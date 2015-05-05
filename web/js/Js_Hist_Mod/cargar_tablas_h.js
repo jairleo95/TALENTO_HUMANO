@@ -640,11 +640,10 @@ function cargar_historial(lista, text) {
     text += "<tr class='roh" + cont + "'>";
     text += "<td>" + (cont + 1) + "</td>";
     text += "<td>" + x[cont] + "</td>";
-    alert(lista[0].col74);
     if(lista[0].col74==0){
         text+="<td class='smart-form deth" + cont + "'>";
         text+="<label class='toggle'>";
-        text+="<input type='checkbox' value=''  class='ck_procesado'  name='estado' name='checkbox-toggle' >";
+        text+="<input type='checkbox' value=''  class='ck_procesadoh'  name='estado' name='checkbox-toggle' >";
         text+="<i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
     }else{
       text += "<td class='deth" + cont + "'>Si</td>";  
@@ -1293,7 +1292,7 @@ function cargar_actual(lista, text) {
     if(lista[0].col74==0){
         text+="<td class='smart-form deta" + cont + "'>";
         text+="<label class='toggle'>";
-        text+="<input type='checkbox' value=''  class='ck_procesado'  name='estado' name='checkbox-toggle' >";
+        text+="<input type='checkbox' value=''  class='ck_procesadoa'  name='estado' name='checkbox-toggle' >";
         text+="<i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
     }else{
       text += "<td class='deta" + cont + "'>Si</td>";  

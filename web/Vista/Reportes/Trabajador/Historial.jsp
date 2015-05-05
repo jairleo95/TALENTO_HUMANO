@@ -160,7 +160,8 @@
                 $("#dtp2").datepicker({
                     dateFormat: "dd/mm/yy",
                     defaultDate: "+1d",
-                    changeMonth: true,
+                    prevText: '<<',
+                    nextText: '>>',
                     numberOfMonths: 2,
                     onClose: function (selectedDate) {
 

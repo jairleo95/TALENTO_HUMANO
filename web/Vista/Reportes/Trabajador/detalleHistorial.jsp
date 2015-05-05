@@ -39,7 +39,7 @@
                                     <div class="row">
                                         <a class="btm btn-primary btn-circle pull-left" onclick="history.back()" ><i class="glyphicon glyphicon-arrow-left"></i></a>
                                         <h1 class="text-center ">Historial de Modificaciones <small class="n_tra">/ Trabajadores</small></h1><br>
-                                        
+
                                     </div>
                                     <div class="row">
                                         <div class="col col-xs-4">
@@ -97,11 +97,15 @@
 
 
                             </div>
+
+
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col col-md-6">
                             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
                                 <div class="jarviswidget jarviswidget-color-blue" id="wid-id-1" data-widget-editbutton="false">
                                     <header>
                                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
@@ -109,6 +113,7 @@
                                     </header>
                                     <div>
                                         <div class="jarviswidget-editbox">
+
                                         </div>
                                         <div class="widget-body no-padding">
                                             <div class="table-responsive">
@@ -159,6 +164,10 @@
                             </article>
                         </div>
                     </div>
+                    <div class="row">
+                        <center><button class="btn btn-info btnPro btn-block" style="width: 50%;">Procesar</button></center>
+                    </div>
+
                 </section>
             </div>
         </div>
@@ -207,10 +216,10 @@
         <script src="../../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-        <script src="../../../js/Js_Hist_Mod/cargar_tablas.js" type="text/javascript"></script>
+        <script src="../../../js/Js_Hist_Mod/cargar_tablas_h.js" type="text/javascript"></script>
         <script type="text/javascript">
                                             $(document).ready(function () {
-                                                
+                                                $('.btnPro').hide();
                                                 var idtrab = '<%= request.getParameter("idtr")%>';
                                                 var us_ip, nombres, us, fe;
                                                 cargar_fechas();
@@ -292,8 +301,25 @@
                                                             $('.roa' + i).css('background-color', '#cde0c4');
                                                         }
                                                     }
-
+                                                    $('.btnPro').show();
                                                 }
+                                                $('.btnPro').click(function () {
+                                                    
+                                                    $.SmartMessageBox({
+                                                        title: "¡Advertencia!",
+                                                        content: "¿Esta seguro de procesar las modificaciones?",
+                                                        buttons: '[No][Si]'
+                                                    }, function(buttonPressed){
+                                                        if(buttonPressed==="Si"){
+                                                            if($('.ck_procesadoh').prop('checked')){
+                                                                $.post("../../../RHistorial?","opc=proc_hist&idtra="+idtrab+"&fe_modif="+fe, function(){
+                                                                    cargar_hist(fe);
+                                                                });
+                                                            }
+                                                        }
+                                                    });
+                                                });
+
                                             });
         </script>
         <script type="text/javascript">
