@@ -210,6 +210,7 @@
         <script src="../../../js/Js_Hist_Mod/cargar_tablas.js" type="text/javascript"></script>
         <script type="text/javascript">
                                             $(document).ready(function () {
+                                                
                                                 var idtrab = '<%= request.getParameter("idtr")%>';
                                                 var us_ip, nombres, us, fe;
                                                 cargar_fechas();
@@ -235,10 +236,11 @@
                                                     });
                                                 }
                                                 $('.s_fecha').change(function () {
+                                                    $('.jarviswidget-color-blue').toggle('slow');
                                                     $('.ti_fecha').empty();
                                                     $('.ti_fecha').text("Datos al " + $(this).val());
                                                     cargar_hist($(this).val());
-
+                                                    $('.jarviswidget-color-blue').toggle('slow');
                                                 });
                                                 function cargar_hist(fe_hist) {
                                                     $.post("../../../RHistorial?", "opc=list_hist_fecha&fe_modif=" + fe_hist + "&idtra=" + idtrab, function (objJson) {
