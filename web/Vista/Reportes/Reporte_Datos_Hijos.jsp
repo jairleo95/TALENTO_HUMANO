@@ -513,6 +513,10 @@
             var d = $("#Li_hijos");
             var texto = '';
             $.post("../../reporte", "opc=reporte_hijo&desde=" + a + "&hasta=" + b + "&edad=" + c, function (objJson) {
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
                 d.empty();
                 var lista = objJson.lista;
                 for (var i = 0; i < lista.length; i++) {

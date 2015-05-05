@@ -457,30 +457,11 @@
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
     </body>
     <script>
-
-        $(document).ready(function () {
-            var b = $('#tbodys');
-
-            $("#btnbuscar").click(
-                    function () {
-                        listar_trabajor_na();
-                    }
-            );
-            $("#btncancel").click(
-                    function () {
-                        document.formulario.reset();
-                        b.empty();
-                        html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
-                        $(".tbodys").html(html);
-                    }
-            );
-        }
-        );
+       
         function listar_trabajor_na() {
             var a = $(".mes").val();
             var b = $("#listar_trabajor_na");
             var texto = '';
-            alert();
             $.post("../../reporte", "opc=reporte_t_navidad&mes=" + a, function (objJson) {
                if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -511,6 +492,25 @@
             });
 
         }
+        //OPCIONES DEL BOTTON
+        $(document).ready(function () {
+            var b = $('#tbodys');
+
+            $("#btnbuscar").click(
+                    function () {
+                        listar_trabajor_na();
+                    }
+            );
+            $("#btncancel").click(
+                    function () {
+                        document.formulario.reset();
+                        b.empty();
+                        html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                        $(".tbodys").html(html);
+                    }
+            );
+        }
+        );
     </script>
 
 </html>
