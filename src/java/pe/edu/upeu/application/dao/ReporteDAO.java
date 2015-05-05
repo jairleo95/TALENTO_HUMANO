@@ -140,4 +140,46 @@ public class ReporteDAO implements InterfaceReporteDAO {
         return Lista;
     }
 
+    @Override
+    public List<Map<String, ?>> lirtar_trabajor_Navidad(String mes) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT * from RHVD_FILTRO_NAVIDAD ";
+            sql += (!mes.equals("")) ? "where TIEMPO_TRABAJO='" + mes.trim() + "'" : "";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("aps", rs.getString("CO_APS"));
+                rec.put("dep", rs.getString("NO_DEP"));
+                rec.put("are", rs.getString("NO_AREA"));
+                rec.put("ti_doc", rs.getString("TI_DOC"));
+                rec.put("nu_doc", rs.getString("NU_DOC"));
+                rec.put("sec", rs.getString("NO_SECCION"));
+                rec.put("pat", rs.getString("AP_PATERNO"));
+                rec.put("mat", rs.getString("AP_MATERNO"));
+                rec.put("nom_t", rs.getString("NO_TRABAJADOR"));
+                rec.put("nom", rs.getString("NOMBRES"));
+                rec.put("sex", rs.getString("ES_SEXO"));
+                rec.put("fe_nac", rs.getString("FE_NAC"));
+                rec.put("des", rs.getString("FE_DESDE"));
+                rec.put("has", rs.getString("FE_HASTA"));
+                rec.put("t_tra", rs.getString("TIEMPO_TRABAJO"));                
+                rec.put("ID_TRABAJADOR", rs.getString("ID_TRABAJADOR"));                
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
 }

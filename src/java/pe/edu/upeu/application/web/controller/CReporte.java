@@ -103,12 +103,30 @@ public class CReporte extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            if (opc.equals("reporte_t_navidad")) {
+                String mes = request.getParameter("mes");
+                List<Map<String, ?>> lista = RP.lirtar_trabajor_Navidad(mes);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            
+            
+            
+            
+            
+            //vistas
+            if (opc.equals("Reporte_padres_madres")) {
+                 response.sendRedirect("Vista/Reportes/Reporte_Padres_Madres.jsp");
+            }
             if (opc.equals("Reporte_Datos_Hijos")) {
                  response.sendRedirect("Vista/Reportes/Reporte_Datos_Hijos.jsp");
             }
             
             if (opc.equals("Reporte_Datos_cumpl")) {
                  response.sendRedirect("Vista/Reportes/Reporte_Cumpleanos.jsp");
+            }
+            if (opc.equals("Reporte_Navidad")) {
+                 response.sendRedirect("Vista/Reportes/Reporte_para_navidad.jsp");
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
