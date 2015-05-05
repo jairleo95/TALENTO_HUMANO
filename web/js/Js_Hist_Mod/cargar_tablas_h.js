@@ -78,7 +78,8 @@ function cargar_historial(lista, text) {
         "ESSALUD (CONYUGE)",
         "ID CONYUGUE",
         "CODIGO UNIVERSITARIO",
-        "SEMESTRE"
+        "SEMESTRE",
+        "¿PROCESADO?"
 
     ];
     var cont = 0;
@@ -635,6 +636,21 @@ function cargar_historial(lista, text) {
     text += "<td class='deth" + cont + "'>" + lista[0].col73 + "</td>";
     text += "</tr>";
     cont = cont + 1;
+    
+    text += "<tr class='roh" + cont + "'>";
+    text += "<td>" + (cont + 1) + "</td>";
+    text += "<td>" + x[cont] + "</td>";
+    if(lista[0].col74==0){
+        text+="<td class='smart-form deth" + cont + "'>";
+        text+="<label class='toggle'>";
+        text+="<input type='checkbox' value=''  class='ck_procesadoh'  name='estado' name='checkbox-toggle' >";
+        text+="<i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
+    }else{
+      text += "<td class='deth" + cont + "'>Si</td>";  
+    }
+    
+    text += "</tr>";
+    cont = cont + 1;    
 
     return text;
 
@@ -713,7 +729,8 @@ function cargar_actual(lista, text) {
         "ESSALUD (CONYUGE)",
         "ID CONYUGUE",
         "CODIGO UNIVERSITARIO",
-        "SEMESTRE"
+        "SEMESTRE",
+        "¿PROCESADO?"
 
     ];
     var cont = 0;
@@ -1266,6 +1283,21 @@ function cargar_actual(lista, text) {
     text += "<td>" + (cont + 1) + "</td>";
     text += "<td>" + x[cont] + "</td>";
     text += "<td class='deta" + cont + "'>" + lista[0].col73 + "</td>";
+    text += "</tr>";
+    cont = cont + 1;
+    
+    text += "<tr class='roa" + cont + "'>";
+    text += "<td>" + (cont + 1) + "</td>";
+    text += "<td>" + x[cont] + "</td>";
+    if(lista[0].col74==0){
+        text+="<td class='smart-form deta" + cont + "'>";
+        text+="<label class='toggle'>";
+        text+="<input type='checkbox' value=''  class='ck_procesadoa'  name='estado' name='checkbox-toggle' >";
+        text+="<i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
+    }else{
+      text += "<td class='deta" + cont + "'>Si</td>";  
+    }
+    
     text += "</tr>";
     cont = cont + 1;
 
