@@ -45,6 +45,11 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <title>Reporte Datos Hijos</title>
+        <style>
+            .caja{
+                background:transparent url(../../imagenes/Gifloader.GIF) center no-repeat;
+            }
+        </style>
     </head>
     <body>  
         <form class="form-inline validarform" id="frm_filtro2" method="post" action="../../Imprimir" name="formulario" onclick="return marcado();">
@@ -117,9 +122,11 @@
                                         </tr>
                                     </thead>
                                     <tbody id="Li_hijos">
-                                        
+
                                     </tbody>
                                 </table>
+                                <div class="div_t">                                                                                     
+                                </div>
 
                             </div>
                             <!-- end widget content -->
@@ -519,25 +526,31 @@
                 }
                 d.empty();
                 var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    texto += '<tr role="row" class="odd">';
-                    texto += '<td class>' + (i + 1) + '</td>';
-                    texto += '<td>' + lista[i].nom + '</td>';
-                    texto += '<td>' + lista[i].dni + '</td>';
-                    texto += '<td>' + lista[i].gen + '</td>';
-                    texto += '<td>' + lista[i].fec_na + '</td>';
-                    texto += '<td>' + lista[i].edad + '</td>';
-                    texto += '</tr>';
+                if (lista.length > 0) {
+                    for (var i = 0; i < lista.length; i++) {
+                        texto += '<tr role="row" class="odd">';
+                        texto += '<td class>' + (i + 1) + '</td>';
+                        texto += '<td>' + lista[i].nom + '</td>';
+                        texto += '<td>' + lista[i].dni + '</td>';
+                        texto += '<td>' + lista[i].gen + '</td>';
+                        texto += '<td>' + lista[i].fec_na + '</td>';
+                        texto += '<td>' + lista[i].edad + '</td>';
+                        texto += '</tr>';
 
+                    }
+                    d.append(texto);
+                } else {
+                    d.append("<td colspan='11' align='center'><strong>NO SE ENCONTRARON DATOS</strong></td>");
                 }
-                d.append(texto);
             });
         }
         $(document).ready(function () {
             var b = $('#tbodys');
             $("#btnbuscar").click(
                     function () {
+                        GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
                         listar_hijos();
+                        $('.div_t').empty();
                     }
             );
             $("#btncancel").click(
@@ -549,6 +562,17 @@
                     }
             );
         });
+        function GifLoader(contenedor, msg, action) {
+            $('.headerr').hide();
+            var text = "";
+            contenedor.empty();
+            if (action == 1) {
+                text += "<div class='caja' style='height:250px; width:150px; margin:auto;'><center><h3>" + msg + "</h3></center></div>";
+            } else if (action == 2) {
+                text += "<div style='height:150px; width:150px; margin:auto; padding-top:30px;'><center><h3>" + msg + "</h3></center></div>";
+            }
+            contenedor.append(text);
+        }
     </script>
 
 </html>

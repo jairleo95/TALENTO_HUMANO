@@ -156,6 +156,7 @@ public class ReporteDAO implements InterfaceReporteDAO {
                 rec.put("ti_doc", rs.getString("TI_DOC"));
                 rec.put("nu_doc", rs.getString("NU_DOC"));
                 rec.put("sec", rs.getString("NO_SECCION"));
+                rec.put("pue", rs.getString("NO_PUESTO"));
                 rec.put("pat", rs.getString("AP_PATERNO"));
                 rec.put("mat", rs.getString("AP_MATERNO"));
                 rec.put("nom_t", rs.getString("NO_TRABAJADOR"));
