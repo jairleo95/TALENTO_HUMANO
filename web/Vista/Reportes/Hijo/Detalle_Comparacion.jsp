@@ -156,192 +156,227 @@
                     }
                 });
             }
+            function ver_comparacion() {
+
+                var tbody = $(".tbodys");
+                tbody.empty();
+                var texto_html = "";
+                $.post("../../../RHistorial", "opc=Comparar_dato_Hijo&id=" + $(".idh").val() + "&fecha1=" + $(".fecha1").val() + "&fecha2=" + $(".fecha2").val(), function (objJson) {
+                    var lista = objJson.lista;
+                    if (lista[0].ap_p != lista[1].ap_p) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>1</td><td>Apellido Paterno:</td><td>" + lista[0].ap_p + "</td>";
+                    texto_html += "<td>" + lista[1].ap_p + "</td></tr>";
+
+                    if (lista[0].ap_m != lista[1].ap_m) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>2</td><td>Apellido Materno:</td><td>" + lista[0].ap_m + "</td>";
+                    texto_html += "<td>" + lista[1].ap_m + "</td></tr>";
+
+                    if (lista[0].no_hijo != lista[1].no_hijo) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>3</td><td>Nombres:</td><td>" + lista[0].no_hijo + "</td>";
+                    texto_html += "<td>" + lista[1].no_hijo + "</td></tr>";
+
+                    if (lista[0].fe_nac != lista[1].fe_nac) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>4</td><td>Fecha de Nacimiento:</td><td>" + lista[0].fe_nac + "</td>";
+                    texto_html += "<td>" + lista[1].fe_nac + "</td></tr>";
+
+                    if (lista[0].no_sexo != lista[1].no_sexo) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>5</td><td>Sexo:</td><td>" + lista[0].no_sexo + "</td>";
+                    texto_html += "<td>" + lista[1].no_sexo + "</td></tr>";
+
+                    if (lista[0].de_tip_doc != lista[1].de_tip_doc) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>6</td><td>Tipo de documento:</td><td>" + lista[0].de_tip_doc + "</td>";
+                    texto_html += "<td>" + lista[1].de_tip_doc + "</td></tr>";
+
+                    if (lista[0].nu_doc != lista[1].nu_doc) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>7</td><td>Numero de Documento:</td><td>" + lista[0].nu_doc + "</td>";
+                    texto_html += "<td>" + lista[1].nu_doc + "</td></tr>";
+
+
+                    if (lista[0].no_essalud != lista[1].no_essalud) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>8</td><td>Inscripcion Vigente en Essalud:</td><td>" + lista[0].no_essalud + "</td>";
+                    texto_html += "<td>" + lista[1].no_essalud + "</td></tr>";
+
+
+                    if (lista[0].no_niv_sup != lista[1].no_niv_sup) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>9</td><td>Estudios en Nivel Superior:</td><td>" + lista[0].no_niv_sup + "</td>";
+                    texto_html += "<td>" + lista[1].no_niv_sup + "</td></tr>";
+
+
+                    if (lista[0].us_creacion != lista[1].us_creacion) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>10</td><td>Usuario de Creacion:</td><td>" + lista[0].us_creacion + "</td>";
+                    texto_html += "<td>" + lista[1].us_creacion + "</td></tr>";
+
+                    if (lista[0].creacion != lista[1].creacion) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>11</td><td>Fecha de Creacion:</td><td>" + lista[0].creacion + "</td>";
+                    texto_html += "<td>" + lista[1].creacion + "</td></tr>";
+
+                    if (lista[0].us_modif != lista[1].us_modif) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>12</td><td>Usuario de Modificacion:</td><td>" + lista[0].us_modif + "</td>";
+                    texto_html += "<td>" + lista[1].us_modif + "</td></tr>";
+
+                    if (lista[0].modif != lista[1].modif) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>13</td><td>Fecha de Modificacion:</td><td>" + lista[0].modif + "</td>";
+                    texto_html += "<td>" + lista[1].modif + "</td></tr>";
+
+                    var detalle_ip1 = lista[0].ip_usuario.split("**");
+                    var ip1 = detalle_ip1[0];
+                    var no_usuario1 = detalle_ip1[1];
+                    var mac1 = detalle_ip1[2];
+
+                    var detalle_ip2 = lista[1].ip_usuario.split("**");
+                    var ip2 = detalle_ip2[0];
+                    var no_usuario2 = detalle_ip2[1];
+                    var mac2 = detalle_ip2[2];
+
+                    if (ip1 != ip2) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>15</td><td>Direccion Ip:</td><td>" + ip1 + "</td>";
+                    texto_html += "<td>" + ip2 + "</td></tr>";
+
+                    if (no_usuario1 != no_usuario2) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>16</td><td>Nombre de Usuario:</td><td>" + no_usuario1 + "</td>";
+                    texto_html += "<td>" + no_usuario2 + "</td></tr>";
+
+                    if (mac1 != mac2) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>17</td><td>Direccion Fisica:</td><td>" + mac1 + "</td>";
+                    texto_html += "<td>" + mac2 + "</td></tr>";
+
+                    if (lista[0].es_procesado != lista[1].es_procesado) {
+                        texto_html += "<tr class='danger'>";
+                    } else {
+                        texto_html += "<tr>";
+                    }
+                    texto_html += "<td>14</td><td>¿Procesar?</td>";
+                    if (lista[0].es_procesado == '1') {
+                        texto_html += "<td>Si</td>";
+                    } else {
+                        texto_html += "<input type='text' class='val_hijo' value='idh=" + lista[0].id + "&es_fecha=" + lista[0].estado_filtro + "&fecha=" + lista[0].fecha + "' ><td class='smart-form'><label class='toggle'><input type='checkbox' value=''  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
+                    }
+
+
+                    if (lista[1].es_procesado == '1') {
+                        texto_html += "<td>Si</td>";
+                    } else {
+                        texto_html += "<input type='text' class='val_hijo' value='idh=" + lista[1].id + "&es_fecha=" + lista[1].estado_filtro + "&fecha=" + lista[1].fecha + "' ><td class='smart-form'><label class='toggle'><input type='checkbox' value=''  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
+                    }
+                    tbody.append(texto_html);
+                });
+                texto_html = "";
+
+            }
             $(document).ready(function () {
                 list_select($(".hijo"), "../../../RHistorial", "opc=Listar_hijo_trabajador&idtr=" + $(".idtr").val(), "1", $(".idh").val());
                 list_select($(".fecha1"), "../../../RHistorial", "opc=Fe_Modif_Hijo&hijo=" + $(".idh").val(), "1", $(".fecha_default").val());
                 listar_fec_sin_repetir($(".fecha_default").val());
                 $(".fecha2").change(function () {
-                    var tbody = $(".tbodys");
-                    tbody.empty();
-                    var texto_html = "";
-                    $.post("../../../RHistorial", "opc=Comparar_dato_Hijo&id=" + $(".idh").val() + "&fecha1=" + $(".fecha1").val() + "&fecha2=" + $(".fecha2").val(), function (objJson) {
-                        var lista = objJson.lista;
-                        if (lista[0].ap_p != lista[1].ap_p) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>1</td><td>Apellido Paterno:</td><td>" + lista[0].ap_p + "</td>";
-                        texto_html += "<td>" + lista[1].ap_p + "</td></tr>";
-
-                        if (lista[0].ap_m != lista[1].ap_m) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>2</td><td>Apellido Materno:</td><td>" + lista[0].ap_m + "</td>";
-                        texto_html += "<td>" + lista[1].ap_m + "</td></tr>";
-
-                        if (lista[0].no_hijo != lista[1].no_hijo) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>3</td><td>Nombres:</td><td>" + lista[0].no_hijo + "</td>";
-                        texto_html += "<td>" + lista[1].no_hijo + "</td></tr>";
-
-                        if (lista[0].fe_nac != lista[1].fe_nac) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>4</td><td>Fecha de Nacimiento:</td><td>" + lista[0].fe_nac + "</td>";
-                        texto_html += "<td>" + lista[1].fe_nac + "</td></tr>";
-
-                        if (lista[0].no_sexo != lista[1].no_sexo) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>5</td><td>Sexo:</td><td>" + lista[0].no_sexo + "</td>";
-                        texto_html += "<td>" + lista[1].no_sexo + "</td></tr>";
-
-                        if (lista[0].de_tip_doc != lista[1].de_tip_doc) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>6</td><td>Tipo de documento:</td><td>" + lista[0].de_tip_doc + "</td>";
-                        texto_html += "<td>" + lista[1].de_tip_doc + "</td></tr>";
-
-                        if (lista[0].nu_doc != lista[1].nu_doc) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>7</td><td>Numero de Documento:</td><td>" + lista[0].nu_doc + "</td>";
-                        texto_html += "<td>" + lista[1].nu_doc + "</td></tr>";
-
-
-                        if (lista[0].no_essalud != lista[1].no_essalud) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>8</td><td>Inscripcion Vigente en Essalud:</td><td>" + lista[0].no_essalud + "</td>";
-                        texto_html += "<td>" + lista[1].no_essalud + "</td></tr>";
-
-
-                        if (lista[0].no_niv_sup != lista[1].no_niv_sup) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>9</td><td>Estudios en Nivel Superior:</td><td>" + lista[0].no_niv_sup + "</td>";
-                        texto_html += "<td>" + lista[1].no_niv_sup + "</td></tr>";
-
-
-                        if (lista[0].us_creacion != lista[1].us_creacion) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>10</td><td>Usuario de Creacion:</td><td>" + lista[0].us_creacion + "</td>";
-                        texto_html += "<td>" + lista[1].us_creacion + "</td></tr>";
-
-                        if (lista[0].creacion != lista[1].creacion) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>11</td><td>Fecha de Creacion:</td><td>" + lista[0].creacion + "</td>";
-                        texto_html += "<td>" + lista[1].creacion + "</td></tr>";
-
-                        if (lista[0].us_modif != lista[1].us_modif) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>12</td><td>Usuario de Modificacion:</td><td>" + lista[0].us_modif + "</td>";
-                        texto_html += "<td>" + lista[1].us_modif + "</td></tr>";
-
-                        if (lista[0].modif != lista[1].modif) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>13</td><td>Fecha de Modificacion:</td><td>" + lista[0].modif + "</td>";
-                        texto_html += "<td>" + lista[1].modif + "</td></tr>";
-
-                        var detalle_ip1 = lista[0].ip_usuario.split("**");
-                        var ip1 = detalle_ip1[0];
-                        var no_usuario1 = detalle_ip1[1];
-                        var mac1 = detalle_ip1[2];
-
-                        var detalle_ip2 = lista[1].ip_usuario.split("**");
-                        var ip2 = detalle_ip2[0];
-                        var no_usuario2 = detalle_ip2[1];
-                        var mac2 = detalle_ip2[2];
-
-
-                        if (ip1 != ip2) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>15</td><td>Direccion Ip:</td><td>" + ip1 + "</td>";
-                        texto_html += "<td>" + ip2 + "</td></tr>";
-
-                        if (no_usuario1 != no_usuario2) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>16</td><td>Nombre de Usuario:</td><td>" + no_usuario1 + "</td>";
-                        texto_html += "<td>" + no_usuario2 + "</td></tr>";
-
-                        if (mac1 != mac2) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>17</td><td>Direccion Fisica:</td><td>" + mac1 + "</td>";
-                        texto_html += "<td>" + mac2 + "</td></tr>";
-
-                        if (lista[0].es_procesado != lista[1].es_procesado) {
-                            texto_html += "<tr class='danger'>";
-                        } else {
-                            texto_html += "<tr>";
-                        }
-                        texto_html += "<td>14</td><td>¿Procesar?</td>";
-                        if (lista[0].es_procesado == '1') {
-                            texto_html += "<td>Si</td>";
-                        } else {
-                            texto_html += "<td class='smart-form'><label class='toggle'><input type='checkbox' value=''  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
-                        }
-
-
-                        if (lista[1].es_procesado == '1') {
-                            texto_html += "<td>Si</td>";
-                        } else {
-                            texto_html += "<td class='smart-form'><label class='toggle'><input type='checkbox' value=''  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
-                        }
-
-
-                        tbody.append(texto_html);
-
-                    });
-                    texto_html = "";
+                    ver_comparacion();
                 });
-
                 $(".fecha1").change(function () {
-                    
                     listar_fec_sin_repetir($(this).val());
                 });
+                $(".val_hijo").click(function () {
+                    if ($(this).prop('checked')) {
+                        $.SmartMessageBox({
+                            title: "¡Advertencia!",
+                            content: "¿Esta seguro de procesar la modificacion?",
+                            buttons: '[No][Si]'
+                        }, function (ButtonPressed) {
+                            if (ButtonPressed === "Si") {
+                                $.ajax({
+                                    url: "../../../RHistorial",
+                                    type: "POST",
+                                    data: "opc=Procesar_datos_hijos&" + $(this).val()
+                                }).done(function () {
+                                    ver_comparacion();
+                                    $.smallBox({
+                                        title: "Procesado con exito",
+                                        content: "<i class='fa fa-clock-o'></i> <i>Las modificaciones se han procesado correctamente...</i>",
+                                        color: "#659265",
+                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                        timeout: 4000
+                                    });
 
 
+                                }).fail(function () {
+                                    $.smallBox({
+                                        title: "¡Error!",
+                                        content: "<i class='fa fa-clock-o'></i> <i>Las modificaciones NO se han procesado correctamente...",
+                                        color: "#C46A69",
+                                        iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                        timeout: 6000
+                                    });
+                                });
+                            }
+                            if (ButtonPressed === "No") {
+                            }
+                        });
 
-
+                    } else {
+                    }
+                });
             });
         </script>
     </body>

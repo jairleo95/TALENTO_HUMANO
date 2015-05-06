@@ -53,8 +53,12 @@ public class CPlazo extends HttpServlet {
                 String DET_ALERTA = request.getParameter("descripcion");
                 String FE_DESDE = request.getParameter("desde");
                 String FE_HASTA = request.getParameter("hasta");
-                String ID_REQ = request.getParameter("id_req");
-                pl.INSERT_PLAZO(null, NO_PLAZO, DET_ALERTA, FE_DESDE, FE_HASTA, null, ID_REQ.trim());
+                String ID_REQUERIMIENTO = request.getParameter("id_req");
+                String TI_PLAZO = request.getParameter("tipo");
+                int CA_DIAS_TOLERANCIA = Integer.parseInt(request.getParameter("CA_DIAS_TOLERANCIA"));
+                String ID_DEPARTAMENTO_TOLERANCIA = request.getParameter("dep_tolerancia");
+                pl.INSERT_PLAZO(null, NO_PLAZO, DET_ALERTA, FE_DESDE, FE_HASTA, "1", ID_REQUERIMIENTO.trim(), TI_PLAZO, CA_DIAS_TOLERANCIA, ID_DEPARTAMENTO_TOLERANCIA);
+
             }
             if (opc.equals("Modificar")) {
 

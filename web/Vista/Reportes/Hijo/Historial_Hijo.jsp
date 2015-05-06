@@ -1,8 +1,4 @@
-<%-- 
-    Document   : Historial
-    Created on : 14/04/2015, 10:05:59 AM
-    Author     : Andres
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -8,6 +8,7 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -101,23 +102,28 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
     }
 
     @Override
-    public void INSERT_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO) {
+    public String INSERT_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO, String TI_PLAZO, int CA_DIAS_TOLERANCIA, String ID_DEPARTAMENTO_TOLERANCIA) {
+        String id = "";
         try {
-
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PLAZO( ?, ?, ?, ?, ?, ?,?)}");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PLAZO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
             cst.setString(1, null);
             cst.setString(2, NO_PLAZO);
             cst.setString(3, DET_ALERTA);
-            cst.setString(4, c.convertFecha(FE_DESDE));
-            cst.setString(5, c.convertFecha(FE_HASTA));
-            cst.setString(6, "1");
-            cst.setString(7, ID_REQUERIMIENTO.trim());
+            cst.setString(4, FE_DESDE);
+            cst.setString(5, FE_HASTA);
+            cst.setString(6, ES_PLAZO);
+            cst.setString(7, ID_REQUERIMIENTO);
+            cst.setString(8, TI_PLAZO);
+            cst.setInt(9, CA_DIAS_TOLERANCIA);
+            cst.setString(10, ID_DEPARTAMENTO_TOLERANCIA);
+            cst.registerOutParameter(11, Types.CHAR);
             cst.execute();
+            id = cst.getString(11);
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -125,6 +131,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
+        return id;
     }
 
     @Override
