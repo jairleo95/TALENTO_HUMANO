@@ -326,16 +326,9 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                     } else {
                         rec.put("col" + i, rs.getString(i));
                     }
-
                 }
                 lista.add(rec);
             }
-            /*while (rs.next()) {
-             Map<String, Object> rec = new HashMap<String, Object>();
-             rec.put("col", rs.getString("columna"));
-             rec.put("det", rs.getString("detalle"));
-             lista.add(rec);
-             }*/
             rs.close();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());

@@ -245,11 +245,11 @@
                                                     });
                                                 }
                                                 $('.s_fecha').change(function () {
-                                                    $('.jarviswidget-color-blue').toggle('slow');
+                                                    
                                                     $('.ti_fecha').empty();
                                                     $('.ti_fecha').text("Datos al " + $(this).val());
                                                     cargar_hist($(this).val());
-                                                    $('.jarviswidget-color-blue').toggle('slow');
+                                                    
                                                 });
                                                 function cargar_hist(fe_hist) {
                                                     $.post("../../../RHistorial?", "opc=list_hist_fecha&fe_modif=" + fe_hist + "&idtra=" + idtrab, function (objJson) {
@@ -264,7 +264,7 @@
                                                             $('.tbodys_hist').empty();
                                                             $('.tbodys_hist').append(text);
                                                             cargar_act();
-
+                                                            $('.jarviswidget-color-blue').toggle('slow');
                                                         }
                                                     });
                                                 }
@@ -301,6 +301,7 @@
                                                             $('.roa' + i).css('background-color', '#cde0c4');
                                                         }
                                                     }
+                                                    $('.jarviswidget-color-blue').toggle('slow');
                                                     $('.btnPro').show();
                                                 }
                                                 $('.btnPro').click(function () {

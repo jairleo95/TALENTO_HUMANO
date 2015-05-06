@@ -165,6 +165,11 @@ public class CReporte_Historial extends HttpServlet {
             if (opc.equals("Historial_Datos_Hijo")) {
                response.sendRedirect("Vista/Reportes/Hijo/Historial_Hijo.jsp");
             }
+            if (opc.equals("proc_hist")) {
+                String idtra= request.getParameter("idtra");
+                String fe_modif= request.getParameter("fe_modif");
+                
+            }
 
         } catch (Exception e) {
             rpta.put("rpta", "-1");
