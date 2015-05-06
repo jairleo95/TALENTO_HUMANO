@@ -71,7 +71,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                 adday = "+1";
             }
 
-            String sql = " select * from RHVD_HISTORIAL_ES_CIVIL  h1 where h1.FE_MODIFICACION = (select  max(h2.FE_MODIFICACION) from RHVD_HISTORIAL_ES_CIVIL h2 where h1.ID_TRABAJADOR = h2.ID_TRABAJADOR )  and h1.FE_MODIFICACION >= TO_CHAR('" + FE_INICIO + "') AND h1.FE_MODIFICACION <= TO_CHAR('" + (FE_FIN + adday )+"')";
+            String sql = " select * from RHVD_HISTORIAL_ES_CIVIL  h1 where h1.FE_MODIFICACION = (select  max(h2.FE_MODIFICACION) from RHVD_HISTORIAL_ES_CIVIL h2 where h1.ID_TRABAJADOR = h2.ID_TRABAJADOR )  and h1.FE_MODIFICACION >= TO_CHAR('" + FE_INICIO + "') AND h1.FE_MODIFICACION <= TO_CHAR('" + (FE_FIN + adday) + "')";
 
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
@@ -326,16 +326,9 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                     } else {
                         rec.put("col" + i, rs.getString(i));
                     }
-
                 }
                 lista.add(rec);
             }
-            /*while (rs.next()) {
-             Map<String, Object> rec = new HashMap<String, Object>();
-             rec.put("col", rs.getString("columna"));
-             rec.put("det", rs.getString("detalle"));
-             lista.add(rec);
-             }*/
             rs.close();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -443,7 +436,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         List<Map<String, ?>> lista = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select ec.ID_ESTADO_CIVIL, ec.LI_ESTADO_CIVIL , TO_CHAR (ec.FE_MODIFICACION , 'dd/mm/yy HH:MI:SS' ) as FE_MODIFICACION, us.NO_USUARIO , ec.ID_TRABAJADOR , ec.ES_REGISTRO from RHTH_ESTADO_CIVIL ec , RHTC_USUARIO us where us.ID_USUARIO = ec.US_MODIFICACION and ID_TRABAJADOR = '"+idtr+"' order by FE_MODIFICACION desc";
+            String sql = "select ec.ID_ESTADO_CIVIL, ec.LI_ESTADO_CIVIL , TO_CHAR (ec.FE_MODIFICACION , 'dd/mm/yy HH:MI:SS' ) as FE_MODIFICACION, us.NO_USUARIO , ec.ID_TRABAJADOR , ec.ES_REGISTRO from RHTH_ESTADO_CIVIL ec , RHTC_USUARIO us where us.ID_USUARIO = ec.US_MODIFICACION and ID_TRABAJADOR = '" + idtr + "' order by FE_MODIFICACION desc";
 
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
@@ -469,5 +462,48 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         }
         return lista;
 
+    }
+
+    @Override
+    public void procesar_h(String idtra, String fe_mod) {
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "UPDATE RHTH_MODIF_TRABAJADOR \n"
+                    + "SET ES_MOD_PROCESADO='1'\n"
+                    + "WHERE ID_TRABAJADOR='" + idtra + "'\n"
+                    + "AND (TO_CHAR(FE_MODIF,'DD/MM/YYYY HH:MI:SS')=TO_CHAR(TO_DATE('" + fe_mod + "','DD/MM/YYYY HH:MI:SS'),'DD/MM/YYYY HH:MI:SS') )";
+            ResultSet rs = this.cnn.query(sql);
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    @Override
+    public void procesar_a(String idtra) {
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "UPDATE RHTM_TRABAJADOR \n"
+                    + "SET ES_MOD_PROCESADO='1'\n"
+                    + "WHERE ID_TRABAJADOR='"+idtra+"'";
+            ResultSet rs = this.cnn.query(sql);
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+            }
+        }
     }
 }
