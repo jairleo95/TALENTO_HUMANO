@@ -168,7 +168,11 @@ public class CReporte_Historial extends HttpServlet {
             if (opc.equals("proc_hist")) {
                 String idtra= request.getParameter("idtra");
                 String fe_modif= request.getParameter("fe_modif");
-                
+                re.procesar_h(idtra, fe_modif);
+            }
+            if (opc.equals("proc_act")) {
+                String idtra= request.getParameter("idtra");
+                re.procesar_a(idtra);
             }
 
         } catch (Exception e) {
