@@ -142,6 +142,19 @@
                 position: absolute;
 
             }
+            #message {
+                display: block;
+                background: white;
+
+                padding: 1em;
+                margin: auto;
+                font-size: 1em;
+
+                height: 12em;
+                max-height: 12em;
+                width: 70%;
+                max-width: 70%;
+            }
 
 
         </style>
@@ -544,10 +557,10 @@
                                         <fieldset>
                                             <section align="center">
                                                 <div class="row" >
-                                                    <h1 class="h1" style="color:#218FDD ; font-size:20px;"><strong>COMENTARIO</strong></h1>
+                                                    <h1 class="h1" style="color:#218FDD ; font-size:20px;"><strong>MOTIVO</strong></h1>
                                                     <div class="col col-10"  >
                                                         <label class="input">
-                                                            <textarea rows="6"width="120%" maxlength="200" required="" name="comentario"></textarea>
+                                                            <textarea id="message" maxlength="200" required="" name="comentario"></textarea>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -793,9 +806,6 @@
         </script>
         <script>
             $(document).ready(function() {
-                $(".btn-rech").click(function(e) {
-                    $("#bnt-mostrar").click();
-                });
                 $(".fe_desde_p, .fe_hasta_p").change(function() {
                     var cuotas = $(".cuota_docente");
                     cuotas.empty();
@@ -874,9 +884,21 @@
         <script>
             $(document).ready(function() {
                 $(".btn-conti").click(function(e) {
-                    $.post("",""+"",function(onjJson){
-                        
+                    $.SmartMessageBox({
+                        title: "Alerta de Confirmaci?!",
+                        content: "?sta totalmente seguro de rechazar este requerimiento?",
+                        buttons: '[No][Si]'
+                    }, function(ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            $(".form-rech").submit();
+                            //$(".form-rech").submit();
+                        }
+                        if (ButtonPressed === "No") {
+                            return false;
+                        }
                     });
+                    e.preventDefault();
+
                 });
                 $(".fe_desde_p, .fe_hasta_p").change(function() {
                     var cuotas = $(".cuota_docente");
@@ -989,6 +1011,7 @@
 
         <!-- EASY PIE CHARTS -->
         <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+        <script src="../../js-steps/jquery-1.11.1.js"></script>
 
         <!-- SPARKLINES -->
         <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>

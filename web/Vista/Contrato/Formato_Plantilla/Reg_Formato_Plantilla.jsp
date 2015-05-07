@@ -394,15 +394,15 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 });
 
             }
-            function list_dir(c) {
-                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function(objJson) {
+            function list_dir_fil(c) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_direccion_filial&id_fil=" + $(".fil").val(), function(objJson) {
                     c.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
                     }
                     var list = objJson.lista;
-                    c.append("<option value='0' selected=''> [TODOS] </option>");
+                    c.append("<option value='0' selected=''> [SELECCIONE] </option>");
                     if (list.length !== 0) {
                         for (var i = 0; i < list.length; i++) {
                             c.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
@@ -419,6 +419,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 var c = $(".dir_as");
                 //list_dir(c);
                 // Listar_Plantilla();
+                $(".fil").change(function() {
+                    var c = $(".dir");
+                    list_dir_fil(c);
+                });
+                $(".fil_as").change(function() {
+                    var c = $(".dir_as");
+                    list_dir_fil(c);
+                });
                 $("#dir").change(function() {
                     var d = $(".dep");
                     var valor = $("#dir").val();
@@ -513,10 +521,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             <div id="content" class="widget-body">
                 <div class="contenido" >
 
-                    <article class=" col-sm-12 col-md-12 col-lg-12">
+                    <article class=" col-sm-12 col-md-12 col-lg-6">
 
                         <div class=" jarviswidget well" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
-                            <div class="col">
+                            <div class="row">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
                                     <h2>Markdown API</h2>
@@ -524,20 +532,24 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                 </header>
                                 <div>
 
-                                    <div class="widget-body col-lg-6" align="center">
+                                    <div class="widget-body col-lg-12" align="center">
 
                                         <h3>CARGAR PLANTILLAS</h3>
-                                        <div class="col-sm-12 col-md-12 col-lg-4" >
+                                        <div class="col-sm-12 col-md-12 col-lg-12" width="50%" >
+                                            <section class="col col-12" style="width:100%;align:cemter;" align="center">
+                                                <label class="select">Filial:
+                                                    <select class="fil form-control" id="fil" name="id_di" >
+                                                        <option value="" >[Filial]</option>
+                                                        <option value="1" >Filial Lina</option>
+                                                        <option value="2" >Filial Juliaca</option>
+                                                        <option value="5" >Filial Tarapoto</option>
+                                                    </select>   
+                                                </label>
+                                            </section>
                                             <section class="col col-12" style="width:100%;align:cemter;" align="center">
                                                 <label class="select">Dirección:
                                                     <select class="dir form-control" id="dir" name="id_di" >
                                                         <option value="" >[Direccion]</option>
-                                                        <%for (int i = 0; i < Listar_Direccion_X.size(); i++) {
-                                                                Direccion d = new Direccion();
-                                                                d = (Direccion) Listar_Direccion_X.get(i);
-                                                        %>
-                                                        <option value="<%=d.getId_direccion()%>"> <%=d.getNo_direccion()%></option>
-                                                        <%}%>
                                                     </select>   
                                                 </label>
                                             </section>
@@ -549,7 +561,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                     </select>
                                                 </label>
                                             </section>
-                                            <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center">
                                                 <label>Area:
                                                     <select class="area form-control" id="area" name="id_are" >
                                                         <option value="">[TODO]</option>
@@ -557,14 +569,14 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                 </label>
                                             </section>
 
-                                            <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center">
                                                 <label>Sección:
                                                     <select class="seccion form-control" id="seccion" name="id_sec" >
                                                         <option value="">[TODO]</option>
                                                     </select>
                                                 </label>
                                             </section>
-                                            <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center">
                                                 <label>Puesto:
                                                     <select class="puesto form-control" id="puesto" name="id_pu" >
                                                         <option value="">[TODO]</option>
@@ -574,12 +586,16 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col">
+                    </article>
+                    <article class=" col-sm-12 col-md-12 col-lg-6">
+
+                        <div class=" jarviswidget well" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
+                            <div class="row">
+                           <!-- </div>
+                            <div class="row">-->
 
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
-                                    <h2>Markdown API</h2>
 
                                 </header>
                                 <div>
@@ -587,44 +603,48 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                         <!-- This area used as dropdown edit box -->
 
                                     </div>
-                                    <div class="widget-body" align="center">
+                                    <div class="widget-body col-lg-12" align="center">
                                         <h3>ASIGNAR PLANTILLAS</h3>
-                                        <div class="col-sm-12 col-md-12 col-lg-4" width="50%">
-                                            <section class="col col-4"  style="width:100%;align:cemter;" align="center">
-                                                <label>Dirección:
-                                                    <select class="dir_as form-control" id="dir_as"  >
-                                                        <option value="">[SELECCIONE]</option>
-                                                        <%for (int i = 0; i < Listar_Direccion_X.size(); i++) {
-                                                                Direccion d = new Direccion();
-                                                                d = (Direccion) Listar_Direccion_X.get(i);
-                                                        %>
-                                                        <option value="<%=d.getId_direccion()%>"> <%=d.getNo_direccion()%></option>
-                                                        <%}%>
+                                        <div class="col-sm-12 col-md-12 col-lg-12" width="50%">
+                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center">
+                                                <label>Filial:
+                                                    <select class="fil_as form-control" id="dir_as"  >
+                                                        <option value="">[Filial]</option>
+                                                        <option value="">Filial Lima</option>
+                                                        <option value="">Filial Juliaca</option>
+                                                        <option value="">Filial Tarapoto</option>
                                                     </select>   
                                                 </label>
                                             </section>
-                                            <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center">
+                                                <label>Dirección:
+                                                    <select class="dir_as form-control" id="dir_as"  >
+                                                        <option value="">[Direccion]</option>
+                                                    </select>   
+                                                </label>
+                                            </section>
+                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center">
                                                 <label>Departamento:
                                                     <select class="dep_as form-control" id="dep_as" >
                                                         <option value="0">[TODO]</option>
                                                     </select>
                                                 </label>
                                             </section>
-                                            <section class="col col-4" style="width:100%;align:cemter;" align="center" >
+                                            <section class="col col-12" style="width:100%;align:cemter;" align="center" >
                                                 <label>Area:
                                                     <select class="area_as form-control" id="area_as" >
                                                         <option value="0">[TODO]</option>
                                                     </select>
                                                 </label>
                                             </section>
-                                            <section class="col col-4"  style="width:100%;align:cemter;" align="center" >
+                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center" >
                                                 <label>Sección:
                                                     <select class="seccion_as form-control col-5" id="seccion_as"  >
                                                         <option value="0">[TODO]</option>
                                                     </select>
                                                 </label>
                                             </section>
-                                            <section class="col col-4"  style="width:100%;align:cemter;" align="center">
+                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center">
                                                 <label>Puesto:
                                                     <select class="puesto_as form-control" id="puesto_as"  >
                                                         <option value="0">[TODO]</option>

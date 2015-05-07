@@ -149,7 +149,8 @@
                 $("#dtp1").datepicker({
                     dateFormat: "dd/mm/yy",
                     defaultDate: "+1d",
-                    changeMonth: true,
+                    prevText: '<<',
+                    nextText: '>>',
                     numberOfMonths: 2,
                     onClose: function (selectedDate) {
                         $("#dtp2").datepicker("option", "minDate", selectedDate);
@@ -159,7 +160,8 @@
                 $("#dtp2").datepicker({
                     dateFormat: "dd/mm/yy",
                     defaultDate: "+1d",
-                    changeMonth: true,
+                    prevText: '<<',
+                    nextText: '>>',
                     numberOfMonths: 2,
                     onClose: function (selectedDate) {
 
@@ -186,14 +188,14 @@
                             crear_t();
                             $('.tabla_t').DataTable();
                         } else {
-                            var t="";
+                            var t = "";
                             for (var i = 0; i < lista.length; i++) {
                                 t += "<tr>";
                                 t += "<td>" + (i + 1) + "</td>";
                                 t += "<td>" + lista[i].no_tra + " " + lista[i].ap_pat + " " + lista[i].ap_mat + "</td>";
-                                t += '<td>'+barra_acciones(lista[i].id_tra)+'</td></tr>';
+                                t += '<td>' + barra_acciones(lista[i].id_tra) + '</td></tr>';
                             }
-                            
+
                             crear_t();
                             $('.tbodys').append(t);
                             $('.tabla_t').DataTable();
@@ -206,18 +208,14 @@
                         $('.cont_t').empty();
                         $('.cont_t').append(text);
                     }
-                    function barra_acciones(idtr){
-                        var tex='<center><div class="btn-group">';
-                        tex+='<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';
-                        tex+='Action <span class="caret"></span></button>';
-                        tex+='<ul class="dropdown-menu" role="menu">';
-                        tex+='<li><a href="../../../RHistorial?opc=mod_tra&idtr='+idtr+'">Detalle</a></li>';
-                        tex+='<li><a href="#">Another action</a></li>';
-                        tex+='<li><a href="#">Something else here</a></li>';
-                        tex+='<li class="divider"></li>';
-                        tex+='<li><a href="#">Separated link</a></li>';
-                        tex+='</ul>';
-                        tex+='</div></center>';
+                    function barra_acciones(idtr) {
+                        var tex = '<center><div class="btn-group">';
+                        tex += '<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';
+                        tex += 'Action <span class="caret"></span></button>';
+                        tex += '<ul class="dropdown-menu" role="menu">';
+                        tex += '<li><a href="../../../RHistorial?opc=mod_tra&idtr=' + idtr + '">Detalle</a></li>';
+                        tex += '</ul>';
+                        tex += '</div></center>';
                         return tex;
                     }
                 });

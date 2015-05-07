@@ -8,6 +8,7 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -101,23 +102,28 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
     }
 
     @Override
-    public void INSERT_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO) {
+    public String INSERT_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO, String TI_PLAZO, int CA_DIAS_TOLERANCIA, String ID_DEPARTAMENTO_TOLERANCIA) {
+        String id = "";
         try {
-
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PLAZO( ?, ?, ?, ?, ?, ?,?)}");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PLAZO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
             cst.setString(1, null);
             cst.setString(2, NO_PLAZO);
             cst.setString(3, DET_ALERTA);
             cst.setString(4, c.convertFecha(FE_DESDE));
             cst.setString(5, c.convertFecha(FE_HASTA));
-            cst.setString(6, "1");
-            cst.setString(7, ID_REQUERIMIENTO.trim());
+            cst.setString(6, ES_PLAZO);
+            cst.setString(7, ID_REQUERIMIENTO);
+            cst.setString(8, TI_PLAZO);
+            cst.setInt(9, CA_DIAS_TOLERANCIA);
+            cst.setString(10, ID_DEPARTAMENTO_TOLERANCIA);
+            cst.registerOutParameter(11, Types.CHAR);
             cst.execute();
+            id = cst.getString(11);
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -125,6 +131,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
+        return id;
     }
 
     @Override
@@ -249,6 +256,84 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         }
         return lista;
 
+    }
+
+    @Override
+    public void validar_Vig_plazos() {
+        String id = "";
+        Double dia = 0.0;
+        Double mes = 0.0;
+        Double ano = 0.0;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT id_plazo,(extract (month from FE_HASTA) -  extract(month from sysdate))as meses_con,(extract (day from FE_HASTA) -  extract(day from sysdate))as dia_con,(extract (year from FE_HASTA) -  extract(year from sysdate))as anno_con FROM RHTR_PLAZO";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                id = rs.getString(1);
+                mes = rs.getDouble(2);
+                dia = rs.getDouble(3);
+                ano = rs.getDouble(4);
+                if (ano < 0) {
+                    this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+                    CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESHABI_PLAZO( ?)}");
+                    cst.setString(1, id);
+                    cst.execute();
+                } else if (ano == 0) {
+                    if (mes < 0) {
+                        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+                        CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESHABI_PLAZO( ?)}");
+                        cst.setString(1, id);
+                        cst.execute();
+                    } else if (mes == 0) {
+                        if (dia < 0) {
+                            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+                            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESHABI_PLAZO( ?)}");
+                            cst.setString(1, id);
+                            cst.execute();
+                        } else if (dia == 0 || dia > 0) {
+                        }
+                    } else if (mes > 0) {
+                    }
+                } else if (ano > 0) {
+                }
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    @Override
+    public String HABILITAR_FECHA(String tipo, String req, String dia, String dep) {
+        String fecha = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cs = this.conn.conex.prepareCall("begin   ? :=rhfu_habilitar_fecha(?,?,?,?);end;");
+            cs.registerOutParameter(1, Types.CHAR);
+            cs.setString(2, tipo);
+            cs.setString(3, req);
+            cs.setString(4, dia);
+            cs.setString(5, dep);
+            cs.execute();
+            fecha = cs.getString(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return fecha;
     }
 
 }

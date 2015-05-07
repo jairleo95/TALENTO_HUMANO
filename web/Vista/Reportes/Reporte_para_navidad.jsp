@@ -11,7 +11,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> SmartAdmin </title>
+        <title> Reporte Navidad </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -58,9 +58,13 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
+        <style>
+            .caja{
+                background:transparent url(../../imagenes/Gifloader.GIF) center no-repeat;
+            }
+        </style>
     </head>
-    <body class="" >
+    <body>
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
         <!-- HEADER -->
@@ -72,19 +76,19 @@
 
         <!-- MAIN PANEL -->
         <div class="spacing">
-            <center><h1 class="spacing" style="font-weight: bold;">RERPORTE-TRABAJADORES DE NAVIDAD</h1></center> 
+            <center><h1 class="spacing" style="font-weight: bold;">REPORTE-TRABAJADORES EN NAVIDAD</h1></center> 
         </div>
         <div align="center">
             <div class="row">
                 <div class="form-group" >
                     <label>Tiempo de Trabajo</label><br>
-                    <input type="text"  class="form-control des" name="del"  length="45" style="width: 250px" id="des"/>
+                    <input type="text"  class="form-control mes" name="mes"  length="45" style="width: 250px" id="des"/>
                 </div>
-                            </div>
-                        <br>
+            </div>
+            <br>
             <div class="row">
                 <div class="form-group">                            
-                    <button type="button" class="btn btn-primary" id="btnbuscar">Buscar</button>
+                    <button type="button" class="btn btn-primary" id="btnbuscar" >Buscar</button>
                 </div>
 
             </div>  
@@ -140,11 +144,11 @@
                                                     <th data-hide="phone">#</th>
                                                     <th data-class="APS">Codigo APS</th>
                                                     <th data-hide="DEP">Departamento</th>
-                                                    <th data-hide="ARE">Area</th><th data-class="tip">Tipo de Hora de Pago</th>
+                                                    <th data-hide="ARE">Area</th>
+                                                    <th data-hide="ARE">Puesto</th>
                                                     <th data-class="tip">Tipo Documento</th>  
                                                     <th data-class="tip">Numerno de documento</th>
                                                     <th data-class="tip">Sección</th>
-                                                    <th data-class="tip">Puesto</th>
                                                     <th data-class="tip">Apelido Paterno</th>
                                                     <th data-class="tip">Apellido Materno</th>
                                                     <th data-class="tip">Nombres</th>
@@ -153,13 +157,16 @@
                                                     <th data-class="tip">Fecha Nacimiento</th>                                                    
                                                     <th data-class="tip">Fecha de inicio</th>
                                                     <th data-class="tip">fecha de Cese</th>
+                                                    <th data-class="tip">T_Trabajo</th>
                                                 </tr>
                                             </thead>
 
-                                            <tbody>
-                                                
+                                            <tbody id="listar_trabajor_na">
+
                                             </tbody>
                                         </table>
+                                        <div class="div_t">                                                                                     
+                                        </div>
                                     </div>
 
                                 </div>
@@ -183,62 +190,7 @@
             <!-- END MAIN CONTENT -->
 
         </div>
-        <!-- END MAIN PANEL -->
 
-        <!-- PAGE FOOTER -->
-        <div class="page-footer">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6">
-                    <span class="txt-color-white">SmartAdmin WebApp © 2013-2014</span>
-                </div>
-
-                <div class="col-xs-6 col-sm-6 text-right hidden-xs">
-                    <div class="txt-color-white inline-block">
-                        <i class="txt-color-blueLight hidden-mobile">Last account activity <i class="fa fa-clock-o"></i> <strong>52 mins ago &nbsp;</strong> </i>
-                        <div class="btn-group dropup">
-                            <button class="btn btn-xs dropdown-toggle bg-color-blue txt-color-white" data-toggle="dropdown">
-                                <i class="fa fa-link"></i> <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu pull-right text-left">
-                                <li>
-                                    <div class="padding-5">
-                                        <p class="txt-color-darken font-sm no-margin">Download Progress</p>
-                                        <div class="progress progress-micro no-margin">
-                                            <div class="progress-bar progress-bar-success" style="width: 50%;"></div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="padding-5">
-                                        <p class="txt-color-darken font-sm no-margin">Server Load</p>
-                                        <div class="progress progress-micro no-margin">
-                                            <div class="progress-bar progress-bar-success" style="width: 20%;"></div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="padding-5">
-                                        <p class="txt-color-darken font-sm no-margin">Memory Load <span class="text-danger">*critical*</span></p>
-                                        <div class="progress progress-micro no-margin">
-                                            <div class="progress-bar progress-bar-danger" style="width: 70%;"></div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="padding-5">
-                                        <button class="btn btn-block btn-default">refresh</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END PAGE FOOTER -->
 
         <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
         Note: These tiles are completely responsive,
@@ -488,7 +440,7 @@
 
                 /* END TABLETOOLS */
 
-            })
+            });
 
         </script>
 
@@ -509,7 +461,81 @@
         </script>
 
 
-
+        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
     </body>
+    <script>
+
+            function listar_trabajor_na() {
+                var a = $(".mes").val();
+                var b = $("#listar_trabajor_na");
+                var texto = '';
+                $.post("../../reporte", "opc=reporte_t_navidad&mes=" + a, function (objJson) {
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    b.empty();
+                    var lista = objJson.lista;
+                    for (var i = 0; i < lista.length; i++) {
+                        texto += '<tr role="row" class="odd">';
+                        texto += '<td class>' + (i + 1) + '</td>';
+                        texto += '<td>' + lista[i].aps + '</td>';
+                        texto += '<td>' + lista[i].dep + '</td>';
+                        texto += '<td>' + lista[i].are + '</td>';
+                        texto += '<td>' + lista[i].pue + '</td>';
+                        texto += '<td>' + lista[i].ti_doc + '</td>';
+                        texto += '<td>' + lista[i].nu_doc + '</td>';
+                        texto += '<td>' + lista[i].sec + '</td>';
+                        texto += '<td>' + lista[i].pat + '</td>';
+                        texto += '<td>' + lista[i].mat + '</td>';
+                        texto += '<td>' + lista[i].nom_t + '</td>';
+                        texto += '<td>' + lista[i].pat + lista[i].mat + lista[i].nom_t + '</td>';
+                        texto += '<td>' + lista[i].sex + '</td>';
+                        texto += '<td>' + lista[i].fe_nac + '</td>';
+                        texto += '<td>' + lista[i].des + '</td>';
+                        texto += '<td>' + lista[i].has + '</td>';
+                        texto += '<td>' + lista[i].t_tra + '</td>';
+                        texto += '</tr>';
+                    }
+                    b.append(texto);
+                   
+                });
+
+            }
+            //OPCIONES DEL BOTTON
+            $(document).ready(function () {
+                var b = $('#tbodys');
+
+                $("#btnbuscar").click(
+                        function () {
+                            GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
+                            listar_trabajor_na();
+                             $('.div_t').empty();
+                        }
+                );
+                $("#btncancel").click(
+                        function () {
+                            document.formulario.reset();
+                            b.empty();
+                            html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                            $(".tbodys").html(html);
+                        }
+                );
+            }
+            );
+            // Login En el reporte
+            function GifLoader(contenedor, msg, action) {
+                $('.headerr').hide();
+                var text = "";
+                contenedor.empty();
+                if (action == 1) {
+                    text += "<div class='caja' style='height:250px; width:150px; margin:auto;'><center><h3>" + msg + "</h3></center></div>";
+                } else if (action == 2) {
+                    text += "<div style='height:150px; width:150px; margin:auto; padding-top:30px;'><center><h3>" + msg + "</h3></center></div>";
+                }
+                contenedor.append(text);
+            }
+
+    </script>
 
 </html>

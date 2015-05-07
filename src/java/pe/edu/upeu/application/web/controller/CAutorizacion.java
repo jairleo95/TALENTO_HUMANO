@@ -95,11 +95,14 @@ public class CAutorizacion extends HttpServlet {
                 /*Cambiar con un trigger al momento de insertar*/
                 dgp.VAL_DGP_PASOS();
                 dgp.RECHAZAR_DGP(iddgp);
-                a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
+                String id_autorizacion = a.Insert_Autorizacion_dev("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
+                a.Insert_comentario_Aut("", id_autorizacion, iddgp, iduser, "1", id_autorizacion, comentario);
                 String idpu = e.Id_Puesto_Personal(ide);
                 getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
-                 getServletContext().setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
+                getServletContext().setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
+                //out.print(id_autorizacion);
                 response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
+                out.print("correcto ");
             }
             //AUTORIZACION CARGA ACADEMICA POR DOCENTE
             if (opc.equals("Autorizacion_CD")) {
@@ -110,13 +113,13 @@ public class CAutorizacion extends HttpServlet {
             if (opc.equals("mens_cod_aps")) {
                 String idpu = e.Id_Puesto_Personal(ide);
                 getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
-                 getServletContext().setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
+                getServletContext().setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                 response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?m=si");
             }
             if (opc.equals("mens_cod_huella")) {
                 String idpu = e.Id_Puesto_Personal(ide);
                 getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
-                 getServletContext().setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
+                getServletContext().setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                 response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?h=si");
             }
             if (opc.equals("Enviar_Correo")) {
@@ -150,10 +153,10 @@ public class CAutorizacion extends HttpServlet {
 
             String idpu = e.Id_Puesto_Personal(ide);
             getServletContext().setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
-             getServletContext().setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
-             out.print( a.List_Autorizados(idpu).size());
-             out.print( idpu);
-             response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
+            getServletContext().setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
+            out.print(a.List_Autorizados(idpu).size());
+            out.print(idpu);
+            response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
 
         }
         /* } finally {

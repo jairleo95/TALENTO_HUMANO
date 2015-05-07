@@ -8,8 +8,11 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -413,7 +416,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "SELECT * FROM RHVD_DGP_AUTORIZADOS where ID_PUESTO = '" + id_puesto + "'";
         //sql += (true) ? " order by fe_creacion " : "" ;
-        
+
         List<V_Autorizar_Dgp> list = new ArrayList<V_Autorizar_Dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -426,7 +429,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setNo_puesto(rs.getString("no_puesto"));
                 v.setNo_req(rs.getString("no_req"));
                 v.setNo_area(rs.getString("no_area"));
-               // v.setAr_foto(rs.getString("ar_foto"));
+                // v.setAr_foto(rs.getString("ar_foto"));
                 v.setFe_creacion(rs.getString("fe_creacion"));
                 v.setFe_autorizacion(rs.getString("fe_autorizacion"));
                 v.setNo_dep(rs.getString("no_dep"));
@@ -440,6 +443,67 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             this.conn.close();
         }
         return list;
+    }
+
+    @Override
+    public String Insert_Autorizacion_dev(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String US_MODIF, String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS) {
+        String id = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_AUTORIZACION_DEV( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )}");
+            cst.setString(1, null);
+            cst.setString(2, ID_DGP);
+            cst.setString(3, ES_AUTORIZACION);
+            cst.setString(4, NU_PASOS);
+            cst.setString(5, IP_USUARIO);
+            cst.setString(6, US_CREACION);
+            cst.setString(7, US_MODIF);
+            cst.setString(8, FE_MODIF);
+            cst.setString(9, CO_PUESTO);
+            cst.setString(10, ID_PUESTO);
+            cst.setString(11, ID_DETALLE_REQ_PROCESO);
+            cst.setString(12, ID_PASOS);
+            cst.registerOutParameter(13, Types.CHAR);
+            cst.execute();
+            id = cst.getString(13);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(AutorizacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.conn.close();
+        }
+        return id;
+    }
+
+    @Override
+    public void Insert_comentario_Aut(String ID_COMENTARIO_DGP_SP, String id_autorizacion, String id_dgp, String us_creacion, String es_comentario, String fe_creacion,String comentario) {
+      CallableStatement cst;
+
+        try {
+
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_COMENTARIO_AUTOR( ?, ?, ?, ?, ?, ?,?)}");
+            cst.setString(1, null);
+            cst.setString(2, id_autorizacion.trim());
+            cst.setString(3, id_dgp.trim());
+            cst.setString(4, us_creacion.trim());
+            cst.setString(5, es_comentario.trim());
+            cst.setString(6, fe_creacion);
+            cst.setString(7, comentario);
+            cst.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
     }
 
 }

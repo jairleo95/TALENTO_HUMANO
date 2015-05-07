@@ -123,7 +123,7 @@
                                             <th data-class="fec_s">Fecha de Cese</th>
                                             <th data-hide="dni_h">Dni Hijo</th>
                                             <th data-hide="nom_h">APELLIDOS Y NOMBRES  HIJO(A)</th>
-                                            <th data-hide="edad_hi">Genero</th>
+                                            <th data-hide="edad_hi">Fecha Nacimiento</th>
                                             <th data-hide="edad_hi">Edad Hijo</th>
                                         </tr>
                                     </thead>
