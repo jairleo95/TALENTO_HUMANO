@@ -73,6 +73,10 @@ public class CPlazo extends HttpServlet {
                 rpta.put("lista", lista);
             }
             if (opc.equals("Listar_Plazo")) {
+                String tipo = request.getParameter("tipo");
+                String req = request.getParameter("req");
+                String dias = request.getParameter("dias");
+                String dep = request.getParameter("dep");
                 List<Map<String, ?>> lista = pl.Listar_Plazo();
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
@@ -98,7 +102,8 @@ public class CPlazo extends HttpServlet {
                 String req = request.getParameter("req");
                 String dias = request.getParameter("dias");
                 String dep = request.getParameter("dep");
-                pl.HABILITAR_FECHA(tipo, req, dias, dep);
+                String fecha = pl.HABILITAR_FECHA(tipo, req, dias, dep);
+                rpta.put("fecha", fecha);
                 rpta.put("rpta", "1");
             }
         } catch (Exception e) {

@@ -41,7 +41,7 @@ Author     : JAIR
                             </select></td></tr>
                     <tr><td>Nombre Plazo :<td><input type="text" name="nombre_plazo" required="" class="nombre_plazo" /></td></tr>
                     <tr><td>Descripción :<td><textarea name="descripcion" required="" class="descripcion"></textarea></td></tr>
-                    <tr class="tr_tolerancia" style="display: none"><td>Dias de tolerancia (Inicio de contrato):<td><input type="number" name="tolerancia" min="1" required="" value="1" class="tolerancia"/></td></tr>
+                    <tr class="tr_tolerancia" style="display: none"><td>Dias de tolerancia (Inicio de contrato):<td><input type="number" name="tolerancia" min="1" required="" value="0" class="tolerancia"/></td></tr>
                     <tr class="tr_dep_tolerancia" style="display:none"><td>Departamento tolerancia (Inicio de contrato):<td><input type="text" name="dep_tolerancia" required="" value="0" class="dep_tolerancia"/></td></tr>
                     <tr><td>Tipo planilla :<td>
                             <select name="planilla" class="planilla" required="">
@@ -51,10 +51,9 @@ Author     : JAIR
                     <tr><td>Requerimiento :<td>
                             <select name="id_req" class="req"  required="">
                                 <option value="">[Seleccione]</option>
-                                <option value="0">[Todos]</option>
                             </select>
                         </td></tr>
-                    <tr><td>Desde :<td><input type="date" readonly="" name="desde" required="" class="desde"/></td></tr>
+                    <tr><td>Desde :<td><input type="date"  readonly="" name="desde" required="" class="desde"/></td></tr>
                     <tr><td>Hasta :<td><input type="date" readonly="" name="hasta" required="" class="hasta"/></td></tr>
                     <input type="hidden" name="opc" value="Registrar"  class="opc"/>
                     <tr><td><button type="button"  id="btn-registrar" class="btn btn-primary btn-registrar">Registrar</button></td></tr>
@@ -146,8 +145,69 @@ Author     : JAIR
 
 
 <script>
-    $(document).ready(function () {
+    function validar_fechas() {
+        var data = "tipo=" + $(".tipo").val() + "&req=" + $(".req").val() + "&dias=" + $(".tolerancia").val() + "&dep=" + $(".dep_tolerancia").val();
+        $.post("../../../plazo_dgp", "opc=fecha_habilitada&" + data, function (objJson) {
+            var fecha = objJson.fecha;
+            $(".desde").attr("min", fecha);
+            if ($(".desde").val() == "") {
+                $(".desde").val(fecha);
+            } else {
+
+            }
+            $(".desde").removeAttr("readonly");
+            $(".hasta").attr("min", fecha);
+            $(".hasta").removeAttr("readonly");
+        });
+    }
+    function listar() {
         var b = $(".tbodys");
+        b.empty();
+        b.append("<tr><td colspan='9'>Cargando...</td></tr>");
+        $.post("../../../plazo_dgp", "opc=Listar_Plazo&" + $(".form_plazo").serialize(), function (objJson) {
+            b.empty();
+            var lista = objJson.lista;
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
+            }
+            for (var i = 0; i < lista.length; i++) {
+                b.append("<tr>");
+                b.append("<td class='id" + i + "'>" + lista[i].id + "</td>");
+                b.append("<td class='nombre" + i + "'>" + lista[i].nom + "</td>");
+                b.append("<td class='det" + i + "'>" + lista[i].det + "</td>");
+                b.append("<td class='desde" + i + "'>" + lista[i].desde + "</td>");
+                b.append("<td class='hasta" + i + "'>" + lista[i].hasta + "</td>");
+                b.append("<td class='planilla" + i + "'>" + lista[i].planilla + "</td>");
+                b.append("<td >" + lista[i].req + "</td>");
+                b.append("<input type='hidden' value='" + lista[i].id_req + "'/>");
+                b.append("<td><button value='" + i + "' class='Editar-Plazo'>Modificar</button><button value='" + i + "' class='Eliminar-Plazo' value='" + i + "'>Eliminar</button></td>");
+                b.append("</tr>");
+            }
+            $(".Editar-Plazo").click(
+                    function () {
+                        $(".nombre_plazo").val($(".nombre" + $(this).val()).text());
+                        $(".descripcion").val($(".det" + $(this).val()).text());
+                        $(".desde").val($(".desde" + $(this).val()).text());
+                        $(".hasta").val($(".hasta" + $(this).val()).text());
+                        $("#form-plazo").append("<input type='hidden' name='ID' value='" + $(".id" + $(this).val()).text() + "'  />");
+                        $("#btn-registrar").val("Modificar");
+                        $(".opc").val("Modificar");
+                    }
+            );
+            $(".Eliminar-Plazo").click(
+                    function () {
+                        if (confirm("Esta Seguro de Eliminar?")) {
+                            $.post("../../../plazo_dgp", "opc=Eliminar&plz=" + $(".id" + $(this).val()).text(), function () {
+                                listar();
+                            });
+                        } else {
+                        }
+                    }
+            );
+        });
+    }
+    $(document).ready(function () {
         listar();
         $.post("../../../requerimiento", "opc=Listar_tp", function (objJson) {
             var tp = $(".planilla");
@@ -169,6 +229,7 @@ Author     : JAIR
                 $(".tr_tolerancia").hide();
                 $(".tr_dep_tolerancia").hide();
                 $(".dep_tolerancia").val("0");
+                $(".tolerancia").val("0");
 
             } else if ($(this).val() == '2') {
                 $(".tr_tolerancia").show();
@@ -193,57 +254,15 @@ Author     : JAIR
                     req.append("<option value='" + lista[t].id + "'>" + lista[t].nombre + "</option>");
                 }
             });
+
         });
-        function listar() {
-            b.empty();
-            b.append("<tr><td colspan='9'>Cargando...</td></tr>");
-            $.post("../../../plazo_dgp", "opc=Listar_Plazo", function (objJson) {
-                b.empty();
-                var lista = objJson.lista;
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                for (var i = 0; i < lista.length; i++) {
-                    b.append("<tr>");
-                    b.append("<td class='id" + i + "'>" + lista[i].id + "</td>");
-                    b.append("<td class='nombre" + i + "'>" + lista[i].nom + "</td>");
-                    b.append("<td class='det" + i + "'>" + lista[i].det + "</td>");
-                    b.append("<td class='desde" + i + "'>" + lista[i].desde + "</td>");
-                    b.append("<td class='hasta" + i + "'>" + lista[i].hasta + "</td>");
-                    b.append("<td class='planilla" + i + "'>" + lista[i].planilla + "</td>");
-                    b.append("<td >" + lista[i].req + "</td>");
-                    b.append("<input type='hidden' value='" + lista[i].id_req + "'/>");
-                    b.append("<td><button value='" + i + "' class='Editar-Plazo'>Modificar</button><button value='" + i + "' class='Eliminar-Plazo' value='" + i + "'>Eliminar</button></td>");
-                    b.append("</tr>");
-                }
-                $(".Editar-Plazo").click(
-                        function () {
-                            $(".nombre_plazo").val($(".nombre" + $(this).val()).text());
-                            $(".descripcion").val($(".det" + $(this).val()).text());
-                            $(".desde").val($(".desde" + $(this).val()).text());
-                            $(".hasta").val($(".hasta" + $(this).val()).text());
-                            $("#form-plazo").append("<input type='hidden' name='ID' value='" + $(".id" + $(this).val()).text() + "'  />");
-                            $("#btn-registrar").val("Modificar");
-                            $(".opc").val("Modificar");
-                        }
-                );
-                $(".Eliminar-Plazo").click(
-                        function () {
-                            if (confirm("Esta Seguro de Eliminar?")) {
-                                $.post("../../../plazo_dgp", "opc=Eliminar&plz=" + $(".id" + $(this).val()).text(), function () {
-                                    listar();
-                                });
-                            } else {
-                            }
-                        }
-                );
-            });
-        }
+        $(".req").change(function () {
+            validar_fechas();
+        });
         $(".btn-registrar").click(
                 function () {
+                    validar_fechas();
                     if ($(".form_plazo").valid()) {
-
                         $.post("../../../plazo_dgp", $("#form-plazo").serialize(), function () {
                             listar();
                         });
@@ -254,6 +273,9 @@ Author     : JAIR
                     }
                 }
         );
+        $(".desde").click(function () {
+            validar_fechas();
+        });
     });
 
 </script>
