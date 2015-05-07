@@ -71,7 +71,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = " select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'yyyy-mm-dd')  as fe_desde ,to_char(fe_hasta,'yyyy-mm-dd')  as fe_hasta, r.ID_TIPO_PLANILLA,p.ID_REQUERIMIENTO ,r.NO_REQ,t.TI_PLANILLA from rhtr_plazo p ,rhtr_requerimiento r , RHTR_TIPO_PLANILLA t where es_plazo ='1' and r.ID_REQUERIMIENTO = p.ID_REQUERIMIENTO and t.ID_TIPO_PLANILLA = r.ID_TIPO_PLANILLA union select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'yyyy-mm-dd')  as fe_desde ,to_char(fe_hasta,'yyyy-mm-dd')  as fe_hasta, '0','0' ,'Todos  los requerimientos','Todos las planillas' from rhtr_plazo  where es_plazo='1' and ID_REQUERIMIENTO='0'";
+            String sql = " select *  from rhvd_plazo";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
 
@@ -315,7 +315,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         String fecha = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cs = this.conn.conex.prepareCall("begin   ? :=rhfu_habilitar_fecha(?,?,?,?);end;");
+            CallableStatement cs = this.conn.conex.prepareCall("begin   ? :=rhfu_fecha_habilitada(?,?,?,?);end;");
             cs.registerOutParameter(1, Types.CHAR);
             cs.setString(2, tipo);
             cs.setString(3, req);

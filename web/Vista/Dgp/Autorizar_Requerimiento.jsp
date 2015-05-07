@@ -126,8 +126,7 @@
                     });
                 }
                 listar();
-            });
-        </script>
+            });</script>
 
         <!-- MAIN PANEL -->
         <div id="main" role="main" style="margin-left: 0px;">
@@ -192,97 +191,151 @@
                                         }
                                         $(document).ready(function () {
                                             $(".btn_pro_remuneracion").click(function () {
-                                                for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
-                                                    if ($(".env_rem" + i).prop('checked')) {
-                                                        $.ajax({
-                                                            url: "../../autorizacion",
-                                                            type: "POST",
-                                                            data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
-                                                        }).done(function () {
-                                                            window.location.href = "../../autorizacion";
-                                                        });
+
+                                                $.SmartMessageBox({
+                                                    title: "¡Advertencia!",
+                                                    content: "¿Esta seguro de procesar estos requerimientos?",
+                                                    buttons: '[No][Si]'
+                                                }, function (ButtonPressed) {
+                                                    if (ButtonPressed === "Si") {
+
+
+                                                        for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
+                                                            if ($(".env_rem" + i).prop('checked')) {
+                                                                $.ajax({
+                                                                    url: "../../autorizacion",
+                                                                    type: "POST",
+                                                                    data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
+                                                                }).done(function () {
+                                                                    window.location.href = "../../autorizacion";
+                                                                });
+                                                            }
+                                                        }
+
                                                     }
-                                                }
+                                                    if (ButtonPressed === "No") {
+                                                    }
+
+                                                });
                                             });
                                             $(".btn_pro_firma").click(function () {
-                                                try {
-                                                    $.each($(".firm_contr"), function () {
-                                                        //alert($(this).val());
-                                                        if ($(this).prop('checked')) {
-                                                            $.ajax({
-                                                                url: "../../contrato",
-                                                                type: "POST",
-                                                                data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
-                                                            }).done(function () {
+                                                $.SmartMessageBox({
+                                                    title: "¡Advertencia!",
+                                                    content: "¿Esta seguro de procesar firmas a estos requerimientos?",
+                                                    buttons: '[No][Si]'
+                                                }, function (ButtonPressed) {
+                                                    if (ButtonPressed === "Si") {
 
-                                                            });
-                                                            $.ajax({
-                                                                url: "../../autorizacion",
-                                                                type: "POST",
-                                                                data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
-                                                            }).done(function () {
+                                                        try {
+                                                            $.each($(".firm_contr"), function () {
+                                                                //alert($(this).val());
 
-                                                                window.location.href = "../../autorizacion";
+
+                                                                if ($(this).prop('checked')) {
+                                                                    $.ajax({
+                                                                        url: "../../contrato",
+                                                                        type: "POST",
+                                                                        data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
+                                                                    }).done(function () {
+
+                                                                    });
+                                                                    $.ajax({
+                                                                        url: "../../autorizacion",
+                                                                        type: "POST",
+                                                                        data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
+                                                                    }).done(function () {
+
+                                                                        window.location.href = "../../autorizacion";
+                                                                    });
+                                                                }
                                                             });
+                                                            // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
+
                                                         }
-                                                    });
-                                                    // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
+                                                        catch (err) {
+                                                            alert(err.message);
+                                                        } finally {
+                                                        }
+                                                    }
+                                                    if (ButtonPressed === "No") {
+                                                    }
 
-                                                }
-                                                catch (err) {
-                                                    alert(err.message);
-                                                } finally {
-                                                }
+                                                });
                                             });
                                             $(".btn_cod_aps").click(function () {
 
-                                                for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
-                                                    if ($(".cod_aps" + r).val() != "") {
-                                                        $.ajax({
-                                                            url: "../../trabajad|or",
-                                                            type: "POST",
-                                                            data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                                        }).done(function () {
-                                                        });
-                                                        $.ajax({
-                                                            url: "../../autorizacion",
-                                                            type: "POST",
-                                                            data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                                        }).done(function () {
-                                                            window.location.href = "../../autorizacion?opc=mens_cod_aps";
-                                                        });
+                                                $.SmartMessageBox({
+                                                    title: "¡Advertencia!",
+                                                    content: "¿Esta seguro de procesar codigos APS a estos requerimientos?",
+                                                    buttons: '[No][Si]'
+                                                }, function (ButtonPressed) {
+                                                    if (ButtonPressed === "Si") {
+
+
+                                                        for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
+                                                            if ($(".cod_aps" + r).val() != "") {
+                                                                $.ajax({
+                                                                    url: "../../trabajad|or",
+                                                                    type: "POST",
+                                                                    data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
+                                                                }).done(function () {
+                                                                });
+                                                                $.ajax({
+                                                                    url: "../../autorizacion",
+                                                                    type: "POST",
+                                                                    data: "opc=Aceptar" + $(".val_aut" + r).val()
+                                                                }).done(function () {
+                                                                    window.location.href = "../../autorizacion?opc=mens_cod_aps";
+                                                                });
+                                                            }
+                                                        }
+
                                                     }
-                                                }
+                                                    if (ButtonPressed === "No") {
+                                                    }
+
+                                                });
                                             });
                                             $(".btn_cod_huella").click(function () {
-                                                for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
-                                                    if ($(".cod_huella" + r).val() != "") {
-                                                        $.ajax({
-                                                            url: "../../trabajador",
-                                                            type: "POST",
-                                                            data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                                        }).done(function () {
-                                                        });
-                                                        $.ajax({
-                                                            url: "../../autorizacion",
-                                                            type: "POST",
-                                                            data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                                        }).done(function () {
+                                                $.SmartMessageBox({
+                                                    title: "¡Advertencia!",
+                                                    content: "¿Esta seguro de procesar codigos de huella a estos requerimientos?",
+                                                    buttons: '[No][Si]'
+                                                }, function (ButtonPressed) {
+                                                    if (ButtonPressed === "Si") {
 
-                                                        });
-                                                        $.ajax({
-                                                            url: "../../autorizacion",
-                                                            type: "POST",
-                                                            data: "opc=Enviar_Correo" + $(".correos_" + r).val()
-                                                        }).done(function () {
-                                                            window.location.href = "../../autorizacion?opc=mens_cod_huella";
-                                                        });
+
+                                                        for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
+                                                            if ($(".cod_huella" + r).val() != "") {
+                                                                $.ajax({
+                                                                    url: "../../trabajador",
+                                                                    type: "POST",
+                                                                    data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
+                                                                }).done(function () {
+                                                                });
+                                                                $.ajax({
+                                                                    url: "../../autorizacion",
+                                                                    type: "POST",
+                                                                    data: "opc=Aceptar" + $(".val_aut" + r).val()
+                                                                }).done(function () {
+
+                                                                });
+                                                                $.ajax({
+                                                                    url: "../../autorizacion",
+                                                                    type: "POST",
+                                                                    data: "opc=Enviar_Correo" + $(".correos_" + r).val()
+                                                                }).done(function () {
+                                                                    window.location.href = "../../autorizacion?opc=mens_cod_huella";
+                                                                });
+                                                            }
+                                                        }
                                                     }
-                                                }
-                                            });
+                                                    if (ButtonPressed === "No") {
+                                                    }
 
-                                        });
-                                    </script>
+                                                });
+                                            });
+                                        });</script>
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
                                         <%if (idrol.trim().equals("ROL-0006")) {
@@ -782,7 +835,6 @@
                                                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                             });
                                             $(".cod_aps").numeric();
-
                                             /* // DOM Position key index //
                                              
                                              l - Length changing (dropdown)
@@ -804,12 +856,10 @@
                                             var responsiveHelper_datatable_fixed_column = undefined;
                                             var responsiveHelper_datatable_col_reorder = undefined;
                                             var responsiveHelper_datatable_tabletools = undefined;
-
                                             var breakpointDefinition = {
                                                 tablet: 1024,
                                                 phone: 480
                                             };
-
                                             $('#dt_basic').dataTable({
                                                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
                                                         "t" +
@@ -828,7 +878,6 @@
                                                     responsiveHelper_dt_basic.respond();
                                                 }
                                             });
-
                                             $('#dt_basic1').dataTable({
                                                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
                                                         "t" +
@@ -847,7 +896,6 @@
                                                     responsiveHelper_dt_basic.respond();
                                                 }
                                             });
-
                                             /* END BASIC */
 
                                             /* COLUMN FILTER  */
@@ -876,10 +924,8 @@
                                                 }
 
                                             });
-
                                             // custom toolbar
                                             $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
-
                                             // Apply the filter
                                             $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
 
@@ -887,7 +933,6 @@
                                                         .column($(this).parent().index() + ':visible')
                                                         .search(this.value)
                                                         .draw();
-
                                             });
                                             /* END COLUMN FILTER */
 
@@ -910,7 +955,6 @@
                                                     responsiveHelper_datatable_col_reorder.respond();
                                                 }
                                             });
-
                                             /* END COLUMN SHOW - HIDE */
 
                                             /* TABLETOOLS */
@@ -952,7 +996,6 @@
                                                     responsiveHelper_datatable_tabletools.respond();
                                                 }
                                             });
-
                                             /* END TABLETOOLS */
 
                                         })
@@ -964,7 +1007,6 @@
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
-
         (function () {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
