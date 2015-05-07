@@ -320,7 +320,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
             ResultSet rs = this.cnn.query(sql);
             if (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                for (int i = 1; i < 74; i++) {
+                for (int i = 1; i < 75; i++) {
                     if (rs.getString(i) == null) {
                         rec.put("col" + i, "SIN DATOS");
                     } else {
@@ -361,7 +361,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
             ResultSet rs = this.cnn.query(sql);
             if (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                for (int i = 1; i < 74; i++) {
+                for (int i = 1; i < 75; i++) {
                     if (rs.getString(i) == null) {
                         rec.put("col" + i, "SIN DATOS");
                     } else {

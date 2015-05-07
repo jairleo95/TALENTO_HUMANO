@@ -16,41 +16,52 @@ Author     : JAIR
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registrar Plazo</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
 
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
+
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/demo.min.css">
+
+        <!-- FAVICONS -->
+        <link rel="shortcut icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
 
     </head>
-    <body > 
+    <body> 
     <center>
-        <h1>Mantenimiento de Plazos de Requerimientos</h1>
-        <form   id="form-plazo" class="form_plazo">
-            <table>
-                <tr><td>Tipo de Plazo</td><td><select name="tipo" class="tipo" required="">
-                            <option value=''>[Seleccione]</option>
-                            <option value='1'>Inicio de Contrato</option>
-                            <option value='2'>Ingreso a planilla</option>
-                        </select>      </td></tr>
-                <tr><td>Nombre Plazo :<td><input type="text" name="nombre_plazo" required="" class="nombre_plazo" /></td></tr>
-                <tr><td>Descripción :<td><textarea name="descripcion" required="" class="descripcion"></textarea></td></tr>
-                <tr><td>Desde :<td><input type="date" name="desde" required="" class="desde"/></td></tr>
-                <tr><td>Hasta :<td><input type="date" name="hasta" required="" class="hasta"/></td></tr>
-                <tr><td>Dias de tolerancia (Inicio de contrato):<td><input type="number" name="tolerancia" required="" class="tolerancia"/></td></tr>
-                <tr><td>Departamento tolerancia (Inicio de contrato):<td><input type="number" name="dep_tolerancia" required="" class="dep_tolerancia"/></td></tr>
-                <tr><td>Tipo planilla :<td>
-                        <select name="planilla" class="planilla" required="">
-                            <option value="">[Seleccione]</option>
-                        </select>
-                    </td></tr>
-                <tr><td>Requerimiento :<td>
-                        <select name="id_req" class="req"  required="">
-                            <option value="">[Seleccione]</option>
-                            <option value="0">[Todos]</option>
-                        </select>
-                    </td></tr>
-                <input type="hidden" name="opc" value="Registrar"  class="opc"/>
-                <tr><td><button type="button"  id="btn-registrar" class="btn-registrar">Registrar</button></td></tr>
-            </table>
-        </form>
-        <table border='1'>
+        <div class="row">
+            <h1>Mantenimiento de Plazos de Requerimientos</h1>
+            <form   id="form-plazo" class="form_plazo smart-form">
+                <table>
+                    <tr><td>Tipo de Plazo</td><td><select name="tipo" class="tipo" required="">
+                                <option value='1' selected="">Ingreso a planilla</option>
+                                <option value='2'>Inicio de Contrato</option>
+                            </select></td></tr>
+                    <tr><td>Nombre Plazo :<td><input type="text" name="nombre_plazo" required="" class="nombre_plazo" /></td></tr>
+                    <tr><td>Descripción :<td><textarea name="descripcion" required="" class="descripcion"></textarea></td></tr>
+                    <tr class="tr_tolerancia" style="display: none"><td>Dias de tolerancia (Inicio de contrato):<td><input type="number" name="tolerancia" min="1" required="" value="1" class="tolerancia"/></td></tr>
+                    <tr class="tr_dep_tolerancia" style="display:none"><td>Departamento tolerancia (Inicio de contrato):<td><input type="text" name="dep_tolerancia" required="" value="0" class="dep_tolerancia"/></td></tr>
+                    <tr><td>Tipo planilla :<td>
+                            <select name="planilla" class="planilla" required="">
+                                <option value="">[Seleccione]</option>
+                            </select>
+                        </td></tr>
+                    <tr><td>Requerimiento :<td>
+                            <select name="id_req" class="req"  required="">
+                                <option value="">[Seleccione]</option>
+                                <option value="0">[Todos]</option>
+                            </select>
+                        </td></tr>
+                    <tr><td>Desde :<td><input type="date" readonly="" name="desde" required="" class="desde"/></td></tr>
+                    <tr><td>Hasta :<td><input type="date" readonly="" name="hasta" required="" class="hasta"/></td></tr>
+                    <input type="hidden" name="opc" value="Registrar"  class="opc"/>
+                    <tr><td><button type="button"  id="btn-registrar" class="btn btn-primary btn-registrar">Registrar</button></td></tr>
+                </table>
+            </form>
+        </div>
+        <table class="table table-hover table-striped  table-responsive">
             <thead>
                 <tr>
                     <td>ID</td>
@@ -81,10 +92,63 @@ Author     : JAIR
         document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
     }
 </script>
+<!-- IMPORTANT: APP CONFIG -->
+<script src="../../../js/app.config.js"></script>
+
+<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+<script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+
+<!-- BOOTSTRAP JS -->
+<script src="../../../js/bootstrap/bootstrap.min.js"></script>
+
+
+<!-- CUSTOM NOTIFICATION -->
+<script src="../../../js/notification/SmartNotification.min.js"></script>
+
+<!-- JARVIS WIDGETS -->
+<script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
+
+<!-- EASY PIE CHARTS -->
+<script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+
+<!-- SPARKLINES -->
+<script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+
+<!-- JQUERY VALIDATE -->
+<script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
+
+<!-- JQUERY MASKED INPUT -->
+<script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+
+<!-- JQUERY SELECT2 INPUT -->
+<script src="../../../js/plugin/select2/select2.min.js"></script>
+
+<!-- JQUERY UI + Bootstrap Slider -->
+<script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+
+<!-- browser msie issue fix -->
+<script src="../../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+
+<!-- FastClick: For mobile devices -->
+<script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
+
+
+<script src="../../../js/demo.min.js"></script>
+
+<!-- MAIN APP JS FILE -->
+<script src="../../../js/app.min.js"></script>
+
+<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+<!-- Voice command : plugin -->
+<script src="../../../js/speech/voicecommand.min.js"></script>
+
+<script src="../../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
+
+
 <script>
     $(document).ready(function () {
-        listar();
         var b = $(".tbodys");
+        listar();
         $.post("../../../requerimiento", "opc=Listar_tp", function (objJson) {
             var tp = $(".planilla");
             tp.empty();
@@ -97,6 +161,20 @@ Author     : JAIR
             tp.append("<option value=''>[Seleccione]</option>");
             for (var t = 0; t < lista.length; t++) {
                 tp.append("<option value='" + lista[t].id + "'>" + lista[t].nombre + "</option>");
+            }
+        });
+
+        $(".tipo").change(function () {
+            if ($(this).val() == '1') {
+                $(".tr_tolerancia").hide();
+                $(".tr_dep_tolerancia").hide();
+                $(".dep_tolerancia").val("0");
+
+            } else if ($(this).val() == '2') {
+                $(".tr_tolerancia").show();
+                $(".tr_dep_tolerancia").show();
+                $(".dep_tolerancia").val("");
+
             }
         });
         $(".planilla").change(function () {
@@ -114,10 +192,11 @@ Author     : JAIR
                 for (var t = 0; t < lista.length; t++) {
                     req.append("<option value='" + lista[t].id + "'>" + lista[t].nombre + "</option>");
                 }
-
             });
         });
         function listar() {
+            b.empty();
+            b.append("<tr><td colspan='9'>Cargando...</td></tr>");
             $.post("../../../plazo_dgp", "opc=Listar_Plazo", function (objJson) {
                 b.empty();
                 var lista = objJson.lista;
@@ -161,7 +240,6 @@ Author     : JAIR
                 );
             });
         }
-
         $(".btn-registrar").click(
                 function () {
                     if ($(".form_plazo").valid()) {
@@ -174,7 +252,6 @@ Author     : JAIR
                         $("#form-plazo")[0].reset();
                         return false;
                     }
-
                 }
         );
     });

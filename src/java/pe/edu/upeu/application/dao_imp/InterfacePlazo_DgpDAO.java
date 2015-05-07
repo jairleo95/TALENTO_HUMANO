@@ -31,4 +31,6 @@ public interface InterfacePlazo_DgpDAO {
 
     public void REMOVE_PLAZO(String ID_PLAZO);
 
+    public String HABILITAR_FECHA(String tipo, String req, String dia, String dep);
+
 }

@@ -110,8 +110,8 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
             cst.setString(1, null);
             cst.setString(2, NO_PLAZO);
             cst.setString(3, DET_ALERTA);
-            cst.setString(4, FE_DESDE);
-            cst.setString(5, FE_HASTA);
+            cst.setString(4, c.convertFecha(FE_DESDE));
+            cst.setString(5, c.convertFecha(FE_HASTA));
             cst.setString(6, ES_PLAZO);
             cst.setString(7, ID_REQUERIMIENTO);
             cst.setString(8, TI_PLAZO);
@@ -256,6 +256,32 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         }
         return lista;
 
+    }
+
+    @Override
+    public String HABILITAR_FECHA(String tipo, String req, String dia, String dep) {
+        String fecha = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cs = this.conn.conex.prepareCall("begin   ? :=rhfu_habilitar_fecha(?,?,?,?);end;");
+            cs.registerOutParameter(1, Types.CHAR);
+            cs.setString(2, tipo);
+            cs.setString(3, req);
+            cs.setString(4, dia);
+            cs.setString(5, dep);
+            cs.execute();
+            fecha = cs.getString(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return fecha;
     }
 
 }

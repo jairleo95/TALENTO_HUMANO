@@ -46,7 +46,6 @@ public class CPlazo extends HttpServlet {
             String opc = request.getParameter("opc");
             if (opc.equals("Mantenimiento")) {
                 response.sendRedirect("Vista/Dgp/Plazo/Reg_Plazo_Dgp.jsp");
-
             }
             if (opc.equals("Registrar")) {
                 String NO_PLAZO = request.getParameter("nombre_plazo");
@@ -55,13 +54,11 @@ public class CPlazo extends HttpServlet {
                 String FE_HASTA = request.getParameter("hasta");
                 String ID_REQUERIMIENTO = request.getParameter("id_req");
                 String TI_PLAZO = request.getParameter("tipo");
-                int CA_DIAS_TOLERANCIA = Integer.parseInt(request.getParameter("CA_DIAS_TOLERANCIA"));
+                int CA_DIAS_TOLERANCIA = Integer.parseInt(request.getParameter("tolerancia"));
                 String ID_DEPARTAMENTO_TOLERANCIA = request.getParameter("dep_tolerancia");
                 pl.INSERT_PLAZO(null, NO_PLAZO, DET_ALERTA, FE_DESDE, FE_HASTA, "1", ID_REQUERIMIENTO.trim(), TI_PLAZO, CA_DIAS_TOLERANCIA, ID_DEPARTAMENTO_TOLERANCIA);
-
             }
             if (opc.equals("Modificar")) {
-
                 String ID_PLAZO = request.getParameter("ID");
                 String NO_PLAZO = request.getParameter("nombre_plazo");
                 String DET_ALERTA = request.getParameter("descripcion");
@@ -95,6 +92,14 @@ public class CPlazo extends HttpServlet {
                 List<Map<String, ?>> lista = pl.Listar_Plazo_id(id, iddgp);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
+            }
+            if (opc.equals("fecha_habilitada")) {
+                String tipo = request.getParameter("tipo");
+                String req = request.getParameter("req");
+                String dias = request.getParameter("dias");
+                String dep = request.getParameter("dep");
+                pl.HABILITAR_FECHA(tipo, req, dias, dep);
+                rpta.put("rpta", "1");
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");

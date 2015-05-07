@@ -344,7 +344,7 @@
                         texto_html += '<tr><td>Tipo de Plazo</td><td>' + lista[i].ti_plazo + '</td></tr>';
                         texto_html += '<tr><td>Nombre de Plazo</td><td>' + lista[i].plazo + '</td></tr>';
                         texto_html += '<tr><td>Detalle de Plazo</td><td>' + lista[i].detalle_plazo + '</td></tr>';
-                        if (lista[i].ti_plazo == '1') {
+                        if (lista[i].ti_plazo == '2') {
                             texto_html += ' <tr><td>Fecha de inicio de contrato solicitado : </td><td>' + lista[i].fecha_plazo + '</td></tr>';
                         }
                         else {
