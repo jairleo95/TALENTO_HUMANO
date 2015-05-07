@@ -66,18 +66,18 @@
                         <div class="row">
                             <div class="form-group" >
                                 <label>Desde</label><br>
-                                <input type="text"  class="form-control des" name="del"  length="45" style="width: 250px" id="des"/>
+                                <input type="text"  class="form-control des" placeholder="Inicio rango de edad" name="del"  length="45" style="width: 250px" id="des"/>
                             </div>
                             <div class="form-group" >
                                 <label>Hasta</label><br>
-                                <input type="text"  class="form-control has" name="al" size="45" maxlength="100" style="width: 250px" id="has" />
+                                <input type="text"  class="form-control has" placeholder="Fin rango de edad" name="al" size="45" maxlength="100" style="width: 250px" id="has" />
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="form-group" >
                                 <label>Edad</label><br>
-                                <input type="text"  class="form-control edad" name="del"  length="45" style="width: 250px" id="edad"/>
+                                <input type="text"  class="form-control edad" placeholder="Rango de edad general" name="del"  length="45" style="width: 250px" id="edad"/>
                             </div>
                         </div>
                         <br>

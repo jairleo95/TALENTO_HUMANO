@@ -43,6 +43,11 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        <style>
+            .caja{
+                background:transparent url(../../imagenes/Gifloader.GIF) center no-repeat;
+            }
+        </style>
         <title>Reporte de Cumpleaños</title>
     </head>
     <body>  
@@ -134,6 +139,8 @@
                                     <tbody id="Li_cump">
                                     </tbody>
                                 </table>
+                                <div class="div_t">                                                                                     
+                                </div>
 
                             </div>
                             <!-- end widget content -->
@@ -226,221 +233,235 @@
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script>
-            $(document).ready(function(){
-               TableTools.DEFAULTS.aButtons = ["copy","xmls","print"] 
+            $(document).ready(function () {
+                TableTools.DEFAULTS.aButtons = ["copy", "xmls", "print"]
             });
         </script>
     </body>
     <script>
-            function listar_opciones(opc, id) {
-                if (opc == 'Listar_dir_dep') {
-                    var a = $(".selectdep");
-                    $(".selectarea").empty();
-                    $(".selectarea").append("<option value=''>[Seleccione]</option>");
-                    $(".selectsec").empty();
-                    $(".selectsec").append("<option value=''>[Seleccione]</option>");
-                    $(".selectpu").empty();
-                    $(".selectpu").append("<option value=''>[Seleccione]</option>");
-                }
-                if (opc == 'Listar_area2') {
-                    var a = $(".selectarea");
-                    $(".selectsec").empty();
-                    $(".selectsec").append("<option value=''>[Seleccione]</option>");
-                    $(".selectpu").empty();
-                    $(".selectpu").append("<option value=''>[Seleccione]</option>");
-                }
-                if (opc == 'Listar_sec2') {
-                    var a = $(".selectsec");
-                    $(".selectpu").empty();
-                    $(".selectpu").append("<option value=''>[Seleccione]</option>");
-                }
-                if (opc == 'Listar_pu_id') {
-                    var a = $(".selectpu");
-                }
-                $.post("../../Direccion_Puesto", "opc=" + opc.trim() + "&id=" + id.trim(), function (objJson) {
-                    var list = objJson.lista;
-                    a.empty();
-                    a.append("<option value=''>[Seleccione]</option>");
-                    for (var i = 0; i < list.length; i++) {
-                        a.append("<option value='" + list[i].id + "'>" + list[i].nombre + "</option>");
-                    }
-                    $(".tbodys").append();
-                });
+        function listar_opciones(opc, id) {
+            if (opc == 'Listar_dir_dep') {
+                var a = $(".selectdep");
+                $(".selectarea").empty();
+                $(".selectarea").append("<option value=''>[Seleccione]</option>");
+                $(".selectsec").empty();
+                $(".selectsec").append("<option value=''>[Seleccione]</option>");
+                $(".selectpu").empty();
+                $(".selectpu").append("<option value=''>[Seleccione]</option>");
             }
-            function buscar(del, al, nombre, dir, dep, area, sec, puesto, fe_i, fe_fi, ca_sueldo, fe_sus) {
-                var b = $(".tbodys");
-                $.post("../../impresion_masiva?opc=filtrar" + "&desde=" + del + "&al=" + al + "&nom_ape=" + nombre + "&direccion=" + dir + "&departamento=" + dep + "&area=" + area + "&seccion=" + sec + "&puesto=" + puesto + "&fec_i=" + fe_i + "&fec_f=" + fe_fi + "&sueldo=" + ca_sueldo + "&fe_sus=" + fe_sus, function (objJson) {
-                    b.empty();
-                    //alert($("#select_pu").val());
-                    var list = objJson.lista;
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var nuro = 1;
-                    if (list.length > 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            nuro = nuro + i;
-                            b.append("<tr>");
-                            b.append("<td>" + nuro + "</td>");
-                            b.append("<td><p>" + list[i].nombre + "</p></td>");
-                            b.append("<td>" + list[i].fe_de + "</td>");
-                            if (list[i].fe_ha != null) {
-                                b.append("<td>" + list[i].fe_ha + "</td>");
-                            } else {
-                                b.append("<td>indefinido</td>");
-                            }
-                            // b.append("<td>" + list[i].fe_ha + "</td>");
-                            b.append("<td><p>" + list[i].no_ar + "</p></td>");
-                            b.append("<td><p>" + list[i].no_se + "</p></td>");
-                            b.append("<td><p>" + list[i].no_pu + "</p></td>");
-                            b.append("<td>" + list[i].ca_su + '</td>');
-                            b.append("<td>" + list[i].fe_su + "</td>");
-                            b.append('<td><a class="btn-warming" href="../../contrato?opc=Detalle_Contractual&idtr=' + list[i].id_tr + '">Ver detalle</a> </td>');
-                            //b.append('<td id="sel' + i + '"></td>');
-                            if (list[i].id_pl != null) {
-                                b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_co + '/' + list[i].id_pl + '"></td>');
-                            } else {
-                                b.append('<td>NO TIENE</td>');
-                            }
-                            b.append("</tr>");
-                            nuro = 1;
-                        }
-                        if (list.length !== 0) {
-                            $("#asa").show();
-                        }
-                        $("#btns").click(
-                                function () {
-                                    $("#gg :checkbox").attr('checked', true);
-                                    $('#imp').is(':checked');
-                                    alerta(checkboxValues.push($("#imp").val()));
-                                });
-                        $("#btns2").click(
-                                function () {
-                                    var checkboxValues = new Array();
-                                    //recorremos todos los checkbox seleccionados con .each
-                                    $('input[name="orderBox[]"]:checked').each(function () {
-                                        //$(this).val() es el valor del checkbox correspondiente
-                                        checkboxValues.push($(this).val());
-                                        alert(checkboxValues.push($(this).val()));
-                                    });
-                                });
-                    } else {
-                        b.append("<tr><TD colspan='12' style='text-align:center;'> NO SE HA ENCONTRADO DATOS DE LA BUSQUEDA</TD></tr>")
-                    }
-
-                }
-                );
+            if (opc == 'Listar_area2') {
+                var a = $(".selectarea");
+                $(".selectsec").empty();
+                $(".selectsec").append("<option value=''>[Seleccione]</option>");
+                $(".selectpu").empty();
+                $(".selectpu").append("<option value=''>[Seleccione]</option>");
             }
-            function marcado() {
-                if (document.form.termin.checked) {
-                    document.form.submit();
-                }
-                else {
-                    alert("Debes aceptar los términos y condiciones");
-                    document.form.termin.focus();
-                    return false;
-                }
-
+            if (opc == 'Listar_sec2') {
+                var a = $(".selectsec");
+                $(".selectpu").empty();
+                $(".selectpu").append("<option value=''>[Seleccione]</option>");
             }
-            //Listar Hijos de Trabajadores
-            function listar_cumpleaños() {
-                var a = $(".selec_mes").val();
-                var b = $(".select_dia").val();
-                var d = $("#Li_cump");
-                var texto = '';
-                $.post("../../reporte", "opc=reporte_cumpleaños&mes=" + a + "&dia=" + b, function (objJson) {
-                    d.empty();
-                    var lista = objJson.lista;
-                    if (lista.length > 0) {
-                        for (var i = 0; i < lista.length; i++) {
-                            texto += '<tr role="row" class="odd">';
-                            texto += '<td class>' + (i + 1) + '</td>';
-                            texto += '<td>' + lista[i].aps + '</td>';
-                            texto += '<td>' + lista[i].dep + '</td>';
-                            texto += '<td>' + lista[i].are + '</td>';
-                            texto += '<td>' + lista[i].secc + '</td>';
-                            texto += '<td>' + lista[i].pue + '</td>';
-                            texto += '<td>' + lista[i].fec_na + '</td>';
-                            texto += '<td>' + lista[i].edad + '</td>';
-                            texto += '<td>' + lista[i].nom + '</td>';
-                            texto += '<td>' + lista[i].tip + '</td>';
-                            texto += '<td>' + lista[i].dni + '</td>';
-                            texto += '</tr>';
-                        }
-                        d.append(texto);
-                    } else {
-                        d.append("<td colspan='11' align='center'><strong>No hay datos</strong></td>");
-                    }
-                });
+            if (opc == 'Listar_pu_id') {
+                var a = $(".selectpu");
             }
-            $(document).ready(function () {
-                var b = $('#tbodys');
-                $("#btnbuscar").click(
-                        function () {
-                            if ($(".selec_mes").val() == "") {
-                                alert("Ingresa mes");
-                            } else {
-                                listar_cumpleaños();
-                            }
-                        }
-                );
-                $("#btncancel").click(
-                        function () {
-                            document.formulario.reset();
-                            b.empty();
-                            html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
-                            $(".tbodys").html(html);
-                        }
-                );
-                $(".selec_mes").change(function () {
-                    var mes = $(".selec_mes").val();
-                    var dia = $(".select_dia");
-                    dia.empty();
-                    var dias = 0;
-                    var texto = "<option value=''>[SELECCIONE]</option>";
-                    if (mes == "01") {
-                        dias = 31;
-                    }
-                    if (mes == "02") {
-                        dias = 28;
-                    }
-                    if (mes == "03") {
-                        dias = 31;
-                    }
-                    if (mes == "04") {
-                        dias = 30;
-                    }
-                    if (mes == "05") {
-                        dias = 31;
-                    }
-                    if (mes == "06") {
-                        dias = 30;
-                    }
-                    if (mes == "07") {
-                        dias = 31;
-                    }
-                    if (mes == "08") {
-                        dias = 31;
-                    }
-                    if (mes == "09") {
-                        dias = 30;
-                    }
-                    if (mes == "10") {
-                        dias = 31;
-                    }
-                    if (mes == "11") {
-                        dias = 30;
-                    }
-                    if (mes == "12") {
-                        dias = 31;
-                    }
-                    for (var i = 0; i < dias; i++) {
-                        texto += "<option value='" + (i + 1) + "'>" + (i + 1) + "</option>";
-                    }
-                    dia.append(texto);
-                });
+            $.post("../../Direccion_Puesto", "opc=" + opc.trim() + "&id=" + id.trim(), function (objJson) {
+                var list = objJson.lista;
+                a.empty();
+                a.append("<option value=''>[Seleccione]</option>");
+                for (var i = 0; i < list.length; i++) {
+                    a.append("<option value='" + list[i].id + "'>" + list[i].nombre + "</option>");
+                }
+                $(".tbodys").append();
             });
+        }
+        function buscar(del, al, nombre, dir, dep, area, sec, puesto, fe_i, fe_fi, ca_sueldo, fe_sus) {
+            var b = $(".tbodys");
+            $.post("../../impresion_masiva?opc=filtrar" + "&desde=" + del + "&al=" + al + "&nom_ape=" + nombre + "&direccion=" + dir + "&departamento=" + dep + "&area=" + area + "&seccion=" + sec + "&puesto=" + puesto + "&fec_i=" + fe_i + "&fec_f=" + fe_fi + "&sueldo=" + ca_sueldo + "&fe_sus=" + fe_sus, function (objJson) {
+                b.empty();
+                //alert($("#select_pu").val());
+                var list = objJson.lista;
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var nuro = 1;
+                if (list.length > 0) {
+                    for (var i = 0; i < list.length; i++) {
+                        nuro = nuro + i;
+                        b.append("<tr>");
+                        b.append("<td>" + nuro + "</td>");
+                        b.append("<td><p>" + list[i].nombre + "</p></td>");
+                        b.append("<td>" + list[i].fe_de + "</td>");
+                        if (list[i].fe_ha != null) {
+                            b.append("<td>" + list[i].fe_ha + "</td>");
+                        } else {
+                            b.append("<td>indefinido</td>");
+                        }
+                        // b.append("<td>" + list[i].fe_ha + "</td>");
+                        b.append("<td><p>" + list[i].no_ar + "</p></td>");
+                        b.append("<td><p>" + list[i].no_se + "</p></td>");
+                        b.append("<td><p>" + list[i].no_pu + "</p></td>");
+                        b.append("<td>" + list[i].ca_su + '</td>');
+                        b.append("<td>" + list[i].fe_su + "</td>");
+                        b.append('<td><a class="btn-warming" href="../../contrato?opc=Detalle_Contractual&idtr=' + list[i].id_tr + '">Ver detalle</a> </td>');
+                        //b.append('<td id="sel' + i + '"></td>');
+                        if (list[i].id_pl != null) {
+                            b.append('<td><input type="checkbox" id="imp" name="Imprimir" value="' + list[i].id_co + '/' + list[i].id_pl + '"></td>');
+                        } else {
+                            b.append('<td>NO TIENE</td>');
+                        }
+                        b.append("</tr>");
+                        nuro = 1;
+                    }
+                    if (list.length !== 0) {
+                        $("#asa").show();
+                    }
+                    $("#btns").click(
+                            function () {
+                                $("#gg :checkbox").attr('checked', true);
+                                $('#imp').is(':checked');
+                                alerta(checkboxValues.push($("#imp").val()));
+                            });
+                    $("#btns2").click(
+                            function () {
+                                var checkboxValues = new Array();
+                                //recorremos todos los checkbox seleccionados con .each
+                                $('input[name="orderBox[]"]:checked').each(function () {
+                                    //$(this).val() es el valor del checkbox correspondiente
+                                    checkboxValues.push($(this).val());
+                                    alert(checkboxValues.push($(this).val()));
+                                });
+                            });
+                } else {
+                    b.append("<tr><TD colspan='12' style='text-align:center;'> NO SE HA ENCONTRADO DATOS DE LA BUSQUEDA</TD></tr>")
+                }
+
+            }
+            );
+        }
+        function marcado() {
+            if (document.form.termin.checked) {
+                document.form.submit();
+            }
+            else {
+                alert("Debes aceptar los términos y condiciones");
+                document.form.termin.focus();
+                return false;
+            }
+
+        }
+        //Listar Hijos de Trabajadores
+        function listar_cumpleaños() {
+            var a = $(".selec_mes").val();
+            var b = $(".select_dia").val();
+            var d = $("#Li_cump");
+            var texto = '';
+            $.post("../../reporte", "opc=reporte_cumpleaños&mes=" + a + "&dia=" + b, function (objJson) {
+                d.empty();
+                var lista = objJson.lista;
+                if (lista.length > 0) {
+                    for (var i = 0; i < lista.length; i++) {
+                        texto += '<tr role="row" class="odd">';
+                        texto += '<td class>' + (i + 1) + '</td>';
+                        texto += '<td>' + lista[i].aps + '</td>';
+                        texto += '<td>' + lista[i].dep + '</td>';
+                        texto += '<td>' + lista[i].are + '</td>';
+                        texto += '<td>' + lista[i].secc + '</td>';
+                        texto += '<td>' + lista[i].pue + '</td>';
+                        texto += '<td>' + lista[i].fec_na + '</td>';
+                        texto += '<td>' + lista[i].edad + '</td>';
+                        texto += '<td>' + lista[i].nom + '</td>';
+                        texto += '<td>' + lista[i].tip + '</td>';
+                        texto += '<td>' + lista[i].dni + '</td>';
+                        texto += '</tr>';
+                    }
+                    d.append(texto);
+                } else {
+                    d.append("<td colspan='11' align='center'><strong>NO SE ENCONTRARON DATOS...</strong></td>");
+                }
+            });
+        }
+        $(document).ready(function () {
+            var b = $('#tbodys');
+            $("#btnbuscar").click(
+                    function () {
+                        if ($(".selec_mes").val() == "") {
+                            alert("Ingresa mes");
+                        } else {
+                            GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
+                            listar_cumpleaños();
+                            $('.div_t').empty();
+                        }
+                    }
+            );
+            $("#btncancel").click(
+                    function () {
+                        document.formulario.reset();
+                        b.empty();
+                        html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                        $(".tbodys").html(html);
+                    }
+            );
+            $(".selec_mes").change(function () {
+                var mes = $(".selec_mes").val();
+                var dia = $(".select_dia");
+                dia.empty();
+                var dias = 0;
+                var texto = "<option value=''>[SELECCIONE]</option>";
+                if (mes == "01") {
+                    dias = 31;
+                }
+                if (mes == "02") {
+                    dias = 28;
+                }
+                if (mes == "03") {
+                    dias = 31;
+                }
+                if (mes == "04") {
+                    dias = 30;
+                }
+                if (mes == "05") {
+                    dias = 31;
+                }
+                if (mes == "06") {
+                    dias = 30;
+                }
+                if (mes == "07") {
+                    dias = 31;
+                }
+                if (mes == "08") {
+                    dias = 31;
+                }
+                if (mes == "09") {
+                    dias = 30;
+                }
+                if (mes == "10") {
+                    dias = 31;
+                }
+                if (mes == "11") {
+                    dias = 30;
+                }
+                if (mes == "12") {
+                    dias = 31;
+                }
+                for (var i = 0; i < dias; i++) {
+                    texto += "<option value='" + (i + 1) + "'>" + (i + 1) + "</option>";
+                }
+                dia.append(texto);
+            });
+        });
+        // Login En el reporte
+        function GifLoader(contenedor, msg, action) {
+            $('.headerr').hide();
+            var text = "";
+            contenedor.empty();
+            if (action == 1) {
+                text += "<div class='caja' style='height:250px; width:150px; margin:auto;'><center><h3>" + msg + "</h3></center></div>";
+            } else if (action == 2) {
+                text += "<div style='height:150px; width:150px; margin:auto; padding-top:30px;'><center><h3>" + msg + "</h3></center></div>";
+            }
+            contenedor.append(text);
+        }
     </script>
 
 </html>

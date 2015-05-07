@@ -44,6 +44,11 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        <style>
+            .caja{
+                background:transparent url(../../imagenes/Gifloader.GIF) center no-repeat;
+            }
+        </style>
         <title>REPORTE PADRES HIJOS</title>
     </head>
     <body>  
@@ -61,18 +66,18 @@
                         <div class="row">
                             <div class="form-group" >
                                 <label>Desde</label><br>
-                                <input type="text"  class="form-control des" name="del"  length="45" style="width: 250px" id="des"/>
+                                <input type="text"  class="form-control des" placeholder="Inicio rango de edad" name="del"  length="45" style="width: 250px" id="des"/>
                             </div>
                             <div class="form-group" >
                                 <label>Hasta</label><br>
-                                <input type="text"  class="form-control has" name="al" size="45" maxlength="100" style="width: 250px" id="has" />
+                                <input type="text"  class="form-control has" placeholder="Fin rango de edad" name="al" size="45" maxlength="100" style="width: 250px" id="has" />
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="form-group" >
                                 <label>Edad</label><br>
-                                <input type="text"  class="form-control edad" name="del"  length="45" style="width: 250px" id="edad"/>
+                                <input type="text"  class="form-control edad" placeholder="Rango de edad" Sname="del"  length="45" style="width: 250px" id="edad"/>
                             </div>
                         </div>
                         <br>
@@ -131,6 +136,8 @@
 
                                     </tbody>
                                 </table>
+                                <div class="div_t">                                                                                     
+                                </div>
 
                             </div>
                             <!-- end widget content -->
@@ -558,7 +565,9 @@
             var b = $('#tbodys');
             $("#btnbuscar").click(
                     function () {
+                        GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
                         listar_padre_hi();
+                        $('.div_t').empty();
                     }
             );
             $("#btncancel").click(
@@ -570,6 +579,18 @@
                     }
             );
         });
+        // Login En el reporte
+        function GifLoader(contenedor, msg, action) {
+            $('.headerr').hide();
+            var text = "";
+            contenedor.empty();
+            if (action == 1) {
+                text += "<div class='caja' style='height:250px; width:150px; margin:auto;'><center><h3>" + msg + "</h3></center></div>";
+            } else if (action == 2) {
+                text += "<div style='height:150px; width:150px; margin:auto; padding-top:30px;'><center><h3>" + msg + "</h3></center></div>";
+            }
+            contenedor.append(text);
+        }
     </script>
 
 </html>
