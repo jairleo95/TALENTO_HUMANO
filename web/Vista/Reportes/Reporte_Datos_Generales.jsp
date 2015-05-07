@@ -126,13 +126,8 @@
                                 <div>
 
                                     <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
-
-                                    </div>
-                                    <!-- end widget edit box -->
-
-                                    <!-- widget content -->                                    
+                                    <div class="jarviswidget-editbox"
+                                    </div>                                  
                                     <div class="widget-body no-padding">
 
                                         <table id="datatable_tabletools" class="table table-striped table-bordered table-hover table-responsive">
