@@ -25,10 +25,14 @@ public interface InterfacePlazo_DgpDAO {
 
     public String fecha_maxima_plazo();
 
-    public void INSERT_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO);
+    public String INSERT_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO, String TI_PLAZO, int CA_DIAS_TOLERANCIA, String ID_DEPARTAMENTO_TOLERANCIA);
 
     public void UPDATE_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO);
 
     public void REMOVE_PLAZO(String ID_PLAZO);
+    
+    public void validar_Vig_plazos();
+
+    public String HABILITAR_FECHA(String tipo, String req, String dia, String dep);
 
 }
