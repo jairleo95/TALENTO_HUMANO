@@ -117,7 +117,7 @@
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr>
-                                                    <td >Paso</td>
+                                                    <td >Paso <%=Det_Autorizacion.size()%></td>
                                                     <td data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i> Detalle</td>
                                                     <td data-class="expand"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Estado</td>
                                                     <td data-hide="phone"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Encargado</td>
@@ -196,7 +196,11 @@
                                                                         <h1 class="h1" style="color:#218FDD ; font-size:20px;"><strong>MOTIVO</strong></h1>
                                                                         <div class="col col-10"  >
                                                                             <label class="input">
-                                                                                <P class="list_motivo"></P>
+                                                                                <P class="list_motivo"><%if (a.getCm_comentario() != null) {
+                                                                                        out.print(a.getCm_comentario());
+                                                                                    } else {
+                                                                                        out.print("No registro motivo Consular presonalmente");
+                                                                                    }%></P>
                                                                             </label>
                                                                         </div>
                                                                     </div>
@@ -492,8 +496,8 @@
             })();
         </script>
         <script>
-            $(document).ready(function (){
-                if($(".estado-aut").val()==)
+            $(document).ready(function() {
+                if ($(".estado-aut").val() == )
             })
         </script>
 

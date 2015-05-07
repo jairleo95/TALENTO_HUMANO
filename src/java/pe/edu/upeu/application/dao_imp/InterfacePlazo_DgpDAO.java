@@ -34,5 +34,9 @@ public interface InterfacePlazo_DgpDAO {
     public void validar_Vig_plazos();
 
     public String HABILITAR_FECHA(String tipo, String req, String dia, String dep);
+    
+    public void Validar_Cumplimiento_plazo_t2();
+    
+    public void Validar_Cumplimiento_plazo_t1();
 
 }
