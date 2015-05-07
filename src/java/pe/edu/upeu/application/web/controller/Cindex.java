@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.ContratoDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
+import pe.edu.upeu.application.dao.Plazo_DgpDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao.RolDAO;
@@ -24,6 +25,7 @@ import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
+import pe.edu.upeu.application.dao_imp.InterfacePlazo_DgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
@@ -57,6 +59,7 @@ public class Cindex extends HttpServlet {
         InterfacePuestoDAO pu = new PuestoDAO();
         InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceContratoDAO cto = new ContratoDAO();
+        InterfacePlazo_DgpDAO pl = new Plazo_DgpDAO();
 
         if (Usuario.equals("") && Clave.equals("")) {
             out.print("ERROR");
@@ -92,7 +95,7 @@ public class Cindex extends HttpServlet {
              getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());*/
             dgp.VAL_DGP_PASOS();
             cto.VALIDAR_FE_CESE_CON();
-
+            pl.validar_Vig_plazos();
             out.print("EXITO!");
         } else {
             out.print("ERROR");

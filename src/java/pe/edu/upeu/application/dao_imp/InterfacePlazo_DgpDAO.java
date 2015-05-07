@@ -30,5 +30,7 @@ public interface InterfacePlazo_DgpDAO {
     public void UPDATE_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO);
 
     public void REMOVE_PLAZO(String ID_PLAZO);
+    
+    public void validar_Vig_plazos();
 
 }
