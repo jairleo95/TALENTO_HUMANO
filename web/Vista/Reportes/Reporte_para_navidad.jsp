@@ -81,13 +81,8 @@
         <div align="center">
             <div class="row">
                 <div class="form-group" >
-<<<<<<< HEAD
-                    <label>Reporte Tiempo de Trabajo</label><br>
-                    <input type="text"  class="form-control mes" name="mes"  length="45" style="width: 250px" id="des"/>
-=======
                     <label>Tiempo de Trabajo</label><br>
                     <input type="text"  class="form-control mes" placeholder="Ingrese la cantidad de meses" name="mes"  length="45" style="width: 250px" id="des"/>
->>>>>>> origin/master
                 </div>
             </div>
             <br>
