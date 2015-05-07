@@ -81,7 +81,7 @@
         <div align="center">
             <div class="row">
                 <div class="form-group" >
-                    <label>Tiempo de Trabajo</label><br>
+                    <label>Reporte Tiempo de Trabajo</label><br>
                     <input type="text"  class="form-control mes" name="mes"  length="45" style="width: 250px" id="des"/>
                 </div>
             </div>
