@@ -81,8 +81,13 @@
         <div align="center">
             <div class="row">
                 <div class="form-group" >
-                    <label>Tiempo de Trabajo</label><br>
+<<<<<<< HEAD
+                    <label>Reporte Tiempo de Trabajo</label><br>
                     <input type="text"  class="form-control mes" name="mes"  length="45" style="width: 250px" id="des"/>
+=======
+                    <label>Tiempo de Trabajo</label><br>
+                    <input type="text"  class="form-control mes" placeholder="Ingrese la cantidad de meses" name="mes"  length="45" style="width: 250px" id="des"/>
+>>>>>>> origin/master
                 </div>
             </div>
             <br>
@@ -476,29 +481,32 @@
                     }
                     b.empty();
                     var lista = objJson.lista;
-                    for (var i = 0; i < lista.length; i++) {
-                        texto += '<tr role="row" class="odd">';
-                        texto += '<td class>' + (i + 1) + '</td>';
-                        texto += '<td>' + lista[i].aps + '</td>';
-                        texto += '<td>' + lista[i].dep + '</td>';
-                        texto += '<td>' + lista[i].are + '</td>';
-                        texto += '<td>' + lista[i].pue + '</td>';
-                        texto += '<td>' + lista[i].ti_doc + '</td>';
-                        texto += '<td>' + lista[i].nu_doc + '</td>';
-                        texto += '<td>' + lista[i].sec + '</td>';
-                        texto += '<td>' + lista[i].pat + '</td>';
-                        texto += '<td>' + lista[i].mat + '</td>';
-                        texto += '<td>' + lista[i].nom_t + '</td>';
-                        texto += '<td>' + lista[i].pat + lista[i].mat + lista[i].nom_t + '</td>';
-                        texto += '<td>' + lista[i].sex + '</td>';
-                        texto += '<td>' + lista[i].fe_nac + '</td>';
-                        texto += '<td>' + lista[i].des + '</td>';
-                        texto += '<td>' + lista[i].has + '</td>';
-                        texto += '<td>' + lista[i].t_tra + '</td>';
-                        texto += '</tr>';
+                    if (lista.length > 0) {
+                        for (var i = 0; i < lista.length; i++) {
+                            texto += '<tr role="row" class="odd">';
+                            texto += '<td class>' + (i + 1) + '</td>';
+                            texto += '<td>' + lista[i].aps + '</td>';
+                            texto += '<td>' + lista[i].dep + '</td>';
+                            texto += '<td>' + lista[i].are + '</td>';
+                            texto += '<td>' + lista[i].pue + '</td>';
+                            texto += '<td>' + lista[i].ti_doc + '</td>';
+                            texto += '<td>' + lista[i].nu_doc + '</td>';
+                            texto += '<td>' + lista[i].sec + '</td>';
+                            texto += '<td>' + lista[i].pat + '</td>';
+                            texto += '<td>' + lista[i].mat + '</td>';
+                            texto += '<td>' + lista[i].nom_t + '</td>';
+                            texto += '<td>' + lista[i].pat + " " + lista[i].mat + " " + lista[i].nom_t + '</td>';
+                            texto += '<td>' + lista[i].sex + '</td>';
+                            texto += '<td>' + lista[i].fe_nac + '</td>';
+                            texto += '<td>' + lista[i].des + '</td>';
+                            texto += '<td>' + lista[i].has + '</td>';
+                            texto += '<td>' + lista[i].t_tra + '</td>';
+                            texto += '</tr>';
+                        }
+                        b.append(texto);
+                    } else {
+                        b.append("<td colspan='11' align='center'><strong>NO SE ENCONTRARON DATOS</strong></td>");
                     }
-                    b.append(texto);
-                   
                 });
 
             }
@@ -510,7 +518,7 @@
                         function () {
                             GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
                             listar_trabajor_na();
-                             $('.div_t').empty();
+                            $('.div_t').empty();
                         }
                 );
                 $("#btncancel").click(
