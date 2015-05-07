@@ -58,7 +58,11 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
+        <style>
+            .caja{
+                background:transparent url(../../imagenes/Gifloader.GIF) center no-repeat;
+            }
+        </style>
     </head>
     <body>
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
@@ -72,13 +76,13 @@
 
         <!-- MAIN PANEL -->
         <div class="spacing">
-            <center><h1 class="spacing" style="font-weight: bold;">RERPORTE-TRABAJADORES DE NAVIDAD</h1></center> 
+            <center><h1 class="spacing" style="font-weight: bold;">REPORTE-TRABAJADORES EN NAVIDAD</h1></center> 
         </div>
         <div align="center">
             <div class="row">
                 <div class="form-group" >
                     <label>Tiempo de Trabajo</label><br>
-                    <input type="text"  class="form-control des" name="del"  length="45" style="width: 250px" id="des"/>
+                    <input type="text"  class="form-control mes" name="mes"  length="45" style="width: 250px" id="des"/>
                 </div>
             </div>
             <br>
@@ -140,11 +144,11 @@
                                                     <th data-hide="phone">#</th>
                                                     <th data-class="APS">Codigo APS</th>
                                                     <th data-hide="DEP">Departamento</th>
-                                                    <th data-hide="ARE">Area</th><th data-class="tip">Tipo de Hora de Pago</th>
+                                                    <th data-hide="ARE">Area</th>
+                                                    <th data-hide="ARE">Puesto</th>
                                                     <th data-class="tip">Tipo Documento</th>  
                                                     <th data-class="tip">Numerno de documento</th>
                                                     <th data-class="tip">Sección</th>
-                                                    <th data-class="tip">Puesto</th>
                                                     <th data-class="tip">Apelido Paterno</th>
                                                     <th data-class="tip">Apellido Materno</th>
                                                     <th data-class="tip">Nombres</th>
@@ -153,13 +157,16 @@
                                                     <th data-class="tip">Fecha Nacimiento</th>                                                    
                                                     <th data-class="tip">Fecha de inicio</th>
                                                     <th data-class="tip">fecha de Cese</th>
+                                                    <th data-class="tip">T_Trabajo</th>
                                                 </tr>
                                             </thead>
 
-                                            <tbody id="Li_Trabajor">
+                                            <tbody id="listar_trabajor_na">
 
                                             </tbody>
                                         </table>
+                                        <div class="div_t">                                                                                     
+                                        </div>
                                     </div>
 
                                 </div>
@@ -199,16 +206,16 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-                        if (!window.jQuery) {
-                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                        }
+            if (!window.jQuery) {
+                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+            }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-                        if (!window.jQuery.ui) {
-                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                        }
+            if (!window.jQuery.ui) {
+                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+            }
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
@@ -274,166 +281,166 @@
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script type="text/javascript">
 
-                        // DO NOT REMOVE : GLOBAL FUNCTIONS!
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                        $(document).ready(function () {
+            $(document).ready(function () {
 
-                            pageSetUp();
+                pageSetUp();
 
-                            /* // DOM Position key index //
-                             
-                             l - Length changing (dropdown)
-                             f - Filtering input (search)
-                             t - The Table! (datatable)
-                             i - Information (records)
-                             p - Pagination (paging)
-                             r - pRocessing 
-                             < and > - div elements
-                             <"#id" and > - div with an id
-                             <"class" and > - div with a class
-                             <"#id.class" and > - div with an id and class
-                             
-                             Also see: http://legacy.datatables.net/usage/features
-                             */
+                /* // DOM Position key index //
+                 
+                 l - Length changing (dropdown)
+                 f - Filtering input (search)
+                 t - The Table! (datatable)
+                 i - Information (records)
+                 p - Pagination (paging)
+                 r - pRocessing 
+                 < and > - div elements
+                 <"#id" and > - div with an id
+                 <"class" and > - div with a class
+                 <"#id.class" and > - div with an id and class
+                 
+                 Also see: http://legacy.datatables.net/usage/features
+                 */
 
-                            /* BASIC ;*/
-                            var responsiveHelper_dt_basic = undefined;
-                            var responsiveHelper_datatable_fixed_column = undefined;
-                            var responsiveHelper_datatable_col_reorder = undefined;
-                            var responsiveHelper_datatable_tabletools = undefined;
+                /* BASIC ;*/
+                var responsiveHelper_dt_basic = undefined;
+                var responsiveHelper_datatable_fixed_column = undefined;
+                var responsiveHelper_datatable_col_reorder = undefined;
+                var responsiveHelper_datatable_tabletools = undefined;
 
-                            var breakpointDefinition = {
-                                tablet: 1024,
-                                phone: 480
-                            };
+                var breakpointDefinition = {
+                    tablet: 1024,
+                    phone: 480
+                };
 
-                            $('#dt_basic').dataTable({
-                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                                        "t" +
-                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                                "autoWidth": true,
-                                "preDrawCallback": function () {
-                                    // Initialize the responsive datatables helper once.
-                                    if (!responsiveHelper_dt_basic) {
-                                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                                    }
-                                },
-                                "rowCallback": function (nRow) {
-                                    responsiveHelper_dt_basic.createExpandIcon(nRow);
-                                },
-                                "drawCallback": function (oSettings) {
-                                    responsiveHelper_dt_basic.respond();
-                                }
-                            });
+                $('#dt_basic').dataTable({
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                            "t" +
+                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                    "autoWidth": true,
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_dt_basic) {
+                            responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_dt_basic.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_dt_basic.respond();
+                    }
+                });
 
-                            /* END BASIC */
+                /* END BASIC */
 
-                            /* COLUMN FILTER  */
-                            var otable = $('#datatable_fixed_column').DataTable({
-                                //"bFilter": false,
-                                //"bInfo": false,
-                                //"bLengthChange": false
-                                //"bAutoWidth": false,
-                                //"bPaginate": false,
-                                //"bStateSave": true // saves sort state using localStorage
-                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
-                                        "t" +
-                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                                "autoWidth": true,
-                                "preDrawCallback": function () {
-                                    // Initialize the responsive datatables helper once.
-                                    if (!responsiveHelper_datatable_fixed_column) {
-                                        responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-                                    }
-                                },
-                                "rowCallback": function (nRow) {
-                                    responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-                                },
-                                "drawCallback": function (oSettings) {
-                                    responsiveHelper_datatable_fixed_column.respond();
-                                }
+                /* COLUMN FILTER  */
+                var otable = $('#datatable_fixed_column').DataTable({
+                    //"bFilter": false,
+                    //"bInfo": false,
+                    //"bLengthChange": false
+                    //"bAutoWidth": false,
+                    //"bPaginate": false,
+                    //"bStateSave": true // saves sort state using localStorage
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
+                            "t" +
+                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                    "autoWidth": true,
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_datatable_fixed_column) {
+                            responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_datatable_fixed_column.respond();
+                    }
 
-                            });
+                });
 
-                            // custom toolbar
-                            $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
+                // custom toolbar
+                $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
 
-                            // Apply the filter
-                            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
+                // Apply the filter
+                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
 
-                                otable
-                                        .column($(this).parent().index() + ':visible')
-                                        .search(this.value)
-                                        .draw();
+                    otable
+                            .column($(this).parent().index() + ':visible')
+                            .search(this.value)
+                            .draw();
 
-                            });
-                            /* END COLUMN FILTER */
+                });
+                /* END COLUMN FILTER */
 
-                            /* COLUMN SHOW - HIDE */
-                            $('#datatable_col_reorder').dataTable({
-                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
-                                        "t" +
-                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                                "autoWidth": true,
-                                "preDrawCallback": function () {
-                                    // Initialize the responsive datatables helper once.
-                                    if (!responsiveHelper_datatable_col_reorder) {
-                                        responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
-                                    }
-                                },
-                                "rowCallback": function (nRow) {
-                                    responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
-                                },
-                                "drawCallback": function (oSettings) {
-                                    responsiveHelper_datatable_col_reorder.respond();
-                                }
-                            });
+                /* COLUMN SHOW - HIDE */
+                $('#datatable_col_reorder').dataTable({
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
+                            "t" +
+                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                    "autoWidth": true,
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_datatable_col_reorder) {
+                            responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_datatable_col_reorder.respond();
+                    }
+                });
 
-                            /* END COLUMN SHOW - HIDE */
+                /* END COLUMN SHOW - HIDE */
 
-                            /* TABLETOOLS */
-                            $('#datatable_tabletools').dataTable({
-                                // Tabletools options: 
-                                //   https://datatables.net/extensions/tabletools/button_options
-                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
-                                        "t" +
-                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                                "oTableTools": {
-                                    "aButtons": [
-                                        "copy",
-                                        "csv",
-                                        "xls",
-                                        {
-                                            "sExtends": "pdf",
-                                            "sTitle": "SmartAdmin_PDF",
-                                            "sPdfMessage": "SmartAdmin PDF Export",
-                                            "sPdfSize": "letter"
-                                        },
-                                        {
-                                            "sExtends": "print",
-                                            "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
-                                        }
-                                    ],
-                                    "sSwfPath": "../../js/DataTables-1.10.4/media/js/copy_csv_xls_pdf.swf"
-                                },
-                                "autoWidth": true,
-                                "preDrawCallback": function () {
-                                    // Initialize the responsive datatables helper once.
-                                    if (!responsiveHelper_datatable_tabletools) {
-                                        responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
-                                    }
-                                },
-                                "rowCallback": function (nRow) {
-                                    responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-                                },
-                                "drawCallback": function (oSettings) {
-                                    responsiveHelper_datatable_tabletools.respond();
-                                }
-                            });
+                /* TABLETOOLS */
+                $('#datatable_tabletools').dataTable({
+                    // Tabletools options: 
+                    //   https://datatables.net/extensions/tabletools/button_options
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
+                            "t" +
+                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                    "oTableTools": {
+                        "aButtons": [
+                            "copy",
+                            "csv",
+                            "xls",
+                            {
+                                "sExtends": "pdf",
+                                "sTitle": "SmartAdmin_PDF",
+                                "sPdfMessage": "SmartAdmin PDF Export",
+                                "sPdfSize": "letter"
+                            },
+                            {
+                                "sExtends": "print",
+                                "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
+                            }
+                        ],
+                        "sSwfPath": "../../js/DataTables-1.10.4/media/js/copy_csv_xls_pdf.swf"
+                    },
+                    "autoWidth": true,
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_datatable_tabletools) {
+                            responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_datatable_tabletools.respond();
+                    }
+                });
 
-                            /* END TABLETOOLS */
+                /* END TABLETOOLS */
 
-                        })
+            });
 
         </script>
 
@@ -458,59 +465,77 @@
     </body>
     <script>
 
-        $(document).ready(function () {
-            var b = $('#tbodys');
-
-            $("#btnbuscar").click(
-                    function () {
-                        listar_trabajor_na();
+            function listar_trabajor_na() {
+                var a = $(".mes").val();
+                var b = $("#listar_trabajor_na");
+                var texto = '';
+                $.post("../../reporte", "opc=reporte_t_navidad&mes=" + a, function (objJson) {
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
                     }
-            );
-            $("#btncancel").click(
-                    function () {
-                        document.formulario.reset();
-                        b.empty();
-                        html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
-                        $(".tbodys").html(html);
+                    b.empty();
+                    var lista = objJson.lista;
+                    for (var i = 0; i < lista.length; i++) {
+                        texto += '<tr role="row" class="odd">';
+                        texto += '<td class>' + (i + 1) + '</td>';
+                        texto += '<td>' + lista[i].aps + '</td>';
+                        texto += '<td>' + lista[i].dep + '</td>';
+                        texto += '<td>' + lista[i].are + '</td>';
+                        texto += '<td>' + lista[i].pue + '</td>';
+                        texto += '<td>' + lista[i].ti_doc + '</td>';
+                        texto += '<td>' + lista[i].nu_doc + '</td>';
+                        texto += '<td>' + lista[i].sec + '</td>';
+                        texto += '<td>' + lista[i].pat + '</td>';
+                        texto += '<td>' + lista[i].mat + '</td>';
+                        texto += '<td>' + lista[i].nom_t + '</td>';
+                        texto += '<td>' + lista[i].pat + lista[i].mat + lista[i].nom_t + '</td>';
+                        texto += '<td>' + lista[i].sex + '</td>';
+                        texto += '<td>' + lista[i].fe_nac + '</td>';
+                        texto += '<td>' + lista[i].des + '</td>';
+                        texto += '<td>' + lista[i].has + '</td>';
+                        texto += '<td>' + lista[i].t_tra + '</td>';
+                        texto += '</tr>';
                     }
-            );
-        }
-        );
-        function listar_trabajor_na() {
-            var a = $(".mes").val();
-            var b = $("#listar_trabajor_na");
-            var texto = '';
-            alert();
-            $.post("../../reporte", "opc=reporte_t_navidad&mes=" + a, function (objJson) {
-               if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                b.empty();
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    texto += '<tr role="row" class="odd">';
-                    texto += '<td class>' + (i + 1) + '</td>';
-                    texto += '<td>' + lista[i].aps + '</td>';
-                    texto += '<td>' + lista[i].dep + '</td>';
-                    texto += '<td>' + lista[i].are + '</td>';
-                    texto += '<td>' + lista[i].ti_doc+ '</td>';
-                    texto += '<td>' + lista[i].nu_doc + '</td>';
-                    texto += '<td>' + lista[i].sec + '</td>';
-                    texto += '<td>' + lista[i].pat + '</td>';
-                    texto += '<td>' + lista[i].mat + '</td>';
-                    texto += '<td>' + lista[i].nom_t + '</td>';
-                    texto += '<td>' + lista[i].sex + '</td>';
-                    texto += '<td>' + lista[i].fe_nac + '</td>';
-                    texto += '<td>' + lista[i].des + '</td>';
-                    texto += '<td>' + lista[i].has + '</td>';
-                    texto += '<td>' + lista[i].t_tra + '</td>';
-                    texto += '</tr>';
-                }
-                b.append(texto);
-            });
+                    b.append(texto);
+                   
+                });
 
-        }
+            }
+            //OPCIONES DEL BOTTON
+            $(document).ready(function () {
+                var b = $('#tbodys');
+
+                $("#btnbuscar").click(
+                        function () {
+                            GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
+                            listar_trabajor_na();
+                             $('.div_t').empty();
+                        }
+                );
+                $("#btncancel").click(
+                        function () {
+                            document.formulario.reset();
+                            b.empty();
+                            html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                            $(".tbodys").html(html);
+                        }
+                );
+            }
+            );
+            // Login En el reporte
+            function GifLoader(contenedor, msg, action) {
+                $('.headerr').hide();
+                var text = "";
+                contenedor.empty();
+                if (action == 1) {
+                    text += "<div class='caja' style='height:250px; width:150px; margin:auto;'><center><h3>" + msg + "</h3></center></div>";
+                } else if (action == 2) {
+                    text += "<div style='height:150px; width:150px; margin:auto; padding-top:30px;'><center><h3>" + msg + "</h3></center></div>";
+                }
+                contenedor.append(text);
+            }
+
     </script>
 
 </html>

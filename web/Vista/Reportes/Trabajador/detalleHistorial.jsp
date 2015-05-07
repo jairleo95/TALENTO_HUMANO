@@ -245,13 +245,13 @@
                                                     });
                                                 }
                                                 $('.s_fecha').change(function () {
-                                                    $('.jarviswidget-color-blue').toggle('slow');
                                                     $('.ti_fecha').empty();
                                                     $('.ti_fecha').text("Datos al " + $(this).val());
                                                     cargar_hist($(this).val());
-                                                    $('.jarviswidget-color-blue').toggle('slow');
                                                 });
                                                 function cargar_hist(fe_hist) {
+                                                    $('.jarviswidget-color-blue').hide('slow');
+                                                    $('.btnPro').hide();
                                                     $.post("../../../RHistorial?", "opc=list_hist_fecha&fe_modif=" + fe_hist + "&idtra=" + idtrab, function (objJson) {
                                                         var lista = objJson.lista;
                                                         us_ip = objJson.us_ip;
@@ -301,18 +301,24 @@
                                                             $('.roa' + i).css('background-color', '#cde0c4');
                                                         }
                                                     }
+                                                    $('.jarviswidget-color-blue').show('slow');
                                                     $('.btnPro').show();
                                                 }
                                                 $('.btnPro').click(function () {
-                                                    
+
                                                     $.SmartMessageBox({
                                                         title: "¡Advertencia!",
                                                         content: "¿Esta seguro de procesar las modificaciones?",
                                                         buttons: '[No][Si]'
-                                                    }, function(buttonPressed){
-                                                        if(buttonPressed==="Si"){
-                                                            if($('.ck_procesadoh').prop('checked')){
-                                                                $.post("../../../RHistorial?","opc=proc_hist&idtra="+idtrab+"&fe_modif="+fe, function(){
+                                                    }, function (buttonPressed) {
+                                                        if (buttonPressed === "Si") {
+                                                            if ($('.ck_procesadoh').prop('checked')) {
+                                                                $.post("../../../RHistorial?", "opc=proc_hist&idtra=" + idtrab + "&fe_modif=" + fe, function () {
+                                                                    cargar_hist(fe);
+                                                                });
+                                                            }
+                                                            if ($('.ck_procesadoa').prop('checked')) {
+                                                                $.post("../../../RHistorial?", "opc=proc_act&idtra=" + idtrab, function () {
                                                                     cargar_hist(fe);
                                                                 });
                                                             }

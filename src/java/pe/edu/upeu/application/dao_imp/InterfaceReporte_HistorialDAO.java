@@ -41,5 +41,8 @@ public interface InterfaceReporte_HistorialDAO {
     public String[] decode(String t);
 
     public void Procesar_historial_hijo(String id_hijo, String es_fecha, String fecha);
+    
+    public void procesar_h(String idtra, String fe_mod);
+    public void procesar_a(String idtra);
 
 }
