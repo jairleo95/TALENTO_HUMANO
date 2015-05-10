@@ -374,9 +374,11 @@
                         texto += '<td>' + lista[i].tip + '</td>';
                         texto += '<td>' + lista[i].dni + '</td>';
                         texto += '</tr>';
+                        $('.div_t').empty();
                     }
                     d.append(texto);
                 } else {
+                    $('.div_t').empty();
                     d.append("<td colspan='11' align='center'><strong>NO SE ENCONTRARON DATOS...</strong></td>");
                 }
             });
@@ -390,7 +392,6 @@
                         } else {
                             GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
                             listar_cumpleaños();
-                            $('.div_t').empty();
                         }
                     }
             );
