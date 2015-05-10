@@ -127,6 +127,9 @@ public class CReporte extends HttpServlet {
             if (opc.equals("Reporte_padres_madres")) {
                  response.sendRedirect("Vista/Reportes/Reporte_Padres_Madres.jsp");
             }
+            if (opc.equals("Reporte_datos")) {
+                 response.sendRedirect("Vista/Reportes/Reporte_Datos_Generales.jsp");
+            }
             if (opc.equals("Reporte_Datos_Hijos")) {
                  response.sendRedirect("Vista/Reportes/Reporte_Datos_Hijos.jsp");
             }

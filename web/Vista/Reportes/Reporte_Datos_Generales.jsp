@@ -58,7 +58,11 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
+        <style>
+            .caja{
+                background:transparent url(../../imagenes/Gifloader.GIF) center no-repeat;
+            }
+        </style>
     </head>
     <body class="" >
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
@@ -126,8 +130,13 @@
                                 <div>
 
                                     <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox"
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+
                                     </div>                                  
+                                    <!-- end widget edit box -->
+
+                                    <!-- widget content -->                                    
                                     <div class="widget-body no-padding">
 
                                         <table id="datatable_tabletools" class="table table-striped table-bordered table-hover table-responsive">
@@ -144,12 +153,13 @@
                                                     <th data-class="nom">Apellidos Paterno</th>
                                                     <th data-class="tip">Apellidos Materno</th>
                                                     <th data-class="tip">Nombre</th>
+                                                    <th data-class="tip">Apellidos y Nombres</th>
                                                     <th data-class="tip">Fecha de Sece</th>
-                                                    <th data-class="tip">Fecha de nacimiento</th>
-                                                    <th data-class="tip">Nacionalidad</th>
-                                                    <th data-class="tip">Esatodo Civil</th>
-                                                    <th data-class="tip">Grupo sanguíneo</th>
-                                                    <th data-class="tip">Sistema Pencionario</th>
+                                                    <th data-class="tip">DNI HIJ@</th>
+                                                    <th data-class="tip">Apellidos y Nombres del Hij@</th>
+                                                    <th data-class="tip">Fecha Nacimiento del Hij@</th>
+                                                    <th data-class="tip">Edad</th>
+                                                    <th data-class="tip">Genero</th>
                                                 </tr>
                                             </thead>
 
@@ -158,6 +168,8 @@
                                             </tbody>
 
                                         </table>
+                                         <div class="div_t">                                                                                     
+                                        </div>
                                     </div>
                                     <!-- end widget content -->
 
@@ -240,9 +252,9 @@
         <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
 
         <!--[if IE 8]>
-
+    
         <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-
+    
         <![endif]-->
 
         <!-- Demo purpose only -->
@@ -452,11 +464,20 @@
                             texto += '<td>' + lista[i].ape + '</td>';
                             texto += '<td>' + lista[i].mat + '</td>';
                             texto += '<td>' + lista[i].nom + '</td>';
+                            texto += '<td>' + lista[i].ape + " " + lista[i].mat + " " + lista[i].nom + '</td>';
                             texto += '<td>' + lista[i].has + '</td>';
+                            texto += '<td>' + lista[i].dni_hi + '</td>';
+                            texto += '<td>' + lista[i].nom_hi + '</td>';
+                            texto += '<td>' + lista[i].gen_hi + '</td>';
+                            texto += '<td>' + lista[i].nac_hi + '</td>';
+                            texto += '<td>' + lista[i].eda_hi + '</td>';
+                            texto += '</tr>';
+                            $('.div_t').empty();
                         }
                         b.append(texto);
                     } else {
-                        b.append("<td colspan='11' align='center'><strong>NO SE ENCONTRARON DATOS</strong></td>");
+                        $('.div_t').empty();
+                        b.append("<td colspan='11' align='center'><strong>NO SE ENCONTRARON DATOS</strong></td>");                        
                     }
                 });
 
@@ -466,9 +487,9 @@
 
                 $("#btnbuscar").click(
                         function () {
-                            //GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
+                            GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
                             listar_trabajor_na();
-                            //$('.div_t').empty();
+                            
                         }
                 );
                 $("#btncancel").click(
@@ -481,6 +502,17 @@
                 );
             }
             );
+            function GifLoader(contenedor, msg, action) {
+                $('.headerr').hide();
+                var text = "";
+                contenedor.empty();
+                if (action == 1) {
+                    text += "<div class='caja' style='height:250px; width:150px; margin:auto;'><center><h3>" + msg + "</h3></center></div>";
+                } else if (action == 2) {
+                    text += "<div style='height:150px; width:150px; margin:auto; padding-top:30px;'><center><h3>" + msg + "</h3></center></div>";
+                }
+                contenedor.append(text);
+            }
         </script>
 
         <!-- Your GOOGLE ANALYTICS CODE Below -->
@@ -497,7 +529,7 @@
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(ga, s);
             })();
-            
+
         </script>
 
 

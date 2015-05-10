@@ -66,12 +66,17 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
     }
 
     @Override
-    public List<Map<String, ?>> Listar_Plazo() {
+    public List<Map<String, ?>> Listar_Plazo(String tipo, String req, int dias, String dep) {
 
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = " select *  from rhvd_plazo";
+            String sql = " select *  from rhvd_plazo where no_plazo is not null";
+
+            sql += (!tipo.equals("")) ? " AND  ti_plazo  = '" + tipo.trim() + "'" : "";
+            sql += (!tipo.equals("")) ? " AND  id_requerimiento  = '" + req.trim() + "'" : "";
+            sql += (!dep.equals("")) ? " AND  ID_DEPARTAMENTO_TOLERANCIA  = '" + dep.trim() + "'" : "";
+
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
 
@@ -84,6 +89,10 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                 rec.put("id_req", rs.getString("id_requerimiento"));
                 rec.put("req", rs.getString("no_req"));
                 rec.put("planilla", rs.getString("ti_planilla"));
+                rec.put("estado", rs.getString("es_plazo"));
+                rec.put("tipo", rs.getString("ti_plazo"));
+                rec.put("dep", rs.getString("ID_DEPARTAMENTO_TOLERANCIA"));
+                rec.put("dias", rs.getString("CA_DIAS_TOLERANCIA"));
                 lista.add(rec);
             }
             rs.close();

@@ -497,10 +497,13 @@
                             texto += '<td>' + lista[i].has + '</td>';
                             texto += '<td>' + lista[i].t_tra + '</td>';
                             texto += '</tr>';
+                            $('.div_t').empty();
                         }
                         b.append(texto);
                     } else {
+                        $('.div_t').empty();
                         b.append("<td colspan='11' align='center'><strong>NO SE ENCONTRARON DATOS</strong></td>");
+                        
                     }
                 });
 
@@ -513,7 +516,6 @@
                         function () {
                             GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
                             listar_trabajor_na();
-                            $('.div_t').empty();
                         }
                 );
                 $("#btncancel").click(
