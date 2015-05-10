@@ -18,64 +18,138 @@ Author     : JAIR
         <title>Registrar Plazo</title>
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
-
+        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
-
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/demo.min.css">
-
-        <!-- FAVICONS -->
+        <!-- #FAVICONS -->
         <link rel="shortcut icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
         <link rel="icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
-
+        <!-- #GOOGLE FONT -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
     </head>
     <body> 
     <center>
-        <div class="row">
-            <h1>Mantenimiento de Plazos de Requerimientos</h1>
-            <form   id="form-plazo" class="form_plazo smart-form">
-                <table>
-                    <tr><td>Tipo de Plazo</td><td><select name="tipo" class="tipo" required="">
-                                <option value='1' selected="">Ingreso a planilla</option>
-                                <option value='2'>Inicio de Contrato</option>
-                            </select></td></tr>
-                    <tr><td>Nombre Plazo :<td><input type="text" name="nombre_plazo" required="" class="nombre_plazo" /></td></tr>
-                    <tr><td>Descripción :<td><textarea name="descripcion" required="" class="descripcion"></textarea></td></tr>
-                    <tr class="tr_tolerancia" style="display: none"><td>Dias de tolerancia (Inicio de contrato):<td><input type="number" name="tolerancia" min="1" required="" value="0" class="tolerancia"/></td></tr>
-                    <tr class="tr_dep_tolerancia" style="display:none"><td>Departamento tolerancia (Inicio de contrato):<td><input type="text" name="dep_tolerancia" required="" value="0" class="dep_tolerancia"/></td></tr>
-                    <tr><td>Tipo planilla :<td>
-                            <select name="planilla" class="planilla" required="">
-                                <option value="">[Seleccione]</option>
-                            </select>
-                        </td></tr>
-                    <tr><td>Requerimiento :<td>
-                            <select name="id_req" class="req"  required="">
-                                <option value="">[Seleccione]</option>
-                            </select>
-                        </td></tr>
-                    <tr><td>Desde :<td><input type="date"  readonly="" name="desde" required="" class="desde"/></td></tr>
-                    <tr><td>Hasta :<td><input type="date" readonly="" name="hasta" required="" class="hasta"/></td></tr>
-                    <input type="hidden" name="opc" value="Registrar"  class="opc"/>
-                    <tr><td><button type="button"  id="btn-registrar" class="btn btn-primary btn-registrar">Registrar</button></td></tr>
-                </table>
-            </form>
+
+        <div id="main" role="main" style="margin: 0px;">
+            <div id="content" >
+
+                <section id="widget-grid" class="">
+                    <div class="row">
+
+                        <div class="well">
+                            <h1>Mantenimiento de Plazos de Requerimientos</h1>
+                            <form    id="form-plazo" class="form_plazo smart-form">
+
+                                <div class="row">
+
+                                    <section class="col col-6">
+                                        <label><strong>Tipo de plazo :</strong></label>
+                                        <label class="select"> <i class="icon-append fa fa-calendar"></i>
+                                            <select name="tipo" required="" class="tipo" required="">
+                                                <option value='1' selected="">Ingreso a planilla</option>
+                                                <option value='2'>Inicio de Contrato</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label><strong>Nombre de plazo :</strong></label>
+                                        <label class="input"> <i class="icon-prepend fa fa-user"></i>
+                                            <input type="text" name="nombre_plazo" required="" class="nombre_plazo" />
+                                        </label>
+                                    </section>
+
+                                </div>
+                                <section>
+                                    <label class="textarea"> 										
+                                        <textarea rows="3" name="descripcion" placeholder="Descripción" required="" class="descripcion" ></textarea> 
+                                    </label>
+                                </section>
+                                <div class="row tr_tolerancia" style="display: none">
+
+                                    <section class="col col-6">
+                                        <label><strong>Dias de tolerancia (Inicio de contrato):</strong></label>
+                                        <label class="input"> <i class="icon-prepend fa fa-user"></i>
+                                            <input type="number" name="tolerancia" min=""  required=""  value="0" class="tolerancia" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label><strong>Departamento tolerancia (Inicio de contrato):</strong></label>
+                                        <label class="input"> <i class="icon-prepend fa fa-user"></i>
+                                            <input type="text" name="dep_tolerancia" required="" value="0" class="dep_tolerancia" />
+                                        </label>
+                                    </section>
+
+                                </div>
+                                <div class="row ">
+                                    <section class="col col-3">
+                                        <label><strong>Tipo planilla :</strong></label>
+                                        <label class="select"> <i class="icon-append fa fa-calendar"></i>
+                                            <select name="planilla" required="" class="planilla" >
+                                                <option value="0">[Todos]</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-3">
+                                        <label><strong>Requerimiento :</strong></label>
+                                        <label class="select"> <i class=""></i>
+                                            <select name="id_req" required="" class="req" required="">
+                                                <option value="0">[Todos]</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-3">
+                                        <label><strong>Desde :</strong></label>
+                                        <label class="input"> <i class=""></i>
+                                            <input type="text" name="desde" placeholder="Request activation on" required=""  readonly="" class="desde datepicker" data-dateformat='yyyy-mm-dd'>
+                                        </label>
+                                    </section>
+                                    <section class="col col-3">
+                                        <label><strong>Hasta :</strong></label>
+                                        <label class="input"> <i class=""></i>
+                                            <input type="text" name="hasta" placeholder="Request activation on" required="" readonly="" class="hasta datepicker" data-dateformat='yyyy-mm-dd'>
+                                        </label>
+                                    </section>
+                                </div>
+                               
+
+                                   <button type="button"  id="btn-registrar" class="btn btn-primary btn-registrar">Registrar</button>
+                             
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="row">
+                    <div class="well">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr >
+                                        <td class="text-center semi-bold">ID</td>
+                                        <td class="text-center semi-bold">Tipo Plazo</td>
+                                        <td class="text-center semi-bold">Nombre Plazo</td>
+                                        <td class="text-center semi-bold">Descripción</td>
+                                        <td class="text-center semi-bold">Desde</td>
+                                        <td class="text-center semi-bold">Hasta</td>
+                                        <td class="text-center semi-bold">Tipo de Planilla</td>
+                                        <td class="text-center semi-bold">Requerimiento</td>
+                                        <td class="text-center semi-bold">Dias de tolerancia</td>
+                                        <td class="text-center semi-bold"> Dep. Tolerancia</td>
+                                        <td class="text-center semi-bold">Estado</td>
+                                        <td class="text-center semi-bold">Editar</td>
+                                    </tr>
+                                </thead>
+                                <tbody  class="tbodys" >
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> 
+            </div>
         </div>
-        <table class="table table-hover table-striped  table-responsive">
-            <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>Nombre Plazo</td>
-                    <td>Descripción</td>
-                    <td>Desde</td>
-                    <td>Hasta</td>
-                    <td>Tipo de Planilla</td>
-                    <td>Requerimiento</td>
-                    <td>Editar</td>
-                </tr>
-            </thead>
-            <tbody  class="tbodys" >
-            </tbody>
-        </table>
+
+
     </center>
 </body>
 
@@ -163,8 +237,9 @@ Author     : JAIR
     function listar() {
         var b = $(".tbodys");
         b.empty();
+        var text_html = "";
         b.append("<tr><td colspan='9'>Cargando...</td></tr>");
-        $.post("../../../plazo_dgp", "opc=Listar_Plazo&" + $(".form_plazo").serialize(), function (objJson) {
+        $.post("../../../plazo_dgp", $(".form_plazo").serialize() + "&opc=Listar_Plazo", function (objJson) {
             b.empty();
             var lista = objJson.lista;
             if (objJson.rpta == -1) {
@@ -172,18 +247,36 @@ Author     : JAIR
                 return;
             }
             for (var i = 0; i < lista.length; i++) {
-                b.append("<tr>");
-                b.append("<td class='id" + i + "'>" + lista[i].id + "</td>");
-                b.append("<td class='nombre" + i + "'>" + lista[i].nom + "</td>");
-                b.append("<td class='det" + i + "'>" + lista[i].det + "</td>");
-                b.append("<td class='desde" + i + "'>" + lista[i].desde + "</td>");
-                b.append("<td class='hasta" + i + "'>" + lista[i].hasta + "</td>");
-                b.append("<td class='planilla" + i + "'>" + lista[i].planilla + "</td>");
-                b.append("<td >" + lista[i].req + "</td>");
-                b.append("<input type='hidden' value='" + lista[i].id_req + "'/>");
-                b.append("<td><button value='" + i + "' class='Editar-Plazo'>Modificar</button><button value='" + i + "' class='Eliminar-Plazo' value='" + i + "'>Eliminar</button></td>");
-                b.append("</tr>");
+
+                if (lista[i].estado == '1') {
+                    text_html += "<tr class='success' >";
+                }
+                else if (lista[i].estado == '0') {
+                    text_html += "<tr class='danger' >";
+                }
+                text_html += "<td class='id" + i + "'>" + lista[i].id + "</td>";
+                text_html += "<td class='tipo" + i + "'>" + lista[i].tipo + "</td>";
+                text_html += "<td class='nombre" + i + "'>" + lista[i].nom + "</td>";
+                text_html += "<td class='det" + i + "'>" + lista[i].det + "</td>";
+                text_html += "<td class='desde" + i + "'>" + lista[i].desde + "</td>";
+                text_html += "<td class='hasta" + i + "'>" + lista[i].hasta + "</td>";
+                text_html += "<td class='planilla" + i + "'>" + lista[i].planilla + "</td>";
+                text_html += "<td >" + lista[i].req + "</td>";
+                text_html += "<td >" + lista[i].dep + "</td>";
+                text_html += "<td >" + lista[i].dias + "</td>";
+                if (lista[i].estado == '1') {
+                    text_html += "<td  >Activo</td>";
+                }
+                else if (lista[i].estado == '0') {
+                    text_html += "<td >No activo</td>";
+                }
+                text_html += "<input type='hidden' value='" + lista[i].id_req + "'/>";
+                text_html += "<td><button value='" + i + "' class='Editar-Plazo'>Modificar</button><button value='" + i + "' class='Eliminar-Plazo' value='" + i + "'>Eliminar</button></td>";
+                text_html += "</tr>";
             }
+            b.append(text_html);
+            text_html = "";
+
             $(".Editar-Plazo").click(
                     function () {
                         $(".nombre_plazo").val($(".nombre" + $(this).val()).text());
@@ -208,6 +301,25 @@ Author     : JAIR
         });
     }
     $(document).ready(function () {
+        $(".desde").datepicker({
+            dateFormat: "yy-mm-dd",
+            // defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 2,
+            onClose: function (selectedDate) {
+                $(".desde").datepicker("option", "minDate", selectedDate);
+                $(".hasta").datepicker("setDate", selectedDate);
+            }
+        });
+        $(".hasta").datepicker({
+            dateFormat: "yy-mm-dd",
+            // defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 2,
+            onClose: function (selectedDate) {
+                $(".hasta").datepicker("option", "maxDate", selectedDate);
+            }
+        });
         listar();
         $.post("../../../requerimiento", "opc=Listar_tp", function (objJson) {
             var tp = $(".planilla");
@@ -218,7 +330,7 @@ Author     : JAIR
                 return;
             }
             var lista = objJson.lista;
-            tp.append("<option value=''>[Seleccione]</option>");
+            tp.append("<option value='0'>[Todos]</option>");
             for (var t = 0; t < lista.length; t++) {
                 tp.append("<option value='" + lista[t].id + "'>" + lista[t].nombre + "</option>");
             }
@@ -237,6 +349,7 @@ Author     : JAIR
                 $(".dep_tolerancia").val("");
 
             }
+            listar();
         });
         $(".planilla").change(function () {
             $.post("../../../requerimiento", "opc=Listar_req_id&id=" + $(this).val(), function (objJson) {
@@ -258,16 +371,16 @@ Author     : JAIR
         });
         $(".req").change(function () {
             validar_fechas();
+            listar();
         });
         $(".btn-registrar").click(
                 function () {
                     validar_fechas();
                     if ($(".form_plazo").valid()) {
-                        $.post("../../../plazo_dgp", $("#form-plazo").serialize(), function () {
+                        $.post("../../../plazo_dgp", "opc=Registrar&" + $("#form-plazo").serialize(), function () {
                             listar();
                         });
                         $("#btn-registrar").val("Registrar Plazo");
-                        $(".opc").val("Registrar");
                         $("#form-plazo")[0].reset();
                         return false;
                     }
