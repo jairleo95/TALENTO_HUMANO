@@ -43,7 +43,38 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     @Override
     public List<X_List_De_Autorizacion> List_Detalle_Autorizacion(String iddgp, String idrp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT f.co_pasos, "
+        String sql = "SELECT rec.co_pasos,"
+                + "rec.de_pasos, "
+                + "rec.es_autorizacion, "
+                + "rec.fe_creacion, "
+                + "rec.id_autorizacion,"
+                + "rec.id_departamento,"
+                + "rec.id_detalle_pasos,"
+                + "rec.id_detalle_req_proceso,"
+                + "rec.id_dgp,"
+                + "rec.id_direccion,"
+                + "rec.id_pasos, "
+                + "rec.id_proceso, "
+                + "rec.id_puesto, "
+                + "rec.id_requerimiento, "
+                + "rec.no_proceso, "
+                + "rec.nu_pasos, "
+                + "rec.us_creacion, "
+                + "rec.ap_paterno, "
+                + "rec.ap_materno, "
+                + "rec.no_trabajador, "
+                + "rec.ca_sueldo, "
+                + "rec.us_ap_p, "
+                + "rec.us_ap_mat, "
+                + "rec.us_no_tr, "
+                + "rec.us_no_area, "
+                + "rec.us_no_puesto, "
+                + "rec.us_no_dep, "
+                + "rec.no_puesto,"
+                + "rec.no_usuario ,"
+                + "com.CM_COMENTARIO "
+                + "FROM("
+                + "SELECT f.co_pasos,"
                 + "  f.de_pasos, "
                 + "  s.es_autorizacion, "
                 + "  s.fe_creacion, "
@@ -160,7 +191,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 + "   "
                 + "  ) s ON ( s.ID_DETALLE_REQ_PROCESO=f.ID_DETALLE_REQ_PROCESO "
                 + "AND f.id_pasos                     =s.id_pasos ) "
-                + "WHERE f.ID_DETALLE_REQ_PROCESO     ='" + idrp.trim() + "' ORDER BY to_number(substr(f.nu_pasos,2,length(f.nu_pasos))) ASC";
+                + "WHERE f.ID_DETALLE_REQ_PROCESO     ='" + idrp.trim() + "' ORDER BY to_number(substr(f.nu_pasos,2,length(f.nu_pasos))) ASC) rec LEFT OUTER join RHTR_COMENTARIO_DGP com ON (rec.ID_DGP=com.ID_DGP and rec.ID_AUTORIZACION=com.ID_AUTORIZACION)";
         List<X_List_De_Autorizacion> list = new ArrayList<X_List_De_Autorizacion>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -195,6 +226,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 x.setUs_no_dep(rs.getString("us_no_dep"));
                 x.setNo_puesto(rs.getString("no_puesto"));
                 x.setNo_usuario(rs.getString("NO_USUARIO"));
+                x.setCm_comentario(rs.getString("CM_COMENTARIO"));
 
                 list.add(x);
             }
@@ -477,8 +509,8 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public void Insert_comentario_Aut(String ID_COMENTARIO_DGP_SP, String id_autorizacion, String id_dgp, String us_creacion, String es_comentario, String fe_creacion,String comentario) {
-      CallableStatement cst;
+    public void Insert_comentario_Aut(String ID_COMENTARIO_DGP_SP, String id_autorizacion, String id_dgp, String us_creacion, String es_comentario, String fe_creacion, String comentario) {
+        CallableStatement cst;
 
         try {
 

@@ -93,9 +93,10 @@ public class Cindex extends HttpServlet {
              getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
              getServletContext().setAttribute("List_Det_Puesto", pu.List_Det_Puesto());
              getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());*/
+            pl.Validar_Cumplimiento_plazo_t2();
             dgp.VAL_DGP_PASOS();
             cto.VALIDAR_FE_CESE_CON();
-            pl.validar_Vig_plazos();
+           // pl.validar_Vig_plazos();
             out.print("EXITO!");
         } else {
             out.print("ERROR");
