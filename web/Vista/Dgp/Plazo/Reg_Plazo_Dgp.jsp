@@ -101,20 +101,21 @@ Author     : JAIR
                                     <section class="col col-3">
                                         <label><strong>Desde :</strong></label>
                                         <label class="input"> <i class=""></i>
-                                            <input type="text" name="desde" placeholder="Request activation on" required=""  readonly="" class="desde datepicker" data-dateformat='yyyy-mm-dd'>
+                                            <input type="text" name="desde" placeholder="Request activation on" s required=""  readonly="" class="desde datepicker" data-dateformat='yy-mm-dd'>
                                         </label>
                                     </section>
                                     <section class="col col-3">
                                         <label><strong>Hasta :</strong></label>
                                         <label class="input"> <i class=""></i>
-                                            <input type="text" name="hasta" placeholder="Request activation on" required="" readonly="" class="hasta datepicker" data-dateformat='yyyy-mm-dd'>
+                                            <input type="text" name="hasta" placeholder="Request activation on"  required="" readonly="" class="hasta datepicker" data-dateformat='yy-mm-dd'>
                                         </label>
                                     </section>
                                 </div>
 
                                 <footer>
-                                    <button type="button"  id="btn-registrar" class="btn btn-primary btn-registrar">
-                                        Registrar 
+                                    <button type="button"  id="btn-registrar" class="btn btn-primary btn-registrar"> <span class="btn-label">
+                                            <i class="glyphicon glyphicon-ok"></i>
+                                            Registrar 
                                     </button>
                                 </footer>
 
@@ -156,7 +157,7 @@ Author     : JAIR
 
     </center>
 </body>
-
+<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script>
     if (!window.jQuery) {
@@ -294,34 +295,57 @@ Author     : JAIR
             );
             $(".Eliminar-Plazo").click(
                     function () {
-                        if (confirm("Esta Seguro de Eliminar?")) {
-                            $.post("../../../plazo_dgp", "opc=Eliminar&plz=" + $(".id" + $(this).val()).text(), function () {
-                                listar();
-                            });
-                        } else {
-                        }
+                        $.SmartMessageBox({
+                            title: "¡Advertencia!",
+                            content: "¿Esta seguro de eliminar el plazo?",
+                            buttons: '[No][Si]'
+                        }, function (ButtonPressed) {
+                            if (ButtonPressed === "Si") {
+                                $.ajax({
+                                    url: "../../../plazo_dgp",
+                                    data: "opc=Eliminar&plz=" + $(".id" + $(this).val()).text(),
+                                    type: "post"
+                                }).done(function () {
+                                    listar();
+                                    $.smallBox({
+                                        title: "¡Procesado con exito!",
+                                        content: "<i class='fa fa-clock-o'></i> <i>Se ha eliminado el plazo correctamente...</i>",
+                                        color: "#659265",
+                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                        timeout: 4000
+                                    });
+                                });
+                            }
+                            if (ButtonPressed === "No") {
+                            }
+                        });
                     }
             );
         });
     }
     $(document).ready(function () {
+        pageSetUp();
+        $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+            $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+        });
+
         $(".desde").datepicker({
             dateFormat: "yy-mm-dd",
-            // defaultDate: "+1w",
+            defaultDate: "+1w",
             changeMonth: true,
             numberOfMonths: 2,
             onClose: function (selectedDate) {
-                $(".desde").datepicker("option", "minDate", selectedDate);
+                $(".hasta").datepicker("option", "minDate", selectedDate);
                 $(".hasta").datepicker("setDate", selectedDate);
             }
         });
         $(".hasta").datepicker({
             dateFormat: "yy-mm-dd",
-            // defaultDate: "+1w",
+            defaultDate: "+1w",
             changeMonth: true,
             numberOfMonths: 2,
             onClose: function (selectedDate) {
-                $(".hasta").datepicker("option", "maxDate", selectedDate);
+                $(".desde").datepicker("option", "maxDate", selectedDate);
             }
         });
         listar();
@@ -379,15 +403,36 @@ Author     : JAIR
         });
         $(".btn-registrar").click(
                 function () {
+                    $(this).attr("disabled", "true");
                     validar_fechas();
                     if ($(".form_plazo").valid()) {
-                        $.post("../../../plazo_dgp", "opc=Registrar&" + $("#form-plazo").serialize(), function () {
+                        $.ajax({
+                            type: "post",
+                            url: "../../../plazo_dgp",
+                            data: "opc=Registrar&" + $("#form-plazo").serialize()
+                        }).done(function () {
                             listar();
+                            $("#form-plazo")[0].reset();
+                            $.smallBox({
+                                title: "¡Registrado!",
+                                content: "<i class='fa fa-clock-o'></i> <i>El plazo se ha registrado correctamente...</i>",
+                                color: "#659265",
+                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                timeout: 4000
+                            });
+                            $(this).removeAttr("disabled");
                         });
-                        $("#btn-registrar").val("Registrar Plazo");
-                        $("#form-plazo")[0].reset();
-                        return false;
+                    } else {
+                        $(this).removeAttr("disabled");
+                        $.smallBox({
+                            title: "¡Atención!",
+                            content: "<i class='fa fa-ban'></i> <i>Complete los campos...</i>",
+                            color: "red",
+                            iconSmall: "bounce animated",
+                            timeout: 4000
+                        });
                     }
+
                 }
         );
         $(".desde").click(function () {
