@@ -111,10 +111,14 @@ Author     : JAIR
                                         </label>
                                     </section>
                                 </div>
-                               
 
-                                   <button type="button"  id="btn-registrar" class="btn btn-primary btn-registrar">Registrar</button>
-                             
+                                <footer>
+                                    <button type="button"  id="btn-registrar" class="btn btn-primary btn-registrar">
+                                        Registrar 
+                                    </button>
+                                </footer>
+
+
                             </form>
                         </div>
                     </div>
