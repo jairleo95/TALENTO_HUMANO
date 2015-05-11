@@ -537,28 +537,35 @@
                 }
                 d.empty();
                 var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    texto += '<tr role="row" class="odd">';
-                    texto += '<td class>' + (i + 1) + '</td>';
-                    texto += '<td>' + lista[i].aps + '</td>';
-                    texto += '<td>' + lista[i].dep + '</td>';
-                    texto += '<td>' + lista[i].are + '</td>';
-                    texto += '<td>' + lista[i].sec + '</td>';
-                    texto += '<td>' + lista[i].pue + '</td>';
-                    texto += '<td>' + lista[i].tip_d + '</td>';
-                    texto += '<td>' + lista[i].num_d + '</td>';
-                    texto += '<td>' + lista[i].pat + '</td>';
-                    texto += '<td>' + lista[i].mat + '</td>';
-                    texto += '<td>' + lista[i].nom + '</td>';
-                    texto += '<td>' + lista[i].nom_e + '</td>';
-                    texto += '<td>' + lista[i].fec_s + '</td>';
-                    texto += '<td>' + lista[i].dni_h + '</td>';
-                    texto += '<td>' + lista[i].nom_h + '</td>';
-                    texto += '<td>' + lista[i].fech_hi + '</td>';
-                    texto += '<td>' + lista[i].edad_hi + '</td>';
-                    texto += '</tr>';
+                if (lista.length > 0) {
+                    for (var i = 0; i < lista.length; i++) {
+                        texto += '<tr role="row" class="odd">';
+                        texto += '<td class>' + (i + 1) + '</td>';
+                        texto += '<td>' + lista[i].aps + '</td>';
+                        texto += '<td>' + lista[i].dep + '</td>';
+                        texto += '<td>' + lista[i].are + '</td>';
+                        texto += '<td>' + lista[i].sec + '</td>';
+                        texto += '<td>' + lista[i].pue + '</td>';
+                        texto += '<td>' + lista[i].tip_d + '</td>';
+                        texto += '<td>' + lista[i].num_d + '</td>';
+                        texto += '<td>' + lista[i].pat + '</td>';
+                        texto += '<td>' + lista[i].mat + '</td>';
+                        texto += '<td>' + lista[i].nom + '</td>';
+                        texto += '<td>' + lista[i].nom_e + '</td>';
+                        texto += '<td>' + lista[i].fec_s + '</td>';
+                        texto += '<td>' + lista[i].dni_h + '</td>';
+                        texto += '<td>' + lista[i].nom_h + '</td>';
+                        texto += '<td>' + lista[i].fech_hi + '</td>';
+                        texto += '<td>' + lista[i].edad_hi + '</td>';
+                        texto += '</tr>';
+                        $('.div_t').empty();
+                    }
+                    d.append(texto);
                 }
-                d.append(texto);
+                else {
+                    $('.div_t').empty();
+                    b.append("<td colspan='15' align='center'><strong>NO SE ENCONTRARON DATOS</strong></td>");
+                }
             });
         }
         $(document).ready(function () {
@@ -567,7 +574,7 @@
                     function () {
                         GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
                         listar_padre_hi();
-                        $('.div_t').empty();
+
                     }
             );
             $("#btncancel").click(

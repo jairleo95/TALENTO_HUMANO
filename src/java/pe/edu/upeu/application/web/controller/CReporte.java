@@ -69,6 +69,7 @@ public class CReporte extends HttpServlet {
         Map<String, Object> rpta = new HashMap<String, Object>();
         String opc = request.getParameter("opc");
         try {
+            //Reportes
             if (opc.equals("reporte1")) {
                 getServletContext().setAttribute("Reporte_Datos_Generales", r.Reporte_Datos_Generales());
                 getServletContext().setAttribute("List_Departamento_Lima", d.List_Departamento_Lima());
@@ -96,6 +97,7 @@ public class CReporte extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            
             if (opc.equals("reporte_cumpleaños")) {
                 String mes = request.getParameter("mes");
                 String dia = request.getParameter("dia");
@@ -109,7 +111,14 @@ public class CReporte extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
-            
+            if (opc.equals("reporte_datos_genereales")) {
+                String desde = request.getParameter("desde");
+                String hasta = request.getParameter("hasta");
+                String edad = request.getParameter("edad");
+                List<Map<String, ?>> lista = r.Reporte_Datos_Gen();
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
             
             
             
@@ -117,6 +126,9 @@ public class CReporte extends HttpServlet {
             //vistas
             if (opc.equals("Reporte_padres_madres")) {
                  response.sendRedirect("Vista/Reportes/Reporte_Padres_Madres.jsp");
+            }
+            if (opc.equals("Reporte_datos")) {
+                 response.sendRedirect("Vista/Reportes/Reporte_Datos_Generales.jsp");
             }
             if (opc.equals("Reporte_Datos_Hijos")) {
                  response.sendRedirect("Vista/Reportes/Reporte_Datos_Hijos.jsp");

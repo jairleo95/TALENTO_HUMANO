@@ -77,7 +77,7 @@
                         <div class="row">
                             <div class="form-group" >
                                 <label>Edad</label><br>
-                                <input type="text"  class="form-control edad" placeholder="Rango de edad general" name="del"  length="45" style="width: 250px" id="edad"/>
+                                <input type="text"  class="form-control edad" placeholder="Rango general de edad" name="del"  length="45" style="width: 250px" id="edad"/>
                             </div>
                         </div>
                         <br>
@@ -536,10 +536,12 @@
                         texto += '<td>' + lista[i].fec_na + '</td>';
                         texto += '<td>' + lista[i].edad + '</td>';
                         texto += '</tr>';
+                        $('.div_t').empty();
 
                     }
                     d.append(texto);
                 } else {
+                    $('.div_t').empty();
                     d.append("<td colspan='11' align='center'><strong>NO SE ENCONTRARON DATOS</strong></td>");
                 }
             });
@@ -550,7 +552,6 @@
                     function () {
                         GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
                         listar_hijos();
-                        $('.div_t').empty();
                     }
             );
             $("#btncancel").click(

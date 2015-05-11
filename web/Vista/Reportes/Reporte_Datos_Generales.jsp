@@ -58,7 +58,11 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
+        <style>
+            .caja{
+                background:transparent url(../../imagenes/Gifloader.GIF) center no-repeat;
+            }
+        </style>
     </head>
     <body class="" >
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
@@ -71,6 +75,13 @@
         <!-- END NAVIGATION -->
 
         <!-- MAIN PANEL -->
+        <br>
+        <div align="center" class="row">
+            <div class="form-group">                            
+                <button type="button" class="btn btn-primary" id="btnbuscar">Buscar</button>
+            </div>
+
+        </div>
         <div id="main" role="main" style="margin-left: 0px">
 
             <!-- RIBBON -->
@@ -115,19 +126,19 @@
                                     <label style=" font-size:21px; font-family:cambria; color:white ;padding-left:5px;padding-top: 2px;">Reporte Filtro</label>
                                 </header>
 
-                                <!-- widget div-->
+                                <!-- widget div-->                                
                                 <div>
 
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
 
-                                    </div>
+                                    </div>                                  
                                     <!-- end widget edit box -->
 
-                                    <!-- widget content -->
+                                    <!-- widget content -->                                    
                                     <div class="widget-body no-padding">
-                                        
+
                                         <table id="datatable_tabletools" class="table table-striped table-bordered table-hover table-responsive">
                                             <thead>
                                                 <tr>
@@ -137,77 +148,28 @@
                                                     <th data-hide="ARE">Area</th>
                                                     <th data-hide="secc">Sección</th>
                                                     <th data-hide="pues">Puesto</th>
-                                                    <th data-class="fec_nac">Fecha Nacimiento</th>
-                                                    <th data-class="ed">Edad</th>
-                                                    <th data-class="nom">Apellidos y Nombres</th>
-                                                    <th data-class="tip">Fecha de inicio</th>
-                                                    <th data-class="tip">Fecha de Cese</th>
-                                                    <th data-class="tip">Sexo</th>
-                                                    <th data-class="tip">Fecha de nacimiento</th>
-                                                    <th data-class="tip">Nacionalidad</th>
-                                                    <th data-class="tip">Esatodo Civil</th>
-                                                    <th data-class="tip">Grupo sanguíneo</th>
-                                                    <th data-class="tip">Sistema Pencionario</th>
-                                                    <th data-class="tip">AFP</th>
-                                                    <th data-class="tip">Situacion Educativa</th>
-                                                    <th data-class="tip">Estudio en Instituto</th>
-                                                    <th data-class="tip">Regimen</th>
-                                                    <th data-class="tip">Tipo de Instituto</th>
-                                                    <th data-class="tip">Institución</th>
-                                                    <th data-class="tip">Carrera</th>
-                                                    <th data-class="tip">Año de Egreso</th>
-                                                    <th data-class="tip">Tipo de Hora de Pago</th>
-                                                    <th data-class="tip">Domicilio Actual</th>
-                                                    <th data-class="tip">Distrito</th>
-                                                    <th data-class="tip">Provincia</th>
-                                                    <th data-class="tip">Domicilio Actual</th>
-                                                    <th data-class="tip">Departamento</th>
-                                                    <th data-class="tip">Religion</th>
-                                                    <th data-class="tip">Iglesia</th>
+                                                    <th data-class="fec_nac">Tipo Documento</th>
+                                                    <th data-class="ed">Numero Documento</th>
+                                                    <th data-class="nom">Apellidos Paterno</th>
+                                                    <th data-class="tip">Apellidos Materno</th>
+                                                    <th data-class="tip">Nombre</th>
+                                                    <th data-class="tip">Apellidos y Nombres</th>
+                                                    <th data-class="tip">Fecha de Sece</th>
+                                                    <th data-class="tip">DNI HIJ@</th>
+                                                    <th data-class="tip">Apellidos y Nombres del Hij@</th>
+                                                    <th data-class="tip">Fecha Nacimiento del Hij@</th>
+                                                    <th data-class="tip">Edad</th>
+                                                    <th data-class="tip">Genero</th>
                                                 </tr>
                                             </thead>
 
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Jennifer</td>
-                                                    <td>1-342-463-8341</td>
-                                                    <td>Et Rutrum Non Associates</td>
-                                                    <td>35728</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>Fogo</td>
-                                                    <td>03/04/14</td>
-                                                </tr>
-                                               
+                                            <tbody id="Datos_generales">                                                                                             
 
                                             </tbody>
 
                                         </table>
+                                         <div class="div_t">                                                                                     
+                                        </div>
                                     </div>
                                     <!-- end widget content -->
 
@@ -232,73 +194,7 @@
             </div>
             <!-- END MAIN CONTENT -->
 
-        </div>
-        <!-- END MAIN PANEL -->
-
-        <!-- PAGE FOOTER -->
-        <div class="page-footer">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6">
-                    <span class="txt-color-white">SmartAdmin WebApp © 2013-2014</span>
-                </div>
-
-                <div class="col-xs-6 col-sm-6 text-right hidden-xs">
-                    <div class="txt-color-white inline-block">
-                        <i class="txt-color-blueLight hidden-mobile">Last account activity <i class="fa fa-clock-o"></i> <strong>52 mins ago &nbsp;</strong> </i>
-                        <div class="btn-group dropup">
-                            <button class="btn btn-xs dropdown-toggle bg-color-blue txt-color-white" data-toggle="dropdown">
-                                <i class="fa fa-link"></i> <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu pull-right text-left">
-                                <li>
-                                    <div class="padding-5">
-                                        <p class="txt-color-darken font-sm no-margin">Download Progress</p>
-                                        <div class="progress progress-micro no-margin">
-                                            <div class="progress-bar progress-bar-success" style="width: 50%;"></div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="padding-5">
-                                        <p class="txt-color-darken font-sm no-margin">Server Load</p>
-                                        <div class="progress progress-micro no-margin">
-                                            <div class="progress-bar progress-bar-success" style="width: 20%;"></div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="padding-5">
-                                        <p class="txt-color-darken font-sm no-margin">Memory Load <span class="text-danger">*critical*</span></p>
-                                        <div class="progress progress-micro no-margin">
-                                            <div class="progress-bar progress-bar-danger" style="width: 70%;"></div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="padding-5">
-                                        <button class="btn btn-block btn-default">refresh</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END PAGE FOOTER -->
-
-        <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
-        Note: These tiles are completely responsive,
-        you can add as many as you like
-        -->
-        <!-- END SHORTCUT AREA -->
-
-        <!--================================================== -->
-
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+        </div>        
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
@@ -356,9 +252,9 @@
         <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
 
         <!--[if IE 8]>
-
+    
         <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-
+    
         <![endif]-->
 
         <!-- Demo purpose only -->
@@ -539,7 +435,84 @@
                 /* END TABLETOOLS */
 
             })
+            //Listar padres_madres
 
+        </script>
+        <script>
+            function listar_trabajor_na() {
+                //var a = $(".mes").val();
+                var b = $("#Datos_generales");
+                var texto = '';
+                $.post("../../reporte", "opc=reporte_datos_genereales", function (objJson) {
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    b.empty();
+                    var lista = objJson.lista;
+                    if (lista.length > 0) {
+                        for (var i = 0; i < lista.length; i++) {
+                            texto += '<tr role="row" class="odd">';
+                            texto += '<td class>' + (i + 1) + '</td>';
+                            texto += '<td>' + lista[i].aps + '</td>';
+                            texto += '<td>' + lista[i].dep + '</td>';
+                            texto += '<td>' + lista[i].are + '</td>';
+                            texto += '<td>' + lista[i].sec + '</td>';
+                            texto += '<td>' + lista[i].pue + '</td>';
+                            texto += '<td>' + lista[i].doc + '</td>';
+                            texto += '<td>' + lista[i].n_doc + '</td>';
+                            texto += '<td>' + lista[i].ape + '</td>';
+                            texto += '<td>' + lista[i].mat + '</td>';
+                            texto += '<td>' + lista[i].nom + '</td>';
+                            texto += '<td>' + lista[i].ape + " " + lista[i].mat + " " + lista[i].nom + '</td>';
+                            texto += '<td>' + lista[i].has + '</td>';
+                            texto += '<td>' + lista[i].dni_hi + '</td>';
+                            texto += '<td>' + lista[i].nom_hi + '</td>';
+                            texto += '<td>' + lista[i].gen_hi + '</td>';
+                            texto += '<td>' + lista[i].nac_hi + '</td>';
+                            texto += '<td>' + lista[i].eda_hi + '</td>';
+                            texto += '</tr>';
+                            $('.div_t').empty();
+                        }
+                        b.append(texto);
+                    } else {
+                        $('.div_t').empty();
+                        b.append("<td colspan='11' align='center'><strong>NO SE ENCONTRARON DATOS</strong></td>");                        
+                    }
+                });
+
+            }
+            $(document).ready(function () {
+                var b = $('#tbodys');
+
+                $("#btnbuscar").click(
+                        function () {
+                            GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
+                            listar_trabajor_na();
+                            
+                        }
+                );
+                $("#btncancel").click(
+                        function () {
+                            document.formulario.reset();
+                            b.empty();
+                            html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                            $(".tbodys").html(html);
+                        }
+                );
+            }
+            );
+            function GifLoader(contenedor, msg, action) {
+                $('.headerr').hide();
+                var text = "";
+                contenedor.empty();
+                if (action == 1) {
+                    text += "<div class='caja' style='height:250px; width:150px; margin:auto;'><center><h3>" + msg + "</h3></center></div>";
+                } else if (action == 2) {
+                    text += "<div style='height:150px; width:150px; margin:auto; padding-top:30px;'><center><h3>" + msg + "</h3></center></div>";
+                }
+                contenedor.append(text);
+            }
         </script>
 
         <!-- Your GOOGLE ANALYTICS CODE Below -->
@@ -556,6 +529,7 @@
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(ga, s);
             })();
+
         </script>
 
 
