@@ -143,17 +143,7 @@
 
             }
             #message {
-                display: block;
-                background: white;
 
-                padding: 1em;
-                margin: auto;
-                font-size: 1em;
-
-                height: 12em;
-                max-height: 12em;
-                width: 70%;
-                max-width: 70%;
             }
 
 
@@ -548,32 +538,30 @@
                         <div class="modal fade" id="myModal6" tabindex="-1" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content" align="center">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                            &times;
-                                        </button>
-                                    </div>
-                                    <div class="modal-body no-padding">
-                                        <fieldset>
-                                            <section align="center">
-                                                <div class="row" >
+                                    <div class="smart-form">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <div class="modal-body no-padding">
+                                            <fieldset>
+                                                <section>
                                                     <h1 class="h1" style="color:#218FDD ; font-size:20px;"><strong>MOTIVO</strong></h1>
-                                                    <div class="col col-10"  >
-                                                        <label class="input">
-                                                            <textarea id="message" maxlength="200" required="" name="comentario"></textarea>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        </fieldset>
-                                        <footer align="center">
-                                            <button type="submit" class="btn btn-primary btn-conti">
-                                                Continuar
-                                            </button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal" >
-                                                Cancel
-                                            </button>
-                                        </footer>
+                                                    <label class="textarea">
+                                                        <textarea rows="3" placeholder="Inserte Comentario" maxlength="200" required="" name="comentario"></textarea>
+                                                    </label>
+                                                </section>
+                                            </fieldset>
+                                            <footer align="center">
+                                                <button type="submit" class="btn btn-primary btn-conti">
+                                                    Continuar
+                                                </button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal" >
+                                                    Cancel
+                                                </button>
+                                            </footer>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

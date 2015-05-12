@@ -540,7 +540,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                 <label class="select">Filial:
                                                     <select class="fil form-control" id="fil" name="id_di" >
                                                         <option value="" >[Filial]</option>
-                                                        <option value="1" >Filial Lina</option>
+                                                        <option value="1" >Filial Lima</option>
                                                         <option value="2" >Filial Juliaca</option>
                                                         <option value="5" >Filial Tarapoto</option>
                                                     </select>   
