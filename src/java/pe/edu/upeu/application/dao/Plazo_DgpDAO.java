@@ -181,7 +181,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
     public List<V_Dgp_Plazo> Lista_detalle_plazo(String id) {
 
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from rhvd_dgp_plazo where id_dgp='" + id + "'";
+        String sql = "select * from rhvd_dgp_plazo_1 where id_dgp='" + id + "'";
         List<V_Dgp_Plazo> list = new ArrayList<V_Dgp_Plazo>();
         try {
             ResultSet rs = this.conn.query(sql);
