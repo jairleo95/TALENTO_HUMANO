@@ -493,7 +493,7 @@
 
                                                 %>
                                                 <a href="../../plazo_dgp?opc=Ver_detalle_plazo&iddgp=<%=a.getId_dgp()%>" class="label label-danger" rel="popover-hover" data-placement="top" data-original-title="Record de plazos cumplidos" data-content="<%=a.getVer_list_plazo()%>" data-html="true"> <strong>No cumplio plazos</strong></a></td>
-                                                <%                                                        } else {
+                                                <%                                                        } else if (a.getVal_plazo() == 0) {
 
 
                                                 %>
