@@ -278,10 +278,10 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
             String sql = "SELECT id_plazo,(extract (month from FE_HASTA) -  extract(month from sysdate))as meses_con,(extract (day from FE_HASTA) -  extract(day from sysdate))as dia_con,(extract (year from FE_HASTA) -  extract(year from sysdate))as anno_con FROM RHTR_PLAZO";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
-                id = rs.getString(1);
-                mes = rs.getDouble(2);
-                dia = rs.getDouble(3);
-                ano = rs.getDouble(4);
+                id = rs.getString("id_plazo");
+                mes = rs.getDouble("meses_con");
+                dia = rs.getDouble("dia_con");
+                ano = rs.getDouble("anno_con");
                 if (ano < 0) {
                     this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
                     CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESHABI_PLAZO( ?)}");
@@ -433,20 +433,20 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                 if (es_cumple_plazo.equals("1")) {
                     if (ano < 0) {
                         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-                        CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESHABI_PLAZO( ?)}");
-                        cst.setString(1, id);
+                        CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESHABI_CUMPL_PLAZO( ?)}");
+                        cst.setString(1, id_cumplimiento_plazo);
                         cst.execute();
                     } else if (ano == 0) {
                         if (mes < 0) {
                             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-                            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESHABI_PLAZO( ?)}");
-                            cst.setString(1, id);
+                            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESHABI_CUMPL_PLAZO( ?)}");
+                            cst.setString(1, id_cumplimiento_plazo);
                             cst.execute();
                         } else if (mes == 0) {
                             if (dia < 0) {
                                 this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-                                CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESHABI_PLAZO( ?)}");
-                                cst.setString(1, id);
+                                CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESHABI_CUMPL_PLAZO( ?)}");
+                                cst.setString(1, id_cumplimiento_plazo);
                                 cst.execute();
                             } else if (dia == 0 || dia > 0) {
                             }
@@ -455,7 +455,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                     } else if (ano > 0) {
                     }
                 } else if (es_cumple_plazo.equals("0")) {
-                    
+
                 }
             }
             rs.close();
