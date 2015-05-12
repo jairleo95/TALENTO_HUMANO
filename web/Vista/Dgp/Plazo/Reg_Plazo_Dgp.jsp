@@ -113,9 +113,8 @@ Author     : JAIR
                                 </div>
 
                                 <footer>
-                                    <button type="button"  id="btn-registrar" class="btn btn-primary btn-registrar"> <span class="btn-label">
-                                            <i class="glyphicon glyphicon-ok"></i>
-                                            Registrar 
+                                    <button type="button"  id="btn-registrar" class="btn btn-primary btn-registrar"> 
+                                        Registrar 
                                     </button>
                                 </footer>
 
@@ -276,7 +275,7 @@ Author     : JAIR
                     text_html += "<td >No activo</td>";
                 }
                 text_html += "<input type='hidden' value='" + lista[i].id_req + "'/>";
-                text_html += "<td><button value='" + i + "' class='Editar-Plazo'>Modificar</button><button value='" + i + "' class='Eliminar-Plazo' value='" + i + "'>Eliminar</button></td>";
+                text_html += "<td><button value='" + i + "' class='Editar-Plazo'>Modificar</button><button  class='Eliminar-Plazo' value='" + lista[i].id + "'>Eliminar</button></td>";
                 text_html += "</tr>";
             }
             b.append(text_html);
@@ -295,6 +294,7 @@ Author     : JAIR
             );
             $(".Eliminar-Plazo").click(
                     function () {
+                        var valor = $(this).val();
                         $.SmartMessageBox({
                             title: "¡Advertencia!",
                             content: "¿Esta seguro de eliminar el plazo?",
@@ -303,8 +303,8 @@ Author     : JAIR
                             if (ButtonPressed === "Si") {
                                 $.ajax({
                                     url: "../../../plazo_dgp",
-                                    data: "opc=Eliminar&plz=" + $(".id" + $(this).val()).text(),
-                                    type: "post"
+                                    data: "opc=Eliminar&plz=" + valor,
+                                    type: "POST"
                                 }).done(function () {
                                     listar();
                                     $.smallBox({

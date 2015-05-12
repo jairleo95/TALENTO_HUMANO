@@ -200,8 +200,8 @@
                                                     <label class="select"> 
                                                         <select name="tipo" class="tipo" required="">
                                                             <option value=''>[SELECCIONE]</option>
-                                                            <option value='1'>Inicio de Contrato</option>
-                                                            <option value='2'>Ingreso a planilla</option>
+                                                            <option value='1'>Ingreso a planilla</option>
+                                                            <option value='2'>Inicio de Contrato</option>
                                                         </select>          
                                                     </label>
                                                 </section>
@@ -338,19 +338,19 @@
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             pageSetUp();
-            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
-            $(".tipo").change(function() {
-                if ($(this).val() == '2') {
+            $(".tipo").change(function () {
+                if ($(this).val() == '1') {
                     $(".fe_inicio").attr("type", "month");
                     $(".lb_fecha_solicitud").text("Mes :");
                     $(".tipo_fecha").val("month");
                 }
-                if ($(this).val() == '1') {
+                if ($(this).val() == '2') {
                     $(".fe_inicio").attr("type", "date");
                     $(".lb_fecha_solicitud").text("Fecha de Inicio :");
                     $(".tipo_fecha").val("date");
@@ -359,21 +359,21 @@
                 //alert();
                 list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
             });
-            $(".sbm_solicitud").click(function(e) {
+            $(".sbm_solicitud").click(function (e) {
                 if ($(".solicitud_plazo").valid() == true) {
 
                     $.SmartMessageBox({
                         title: "¡Advertencia!",
                         content: "¿Esta seguro de enviar la solicitud?",
                         buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Si") {
 
                             $.ajax({
                                 url: "../../solicitud_requerimiento",
                                 type: "post",
                                 data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud"
-                            }).done(function() {
+                            }).done(function () {
                                 $('.solicitud_plazo')[0].reset();
                                 var $p = $(this).parent().parent();
                                 $p.removeClass('has-success');
@@ -387,7 +387,7 @@
                                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
                                     timeout: 4000
                                 });
-                            }).error(function() {
+                            }).error(function () {
                                 $.smallBox({
                                     title: "¡Error!",
                                     content: "<i class='fa fa-clock-o'></i> <i>La solicitud no ha podido ser enviada...</i>",
@@ -396,21 +396,13 @@
                                     timeout: 4000
                                 });
                             });
-                            //var id = $('.dgp').val();
-                            //location.href = "Reg_List_Solicitud.jsp?iddgp="+id+"";
-
                         }
                         if (ButtonPressed === "No") {
                         }
 
                     });
-
                 }
-
             });
-
-
-
             /*
              * Autostart Carousel
              */
@@ -433,7 +425,7 @@
             /*
              * Smart Notifications
              */
-            $('#eg1').click(function(e) {
+            $('#eg1').click(function (e) {
 
                 $.bigBox({
                     title: "Big Information box",
@@ -449,7 +441,7 @@
 
             })
 
-            $('#eg2').click(function(e) {
+            $('#eg2').click(function (e) {
 
                 $.bigBox({
                     title: "Big Information box",
@@ -463,7 +455,7 @@
                 e.preventDefault();
             })
 
-            $('#eg3').click(function(e) {
+            $('#eg3').click(function (e) {
 
                 $.bigBox({
                     title: "Shield is up and running!",
@@ -478,7 +470,7 @@
 
             })
 
-            $('#eg4').click(function(e) {
+            $('#eg4').click(function (e) {
 
                 $.bigBox({
                     title: "Success Message Example",
@@ -487,7 +479,7 @@
                     //timeout: 8000,
                     icon: "fa fa-check",
                     number: "4"
-                }, function() {
+                }, function () {
                     closedthis();
                 });
 
@@ -497,7 +489,7 @@
 
 
 
-            $('#eg5').click(function() {
+            $('#eg5').click(function () {
 
                 $.smallBox({
                     title: "Ding Dong!",
@@ -511,7 +503,7 @@
 
 
 
-            $('#eg6').click(function() {
+            $('#eg6').click(function () {
 
                 $.smallBox({
                     title: "Big Information box",
@@ -523,7 +515,7 @@
 
             })
 
-            $('#eg7').click(function() {
+            $('#eg7').click(function () {
 
                 $.smallBox({
                     title: "James Simmons liked your comment",
@@ -551,7 +543,7 @@
             // With Callback
 
             // With Input
-            $("#smart-mod-eg2").click(function(e) {
+            $("#smart-mod-eg2").click(function (e) {
 
                 $.SmartMessageBox({
                     title: "Smart Alert: Input",
@@ -559,14 +551,14 @@
                     buttons: "[Accept]",
                     input: "text",
                     placeholder: "Enter your user name"
-                }, function(ButtonPress, Value) {
+                }, function (ButtonPress, Value) {
                     alert(ButtonPress + " " + Value);
                 });
 
                 e.preventDefault();
             })
             // With Buttons
-            $("#smart-mod-eg3").click(function(e) {
+            $("#smart-mod-eg3").click(function (e) {
 
                 $.SmartMessageBox({
                     title: "Smart Notification: Buttons",
@@ -577,7 +569,7 @@
                 e.preventDefault();
             })
             // With Select
-            $("#smart-mod-eg4").click(function(e) {
+            $("#smart-mod-eg4").click(function (e) {
 
                 $.SmartMessageBox({
                     title: "Smart Alert: Select",
@@ -585,7 +577,7 @@
                     buttons: "[Done]",
                     input: "select",
                     options: "[Costa Rica][United States][Autralia][Spain]"
-                }, function(ButtonPress, Value) {
+                }, function (ButtonPress, Value) {
                     alert(ButtonPress + " " + Value);
                 });
 
@@ -593,7 +585,7 @@
             });
 
             // With Login
-            $("#smart-mod-eg5").click(function(e) {
+            $("#smart-mod-eg5").click(function (e) {
 
                 $.SmartMessageBox({
                     title: "Login form",
@@ -601,7 +593,7 @@
                     buttons: "[Cancel][Accept]",
                     input: "text",
                     placeholder: "Enter your user name"
-                }, function(ButtonPress, Value) {
+                }, function (ButtonPress, Value) {
                     if (ButtonPress == "Cancel") {
                         alert("Why did you cancel that? :(");
                         return 0;
@@ -615,7 +607,7 @@
                         buttons: "[Login]",
                         input: "password",
                         placeholder: "Password"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         alert("Username: " + ValueOriginal + " and your password is: " + Value);
                     });
                 });
@@ -634,7 +626,7 @@
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
 
-        (function() {
+        (function () {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;

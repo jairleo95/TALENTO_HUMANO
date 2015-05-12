@@ -241,6 +241,7 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
                 rec.put("req", rs.getString("NO_REQ"));
                 rec.put("solicitud", rs.getString("DE_SOLICITUD"));
                 rec.put("mes", rs.getString("mes_s"));
+                rec.put("es_aut", rs.getString("es_autorizar"));
                 lista.add(rec);
             }
             rs.close();
