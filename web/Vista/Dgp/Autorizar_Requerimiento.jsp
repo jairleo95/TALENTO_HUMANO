@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
@@ -7,6 +8,7 @@
 %>
 <%@page import="pe.edu.upeu.application.dao.DgpDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceDgpDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO"%>
 <%@page import="pe.edu.upeu.application.model.V_Autorizar_Dgp"%>
 <jsp:useBean id="List_id_Autorizacion" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_id_Autorizados" scope="application" class="java.util.ArrayList"/>
@@ -173,7 +175,7 @@
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
                                         <%
-
+                                            InterfaceAutorizacionDAO aupl = new AutorizacionDAO();
                                             HttpSession sesion_1 = request.getSession(true);
                                             String idrol = (String) sesion_1.getAttribute("IDROL");
                                             String dep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");%>
@@ -448,7 +450,7 @@
                                                             </ul>
                                                         </div>
                                                     </td>
-                                                    <td ><%=a.getMes_creacion()%></td>   
+                                                    <td ><%out.print(aupl.Mes_plazo(a.getId_dgp()));%></td>   
                                                     <% if (a.getAr_foto() == null) {%>
                                                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
                                                         <% } else {%>
