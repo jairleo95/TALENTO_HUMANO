@@ -121,6 +121,7 @@
                                                     <th data-hide="phone,tablet"><strong>Fecha Inicio</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Fecha Cese</strong></th>
                                                     <th  data-hide="phone,tablet">Fecha Solicitud</th>  
+                                                    <th  data-hide="phone,tablet">Autorizado</th>  
                                                 </tr>
                                             </thead>
                                             <tbody> 
@@ -149,8 +150,13 @@
                                                     <td><%=s.getFe_desde()%></td>
                                                     <td><%=s.getFe_hasta()%></td>
                                                     <td><%=s.getFe_creacion()%></td>
-                                                </tr>
-                                                <%}%>
+                                                <td><center><%if (s.getEs_autorizar().trim().equals("1")) {
+                                                            out.print("SI");
+                                                        } else {
+                                                            out.print("NO");
+                                                        }%></center></td>
+                                            </tr>
+                                            <%}%>
                                             </tbody>
                                         </table>
                                     </div>
@@ -398,7 +404,7 @@
                             });
                             //var id = $('.dgp').val();
                             //location.href = "Reg_List_Solicitud.jsp?iddgp="+id+"";
-
+                            window.location = "../../solicitud_requerimiento?iddgp=" + $(".dgp").val() + "&opc=Reg_List_Solicitud";
                         }
                         if (ButtonPressed === "No") {
                         }
