@@ -60,9 +60,35 @@
                 <br>
                 <div id="contenido">
 
-                    <div   >
-                        <!--style="padding-left: 30px"-->
+                    <div>
 
+                        <hr1 class="spacing" style="font-weight: bold;">Filtro por Datos del Hijos</hr1>
+                        <br>
+                        <div class="row">
+                            <div class="form-group" >
+                                <label>Nombre</label><br>
+                                <input type="text"  class="form-control des" placeholder="Departamento de Trabajo" name="dep"  length="45" style="width: 250px" id="des"/>
+                            </div>
+                            <div class="form-group" >
+                                <label>Dni</label><br>
+                                <input type="text"  class="form-control has" placeholder="Área de Trabajo" name="are" size="45" maxlength="100" style="width: 250px" id="has" />
+                            </div>
+                            <div class="form-group" >
+                                <label>Genero</label><br>
+                                <input type="text"  class="form-control has" placeholder="Sección de trabajo" name="sec" size="45" maxlength="100" style="width: 250px" id="has" />
+                            </div>
+                            <div class="form-group" >
+                                <label>Fecha Nacimiento</label><br>
+                                <input type="date"  class="form-control has" placeholder="Sección de trabajo" name="sec" size="45" maxlength="100" style="width: 250px" id="has" />
+                            </div>
+                            <div class="form-group" >
+                                <label>Genero</label><br>
+                                <select name="puesto" class="form-control select_dia aaa" id="select_dia" style="width: 250px"> 
+                                    <option value="">[Seleccione]</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr1 class="spacing" style="font-weight: bold;">Filtro por Edad del Hijos</hr1>
                         <div class="row">
                             <div class="form-group" >
                                 <label>Desde</label><br>
