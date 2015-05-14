@@ -370,23 +370,33 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                     while (rscon.next()) {
                         cont = rscon.getInt(1);
                     }
-                    String sql2 = "SELECT u.ID_TRABAJADOR, u.ID_ROL, u.ID_DEPARTAMENTO, du.NO_TRABAJADOR ,du.AP_PATERNO,du.AP_MATERNO, p.DE_PASOS AS paso FROM RHVD_USER_AUT u ,RHTC_PASOS p , RHVD_USUARIO du WHERE u.ID_EMPLEADO   =du.ID_EMPLEADO AND u.ID_PASOS = p.ID_PASOS AND u.ID_DGP ='" + id_dgp.trim() + "'AND TRIM(u.ID_PUESTO)<>'0'";
-                    ResultSet rs1 = this.conn.query(sql2);
-                    while (rs1.next()) {
-                        dep = rs1.getString("ID_DEPARTAMENTO");
-                        if (dep.trim().equals("DPT-0019")) {
-                            cont2++;
+                    if (cont > 0) {
+                        String sql2 = "SELECT u.ID_TRABAJADOR, u.ID_ROL, u.ID_DEPARTAMENTO, du.NO_TRABAJADOR ,du.AP_PATERNO,du.AP_MATERNO, p.DE_PASOS AS paso FROM RHVD_USER_AUT u ,RHTC_PASOS p , RHVD_USUARIO du WHERE u.ID_EMPLEADO   =du.ID_EMPLEADO AND u.ID_PASOS = p.ID_PASOS AND u.ID_DGP ='" + id_dgp.trim() + "'AND TRIM(u.ID_PUESTO)<>'0'";
+                        ResultSet rs1 = this.conn.query(sql2);
+                        while (rs1.next()) {
+                            dep = rs1.getString("ID_DEPARTAMENTO");
+                            if (dep.trim().equals("DPT-0019")) {
+                                cont2++;
+                            }
                         }
-                    }
-                    if (cont == cont2) {
-                        int Estado_usu = 1;
-                        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-                        CallableStatement cst = this.conn.conex.prepareCall("{CALL VAL_CUMPLE_PLAZO( ?, ?, ?)}");
-                        cst.setInt(1, Estado_usu);
-                        cst.setString(2, id_plazo);
-                        cst.setString(3, id_cum_plazo);
-                        cst.execute();
-                    } else if (cont2 == 0) {
+                        if (cont == cont2) {
+                            int Estado_usu = 1;
+                            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+                            CallableStatement cst = this.conn.conex.prepareCall("{CALL VAL_CUMPLE_PLAZO( ?, ?, ?)}");
+                            cst.setInt(1, Estado_usu);
+                            cst.setString(2, id_plazo);
+                            cst.setString(3, id_cum_plazo);
+                            cst.execute();
+                        } else if (cont2 == 0) {
+                            int Estado_usu = 0;
+                            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+                            CallableStatement cst = this.conn.conex.prepareCall("{CALL VAL_CUMPLE_PLAZO( ?, ?, ?)}");
+                            cst.setInt(1, Estado_usu);
+                            cst.setString(2, id_plazo);
+                            cst.setString(3, id_cum_plazo);
+                            cst.execute();
+                        }
+                    } else if (cont == 0) {
                         int Estado_usu = 0;
                         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
                         CallableStatement cst = this.conn.conex.prepareCall("{CALL VAL_CUMPLE_PLAZO( ?, ?, ?)}");

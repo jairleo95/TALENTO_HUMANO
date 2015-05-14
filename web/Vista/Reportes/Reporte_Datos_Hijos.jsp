@@ -60,25 +60,21 @@
                 <br>
                 <div id="contenido">
 
-                    <div>
+                    <div   >
+                        <!--style="padding-left: 30px"-->
 
-                        <hr1 class="spacing" style="font-weight: bold;">Filtro por Datos del Hijos</hr1>
                         <div class="row">
                             <div class="form-group" >
-                                <label>Apellidos y Nombres</label><br>
-                                <input type="text"  class="form-control des" placeholder="Apellidos y Nombres" name="nom"  length="45" style="width: 250px" id="des"/>
+                                <label>Departamento</label><br>
+                                <input type="text"  class="form-control des" placeholder="Inicio rango de edad" name="del"  length="45" style="width: 250px" id="des"/>
                             </div>
                             <div class="form-group" >
-                                <label>Dni</label><br>
-                                <input type="text"  class="form-control has" placeholder="Dni del Hijo" name="dni" size="8" maxlength="20" style="width: 95px" id="has" />
+                                <label>Area</label><br>
+                                <input type="text"  class="form-control has" placeholder="Fin rango de edad" name="al" size="45" maxlength="100" style="width: 250px" id="has" />
                             </div>
                             <div class="form-group" >
-                                <label>Genero</label><br>
-                                <select name="puesto" class="form-control select_dia aaa" id="select_dia" style="width: 250px"> 
-                                    <option value="">[Seleccione]</option>
-                                    <option value="F">Masculino</option>
-                                    <option value="M">Femenino</option>
-                                </select>
+                                <label>Sección</label><br>
+                                <input type="text"  class="form-control has" placeholder="Fin rango de edad" name="al" size="45" maxlength="100" style="width: 250px" id="has" />
                             </div>                            
                             <div class="form-group" >
                                 <label>Fecha Nacimiento</label><br>
@@ -86,7 +82,7 @@
                             </div>                           
                             <div class="form-group" >
                                 <label>Edad</label><br>
-                                <input type="text"  class="form-control edad" placeholder="Edad" name="del"  length="45" style="width: 60px" id="edad"/>
+                                <input type="text"  class="form-control edad" placeholder="Edad" name=""  length="45" style="width: 60px" id="edad"/>
                             </div>
                         </div>
                         <br>
@@ -94,16 +90,19 @@
                         <div class="row">
                             <div class="form-group" >
                                 <label>Desde</label><br>
-                                <input type="text"  class="form-control des" placeholder="Inicio" name="des"  length="45" style="width: 70px" id="des"/>
+                                <input type="text"  class="form-control des" placeholder="Inicio rango de edad" name="del"  length="45" style="width: 250px" id="des"/>
                             </div>
                             <div class="form-group" >
                                 <label>Hasta</label><br>
-                                <input type="text"  class="form-control has" placeholder="Fin" name="has" size="45" maxlength="100" style="width: 70px" id="has" />
+                                <input type="text"  class="form-control has" placeholder="Fin rango de edad" name="al" size="45" maxlength="100" style="width: 250px" id="has" />
                             </div>
                         </div>
                         <br>
                         <div class="row">
-
+                            <div class="form-group" >
+                                <label>Edad</label><br>
+                                <input type="text"  class="form-control edad" placeholder="Rango general de edad" name="del"  length="45" style="width: 250px" id="edad"/>
+                        </div>
                         </div>
                         <br>
                         <div class="row">
