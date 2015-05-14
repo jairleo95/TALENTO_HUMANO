@@ -1,3 +1,5 @@
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceComentario_DGPDAO"%>
+<%@page import="pe.edu.upeu.application.dao.Comentario_DGPDAO"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -64,7 +66,8 @@
     <body class="">
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
-        <%HttpSession sesion = request.getSession();
+        <%InterfaceComentario_DGPDAO cm = new Comentario_DGPDAO();
+            HttpSession sesion = request.getSession();
             String rol = (String) sesion.getAttribute("IDROL");%>
         <!-- MAIN PANEL -->
         <div id="main" role="main" style="margin-left: 0px;">
@@ -196,11 +199,17 @@
                                                                         <h1 class="h1" style="color:#218FDD ; font-size:20px;"><strong>MOTIVO</strong></h1>
                                                                         <div class="col col-10"  >
                                                                             <label class="input">
-                                                                                <P class="list_motivo"><%if (a.getCm_comentario() != null) {
-                                                                                        out.print(a.getCm_comentario());
-                                                                                    } else {
-                                                                                        out.print("No registro motivo Consular presonalmente");
-                                                                                    }%></P>
+                                                                                <% if (a.getCm_comentario() != null & a.getId_autorizacion() != null & a.getId_dgp() != null) {
+                                                                                        String inf = "";
+                                                                                        inf = cm.Comentario_dgp_aut(a.getId_dgp(), a.getId_autorizacion());
+                                                                                        String info[] = inf.split("/");
+                                                                                %>
+                                                                                <P class="list_motivo"><%=info[0]%></P>
+                                                                                <P class="list_motivo"><strong>Usuario:</strong><%=info[1]%></P>
+                                                                                <P class="list_motivo"><strong>Fecha:</strong><%=info[2]%></P>
+                                                                                    <%} else {%>
+                                                                                <p>No se Comento Rechazo</p>
+                                                                                <%}%>
                                                                             </label>
                                                                         </div>
                                                                     </div>
