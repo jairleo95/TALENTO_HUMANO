@@ -471,4 +471,27 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         }
     }
 
+    @Override
+    public int Validar_cumple_dias_pt2(String dgp) {
+        int n = 0;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cs = this.conn.conex.prepareCall("begin   ? :=rhfu_habilitar_terminar_plazo(?);end;");
+            cs.registerOutParameter(1, Types.INTEGER);
+            cs.setString(2, dgp);
+            cs.execute();
+            n = cs.getInt(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return n;
+    }
+
 }
