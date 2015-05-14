@@ -295,7 +295,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     "[horas]": "<%=n.getNu_horas_lab()%>",
                     "[cursos]": "",
                     "[moneda]": "<%=moneda%>",
-                    "[funciones]": "<%=funciones%>"
+                    "[funciones_pr]": "<%=funciones_pr%>",
+                    "[funciones_sec]": "<%=funciones_sec%>"
                 };
                 var editor = CKEDITOR.instances.editor1;
                 var string_texto = "";
