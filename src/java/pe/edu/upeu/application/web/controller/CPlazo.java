@@ -106,6 +106,7 @@ public class CPlazo extends HttpServlet {
                 rpta.put("fecha", fecha);
                 rpta.put("rpta", "1");
             }
+            
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
