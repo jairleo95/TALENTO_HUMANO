@@ -358,6 +358,7 @@ public class CContrato extends HttpServlet {
                 getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
                 getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
                 getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+                out.print(id_cto);
                 response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto + "&id_dg=" + id_dgp);
 
                 //response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);

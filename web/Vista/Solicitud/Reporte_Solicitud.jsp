@@ -215,7 +215,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                     &times;
                                 </button>
-                                <h4 class="modal-title" id="myModalLabel"><span class="btn-label"><i class="fa fa-envelope"></i></span> <strong>Solicitud de Requerimiento</strong></h4>
+                                <h4 class="modal-title" id="myModalLabel"><span class="btn-label"><i class="fa fa-envelope"></i></span> <strong>Solicitud de Requerimientos Fuera de Plazo</strong></h4>
                             </div>
                             <div class="modal-body">
                                 <table class="table table-hover table-striped  table-responsive tabla_detalle_sol" ></table>
