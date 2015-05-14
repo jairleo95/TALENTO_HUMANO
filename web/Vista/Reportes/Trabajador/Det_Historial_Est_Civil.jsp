@@ -41,6 +41,8 @@
                     </div>
                     <div class="row">
                         <div class="well" >
+
+                            <button type="button" class="btn btn-success btn_pro_reg">Procesar Registros</button>
                             <div class="table-responsive cont_t" >
 
                                 <table class="tabla_t table table-bordered table-hover table-striped">
@@ -57,7 +59,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
 
                         </div>
 
@@ -123,17 +124,69 @@
                 $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
-                  ListarEC();
+                ListarEC();
             });
+            $(".btn_pro_reg").click(function() {
+                //t += "<td><center><a href='../../../RHistorial?opc=Procesar_reg_ec'  </td>";
+                    $.SmartMessageBox({
+                        title: "¡Advertencia!",
+                        content: "¿Esta seguro de procesar la(s) modificacione(s)?",
+                        buttons: '[No][Si]'
+                    }, function(ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            var t = 0;
+                            $.each($(".registrado"), function() {
 
+                                if ($(this).prop('checked')) {
+                                    $.ajax({
+                                        url: "../../../RHistorial",
+                                        type: "POST",
+                                        data: "opc=Procesar_reg_ec&" + $(".id_ec" + $(this).val()).val()
+                                    }).done(function() {
+                                        $.smallBox({
+                                            title: "Procesado con exito",
+                                            content: "<i class='fa fa-clock-o'></i> <i>Las modificaciones se han procesado correctamente...</i>",
+                                            color: "#659265",
+                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                            timeout: 4000
+                                        });
+
+                                    }).error(function() {
+                                        $.smallBox({
+                                            title: "¡Error!",
+                                            content: "<i class='fa fa-clock-o'></i> <i>Las modificaciones NO se han procesado correctamente...",
+                                            color: "#C46A69",
+                                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                            timeout: 6000
+                                        });
+                                    });
+                                    t++;
+                                }
+                            });
+                            if (t == 0) {
+                                $.smallBox({
+                                    title: "Procesar Modificaciones",
+                                    content: "<i class='fa fa-ban'></i> <i>No hay modificaciones por procesar, porfavor seleccione si o no...</i>",
+                                    color: "#dfb56c",
+                                    iconSmall: "bounce animated",
+                                    timeout: 6000
+                                });
+                            }
+                            ListarEC();
+                        }
+                        if (ButtonPressed === "No") {
+                        }
+                    });
+                });
+            
             function ListarEC() {
                 var id = $('.idtra').val();
                 var d = "opc=list_detalle_ec";
-                 d += "&idtr=" + id;
+                d += "&idtr=" + id;
                 $.post("../../../RHistorial?", d, function(objJson) {
                     var lista = objJson.lista;
-                    
-                   // alert(lista);
+
+                    // alert(lista);
                     var t = "<tr>";
                     for (var i = 0; i < lista.length; i++) {
                         var ec_p;
@@ -161,11 +214,11 @@
                         t += "<td>" + (i + 1) + "</td>";
                         t += "<td>" + ec_p + "</td>";
                         t += "<td>" + lista[i].fe_modi + "</td>";
-                        t += "<td>" + lista[i].no_usuario + "</td>";
+                        t += "<td><input type='hidden' class='id_ec" + i + "' value='idec=" + lista[i].id_ec + "'>" + lista[i].no_usuario + "</td>";
                         if (lista[i].es_reg == '1') {
                             t += "<td><center>Si</center></td>";
                         } else {
-                            t += "<td><center>No</center></td>";
+                            t += "<td class='smart-form'><center><label class='toggle'><input type='checkbox' value=" + i + " name='checkbox-toggle' class='registrado' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label><center> </td>";
                         }
                         t += "<tr>";
                     }

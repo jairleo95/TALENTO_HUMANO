@@ -188,7 +188,7 @@ public class ReporteDAO implements InterfaceReporteDAO {
           List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * from RHVD_REPORTE_EMP ";
+            String sql = "SELECT * from RHVD_REPORTE_EMP e, RHVD_FILTRO_EDAD h WHERE h.ID_TRABAJADOR = e.ID_TRABAJADOR ";
             //sql += (!mes.equals("")) ? "where TIEMPO_TRABAJO='" + mes.trim() + "'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
@@ -202,8 +202,13 @@ public class ReporteDAO implements InterfaceReporteDAO {
                 rec.put("n_doc", rs.getString("NU_DOC")); 
                 rec.put("ape", rs.getString("AP_PATERNO")); 
                 rec.put("mat", rs.getString("AP_MATERNO")); 
-                rec.put("tra", rs.getString("NO_TRABAJADOR"));
-                rec.put("has", rs.getString("FE_HASTA"));              
+                rec.put("nom",rs.getString("NO_TRABAJADOR"));
+                rec.put("has", rs.getString("FE_HASTA"));   
+                rec.put("nom_hi", rs.getString("NOMBRE"));         
+                rec.put("dni_hi", rs.getString("DNI"));         
+                rec.put("gen_hi", rs.getString("GENERO"));         
+                rec.put("nac_hi", rs.getString("FECHA_NAC"));         
+                rec.put("eda_hi", rs.getString("EDAD"));                    
                 Lista.add(rec);
             }
             rs.close();

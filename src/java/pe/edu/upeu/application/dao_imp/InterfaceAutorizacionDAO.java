@@ -41,4 +41,6 @@ public interface InterfaceAutorizacionDAO {
     public int Val_Aut_DGP_M(String id_dgp);
     
     public List<V_Autorizar_Dgp> List_Autorizados (String id_puesto);
+    
+    public String Mes_plazo(String id_dgp);
 }

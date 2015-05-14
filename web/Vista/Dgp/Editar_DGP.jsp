@@ -1223,6 +1223,7 @@
                             dep = lista[i].id_dep_cc;
                             cc = lista[i].id;
                             listar_cc2(ag, dir, dep, cc);
+                            
                             /*texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" id="rem' + (i + 1) + '" onclick="Eliminar($(this).val());" disabled=""><i class="fa fa-minus fa-2x"></i></button></label></section>');
                              texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
                              texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
@@ -1248,7 +1249,7 @@
 
                         numero = 1;
                         ag++;
-                        CANT_T = (CANT_T + parseInt(lista[i].ca_por_cc));
+                        CANT_T = (CANT_T +parseFloat(lista[i].ca_por_cc));
                     }
 
                     x.append(texto);
@@ -1263,6 +1264,11 @@
         }
         function dar_valor(caracter, num) {
             $(".porc" + num).val(caracter);
+            var acum = 0;
+            $.each($(".porcentaje_cc"), function() {
+                acum = acum + parseFloat($(this).val());
+            });
+            $(".por_sum_to").val(acum);
         }
         var ag = 1;
         var ingr = 0;
@@ -1498,7 +1504,11 @@
             });
             $(".porcenttaj" + num).keyup(function() {
                 $(".cont_dif" + num).val($(this).val());
-                // act_va_an();
+                var acum = 0;
+                $.each($(".porcentaje_cc"), function() {
+                    acum = acum + parseFloat($(this).val());
+                });
+                $(".por_sum_to").val(acum);
             });
             $(".remover" + num).click(function() {
                 remover(num);

@@ -146,6 +146,7 @@
                                                     <th data-hide="phone,tablet"><strong>Fecha Inicio</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Fecha Cese</strong></th>
                                                     <th  data-hide="phone,tablet">Fecha Solicitud</th>  
+                                                    <th  data-hide="phone,tablet">Estado</th>  
                                                 </tr>
                                             </thead>
                                             <tbody> 
@@ -163,7 +164,6 @@
                                                             <ul class="dropdown-menu">
                                                                 <li><a href="../../dgp?iddgp=<%=s.getId_dgp().trim()%>&idtr=<%=s.getId_trabajador().trim()%>&opc=Detalle"> Ver Requerimiento</a></li>
                                                                 <li class="divider"></li>
-                                                                <li><a href="../../solicitud_requerimiento?opc=Ver_Detalle_Solicitud&id=<%=s.getId_solicitud_dgp()%>"> Ver Solicitud</a></li>
                                                                 <li>
                                                                     <button class="btn btn-primary btn-labeled btn_sol" data-toggle="modal" type="button" data-target="#myModal" value="<%=s.getId_solicitud_dgp()%>"><span class="btn-label"><i class="fa fa-envelope"></i></span>
                                                                         Ver Solicitud
@@ -178,7 +178,17 @@
                                                     <td><%=s.getNo_puesto()%></td>
                                                     <td><%=s.getFe_desde()%></td>
                                                     <td><%=s.getFe_hasta()%></td>
+
                                                     <td><%=s.getFe_creacion()%></td>
+                                                    <td>
+                                                        <%if (s.getEs_autorizar().trim().equals("0")) {
+                                                                out.print("Sin autorizar");
+                                                            } else if (s.getEs_autorizar().trim().equals("1")) {
+                                                                out.print("Autorizado");
+                                                            }
+
+                                                        %>
+                                                    </td>
                                                 </tr>
                                                 <%}%>
                                             </tbody>
@@ -211,7 +221,7 @@
                                 <table class="table table-hover table-striped  table-responsive tabla_detalle_sol" ></table>
                                 <input  type="hidden" value="" class="data_procesar" />
                             </div>
-                            <div class="modal-footer">
+                            <div class="modal-footer foot_sol">
                                 <button type="button" class="btn btn-default btn-labeled" data-dismiss="modal"><span class="btn-label"><i class="fa fa-times"></i></span>
                                     Cancel
                                 </button>
@@ -325,7 +335,33 @@
             });
             $(".cod_aps").numeric();
             $(".btn_procesar_sol").click(function () {
-                $.post("../../solicitud_requerimiento", "opc=Procesar_Solicitud" + $(".data_procesar").val());
+
+                var valor = $(this).val();
+                $.SmartMessageBox({
+                    title: "¡Advertencia!",
+                    content: "¿Esta seguro de procesar esta solicitud?",
+                    buttons: '[No][Si]'
+                }, function (ButtonPressed) {
+                    if (ButtonPressed === "Si") {
+                        $.ajax({
+                            url: "../../solicitud_requerimiento",
+                            data: "opc=Procesar_Solicitud" + $(".data_procesar").val(),
+                            type: "post"
+
+                        }).done(function () {
+                            $.smallBox({
+                                title: "¡Procesado con exito!",
+                                content: "<i class='fa fa-clock-o'></i> <i>Se ha procesado la solicituid correctamente...</i>",
+                                color: "#659265",
+                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                timeout: 4000
+                            });
+
+                        });
+                    }
+                    if (ButtonPressed === "No") {
+                    }
+                });
             });
             $(".btn_sol").click(function () {
 
@@ -341,7 +377,14 @@
                     for (var i = 0; i < lista.length; i++) {
                         texto_html += '<tr><td colspan="2" class="text-info table-bordered"><i class="fa fa-file"></i> REQUERIMIENTO : ' + lista[i].req + '</td></tr>';
                         texto_html += '<tr><td>Apellidos y Nombres</td><td>' + lista[i].ap_p + ' ' + lista[i].ap_m + ' ' + lista[i].nombre + '</td></tr>';
-                        texto_html += '<tr><td>Tipo de Plazo</td><td>' + lista[i].ti_plazo + '</td></tr>';
+                        if (lista[i].ti_plazo == '1') {
+                            texto_html += '<tr><td>Tipo de Plazo</td><td>Ingreso a planilla</td></tr>';
+                        }
+
+                        if (lista[i].ti_plazo == '2') {
+                            texto_html += '<tr><td>Tipo de Plazo</td><td>Inicio de Contrato</td></tr>';
+                        }
+
                         texto_html += '<tr><td>Nombre de Plazo</td><td>' + lista[i].plazo + '</td></tr>';
                         texto_html += '<tr><td>Detalle de Plazo</td><td>' + lista[i].detalle_plazo + '</td></tr>';
                         if (lista[i].ti_plazo == '2') {
@@ -352,6 +395,13 @@
                         }
                         texto_html += '<tr><td>Motivo de solicitud</td><td>' + lista[i].solicitud + '</td></tr>';
                         $(".data_procesar").val("&id=" + lista[i].id + "&tipo=" + lista[i].ti_plazo + "&fecha=" + lista[i].fecha_plazo);
+                        if (lista[i].es_aut == '1') {
+                            texto_html += '<tr><td>Estado de solicitud</td><td>Autorizado</td></tr>';
+                        }
+                        if (lista[i].es_aut == '0') {
+                            texto_html += '<tr><td>Estado de solicitud</td><td>Sin Autorizar</td></tr>';
+                        }
+
                     }
                     tb.append(texto_html);
                     texto_html = "";
@@ -377,12 +427,10 @@
             var responsiveHelper_datatable_fixed_column = undefined;
             var responsiveHelper_datatable_col_reorder = undefined;
             var responsiveHelper_datatable_tabletools = undefined;
-
             var breakpointDefinition = {
                 tablet: 1024,
                 phone: 480
             };
-
             $('#dt_basic').dataTable({
                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
                         "t" +
@@ -401,7 +449,6 @@
                     responsiveHelper_dt_basic.respond();
                 }
             });
-
             /* END BASIC */
 
             /* COLUMN FILTER  */
@@ -430,10 +477,8 @@
                 }
 
             });
-
             // custom toolbar
             $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
-
             // Apply the filter
             $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
 
@@ -441,7 +486,6 @@
                         .column($(this).parent().index() + ':visible')
                         .search(this.value)
                         .draw();
-
             });
             /* END COLUMN FILTER */
 
@@ -464,7 +508,6 @@
                     responsiveHelper_datatable_col_reorder.respond();
                 }
             });
-
             /* END COLUMN SHOW - HIDE */
 
             /* TABLETOOLS */
@@ -506,7 +549,6 @@
                     responsiveHelper_datatable_tabletools.respond();
                 }
             });
-
             /* END TABLETOOLS */
 
         })
@@ -517,7 +559,6 @@
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
-
         (function () {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';

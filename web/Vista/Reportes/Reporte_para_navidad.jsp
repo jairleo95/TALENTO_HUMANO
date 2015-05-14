@@ -81,7 +81,7 @@
         <div align="center">
             <div class="row">
                 <div class="form-group" >
-                    <label>Tiempo de Trabajo</label><br>
+                    <label>Tiempo de Trabajo (Mayor a 10 meses)</label><br>
                     <input type="text"  class="form-control mes" placeholder="Ingrese la cantidad de meses" name="mes"  length="45" style="width: 250px" id="des"/>
                 </div>
             </div>
@@ -147,7 +147,7 @@
                                                     <th data-hide="ARE">Area</th>
                                                     <th data-hide="ARE">Puesto</th>
                                                     <th data-class="tip">Tipo Documento</th>  
-                                                    <th data-class="tip">Numerno de documento</th>
+                                                    <th data-class="tip">Numerno de Documento</th>
                                                     <th data-class="tip">Sección</th>
                                                     <th data-class="tip">Apelido Paterno</th>
                                                     <th data-class="tip">Apellido Materno</th>
@@ -155,9 +155,9 @@
                                                     <th data-class="tip">Apellidos y Nombres</th>
                                                     <th data-class="tip">sexo</th>
                                                     <th data-class="tip">Fecha Nacimiento</th>                                                    
-                                                    <th data-class="tip">Fecha de inicio</th>
-                                                    <th data-class="tip">fecha de Cese</th>
-                                                    <th data-class="tip">T_Trabajo</th>
+                                                    <th data-class="tip">Fecha de Inicio</th>
+                                                    <th data-class="tip">Fecha de Cese</th>
+                                                    <th data-class="tip">Meses Trabajando</th>
                                                 </tr>
                                             </thead>
 
@@ -497,10 +497,13 @@
                             texto += '<td>' + lista[i].has + '</td>';
                             texto += '<td>' + lista[i].t_tra + '</td>';
                             texto += '</tr>';
+                            $('.div_t').empty();
                         }
                         b.append(texto);
                     } else {
+                        $('.div_t').empty();
                         b.append("<td colspan='11' align='center'><strong>NO SE ENCONTRARON DATOS</strong></td>");
+                        
                     }
                 });
 
@@ -513,7 +516,6 @@
                         function () {
                             GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
                             listar_trabajor_na();
-                            $('.div_t').empty();
                         }
                 );
                 $("#btncancel").click(
