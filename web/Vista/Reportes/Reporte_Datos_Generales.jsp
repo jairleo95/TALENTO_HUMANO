@@ -64,137 +64,199 @@
             }
         </style>
     </head>
-    <body class="" >
-        <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
-
-        <!-- HEADER -->
-        <!-- END HEADER -->
-
-        <!-- Left panel : Navigation area -->
-        <!-- Note: This width of the aside area can be adjusted through LESS variables -->
-        <!-- END NAVIGATION -->
-
-        <!-- MAIN PANEL -->
-        <br>
-        <div align="center" class="row">
-            <div class="form-group">                            
-                <button type="button" class="btn btn-primary" id="btnbuscar">Buscar</button>
-            </div>
-
+    <body>
+        <div class="spacing">
+            <center><h1 class="spacing" style="font-weight: bold;">Resportes Generales</h1></center> 
         </div>
-        <div id="main" role="main" style="margin-left: 0px">
+        <form class="form-inline validarform" id="frm_filtro2" method="post" action="../../Imprimir" name="formulario" onclick="return marcado();">
+            <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
-            <!-- RIBBON -->
-            <!-- END RIBBON -->
+            <!-- HEADER -->
+            <!-- END HEADER -->
 
-            <!-- MAIN CONTENT -->
-            <div id="content">
+            <!-- Left panel : Navigation area -->
+            <!-- Note: This width of the aside area can be adjusted through LESS variables -->
+            <!-- END NAVIGATION -->
 
-                <!-- widget grid -->
-                <section id="widget-grid" class="">
-
-                    <!-- row -->
+            <!-- MAIN PANEL -->
+            <center>
+                <div id="contenido">
+                    <div class="form-group" >
+                        <label>CODIGO APS</label><br>
+                        <input type="text"  class="form-control mes" placeholder="APS" name=""  length="45" style="width: 80px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>DEPARTAMENTO</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese el DEPARTAMENTO" name=""  length="45" style="width: 150px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>AREA</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese su AREA" name=""  length="45" style="width: 150px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>SECCIÓN</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese su SECCIÓN" name=""  length="45" style="width: 150px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>PUESTO</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese su PUESTO" name=""  length="45" style="width: 150px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>TIPO DOCUMENTO</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Tipo de Codumento" name=""  length="45" style="width: 250px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>FECHA NACIMIENTO</label><br>
+                        <input type="DATE"  class="form-control mes" name=""  length="45" style="width: 170px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>EDAD</label><br>
+                        <input type="text"  class="form-control mes" placeholder="EDAD" name=""  length="45" style="width: 80px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>APELLIDO PATERNO</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>APELLIDO MATERNO</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>NOMBRES</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>Nº DOCUMENTO</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Nº Documento" name=""  length="45" style="width: 120px" id="des"/>
+                    </div>
                     <div class="row">
-
-                        <!-- NEW WIDGET START -->
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <!-- end widget -->
-
-                            <!-- Widget ID (each widget will need unique ID)-->
-                            <!-- end widget -->
-
-                            <!-- Widget ID (each widget will need unique ID)-->
-                            <!-- end widget -->
-
-                            <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
-                                <!-- widget options:
-                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-
-                                data-widget-colorbutton="false"
-                                data-widget-editbutton="false"
-                                data-widget-togglebutton="false"
-                                data-widget-deletebutton="false"
-                                data-widget-fullscreenbutton="false"
-                                data-widget-custombutton="false"
-                                data-widget-collapsed="true"
-                                data-widget-sortable="false"
-
-                                -->
-                                <header>
-                                    <span class="widget-icon"><i class="fa fa-table"></i>  </span>
-                                    <label style=" font-size:21px; font-family:cambria; color:white ;padding-left:5px;padding-top: 2px;">Reporte Filtro</label>
-                                </header>
-
-                                <!-- widget div-->                                
-                                <div>
-
-                                    <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
-
-                                    </div>                                  
-                                    <!-- end widget edit box -->
-
-                                    <!-- widget content -->                                    
-                                    <div class="widget-body no-padding">
-
-                                        <table id="datatable_tabletools" class="table table-striped table-bordered table-hover table-responsive">
-                                            <thead>
-                                                <tr>
-                                                    <th data-hide="phone">#</th>
-                                                    <th data-class="APS">Codigo APS</th>
-                                                    <th data-hide="DEP">Departamento</th>
-                                                    <th data-hide="ARE">Area</th>
-                                                    <th data-hide="secc">Sección</th>
-                                                    <th data-hide="pues">Puesto</th>
-                                                    <th data-class="fec_nac">Tipo Documento</th>
-                                                    <th data-class="ed">Numero Documento</th>
-                                                    <th data-class="nom">Apellidos Paterno</th>
-                                                    <th data-class="tip">Apellidos Materno</th>
-                                                    <th data-class="tip">Nombre</th>
-                                                    <th data-class="tip">Apellidos y Nombres</th>
-                                                    <th data-class="tip">Fecha de Sece</th>
-                                                    <th data-class="tip">DNI HIJ@</th>
-                                                    <th data-class="tip">Apellidos y Nombres del Hij@</th>
-                                                    <th data-class="tip">Fecha Nacimiento del Hij@</th>
-                                                    <th data-class="tip">Edad</th>
-                                                    <th data-class="tip">Genero</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody id="Datos_generales">                                                                                             
-
-                                            </tbody>
-
-                                        </table>
-                                         <div class="div_t">                                                                                     
-                                        </div>
-                                    </div>
-                                    <!-- end widget content -->
-
-                                </div>
-                                <!-- end widget div -->
-
-                            </div>
-                            <!-- end widget -->
-
-                        </article>
-                        <!-- WIDGET END -->
+                        <div class="form-group">  
+                            <br>
+                            <a id="btnbuscar"class="btn btn-primary btn-circle btn-xl btnEnviar">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </a>
+                            <a class="btn btn-danger btn-circle btn-xl btnCancelar">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
+                        </div>
 
                     </div>
+                </div>
+                <div id="main" role="main" style="margin-left: 0px">
 
-                    <!-- end row -->
+                    <!-- RIBBON -->
+                    <!-- END RIBBON -->
 
-                    <!-- end row -->
+                    <!-- MAIN CONTENT -->
+                    <div id="content">
 
-                </section>
-                <!-- end widget grid -->
+                        <!-- widget grid -->
+                        <section id="widget-grid" class="">
 
-            </div>
-            <!-- END MAIN CONTENT -->
+                            <!-- row -->
+                            <div class="row">
 
-        </div>        
+                                <!-- NEW WIDGET START -->
+                                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <!-- end widget -->
+
+                                    <!-- Widget ID (each widget will need unique ID)-->
+                                    <!-- end widget -->
+
+                                    <!-- Widget ID (each widget will need unique ID)-->
+                                    <!-- end widget -->
+
+                                    <!-- Widget ID (each widget will need unique ID)-->
+                                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
+                                        <!-- widget options:
+                                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+        
+                                        data-widget-colorbutton="false"
+                                        data-widget-editbutton="false"
+                                        data-widget-togglebutton="false"
+                                        data-widget-deletebutton="false"
+                                        data-widget-fullscreenbutton="false"
+                                        data-widget-custombutton="false"
+                                        data-widget-collapsed="true"
+                                        data-widget-sortable="false"
+        
+                                        -->
+                                        <header>
+                                            <span class="widget-icon"><i class="fa fa-table"></i>  </span>
+                                            <label style=" font-size:21px; font-family:cambria; color:white ;padding-left:5px;padding-top: 2px;">Reporte Filtro</label>
+                                        </header>
+
+                                        <!-- widget div-->                                
+                                        <div>
+
+                                            <!-- widget edit box -->
+                                            <div class="jarviswidget-editbox">
+                                                <!-- This area used as dropdown edit box -->
+
+                                            </div>                                  
+                                            <!-- end widget edit box -->
+
+                                            <!-- widget content -->                                    
+                                            <div class="widget-body no-padding">
+
+                                                <table id="datatable_tabletools" class="table table-striped table-bordered table-hover table-responsive">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-hide="phone">#</th>
+                                                            <th data-class="APS">Codigo APS</th>
+                                                            <th data-hide="DEP">Departamento</th>
+                                                            <th data-hide="ARE">Area</th>
+                                                            <th data-hide="secc">Sección</th>
+                                                            <th data-hide="pues">Puesto</th>
+                                                            <th data-class="fec_nac">Tipo Documento</th>
+                                                            <th data-class="ed">Numero Documento</th>
+                                                            <th data-class="nom">Apellidos Paterno</th>
+                                                            <th data-class="tip">Apellidos Materno</th>
+                                                            <th data-class="tip">Nombre</th>
+                                                            <th data-class="tip">Apellidos y Nombres</th>
+                                                            <th data-class="tip">Fecha de Sece</th>
+                                                            <th data-class="tip">DNI HIJ@</th>
+                                                            <th data-class="tip">Apellidos y Nombres del Hij@</th>
+                                                            <th data-class="tip">Fecha Nacimiento del Hij@</th>
+                                                            <th data-class="tip">Edad</th>
+                                                            <th data-class="tip">Genero</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody id="Datos_generales">                                                                                             
+
+                                                    </tbody>
+
+                                                </table>
+                                                <div class="div_t">                                                                                     
+                                                </div>
+                                            </div>
+                                            <!-- end widget content -->
+
+                                        </div>
+                                        <!-- end widget div -->
+
+                                    </div>
+                                    <!-- end widget -->
+
+                                </article>
+                                <!-- WIDGET END -->
+
+                            </div>
+
+                            <!-- end row -->
+
+                            <!-- end row -->
+
+                        </section>
+                        <!-- end widget grid -->
+
+                    </div>
+                    <!-- END MAIN CONTENT -->
+
+                </div> 
+            </center>
+        </form>
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
@@ -440,7 +502,18 @@
         </script>
         <script>
             function listar_trabajor_na() {
-                //var a = $(".mes").val();
+                var ap = $(".aps").val();
+                var de = $(".dep").val();
+                var ar = $(".are").val();
+                var se = $(".sec").val();
+                var pu = $(".pue").val();
+                var ti = $(".tip").val();
+                var fe = $(".fec").val();
+                var ed = $(".eda").val();
+                var ap_p = $(".ap_pa").val();
+                var ap_m = $(".ap_ma").val();
+                var no = $(".nom").val();
+                var n_d = $(".num_doc").val();
                 var b = $("#Datos_generales");
                 var texto = '';
                 $.post("../../reporte", "opc=reporte_datos_genereales", function (objJson) {
@@ -477,7 +550,7 @@
                         b.append(texto);
                     } else {
                         $('.div_t').empty();
-                        b.append("<td colspan='11' align='center'><strong>NO SE ENCONTRARON DATOS</strong></td>");                        
+                        b.append("<td colspan='11' align='center'><strong>NO SE ENCONTRARON DATOS</strong></td>");
                     }
                 });
 
@@ -489,7 +562,7 @@
                         function () {
                             GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
                             listar_trabajor_na();
-                            
+
                         }
                 );
                 $("#btncancel").click(

@@ -60,31 +60,9 @@
                 <br>
                 <div id="contenido">
 
-                    <div   >
+                    <div>
                         <!--style="padding-left: 30px"-->
 
-                        <div class="row">
-                            <div class="form-group" >
-                                <label>Departamento</label><br>
-                                <input type="text"  class="form-control des" placeholder="Inicio rango de edad" name="del"  length="45" style="width: 250px" id="des"/>
-                            </div>
-                            <div class="form-group" >
-                                <label>Area</label><br>
-                                <input type="text"  class="form-control has" placeholder="Fin rango de edad" name="al" size="45" maxlength="100" style="width: 250px" id="has" />
-                            </div>
-                            <div class="form-group" >
-                                <label>Sección</label><br>
-                                <input type="text"  class="form-control has" placeholder="Fin rango de edad" name="al" size="45" maxlength="100" style="width: 250px" id="has" />
-                            </div>                            
-                            <div class="form-group" >
-                                <label>Fecha Nacimiento</label><br>
-                                <input type="date"  class="form-control has" name="fec" size="45" maxlength="100" style="width: 120px" id="has" />
-                            </div>                           
-                            <div class="form-group" >
-                                <label>Edad</label><br>
-                                <input type="text"  class="form-control edad" placeholder="Edad" name=""  length="45" style="width: 60px" id="edad"/>
-                            </div>
-                        </div>
                         <br>
                         <hr1 class="spacing" style="font-weight: bold;">Filtro Rango Edad del Hijos</hr1>
                         <div class="row">
