@@ -146,14 +146,23 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     } else {
                         fechahas = "NO TIENE";
                     }
-                    String funciones = "";
+                    String funciones_pr = "";
+                    String funciones_sec = "";
                     for (int p = 0; p < List_x_fun_x_idpu.size(); p++) {
                         Funciones fn = new Funciones();
                         fn = (Funciones) List_x_fun_x_idpu.get(p);
-                        if (p == (List_x_fun_x_idpu.size() - 1)) {
-                            funciones += fn.getDe_funcion();
-                        } else {
-                            funciones += fn.getDe_funcion() + ",";
+                        if (fn.getTi_funcion().trim().equals("1")) {
+                            if (p == (List_x_fun_x_idpu.size() - 1)) {
+                                funciones_pr += fn.getDe_funcion();
+                            } else {
+                                funciones_pr += fn.getDe_funcion() + ",";
+                            }
+                        } else if (fn.getTi_funcion().trim().equals("2")) {
+                            if (p == (List_x_fun_x_idpu.size() - 1)) {
+                                funciones_sec += fn.getDe_funcion();
+                            } else {
+                                funciones_sec += fn.getDe_funcion() + ",";
+                            }
                         }
                     }
                     String moneda = "";
@@ -286,7 +295,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     "[horas]": "<%=n.getNu_horas_lab()%>",
                     "[cursos]": "",
                     "[moneda]": "<%=moneda%>",
-                    "[funciones]": "<%=funciones%>"
+                    "[funciones_pr]": "<%=funciones_pr%>",
+                    "[funciones_sec]": "<%=funciones_sec%>"
                 };
                 var editor = CKEDITOR.instances.editor1;
                 var string_texto = "";
