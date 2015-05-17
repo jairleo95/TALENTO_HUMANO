@@ -219,6 +219,7 @@
                             </div>
                             <div class="modal-body">
                                 <table class="table table-hover table-striped  table-responsive tabla_detalle_sol" ></table>
+                                <form class="smart-form comentario">Comentario:<label class="textarea"><textarea rows="3"  required="" name="comentario" placeholder="Información adicional"></textarea></label></form>
                                 <input  type="hidden" value="" class="data_procesar" />
                             </div>
                             <div class="modal-footer foot_sol">
@@ -322,12 +323,9 @@
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-
-
     <script type="text/javascript">
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
         $(document).ready(function () {
             pageSetUp();
             $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
@@ -335,33 +333,34 @@
             });
             $(".cod_aps").numeric();
             $(".btn_procesar_sol").click(function () {
+                //  var valor = $(this).val();
+                if ($(".comentario").valid() == true) {
+                    $.SmartMessageBox({
+                        title: "¡Advertencia!",
+                        content: "¿Esta seguro de procesar esta solicitud?",
+                        buttons: '[No][Si]'
+                    }, function (ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            $.ajax({
+                                url: "../../solicitud_requerimiento",
+                                data: "opc=Procesar_Solicitud" + $(".data_procesar").val() + "&" + $(".comentario").serialize(),
+                                type: "post"
+                            }).done(function () {
+                                $.smallBox({
+                                    title: "¡Procesado con exito!",
+                                    content: "<i class='fa fa-clock-o'></i> <i>Se ha procesado la solicituid correctamente...</i>",
+                                    color: "#659265",
+                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                    timeout: 4000
+                                });
+                                $(".comentario")[0].reset();
 
-                var valor = $(this).val();
-                $.SmartMessageBox({
-                    title: "¡Advertencia!",
-                    content: "¿Esta seguro de procesar esta solicitud?",
-                    buttons: '[No][Si]'
-                }, function (ButtonPressed) {
-                    if (ButtonPressed === "Si") {
-                        $.ajax({
-                            url: "../../solicitud_requerimiento",
-                            data: "opc=Procesar_Solicitud" + $(".data_procesar").val(),
-                            type: "post"
-
-                        }).done(function () {
-                            $.smallBox({
-                                title: "¡Procesado con exito!",
-                                content: "<i class='fa fa-clock-o'></i> <i>Se ha procesado la solicituid correctamente...</i>",
-                                color: "#659265",
-                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                timeout: 4000
                             });
-
-                        });
-                    }
-                    if (ButtonPressed === "No") {
-                    }
-                });
+                        }
+                        if (ButtonPressed === "No") {
+                        }
+                    });
+                }
             });
             $(".btn_sol").click(function () {
 
@@ -402,9 +401,14 @@
                             texto_html += '<tr><td>Estado de solicitud</td><td>Sin Autorizar</td></tr>';
                         }
 
+
                     }
+                    texto_html += '';
                     tb.append(texto_html);
                     texto_html = "";
+
+
+
                 });
             });
             /* // DOM Position key index //
@@ -553,20 +557,6 @@
 
         })
 
-    </script>
-    <!-- Your GOOGLE ANALYTICS CODE Below -->
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-        _gaq.push(['_trackPageview']);
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
     </script>
 </html>
 <%} else {

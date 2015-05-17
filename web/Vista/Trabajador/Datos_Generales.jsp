@@ -18,7 +18,6 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
-        <script src=" ../../../../js1/jquery-1.11.1.min.js" type="text/javascript"></script>
         <title>Datos generales</title>
     </head>
 
@@ -27,7 +26,7 @@
             <table class="table table-striped table-hover table-responsive  ">
 
                 <%String edit = request.getParameter("edit");
-                        for (int index = 0; index < ListaridTrabajador.size(); index++) {
+                    for (int index = 0; index < ListaridTrabajador.size(); index++) {
                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
 
@@ -39,7 +38,7 @@
                         <%
                             InterfaceListaDAO list = new ListaDAO();
                             InterfaceTipo_DocumentoDAO itd = new Tipo_DocumentoDAO();
-                            
+
                             for (int k = 0; k < itd.Listar_tipo_doc().size(); k++) {
                                 Tipo_Documento td = new Tipo_Documento();
                                 td = (Tipo_Documento) itd.Listar_tipo_doc().get(k);
@@ -80,7 +79,7 @@
                                     if (trb.getLi_grupo_sanguineo().trim().equals(n + 1 + "")) {
                                         out.println(list.List_Gs().get(n));
                                     }
-                                    
+
                                 }
                             } else {
                                 out.print("NO DEFINIDO");
@@ -149,7 +148,7 @@
                     } else {
                         out.print("NO REGISTRADO");
                     }
-                    
+
                         %></td></tr>
                 <tr><td  class="text-info">Afiliado a EsSalud-vida:</td>
                     <td><%if (trb.getEs_afiliado_essalud() != null) {
@@ -158,7 +157,7 @@
                             }
                             if (trb.getEs_afiliado_essalud().equals("0")) {
                                 out.println("No");
-                                
+
                             }
                         } else {
                             out.print("NO REGISTRADO");
@@ -176,7 +175,7 @@
                         out.print("NO REGISTRADO");
                     }
                         %></td></tr>
-                
+
 
                 <tr>
                     <%String IDTR = trb.getId_trabajador();%>
