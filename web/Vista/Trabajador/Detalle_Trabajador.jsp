@@ -367,15 +367,17 @@
                         <%}
 
                             }%>
-                        <%if (iddep == null || iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0002") || idrol.trim().equals("ROL-0005")) {
+                        <%if ((iddep == null || iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012")|| idrol.trim().equals("ROL-0005")) & !idrol.equals("ROL-0013")) {
                         %>
                         <li >
                             <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
                         </li>
                         <%}%>
+
                         <li >
                             <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
                         </li>
+
                         <li>
                             <a href="Aspecto_Academico.jsp?edit=<%=edit%>" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
                         </li>
@@ -385,9 +387,12 @@
                         <li >
                             <a href="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" target="myframe2"><i class="fa fa-group fa-gear"></i> Familiares </a>
                         </li>
+                        <%if (!idrol.trim().equals("ROL-0013")) {
+                        %>
                         <li >
                             <a href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="myframe2"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
                         </li>
+                        <%}%>
                         <li>
                             <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
                         </li>
@@ -395,7 +400,7 @@
                         <%if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
                         %>
                         <li >
-                            <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluaci? de Empleado</a>
+                            <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Empleado</a>
                         </li>
                         <%}%>
                         <%if (idtr.equals(idtr_session)) {
@@ -684,7 +689,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function() {
+            $(document).ready(function () {
                 pageSetUp();
                 var $validator = $("#wizard-1").validate({
                     rules: {
@@ -734,15 +739,15 @@
                             email: "Your email address must be in the format of name@domain.com"
                         }
                     },
-                    highlight: function(element) {
+                    highlight: function (element) {
                         $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
                     },
-                    unhighlight: function(element) {
+                    unhighlight: function (element) {
                         $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
                     },
                     errorElement: 'span',
                     errorClass: 'help-block',
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         if (element.parent('.input-group').length) {
                             error.insertAfter(element.parent());
                         } else {
@@ -750,14 +755,14 @@
                         }
                     }
                 });
-                jQuery.validator.addMethod("val_fecha", function(value, element) {
+                jQuery.validator.addMethod("val_fecha", function (value, element) {
                     var d = value.split("-");
                     return this.optional(element) || String(parseInt(d[0])).length == 4;
                 }, "¡Fecha ingresada invalida!");
 
                 $('#bootstrap-wizard-1').bootstrapWizard({
                     'tabClass': 'form-wizard',
-                    'onNext': function(tab, navigation, index) {
+                    'onNext': function (tab, navigation, index) {
                         var $valid = $("#wizard-1").valid();
                         if (!$valid) {
                             $validator.focusInvalid();
@@ -775,7 +780,7 @@
                 // fuelux wizard
                 var wizard = $('.wizard').wizard();
 
-                wizard.on('finished', function(e, data) {
+                wizard.on('finished', function (e, data) {
                     //$("#fuelux-wizard").submit();
                     //console.log("submitted!");
                     $.smallBox({
@@ -793,12 +798,12 @@
 
         </script>
         <script>
-            $(document).ready(function() {
-                $(".fe_desde_p, .fe_hasta_p").change(function() {
+            $(document).ready(function () {
+                $(".fe_desde_p, .fe_hasta_p").change(function () {
                     var cuotas = $(".cuota_docente");
                     cuotas.empty();
 
-                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
+                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
@@ -810,36 +815,36 @@
                     });
                 });
 
-                $(".btn_guardar_ca").click(function() {
+                $(".btn_guardar_ca").click(function () {
                     $.ajax({
                         url: "../../carga_academica",
                         type: "POST",
                         data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                    }).done(function(ids) {
+                    }).done(function (ids) {
                         var arr_id = ids.split(":");
                         alert("Registrado con exito!...");
                         $(".proceso").val(arr_id[0]);
                         $(".dgp").val(arr_id[1]);
                         $(".btn_procesar").show();
-                    }).fail(function(e) {
+                    }).fail(function (e) {
                         alert("Error: " + e);
                     });
                 });
 
-                $(".btn_procesar").click(function() {
+                $(".btn_procesar").click(function () {
                     $.ajax({
                         url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                    }).done(function() {
+                    }).done(function () {
                         window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
                     });
                 });
 
-                $(".btn-autor").click(function(e) {
+                $(".btn-autor").click(function (e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmaci?!",
                         content: "?sta totalmente seguro de autorizar este requerimiento?",
                         buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Si") {
                             // return true;
                             $(".form-aut").submit();
@@ -850,12 +855,12 @@
                     });
                     e.preventDefault();
                 });
-                $(".btn-rech").click(function(e) {
+                $(".btn-rech").click(function (e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmaci?!",
                         content: "?sta totalmente seguro de rechazar este requerimiento?",
                         buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Si") {
                             $(".form-rech").submit();
                         }
@@ -870,13 +875,13 @@
 
         <script src="../../js/JQuery/jQuery.js"></script>
         <script>
-            $(document).ready(function() {
-                $(".btn-conti").click(function(e) {
+            $(document).ready(function () {
+                $(".btn-conti").click(function (e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmaci?!",
                         content: "?sta totalmente seguro de rechazar este requerimiento?",
                         buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Si") {
                             $(".form-rech").submit();
                             //$(".form-rech").submit();
@@ -888,11 +893,11 @@
                     e.preventDefault();
 
                 });
-                $(".fe_desde_p, .fe_hasta_p").change(function() {
+                $(".fe_desde_p, .fe_hasta_p").change(function () {
                     var cuotas = $(".cuota_docente");
                     cuotas.empty();
 
-                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
+                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
@@ -903,36 +908,36 @@
                         }
                     });
                 });
-                $(".btn_guardar_ca").click(function() {
+                $(".btn_guardar_ca").click(function () {
                     $.ajax({
                         url: "../../carga_academica",
                         type: "POST",
                         data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                    }).done(function(ids) {
+                    }).done(function (ids) {
                         var arr_id = ids.split(":");
                         alert("Registrado con exito!...");
                         $(".proceso").val(arr_id[0]);
                         $(".dgp").val(arr_id[1]);
                         $(".btn_procesar").show();
-                    }).fail(function(e) {
+                    }).fail(function (e) {
                         alert("Error: " + e);
                     });
                 });
 
-                $(".btn_procesar").click(function() {
+                $(".btn_procesar").click(function () {
                     $.ajax({
                         url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                    }).done(function() {
+                    }).done(function () {
                         window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
                     });
                 });
 
-                $(".btn-autor").click(function(e) {
+                $(".btn-autor").click(function (e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmaci?!",
                         content: "?sta totalmente seguro de autorizar este requerimiento?",
                         buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Si") {
                             // return true;
                             $(".form-aut").submit();
@@ -943,12 +948,12 @@
                     });
                     e.preventDefault();
                 });
-                $(".btn-rech").click(function(e) {
+                $(".btn-rech").click(function (e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmaci?!",
                         content: "?sta totalmente seguro de rechazar este requerimiento?",
                         buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Si") {
                             $(".btn-mos").click();
                             //$(".form-rech").submit();
@@ -967,7 +972,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -979,7 +984,7 @@
         </script>
         <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
         <script>
-            $(function() {
+            $(function () {
                 $('#dl-menu').dlmenu({
                     animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
                 });
@@ -1060,11 +1065,11 @@
                     timeout: 6000
                 });
             }
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 pageSetUp();
 
-                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
                 $("#cod_ap").numeric();
@@ -1087,7 +1092,7 @@
                 /*
                  * Smart Notifications
                  */
-                $('#eg1').click(function(e) {
+                $('#eg1').click(function (e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -1101,7 +1106,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg2').click(function(e) {
+                $('#eg2').click(function (e) {
 
                     $.bigBox({
                         title: "Big Information box",
@@ -1114,7 +1119,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg3').click(function(e) {
+                $('#eg3').click(function (e) {
 
                     $.bigBox({
                         title: "Shield is up and running!",
@@ -1127,7 +1132,7 @@
                     e.preventDefault();
                 })
 
-                $('#eg4').click(function(e) {
+                $('#eg4').click(function (e) {
 
                     $.bigBox({
                         title: "Success Message Example",
@@ -1136,7 +1141,7 @@
                         //timeout: 8000,
                         icon: "fa fa-check",
                         number: "4"
-                    }, function() {
+                    }, function () {
                         closedthis();
                     });
                     e.preventDefault();
@@ -1144,7 +1149,7 @@
 
 
 
-                $('#eg5').click(function() {
+                $('#eg5').click(function () {
 
                     $.smallBox({
                         title: "Ding Dong!",
@@ -1154,7 +1159,7 @@
                         icon: "fa fa-bell swing animated"
                     });
                 });
-                $('#eg6').click(function() {
+                $('#eg6').click(function () {
 
                     $.smallBox({
                         title: "Big Information box",
@@ -1165,7 +1170,7 @@
                     });
                 })
 
-                $('#eg7').click(function() {
+                $('#eg7').click(function () {
 
                     $.smallBox({
                         title: "James Simmons liked your comment",
@@ -1181,12 +1186,12 @@
                  * SmartAlerts
                  */
                 // With Callback
-                $("#smart-mod-eg1").click(function(e) {
+                $("#smart-mod-eg1").click(function (e) {
                     $.SmartMessageBox({
                         title: "Smart Alert!",
                         content: "This is a confirmation box. Can be programmed for button callback",
                         buttons: '[No][Yes]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Yes") {
 
                             $.smallBox({
@@ -1211,7 +1216,7 @@
                     e.preventDefault();
                 })
                 // With Input
-                $("#smart-mod-eg2").click(function(e) {
+                $("#smart-mod-eg2").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Input",
@@ -1219,13 +1224,13 @@
                         buttons: "[Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
                     e.preventDefault();
                 })
                 // With Buttons
-                $("#smart-mod-eg3").click(function(e) {
+                $("#smart-mod-eg3").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Notification: Buttons",
@@ -1235,7 +1240,7 @@
                     e.preventDefault();
                 })
                 // With Select
-                $("#smart-mod-eg4").click(function(e) {
+                $("#smart-mod-eg4").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Smart Alert: Select",
@@ -1243,13 +1248,13 @@
                         buttons: "[Done]",
                         input: "select",
                         options: "[Costa Rica][United States][Autralia][Spain]"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         alert(ButtonPress + " " + Value);
                     });
                     e.preventDefault();
                 });
                 // With Login
-                $("#smart-mod-eg5").click(function(e) {
+                $("#smart-mod-eg5").click(function (e) {
 
                     $.SmartMessageBox({
                         title: "Login form",
@@ -1257,7 +1262,7 @@
                         buttons: "[Cancel][Accept]",
                         input: "text",
                         placeholder: "Enter your user name"
-                    }, function(ButtonPress, Value) {
+                    }, function (ButtonPress, Value) {
                         if (ButtonPress == "Cancel") {
                             alert("Why did you cancel that? :(");
                             return 0;
@@ -1271,7 +1276,7 @@
                             buttons: "[Login]",
                             input: "password",
                             placeholder: "Password"
-                        }, function(ButtonPress, Value) {
+                        }, function (ButtonPress, Value) {
                             alert("Username: " + ValueOriginal + " and your password is: " + Value);
                         });
                     });
@@ -1286,7 +1291,7 @@
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -1296,18 +1301,18 @@
             })();</script>
         <script type="text/javascript">
             $(document).ready(
-                    function() {
+                    function () {
 
 
                     });</script>
         <script type="text/javascript" language="javascript">
-            $('.ver_foto').click(function() {
+            $('.ver_foto').click(function () {
                 $(".file-foto").click();
             });
-            $(window).load(function() {
+            $(window).load(function () {
 
-                $(function() {
-                    $('.file-foto').change(function(e) {
+                $(function () {
+                    $('.file-foto').change(function (e) {
 
                         if (this.files[0].size <= 500000) {
                             var jForm = new FormData();
@@ -1320,7 +1325,7 @@
                                 processData: false,
                                 contentType: false,
                                 data: jForm
-                            }).done(function(f) {
+                            }).done(function (f) {
                                 $(".mensaje").text(f);
                             });
                             addImage(e);
@@ -1354,7 +1359,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
