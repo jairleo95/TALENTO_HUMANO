@@ -25,14 +25,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
-        <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
-        <title>Detalle de Trabajador</title>
-        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
-        <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
 
+        <title>Detalle de Trabajador</title>
         <link rel="stylesheet" type="text/css" href="../../css/Css_Menu_Desplegable/default.css" />
         <link rel="stylesheet" type="text/css" href="../../css/Css_Menu_Desplegable/component.css" />
         <script src="../../js/modernizr.custom.js"></script>
@@ -79,7 +73,6 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <style type="text/css">
             body{
 
@@ -146,9 +139,7 @@
 
             }
 
-
         </style>
-
     </head>
     <%          if (request.getParameter("ms") != null) {
             if (request.getParameter("ms").equals("ok")) {
@@ -175,6 +166,8 @@
             String idrol = (String) sesion.getAttribute("IDROL");
             String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
             String idtr_session = (String) sesion.getAttribute("IDTR");
+            String cl = (String) sesion.getAttribute("CL");
+            String user = (String) sesion.getAttribute("USER");
             String iddgp = request.getParameter("dgp");
             String cod = request.getParameter("c");
             String iddrp = request.getParameter("drp");
@@ -235,7 +228,6 @@
                                         for (int index = 0; index < ListaridTrabajador.size(); index++) {
                                             V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                                             trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
-
                                     %>
                                     <td>
                                         <table>
@@ -393,14 +385,16 @@
                             <a href="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Datos de Requerimientos</a>
                         </li>
                         <%}
-
                             }%>
-                        <%if (iddep == null || iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0002") || idrol.trim().equals("ROL-0005")) {
+                        <%if (iddep != null) {
+
+                                if ((iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0005"))) {
                         %>
-                        <li >
+                        <li>
                             <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
                         </li>
-                        <%}%>
+                        <%}
+                            }%>
                         <li >
                             <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
                         </li>
@@ -410,12 +404,15 @@
                         <li >
                             <a href="../../trabajador?idtr=<%=idtr%>&opc=Listar_Asp_Social" target="myframe2"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
                         </li>
-                        <li >
+                        <li>
                             <a href="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" target="myframe2"><i class="fa fa-group fa-gear"></i> Familiares </a>
                         </li>
+                        <%if (!idrol.trim().equals("ROL-0013")) {
+                        %>
                         <li >
                             <a href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="myframe2"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
                         </li>
+                        <%}%>
                         <li>
                             <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
                         </li>
@@ -423,13 +420,19 @@
                         <%if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
                         %>
                         <li >
-                            <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluaci? de Empleado</a>
+                            <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Empleado</a>
                         </li>
                         <%}%>
                         <%if (idtr.equals(idtr_session)) {
+
                         %>
                         <li>
-                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"><i class="fa fa-lock"></i> Cambiar Contraseña </a>
+                            <%if (cl.trim().equals(user.trim())) {
+                            %>
+                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2" rel="tooltip" data-placement="top" data-original-title="<h1><b>One</b> <em>Really</em> big tip!</h1>" data-html="true" ><i class="fa fa-lock"></i> Contraseña <span class="badge bg-color-red pull-right inbox-badge">¡Cambiar!</span></a>
+                            <%}else{%>
+                              <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"  ><i class="fa fa-lock"></i> Contraseña</a>
+                            <%}%>
                         </li>
                         <%}%>
                         <%if (idrol.trim().equals("ROL-0002") | ID_ROL.trim().equals("ROL-0001")) {
@@ -439,6 +442,7 @@
                         </li>
                         <%}%>
                     </ul>
+
                     <div id="myTabContent1" class="tab-content padding-10">
                         <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
                                 for (int r = 0; r < List_Auto_mostrar.size(); r++) {
@@ -492,11 +496,9 @@
                 <%
                     }
                 } else {
-
                     if (idrol.trim().equals("ROL-0009")) {
                         int val_aps = Integer.parseInt(request.getParameter("val_aps"));
                         if (val_aps > 0) {
-
                 %>
 
                 <form class="form-aut" action="../../autorizacion" method="post" > 
@@ -602,7 +604,6 @@
                 }
             %>
         </div>
-
         <%    if (academico != null) {%>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -654,13 +655,11 @@
                             <label for="category" > <strong>CUOTAS</strong></label>
                             <br>
                             <div class="row">
-
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="cuota_docente">
 
                                         </div>
-
                                         <input type="hidden" name="PUESTO" value="PUT-000482" >
                                         <input type="hidden" name="REQ" value="REQ-0018">
                                         <input type="hidden" name="IDTR" value="<%=idtr%>" >
@@ -668,7 +667,6 @@
                                         <input type="hidden" name="facultad" value="<%=request.getParameter("facultad")%>" >
                                         <input type="hidden" name="dgp"  class="dgp" value="<%=request.getParameter("dgp")%>" >
                                         <input type="hidden" name="proceso" class="proceso" value="<%=request.getParameter("proceso")%>" >
-
                                     </div>
                                 </div>
                             </div>
@@ -691,9 +689,8 @@
         <!-- /.modal -->
 
         <%}%>
-        <%}%>
+        <%}%> <%}%>
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
-
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
@@ -708,310 +705,8 @@
                                             document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
                                         }
         </script>
-        <script type="text/javascript">
-
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
-            $(document).ready(function() {
-                pageSetUp();
-                var $validator = $("#wizard-1").validate({
-                    rules: {
-                        email: {
-                            required: true,
-                            email: "Your email address must be in the format of name@domain.com"
-                        },
-                        FECHA_NAC: {
-                            required: true,
-                            val_fecha: true
-                        }
-                        ,
-                        FECHA_NAC_H: {
-                            val_fecha: true
-                        }
-                        ,
-                        fname: {
-                            required: true
-                        },
-                        lname: {
-                            required: true
-                        },
-                        country: {
-                            required: true
-                        },
-                        city: {
-                            required: true
-                        },
-                        postal: {
-                            required: true,
-                            minlength: 4
-                        },
-                        wphone: {
-                            required: true,
-                            minlength: 10
-                        },
-                        hphone: {
-                            required: true,
-                            minlength: 10
-                        }
-                    },
-                    messages: {
-                        fname: "Please specify your First name",
-                        lname: "Please specify your Last name",
-                        email: {
-                            required: "We need your email address to contact you",
-                            email: "Your email address must be in the format of name@domain.com"
-                        }
-                    },
-                    highlight: function(element) {
-                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                    },
-                    unhighlight: function(element) {
-                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-                    },
-                    errorElement: 'span',
-                    errorClass: 'help-block',
-                    errorPlacement: function(error, element) {
-                        if (element.parent('.input-group').length) {
-                            error.insertAfter(element.parent());
-                        } else {
-                            error.insertAfter(element);
-                        }
-                    }
-                });
-                jQuery.validator.addMethod("val_fecha", function(value, element) {
-                    var d = value.split("-");
-                    return this.optional(element) || String(parseInt(d[0])).length == 4;
-                }, "¡Fecha ingresada invalida!");
-
-                $('#bootstrap-wizard-1').bootstrapWizard({
-                    'tabClass': 'form-wizard',
-                    'onNext': function(tab, navigation, index) {
-                        var $valid = $("#wizard-1").valid();
-                        if (!$valid) {
-                            $validator.focusInvalid();
-                            return false;
-                        } else {
-                            $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
-                                    'complete');
-                            $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
-                                    .html('<i class="fa fa-check"></i>');
-                        }
-                    }
-                });
 
 
-                // fuelux wizard
-                var wizard = $('.wizard').wizard();
-
-                wizard.on('finished', function(e, data) {
-                    //$("#fuelux-wizard").submit();
-                    //console.log("submitted!");
-                    $.smallBox({
-                        title: "Congratulations! Your form was submitted",
-                        content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-                        color: "#5F895F",
-                        iconSmall: "fa fa-check bounce animated",
-                        timeout: 4000
-                    });
-
-                });
-
-
-            });
-
-        </script>
-        <script>
-            $(document).ready(function() {
-                $(".fe_desde_p, .fe_hasta_p").change(function() {
-                    var cuotas = $(".cuota_docente");
-                    cuotas.empty();
-
-                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
-                        var lista = objJson.lista;
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-                        for (var i = 0; i < lista.length; i++) {
-                            cuotas.append(lista[i].html);
-                        }
-                    });
-                });
-
-                $(".btn_guardar_ca").click(function() {
-                    $.ajax({
-                        url: "../../carga_academica",
-                        type: "POST",
-                        data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                    }).done(function(ids) {
-                        var arr_id = ids.split(":");
-                        alert("Registrado con exito!...");
-                        $(".proceso").val(arr_id[0]);
-                        $(".dgp").val(arr_id[1]);
-                        $(".btn_procesar").show();
-                    }).fail(function(e) {
-                        alert("Error: " + e);
-                    });
-                });
-
-                $(".btn_procesar").click(function() {
-                    $.ajax({
-                        url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                    }).done(function() {
-                        window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
-                    });
-                });
-
-                $(".btn-autor").click(function(e) {
-                    $.SmartMessageBox({
-                        title: "Alerta de Confirmaci?!",
-                        content: "?sta totalmente seguro de autorizar este requerimiento?",
-                        buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
-                        if (ButtonPressed === "Si") {
-                            // return true;
-                            $(".form-aut").submit();
-                        }
-                        if (ButtonPressed === "No") {
-                            return false;
-                        }
-                    });
-                    e.preventDefault();
-                });
-                $(".btn-rech").click(function(e) {
-                    $.SmartMessageBox({
-                        title: "Alerta de Confirmaci?!",
-                        content: "?sta totalmente seguro de rechazar este requerimiento?",
-                        buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
-                        if (ButtonPressed === "Si") {
-                            $(".form-rech").submit();
-                        }
-                        if (ButtonPressed === "No") {
-                            return false;
-                        }
-
-                    })
-                });
-            });
-        </script>
-
-        <script src="../../js/JQuery/jQuery.js"></script>
-        <script>
-            $(document).ready(function() {
-                $(".btn-conti").click(function(e) {
-                    $.SmartMessageBox({
-                        title: "Alerta de Confirmaci?!",
-                        content: "?sta totalmente seguro de rechazar este requerimiento?",
-                        buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
-                        if (ButtonPressed === "Si") {
-                            $(".form-rech").submit();
-                            //$(".form-rech").submit();
-                        }
-                        if (ButtonPressed === "No") {
-                            return false;
-                        }
-                    });
-                    e.preventDefault();
-
-                });
-                $(".fe_desde_p, .fe_hasta_p").change(function() {
-                    var cuotas = $(".cuota_docente");
-                    cuotas.empty();
-
-                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
-                        var lista = objJson.lista;
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-                        for (var i = 0; i < lista.length; i++) {
-                            cuotas.append(lista[i].html);
-                        }
-                    });
-                });
-                $(".btn_guardar_ca").click(function() {
-                    $.ajax({
-                        url: "../../carga_academica",
-                        type: "POST",
-                        data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                    }).done(function(ids) {
-                        var arr_id = ids.split(":");
-                        alert("Registrado con exito!...");
-                        $(".proceso").val(arr_id[0]);
-                        $(".dgp").val(arr_id[1]);
-                        $(".btn_procesar").show();
-                    }).fail(function(e) {
-                        alert("Error: " + e);
-                    });
-                });
-
-                $(".btn_procesar").click(function() {
-                    $.ajax({
-                        url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                    }).done(function() {
-                        window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
-                    });
-                });
-
-                $(".btn-autor").click(function(e) {
-                    $.SmartMessageBox({
-                        title: "Alerta de Confirmaci?!",
-                        content: "?sta totalmente seguro de autorizar este requerimiento?",
-                        buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
-                        if (ButtonPressed === "Si") {
-                            // return true;
-                            $(".form-aut").submit();
-                        }
-                        if (ButtonPressed === "No") {
-                            return false;
-                        }
-                    });
-                    e.preventDefault();
-                });
-                $(".btn-rech").click(function(e) {
-                    $.SmartMessageBox({
-                        title: "Alerta de Confirmaci?!",
-                        content: "?sta totalmente seguro de rechazar este requerimiento?",
-                        buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
-                        if (ButtonPressed === "Si") {
-                            $(".btn-mos").click();
-                            //$(".form-rech").submit();
-                        }
-                        if (ButtonPressed === "No") {
-                            return false;
-                        }
-
-                    });
-                    e.preventDefault();
-                });
-            });</script>
-
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-            _gaq.push(['_trackPageview']);
-
-            (function() {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-
-        </script>
-        <script src="../../js/Js_dlmenu/jquery.dlmenu.js"></script>
-        <script>
-            $(function() {
-                $('#dl-menu').dlmenu({
-                    animationClasses: {classin: 'dl-animate-in-2', classout: 'dl-animate-out-2'}
-                });
-            });</script>
         <!-- IMPORTANT: APP CONFIG -->
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
@@ -1019,15 +714,6 @@
 
         <!-- BOOTSTRAP JS -->
         <script src="../../js/bootstrap/bootstrap.min.js"></script>
-
-        <!-- CUSTOM NOTIFICATION -->
-
-        <!-- JARVIS WIDGETS -->
-        <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
-
-        <!-- EASY PIE CHARTS -->
-        <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
-        <script src="../../js-steps/jquery-1.11.1.js"></script>
 
         <!-- SPARKLINES -->
         <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
@@ -1062,10 +748,185 @@
         <!-- Voice command : plugin -->
         <script src="../../js/speech/voicecommand.min.js"></script>
         <!-- PAGE RELATED PLUGIN(S) -->
+
+
         <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
+
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
+
+        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
+        <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
+        <script>
+        $(document).ready(function () {
+            pageSetUp();
+            $(".fe_desde_p, .fe_hasta_p").change(function () {
+                var cuotas = $(".cuota_docente");
+                cuotas.empty();
+
+                $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
+                    var lista = objJson.lista;
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    for (var i = 0; i < lista.length; i++) {
+                        cuotas.append(lista[i].html);
+                    }
+                });
+            });
+
+            $(".btn_guardar_ca").click(function () {
+                $.ajax({
+                    url: "../../carga_academica",
+                    type: "POST",
+                    data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
+                }).done(function (ids) {
+                    var arr_id = ids.split(":");
+                    alert("Registrado con exito!...");
+                    $(".proceso").val(arr_id[0]);
+                    $(".dgp").val(arr_id[1]);
+                    $(".btn_procesar").show();
+                }).fail(function (e) {
+                    alert("Error: " + e);
+                });
+            });
+
+            $(".btn_procesar").click(function () {
+                $.ajax({
+                    url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
+                }).done(function () {
+                    window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
+                });
+            });
+
+            $(".btn-autor").click(function (e) {
+                $.SmartMessageBox({
+                    title: "Alerta de Confirmaci?!",
+                    content: "?sta totalmente seguro de autorizar este requerimiento?",
+                    buttons: '[No][Si]'
+                }, function (ButtonPressed) {
+                    if (ButtonPressed === "Si") {
+                        // return true;
+                        $(".form-aut").submit();
+                    }
+                    if (ButtonPressed === "No") {
+                        return false;
+                    }
+                });
+                e.preventDefault();
+            });
+            $(".btn-rech").click(function (e) {
+                $.SmartMessageBox({
+                    title: "Alerta de Confirmaci?!",
+                    content: "?sta totalmente seguro de rechazar este requerimiento?",
+                    buttons: '[No][Si]'
+                }, function (ButtonPressed) {
+                    if (ButtonPressed === "Si") {
+                        $(".form-rech").submit();
+                    }
+                    if (ButtonPressed === "No") {
+                        return false;
+                    }
+
+                })
+            });
+        });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $(".btn-conti").click(function (e) {
+                    $.SmartMessageBox({
+                        title: "Alerta de Confirmaci?!",
+                        content: "?sta totalmente seguro de rechazar este requerimiento?",
+                        buttons: '[No][Si]'
+                    }, function (ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            $(".form-rech").submit();
+                            //$(".form-rech").submit();
+                        }
+                        if (ButtonPressed === "No") {
+                            return false;
+                        }
+                    });
+                    e.preventDefault();
+
+                });
+                $(".fe_desde_p, .fe_hasta_p").change(function () {
+                    var cuotas = $(".cuota_docente");
+                    cuotas.empty();
+
+                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
+                        var lista = objJson.lista;
+                        if (objJson.rpta == -1) {
+                            alert(objJson.mensaje);
+                            return;
+                        }
+                        for (var i = 0; i < lista.length; i++) {
+                            cuotas.append(lista[i].html);
+                        }
+                    });
+                });
+                $(".btn_guardar_ca").click(function () {
+                    $.ajax({
+                        url: "../../carga_academica",
+                        type: "POST",
+                        data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
+                    }).done(function (ids) {
+                        var arr_id = ids.split(":");
+                        alert("Registrado con exito!...");
+                        $(".proceso").val(arr_id[0]);
+                        $(".dgp").val(arr_id[1]);
+                        $(".btn_procesar").show();
+                    }).fail(function (e) {
+                        alert("Error: " + e);
+                    });
+                });
+
+                $(".btn_procesar").click(function () {
+                    $.ajax({
+                        url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
+                    }).done(function () {
+                        window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
+                    });
+                });
+
+                $(".btn-autor").click(function (e) {
+                    $.SmartMessageBox({
+                        title: "Alerta de Confirmaci?!",
+                        content: "?sta totalmente seguro de autorizar este requerimiento?",
+                        buttons: '[No][Si]'
+                    }, function (ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            // return true;
+                            $(".form-aut").submit();
+                        }
+                        if (ButtonPressed === "No") {
+                            return false;
+                        }
+                    });
+                    e.preventDefault();
+                });
+                $(".btn-rech").click(function (e) {
+                    $.SmartMessageBox({
+                        title: "Alerta de Confirmaci?!",
+                        content: "?sta totalmente seguro de rechazar este requerimiento?",
+                        buttons: '[No][Si]'
+                    }, function (ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            $(".btn-mos").click();
+                            //$(".form-rech").submit();
+                        }
+                        if (ButtonPressed === "No") {
+                            return false;
+                        }
+
+                    });
+                    e.preventDefault();
+                });
+            });</script>
         <script type="text/javascript">
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
@@ -1088,254 +949,29 @@
                     timeout: 6000
                 });
             }
-            $(document).ready(function() {
+            $(document).ready(function () {
 
-                pageSetUp();
-
-                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
                 $("#cod_ap").numeric();
                 /*
                  * Autostart Carousel
                  */
-                $('.carousel.slide').carousel({
-                    interval: 3000,
-                    cycle: true
-                });
-                $('.carousel.fade').carousel({
-                    interval: 3000,
-                    cycle: true
-                });
-                // Fill all progress bars with animation
 
-                $('.progress-bar').progressbar({
-                    display_text: 'fill'
-                });
-                /*
-                 * Smart Notifications
-                 */
-                $('#eg1').click(function(e) {
-
-                    $.bigBox({
-                        title: "Big Information box",
-                        content: "This message will dissapear in 6 seconds!",
-                        color: "#C46A69",
-                        //timeout: 6000,
-                        icon: "fa fa-warning shake animated",
-                        number: "1",
-                        timeout: 6000
-                    });
-                    e.preventDefault();
-                })
-
-                $('#eg2').click(function(e) {
-
-                    $.bigBox({
-                        title: "Big Information box",
-                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        color: "#3276B1",
-                        //timeout: 8000,
-                        icon: "fa fa-bell swing animated",
-                        number: "2"
-                    });
-                    e.preventDefault();
-                })
-
-                $('#eg3').click(function(e) {
-
-                    $.bigBox({
-                        title: "Shield is up and running!",
-                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        color: "#C79121",
-                        //timeout: 8000,
-                        icon: "fa fa-shield fadeInLeft animated",
-                        number: "3"
-                    });
-                    e.preventDefault();
-                })
-
-                $('#eg4').click(function(e) {
-
-                    $.bigBox({
-                        title: "Success Message Example",
-                        content: "Lorem ipsum dolor sit amet, test consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        color: "#739E73",
-                        //timeout: 8000,
-                        icon: "fa fa-check",
-                        number: "4"
-                    }, function() {
-                        closedthis();
-                    });
-                    e.preventDefault();
-                })
-
-
-
-                $('#eg5').click(function() {
-
-                    $.smallBox({
-                        title: "Ding Dong!",
-                        content: "Someone's at the door...shall one get it sir? <p class='text-align-right'><a href='javascript:void(0);' class='btn btn-primary btn-sm'>Yes</a> <a href='javascript:void(0);' class='btn btn-danger btn-sm'>No</a></p>",
-                        color: "#296191",
-                        //timeout: 8000,
-                        icon: "fa fa-bell swing animated"
-                    });
-                });
-                $('#eg6').click(function() {
-
-                    $.smallBox({
-                        title: "Big Information box",
-                        content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                        color: "#5384AF",
-                        //timeout: 8000,
-                        icon: "fa fa-bell"
-                    });
-                })
-
-                $('#eg7').click(function() {
-
-                    $.smallBox({
-                        title: "James Simmons liked your comment",
-                        content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-                        color: "#296191",
-                        iconSmall: "fa fa-thumbs-up bounce animated",
-                        timeout: 4000
-                    });
-                })
-
-
-                /*
-                 * SmartAlerts
-                 */
-                // With Callback
-                $("#smart-mod-eg1").click(function(e) {
-                    $.SmartMessageBox({
-                        title: "Smart Alert!",
-                        content: "This is a confirmation box. Can be programmed for button callback",
-                        buttons: '[No][Yes]'
-                    }, function(ButtonPressed) {
-                        if (ButtonPressed === "Yes") {
-
-                            $.smallBox({
-                                title: "Callback function",
-                                content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
-                                color: "#659265",
-                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                timeout: 4000
-                            });
-                        }
-                        if (ButtonPressed === "No") {
-                            $.smallBox({
-                                title: "Callback function",
-                                content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
-                                color: "#C46A69",
-                                iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                timeout: 4000
-                            });
-                        }
-
-                    });
-                    e.preventDefault();
-                })
-                // With Input
-                $("#smart-mod-eg2").click(function(e) {
-
-                    $.SmartMessageBox({
-                        title: "Smart Alert: Input",
-                        content: "Please enter your user name",
-                        buttons: "[Accept]",
-                        input: "text",
-                        placeholder: "Enter your user name"
-                    }, function(ButtonPress, Value) {
-                        alert(ButtonPress + " " + Value);
-                    });
-                    e.preventDefault();
-                })
-                // With Buttons
-                $("#smart-mod-eg3").click(function(e) {
-
-                    $.SmartMessageBox({
-                        title: "Smart Notification: Buttons",
-                        content: "Lots of buttons to go...",
-                        buttons: '[Need?][You][Do][Buttons][Many][How]'
-                    });
-                    e.preventDefault();
-                })
-                // With Select
-                $("#smart-mod-eg4").click(function(e) {
-
-                    $.SmartMessageBox({
-                        title: "Smart Alert: Select",
-                        content: "You can even create a group of options.",
-                        buttons: "[Done]",
-                        input: "select",
-                        options: "[Costa Rica][United States][Autralia][Spain]"
-                    }, function(ButtonPress, Value) {
-                        alert(ButtonPress + " " + Value);
-                    });
-                    e.preventDefault();
-                });
-                // With Login
-                $("#smart-mod-eg5").click(function(e) {
-
-                    $.SmartMessageBox({
-                        title: "Login form",
-                        content: "Please enter your user name",
-                        buttons: "[Cancel][Accept]",
-                        input: "text",
-                        placeholder: "Enter your user name"
-                    }, function(ButtonPress, Value) {
-                        if (ButtonPress == "Cancel") {
-                            alert("Why did you cancel that? :(");
-                            return 0;
-                        }
-
-                        Value1 = Value.toUpperCase();
-                        ValueOriginal = Value;
-                        $.SmartMessageBox({
-                            title: "Hey! <strong>" + Value1 + ",</strong>",
-                            content: "And now please provide your password:",
-                            buttons: "[Login]",
-                            input: "password",
-                            placeholder: "Password"
-                        }, function(ButtonPress, Value) {
-                            alert("Username: " + ValueOriginal + " and your password is: " + Value);
-                        });
-                    });
-                    e.preventDefault();
-                });
             })
 
         </script>
 
-        <!-- Your GOOGLE ANALYTICS CODE Below -->
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-            _gaq.push(['_trackPageview']);
-            (function() {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();</script>
-        <script type="text/javascript">
-            $(document).ready(
-                    function() {
 
-
-                    });</script>
         <script type="text/javascript" language="javascript">
-            $('.ver_foto').click(function() {
+            $('.ver_foto').click(function () {
                 $(".file-foto").click();
             });
-            $(window).load(function() {
+            $(window).load(function () {
 
-                $(function() {
-                    $('.file-foto').change(function(e) {
+                $(function () {
+                    $('.file-foto').change(function (e) {
 
                         if (this.files[0].size <= 500000) {
                             var jForm = new FormData();
@@ -1348,7 +984,7 @@
                                 processData: false,
                                 contentType: false,
                                 data: jForm
-                            }).done(function(f) {
+                            }).done(function (f) {
                                 $(".mensaje").text(f);
                             });
                             addImage(e);
@@ -1376,25 +1012,11 @@
                 });
             });
         </script>
-        <%}%>
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-            _gaq.push(['_trackPageview']);
 
-            (function() {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
 
-        </script>
     </body>
 </html>
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
-%>
+%> 
