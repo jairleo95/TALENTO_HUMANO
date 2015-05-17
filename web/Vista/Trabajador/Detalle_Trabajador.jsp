@@ -259,7 +259,9 @@
                                                         if (val_hue > 0) {%>
                                             <tr><td class="td" >Código Huella</td><td class="td1" ><%=emp.getCo_huella_digital()%></td></tr>
                                                 <%}%>
-                                                <%}%>
+                                                <%}else{%>
+                                            <tr><td class="td" >Código Huella</td><td class="td1" ><%=request.getParameter("cod_aps")%></td></tr>
+                                            <%}%>
                                         </table>
                                     </td>
                                     <%
@@ -274,12 +276,38 @@
                                             <input type="hidden" name="idpasos" value="<%=id_pasos%>">
                                             <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>">
                                             <input type="hidden"name="nup" value="<%=nropaso%>">
-                                            <input type="hidden" name="idtr" value="<%=idtra%>">
+                                            <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
                                             <tr><td class="td" colspan="2">Registrar codigo APS</td></tr>
-                                            <tr><td><input type="text" id="cod_ap" name="cod_aps" maxlength="6"></td></tr>
-                                            <tr><td><button value="registrar_aps" name="opc">Registrar</button></td></tr>
+                                            <tr><td><input type="text" id="cod_ap" name="cod_aps" maxlength="6" onblur="myFunction()"></td></tr>
+                                            <tr><td><button value="registrar_aps" name="opc" class="btn_aps">Registrar</button></td></tr>
                                         </table>
                                     </td>
+                                    <script>
+                                        function myFunction() {
+                                            var co_aps = document.getElementById("cod_ap");
+                                            $.ajax({
+                                                url: "../../empleado",
+                                                type: "POST",
+                                                data: "opc=validar_aps&co_aps=" + co_aps.value
+                                            }).done(function(e) {
+                                                alert(e)
+                                                 if (e == 0) {
+                                                    
+                                                    alert($(".idtra").val());
+                                                    alert($("#cod_ap").val());
+                                                    window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#cod_ap").val() + "&idtr=" + $(".idtra").val() + "";
+                                                }
+                                                 else {
+                                                    $.SmartMessageBox({
+                                                        title: "El codigo APS ya fue registrado!",
+                                                        content: "Por favor Ingrese un codigo APS distinto",
+                                                    });
+                                                }
+                                            }).fail(function(e) {
+                                                alert("Error: " + e);
+                                            });
+                                        }
+                                    </script>
                                     <%}
                                         String val_hue = emp.getCo_huella_digital();
                                         if (val_hue == null && ID_ROL.trim().equals("ROL-0001")) {%>
@@ -666,16 +694,16 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-        if (!window.jQuery) {
-            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-        }
+                                        if (!window.jQuery) {
+                                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                        }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-        if (!window.jQuery.ui) {
-            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-        }
+                                        if (!window.jQuery.ui) {
+                                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                        }
         </script>
 
 
