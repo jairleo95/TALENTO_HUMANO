@@ -385,6 +385,7 @@ public class CTrabajador extends HttpServlet {
             String idtr = request.getParameter("idtr");
             int cod_huella = Integer.parseInt(request.getParameter("cod"));
             em.Reg_cod_huella(idtr, cod_huella);
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr="+idtr+"&cod_hue="+cod_huella+"");
         }
 
         if (opc.equals("Editar_Dat_Gen")) {

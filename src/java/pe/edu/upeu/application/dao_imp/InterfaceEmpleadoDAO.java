@@ -32,4 +32,5 @@ public interface InterfaceEmpleadoDAO {
     public void Reg_aps(String idtr,int aps);
     public void Reg_cod_huella(String idtr,int cod_huella);
     public int val_aps (String co_aps);
+    public int val_huella (String co_hue);
 }
