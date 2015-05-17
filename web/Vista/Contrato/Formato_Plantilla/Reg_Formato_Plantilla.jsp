@@ -540,7 +540,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                 <label class="select">Filial:
                                                     <select class="fil form-control" id="fil" name="id_di" >
                                                         <option value="" >[Filial]</option>
-                                                        <option value="1" >Filial Lina</option>
+                                                        <option value="1" >Filial Lima</option>
                                                         <option value="2" >Filial Juliaca</option>
                                                         <option value="5" >Filial Tarapoto</option>
                                                     </select>   
@@ -715,7 +715,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                         <tr><td><code>[sueldo]</code></td><td>Sueldo del trabajador</td></tr>
                                         <tr><td><code>[horas]</code></td><td>Horas de trabajo semanales</td></tr>
                                         <tr><td><code>[cursos]</code></td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
-                                        <tr><td><code>[funciones]</code></td><td>Funciones que va a desempeñar en el puesto</td></tr>
+                                        <tr><td><code>[funciones_pr]</code></td><td>Funciones primarias que va a desempeñar en el puesto</td></tr>
+                                        <tr><td><code>[funciones_sec]</code></td><td>Funciones secundarias que va a desempeñar en el puesto</td></tr>
                                         <tr><td><code>[moneda]</code></td><td>Tipo de moneda de pago</td></tr>
                                     </tbody>
                                 </table>

@@ -37,6 +37,8 @@ public interface InterfacePlazo_DgpDAO {
     
     public void Validar_Cumplimiento_plazo_t2();
     
+    public int Validar_cumple_dias_pt2(String dgp);
+    
     public void Validar_Cumplimiento_plazo_t1();
 
 }

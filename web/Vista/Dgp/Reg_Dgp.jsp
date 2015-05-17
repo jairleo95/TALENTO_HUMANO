@@ -333,22 +333,18 @@
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
-                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe" min="<%=fecha_maxima_plazo%>">
+                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe">
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
-                                                                <input type="date" name="FEC_HASTA"  required="" id="datepicker" class="val_fe" min="<%=fecha_maxima_plazo%>" >
+                                                                <input type="date" name="FEC_HASTA"  required="" id="datepicker" class="val_fe" >
                                                             </label>
                                                         </section>
                                                     </div>
 
-
-
                                                     <%if (idreq.equals("REQ-0008")) {
                                                     %>
-
-
                                                     <%String es_cue_sue = request.getParameter("es_cs");%>
                                                     <input type="hidden" name="ESTADO" value="<%=es_cue_sue%>">
                                                     <%if (es_cue_sue.equals("0")) {%>
@@ -1846,7 +1842,6 @@
         $(document).ready(function () {
             $(".val_fe").change(function () {
                 var fecha = $(this).val().split("-");
-
                 if (fecha[0].length > 4) {
                     $(this).val("");
                 }

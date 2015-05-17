@@ -60,9 +60,11 @@
                 <br>
                 <div id="contenido">
 
-                    <div   >
+                    <div>
                         <!--style="padding-left: 30px"-->
 
+                        <br>
+                        <hr1 class="spacing" style="font-weight: bold;">Filtro Rango Edad del Hijos</hr1>
                         <div class="row">
                             <div class="form-group" >
                                 <label>Desde</label><br>
@@ -78,7 +80,7 @@
                             <div class="form-group" >
                                 <label>Edad</label><br>
                                 <input type="text"  class="form-control edad" placeholder="Rango general de edad" name="del"  length="45" style="width: 250px" id="edad"/>
-                            </div>
+                        </div>
                         </div>
                         <br>
                         <div class="row">

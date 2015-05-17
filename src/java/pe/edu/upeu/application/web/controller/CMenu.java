@@ -43,7 +43,7 @@ public class CMenu extends HttpServlet {
             String user = (String) sesion.getAttribute("USER");
             String idrol = (String) sesion.getAttribute("IDROL");
 
-            if (opc == null) {
+            if (opc == null && !idrol.trim().equals("ROL-0013")) {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Modulos.jsp");
                 dispatcher.forward(request, response);
             } else if (opc != null & user != null) {
@@ -60,6 +60,11 @@ public class CMenu extends HttpServlet {
 
                 }
 
+            } else if (idrol.trim().equals("ROL-0013")) {
+                String id_modulo = "MOD-0001";
+                getServletContext().setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal_3.jsp");
+                dispatcher.forward(request, response);
             } else {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                 dispatcher.forward(request, response);

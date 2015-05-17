@@ -92,4 +92,21 @@ public class Comentario_DGPDAO implements InterfaceComentario_DGPDAO {
         return list;
     }
 
+    @Override
+    public String Comentario_dgp_aut(String iddgp, String id_aut) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT (CM_COMENTARIO||'/'||US_CREACION||'/'||to_char(FE_CREACION,'dd-mm-yy'))AS INF FROM  RHTR_COMENTARIO_DGP WHERE ID_DGP='"+iddgp.trim()+"' and ID_AUTORIZACION='"+id_aut.trim()+"'";
+        String info_comentario = "";
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                info_comentario = rs.getString("INF");
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return info_comentario;
+    }
+
 }

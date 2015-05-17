@@ -15,6 +15,11 @@
         <link rel="icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
         <!-- #GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+          <style>
+            .caja{
+                background:transparent url(../../../imagenes/Gifloader.GIF) center no-repeat;
+            }
+        </style>
     </head>
     <body>
         <div id="main" role="main" style="margin: 0px;">
@@ -141,6 +146,7 @@
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script src="../../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
 
+        <script src="../../../js/Js_DTDinamico/Dinamico.js" type="text/javascript"></script>
         <script type="text/javascript">
             function listar_fec_sin_repetir(fecha_default) {
                 $.post("../../../RHistorial", "opc=Fe_Modif_Hijo2&hijo=" + $(".idh").val() + "&fecha=" + fecha_default, function (objJson) {
@@ -161,6 +167,8 @@
                 var tbody = $(".tbodys");
                 tbody.empty();
                 var texto_html = "";
+                GifLoader(tbody, " Por Favor Espere un Momento..", 1);
+                tbody.empty();
                 $.post("../../../RHistorial", "opc=Comparar_dato_Hijo&id=" + $(".idh").val() + "&fecha1=" + $(".fecha1").val() + "&fecha2=" + $(".fecha2").val(), function (objJson) {
                     var lista = objJson.lista;
                     if (lista[0].ap_p != lista[1].ap_p) {
@@ -310,19 +318,22 @@
                         texto_html += "<tr>";
                     }
                     texto_html += "<td>14</td><td>¿Procesar?</td>";
+
                     if (lista[0].es_procesado == '1') {
                         texto_html += "<td>Si</td>";
-                    } else {
-                        texto_html += "<input type='text' class='val_hijo' value='idh=" + lista[0].id + "&es_fecha=" + lista[0].estado_filtro + "&fecha=" + lista[0].fecha + "' ><td class='smart-form'><label class='toggle'><input type='checkbox' value=''  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
+                    } else if (lista[0].es_procesado == '0') {
+                        texto_html += "<input type='hidden' class='val_hijo' value='idh=" + lista[0].id + "&es_fecha=" + lista[0].estado_filtro + "&fecha=" + lista[0].fecha + "' ><td class='smart-form'><label class='toggle'><input type='checkbox' value=''  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
                     }
-
-
                     if (lista[1].es_procesado == '1') {
                         texto_html += "<td>Si</td>";
-                    } else {
-                        texto_html += "<input type='text' class='val_hijo' value='idh=" + lista[1].id + "&es_fecha=" + lista[1].estado_filtro + "&fecha=" + lista[1].fecha + "' ><td class='smart-form'><label class='toggle'><input type='checkbox' value=''  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
+                    } else if (lista[1].es_procesado == '0') {
+                        texto_html += "<input type='hidden' class='val_hijo' value='idh=" + lista[1].id + "&es_fecha=" + lista[1].estado_filtro + "&fecha=" + lista[1].fecha + "' ><td class='smart-form'><label class='toggle'><input type='checkbox' value=''  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
                     }
+
+
                     tbody.append(texto_html);
+                    // alert(lista[1].es_procesado);
+
                 });
                 texto_html = "";
 
@@ -337,6 +348,8 @@
                 $(".fecha1").change(function () {
                     listar_fec_sin_repetir($(this).val());
                 });
+               
+
                 $(".val_hijo").click(function () {
                     if ($(this).prop('checked')) {
                         $.SmartMessageBox({

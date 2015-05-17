@@ -538,4 +538,21 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         }
     }
 
+    @Override
+    public String Mes_plazo(String id_dgp) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT TO_CHAR(pl.FE_HASTA,'MONTH','nls_date_language=spanish')as mes_hasta FROM RHTR_CUMPLIMIENTO_PLAZO cp,RHTR_PLAZO pl WHERE pl.ID_PLAZO = cp.ID_PLAZO and cp.ID_DGP='" + id_dgp.trim() + "'";
+        String validar = "";
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                validar = rs.getString("mes_hasta");
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return validar;
+    }
+
 }
