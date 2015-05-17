@@ -101,7 +101,12 @@ public class CEmpleado extends HttpServlet {
             out.print(idrol);
            response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp?idtr");
         }
-
+        
+        if(opc.equals("validar_aps")){
+        String co_aps = request.getParameter("co_aps");
+        int aps = Iem.val_aps(co_aps);
+        out.print(aps);
+        }
         try {
 
         } finally {

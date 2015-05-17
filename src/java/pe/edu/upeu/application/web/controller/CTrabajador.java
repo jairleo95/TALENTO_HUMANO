@@ -379,7 +379,7 @@ public class CTrabajador extends HttpServlet {
             String idtr = request.getParameter("idtr");
             int co_aps = Integer.parseInt(request.getParameter("cod"));
             em.Reg_aps(idtr, co_aps);
-
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr="+idtr+"&cod_aps="+co_aps+"");
         }
         if ("reg_huella".equals(opc)) {
             String idtr = request.getParameter("idtr");
