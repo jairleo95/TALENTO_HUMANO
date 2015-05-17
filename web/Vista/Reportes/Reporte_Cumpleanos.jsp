@@ -64,7 +64,7 @@
                     </div>
                     <div class="form-group" >
                         <label>DEPARTAMENTO</label><br>
-                        <input type="text"  class="form-control mes" placeholder="Ingrese el DEPARTAMENTO" name=""  length="45" style="width: 150px" id="des"/>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese el DEPARTAMENTO" name="aps"  length="45" style="width: 150px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>AREA</label><br>
@@ -116,7 +116,7 @@
 
                         <div class="form-group">
                             <label>Mes de Cumpleaños:</label><br>
-                            <select name="puesto" class="form-control selec_mes" id="selec_mes" style="width: 250px" required=""> 
+                            <select name="puesto" class="form-control selec_mes" id="selec_mes" style="width: 250px"> 
                                 <option value="">[Seleccione]</option>
                                 <option value="01">Enero</option>
                                 <option value="02">Febrero</option>
@@ -407,9 +407,15 @@
         function listar_cumpleaños() {
             var a = $(".selec_mes").val();
             var b = $(".select_dia").val();
+            var aps = $(".select_dia").val();
+            var dep = $(".select_dia").val();
+            var are = $(".select_dia").val();
+            var sec = $(".select_dia").val();
+            var pue = $(".select_dia").val();
             var d = $("#Li_cump");
             var texto = '';
             $.post("../../reporte", "opc=reporte_cumpleaños&mes=" + a + "&dia=" + b, function (objJson) {
+                
                 d.empty();
                 var lista = objJson.lista;
                 if (lista.length > 0) {

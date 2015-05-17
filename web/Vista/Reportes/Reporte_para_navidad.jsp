@@ -78,21 +78,63 @@
         <div class="spacing">
             <center><h1 class="spacing" style="font-weight: bold;">REPORTE-TRABAJADORES EN NAVIDAD</h1></center> 
         </div>
-        <div align="center">
-            <div class="row">
+        <div class="row">
+            <div align="center" style="border:3px solid red;">
                 <div class="form-group" >
-                    <label>Tiempo de Trabajo (Mayor a 10 meses)</label><br>
-                    <input type="text"  class="form-control mes" placeholder="Ingrese la cantidad de meses" name="mes"  length="45" style="width: 250px" id="des"/>
+                    <label>CODIGO APS</label><br>
+                    <input type="text"  class="form-control mes" placeholder="APS" name=""  length="45" style="width: 80px" id="des"/>
                 </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="form-group">                            
-                    <button type="button" class="btn btn-primary" id="btnbuscar" >Buscar</button>
+                <div class="form-group" >
+                    <label>DEPARTAMENTO</label><br>
+                    <input type="text"  class="form-control mes" placeholder="Ingrese el DEPARTAMENTO" name=""  length="45" style="width: 150px" id="des"/>
                 </div>
+                <div class="form-group" >
+                    <label>AREA</label><br>
+                    <input type="text"  class="form-control mes" placeholder="Ingrese su AREA" name=""  length="45" style="width: 150px" id="des"/>
+                </div>
+                <div class="form-group" >
+                    <label>SECCIÓN</label><br>
+                    <input type="text"  class="form-control mes" placeholder="Ingrese su SECCIÓN" name=""  length="45" style="width: 150px" id="des"/>
+                </div>
+                <div class="form-group" >
+                    <label>PUESTO</label><br>
+                    <input type="text"  class="form-control mes" placeholder="Ingrese su PUESTO" name=""  length="45" style="width: 150px" id="des"/>
+                </div>
+                <div class="form-group" >
+                    <label>FECHA NACIMIENTO</label><br>
+                    <input type="DATE"  class="form-control mes" name=""  length="45" style="width: 170px" id="des"/>
+                </div>
+                <div class="form-group" >
+                    <label>EDAD</label><br>
+                    <input type="text"  class="form-control mes" placeholder="EDAD" name=""  length="45" style="width: 80px" id="des"/>
+                </div>
+                <div class="form-group" >
+                    <label>APELLIDO Y NOMBRES</label><br>
+                    <input type="text"  class="form-control mes" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
+                </div>
+                <div class="form-group" >
+                    <label>TIPO DOC</label><br>
+                    <input type="text"  class="form-control mes" placeholder="Ingrese la cantidad de meses" name=""  length="45" style="width: 250px" id="des"/>
+                </div>
+                <div class="form-group" >
+                    <label>Nº DOCUMENTO</label><br>
+                    <input type="text"  class="form-control mes" placeholder="Nº Documento" name=""  length="45" style="width: 120px" id="des"/>
+                </div>
+                <div class="row">
+                    <div class="form-group" >
+                        <label>Tiempo de Trabajo (Mayor a 10 meses)</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese la cantidad de meses" name="mes"  length="45" style="width: 250px" id="des"/>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="form-group">                            
+                        <button type="button" class="btn btn-primary" id="btnbuscar" >Buscar</button>
+                    </div>
 
-            </div>  
-        </div> 
+                </div>  
+            </div> 
+        </div>
         <div id="main" role="main" style="margin-left: 0px">
 
             <!-- RIBBON -->
@@ -503,7 +545,7 @@
                     } else {
                         $('.div_t').empty();
                         b.append("<td colspan='11' align='center'><strong>NO SE ENCONTRARON DATOS</strong></td>");
-                        
+
                     }
                 });
 

@@ -83,7 +83,7 @@
                 <div id="contenido">
                     <div class="form-group" >
                         <label>CODIGO APS</label><br>
-                        <input type="text"  class="form-control mes" placeholder="APS" name=""  length="45" style="width: 80px" id="des"/>
+                        <input type="text"  class="form-control mes" placeholder="APS" name="aps"  length="45" style="width: 80px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>DEPARTAMENTO</label><br>
@@ -217,9 +217,9 @@
                                                             <th data-class="tip">Fecha de Sece</th>
                                                             <th data-class="tip">DNI HIJ@</th>
                                                             <th data-class="tip">Apellidos y Nombres del Hij@</th>
+                                                            <th data-class="tip">Genero</th>
                                                             <th data-class="tip">Fecha Nacimiento del Hij@</th>
                                                             <th data-class="tip">Edad</th>
-                                                            <th data-class="tip">Genero</th>
                                                         </tr>
                                                     </thead>
 
@@ -502,25 +502,27 @@
         </script>
         <script>
             function listar_trabajor_na() {
-                var ap = $(".aps").val();
-                var de = $(".dep").val();
-                var ar = $(".are").val();
-                var se = $(".sec").val();
-                var pu = $(".pue").val();
-                var ti = $(".tip").val();
-                var fe = $(".fec").val();
-                var ed = $(".eda").val();
-                var ap_p = $(".ap_pa").val();
-                var ap_m = $(".ap_ma").val();
-                var no = $(".nom").val();
-                var n_d = $(".num_doc").val();
-                var b = $("#Datos_generales");
+                /* var ap = $(".aps").val();
+                 var de = $(".dep").val();
+                 var ar = $(".are").val();
+                 var se = $(".sec").val();
+                 var pu = $(".pue").val();
+                 var ti = $(".tip").val();
+                 var fe = $(".fec").val();
+                 var ed = $(".eda").val();
+                 var ap_p = $(".ap_pa").val();
+                 var ap_m = $(".ap_ma").val();
+                 var no = $(".nom").val();
+                 var n_d = $(".num_doc").val();
+                 var b = $("#Datos_generales");*/
                 var texto = '';
-                $.post("../../reporte", "opc=reporte_datos_genereales", function (objJson) {
+                $.post("../../reporte", "opc=reporte_datos_genereales&" + $(".validarform").serialize(), function (objJson) {
                     if (objJson.rpta == -1) {
+                        $('.div_t').empty();
                         alert(objJson.mensaje);
                         return;
                     }
+
                     b.empty();
                     var lista = objJson.lista;
                     if (lista.length > 0) {
