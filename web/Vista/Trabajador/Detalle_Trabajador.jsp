@@ -254,8 +254,7 @@
                                     %>
                                     <td>
                                         <table class="info-det" style="margin-left:80%;" >
-                                            <% String cdg_aps = request.getParameter("cod_aps");
-                                               String cdg_hue = request.getParameter("cod_hue");
+                                           <%
                                                 if (emp.getCo_aps() != null) {
                                                     int val_aps = Integer.parseInt(emp.getCo_aps());
 
@@ -264,9 +263,7 @@
                                             <tr><td class="td" >Código APS:</td><td class="td1" ><%=emp.getCo_aps()%></td></tr>
                                                 <%}
                                                     %>
-                                             <%} else if (cdg_aps != null) {%>
-                                            <tr><td class="td" >Código APS</td><td class="td1" ><%=cdg_aps%></td></tr>
-                                                <%}%>
+                                             <%}%>
 
                                                     <%if (emp.getCo_huella_digital() != null) {
 
@@ -274,8 +271,6 @@
                                                         if (val_hue > 0) {%>
                                             <tr><td class="td" >Código Huella</td><td class="td1" ><%=emp.getCo_huella_digital()%></td></tr>
                                                 <%}%>
-                                                <%} else if (cdg_hue != null) {%>
-                                            <tr><td class="td" >Código Huella</td><td class="td1" ><%=cdg_hue %></td></tr>
                                                 <%}%>
                                         </table>
                                     </td>
@@ -292,11 +287,9 @@
                                             <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>">
                                             <input type="hidden"name="nup" value="<%=nropaso%>">
                                             <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
-                                            <%if (cdg_aps == null) {%>
                                             <tr><td class="td" colspan="2">Registrar codigo APS</td></tr>
                                             <tr><td><input type="text" id="cod_ap" name="cod_aps" maxlength="6" onblur="VAL_COD_APS()"></td></tr>
                                             <tr><td><input type="button" value="Registrar" name="" class=""></button</td></tr>
-                                                    <%}%>
                                             <!--<tr><td><button value="registrar_aps" name="opc" class="btn_aps">Registrar</button></td></tr>-->
                                         </table
                                     </td>
@@ -309,24 +302,24 @@
                                                     type: "POST",
                                                     data: "opc=validar_aps&co_aps=" + co_aps.value
                                                 }).done(function(e) {
-                                                    alert(e)
-                                                    var cant = $("#cod_ap").length;
-                                                    alert(cant)
-                                                    // if (cant > 5) {
+                                                   // alert(e)
+                                                  var cant = ($("#cod_ap").val());
+                                                    //alert(cant.length)
+                                                   if (cant.length > 5) {
                                                     if (e == 0) {
-                                                        alert(e)
-                                                        alert($(".idtra").val());
-                                                        alert($("#cod_ap").val());
+                                                        //alert(e)
+                                                       // alert($(".idtra").val());
+                                                       // alert($("#cod_ap").val());
                                                         window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#cod_ap").val() + "&idtr=" + $(".idtra").val() + "";
                                                     }
                                                     else {
-                                                        alert(e)
+                                                        //alert(e)
                                                         $.SmartMessageBox({
-                                                            title: "El codigo APS ya fue registrado!",
-                                                            content: "Por favor Ingrese un codigo APS distinto",
+                                                            title: "Este Código APS ya fue registrado!",
+                                                            content: "Por favor Ingrese un Código APS distinto",
                                                         });
                                                     }
-                                                    // }
+                                                   }
                                                 }).fail(function(e) {
                                                     alert("Error: " + e);
                                                 });
@@ -344,13 +337,11 @@
                                             <input type="hidden" name="idpasos" value="<%=id_pasos%>">
                                             <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>">
                                             <input type="hidden"name="nup" value="<%=nropaso%>">
-                                            <input type="hidden" name="idtr" value="<%=idtra%>">
-                                             <%if (cdg_hue == null) {%>
+                                            <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
                                             <tr><td class="td" colspan="3">Registrar Codigo de huella digital</td></tr>
                                             <tr><td><input type="text" id="cod_hu" name="cod_huella" maxlength="6" onblur="VAL_COD_HUELLA()"></td></tr>
                                             <tr><td><input type="button" value="Registrar" name="" class=""></button</td></tr>
                                             <!--<tr><td><button value="registrar_huella" name="opc">Registrar</button></td></tr>-->
-                                             <%}%>
                                         </table>
                                     </td>
                                     <%}%>
@@ -363,24 +354,23 @@
                                                     type: "POST",
                                                     data: "opc=validar_huella&co_hue=" + co_huel.value
                                                 }).done(function(e) {
-                                                    alert(e)
-                                                    //var cant = $("#cod_hu").length;
-                                                    //alert(cant)
-                                                    // if (cant > 5) {
+                                                   // alert(e)
+                                                    var cant = $("#cod_hu").val();
+                                                     if (cant.length > 5) {
                                                     if (e == 0) {
-                                                        alert(e)
-                                                        alert($(".idtra").val());
-                                                        alert($("#cod_hu").val());
-                                                        window.location.href = "../../trabajador?opc=reg_huella&cod=" + $("#cod_hu").val() + "&idtr=" + $(".idtra").val() + "";
+                                                      //  alert(e)
+                                                        //alert($(".idtra").val());
+                                                        //alert($("#cod_hu").val());
+                                                        window.location.href = "../../trabajador?opc=reg_huella&idtr=" + $(".idtra").val() + "&cod=" + $("#cod_hu").val() + "";
                                                     }
                                                     else {
-                                                        alert(e)
+                                                        //alert(e)
                                                         $.SmartMessageBox({
-                                                            title: "El codigo APS ya fue registrado!",
-                                                            content: "Por favor Ingrese un codigo APS distinto",
+                                                            title: "Este Código de Huella ya fue registrado!",
+                                                            content: "Por favor Ingrese un Codigo de Huella distinto",
                                                         });
                                                     }
-                                                    // }
+                                                     }
                                                 }).fail(function(e) {
                                                     alert("Error: " + e);
                                                 });
