@@ -53,16 +53,35 @@
     </head>
     <body>  
         <form class="form-inline validarform" id="frm_filtro2" method="post" action="../../Imprimir" name="formulario" onclick="return marcado();">
-            <div class="spacing">
+            <div class="spacing" >
                 <center><h1 class="spacing" style="font-weight: bold;">Datos Hijos</h1></center> 
             </div>
             <center>
                 <br>
                 <div id="contenido">
 
-                    <div>
+                    <div style="border:3px solid red;" >
                         <!--style="padding-left: 30px"-->
-
+                        <div class="form-group" >
+                            <label>Nombre</label><br>
+                            <input type="text"  class="form-control mes" placeholder="Nombre" name="nom"  length="45" style="width: 280px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>Dni</label><br>
+                            <input type="text"  class="form-control mes" placeholder="Dni" name="dni"  length="45" style="width: 120px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>Genero:</label><br>
+                            <select name="puesto" class="form-control selec_mes" id="" style="width: 150px"> 
+                                <option value="">[Seleccione]</option>
+                                <option value="f">Femenino</option>
+                                <option value="m">Masculino</option>
+                            </select>
+                        </div>
+                        <div class="form-group" >
+                            <label>FECHA NACIMIENTO</label><br>
+                            <input type="DATE"  class="form-control mes" name=""  length="45" style="width: 160px" id="des"/>
+                        </div>
                         <br>
                         <hr1 class="spacing" style="font-weight: bold;">Filtro Rango Edad del Hijos</hr1>
                         <div class="row">
@@ -80,7 +99,7 @@
                             <div class="form-group" >
                                 <label>Edad</label><br>
                                 <input type="text"  class="form-control edad" placeholder="Rango general de edad" name="del"  length="45" style="width: 250px" id="edad"/>
-                        </div>
+                            </div>
                         </div>
                         <br>
                         <div class="row">
