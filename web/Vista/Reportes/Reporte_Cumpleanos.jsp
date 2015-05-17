@@ -57,14 +57,66 @@
             </div>
             <center>
                 <br>
-                <div id="contenido">
+                <div id="contenido" >
+                    <div class="form-group" >
+                        <label>CODIGO APS</label><br>
+                        <input type="text"  class="form-control mes" placeholder="APS" name=""  length="45" style="width: 80px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>DEPARTAMENTO</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese el DEPARTAMENTO" name="aps"  length="45" style="width: 150px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>AREA</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese su AREA" name=""  length="45" style="width: 150px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>SECCIÓN</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese su SECCIÓN" name=""  length="45" style="width: 150px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>PUESTO</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese su PUESTO" name=""  length="45" style="width: 150px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>FECHA NACIMIENTO</label><br>
+                        <input type="DATE"  class="form-control mes" name=""  length="45" style="width: 170px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>EDAD</label><br>
+                        <input type="text"  class="form-control mes" placeholder="EDAD" name=""  length="45" style="width: 80px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>APELLIDO Y NOMBRES</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>TIPO DOC</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese la cantidad de meses" name=""  length="45" style="width: 250px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>Nº DOCUMENTO</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Nº Documento" name=""  length="45" style="width: 120px" id="des"/>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">  
+                            <br>
+                            <a class="btn btn-primary btn-circle btn-xl btnEnviar">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </a>
+                            <a class="btn btn-danger btn-circle btn-xl btnCancelar">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </a>
+                        </div>
 
-                    <div   >
+                    </div>
+                    <div>
                         <!--style="padding-left: 30px"-->
                         <br>
+
                         <div class="form-group">
                             <label>Mes de Cumpleaños:</label><br>
-                            <select name="puesto" class="form-control selec_mes" id="selec_mes" style="width: 250px" required=""> 
+                            <select name="puesto" class="form-control selec_mes" id="selec_mes" style="width: 250px"> 
                                 <option value="">[Seleccione]</option>
                                 <option value="01">Enero</option>
                                 <option value="02">Febrero</option>
@@ -83,7 +135,7 @@
                         </div>
                         <br>
                         <br>
-                        <div class="row">
+                        <div class="form-group">
                             <label>Dia de Cumpleaños:</label><br>
                             <select name="puesto" class="form-control select_dia aaa" id="select_dia" style="width: 250px"> 
                                 <option value="">[Seleccione]</option>
@@ -98,6 +150,7 @@
 
                         </div>
                     </div> 
+                    </div>
                     <br>
                     <br>
                     <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
@@ -150,7 +203,7 @@
 
                     </div>
 
-                </div>
+                
             </center>
         </form>
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
@@ -354,9 +407,15 @@
         function listar_cumpleaños() {
             var a = $(".selec_mes").val();
             var b = $(".select_dia").val();
+            var aps = $(".select_dia").val();
+            var dep = $(".select_dia").val();
+            var are = $(".select_dia").val();
+            var sec = $(".select_dia").val();
+            var pue = $(".select_dia").val();
             var d = $("#Li_cump");
             var texto = '';
             $.post("../../reporte", "opc=reporte_cumpleaños&mes=" + a + "&dia=" + b, function (objJson) {
+                
                 d.empty();
                 var lista = objJson.lista;
                 if (lista.length > 0) {

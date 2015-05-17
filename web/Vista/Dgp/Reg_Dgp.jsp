@@ -1842,7 +1842,6 @@
         $(document).ready(function () {
             $(".val_fe").change(function () {
                 var fecha = $(this).val().split("-");
-
                 if (fecha[0].length > 4) {
                     $(this).val("");
                 }

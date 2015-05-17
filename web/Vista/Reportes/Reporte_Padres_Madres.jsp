@@ -60,9 +60,52 @@
                 <br>
                 <div id="contenido">
 
-                    <div   >
+                    <div  style="border:3px solid red;" >
                         <!--style="padding-left: 30px"-->
-
+                        <div class="form-group" >
+                            <label>CODIGO APS</label><br>
+                            <input type="text"  class="form-control mes" placeholder="APS" name=""  length="45" style="width: 80px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>DEPARTAMENTO</label><br>
+                            <input type="text"  class="form-control mes" placeholder="Ingrese el DEPARTAMENTO" name=""  length="45" style="width: 150px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>AREA</label><br>
+                            <input type="text"  class="form-control mes" placeholder="Ingrese su AREA" name=""  length="45" style="width: 150px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>SECCIÓN</label><br>
+                            <input type="text"  class="form-control mes" placeholder="Ingrese su SECCIÓN" name=""  length="45" style="width: 150px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>PUESTO</label><br>
+                            <input type="text"  class="form-control mes" placeholder="Ingrese su PUESTO" name=""  length="45" style="width: 150px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>FECHA NACIMIENTO</label><br>
+                            <input type="DATE"  class="form-control mes" name=""  length="45" style="width: 170px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>EDAD</label><br>
+                            <input type="text"  class="form-control mes" placeholder="EDAD" name=""  length="45" style="width: 80px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>APELLIDO Y NOMBRES</label><br>
+                            <input type="text"  class="form-control mes" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>TIPO DOC</label><br>
+                            <input type="text"  class="form-control mes" placeholder="Ingrese la cantidad de meses" name=""  length="45" style="width: 250px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>Nº DOCUMENTO</label><br>
+                            <input type="text"  class="form-control mes" placeholder="Nº Documento" name=""  length="45" style="width: 120px" id="des"/>
+                        </div>
+                        <br>
+                        <div>
+                            <hr1 class="spacing" style="font-weight: bold;">Filtro Rango Edad del Hijo</hr1>
+                        </div>
                         <div class="row">
                             <div class="form-group" >
                                 <label>Desde</label><br>

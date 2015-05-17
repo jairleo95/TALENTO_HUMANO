@@ -63,8 +63,8 @@ public class CSolicitud_Requerimiento extends HttpServlet {
             String tipo = request.getParameter("tipo_fecha");
             if (tipo.equals("month")) {
                 FE_DESDE = FE_DESDE + "-01";
-            } 
-            s.INSERT_SOLICITUD_DGP(null, FE_DESDE, ID_DGP, ID_PLAZO, DE_SOLICITUD, ES_AUTORIZAR, ES_SOLICITUD_DGP, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, NO_USUARIO);  
+            }
+            s.INSERT_SOLICITUD_DGP(null, FE_DESDE, ID_DGP, ID_PLAZO, DE_SOLICITUD, ES_AUTORIZAR, ES_SOLICITUD_DGP, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, NO_USUARIO);
             getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser));
             response.sendRedirect("Vista/Solicitud/Reg_List_Solicitud.jsp?iddgp=" + ID_DGP + "");
         }
@@ -88,17 +88,20 @@ public class CSolicitud_Requerimiento extends HttpServlet {
             String id = request.getParameter("id");
             String tipo = request.getParameter("tipo");
             String fecha = request.getParameter("fecha");
-            s.procesar_solicitud(tipo, id, fecha, iduser);
+            String comentario = request.getParameter("comentario");
+            s.procesar_solicitud(tipo, id, fecha, iduser, comentario);
             rpta.put("rpta", "1");
         }
         Gson gson = new Gson();
+
         out.println(gson.toJson(rpta));
         out.flush();
+
         out.close();
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
