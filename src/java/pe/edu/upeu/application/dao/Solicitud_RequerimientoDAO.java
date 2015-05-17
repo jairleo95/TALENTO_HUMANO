@@ -145,7 +145,7 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
             cst.setString(5, DE_SOLICITUD);
             cst.setString(6, "0");
             cst.setString(7, "1");
-            cst.setString(8, IP_USUARIO);
+            cst.setString(8, FactoryConnectionDB.detalle_ip());
             cst.setString(9, US_CREACION);
             cst.setString(10, FE_CREACION);
             cst.setString(11, US_MODIF);
@@ -260,15 +260,16 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
     }
 
     @Override
-    public void procesar_solicitud(String tipo, String id_sol, String fecha, String usuario) {
+    public void procesar_solicitud(String tipo, String id_sol, String fecha, String usuario, String comentario) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL rhsp_procesar_solicitud( ?, ?, ?, ?, ? )} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL rhsp_procesar_solicitud( ?, ?, ?, ?, ?,? )} ");
             cst.setString(1, tipo.trim());
             cst.setString(2, id_sol);
             cst.setString(3, fecha);
             cst.setString(4, FactoryConnectionDB.detalle_ip());
             cst.setString(5, usuario);
+            cst.setString(6, comentario);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());

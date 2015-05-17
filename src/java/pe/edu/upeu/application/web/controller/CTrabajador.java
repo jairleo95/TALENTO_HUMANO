@@ -270,7 +270,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
-             getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
+            getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
 //out.print(idtr);            
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
         }
@@ -445,7 +445,7 @@ public class CTrabajador extends HttpServlet {
             String ES_CIVIL_A = request.getParameter("ES_CIVIL_A");
             String ES_REGISTRO = request.getParameter("ES_REGISTRO");
             if (!ES_CIVIL.equals(ES_CIVIL_A)) {
-                ec.INSERT_HIST_ESTADO_CIVIL(null, ES_CIVIL_A, FE_MODIFICACION, US_MODIF, ID_TRABAJADOR , ES_REGISTRO);
+                ec.INSERT_HIST_ESTADO_CIVIL(null, ES_CIVIL_A, FE_MODIFICACION, US_MODIF, ID_TRABAJADOR, ES_REGISTRO);
             }
             tr.MOD_DAT_GEN(AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, ES_SEXO, LI_GRUPO_SANGUINEO, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, ES_FACTOR_RH, idtr, US_MODIF, IP_USUARIO);
 
@@ -623,10 +623,14 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?edit=ok&idtr=" + idtr );
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?edit=ok&idtr=" + idtr);
         }
         if (opc.equals("Form_Cambiar_Clave")) {
             response.sendRedirect("Vista/Usuario/Cambiar_Pwd.jsp");
+        }
+        if (opc.equals("Val_num_Doc")) {
+            String nu_doc = request.getParameter("doc");
+            out.print(tr.val_nu_doc(nu_doc));
         }
 
     }

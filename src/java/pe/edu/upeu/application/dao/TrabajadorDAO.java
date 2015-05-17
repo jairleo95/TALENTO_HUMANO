@@ -364,7 +364,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-          //  throw new RuntimeException("ERROR :" + e.getMessage());
+            //  throw new RuntimeException("ERROR :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -558,7 +558,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     }
 
     @Override
-    public void UPDATE_ID_CONYUGUE(String id_conyugue, String id_trabajador ,String US_MODIF, String IP_USUARIO) {
+    public void UPDATE_ID_CONYUGUE(String id_conyugue, String id_trabajador, String US_MODIF, String IP_USUARIO) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_UPDATE_ID_CONYUGUE(?, ?, ? ,?)} ");
@@ -725,8 +725,6 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         return es_cs;
     }
 
-    
-
     @Override
     public void MOD_DAT_GEN(String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String TI_DOC, String NU_DOC, String ES_CIVIL, String FE_NAC, String ID_NACIONALIDAD, String ID_DEPARTAMENTO, String ID_PROVINCIA, String ID_DISTRITO, String TE_TRABAJADOR, String CL_TRA, String DI_CORREO_PERSONAL, String DI_CORREO_INST, String CO_SISTEMA_PENSIONARIO, String ES_SEXO, String LI_GRUPO_SANGUINEO, String ID_NO_AFP, String ES_AFILIADO_ESSALUD, String LI_TIPO_TRABAJADOR, String ES_FACTOR_RH, String ID_TRABAJADOR, String US_MODIF, String IP_USUARIO) {
         try {
@@ -836,7 +834,6 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         }
     }
 
-   
     @Override
     public void MOD_CUENTA_SUELDO(String NO_BANCO, String NU_CUENTA, String NU_CUENTA_BANC, String ES_GEM_NU_CUENTA, String NO_BANCO_OTROS_SP, String ID_TRABAJADOR, String ES_CUENTA_SUELDO) {
         try {
@@ -937,8 +934,8 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 
     @Override
     public String REG_DOC_TRABAJADOR(String trb) {
-       this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select count(*) from RHTV_DGP_DOC_ADJ where ID_TRABAJADOR = "+trb+"";
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select count(*) from RHTV_DGP_DOC_ADJ where ID_TRABAJADOR = " + trb + "";
         String n = null;
         try {
             ResultSet rs = this.conn.query(sql);
@@ -955,7 +952,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     @Override
     public String ID_TRB(String user) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select ID_TRABAJADOR from RHVD_USUARIO_TEMP where ID_USUARIO = '"+user+"'";
+        String sql = "select ID_TRABAJADOR from RHVD_USUARIO_TEMP where ID_USUARIO = '" + user + "'";
         String id = null;
         try {
             ResultSet rs = this.conn.query(sql);
@@ -968,25 +965,55 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         }
         return id;
     }
+
     @Override
-     public String ip() {
+    public String ip() {
         String x = "";
         InetAddress ip;
-	try {
-		ip = InetAddress.getLocalHost();
-		NetworkInterface network = NetworkInterface.getByInetAddress(ip);
-		byte[] mac = network.getHardwareAddress();
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < mac.length; i++) {
-			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));		
-		}
-                x=ip.getHostAddress()+"*"+ip.getCanonicalHostName()+"*"+sb.toString();
- 
-	} catch (UnknownHostException e) {
-		e.printStackTrace();
-	} catch (SocketException e){
-		e.printStackTrace();
-	}
+        try {
+            ip = InetAddress.getLocalHost();
+            NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+            byte[] mac = network.getHardwareAddress();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < mac.length; i++) {
+                sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+            }
+            x = ip.getHostAddress() + "*" + ip.getCanonicalHostName() + "*" + sb.toString();
+
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
         return x;
+    }
+
+    @Override
+    public boolean val_nu_doc(String nu_doc) {
+
+        boolean val = false;
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select count(*)  from rhtm_trabajador where trim(NU_DOC)='" + nu_doc.trim() + "'";
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                if (rs.getString(1).trim().equals("1")) {
+                    val = true;
+                } else {
+                    val = false;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return val;
     }
 }
