@@ -56,7 +56,9 @@ public class CPlazo extends HttpServlet {
                 String TI_PLAZO = request.getParameter("tipo");
                 int CA_DIAS_TOLERANCIA = Integer.parseInt(request.getParameter("tolerancia"));
                 String ID_DEPARTAMENTO_TOLERANCIA = request.getParameter("dep_tolerancia");
-                pl.INSERT_PLAZO(null, NO_PLAZO, DET_ALERTA, FE_DESDE, FE_HASTA, "1", ID_REQUERIMIENTO.trim(), TI_PLAZO, CA_DIAS_TOLERANCIA, ID_DEPARTAMENTO_TOLERANCIA);
+                String DEP = request.getParameter("departamento");
+                String AREA = request.getParameter("area");
+                pl.INSERT_PLAZO(null, NO_PLAZO, DET_ALERTA, FE_DESDE, FE_HASTA, "1", ID_REQUERIMIENTO.trim(), TI_PLAZO, CA_DIAS_TOLERANCIA, ID_DEPARTAMENTO_TOLERANCIA, DEP, AREA);
             }
             if (opc.equals("Modificar")) {
                 String ID_PLAZO = request.getParameter("ID");
@@ -106,7 +108,7 @@ public class CPlazo extends HttpServlet {
                 rpta.put("fecha", fecha);
                 rpta.put("rpta", "1");
             }
-            
+
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());

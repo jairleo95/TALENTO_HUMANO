@@ -25,7 +25,7 @@ public interface InterfacePlazo_DgpDAO {
 
     public String fecha_maxima_plazo();
 
-    public String INSERT_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO, String TI_PLAZO, int CA_DIAS_TOLERANCIA, String ID_DEPARTAMENTO_TOLERANCIA);
+    public String INSERT_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO, String TI_PLAZO, int CA_DIAS_TOLERANCIA, String ID_DEPARTAMENTO_TOLERANCIA,String ID_DEPARTAMENTO, String ID_AREA);
 
     public void UPDATE_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO);
 
