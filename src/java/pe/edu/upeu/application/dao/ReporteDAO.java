@@ -185,16 +185,21 @@ public class ReporteDAO implements InterfaceReporteDAO {
     }
 
     @Override
-    public List<Map<String, ?>> Reporte_Datos_Gen(String aps, String dep, String are,String sec, String puesto) {
+    public List<Map<String, ?>> Reporte_Datos_Gen(String aps, String dep, String are, String sec, String puesto, String fec, String edad, String ape, String mat, String nom, String num) {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM RHVD_FILTRO_DATOS_GENERALES ";                       
-            sql+=(!aps.equals("" ))? "Where CO_APS='"+aps.trim() + "'" : "";
-            sql+=(!dep.equals("" ))? "Where NO_DEP='"+dep.trim() + "'" : "";
-            //sql+=(!dep.equals("" ))? "Where NO_AREA='"+are.trim() + "'" : "";
-            //sql+=(!dep.equals("" ))? "Where NO_SECCION='"+sec.trim() + "'" : "";            
-            //sql+=(!dep.equals("" ))? "Where NO_PUESTO='"+puesto.trim() + "'" : "";
+            String sql = "SELECT * FROM RHVD_FILTRO_DATOS_GENERALES ";
+            sql += (!aps.equals("")) ? "Where CO_APS='" + aps.trim() + "'" : "";
+            sql += (!dep.equals("")) ? "Where UPPER(NO_DEP)='" + dep.trim().toUpperCase() + "'" : "";
+            sql += (!are.equals("")) ? "Where UPPER(NO_AREA)='" + are.trim().toUpperCase() + "'" : "";
+            sql += (!sec.equals("")) ? "Where UPPER(NO_SECCION)='" + sec.trim().toUpperCase() + "'" : "";
+            sql += (!puesto.equals("")) ? "Where UPPER(NO_PUESTO)='" + puesto.trim().toUpperCase() + "'" : "";
+            sql+=(!fec.equals("" ))? "Where FE_NAC='"+fec.trim() + "'" : "";                         
+            sql += (!ape.equals("")) ? "Where UPPER(AP_PATERNO)='" + ape.trim().toUpperCase() + "'" : "";
+            sql += (!mat.equals("")) ? "Where UPPER(AP_MATERNO)='" + mat.trim().toUpperCase() + "'" : "";
+            sql += (!nom.equals("")) ? "Where UPPER(NO_TRABAJADOR)='" + nom.trim() + "'" : "";
+            sql += (!num.equals("")) ? "Where NU_DOC='" + num.trim() + "'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -210,7 +215,7 @@ public class ReporteDAO implements InterfaceReporteDAO {
                 rec.put("nom", rs.getString("NO_TRABAJADOR"));
                 rec.put("has", rs.getString("FE_HASTA"));
                 rec.put("nom_hi", rs.getString("NOMBRE"));
-                rec.put("dni_hi", rs.getString("DNI"));                
+                rec.put("dni_hi", rs.getString("DNI"));
                 rec.put("gen_hi", rs.getString("GENERO"));
                 rec.put("nac_hi", rs.getString("FECHA_NAC"));
                 rec.put("eda_hi", rs.getString("EDAD"));

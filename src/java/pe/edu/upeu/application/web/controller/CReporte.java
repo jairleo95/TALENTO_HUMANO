@@ -118,7 +118,13 @@ public class CReporte extends HttpServlet {
                 String are = request.getParameter("seccion");
                 String sec = request.getParameter("area");
                 String puesto = request.getParameter("puesto");
-                List<Map<String, ?>> lista = r.Reporte_Datos_Gen(aps, dep, are, sec, puesto);
+                String fec = request.getParameter("fecha");
+                String edad = request.getParameter("edad");
+                String ape = request.getParameter("paterno");
+                String mat = request.getParameter("materno");
+                String nom = request.getParameter("nombre");
+                String num = request.getParameter("num");
+                List<Map<String, ?>> lista = r.Reporte_Datos_Gen(aps, dep, are, sec, puesto, fec, edad, ape, mat,nom, num);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
