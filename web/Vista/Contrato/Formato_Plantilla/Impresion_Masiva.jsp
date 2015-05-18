@@ -38,6 +38,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <script src="../../../HTML_version/js/plugin/ckeditor/ckeditor.js"></script>
         <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
+        <style>
+            .caja{
+                background:transparent url(../../../imagenes/Gifloader.GIF) center no-repeat;
+            }
+        </style>
     <input type="hidden" id="cant_con" class="cant_con" value="<%=lista.size()%>">
     <%
         for (int i = 0; i < lista.size(); i++) {
@@ -169,6 +174,38 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     var app = "";
                     var apm = "";
                     var nu_doc = "";
+                    var funciones_prim = "";
+                    var funciones_sec = "";
+                    if (Lista[i].id_fu_1 != null) {
+                        var func_pr = "";
+                        func_pr = Lista[i].id_fu_1;
+                        var aray = func_pr.split("/");
+                        for (var c_f = 0; c_f < aray.length; c_f++) {
+                            if ((c_f+1)  === aray.length) {
+                            } else {
+                                if((c_f+2)===aray.length){
+                                    funciones_prim += aray[c_f];
+                                }else{
+                                    funciones_prim += aray[c_f] + ", ";
+                                }
+                            }
+                        }
+                    }
+                    if (Lista[i].id_fu_2 != null) {
+                        var func_sc = "";
+                        func_sc = Lista[i].id_fu_2;
+                        var aray = (func_sc).split("/");
+                        for (var c_f = 0; c_f < aray.length; c_f++) {
+                            if ((c_f+1) === aray.length) {
+                            } else {
+                                if((c_f+2)===aray.length){
+                                    funciones_sec += aray[c_f];
+                                }else{
+                                    funciones_sec += aray[c_f] + ", ";
+                                }
+                            }
+                        }
+                    }
                     if (Lista[i].no_tr != null) {
                         nombre = Lista[i].no_tr;
                     } else {
@@ -338,7 +375,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         "[horas]": nu_ho,
                         "[cursos]": "",
                         "[moneda]": co_tm,
-                        "[funciones]": ""
+                        "[funciones_pr]": funciones_prim,
+                        "[funciones_sec]": funciones_sec
                     };
                     var string_texto = "";
                     var arr_text;
@@ -358,7 +396,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 $("#texto2").val(txt);
             });
         }
+
         var texto = "";
+        function funciones(id_p) {
+        }
+        ;
         function procesar_texto_1(plan, valor) {
             $.post("../../../formato_plantilla", "opc=Listar2&id=" + plan.trim(), function(objJson) {
                 var imprimir = objJson.imprimir;
@@ -399,13 +441,27 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             // InsertHTML();
             //ExecuteCommand("print");
         }
+        function imd() {
+            $(".div_t").empty();
+        }
         $(document).ready(function() {
 
             $("#actu").hide();
             $("#texto").hide();
             $("#texto2").hide();
+            function GifLoader(contenedor, msg, action) {
+                $('.headerr').hide();
+                var text = "";
+                contenedor.empty();
+                if (action == 1) {
+                    text += "<div class='caja' style='height:250px; width:150px; margin:auto;'><center><h3>" + msg + "</h3></center></div>";
+                } else if (action == 2) {
+                    text += "<div style='height:150px; width:150px; margin:auto; padding-top:30px;'><center><h3>" + msg + "</h3></center></div>";
+                }
+                contenedor.append(text);
+            }
             setTimeout(function() {
-                InsertHTML();
+                InsertHTML().after(imd());
                 ExecuteCommand("print");
             }, 10000);
             recorido();
@@ -426,6 +482,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <button type="button" id="btn2" class="btn2" onclick="resetear()" >Resetear</button>
     <h3>EDITAR PLANTILLAS</h3>
     <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
+        <div class="div_t">                                                                                     
+        </div>
         <textarea cols="100" id="editor1" name="editor1" rows="10">
         </textarea>
         <script>
@@ -451,6 +509,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
             }
             );</script>
+
         <div id="eButtons" >
             <textarea id="texto" class="texto"></textarea>
             <textarea id="texto2" class="texto2"></textarea>

@@ -752,7 +752,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM RHVD_CONTRATOS_HISTORIAL WHERE ID_CONTRATO='" + id_ctos + "'";
+            String sql = "SELECT rhfu_print_func_pri(h.ID_PUESTO) as func1,rhfu_print_func_sec(h.ID_PUESTO)as func2,h.* FROM RHVD_CONTRATOS_HISTORIAL h WHERE h.ID_CONTRATO='"+id_ctos.trim()+"'";
             // if(sueldo_total!=null ){sql+=" and CA_SUELDO_TOTAL="+sueldo_total;}else{}
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
@@ -778,6 +778,8 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 rec.put("nu_ho", rs.getString("nu_horas_lab"));
                 rec.put("co_tm", rs.getString("co_ti_moneda"));
                 rec.put("id_pu", rs.getString("id_puesto"));
+                rec.put("id_fu_1", rs.getString("func1"));
+                rec.put("id_fu_2", rs.getString("func2"));
                 /*
                  v.setId_filial(rs.getString("id_filial"));
                  v.setId_puesto(rs.getString("id_puesto"));

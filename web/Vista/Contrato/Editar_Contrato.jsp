@@ -19,7 +19,7 @@
 <html>
     <head>
         <meta charset="windows-1252">
-        <title>Registrar Contrato</title>
+        <title>Editar Contrato</title>
 
         <!-- Basic Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
