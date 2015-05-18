@@ -303,33 +303,39 @@
                                     <div class="row">
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Remuneración:
-                                                <input type="text" name="SUELDO" value="<%=a.getCa_sueldo()%>" class="input-group-sm" id="remu" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%>>
+                                                <input type="text" name="SUELDO" value="<%=a.getCa_sueldo()%>" class="input-group-sm" id="remu" <%if (a.getId_dgp() == null) {
+                                                    } else {%>readonly=""<%}%>>
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">Reintegro:
-                                                <input type="text" name="REINTEGRO" value="<%=a.getCa_reintegro()%>" class="input-group-sm" id="rein" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%> >
+                                                <input type="text" name="REINTEGRO" value="<%=a.getCa_reintegro()%>" class="input-group-sm" id="rein" <%if (a.getId_dgp() == null) {
+                                                    } else {%>readonly=""<%}%> >
                                             </label>
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Bono Alimentario:
-                                                <input type="text" name="BONO_ALIMENTO" value="<%=a.getCa_bono_alimento()%>" class="input-group-sm" id="bo_a" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%>>
+                                                <input type="text" name="BONO_ALIMENTO" value="<%=a.getCa_bono_alimento()%>" class="input-group-sm" id="bo_a" <%if (a.getId_dgp() == null) {
+                                                    } else {%>readonly=""<%}%>>
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">BEV:
-                                                <input type="text" name="BEV" value="<%=a.getCa_bev()%>" class="input-group-sm" id="bev" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%>>
+                                                <input type="text" name="BEV" value="<%=a.getCa_bev()%>" class="input-group-sm" id="bev" <%if (a.getId_dgp() == null) {
+                                                    } else {%>readonly=""<%}%>>
                                             </label>
                                         </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">Bono puesto:
-                                                <input type="text" name="ca_bono_puesto" value="<%=a.getCa_bonificacion_p()%>" class="input-group-sm" required="" id="ca_bono_pu" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%>>
+                                                <input type="text" name="ca_bono_puesto" value="<%=a.getCa_bonificacion_p()%>" class="input-group-sm" required="" id="ca_bono_pu" <%if (a.getId_dgp() == null) {
+                                                    } else {%>readonly=""<%}%>>
                                             </label>
                                         </section>
 
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Sueldo Total:
-                                                <input type="text" name="TOTAL_SUELDO" value="<%=a.getCa_sueldo_total()%>" class="input-group-sm" id="su_t" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%>>
+                                                <input type="text" name="TOTAL_SUELDO" value="<%=a.getCa_sueldo_total()%>" class="input-group-sm" id="su_t" <%if (a.getId_dgp() == null) {
+                                                    } else {%>readonly=""<%}%>>
                                             </label>
                                         </section>
                                         <section class="col col-2">
@@ -338,12 +344,14 @@
                                                         out.print("0");
                                                     } else {
                                                         out.print(a.getTi_hora_pago());
-                                                    }%>" class="input-group-sm" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%>>
+                                                    }%>" class="input-group-sm" <%if (a.getId_dgp() == null) {
+                                                        } else {%>readonly=""<%}%>>
                                             </label>
                                         </section>
                                         <section class="col col-2" >
                                             <label class="input" id="titulo">Asignanción Familiar:
-                                                <input type="text" name="ASIG_FAMILIAR" value="<%=a.getCa_asig_familiar()%>"  class="input-group-sm" id="asig" <%if(a.getId_dgp() == null){}else{%>readonly=""<%}%>>
+                                                <input type="text" name="ASIG_FAMILIAR" value="<%=a.getCa_asig_familiar()%>"  class="input-group-sm" id="asig" <%if (a.getId_dgp() == null) {
+                                                    } else {%>readonly=""<%}%>>
                                             </label>
                                         </section>
                                     </div>
@@ -458,7 +466,7 @@
                                         </section>
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Modalidad:
-                                                <select name="MODALIDAD" class="input-group-sm" id="select_mod" required="">
+                                                <select name="MODALIDAD" class="input-group-sm select_mod" id="select_mod" required="">
                                                     <option value="">[SELECCIONE]</option>
                                                     <%for (int l = 0; l < List_modalidad.size(); l++) {
                                                             Modalidad mo = new Modalidad();
@@ -466,7 +474,7 @@
                                                             if (request.getParameter("id_mod") != null) {
                                                                 if (request.getParameter("id_mod").trim().equals(mo.getId_modalidad().trim())) {
                                                     %>
-                                                    <option value="<%=mo.getId_modalidad()%>" selected=""><%=mo.getDe_modalidad() + mo.getId_modalidad()%></option>
+                                                    <option value="<%=mo.getId_modalidad()%>" selected=""><%=mo.getDe_modalidad()%></option>
                                                     <%} else {%>
                                                     <option value="<%=mo.getId_modalidad()%>" ><%=mo.getDe_modalidad()%></option>
                                                     <%}
@@ -507,7 +515,9 @@
                                                     <%} else {%>
                                                     <option value="<%=g.getId_grupo_ocupacion()%>"><%=g.getDe_grupo_ocupacion()%></option>
                                                     <%}
-                                                            }
+                                                    } else {%>
+                                                    <option value="<%=g.getId_grupo_ocupacion()%>"><%=g.getDe_grupo_ocupacion()%></option>
+                                                    <%}
                                                         }%>
                                                 </select>
                                             </label>
@@ -1618,7 +1628,7 @@
                     estable++;
                     sumn_porcen_total();
                     //agrgar_atrib_rem_t();
-                    
+
                 }
                 //$(".ver").text(texto); 
                 texto = "";
@@ -1676,7 +1686,7 @@
                 $(".cc-dir" + num).change(function() {
 
                     listar_dep_cc(num, "0", arr_cc);
-                    
+
                 });
                 $(".cc-dep" + num).change(function() {
                     listar_centro_costo2(num, "0", arr_cc);
@@ -1692,7 +1702,7 @@
                     ag--;
                     ingr--;
                     estable--;
-                    if(ingr==0){
+                    if (ingr == 0) {
                         rem_atrib_rem_t();
                     }
                     $(".cant-ing").val(ingr);
@@ -1793,7 +1803,7 @@
                     listar_centro_costo2(num, "0", arr_cc);
                 });
                 //  alert(num);
-                $(".por-cen-"+num).keyup(function() {
+                $(".por-cen-" + num).keyup(function() {
                     sumn_porcen_total();
                 });
                 $(".remover" + num).click(function() {
@@ -1856,7 +1866,7 @@
             function Eliminar(i) {
                 //alert();
                 var x = $("#fila-agregar-cc");
-                
+
                 var msg = confirm('Si aceptas se eliminara la informacion totalmente ¿aceptas?');
                 if (msg == true) {
                     $.post("../../centro_costo", "opc=Eliminar_det_cc&" + "id_dcc=" + $(".id_dcc" + i).val(), function() {
@@ -1872,7 +1882,7 @@
                         Actualizar_valores().after(Listar_centro_costo());
                         ag = 1;
                     });
-                } else if(msg == false){
+                } else if (msg == false) {
                     return false;
                 }
             }
@@ -1908,19 +1918,24 @@
                 $(".date").keyup(function() {
                     $(".conteni").val($(".date").val());
                 });
-                $(".")
                 // $.post("../../  ")
-                $("#select_mod").change(
+                $(".select_mod").change(
                         function() {
                             // alert("?MODALIDAD="+$("#select_mod").val());
-                            $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
+                            $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&id=" + $(".select_mod").val(), function(objJson) {
                                 a.empty();
+                                if (objJson.rpta == -1) {
+                                    alert(objJson.mensaje);
+                                    return;
+                                }
                                 var list = objJson.lista;
                                 a.append("<option value='' > [SELECCIONE] </option>");
                                 if (list.length !== 0) {
                                     for (var i = 0; i < list.length; i++) {
-                                        a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
+                                        a.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
                                     }
+                                }else{
+                                    a.append("<option value='' > [no hay] </option>");
                                 }
                             });
                         });

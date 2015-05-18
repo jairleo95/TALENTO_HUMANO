@@ -21,6 +21,6 @@ public interface InterfaceAnnoDAO {
     public List<Contrato> List_A_Cont (String id_dgp);
     public List<Anno>List_anno_max();
     public List<Anno>List_anno_ma();
-    public List<Anno>List_Anno_trabajador(String idtr);
-    
+    public List<Anno>List_Anno_trabajador_contrato(String idtr);
+    public String Listar_año_contrato(String id_contrato);
 }
