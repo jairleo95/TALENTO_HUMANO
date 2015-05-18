@@ -431,7 +431,7 @@ public class CDgp extends HttpServlet {
                     
                     String id_cto = con.Contrato_max(idtr);
                     String id_pu = puesto.puesto(id_cto);
-                    getServletContext().setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador(idtr));
+                    getServletContext().setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador_contrato(idtr));
                     getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
                     getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
                     getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
@@ -464,7 +464,7 @@ public class CDgp extends HttpServlet {
                     String ida1 = anno.List_Anno_Max_Cont(idtr);
                     String id_cto = con.Contrato_max(idtr);
                     String id_pu = puesto.puesto(id_cto);
-                    getServletContext().setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador(idtr));
+                    getServletContext().setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador_contrato(idtr));
                     getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
                     getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
                     getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
