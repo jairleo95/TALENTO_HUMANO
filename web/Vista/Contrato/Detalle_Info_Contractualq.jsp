@@ -458,10 +458,13 @@
                         }
                             %> </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>Situacion Actual:</strong></td><td class="table-bordered" colspan="6"><%
-                        for (int t = 0; t < List_Situacion_Actual.size(); t++) {
-                            if (n.getEs_contrato().trim().equals(t + 1 + "")) {
-                            %><%=List_Situacion_Actual.get(t)%>
-                            <%}
+                       // for (int t = 0; t < List_Situacion_Actual.size(); t++) {
+                        if (n.getEs_contrato() != null) {
+                            if (n.getEs_contrato().trim().equals("1")) {
+                                    out.print("Activo");
+                            }else{
+                                out.print("Termino Contrato"); 
+                            }
                                 }
                             %> </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>Filial donde Trabaja:</strong></td><td class="table-bordered" colspan="6"><%

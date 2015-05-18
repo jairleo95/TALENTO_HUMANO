@@ -1157,4 +1157,23 @@ public class ContratoDAO implements InterfaceContratoDAO {
         }
     }
 
+    @Override
+    public void VALIDAR_FE_HASTA_CON() {
+         try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL VAL_ESTADO_CONTRATO}");
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al insertar archivo");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
 }
