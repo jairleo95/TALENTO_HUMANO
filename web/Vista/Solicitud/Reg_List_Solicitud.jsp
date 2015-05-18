@@ -75,6 +75,7 @@
                 <section id="widget-grid" class="">
                     <div class="row">
                         <!-- NEW WIDGET START -->
+                                    <!--col-xs-12 col-sm-12 col-md-12 col-lg-12-->
                         <article class="col-sm-12 col-md-12 col-lg-6">
                             <div id="alerta_dgp">
                             </div>
@@ -186,7 +187,7 @@
 
                                 -->
                                 <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <span class="widget-icon col-lg-6"> <i class="fa fa-table"></i> </span>
                                     <h>Hacer Solicitud</h2>
                                 </header>
                                 <!-- widget div-->

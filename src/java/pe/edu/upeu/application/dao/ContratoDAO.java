@@ -669,7 +669,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     @Override
     public List<V_List_Empleado> LIST_CASOS_ESPECIALES() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHVD_LIST_EMPLEADO where ID_TRABAJADOR IN (select DISTINCT ID_TRABAJADOR from RHTM_CONTRATO where ID_DGP is null ) and FE_CREACION_CONTRATO  like '%15'";
+        String sql = "select * from RHVD_LIST_EMPLEADO where ID_TRABAJADOR IN (select DISTINCT ID_TRABAJADOR from RHTM_CONTRATO where ID_DGP is null ) and  to_char(FE_CREACION_CONTRATO,'yy')  = to_char(sysdate,'yy')";
         List<V_List_Empleado> list = new ArrayList<V_List_Empleado>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -1175,5 +1175,4 @@ public class ContratoDAO implements InterfaceContratoDAO {
             }
         }
     }
-
 }

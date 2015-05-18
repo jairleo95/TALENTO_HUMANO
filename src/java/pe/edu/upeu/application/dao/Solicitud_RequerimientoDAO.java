@@ -169,11 +169,11 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
     }
 
     @Override
-    public List<V_Solicitud_Requerimiento> Listar_solicitud_id_us(String id_us) {
+    public List<V_Solicitud_Requerimiento> Listar_solicitud_id_us(String id_us , String id_dgp) {
         List<V_Solicitud_Requerimiento> lista = new ArrayList<>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select *  from RHVD_SOLICITUD_REQUERIMIENTO where  US_CREACION='" + id_us.trim() + "'";
+            String sql = "select *  from RHVD_SOLICITUD_REQUERIMIENTO where  US_CREACION='" + id_us.trim() + "' and ID_DGP = '"+id_dgp.trim()+"'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 V_Solicitud_Requerimiento v = new V_Solicitud_Requerimiento();
