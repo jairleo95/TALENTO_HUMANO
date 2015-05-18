@@ -328,7 +328,7 @@ public class ListaDAO implements InterfaceListaDAO {
     public List<String> List_Situacion_Actual() {
         List<String> list = new ArrayList<String>();
         list.add("Activo");
-        list.add("Término de Contrato");
+        list.add("Terminó Contrato");
         list.add("Renuncia Voluntaria");
         list.add("Traslado a otra Filial/Institución");
         list.add("No Inicio Relacion Laboral");

@@ -278,7 +278,7 @@
                                         </section>
                                         <section class="col col-3">
                                             <label class="select" id="titulo">Condición:
-                                                <select name="CONDICION" class="input-group-sm" required="">
+                                                <select name="CONDICION" class="input-group-sm" >
                                                     <option value="">[SELECCIONE]</option>
                                                     <option value="1">Contratado</option>
                                                     <option value="2">Contratado Independiente</option>

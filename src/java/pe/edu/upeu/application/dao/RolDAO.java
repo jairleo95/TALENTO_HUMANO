@@ -9,7 +9,10 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.ObjDoubleConsumer;
 import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -214,6 +217,52 @@ public class RolDAO implements InterfaceRolDAO {
 
         return list;
 
+    }
+
+    @Override
+    public List<Map<String, ?>> List_rol() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from RHTR_ROL";
+        List<Map<String,?>> list = new ArrayList<>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String,Object> rec= new HashMap<>();
+                rec.put("id_rol", rs.getString("id_rol"));
+                rec.put("no_rol", rs.getString("no_rol"));
+                rec.put("es_rol", rs.getString("es_rol"));
+                list.add(rec);
+            }
+
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<Map<String, ?>> List_rol(String idRol) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from RHTR_ROL where id_rol="+idRol;
+        List<Map<String,?>> list = new ArrayList<>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String,Object> rec= new HashMap<>();
+                rec.put("id_rol", rs.getString("id_rol"));
+                rec.put("no_rol", rs.getString("no_rol"));
+                rec.put("es_rol", rs.getString("es_rol"));
+                list.add(rec);
+            }
+
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+
+        return list;
     }
 
 }

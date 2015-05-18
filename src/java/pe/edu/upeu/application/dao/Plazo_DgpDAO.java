@@ -111,11 +111,11 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
     }
 
     @Override
-    public String INSERT_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO, String TI_PLAZO, int CA_DIAS_TOLERANCIA, String ID_DEPARTAMENTO_TOLERANCIA) {
+    public String INSERT_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO, String TI_PLAZO, int CA_DIAS_TOLERANCIA, String ID_DEPARTAMENTO_TOLERANCIA, String ID_DEPARTAMENTO, String ID_AREA) {
         String id = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PLAZO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PLAZO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,?,?)} ");
             cst.setString(1, null);
             cst.setString(2, NO_PLAZO);
             cst.setString(3, DET_ALERTA);
@@ -126,9 +126,11 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
             cst.setString(8, TI_PLAZO);
             cst.setInt(9, CA_DIAS_TOLERANCIA);
             cst.setString(10, ID_DEPARTAMENTO_TOLERANCIA);
-            cst.registerOutParameter(11, Types.CHAR);
+            cst.setString(11, ID_DEPARTAMENTO);
+            cst.setString(12, ID_AREA);
+            cst.registerOutParameter(13, Types.CHAR);
             cst.execute();
-            id = cst.getString(11);
+            id = cst.getString(13);
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {

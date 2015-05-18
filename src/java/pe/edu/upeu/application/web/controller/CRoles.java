@@ -5,18 +5,19 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JCheckBox;
-import pe.edu.upeu.application.dao.PrivilegioDAO;
 import pe.edu.upeu.application.dao.RolDAO;
-import pe.edu.upeu.application.dao_imp.InterfacePrivilegioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
 
 /**
@@ -39,16 +40,24 @@ public class CRoles extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        
+        Map<String, Object> rpta = new HashMap<String, Object>();
         String opc = request.getParameter("opc");
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
+        
         try {
-            if (opc.equals("Listar_Rol")) {
-                getServletContext().setAttribute("List_Rol", rol.List_Rol());
+            if (opc.equals("mat_rol")) {
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
+            }
+            if (opc.equals("Listar_Rol")) {
+                //getServletContext().setAttribute("List_Rol", rol.List_Rol());
+                //response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
+                List<Map<String, ?>> list = rol.List_rol();
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
             }
             if (opc.equals("Modificar_Rol")) {
                 String idrol = request.getParameter("idrol");
@@ -95,9 +104,15 @@ public class CRoles extends HttpServlet {
                 getServletContext().setAttribute("List_Rol", rol.List_Rol());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
             }
-        } finally {
-            out.close();
+        } catch (Exception e) {
+            rpta.put("rpta", "-1");
+            rpta.put("mensaje", e.getMessage());
         }
+        Gson gson = new Gson();
+        out.println(gson.toJson(rpta));
+        out.flush();
+        out.close();
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
