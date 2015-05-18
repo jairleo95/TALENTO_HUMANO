@@ -586,13 +586,15 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
                     </article>
                     <article class=" col-sm-12 col-md-12 col-lg-6">
 
                         <div class=" jarviswidget well" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
                             <div class="row">
-                           <!-- </div>
-                            <div class="row">-->
+                                <!-- </div>
+                                 <div class="row">-->
 
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
@@ -763,22 +765,63 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                     </textarea>
                                     <script>
                                         // Replace the <textarea id="editor1"> with an CKEditor instance.
-                                        CKEDITOR.replace('editor1', {
-                                            on: {
-                                                focus: onFocus,
-                                                blur: onBlur,
-                                                // Check for availability of corresponding plugins.
-                                                pluginsLoaded: function(evt) {
-
-
-                                                    var doc = CKEDITOR.document, ed = evt.editor;
-                                                    if (!ed.getCommand('bold'))
-                                                        doc.getById('exec-bold').hide();
-                                                    if (!ed.getCommand('link'))
-                                                        doc.getById('exec-link').hide();
-                                                }
-
-                                            }, height: '1024px'});
+                                        /* config.toolbar = 'Full';
+                                         
+                                         config.toolbar_Full =
+                                         [
+                                         ['Source', '-', 'Save', 'NewPage', 'Preview', '-', 'Templates'],
+                                         ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Print', 'SpellChecker', 'Scayt'],
+                                         ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
+                                         ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
+                                         '/',
+                                         ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
+                                         ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
+                                         ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                                         ['Link', 'Unlink', 'Anchor'],
+                                         ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
+                                         '/',
+                                         ['Styles', 'Format', 'Font', 'FontSize'],
+                                         ['TextColor', 'BGColor'],
+                                         ['Maximize', 'ShowBlocks', '-', 'About']
+                                         ];*/
+                                        /* CKEDITOR.replace('editor1', {
+                                         on: {
+                                         focus: onFocus,
+                                         blur: onBlur,
+                                         // Check for availability of corresponding plugins.
+                                         pluginsLoaded: function(evt) {
+                                         
+                                         
+                                         var doc = CKEDITOR.document, ed = evt.editor;
+                                         if (!ed.getCommand('bold'))
+                                         doc.getById('exec-bold').hide();
+                                         if (!ed.getCommand('link'))
+                                         doc.getById('exec-link').hide();
+                                         }
+                                         
+                                         }, height: '1024px'});*/
+                                        CKEDITOR.replace('editor1',
+                                                {
+                                                    toolbar:
+                                                            [['Source', '-', 'NewPage', 'Preview', '-', 'Templates'],
+                                                                ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Print', 'SpellChecker', 'Scayt'],
+                                                                ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
+                                                                ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
+                                                                '/',
+                                                                ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
+                                                                ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
+                                                                ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                                                                ['Link', 'Unlink', 'Anchor'],
+                                                                ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
+                                                                '/',
+                                                                ['Styles', 'Format', 'Font', 'FontSize'],
+                                                                ['TextColor', 'BGColor'],
+                                                                ['Maximize', 'ShowBlocks', '-', 'About'],
+                                                                ['Styles', 'Format'],
+                                                                ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', '-', 'About']
+                                                            ],
+                                                    height: '1024px'
+                                                });
                                     </script>
                                     <div id="eButtons" >
                                         <input  type="hidden" name="id" value="" class="id_pl"/>
