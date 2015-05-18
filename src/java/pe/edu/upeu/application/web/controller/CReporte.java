@@ -113,15 +113,12 @@ public class CReporte extends HttpServlet {
                 rpta.put("lista", lista);
             }
             if (opc.equals("reporte_datos_genereales")) {
-                int aps = 0;
-                if (request.getParameter("aps") != null) {
-                    if (!request.getParameter("aps").equals("")) {
-                        aps = Integer.parseInt(request.getParameter("aps"));
-                    }
-                }
-                String hasta = request.getParameter("hasta");
-                String edad = request.getParameter("edad");
-                List<Map<String, ?>> lista = r.Reporte_Datos_Gen(aps);
+                String aps = request.getParameter("aps");
+                String dep = request.getParameter("departamento");
+                String are = request.getParameter("seccion");
+                String sec = request.getParameter("area");
+                String puesto = request.getParameter("puesto");
+                List<Map<String, ?>> lista = r.Reporte_Datos_Gen(aps, dep, are, sec, puesto);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }

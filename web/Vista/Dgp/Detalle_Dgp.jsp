@@ -123,7 +123,7 @@
         </head>
         <body onload="closedthis();">
             <script >
-                $(document).ready(function() {
+                $(document).ready(function () {
                     function exito(titulo, mensaje) {
                         $.smallBox({
                             title: titulo,
@@ -284,14 +284,14 @@
                                 %>
 
                                 <h3 style="text-align: center;">Enviar Requerimiento</h3> 
-                                <form action="../../dgp" method="get">
+                                <form action="../../dgp" method="get" class="form_terminar_req">
                                     <input  type="hidden" value="<%=iddgp%>" name="iddgp">
                                     <input type="hidden" value="Terminar" name="opc">
                                     <footer> <%
                                         InterfacePlazo_DgpDAO p = new Plazo_DgpDAO();
                                         int val_btn = p.Validar_cumple_dias_pt2(iddgp.trim());
                                         %>
-                                        <%if (val_btn==0) {
+                                        <%if (val_btn == 0) {
 
                                         %>
                                         <label>Usted no ha cumplido con los dias de tolerancia del plazo <strong>Inicio de contrato</strong>, porfavor envie solicitud para la nueva fecha de inicio del trabajador.</label><br>
@@ -300,7 +300,7 @@
                                             SOLICITUD DE PLAZO
                                         </button>
 
-                                        <button type="submit" class="btn btn-success btn-labeled" <%if (val_btn==0) {
+                                        <button type="button" class="btn btn-success btn-labeled btn_terminar" <%if (val_btn == 0) {
                                                 out.print("disabled");
                                             }
                                                 %> ><span class="btn-label"><i class="fa fa-arrow-circle-right"></i></span>
@@ -460,16 +460,13 @@
 
 
         <script type="text/javascript">
-
                 // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
-                $(document).ready(function() {
-
+                $(document).ready(function () {
                     pageSetUp();
-                    $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                    $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                         $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                     });
-                    $(".tipo").change(function() {
+                    $(".tipo").change(function () {
                         if ($(this).val() == '1') {
                             $(".fe_inicio").attr("type", "month");
                             $(".lb_fecha_solicitud").text("Mes :");
@@ -483,21 +480,32 @@
                         //alert();
                         list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
                     });
-                    $(".sbm_solicitud").click(function(e) {
+                    $(".btn_terminar").click(function () {
+                        $.SmartMessageBox({
+                            title: "¡Advertencia!",
+                            content: "¿Esta seguro de enviar la solicitud?",
+                            buttons: '[No][Si]'
+                        }, function (ButtonPressed) {
+                            if (ButtonPressed === "Si") {
+                                $(".form_terminar_req").submit();
+                            }
+                            if (ButtonPressed === "No") {
+                            }
+                        });
+                    });
+                    $(".sbm_solicitud").click(function (e) {
                         if ($(".solicitud_plazo").valid() == true) {
-
                             $.SmartMessageBox({
                                 title: "¡Advertencia!",
                                 content: "¿Esta seguro de enviar la solicitud?",
                                 buttons: '[No][Si]'
-                            }, function(ButtonPressed) {
+                            }, function (ButtonPressed) {
                                 if (ButtonPressed === "Si") {
-
                                     $.ajax({
                                         url: "../../solicitud_requerimiento",
                                         type: "post",
                                         data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud"
-                                    }).done(function() {
+                                    }).done(function () {
                                         $('.solicitud_plazo')[0].reset();
                                         var $p = $(this).parent().parent();
                                         $p.removeClass('has-success');
@@ -511,7 +519,7 @@
                                             iconSmall: "fa fa-check fa-2x fadeInRight animated",
                                             timeout: 4000
                                         });
-                                    }).error(function() {
+                                    }).error(function () {
                                         $.smallBox({
                                             title: "¡Error!",
                                             content: "<i class='fa fa-clock-o'></i> <i>La solicitud no ha podido ser enviada...</i>",
@@ -529,9 +537,6 @@
                         }
 
                     });
-
-
-
                     /*
                      * Autostart Carousel
                      */
@@ -554,7 +559,7 @@
                     /*
                      * Smart Notifications
                      */
-                    $('#eg1').click(function(e) {
+                    $('#eg1').click(function (e) {
 
                         $.bigBox({
                             title: "Big Information box",
@@ -570,7 +575,7 @@
 
                     })
 
-                    $('#eg2').click(function(e) {
+                    $('#eg2').click(function (e) {
 
                         $.bigBox({
                             title: "Big Information box",
@@ -584,7 +589,7 @@
                         e.preventDefault();
                     })
 
-                    $('#eg3').click(function(e) {
+                    $('#eg3').click(function (e) {
 
                         $.bigBox({
                             title: "Shield is up and running!",
@@ -599,7 +604,7 @@
 
                     })
 
-                    $('#eg4').click(function(e) {
+                    $('#eg4').click(function (e) {
 
                         $.bigBox({
                             title: "Success Message Example",
@@ -608,7 +613,7 @@
                             //timeout: 8000,
                             icon: "fa fa-check",
                             number: "4"
-                        }, function() {
+                        }, function () {
                             closedthis();
                         });
 
@@ -618,7 +623,7 @@
 
 
 
-                    $('#eg5').click(function() {
+                    $('#eg5').click(function () {
 
                         $.smallBox({
                             title: "Ding Dong!",
@@ -632,7 +637,7 @@
 
 
 
-                    $('#eg6').click(function() {
+                    $('#eg6').click(function () {
 
                         $.smallBox({
                             title: "Big Information box",
@@ -644,7 +649,7 @@
 
                     })
 
-                    $('#eg7').click(function() {
+                    $('#eg7').click(function () {
 
                         $.smallBox({
                             title: "James Simmons liked your comment",
@@ -672,7 +677,7 @@
                     // With Callback
 
                     // With Input
-                    $("#smart-mod-eg2").click(function(e) {
+                    $("#smart-mod-eg2").click(function (e) {
 
                         $.SmartMessageBox({
                             title: "Smart Alert: Input",
@@ -680,14 +685,14 @@
                             buttons: "[Accept]",
                             input: "text",
                             placeholder: "Enter your user name"
-                        }, function(ButtonPress, Value) {
+                        }, function (ButtonPress, Value) {
                             alert(ButtonPress + " " + Value);
                         });
 
                         e.preventDefault();
                     })
                     // With Buttons
-                    $("#smart-mod-eg3").click(function(e) {
+                    $("#smart-mod-eg3").click(function (e) {
 
                         $.SmartMessageBox({
                             title: "Smart Notification: Buttons",
@@ -698,7 +703,7 @@
                         e.preventDefault();
                     })
                     // With Select
-                    $("#smart-mod-eg4").click(function(e) {
+                    $("#smart-mod-eg4").click(function (e) {
 
                         $.SmartMessageBox({
                             title: "Smart Alert: Select",
@@ -706,7 +711,7 @@
                             buttons: "[Done]",
                             input: "select",
                             options: "[Costa Rica][United States][Autralia][Spain]"
-                        }, function(ButtonPress, Value) {
+                        }, function (ButtonPress, Value) {
                             alert(ButtonPress + " " + Value);
                         });
 
@@ -714,7 +719,7 @@
                     });
 
                     // With Login
-                    $("#smart-mod-eg5").click(function(e) {
+                    $("#smart-mod-eg5").click(function (e) {
 
                         $.SmartMessageBox({
                             title: "Login form",
@@ -722,7 +727,7 @@
                             buttons: "[Cancel][Accept]",
                             input: "text",
                             placeholder: "Enter your user name"
-                        }, function(ButtonPress, Value) {
+                        }, function (ButtonPress, Value) {
                             if (ButtonPress == "Cancel") {
                                 alert("Why did you cancel that? :(");
                                 return 0;
@@ -736,7 +741,7 @@
                                 buttons: "[Login]",
                                 input: "password",
                                 placeholder: "Password"
-                            }, function(ButtonPress, Value) {
+                            }, function (ButtonPress, Value) {
                                 alert("Username: " + ValueOriginal + " and your password is: " + Value);
                             });
                         });
@@ -755,7 +760,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;

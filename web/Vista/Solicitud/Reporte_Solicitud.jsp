@@ -223,12 +223,7 @@
                                 <input  type="hidden" value="" class="data_procesar" />
                             </div>
                             <div class="modal-footer foot_sol">
-                                <button type="button" class="btn btn-default btn-labeled" data-dismiss="modal"><span class="btn-label"><i class="fa fa-times"></i></span>
-                                    Cancel
-                                </button>
-                                <button class="btn btn-primary btn-labeled btn_procesar_sol"  type="button" ><span class="btn-label"><i class="fa fa-check"></i></span>
-                                    Procesar
-                                </button>
+
                             </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
@@ -332,41 +327,13 @@
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
             $(".cod_aps").numeric();
-            $(".btn_procesar_sol").click(function () {
-                //  var valor = $(this).val();
-                if ($(".comentario").valid() == true) {
-                    $.SmartMessageBox({
-                        title: "¡Advertencia!",
-                        content: "¿Esta seguro de procesar esta solicitud?",
-                        buttons: '[No][Si]'
-                    }, function (ButtonPressed) {
-                        if (ButtonPressed === "Si") {
-                            $.ajax({
-                                url: "../../solicitud_requerimiento",
-                                data: "opc=Procesar_Solicitud" + $(".data_procesar").val() + "&" + $(".comentario").serialize(),
-                                type: "post"
-                            }).done(function () {
-                                $.smallBox({
-                                    title: "¡Procesado con exito!",
-                                    content: "<i class='fa fa-clock-o'></i> <i>Se ha procesado la solicituid correctamente...</i>",
-                                    color: "#659265",
-                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                    timeout: 4000
-                                });
-                                $(".comentario")[0].reset();
 
-                            });
-                        }
-                        if (ButtonPressed === "No") {
-                        }
-                    });
-                }
-            });
             $(".btn_sol").click(function () {
 
                 var tb = $(".tabla_detalle_sol");
                 tb.empty();
                 var texto_html = '';
+                $(".foot_sol").empty();
                 $.post("../../solicitud_requerimiento", "opc=Ver_Solicitud&id=" + $(this).val(), function (objJson) {
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -377,20 +344,22 @@
                         texto_html += '<tr><td colspan="2" class="text-info table-bordered"><i class="fa fa-file"></i> REQUERIMIENTO : ' + lista[i].req + '</td></tr>';
                         texto_html += '<tr><td>Apellidos y Nombres</td><td>' + lista[i].ap_p + ' ' + lista[i].ap_m + ' ' + lista[i].nombre + '</td></tr>';
                         if (lista[i].ti_plazo == '1') {
-                            texto_html += '<tr><td>Tipo de Plazo</td><td>Ingreso a planilla</td></tr>';
+
+                            texto_html += '<tr><td>Tipo de Plazo</td><td>Inicio de Contrato</td></tr>';
                         }
 
                         if (lista[i].ti_plazo == '2') {
-                            texto_html += '<tr><td>Tipo de Plazo</td><td>Inicio de Contrato</td></tr>';
+                            texto_html += '<tr><td>Tipo de Plazo</td><td>Ingreso a planilla</td></tr>';
                         }
 
                         texto_html += '<tr><td>Nombre de Plazo</td><td>' + lista[i].plazo + '</td></tr>';
                         texto_html += '<tr><td>Detalle de Plazo</td><td>' + lista[i].detalle_plazo + '</td></tr>';
                         if (lista[i].ti_plazo == '2') {
-                            texto_html += ' <tr><td>Fecha de inicio de contrato solicitado : </td><td>' + lista[i].fecha_plazo + '</td></tr>';
+                            texto_html += ' <tr><td>Mes de ingreso solicitado : </td><td>' + lista[i].mes + '</td></tr>';
+
                         }
                         else {
-                            texto_html += ' <tr><td>Mes de ingreso solicitado : </td><td>' + lista[i].mes + '</td></tr>';
+                            texto_html += ' <tr><td>Fecha de inicio de contrato solicitado : </td><td>' + lista[i].fecha_plazo + '</td></tr>';
                         }
                         texto_html += '<tr><td>Motivo de solicitud</td><td>' + lista[i].solicitud + '</td></tr>';
                         $(".data_procesar").val("&id=" + lista[i].id + "&tipo=" + lista[i].ti_plazo + "&fecha=" + lista[i].fecha_plazo);
@@ -399,16 +368,45 @@
                         }
                         if (lista[i].es_aut == '0') {
                             texto_html += '<tr><td>Estado de solicitud</td><td>Sin Autorizar</td></tr>';
+                            $(".foot_sol").empty();
+                            $(".foot_sol").append('<button type="button" class="btn btn-default btn-labeled" data-dismiss="modal"><span class="btn-label"><i class="fa fa-times"></i></span>Cancel</button><button class="btn btn-primary btn-labeled btn_procesar_sol"  type="button" ><span class="btn-label"><i class="fa fa-check"></i></span>Procesar</button>');
+
                         }
-
-
                     }
                     texto_html += '';
                     tb.append(texto_html);
                     texto_html = "";
 
 
-
+                    $(".btn_procesar_sol").click(function () {
+                        //  var valor = $(this).val();
+                        if ($(".comentario").valid() == true) {
+                            $.SmartMessageBox({
+                                title: "¡Advertencia!",
+                                content: "¿Esta seguro de procesar esta solicitud?",
+                                buttons: '[No][Si]'
+                            }, function (ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+                                    $.ajax({
+                                        url: "../../solicitud_requerimiento",
+                                        data: "opc=Procesar_Solicitud" + $(".data_procesar").val() + "&" + $(".comentario").serialize(),
+                                        type: "post"
+                                    }).done(function () {
+                                        $.smallBox({
+                                            title: "¡Procesado con exito!",
+                                            content: "<i class='fa fa-clock-o'></i> <i>Se ha procesado la solicituid correctamente...</i>",
+                                            color: "#659265",
+                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                            timeout: 4000
+                                        });
+                                        $(".comentario")[0].reset();
+                                    });
+                                }
+                                if (ButtonPressed === "No") {
+                                }
+                            });
+                        }
+                    });
                 });
             });
             /* // DOM Position key index //

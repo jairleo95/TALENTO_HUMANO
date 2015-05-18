@@ -133,6 +133,24 @@
     </head>
     <body>
     <center>
+        <BR>
+
+        <%
+            HttpSession Sesion = request.getSession(true);
+            String idrol = (String) Sesion.getAttribute("IDROL");
+            X_List_Id_Contrato_DGP n1 = new X_List_Id_Contrato_DGP();
+            n1 = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(0);
+            if (Integer.parseInt(n1.getEs_secre_is()) == 2 && idrol.trim().equals("ROL-0002")) {
+        %>
+
+        <div class="alert alert-warning fade in">
+            <button class="close" data-dismiss="alert">
+                ×
+            </button>
+            <i class="fa-fw fa fa-warning"></i>
+            <strong>¡Advertencia!</strong> Usted no tiene acceso a imprimir ni subir el contrato...
+        </div>
+        <%}%>
 
         <form action="../../contrato" method="get">
             <%String idanno = request.getParameter("anno");
@@ -171,21 +189,23 @@
         <div>
 
             <%
-
-                CConversion c = new CConversion();
-
-                HttpSession Sesion = request.getSession(true);
-                String idrol = (String) Sesion.getAttribute("IDROL");
-
             %>
             <%for (int b = 0; b < List_contra_x_idcto.size(); b++) {
                     X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
                     n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(b);
             %>
 
-            <%if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0002")) {%> 
+            <%if (Integer.parseInt(n.getEs_secre_is()) == 2 && idrol.trim().equals("ROL-0002")) {
+
+            %>
+
+
+            <%} else {%>
             <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Subir_Contrato2&idc=<%=n.getId_contrato()%>" > <span class="btn-label"><i class="fa fa-cloud-upload"></i></span>Subir Contrato Firmado</a>
                     <%}%>
+                    <%if (Integer.parseInt(n.getEs_secre_is()) == 2 && idrol.trim().equals("ROL-0002")) {
+                    %>
+                    <%} else {%>
             <form action="../../plantilla_contractual" method="post" class="formu">
                 <div class="Contenido">
                     <table>
@@ -193,10 +213,14 @@
                         <td><input type="hidden" name="idtraba" value="<%=n.getId_trabajador()%>"></td>
                         <td><input type="hidden" name="id_con" class="id_contrato" value="<%=n.getId_contrato()%>"></td>
                         <td><input type="hidden" name="puesto" class="id_pu" value="<%=n.getId_puesto()%>" ></td>
+
                         <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><button name="opc" value="Imprimir" class="PLANTI btn btn-labeled btn-primary"><span class="btn-label"><i class="fa fa-print"></i></span>Imprimir</button></td></tr>
                     </table>
                 </div>
             </form>
+            <%}%>
+
+
 
             <form action="">
 
