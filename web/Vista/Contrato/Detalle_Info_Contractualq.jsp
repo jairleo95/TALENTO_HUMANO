@@ -424,7 +424,7 @@
                     <tr><td class="text-info table-bordered"><strong>Situacion Actual:</strong></td><td class="table-bordered" colspan="6"><%
                         for (int t = 0; t < List_Situacion_Actual.size(); t++) {
                             if (n.getEs_contrato().trim().equals(t + 1 + "")) {
-                            %><%=List_Situacion_Actual.get(0)%>
+                            %><%=List_Situacion_Actual.get(t)%>
                             <%}
                                 }
                             %> </td></tr>   
