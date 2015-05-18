@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jdk.nashorn.internal.objects.annotations.Where;
 import pe.edu.upeu.application.dao_imp.InterfaceReporteDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -165,8 +166,8 @@ public class ReporteDAO implements InterfaceReporteDAO {
                 rec.put("fe_nac", rs.getString("FE_NAC"));
                 rec.put("des", rs.getString("FE_DESDE"));
                 rec.put("has", rs.getString("FE_HASTA"));
-                rec.put("t_tra", rs.getString("TIEMPO_TRABAJO"));                
-                rec.put("ID_TRABAJADOR", rs.getString("ID_TRABAJADOR"));                
+                rec.put("t_tra", rs.getString("TIEMPO_TRABAJO"));
+                rec.put("ID_TRABAJADOR", rs.getString("ID_TRABAJADOR"));
                 Lista.add(rec);
             }
             rs.close();
@@ -184,31 +185,35 @@ public class ReporteDAO implements InterfaceReporteDAO {
     }
 
     @Override
-    public List<Map<String,?>> Reporte_Datos_Gen() {
-          List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+    public List<Map<String, ?>> Reporte_Datos_Gen(String aps, String dep, String are,String sec, String puesto) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * from RHVD_REPORTE_EMP e, RHVD_FILTRO_EDAD h WHERE h.ID_TRABAJADOR = e.ID_TRABAJADOR ";
-            //sql += (!mes.equals("")) ? "where TIEMPO_TRABAJO='" + mes.trim() + "'" : "";
+            String sql = "SELECT * FROM RHVD_FILTRO_DATOS_GENERALES ";                       
+            sql+=(!aps.equals("" ))? "Where CO_APS='"+aps.trim() + "'" : "";
+            sql+=(!dep.equals("" ))? "Where NO_DEP='"+dep.trim() + "'" : "";
+            //sql+=(!dep.equals("" ))? "Where NO_AREA='"+are.trim() + "'" : "";
+            //sql+=(!dep.equals("" ))? "Where NO_SECCION='"+sec.trim() + "'" : "";            
+            //sql+=(!dep.equals("" ))? "Where NO_PUESTO='"+puesto.trim() + "'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("aps", rs.getString("CO_APS"));
                 rec.put("dep", rs.getString("NO_DEP"));
                 rec.put("are", rs.getString("NO_AREA"));
-                rec.put("sec", rs.getString("NO_SECCION")); 
-                rec.put("pue", rs.getString("NO_PUESTO")); 
-                rec.put("doc", rs.getString("TI_DOC")); 
-                rec.put("n_doc", rs.getString("NU_DOC")); 
-                rec.put("ape", rs.getString("AP_PATERNO")); 
-                rec.put("mat", rs.getString("AP_MATERNO")); 
-                rec.put("nom",rs.getString("NO_TRABAJADOR"));
-                rec.put("has", rs.getString("FE_HASTA"));   
-                rec.put("nom_hi", rs.getString("NOMBRE"));         
-                rec.put("dni_hi", rs.getString("DNI"));         
-                rec.put("gen_hi", rs.getString("GENERO"));         
-                rec.put("nac_hi", rs.getString("FECHA_NAC"));         
-                rec.put("eda_hi", rs.getString("EDAD"));                    
+                rec.put("sec", rs.getString("NO_SECCION"));
+                rec.put("pue", rs.getString("NO_PUESTO"));
+                rec.put("doc", rs.getString("TI_DOC"));
+                rec.put("n_doc", rs.getString("NU_DOC"));
+                rec.put("ape", rs.getString("AP_PATERNO"));
+                rec.put("mat", rs.getString("AP_MATERNO"));
+                rec.put("nom", rs.getString("NO_TRABAJADOR"));
+                rec.put("has", rs.getString("FE_HASTA"));
+                rec.put("nom_hi", rs.getString("NOMBRE"));
+                rec.put("dni_hi", rs.getString("DNI"));                
+                rec.put("gen_hi", rs.getString("GENERO"));
+                rec.put("nac_hi", rs.getString("FECHA_NAC"));
+                rec.put("eda_hi", rs.getString("EDAD"));
                 Lista.add(rec);
             }
             rs.close();
@@ -223,6 +228,6 @@ public class ReporteDAO implements InterfaceReporteDAO {
             }
         }
         return Lista;
-     }
+    }
 
 }

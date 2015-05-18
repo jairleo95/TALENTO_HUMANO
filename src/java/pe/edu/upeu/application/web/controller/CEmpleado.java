@@ -107,6 +107,11 @@ public class CEmpleado extends HttpServlet {
         int aps = Iem.val_aps(co_aps);
         out.print(aps);
         }
+        if(opc.equals("validar_huella")){
+        String co_hue = request.getParameter("co_hue");
+        int huella = Iem.val_huella(co_hue);
+        out.print(huella);
+        }
         try {
 
         } finally {

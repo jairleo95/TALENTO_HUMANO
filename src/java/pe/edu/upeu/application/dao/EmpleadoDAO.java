@@ -528,4 +528,27 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
         return cant;
     }
 
+    @Override
+    public int val_huella(String co_hue) {
+        int cant = 0;
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT COUNT (*) FROM RHTD_EMPLEADO WHERE CO_HUELLA_DIGITAL = '"+co_hue+"' ";
+        try {
+            ResultSet rs = this.conn.query(sql);
+            rs.next();
+            cant = rs.getInt(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al validar codigo huella");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return cant;
+    }
+
 }

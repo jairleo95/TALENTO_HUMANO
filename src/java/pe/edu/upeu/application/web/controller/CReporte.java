@@ -55,7 +55,7 @@ public class CReporte extends HttpServlet {
     InterfaceAreaDAO a = new AreaDAO();
     InterfaceSeccionDAO s = new SeccionDAO();
     InterfacePuestoDAO p = new PuestoDAO();
-    InterfaceReporteDAO RP= new ReporteDAO();
+    InterfaceReporteDAO RP = new ReporteDAO();
     InterfaceNacionalidadDAO n = new NacionalidadDAO();
     InterfaceSituacionEducativaDAO se = new SituacionEducativaDAO();
     InterfaceCarrera_UniversidadDAO ca = new Carrera_UniversidadDAO();
@@ -97,10 +97,11 @@ public class CReporte extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
-            
+
             if (opc.equals("reporte_cumpleaños")) {
                 String mes = request.getParameter("mes");
                 String dia = request.getParameter("dia");
+                //String aps = request.getParameter("aps");
                 List<Map<String, ?>> lista = dah.Listar_Cumpleaños(mes, dia);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
@@ -112,33 +113,32 @@ public class CReporte extends HttpServlet {
                 rpta.put("lista", lista);
             }
             if (opc.equals("reporte_datos_genereales")) {
-                String desde = request.getParameter("desde");
-                String hasta = request.getParameter("hasta");
-                String edad = request.getParameter("edad");
-                List<Map<String, ?>> lista = r.Reporte_Datos_Gen();
+                String aps = request.getParameter("aps");
+                String dep = request.getParameter("departamento");
+                String are = request.getParameter("seccion");
+                String sec = request.getParameter("area");
+                String puesto = request.getParameter("puesto");
+                List<Map<String, ?>> lista = r.Reporte_Datos_Gen(aps, dep, are, sec, puesto);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
-            
-            
-            
-            
+
             //vistas
             if (opc.equals("Reporte_padres_madres")) {
-                 response.sendRedirect("Vista/Reportes/Reporte_Padres_Madres.jsp");
+                response.sendRedirect("Vista/Reportes/Reporte_Padres_Madres.jsp");
             }
             if (opc.equals("Reporte_datos")) {
-                 response.sendRedirect("Vista/Reportes/Reporte_Datos_Generales.jsp");
+                response.sendRedirect("Vista/Reportes/Reporte_Datos_Generales.jsp");
             }
             if (opc.equals("Reporte_Datos_Hijos")) {
-                 response.sendRedirect("Vista/Reportes/Reporte_Datos_Hijos.jsp");
+                response.sendRedirect("Vista/Reportes/Reporte_Datos_Hijos.jsp");
             }
-            
+
             if (opc.equals("Reporte_Datos_cumpl")) {
-                 response.sendRedirect("Vista/Reportes/Reporte_Cumpleanos.jsp");
+                response.sendRedirect("Vista/Reportes/Reporte_Cumpleanos.jsp");
             }
             if (opc.equals("Reporte_Navidad")) {
-                 response.sendRedirect("Vista/Reportes/Reporte_para_navidad.jsp");
+                response.sendRedirect("Vista/Reportes/Reporte_para_navidad.jsp");
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");

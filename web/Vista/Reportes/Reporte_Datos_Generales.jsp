@@ -83,31 +83,31 @@
                 <div id="contenido">
                     <div class="form-group" >
                         <label>CODIGO APS</label><br>
-                        <input type="text"  class="form-control mes" placeholder="APS" name=""  length="45" style="width: 80px" id="des"/>
+                        <input type="text"  class="form-control aps" placeholder="APS"  length="45" style="width: 80px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>DEPARTAMENTO</label><br>
-                        <input type="text"  class="form-control mes" placeholder="Ingrese el DEPARTAMENTO" name=""  length="45" style="width: 150px" id="des"/>
+                        <input type="text"  class="form-control dep" placeholder="Ingrese el DEPARTAMENTO"   length="45" style="width: 150px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>AREA</label><br>
-                        <input type="text"  class="form-control mes" placeholder="Ingrese su AREA" name=""  length="45" style="width: 150px" id="des"/>
+                        <input type="text"  class="form-control ar" placeholder="Ingrese su AREA"  length="45" style="width: 150px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>SECCIÓN</label><br>
-                        <input type="text"  class="form-control mes" placeholder="Ingrese su SECCIÓN" name=""  length="45" style="width: 150px" id="des"/>
+                        <input type="text"  class="form-control pu" placeholder="Ingrese su SECCIÓN" length="45" style="width: 150px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>PUESTO</label><br>
-                        <input type="text"  class="form-control mes" placeholder="Ingrese su PUESTO" name=""  length="45" style="width: 150px" id="des"/>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese su PUESTO" length="45" style="width: 150px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>TIPO DOCUMENTO</label><br>
-                        <input type="text"  class="form-control mes" placeholder="Tipo de Codumento" name=""  length="45" style="width: 250px" id="des"/>
+                        <input type="text"  class="form-control ti" placeholder="Tipo de Codumento"  length="45" style="width: 250px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>FECHA NACIMIENTO</label><br>
-                        <input type="DATE"  class="form-control mes" name=""  length="45" style="width: 170px" id="des"/>
+                        <input type="DATE"  class="form-control fe" name=""  length="45" style="width: 170px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>EDAD</label><br>
@@ -115,19 +115,19 @@
                     </div>
                     <div class="form-group" >
                         <label>APELLIDO PATERNO</label><br>
-                        <input type="text"  class="form-control mes" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
+                        <input type="text"  class="form-control ed" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>APELLIDO MATERNO</label><br>
-                        <input type="text"  class="form-control mes" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
+                        <input type="text"  class="form-control ap" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>NOMBRES</label><br>
-                        <input type="text"  class="form-control mes" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
+                        <input type="text"  class="form-control no" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>Nº DOCUMENTO</label><br>
-                        <input type="text"  class="form-control mes" placeholder="Nº Documento" name=""  length="45" style="width: 120px" id="des"/>
+                        <input type="text"  class="form-control num" placeholder="Nº Documento" name=""  length="45" style="width: 120px" id="des"/>
                     </div>
                     <div class="row">
                         <div class="form-group">  
@@ -217,9 +217,9 @@
                                                             <th data-class="tip">Fecha de Sece</th>
                                                             <th data-class="tip">DNI HIJ@</th>
                                                             <th data-class="tip">Apellidos y Nombres del Hij@</th>
+                                                            <th data-class="tip">Genero</th>
                                                             <th data-class="tip">Fecha Nacimiento del Hij@</th>
                                                             <th data-class="tip">Edad</th>
-                                                            <th data-class="tip">Genero</th>
                                                         </tr>
                                                     </thead>
 
@@ -516,11 +516,13 @@
                 var n_d = $(".num_doc").val();
                 var b = $("#Datos_generales");
                 var texto = '';
-                $.post("../../reporte", "opc=reporte_datos_genereales", function (objJson) {
+                $.post("../../reporte", "opc=reporte_datos_genereales&aps=" + ap + "&departamento=" + de + "&area=" + ar + "&seccion=" + se, function (objJson) {
                     if (objJson.rpta == -1) {
+                        $('.div_t').empty();
                         alert(objJson.mensaje);
                         return;
                     }
+
                     b.empty();
                     var lista = objJson.lista;
                     if (lista.length > 0) {
