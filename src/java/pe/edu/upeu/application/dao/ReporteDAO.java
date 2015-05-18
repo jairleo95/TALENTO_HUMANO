@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jdk.nashorn.internal.objects.annotations.Where;
 import pe.edu.upeu.application.dao_imp.InterfaceReporteDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -184,12 +185,16 @@ public class ReporteDAO implements InterfaceReporteDAO {
     }
 
     @Override
-    public List<Map<String, ?>> Reporte_Datos_Gen(int aps) {
+    public List<Map<String, ?>> Reporte_Datos_Gen(String aps, String dep, String are,String sec, String puesto) {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM RHVD_FILTRO_DATOS_GENERALES ";
-            sql += (aps != 0) ? " where CO_APS='" + aps + "'" : "";
+            String sql = "SELECT * FROM RHVD_FILTRO_DATOS_GENERALES ";                       
+            sql+=(!aps.equals("" ))? "Where CO_APS='"+aps.trim() + "'" : "";
+            sql+=(!dep.equals("" ))? "Where NO_DEP='"+dep.trim() + "'" : "";
+            //sql+=(!dep.equals("" ))? "Where NO_AREA='"+are.trim() + "'" : "";
+            //sql+=(!dep.equals("" ))? "Where NO_SECCION='"+sec.trim() + "'" : "";            
+            //sql+=(!dep.equals("" ))? "Where NO_PUESTO='"+puesto.trim() + "'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
