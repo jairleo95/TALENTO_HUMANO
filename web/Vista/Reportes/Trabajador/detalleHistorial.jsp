@@ -252,6 +252,7 @@
                                                 function cargar_hist(fe_hist) {
                                                     $('.jarviswidget-color-blue').hide('slow');
                                                     $('.btnPro').hide();
+
                                                     $.post("../../../RHistorial?", "opc=list_hist_fecha&fe_modif=" + fe_hist + "&idtra=" + idtrab, function (objJson) {
                                                         var lista = objJson.lista;
                                                         us_ip = objJson.us_ip;
