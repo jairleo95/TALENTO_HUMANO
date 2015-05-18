@@ -6,6 +6,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.model.Privilegio_Rol;
 
 import pe.edu.upeu.application.model.Rol;
@@ -37,5 +38,8 @@ public interface InterfaceRolDAO {
     public List<Rol> Listar_Rol_id(String id_rol);
 
     public void Eliminar_rol(String id_Rol);
+    
+    public List<Map<String,?>> List_rol();
+    public List<Map<String,?>> List_rol(String idRol);
 
 }
