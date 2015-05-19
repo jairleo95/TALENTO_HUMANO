@@ -132,6 +132,7 @@
                                                                                                                                             <th data-hide="phone,tablet">Fecha Fin</th>
                                                                                                                                             <th data-hide="phone,tablet">Sueldo</th>
                                                                                                                                             <th data-hide="phone,tablet">Estado</th>
+
                                                                                                                                         </tr>
                                                                                                                                     </thead>
                                                                                                                                     <tbody>
@@ -154,14 +155,21 @@
                                                                                                                                             <td>Indeterminado</td>
                                                                                                                                             <%}%>
                                                                                                                                             <td><%="S/. " + e.getCa_sueldo()%></td>
-                                                                                                                                            <%if (e.getFe_hasta() == null) {%>
-                                                                                                                                            <td><button class="btn btn-labeled btn-warning btn-autor" type="submit">
+
+                                                                                                                                            <td>
+                                                                                                                                                <input type="hidden" id="id_cto" value="<%=e.getId_contrato()%>" ></input>
+                                                                                                                                                <%if (e.getFe_hasta() == null) {%>
+                                                                                                                                                <button type="button" class="btn btn-primary dis_estado" id="btn_nro" value="<%=i%>">
                                                                                                                                                     </span>Deshabilitar 
-                                                                                                                                                </button></td>
-                                                                                                                                            <%}else{%>
-                                                                                                                                            <td></td>
-                                                                                                                                            <%}%>
+                                                                                                                                                </button>
+                                                                                                                                                <input type="hidden" id="nro" value="<%=i%>" ></input>
+                                                                                                                                                <%} else {%>
+                                                                                                                                                <%}%>
+                                                                                                                                            </td>
+
+
                                                                                                                                         </tr>
+
                                                                                                                                         <%}%> 
 
 
@@ -438,6 +446,50 @@
                                                                                                             "drawCallback": function(oSettings) {
                                                                                                                 responsiveHelper_datatable_tabletools.respond();
                                                                                                             }
+                                                                                                        });
+                                                                                                        $(".dis_estado").click(function(e) {
+                                                                                                            var cto = document.getElementById("id_cto");
+                                                                                                            //alert(cto.value)
+                                                                                                            $.SmartMessageBox({
+                                                                                                                title: "¡Advertencia!",
+                                                                                                                content: "¿Esta seguro que terminó el contrato?",
+                                                                                                                buttons: '[No][Si]'
+                                                                                                            }, function(ButtonPressed) {
+                                                                                                                if (ButtonPressed === "Si") {
+                                                                                                                    // alert($("#btn_nro").val())
+                                                                                                                   /* if (document.getElementById("nro") == document.getElementById("btn_nro") ){
+                                                                                                                        alert($("#nro").val())
+                                                                                                                    }*/
+                                                                                                                    $.ajax({
+                                                                                                                        url: "../../contrato",
+                                                                                                                        type: "POST",
+                                                                                                                        data: "opc=validar_contrato&id_cto=" + $("#id_cto").val()
+                                                                                                                    }).done(function(e) {
+                                                                                                                        //alert($("#id_cto").val())
+                                                                                                                        $.SmartMessageBox({
+                                                                                                                            title: "Se cambió el estado correctamente",
+                                                                                                                            content: "Cambio Exitoso!",
+                                                                                                                        });
+                                                                                                                        //$(".dis_estado").hide();
+                                                                                                                    }).error(function() {
+                                                                                                                        $.smallBox({
+                                                                                                                            title: "¡Error!",
+                                                                                                                            content: "<i class='fa fa-clock-o'></i> <i>NO se pudo cambiar el estado</i>",
+                                                                                                                            color: "#C46A69",
+                                                                                                                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                                                                                                            timeout: 4000
+                                                                                                                        });
+                                                                                                                    });
+                                                                                                                    //var id = $('.dgp').val();
+                                                                                                                    //location.href = "Reg_List_Solicitud.jsp?iddgp="+id+"";
+                                                                                                                    //window.location = "../../solicitud_requerimiento?iddgp=" + $(".dgp").val() + "&opc=Reg_List_Solicitud";
+                                                                                                                    //alert();
+                                                                                                                }
+                                                                                                                if (ButtonPressed === "No") {
+                                                                                                                }
+
+                                                                                                            });
+
                                                                                                         });
 
                                                                                                         /* END TABLETOOLS */

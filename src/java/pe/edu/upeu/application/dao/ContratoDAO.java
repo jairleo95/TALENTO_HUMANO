@@ -686,6 +686,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 v.setFe_hasta(rs.getString("fe_hasta"));
                 v.setFe_hasta(rs.getString("fe_hasta"));
                 v.setCa_sueldo(rs.getDouble("ca_sueldo"));
+                v.setId_contrato(rs.getString("id_contrato"));
                 list.add(v);
             }
         } catch (SQLException e) {
@@ -1167,6 +1168,25 @@ public class ContratoDAO implements InterfaceContratoDAO {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("Error al validar fecha hasta del contrato");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void validar_contrato(String id_cto) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("UPDATE RHTM_CONTRATO SET ES_CONTRATO = '0' WHERE  ID_CONTRATO = '"+id_cto+"'");
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al insertar archivo");
         } finally {
             try {
                 this.conn.close();

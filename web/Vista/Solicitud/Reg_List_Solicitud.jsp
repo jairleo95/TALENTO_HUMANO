@@ -407,7 +407,7 @@
                             //var id = $('.dgp').val();
                             //location.href = "Reg_List_Solicitud.jsp?iddgp="+id+"";
                             window.location = "../../solicitud_requerimiento?iddgp=" + $(".dgp").val() + "&opc=Reg_List_Solicitud";
-                            alert();
+                            //alert();
                         }
                         if (ButtonPressed === "No") {
                         }
