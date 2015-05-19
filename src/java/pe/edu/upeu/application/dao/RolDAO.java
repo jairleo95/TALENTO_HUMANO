@@ -12,15 +12,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.ObjDoubleConsumer;
 import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
-import pe.edu.upeu.application.model.Detalle_Privilegio;
 import pe.edu.upeu.application.model.Privilegio_Rol;
 import pe.edu.upeu.application.model.Rol;
 import pe.edu.upeu.application.model.V_Privilegio;
-import pe.edu.upeu.application.model.V_Rol;
 
 /**
  *
