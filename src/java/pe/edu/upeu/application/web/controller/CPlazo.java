@@ -56,8 +56,23 @@ public class CPlazo extends HttpServlet {
                 String TI_PLAZO = request.getParameter("tipo");
                 int CA_DIAS_TOLERANCIA = Integer.parseInt(request.getParameter("tolerancia"));
                 String ID_DEPARTAMENTO_TOLERANCIA = request.getParameter("dep_tolerancia");
-                String DEP = request.getParameter("departamento");
-                String AREA = request.getParameter("area");
+                String DEP = "0";
+                String AREA = "0";
+                if (request.getParameter("departamento") != null) {
+                    if (!request.getParameter("departamento").equals("")) {
+                        DEP = request.getParameter("departamento");
+                    } else {
+                        DEP = "0";
+                    }
+                }
+
+                if (request.getParameter("area") != null) {
+                    if (!request.getParameter("area").equals("")) {
+                        AREA = request.getParameter("area");
+                    } else {
+                        AREA = "0";
+                    }
+                }
                 pl.INSERT_PLAZO(null, NO_PLAZO, DET_ALERTA, FE_DESDE, FE_HASTA, "1", ID_REQUERIMIENTO.trim(), TI_PLAZO, CA_DIAS_TOLERANCIA, ID_DEPARTAMENTO_TOLERANCIA, DEP, AREA);
             }
             if (opc.equals("Modificar")) {
@@ -114,12 +129,14 @@ public class CPlazo extends HttpServlet {
             rpta.put("mensaje", e.getMessage());
         }
         Gson gson = new Gson();
+
         out.print(gson.toJson(rpta));
         out.flush();
+
         out.close();
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

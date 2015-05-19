@@ -348,7 +348,7 @@
                             $('.msgi').text("Funcion Otorgada con exito!");
                             $('.informacion').fadeOut(700, function() {
                                 var msg = confirm("¿Desea crear una nueva funcion?");
-                                if (msg == true) {
+                                if (msg == false) {
                                     limpiar();
                                 } else {
                                     $('.ifun').val("");

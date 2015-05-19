@@ -43,7 +43,7 @@ Author     : JAIR
 
                                 <div class="row">
 
-                                    <section class="col col-6">
+                                    <section class="col col-4">
                                         <label><strong>Tipo de plazo :</strong></label>
                                         <label class="select"> <i class="icon-append fa fa-calendar"></i>
                                             <select name="tipo" required="" class="tipo" required="">
@@ -52,10 +52,22 @@ Author     : JAIR
                                             </select>
                                         </label>
                                     </section>
-                                    <section class="col col-6">
+                                    <section class="col col-4">
                                         <label><strong>Nombre de plazo :</strong></label>
                                         <label class="input"> <i class="icon-prepend fa fa-user"></i>
                                             <input type="text" name="nombre_plazo" required="" class="nombre_plazo" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-4 tr_tolerancia" style="display: none; ">
+                                        <label><strong>Dias de tolerancia (Ingreso a planilla):</strong></label>
+                                        <label class="input"> <i class="icon-prepend fa fa-user"></i>
+                                            <input type="number" name="tolerancia" min="1"  required=""  value="0" class="tolerancia" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-4 tr_dep_tolerancia">
+                                        <label><strong>Departamento tolerancia (Ingreso a planilla):</strong></label>
+                                        <label class="input"> <i class="icon-prepend fa fa-user"></i>
+                                            <input type="text" name="dep_tolerancia" required="" value="DPT-0019" class="dep_tolerancia" />
                                         </label>
                                     </section>
 
@@ -65,22 +77,6 @@ Author     : JAIR
                                         <textarea rows="3" name="descripcion" placeholder="Descripción" required="" class="descripcion" ></textarea> 
                                     </label>
                                 </section>
-                                <div class="row tr_tolerancia">
-
-                                    <section class="col col-6">
-                                        <label><strong>Dias de tolerancia (Ingreso a planilla):</strong></label>
-                                        <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                            <input type="number" name="tolerancia" min="1"  required=""  value="0" class="tolerancia" />
-                                        </label>
-                                    </section>
-                                    <section class="col col-6">
-                                        <label><strong>Departamento tolerancia (Ingreso a planilla):</strong></label>
-                                        <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                            <input type="text" name="dep_tolerancia" required="" value="DPT-0019" class="dep_tolerancia" />
-                                        </label>
-                                    </section>
-
-                                </div>
                                 <div class="row ">
                                     <section class="col col-3">
                                         <label><strong>Tipo planilla :</strong></label>
@@ -114,14 +110,14 @@ Author     : JAIR
                                 <div class="row">
                                     <section class="col col-4">
                                         <label class="select" id="titu">
-                                            Dirección :<select name="direccion" class="direccion" required="" >
+                                            Dirección :<select name="direccion" class="direccion"  >
                                                 <option value="" >[SELECCIONE]</option>
                                             </select>
                                         </label>
                                     </section>
                                     <section class="col col-4">
                                         <label class="select" id="titu">
-                                            Departamento :<select name="departamento" class="departamento" required="" >
+                                            Departamento :<select name="departamento" class="departamento"  >
                                                 <option value="" >[SELECCIONE]</option>
 
                                             </select>
@@ -129,7 +125,7 @@ Author     : JAIR
                                     </section>
                                     <section class="col col-4">
                                         <label class="select" id="titu">
-                                            Area :<select name="area" class="area" required="" >
+                                            Area :<select name="area" class="area" >
                                                 <option value="" >[SELECCIONE]</option>
                                             </select>
                                         </label>
@@ -154,7 +150,7 @@ Author     : JAIR
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr >
-                                        <td class="text-center semi-bold">ID</td>
+                                        <td class="text-center semi-bold">Nro</td>
                                         <td class="text-center semi-bold">Tipo Plazo</td>
                                         <td class="text-center semi-bold">Nombre Plazo</td>
                                         <td class="text-center semi-bold">Descripción</td>
@@ -162,8 +158,10 @@ Author     : JAIR
                                         <td class="text-center semi-bold">Hasta</td>
                                         <td class="text-center semi-bold">Tipo de Planilla</td>
                                         <td class="text-center semi-bold">Requerimiento</td>
-                                        <td class="text-center semi-bold"> Dep. Tolerancia</td>
+                                        <td class="text-center semi-bold">Dep. Tolerancia</td>
                                         <td class="text-center semi-bold">Dias de tolerancia</td>
+                                        <td class="text-center semi-bold">Departamento</td>
+                                        <td class="text-center semi-bold">Area</td>
                                         <td class="text-center semi-bold">Estado</td>
                                         <td class="text-center semi-bold">Editar</td>
                                     </tr>
@@ -281,7 +279,7 @@ Author     : JAIR
                 else if (lista[i].estado == '0') {
                     text_html += "<tr class='danger' >";
                 }
-                text_html += "<td class='id" + i + "'>" + lista[i].id + "</td>";
+                text_html += "<td>" + (i + 1) + "</td>";
                 text_html += "<td class='tipo" + i + "'>" + lista[i].tipo + "</td>";
                 text_html += "<td class='nombre" + i + "'>" + lista[i].nom + "</td>";
                 text_html += "<td class='det" + i + "'>" + lista[i].det + "</td>";
@@ -289,8 +287,11 @@ Author     : JAIR
                 text_html += "<td class='hasta" + i + "'>" + lista[i].hasta + "</td>";
                 text_html += "<td class='planilla" + i + "'>" + lista[i].planilla + "</td>";
                 text_html += "<td >" + lista[i].req + "</td>";
-                text_html += "<td >" + lista[i].dep + "</td>";
+                text_html += "<td >" + lista[i].dep_tol + "</td>";
                 text_html += "<td >" + lista[i].dias + "</td>";
+                text_html += "<td >" + lista[i].dep + "</td>";
+                text_html += "<td >" + lista[i].area + "</td>";
+
                 if (lista[i].estado == '1') {
                     text_html += "<td  >Activo</td>";
                 }
@@ -298,7 +299,7 @@ Author     : JAIR
                     text_html += "<td >No activo</td>";
                 }
                 text_html += "<input type='hidden' value='" + lista[i].id_req + "'/>";
-                text_html += "<td><button value='" + i + "' class='Editar-Plazo'>Modificar</button><button  class='Eliminar-Plazo' value='" + lista[i].id + "'>Eliminar</button></td>";
+                text_html += "<td><button  class='Eliminar-Plazo' value='" + lista[i].id + "'>Eliminar</button></td>";
                 text_html += "</tr>";
             }
             b.append(text_html);
@@ -389,13 +390,14 @@ Author     : JAIR
 
         $(".tipo").change(function () {
             if ($(this).val() == '1') {
-                $(".tr_tolerancia").hide();
+                $(".tolerancia").val("0");
+                $(".tr_tolerancia").show();
                 $(".tr_dep_tolerancia").hide();
                 $(".dep_tolerancia").val("0");
-                $(".tolerancia").val("0");
 
             } else if ($(this).val() == '2') {
-                $(".tr_tolerancia").show();
+                $(".tr_tolerancia").hide();
+                $(".tolerancia").val("0");
                 $(".tr_dep_tolerancia").show();
                 $(".dep_tolerancia").val("DPT-0019");
 
