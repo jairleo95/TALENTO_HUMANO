@@ -88,19 +88,19 @@
                     </div>
                     <div class="form-group" >
                         <label>APELLIDO PATERNO</label><br>
-                        <input type="text"  class="form-control pat" placeholder="Ingrese APELLIDOS Y NOMBRES" length="45" style="width: 250px" id="des"/>
+                        <input type="text"  class="form-control pat" placeholder="Ingrese Apellido Paterno" length="45" style="width: 250px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>APELLIDO MATERNO</label><br>
-                        <input type="text"  class="form-control mat" placeholder="Ingrese APELLIDOS Y NOMBRES" length="45" style="width: 250px" id="des"/>
+                        <input type="text"  class="form-control mat" placeholder="Ingrese Apellido Materno" length="45" style="width: 250px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>NOMBRE</label><br>
-                        <input type="text"  class="form-control nom" placeholder="Ingrese APELLIDOS Y NOMBRES" length="45" style="width: 250px" id="des"/>
+                        <input type="text"  class="form-control nom" placeholder="Ingrese NOMBRES" length="45" style="width: 250px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>TIPO DOC</label><br>
-                        <input type="text"  class="form-control tip" placeholder="Ingrese la cantidad de meses" length="45" style="width: 250px" id="des"/>
+                        <input type="text"  class="form-control tip" placeholder="Ingrese el tipo de Docuemtno" length="45" style="width: 250px" id="des"/>
                     </div>
                     <div class="form-group" >
                         <label>Nº DOCUMENTO</label><br>
@@ -415,13 +415,15 @@
             var se = $(".sec").val();
             var pu = $(".pue").val();
             var fe = $(".fec").val();
+            var eda = $(".edad").val();
             var apt = $(".pat").val();
             var ma = $(".mat").val();
             var no = $(".nom").val();
+            var ti = $(".tip").val();
             var nu = $(".num").val();
             var d = $("#Li_cump");
             var texto = '';
-            $.post("../../reporte", "opc=reporte_cumpleaños&mes=" + a + "&dia=" + b+ "&aps=" + ap, function (objJson) {
+            $.post("../../reporte", "opc=reporte_cumpleaños&mes=" + a + "&dia=" + b + "&aps=" + ap + "&departamento=" + de + "&area=" + ar + "&seccion=" + se + "&puesto=" + pu + "&fecha=" + fe + "&edad=" + eda + "&paterno=" + apt + "&materno=" + ma + "&nombre=" + "&tipo=" + ti + "&num=" + nu, function (objJson) {
 
                 d.empty();
                 var lista = objJson.lista;
@@ -453,10 +455,10 @@
             var b = $('#tbodys');
             $("#btnbuscar").click(
                     function () {
+                        GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
                         listar_cumpleaños();
-                        //GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
                         if ($(".selec_mes").val() == "") {
-                          //alert("Ingresa mes");
+                            //alert("Ingresa mes");
                         } else {
                             GifLoader($('.div_t'), " Por Favor Espere un Momento..", 1);
                             listar_cumpleaños();
