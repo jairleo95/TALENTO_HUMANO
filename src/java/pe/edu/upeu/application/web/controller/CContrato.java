@@ -806,6 +806,10 @@ public class CContrato extends HttpServlet {
                 String estado = request.getParameter("estado");
                 con.HABILITAR_SI(id, estado);
             }
+            if(opc.equals("validar_contrato")){
+                String id_cto = request.getParameter("id_cto");
+                con.validar_contrato(id_cto);
+            }
         } catch (Exception e) {
             throw new RuntimeException("Error!");
         }

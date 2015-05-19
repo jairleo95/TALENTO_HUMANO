@@ -85,4 +85,6 @@ public interface InterfaceContratoDAO {
     public void HABILITAR_SI(String idc, String estado);
     
     public void VALIDAR_FE_HASTA_CON();
+    
+    public void validar_contrato(String id_cto);
 }
