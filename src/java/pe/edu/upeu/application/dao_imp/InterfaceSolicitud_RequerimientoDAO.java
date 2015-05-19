@@ -19,7 +19,7 @@ public interface InterfaceSolicitud_RequerimientoDAO {
 
     public List<V_Solicitud_Requerimiento> Listar_solicitud_id(String id_solicitud);
 
-    public List<V_Solicitud_Requerimiento> Listar_solicitud_id_us(String id_us);
+    public List<V_Solicitud_Requerimiento> Listar_solicitud_id_us(String id_us, String id_dgp);
 
     public List<Map<String, ?>> List_solicitud_id(String id);
 
