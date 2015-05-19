@@ -146,7 +146,7 @@
                                 <a id="btnbuscar" class="btn btn-primary btn-circle btn-xl btnEnviar">
                                     <i class="glyphicon glyphicon-search"></i>
                                 </a>
-                                <a class="btn btn-danger btn-circle btn-xl btnCancelar">
+                                <a id="btncancel" class="btn btn-danger btn-circle btn-xl btnCancelar">
                                     <i class="glyphicon glyphicon-remove"></i>
                                 </a>
                             </div>
