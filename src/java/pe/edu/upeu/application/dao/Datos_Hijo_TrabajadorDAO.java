@@ -232,14 +232,27 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
     }
 
     @Override
-    public List<Map<String, ?>> Listar_Cumpleaños(String mes, String dia,String aps) {
+    public List<Map<String, ?>> Listar_Cumpleaños(String mes, String dia, String aps, String dep, String are, String sec, String pue, String fec, String edad, String ape, String mat, String nom, String tip, String num) {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM RHVD_FILTRO_CUMPL_TRAB ";            
-            sql += (!aps.equals("")) ? "Where CO_APS='" + aps.trim() + "'" : "";
-            sql += (!mes.equals("")&!mes.equals("13")) ? "where mes='" + mes.trim() + "' " : "";
-            sql += (!mes.equals("")&mes.equals("13")) ? "" : "";
+            String sql = "SELECT * FROM RHVD_FILTRO_CUMPL_TRAB ";
+            sql += (!aps.equals("")) ? "Where UPPER(CO_APS)='" + aps.trim().toUpperCase() + "'" : "";
+            sql += (!dep.equals("")) ? "Where UPPER(DEPARTAMENTO)='" + dep.trim().toUpperCase() + "'" : "";
+            sql += (!are.equals("")) ? "Where UPPER(AREA)='" + are.trim().toUpperCase() + "'" : "";
+            sql += (!sec.equals("")) ? "Where UPPER(SECCION)='" + sec.trim().toUpperCase() + "'" : "";
+            sql += (!pue.equals("")) ? "Where UPPER(PUESTO)='" + pue.trim().toUpperCase() + "'" : "";
+            //sql += (!fec.equals("")) ? "Where FECHA_NAC='" + fec.trim() + "'" : "";            
+            sql += (!edad.equals("")) ? "Where EDAD='" + edad.trim() + "'" : "";
+            sql += (!ape.equals("")) ? "Where UPPER(AP_PATERNO)='" + ape.trim().toUpperCase() + "'" : "";
+            sql += (!mat.equals("")) ? "Where UPPER(AP_MATERNO)='" + mat.trim().toUpperCase() + "'" : "";
+            sql += (!nom.equals("")) ? "Where UPPER(NO_TRABAJADOR)='" + nom.trim().toUpperCase() + "'" : "";
+            sql += (!tip.equals("")) ? "Where UPPER(TIPO)='" + tip.trim().toUpperCase() + "'" : "";
+            sql += (!num.equals("")) ? "Where NU_DOC='" + num.trim() + "'" : "";
+            //buscar por rango de mes de cumpleaños*/
+
+            sql += (!mes.equals("") & !mes.equals("13")) ? "where mes='" + mes.trim() + "' " : "";
+            sql += (!mes.equals("") & mes.equals("13")) ? "" : "";
             sql += (!dia.equals("")) ? "and dia='" + dia.trim() + "'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
@@ -253,9 +266,9 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
                 rec.put("edad", rs.getString("EDAD"));
                 rec.put("nom", rs.getString("NOMBRE"));
                 rec.put("tip", rs.getString("TIPO"));
-                rec.put("dni", rs.getString("DNI")); 
+                rec.put("dni", rs.getString("NU_DOC"));
                 rec.put("dia", rs.getString("DIA"));
-                rec.put("mes", rs.getString("MES"));               
+                rec.put("mes", rs.getString("MES"));
                 rec.put("id_tr", rs.getString("ID_TRABAJADOR"));
                 Lista.add(rec);
             }
