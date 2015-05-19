@@ -22,19 +22,19 @@
         <div class="well caja_t">
             <div class="row">
                 <form class="smart-form">
-                    <section class="col col-md-4">
+                    <section class="col col-md-3">
                         <label class="label">Codigo</label>
                         <label class="input">
                             <input type="text" name="codigo" placeholder="Ingesar Codigo" maxlength="8">
                         </label>
                     </section>
-                    <section class="col col-md-4">
+                    <section class="col col-md-3">
                         <label class="label">Detalle</label>
                         <label class="input">
                             <input type="text" name="detalle" placeholder="Detalle Centro Costo" maxlength="200">
                         </label>
                     </section>
-                    <section class="col col-md-4">
+                    <section class="col col-md-3">
                         <label class="label">Direccion</label>
                         <label class="select">
                             <select>
@@ -42,7 +42,7 @@
                             </select>
                         </label>
                     </section>
-                    <section class="col col-md-4">
+                    <section class="col col-md-3">
                         <label class="label">Departmento</label>
                         <label class="select">
                             <select>
@@ -50,7 +50,7 @@
                             </select>
                         </label>
                     </section>
-                    <section class="col col-md-4">
+                    <section class="col col-md-3">
                         <label class="label">Area (Opcional)</label>
                         <label class="select">
                             <select>
