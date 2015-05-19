@@ -151,6 +151,10 @@
         <servlet-name>CSolicitud_Requerimiento</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CSolicitud_Requerimiento</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MCCosto</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.MCCosto</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -298,6 +302,10 @@
     <servlet-mapping>
         <servlet-name>CSolicitud_Requerimiento</servlet-name>
         <url-pattern>/solicitud_requerimiento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MCCosto</servlet-name>
+        <url-pattern>/MCCosto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>120</session-timeout>
