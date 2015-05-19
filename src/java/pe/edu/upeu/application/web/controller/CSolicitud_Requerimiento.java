@@ -65,12 +65,12 @@ public class CSolicitud_Requerimiento extends HttpServlet {
                 FE_DESDE = FE_DESDE + "-01";
             }
             s.INSERT_SOLICITUD_DGP(null, FE_DESDE, ID_DGP, ID_PLAZO, DE_SOLICITUD, ES_AUTORIZAR, ES_SOLICITUD_DGP, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, NO_USUARIO);
-            getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser));
+            getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser,ID_DGP));
             response.sendRedirect("Vista/Solicitud/Reg_List_Solicitud.jsp?iddgp=" + ID_DGP + "");
         }
         if (opc.equals("Reg_List_Solicitud")) {
             String iddgp = request.getParameter("iddgp");
-            getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser));
+            getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser, iddgp));
             response.sendRedirect("Vista/Solicitud/Reg_List_Solicitud.jsp?iddgp=" + iddgp + "");
         }
         if (opc.equals("Ver_Detalle_Solicitud")) {

@@ -75,7 +75,8 @@
                 <section id="widget-grid" class="">
                     <div class="row">
                         <!-- NEW WIDGET START -->
-                        <article class="col-sm-12 col-md-12 col-lg-6">
+                        <!--col-xs-12 col-sm-12 col-md-12 col-lg-12-->
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div id="alerta_dgp">
                             </div>
                             <!-- Widget ID (each widget will need unique ID)-->
@@ -151,10 +152,10 @@
                                                     <td><%=s.getFe_hasta()%></td>
                                                     <td><%=s.getFe_creacion()%></td>
                                                 <td><center><%if (s.getEs_autorizar().trim().equals("1")) {
-                                                            out.print("SI");
-                                                        } else {
-                                                            out.print("NO");
-                                                        }%></center></td>
+                                                        out.print("SI");
+                                                    } else {
+                                                        out.print("NO");
+                                                    }%></center></td>
                                             </tr>
                                             <%}%>
                                             </tbody>
@@ -167,11 +168,12 @@
                             <!-- end widget -->
                         </article>
                         <!-- NEW WIDGET START -->
-                        <article class="col-sm-12 col-md-12 col-lg-6">
+                    
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div id="alerta_dgp">
                             </div>
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-greenDark" id="wid-id-2" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-greenDark" id="wid-id-0" data-widget-editbutton="false">
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -186,7 +188,7 @@
 
                                 -->
                                 <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <span class="widget-icon "> <i class="fa fa-table"></i> </span>
                                     <h>Hacer Solicitud</h2>
                                 </header>
                                 <!-- widget div-->
@@ -344,13 +346,13 @@
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             pageSetUp();
-            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
-            $(".tipo").change(function () {
+            $(".tipo").change(function() {
                 if ($(this).val() == '1') {
                     $(".fe_inicio").attr("type", "month");
                     $(".lb_fecha_solicitud").text("Mes :");
@@ -365,21 +367,21 @@
                 //alert();
                 list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
             });
-            $(".sbm_solicitud").click(function (e) {
+            $(".sbm_solicitud").click(function(e) {
                 if ($(".solicitud_plazo").valid() == true) {
 
                     $.SmartMessageBox({
                         title: "¡Advertencia!",
                         content: "¿Esta seguro de enviar la solicitud?",
                         buttons: '[No][Si]'
-                    }, function (ButtonPressed) {
+                    }, function(ButtonPressed) {
                         if (ButtonPressed === "Si") {
 
                             $.ajax({
                                 url: "../../solicitud_requerimiento",
                                 type: "post",
                                 data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud"
-                            }).done(function () {
+                            }).done(function() {
                                 $('.solicitud_plazo')[0].reset();
                                 var $p = $(this).parent().parent();
                                 $p.removeClass('has-success');
@@ -393,7 +395,7 @@
                                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
                                     timeout: 4000
                                 });
-                            }).error(function () {
+                            }).error(function() {
                                 $.smallBox({
                                     title: "¡Error!",
                                     content: "<i class='fa fa-clock-o'></i> <i>La solicitud no ha podido ser enviada...</i>",
@@ -405,6 +407,7 @@
                             //var id = $('.dgp').val();
                             //location.href = "Reg_List_Solicitud.jsp?iddgp="+id+"";
                             window.location = "../../solicitud_requerimiento?iddgp=" + $(".dgp").val() + "&opc=Reg_List_Solicitud";
+                            alert();
                         }
                         if (ButtonPressed === "No") {
                         }
@@ -434,7 +437,7 @@
             /*
              * Smart Notifications
              */
-            $('#eg1').click(function (e) {
+            $('#eg1').click(function(e) {
 
                 $.bigBox({
                     title: "Big Information box",
@@ -450,7 +453,7 @@
 
             })
 
-            $('#eg2').click(function (e) {
+            $('#eg2').click(function(e) {
 
                 $.bigBox({
                     title: "Big Information box",
@@ -464,7 +467,7 @@
                 e.preventDefault();
             })
 
-            $('#eg3').click(function (e) {
+            $('#eg3').click(function(e) {
 
                 $.bigBox({
                     title: "Shield is up and running!",
@@ -479,7 +482,7 @@
 
             })
 
-            $('#eg4').click(function (e) {
+            $('#eg4').click(function(e) {
 
                 $.bigBox({
                     title: "Success Message Example",
@@ -488,7 +491,7 @@
                     //timeout: 8000,
                     icon: "fa fa-check",
                     number: "4"
-                }, function () {
+                }, function() {
                     closedthis();
                 });
 
@@ -498,7 +501,7 @@
 
 
 
-            $('#eg5').click(function () {
+            $('#eg5').click(function() {
 
                 $.smallBox({
                     title: "Ding Dong!",
@@ -512,7 +515,7 @@
 
 
 
-            $('#eg6').click(function () {
+            $('#eg6').click(function() {
 
                 $.smallBox({
                     title: "Big Information box",
@@ -524,7 +527,7 @@
 
             })
 
-            $('#eg7').click(function () {
+            $('#eg7').click(function() {
 
                 $.smallBox({
                     title: "James Simmons liked your comment",
@@ -552,7 +555,7 @@
             // With Callback
 
             // With Input
-            $("#smart-mod-eg2").click(function (e) {
+            $("#smart-mod-eg2").click(function(e) {
 
                 $.SmartMessageBox({
                     title: "Smart Alert: Input",
@@ -560,14 +563,14 @@
                     buttons: "[Accept]",
                     input: "text",
                     placeholder: "Enter your user name"
-                }, function (ButtonPress, Value) {
+                }, function(ButtonPress, Value) {
                     alert(ButtonPress + " " + Value);
                 });
 
                 e.preventDefault();
             })
             // With Buttons
-            $("#smart-mod-eg3").click(function (e) {
+            $("#smart-mod-eg3").click(function(e) {
 
                 $.SmartMessageBox({
                     title: "Smart Notification: Buttons",
@@ -578,7 +581,7 @@
                 e.preventDefault();
             })
             // With Select
-            $("#smart-mod-eg4").click(function (e) {
+            $("#smart-mod-eg4").click(function(e) {
 
                 $.SmartMessageBox({
                     title: "Smart Alert: Select",
@@ -586,7 +589,7 @@
                     buttons: "[Done]",
                     input: "select",
                     options: "[Costa Rica][United States][Autralia][Spain]"
-                }, function (ButtonPress, Value) {
+                }, function(ButtonPress, Value) {
                     alert(ButtonPress + " " + Value);
                 });
 
@@ -594,7 +597,7 @@
             });
 
             // With Login
-            $("#smart-mod-eg5").click(function (e) {
+            $("#smart-mod-eg5").click(function(e) {
 
                 $.SmartMessageBox({
                     title: "Login form",
@@ -602,7 +605,7 @@
                     buttons: "[Cancel][Accept]",
                     input: "text",
                     placeholder: "Enter your user name"
-                }, function (ButtonPress, Value) {
+                }, function(ButtonPress, Value) {
                     if (ButtonPress == "Cancel") {
                         alert("Why did you cancel that? :(");
                         return 0;
@@ -616,7 +619,7 @@
                         buttons: "[Login]",
                         input: "password",
                         placeholder: "Password"
-                    }, function (ButtonPress, Value) {
+                    }, function(ButtonPress, Value) {
                         alert("Username: " + ValueOriginal + " and your password is: " + Value);
                     });
                 });
@@ -635,7 +638,7 @@
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
 
-        (function () {
+        (function() {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;

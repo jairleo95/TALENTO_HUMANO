@@ -333,8 +333,8 @@
                                                     <label class="select"> 
                                                         <select name="tipo" class="tipo" required="">
                                                             <option value=''>[SELECCIONE]</option>
-                                                            <option value='1'>Ingreso a planilla</option>
-                                                            <option value='2'>Inicio de Contrato</option>
+                                                            <option value='2'>Ingreso a planilla</option>
+                                                            <option value='1'>Inicio de Contrato</option>
 
                                                         </select>          
                                                     </label>
@@ -350,6 +350,7 @@
                                                 <section class="col col-4">
                                                     <label class="label lb_fecha_solicitud">Fecha de Inicio :</label>
                                                     <label class="input"> 
+
                                                         <input type="date" name="desde"  class="fe_inicio" required="">
                                                         <input type="hidden" name="tipo_fecha"  class="tipo_fecha" value="date" required="">
                                                         <input type="hidden" name="iddgp"  value="<%=iddgp%>" class="dgp" required="">
@@ -467,12 +468,12 @@
                         $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                     });
                     $(".tipo").change(function () {
-                        if ($(this).val() == '1') {
+                        if ($(this).val() == '2') {
                             $(".fe_inicio").attr("type", "month");
                             $(".lb_fecha_solicitud").text("Mes :");
                             $(".tipo_fecha").val("month");
                         }
-                        if ($(this).val() == '2') {
+                        if ($(this).val() == '1') {
                             $(".fe_inicio").attr("type", "date");
                             $(".lb_fecha_solicitud").text("Fecha de Inicio :");
                             $(".tipo_fecha").val("date");

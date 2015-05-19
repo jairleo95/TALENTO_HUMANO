@@ -22,7 +22,9 @@
 
 <h4 style="text-align:justify"><span style="font-size:11px"><strong>NOVENA</strong>: En todo lo no previsto en el presente contrato se aplicará la Ley vigente de nuestro país.</span></h4>
 
-<h4 style="text-align:justify"><span style="font-size:11px">Estando de acuerdo en todo el contenido del presente contrato, firmamos en señal de conformidad, en Ñaña, Chosica, Lima, al [fe_suscripcion]. <span style="font-family:open sans,arial,helvetica,sans-serif">[funciones_pr][funciones_sec]</span></span></h4>
+<p><span style="font-size:11px">Con tale funciones(<span style="font-family:open sans,arial,helvetica,sans-serif">[funciones_pr][funciones_sec]</span>)</span></p>
+
+<h4 style="text-align:justify"><span style="font-size:11px">Estando de acuerdo en todo el contenido del presente contrato, firmamos en señal de conformidad, en Ñaña, Chosica, Lima, al [fe_suscripcion]. </span></h4>
 
 <p style="text-align:justify">                             <img alt="" src="http://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Firma_Salvador_Allende.svg/800px-Firma_Salvador_Allende.svg.png" style="height:40px; position:absolute; width:131px" /></p>
 

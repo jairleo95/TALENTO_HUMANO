@@ -103,7 +103,7 @@
                                                                                                                         -->
                                                                                                                         <header>
                                                                                                                             <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                                                                                                            <h2>Reporte de Contratos (Casos Especiales)</h2>
+                                                                                                                            <h2><center>Reporte de Contratos (Casos Especiales) -- 2015</center></h2>
 
                                                                                                                         </header>
 
@@ -131,6 +131,7 @@
                                                                                                                                             <th data-hide="phone,tablet">Fecha Inicio</th>
                                                                                                                                             <th data-hide="phone,tablet">Fecha Fin</th>
                                                                                                                                             <th data-hide="phone,tablet">Sueldo</th>
+                                                                                                                                            <th data-hide="phone,tablet">Estado</th>
                                                                                                                                         </tr>
                                                                                                                                     </thead>
                                                                                                                                     <tbody>
@@ -153,6 +154,13 @@
                                                                                                                                             <td>Indeterminado</td>
                                                                                                                                             <%}%>
                                                                                                                                             <td><%="S/. " + e.getCa_sueldo()%></td>
+                                                                                                                                            <%if (e.getFe_hasta() == null) {%>
+                                                                                                                                            <td><button class="btn btn-labeled btn-warning btn-autor" type="submit">
+                                                                                                                                                    </span>Deshabilitar 
+                                                                                                                                                </button></td>
+                                                                                                                                            <%}else{%>
+                                                                                                                                            <td></td>
+                                                                                                                                            <%}%>
                                                                                                                                         </tr>
                                                                                                                                         <%}%> 
 

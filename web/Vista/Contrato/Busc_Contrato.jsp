@@ -25,6 +25,8 @@
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
         <link type="text/css" rel="stylesheet" href="../../css/Css_Formulario/form.css">
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
+        <script src="../../../ajax/ajax.google.min.js"></script>
+
         <title>Contratos</title>
     </head>
     <body>  
@@ -160,11 +162,12 @@
                                 </tr>
                             </thead>
                             <tbody class="tbodys" id="gg">
-
                             </tbody>
                         </table>
 
+
                     </div>
+                    <div id="wait" style="display:none;width:69px;height:89px;position:absolute;top:50%;left:50%;padding:2px;" align="center"><img src='../../imagenes/por-favor-espere.gif' width="100" height="100" /><br>Loading..</div>
 
                 </div>
             </center>
@@ -269,6 +272,8 @@
                 } else {
                     b.append("<tr><TD colspan='12' style='text-align:center;'> NO SE HA ENCONTRADO DATOS DE LA BUSQUEDA</TD></tr>")
                 }
+                $("#wait").css("display", "none");
+
 
             }
             );
@@ -333,7 +338,7 @@
                         var fe_f = $("#fe_fin").val();
                         var sueldo = $("#sueldo").val();
                         var fe_sus = $("#fe_sus").val();
-
+                        $("#wait").css("display", "block");
                         //alert(del + al + nombre + dir + dep + area + sec + pu + fe_i + fe_f + sueldo)
                         buscar(del, al, nombre, dir, dep, area, sec, pu, fe_i, fe_f, sueldo, fe_sus);
                     }
