@@ -1,73 +1,73 @@
 <h4 style="text-align:center"><strong>CONTRATO DE TRABAJO A PLAZO FIJO BAJO MODALIDAD</strong></h4>
 
-<h5 style="text-align: justify;"><span style="font-size:12px">Conste por el presente documento el contrato de trabajo a plazo fijo y sujeto a modalidad por Servicio Específico, conforme lo dispone el Art. 63  del T.U.O del D. Leg. 728, Ley de Productividad y Competitividad Laboral (D.S. Nº 003-97-TR), que celebran de una parte la <strong>UNIVERSIDAD PERUANA UNIÓN</strong>, con RUC Nº 20138122256, con domicilio en Villa Unión s/n, altura del Km. 19 de la carretera central, Ñaña, Lurigancho-Chosica, a quien se le denominará "EMPLEADOR", representada por su Apoderado Mg. Julio Cesar Rengifo Peña, con DNI No. 06690086,; y de la otra parte [nombre] [app] [apm] , con DNI Nº[dni], domiciliado(a) en [dir], [prov], a quien se le denominará el (la) "TRABAJADOR&#148;(A), en los términos y condiciones siguientes: </span></h5>
+<h5 style="text-align:justify"><span style="font-size:12px">Conste por el presente documento el contrato de trabajo a plazo fijo y sujeto a modalidad por Servicio Específico, conforme lo dispone el Art. 63  del T.U.O del D. Leg. 728, Ley de Productividad y Competitividad Laboral (D.S. Nº 003-97-TR), que celebran de una parte la <strong>UNIVERSIDAD PERUANA UNI�?N</strong>, con RUC Nº 20138122256, con domicilio en Villa Unión s/n, altura del Km. 19 de la carretera central, �?aña, Lurigancho-Chosica, a quien se le denominará "EMPLEADOR", representada por su Apoderado Mg. Julio Cesar Rengifo Peña, con DNI No. 06690086,; y de la otra parte [nombre] [app] [apm] , con DNI Nº[dni], domiciliado(a) en [dir], [prov], a quien se le denominará el (la) "TRABAJADOR?(A), en los términos y condiciones siguientes: </span></h5>
 
-<h5 style="text-align: justify;"><span style="font-size:12px"><strong>PRIMERA</strong>: El EMPLEADOR es una institución de derecho privado, dedicada a la educación superior universitaria a través de sus respectivas facultades, escuelas, o programas autorizados. El (la) TRABAJADOR (A) reconoce que la Universidad es una institución integrante del sistema educativo Adventista y es normado bajo la Ley Universitaria, Estatuto y Reglamento Interno de Trabajo y también bajo prácticas, costumbres y principios axiológicos, valores éticos - morales, que acepta respetar.</span></h5>
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>PRIMERA</strong>: El EMPLEADOR es una institución de derecho privado, dedicada a la educación superior universitaria a través de sus respectivas facultades, escuelas, o programas autorizados. El (la) TRABAJADOR (A) reconoce que la Universidad es una institución integrante del sistema educativo Adventista y es normado bajo la Ley Universitaria, Estatuto y Reglamento Interno de Trabajo y también bajo prácticas, costumbres y principios axiológicos, valores éticos - morales, que acepta respetar.</span></h5>
 
-<h5 style="text-align: justify;"><span style="font-size:12px"><strong>SEGUNDA</strong>: El EMPLEADOR requiere de personal temporal en la [dep], con el objeto de cumplir con el dictado de asignaturas que se le asigne durante los ciclos académicos mediante clases teóricas y prácticas; en consecuencia, el EMPLEADOR ha visto por conveniente contratar al TRABAJADOR (A), bajo la modalidad de servicio específico.</span></h5>
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>SEGUNDA</strong>: El EMPLEADOR requiere de personal temporal en la [dep], con el objeto de cumplir con el dictado de asignaturas que se le asigne durante los ciclos académicos mediante clases teóricas y prácticas; en consecuencia, el EMPLEADOR ha visto por conveniente contratar al TRABAJADOR (A), bajo la modalidad de servicio específico.</span></h5>
 
-<h5 style="text-align: justify;"><span style="font-size:12px"><strong>TERCERA</strong>: El EMPLEADOR en virtud del presente contrato y bajo la condición de subordinación y de obligación personalísima, contrata al (la) TRABAJADOR (A) desde el [desde]  hasta el [hasta], para que se desempeñe como [puesto] de la EAP de Ingeniería de Sistemas. Cumplirá una jornada laboral en el horario establecido por su centro de labor, la cual no será mayor a la jornada máxima legal.</span></h5>
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>TERCERA</strong>: El EMPLEADOR en virtud del presente contrato y bajo la condición de subordinación y de obligación personalísima, contrata al (la) TRABAJADOR (A) desde el [desde]  hasta el [hasta], para que se desempeñe como [puesto] de la EAP de Ingeniería de Sistemas. Cumplirá una jornada laboral en el horario establecido por su centro de labor, la cual no será mayor a la jornada máxima legal.</span></h5>
 
-<h5 style="text-align: justify;"><span style="font-size:12px"><strong>CUARTA</strong>: El (la) TRABAJADOR (A) percibirá una remuneración mensual de S/. [sueldo]. (Nuevos soles), siempre y cuando haya cumplido con sus obligaciones laborales.</span></h5>
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>CUARTA</strong>: El (la) TRABAJADOR (A) percibirá una remuneración mensual de S/. [sueldo]. (Nuevos soles), siempre y cuando haya cumplido con sus obligaciones laborales.</span></h5>
 
-<h5 style="text-align: justify;"><span style="font-size:12px"><strong>QUINTA</strong>: Además como Docente Contratado, está obligado a observar y cumplir con los requisitos que se detalla en esta cláusula, caso contrario será sancionado laboralmente o se resolverá (dar por terminado) automáticamente el presente contrato:</span></h5>
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>QUINTA</strong>: Además como Docente Contratado, está obligado a observar y cumplir con los requisitos que se detalla en esta cláusula, caso contrario será sancionado laboralmente o se resolverá (dar por terminado) automáticamente el presente contrato:</span></h5>
 
 <ol>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">Cumplir con el  desarrollo total de la (s) asignatura (s) asignada (s) y desarrollar personalmente su labor.</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">Cumplir con el  desarrollo total de la (s) asignatura (s) asignada (s) y desarrollar personalmente su labor.</span></h5>
 	</li>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">Formular, en el medio informático a su alcance y entregar el  (los) sílabo (s) de la (s) asignatura (s),  completando los requisitos exigidos, como: programas, planes, conjunto de actividades de la asignatura, y a  reformularlos en su contenido, alcances, términos y evaluaciones,  conforme lo determinen la escuela académica profesional y/o facultad o el Vicerrectorado, dentro de los plazos establecidos.</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">Formular, en el medio informático a su alcance y entregar el  (los) sílabo (s) de la (s) asignatura (s),  completando los requisitos exigidos, como: programas, planes, conjunto de actividades de la asignatura, y a  reformularlos en su contenido, alcances, términos y evaluaciones,  conforme lo determinen la escuela académica profesional y/o facultad o el Vicerrectorado, dentro de los plazos establecidos.</span></h5>
 	</li>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">Cumplir estricta y puntualmente el horario asignado a sus actividades académicas, sin ninguna tolerancia de ingreso o ausencia</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">Cumplir estricta y puntualmente el horario asignado a sus actividades académicas, sin ninguna tolerancia de ingreso o ausencia</span></h5>
 	</li>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">No puede cambiar los horarios asignados, ni postergar o variar las actividades académicas, curriculares o extracurriculares asignadas, salvo  autorización expresa por las autoridades de la universidad.</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">No puede cambiar los horarios asignados, ni postergar o variar las actividades académicas, curriculares o extracurriculares asignadas, salvo  autorización expresa por las autoridades de la universidad.</span></h5>
 	</li>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">Garantizar un mínimo de aptitud,  nivel académico y profesional (preparación de clases, material didáctico o de enseñanza, etc) durante el desarrollo de las asignaturas.</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">Garantizar un mínimo de aptitud,  nivel académico y profesional (preparación de clases, material didáctico o de enseñanza, etc) durante el desarrollo de las asignaturas.</span></h5>
 	</li>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">Dedicar sus habilidades, aptitudes a las labores estrictamente académicas; salvo comunicación de la universidad.</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">Dedicar sus habilidades, aptitudes a las labores estrictamente académicas; salvo comunicación de la universidad.</span></h5>
 	</li>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">Abstenerse de disponer, ordenar, actuar o intervenir en asuntos administrativos (matrícula, variación de matrícula de asignaturas, horario, cambio de grupo de estudio, etc.), por ser de entera exclusividad de la universidad, salvo autorización expresa  de las autoridades universitarias.</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">Abstenerse de disponer, ordenar, actuar o intervenir en asuntos administrativos (matrícula, variación de matrícula de asignaturas, horario, cambio de grupo de estudio, etc.), por ser de entera exclusividad de la universidad, salvo autorización expresa  de las autoridades universitarias.</span></h5>
 	</li>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">Observar y hacer cumplir a sus alumnos, las disposiciones, reglamentos y normas de conducta, vestimenta  dentro del aula, laboratorios, centro de prácticas, eventos u otros actos académicos o extra académicos.</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">Observar y hacer cumplir a sus alumnos, las disposiciones, reglamentos y normas de conducta, vestimenta  dentro del aula, laboratorios, centro de prácticas, eventos u otros actos académicos o extra académicos.</span></h5>
 	</li>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">Entregar el resultado de las evaluaciones, dentro de los plazos previstos y suscribir los documentos y  registros académicos sin enmendaduras o borrones.</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">Entregar el resultado de las evaluaciones, dentro de los plazos previstos y suscribir los documentos y  registros académicos sin enmendaduras o borrones.</span></h5>
 	</li>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">Cumplir con el cronograma de evaluación programados en el sílabo y los dispuestos por la Vicerrectorado, ingresando la información al sistema académico en los plazos previstos.</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">Cumplir con el cronograma de evaluación programados en el sílabo y los dispuestos por la Vicerrectorado, ingresando la información al sistema académico en los plazos previstos.</span></h5>
 	</li>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">Coordinar y mantener una comunicación fluida sobre cualquier asunto académico, curricular o extracurricular, asignado con la Facultad, Escuela o Departamento Académico.</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">Coordinar y mantener una comunicación fluida sobre cualquier asunto académico, curricular o extracurricular, asignado con la Facultad, Escuela o Departamento Académico.</span></h5>
 	</li>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">Dar cuenta de las tareas, actividades, planes, programas o asignaturas a las instancias que la universidad considere pertinentes.</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">Dar cuenta de las tareas, actividades, planes, programas o asignaturas a las instancias que la universidad considere pertinentes.</span></h5>
 	</li>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">Presentar una imagen adecuada, conducta, decoro y buenas costumbres acorde a su función docente dentro del salón de clases, laboratorios, centro de prácticas o eventos u otros actos académicos o extra académicos</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">Presentar una imagen adecuada, conducta, decoro y buenas costumbres acorde a su función docente dentro del salón de clases, laboratorios, centro de prácticas o eventos u otros actos académicos o extra académicos</span></h5>
 	</li>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">Observar y practicar el debido respeto por la integridad, buen nombre y honor de los alumnos asignados dentro del salón de clases.</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">Observar y practicar el debido respeto por la integridad, buen nombre y honor de los alumnos asignados dentro del salón de clases.</span></h5>
 	</li>
 	<li>
-	<h5 style="text-align: justify;"><span style="font-size:12px">Abstenerse de realizar proselitismo, campaña o actividad política, partidaria, segregacionista, discriminatoria u otras de la misma índole o naturaleza dentro o fuera del horario de sus labores académicas o dentro de campus universitario.</span></h5>
+	<h5 style="text-align:justify"><span style="font-size:12px">Abstenerse de realizar proselitismo, campaña o actividad política, partidaria, segregacionista, discriminatoria u otras de la misma índole o naturaleza dentro o fuera del horario de sus labores académicas o dentro de campus universitario.</span></h5>
 	</li>
 </ol>
 
-<h5 style="text-align: justify;"><span style="font-size:12px"><strong>SEXTA: </strong>EL (la) TRABAJADOR (A) se obliga a prestar sus servicios con eficiencia, puntualidad y bajo principio de subordinación,  cumplir con las directivas de sus jefes y de su Centro de Labor y con lo que dispone El Reglamento General Interno de Trabajo, Reglamento de Trabajo en Sobretiempo, Reglamento de Seguridad y Salud en el Trabajo, Recomendaciones sobre Seguridad y Salud en el Trabajo y demás políticas, que por su función le son entregados a la suscripción del presente contrato, caso contrario se resolverá el presente contrato conforme las normas laborales vigentes.  </span></h5>
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>SEXTA: </strong>EL (la) TRABAJADOR (A) se obliga a prestar sus servicios con eficiencia, puntualidad y bajo principio de subordinación,  cumplir con las directivas de sus jefes y de su Centro de Labor y con lo que dispone El Reglamento General Interno de Trabajo, Reglamento de Trabajo en Sobretiempo, Reglamento de Seguridad y Salud en el Trabajo, Recomendaciones sobre Seguridad y Salud en el Trabajo y demás políticas, que por su función le son entregados a la suscripción del presente contrato, caso contrario se resolverá el presente contrato conforme las normas laborales vigentes.  </span></h5>
 
-<h5 style="text-align: justify;"><span style="font-size:12px"><strong>SÉPTIMA</strong>: El (la) TRABAJADOR (A)  conforme a la segunda parte de la cláusula primera del presente contrato, se reserva sus opiniones religiosas, políticas u otros actos personales en el desarrollo de la asignatura, programas, planes actividades curriculares o extracurriculares, contrarios a los principios axiológicos, religiosos, ético-morales, costumbres prácticas por la universidad o la patrocinadora de esta. El EMPLEADOR reconoce la libertad de cátedra que signifique formas de enseñanza, evaluación, didáctica universitaria u otros análogos, dentro de los parámetros determinados por la misma.</span></h5>
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>S�?PTIMA</strong>: El (la) TRABAJADOR (A)  conforme a la segunda parte de la cláusula primera del presente contrato, se reserva sus opiniones religiosas, políticas u otros actos personales en el desarrollo de la asignatura, programas, planes actividades curriculares o extracurriculares, contrarios a los principios axiológicos, religiosos, ético-morales, costumbres prácticas por la universidad o la patrocinadora de esta. El EMPLEADOR reconoce la libertad de cátedra que signifique formas de enseñanza, evaluación, didáctica universitaria u otros análogos, dentro de los parámetros determinados por la misma.</span></h5>
 
-<h5 style="text-align: justify;"><span style="font-size:12px"><strong>OCTAVA</strong>: El EMPLEADOR no está obligado a dar aviso adicional alguno, referente al término del presente contrato, el que concluye definitivamente como lo dispone la cláusula tercera. Por su parte el (la) TRABAJADOR (A) podrá dar por terminada su relación laboral, siempre y cuando presente su carta de renuncia con 30 días de anticipación.</span></h5>
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>OCTAVA</strong>: El EMPLEADOR no está obligado a dar aviso adicional alguno, referente al término del presente contrato, el que concluye definitivamente como lo dispone la cláusula tercera. Por su parte el (la) TRABAJADOR (A) podrá dar por terminada su relación laboral, siempre y cuando presente su carta de renuncia con 30 días de anticipación.</span></h5>
 
-<h5 style="text-align: justify;"><span style="font-size:12px">Estando conformes en todo el contenido expresado en el presente contrato firmamos en Ñaña, Lima al [fe_suscripcion].</span></h5>
+<h5 style="text-align:justify"><span style="font-size:12px">Estando conformes en todo el contenido expresado en el presente contrato firmamos en �?aña, Lima al [fe_suscripcion].</span></h5>
 
-<p><span style="font-size:11px">                                                     <img alt="" src="http://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Firma_Salvador_Allende.svg/800px-Firma_Salvador_Allende.svg.png" style="height:40px; position:absolute; width:131px" /></span></p>
+<p><span style="font-size:11px">� � � � � � � � � � � � � � � � � � � � � � ��<img alt="" src="http://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Firma_Salvador_Allende.svg/800px-Firma_Salvador_Allende.svg.png" style="height:40px; position:absolute; width:131px" /></span></p>
 
-<p><span style="font-size:11px">                                                         EL EMPLEADOR                                                   EL (LA) TRABAJADOR (A)</span></p>
+<p><span style="font-size:11px">� � � � � � � � � � � � � � � � � � �� � � � � � � � EL EMPLEADOR � � � � � � � � � � � � � � � � � � � � � �� � � � � EL (LA)�TRABAJADOR (A)</span></p>

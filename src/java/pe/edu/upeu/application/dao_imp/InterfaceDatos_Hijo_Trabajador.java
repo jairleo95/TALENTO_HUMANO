@@ -29,5 +29,5 @@ public interface InterfaceDatos_Hijo_Trabajador {
 
     public List<Map<String, ?>> Listar_hijo_filtro(String desde, String hasta,String edad);
     
-    public List<Map<String,?>> Listar_Cumpleaños(String mes, String dia);
+    public List<Map<String,?>> Listar_Cumpleaños(String mes, String dia, String aps);
 }

@@ -35,9 +35,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <head>
         <meta charset="utf-8">
         <title>Crear Formatos</title>
+        <link rel="stylesheet" href="../../../css/bootstrap.min.css">
         <script src="../../../HTML_version/js/plugin/ckeditor/ckeditor.js"></script>
         <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
+        <script src="../../../ajax/ajax.google.min.js"></script>
         <style>
             .caja{
                 background:transparent url(../../../imagenes/Gifloader.GIF) center no-repeat;
@@ -181,11 +183,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         func_pr = Lista[i].id_fu_1;
                         var aray = func_pr.split("/");
                         for (var c_f = 0; c_f < aray.length; c_f++) {
-                            if ((c_f+1)  === aray.length) {
+                            if ((c_f + 1) === aray.length) {
                             } else {
-                                if((c_f+2)===aray.length){
+                                if ((c_f + 2) === aray.length) {
                                     funciones_prim += aray[c_f];
-                                }else{
+                                } else {
                                     funciones_prim += aray[c_f] + ", ";
                                 }
                             }
@@ -196,11 +198,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         func_sc = Lista[i].id_fu_2;
                         var aray = (func_sc).split("/");
                         for (var c_f = 0; c_f < aray.length; c_f++) {
-                            if ((c_f+1) === aray.length) {
+                            if ((c_f + 1) === aray.length) {
                             } else {
-                                if((c_f+2)===aray.length){
+                                if ((c_f + 2) === aray.length) {
                                     funciones_sec += aray[c_f];
-                                }else{
+                                } else {
                                     funciones_sec += aray[c_f] + ", ";
                                 }
                             }
@@ -398,7 +400,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         }
 
         var texto = "";
-        function funciones(id_p) {
+        function imp() {
+            ExecuteCommand('print');
         }
         ;
         function procesar_texto_1(plan, valor) {
@@ -418,8 +421,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             for (var f = 0; f < cant_con + 1; f++) {
                 procesar_texto_1($(".plantilla" + f + "").val(), $(".contrato" + f + "").val());
             }
-
         }
+
         function resetear() {
             var editor = CKEDITOR.instances.editor1;
             //var value = document.getElementById('htmlArea').value;
@@ -430,7 +433,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             setTimeout(function() {
                 InsertHTML();
                 ExecuteCommand("print");
-            }, 10000);
+            }, 15000);
             recorido();
             //ResetDirty();
             /*setTimeout(function() {
@@ -441,31 +444,21 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             // InsertHTML();
             //ExecuteCommand("print");
         }
-        function imd() {
-            $(".div_t").empty();
-        }
         $(document).ready(function() {
 
             $("#actu").hide();
             $("#texto").hide();
             $("#texto2").hide();
-            function GifLoader(contenedor, msg, action) {
-                $('.headerr').hide();
-                var text = "";
-                contenedor.empty();
-                if (action == 1) {
-                    text += "<div class='caja' style='height:250px; width:150px; margin:auto;'><center><h3>" + msg + "</h3></center></div>";
-                } else if (action == 2) {
-                    text += "<div style='height:150px; width:150px; margin:auto; padding-top:30px;'><center><h3>" + msg + "</h3></center></div>";
-                }
-                contenedor.append(text);
-            }
-            setTimeout(function() {
-                InsertHTML().after(imd());
-                ExecuteCommand("print");
-            }, 10000);
-            recorido();
-
+            /*setTimeout(function() {
+             InsertHTML();
+             ExecuteCommand("print");
+             }, 20000);*/
+            //$(document).ajaxStart(function() {
+            //});
+            /*$(document).ajaxComplete(function() {
+             $("#wait").css("display", "none");
+             });*/
+            recorido().before(InsertHTML());
 
 
         }
@@ -474,35 +467,45 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 </head>
 
 <body style="height: 1080px">
-    <h3>CARGAR PLANTILLAS</h3>
+    <h3 class="h">CARGAR PLANTILLAS</h3>
+    <label >CARGAR PLANTILLAS</label>
     <%%>
     <input type="hidden" id="no_arch" class="no_arc" value="<%%>">
 
-    <button type="button" id="btn1" class=" btn btn-success btn2" onclick="InsertHTML()" style="display: none">CARGAR</button>
-    <button type="button" id="btn2" class="btn2" onclick="resetear()" >Resetear</button>
+    <button type="button" id="btn1" class=" btn btn-success btn2" onclick="InsertHTML()" >CARGAR</button>
+    <button type="button" id="btn2" class="btn2 btn btn-danger" onclick="resetear()" >Resetear</button>
+    <button type="button" id="btn2" class="btn2 btn btn-primary" onclick="imp();" >Imprimir</button>
     <h3>EDITAR PLANTILLAS</h3>
     <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
         <div class="div_t">                                                                                     
         </div>
+        <div id="wait" style="display:none;width:69px;height:89px;position:absolute;top:50%;left:50%;padding:2px;" align="center"><img src='../../../imagenes/por-favor-espere.gif' width="100" height="100" /><br>Loading..</div>
         <textarea cols="100" id="editor1" name="editor1" rows="10">
         </textarea>
         <script>
             // Replace the <textarea id="editor1"> with an CKEditor instance.
-
-            CKEDITOR.replace('editor1', {
-                on: {
-                    focus: onFocus,
-                    blur: onBlur,
-                    // Check for availability of corresponding plugins.
-                    pluginsLoaded: function(evt) {
-                        var doc = CKEDITOR.document, ed = evt.editor;
-                        if (!ed.getCommand('bold'))
-                            doc.getById('exec-bold').hide();
-                        if (!ed.getCommand('link'))
-                            doc.getById('exec-link').hide();
-                    }
-                }
-                , height: '800px'});</script>
+            CKEDITOR.replace('editor1',
+                    {
+                        toolbar:
+                                [['Source', '-', 'NewPage', 'Preview', '-', 'Templates'],
+                                    ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Print', 'SpellChecker', 'Scayt'],
+                                    ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
+                                    ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
+                                    '/',
+                                    ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
+                                    ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
+                                    ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                                    ['Link', 'Unlink', 'Anchor'],
+                                    ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
+                                    '/',
+                                    ['Styles', 'Format', 'Font', 'FontSize'],
+                                    ['TextColor', 'BGColor'],
+                                    ['Maximize', 'ShowBlocks', '-', 'About'],
+                                    ['Styles', 'Format'],
+                                    ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', '-', 'About']
+                                ],
+                        height: '800px'
+                    });</script>
         <script type="text/javascript">
             $(document).ready(function() {
 

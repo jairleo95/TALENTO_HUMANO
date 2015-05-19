@@ -47,8 +47,8 @@ Author     : JAIR
                                         <label><strong>Tipo de plazo :</strong></label>
                                         <label class="select"> <i class="icon-append fa fa-calendar"></i>
                                             <select name="tipo" required="" class="tipo" required="">
-                                                <option value='1' selected="">Ingreso a planilla</option>
-                                                <option value='2'>Inicio de Contrato</option>
+                                                <option value='2' selected="">Ingreso a planilla</option>
+                                                <option value='1'>Inicio de Contrato</option>
                                             </select>
                                         </label>
                                     </section>
@@ -65,18 +65,18 @@ Author     : JAIR
                                         <textarea rows="3" name="descripcion" placeholder="Descripción" required="" class="descripcion" ></textarea> 
                                     </label>
                                 </section>
-                                <div class="row tr_tolerancia" style="display: none">
+                                <div class="row tr_tolerancia">
 
                                     <section class="col col-6">
-                                        <label><strong>Dias de tolerancia (Inicio de contrato):</strong></label>
+                                        <label><strong>Dias de tolerancia (Ingreso a planilla):</strong></label>
                                         <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                            <input type="number" name="tolerancia" min=""  required=""  value="0" class="tolerancia" />
+                                            <input type="number" name="tolerancia" min="1"  required=""  value="0" class="tolerancia" />
                                         </label>
                                     </section>
                                     <section class="col col-6">
-                                        <label><strong>Departamento tolerancia (Inicio de contrato):</strong></label>
+                                        <label><strong>Departamento tolerancia (Ingreso a planilla):</strong></label>
                                         <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                            <input type="text" name="dep_tolerancia" required="" value="0" class="dep_tolerancia" />
+                                            <input type="text" name="dep_tolerancia" required="" value="DPT-0019" class="dep_tolerancia" />
                                         </label>
                                     </section>
 
@@ -111,6 +111,30 @@ Author     : JAIR
                                         </label>
                                     </section>
                                 </div>
+                                <div class="row">
+                                    <section class="col col-4">
+                                        <label class="select" id="titu">
+                                            Dirección :<select name="direccion" class="direccion" required="" >
+                                                <option value="" >[SELECCIONE]</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-4">
+                                        <label class="select" id="titu">
+                                            Departamento :<select name="departamento" class="departamento" required="" >
+                                                <option value="" >[SELECCIONE]</option>
+
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-4">
+                                        <label class="select" id="titu">
+                                            Area :<select name="area" class="area" required="" >
+                                                <option value="" >[SELECCIONE]</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                </div>
 
                                 <footer>
                                     <button type="button"  id="btn-registrar" class="btn btn-primary btn-registrar"> 
@@ -138,8 +162,8 @@ Author     : JAIR
                                         <td class="text-center semi-bold">Hasta</td>
                                         <td class="text-center semi-bold">Tipo de Planilla</td>
                                         <td class="text-center semi-bold">Requerimiento</td>
-                                        <td class="text-center semi-bold">Dias de tolerancia</td>
                                         <td class="text-center semi-bold"> Dep. Tolerancia</td>
+                                        <td class="text-center semi-bold">Dias de tolerancia</td>
                                         <td class="text-center semi-bold">Estado</td>
                                         <td class="text-center semi-bold">Editar</td>
                                     </tr>
@@ -231,7 +255,6 @@ Author     : JAIR
             if ($(".desde").val() == "") {
                 $(".desde").val(fecha);
             } else {
-
             }
             $(".desde").removeAttr("readonly");
             $(".hasta").attr("min", fecha);
@@ -374,7 +397,7 @@ Author     : JAIR
             } else if ($(this).val() == '2') {
                 $(".tr_tolerancia").show();
                 $(".tr_dep_tolerancia").show();
-                $(".dep_tolerancia").val("");
+                $(".dep_tolerancia").val("DPT-0019");
 
             }
             listar();
@@ -403,24 +426,29 @@ Author     : JAIR
         });
         $(".btn-registrar").click(
                 function () {
-                    $(this).attr("disabled", "true");
+                    //$(this).attr("disabled", "true");
                     validar_fechas();
                     if ($(".form_plazo").valid()) {
                         $.ajax({
                             type: "post",
                             url: "../../../plazo_dgp",
                             data: "opc=Registrar&" + $("#form-plazo").serialize()
-                        }).done(function () {
-                            listar();
-                            $("#form-plazo")[0].reset();
-                            $.smallBox({
-                                title: "¡Registrado!",
-                                content: "<i class='fa fa-clock-o'></i> <i>El plazo se ha registrado correctamente...</i>",
-                                color: "#659265",
-                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                timeout: 4000
-                            });
-                            $(this).removeAttr("disabled");
+                        }).done(function (objJson) {
+                            if (objJson.rpta == -1) {
+                                alert(objJson.mensaje);
+                                return;
+                            } else {
+                                listar();
+                                $("#form-plazo")[0].reset();
+                                $.smallBox({
+                                    title: "¡Registrado!",
+                                    content: "<i class='fa fa-clock-o'></i> <i>El plazo se ha registrado correctamente...</i>",
+                                    color: "#659265",
+                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                    timeout: 4000
+                                });
+                                //$(this).removeAttr("disabled");
+                            }
                         });
                     } else {
                         $(this).removeAttr("disabled");
@@ -438,6 +466,15 @@ Author     : JAIR
         $(".desde").click(function () {
             validar_fechas();
         });
+
+        list_select($(".direccion"), "../../../Direccion_Puesto", "opc=Listar_direccion");
+        $(".direccion").change(function () {
+            list_select($(".departamento"), "../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $(this).val());
+        });
+        $(".departamento").change(function () {
+            list_select($(".area"), "../../../Direccion_Puesto", "opc=Listar_area2&" + "id=" + $(this).val());
+        });
+
     });
 
 </script>

@@ -232,11 +232,12 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
     }
 
     @Override
-    public List<Map<String, ?>> Listar_Cumpleaños(String mes, String dia) {
+    public List<Map<String, ?>> Listar_Cumpleaños(String mes, String dia,String aps) {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM RHVD_FILTRO_CUMPL_TRAB ";
+            String sql = "SELECT * FROM RHVD_FILTRO_CUMPL_TRAB ";            
+            sql += (!aps.equals("")) ? "Where CO_APS='" + aps.trim() + "'" : "";
             sql += (!mes.equals("")&!mes.equals("13")) ? "where mes='" + mes.trim() + "' " : "";
             sql += (!mes.equals("")&mes.equals("13")) ? "" : "";
             sql += (!dia.equals("")) ? "and dia='" + dia.trim() + "'" : "";
