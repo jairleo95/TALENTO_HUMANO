@@ -21,7 +21,44 @@
     <body>
         <div class="well caja_t">
             <div class="row">
-
+                <form class="smart-form">
+                    <section class="col col-md-3">
+                        <label class="label">Codigo</label>
+                        <label class="input">
+                            <input type="text" name="codigo" placeholder="Ingesar Codigo" maxlength="8">
+                        </label>
+                    </section>
+                    <section class="col col-md-3">
+                        <label class="label">Detalle</label>
+                        <label class="input">
+                            <input type="text" name="detalle" placeholder="Detalle Centro Costo" maxlength="200">
+                        </label>
+                    </section>
+                    <section class="col col-md-3">
+                        <label class="label">Direccion</label>
+                        <label class="select">
+                            <select>
+                                <option>[Seleccione]</option>
+                            </select>
+                        </label>
+                    </section>
+                    <section class="col col-md-3">
+                        <label class="label">Departmento</label>
+                        <label class="select">
+                            <select>
+                                <option>[Seleccione]</option>
+                            </select>
+                        </label>
+                    </section>
+                    <section class="col col-md-3">
+                        <label class="label">Area (Opcional)</label>
+                        <label class="select">
+                            <select>
+                                <option>[Seleccione]</option>
+                            </select>
+                        </label>
+                    </section>
+                </form>
             </div>
         </div>
         <div class="well">
@@ -38,8 +75,8 @@
                                 <td class="text-center semi-bold">Acciones</td>
                             </tr>
                         </thead>
-                        <tbody class="tbodys">
-
+                        <tbody class="tbodys">                            
+                            
                         </tbody>
                     </table>
                 </div>
@@ -81,7 +118,6 @@
 
         <script>
             $(document).ready(function () {
-                $('.caja_t').hide();
                 $('.tabla_t').DataTable();
                 cargar_T();
                 function cargar_T() {
@@ -90,7 +126,7 @@
                         if (lista.length > 0) {
                             var t = "";
                             for (var i = 0; i < lista.length; i++) {
-                                t += "<tr id="+lista[i].ID_CENTRO_COSTO+">";
+                                t += "<tr>";
                                 t += "<td>" + (i + 1) + "</td>";
                                 t += "<td>"+lista[i].CO_CENTRO_COSTO+"</td>";
                                 t += "<td>"+lista[i].DE_CENTRO_COSTO+"</td>";
@@ -104,7 +140,7 @@
                                 }else{
                                     t += "<td style='background-color : #d6dde7'>Sin Asignar</td>";
                                 }
-                                t += "<td>Acciones</td>";
+                                t += "<td><a href='#' id="+lista[i].ID_CENTRO_COSTO+" ><i class='glyphicon glyphicon-pencil'></i> Editar</a></td>";
                                 t += "</tr>";
                             }
                             crear_T();
