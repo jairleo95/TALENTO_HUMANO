@@ -29,7 +29,6 @@
         <title>Detalle de Trabajador</title>
         <link rel="stylesheet" type="text/css" href="../../css/Css_Menu_Desplegable/default.css" />
         <link rel="stylesheet" type="text/css" href="../../css/Css_Menu_Desplegable/component.css" />
-        <script src="../../js/modernizr.custom.js"></script>
 
         <!-- Estilos plantilla-->
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
@@ -849,9 +848,7 @@
 
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
-        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
+ 
         <script>
                                     $(document).ready(function() {
                                         pageSetUp();
