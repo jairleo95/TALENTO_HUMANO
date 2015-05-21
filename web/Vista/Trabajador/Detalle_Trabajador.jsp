@@ -22,7 +22,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -235,7 +235,7 @@
                                             <tr><td class="td">Nombre :</td><td class="td1"><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
                                             <tr><td class="td">Apellido Paterno :</td><td class="td1"><%=trb.getAp_paterno().toUpperCase()%></td></tr>
                                             <tr><td class="td">Apellido Materno :</td><td class="td1"><%=trb.getAp_materno().toUpperCase()%></td></tr>
-                                            <tr><td class="td">Fecha de Nacimiento :</td><td class="td1"><%=c.convertFecha5(trb.getFe_nac())%></td></tr>
+                                            <tr><td class="td" style="width:65%">Fecha de Nacimiento :</td><td class="td1"><%=c.convertFecha5(trb.getFe_nac())%></td></tr>
                                         </table>
                                     </td>
                                     <%String ID_ROL = (String) sesion.getAttribute("IDROL");
@@ -245,20 +245,136 @@
 
                                     %>
                                     <td>
-                                        <table class="info-det" style="margin-left:80%;"  >
+                                        <!-- <table class="info-det" style="margin-left:80%;"  >-->
+                                        <table  id="user" class="table table-bordered table-striped" style="clear: both" >
                                             <%                                               if (emp.getCo_aps() != null) {
                                                     int val_aps = Integer.parseInt(emp.getCo_aps());
 
                                                     if (val_aps > 0) {%>
 
-                                            <tr><td class="td" >Código APS:</td><td class="td1" ><%=emp.getCo_aps()%></td>
+                                            <tr>
+                                                <td class="td" >Código APS:</td>
+                                                <td class="td1" >
+                                                    <a href="#" id="username" data-type="text" data-pk="1" data-original-title="Enter username">
+                                                        <%=emp.getCo_aps()%>
+                                                    </a>
+                                                </td>
                                                 <td class="td" colspan="2">
-                                            <center>
                                                 <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="" class=" btn btn-default txt-color-green btn-mod-a"><i class="fa fa-pencil fa-2x"></i></a>
-                                            </center></td>
-                                    </tr>
+                                            </td>
+                                            </tr>
+                                            <%}
+                                            %>
+                                            <%}%>
+
+                                            <%if (emp.getCo_huella_digital() != null) {
+
+                                                    int val_hue = Integer.parseInt(emp.getCo_huella_digital());
+                                                    if (val_hue > 0) {%>
+                                            <tr><td class="td" >Código Huella:</td><td class="td1" ><%=emp.getCo_huella_digital()%></td>
+                                                <td class="td" colspan="2">
+                                                <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="mod_huella" class=" btn btn-default txt-color-green mod_huella" ><i class="fa fa-pencil fa-2x"></i></a>
+                                                  
+                                              </td>
+                                            </tr>
+                                            <%}%>
+                                            <%}%>
+
+                                        </table>
+                                    </td>
+                                    <%
+
+                                        String val_aps = emp.getCo_aps();
+                                        if (val_aps == null && ID_ROL.trim().equals("ROL-0001")) {%>
+                                    <td>
+                                        <table class="info-det" style="margin-left:50%;">
+                                            <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
+                                            <input type="hidden" name="puesto_id" value="<%=idp%>">
+                                            <input type="hidden" name="cod" value="<%=cod%>">
+                                            <input type="hidden" name="idpasos" value="<%=id_pasos%>">
+                                            <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>">
+                                            <input type="hidden"name="nup" value="<%=nropaso%>">
+                                            <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
+                                            <tr><td class="td" colspan="2">Registrar codigo APS</td></tr>
+                                            <tr><td><input type="text" id="cod_ap" name="cod_aps" maxlength="6" onblur="VAL_COD_APS()"></td></tr>
+                                            <tr><td><input type="button" value="Registrar" name="" class=""></button</td></tr>
+                                            <!--<tr><td><button value="registrar_aps" name="opc" class="btn_aps">Registrar</button></td></tr>-->
+                                        </table
+                                    </td>
+                                    <script>
+                                        $(document).ready(function() {
+
+                                            alert("asdas")
+                                        });
+                                        $(".mod_huella").click(function() {
+                                            alert();
+                                        });
+
+                                        /*$.ajax({
+                                         url: "../../carga_academica",
+                                         type: "POST",
+                                         data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
+                                         }).done(function(ids) {
+                                         var arr_id = ids.split(":");
+                                         alert("Registrado con exito!...");
+                                         $(".proceso").val(arr_id[0]);
+                                         $(".dgp").val(arr_id[1]);
+                                         $(".btn_procesar").show();
+                                         }).fail(function(e) {
+                                         alert("Error: " + e);
+                                         });*/
+
+                                        function VAL_COD_APS() {
+                                         
+                                            if ($("#cod_ap").val() != "") {
+                                                var co_aps = document.getElementById("cod_ap");
+                                                $.ajax({
+                                                    url: "../../empleado",
+                                                    type: "POST",
+                                                    data: "opc=validar_aps&co_aps=" + co_aps.value
+                                                }).done(function(e) {
+                                                    // alert(e)
+                                                    var cant = ($("#cod_ap").val());
+                                                    //alert(cant.length)
+                                                    if (cant.length > 5) {
+                                                        if (e == 0) {
+                                                            //alert(e)
+                                                            // alert($(".idtra").val());
+                                                            // alert($("#cod_ap").val());
+                                                            window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#cod_ap").val() + "&idtr=" + $(".idtra").val() + "";
+                                                        }
+                                                        else {
+                                                            alert("Este Código APS ya fue registrado!")
+                                                            $.SmartMessageBox({
+                                                                title: "Este Código APS ya fue registrado!",
+                                                                content: "Por favor Ingrese un Código APS distinto",
+                                                            });
+                                                        }
+                                                    }
+                                                }).fail(function(e) {
+                                                    alert("Error: " + e);
+                                                });
+                                            }
+                                        }
+                                    </script>
                                     <%}
-                                    %>
+                                        String val_hue = emp.getCo_huella_digital();
+                                        if (val_hue == null && ID_ROL.trim().equals("ROL-0001")) {%>
+                                    <td>
+                                        <table class="info-det" style="margin-left:50%;">
+                                            <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
+                                            <input type="hidden" name="puesto_id" value="<%=idp%>">
+                                            <input type="hidden" name="cod" value="<%=cod%>">
+                                            <input type="hidden" name="idpasos" value="<%=id_pasos%>">
+                                            <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>">
+                                            <input type="hidden"name="nup" value="<%=nropaso%>">
+                                            <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
+                                            <tr><td class="td" colspan="3">Registrar Codigo de huella digital</td></tr>
+                                            <tr><td><input type="text" id="cod_hu" name="cod_huella" maxlength="6" onblur="VAL_COD_HUELLA()"></td></tr>
+                                            <tr><td><input type="button" value="Registrar" name="" class=""></button</td></tr>
+                                            <!--<tr><td><button value="registrar_huella" name="opc">Registrar</button></td></tr>-->
+                                        </table>
+                                    </td>
                                     <%}%>
 
                                     <%if (emp.getCo_huella_digital() != null) {
@@ -767,6 +883,21 @@
         <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
+
+        <!-- PAGE RELATED PLUGIN(S) -->
+        <script src="../../js/plugin/maxlength/bootstrap-maxlength.min.js"></script>
+        <script src="../../js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+        <script src="../../js/plugin/clockpicker/clockpicker.min.js"></script>
+        <script src="../../js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js"></script>
+        <script src="../../js/plugin/noUiSlider/jquery.nouislider.min.js"></script>
+        <script src="../../js/plugin/ion-slider/ion.rangeSlider.min.js"></script>
+        <script src="../../js/plugin/colorpicker/bootstrap-colorpicker.min.js"></script>
+        <script src="../../js/plugin/knob/jquery.knob.min.js"></script>
+        <script src="../../js/plugin/x-editable/moment.min.js"></script>
+        <script src="../../js/plugin/x-editable/jquery.mockjax.min.js"></script>
+        <script src="../../js/plugin/x-editable/x-editable.min.js"></script>
+        <script src="../../js/plugin/typeahead/typeahead.min.js"></script>
+        <script src="../../js/plugin/typeahead/typeaheadjs.min.js"></script>
         <script>
                                             function closedthis() {
                                                 $.smallBox({
