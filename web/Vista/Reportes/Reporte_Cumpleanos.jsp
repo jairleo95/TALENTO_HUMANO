@@ -56,6 +56,9 @@
                 <center><h1 class="spacing" style="font-weight: bold;">Cumpleaños Del Trabajador</h1></center> 
             </div>
             <center>
+                <div class="spacing">
+                    <center><h3 class="spacing" style="font-weight: bold;">Filtro</h3></center> 
+                </div>
                 <br>
                 <div id="contenido" >
                     <div class="form-group" >

@@ -84,8 +84,11 @@ public class CReporte extends HttpServlet {
             if (opc.equals("reporte_hijo")) {
                 String desde = request.getParameter("desde");
                 String hasta = request.getParameter("hasta");
-                String edad = request.getParameter("edad");
-                List<Map<String, ?>> lista = dah.Listar_hijo_filtro(desde, hasta, edad);
+                String edad = request.getParameter("hasta");
+                String nom = request.getParameter("nom");                
+                String dni = request.getParameter("dni");
+                String gen = request.getParameter("genero");
+                List<Map<String, ?>> lista = dah.Listar_hijo_filtro(desde, hasta, edad,nom,dni,gen);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }

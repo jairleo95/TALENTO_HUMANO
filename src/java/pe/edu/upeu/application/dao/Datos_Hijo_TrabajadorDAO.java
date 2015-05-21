@@ -198,13 +198,16 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
     }
 
     @Override
-    public List<Map<String, ?>> Listar_hijo_filtro(String desde, String hasta, String edad) {
+    public List<Map<String, ?>> Listar_hijo_filtro(String desde, String hasta, String edad,String nom,String dni,String gen) {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "SELECT * FROM RHVD_FILTRO_EDAD ";
             sql += (!desde.equals("") & !(hasta.equals(""))) ? "where EDAD BETWEEN '" + desde.trim() + "' and '" + hasta.trim() + "'" : "";
             sql += (!edad.equals("")) ? "where EDAD='" + edad.trim() + "'" : "";
+            sql += (!nom.equals("")) ? "where EDAD='" + nom.trim() + "'" : "";
+            sql += (!dni.equals("")) ? "where EDAD='" + dni.trim() + "'" : "";
+            sql += (!gen.equals("")) ? "where EDAD='" + gen.trim() + "'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();

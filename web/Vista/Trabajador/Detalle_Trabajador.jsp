@@ -265,9 +265,10 @@
 
                                             int val_hue = Integer.parseInt(emp.getCo_huella_digital());
                                             if (val_hue > 0) {%>
-                                    <tr><td class="td" >Código Huella</td><td class="td1" ><%=emp.getCo_huella_digital()%></td>
+                                    <tr><td class="td" >Código Huella:</td><td class="td1" ><%=emp.getCo_huella_digital()%></td>
                                         <td class="td" colspan="2">
                                             <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="mod_huella" class=" btn btn-default txt-color-green mod_huella" ><i class="fa fa-pencil fa-2x"></i></a>
+                                            
                                         </td>
                                     </tr>
                                     <%}%>
@@ -295,7 +296,13 @@
                                     </table
                                 </td>
                                 <script>
+                                    $(document).ready(function() {
 
+                                        alert("asdas")
+                                    });
+                                    $(".mod_huella").click(function() {
+                                        alert();
+                                    });
 
                                     /*$.ajax({
                                      url: "../../carga_academica",
@@ -756,30 +763,41 @@
 
         <%}%>
         <%}%> <%}%>
+        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-                                    if (!window.jQuery) {
-                                        document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                    }
+                                        if (!window.jQuery) {
+                                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                        }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-                                    if (!window.jQuery.ui) {
-                                        document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                    }
+                                        if (!window.jQuery.ui) {
+                                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                        }
         </script>
 
-
         <!-- IMPORTANT: APP CONFIG -->
+        <script src="../../js/app.config.js"></script>
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
         <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
 
         <!-- BOOTSTRAP JS -->
         <script src="../../js/bootstrap/bootstrap.min.js"></script>
+
+        <!-- CUSTOM NOTIFICATION -->
+        <script src="../../js/notification/SmartNotification.min.js"></script>
+
+        <!-- JARVIS WIDGETS -->
+        <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
+
+        <!-- EASY PIE CHARTS -->
+        <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
 
         <!-- SPARKLINES -->
         <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
@@ -801,19 +819,26 @@
 
         <!-- FastClick: For mobile devices -->
         <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
+
+        <!--[if IE 8]>
+    
+        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+    
+        <![endif]-->
+
         <!-- Demo purpose only -->
         <script src="../../js/demo.min.js"></script>
-        <!-- MAIN APP JS FILE -->
-        <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-        <script src="../../js/app.config.js"></script>
-        <script src="../../js/notification/SmartNotification.min.js"></script>
-        <!--[if IE 8]>
+
         <!-- MAIN APP JS FILE -->
         <script src="../../js/app.min.js"></script>
+
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
         <!-- Voice command : plugin -->
         <script src="../../js/speech/voicecommand.min.js"></script>
+
         <!-- PAGE RELATED PLUGIN(S) -->
+        <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+        <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
 
 
         <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
@@ -824,6 +849,9 @@
 
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
+        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
+        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
+        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
         <script>
                                     $(document).ready(function() {
                                         pageSetUp();
@@ -843,9 +871,7 @@
                                             });
                                         });
 
-                                        $(".mod_huella").click(function() {
-                                            alert();
-                                        });
+
 
                                         $(".btn_guardar_ca").click(function() {
                                             $.ajax({
@@ -907,6 +933,7 @@
 
         <script>
             $(document).ready(function() {
+                
                 $(".btn-conti").click(function(e) {
                     $.SmartMessageBox({
                         title: "Alerta de Confirmaci?!",
