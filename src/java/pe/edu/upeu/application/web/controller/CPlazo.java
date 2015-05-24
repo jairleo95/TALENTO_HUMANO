@@ -84,8 +84,8 @@ public class CPlazo extends HttpServlet {
                 pl.UPDATE_PLAZO(ID_PLAZO, NO_PLAZO, DET_ALERTA, FE_DESDE, FE_HASTA, null);
             }
             if (opc.equals("Listar")) {
-                String t_List = request.getParameter("t_List");
-                List<Map<String, ?>> lista = pl.List_Plazo(t_List);
+                String tipo = request.getParameter("tipo");
+                List<Map<String, ?>> lista = pl.List_Plazo(tipo);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }

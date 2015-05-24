@@ -159,7 +159,7 @@
                                                                                                                                             <td>
                                                                                                                                                 <input type="hidden" id="id_cto" value="<%=e.getId_contrato()%>" ></input>
                                                                                                                                                 <%if (e.getFe_hasta() == null) {%>
-                                                                                                                                                <button type="button" class="btn btn-primary dis_estado" id="btn_nro" value="<%=i%>">
+                                                                                                                                                <button type="button" class="btn btn-primary dis_estado" id="btn_nro" value="<%=e.getId_contrato()%>">
                                                                                                                                                     </span>Deshabilitar 
                                                                                                                                                 </button>
                                                                                                                                                 <input type="hidden" id="nro" value="<%=i%>" ></input>
@@ -448,24 +448,19 @@
                                                                                                             }
                                                                                                         });
                                                                                                         $(".dis_estado").click(function(e) {
-                                                                                                            var cto = document.getElementById("id_cto");
-                                                                                                            //alert(cto.value)
+                                                                                                            var cto =  $(this).val();
+                                                                                                          // alert(cto);
                                                                                                             $.SmartMessageBox({
                                                                                                                 title: "¡Advertencia!",
                                                                                                                 content: "¿Esta seguro que terminó el contrato?",
                                                                                                                 buttons: '[No][Si]'
                                                                                                             }, function(ButtonPressed) {
                                                                                                                 if (ButtonPressed === "Si") {
-                                                                                                                    // alert($("#btn_nro").val())
-                                                                                                                   /* if (document.getElementById("nro") == document.getElementById("btn_nro") ){
-                                                                                                                        alert($("#nro").val())
-                                                                                                                    }*/
                                                                                                                     $.ajax({
                                                                                                                         url: "../../contrato",
                                                                                                                         type: "POST",
-                                                                                                                        data: "opc=validar_contrato&id_cto=" + $("#id_cto").val()
+                                                                                                                        data: "opc=validar_contrato&id_cto=" + cto 
                                                                                                                     }).done(function(e) {
-                                                                                                                        //alert($("#id_cto").val())
                                                                                                                         $.SmartMessageBox({
                                                                                                                             title: "Se cambió el estado correctamente",
                                                                                                                             content: "Cambio Exitoso!",

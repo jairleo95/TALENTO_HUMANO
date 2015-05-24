@@ -64,41 +64,45 @@
                         <!--style="padding-left: 30px"-->
                         <div class="form-group" >
                             <label>Nombre</label><br>
-                            <input type="text"  class="form-control mes" placeholder="Nombre" name="nom"  length="45" style="width: 280px" id="des"/>
+                            <input type="text"  class="form-control nom" placeholder="Nombre" length="45" style="width: 280px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>Apellido Paterno</label><br>
+                            <input type="text"  class="form-control ape" placeholder="Nombre" length="45" style="width: 280px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>Apellido Materno</label><br>
+                            <input type="text"  class="form-control mat" placeholder="Nombre" length="45" style="width: 280px" id="des"/>
                         </div>
                         <div class="form-group" >
                             <label>Dni</label><br>
-                            <input type="text"  class="form-control mes" placeholder="Dni" name="dni"  length="45" style="width: 120px" id="des"/>
+                            <input type="text"  class="form-control dni" placeholder="Dni" length="45" style="width: 120px" id="des"/>
                         </div>
                         <div class="form-group" >
                             <label>Genero:</label><br>
-                            <select name="puesto" class="form-control selec_mes" id="" style="width: 150px"> 
+                            <select name="puesto"class="form-control selec_gen" id="selec_gen"style="width: 150px"> 
                                 <option value="">[Seleccione]</option>
-                                <option value="f">Femenino</option>
-                                <option value="m">Masculino</option>
+                                <option value="F">Femenino</option>
+                                <option value="M">Masculino</option>
                             </select>
-                        </div>
-                        <div class="form-group" >
-                            <label>FECHA NACIMIENTO</label><br>
-                            <input type="DATE"  class="form-control mes" name=""  length="45" style="width: 160px" id="des"/>
                         </div>
                         <br>
                         <hr1 class="spacing" style="font-weight: bold;">Filtro Rango Edad del Hijos</hr1>
                         <div class="row">
                             <div class="form-group" >
                                 <label>Desde</label><br>
-                                <input type="text"  class="form-control des" placeholder="Inicio rango de edad" name="del"  length="45" style="width: 250px" id="des"/>
+                                <input type="text"  class="form-control des" placeholder="Inicio rango de edad"  length="45" style="width: 250px" id="des"/>
                             </div>
                             <div class="form-group" >
                                 <label>Hasta</label><br>
-                                <input type="text"  class="form-control has" placeholder="Fin rango de edad" name="al" size="45" maxlength="100" style="width: 250px" id="has" />
+                                <input type="text"  class="form-control has" placeholder="Fin rango de edad" size="45" maxlength="100" style="width: 250px" id="has" />
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="form-group" >
                                 <label>Edad</label><br>
-                                <input type="text"  class="form-control edad" placeholder="Rango general de edad" name="del"  length="45" style="width: 250px" id="edad"/>
+                                <input type="text"  class="form-control edad" placeholder="Rango general de edad" length="45" style="width: 250px" id="edad"/>
                             </div>
                         </div>
                         <br>
@@ -538,9 +542,15 @@
             var a = $(".des").val();
             var b = $(".has").val();
             var c = $(".edad").val();
+            var no = $(".nom").val();
+            var ap = $(".ape").val();
+            var ma = $(".mat").val();
+            var dn = $(".dni").val();
+            var ge = $(".selec_gen").val();
+            var fe = $(".fec").val();
             var d = $("#Li_hijos");
             var texto = '';
-            $.post("../../reporte", "opc=reporte_hijo&desde=" + a + "&hasta=" + b + "&edad=" + c, function (objJson) {
+            $.post("../../reporte", "opc=reporte_hijo&desde=" + a + "&hasta=" + b + "&edad=" + c + "&nom=" + no + "&paterno=" + ap + "&materno=" + ma + "&DNI=" + dn + "&genero=" + ge, function (objJson) {
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
