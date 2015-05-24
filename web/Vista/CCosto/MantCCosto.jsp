@@ -271,7 +271,7 @@
                                     }
                                     if (ButtonPressed === "No") {
                                         $.smallBox({
-                                            title: "Crear Centro de Costo",
+                                            title: "Eliminar Centro de Costo",
                                             content: "<i class='fa fa-clock-o'></i> <i>La operación ha sido Cancelada</i>",
                                             color: "#C46A69",
                                             iconSmall: "fa fa-times fa-2x fadeInRight animated",
