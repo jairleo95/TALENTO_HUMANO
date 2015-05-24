@@ -53,6 +53,17 @@ public class MCCosto extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            if (opc.equals("list_dir")) {
+                List<Map<String,?>> lista= cc.List_Direccion();
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);                
+            }
+            if (opc.equals("list_dep")) {
+                String id= request.getParameter("id");
+                List<Map<String,?>> lista= cc.List_Depxdir(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);                
+            }
 
         } catch (Exception e) {
             rpta.put("rpta", "-1");

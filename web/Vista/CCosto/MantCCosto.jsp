@@ -25,19 +25,19 @@
                     <section class="col col-md-3">
                         <label class="label">Codigo</label>
                         <label class="input">
-                            <input type="text" name="codigo" placeholder="Ingesar Codigo" maxlength="8">
+                            <input class="inccc" type="text" name="codigo" placeholder="Ingesar Codigo" maxlength="8">
                         </label>
                     </section>
                     <section class="col col-md-3">
                         <label class="label">Detalle</label>
                         <label class="input">
-                            <input type="text" name="detalle" placeholder="Detalle Centro Costo" maxlength="200">
+                            <input class="indcc" type="text" name="detalle" placeholder="Detalle Centro Costo" maxlength="200">
                         </label>
                     </section>
                     <section class="col col-md-3">
                         <label class="label">Direccion</label>
                         <label class="select">
-                            <select>
+                            <select class="indir">
                                 <option>[Seleccione]</option>
                             </select>
                         </label>
@@ -45,7 +45,7 @@
                     <section class="col col-md-3">
                         <label class="label">Departmento</label>
                         <label class="select">
-                            <select>
+                            <select class="indep">
                                 <option>[Seleccione]</option>
                             </select>
                         </label>
@@ -53,7 +53,7 @@
                     <section class="col col-md-3">
                         <label class="label">Area (Opcional)</label>
                         <label class="select">
-                            <select>
+                            <select class="inarea">
                                 <option>[Seleccione]</option>
                             </select>
                         </label>
@@ -72,11 +72,11 @@
                                 <td class="text-center semi-bold">Detalle</td>
                                 <td class="text-center semi-bold">Departamento</td>
                                 <td class="text-center semi-bold">Area</td>
-                                <td class="text-center semi-bold">Acciones</td>
+                                <td class="text-center semi-bold" colspan="2">Acciones</td>
                             </tr>
                         </thead>
                         <tbody class="tbodys">                            
-                            
+
                         </tbody>
                     </table>
                 </div>
@@ -118,8 +118,43 @@
 
         <script>
             $(document).ready(function () {
+                var valnum;
                 $('.tabla_t').DataTable();
+                cargar_Dir();
                 cargar_T();
+                
+                function cargar_Dir() {
+                    $('.indir').empty();
+                    $('.indir').append("<option>[Espere..]</option>");
+                    $.post("../../MCCosto?opc=list_dir", function (objJson) {
+                        var lista = objJson.lista;
+                        if (lista.length > 0) {
+                            $('.indir').empty();
+                            $('.indir').append("<option>[Seleccione]</option>");
+                            for (var i = 0; i < lista.length; i++) {
+                                $('.indir').append("<option value=" + lista[i].id + ">" + lista[i].nombre + "</option>");
+                            }
+                        }
+                        $('.indir').change(function () {
+                            var id= $(this).val();
+                            $('.indep').empty();
+                            $('.indep').append("<option>[Espere..]</option>");
+                            $.post("../../MCCosto?opc=list_dep&id="+id,function(objJson){
+                                var lista = objJson.lista;
+                                if(lista.length>0){
+                                    $('.indep').append("<option>[Seleccione]</option>");
+                                    for (var i=0;i<lista.length;i++){
+                                       $('.indep').append("<option value="+lista[i].id+">"+lista[i].nombre+"</option>"); 
+                                    }
+                                    
+                                    
+                                }
+                            });
+                        });
+                        
+                    });
+                }
+
                 function cargar_T() {
                     $.post("../../MCCosto?opc=list_ccosto", function (objJson) {
                         var lista = objJson.lista;
@@ -128,25 +163,33 @@
                             for (var i = 0; i < lista.length; i++) {
                                 t += "<tr>";
                                 t += "<td>" + (i + 1) + "</td>";
-                                t += "<td>"+lista[i].CO_CENTRO_COSTO+"</td>";
-                                t += "<td>"+lista[i].DE_CENTRO_COSTO+"</td>";
-                                if(lista[i].NO_DEP!=undefined){
-                                    t += "<td>"+lista[i].NO_DEP+"</td>";
-                                }else{
-                                    t += "<td style='background-color : #d6dde7'>Sin Asignar</td>";
+                                t += "<td class='ccc" + i + "'>" + lista[i].CO_CENTRO_COSTO + "</td>";
+                                t += "<td class='dcc" + i + "'>" + lista[i].DE_CENTRO_COSTO + "</td>";
+                                if (lista[i].NO_DEP != undefined) {
+                                    t += "<td class='ndep" + i + "'>" + lista[i].NO_DEP + "</td>";
+                                } else {
+                                    t += "<td class='ndep" + i + "' style='background-color : #d6dde7'>Sin Asignar</td>";
                                 }
-                                if(lista[i].NO_AREA!=undefined){
-                                    t += "<td>"+lista[i].NO_AREA+"</td>";
-                                }else{
-                                    t += "<td style='background-color : #d6dde7'>Sin Asignar</td>";
+                                if (lista[i].NO_AREA != undefined) {
+                                    t += "<td class='narea" + i + "'>" + lista[i].NO_AREA + "</td>";
+                                } else {
+                                    t += "<td class='narea" + i + "' style='background-color : #d6dde7'>Sin Asignar</td>";
                                 }
-                                t += "<td><a href='#' id="+lista[i].ID_CENTRO_COSTO+" ><i class='glyphicon glyphicon-pencil'></i> Editar</a></td>";
+                                t += "<td id=" + i + "><a class='btnEditar btn btn-default' id=" + lista[i].ID_CENTRO_COSTO + " ><i class='glyphicon glyphicon-pencil'></i> Editar</a></td>";
+                                t += "<td><a class='btnDel btn btn-default' id=" + lista[i].ID_CENTRO_COSTO + " ><i class='glyphicon glyphicon-remove'></i> Eliminar</a></td>";
                                 t += "</tr>";
                             }
                             crear_T();
                             $('.tbodys').append(t);
-                            $('.tabla_t').DataTable();                          
+                            
+                            $('.btnEditar').click(function () {
+                                valnum = $(this).parent().attr('id');
+                                $('.inccc').val($('.ccc' + valnum).text());
+                                $('.indcc').val($('.dcc' + valnum).text());
+                            });
+                            $('.tabla_t').DataTable();
                         }
+
                     });
                 }
                 function crear_T() {
@@ -158,7 +201,7 @@
                     t += '         <td class="text-center semi-bold">Detalle</td>';
                     t += '         <td class="text-center semi-bold">Departamento</td>';
                     t += '         <td class="text-center semi-bold">Area</td>';
-                    t += '         <td class="text-center semi-bold">Acciones</td>';
+                    t += '         <td class="text-center semi-bold" colspan="2">Acciones</td>';
                     t += '     </tr>';
                     t += ' </thead>';
                     t += ' <tbody class="tbodys"></tbody>';
@@ -166,8 +209,8 @@
                     $('.cont_t').empty();
                     $('.cont_t').append(t);
                 }
-                function barra_acciones(){
-                    var t='';
+                function barra_acciones() {
+                    var t = '';
                 }
             });
         </script>
