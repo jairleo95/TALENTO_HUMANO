@@ -96,13 +96,21 @@ public class ReporteDAO implements InterfaceReporteDAO {
     }
 
     @Override
-    public List<Map<String, ?>> listar_padre_hi(String desde, String hasta, String edad) {
+    public List<Map<String, ?>> listar_padre_hi(String desde, String hasta, String edad, String aps, String dep, String are, String sec, String pue, String nom, String pat, String mat, String dn, String gen) {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "SELECT * from RHVD_FILTRO__PADRE_HIJO ";
             sql += (!desde.equals("") & !(hasta.equals(""))) ? "where EDAD_HI BETWEEN '" + desde.trim() + "' and '" + hasta.trim() + "'" : "";
             sql += (!edad.equals("")) ? "where EDAD_HI='" + edad.trim() + "'" : "";
+            sql += (!aps.equals("")) ? "where APS='" + aps.trim() + "'" : "";
+            sql += (!dep.equals("")) ? "where DEPARTAMENTO='" + dep.trim() + "'" : "";
+            sql += (!are.equals("")) ? "where AREA='" + are.trim() + "'" : "";
+            sql += (!sec.equals("")) ? "where SECCION='" + sec.trim() + "'" : "";
+            sql += (!pue.equals("")) ? "where PUESTO='" + pue.trim() + "'" : "";
+            /*sql += (!nom.equals("")) ? "where NOM='" + nom.trim() + "'" : "";
+            sql += (!pat.equals("")) ? "where PATERNO='" + pat.trim() + "'" : "";
+            sql += (!mat.equals("")) ? "where MATERNO='" + mat.trim() + "'" : "";*/
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -194,7 +202,7 @@ public class ReporteDAO implements InterfaceReporteDAO {
             sql += (!are.equals("")) ? "Where UPPER(NO_AREA)='" + are.trim().toUpperCase() + "'" : "";
             sql += (!sec.equals("")) ? "Where UPPER(NO_SECCION)='" + sec.trim().toUpperCase() + "'" : "";
             sql += (!puesto.equals("")) ? "Where UPPER(NO_PUESTO)='" + puesto.trim().toUpperCase() + "'" : "";
-            sql+=(!fec.equals("" ))? "Where FE_NAC='"+fec.trim() + "'" : "";                         
+            sql += (!fec.equals("")) ? "Where FE_NAC='" + fec.trim() + "'" : "";
             sql += (!ape.equals("")) ? "Where UPPER(AP_PATERNO)='" + ape.trim().toUpperCase() + "'" : "";
             sql += (!mat.equals("")) ? "Where UPPER(AP_MATERNO)='" + mat.trim().toUpperCase() + "'" : "";
             sql += (!nom.equals("")) ? "Where UPPER(NO_TRABAJADOR)='" + nom.trim() + "'" : "";
