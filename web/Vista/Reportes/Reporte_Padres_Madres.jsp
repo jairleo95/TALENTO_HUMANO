@@ -64,27 +64,23 @@
                         <!--style="padding-left: 30px"-->
                         <div class="form-group" >
                             <label>CODIGO APS</label><br>
-                            <input type="text"  class="form-control mes" placeholder="APS" name=""  length="45" style="width: 80px" id="des"/>
+                            <input type="text"  class="form-control aps" placeholder="APS" length="45" style="width: 80px" id="des"/>
                         </div>
                         <div class="form-group" >
                             <label>DEPARTAMENTO</label><br>
-                            <input type="text"  class="form-control mes" placeholder="Ingrese el DEPARTAMENTO" name=""  length="45" style="width: 150px" id="des"/>
+                            <input type="text"  class="form-control dep" placeholder="Ingrese el DEPARTAMENTO" length="45" style="width: 150px" id="des"/>
                         </div>
                         <div class="form-group" >
                             <label>AREA</label><br>
-                            <input type="text"  class="form-control mes" placeholder="Ingrese su AREA" name=""  length="45" style="width: 150px" id="des"/>
+                            <input type="text"  class="form-control are" placeholder="Ingrese su AREA" length="45" style="width: 150px" id="des"/>
                         </div>
                         <div class="form-group" >
                             <label>SECCIÓN</label><br>
-                            <input type="text"  class="form-control mes" placeholder="Ingrese su SECCIÓN" name=""  length="45" style="width: 150px" id="des"/>
+                            <input type="text"  class="form-control sec" placeholder="Ingrese su SECCIÓN" name=""  length="45" style="width: 150px" id="des"/>
                         </div>
                         <div class="form-group" >
                             <label>PUESTO</label><br>
-                            <input type="text"  class="form-control mes" placeholder="Ingrese su PUESTO" name=""  length="45" style="width: 150px" id="des"/>
-                        </div>
-                        <div class="form-group" >
-                            <label>FECHA NACIMIENTO</label><br>
-                            <input type="DATE"  class="form-control mes" name=""  length="45" style="width: 170px" id="des"/>
+                            <input type="text"  class="form-control pue" placeholder="Ingrese su PUESTO" name=""  length="45" style="width: 150px" id="des"/>
                         </div>
                         <div class="form-group" >
                             <label>EDAD</label><br>
@@ -93,6 +89,18 @@
                         <div class="form-group" >
                             <label>APELLIDO Y NOMBRES</label><br>
                             <input type="text"  class="form-control mes" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>APELLIDO PATERNO</label><br>
+                            <input type="text"  class="form-control pat" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>APELLIDO MATERNO</label><br>
+                            <input type="text"  class="form-control mat" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
+                        </div>
+                        <div class="form-group" >
+                            <label>APELLIDO MATERNO</label><br>
+                            <input type="text"  class="form-control nom" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
                         </div>
                         <div class="form-group" >
                             <label>TIPO DOC</label><br>
@@ -570,9 +578,17 @@
             var a = $(".des").val();
             var b = $(".has").val();
             var c = $(".edad").val();
+            var ap = $(".aps").val();
+            var de = $(".dep").val();
+            var ar = $(".are").val();
+            var se = $(".sec").val();
+            var pu = $(".pue").val();
+            var apt = $(".apt").val();
+            var ma = $(".mat").val();
+            var no = $(".nom").val();
             var d = $("#Li_padre_hijos");
             var texto = '';
-            $.post("../../reporte", "opc=reporte_padre_hijo&desde=" + a + "&hasta=" + b + "&edad=" + c, function (objJson) {
+            $.post("../../reporte", "opc=reporte_padre_hijo&desde=" + a + "&hasta=" + b + "&edad=" + c + "&aps=" + ap + "&departamento=" + de+ "&area=" + ar+ "&puesto=" + se+ "&seccion=" + pu, function (objJson) {
 
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);

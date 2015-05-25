@@ -5,13 +5,16 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -46,19 +49,22 @@ public class CFoto extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, FileUploadException, Exception {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         InterfaceFotos_TrabajadorDAO foto = new Fotos_TrabajadorDAO();
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
         String ubicacion = "";
+        Map<String, Object> rpta = new HashMap<String, Object>();
         try {
             /*if (System.getProperty("sun.desktop").trim().equals("windows")) {
              ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Usuario\\Fotos";
              } else {
              ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Usuario/Fotos/";
              }*/
-            ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Usuario/Fotos/";
-
+            // ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Usuario/Fotos/";
+           // ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web/Vista/Usuario/Fotos/";
+            ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Usuario\\Fotos";
             //out.print(ubicacion);
             out.print(ubicacion);
             DiskFileItemFactory f = new DiskFileItemFactory();
@@ -108,7 +114,7 @@ public class CFoto extends HttpServlet {
 
             foto.INSERT_FOTOS_TRABAJADOR(null, null, nombre_archivo, no_original, no_original, String.valueOf(sizeInBytes), idtr);
 
-             //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             //Thread.sleep(2000);
             // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
             // out.println("Archivo subido correctamente");
@@ -116,9 +122,13 @@ public class CFoto extends HttpServlet {
             out.println(nombre_archivo);
             out.println(sizeInBytes);
         } catch (Exception e) {
-            out.print(e.getMessage());
-            //out.print(ubicacion);
+            rpta.put("rpta", "-1");
+            rpta.put("mensaje", e.getMessage());
         }
+        Gson gson = new Gson();
+        out.print(gson.toJson(rpta));
+        out.flush();
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

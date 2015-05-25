@@ -43,15 +43,54 @@ public class MCCosto extends HttpServlet {
         String opc = request.getParameter("opc");
         HttpSession sesion = request.getSession(true);
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
-        InterfaceCentroCosto cc= new CentroCostoDAO();
+        InterfaceCentroCosto cc = new CentroCostoDAO();
         try {
             if (opc.equals("menu")) {
                 response.sendRedirect("Vista/CCosto/MantCCosto.jsp");
             }
             if (opc.equals("list_ccosto")) {
-                List<Map<String,?>> lista= cc.listarCcosto();
+                List<Map<String, ?>> lista = cc.listarCcosto();
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
+            }
+            if (opc.equals("list_dir")) {
+                List<Map<String, ?>> lista = cc.List_Direccion();
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("list_dep")) {
+                String id = request.getParameter("id");
+                List<Map<String, ?>> lista = cc.List_Depxdir(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("list_ar")) {
+                String id = request.getParameter("id");
+                List<Map<String, ?>> lista = cc.List_Arxdep(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
+            if (opc.equals("edit_cc")) {
+                String ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA;
+                ID_CENTRO_COSTO = request.getParameter("ID_CENTRO_COSTO");
+                CO_CENTRO_COSTO = request.getParameter("CO_CENTRO_COSTO");
+                DE_CENTRO_COSTO = request.getParameter("DE_CENTRO_COSTO");
+                ID_DEPARTAMENTO = request.getParameter("ID_DEPARTAMENTO");
+                ID_AREA = request.getParameter("ID_AREA");
+                cc.editarCCosto(ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA);
+            }
+            if (opc.equals("add_cc")) {
+                String CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA;
+                CO_CENTRO_COSTO = request.getParameter("CO_CENTRO_COSTO");
+                DE_CENTRO_COSTO = request.getParameter("DE_CENTRO_COSTO");
+                ID_DEPARTAMENTO = request.getParameter("ID_DEPARTAMENTO");
+                ID_AREA = request.getParameter("ID_AREA");
+                cc.crearCCosto(CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA);
+            }
+            if (opc.equals("del_cc")) {
+                String ID_CENTRO_COSTO;
+                ID_CENTRO_COSTO = request.getParameter("ID_CENTRO_COSTO");
+                cc.eliminarCCosto(ID_CENTRO_COSTO);
             }
 
         } catch (Exception e) {

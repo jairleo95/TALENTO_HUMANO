@@ -19,7 +19,7 @@ public interface InterfaceReporteDAO {
 
     public List<Datos_Generales> Reporte_Datos_Generales();
 
-    public List<Map<String, ?>> listar_padre_hi(String desde, String hasta, String edad);
+    public List<Map<String, ?>> listar_padre_hi(String desde, String hasta, String edad,String aps,String dep,String are,String sec,String pue,String nom,String pat,String mat,String dn,String gen);
 
     public List<Map<String, ?>> lirtar_trabajor_Navidad(String mes);
 
