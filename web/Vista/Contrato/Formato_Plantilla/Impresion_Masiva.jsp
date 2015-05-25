@@ -408,7 +408,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             $.post("../../../formato_plantilla", "opc=Listar2&id=" + plan.trim(), function(objJson) {
                 var imprimir = objJson.imprimir;
                 //var editor2 = editor.getData();
-
                 imprimir = imprimir + '<div style="page-break-after: always;"><span style="display:none">&nbsp;</span></div>';
                 $(".texto").val("");
                 $(".texto").val(imprimir);
@@ -416,9 +415,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             });
         }
         function recorido() {
-            var cant_con = $(".cant_con").val();
-
-            for (var f = 0; f < cant_con + 1; f++) {
+            var cant_con = parseInt($(".cant_con").val());
+            for (var f = 0; f < cant_con; f++) {
                 procesar_texto_1($(".plantilla" + f + "").val(), $(".contrato" + f + "").val());
             }
         }
@@ -449,6 +447,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             $("#actu").hide();
             $("#texto").hide();
             $("#texto2").hide();
+            recorido();
             /*setTimeout(function() {
              InsertHTML();
              ExecuteCommand("print");
@@ -458,7 +457,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             /*$(document).ajaxComplete(function() {
              $("#wait").css("display", "none");
              });*/
-            recorido().before(InsertHTML());
+            
 
 
         }
@@ -468,7 +467,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
 <body style="height: 1080px">
     <h3 class="h">CARGAR PLANTILLAS</h3>
-    <label >CARGAR PLANTILLAS</label>
     <%%>
     <input type="hidden" id="no_arch" class="no_arc" value="<%%>">
 
@@ -477,8 +475,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <button type="button" id="btn2" class="btn2 btn btn-primary" onclick="imp();" >Imprimir</button>
     <h3>EDITAR PLANTILLAS</h3>
     <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
-        <div class="div_t">                                                                                     
-        </div>
         <div id="wait" style="display:none;width:69px;height:89px;position:absolute;top:50%;left:50%;padding:2px;" align="center"><img src='../../../imagenes/por-favor-espere.gif' width="100" height="100" /><br>Loading..</div>
         <textarea cols="100" id="editor1" name="editor1" rows="10">
         </textarea>
