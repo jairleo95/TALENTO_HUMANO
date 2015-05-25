@@ -169,12 +169,16 @@
                                         <section class="col col-2">
                                             <label class="select" id="titulo">Motivo :
                                                 <select disabled=""  class="input-group-sm">
+                                                    <%if (d.getLi_motivo()!= null) {%>
                                                     <%if (d.getLi_motivo().trim().equals("1")) {%>
                                                     <option  selected="selected">Trabajador Nuevo</option>   
                                                     <option  >renovación</option>   
                                                     <%} else {%>
                                                     <option >Trabajador Nuevo</option>   
                                                     <option selected="selected">renovación</option>   
+                                                    <%}%>
+                                                    <%}else{%>
+                                                    <option selected="">NINGUNO</option>
                                                     <%}%>
                                                 </select>  
                                             </label>
@@ -322,7 +326,7 @@
                                             </label>
                                         </section>
 
-                                        <section class="col col-2">
+                                        <section class="col col-1">
                                             <label class="input" id="titulo">Sueldo Total:
                                                 <input type="text" name="TOTAL_SUELDO" value="<%=d.getCa_bono_alimentario() + d.getCa_sueldo() + d.getDe_bev() + d.getCa_bonificacion_p()%>" class="input-group-sm" id="su_t" readonly="">
                                             </label>

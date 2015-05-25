@@ -138,6 +138,7 @@
             #message {
 
             }
+            
 
         </style>
     </head>
@@ -229,7 +230,7 @@
                                             V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                                             trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
                                     %>
-                                    <td>
+                                    <td height="70" width="585px">
                                         <table>
                                             <button data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">asas</button>
                                             <tr><td class="td">Nombre :</td><td class="td1"><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
@@ -244,8 +245,8 @@
                                             emp = (Empleado) id_empleadox_ide.get(e);
 
                                     %>
-                                    <td>
-                                        <table class="info-det" style="margin-left:80%;"  >
+                                    <td >
+                                        <table class="info-det" style="margin-left:30%;"  >
 
                                             <%                                               if (emp.getCo_aps() != null) {
                                                     int val_aps = Integer.parseInt(emp.getCo_aps());
@@ -256,7 +257,7 @@
                                                 <td class="td" >Código APS:</td>
 
                                                 <td class="td1" id="cel_aps" ><%=emp.getCo_aps()%></td>
-                                                <td class="td1" ><input type="hidden" id="mod_aps"  value="<%=emp.getCo_aps()%>" name="cod_aps" maxlength="6" onblur="VAL_COD_APS()"></td>
+                                                <td class="td1" ><input type="hidden" id="mod_aps"  value="<%=emp.getCo_aps()%>" name="cod_aps" maxlength="6" size="5%" onblur="MOD_COD_APS()"></td>
                                                 <td class="td" colspan="2">
                                                     <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-green mod_co_aps"><i class="fa fa-pencil fa-2x"></i></a>
                                                 </td>
@@ -271,7 +272,7 @@
                                                     if (val_hue > 0) {%>
                                             <tr><td class="td" >Código Huella:</td>
                                                 <td class="td1" id="cel_hue" ><%=emp.getCo_huella_digital()%></td>
-                                                <td class="td1"  ><input type="hidden" id="mod_hue"  value="<%=emp.getCo_huella_digital()%>" name="cod_huella" maxlength="6" onblur="VAL_COD_HUELLA()"></td>
+                                                <td class="td1"  ><input type="hidden" id="mod_hue"  value="<%=emp.getCo_huella_digital()%>" name="cod_huella" size="5%" maxlength="6" size="20%" onblur="MOD_COD_HUELLA()"></td>
                                                 <td class="td" colspan="2">
                                                     <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-green mod_huella" ><i class="fa fa-pencil fa-2x"></i></a>
 
@@ -287,7 +288,7 @@
 
                                         String val_aps = emp.getCo_aps();
                                         if (val_aps == null && ID_ROL.trim().equals("ROL-0001")) {%>
-                                    <td>
+                                    <td >
                                         <table class="info-det" style="margin-left:50%;">
                                             <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
                                             <input type="hidden" name="puesto_id" value="<%=idp%>">
@@ -306,7 +307,7 @@
                                     <%}
                                         String val_hue = emp.getCo_huella_digital();
                                         if (val_hue == null && ID_ROL.trim().equals("ROL-0001")) {%>
-                                    <td>
+                                        <td >
                                         <table class="info-det" style="margin-left:50%;">
                                             <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
                                             <input type="hidden" name="puesto_id" value="<%=idp%>">
@@ -814,43 +815,22 @@
                                                         timeout: 6000
                                                     });
                                                 }
-                                                function VAL_COD_APS() {
-                                                    if ($("#mod_aps").val() != "") {
+                                                function MOD_COD_APS(){
+                                                     if ($("#mod_aps").val() != "") {
                                                         var co_aps = document.getElementById("mod_aps");
                                                         $.ajax({
                                                             url: "../../empleado",
                                                             type: "POST",
                                                             data: "opc=validar_aps&co_aps=" + co_aps.value
                                                         }).done(function(e) {
+                                                            // alert(e);
                                                             var cant = ($("#mod_aps").val());
                                                             if (cant.length > 5) {
                                                                 if (e == 0) {
                                                                     window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#mod_aps").val() + "&idtr=" + $(".idtra").val() + "";
                                                                 }
                                                                 else {
-                                                                    $.SmartMessageBox({
-                                                                        title: "Este Código APS ya fue registrado!",
-                                                                        content: "Por favor Ingrese un Código APS distinto",
-                                                                    });
-                                                                }
-                                                            }
-                                                        }).fail(function(e) {
-                                                            alert("Error: " + e);
-                                                        });
-                                                    }
-                                                    if ($("#cod_ap").val() != "") {
-                                                        var co_aps = document.getElementById("cod_ap");
-                                                        $.ajax({
-                                                            url: "../../empleado",
-                                                            type: "POST",
-                                                            data: "opc=validar_aps&co_aps=" + co_aps.value
-                                                        }).done(function(e) {
-                                                            var cant = ($("#cod_ap").val());
-                                                            if (cant.length > 5) {
-                                                                if (e == 0) {
-                                                                    window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#cod_ap").val() + "&idtr=" + $(".idtra").val() + "";
-                                                                }
-                                                                else {
+                                                                    alert("Este codigo ya esta registrado!")
                                                                     $.SmartMessageBox({
                                                                         title: "Este Código APS ya fue registrado!",
                                                                         content: "Por favor Ingrese un Código APS distinto",
@@ -862,8 +842,34 @@
                                                         });
                                                     }
                                                 }
-                                                function VAL_COD_HUELLA() {
-
+                                                function VAL_COD_APS() {
+                                                    if ($("#cod_ap").val() != "") {
+                                                        var co_aps = document.getElementById("cod_ap");
+                                                        $.ajax({
+                                                            url: "../../empleado",
+                                                            type: "POST",
+                                                            data: "opc=validar_aps&co_aps=" + co_aps.value
+                                                        }).done(function(e) {
+                                                            //alert(e);
+                                                            var cant = ($("#cod_ap").val());
+                                                            if (cant.length > 5) {
+                                                                if (e == 0) {
+                                                                    window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#cod_ap").val() + "&idtr=" + $(".idtra").val() + "";
+                                                                }
+                                                                else {
+                                                                     alert("Este codigo ya esta registrado!")
+                                                                    $.SmartMessageBox({
+                                                                        title: "Este Código APS ya fue registrado!",
+                                                                        content: "Por favor Ingrese un Código APS distinto",
+                                                                    });
+                                                                }
+                                                            }
+                                                        }).fail(function(e) {
+                                                            alert("Error: " + e);
+                                                        });
+                                                    }
+                                                }
+                                                function MOD_COD_HUELLA() {
                                                     if ($("#mod_hue").val() != "") {
                                                         var co_huel = document.getElementById("mod_hue");
                                                         $.ajax({
@@ -877,6 +883,7 @@
                                                                     window.location.href = "../../trabajador?opc=reg_huella&idtr=" + $(".idtra").val() + "&cod=" + $("#mod_hue").val() + "";
                                                                 }
                                                                 else {
+                                                                     alert("Este codigo ya esta registrado!")
                                                                     $.SmartMessageBox({
                                                                         title: "Este Código de Huella ya fue registrado!",
                                                                         content: "Por favor Ingrese un Codigo de Huella distinto",
@@ -885,6 +892,9 @@
                                                             }
                                                         });
                                                     }
+                                                }
+                                                function VAL_COD_HUELLA() {
+                                                    
                                                     if ($("#cod_hu").val() != "") {
                                                         var co_huel = document.getElementById("cod_hu");
                                                         $.ajax({
@@ -899,6 +909,7 @@
                                                                     window.location.href = "../../trabajador?opc=reg_huella&idtr=" + $(".idtra").val() + "&cod=" + $("#cod_hu").val() + "";
                                                                 }
                                                                 else {
+                                                                     alert("Este codigo ya esta registrado!")
                                                                     $.SmartMessageBox({
                                                                         title: "Este Código de Huella ya fue registrado!",
                                                                         content: "Por favor Ingrese un Codigo de Huella distinto",
