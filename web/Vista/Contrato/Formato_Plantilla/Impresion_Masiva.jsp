@@ -10,11 +10,9 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%
-
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
-
 %>
 
 <!DOCTYPE html>
@@ -59,20 +57,18 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
 // its initialization.
-        CKEDITOR.on('instanceReady', function(ev) {
-            // Show the editor name and description in the browser status bar.
-            document.getElementById('eMessage').innerHTML = 'Instance <code>' + ev.editor.name + '<\/code> loaded.';
-
-            // Show this sample buttons.
-            document.getElementById('eButtons').style.display = 'block';
-        });
+        function ckeditor() {
+            CKEDITOR.on('instanceReady', function(ev) {
+                // Show the editor name and description in the browser status bar.
+                document.getElementById('eMessage').innerHTML = 'Instance <code>' + ev.editor.name + '<\/code> loaded.';
+                // Show this sample buttons.
+                document.getElementById('eButtons').style.display = 'block';
+            });
+        }
         function InsertHTML() {
-
-
             // Get the editor instance that we want to interact with.
             var editor = CKEDITOR.instances.editor1;
             var value = document.getElementById('texto2').value;
-
             // Check the active editing mode.
             if (editor.mode == 'wysiwyg')
             {
@@ -97,7 +93,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             else
                 alert('You must be in WYSIWYG mode!');
         }
-
         function SetContents() {
             // Get the editor instance that we want to interact with.
             var editor = CKEDITOR.instances.editor1;
@@ -106,7 +101,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setData
             editor.setData(value);
         }
-
         function GetContents() {
             // Get the editor instance that you want to interact with.
             var editor = CKEDITOR.instances.editor1;
@@ -115,7 +109,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             alert(editor.getData());
             //  alert(editor.getData())
         }
-
         function ExecuteCommand(commandName) {
             // Get the editor instance that we want to interact with.
             var editor = CKEDITOR.instances.editor1;
@@ -129,7 +122,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             else
                 alert('You must be in WYSIWYG mode!');
         }
-
         function CheckDirty() {
             // Get the editor instance that we want to interact with.
             var editor = CKEDITOR.instances.editor1;
@@ -138,7 +130,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-checkDirty
             alert(editor.checkDirty());
         }
-
         function ResetDirty() {
             // Get the editor instance that we want to interact with.
             var editor = CKEDITOR.instances.editor1;
@@ -147,15 +138,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             editor.resetDirty();
             alert('The "IsDirty" status has been reset');
         }
-
         function Focus() {
             CKEDITOR.instances.editor1.focus();
         }
-
         function onFocus() {
             document.getElementById('eMessage').innerHTML = '<b>' + this.name + ' is focused </b>';
         }
-
         function onBlur() {
             document.getElementById('eMessage').innerHTML = this.name + ' lost focus';
         }
@@ -166,7 +154,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         }
         function procesar_texto(valor, asa) {
             // var editor = CKEDITOR.instances.editor1;
-
             $.post("../../../Imprimir", "opc=Listar_contrato&" + "id=" + valor, function(objJson) {
                 var Lista = objJson.lista;
                 var texto = asa;
@@ -359,7 +346,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     } else {
                         co_tm = "-";
                     }
-
                     var menu = {
                         "[nombre]": nombre,
                         "[app]": app,
@@ -398,12 +384,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 $("#texto2").val(txt);
             });
         }
-
         var texto = "";
         function imp() {
             ExecuteCommand('print');
         }
-        ;
         function procesar_texto_1(plan, valor) {
             $.post("../../../formato_plantilla", "opc=Listar2&id=" + plan.trim(), function(objJson) {
                 var imprimir = objJson.imprimir;
@@ -420,34 +404,33 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 procesar_texto_1($(".plantilla" + f + "").val(), $(".contrato" + f + "").val());
             }
         }
-
         function resetear() {
             var editor = CKEDITOR.instances.editor1;
-            //var value = document.getElementById('htmlArea').value;
-            // Set editor contents (replace current contents).
-            // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setData
             editor.setData("");
-            $(".texto2").val("");
-            setTimeout(function() {
-                InsertHTML();
-                ExecuteCommand("print");
-            }, 15000);
-            recorido();
-            //ResetDirty();
-            /*setTimeout(function() {
-             InsertHTML();
-             ExecuteCommand("print");
-             }, 10000);
-             recorido();*/
-            // InsertHTML();
-            //ExecuteCommand("print");
+            //InsertHTML().before(ExecuteCommand("print"));
         }
         $(document).ready(function() {
 
             $("#actu").hide();
             $("#texto").hide();
             $("#texto2").hide();
+            $("#editor1").hide();
+            $("#wait").show();
             recorido();
+            var time = parseInt($(".cant_con").val())
+            setTimeout(function() {
+                $("#wait").hide();
+                $("#editor1").show();
+                ckeditor();
+                ckeditor2();
+                //InsertHTML();
+                //imp();
+                setTimeout(function() {
+                    InsertHTML();
+                    imp();
+                }, 1200);
+            }, (time * 100));
+
             /*setTimeout(function() {
              InsertHTML();
              ExecuteCommand("print");
@@ -457,8 +440,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             /*$(document).ajaxComplete(function() {
              $("#wait").css("display", "none");
              });*/
-            
-
 
         }
         );</script>
@@ -467,48 +448,41 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
 <body style="height: 1080px">
     <h3 class="h">CARGAR PLANTILLAS</h3>
-    <%%>
     <input type="hidden" id="no_arch" class="no_arc" value="<%%>">
-
-    <button type="button" id="btn1" class=" btn btn-success btn2" onclick="InsertHTML()" >CARGAR</button>
-    <button type="button" id="btn2" class="btn2 btn btn-danger" onclick="resetear()" >Resetear</button>
+    <button type="button" id="btn1" class=" btn btn-success btn2" onclick="InsertHTML();" >Cargar Contratos</button>
+    <button type="button" id="btn2" class="btn2 btn btn-danger" onclick="resetear();" >Borrar Todo</button>
     <button type="button" id="btn2" class="btn2 btn btn-primary" onclick="imp();" >Imprimir</button>
     <h3>EDITAR PLANTILLAS</h3>
     <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
-        <div id="wait" style="display:none;width:69px;height:89px;position:absolute;top:50%;left:50%;padding:2px;" align="center"><img src='../../../imagenes/por-favor-espere.gif' width="100" height="100" /><br>Loading..</div>
+        <div id="wait"  align="center"><img src='../../../imagenes/por-favor-espere.gif' width="100" height="100" /><br>Cargando..</div>
         <textarea cols="100" id="editor1" name="editor1" rows="10">
         </textarea>
         <script>
             // Replace the <textarea id="editor1"> with an CKEditor instance.
-            CKEDITOR.replace('editor1',
-                    {
-                        toolbar:
-                                [['Source', '-', 'NewPage', 'Preview', '-', 'Templates'],
-                                    ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Print', 'SpellChecker', 'Scayt'],
-                                    ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
-                                    ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
-                                    '/',
-                                    ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
-                                    ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
-                                    ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-                                    ['Link', 'Unlink', 'Anchor'],
-                                    ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
-                                    '/',
-                                    ['Styles', 'Format', 'Font', 'FontSize'],
-                                    ['TextColor', 'BGColor'],
-                                    ['Maximize', 'ShowBlocks', '-', 'About'],
-                                    ['Styles', 'Format'],
-                                    ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', '-', 'About']
-                                ],
-                        height: '800px'
-                    });</script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-
-
-            }
-            );</script>
-
+            function ckeditor2() {
+                CKEDITOR.replace('editor1',
+                        {
+                            toolbar:
+                                    [['Source', '-', 'NewPage', 'Preview', '-', 'Templates'],
+                                        ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Print', 'SpellChecker', 'Scayt'],
+                                        ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
+                                        ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
+                                        '/',
+                                        ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
+                                        ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
+                                        ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                                        ['Link', 'Unlink', 'Anchor'],
+                                        ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
+                                        '/',
+                                        ['Styles', 'Format', 'Font', 'FontSize'],
+                                        ['TextColor', 'BGColor'],
+                                        ['Maximize', 'ShowBlocks', '-', 'About'],
+                                        ['Styles', 'Format'],
+                                        ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', '-', 'About']
+                                    ],
+                            height: '800px'
+                        });
+            }</script>
         <div id="eButtons" >
             <textarea id="texto" class="texto"></textarea>
             <textarea id="texto2" class="texto2"></textarea>
