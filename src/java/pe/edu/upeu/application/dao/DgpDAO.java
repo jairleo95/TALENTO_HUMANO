@@ -64,7 +64,7 @@ public class DgpDAO implements InterfaceDgpDAO {
             cst.setString(20, null);
             cst.setString(21, US_MODIF);
             cst.setString(22, null);
-            cst.setString(23, IP_USUARIO);
+            cst.setString(23, FactoryConnectionDB.detalle_ip());
             cst.setDouble(24, CA_BONO_ALIMENTARIO);
             cst.setDouble(25, DE_BEV);
             cst.setString(26, DE_ANTECEDENTES_POLICIALES);

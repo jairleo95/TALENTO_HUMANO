@@ -106,12 +106,12 @@ public class CReporte extends HttpServlet {
                 String sec = request.getParameter("seccion");
                 String pue = request.getParameter("puesto");
                 String fec = request.getParameter("fecha");
-                String nom = request.getParameter("nom");
+                String nom = request.getParameter("nombre");
                 String pat = request.getParameter("paterno");
                 String mat = request.getParameter("materno");
-                String dn = request.getParameter("DNI");
-                String gen = request.getParameter("genero");
-                List<Map<String, ?>> lista = RP.listar_padre_hi(desde, hasta, edad,aps,dep,are,sec,pue,nom,pat,mat,dn,gen);
+                String tip = request.getParameter("tipo");
+                String nun = request.getParameter("numero");
+                List<Map<String, ?>> lista = RP.listar_padre_hi(desde, hasta, edad,aps,dep,are,sec,pue,nom,pat,mat,nun,tip);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }

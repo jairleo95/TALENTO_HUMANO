@@ -106,10 +106,6 @@
                         <input type="text"  class="form-control tip" placeholder="Tipo de Codumento"  length="45" style="width: 250px" id="des"/>
                     </div>
                     <div class="form-group" >
-                        <label>FECHA NACIMIENTO</label><br>
-                        <input type="DATE"  class="form-control fec"   length="45" style="width: 170px" id="des"/>
-                    </div>
-                    <div class="form-group" >
                         <label>APELLIDO PATERNO</label><br>
                         <input type="text"  class="form-control pat" placeholder="Ingrese APELLIDOS Y NOMBRES" length="45" style="width: 250px" id="des"/>
                     </div>

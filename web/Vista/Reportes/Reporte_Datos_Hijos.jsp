@@ -60,7 +60,7 @@
                 <br>
                 <div id="contenido">
 
-                    <div style="border:3px solid red;" >
+                    <div >
                         <!--style="padding-left: 30px"-->
                         <div class="form-group" >
                             <label>Nombre</label><br>
