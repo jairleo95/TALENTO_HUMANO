@@ -218,7 +218,7 @@ public class CDgp extends HttpServlet {
             }
             
             dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, LI_MOTIVO, ES_MFL, BONO_PUESTO);
-            String iddgp = dgp.MAX_ID_DGP();
+           String iddgp = dgp.MAX_ID_DGP();
             String ESTADO = request.getParameter("ESTADO");
             if (ESTADO != null) {
                 if (ESTADO.trim().equals("0")) {
@@ -295,6 +295,7 @@ public class CDgp extends HttpServlet {
             
             response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&idtr=" + ID_TRABAJADOR);
             // response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
+            
         }
         
         if (opc.equals("Reg_form")) {
