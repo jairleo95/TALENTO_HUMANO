@@ -15,8 +15,9 @@ import java.util.Map;
 public interface InterfaceCentroCosto {
     public List<Map<String,?>> listarCcosto();
     public List<Map<String,?>> listarCcosto(String idCCosto);
-    public List<Map<String,?>> listarCcostoxdep(String idDep);
-    public List<Map<String,?>> listarCcostoxarea(String idArea);
+    public List<Map<String, ?>> List_Direccion();
+    public List<Map<String, ?>> List_Depxdir(String iddep);
+    public List<Map<String, ?>> List_Arxdep(String iddep);
     public boolean crearCCosto(String CO_CENTRO_COSTO, String DE_CENTRO_COSTO, String ID_DEPARTAMENTO, String ID_AREA);
     public boolean editarCCosto(String ID_CENTRO_COSTO, String CO_CENTRO_COSTO, String DE_CENTRO_COSTO, String ID_DEPARTAMENTO, String ID_AREA);
     public boolean eliminarCCosto(String ID_CENTRO_COSTO);
