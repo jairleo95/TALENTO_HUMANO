@@ -1274,6 +1274,10 @@
 
 </html>
 <%} else {
+       
+        //out.print("<script>window.location.href = '../../menu?'</script>");
+       /* RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+        dispatcher.forward(request, response);*/
         response.sendRedirect("/TALENTO_HUMANO/");
     }
 
