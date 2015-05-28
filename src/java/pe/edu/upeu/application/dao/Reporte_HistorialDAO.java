@@ -140,11 +140,11 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "SELECT AP_MATERNO_T, AP_PATERNO_T, NO_TRABAJADOR_T, ID_DATOS_HIJOS_TRABAJADOR, ID_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, NO_ES_SEXO, ES_SEXO, ES_TIPO_DOC, NU_DOC, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, NO_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, NO_ESTUDIO_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR, SEMESTRE, ESTADO_REGISTRO, to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mi:ss') as FE_FILTRO_TODO, NO_USUARIO_CREACION, NO_USUARIO_MODIF, DE_TIP_DOC,ES_PROCESADO FROM RHVD_HISTORIAL_MOD_HIJO WHERE  us_creacion is not null ";
             if (tipo.equals("2")) {
-                sql += " and  ESTADO_REGISTRO ='0' and fe_creacion BETWEEN TO_DATE('" + FE_INICIO.trim() + "') AND TO_DATE('" + FE_FIN.trim() + "')  ";
+                sql += " and  ESTADO_REGISTRO ='0' and fe_creacion BETWEEN TO_DATE('" + FE_INICIO.trim() + "','dd/mm/yyyy') AND TO_DATE('" + FE_FIN.trim() + "','dd/mm/yyyy')  ";
             } else if (tipo.equals("3")) {
-                sql += " and  ESTADO_REGISTRO ='1'  and fe_modif BETWEEN TO_DATE('" + FE_INICIO.trim() + "') AND TO_DATE('" + FE_FIN.trim() + "') ";
+                sql += " and  ESTADO_REGISTRO ='1'  and fe_modif BETWEEN TO_DATE('" + FE_INICIO.trim() + "','dd/mm/yyyy') AND TO_DATE('" + FE_FIN.trim() + "','dd/mm/yyyy') ";
             } else if (tipo.equals("1")) {
-                sql += " and FE_FILTRO_TODO BETWEEN TO_DATE('" + FE_INICIO.trim() + "') AND TO_DATE('" + FE_FIN.trim() + "') ";
+                sql += " and FE_FILTRO_TODO BETWEEN TO_DATE('" + FE_INICIO.trim() + "','dd/mm/yyyy') AND TO_DATE('" + FE_FIN.trim() + "','dd/mm/yyyy') ";
             }
             sql += " ORDER BY FE_FILTRO_TODO";
             ResultSet rs = this.cnn.query(sql);
@@ -267,7 +267,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM RHVD_HISTORIAL_MOD_HIJO where ID_DATOS_HIJOS_TRABAJADOR='" + id + "' and to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mi:ss') ='" + fecha1.trim() + "' or to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mi:ss') ='" + fecha2.trim() + "' ";
+            String sql = "SELECT AP_MATERNO_T, AP_PATERNO_T, NO_TRABAJADOR_T, ID_DATOS_HIJOS_TRABAJADOR, ID_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, NO_ES_SEXO, ES_SEXO, ES_TIPO_DOC, NU_DOC, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, NO_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, NO_ESTUDIO_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR, SEMESTRE, ESTADO_REGISTRO, to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mi:ss') AS FE_FILTRO_TODO , NO_USUARIO_CREACION, NO_USUARIO_MODIF, DE_TIP_DOC, ES_PROCESADO FROM RHVD_HISTORIAL_MOD_HIJO where ID_DATOS_HIJOS_TRABAJADOR='" + id + "' and to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mi:ss') ='" + fecha1.trim() + "' or to_char(FE_FILTRO_TODO,'dd/mm/yyyy hh:mi:ss') ='" + fecha2.trim() + "' ";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -292,6 +292,10 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
                 rec.put("modif", rs.getString("FE_MODIF"));
                 rec.put("ip_usuario", rs.getString("IP_USUARIO"));
                 rec.put("es_procesado", rs.getString("es_procesado"));
+
+                rec.put("id", rs.getString("ID_DATOS_HIJOS_TRABAJADOR"));
+                rec.put("estado_filtro", rs.getString("ESTADO_REGISTRO"));
+                rec.put("fecha", rs.getString("FE_FILTRO_TODO"));
                 lista.add(rec);
             }
             rs.close();
@@ -492,7 +496,7 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "UPDATE RHTM_TRABAJADOR \n"
                     + "SET ES_MOD_PROCESADO='1'\n"
-                    + "WHERE ID_TRABAJADOR='"+idtra+"'";
+                    + "WHERE ID_TRABAJADOR='" + idtra + "'";
             ResultSet rs = this.cnn.query(sql);
             rs.close();
         } catch (SQLException e) {

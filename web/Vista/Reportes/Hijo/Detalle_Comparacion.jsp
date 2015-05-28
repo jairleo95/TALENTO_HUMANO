@@ -278,12 +278,12 @@
                     texto_html += "<td>13</td><td>Fecha de Modificacion:</td><td>" + lista[0].modif + "</td>";
                     texto_html += "<td>" + lista[1].modif + "</td></tr>";
 
-                    var detalle_ip1 = lista[0].ip_usuario.split("**");
+                    var detalle_ip1 = lista[0].ip_usuario.split("*");
                     var ip1 = detalle_ip1[0];
                     var no_usuario1 = detalle_ip1[1];
                     var mac1 = detalle_ip1[2];
 
-                    var detalle_ip2 = lista[1].ip_usuario.split("**");
+                    var detalle_ip2 = lista[1].ip_usuario.split("*");
                     var ip2 = detalle_ip2[0];
                     var no_usuario2 = detalle_ip2[1];
                     var mac2 = detalle_ip2[2];
@@ -334,21 +334,18 @@
                     tbody.append(texto_html);
                     // alert(lista[1].es_procesado);
                     $(".ck_procesado").click(function () {
-
-                    $.SmartMessageBox({
-                        title: "¡Advertencia!",
-                        content: "¿Esta seguro de procesar las modificaciones?",
-                        buttons: '[No][Si]'
-                    }, function (ButtonPressed) {
-                        if (ButtonPressed === "Si") {
-                            var t = 0;
-                            $.each($(".ck_procesado"), function () {
-
-                                if ($(this).prop('checked')) {
+                        var d = $(this);
+                        $.SmartMessageBox({
+                            title: "¡Advertencia!",
+                            content: "¿Esta seguro de procesar las modificaciones?",
+                            buttons: '[No][Si]'
+                        }, function (ButtonPressed) {
+                            if (ButtonPressed === "Si") {
+                                if (d.prop('checked')) {
                                     $.ajax({
                                         url: "../../../RHistorial",
                                         type: "POST",
-                                        data: "opc=Procesar_datos_hijos&" + $(".val_hijo" + $(this).val()).val()
+                                        data: "opc=Procesar_datos_hijos&" + $(".val_hijo" + d.val()).val()
                                     }).done(function () {
                                         $.smallBox({
                                             title: "Procesado con exito",
@@ -367,25 +364,17 @@
                                             timeout: 6000
                                         });
                                     });
-                                    t++;
+
                                 }
-                            });
-                            if (t == 0) {
-                                $.smallBox({
-                                    title: "Procesar Modificaciones",
-                                    content: "<i class='fa fa-ban'></i> <i>No hay modificaciones por procesar, porfavor seleccione si o no...</i>",
-                                    color: "#dfb56c",
-                                    iconSmall: "bounce animated",
-                                    timeout: 6000
-                                });
+
+                                // obetnerDatos();
+                                ver_comparacion();
                             }
-                            // obetnerDatos();
-                        }
-                        if (ButtonPressed === "No") {
-                            $(".ck_procesado").prop('checked',false);
-                        }
+                            if (ButtonPressed === "No") {
+                                $(".ck_procesado").prop('checked', false);
+                            }
+                        });
                     });
-                });
 
                 });
                 texto_html = "";
@@ -402,7 +391,7 @@
                     listar_fec_sin_repetir($(this).val());
                 });
 
-                
+
                 $(".val_hijo").click(function () {
                     if ($(this).prop('checked')) {
                         $.SmartMessageBox({
