@@ -79,7 +79,7 @@
             <center><h1 class="spacing" style="font-weight: bold;">REPORTE-TRABAJADORES EN NAVIDAD</h1></center> 
         </div>
         <div class="row">
-            <div align="center" style="border:3px solid red;">
+            <div align="center">
                 <div class="form-group" >
                     <label>CODIGO APS</label><br>
                     <input type="text"  class="form-control mes" placeholder="APS" name=""  length="45" style="width: 80px" id="des"/>

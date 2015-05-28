@@ -84,7 +84,7 @@ public class CReporte extends HttpServlet {
             if (opc.equals("reporte_hijo")) {
                 String desde = request.getParameter("desde");
                 String hasta = request.getParameter("hasta");
-                String edad = request.getParameter("hasta");
+                String edad = request.getParameter("edad");
                 String nom = request.getParameter("nom");
                 String pat = request.getParameter("paterno");
                 String mat = request.getParameter("materno");
@@ -95,10 +95,23 @@ public class CReporte extends HttpServlet {
                 rpta.put("lista", lista);
             }
             if (opc.equals("reporte_padre_hijo")) {
+                //RANGO DE EDADES
                 String desde = request.getParameter("desde");
                 String hasta = request.getParameter("hasta");
                 String edad = request.getParameter("edad");
-                List<Map<String, ?>> lista = RP.listar_padre_hi(desde, hasta, edad);
+                //FILTROS
+                String aps = request.getParameter("aps");
+                String dep = request.getParameter("departamento");
+                String are = request.getParameter("area");
+                String sec = request.getParameter("seccion");
+                String pue = request.getParameter("puesto");
+                String fec = request.getParameter("fecha");
+                String nom = request.getParameter("nombre");
+                String pat = request.getParameter("paterno");
+                String mat = request.getParameter("materno");
+                String tip = request.getParameter("tipo");
+                String nun = request.getParameter("numero");
+                List<Map<String, ?>> lista = RP.listar_padre_hi(desde, hasta, edad,aps,dep,are,sec,pue,nom,pat,mat,nun,tip);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }

@@ -25,7 +25,7 @@
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
         <link type="text/css" rel="stylesheet" href="../../css/Css_Formulario/form.css">
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
-        <script src="../../../ajax/ajax.google.min.js"></script>
+        <script src="../../ajax/ajax.google.min.js"></script>
 
         <title>Contratos</title>
     </head>

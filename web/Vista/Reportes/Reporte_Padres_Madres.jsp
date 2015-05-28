@@ -60,51 +60,52 @@
                 <br>
                 <div id="contenido">
 
-                    <div  style="border:3px solid red;" >
+                    <div >
                         <!--style="padding-left: 30px"-->
                         <div class="form-group" >
                             <label>CODIGO APS</label><br>
-                            <input type="text"  class="form-control mes" placeholder="APS" name=""  length="45" style="width: 80px" id="des"/>
+                            <input type="text"  class="form-control aps" placeholder="APS" length="45" style="width: 60px" id="des"/>
                         </div>
                         <div class="form-group" >
                             <label>DEPARTAMENTO</label><br>
-                            <input type="text"  class="form-control mes" placeholder="Ingrese el DEPARTAMENTO" name=""  length="45" style="width: 150px" id="des"/>
+                            <input type="text"  class="form-control dep" placeholder="Ingrese el DEPARTAMENTO" length="45" style="width: 150px" id="des"/>
                         </div>
                         <div class="form-group" >
                             <label>AREA</label><br>
-                            <input type="text"  class="form-control mes" placeholder="Ingrese su AREA" name=""  length="45" style="width: 150px" id="des"/>
+                            <input type="text"  class="form-control are" placeholder="Ingrese su AREA" length="45" style="width: 150px" id="des"/>
                         </div>
                         <div class="form-group" >
                             <label>SECCIÓN</label><br>
-                            <input type="text"  class="form-control mes" placeholder="Ingrese su SECCIÓN" name=""  length="45" style="width: 150px" id="des"/>
+                            <input type="text"  class="form-control sec" placeholder="Ingrese su SECCIÓN" name=""  length="45" style="width: 150px" id="des"/>
                         </div>
                         <div class="form-group" >
                             <label>PUESTO</label><br>
-                            <input type="text"  class="form-control mes" placeholder="Ingrese su PUESTO" name=""  length="45" style="width: 150px" id="des"/>
+                            <input type="text"  class="form-control pue" placeholder="Ingrese su PUESTO" name=""  length="45" style="width: 150px" id="des"/>
+                        </div>
+                        <div class="form-group">
+                            <label>APELLIDO PATERNO</label><br>
+                            <input type="text"  class="form-control pat" placeholder="Ingrese APELLIDOS PATERNO" name=""  length="45" style="width: 250px" id="des"/>
                         </div>
                         <div class="form-group" >
-                            <label>FECHA NACIMIENTO</label><br>
-                            <input type="DATE"  class="form-control mes" name=""  length="45" style="width: 170px" id="des"/>
+                            <label>APELLIDO MATERNO</label><br>
+                            <input type="text"  class="form-control mat" placeholder="Ingrese APELLIDOS MATERNO" name=""  length="45" style="width: 250px" id="des"/>
                         </div>
                         <div class="form-group" >
-                            <label>EDAD</label><br>
-                            <input type="text"  class="form-control mes" placeholder="EDAD" name=""  length="45" style="width: 80px" id="des"/>
-                        </div>
-                        <div class="form-group" >
-                            <label>APELLIDO Y NOMBRES</label><br>
-                            <input type="text"  class="form-control mes" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
+                            <label>NOMBRES</label><br>
+                            <input type="text"  class="form-control nom" placeholder="Ingrese NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
                         </div>
                         <div class="form-group" >
                             <label>TIPO DOC</label><br>
-                            <input type="text"  class="form-control mes" placeholder="Ingrese la cantidad de meses" name=""  length="45" style="width: 250px" id="des"/>
+                            <input type="text"  class="form-control tip" placeholder="TIPO DOCUMENO" name=""  length="45" style="width: 150px" id="des"/>
                         </div>
                         <div class="form-group" >
                             <label>Nº DOCUMENTO</label><br>
-                            <input type="text"  class="form-control mes" placeholder="Nº Documento" name=""  length="45" style="width: 120px" id="des"/>
+                            <input type="text"  class="form-control num" placeholder="Nº Documento" name=""  length="45" style="width: 120px" id="des"/>
                         </div>
                         <br>
+                        <br>
                         <div>
-                            <hr1 class="spacing" style="font-weight: bold;">Filtro Rango Edad del Hijo</hr1>
+                            <hr2 class="spacing" style="font-weight: bold;">Filtro por Rango Edad del Hijo</hr2>
                         </div>
                         <div class="row">
                             <div class="form-group" >
@@ -164,8 +165,8 @@
                                             <th data-hide="pue">Puesto</th>
                                             <th data-hide="tip_d">Tipo del Documento</th>
                                             <th data-hide="num_d">Numero Documento</th>
-                                            <th data-class="pat">Apellido Materno</th>
                                             <th data-class="mat">Apellido Paterno</th>
+                                            <th data-class="pat">Apellido Materno</th>
                                             <th data-hide="nom">Nombres</th>
                                             <th data-class="nom_e">Nombre y Apellido</th>
                                             <th data-class="fec_s">Fecha de Cese</th>
@@ -570,9 +571,19 @@
             var a = $(".des").val();
             var b = $(".has").val();
             var c = $(".edad").val();
+            var ap = $(".aps").val();
+            var de = $(".dep").val();
+            var ar = $(".are").val();
+            var se = $(".sec").val();
+            var pu = $(".pue").val();
+            var pa = $(".pat").val();
+            var ma = $(".mat").val();
+            var no = $(".nom").val();
+            var tip = $(".tip").val();
+            var num = $(".num").val();
             var d = $("#Li_padre_hijos");
             var texto = '';
-            $.post("../../reporte", "opc=reporte_padre_hijo&desde=" + a + "&hasta=" + b + "&edad=" + c, function (objJson) {
+            $.post("../../reporte", "opc=reporte_padre_hijo&desde=" + a + "&hasta=" + b + "&edad=" + c + "&aps=" + ap + "&departamento=" + de + "&area=" + ar + "&puesto=" + pu + "&seccion=" + se + "&paterno=" + pa + "&materno=" + ma + "&nombre=" + no + "&tipo=" + tip + "&numero=" + num, function (objJson) {
 
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
