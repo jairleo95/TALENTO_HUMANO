@@ -1,4 +1,4 @@
-<%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
+    <%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
@@ -170,7 +170,6 @@
                                 </header>
                                 <!-- widget div-->
                                 <div>
-
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
@@ -193,15 +192,12 @@
                                         }
                                         $(document).ready(function() {
                                             $(".btn_pro_remuneracion").click(function() {
-
                                                 $.SmartMessageBox({
                                                     title: "¡Advertencia!",
                                                     content: "¿Esta seguro de procesar estos requerimientos?",
                                                     buttons: '[No][Si]'
                                                 }, function(ButtonPressed) {
                                                     if (ButtonPressed === "Si") {
-
-
                                                         for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
                                                             if ($(".env_rem" + i).prop('checked')) {
                                                                 $.ajax({
@@ -213,7 +209,6 @@
                                                                 });
                                                             }
                                                         }
-
                                                     }
                                                     if (ButtonPressed === "No") {
                                                     }
@@ -227,32 +222,26 @@
                                                     buttons: '[No][Si]'
                                                 }, function(ButtonPressed) {
                                                     if (ButtonPressed === "Si") {
-
                                                         try {
                                                             $.each($(".firm_contr"), function() {
                                                                 //alert($(this).val());
-
-
                                                                 if ($(this).prop('checked')) {
                                                                     $.ajax({
                                                                         url: "../../contrato",
                                                                         type: "POST",
                                                                         data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
                                                                     }).done(function() {
-
                                                                     });
                                                                     $.ajax({
                                                                         url: "../../autorizacion",
                                                                         type: "POST",
                                                                         data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
                                                                     }).done(function() {
-
                                                                         window.location.href = "../../autorizacion";
                                                                     });
                                                                 }
                                                             });
                                                             // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
-
                                                         }
                                                         catch (err) {
                                                             alert(err.message);
@@ -261,19 +250,15 @@
                                                     }
                                                     if (ButtonPressed === "No") {
                                                     }
-
                                                 });
                                             });
                                             $(".btn_cod_aps").click(function() {
-
                                                 $.SmartMessageBox({
                                                     title: "¡Advertencia!",
                                                     content: "¿Esta seguro de procesar codigos APS a estos requerimientos?",
                                                     buttons: '[No][Si]'
                                                 }, function(ButtonPressed) {
                                                     if (ButtonPressed === "Si") {
-
-
                                                         for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
                                                             if ($(".cod_aps" + r).val() != "") {
                                                                 $.ajax({
@@ -291,7 +276,6 @@
                                                                 });
                                                             }
                                                         }
-                                                        
                                                     }
                                                     if (ButtonPressed === "No") {
                                                     }
@@ -305,8 +289,6 @@
                                                     buttons: '[No][Si]'
                                                 }, function(ButtonPressed) {
                                                     if (ButtonPressed === "Si") {
-
-
                                                         for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
                                                             if ($(".cod_huella" + r).val() != "") {
                                                                 $.ajax({
@@ -320,7 +302,6 @@
                                                                     type: "POST",
                                                                     data: "opc=Aceptar" + $(".val_aut" + r).val()
                                                                 }).done(function() {
-
                                                                 });
                                                                 $.ajax({
                                                                     url: "../../autorizacion",
@@ -430,7 +411,6 @@
                                                                     %>
                                                                     <a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>">
                                                                         <%
-
                                                                             if (idrol != null) {
                                                                                 if (idrol.trim().equals("ROL-0006")) {
                                                                                     if (num >= 1) {
