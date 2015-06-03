@@ -77,7 +77,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 editor.insertHtml(value);
             }
             else
-                alert('You must be in WYSIWYG mode!');
+                alert('Tiempo de Espera Agotado presionar Cargar Contratos');
         }
         function InsertText() {
             // Get the editor instance that we want to interact with.
@@ -429,7 +429,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     InsertHTML();
                     imp();
                 }, 1200);
-            }, (time * 100));
+            }, (time * 175));
 
             /*setTimeout(function() {
              InsertHTML();
