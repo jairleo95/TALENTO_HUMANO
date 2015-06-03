@@ -15,7 +15,7 @@
         <link rel="icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
         <!-- #GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
-          <style>
+        <style>
             .caja{
                 background:transparent url(../../../imagenes/Gifloader.GIF) center no-repeat;
             }
@@ -278,12 +278,12 @@
                     texto_html += "<td>13</td><td>Fecha de Modificacion:</td><td>" + lista[0].modif + "</td>";
                     texto_html += "<td>" + lista[1].modif + "</td></tr>";
 
-                    var detalle_ip1 = lista[0].ip_usuario.split("**");
+                    var detalle_ip1 = lista[0].ip_usuario.split("*");
                     var ip1 = detalle_ip1[0];
                     var no_usuario1 = detalle_ip1[1];
                     var mac1 = detalle_ip1[2];
 
-                    var detalle_ip2 = lista[1].ip_usuario.split("**");
+                    var detalle_ip2 = lista[1].ip_usuario.split("*");
                     var ip2 = detalle_ip2[0];
                     var no_usuario2 = detalle_ip2[1];
                     var mac2 = detalle_ip2[2];
@@ -322,17 +322,59 @@
                     if (lista[0].es_procesado == '1') {
                         texto_html += "<td>Si</td>";
                     } else if (lista[0].es_procesado == '0') {
-                        texto_html += "<input type='hidden' class='val_hijo' value='idh=" + lista[0].id + "&es_fecha=" + lista[0].estado_filtro + "&fecha=" + lista[0].fecha + "' ><td class='smart-form'><label class='toggle'><input type='checkbox' value=''  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
+                        texto_html += "<input type='hidden' class='val_hijo1' value='idh=" + lista[0].id + "&es_fecha=" + lista[0].estado_filtro + "&fecha=" + lista[0].fecha + "' ><td class='smart-form'><label class='toggle'><input type='checkbox' value='1'  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
                     }
                     if (lista[1].es_procesado == '1') {
                         texto_html += "<td>Si</td>";
                     } else if (lista[1].es_procesado == '0') {
-                        texto_html += "<input type='hidden' class='val_hijo' value='idh=" + lista[1].id + "&es_fecha=" + lista[1].estado_filtro + "&fecha=" + lista[1].fecha + "' ><td class='smart-form'><label class='toggle'><input type='checkbox' value=''  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
+                        texto_html += "<input type='hidden' class='val_hijo2' value='idh=" + lista[1].id + "&es_fecha=" + lista[1].estado_filtro + "&fecha=" + lista[1].fecha + "' ><td class='smart-form'><label class='toggle'><input type='checkbox' value='2'  class='ck_procesado'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></td>";
                     }
 
 
                     tbody.append(texto_html);
                     // alert(lista[1].es_procesado);
+                    $(".ck_procesado").click(function () {
+                        var d = $(this);
+                        $.SmartMessageBox({
+                            title: "¡Advertencia!",
+                            content: "¿Esta seguro de procesar las modificaciones?",
+                            buttons: '[No][Si]'
+                        }, function (ButtonPressed) {
+                            if (ButtonPressed === "Si") {
+                                if (d.prop('checked')) {
+                                    $.ajax({
+                                        url: "../../../RHistorial",
+                                        type: "POST",
+                                        data: "opc=Procesar_datos_hijos&" + $(".val_hijo" + d.val()).val()
+                                    }).done(function () {
+                                        $.smallBox({
+                                            title: "Procesado con exito",
+                                            content: "<i class='fa fa-clock-o'></i> <i>Las modificaciones se han procesado correctamente...</i>",
+                                            color: "#659265",
+                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                            timeout: 4000
+                                        });
+
+                                    }).error(function () {
+                                        $.smallBox({
+                                            title: "¡Error!",
+                                            content: "<i class='fa fa-clock-o'></i> <i>Las modificaciones NO se han procesado correctamente...",
+                                            color: "#C46A69",
+                                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                            timeout: 6000
+                                        });
+                                    });
+
+                                }
+
+                                // obetnerDatos();
+                                ver_comparacion();
+                            }
+                            if (ButtonPressed === "No") {
+                                $(".ck_procesado").prop('checked', false);
+                            }
+                        });
+                    });
 
                 });
                 texto_html = "";
@@ -348,7 +390,7 @@
                 $(".fecha1").change(function () {
                     listar_fec_sin_repetir($(this).val());
                 });
-               
+
 
                 $(".val_hijo").click(function () {
                     if ($(this).prop('checked')) {

@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfacePlazo_DgpDAO"%>
 <%@page import="pe.edu.upeu.application.dao.Plazo_DgpDAO"%>
 <%
@@ -123,7 +124,7 @@
         </head>
         <body onload="closedthis();">
             <script >
-                $(document).ready(function() {
+                $(document).ready(function () {
                     function exito(titulo, mensaje) {
                         $.smallBox({
                             title: titulo,
@@ -165,9 +166,11 @@
                                                     d = (V_Det_DGP) LIST_ID_DGP.get(i);
                                                     iddgp = d.getId_dgp();
                                         %>
+                                        <input type="text"  class="fe_desde_dgp" value="<%=FactoryConnectionDB.convertFecha3(d.getFe_desde())%>"/>
                                         <tr><td colspan="2" class="text-info table-bordered"><i class="fa fa-file"></i> REQUERIMIENTO : <%=d.getNo_req()%> </td></tr>
                                         <!--<label style="color: black; //font-family: cursive;"><h2><%=d.getNo_req()%></h2></label>
                                         --><tr><td  class="text-info table-bordered" style="text-align:align;">Fecha Desde:</td><td class="text-info table-bordered"><%=d.getFe_desde()%></td></tr>
+
                                         <tr ><td class="text-info table-bordered">Fecha Hasta:</td><td class="text-info table-bordered"><%=d.getFe_hasta()%></td></tr>
                                         <tr><td class="text-info table-bordered">Sueldo : S/.</td><td class="text-info table-bordered"><%=d.getCa_sueldo()%></td></tr>
                                         <tr><td class="text-info table-bordered">BEV: </td><td class="text-info table-bordered"><%=d.getDe_bev()%></td></tr>
@@ -254,7 +257,7 @@
                                             <% if (d.getLi_motivo().equals("1")) {%>
                                             <td colspan="2" class="text-info table-bordered">Trabajador Nuevo</td></tr>
                                             <%}
-                                            if (d.getLi_motivo().equals("2")) {%>
+                                                if (d.getLi_motivo().equals("2")) {%>
                                         <td colspan="2" class="text-info table-bordered">Renovación</td></tr>
                                         <%}
                                             }
@@ -466,31 +469,33 @@
 
         <script type="text/javascript">
                 // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                $(document).ready(function() {
+                $(document).ready(function () {
                     pageSetUp();
-                    $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                    $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                         $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                     });
-                    $(".tipo").change(function() {
+                    $(".tipo").change(function () {
                         if ($(this).val() == '2') {
+                            $(".fe_inicio").val("");
                             $(".fe_inicio").attr("type", "month");
                             $(".lb_fecha_solicitud").text("Mes :");
                             $(".tipo_fecha").val("month");
                         }
                         if ($(this).val() == '1') {
                             $(".fe_inicio").attr("type", "date");
+                            $(".fe_inicio").val($(".fe_desde_dgp").val());
                             $(".lb_fecha_solicitud").text("Fecha de Inicio :");
                             $(".tipo_fecha").val("date");
                         }
                         //alert();
                         list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
                     });
-                    $(".btn_terminar").click(function() {
+                    $(".btn_terminar").click(function () {
                         $.SmartMessageBox({
                             title: "¡Advertencia!",
                             content: "¿Esta seguro de enviar la solicitud?",
                             buttons: '[No][Si]'
-                        }, function(ButtonPressed) {
+                        }, function (ButtonPressed) {
                             if (ButtonPressed === "Si") {
                                 $(".form_terminar_req").submit();
                             }
@@ -498,19 +503,19 @@
                             }
                         });
                     });
-                    $(".sbm_solicitud").click(function(e) {
+                    $(".sbm_solicitud").click(function (e) {
                         if ($(".solicitud_plazo").valid() == true) {
                             $.SmartMessageBox({
                                 title: "¡Advertencia!",
                                 content: "¿Esta seguro de enviar la solicitud?",
                                 buttons: '[No][Si]'
-                            }, function(ButtonPressed) {
+                            }, function (ButtonPressed) {
                                 if (ButtonPressed === "Si") {
                                     $.ajax({
                                         url: "../../solicitud_requerimiento",
                                         type: "post",
                                         data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud"
-                                    }).done(function() {
+                                    }).done(function () {
                                         $('.solicitud_plazo')[0].reset();
                                         var $p = $(this).parent().parent();
                                         $p.removeClass('has-success');
@@ -524,7 +529,7 @@
                                             iconSmall: "fa fa-check fa-2x fadeInRight animated",
                                             timeout: 4000
                                         });
-                                    }).error(function() {
+                                    }).error(function () {
                                         $.smallBox({
                                             title: "¡Error!",
                                             content: "<i class='fa fa-clock-o'></i> <i>La solicitud no ha podido ser enviada...</i>",
@@ -564,7 +569,7 @@
                     /*
                      * Smart Notifications
                      */
-                    $('#eg1').click(function(e) {
+                    $('#eg1').click(function (e) {
 
                         $.bigBox({
                             title: "Big Information box",
@@ -580,7 +585,7 @@
 
                     })
 
-                    $('#eg2').click(function(e) {
+                    $('#eg2').click(function (e) {
 
                         $.bigBox({
                             title: "Big Information box",
@@ -594,7 +599,7 @@
                         e.preventDefault();
                     })
 
-                    $('#eg3').click(function(e) {
+                    $('#eg3').click(function (e) {
 
                         $.bigBox({
                             title: "Shield is up and running!",
@@ -609,7 +614,7 @@
 
                     })
 
-                    $('#eg4').click(function(e) {
+                    $('#eg4').click(function (e) {
 
                         $.bigBox({
                             title: "Success Message Example",
@@ -618,7 +623,7 @@
                             //timeout: 8000,
                             icon: "fa fa-check",
                             number: "4"
-                        }, function() {
+                        }, function () {
                             closedthis();
                         });
 
@@ -628,7 +633,7 @@
 
 
 
-                    $('#eg5').click(function() {
+                    $('#eg5').click(function () {
 
                         $.smallBox({
                             title: "Ding Dong!",
@@ -642,7 +647,7 @@
 
 
 
-                    $('#eg6').click(function() {
+                    $('#eg6').click(function () {
 
                         $.smallBox({
                             title: "Big Information box",
@@ -654,7 +659,7 @@
 
                     })
 
-                    $('#eg7').click(function() {
+                    $('#eg7').click(function () {
 
                         $.smallBox({
                             title: "James Simmons liked your comment",
@@ -682,7 +687,7 @@
                     // With Callback
 
                     // With Input
-                    $("#smart-mod-eg2").click(function(e) {
+                    $("#smart-mod-eg2").click(function (e) {
 
                         $.SmartMessageBox({
                             title: "Smart Alert: Input",
@@ -690,14 +695,14 @@
                             buttons: "[Accept]",
                             input: "text",
                             placeholder: "Enter your user name"
-                        }, function(ButtonPress, Value) {
+                        }, function (ButtonPress, Value) {
                             alert(ButtonPress + " " + Value);
                         });
 
                         e.preventDefault();
                     })
                     // With Buttons
-                    $("#smart-mod-eg3").click(function(e) {
+                    $("#smart-mod-eg3").click(function (e) {
 
                         $.SmartMessageBox({
                             title: "Smart Notification: Buttons",
@@ -708,7 +713,7 @@
                         e.preventDefault();
                     })
                     // With Select
-                    $("#smart-mod-eg4").click(function(e) {
+                    $("#smart-mod-eg4").click(function (e) {
 
                         $.SmartMessageBox({
                             title: "Smart Alert: Select",
@@ -716,7 +721,7 @@
                             buttons: "[Done]",
                             input: "select",
                             options: "[Costa Rica][United States][Autralia][Spain]"
-                        }, function(ButtonPress, Value) {
+                        }, function (ButtonPress, Value) {
                             alert(ButtonPress + " " + Value);
                         });
 
@@ -724,7 +729,7 @@
                     });
 
                     // With Login
-                    $("#smart-mod-eg5").click(function(e) {
+                    $("#smart-mod-eg5").click(function (e) {
 
                         $.SmartMessageBox({
                             title: "Login form",
@@ -732,7 +737,7 @@
                             buttons: "[Cancel][Accept]",
                             input: "text",
                             placeholder: "Enter your user name"
-                        }, function(ButtonPress, Value) {
+                        }, function (ButtonPress, Value) {
                             if (ButtonPress == "Cancel") {
                                 alert("Why did you cancel that? :(");
                                 return 0;
@@ -746,7 +751,7 @@
                                 buttons: "[Login]",
                                 input: "password",
                                 placeholder: "Password"
-                            }, function(ButtonPress, Value) {
+                            }, function (ButtonPress, Value) {
                                 alert("Username: " + ValueOriginal + " and your password is: " + Value);
                             });
                         });
@@ -765,7 +770,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;

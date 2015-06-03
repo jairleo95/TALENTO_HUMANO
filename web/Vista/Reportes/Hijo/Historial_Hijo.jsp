@@ -136,6 +136,26 @@
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
+                $("#dtp1").datepicker({
+                    dateFormat: "dd/mm/yy",
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2,
+                    onClose: function (selectedDate) {
+                        $("#dtp2").datepicker("option", "minDate", selectedDate);
+                        $("#dtp2").datepicker("setDate", selectedDate);
+
+                    }
+                });
+                $("#dtp2").datepicker({
+                    dateFormat: "dd/mm/yy",
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2,
+                    onClose: function (selectedDate) {
+                        $("#dtp1").datepicker("option", "maxDate", selectedDate);
+                    }
+                });
                 pageSetUp();
                 $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
@@ -192,25 +212,7 @@
                         }
                     });
                 });
-                $("#dtp1").datepicker({
-                    dateFormat: "dd/mm/yy",
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    numberOfMonths: 2,
-                    onClose: function (selectedDate) {
-                        $("#dtp2").datepicker("option", "minDate", selectedDate);
-                        $("#dtp2").datepicker("setDate", selectedDate);
-                    }
-                });
-                $("#dtp2").datepicker({
-                    dateFormat: "dd/mm/yy",
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    numberOfMonths: 2,
-                    onClose: function (selectedDate) {
-                        $("#dtp1").datepicker("option", "maxDate", selectedDate);
-                    }
-                });
+
                 $('.tabla_t').DataTable();
                 $(".tipo").change(function () {
                     if ($("#dtp1").val() != '' && $("#dtp2").val() != '') {

@@ -9,6 +9,9 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -55,5 +58,28 @@ public class FactoryConnectionDB {
             e.printStackTrace();
         }
         return x;
+    }
+    
+     public static  String convertFecha(String fecha) throws ParseException {
+        String f[] = fecha.split("-");
+     /*   if (System.getProperty("sun.desktop").trim().equals("windows")) {
+            return f[2] + "/" + f[1] + "/" + f[0];
+        } else {*/
+
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
+            String fecha_convertida = new SimpleDateFormat("dd-MMM-yy").format(date);
+            return fecha_convertida.toUpperCase();
+       // }
+
+    }
+
+    public static String convertFecha2(String fecha) {
+        String f[] = fecha.split("/");
+        return f[0] + "-" + f[1] + "-" + f[2];
+    }
+
+    public static String convertFecha3(String fecha) {
+        String f[] = fecha.split("/");
+        return f[2] + "-" + f[1] + "-" + f[0];
     }
 }
