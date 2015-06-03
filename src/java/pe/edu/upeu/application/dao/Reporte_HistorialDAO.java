@@ -433,14 +433,14 @@ public class Reporte_HistorialDAO implements InterfaceReporte_HistorialDAO {
 
     @Override
     public List<Map<String, ?>> Listar_Det_EC(String idtr) {
-        List<Map<String, ?>> lista = new ArrayList<>();
+        List<Map<String, ?>> lista = new  ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "select ec.ID_ESTADO_CIVIL, ec.LI_ESTADO_CIVIL , TO_CHAR (ec.FE_MODIFICACION , 'dd/mm/yy HH:MI:SS' ) as FE_MODIFICACION, us.NO_USUARIO , ec.ID_TRABAJADOR , ec.ES_REGISTRO from RHTH_ESTADO_CIVIL ec , RHTC_USUARIO us where us.ID_USUARIO = ec.US_MODIFICACION and ID_TRABAJADOR = '" + idtr + "' order by FE_MODIFICACION desc";
 
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
-                Map<String, Object> rec = new HashMap<>();
+                Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("id_ec", rs.getString("ID_ESTADO_CIVIL"));
                 rec.put("es_civil_p", rs.getString("LI_ESTADO_CIVIL"));
                 rec.put("no_usuario", rs.getString("NO_USUARIO"));
