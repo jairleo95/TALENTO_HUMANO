@@ -29,6 +29,44 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
 
     CConversion c = new CConversion();
     ConexionBD conn;
+    
+       @Override
+    public void Insert_Autorizacion(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String US_MODIF, String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS) {
+        CallableStatement cst;
+
+        try {
+
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst.setString(1, null);
+            cst.setString(2, ID_DGP);
+            cst.setString(3, ES_AUTORIZACION);
+            cst.setString(4, NU_PASOS);
+            cst.setString(5, IP_USUARIO);
+            cst.setString(6, US_CREACION);
+            cst.setString(7, US_MODIF);
+            cst.setString(8, FE_MODIF);
+            cst.setString(9, CO_PUESTO);
+            cst.setString(10, ID_PUESTO);
+            cst.setString(11, ID_DETALLE_REQ_PROCESO);
+            cst.setString(12, ID_PASOS);
+            cst.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!"+ e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
+
+    
+    
 
     @Override
     public boolean Guardar_Autorizacion(String id_autorizacion, String id_dgp, String id_proceso, String estado, String detalle, String nu_pasos) {
@@ -408,41 +446,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         return list;
     }
 
-    @Override
-    public void Insert_Autorizacion(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String US_MODIF, String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS) {
-        CallableStatement cst;
-
-        try {
-
-            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            cst = conn.conex.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
-            cst.setString(1, null);
-            cst.setString(2, ID_DGP);
-            cst.setString(3, ES_AUTORIZACION);
-            cst.setString(4, NU_PASOS);
-            cst.setString(5, IP_USUARIO);
-            cst.setString(6, US_CREACION);
-            cst.setString(7, US_MODIF);
-            cst.setString(8, FE_MODIF);
-            cst.setString(9, CO_PUESTO);
-            cst.setString(10, ID_PUESTO);
-            cst.setString(11, ID_DETALLE_REQ_PROCESO);
-            cst.setString(12, ID_PASOS);
-            cst.execute();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
-        } catch (Exception e) {
-            throw new RuntimeException("Error!");
-        } finally {
-            try {
-                this.conn.close();
-            } catch (Exception e) {
-                throw new RuntimeException(e.getMessage());
-            }
-        }
-    }
-
+ 
     @Override
     public List<V_Autorizar_Dgp> List_Autorizados(String id_puesto) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
