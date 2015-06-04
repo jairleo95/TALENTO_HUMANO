@@ -19,7 +19,7 @@ import pe.edu.upeu.application.dao.EmpleadoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCorreoDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;     
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 
@@ -29,15 +29,6 @@ import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
  */
 public class CAutorizacion extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -62,7 +53,7 @@ public class CAutorizacion extends HttpServlet {
                 String iddgp = request.getParameter("IDDETALLE_DGP");
                 String estado = "1";
                 String nropaso = request.getParameter("NROPASO");
-                String usuario_ip = "";
+                //String usuario_ip = "";
                 String cod = request.getParameter("COD");
                 String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
                 String idpasos = request.getParameter("IDPASOS");
@@ -88,7 +79,7 @@ public class CAutorizacion extends HttpServlet {
                 String comentario = request.getParameter("comentario");
                 String estado = "2";
                 String nropaso = request.getParameter("NROPASO");
-                String usuario_ip = "";
+                //String usuario_ip = "";
                 String cod = request.getParameter("COD");
                 String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
                 String idpasos = request.getParameter("IDPASOS");
