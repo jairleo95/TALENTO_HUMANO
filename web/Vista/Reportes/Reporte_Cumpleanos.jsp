@@ -82,10 +82,6 @@
                         <input type="text"  class="form-control pue" placeholder="Ingrese su PUESTO" length="45" style="width: 150px" id="des"/>
                     </div>
                     <div class="form-group" >
-                        <label>FECHA NACIMIENTO</label><br>
-                        <input type="DATE"  class="form-control fec" length="45" style="width: 170px" id="des"/>
-                    </div>
-                    <div class="form-group" >
                         <label>EDAD</label><br>
                         <input type="text"  class="form-control edad" placeholder="EDAD" length="45" style="width: 80px" id="des"/>
                     </div>
