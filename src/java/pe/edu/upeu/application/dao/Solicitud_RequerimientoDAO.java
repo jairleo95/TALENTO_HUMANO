@@ -169,11 +169,11 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
     }
 
     @Override
-    public List<V_Solicitud_Requerimiento> Listar_solicitud_id_us(String id_us , String id_dgp) {
+    public List<V_Solicitud_Requerimiento> Listar_solicitud_id_us(String id_us, String id_dgp) {
         List<V_Solicitud_Requerimiento> lista = new ArrayList<>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select *  from RHVD_SOLICITUD_REQUERIMIENTO where  US_CREACION='" + id_us.trim() + "' and ID_DGP = '"+id_dgp.trim()+"'";
+            String sql = "select *  from RHVD_SOLICITUD_REQUERIMIENTO where  US_CREACION='" + id_us.trim() + "' and ID_DGP = '" + id_dgp.trim() + "'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 V_Solicitud_Requerimiento v = new V_Solicitud_Requerimiento();
@@ -266,7 +266,7 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
             CallableStatement cst = this.conn.conex.prepareCall("{CALL rhsp_procesar_solicitud( ?, ?, ?, ?, ?,? )} ");
             cst.setString(1, tipo.trim());
             cst.setString(2, id_sol);
-            cst.setString(3, fecha);
+            cst.setString(3, FactoryConnectionDB.convertFecha(fecha));
             cst.setString(4, FactoryConnectionDB.detalle_ip());
             cst.setString(5, usuario);
             cst.setString(6, comentario);
