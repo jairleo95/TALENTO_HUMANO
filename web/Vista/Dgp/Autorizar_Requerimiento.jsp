@@ -1,4 +1,4 @@
-<%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
+    <%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
@@ -170,7 +170,6 @@
                                 </header>
                                 <!-- widget div-->
                                 <div>
-
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
@@ -193,15 +192,12 @@
                                         }
                                         $(document).ready(function() {
                                             $(".btn_pro_remuneracion").click(function() {
-
                                                 $.SmartMessageBox({
                                                     title: "¡Advertencia!",
                                                     content: "¿Esta seguro de procesar estos requerimientos?",
                                                     buttons: '[No][Si]'
                                                 }, function(ButtonPressed) {
                                                     if (ButtonPressed === "Si") {
-
-
                                                         for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
                                                             if ($(".env_rem" + i).prop('checked')) {
                                                                 $.ajax({
@@ -213,7 +209,6 @@
                                                                 });
                                                             }
                                                         }
-
                                                     }
                                                     if (ButtonPressed === "No") {
                                                     }
@@ -227,32 +222,26 @@
                                                     buttons: '[No][Si]'
                                                 }, function(ButtonPressed) {
                                                     if (ButtonPressed === "Si") {
-
                                                         try {
                                                             $.each($(".firm_contr"), function() {
                                                                 //alert($(this).val());
-
-
                                                                 if ($(this).prop('checked')) {
                                                                     $.ajax({
                                                                         url: "../../contrato",
                                                                         type: "POST",
                                                                         data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
                                                                     }).done(function() {
-
                                                                     });
                                                                     $.ajax({
                                                                         url: "../../autorizacion",
                                                                         type: "POST",
                                                                         data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
                                                                     }).done(function() {
-
                                                                         window.location.href = "../../autorizacion";
                                                                     });
                                                                 }
                                                             });
                                                             // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
-
                                                         }
                                                         catch (err) {
                                                             alert(err.message);
@@ -261,37 +250,51 @@
                                                     }
                                                     if (ButtonPressed === "No") {
                                                     }
-
                                                 });
                                             });
                                             $(".btn_cod_aps").click(function() {
-
                                                 $.SmartMessageBox({
                                                     title: "¡Advertencia!",
                                                     content: "¿Esta seguro de procesar codigos APS a estos requerimientos?",
                                                     buttons: '[No][Si]'
                                                 }, function(ButtonPressed) {
                                                     if (ButtonPressed === "Si") {
-
-
                                                         for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
+                                                            //alert($(".cod_aps" + r).val() )
+                                                            var co_aps = $(".cod_aps" + r).val() ; 
+                                                            //alert(co_aps)
                                                             if ($(".cod_aps" + r).val() != "") {
                                                                 $.ajax({
-                                                                    url: "../../trabajador",
+                                                                    url: "../../empleado",
                                                                     type: "POST",
-                                                                    data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                                                }).done(function () {
+                                                                    data: "opc=validar_aps&co_aps=" + co_aps
+                                                                }).done(function(e) {
+                                                                    var cant = $(".cod_aps" + r).val();
+                                                                    alert(co_aps)
+                                                                    if (cant.length > 5) {
+                                                                        if (e == 0) {
+                                                                            alert("registro valido" + $(".cod_aps" + r).val() + $(".idtr" + r).val())
+                                                                            //window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
+                                                                        }
+                                                                        else {
+                                                                            alert("Este codigo ya esta registrado!")
+                                                                            $.SmartMessageBox({
+                                                                                title: "Este Código APS ya fue registrado!",
+                                                                                content: "Por favor Ingrese un Código APS distinto",
+                                                                            });
+                                                                        }
+                                                                    }
                                                                 });
-                                                                $.ajax({
-                                                                    url: "../../autorizacion",
-                                                                    type: "POST",
-                                                                    data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                                                }).done(function() {
-                                                                    window.location.href = "../../autorizacion?opc=mens_cod_aps";
-                                                                });
+                                                                /*$.ajax({
+S                                                                 url: "../../autorizacion",
+                                                                 type: "POST",
+                                                                 data: "opc=Aceptar" + $(".val_aut" + r).val()
+                                                                 }).done(function() {
+                                                                 window.location.href = "../../autorizacion?opc=mens_cod_aps";
+                                                                 })*/;
                                                             }
                                                         }
-                                                        
+
                                                     }
                                                     if (ButtonPressed === "No") {
                                                     }
@@ -305,8 +308,6 @@
                                                     buttons: '[No][Si]'
                                                 }, function(ButtonPressed) {
                                                     if (ButtonPressed === "Si") {
-
-
                                                         for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
                                                             if ($(".cod_huella" + r).val() != "") {
                                                                 $.ajax({
@@ -320,7 +321,6 @@
                                                                     type: "POST",
                                                                     data: "opc=Aceptar" + $(".val_aut" + r).val()
                                                                 }).done(function() {
-
                                                                 });
                                                                 $.ajax({
                                                                     url: "../../autorizacion",
@@ -430,7 +430,6 @@
                                                                     %>
                                                                     <a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>">
                                                                         <%
-
                                                                             if (idrol != null) {
                                                                                 if (idrol.trim().equals("ROL-0006")) {
                                                                                     if (num >= 1) {
@@ -553,7 +552,7 @@
                                             %>
                                             <td>
                                                 <input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%>" style="width:50px"/>
-                                              <!--  <input type="text" id="cod_ap" name="cod_aps" maxlength="6" onblur="VAL_COD_APS()">-->
+                                                <!--  <input type="text" id="cod_ap" name="cod_aps" maxlength="6" onblur="VAL_COD_APS()">-->
                                             </td>
                                             <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
                                             <%} else {%>
@@ -564,7 +563,7 @@
                                             <%if (a.getVal_cod_huella() == 0) {
                                                     num_cod_huella++;
                                             %>
-                                            <td><input type="text" name="cod_huella" maxlength="6" class="cod_huella<%=(f + 1)%>" style="width:50px"/></td>
+                                            <td><input type="hidden" name="cod_huella" maxlength="6" class="cod_huella<%=(f + 1)%>" style="width:50px"/></td>
                                             <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
                                             <%} else {%>
                                             <td><strong><%=a.getCo_huella_digital()%></strong></td>

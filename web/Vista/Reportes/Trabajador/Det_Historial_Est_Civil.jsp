@@ -210,7 +210,6 @@
                             ec_p = "Conviviente(a)"
                         }
 
-
                         t += "<td>" + (i + 1) + "</td>";
                         t += "<td>" + ec_p + "</td>";
                         t += "<td>" + lista[i].fe_modi + "</td>";
