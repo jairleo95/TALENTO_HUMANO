@@ -11,9 +11,10 @@
 <%@page import="pe.edu.upeu.application.model.Area"%>
 <jsp:useBean id="Listar_Direccion" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean class="java.util.ArrayList" scope="application"  id="Listar_Requerimiento"/>
+<jsp:useBean class="java.util.ArrayList" scope="application"  id="List_Area_ID"/>
 <%    HttpSession sesion_1 = request.getSession(true);
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
-    String id_dep = (String) sesion.getAttribute("ID_DEPARTAMENTO");
+    String id_dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
     if (id_user_1 != "") {
 %>
 <!DOCTYPE html>
@@ -50,6 +51,7 @@
                                 <label>Al</label><br>
                                 <input type="date"  class="form-control" name="al" size="45" maxlength="100" style="width: 250px" id="al" />
                                 <input type="hidden" name="iddep" value="<%%>">
+                                <input type="hidden" class="is_d_ses" value="<%=id_dep%>">
                             </div>
                         </div>
                         <div class="row">
@@ -58,6 +60,7 @@
                                 <label>Nombres y Apellidos :</label><br>
                                 <input type="text"  class="form-control" name="nom_ape"  style="width: 250px"   id="ap"/>
                             </div>
+                            <%if (id_dep.equals("DPT-0019")) {%>
                             <div class="form-group">  
                                 <label>Direccion :</label><br>
                                 <select name="direccion" class="form-control selecdireccion" style="width: 250px" id="select_direccion">
@@ -78,13 +81,26 @@
                                     <option value="">[Seleccione]</option>
                                 </select>
                             </div>
-
+                            <%}%>
+                            <%if (!id_dep.trim().equals("DPT-0019")) {%>
+                            <div class="form-group">
+                                <label>Area :</label><br>
+                                <select name="area" class="form-control selectarea" id="select_area" style="width: 250px"> 
+                                    <option value="">[Seleccione]</option>
+                                    <%for (int i = 0; i < List_Area_ID.size(); i++) {
+                                            Area ar = new Area();
+                                            ar = (Area) List_Area_ID.get(i);
+                                    %>
+                                    <option value="<%=ar.getId_area()%>"><%=ar.getNo_area()%></option>
+                                    <%}%>
+                                </select>
+                            </div><%} else {%>
                             <div class="form-group">
                                 <label>Area :</label><br>
                                 <select name="area" class="form-control selectarea" id="select_area" style="width: 250px"> 
                                     <option value="">[Seleccione]</option>
                                 </select>
-                            </div>
+                            </div><%}%>
                         </div>
                         <div class="row">
                             <div class="form-group" >
@@ -329,8 +345,16 @@
                         var del = $("#del").val();
                         var al = $("#al").val();
                         var nombre = $("#ap").val();
-                        var dir = $("#select_direccion").val();
-                        var dep = $("#select_dep").val();
+                        var dir;
+                        var dep;
+                        var deps = $(".is_d_ses").val();
+                        if (deps.trim() == 'DPT-0019') {
+                            dir = $("#select_direccion").val();
+                            dep = $("#select_dep").val();
+                        } else {
+                            dir = '';
+                            dep = '';
+                        }
                         var area = $("#select_area").val();
                         var sec = $("#select_sec").val();
                         var pu = $("#select_pu").val();

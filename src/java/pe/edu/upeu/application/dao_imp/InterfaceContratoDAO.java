@@ -66,7 +66,7 @@ public interface InterfaceContratoDAO {
 
     public List<V_List_Empleado> LIST_CASOS_ESPECIALES();
 
-    public List<Map<String, ?>> Listar_Contratos(String de, String al, String direccion, String dep, String area, String sec, String puesto, String sueldo_total, String nombre, String fe_i, String fe_fin, String fe_sus);
+    public List<Map<String, ?>> Listar_Contratos(String de, String al, String direccion, String dep, String area, String sec, String puesto, String sueldo_total, String nombre, String fe_i, String fe_fin, String fe_sus,String id_dep_ses);
 
     public List<Map<String, ?>> List_contra_x_idcto_json(String id_ctos);
 

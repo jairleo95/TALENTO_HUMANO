@@ -102,7 +102,7 @@ public class CContrato extends HttpServlet {
         String opc = request.getParameter("opc");
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
-        String iddep = (String) sesion.getAttribute("");
+        String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         String idpuesto = (String) sesion.getAttribute("PUESTO_ID");
         String idrol = (String) sesion.getAttribute("IDROL");
         try {
@@ -799,6 +799,7 @@ public class CContrato extends HttpServlet {
 
             if (opc.equals("filtrar")) {
                 getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
+                getServletContext().setAttribute("List_Area_ID", area.List_Area_ID(iddep));
                 response.sendRedirect("Vista/Contrato/Busc_Contrato.jsp");
             }
             if (opc.equals("Habilitar_is")) {

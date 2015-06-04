@@ -62,7 +62,7 @@ public class CImpresion_Masiva extends HttpServlet {
                 String fec_f=request.getParameter("fec_f");
                 String sueldo=request.getParameter("sueldo");
                 String fe_sus=request.getParameter("fe_sus");
-                List<Map<String, ?>> list = c.Listar_Contratos(del, al, direccion, departamento, area, seccion, puesto, sueldo, nom_ape, fec_i, fec_f,fe_sus);
+                List<Map<String, ?>> list = c.Listar_Contratos(del, al, direccion, departamento, area, seccion, puesto, sueldo, nom_ape, fec_i, fec_f,fe_sus,iddep);
                 String List=del+","+al+","+direccion+","+nom_ape+","+departamento+","+area+","+seccion+","+puesto+","+fec_i+","+fec_f+","+sueldo;
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
