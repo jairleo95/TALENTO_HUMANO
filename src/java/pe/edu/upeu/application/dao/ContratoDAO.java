@@ -697,7 +697,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     }
 
     @Override
-    public List<Map<String, ?>> Listar_Contratos(String de, String al, String direccion, String dep, String area, String sec, String puesto, String sueldo_total, String nombre, String fe_i, String fe_fin, String fe_sus) {
+    public List<Map<String, ?>> Listar_Contratos(String de, String al, String direccion, String dep, String area, String sec, String puesto, String sueldo_total, String nombre, String fe_i, String fe_fin, String fe_sus, String id_dep_ses) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -705,8 +705,14 @@ public class ContratoDAO implements InterfaceContratoDAO {
             // if(sueldo_total!=null ){sql+=" and CA_SUELDO_TOTAL="+sueldo_total;}else{}
             sql += (!nombre.equals("")) ? " AND  UPPER(NO_AP)  like '%" + nombre.toUpperCase() + "%'" : "";
             sql += (!de.equals("") & !al.equals("")) ? " AND FE_CREACION BETWEEN '" + c.convertFecha(de.trim()) + "' and '" + c.convertFecha(al.trim()) + "'" : "";
-            sql += (!direccion.equals("")) ? " AND ID_DIRECCION = '" + direccion.trim() + "'" : "";
-            sql += (!dep.equals("")) ? " and ID_DEPARTAMENTO= '" + dep.trim() + "'" : "";
+            if (!id_dep_ses.equals("")) {
+                if (!id_dep_ses.trim().equals("DPT-0019")) {
+                    sql += (!id_dep_ses.equals("")) ? " and ID_DEPARTAMENTO= '" + id_dep_ses.trim() + "'" : "";
+                } else {
+                    sql += (!direccion.equals("")) ? " AND ID_DIRECCION = '" + direccion.trim() + "'" : "";
+                    sql += (!dep.equals("")) ? " and ID_DEPARTAMENTO= '" + dep.trim() + "'" : "";
+                }
+            }
             sql += (!area.equals("")) ? " and ID_AREA= '" + area.trim() + "'" : "";
             sql += (!sec.equals("")) ? " and ID_SECCION= '" + sec.trim() + "'" : "";
             sql += (!sueldo_total.equals("")) ? " and CA_SUELDO_TOTAL= '" + sueldo_total.trim() + "'" : "";
@@ -753,7 +759,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT rhfu_print_func_pri(h.ID_PUESTO) as func1,rhfu_print_func_sec(h.ID_PUESTO)as func2,h.* FROM RHVD_CONTRATOS_HISTORIAL h WHERE h.ID_CONTRATO='"+id_ctos.trim()+"'";
+            String sql = "SELECT rhfu_print_func_pri(h.ID_PUESTO) as func1,rhfu_print_func_sec(h.ID_PUESTO)as func2,h.* FROM RHVD_CONTRATOS_HISTORIAL h WHERE h.ID_CONTRATO='" + id_ctos.trim() + "'";
             // if(sueldo_total!=null ){sql+=" and CA_SUELDO_TOTAL="+sueldo_total;}else{}
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
@@ -1160,7 +1166,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
 
     @Override
     public void VALIDAR_FE_HASTA_CON() {
-         try {
+        try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_VAL_ESTADO_CONTRATO}");
             cst.execute();
@@ -1181,7 +1187,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     public void validar_contrato(String id_cto) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("UPDATE RHTM_CONTRATO SET ES_CONTRATO = '0' WHERE  ID_CONTRATO = '"+id_cto+"'");
+            CallableStatement cst = this.conn.conex.prepareCall("UPDATE RHTM_CONTRATO SET ES_CONTRATO = '0' WHERE  ID_CONTRATO = '" + id_cto + "'");
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());

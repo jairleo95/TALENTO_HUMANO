@@ -260,22 +260,41 @@
                                                 }, function(ButtonPressed) {
                                                     if (ButtonPressed === "Si") {
                                                         for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
+                                                            //alert($(".cod_aps" + r).val() )
+                                                            var co_aps = $(".cod_aps" + r).val() ; 
+                                                            //alert(co_aps)
                                                             if ($(".cod_aps" + r).val() != "") {
                                                                 $.ajax({
-                                                                    url: "../../trabajador",
+                                                                    url: "../../empleado",
                                                                     type: "POST",
-                                                                    data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                                                }).done(function () {
+                                                                    data: "opc=validar_aps&co_aps=" + co_aps
+                                                                }).done(function(e) {
+                                                                    var cant = $(".cod_aps" + r).val();
+                                                                    alert(co_aps)
+                                                                    if (cant.length > 5) {
+                                                                        if (e == 0) {
+                                                                            alert("registro valido" + $(".cod_aps" + r).val() + $(".idtr" + r).val())
+                                                                            //window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
+                                                                        }
+                                                                        else {
+                                                                            alert("Este codigo ya esta registrado!")
+                                                                            $.SmartMessageBox({
+                                                                                title: "Este Código APS ya fue registrado!",
+                                                                                content: "Por favor Ingrese un Código APS distinto",
+                                                                            });
+                                                                        }
+                                                                    }
                                                                 });
-                                                                $.ajax({
-                                                                    url: "../../autorizacion",
-                                                                    type: "POST",
-                                                                    data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                                                }).done(function() {
-                                                                    window.location.href = "../../autorizacion?opc=mens_cod_aps";
-                                                                });
+                                                                /*$.ajax({
+S                                                                 url: "../../autorizacion",
+                                                                 type: "POST",
+                                                                 data: "opc=Aceptar" + $(".val_aut" + r).val()
+                                                                 }).done(function() {
+                                                                 window.location.href = "../../autorizacion?opc=mens_cod_aps";
+                                                                 })*/;
                                                             }
                                                         }
+
                                                     }
                                                     if (ButtonPressed === "No") {
                                                     }
@@ -533,7 +552,7 @@
                                             %>
                                             <td>
                                                 <input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%>" style="width:50px"/>
-                                              <!--  <input type="text" id="cod_ap" name="cod_aps" maxlength="6" onblur="VAL_COD_APS()">-->
+                                                <!--  <input type="text" id="cod_ap" name="cod_aps" maxlength="6" onblur="VAL_COD_APS()">-->
                                             </td>
                                             <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
                                             <%} else {%>
@@ -544,7 +563,7 @@
                                             <%if (a.getVal_cod_huella() == 0) {
                                                     num_cod_huella++;
                                             %>
-                                            <td><input type="text" name="cod_huella" maxlength="6" class="cod_huella<%=(f + 1)%>" style="width:50px"/></td>
+                                            <td><input type="hidden" name="cod_huella" maxlength="6" class="cod_huella<%=(f + 1)%>" style="width:50px"/></td>
                                             <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
                                             <%} else {%>
                                             <td><strong><%=a.getCo_huella_digital()%></strong></td>
