@@ -102,10 +102,6 @@
                         <input type="text"  class="form-control pue" placeholder="Ingrese su PUESTO" length="45" style="width: 150px" id="des"/>
                     </div>
                     <div class="form-group" >
-                        <label>TIPO DOCUMENTO</label><br>
-                        <input type="text"  class="form-control tip" placeholder="Tipo de Codumento"  length="45" style="width: 250px" id="des"/>
-                    </div>
-                    <div class="form-group" >
                         <label>APELLIDO PATERNO</label><br>
                         <input type="text"  class="form-control pat" placeholder="Ingrese APELLIDOS Y NOMBRES" length="45" style="width: 250px" id="des"/>
                     </div>
