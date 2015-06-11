@@ -673,7 +673,7 @@
 
             })
 
-        </script>1
+        </script>
 
         <!-- Your GOOGLE ANALYTICS CODE Below -->
         <script type="text/javascript">
