@@ -1,3 +1,5 @@
+<%@page import="pe.edu.upeu.application.dao.Solicitud_RequerimientoDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceSolicitud_RequerimientoDAO"%>
 <%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfacePlazo_DgpDAO"%>
 <%@page import="pe.edu.upeu.application.dao.Plazo_DgpDAO"%>
@@ -166,7 +168,7 @@
                                                     d = (V_Det_DGP) LIST_ID_DGP.get(i);
                                                     iddgp = d.getId_dgp();
                                         %>
-                                        <input type="text"  class="fe_desde_dgp" value="<%=FactoryConnectionDB.convertFecha3(d.getFe_desde())%>"/>
+                                        <input type="hidden"  class="fe_desde_dgp" value="<%=FactoryConnectionDB.convertFecha3(d.getFe_desde())%>"/>
                                         <tr><td colspan="2" class="text-info table-bordered"><i class="fa fa-file"></i> REQUERIMIENTO : <%=d.getNo_req()%> </td></tr>
                                         <!--<label style="color: black; //font-family: cursive;"><h2><%=d.getNo_req()%></h2></label>
                                         --><tr><td  class="text-info table-bordered" style="text-align:align;">Fecha Desde:</td><td class="text-info table-bordered"><%=d.getFe_desde()%></td></tr>
@@ -303,7 +305,9 @@
                                         %>
                                         <label>Usted no ha cumplido con los dias de tolerancia del plazo <strong>Inicio de contrato</strong>, porfavor envie solicitud para la nueva fecha de inicio del trabajador.</label><br>
                                         <%}%>
-                                        <button class="btn btn-primary btn-labeled" data-toggle="modal" type="button" data-target="#myModal"><span class="btn-label"><i class="fa fa-envelope"></i></span>
+
+
+                                        <button class="btn btn-primary btn-labeled btn_solicitud" data-toggle="modal" type="button" data-target="#myModal"><span class="btn-label"><i class="fa fa-envelope"></i></span>
                                             SOLICITUD DE PLAZO
                                         </button>
 
@@ -314,6 +318,7 @@
                                             TERMINAR
                                         </button>
                                     </footer>
+                                    <input type="hidden" name="iddgp"  value="<%=iddgp%>" class="dgp" required="">
                                 </form>
                                 <%}
                                     }%>
@@ -331,55 +336,9 @@
                                         </button>
                                         <h4 class="modal-title" id="myModalLabel"><span class="btn-label"><i class="fa fa-envelope"></i></span> <strong>Solicitud de Requerimiento</strong></h4>
                                     </div>
-                                    <div class="modal-body">
-                                        <form id="checkout-form" class="smart-form solicitud_plazo">
-                                            <div class="row">
+                                    <div class="modal-body body_mdal_sol">
 
-                                                <section class="col col-4">
-                                                    <label class="label">Tipo de Plazo :</label>
-                                                    <label class="select"> 
-                                                        <select name="tipo" class="tipo" required="">
-                                                            <option value=''>[SELECCIONE]</option>
-                                                            <option value='2'>Ingreso a planilla</option>
-                                                            <option value='1'>Inicio de Contrato</option>
-
-                                                        </select>          
-                                                    </label>
-                                                </section>
-                                                <section class="col col-4">
-                                                    <label class="label">Plazo :</label>
-                                                    <label class="select"> 
-                                                        <select name="plazo" class="plazo" required="">
-                                                            <option value='' selected >[SELECCIONE]</option>
-                                                        </select>          
-                                                    </label>
-                                                </section>
-                                                <section class="col col-4">
-                                                    <label class="label lb_fecha_solicitud">Fecha de Inicio :</label>
-                                                    <label class="input"> 
-
-                                                        <input type="date" name="desde"  class="fe_inicio" required="">
-                                                        <input type="hidden" name="tipo_fecha"  class="tipo_fecha" value="date" required="">
-                                                        <input type="hidden" name="iddgp"  value="<%=iddgp%>" class="dgp" required="">
-                                                    </label>
-                                                </section>
-                                            </div>
-                                            <section >
-                                                <label class="label">Motivo :</label>
-                                                <label class="textarea"> 										
-                                                    <textarea rows="3" class="comentario" name="descripcion" placeholder="" required=""></textarea> 
-                                                </label>
-                                            </section>
-                                            <footer>
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                    Cancelar
-                                                </button>
-                                                <button type="button" class="btn btn-primary sbm_solicitud" >
-                                                    Enviar
-                                                </button>
-                                            </footer>
-
-                                        </form>  </div>
+                                    </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
                         </div><!-- /.modal -->
@@ -474,79 +433,91 @@
                     $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                         $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                     });
-                    $(".tipo").change(function () {
-                        if ($(this).val() == '2') {
-                            $(".fe_inicio").val("");
-                            $(".fe_inicio").attr("type", "month");
-                            $(".lb_fecha_solicitud").text("Mes :");
-                            $(".tipo_fecha").val("month");
-                        }
-                        if ($(this).val() == '1') {
-                            $(".fe_inicio").attr("type", "date");
-                            $(".fe_inicio").val($(".fe_desde_dgp").val());
-                            $(".lb_fecha_solicitud").text("Fecha de Inicio :");
-                            $(".tipo_fecha").val("date");
-                        }
-                        //alert();
-                        list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
-                    });
-                    $(".btn_terminar").click(function () {
-                        $.SmartMessageBox({
-                            title: "¡Advertencia!",
-                            content: "¿Esta seguro de enviar la solicitud?",
-                            buttons: '[No][Si]'
-                        }, function (ButtonPressed) {
-                            if (ButtonPressed === "Si") {
-                                $(".form_terminar_req").submit();
-                            }
-                            if (ButtonPressed === "No") {
-                            }
-                        });
-                    });
-                    $(".sbm_solicitud").click(function (e) {
-                        if ($(".solicitud_plazo").valid() == true) {
-                            $.SmartMessageBox({
-                                title: "¡Advertencia!",
-                                content: "¿Esta seguro de enviar la solicitud?",
-                                buttons: '[No][Si]'
-                            }, function (ButtonPressed) {
-                                if (ButtonPressed === "Si") {
-                                    $.ajax({
-                                        url: "../../solicitud_requerimiento",
-                                        type: "post",
-                                        data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud"
-                                    }).done(function () {
-                                        $('.solicitud_plazo')[0].reset();
-                                        var $p = $(this).parent().parent();
-                                        $p.removeClass('has-success');
-                                        $("section > label").removeClass('state-success');
-                                        /*vuelve a cargar el selector para evitar enviar solicitudes del mismo plazo*/
-                                        list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
-                                        $.smallBox({
-                                            title: "¡Exito!",
-                                            content: "<i class='fa fa-clock-o'></i> <i>La solicitud ha sido enviada exitosamente...</i>",
-                                            color: "#659265",
-                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                            timeout: 4000
-                                        });
-                                    }).error(function () {
-                                        $.smallBox({
-                                            title: "¡Error!",
-                                            content: "<i class='fa fa-clock-o'></i> <i>La solicitud no ha podido ser enviada...</i>",
-                                            color: "#C46A69",
-                                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                            timeout: 4000
-                                        });
-                                    });
+                    $(".btn_solicitud").click(function () {
+                        var body_modal = $(".body_mdal_sol");
+                        var texto_html = '';
+                        body_modal.empty();
+                        $.post("../../solicitud_requerimiento", "opc=Val_Envio_Solicitud&iddgp=" + $(".dgp").val(), function (objJson) {
+                            var html = objJson.html;
+                            body_modal.append(html);
+                            $(".tipo").change(function () {
+                                if ($(this).val() == '2') {
+                                    $(".fe_inicio").val("");
+                                    $(".fe_inicio").attr("type", "month");
+                                    $(".lb_fecha_solicitud").text("Mes :");
+                                    $(".tipo_fecha").val("month");
                                 }
-                                if (ButtonPressed === "No") {
+                                if ($(this).val() == '1') {
+                                    $(".fe_inicio").attr("type", "date");
+                                    $(".fe_inicio").val($(".fe_desde_dgp").val());
+                                    $(".lb_fecha_solicitud").text("Fecha de Inicio :");
+                                    $(".tipo_fecha").val("date");
+                                }
+                                //alert();
+                                list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize()+"&id="+$(".dgp").val(), "1", $(".tipo").val());
+                            });
+                            $(".btn_terminar").click(function () {
+                                $.SmartMessageBox({
+                                    title: "¡Advertencia!",
+                                    content: "¿Esta seguro de enviar la solicitud?",
+                                    buttons: '[No][Si]'
+                                }, function (ButtonPressed) {
+                                    if (ButtonPressed === "Si") {
+                                        $(".form_terminar_req").submit();
+                                    }
+                                    if (ButtonPressed === "No") {
+                                    }
+                                });
+                            });
+                            $(".sbm_solicitud").click(function (e) {
+                                if ($(".solicitud_plazo").valid() == true) {
+                                    $.SmartMessageBox({
+                                        title: "¡Advertencia!",
+                                        content: "¿Esta seguro de enviar la solicitud?",
+                                        buttons: '[No][Si]'
+                                    }, function (ButtonPressed) {
+                                        if (ButtonPressed === "Si") {
+                                            $.ajax({
+                                                url: "../../solicitud_requerimiento",
+                                                type: "post",
+                                                data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud"+"&iddgp="+$(".dgp").val()
+                                            }).done(function () {
+                                                $('.solicitud_plazo')[0].reset();
+                                                var $p = $(this).parent().parent();
+                                                $p.removeClass('has-success');
+                                                $("section > label").removeClass('state-success');
+                                                /*vuelve a cargar el selector para evitar enviar solicitudes del mismo plazo*/
+                                                list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
+                                                $.smallBox({
+                                                    title: "¡Exito!",
+                                                    content: "<i class='fa fa-clock-o'></i> <i>La solicitud ha sido enviada exitosamente...</i>",
+                                                    color: "#659265",
+                                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                    timeout: 4000
+                                                });
+                                            }).error(function () {
+                                                $.smallBox({
+                                                    title: "¡Error!",
+                                                    content: "<i class='fa fa-clock-o'></i> <i>La solicitud no ha podido ser enviada...</i>",
+                                                    color: "#C46A69",
+                                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                                    timeout: 4000
+                                                });
+                                            });
+                                        }
+                                        if (ButtonPressed === "No") {
+                                        }
+
+                                    });
+
                                 }
 
                             });
-
-                        }
-
+                        });
                     });
+
+
+
                     /*
                      * Autostart Carousel
                      */

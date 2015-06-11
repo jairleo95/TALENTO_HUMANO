@@ -284,4 +284,30 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
         }
     }
 
+    @Override
+    public boolean Validar_Envio_Solicitud(String dgp) {
+        boolean estado = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cs = this.conn.conex.prepareCall("begin   ? :=rhfu_activar_hacer_solicitud(?);end;");
+            cs.registerOutParameter(1, Types.INTEGER);
+            cs.setString(2, dgp);
+            cs.execute();
+            if (cs.getInt(1) == 0) {
+                estado = true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                 throw new RuntimeException(e.getMessage());
+            }
+        }
+        return estado;
+    }
+
 }
