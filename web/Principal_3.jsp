@@ -200,7 +200,7 @@
 
                 <!-- logout button -->
                 <div id="logout" class="btn-header transparent pull-right">
-                    <span> <a href="menu?opc=logout" title="Sign Out" data-action="userLogout" data-logout-msg="Â¿Esta complemetamente seguro de cerrar sesiÃ³n?"><i class="fa fa-sign-out"></i></a> </span>
+                    <span> <a href="menu?opc=logout" title="Sign Out" data-action="userLogout" data-logout-msg="¿Está complemetamente seguro de cerrar sesión?"><i class="fa fa-sign-out"></i></a> </span>
                 </div>
                 <!-- end logout button -->
 
@@ -212,7 +212,7 @@
 
                 <!-- input: search field -->
                 <form action="" class="header-search pull-right">
-                    <input id="search-fld"  type="text" name="param" placeholder="Buscar reportes y mÃ¡s" data-autocomplete='[
+                    <input id="search-fld"  type="text" name="param" placeholder="Buscar reportes y más" data-autocomplete='[
                            "ActionScript",
                            "AppleScript",
                            "Asp",
@@ -245,6 +245,10 @@
                 <!-- fullscreen button -->
                 <div id="fullscreen" class="btn-header transparent pull-right">
                     <span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
+                </div>
+                <!-- logout button -->
+                <div id="logout" class="btn-header transparent pull-right">
+                    <span> <a href="menu" title="Inicio" ><i class="fa fa-home"></i></a> </span>
                 </div>
                 <!-- end fullscreen button -->
 
@@ -1274,10 +1278,10 @@
 
 </html>
 <%} else {
-       
+
         //out.print("<script>window.location.href = '../../menu?'</script>");
        /* RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-        dispatcher.forward(request, response);*/
+         dispatcher.forward(request, response);*/
         response.sendRedirect("/TALENTO_HUMANO/");
     }
 
