@@ -195,7 +195,7 @@ public class ReporteDAO implements InterfaceReporteDAO {
     }
 
     @Override
-    public List<Map<String, ?>> Reporte_Datos_Gen(String aps, String dep, String are, String sec, String puesto, String fec, String edad, String ape, String mat, String nom, String num) {
+    public List<Map<String, ?>> Reporte_Datos_Gen(String aps, String dep, String are, String sec, String puesto, String edad, String ape, String mat, String nom, String num) {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -205,7 +205,7 @@ public class ReporteDAO implements InterfaceReporteDAO {
             sql += (!are.equals("")) ? "Where UPPER(NO_AREA)='" + are.trim().toUpperCase() + "'" : "";
             sql += (!sec.equals("")) ? "Where UPPER(NO_SECCION)='" + sec.trim().toUpperCase() + "'" : "";
             sql += (!puesto.equals("")) ? "Where UPPER(NO_PUESTO)='" + puesto.trim().toUpperCase() + "'" : "";
-            sql += (!fec.equals("")) ? "Where FE_NAC='" + fec.trim() + "'" : "";
+            //sql += (!fec.equals("")) ? "Where FE_NAC='" + fec.trim() + "'" : "";
             sql += (!ape.equals("")) ? "Where UPPER(AP_PATERNO)='" + ape.trim().toUpperCase() + "'" : "";
             sql += (!mat.equals("")) ? "Where UPPER(AP_MATERNO)='" + mat.trim().toUpperCase() + "'" : "";
             sql += (!nom.equals("")) ? "Where UPPER(NO_TRABAJADOR)='" + nom.trim() + "'" : "";

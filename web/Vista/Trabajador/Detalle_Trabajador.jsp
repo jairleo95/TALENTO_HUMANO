@@ -138,7 +138,7 @@
             #message {
 
             }
-            
+
 
         </style>
     </head>
@@ -222,930 +222,930 @@
                         <%}%>
                     <td>
                         <div>
-                            <form action="../../trabajador" method="post">
-                                <table   class="info-det" >
-                                    <%
-                                        CConversion c = new CConversion();
-                                        for (int index = 0; index < ListaridTrabajador.size(); index++) {
-                                            V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
-                                            trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
-                                    %>
-                                    <td height="70" width="585px">
-                                        <table>
-                                            <button data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">asas</button>
-                                            <tr><td class="td">Nombre :</td><td class="td1"><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
-                                            <tr><td class="td">Apellido Paterno :</td><td class="td1"><%=trb.getAp_paterno().toUpperCase()%></td></tr>
-                                            <tr><td class="td">Apellido Materno :</td><td class="td1"><%=trb.getAp_materno().toUpperCase()%></td></tr>
-                                            <tr><td class="td" style="width:65%">Fecha de Nacimiento :</td><td class="td1"><%=c.convertFecha5(trb.getFe_nac())%></td></tr>
-                                        </table>
-                                    </td>
-                                    <%String ID_ROL = (String) sesion.getAttribute("IDROL");
-                                        for (int e = 0; e < id_empleadox_ide.size(); e++) {
-                                            Empleado emp = new Empleado();
-                                            emp = (Empleado) id_empleadox_ide.get(e);
+                            <!--<form action="../../trabajador" method="post">-->
+                            <table   class="info-det" >
+                                <%
+                                    CConversion c = new CConversion();
+                                    for (int index = 0; index < ListaridTrabajador.size(); index++) {
+                                        V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
+                                        trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
+                                %>
+                                <td height="70" width="585px">
+                                    <table>
+                                        <button data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">asas</button>
+                                        <tr><td class="td">Nombre :</td><td class="td1"><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
+                                        <tr><td class="td">Apellido Paterno :</td><td class="td1"><%=trb.getAp_paterno().toUpperCase()%></td></tr>
+                                        <tr><td class="td">Apellido Materno :</td><td class="td1"><%=trb.getAp_materno().toUpperCase()%></td></tr>
+                                        <tr><td class="td" style="width:65%">Fecha de Nacimiento :</td><td class="td1"><%=c.convertFecha5(trb.getFe_nac())%></td></tr>
+                                    </table>
+                                </td>
+                                <%String ID_ROL = (String) sesion.getAttribute("IDROL");
+                                    for (int e = 0; e < id_empleadox_ide.size(); e++) {
+                                        Empleado emp = new Empleado();
+                                        emp = (Empleado) id_empleadox_ide.get(e);
 
-                                    %>
-                                    <td >
-                                        <table class="info-det" style="margin-left:30%;"  >
+                                %>
+                                <td >
+                                    <table class="info-det" style="margin-left:30%;"  >
 
-                                            <%                                               if (emp.getCo_aps() != null) {
-                                                    int val_aps = Integer.parseInt(emp.getCo_aps());
+                                        <%                                               if (emp.getCo_aps() != null) {
+                                                int val_aps = Integer.parseInt(emp.getCo_aps());
 
-                                                    if (val_aps > 0) {%>
+                                                if (val_aps > 0) {%>
 
-                                            <tr>
-                                                <td class="td" >Código APS:</td>
+                                        <tr>
+                                            <td class="td" >Código APS:</td>
 
-                                                <td class="td1" id="cel_aps" ><%=emp.getCo_aps()%></td>
-                                                <td class="td1" ><input type="hidden" id="mod_aps"  value="<%=emp.getCo_aps()%>" name="cod_aps" maxlength="6" size="5%" onblur="MOD_COD_APS()"></td>
-                                                <td class="td" colspan="2">
-                                                    <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-green mod_co_aps"><i class="fa fa-pencil fa-2x"></i></a>
-                                                </td>
-                                            </tr>
-                                            <%}
-                                            %>
-                                            <%}%>
+                                            <td class="td1" id="cel_aps" ><%=emp.getCo_aps()%></td>
+                                            <td class="td1" ><input type="hidden" id="mod_aps"  value="<%=emp.getCo_aps()%>" name="cod_aps" maxlength="6" size="5%" onblur="MOD_COD_APS()"></td>
+                                            <td class="td" colspan="2">
+                                                <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-green mod_co_aps"><i class="fa fa-pencil fa-2x"></i></a>
+                                            </td>
+                                        </tr>
+                                        <%}
+                                        %>
+                                        <%}%>
 
-                                            <%if (emp.getCo_huella_digital() != null) {
+                                        <%if (emp.getCo_huella_digital() != null) {
 
-                                                    int val_hue = Integer.parseInt(emp.getCo_huella_digital());
-                                                    if (val_hue > 0) {%>
-                                            <tr><td class="td" >Código Huella:</td>
-                                                <td class="td1" id="cel_hue" ><%=emp.getCo_huella_digital()%></td>
-                                                <td class="td1"  ><input type="hidden" id="mod_hue"  value="<%=emp.getCo_huella_digital()%>" name="cod_huella" size="5%" maxlength="6" size="20%" onblur="MOD_COD_HUELLA()"></td>
-                                                <td class="td" colspan="2">
-                                                    <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-green mod_huella" ><i class="fa fa-pencil fa-2x"></i></a>
+                                                int val_hue = Integer.parseInt(emp.getCo_huella_digital());
+                                                if (val_hue > 0) {%>
+                                        <tr><td class="td" >Código Huella:</td>
+                                            <td class="td1" id="cel_hue" ><%=emp.getCo_huella_digital()%></td>
+                                            <td class="td1"  ><input type="hidden" id="mod_hue"  value="<%=emp.getCo_huella_digital()%>" name="cod_huella" size="5%" maxlength="6" size="20%" onblur="MOD_COD_HUELLA()"></td>
+                                            <td class="td" colspan="2">
+                                                <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-green mod_huella" ><i class="fa fa-pencil fa-2x"></i></a>
 
-                                                </td>
-                                            </tr>
-                                            <%}%>
-                                            <%}%>
+                                            </td>
+                                        </tr>
+                                        <%}%>
+                                        <%}%>
 
-                                        </table>
+                                    </table>
+                                    <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
+                                </td>
+                                <%
+
+                                    String val_aps = emp.getCo_aps();
+                                    if (val_aps == null && ID_ROL.trim().equals("ROL-0001")) {%>
+                                <td >
+                                    <table class="info-det" style="margin-left:50%;">
+                                        <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
+                                        <input type="hidden" name="puesto_id" value="<%=idp%>">
+                                        <input type="hidden" name="cod" value="<%=cod%>">
+                                        <input type="hidden" name="idpasos" value="<%=id_pasos%>">
+                                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>">
+                                        <input type="hidden"name="nup" value="<%=nropaso%>">
                                         <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
-                                    </td>
-                                    <%
-
-                                        String val_aps = emp.getCo_aps();
-                                        if (val_aps == null && ID_ROL.trim().equals("ROL-0001")) {%>
-                                    <td >
-                                        <table class="info-det" style="margin-left:50%;">
-                                            <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
-                                            <input type="hidden" name="puesto_id" value="<%=idp%>">
-                                            <input type="hidden" name="cod" value="<%=cod%>">
-                                            <input type="hidden" name="idpasos" value="<%=id_pasos%>">
-                                            <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>">
-                                            <input type="hidden"name="nup" value="<%=nropaso%>">
-                                            <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
-                                            <tr><td class="td" colspan="2">Registrar codigo APS</td></tr>
-                                            <tr><td><input type="text" id="cod_ap" name="cod_aps" maxlength="6" onblur="VAL_COD_APS()"></td></tr>
-                                            <tr><td><input type="button" value="Registrar" name="" class=""></button</td></tr>
-                                            <!--<tr><td><button value="registrar_aps" name="opc" class="btn_aps">Registrar</button></td></tr>-->
-                                        </table
-                                    </td>
-
-                                    <%}
-                                        String val_hue = emp.getCo_huella_digital();
-                                        if (val_hue == null && ID_ROL.trim().equals("ROL-0001")) {%>
-                                        <td >
-                                        <table class="info-det" style="margin-left:50%;">
-                                            <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
-                                            <input type="hidden" name="puesto_id" value="<%=idp%>">
-                                            <input type="hidden" name="cod" value="<%=cod%>">
-                                            <input type="hidden" name="idpasos" value="<%=id_pasos%>">
-                                            <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>">
-                                            <input type="hidden"name="nup" value="<%=nropaso%>">
-                                            <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
-                                            <tr><td class="td" colspan="3">Registrar Codigo de huella digital</td></tr>
-                                            <tr><td><input type="text" id="cod_hu" name="cod_huella" maxlength="6" onblur="VAL_COD_HUELLA()"></td></tr>
-                                            <tr><td><input type="button" value="Registrar" name="" class=""></button</td></tr>
-                                            <!--<tr><td><button value="registrar_huella" name="opc">Registrar</button></td></tr>-->
-                                        </table>
-                                    </td>
-                                    <%}%>
-
-
-
-                                </table>
+                                        <tr><td class="td" colspan="2">Registrar codigo APS</td></tr>
+                                        <tr><td><input type="text" id="cod_ap" name="cod_aps" maxlength="6" onblur="VAL_COD_APS()"></td></tr>
+                                        <tr><td><input type="button" value="Registrar" name="" class=""></button</td></tr>
+                                        <!--<tr><td><button value="registrar_aps" name="opc" class="btn_aps">Registrar</button></td></tr>-->
+                                    </table
                                 </td>
 
+                                <%}
+                                    String val_hue = emp.getCo_huella_digital();
+                                    if (val_hue == null && ID_ROL.trim().equals("ROL-0001")) {%>
+                                <td >
+                                    <table class="info-det" style="margin-left:50%;">
+                                        <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
+                                        <input type="hidden" name="puesto_id" value="<%=idp%>">
+                                        <input type="hidden" name="cod" value="<%=cod%>">
+                                        <input type="hidden" name="idpasos" value="<%=id_pasos%>">
+                                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>">
+                                        <input type="hidden"name="nup" value="<%=nropaso%>">
+                                        <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
+                                        <tr><td class="td" colspan="3">Registrar Codigo de huella digital</td></tr>
+                                        <tr><td><input type="text" id="cod_hu" name="cod_huella" maxlength="6" onblur="VAL_COD_HUELLA()"></td></tr>
+                                        <tr><td><input type="button" value="Registrar" name="" class=""></button</td></tr>
+                                        <!--<tr><td><button value="registrar_huella" name="opc">Registrar</button></td></tr>-->
+                                    </table>
+                                </td>
                                 <%}%>
-                                </table>
-                            </form>
-                        </div>
+
+
+
+                            </table>
                     </td>
-                </tr>
+
+                    <%}%>
             </table>
+            <!-- </form>-->
+        </div>
+    </td>
+</tr>
+</table>
+</div>
+
+<!--End Detalle Trabajador-->
+
+<!-- Begin TABS-->
+<div class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
+    <!-- widget options:
+    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+    data-widget-colorbutton="false"
+    data-widget-editbutton="false"
+    data-widget-togglebutton="false"
+    data-widget-deletebutton="false"
+    data-widget-fullscreenbutton="false"
+    data-widget-custombutton="false"
+    data-widget-collapsed="true"
+    data-widget-sortable="false"
+    -->
+    <header>
+        <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+        <h2>Default Tabs with border </h2>
+
+    </header>
+
+    <!-- widget div-->
+    <div>
+
+        <!-- widget edit box -->
+        <div class="jarviswidget-editbox">
+            <!-- This area used as dropdown edit box -->
+
+        </div>
+        <!-- end widget edit box -->
+
+        <!-- widget content -->
+        <div class="widget-body">
+
+
+            <hr class="simple">
+            <ul id="myTab1" class="nav nav-tabs bordered">
+                <%
+                    if (List_Auto_mostrar.size() == 1 && aut != null) {
+                        for (int r = 0; r < List_Auto_mostrar.size(); r++) {
+                            Auto_Mostrar a = new Auto_Mostrar();
+                            a = (Auto_Mostrar) List_Auto_mostrar.get(r);
+                %>
+                <li >
+                    <a href="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Datos de Requerimientos</a>
+                </li>
+                <%}
+                            }%>
+                <%if (iddep != null) {
+
+                        if ((iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0005"))) {
+                %>
+                <li>
+                    <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
+                </li>
+                <%}
+                            }%>
+                <li >
+                    <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
+                </li>
+                <li>
+                    <a href="Aspecto_Academico.jsp?edit=<%=edit%>" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
+                </li>
+                <li >
+                    <a href="../../trabajador?idtr=<%=idtr%>&opc=Listar_Asp_Social" target="myframe2"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
+                </li>
+                <li>
+                    <a href="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" target="myframe2"><i class="fa fa-group fa-gear"></i> Familiares </a>
+                </li>
+                <%if (!idrol.trim().equals("ROL-0013")) {
+                %>
+                <li >
+                    <a href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="myframe2"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
+                </li>
+                <%}%>
+                <li>
+                    <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
+                </li>
+
+                <%if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
+                %>
+                <li >
+                    <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Empleado</a>
+                </li>
+                <%}%>
+                <%if (idtr.equals(idtr_session)) {
+
+                %>
+                <li>
+                    <%if (cl.trim().equals(user.trim())) {
+                    %>
+                    <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2" rel="tooltip" data-placement="top" data-original-title="<h1><b>One</b> <em>Really</em> big tip!</h1>" data-html="true" ><i class="fa fa-lock"></i> Contraseña <span class="badge bg-color-red pull-right inbox-badge">¡Cambiar!</span></a>
+                    <%} else {%>
+                    <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"  ><i class="fa fa-lock"></i> Contraseña</a>
+                    <%}%>
+                </li>
+                <%}%>
+                <%if (idrol.trim().equals("ROL-0002") | ID_ROL.trim().equals("ROL-0001")) {
+                %>
+                <li>
+                    <a href="../../contrato?idtr=<%=idtr%>&opc=SI_CONNTRATO" target="myframe2"><i class="fa fa-male fa-gear"></i> Imprimir / Subir Contratos </a>
+                </li>
+                <%}%>
+            </ul>
+
+            <div id="myTabContent1" class="tab-content padding-10">
+                <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
+                        for (int r = 0; r < List_Auto_mostrar.size(); r++) {
+                            Auto_Mostrar a = new Auto_Mostrar();
+                            a = (Auto_Mostrar) List_Auto_mostrar.get(r);
+                %>
+                <iframe id="myframe2" name="myframe2" class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" width="100%" height="100%" ></iframe>
+                <%}
+                    List_Auto_mostrar.clear();
+                } else {%>
+                <iframe id="myframe2" name="myframe2" width="100%" height="800" scrolling="si" frameborder="0" src="Datos_Generales.jsp?edit=<%=edit%>"></iframe>
+                <%}%>
+            </div>
         </div>
 
-        <!--End Detalle Trabajador-->
+        <!-- end widget content -->
 
-        <!-- Begin TABS-->
-        <div class="jarviswidget well" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
-            <!-- widget options:
-            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+    </div>
+    <!-- end widget div -->
 
-            data-widget-colorbutton="false"
-            data-widget-editbutton="false"
-            data-widget-togglebutton="false"
-            data-widget-deletebutton="false"
-            data-widget-fullscreenbutton="false"
-            data-widget-custombutton="false"
-            data-widget-collapsed="true"
-            data-widget-sortable="false"
-            -->
-            <header>
-                <span class="widget-icon"> <i class="fa fa-comments"></i> </span>
-                <h2>Default Tabs with border </h2>
+</div>        
+<!-- end TABS-->
+<div >
+    <%
 
-            </header>
-
-            <!-- widget div-->
-            <div>
-
-                <!-- widget edit box -->
-                <div class="jarviswidget-editbox">
-                    <!-- This area used as dropdown edit box -->
-
-                </div>
-                <!-- end widget edit box -->
-
-                <!-- widget content -->
-                <div class="widget-body">
+        if (aut != null) {
+            if (aut.equals("1")) {
 
 
-                    <hr class="simple">
-                    <ul id="myTab1" class="nav nav-tabs bordered">
-                        <%
-                            if (List_Auto_mostrar.size() == 1 && aut != null) {
-                                for (int r = 0; r < List_Auto_mostrar.size(); r++) {
-                                    Auto_Mostrar a = new Auto_Mostrar();
-                                    a = (Auto_Mostrar) List_Auto_mostrar.get(r);
-                        %>
-                        <li >
-                            <a href="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Datos de Requerimientos</a>
-                        </li>
-                        <%}
-                            }%>
-                        <%if (iddep != null) {
+    %>
+    <center>
+        <%                    if (idrol.trim().equals("ROL-0006")) {
+                int vnc = Integer.parseInt(request.getParameter("vnc"));
+                if (vnc > 0) {
 
-                                if ((iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0005"))) {
-                        %>
-                        <li>
-                            <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
-                        </li>
-                        <%}
-                            }%>
-                        <li >
-                            <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
-                        </li>
-                        <li>
-                            <a href="Aspecto_Academico.jsp?edit=<%=edit%>" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
-                        </li>
-                        <li >
-                            <a href="../../trabajador?idtr=<%=idtr%>&opc=Listar_Asp_Social" target="myframe2"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
-                        </li>
-                        <li>
-                            <a href="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" target="myframe2"><i class="fa fa-group fa-gear"></i> Familiares </a>
-                        </li>
-                        <%if (!idrol.trim().equals("ROL-0013")) {
-                        %>
-                        <li >
-                            <a href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="myframe2"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
-                        </li>
-                        <%}%>
-                        <li>
-                            <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
-                        </li>
+        %>
+        <form class="form-aut" action="../../autorizacion" method="post" > 
+            <table > 
+                <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
+                <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
+                <input type="hidden" name="COD" value="<%=cod%>"  >               
+                <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
+                <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
+                <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
+                <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
+                <button class="btn btn-labeled btn-success btn-autor" type="submit">
+                    <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>PROCESAR 
+                </button>
+            </table>
+        </form>
+        <%
+            }
+        } else {
+            if (idrol.trim().equals("ROL-0009")) {
+                int val_aps = Integer.parseInt(request.getParameter("val_aps"));
+                if (val_aps > 0) {
+        %>
 
-                        <%if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
-                        %>
-                        <li >
-                            <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Empleado</a>
-                        </li>
-                        <%}%>
-                        <%if (idtr.equals(idtr_session)) {
+        <form class="form-aut" action="../../autorizacion" method="post" > 
+            <table > 
+                <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
+                <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
+                <input type="hidden" name="COD" value="<%=cod%>"  >               
+                <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
+                <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
+                <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
+                <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
+                <button class="btn btn-labeled btn-success btn-autor" type="submit">
+                    <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>ENVIAR 
+                </button>
+            </table>
+        </form>
+        <%}
+                } else {%>
+        <% if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
+                int val_huella = Integer.parseInt(request.getParameter("val_huella"));
+                if (val_huella > 0) {%>
+        <form class="form-aut" action="../../autorizacion" method="post" > 
+            <table > 
+                <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
+                <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
+                <input type="hidden" name="COD" value="<%=cod%>"  >               
+                <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
+                <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
+                <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
+                <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
+                <button class="btn btn-labeled btn-success btn-autor" type="submit">
+                    <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>AUTORIZAR REQUERIMIENTO 
+                </button>
 
-                        %>
-                        <li>
-                            <%if (cl.trim().equals(user.trim())) {
-                            %>
-                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2" rel="tooltip" data-placement="top" data-original-title="<h1><b>One</b> <em>Really</em> big tip!</h1>" data-html="true" ><i class="fa fa-lock"></i> Contraseña <span class="badge bg-color-red pull-right inbox-badge">¡Cambiar!</span></a>
-                            <%} else {%>
-                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"  ><i class="fa fa-lock"></i> Contraseña</a>
-                            <%}%>
-                        </li>
-                        <%}%>
-                        <%if (idrol.trim().equals("ROL-0002") | ID_ROL.trim().equals("ROL-0001")) {
-                        %>
-                        <li>
-                            <a href="../../contrato?idtr=<%=idtr%>&opc=SI_CONNTRATO" target="myframe2"><i class="fa fa-male fa-gear"></i> Imprimir / Subir Contratos </a>
-                        </li>
-                        <%}%>
-                    </ul>
+            </table>
+        </form>
+        <%}
+                } else {%>
+        <form class="form-aut" action="../../autorizacion" method="post" > 
+            <table > 
+                <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
+                <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
+                <input type="hidden" name="COD" value="<%=cod%>"  >               
+                <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
+                <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
+                <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
+                <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
+                <button class="btn btn-labeled btn-success btn-autor" type="submit">
+                    <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>AUTORIZAR REQUERIMIENTO 
+                </button>
 
-                    <div id="myTabContent1" class="tab-content padding-10">
-                        <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
-                                for (int r = 0; r < List_Auto_mostrar.size(); r++) {
-                                    Auto_Mostrar a = new Auto_Mostrar();
-                                    a = (Auto_Mostrar) List_Auto_mostrar.get(r);
-                        %>
-                        <iframe id="myframe2" name="myframe2" class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" width="100%" height="100%" ></iframe>
-                        <%}
-                            List_Auto_mostrar.clear();
-                        } else {%>
-                        <iframe id="myframe2" name="myframe2" width="100%" height="800" scrolling="si" frameborder="0" src="Datos_Generales.jsp?edit=<%=edit%>"></iframe>
-                        <%}%>
+            </table>
+        </form>
+        <%}%>
+
+        <%}
+                    }%>
+        <form class="form-rech" action="../../autorizacion" method="post">
+            <table>
+                <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
+                <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
+                <input type="hidden" name="COD" value="<%=cod%>"  >               
+                <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
+                <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
+                <input type="hidden" name="IDPASOS" value="<%=id_pasos%>" 
+                       <tr><td><input type="hidden" name="opc"  class="submit" value="Rechazar"/></td></tr>
+                <div class="modal fade" id="myModal6" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content" align="center">
+                            <div class="smart-form">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-body no-padding">
+                                    <fieldset>
+                                        <section>
+                                            <h1 class="h1" style="color:#218FDD ; font-size:20px;"><strong>MOTIVO</strong></h1>
+                                            <label class="textarea">
+                                                <textarea rows="3" placeholder="Inserte Comentario" maxlength="200" required="" name="comentario"></textarea>
+                                            </label>
+                                        </section>
+                                    </fieldset>
+                                    <footer align="center">
+                                        <button type="submit" class="btn btn-primary btn-conti">
+                                            Continuar
+                                        </button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" >
+                                            Cancel
+                                        </button>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <a data-toggle="modal" href="#myModal6" class="btn btn-labeled btn-danger"><span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>RECHAZAR</a>
+            </table>
+        </form>   
+    </center>
+    <%}
+        }
+    %>
+</div>
+<%    if (academico != null) {%>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Carga Academica</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form_carga_academica">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="category"> Fecha de Inicio:</label>
+                                <input type="date" class="form-control fe_desde_p" value="" name="DESDE" required />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="category"> Fecha de Cese:</label>
+                                <input type="date" class="form-control fe_hasta_p" value="" name="HASTA" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="category"> Tipo de Hora Pago:</label>
+                                <input type="text" class="form-control ti_hp_docente" value="25" placeholder="0.0"  name="TI_HORA_PAGO" required />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="category"> Horas Laborables:</label>
+                                <%
+                                    if (hl != null) {
+                                        if (Boolean.valueOf(academico) == true) {
+                                %>
+                                <input type="text" class="form-control hl_docente" value="0" name="HL" placeholder="0" required />
+                                <%} else {%>
+                                <input type="text" class="form-control hl_docente" value="0" name="HL" placeholder="0" required />
+                                <%}%>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="category" > <strong>CUOTAS</strong></label>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="cuota_docente">
 
-                <!-- end widget content -->
+                                </div>
+                                <input type="hidden" name="PUESTO" value="PUT-000482" >
+                                <input type="hidden" name="REQ" value="REQ-0018">
+                                <input type="hidden" name="IDTR" value="<%=idtr%>" >
+                                <input type="hidden" name="eap" value="<%=request.getParameter("eap")%>" >
+                                <input type="hidden" name="facultad" value="<%=request.getParameter("facultad")%>" >
+                                <input type="hidden" name="dgp"  class="dgp" value="<%=request.getParameter("dgp")%>" >
+                                <input type="hidden" name="proceso" class="proceso" value="<%=request.getParameter("proceso")%>" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="button" class="btn btn-primary btn_guardar_ca"  data-dismiss="modal">
+                            Guardar
+                        </button>
+
+                    </div>
+                </form>
 
             </div>
-            <!-- end widget div -->
 
-        </div>        
-        <!-- end TABS-->
-        <div >
-            <%
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
-                if (aut != null) {
-                    if (aut.equals("1")) {
+<%}%>
+<%}%> <%}%>
+<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
+<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script>
+                                        if (!window.jQuery) {
+                                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                        }
+</script>
 
-            %>
-            <center>
-                <%                    if (idrol.trim().equals("ROL-0006")) {
-                        int vnc = Integer.parseInt(request.getParameter("vnc"));
-                        if (vnc > 0) {
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script>
+                                        if (!window.jQuery.ui) {
+                                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                        }
+</script>
 
-                %>
-                <form class="form-aut" action="../../autorizacion" method="post" > 
-                    <table > 
-                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
-                        <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
-                        <input type="hidden" name="COD" value="<%=cod%>"  >               
-                        <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
-                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
-                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
-                        <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
-                        <button class="btn btn-labeled btn-success btn-autor" type="submit">
-                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>PROCESAR 
-                        </button>
-                    </table>
-                </form>
-                <%
-                    }
-                } else {
-                    if (idrol.trim().equals("ROL-0009")) {
-                        int val_aps = Integer.parseInt(request.getParameter("val_aps"));
-                        if (val_aps > 0) {
-                %>
+<!-- IMPORTANT: APP CONFIG -->
+<script src="../../js/app.config.js"></script>
 
-                <form class="form-aut" action="../../autorizacion" method="post" > 
-                    <table > 
-                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
-                        <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
-                        <input type="hidden" name="COD" value="<%=cod%>"  >               
-                        <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
-                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
-                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
-                        <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
-                        <button class="btn btn-labeled btn-success btn-autor" type="submit">
-                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>ENVIAR 
-                        </button>
-                    </table>
-                </form>
-                <%}
-                } else {%>
-                <% if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
-                        int val_huella = Integer.parseInt(request.getParameter("val_huella"));
-                        if (val_huella > 0) {%>
-                <form class="form-aut" action="../../autorizacion" method="post" > 
-                    <table > 
-                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
-                        <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
-                        <input type="hidden" name="COD" value="<%=cod%>"  >               
-                        <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
-                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
-                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
-                        <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
-                        <button class="btn btn-labeled btn-success btn-autor" type="submit">
-                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>AUTORIZAR REQUERIMIENTO 
-                        </button>
+<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+<script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
 
-                    </table>
-                </form>
-                <%}
-                } else {%>
-                <form class="form-aut" action="../../autorizacion" method="post" > 
-                    <table > 
-                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
-                        <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
-                        <input type="hidden" name="COD" value="<%=cod%>"  >               
-                        <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
-                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
-                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
-                        <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
-                        <button class="btn btn-labeled btn-success btn-autor" type="submit">
-                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>AUTORIZAR REQUERIMIENTO 
-                        </button>
+<!-- BOOTSTRAP JS -->
+<script src="../../js/bootstrap/bootstrap.min.js"></script>
 
-                    </table>
-                </form>
-                <%}%>
+<!-- CUSTOM NOTIFICATION -->
+<script src="../../js/notification/SmartNotification.min.js"></script>
 
-                <%}
-                    }%>
-                <form class="form-rech" action="../../autorizacion" method="post">
-                    <table>
-                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
-                        <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
-                        <input type="hidden" name="COD" value="<%=cod%>"  >               
-                        <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
-                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
-                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>" 
-                               <tr><td><input type="hidden" name="opc"  class="submit" value="Rechazar"/></td></tr>
-                        <div class="modal fade" id="myModal6" tabindex="-1" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content" align="center">
-                                    <div class="smart-form">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                &times;
-                                            </button>
-                                        </div>
-                                        <div class="modal-body no-padding">
-                                            <fieldset>
-                                                <section>
-                                                    <h1 class="h1" style="color:#218FDD ; font-size:20px;"><strong>MOTIVO</strong></h1>
-                                                    <label class="textarea">
-                                                        <textarea rows="3" placeholder="Inserte Comentario" maxlength="200" required="" name="comentario"></textarea>
-                                                    </label>
-                                                </section>
-                                            </fieldset>
-                                            <footer align="center">
-                                                <button type="submit" class="btn btn-primary btn-conti">
-                                                    Continuar
-                                                </button>
-                                                <button type="button" class="btn btn-default" data-dismiss="modal" >
-                                                    Cancel
-                                                </button>
-                                            </footer>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a data-toggle="modal" href="#myModal6" class="btn btn-labeled btn-danger"><span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>RECHAZAR</a>
-                    </table>
-                </form>   
-            </center>
-            <%}
-                }
-            %>
-        </div>
-        <%    if (academico != null) {%>
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            &times;
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">Carga Academica</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form_carga_academica">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="category"> Fecha de Inicio:</label>
-                                        <input type="date" class="form-control fe_desde_p" value="" name="DESDE" required />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="category"> Fecha de Cese:</label>
-                                        <input type="date" class="form-control fe_hasta_p" value="" name="HASTA" required />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="category"> Tipo de Hora Pago:</label>
-                                        <input type="text" class="form-control ti_hp_docente" value="25" placeholder="0.0"  name="TI_HORA_PAGO" required />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="category"> Horas Laborables:</label>
-                                        <%
-                                            if (hl != null) {
-                                                if (Boolean.valueOf(academico) == true) {
-                                        %>
-                                        <input type="text" class="form-control hl_docente" value="0" name="HL" placeholder="0" required />
-                                        <%} else {%>
-                                        <input type="text" class="form-control hl_docente" value="0" name="HL" placeholder="0" required />
-                                        <%}%>
-                                    </div>
-                                </div>
-                            </div>
-                            <label for="category" > <strong>CUOTAS</strong></label>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="cuota_docente">
+<!-- JARVIS WIDGETS -->
+<script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-                                        </div>
-                                        <input type="hidden" name="PUESTO" value="PUT-000482" >
-                                        <input type="hidden" name="REQ" value="REQ-0018">
-                                        <input type="hidden" name="IDTR" value="<%=idtr%>" >
-                                        <input type="hidden" name="eap" value="<%=request.getParameter("eap")%>" >
-                                        <input type="hidden" name="facultad" value="<%=request.getParameter("facultad")%>" >
-                                        <input type="hidden" name="dgp"  class="dgp" value="<%=request.getParameter("dgp")%>" >
-                                        <input type="hidden" name="proceso" class="proceso" value="<%=request.getParameter("proceso")%>" >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">
-                                    Cancelar
-                                </button>
-                                <button type="button" class="btn btn-primary btn_guardar_ca"  data-dismiss="modal">
-                                    Guardar
-                                </button>
+<!-- EASY PIE CHARTS -->
+<script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
 
-                            </div>
-                        </form>
+<!-- SPARKLINES -->
+<script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
 
-                    </div>
+<!-- JQUERY VALIDATE -->
+<script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
+<!-- JQUERY MASKED INPUT -->
+<script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
-        <%}%>
-        <%}%> <%}%>
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+<!-- JQUERY SELECT2 INPUT -->
+<script src="../../js/plugin/select2/select2.min.js"></script>
 
-        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <script>
-                                                if (!window.jQuery) {
-                                                    document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                }
-        </script>
+<!-- JQUERY UI + Bootstrap Slider -->
+<script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-        <script>
-                                                if (!window.jQuery.ui) {
-                                                    document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                }
-        </script>
+<!-- browser msie issue fix -->
+<script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 
-        <!-- IMPORTANT: APP CONFIG -->
-        <script src="../../js/app.config.js"></script>
+<!-- FastClick: For mobile devices -->
+<script src="../../js/plugin/fastclick/fastclick.min.js"></script>
 
-        <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-        <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+<!--[if IE 8]>
 
-        <!-- BOOTSTRAP JS -->
-        <script src="../../js/bootstrap/bootstrap.min.js"></script>
+<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
 
-        <!-- CUSTOM NOTIFICATION -->
-        <script src="../../js/notification/SmartNotification.min.js"></script>
+<![endif]-->
 
-        <!-- JARVIS WIDGETS -->
-        <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
+<!-- Demo purpose only -->
+<script src="../../js/demo.min.js"></script>
 
-        <!-- EASY PIE CHARTS -->
-        <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+<!-- MAIN APP JS FILE -->
+<script src="../../js/app.min.js"></script>
 
-        <!-- SPARKLINES -->
-        <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+<!-- Voice command : plugin -->
+<script src="../../js/speech/voicecommand.min.js"></script>
 
-        <!-- JQUERY VALIDATE -->
-        <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
-
-        <!-- JQUERY MASKED INPUT -->
-        <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
-
-        <!-- JQUERY SELECT2 INPUT -->
-        <script src="../../js/plugin/select2/select2.min.js"></script>
-
-        <!-- JQUERY UI + Bootstrap Slider -->
-        <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
-
-        <!-- browser msie issue fix -->
-        <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
-
-        <!-- FastClick: For mobile devices -->
-        <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
-
-        <!--[if IE 8]>
-    
-        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-    
-        <![endif]-->
-
-        <!-- Demo purpose only -->
-        <script src="../../js/demo.min.js"></script>
-
-        <!-- MAIN APP JS FILE -->
-        <script src="../../js/app.min.js"></script>
-
-        <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-        <!-- Voice command : plugin -->
-        <script src="../../js/speech/voicecommand.min.js"></script>
-
-        <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-        <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
+<!-- PAGE RELATED PLUGIN(S) -->
+<script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
 
 
-        <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
-        <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
+<script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
 
-        <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-        <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
+<script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+<script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
 
-        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
-        <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
-        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
+<script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
+<script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
+<script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
+<link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
+<link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
 
-        <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="../../js/plugin/maxlength/bootstrap-maxlength.min.js"></script>
-        <script src="../../js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
-        <script src="../../js/plugin/clockpicker/clockpicker.min.js"></script>
-        <script src="../../js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js"></script>
-        <script src="../../js/plugin/noUiSlider/jquery.nouislider.min.js"></script>
-        <script src="../../js/plugin/ion-slider/ion.rangeSlider.min.js"></script>
-        <script src="../../js/plugin/colorpicker/bootstrap-colorpicker.min.js"></script>
-        <script src="../../js/plugin/knob/jquery.knob.min.js"></script>
-        <script src="../../js/plugin/x-editable/moment.min.js"></script>
-        <script src="../../js/plugin/x-editable/jquery.mockjax.min.js"></script>
-        <script src="../../js/plugin/x-editable/x-editable.min.js"></script>
-        <script src="../../js/plugin/typeahead/typeahead.min.js"></script>
-        <script src="../../js/plugin/typeahead/typeaheadjs.min.js"></script>
-        <script>
-                                                function closedthis() {
-                                                    $.smallBox({
-                                                        title: "?icha de trabajador registrada correctamente!",
-                                                        content: "ya puede visualizar toda la informacion del trabajador...",
-                                                        color: "#739E73",
-                                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                        timeout: 6000
-                                                    });
-                                                }
+<!-- PAGE RELATED PLUGIN(S) -->
+<script src="../../js/plugin/maxlength/bootstrap-maxlength.min.js"></script>
+<script src="../../js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+<script src="../../js/plugin/clockpicker/clockpicker.min.js"></script>
+<script src="../../js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js"></script>
+<script src="../../js/plugin/noUiSlider/jquery.nouislider.min.js"></script>
+<script src="../../js/plugin/ion-slider/ion.rangeSlider.min.js"></script>
+<script src="../../js/plugin/colorpicker/bootstrap-colorpicker.min.js"></script>
+<script src="../../js/plugin/knob/jquery.knob.min.js"></script>
+<script src="../../js/plugin/x-editable/moment.min.js"></script>
+<script src="../../js/plugin/x-editable/jquery.mockjax.min.js"></script>
+<script src="../../js/plugin/x-editable/x-editable.min.js"></script>
+<script src="../../js/plugin/typeahead/typeahead.min.js"></script>
+<script src="../../js/plugin/typeahead/typeaheadjs.min.js"></script>
+<script>
+                                        function closedthis() {
+                                            $.smallBox({
+                                                title: "?icha de trabajador registrada correctamente!",
+                                                content: "ya puede visualizar toda la informacion del trabajador...",
+                                                color: "#739E73",
+                                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                timeout: 6000
+                                            });
+                                        }
 
-                                                function closedthis2() {
-                                                    $.smallBox({
-                                                        title: "?ontrato Especial registrado con exito!",
-                                                        content: "ya puede visualizar el contrato en Detalle del Trabajador",
-                                                        color: "#739E73",
-                                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                        timeout: 6000
-                                                    });
-                                                }
-                                                function MOD_COD_APS(){
-                                                     if ($("#mod_aps").val() != "") {
-                                                        var co_aps = document.getElementById("mod_aps");
-                                                        $.ajax({
-                                                            url: "../../empleado",
-                                                            type: "POST",
-                                                            data: "opc=validar_aps&co_aps=" + co_aps.value
-                                                        }).done(function(e) {
-                                                            // alert(e);
-                                                            var cant = ($("#mod_aps").val());
-                                                            if (cant.length > 5) {
-                                                                if (e == 0) {
-                                                                    window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#mod_aps").val() + "&idtr=" + $(".idtra").val() + "";
-                                                                }
-                                                                else {
-                                                                    alert("Este codigo ya esta registrado!")
-                                                                    $.SmartMessageBox({
-                                                                        title: "Este Código APS ya fue registrado!",
-                                                                        content: "Por favor Ingrese un Código APS distinto",
-                                                                    });
-                                                                }
-                                                            }
-                                                        }).fail(function(e) {
-                                                            alert("Error: " + e);
-                                                        });
-                                                    }
-                                                }
-                                                function VAL_COD_APS() {
-                                                    if ($("#cod_ap").val() != "") {
-                                                        var co_aps = document.getElementById("cod_ap");
-                                                        $.ajax({
-                                                            url: "../../empleado",
-                                                            type: "POST",
-                                                            data: "opc=validar_aps&co_aps=" + co_aps.value
-                                                        }).done(function(e) {
-                                                            //alert(e);
-                                                            var cant = ($("#cod_ap").val());
-                                                            if (cant.length > 5) {
-                                                                if (e == 0) {
-                                                                    window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#cod_ap").val() + "&idtr=" + $(".idtra").val() + "";
-                                                                }
-                                                                else {
-                                                                     alert("Este codigo ya esta registrado!")
-                                                                    $.SmartMessageBox({
-                                                                        title: "Este Código APS ya fue registrado!",
-                                                                        content: "Por favor Ingrese un Código APS distinto",
-                                                                    });
-                                                                }
-                                                            }
-                                                        }).fail(function(e) {
-                                                            alert("Error: " + e);
-                                                        });
-                                                    }
-                                                }
-                                                function MOD_COD_HUELLA() {
-                                                    if ($("#mod_hue").val() != "") {
-                                                        var co_huel = document.getElementById("mod_hue");
-                                                        $.ajax({
-                                                            url: "../../empleado",
-                                                            type: "POST",
-                                                            data: "opc=validar_huella&co_hue=" + co_huel.value
-                                                        }).done(function(e) {
-                                                            var cant = $("#mod_hue").val();
-                                                            if (cant.length > 5) {
-                                                                if (e == 0) {
-                                                                    window.location.href = "../../trabajador?opc=reg_huella&idtr=" + $(".idtra").val() + "&cod=" + $("#mod_hue").val() + "";
-                                                                }
-                                                                else {
-                                                                     alert("Este codigo ya esta registrado!")
-                                                                    $.SmartMessageBox({
-                                                                        title: "Este Código de Huella ya fue registrado!",
-                                                                        content: "Por favor Ingrese un Codigo de Huella distinto",
-                                                                    });
-                                                                }
-                                                            }
-                                                        });
-                                                    }
-                                                }
-                                                function VAL_COD_HUELLA() {
-                                                    
-                                                    if ($("#cod_hu").val() != "") {
-                                                        var co_huel = document.getElementById("cod_hu");
-                                                        $.ajax({
-                                                            url: "../../empleado",
-                                                            type: "POST",
-                                                            data: "opc=validar_huella&co_hue=" + co_huel.value
-                                                        }).done(function(e) {
-                                                            // alert(e)
-                                                            var cant = $("#cod_hu").val();
-                                                            if (cant.length > 5) {
-                                                                if (e == 0) {
-                                                                    window.location.href = "../../trabajador?opc=reg_huella&idtr=" + $(".idtra").val() + "&cod=" + $("#cod_hu").val() + "";
-                                                                }
-                                                                else {
-                                                                     alert("Este codigo ya esta registrado!")
-                                                                    $.SmartMessageBox({
-                                                                        title: "Este Código de Huella ya fue registrado!",
-                                                                        content: "Por favor Ingrese un Codigo de Huella distinto",
-                                                                    });
-                                                                }
-                                                            }
-                                                        });
-                                                    }
-                                                }
-                                                function addImage(e) {
-                                                    var file = e.target.files[0], imageType = /image.*/;
-                                                    if (!file.type.match(imageType))
-                                                        return;
-                                                    var reader = new FileReader();
-                                                    reader.onload = fileOnload;
-                                                    reader.readAsDataURL(file);
-                                                }
-                                                function fileOnload(e) {
-                                                    var result = e.target.result;
-                                                    $('.ver_foto').attr("src", result);
-                                                }
-                                                $(document).ready(function() {
-                                                    // pageSetUp();
-                                                    $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
-                                                        $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-                                                    });
-                                                    //  $("#cod_ap").numeric();
-                                                    $(".mod_huella").click(function() {
-                                                        $("#cel_hue").hide();
-                                                        document.getElementById("mod_hue").type = "text";
-                                                    });
-                                                    $(".mod_co_aps").click(function() {
-                                                        $("#cel_aps").hide();
-                                                        document.getElementById("mod_aps").type = "text";
-
-                                                    });
-
-                                                    $(".fe_desde_p, .fe_hasta_p").change(function() {
-                                                        var cuotas = $(".cuota_docente");
-                                                        cuotas.empty();
-
-                                                        $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
-                                                            var lista = objJson.lista;
-                                                            if (objJson.rpta == -1) {
-                                                                alert(objJson.mensaje);
-                                                                return;
-                                                            }
-                                                            for (var i = 0; i < lista.length; i++) {
-                                                                cuotas.append(lista[i].html);
-                                                            }
-                                                        });
-                                                    });
-
-
-
-                                                    $(".btn_guardar_ca").click(function() {
-                                                        $.ajax({
-                                                            url: "../../carga_academica",
-                                                            type: "POST",
-                                                            data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                                                        }).done(function(ids) {
-                                                            var arr_id = ids.split(":");
-                                                            alert("Registrado con exito!...");
-                                                            $(".proceso").val(arr_id[0]);
-                                                            $(".dgp").val(arr_id[1]);
-                                                            $(".btn_procesar").show();
-                                                        }).fail(function(e) {
-                                                            alert("Error: " + e);
-                                                        });
-                                                    });
-
-                                                    $(".btn_procesar").click(function() {
-                                                        $.ajax({
-                                                            url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                                                        }).done(function() {
-                                                            window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
-                                                        });
-                                                    });
-
-                                                    $(".btn-autor").click(function(e) {
-                                                        $.SmartMessageBox({
-                                                            title: "Alerta de Confirmaci?!",
-                                                            content: "?sta totalmente seguro de autorizar este requerimiento?",
-                                                            buttons: '[No][Si]'
-                                                        }, function(ButtonPressed) {
-                                                            if (ButtonPressed === "Si") {
-                                                                // return true;
-                                                                $(".form-aut").submit();
-                                                            }
-                                                            if (ButtonPressed === "No") {
-                                                                return false;
-                                                            }
-                                                        });
-                                                        e.preventDefault();
-                                                    });
-                                                    $(".btn-rech").click(function(e) {
-                                                        $.SmartMessageBox({
-                                                            title: "Alerta de Confirmaci?!",
-                                                            content: "?sta totalmente seguro de rechazar este requerimiento?",
-                                                            buttons: '[No][Si]'
-                                                        }, function(ButtonPressed) {
-                                                            if (ButtonPressed === "Si") {
-                                                                $(".form-rech").submit();
-                                                            }
-                                                            if (ButtonPressed === "No") {
-                                                                return false;
-                                                            }
-
-                                                        })
-                                                    });
-
-                                                    $('.ver_foto').click(function() {
-                                                        $(".file-foto").click();
-                                                    });
-                                                    $('.file-foto').change(function(e) {
-                                                        var t = e;
-                                                        if (this.files[0].size <= 500000) {
-                                                            var jForm = new FormData();
-                                                            jForm.append("idtr", $('.idtr').val());
-                                                            jForm.append("archivo", $('.file-foto').get(0).files[0]);
-                                                            $.ajax({
-                                                                type: "POST",
-                                                                url: "../../foto",
-                                                                cache: false,
-                                                                processData: false,
-                                                                contentType: false,
-                                                                data: jForm
-                                                            }).done(function(objJson) {
-                                                                if (objJson.rpta == -1) {
-                                                                    alert(objJson.mensaje);
-                                                                    return;
-                                                                } else {
-
-                                                                    $(".mensaje").text(objJson.mensaje);
-                                                                }
-                                                            });
-                                                            addImage(e);
-
-                                                        } else {
-                                                            alert("Archivo no permitido, su tama? debe ser menor a 500 KB");
-                                                            $(this).val('');
+                                        function closedthis2() {
+                                            $.smallBox({
+                                                title: "?ontrato Especial registrado con exito!",
+                                                content: "ya puede visualizar el contrato en Detalle del Trabajador",
+                                                color: "#739E73",
+                                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                timeout: 6000
+                                            });
+                                        }
+                                        function MOD_COD_APS() {
+                                            if ($("#mod_aps").val() != "") {
+                                                var co_aps = document.getElementById("mod_aps");
+                                                $.ajax({
+                                                    url: "../../empleado",
+                                                    type: "POST",
+                                                    data: "opc=validar_aps&co_aps=" + co_aps.value
+                                                }).done(function (e) {
+                                                    // alert(e);
+                                                    var cant = ($("#mod_aps").val());
+                                                    if (cant.length > 5) {
+                                                        if (e == 0) {
+                                                            window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#mod_aps").val() + "&idtr=" + $(".idtra").val() + "";
                                                         }
+                                                        else {
+                                                            alert("Este codigo ya esta registrado!")
+                                                            $.SmartMessageBox({
+                                                                title: "Este Código APS ya fue registrado!",
+                                                                content: "Por favor Ingrese un Código APS distinto",
+                                                            });
+                                                        }
+                                                    }
+                                                }).fail(function (e) {
+                                                    alert("Error: " + e);
+                                                });
+                                            }
+                                        }
+                                        function VAL_COD_APS() {
+                                            if ($("#cod_ap").val() != "") {
+                                                var co_aps = document.getElementById("cod_ap");
+                                                $.ajax({
+                                                    url: "../../empleado",
+                                                    type: "POST",
+                                                    data: "opc=validar_aps&co_aps=" + co_aps.value
+                                                }).done(function (e) {
+                                                    //alert(e);
+                                                    var cant = ($("#cod_ap").val());
+                                                    if (cant.length > 5) {
+                                                        if (e == 0) {
+                                                            window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#cod_ap").val() + "&idtr=" + $(".idtra").val() + "";
+                                                        }
+                                                        else {
+                                                            alert("Este codigo ya esta registrado!")
+                                                            $.SmartMessageBox({
+                                                                title: "Este Código APS ya fue registrado!",
+                                                                content: "Por favor Ingrese un Código APS distinto",
+                                                            });
+                                                        }
+                                                    }
+                                                }).fail(function (e) {
+                                                    alert("Error: " + e);
+                                                });
+                                            }
+                                        }
+                                        function MOD_COD_HUELLA() {
+                                            if ($("#mod_hue").val() != "") {
+                                                var co_huel = document.getElementById("mod_hue");
+                                                $.ajax({
+                                                    url: "../../empleado",
+                                                    type: "POST",
+                                                    data: "opc=validar_huella&co_hue=" + co_huel.value
+                                                }).done(function (e) {
+                                                    var cant = $("#mod_hue").val();
+                                                    if (cant.length > 5) {
+                                                        if (e == 0) {
+                                                            window.location.href = "../../trabajador?opc=reg_huella&idtr=" + $(".idtra").val() + "&cod=" + $("#mod_hue").val() + "";
+                                                        }
+                                                        else {
+                                                            alert("Este codigo ya esta registrado!")
+                                                            $.SmartMessageBox({
+                                                                title: "Este Código de Huella ya fue registrado!",
+                                                                content: "Por favor Ingrese un Codigo de Huella distinto",
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        }
+                                        function VAL_COD_HUELLA() {
 
-                                                    });
-                                                    $(".btn-conti").click(function(e) {
-                                                        $.SmartMessageBox({
-                                                            title: "Alerta de Confirmaci?!",
-                                                            content: "?sta totalmente seguro de rechazar este requerimiento?",
-                                                            buttons: '[No][Si]'
-                                                        }, function(ButtonPressed) {
-                                                            if (ButtonPressed === "Si") {
-                                                                $(".form-rech").submit();
-                                                                //$(".form-rech").submit();
-                                                            }
-                                                            if (ButtonPressed === "No") {
-                                                                return false;
-                                                            }
-                                                        });
-                                                        e.preventDefault();
+                                            if ($("#cod_hu").val() != "") {
+                                                var co_huel = document.getElementById("cod_hu");
+                                                $.ajax({
+                                                    url: "../../empleado",
+                                                    type: "POST",
+                                                    data: "opc=validar_huella&co_hue=" + co_huel.value
+                                                }).done(function (e) {
+                                                    // alert(e)
+                                                    var cant = $("#cod_hu").val();
+                                                    if (cant.length > 5) {
+                                                        if (e == 0) {
+                                                            window.location.href = "../../trabajador?opc=reg_huella&idtr=" + $(".idtra").val() + "&cod=" + $("#cod_hu").val() + "";
+                                                        }
+                                                        else {
+                                                            alert("Este codigo ya esta registrado!")
+                                                            $.SmartMessageBox({
+                                                                title: "Este Código de Huella ya fue registrado!",
+                                                                content: "Por favor Ingrese un Codigo de Huella distinto",
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        }
+                                        function addImage(e) {
+                                            var file = e.target.files[0], imageType = /image.*/;
+                                            if (!file.type.match(imageType))
+                                                return;
+                                            var reader = new FileReader();
+                                            reader.onload = fileOnload;
+                                            reader.readAsDataURL(file);
+                                        }
+                                        function fileOnload(e) {
+                                            var result = e.target.result;
+                                            $('.ver_foto').attr("src", result);
+                                        }
+                                        $(document).ready(function () {
+                                            // pageSetUp();
+                                            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                                                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                                            });
+                                            //  $("#cod_ap").numeric();
+                                            $(".mod_huella").click(function () {
+                                                $("#cel_hue").hide();
+                                                document.getElementById("mod_hue").type = "text";
+                                            });
+                                            $(".mod_co_aps").click(function () {
+                                                $("#cel_aps").hide();
+                                                document.getElementById("mod_aps").type = "text";
 
-                                                    });
-                                                    $(".fe_desde_p, .fe_hasta_p").change(function() {
-                                                        var cuotas = $(".cuota_docente");
-                                                        cuotas.empty();
+                                            });
 
-                                                        $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
-                                                            var lista = objJson.lista;
-                                                            if (objJson.rpta == -1) {
-                                                                alert(objJson.mensaje);
-                                                                return;
-                                                            }
-                                                            for (var i = 0; i < lista.length; i++) {
-                                                                cuotas.append(lista[i].html);
-                                                            }
-                                                        });
-                                                    });
-                                                    $(".btn_guardar_ca").click(function() {
-                                                        $.ajax({
-                                                            url: "../../carga_academica",
-                                                            type: "POST",
-                                                            data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                                                        }).done(function(ids) {
-                                                            var arr_id = ids.split(":");
-                                                            alert("Registrado con exito!...");
-                                                            $(".proceso").val(arr_id[0]);
-                                                            $(".dgp").val(arr_id[1]);
-                                                            $(".btn_procesar").show();
-                                                        }).fail(function(e) {
-                                                            alert("Error: " + e);
-                                                        });
-                                                    });
+                                            $(".fe_desde_p, .fe_hasta_p").change(function () {
+                                                var cuotas = $(".cuota_docente");
+                                                cuotas.empty();
 
-                                                    $(".btn_procesar").click(function() {
-                                                        $.ajax({
-                                                            url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                                                        }).done(function() {
-                                                            window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
-                                                        });
-                                                    });
+                                                $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
+                                                    var lista = objJson.lista;
+                                                    if (objJson.rpta == -1) {
+                                                        alert(objJson.mensaje);
+                                                        return;
+                                                    }
+                                                    for (var i = 0; i < lista.length; i++) {
+                                                        cuotas.append(lista[i].html);
+                                                    }
+                                                });
+                                            });
 
-                                                    $(".btn-autor").click(function(e) {
-                                                        $.SmartMessageBox({
-                                                            title: "Alerta de Confirmaci?!",
-                                                            content: "?sta totalmente seguro de autorizar este requerimiento?",
-                                                            buttons: '[No][Si]'
-                                                        }, function(ButtonPressed) {
-                                                            if (ButtonPressed === "Si") {
-                                                                // return true;
-                                                                $(".form-aut").submit();
-                                                            }
-                                                            if (ButtonPressed === "No") {
-                                                                return false;
-                                                            }
-                                                        });
-                                                        e.preventDefault();
-                                                    });
-                                                    $(".btn-rech").click(function(e) {
-                                                        $.SmartMessageBox({
-                                                            title: "Alerta de Confirmaci?!",
-                                                            content: "?sta totalmente seguro de rechazar este requerimiento?",
-                                                            buttons: '[No][Si]'
-                                                        }, function(ButtonPressed) {
-                                                            if (ButtonPressed === "Si") {
-                                                                $(".btn-mos").click();
-                                                                //$(".form-rech").submit();
-                                                            }
-                                                            if (ButtonPressed === "No") {
-                                                                return false;
-                                                            }
 
-                                                        });
-                                                        e.preventDefault();
-                                                    });
-                                                });</script>
 
-    </body>
+                                            $(".btn_guardar_ca").click(function () {
+                                                $.ajax({
+                                                    url: "../../carga_academica",
+                                                    type: "POST",
+                                                    data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
+                                                }).done(function (ids) {
+                                                    var arr_id = ids.split(":");
+                                                    alert("Registrado con exito!...");
+                                                    $(".proceso").val(arr_id[0]);
+                                                    $(".dgp").val(arr_id[1]);
+                                                    $(".btn_procesar").show();
+                                                }).fail(function (e) {
+                                                    alert("Error: " + e);
+                                                });
+                                            });
+
+                                            $(".btn_procesar").click(function () {
+                                                $.ajax({
+                                                    url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
+                                                }).done(function () {
+                                                    window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
+                                                });
+                                            });
+
+                                            $(".btn-autor").click(function (e) {
+                                                $.SmartMessageBox({
+                                                    title: "Alerta de Confirmaci?!",
+                                                    content: "?sta totalmente seguro de autorizar este requerimiento?",
+                                                    buttons: '[No][Si]'
+                                                }, function (ButtonPressed) {
+                                                    if (ButtonPressed === "Si") {
+                                                        // return true;
+                                                        $(".form-aut").submit();
+                                                    }
+                                                    if (ButtonPressed === "No") {
+                                                        return false;
+                                                    }
+                                                });
+                                                e.preventDefault();
+                                            });
+                                            $(".btn-rech").click(function (e) {
+                                                $.SmartMessageBox({
+                                                    title: "Alerta de Confirmaci?!",
+                                                    content: "?sta totalmente seguro de rechazar este requerimiento?",
+                                                    buttons: '[No][Si]'
+                                                }, function (ButtonPressed) {
+                                                    if (ButtonPressed === "Si") {
+                                                        $(".form-rech").submit();
+                                                    }
+                                                    if (ButtonPressed === "No") {
+                                                        return false;
+                                                    }
+
+                                                })
+                                            });
+
+                                            $('.ver_foto').click(function () {
+                                                $(".file-foto").click();
+                                            });
+                                            $('.file-foto').change(function (e) {
+                                                var t = e;
+                                                if (this.files[0].size <= 500000) {
+                                                    var jForm = new FormData();
+                                                    jForm.append("idtr", $('.idtr').val());
+                                                    jForm.append("archivo", $('.file-foto').get(0).files[0]);
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        url: "../../foto",
+                                                        cache: false,
+                                                        processData: false,
+                                                        contentType: false,
+                                                        data: jForm
+                                                    }).done(function (objJson) {
+                                                        if (objJson.rpta == -1) {
+                                                            alert(objJson.mensaje);
+                                                            return;
+                                                        } else {
+
+                                                            $(".mensaje").text(objJson.mensaje);
+                                                        }
+                                                    });
+                                                    addImage(e);
+
+                                                } else {
+                                                    alert("Archivo no permitido, su tama? debe ser menor a 500 KB");
+                                                    $(this).val('');
+                                                }
+
+                                            });
+                                            $(".btn-conti").click(function (e) {
+                                                $.SmartMessageBox({
+                                                    title: "Alerta de Confirmaci?!",
+                                                    content: "?sta totalmente seguro de rechazar este requerimiento?",
+                                                    buttons: '[No][Si]'
+                                                }, function (ButtonPressed) {
+                                                    if (ButtonPressed === "Si") {
+                                                        $(".form-rech").submit();
+                                                        //$(".form-rech").submit();
+                                                    }
+                                                    if (ButtonPressed === "No") {
+                                                        return false;
+                                                    }
+                                                });
+                                                e.preventDefault();
+
+                                            });
+                                            $(".fe_desde_p, .fe_hasta_p").change(function () {
+                                                var cuotas = $(".cuota_docente");
+                                                cuotas.empty();
+
+                                                $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
+                                                    var lista = objJson.lista;
+                                                    if (objJson.rpta == -1) {
+                                                        alert(objJson.mensaje);
+                                                        return;
+                                                    }
+                                                    for (var i = 0; i < lista.length; i++) {
+                                                        cuotas.append(lista[i].html);
+                                                    }
+                                                });
+                                            });
+                                            $(".btn_guardar_ca").click(function () {
+                                                $.ajax({
+                                                    url: "../../carga_academica",
+                                                    type: "POST",
+                                                    data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
+                                                }).done(function (ids) {
+                                                    var arr_id = ids.split(":");
+                                                    alert("Registrado con exito!...");
+                                                    $(".proceso").val(arr_id[0]);
+                                                    $(".dgp").val(arr_id[1]);
+                                                    $(".btn_procesar").show();
+                                                }).fail(function (e) {
+                                                    alert("Error: " + e);
+                                                });
+                                            });
+
+                                            $(".btn_procesar").click(function () {
+                                                $.ajax({
+                                                    url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
+                                                }).done(function () {
+                                                    window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
+                                                });
+                                            });
+
+                                            $(".btn-autor").click(function (e) {
+                                                $.SmartMessageBox({
+                                                    title: "Alerta de Confirmaci?!",
+                                                    content: "?sta totalmente seguro de autorizar este requerimiento?",
+                                                    buttons: '[No][Si]'
+                                                }, function (ButtonPressed) {
+                                                    if (ButtonPressed === "Si") {
+                                                        // return true;
+                                                        $(".form-aut").submit();
+                                                    }
+                                                    if (ButtonPressed === "No") {
+                                                        return false;
+                                                    }
+                                                });
+                                                e.preventDefault();
+                                            });
+                                            $(".btn-rech").click(function (e) {
+                                                $.SmartMessageBox({
+                                                    title: "Alerta de Confirmaci?!",
+                                                    content: "?sta totalmente seguro de rechazar este requerimiento?",
+                                                    buttons: '[No][Si]'
+                                                }, function (ButtonPressed) {
+                                                    if (ButtonPressed === "Si") {
+                                                        $(".btn-mos").click();
+                                                        //$(".form-rech").submit();
+                                                    }
+                                                    if (ButtonPressed === "No") {
+                                                        return false;
+                                                    }
+
+                                                });
+                                                e.preventDefault();
+                                            });
+                                        });</script>
+
+</body>
 </html>
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");
