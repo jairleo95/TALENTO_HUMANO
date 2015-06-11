@@ -142,6 +142,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
          }*/
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select d.* from (select * from RHVD_TRABAJADOR) d, RHVD_USUARIO u where u.id_usuario= d.id_usuario_creacion ";
+       //String sql = "select * from RHVD_TRABAJADOR d where d.NU_DOC is not null ";
         nom = nom.toUpperCase();
         ape_p = ape_p.toUpperCase();
         ape_m = ape_m.toUpperCase();
