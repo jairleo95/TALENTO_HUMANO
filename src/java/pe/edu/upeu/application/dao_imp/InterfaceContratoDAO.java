@@ -87,4 +87,6 @@ public interface InterfaceContratoDAO {
     public void VALIDAR_FE_HASTA_CON();
     
     public void validar_contrato(String id_cto);
+    
+   
 }

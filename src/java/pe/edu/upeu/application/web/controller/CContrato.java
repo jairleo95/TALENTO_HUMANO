@@ -811,6 +811,7 @@ public class CContrato extends HttpServlet {
                 String id_cto = request.getParameter("id_cto");
                 con.validar_contrato(id_cto);
             }
+            
         } catch (Exception e) {
             throw new RuntimeException("Error!");
         }
