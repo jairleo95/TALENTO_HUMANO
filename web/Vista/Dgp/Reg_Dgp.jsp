@@ -341,7 +341,7 @@
 
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
-                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe">
+                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe fe_inicio_dgp">
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
@@ -1060,6 +1060,30 @@
                                                                 }
                                                             });
                                                             pageSetUp();
+                                                            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                                                                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                                                            });
+                                                            $(".fe_inicio_dgp").change(function () {
+                                                                $.post("../../dgp", "opc=Val_Fe_Inicio&fecha=" + $(this).val(), function (objJson) {
+                                                                   // alert(objJson.estado);
+                                                                    if (objJson.estado) {
+                                                                        $.bigBox({
+                                                                            title: "¡Alerta de plazo no cumplido!",
+                                                                            content: "Si registra con esta fecha el requerimiento estara en fuera de plazo. ¡NECESITA HACER SOLICITUD!",
+                                                                            color: "#C46A69",
+                                                                            //timeout: 6000,
+                                                                            icon: "fa fa-warning shake animated",
+                                                                            number: "1",
+                                                                            timeout: 10000
+                                                                        });
+                                                                    }
+                                                                });
+
+
+
+
+
+                                                            });
                                                             var $checkoutForm = $('#checkout-form').validate({
                                                                 // Rules for form validation
                                                                 rules: {
