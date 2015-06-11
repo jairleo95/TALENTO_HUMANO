@@ -26,4 +26,6 @@ public interface InterfaceSolicitud_RequerimientoDAO {
     public String INSERT_SOLICITUD_DGP(String ID_SOLICITUD_DGP, String FE_DESDE, String ID_DGP, String ID_PLAZO, String DE_SOLICITUD, String ES_AUTORIZAR, String ES_SOLICITUD_DGP, String IP_USUARIO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String NO_USUARIO);
 
     public void procesar_solicitud(String tipo, String id_sol, String fecha, String usaurio, String Comentario);
+
+    public boolean Validar_Envio_Solicitud(String dgp);
 }
