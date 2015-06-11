@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.Solicitud_RequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSolicitud_RequerimientoDAO;
+import pe.edu.upeu.application.factory.FactoryConnectionDB;
 
 /**
  *
@@ -65,7 +66,7 @@ public class CSolicitud_Requerimiento extends HttpServlet {
                 FE_DESDE = FE_DESDE + "-01";
             }
             s.INSERT_SOLICITUD_DGP(null, FE_DESDE, ID_DGP, ID_PLAZO, DE_SOLICITUD, ES_AUTORIZAR, ES_SOLICITUD_DGP, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, NO_USUARIO);
-            getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser,ID_DGP));
+            getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser, ID_DGP));
             response.sendRedirect("Vista/Solicitud/Reg_List_Solicitud.jsp?iddgp=" + ID_DGP + "");
         }
         if (opc.equals("Reg_List_Solicitud")) {
@@ -89,8 +90,68 @@ public class CSolicitud_Requerimiento extends HttpServlet {
             String tipo = request.getParameter("tipo");
             String fecha = request.getParameter("fecha");
             String comentario = request.getParameter("comentario");
-            s.procesar_solicitud(tipo, id, fecha, iduser, comentario);
+            s.procesar_solicitud(tipo, id, FactoryConnectionDB.convertFecha3(fecha), iduser, comentario);
             rpta.put("rpta", "1");
+        }
+        if (opc.equals("Val_Envio_Solicitud")) {
+             String h="";
+            String id = request.getParameter("iddgp");
+            boolean estado = s.Validar_Envio_Solicitud(id);
+            if (estado==true) {
+                h = "<form id=\"checkout-form\" class=\"smart-form solicitud_plazo\">\n"
+                    + "                                            <div class=\"row\">\n"
+                    + "\n"
+                    + "                                                <section class=\"col col-4\">\n"
+                    + "                                                    <label class=\"label\">Tipo de Plazo :</label>\n"
+                    + "                                                    <label class=\"select\"> \n"
+                    + "                                                        <select name=\"tipo\" class=\"tipo\" required=\"\">\n"
+                    + "                                                            <option value=''>[SELECCIONE]</option>\n"
+                    + "                                                            <option value='2'>Ingreso a planilla</option>\n"
+                    + "                                                            <option value='1'>Inicio de Contrato</option>\n"
+                    + "\n"
+                    + "                                                        </select>          \n"
+                    + "                                                    </label>\n"
+                    + "                                                </section>\n"
+                    + "                                                <section class=\"col col-4\">\n"
+                    + "                                                    <label class=\"label\">Plazo :</label>\n"
+                    + "                                                    <label class=\"select\"> \n"
+                    + "                                                        <select name=\"plazo\" class=\"plazo\" required=\"\">\n"
+                    + "                                                            <option value='' selected >[SELECCIONE]</option>\n"
+                    + "                                                        </select>          \n"
+                    + "                                                    </label>\n"
+                    + "                                                </section>\n"
+                    + "                                                <section class=\"col col-4\">\n"
+                    + "                                                    <label class=\"label lb_fecha_solicitud\">Fecha de Inicio :</label>\n"
+                    + "                                                    <label class=\"input\"> \n"
+                    + "\n"
+                    + "                                                        <input type=\"date\" name=\"desde\"  class=\"fe_inicio\" required=\"\">\n"
+                    + "                                                        <input type=\"hidden\" name=\"tipo_fecha\"  class=\"tipo_fecha\" value=\"date\" required=\"\">\n"
+                    + "                                                    </label>\n"
+                    + "                                                </section>\n"
+                    + "                                            </div>\n"
+                    + "                                            <section >\n"
+                    + "                                                <label class=\"label\">Motivo :</label>\n"
+                    + "                                                <label class=\"textarea\"> 										\n"
+                    + "                                                    <textarea rows=\"3\" class=\"comentario\" name=\"descripcion\" placeholder=\"\" required=\"\"></textarea> \n"
+                    + "                                                </label>\n"
+                    + "                                            </section>\n"
+                    + "                                            <footer>\n"
+                    + "                                                <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">\n"
+                    + "                                                    Cancelar\n"
+                    + "                                                </button>\n"
+                    + "                                                <button type=\"button\" class=\"btn btn-primary sbm_solicitud\" >\n"
+                    + "                                                    Enviar\n"
+                    + "                                                </button>\n"
+                    + "                                            </footer>\n"
+                    + "\n"
+                    + "                                        </form>  "; 
+            }else{
+            h ="Ya tiene una solicitud en proceso";
+            }
+            
+            rpta.put("rpta", "1");
+            rpta.put("estado", estado);
+            rpta.put("html", h);
         }
         Gson gson = new Gson();
 
