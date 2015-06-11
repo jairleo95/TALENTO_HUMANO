@@ -1064,7 +1064,7 @@
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script>$(document).ready(function() {
                                                                                     $('#doc').click(function() {
-                                                                                        $('#doc').val("");
+                                                                                       // $('#doc').val("");
                                                                                     });
                                                                                     if ($(".select-doc").val() == 1) {
                                                                                         $("#doc").numeric(false, function() {
