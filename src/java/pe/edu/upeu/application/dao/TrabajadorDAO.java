@@ -1016,4 +1016,38 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         }
         return val;
     }
+
+    @Override
+    public String Cod_aps_x_idt(String id_trabajador) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT CO_APS FROM RHTD_EMPLEADO WHERE ID_TRABAJADOR='" + id_trabajador.trim() + "'";
+        String co_ap = null;
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                co_ap = rs.getString(1);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return co_ap;
+    }
+
+    @Override
+    public String Cod_huella_x_idt(String id_trabajador) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT CO_HUELLA_DIGITAL FROM RHTD_EMPLEADO WHERE ID_TRABAJADOR='" + id_trabajador.trim() + "'";
+        String co_hu = null;
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                co_hu = rs.getString(1);
+            }
+        } catch (SQLException e) {
+        } finally {
+            this.conn.close();
+        }
+        return co_hu;
+    }
 }

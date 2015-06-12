@@ -144,7 +144,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         String f[] = fecha2.split("/");
                         fechahas = f[0] + " de " + f[1] + " del " + f[2];
                     } else {
-                        fechahas = "NO TIENE";
+                        fechahas = "momento no definido";
                     }
                     String funciones_pr = "";
                     String funciones_sec = "";

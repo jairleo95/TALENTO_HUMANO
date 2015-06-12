@@ -183,7 +183,7 @@
                                         out.print(" hasta indefinidamente");
                                     }%></option><%
                                     } else {
-                                    %><option value="<%=an.getId_contrato()%>"><%= (cv + 1) + ") De " + an.getFe_desde()%><%if (an.getFe_hasta()!= null) {
+                                    %><option value="<%=an.getId_contrato()%>"><%= (cv + 1) + ") De " + an.getFe_desde()%><%if (an.getFe_hasta() != null) {
                                             out.print(" Al " + an.getFe_hasta());
                                         } else {
                                             out.print(" hasta indefinidamente");
@@ -241,7 +241,11 @@
                         <%}%>
                         <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
                 <table class="table table-hover table-striped  table-responsive">
-                    <tr><td class="text-info table-bordered"><strong>Desde: </strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info table-bordered" colspan="2"><strong>Hasta:</strong></td><td class="table-bordered" colspan="2"><%=n.getFe_hasta()%></td></tr>
+                    <tr><td class="text-info table-bordered"><strong>Desde: </strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info table-bordered" colspan="2"><strong>Hasta:</strong></td><td class="table-bordered" colspan="2"><%if (n.getFe_hasta() != null) {
+                            out.print(n.getFe_hasta());
+                        } else {
+                            out.print("No definido");
+                        }%></td></tr>
                     <tr><td class="text-info table-bordered"><strong>Dirección:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_direccion()%> </p></td></tr>
                     <tr><td class="text-info table-bordered"><strong>Departamento:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_dep()%> </p></td></tr>
                     <tr><td class="text-info table-bordered"><strong>Area:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_area()%> </td></p></tr>
@@ -458,14 +462,14 @@
                         }
                             %> </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>Situacion Actual:</strong></td><td class="table-bordered" colspan="6"><%
-                       // for (int t = 0; t < List_Situacion_Actual.size(); t++) {
+                        // for (int t = 0; t < List_Situacion_Actual.size(); t++) {
                         if (n.getEs_contrato() != null) {
                             if (n.getEs_contrato().trim().equals("1")) {
-                                    out.print("Activo");
-                            }else{
-                                out.print("Termino Contrato"); 
+                                out.print("Activo");
+                            } else {
+                                out.print("Termino Contrato");
                             }
-                                }
+                        }
                             %> </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>Filial donde Trabaja:</strong></td><td class="table-bordered" colspan="6"><%
                         if (n.getId_filial().trim().equals(1 + "")) {
