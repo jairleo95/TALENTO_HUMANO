@@ -22,9 +22,9 @@
             <center><h1 class="spacing" style="font-weight: bold;">
                     BUSCAR TRABAJADOR
                     <%
-                HttpSession sesion_1 = request.getSession(true);
-                String text = request.getParameter("text");
-                String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+                        HttpSession sesion_1 = request.getSession(true);
+                        String text = request.getParameter("text");
+                        String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
 
                     %>
                 </h1></center>
@@ -82,7 +82,6 @@
                 <td>Nombre</td>
                 <td>Carrera</td>
                 <td>Acciones</td>
-                <td>ID</td>
             </tr>
             <% for (int i = 0; i < ListarTrabajador2.size(); i++) {
                     V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
@@ -103,14 +102,14 @@
                     }
                     %></td>
                 <td>
-                    
+                    <%if (tr.getVi_contrato().equals("0")) {%>
                     <%String nom = tr.getAp_paterno().toUpperCase() + " " + tr.getAp_materno().toUpperCase() + " " + tr.getNo_trabajador().toUpperCase();%>
                     <a href="../../contrato?idtr=<%=tr.getId_trabajador()%>&iddep=<%=iddep%>&nom=<%=nom%>&opc=LIST_FORMULARIO" class="btn bg-color-teal txt-color-white">Elaborar Contrato</a>
-                    <%%>
+                    <%} else {%>
+                      <a href="" disabled="" class="btn bg-color-red txt-color-white">Contrato Vigente</a>
+                        <%}%>
                 </td> 
-                <td>
-                    <%=tr.getId_trabajador() %>
-                </td>
+              
             </tr>
             <%
                         }

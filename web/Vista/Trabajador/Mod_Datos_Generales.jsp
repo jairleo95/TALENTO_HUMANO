@@ -209,27 +209,7 @@
 
                         });
 
-                        $(".select-doc").change(
-                                function() {
-                                    $(".doc").val("");
-                                    if ($(".select-doc").val() == 1) {
-                                        $("#doc").numeric(false, function() {
-                                        });
-                                        $(".doc").attr("maxlength", "8");
-                                        $(".doc").attr("minlength", "8");
-
-                                    }
-                                    else {
-
-                                        $("#doc").removeNumeric();
-                                        $(".doc").attr("maxlength", "10");
-                                        $(".doc").removeAttr("minlength");
-                                        //    $(".doc").val("");
-                                    }
-                                    $(".doc").focus();
-
-                                }
-                        );
+                        
                         $(".select-doc_c").change(
                                 function() {
                                     $(".doc_c").val("");
@@ -1064,7 +1044,7 @@
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script>$(document).ready(function() {
                                                                                     $('#doc').click(function() {
-                                                                                        $('#doc').val("");
+                                                                                       // $('#doc').val("");
                                                                                     });
                                                                                     if ($(".select-doc").val() == 1) {
                                                                                         $("#doc").numeric(false, function() {

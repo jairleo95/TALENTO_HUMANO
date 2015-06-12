@@ -1691,10 +1691,10 @@
                     FEC_HASTA: {
                         val_fecha: true
                     },
-                    FECHA_SUSCRIPCION: {
+                   /* FECHA_SUSCRIPCION: {
                         required: true,
                         val_fecha: true
-                    },
+                    },*/
                     fname: {
                         required: true
                     },

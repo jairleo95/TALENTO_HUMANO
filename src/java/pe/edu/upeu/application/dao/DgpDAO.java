@@ -8,6 +8,7 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -933,6 +934,32 @@ public class DgpDAO implements InterfaceDgpDAO {
         } finally {
             this.conn.close();
         }
+    }
+
+    @Override
+    public boolean val_fe_inicio_dgp(String fecha) {
+        boolean estado = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cs = this.conn.conex.prepareCall("begin   ? :=rhfu_val_fe_desde_dgp(?);end;");
+            cs.registerOutParameter(1, Types.INTEGER);
+            cs.setString(2, c.convertFecha(fecha));
+            cs.execute();
+            if (cs.getInt(1) == 0) {
+                estado = true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return estado;
     }
 
 }

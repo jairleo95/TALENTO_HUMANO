@@ -777,11 +777,51 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
             getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
 
-            out.print(ID_MODALIDAD + "-");
-            out.print(ID_SUB_MODALIDAD);
-            String idctr = con.Contrato_max(ID_TRABAJADOR);
-            //response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR + "&idctr=" + idctr + "&dce=Doc_CE");
-            response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&req=si&idtr=" + ID_TRABAJADOR + "&P2=TRUE&ms=ok");
+                out.print(ID_MODALIDAD + "-");
+                out.print(ID_SUB_MODALIDAD);
+                String idctr = con.Contrato_max(ID_TRABAJADOR);
+                //response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR + "&idctr=" + idctr + "&dce=Doc_CE");
+                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&req=si&idtr=" + ID_TRABAJADOR + "&P2=TRUE&ms=ok");
+            }
+
+            if (opc.equals("Reporte_CE")) {
+                getServletContext().setAttribute("List_Casos_Esp", con.LIST_CASOS_ESPECIALES());
+                response.sendRedirect("Vista/Contrato/Filtro_Contrato_CE.jsp");
+            }
+
+            if (opc.equals("Buscar")) {
+                getServletContext().setAttribute("List_Area", area.List_Area());
+            }
+
+            if (opc.equals("Ver_Plantilla")) {
+                String idc = request.getParameter("idc");
+                getServletContext().setAttribute("LIST_DAT_TR_PLANTILLA", tr.LIST_DAT_TR_PLANTILLA(idc));
+                response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla.jsp");
+            }
+
+            if (opc.equals("Ver Plantilla")) {
+                String idc = request.getParameter("idc");
+                getServletContext().setAttribute("LIST_DAT_TR_PLANTILLA", tr.LIST_DAT_TR_PLANTILLA(idc));
+                response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla.jsp");
+            }
+
+            if (opc.equals("filtrar")) {
+                getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
+                getServletContext().setAttribute("List_Area_ID", area.List_Area_ID(iddep));
+                response.sendRedirect("Vista/Contrato/Busc_Contrato.jsp");
+            }
+            if (opc.equals("Habilitar_is")) {
+                String id = request.getParameter("id");
+                String estado = request.getParameter("estado");
+                con.HABILITAR_SI(id, estado);
+            }
+            if(opc.equals("validar_contrato")){
+                String id_cto = request.getParameter("id_cto");
+                con.validar_contrato(id_cto);
+            }
+            
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
         }
 
         if (opc.equals("Reporte_CE")) {
