@@ -211,7 +211,7 @@ public class CContrato extends HttpServlet {
             Double HO_SEMANA = Double.parseDouble(request.getParameter("HORAS_SEMANA"));
             Double NU_HORAS_LAB = Double.parseDouble(request.getParameter("NRO_HORAS_LAB"));
             Double DIA_CONTRATO = Double.parseDouble(request.getParameter("DIAS"));
-                //Double CA_SUELDO = 0.0;
+            //Double CA_SUELDO = 0.0;
             /*Double CA_REINTEGRO = 0.0;
              Double CA_ASIG_FAMILIAR = 0.0;
              Double HO_SEMANA = 0.0;
@@ -276,11 +276,11 @@ public class CContrato extends HttpServlet {
             String ID_PLANTILLA_CONTRACTUAL = request.getParameter("id_plantilla_contractual");
             //Double ca_bonificacion_p = Double.parseDouble(request.getParameter("ca_bono_puesto"));
             Double ca_bonificacion_p = 0.0;
-                //int cantidad_centro = Integer.parseInt(request.getParameter("can_centro_cos"));
+            //int cantidad_centro = Integer.parseInt(request.getParameter("can_centro_cos"));
             // out.print(ID_CONTRATO + "-" + ID_DGP + "-" + FE_DESDE + "-" + FE_HASTA + "-" + FE_CESE + "-" + ID_FUNC + "-" + LI_CONDICION + "-" + CA_SUELDO + "-" + CA_REINTEGRO + "-" + CA_ASIG_FAMILIAR + "-" + HO_SEMANA + "-" + NU_HORAS_LAB + "-" + DIA_CONTRATO + "-" + TI_TRABAJADOR + "-" + LI_REGIMEN_LABORAL + "-" + ES_DISCAPACIDAD + "-" + TI_CONTRATO + "-" + LI_REGIMEN_PENSIONARIO + "-" + ES_CONTRATO_TRABAJADOR + "-" + US_CREACION + "-" + FE_CREACION + "-" + US_MODIF + "-" + FE_MODIF + "-" + US_IP + "-" + FE_VACACIO_INI + "-" + FE_VACACIO_FIN + "-" + ES_CONTRATO + "-" + ID_FILIAL + "-" + ID_PUESTO + "-" + CA_BONO_ALIMENTO + "-" + LI_TIPO_CONVENIO + "-" + ES_FIRMO_CONTRATO + "-" + NU_CONTRATO + "-" + DE_OBSERVACION + "-" + ES_APOYO + "-" + TI_HORA_PAGO + "-" + NU_DOCUMENTO + "-" + ID_ANNO + "-" + ES_ENTREGAR_DOC_REGLAMENTOS + "-" + ES_REGISTRO_HUELLA + "-" + DE_REGISTRO_SISTEM_REMU + "-" + ID_TRABAJADOR + "-" + CA_SUELDO_TOTAL + "-" + ID_REGIMEN_LABORAL + "-" + ID_MODALIDAD + "-" + ID_SUB_MODALIDAD + "-" + CO_GR_OCUPACION + "-" + FE_SUSCRIPCION + "-" + CO_TI_MONEDA + "-" + CO_TI_REM_VARIAB + "-" + DE_REMU_ESPECIE + "-" + DE_RUC_EMP_TRAB + "-" + CO_SUCURSAL + "-" + DE_MYPE + "-" + ES_TI_CONTRATACION + "-" + CA_BEV + "-" + ID_TIPO_PLANILLA + "-" + ES_REMUNERACION_PROCESADO + "-" + ID_HORARIO + "-" + ID_PLANTILLA_CONTRACTUAL + "-" + ca_bonificacion_p);
             con.MODIFICAR_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ID_ANNO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR, CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV, ID_TIPO_PLANILLA, ES_REMUNERACION_PROCESADO, ID_HORARIO, ID_PLANTILLA_CONTRACTUAL, ca_bonificacion_p);
             if (ID_DGP != null) {
-                    //  int cant_actual = Integer.parseInt(request.getParameter("cant_actual_anti"));
+                //  int cant_actual = Integer.parseInt(request.getParameter("cant_actual_anti"));
                 //  int cant_eliminada = Integer.parseInt(request.getParameter("cant_eliminada"));
                 int cant_inicial = Integer.parseInt(request.getParameter("cant_inicial"));
                 int cant_ingresada = Integer.parseInt(request.getParameter("cant_ingresada"));
@@ -537,7 +537,7 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
             getServletContext().setAttribute("List_ID_User", usu.List_ID_User(US_CREACION));
             getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(ID_PUESTO));
-                //getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());*/
+            //getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());*/
             //response.sendRedirect("Vista/Contrato/Reg_Casos_Especiales.jsp");
             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1.trim() + "&idtr=" + idtr1.trim() + "&id_cto=" + id_cto);
         }
@@ -777,51 +777,11 @@ public class CContrato extends HttpServlet {
             getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
             getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
 
-                out.print(ID_MODALIDAD + "-");
-                out.print(ID_SUB_MODALIDAD);
-                String idctr = con.Contrato_max(ID_TRABAJADOR);
-                //response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR + "&idctr=" + idctr + "&dce=Doc_CE");
-                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&req=si&idtr=" + ID_TRABAJADOR + "&P2=TRUE&ms=ok");
-            }
-
-            if (opc.equals("Reporte_CE")) {
-                getServletContext().setAttribute("List_Casos_Esp", con.LIST_CASOS_ESPECIALES());
-                response.sendRedirect("Vista/Contrato/Filtro_Contrato_CE.jsp");
-            }
-
-            if (opc.equals("Buscar")) {
-                getServletContext().setAttribute("List_Area", area.List_Area());
-            }
-
-            if (opc.equals("Ver_Plantilla")) {
-                String idc = request.getParameter("idc");
-                getServletContext().setAttribute("LIST_DAT_TR_PLANTILLA", tr.LIST_DAT_TR_PLANTILLA(idc));
-                response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla.jsp");
-            }
-
-            if (opc.equals("Ver Plantilla")) {
-                String idc = request.getParameter("idc");
-                getServletContext().setAttribute("LIST_DAT_TR_PLANTILLA", tr.LIST_DAT_TR_PLANTILLA(idc));
-                response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla.jsp");
-            }
-
-            if (opc.equals("filtrar")) {
-                getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
-                getServletContext().setAttribute("List_Area_ID", area.List_Area_ID(iddep));
-                response.sendRedirect("Vista/Contrato/Busc_Contrato.jsp");
-            }
-            if (opc.equals("Habilitar_is")) {
-                String id = request.getParameter("id");
-                String estado = request.getParameter("estado");
-                con.HABILITAR_SI(id, estado);
-            }
-            if(opc.equals("validar_contrato")){
-                String id_cto = request.getParameter("id_cto");
-                con.validar_contrato(id_cto);
-            }
-            
-        } catch (Exception e) {
-            throw new RuntimeException("Error!");
+            out.print(ID_MODALIDAD + "-");
+            out.print(ID_SUB_MODALIDAD);
+            String idctr = con.Contrato_max(ID_TRABAJADOR);
+            //response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR + "&idctr=" + idctr + "&dce=Doc_CE");
+            response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&req=si&idtr=" + ID_TRABAJADOR + "&P2=TRUE&ms=ok");
         }
 
         if (opc.equals("Reporte_CE")) {
@@ -859,6 +819,43 @@ public class CContrato extends HttpServlet {
             String id_cto = request.getParameter("id_cto");
             con.validar_contrato(id_cto);
         }
+
+        if (opc.equals("Reporte_CE")) {
+            getServletContext().setAttribute("List_Casos_Esp", con.LIST_CASOS_ESPECIALES());
+            response.sendRedirect("Vista/Contrato/Filtro_Contrato_CE.jsp");
+        }
+
+        if (opc.equals("Buscar")) {
+            getServletContext().setAttribute("List_Area", area.List_Area());
+        }
+
+        if (opc.equals("Ver_Plantilla")) {
+            String idc = request.getParameter("idc");
+            getServletContext().setAttribute("LIST_DAT_TR_PLANTILLA", tr.LIST_DAT_TR_PLANTILLA(idc));
+            response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla.jsp");
+        }
+
+        if (opc.equals("Ver Plantilla")) {
+            String idc = request.getParameter("idc");
+            getServletContext().setAttribute("LIST_DAT_TR_PLANTILLA", tr.LIST_DAT_TR_PLANTILLA(idc));
+            response.sendRedirect("Vista/Contrato/Plantilla/Editor_Plantilla.jsp");
+        }
+
+        if (opc.equals("filtrar")) {
+            getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
+            getServletContext().setAttribute("List_Area_ID", area.List_Area_ID(iddep));
+            response.sendRedirect("Vista/Contrato/Busc_Contrato.jsp");
+        }
+        if (opc.equals("Habilitar_is")) {
+            String id = request.getParameter("id");
+            String estado = request.getParameter("estado");
+            con.HABILITAR_SI(id, estado);
+        }
+        if (opc.equals("validar_contrato")) {
+            String id_cto = request.getParameter("id_cto");
+            con.validar_contrato(id_cto);
+        }
+        
         /*} catch (Exception e) {
          throw new RuntimeException("Error!");
          }*/

@@ -290,11 +290,10 @@
                                         diaCumple = diaCumple.substring(1, 2);
                                     }
                                     var edad = yyyyActual - yyyyCumple;
-
                                     if ((mmActual < mmCumple) || (mmActual == mmCumple && diaActual < diaCumple)) {
                                         edad--;
                                     }
-                                    $(".edad").text(edad + " años");
+                                    $(".edad").text(edad + "años");
                                 }
                         );
 
