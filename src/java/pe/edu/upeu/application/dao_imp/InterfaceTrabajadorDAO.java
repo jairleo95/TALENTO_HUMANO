@@ -69,4 +69,6 @@ public interface InterfaceTrabajadorDAO {
     public String Cod_aps_x_idt(String id_trabajador);
     
     public String Cod_huella_x_idt(String id_trabajador);
+    
+    public int cod_uni_unico(String cod_uni);
 }

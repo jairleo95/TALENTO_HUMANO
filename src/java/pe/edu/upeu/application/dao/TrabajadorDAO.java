@@ -1051,4 +1051,27 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         }
         return co_hu;
     }
+
+    @Override
+    public int cod_uni_unico(String cod_uni) {
+        int n = 0;
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select count (*) from RHTM_TRABAJADOR where CO_UNIVERSITARIO = '"+cod_uni+"'";
+        try {
+            ResultSet rs = this.conn.query(sql);
+            rs.next();
+            n = rs.getInt(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al validar el codigo universitario");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return n;
+    }
 }
