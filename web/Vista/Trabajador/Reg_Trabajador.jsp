@@ -94,7 +94,7 @@
                         url: "../../trabajador",
                         data: "opc=Val_num_Doc&doc=" + $(".doc").val(),
                         type: "post"
-                    }).done(function (e) {
+                    }).done(function(e) {
                         if (e == 'true') {
                             $(".class_doc").removeClass("has-success");
                             $(".class_doc").addClass("has-error");
@@ -111,8 +111,8 @@
 
 
             $(document).ready(
-                    function () {
-                        $("#next-step").on("submit", function () {
+                    function() {
+                        $("#next-step").on("submit", function() {
                             alert()
                         })
                         var tip = $("#pro_dir_l");
@@ -120,7 +120,7 @@
                         var rg = $("#dep_dir_l").val();
                         var data = "id_dep=" + rg + "&opc=dep_nac";
                         tip.append('<option value="">Cargando...</option>').val('');
-                        $.post("../../ubigeo", data, function (objJson) {
+                        $.post("../../ubigeo", data, function(objJson) {
                             tip.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -142,7 +142,7 @@
                         var rg = $("#pro_dir_l").val();
                         var data = "id_dist=" + rg + "&opc=pro_nac";
                         ti.append('<option value="">Cargando...</option>').val('');
-                        $.post("../../ubigeo", data, function (objJson) {
+                        $.post("../../ubigeo", data, function(objJson) {
                             ti.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -164,7 +164,7 @@
                         //  $(".doc, .doc_c").val("");
 
                         $("#nac").change(
-                                function () {
+                                function() {
                                     if ($("#nac").val() != "NAC-0193") {
                                         $("#dist").hide();
                                         $("#dist_nac").val("DST-001832");
@@ -178,7 +178,7 @@
                                 }
                         );
 
-                        $("#sit_edu").change(function () {
+                        $("#sit_edu").change(function() {
                             if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
                                     | $("#sit_edu").val() == 'SED-0015'
                                     | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
@@ -204,7 +204,7 @@
                                 $("#carr").find('select option:eq(0)').prop('selected', true);
                             }
                         });
-                        $("#es_inst_p").change(function () {
+                        $("#es_inst_p").change(function() {
                             if ($("#inst_peru").val() == "1") {
                                 $("#regimen").show();
                                 $("#egreso").show();
@@ -221,10 +221,10 @@
                         });
 
                         $(".select-doc").change(
-                                function () {
+                                function() {
                                     $(".doc").val("");
                                     if ($(".select-doc").val() == 1) {
-                                        $("#doc").numeric(false, function () {
+                                        $("#doc").numeric(false, function() {
                                         });
                                         $(".doc").attr("maxlength", "8");
                                         $(".doc").attr("minlength", "8");
@@ -239,10 +239,10 @@
                                 }
                         );
                         $(".select-doc_c").change(
-                                function () {
+                                function() {
                                     $(".doc_c").val("");
                                     if ($(".select-doc_c").val() == 1) {
-                                        $(".doc_c").numeric(false, function () {
+                                        $(".doc_c").numeric(false, function() {
                                         });
                                         $(".doc_c").attr("maxlength", "8");
                                         $(".doc_c").attr("minlength", "8");
@@ -258,7 +258,7 @@
 
                                 }
                         );
-                        $(".doc").change(function () {
+                        $(".doc").change(function() {
                             val_doc();
 
                         });
@@ -268,10 +268,10 @@
         <!--Alerta para la edad -->
         <script type="text/javascript">
             $(document).ready(
-                    function () {
+                    function() {
                         $(".alerta-req").hide();
                         $("#edad").change(
-                                function () {
+                                function() {
                                     $(".alerta-req").hide();
                                     var fecha = $("#edad").val();
                                     var fechaActual = new Date();
@@ -290,11 +290,10 @@
                                         diaCumple = diaCumple.substring(1, 2);
                                     }
                                     var edad = yyyyActual - yyyyCumple;
-
                                     if ((mmActual < mmCumple) || (mmActual == mmCumple && diaActual < diaCumple)) {
                                         edad--;
                                     }
-                                    $(".edad").text(edad + " años");
+                                    $(".edad").text(edad + "años");
                                 }
                         );
 
@@ -698,9 +697,9 @@
                                                             </div>
                                                             <script>
                                                                 $(document).ready(
-                                                                        function () {
+                                                                        function() {
                                                                             $("#sis_pens").change(
-                                                                                    function () {
+                                                                                    function() {
                                                                                         if ($("#sis_pens").val() != "1") {
                                                                                             $(".n_afp").remove();
                                                                                             $("#nom_afp").attr("disabled", true);
@@ -864,10 +863,10 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-4">  <!-- <label>Codigo Universitario:</label>-->
-                                                                    <div class="form-group">
+                                                                    <div class="form-group class_cod">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-th fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm" id="doc" type="text" name="COD_UNI" maxlength="9" placeholder="Codigo Universitario">
+                                                                            <input class="form-control input-group-sm cod_uni" id="doc" type="text" name="COD_UNI" maxlength="9" placeholder="Codigo Universitario" onblur="cod_uni_unico()">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -966,6 +965,26 @@
                                                         </div>  
 
                                                         <script>
+                                                            function cod_uni_unico() {
+                                                                // alert($(".cod_uni").val());
+                                                                $.ajax({
+                                                                    url: "../../trabajador",
+                                                                    type: "POST",
+                                                                    data: "opc=validar_cod_uni&" + "cod_uni=" + $(".cod_uni").val()
+                                                                }).done(function(e) {
+                                                                    if (e > 0) {
+                                                                        $(".class_cod").removeClass("has-success");
+                                                                        $(".class_cod").addClass("has-error");
+                                                                        $(".class_cod").children().remove('.help-block');
+                                                                        $(".class_cod").append('<span  class="help-block">¡El codigo ya existe!</span>');
+                                                                    } else {
+                                                                        $(".class_cod").children().remove('.help-block');
+                                                                    }
+                                                                }).fail(function(e) {
+                                                                    alert("Error: " + e);
+                                                                });
+
+                                                            }
                                                             function estado_civil(es_civil) {
                                                                 if (es_civil == '1' || es_civil == '3' || es_civil == '4' || es_civil == '5') {
                                                                     // alert("estado civil");
@@ -1143,7 +1162,7 @@
                                                                 </div>
                                                                 <script>
                                                                     $(document).ready(
-                                                                            function () {
+                                                                            function() {
 
                                                                                 $("#no_cuen").hide();
                                                                                 $("#no_cuen_ban").hide();
@@ -1152,7 +1171,7 @@
                                                                                 $("#no_cuen_otros").hide();
                                                                                 //alert($("#es_cuenta").val());
 
-                                                                                $(".fecha").keyup(function () {
+                                                                                $(".fecha").keyup(function() {
 
                                                                                     /*var arr_date = $(this).val().split("-");
                                                                                      if (arr_date[0].length > 4) {
@@ -1165,7 +1184,7 @@
 
                                                                                 });
 
-                                                                                $("#banco").change(function () {
+                                                                                $("#banco").change(function() {
 
                                                                                     cuenta_bancaria($(this).val());
                                                                                     $("#nu_cuen").focus();
@@ -1173,11 +1192,11 @@
                                                                                     //  alert($("#es_cuenta").val());
                                                                                 });
 
-                                                                                $("#es_civil").change(function () {
+                                                                                $("#es_civil").change(function() {
                                                                                     estado_civil($(this).val());
                                                                                 });
                                                                                 $("#DOM_A_D3").change(
-                                                                                        function () {
+                                                                                        function() {
                                                                                             if ($("#DOM_A_D3").val() == "3") {
                                                                                                 $("#DOM_A_D4").val("Sin Numero");
                                                                                             } else {
@@ -1188,7 +1207,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#DOM_LEG_D3").change(
-                                                                                        function () {
+                                                                                        function() {
                                                                                             if ($("#DOM_LEG_D3").val() == "3") {
                                                                                                 $("#DOM_LEG_D4").val("Sin Numero");
                                                                                             } else {
@@ -1199,7 +1218,7 @@
                                                                                         }
                                                                                 );
                                                                                 $("#reli").change(
-                                                                                        function () {
+                                                                                        function() {
                                                                                             if ($("#reli").val() == "1") {
                                                                                                 $("#igle").attr("required", "required")
                                                                                             } else {
@@ -1884,10 +1903,10 @@
                                                             <input type="hidden" name="opc" value="Registrar" >
                                                             <center><input type="submit" name=""  class="submit btn btn-primary" value="Registrar Trabajador" style="width: 30%"></center>
                                                             <code class="codigo"></code>
-                                                            <script>$(document).ready(function () {
+                                                            <script>$(document).ready(function() {
                                                                     var p = 1;
                                                                     var texto_h = "";
-                                                                    $(".btn-reg-hijo").click(function () {
+                                                                    $(".btn-reg-hijo").click(function() {
                                                                         var tabla_hijo = $(".tabla-hijo");
                                                                         var ap_pat = $(".i_app_h");
                                                                         var ap_mat = $(".i_apm_h");
@@ -1999,7 +2018,7 @@
                                                                             essalud.val("");
                                                                             es_sup.val("");
                                                                         }
-                                                                        $(".btn-modificar_" + p).click(function () {
+                                                                        $(".btn-modificar_" + p).click(function() {
                                                                             ap_pat.val($(".ap_p_h_" + $(this).val()).val());
                                                                             ap_mat.val($(".ap_m_h_" + $(this).val()).val());
                                                                             nombre.val($(".no_h_" + $(this).val()).val());
@@ -2012,7 +2031,7 @@
 
                                                                             $(".btn-reg-hijo").hide();
                                                                             $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
-                                                                            $(".btn-mod-hijo").click(function () {
+                                                                            $(".btn-mod-hijo").click(function() {
 
                                                                                 $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
                                                                                 $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
@@ -2285,7 +2304,7 @@
 
                                                     // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                    $(document).ready(function () {
+                                                    $(document).ready(function() {
                                                         pageSetUp();
                                                         var $validator = $("#wizard-1").validate({
                                                             rules: {
@@ -2335,15 +2354,15 @@
                                                                     email: "Your email address must be in the format of name@domain.com"
                                                                 }
                                                             },
-                                                            highlight: function (element) {
+                                                            highlight: function(element) {
                                                                 $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
                                                             },
-                                                            unhighlight: function (element) {
+                                                            unhighlight: function(element) {
                                                                 $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
                                                             },
                                                             errorElement: 'span',
                                                             errorClass: 'help-block',
-                                                            errorPlacement: function (error, element) {
+                                                            errorPlacement: function(error, element) {
                                                                 if (element.parent('.input-group').length) {
                                                                     error.insertAfter(element.parent());
                                                                 } else {
@@ -2351,7 +2370,7 @@
                                                                 }
                                                             }
                                                         });
-                                                        jQuery.validator.addMethod("val_fecha", function (value, element) {
+                                                        jQuery.validator.addMethod("val_fecha", function(value, element) {
                                                             var d = value.split("-");
                                                             return this.optional(element) || String(parseInt(d[0])).length == 4;
                                                         }, "¡Fecha ingresada invalida!");
@@ -2371,11 +2390,11 @@
                                                         }
                                                         $('#bootstrap-wizard-1').bootstrapWizard({
                                                             'tabClass': 'form-wizard',
-                                                            onTabClick: function (tab, navigation, index) {
+                                                            onTabClick: function(tab, navigation, index) {
                                                                 return validateTab(index)
 
                                                             },
-                                                            'onNext': function (tab, navigation, index) {
+                                                            'onNext': function(tab, navigation, index) {
                                                                 return validateTab(index)
                                                             }
                                                         });
@@ -2384,7 +2403,7 @@
                                                         // fuelux wizard
                                                         var wizard = $('.wizard').wizard();
 
-                                                        wizard.on('finished', function (e, data) {
+                                                        wizard.on('finished', function(e, data) {
                                                             //$("#fuelux-wizard").submit();
                                                             //console.log("submitted!");
                                                             $.smallBox({
@@ -2408,7 +2427,7 @@
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
 
-        (function () {
+        (function() {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;
@@ -2422,24 +2441,24 @@
     <!--Solo numeros -->
     <script type="text/javascript">
         $("#docs, .doc_c, #nu_cuen, #nu_cuen_ban").numeric();
-        $("#doc, .doc_c").numeric(false, function () {
+        $("#doc, .doc_c").numeric(false, function() {
             alert("Solo Numeros Enteros");
             this.value = "";
             this.focus();
         });
-        $(".positive").numeric({negative: false}, function () {
+        $(".positive").numeric({negative: false}, function() {
             alert("No negative values");
             this.value = "";
             this.focus();
         });
-        $(".positive-integer").numeric({decimal: false, negative: false}, function () {
+        $(".positive-integer").numeric({decimal: false, negative: false}, function() {
             alert("Positive integers only");
             this.value = "";
             this.focus();
         });
 
         $("#remove").click(
-                function (e)
+                function(e)
                 {
                     e.preventDefault();
                     $(".numeric,.integer,.positive").removeNumeric();
@@ -2486,13 +2505,13 @@
     <!--Select dinamicos-->
     <script type="text/javascript">
         /*Ubigeo*/
-        $("#dep_nac").change(function () {
+        $("#dep_nac").change(function() {
             var ti = $("#pro_nac");
             ti.empty();
             var rg = $("#dep_nac").val();
             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2510,13 +2529,13 @@
                 }
             });
         });
-        $("#pro_nac").change(function () {
+        $("#pro_nac").change(function() {
             var ti = $("#dist_nac");
             ti.empty();
             var rg = $("#pro_nac").val();
             var data = "id_dist=" + rg + "&opc=pro_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2535,13 +2554,13 @@
             });
         });
         // ============ DIRECCION ===========
-        $("#dep_dir_a").change(function () {
+        $("#dep_dir_a").change(function() {
             var ti = $("#pro_dir_a");
             ti.empty();
             var rg = $("#dep_dir_a").val();
             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2559,13 +2578,13 @@
                 }
             });
         });
-        $("#pro_dir_a").change(function () {
+        $("#pro_dir_a").change(function() {
             var ti = $("#DOM_A_DISTRITO");
             ti.empty();
             var rg = $("#pro_dir_a").val();
             var data = "id_dist=" + rg + "&opc=pro_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2584,7 +2603,7 @@
             });
         });
         //PROVINCIA
-        $("#dep_dir_l").change(function () {
+        $("#dep_dir_l").change(function() {
             var ti = $("#pro_dir_l");
             var rg = $("#dep_dir_l").val();
             list_prov_id_dep(rg, ti, "0", "")
@@ -2594,7 +2613,7 @@
         function list_prov_id_dep(rg, ti, selected, id_select) {
             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2635,7 +2654,7 @@
 
 
         //DISTRITO
-        $("#pro_dir_l").change(function () {
+        $("#pro_dir_l").change(function() {
             var ti = $("#DOM_LEG_DISTRITO");
             var rg = $("#pro_dir_l").val();
             list_dist_id_prov(rg, ti, "0", "");
@@ -2649,7 +2668,7 @@
 
             ti.append('<option value="">Cargando...</option>').val('');
             ti.empty();
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
 
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2694,14 +2713,14 @@
 
 
         /*Datos Academicos*/
-        $("#rg").change(function () {
+        $("#rg").change(function() {
             var ti = $("#ti_inst");
             ti.empty();
             var rg = $("#rg").val();
             var data = "regimen=" + rg + "&opc=ti_inst";
 
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function (objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2721,7 +2740,7 @@
         });
 
 
-        $("#ti_inst").change(function () {
+        $("#ti_inst").change(function() {
             var inst = $("#inst");
             inst.empty();
             var ti = $("#ti_inst").val();
@@ -2730,7 +2749,7 @@
              }*/
             var data = "ti=" + ti + "&opc=institucion";
             inst.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function (objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 inst.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2748,7 +2767,7 @@
                 }
             });
         });
-        $("#inst").change(function () {
+        $("#inst").change(function() {
             var carr = $("#carrera");
             carr.empty();
             var insti = $("#inst").val();
@@ -2757,7 +2776,7 @@
              }*/
             var data = "inst=" + insti + "&opc=carrera";
             carr.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function (objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 carr.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2784,14 +2803,14 @@
          });*/
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var b = $(".tbodys");
 
             $("#btnfiltrar").click(
-                    function () {
+                    function() {
 
 
-                        $.post("../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function (objJson) {
+                        $.post("../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function(objJson) {
                             b.empty();
                             var list = objJson.lista;
                             for (var i = 0; i < list.length; i++) {
@@ -2813,7 +2832,7 @@
 
                             }
 
-                            $(".btn-add-conyugue").click(function () {
+                            $(".btn-add-conyugue").click(function() {
                                 var v = $(this).val();
                                 $(".nom_c").val($(".nom_ape_" + v).val());
                                 $(".f_nac").val($(".nac_" + v).val());
@@ -2832,13 +2851,13 @@
 
 
                     });
-            $(".btn-salir-busc, .close").click(function () {
+            $(".btn-salir-busc, .close").click(function() {
 
                 $(".select-conyugue").val("0");
             });
 
 
-            $(".select-conyugue").change(function () {
+            $(".select-conyugue").change(function() {
                 if ($(this).val() == "1") {
                     $("#btn-mostrar").click();
                 }
@@ -2854,7 +2873,7 @@
             }
             );
             $("#btncancel").click(
-                    function () {
+                    function() {
                         document.formulario.reset();
                         b.empty();
                         html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'

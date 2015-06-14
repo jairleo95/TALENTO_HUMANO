@@ -7,6 +7,8 @@ package pe.edu.upeu.application.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -60,6 +62,7 @@ public class CTrabajador extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        Map<String, Object> rpta = new HashMap<String, Object>();
         /*  try {*/
         HttpSession sesion = request.getSession(true);
         String idrol = (String) sesion.getAttribute("IDROL");
@@ -376,14 +379,14 @@ public class CTrabajador extends HttpServlet {
             int co_aps = Integer.parseInt(request.getParameter("cod"));
             em.Reg_aps(idtr, co_aps);
             getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
-            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr="+idtr+"");
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "");
         }
         if ("reg_huella".equals(opc)) {
             String idtr = request.getParameter("idtr");
             int cod_huella = Integer.parseInt(request.getParameter("cod"));
             em.Reg_cod_huella(idtr, cod_huella);
             getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
-             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr="+idtr+"");
+            response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "");
         }
 
         if (opc.equals("Editar_Dat_Gen")) {
@@ -627,6 +630,11 @@ public class CTrabajador extends HttpServlet {
         if (opc.equals("Val_num_Doc")) {
             String nu_doc = request.getParameter("doc");
             out.print(tr.val_nu_doc(nu_doc));
+        }
+        if (opc.equals("validar_cod_uni")) {
+            String cod_uni = request.getParameter("cod_uni");
+            int n = tr.cod_uni_unico(cod_uni);
+            out.print(n);
         }
 
     }
