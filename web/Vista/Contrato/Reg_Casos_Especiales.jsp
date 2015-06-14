@@ -270,7 +270,7 @@
                                                         </section>
                                                         <section class="col col-1">
                                                             <label class="input" id="titu">Reintegro:
-                                                                <input type="text" name="REINTEGRO"  value="0" class="input-group-sm">
+                                                                <input type="text" name="REINTEGRO"  value="0" id="rein" class="input-group-sm">
                                                             </label>
                                                         </section>
                                                         <section class="col col-2">
@@ -310,12 +310,20 @@
                                                     <div class="row">
                                                         <section class="col col-1 ">
                                                             <label class="input" id="titu">Codigo APS: 
-                                                                <input type="text" maxlength="6" name="co_aps" id="aps" class="input-group-sm">
+                                                                <%String co_aps = request.getParameter("co_ap");
+                                                                    String co_hue = request.getParameter("co_hu");%>
+                                                                <input type="text" maxlength="6" name="cod_aps" id="aps" class="input-group-sm" <%if (!co_aps.equals("--")) {
+                                                                        out.print("value='" + co_aps + "'");
+                                                                    } else {
+                                                                    }%> onblur="VAL_COD_APS()">
                                                             </label>
                                                         </section>
                                                         <section class="col col-1 ">
                                                             <label class="input" id="titu">Codigo Huella: 
-                                                                <input type="text" maxlength="6" name="co_hue" id="hue" class="input-group-sm">
+                                                                <input type="text" maxlength="6" name="cod_hue" id="hue" class="input-group-sm" <%if (!co_hue.equals("--")) {
+                                                                        out.print("value='" + co_hue + "'");
+                                                                    } else {
+                                                                    }%>>
                                                             </label>
                                                         </section>
                                                         <section class="col col-2" style=" margin-top:0.8%;">
@@ -390,7 +398,7 @@
                                                                 function() {
                                                                     Listar_Direccion();
                                                                     Listar_Departamento();
-                                                                    
+
                                                                     $("#aps").numeric();
                                                                     $("#hue").numeric();
                                                                 }
@@ -698,7 +706,7 @@
                                                         </section>
                                                         <section class="col col-3">
                                                             <label class="select" id="titu">Plantilla de Contrato:
-                                                                <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm" >
+                                                                <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm" required="">
                                                                     <option value="">[SELECCIONE]</option>
                                                                 </select>
                                                             </label>
@@ -890,7 +898,7 @@
                                                 </fieldset>
                                                 <footer>
                                                     <input  type="hidden" name="opc" value="REG_CASOS_ESP">
-                                                    <button type="submit" class="btn btn-primary" name="opc">
+                                                    <button type="submit" class="btn btn-primary" >
                                                         Siguiente
                                                     </button>
                                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
@@ -938,10 +946,11 @@
         function Sueldo_Total() {
 
             var a = parseFloat($("#remu").val());
+            var e = parseFloat($("#rein").val());
             var b = parseFloat($("#bono_al").val());
             var c = parseFloat($("#bev").val());
             var d = parseFloat($("#bo_puesto").val());
-            var x = a + b + c + d;
+            var x = a + b + c + d + e;
             $("#sueldo_total").val(x);
         }
         $(document).ready(
@@ -964,6 +973,11 @@
                             }
                     );
                     $("#bo_puesto").keyup(
+                            function() {
+                                Sueldo_Total();
+                            }
+                    );
+                    $("#rein").keyup(
                             function() {
                                 Sueldo_Total();
                             }
@@ -1447,6 +1461,7 @@
 
             $("#sueldo").numeric();
             $("#bono_al").numeric();
+            $("#rein").numeric();
             $("#bev").numeric();
             /* $("#sueldo").mask("99999.99", {placeholder: "0"});
              $("#bono_al").mask("99999.99", {placeholder: "0"});

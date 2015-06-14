@@ -65,5 +65,8 @@ public interface InterfaceTrabajadorDAO {
     public boolean val_nu_doc(String nu_doc);
 
     public String ip();
-
+    
+    public String Cod_aps_x_idt(String id_trabajador);
+    
+    public String Cod_huella_x_idt(String id_trabajador);
 }

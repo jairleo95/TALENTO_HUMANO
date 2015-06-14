@@ -149,7 +149,7 @@
                                                                                                                                             <td><%=x.getCa_sueldo()%></td>
                                                                                                                                             <td><%=x.getNo_puesto()%></td>
                                                                                                                                             <td><%=x.getNo_area()%></td>
-                                                                                                                                            <td><a href="../../dgp?iddgp=<%=x.getId_dgp()%>&opc=Detalle "><%=x.getNo_req()%></a></td>
+                                                                                                                                            <td><a href="../../dgp?iddgp=<%=x.getId_dgp()%>&idtr=<%=x.getId_trabajador()%>&opc=Detalle "><%=x.getNo_req()%></a></td>
                                                                                                                                             <td><%
                                                                                                                                                 if (x.getEs_dgp().equals("1")) {
                                                                                                                                                     out.print("Terminado");
