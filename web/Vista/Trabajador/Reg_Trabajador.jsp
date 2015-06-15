@@ -1948,6 +1948,7 @@
                                                                                 d = false;
                                                                             } else
                                                                                 d = true;
+
                                                                             if (sexo.val() == "") {
                                                                                 var $p = sexo.parent().parent();
                                                                                 $p.removeClass('has-success');
@@ -1990,12 +1991,18 @@
                                                                             }
                                                                             return x;
                                                                         }
+                                                                        var f = fe_nac.val();
+                                                                        alert(f)
+                                                                        var a = f.split("");
+                                                                        alert(a)
+                                                                        var fecha_naci = a[8] + a[9] + "/" + a[5] + a[6] + "/" + a[2] + a[3];
+                                                                        alert(fecha_naci)
                                                                         if (validar()) {
                                                                             texto_h += ("<tr class='tr-hijo_" + p + "'>");
                                                                             texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
                                                                             texto_h += ('<td ><label class="td-ap_mat' + p + '">' + ap_mat.val() + '</label><input type="hidden" value="' + ap_mat.val() + '" name="APELLIDO_M_H' + p + '" class="ap_m_h_' + p + '"/></td>');
                                                                             texto_h += ('<td ><label class="td-nom' + p + '">' + nombre.val() + '</label><input type="hidden" value="' + nombre.val() + '" name="NOMBRE_H' + p + '" class="no_h_' + p + '"/></td>');
-                                                                            texto_h += ('<td ><label class="td-fe_nac' + p + '">' + fe_nac.val() + '</label><input type="hidden" value="' + fe_nac.val() + '" name="FECHA_NAC_H' + p + '" class="fe_n_h_' + p + '"/></td>');
+                                                                            texto_h += ('<td ><label class="td-fe_nac' + p + '">' + fecha_naci + '</label><input type="hidden" value="' + fe_nac.val() + '" name="FECHA_NAC_H' + p + '" class="fe_n_h_' + p + '"/></td>');
                                                                             texto_h += (' <td ><label class="td-sex' + p + '">' + $(".i_sexo_h option:selected").html() + '</label><input type="hidden" value="' + sexo.val() + '" name="SEXO_H' + p + '" class="sex_h_' + p + '"/></td>');
                                                                             texto_h += ('<td ><label class="td-tdoc' + p + '">' + $(".i_tdoc_h option:selected").html() + '</label><input type="hidden" value="' + t_doc.val() + '" name="TIPO_DOC_ID_H' + p + '" class="ti_doc_h_' + p + '"/></td>');
                                                                             texto_h += ('<td ><label class="td-ndoc' + p + '">' + ndoc.val() + '</label><input type="hidden" value="' + ndoc.val() + '" name="NRO_DOC_H' + p + '" class="nu_doc_h_' + p + '"/></td>');
