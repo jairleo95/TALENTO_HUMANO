@@ -304,10 +304,64 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
             try {
                 this.conn.close();
             } catch (Exception e) {
-                 throw new RuntimeException(e.getMessage());
+                throw new RuntimeException(e.getMessage());
             }
         }
         return estado;
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_solicitud_Pendiente() {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select *  from RHVD_SOLICITUD_REQUERIMIENTO  where es_autorizar='0'  ";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("no_dep", rs.getString("no_dep"));
+                rec.put("no_area", rs.getString("no_area"));
+                rec.put("no_puesto", rs.getString("no_puesto"));
+                rec.put("no_trabajador", rs.getString("no_trabajador"));
+                rec.put("ap_materno", rs.getString("ap_materno"));
+                rec.put("ap_paterno", rs.getString("ap_paterno"));
+                rec.put("fe_desde", rs.getString("fe_desde"));
+                rec.put("fe_hasta", rs.getString("fe_hasta"));
+                rec.put("fe_creacion", rs.getString("fe_creacion"));
+                rec.put("id_dgp", rs.getString("id_dgp"));
+                rec.put("id_solicitud_dgp", rs.getString("id_solicitud_dgp"));
+                rec.put("id_trabajador", rs.getString("id_trabajador"));
+                rec.put("id_departamento", rs.getString("id_departamento"));
+                rec.put("no_usuario_sol", rs.getString("no_usuario_sol"));
+                rec.put("us_modif", rs.getString("us_modif"));
+                rec.put("id_plazo", rs.getString("id_plazo"));
+                rec.put("no_plazo", rs.getString("no_plazo"));
+                rec.put("det_alerta", rs.getString("det_alerta"));
+                rec.put("fe_desde_p", rs.getString("fe_desde_p"));
+                rec.put("no_usuario_modif", rs.getString("no_usuario_modif"));
+                rec.put("no_req", rs.getString("no_req"));
+                rec.put("de_solicitud", rs.getString("de_solicitud"));
+                rec.put("es_autorizar", rs.getString("es_autorizar"));
+                rec.put("es_solicitud_dgp", rs.getString("es_solicitud_dgp"));
+                rec.put("ti_plazo", rs.getString("ti_plazo"));
+                rec.put("fe_desde_s", rs.getString("fe_desde_s"));
+                rec.put("us_creacion", rs.getString("us_creacion"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR: " + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
+
     }
 
 }

@@ -410,7 +410,6 @@
                         if (objJson.estado) {
                             listar_plazo_tipo($(".tipo"));
                         }
-
                         $(".tipo").change(function () {
                             listar_plazo_tipo($(this));
                         });

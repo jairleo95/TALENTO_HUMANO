@@ -17,6 +17,8 @@ public interface InterfaceSolicitud_RequerimientoDAO {
 
     public List<V_Solicitud_Requerimiento> Listar_solicitud();
 
+    public List<Map<String, ?>> Listar_solicitud_Pendiente();
+
     public List<V_Solicitud_Requerimiento> Listar_solicitud_id(String id_solicitud);
 
     public List<V_Solicitud_Requerimiento> Listar_solicitud_id_us(String id_us, String id_dgp);

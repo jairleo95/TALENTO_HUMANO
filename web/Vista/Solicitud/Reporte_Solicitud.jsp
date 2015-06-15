@@ -131,66 +131,11 @@
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
-                                    <div class="widget-body no-padding">
+                                    <div class="widget-body no-padding head_list_sol">
 
-                                        <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th><strong>Nro</strong></th>
-                                                    <th>Acciones</th>  
-                                                    <th data-class="expand"><strong>Apellidos y Nombres</strong></th>
-                                                    <th data-hide="phone,tablet" ><strong>Departamento</strong></th>
-                                                    <th data-class="expand" ><strong>Area</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Puesto</strong></th>
-
-                                                    <th data-hide="phone,tablet"><strong>Fecha Inicio</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Fecha Cese</strong></th>
-                                                    <th  data-hide="phone,tablet">Fecha Solicitud</th>  
-                                                    <th  data-hide="phone,tablet">Estado</th>  
-                                                </tr>
-                                            </thead>
-                                            <tbody> 
-                                                <%for (int i = 0; i < Listar_solicitud.size(); i++) {
-                                                        V_Solicitud_Requerimiento s = new V_Solicitud_Requerimiento();
-                                                        s = (V_Solicitud_Requerimiento) Listar_solicitud.get(i);
-                                                %>
-                                                <tr>
-                                                    <td><%=(i + 1)%></td>
-                                                    <td>
-                                                        <div class="btn-group">
-                                                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                                Accion <span class="caret"></span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a href="../../dgp?iddgp=<%=s.getId_dgp().trim()%>&idtr=<%=s.getId_trabajador().trim()%>&opc=Detalle"> Ver Requerimiento</a></li>
-                                                                <li class="divider"></li>
-                                                                <li>
-                                                                    <button class="btn btn-primary btn-labeled btn_sol" data-toggle="modal" type="button" data-target="#myModal" value="<%=s.getId_solicitud_dgp()%>"><span class="btn-label"><i class="fa fa-envelope"></i></span>
-                                                                        Ver Solicitud
-                                                                    </button>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </td>
-                                                    <td><a href="../../trabajador?idtr=<%=s.getId_trabajador()%>&opc=list"><strong><%=s.getAp_paterno() + " " + s.getAp_materno() + " " + s.getNo_trabajador()%></strong></a></td>
-                                                    <td><%=s.getNo_dep()%></td>
-                                                    <td><%=s.getNo_area()%></td>
-                                                    <td><%=s.getNo_puesto()%></td>
-                                                    <td><%=s.getFe_desde()%></td>
-                                                    <td><%=s.getFe_hasta()%></td>
-
-                                                    <td><%=s.getFe_creacion()%></td>
-                                                    <td>
-                                                        <%if (s.getEs_autorizar().trim().equals("0")) {
-                                                                out.print("Sin autorizar");
-                                                            } else if (s.getEs_autorizar().trim().equals("1")) {
-                                                                out.print("Autorizado");
-                                                            }
-
-                                                        %>
-                                                    </td>
-                                                </tr>
-                                                <%}%>
+                                        <table  class="table table-striped table-bordered table-hover table_list_sol" width="100%">
+                                            <thead><tr><th><strong>Nro</strong></th><th>Acciones</th><th data-class="expand"><strong>Apellidos y Nombres</strong></th><th data-hide="phone,tablet" ><strong>Departamento</strong></th><th data-class="expand" ><strong>Area</strong></th><th data-hide="phone,tablet"><strong>Puesto</strong></th><th data-hide="phone,tablet"><strong>Fecha Inicio</strong></th><th data-hide="phone,tablet"><strong>Fecha Cese</strong></th><th  data-hide="phone,tablet">Fecha Solicitud</th><th  data-hide="phone,tablet">Estado</th></tr></thead>
+                                            <tbody class="tbody_list_solicitud">
                                             </tbody>
                                         </table>
                                     </div>
@@ -319,17 +264,40 @@
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script type="text/javascript">
-
-        // DO NOT REMOVE : GLOBAL FUNCTIONS!
-        $(document).ready(function () {
-            pageSetUp();
-            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-            });
-            $(".cod_aps").numeric();
-
-            $(".btn_sol").click(function () {
-
+        function listar_solicitudes() {
+            var t_body = $(".tbody_list_solicitud");
+            var text_html = '';
+            t_body.empty();
+            $.post("../../solicitud_requerimiento", "opc=Listar_Sol_Pendientes", function (objJson) {
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                } else {
+                    t_body.empty();
+                    var lista = objJson.lista;
+                    for (var g = 0; g < lista.length; g++) {
+                        text_html += '<tr>';
+                        text_html += '<td>' + (g + 1) + '</td>';
+                        text_html += '<td><div class="btn-group"> <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Accion <span class="caret"></span></button><ul class="dropdown-menu"><li><a href="../../dgp?iddgp=' + lista[g].id_dgp + '&idtr=' + lista[g].id_trabajador + '&opc=Detalle"> Ver Requerimiento</a></li> <li class="divider"></li>';
+                        text_html += '<li><button class="btn btn-primary btn-labeled btn_sol" data-toggle="modal" type="button" data-target="#myModal" value="' + lista[g].id_solicitud_dgp + '"><span class="btn-label"><i class="fa fa-envelope"></i></span> Ver Solicitud</button></li></ul></div></td>';
+                        text_html += '<td><a href="../../trabajador?idtr=' + lista[g].id_trabajador + '&opc=list"><strong>' + lista[g].ap_paterno + ' ' + lista[g].ap_materno + ' ' + lista[g].no_trabajador + '</strong></a></td>';
+                        text_html += '<td>' + lista[g].no_dep + '</td>';
+                        text_html += '<td>' + lista[g].no_area + '</td>';
+                        text_html += '<td>' + lista[g].no_puesto + '</td>';
+                        text_html += '<td>' + lista[g].fe_desde + '</td>';
+                        text_html += '<td>' + lista[g].fe_hasta + '</td>';
+                        text_html += '<td>' + lista[g].fe_creacion + '</td>';
+                        if (lista[g].es_autorizar == '0') {
+                            text_html += '<td>Sin Autorizar</td>';
+                        }
+                        text_html += '</tr>';
+                    }
+                    t_body.append(text_html);
+                    text_html = "";
+                    $('.table_list_sol').DataTable();
+                }
+                
+                 $(".btn_sol").click(function () {
                 var tb = $(".tabla_detalle_sol");
                 tb.empty();
                 var texto_html = '';
@@ -344,22 +312,18 @@
                         texto_html += '<tr><td colspan="2" class="text-info table-bordered"><i class="fa fa-file"></i> REQUERIMIENTO : ' + lista[i].req + '</td></tr>';
                         texto_html += '<tr><td>Apellidos y Nombres</td><td>' + lista[i].ap_p + ' ' + lista[i].ap_m + ' ' + lista[i].nombre + '</td></tr>';
                         if (lista[i].ti_plazo == '1') {
-
                             texto_html += '<tr><td>Tipo de Plazo</td><td>Inicio de Contrato</td></tr>';
                         }
-
                         if (lista[i].ti_plazo == '2') {
                             texto_html += '<tr><td>Tipo de Plazo</td><td>Ingreso a planilla</td></tr>';
                         }
-
                         texto_html += '<tr><td>Nombre de Plazo</td><td>' + lista[i].plazo + '</td></tr>';
                         texto_html += '<tr><td>Detalle de Plazo</td><td>' + lista[i].detalle_plazo + '</td></tr>';
                         if (lista[i].ti_plazo == '2') {
-                            texto_html += ' <tr><td>Mes de ingreso solicitado : </td><td>' + lista[i].mes + '</td></tr>';
-
+                            texto_html += ' <tr class="success"><td>Mes de ingreso solicitado : </td><td>' + lista[i].mes + '</td></tr>';
                         }
                         else {
-                            texto_html += ' <tr><td>Fecha de inicio de contrato solicitado : </td><td>' + lista[i].fecha_plazo + '</td></tr>';
+                            texto_html += ' <tr class="success"><td>Fecha de inicio de contrato solicitado : </td><td>' + lista[i].fecha_plazo + '</td></tr>';
                         }
                         texto_html += '<tr><td>Motivo de solicitud</td><td>' + lista[i].solicitud + '</td></tr>';
                         $(".data_procesar").val("&id=" + lista[i].id + "&tipo=" + lista[i].ti_plazo + "&fecha=" + lista[i].fecha_plazo);
@@ -370,14 +334,11 @@
                             texto_html += '<tr><td>Estado de solicitud</td><td>Sin Autorizar</td></tr>';
                             $(".foot_sol").empty();
                             $(".foot_sol").append('<button type="button" class="btn btn-default btn-labeled" data-dismiss="modal"><span class="btn-label"><i class="fa fa-times"></i></span>Cancel</button><button class="btn btn-primary btn-labeled btn_procesar_sol"  type="button" ><span class="btn-label"><i class="fa fa-check"></i></span>Procesar</button>');
-
                         }
                     }
                     texto_html += '';
                     tb.append(texto_html);
                     texto_html = "";
-
-
                     $(".btn_procesar_sol").click(function () {
                         //  var valor = $(this).val();
                         if ($(".comentario").valid() == true) {
@@ -409,6 +370,18 @@
                     });
                 });
             });
+            });
+        }
+
+        $(document).ready(function () {
+            pageSetUp();
+            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+            });
+            $(".cod_aps").numeric();
+            listar_solicitudes();
+
+           
             /* // DOM Position key index //
              l - Length changing (dropdown)
              f - Filtering input (search)

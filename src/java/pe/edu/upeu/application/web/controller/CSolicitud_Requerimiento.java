@@ -49,6 +49,11 @@ public class CSolicitud_Requerimiento extends HttpServlet {
             getServletContext().setAttribute("Listar_solicitud", s.Listar_solicitud());
             response.sendRedirect("Vista/Solicitud/Reporte_Solicitud.jsp");
         }
+        if (opc.equals("Listar_Sol_Pendientes")) {
+            List<Map<String, ?>> list = s.Listar_solicitud_Pendiente();
+            rpta.put("rpta", "1");
+            rpta.put("lista", list);
+        }
         if (opc.equals("Registrar_solicitud")) {
             String FE_DESDE = request.getParameter("desde");
             String ID_DGP = request.getParameter("iddgp");
