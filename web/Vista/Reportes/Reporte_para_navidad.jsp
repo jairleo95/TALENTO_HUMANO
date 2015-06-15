@@ -65,76 +65,71 @@
         </style>
     </head>
     <body>
-        <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
-
-        <!-- HEADER -->
-        <!-- END HEADER -->
-
-        <!-- Left panel : Navigation area -->
-        <!-- Note: This width of the aside area can be adjusted through LESS variables -->
-        <!-- END NAVIGATION -->
-
-        <!-- MAIN PANEL -->
-        <div class="spacing">
-            <center><h1 class="spacing" style="font-weight: bold;">REPORTE-TRABAJADORES EN NAVIDAD</h1></center> 
-        </div>
-        <div class="row">
-            <div align="center">
-                <div class="form-group" >
-                    <label>CODIGO APS</label><br>
-                    <input type="text"  class="form-control mes" placeholder="APS" name=""  length="45" style="width: 80px" id="des"/>
-                </div>
-                <div class="form-group" >
-                    <label>DEPARTAMENTO</label><br>
-                    <input type="text"  class="form-control mes" placeholder="Ingrese el DEPARTAMENTO" name=""  length="45" style="width: 150px" id="des"/>
-                </div>
-                <div class="form-group" >
-                    <label>AREA</label><br>
-                    <input type="text"  class="form-control mes" placeholder="Ingrese su AREA" name=""  length="45" style="width: 150px" id="des"/>
-                </div>
-                <div class="form-group" >
-                    <label>SECCIÓN</label><br>
-                    <input type="text"  class="form-control mes" placeholder="Ingrese su SECCIÓN" name=""  length="45" style="width: 150px" id="des"/>
-                </div>
-                <div class="form-group" >
-                    <label>PUESTO</label><br>
-                    <input type="text"  class="form-control mes" placeholder="Ingrese su PUESTO" name=""  length="45" style="width: 150px" id="des"/>
-                </div>
-                <div class="form-group" >
-                    <label>FECHA NACIMIENTO</label><br>
-                    <input type="DATE"  class="form-control mes" name=""  length="45" style="width: 170px" id="des"/>
-                </div>
-                <div class="form-group" >
-                    <label>EDAD</label><br>
-                    <input type="text"  class="form-control mes" placeholder="EDAD" name=""  length="45" style="width: 80px" id="des"/>
-                </div>
-                <div class="form-group" >
-                    <label>APELLIDO Y NOMBRES</label><br>
-                    <input type="text"  class="form-control mes" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
-                </div>
-                <div class="form-group" >
-                    <label>TIPO DOC</label><br>
-                    <input type="text"  class="form-control mes" placeholder="Ingrese la cantidad de meses" name=""  length="45" style="width: 250px" id="des"/>
-                </div>
-                <div class="form-group" >
-                    <label>Nº DOCUMENTO</label><br>
-                    <input type="text"  class="form-control mes" placeholder="Nº Documento" name=""  length="45" style="width: 120px" id="des"/>
-                </div>
-                <div class="row">
+        <form class="form-inline validarform" id="frm_filtro2" method="post" action="../../Imprimir" name="formulario" onclick="return marcado();">
+            <div class="spacing">
+                <center><h1 class="spacing" style="font-weight: bold;">REPORTE-TRABAJADORES EN NAVIDAD</h1></center> 
+            </div>
+            <div class="row">
+                <div align="center">
                     <div class="form-group" >
-                        <label>Tiempo de Trabajo (Mayor a 10 meses)</label><br>
-                        <input type="text"  class="form-control mes" placeholder="Ingrese la cantidad de meses" name="mes"  length="45" style="width: 250px" id="des"/>
+                        <label>CODIGO APS</label><br>
+                        <input type="text"  class="form-control mes" placeholder="APS" name=""  length="45" style="width: 80px" id="des"/>
                     </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="form-group">                            
-                        <button type="button" class="btn btn-primary" id="btnbuscar" >Buscar</button>
+                    <div class="form-group" >
+                        <label>DEPARTAMENTO</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese el DEPARTAMENTO" name=""  length="45" style="width: 150px" id="des"/>
                     </div>
+                    <div class="form-group" >
+                        <label>AREA</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese su AREA" name=""  length="45" style="width: 150px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>SECCIÓN</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese su SECCIÓN" name=""  length="45" style="width: 150px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>PUESTO</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese su PUESTO" name=""  length="45" style="width: 150px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>EDAD</label><br>
+                        <input type="text"  class="form-control mes" placeholder="EDAD" name=""  length="45" style="width: 80px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>APELLIDO Y NOMBRES</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese APELLIDOS Y NOMBRES" name=""  length="45" style="width: 250px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>TIPO DOC</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Ingrese la cantidad de meses" name=""  length="45" style="width: 250px" id="des"/>
+                    </div>
+                    <div class="form-group" >
+                        <label>Nº DOCUMENTO</label><br>
+                        <input type="text"  class="form-control mes" placeholder="Nº Documento" name=""  length="45" style="width: 120px" id="des"/>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="form-group" >
+                            <label>Tiempo de Trabajo (Mayor a 10 meses)</label><br>
+                            <input type="text"  class="form-control mes" placeholder="Ingrese la cantidad de meses" name="mes"  length="45" style="width: 250px" id="des"/>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="form-group">  
+                            <br>
+                            <a id="btnbuscar"class="btn btn-primary btn-circle btn-xl btnEnviar">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </a>
+                            <a id="btncancel" class="btn btn-danger btn-circle btn-xl btnCancelar">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
+                        </div>
 
-                </div>  
-            </div> 
-        </div>
+                    </div> 
+                </div> 
+            </div>
+        </form>
         <div id="main" role="main" style="margin-left: 0px">
 
             <!-- RIBBON -->

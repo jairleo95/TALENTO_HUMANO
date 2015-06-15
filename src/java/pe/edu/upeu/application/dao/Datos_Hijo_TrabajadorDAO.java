@@ -209,7 +209,6 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
             sql += (!pat.equals("")) ? "where UPPER(AP_PATERNO)='" + pat.trim().toUpperCase() + "'" : "";
             sql += (!mat.equals("")) ? "where UPPER(AP_MATERNO)='" + mat.trim().toUpperCase() + "'" : "";
             sql += (!dn.equals("")) ? "where DNI='" + dn.trim() + "'" : "";
-            sql += (!dn.equals("")) ? "where DNI='" + dn.trim() + "'" : "";
             sql += (!gen.equals("")) ? "where genero='" + gen.trim() + "'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {

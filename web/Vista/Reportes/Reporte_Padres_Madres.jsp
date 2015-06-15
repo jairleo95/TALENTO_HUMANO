@@ -10,16 +10,6 @@
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
-
-        <!-- SmartAdmin RTL Support is under construction
-                 This RTL CSS will be released in version 1.5
-        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> -->
-
-        <!-- We recommend you use "your_style.css" to override SmartAdmin
-             specific styles this will also ensure you retrain your customization with each SmartAdmin update.
-        <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
-
-        <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/demo.min.css">
 
         <!-- FAVICONS -->
@@ -126,11 +116,17 @@
                         </div>
                         <br>
                         <div class="row">
-                            <div class="form-group">                            
-                                <button type="button" class="btn btn-primary" id="btnbuscar">Buscar</button>
+                            <div class="form-group">  
+                                <br>
+                                <a id="btnbuscar"class="btn btn-primary btn-circle btn-xl btnEnviar">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </a>
+                                <a id="btncancel" class="btn btn-danger btn-circle btn-xl btnCancelar">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </a>
                             </div>
 
-                        </div>  
+                        </div> 
                     </div> 
                     <br>
                     <br>
