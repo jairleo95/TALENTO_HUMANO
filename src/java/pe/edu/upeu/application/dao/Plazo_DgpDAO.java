@@ -255,28 +255,27 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  *  from rhtr_plazo where ti_plazo='" + id_tipo.trim() + "' and id_plazo not in (select  id_plazo  from RHTD_SOLICITUD_DGP where ID_DGP='" + iddgp + "')";
+            String sql = "select ID_PLAZO, no_plazo || ' ('|| to_char(to_date(fe_desde,'yyyy-mm-dd'),'dd/mm/yyyy') || ' - '|| to_char(to_date(fe_hasta,'yyyy-mm-dd'),'dd/mm/yyyy')||') ' as nombre  from RHVD_PLAZO where ti_plazo='" + id_tipo.trim() + "' and id_plazo not in (select  id_plazo  from RHTD_SOLICITUD_DGP where ID_DGP='" + iddgp + "') order by to_number(substr(id_plazo,5,length(id_plazo))) desc";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
-
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("id", rs.getString("id_plazo"));
-                rec.put("nombre", rs.getString("no_plazo"));
+                rec.put("nombre", rs.getString("nombre"));
                 lista.add(rec);
             }
             rs.close();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
         return lista;
-
     }
 
     @Override

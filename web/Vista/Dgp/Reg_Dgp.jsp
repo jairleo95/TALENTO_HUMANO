@@ -1064,17 +1064,27 @@
                                                                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                                             });
                                                             $(".fe_inicio_dgp").change(function () {
-                                                                $.post("../../dgp", "opc=Val_Fe_Inicio&fecha=" + $(this).val(), function (objJson) {
-                                                                   // alert(objJson.estado);
+                                                                var fecha = $(this).val();
+                                                                $.post("../../dgp", "opc=Val_Fe_Inicio&fecha=" + fecha, function (objJson) {
                                                                     if (objJson.estado) {
                                                                         $.bigBox({
                                                                             title: "¡Alerta de plazo no cumplido!",
-                                                                            content: "Si registra con esta fecha el requerimiento estara en fuera de plazo. ¡NECESITA HACER SOLICITUD!",
-                                                                            color: "#C46A69",
-                                                                            //timeout: 6000,
+                                                                            content: "Si registra con esta fecha de inicio : " + fecha + ",  el requerimiento estara en fuera de plazo. ¡NECESITA HACER SOLICITUD AL TERMINAR REGISTRO!",
+                                                                            color: "#C79121",
                                                                             icon: "fa fa-warning shake animated",
-                                                                            number: "1",
-                                                                            timeout: 10000
+                                                                            // number: "1",
+                                                                            //timeout: 15000
+                                                                        });
+                                                                    } else {
+
+
+                                                                        $.bigBox({
+                                                                            title: "¡Plazo cumplido!",
+                                                                            content: "Con la fecha de inicio :" + fecha + " el plazo para este requerimiento se cumplirá.",
+                                                                            color: "#739E73",
+                                                                            icon: "fa fa-shield fadeInLeft animated"
+                                                                                    // ,number: "1",
+                                                                                    //timeout: 15000
                                                                         });
                                                                     }
                                                                 });
