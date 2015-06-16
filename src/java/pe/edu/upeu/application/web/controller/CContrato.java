@@ -633,7 +633,7 @@ public class CContrato extends HttpServlet {
             String ID_FUNC = "";
             String ID_TRABAJADOR = request.getParameter("IDDATOS_TRABAJADOR");
             String ID_TIPO_PLANILLA = request.getParameter("TIPO_PLANILLA");
-            String ID_HORARIO = "HORARIO";
+            //String ID_HORARIO = "HORARIO";
             String ID_REGIMEN_LABORAL = request.getParameter("REG_LAB_MINTRA");
 
             String ID_MODALIDAD = request.getParameter("MODALIDAD");
@@ -703,8 +703,38 @@ public class CContrato extends HttpServlet {
             String ES_REMUNERACION_PROCESADO = null;
             Double ca_bonificacion_p = Double.parseDouble(request.getParameter("ca_bono_puesto"));
             String ES_MFL = request.getParameter("MFL");
+            List<String> dia = new ArrayList<String>();
+            dia.add("lun");
+            dia.add("mar");
+            dia.add("mie");
+            dia.add("jue");
+            dia.add("vie");
+            dia.add("sab");
+            dia.add("dom");
 
-            con.INSERT_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ID_ANNO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR, CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV, ID_TIPO_PLANILLA, ES_REMUNERACION_PROCESADO, ID_HORARIO, ID_PLANTILLA_CONTRACTUAL, ca_bonificacion_p, ES_MFL);
+            String ID_DETALLE_HORARIO = null;
+            String ES_DETALLE_HORARIO = "1";
+            String ES_HORARIO = "1";
+            String ID_TIPO_HORARIO = request.getParameter("ID_TIPO_HORARIO");
+            String ES_MOD_FARMATO = "1";
+            Double ca_ho_total = Double.parseDouble(request.getParameter("horas_totales"));
+
+            ID_DETALLE_HORARIO = IHor.Insert_Det_Hor_Casos_Esp(null, ID_DGP, ES_DETALLE_HORARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, ID_TIPO_HORARIO, ES_MOD_FARMATO, ca_ho_total);
+
+            for (int i = 0; i < dia.size(); i++) {
+                for (int j = 0; j < 10; j++) {
+                    String hora_desde = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
+                    String hora_hasta = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
+                    String d = request.getParameter("DIA_" + dia.get(i) + j);
+
+                    if (hora_desde != null & d != null & hora_hasta != null) {
+                        if (!hora_hasta.equals("") & !hora_desde.equals("") & !d.equals("")) {
+                            IHor.Insert_Horario(null, hora_desde, hora_hasta, d, ES_HORARIO, ID_DETALLE_HORARIO);
+                        }
+                    }
+                }
+            }
+            con.INSERT_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ID_ANNO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR, CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV, ID_TIPO_PLANILLA, ES_REMUNERACION_PROCESADO, ID_DETALLE_HORARIO, ID_PLANTILLA_CONTRACTUAL, ca_bonificacion_p, ES_MFL);
             emp.VALIDAR_EMPLEADO(ID_TRABAJADOR);
             //--------- COD HUELLA y APS ------------
             String aps = request.getParameter("cod_aps");
@@ -732,38 +762,6 @@ public class CContrato extends HttpServlet {
             }
 
             //------------- HORARIO ------------
-            List<String> dia = new ArrayList<String>();
-            dia.add("lun");
-            dia.add("mar");
-            dia.add("mie");
-            dia.add("jue");
-            dia.add("vie");
-            dia.add("sab");
-            dia.add("dom");
-
-            String ID_DETALLE_HORARIO = null;
-            String ES_DETALLE_HORARIO = "1";
-            String ES_HORARIO = "1";
-            String ID_TIPO_HORARIO = request.getParameter("ID_TIPO_HORARIO");
-            String ES_MOD_FARMATO = "1";
-
-            //IHor.Insert_Det_Hor_Casos_Esp(null, ID_DGP, ES_DETALLE_HORARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, ID_TIPO_HORARIO, ES_MOD_FARMATO);
-            ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
-
-            for (int i = 0; i < dia.size(); i++) {
-                for (int j = 0; j < 10; j++) {
-                    String hora_desde = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
-                    String hora_hasta = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
-                    String d = request.getParameter("DIA_" + dia.get(i) + j);
-
-                    if (hora_desde != null & d != null & hora_hasta != null) {
-                        if (!hora_hasta.equals("") & !hora_desde.equals("") & !d.equals("")) {
-                            // IHor.Insert_Horario(null, hora_desde, hora_hasta, d, ES_HORARIO, ID_DETALLE_HORARIO);
-                        }
-                    }
-                }
-
-            }
             getServletContext().setAttribute("List_Jefe", l.List_Jefe());
             getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
             getServletContext().setAttribute("List_ID_User", usu.List_ID_User(US_CREACION));
@@ -776,9 +774,9 @@ public class CContrato extends HttpServlet {
             int num_ad = doc.List_Adventista(ID_TRABAJADOR);
             getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
             getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
-
-            out.print(ID_MODALIDAD + "-");
-            out.print(ID_SUB_MODALIDAD);
+           /* out.print(ID_TIPO_HORARIO + "-");
+            out.print(ID_DETALLE_HORARIO + "-");
+            out.print(ID_SUB_MODALIDAD);*/
             String idctr = con.Contrato_max(ID_TRABAJADOR);
             //response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR + "&idctr=" + idctr + "&dce=Doc_CE");
             response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&req=si&idtr=" + ID_TRABAJADOR + "&P2=TRUE&ms=ok");
