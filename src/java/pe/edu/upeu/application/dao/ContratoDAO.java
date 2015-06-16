@@ -108,7 +108,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setDouble(56, CA_BEV);
             cst.setString(57, ID_TIPO_PLANILLA);
             cst.setString(58, "0");
-            cst.setString(59, ID_HORARIO);
+            cst.setString(59, ID_HORARIO.trim());
             cst.setString(60, ID_PLANTILLA_CONTRACTUAL);
             cst.setDouble(61, ca_bonificacion_p);
             cst.setString(62, ES_MFL);

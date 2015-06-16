@@ -312,7 +312,7 @@
                                                             <label class="input" id="titu">Codigo APS: 
                                                                 <%String co_aps = request.getParameter("co_ap");
                                                                     String co_hue = request.getParameter("co_hu");%>
-                                                                <input type="text" maxlength="6" name="cod_aps" id="aps" class="input-group-sm" <%if (!co_aps.equals("--")) {
+                                                                <input type="text" maxlength="6" name="cod_aps" id="cod_ap" class="input-group-sm" <%if (!co_aps.equals("--")) {
                                                                         out.print("value='" + co_aps + "'");
                                                                     } else {
                                                                     }%> onblur="VAL_COD_APS()">
@@ -1677,7 +1677,32 @@
     <script type="text/javascript">
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
+        function VAL_COD_APS() {
+            if ($("#cod_ap").val() != "") {
+                var co_aps = document.getElementById("cod_ap");
+                $.ajax({
+                    url: "../../empleado",
+                    type: "POST",
+                    data: "opc=validar_aps&co_aps=" + co_aps.value
+                }).done(function(e) {
+                    //alert(e);
+                    var cant = ($("#cod_ap").val());
+                    if (cant.length > 5) {
+                        if (e == 0) {
+                            window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#cod_ap").val() + "&idtr=" + $(".idtra").val() + "";
+                        }
+                        else {
+                            $.SmartMessageBox({
+                                title: "Este Código APS ya fue registrado!",
+                                content: "Por favor Ingrese un Código APS distinto",
+                            });
+                        }
+                    }
+                }).fail(function(e) {
+                    alert("Error: " + e);
+                });
+            }
+        }
         $(document).ready(function() {
 
             pageSetUp();
@@ -1691,10 +1716,10 @@
                     FEC_HASTA: {
                         val_fecha: true
                     },
-                   /* FECHA_SUSCRIPCION: {
-                        required: true,
-                        val_fecha: true
-                    },*/
+                    /* FECHA_SUSCRIPCION: {
+                     required: true,
+                     val_fecha: true
+                     },*/
                     fname: {
                         required: true
                     },
