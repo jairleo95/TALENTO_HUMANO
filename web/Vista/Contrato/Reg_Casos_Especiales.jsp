@@ -320,10 +320,10 @@
                                                         </section>
                                                         <section class="col col-1 ">
                                                             <label class="input" id="titu">Codigo Huella: 
-                                                                <input type="text" maxlength="6" name="cod_hue" id="hue" class="input-group-sm" <%if (!co_hue.equals("--")) {
+                                                                <input type="text" maxlength="6" name="cod_hue" id="cod_hu" class="input-group-sm" <%if (!co_hue.equals("--")) {
                                                                         out.print("value='" + co_hue + "'");
                                                                     } else {
-                                                                    }%>>
+                                                                    }%> onblur="VAL_COD_HUELLA()">
                                                             </label>
                                                         </section>
                                                         <section class="col col-2" style=" margin-top:0.8%;">
@@ -399,8 +399,8 @@
                                                                     Listar_Direccion();
                                                                     Listar_Departamento();
 
-                                                                    $("#aps").numeric();
-                                                                    $("#hue").numeric();
+                                                                    $("#cod_ap").numeric();
+                                                                    $("#cod_hu").numeric();
                                                                 }
                                                         );</script> 
                                                     <script>
@@ -1689,7 +1689,7 @@
                     var cant = ($("#cod_ap").val());
                     if (cant.length > 5) {
                         if (e == 0) {
-                            window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#cod_ap").val() + "&idtr=" + $(".idtra").val() + "";
+                            //window.location.href = "";
                         }
                         else {
                             $.SmartMessageBox({
@@ -1700,6 +1700,31 @@
                     }
                 }).fail(function(e) {
                     alert("Error: " + e);
+                });
+            }
+        }
+        function VAL_COD_HUELLA() {
+
+            if ($("#cod_hu").val() != "") {
+                var co_huel = document.getElementById("cod_hu");
+                $.ajax({
+                    url: "../../empleado",
+                    type: "POST",
+                    data: "opc=validar_huella&co_hue=" + co_huel.value
+                }).done(function(e) {
+                    // alert(e)
+                    var cant = $("#cod_hu").val();
+                    if (cant.length > 5) {
+                        if (e == 0) {
+                            //window.location.href = "";
+                        }
+                        else {
+                            $.SmartMessageBox({
+                                title: "Este Código de Huella ya fue registrado!",
+                                content: "Por favor Ingrese un Codigo de Huella distinto",
+                            });
+                        }
+                    }
                 });
             }
         }
