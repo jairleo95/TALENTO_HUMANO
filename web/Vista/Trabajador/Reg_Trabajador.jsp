@@ -1992,11 +1992,8 @@
                                                                             return x;
                                                                         }
                                                                         var f = fe_nac.val();
-                                                                        alert(f)
                                                                         var a = f.split("");
-                                                                        alert(a)
                                                                         var fecha_naci = a[8] + a[9] + "/" + a[5] + a[6] + "/" + a[2] + a[3];
-                                                                        alert(fecha_naci)
                                                                         if (validar()) {
                                                                             texto_h += ("<tr class='tr-hijo_" + p + "'>");
                                                                             texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
