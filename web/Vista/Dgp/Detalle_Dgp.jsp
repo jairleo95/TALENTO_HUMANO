@@ -401,6 +401,19 @@
                 $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
+                $(".btn_terminar").click(function () {
+                    $.SmartMessageBox({
+                        title: "¡Advertencia!",
+                        content: "¿Esta seguro de enviar la solicitud?",
+                        buttons: '[No][Si]'
+                    }, function (ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            $(".form_terminar_req").submit();
+                        }
+                        if (ButtonPressed === "No") {
+                        }
+                    });
+                });
                 $(".btn_solicitud").click(function () {
                     var body_modal = $(".body_mdal_sol");
                     body_modal.empty();
@@ -413,19 +426,7 @@
                         $(".tipo").change(function () {
                             listar_plazo_tipo($(this));
                         });
-                        $(".btn_terminar").click(function () {
-                            $.SmartMessageBox({
-                                title: "¡Advertencia!",
-                                content: "¿Esta seguro de enviar la solicitud?",
-                                buttons: '[No][Si]'
-                            }, function (ButtonPressed) {
-                                if (ButtonPressed === "Si") {
-                                    $(".form_terminar_req").submit();
-                                }
-                                if (ButtonPressed === "No") {
-                                }
-                            });
-                        });
+
                         $(".sbm_solicitud").click(function (e) {
                             if ($(".solicitud_plazo").valid() == true) {
                                 $.SmartMessageBox({
