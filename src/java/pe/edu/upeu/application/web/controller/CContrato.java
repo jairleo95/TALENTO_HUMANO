@@ -708,12 +708,12 @@ public class CContrato extends HttpServlet {
             emp.VALIDAR_EMPLEADO(ID_TRABAJADOR);
             //--------- COD HUELLA y APS ------------
             String aps = request.getParameter("cod_aps");
-            if (aps != null) {
+            if (!aps.equals("")) {
                 int cod_aps = Integer.parseInt(aps);
                 emp.Reg_aps(ID_TRABAJADOR, cod_aps);
             }
             String huella = request.getParameter("cod_hue");
-            if (huella != null) {
+            if (!huella.equals("")) {
                 int cod_hue = Integer.parseInt(huella);
                 emp.Reg_cod_huella(ID_TRABAJADOR, cod_hue);
             }
