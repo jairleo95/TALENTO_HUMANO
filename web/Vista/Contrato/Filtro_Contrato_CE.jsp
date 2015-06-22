@@ -448,8 +448,8 @@
                                                                                                             }
                                                                                                         });
                                                                                                         $(".dis_estado").click(function(e) {
-                                                                                                            var cto =  $(this).val();
-                                                                                                          // alert(cto);
+                                                                                                            var cto = $(this).val();
+                                                                                                            // alert(cto);
                                                                                                             $.SmartMessageBox({
                                                                                                                 title: "¡Advertencia!",
                                                                                                                 content: "¿Esta seguro que terminó el contrato?",
@@ -459,7 +459,7 @@
                                                                                                                     $.ajax({
                                                                                                                         url: "../../contrato",
                                                                                                                         type: "POST",
-                                                                                                                        data: "opc=validar_contrato&id_cto=" + cto 
+                                                                                                                        data: "opc=validar_contrato&id_cto=" + cto
                                                                                                                     }).done(function(e) {
                                                                                                                         $.SmartMessageBox({
                                                                                                                             title: "Se cambió el estado correctamente",
