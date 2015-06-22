@@ -106,8 +106,7 @@
                     <div class="form-group" >
                         <label>Nº DOCUMENTO</label><br>
                         <input type="text"  class="form-control mes" placeholder="Nº Documento" name=""  length="45" style="width: 120px" id="des"/>
-                    </div>
-                    <br>
+                    </div><br>
                     <div class="row">
                         <div class="form-group" >
                             <label>Tiempo de Trabajo (Mayor a 10 meses)</label><br>
@@ -155,7 +154,7 @@
                             <!-- end widget -->
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div  width="200%" class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
 
                                 <header width="200%">
                                     <span class="widget-icon"><i class="fa fa-table"></i>  </span>
