@@ -816,9 +816,9 @@ public class CContrato extends HttpServlet {
             String id_cto = request.getParameter("id_cto");
             con.validar_contrato(id_cto);
         }
-
-        
-
+        if(opc.equals("gen_cont")){
+            response.sendRedirect("Vista/Contrato/Gen_Contrato_CE.jsp");
+        }
         /*} catch (Exception e) {
          throw new RuntimeException("Error!");
          }*/

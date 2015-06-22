@@ -636,6 +636,9 @@ public class CTrabajador extends HttpServlet {
             int n = tr.cod_uni_unico(cod_uni);
             out.print(n);
         }
+        if(opc.equals("reg_trb")){
+        response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
+        }
 
     }
 
