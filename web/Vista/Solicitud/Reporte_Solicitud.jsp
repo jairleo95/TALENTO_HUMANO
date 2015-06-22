@@ -298,10 +298,12 @@
                 }
                 
                  $(".btn_sol").click(function () {
+                     //alert()
                 var tb = $(".tabla_detalle_sol");
                 tb.empty();
                 var texto_html = '';
                 $(".foot_sol").empty();
+                
                 $.post("../../solicitud_requerimiento", "opc=Ver_Solicitud&id=" + $(this).val(), function (objJson) {
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
