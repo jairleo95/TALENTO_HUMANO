@@ -1,4 +1,4 @@
-    <%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
+<%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
@@ -110,12 +110,12 @@
         <%}%> 
         <script>
 
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 var b = $("#alerta_dgp");
                 // $("#alerta_dgp").hide();
                 function listar() {
-                    $.post("../../plazo_dgp", "opc=Listar", function(objJson) {
+                    $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
                         b.empty();
                         var lista = objJson.lista;
                         if (objJson.rpta == -1) {
@@ -190,13 +190,13 @@
                                                 timeout: 3000
                                             });
                                         }
-                                        $(document).ready(function() {
-                                            $(".btn_pro_remuneracion").click(function() {
+                                        $(document).ready(function () {
+                                            $(".btn_pro_remuneracion").click(function () {
                                                 $.SmartMessageBox({
                                                     title: "¡Advertencia!",
                                                     content: "¿Esta seguro de procesar estos requerimientos?",
                                                     buttons: '[No][Si]'
-                                                }, function(ButtonPressed) {
+                                                }, function (ButtonPressed) {
                                                     if (ButtonPressed === "Si") {
                                                         for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
                                                             if ($(".env_rem" + i).prop('checked')) {
@@ -204,7 +204,7 @@
                                                                     url: "../../autorizacion",
                                                                     type: "POST",
                                                                     data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
-                                                                }).done(function() {
+                                                                }).done(function () {
                                                                     window.location.href = "../../autorizacion";
                                                                 });
                                                             }
@@ -215,28 +215,28 @@
 
                                                 });
                                             });
-                                            $(".btn_pro_firma").click(function() {
+                                            $(".btn_pro_firma").click(function () {
                                                 $.SmartMessageBox({
                                                     title: "¡Advertencia!",
                                                     content: "¿Esta seguro de procesar firmas a estos requerimientos?",
                                                     buttons: '[No][Si]'
-                                                }, function(ButtonPressed) {
+                                                }, function (ButtonPressed) {
                                                     if (ButtonPressed === "Si") {
                                                         try {
-                                                            $.each($(".firm_contr"), function() {
+                                                            $.each($(".firm_contr"), function () {
                                                                 //alert($(this).val());
                                                                 if ($(this).prop('checked')) {
                                                                     $.ajax({
                                                                         url: "../../contrato",
                                                                         type: "POST",
                                                                         data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
-                                                                    }).done(function() {
+                                                                    }).done(function () {
                                                                     });
                                                                     $.ajax({
                                                                         url: "../../autorizacion",
                                                                         type: "POST",
                                                                         data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
-                                                                    }).done(function() {
+                                                                    }).done(function () {
                                                                         window.location.href = "../../autorizacion";
                                                                     });
                                                                 }
@@ -252,12 +252,12 @@
                                                     }
                                                 });
                                             });
-                                            $(".btn_cod_aps").click(function() {
+                                            $(".btn_cod_aps").click(function () {
                                                 $.SmartMessageBox({
                                                     title: "¡Advertencia!",
                                                     content: "¿Esta seguro de procesar codigos APS a estos requerimientos?",
                                                     buttons: '[No][Si]'
-                                                }, function(ButtonPressed) {
+                                                }, function (ButtonPressed) {
                                                     if (ButtonPressed === "Si") {
                                                         for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
                                                             if ($(".cod_aps" + r).val() != "") {
@@ -271,7 +271,7 @@
                                                                     url: "../../autorizacion",
                                                                     type: "POST",
                                                                     data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                                                }).done(function() {
+                                                                }).done(function () {
                                                                     window.location.href = "../../autorizacion?opc=mens_cod_aps";
                                                                 });
                                                             }
@@ -282,12 +282,12 @@
 
                                                 });
                                             });
-                                            $(".btn_cod_huella").click(function() {
+                                            $(".btn_cod_huella").click(function () {
                                                 $.SmartMessageBox({
                                                     title: "¡Advertencia!",
                                                     content: "¿Esta seguro de procesar codigos de huella a estos requerimientos?",
                                                     buttons: '[No][Si]'
-                                                }, function(ButtonPressed) {
+                                                }, function (ButtonPressed) {
                                                     if (ButtonPressed === "Si") {
                                                         for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
                                                             if ($(".cod_huella" + r).val() != "") {
@@ -295,20 +295,21 @@
                                                                     url: "../../trabajador",
                                                                     type: "POST",
                                                                     data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                                                }).done(function() {
+                                                                }).done(function () {
                                                                 });
                                                                 $.ajax({
                                                                     url: "../../autorizacion",
                                                                     type: "POST",
                                                                     data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                                                }).done(function() {
+                                                                }).done(function () {
+                                                                    window.location.href = "../../autorizacion?opc=mens_cod_huella";
                                                                 });
                                                                 $.ajax({
                                                                     url: "../../autorizacion",
                                                                     type: "POST",
                                                                     data: "opc=Enviar_Correo" + $(".correos_" + r).val()
-                                                                }).done(function() {
-                                                                    window.location.href = "../../autorizacion?opc=mens_cod_huella";
+                                                                }).done(function () {
+
                                                                 });
                                                             }
                                                         }
@@ -533,7 +534,7 @@
                                             %>
                                             <td>
                                                 <input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%>" style="width:50px"/>
-                                              <!--  <input type="text" id="cod_ap" name="cod_aps" maxlength="6" onblur="VAL_COD_APS()">-->
+                                                <!--  <input type="text" id="cod_ap" name="cod_aps" maxlength="6" onblur="VAL_COD_APS()">-->
                                             </td>
                                             <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
                                             <%} else {%>
@@ -813,10 +814,10 @@
 
                                         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                        $(document).ready(function() {
+                                        $(document).ready(function () {
 
                                             pageSetUp();
-                                            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                                            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                                                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                             });
                                             $(".cod_aps").numeric();
@@ -850,16 +851,16 @@
                                                         "t" +
                                                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                                                 "autoWidth": true,
-                                                "preDrawCallback": function() {
+                                                "preDrawCallback": function () {
                                                     // Initialize the responsive datatables helper once.
                                                     if (!responsiveHelper_dt_basic) {
                                                         responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
                                                     }
                                                 },
-                                                "rowCallback": function(nRow) {
+                                                "rowCallback": function (nRow) {
                                                     responsiveHelper_dt_basic.createExpandIcon(nRow);
                                                 },
-                                                "drawCallback": function(oSettings) {
+                                                "drawCallback": function (oSettings) {
                                                     responsiveHelper_dt_basic.respond();
                                                 }
                                             });
@@ -868,16 +869,16 @@
                                                         "t" +
                                                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                                                 "autoWidth": true,
-                                                "preDrawCallback": function() {
+                                                "preDrawCallback": function () {
                                                     // Initialize the responsive datatables helper once.
                                                     if (!responsiveHelper_dt_basic) {
                                                         responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic1'), breakpointDefinition);
                                                     }
                                                 },
-                                                "rowCallback": function(nRow) {
+                                                "rowCallback": function (nRow) {
                                                     responsiveHelper_dt_basic.createExpandIcon(nRow);
                                                 },
-                                                "drawCallback": function(oSettings) {
+                                                "drawCallback": function (oSettings) {
                                                     responsiveHelper_dt_basic.respond();
                                                 }
                                             });
@@ -895,16 +896,16 @@
                                                         "t" +
                                                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                                                 "autoWidth": true,
-                                                "preDrawCallback": function() {
+                                                "preDrawCallback": function () {
                                                     // Initialize the responsive datatables helper once.
                                                     if (!responsiveHelper_datatable_fixed_column) {
                                                         responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
                                                     }
                                                 },
-                                                "rowCallback": function(nRow) {
+                                                "rowCallback": function (nRow) {
                                                     responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
                                                 },
-                                                "drawCallback": function(oSettings) {
+                                                "drawCallback": function (oSettings) {
                                                     responsiveHelper_datatable_fixed_column.respond();
                                                 }
 
@@ -912,7 +913,7 @@
                                             // custom toolbar
                                             $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
                                             // Apply the filter
-                                            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function() {
+                                            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
 
                                                 otable
                                                         .column($(this).parent().index() + ':visible')
@@ -927,16 +928,16 @@
                                                         "t" +
                                                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
                                                 "autoWidth": true,
-                                                "preDrawCallback": function() {
+                                                "preDrawCallback": function () {
                                                     // Initialize the responsive datatables helper once.
                                                     if (!responsiveHelper_datatable_col_reorder) {
                                                         responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
                                                     }
                                                 },
-                                                "rowCallback": function(nRow) {
+                                                "rowCallback": function (nRow) {
                                                     responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
                                                 },
-                                                "drawCallback": function(oSettings) {
+                                                "drawCallback": function (oSettings) {
                                                     responsiveHelper_datatable_col_reorder.respond();
                                                 }
                                             });
@@ -968,16 +969,16 @@
                                                     "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
                                                 },
                                                 "autoWidth": true,
-                                                "preDrawCallback": function() {
+                                                "preDrawCallback": function () {
                                                     // Initialize the responsive datatables helper once.
                                                     if (!responsiveHelper_datatable_tabletools) {
                                                         responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
                                                     }
                                                 },
-                                                "rowCallback": function(nRow) {
+                                                "rowCallback": function (nRow) {
                                                     responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
                                                 },
-                                                "drawCallback": function(oSettings) {
+                                                "drawCallback": function (oSettings) {
                                                     responsiveHelper_datatable_tabletools.respond();
                                                 }
                                             });
@@ -992,7 +993,7 @@
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
-        (function() {
+        (function () {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;
