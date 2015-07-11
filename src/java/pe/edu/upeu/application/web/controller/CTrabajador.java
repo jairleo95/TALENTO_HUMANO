@@ -207,8 +207,11 @@ public class CTrabajador extends HttpServlet {
                 String ES_INSCRIPCION_VIG_ESSALUD = request.getParameter("ESSALUD_H" + i);
                 String ES_ESTUDIO_NIV_SUPERIOR = request.getParameter("EST_SUP_H" + i);
                 String ES_DATOS_HIJO_TRABAJADOR = "1";
-                h.INSERT_DATOS_HIJO_TRABAJADOR(null, idtr, AP_PATERNO_H, AP_MATERNO_H, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO_H, ES_TIPO_DOC, NU_DOC_H, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR);
-
+                if (NU_DOC_H != null) {
+                    if (!NU_DOC_H.equals("")) {
+                        h.INSERT_DATOS_HIJO_TRABAJADOR(null, idtr, AP_PATERNO_H, AP_MATERNO_H, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO_H, ES_TIPO_DOC, NU_DOC_H, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR);
+                    }
+                }
             }
 
             //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
@@ -635,6 +638,9 @@ public class CTrabajador extends HttpServlet {
             String cod_uni = request.getParameter("cod_uni");
             int n = tr.cod_uni_unico(cod_uni);
             out.print(n);
+        }
+        if (opc.equals("reg_trb")) {
+            response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
         }
 
     }

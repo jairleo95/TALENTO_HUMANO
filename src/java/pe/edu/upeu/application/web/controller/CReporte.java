@@ -88,7 +88,7 @@ public class CReporte extends HttpServlet {
                 String nom = request.getParameter("nom");
                 String pat = request.getParameter("paterno");
                 String mat = request.getParameter("materno");
-                String dn = request.getParameter("DNI");
+                String dn = request.getParameter("dni");
                 String gen = request.getParameter("genero");
                 List<Map<String, ?>> lista = dah.Listar_hijo_filtro(desde, hasta, edad, nom, pat, mat, dn, gen);
                 rpta.put("rpta", "1");

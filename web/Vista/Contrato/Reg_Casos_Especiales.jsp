@@ -312,7 +312,7 @@
                                                             <label class="input" id="titu">Codigo APS: 
                                                                 <%String co_aps = request.getParameter("co_ap");
                                                                     String co_hue = request.getParameter("co_hu");%>
-                                                                <input type="text" maxlength="6" name="cod_aps" id="aps" class="input-group-sm" <%if (!co_aps.equals("--")) {
+                                                                <input type="text" maxlength="6" name="cod_aps" id="cod_ap" class="input-group-sm" <%if (!co_aps.equals("--")) {
                                                                         out.print("value='" + co_aps + "'");
                                                                     } else {
                                                                     }%> onblur="VAL_COD_APS()">
@@ -320,10 +320,10 @@
                                                         </section>
                                                         <section class="col col-1 ">
                                                             <label class="input" id="titu">Codigo Huella: 
-                                                                <input type="text" maxlength="6" name="cod_hue" id="hue" class="input-group-sm" <%if (!co_hue.equals("--")) {
+                                                                <input type="text" maxlength="6" name="cod_hue" id="cod_hu" class="input-group-sm" <%if (!co_hue.equals("--")) {
                                                                         out.print("value='" + co_hue + "'");
                                                                     } else {
-                                                                    }%>>
+                                                                    }%> onblur="VAL_COD_HUELLA()">
                                                             </label>
                                                         </section>
                                                         <section class="col col-2" style=" margin-top:0.8%;">
@@ -399,8 +399,8 @@
                                                                     Listar_Direccion();
                                                                     Listar_Departamento();
 
-                                                                    $("#aps").numeric();
-                                                                    $("#hue").numeric();
+                                                                    $("#cod_ap").numeric();
+                                                                    $("#cod_hu").numeric();
                                                                 }
                                                         );</script> 
                                                     <script>
@@ -706,7 +706,7 @@
                                                         </section>
                                                         <section class="col col-3">
                                                             <label class="select" id="titu">Plantilla de Contrato:
-                                                                <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm" required="">
+                                                                <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm" >
                                                                     <option value="">[SELECCIONE]</option>
                                                                 </select>
                                                             </label>
@@ -1327,7 +1327,8 @@
                 $("#nu_cuen_ban").val("");
                 $("#subscription").attr('checked', false);
                 $("#nu_cuen").attr("maxlength", "21");
-                $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
+                $("#nu_cuen").attr("minlength", "19")
+                // $("#nu_cuen").mask("0011-9999999999999999", {placeholder: "X"});
                 $("#no_cuen_otros").hide();
                 $("#nu_cuen_otros").val("");
             }
@@ -1677,7 +1678,57 @@
     <script type="text/javascript">
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
+        function VAL_COD_APS() {
+            if ($("#cod_ap").val() != "") {
+                var co_aps = document.getElementById("cod_ap");
+                $.ajax({
+                    url: "../../empleado",
+                    type: "POST",
+                    data: "opc=validar_aps&co_aps=" + co_aps.value
+                }).done(function(e) {
+                    //alert(e);
+                    var cant = ($("#cod_ap").val());
+                    if (cant.length > 5) {
+                        if (e == 0) {
+                            //window.location.href = "";
+                        }
+                        else {
+                            $.SmartMessageBox({
+                                title: "Este Código APS ya fue registrado!",
+                                content: "Por favor Ingrese un Código APS distinto",
+                            });
+                        }
+                    }
+                }).fail(function(e) {
+                    alert("Error: " + e);
+                });
+            }
+        }
+        function VAL_COD_HUELLA() {
 
+            if ($("#cod_hu").val() != "") {
+                var co_huel = document.getElementById("cod_hu");
+                $.ajax({
+                    url: "../../empleado",
+                    type: "POST",
+                    data: "opc=validar_huella&co_hue=" + co_huel.value
+                }).done(function(e) {
+                    // alert(e)
+                    var cant = $("#cod_hu").val();
+                    if (cant.length > 5) {
+                        if (e == 0) {
+                            //window.location.href = "";
+                        }
+                        else {
+                            $.SmartMessageBox({
+                                title: "Este Código de Huella ya fue registrado!",
+                                content: "Por favor Ingrese un Codigo de Huella distinto",
+                            });
+                        }
+                    }
+                });
+            }
+        }
         $(document).ready(function() {
 
             pageSetUp();
@@ -1691,10 +1742,10 @@
                     FEC_HASTA: {
                         val_fecha: true
                     },
-                   /* FECHA_SUSCRIPCION: {
-                        required: true,
-                        val_fecha: true
-                    },*/
+                    /* FECHA_SUSCRIPCION: {
+                     required: true,
+                     val_fecha: true
+                     },*/
                     fname: {
                         required: true
                     },

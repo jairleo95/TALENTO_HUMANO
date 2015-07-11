@@ -64,19 +64,19 @@
                         <!--style="padding-left: 30px"-->
                         <div class="form-group" >
                             <label>Nombre</label><br>
-                            <input type="text"  class="form-control nom" placeholder="Nombre" length="45" style="width: 280px" id="des"/>
+                            <input type="text"  class="form-control nom" placeholder="Nombre" length="45" style="width:280px"/>
                         </div>
                         <div class="form-group" >
                             <label>Apellido Paterno</label><br>
-                            <input type="text"  class="form-control ape" placeholder="Nombre" length="45" style="width: 280px" id="des"/>
+                            <input type="text"  class="form-control ape" placeholder="Nombre" length="45" style="width:280px"/>
                         </div>
                         <div class="form-group" >
                             <label>Apellido Materno</label><br>
-                            <input type="text"  class="form-control mat" placeholder="Nombre" length="45" style="width: 280px" id="des"/>
+                            <input type="text"  class="form-control mat" placeholder="Nombre" length="45" style="width:280px" />
                         </div>
                         <div class="form-group" >
                             <label>Dni</label><br>
-                            <input type="text"  class="form-control dni" placeholder="Dni" length="45" style="width: 120px" id="des"/>
+                            <input type="text"  class="form-control dni" placeholder="Dni" length="45" style="width:120px"/>
                         </div>
                         <div class="form-group" >
                             <label>Genero:</label><br>
@@ -107,8 +107,14 @@
                         </div>
                         <br>
                         <div class="row">
-                            <div class="form-group">                            
-                                <button type="button" class="btn btn-primary" id="btnbuscar">Buscar</button>
+                            <div class="form-group">  
+                                <br>
+                                <a id="btnbuscar"class="btn btn-primary btn-circle btn-xl btnEnviar">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </a>
+                                <a id="btncancel" class="btn btn-danger btn-circle btn-xl btnCancelar">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </a>
                             </div>
 
                         </div>  
@@ -550,7 +556,7 @@
             var fe = $(".fec").val();
             var d = $("#Li_hijos");
             var texto = '';
-            $.post("../../reporte", "opc=reporte_hijo&desde=" + a + "&hasta=" + b + "&edad=" + c + "&nom=" + no + "&paterno=" + ap + "&materno=" + ma + "&DNI=" + dn + "&genero=" + ge, function (objJson) {
+            $.post("../../reporte", "opc=reporte_hijo&desde=" + a + "&hasta=" + b + "&edad=" + c + "&nom=" + no + "&paterno=" + ap + "&materno=" + ma + "&dni=" + dn + "&genero=" + ge, function (objJson) {
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
