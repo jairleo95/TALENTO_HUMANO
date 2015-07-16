@@ -216,13 +216,10 @@
                                                                         lista_dgp.append('<option value="' + lista[t].id + '">' + lista[t].desc + '</option>');
                                                                     }
                                                                 }
-
-
                                                             });
 
                                                             lista_dgp.change(function () {
                                                                 $.post("../../dgp", "opc=Listar_Datos&idc=" + $(this).val(), function (objJson) {
-
                                                                     if (objJson.rpta == -1) {
                                                                         alert(objJson.mensaje);
                                                                         return;
@@ -242,9 +239,6 @@
                                                                         $("#nu_cuen_ban").val(lis_datos[v].cuenta_bancaria);
                                                                         $("#subscription").val(lis_datos[v].gen_cuenta);
                                                                     }
-
-
-
                                                                 });
                                                                 $.post("../../centro_costo", "opc=Cargar_cc_DGP&id_c=" + $(this).val(), function (objJson) {
                                                                     var lista = objJson.lista;
@@ -257,21 +251,11 @@
                                                                         } else {
                                                                             var arr_cc = [lista[i].id_dir, lista[i].id_dep, "0", lista[i].porcent_cc, lista[i].id_cc];
                                                                             agregar_centro_costo("1", arr_cc);
-                                                                            //alert();
-
                                                                         }
-
-
                                                                     }
-
-
                                                                 });
                                                                 $("#horario").val("2");
                                                                 list_horario($("#horario").val());
-                                                            });
-
-                                                            $(".cl").click(function () {
-
                                                             });
                                                         });
                                                     </script>
@@ -321,24 +305,17 @@
                                                                     <option value="2">Renovación</option>
                                                                 </select>
                                                             </label>
-
                                                         </section>
                                                         <section class="col col-2" id="titu">MFL:
                                                             <label class="toggle"  > 
-
                                                                 <input type="checkbox" value="1"   name="MFL" name="checkbox-toggle" >
                                                                 <i data-swchon-text="SI" data-swchoff-text="NO"></i>
                                                             </label>
                                                         </section>
                                                     </div>
-
                                                     <div class="info_1">
-
                                                     </div>
-
-
                                                     <div class="row">
-
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
                                                                 <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe fe_inicio_dgp">
@@ -350,14 +327,11 @@
                                                             </label>
                                                         </section>
                                                     </div>
-
-
                                                     <%if (idreq.equals("REQ-0008")) {
                                                     %>
                                                     <%String es_cue_sue = request.getParameter("es_cs");%>
                                                     <input type="hidden" name="ESTADO" value="<%=es_cue_sue%>">
                                                     <%if (es_cue_sue.equals("0")) {%>
-
                                                     <input type="hidden" name="ES_CUENTA_SUELDO" value="1" required="" />
                                                     <div class="row"> 
                                                         <section class="col col-3" name="">
@@ -399,7 +373,6 @@
                                                                 <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1" >
                                                                 <i></i>Generar Nro de Cuenta Bancaria</label>
                                                         </section>
-
                                                     </div>
                                                     <%} else { %>
                                                     <%for (int i = 0; i < list_Cuenta_Sueldo.size(); i++) {
@@ -408,7 +381,6 @@
 
                                                     %>
                                                     <div class="row"> 
-
                                                         <section class="col col-3" name="">
                                                             <label class="select" id="titu" >Cta Sueldo - Banco:
                                                                 <select name="BANCO"  required="" disabled="">
@@ -463,12 +435,8 @@
                                                         <%}
                                                         %>
                                                     </div>
-
                                                     <%}
                                                         }%>
-
-
-
                                                     <%}%>
                                                     <div class="row">
                                                         <section class="col col-3" >
@@ -1050,8 +1018,6 @@
                                                                 }
                                                             });
                                                         }
-
-
                                                         $(document).ready(function () {
                                                             $(".val_fe").change(function () {
                                                                 var fecha = $(this).val().split("-");
@@ -1076,8 +1042,6 @@
                                                                             //timeout: 15000
                                                                         });
                                                                     } else {
-
-
                                                                         $.bigBox({
                                                                             title: "¡Plazo cumplido!",
                                                                             content: "Con la fecha de inicio :" + fecha + " el plazo para este requerimiento se cumplirá.",
@@ -1088,11 +1052,6 @@
                                                                         });
                                                                     }
                                                                 });
-
-
-
-
-
                                                             });
                                                             var $checkoutForm = $('#checkout-form').validate({
                                                                 // Rules for form validation
@@ -1738,7 +1697,6 @@
                 for (var j = 0, max = 5; j < max; j++) {
                     var horaTurno = 0;
                     //var str = $("#HORA_DESDE_" + dias_semana[i] + j).val();
-
                     var Desde = $(".HORA_DESDE_" + dias_semana[i] + (j + 1)).val();
                     var Hasta = $(".HORA_HASTA_" + dias_semana[i] + (j + 1)).val();
                     if ($(".HORA_DESDE_" + dias_semana[i] + (j + 1)).val() == null) {
@@ -1751,7 +1709,6 @@
                     var arrHasta = Hasta.split(":");
                     horaTurno = (((parseInt(arrHasta[0]) * 60) + (parseInt(arrHasta[1]))) - ((parseInt(arrDesde[0]) * 60) + (parseInt(arrDesde[1]))));
                     // alert(horaTurno + Desde + ".HORA_DESDE_" + dias_semana[i] + (j + 1));
-
                     acum = acum + horaTurno;
                     // }
                 }
@@ -1763,7 +1720,6 @@
             $(".h_total").text("Hora Semanal Total : " + parseInt(acum) + ":" + min + " Horas.");
             $(".h_total").val(acum);
             if (minutos_totales > 2880) {
-
             }
         }
         function listar_dep_cc(x, opc, arr_cc) {
@@ -1783,8 +1739,6 @@
                         if (arr_cc[1] == lista[i].id) {
                             cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
                             listar_centro_costo(x, opc, arr_cc);
-
-
                         } else {
                             cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
                         }
@@ -1808,8 +1762,6 @@
                 }
                 var lista = objJson.lista;
                 for (var i = 0; i < lista.length; i++) {
-
-
                     if (opc == "1") {
                         if (arr_cc[4] == lista[i].id) {
                             centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
@@ -1883,10 +1835,7 @@
             });
             $(".total_porcentaje").val(acum);
         }
-
         function list_horario(valor) {
-
-
             if (valor == 0) {
                 $(".cont_lun").hide();
                 $(".cont_mar").hide();
@@ -1943,7 +1892,7 @@
                     }
                     calcularHoras();
                     //$(".texto-h").mask("99:99", {placeholder: "X"});
-                    $(".texto-h").keypress(
+                    $(".texto-h").keyup(
                             function () {
                                 calcularHoras();
                             }
