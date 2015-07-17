@@ -1,5 +1,4 @@
-<%
-    HttpSession sesion = request.getSession();
+<%    HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
 %>
@@ -51,7 +50,7 @@
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        
+
     </head>
     <body>
         <%InterfaceTipo_DocumentoDAO idoc = new Tipo_DocumentoDAO(); %>
@@ -108,7 +107,7 @@
                                 </section>
                                 <section class="col col-4">
                                     <label class="select">
-                                        <select name="SEXO" required="" class="select-conyugue">
+                                        <select name="SEXO" required="" >
                                             <option value="" selected=""  disabled="">Sexo</option>
                                             <option value="M">Masculino</option>
                                             <option value="F">Femenino</option>
@@ -118,34 +117,30 @@
                                 </section>
                                 <section class="col col-4">
                                     <label class="select">
-                                        <select name="TIPO_DOC_ID" required="" class="select-conyugue">
+                                        <select name="TIPO_DOC_ID" required="" class="ti_doc">
                                             <option value="" selected=""  disabled="">Tipo de Documento</option>
                                             <%for (int i = 0; i < idoc.Listar_tipo_doc().size(); i++) {
                                                     Tipo_Documento t = new Tipo_Documento();
                                                     t = (Tipo_Documento) idoc.Listar_tipo_doc().get(i);
-                                                    %>
-                                                    <option value="<%=t.getId_tipo_doc_ident()%>"><%=t.getDe_tdoc_abreviada() %></option>    
-                                                    <%
+                                            %>
+                                            <option value="<%=t.getId_tipo_doc_ident()%>"><%=t.getDe_tdoc_abreviada()%></option>    
+                                            <%
                                                 }
                                             %>
                                         </select> 
                                         <i></i> </label>
                                 </section>
-
                                 <section class="col col-4">
                                     <label class="input">
-                                        <input type="text" name="NRO_DOC" placeholder="Nro de Documento" maxlength="10" required="">
+                                        <input type="text" name="NRO_DOC" placeholder="Nro de Documento" maxlength="10" required="" class="nu_doc">
                                     </label>
                                 </section>
-
-
                                 <section class="col col-4">
                                     <label class="select">
                                         <select name="INSCRIPCION_VIG_ESSALUD" required="">
                                             <option value="" selected="" disabled="">Inscripción Vigente en Essalud</option>
                                             <option value="1">Si</option>
                                             <option value="0">No</option>
-
                                         </select> 
                                         <i></i> </label>
                                 </section>
@@ -155,7 +150,6 @@
                                             <option value="" selected="" disabled="">Estudio de Nivel Superior</option>
                                             <option value="1">Si</option>
                                             <option value="0">No</option>
-
                                         </select> 
                                         <i></i> </label>
                                 </section>
@@ -255,109 +249,24 @@
         <script src="../../../js/speech/voicecommand.min.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) -->
+
+
+        <script language="javascript" type="text/javascript" src="../../../js/JQuery/jQuery.js"></script>
+        <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
         <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
-
-
+        <script src="../../../js/Js_Validar/Validar_Formulario.js"></script>
         <script type="text/javascript">
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
             $(document).ready(function() {
-                pageSetUp();
-
-                var $checkoutForm = $('#checkout-form').validate({
+              //  pageSetUp();
+                $(".nu_doc").numeric();
+                $('#checkout-form').validate({
                     // Rules for form validation
-                    
                     rules: {
-                        fname: {
-                            required: true
-                        },
-                        lname: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        phone: {
-                            required: true
-                        },
-                        country: {
-                            required: true
-                        },
-                        city: {
-                            required: true
-                        },
-                        code: {
-                            required: true,
-                            digits: true
-                        },
-                        address: {
-                            required: true
-                        },
-                        name: {
-                            required: true
-                        },
-                        card: {
-                            required: true,
-                            creditcard: true
-                        },
-                        cvv: {
-                            required: true,
-                            digits: true
-                        },
-                        month: {
-                            required: true
-                        },
-                        year: {
-                            required: true,
-                            digits: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        fname: {
-                            required: 'Please enter your first name'
-                        },
-                        lname: {
-                            required: 'Please enter your last name'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        phone: {
-                            required: 'Please enter your phone number'
-                        },
-                        country: {
-                            required: 'Please select your country'
-                        },
-                        city: {
-                            required: 'Please enter your city'
-                        },
-                        code: {
-                            required: 'Please enter code',
-                            digits: 'Digits only please'
-                        },
-                        address: {
-                            required: 'Please enter your full address'
-                        },
-                        name: {
-                            required: 'Please enter name on your card'
-                        },
-                        card: {
-                            required: 'Please enter your card number'
-                        },
-                        cvv: {
-                            required: 'Enter CVV2',
-                            digits: 'Digits only'
-                        },
-                        month: {
-                            required: 'Select month'
-                        },
-                        year: {
-                            required: 'Enter year',
-                            digits: 'Digits only please'
+                        FECHA_NAC: {
+                            val_fecha: true,
+                            val_edad: true
                         }
                     },
                     // Do not change code below
@@ -365,330 +274,13 @@
                         error.insertAfter(element.parent());
                     }
                 });
-
-                var $registerForm = $("#smart-form-register").validate({
-                    // Rules for form validation
-                    rules: {
-                        username: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        password: {
-                            required: true,
-                            minlength: 3,
-                            maxlength: 20
-                        },
-                        passwordConfirm: {
-                            required: true,
-                            minlength: 3,
-                            maxlength: 20,
-                            equalTo: '#password'
-                        },
-                        firstname: {
-                            required: true
-                        },
-                        lastname: {
-                            required: true
-                        },
-                        gender: {
-                            required: true
-                        },
-                        terms: {
-                            required: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        login: {
-                            required: 'Please enter your login'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        password: {
-                            required: 'Please enter your password'
-                        },
-                        passwordConfirm: {
-                            required: 'Please enter your password one more time',
-                            equalTo: 'Please enter the same password as above'
-                        },
-                        firstname: {
-                            required: 'Please select your first name'
-                        },
-                        lastname: {
-                            required: 'Please select your last name'
-                        },
-                        gender: {
-                            required: 'Please select your gender'
-                        },
-                        terms: {
-                            required: 'You must agree with Terms and Conditions'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
-
-                var $reviewForm = $("#review-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        name: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        review: {
-                            required: true,
-                            minlength: 20
-                        },
-                        quality: {
-                            required: true
-                        },
-                        reliability: {
-                            required: true
-                        },
-                        overall: {
-                            required: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        name: {
-                            required: 'Please enter your name'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: '<i class="fa fa-warning"></i><strong>Please enter a VALID email addres</strong>'
-                        },
-                        review: {
-                            required: 'Please enter your review'
-                        },
-                        quality: {
-                            required: 'Please rate quality of the product'
-                        },
-                        reliability: {
-                            required: 'Please rate reliability of the product'
-                        },
-                        overall: {
-                            required: 'Please rate the product'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
-
-                var $commentForm = $("#comment-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        name: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        url: {
-                            url: true
-                        },
-                        comment: {
-                            required: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        name: {
-                            required: 'Enter your name',
-                        },
-                        email: {
-                            required: 'Enter your email address',
-                            email: 'Enter a VALID email'
-                        },
-                        url: {
-                            email: 'Enter a VALID url'
-                        },
-                        comment: {
-                            required: 'Please enter your comment'
-                        }
-                    },
-                    // Ajax form submition
-                    submitHandler: function(form) {
-                        $(form).ajaxSubmit({
-                            success: function() {
-                                $("#comment-form").addClass('submited');
-                            }
-                        });
-                    },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
-
-                var $contactForm = $("#contact-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        name: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        message: {
-                            required: true,
-                            minlength: 10
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        name: {
-                            required: 'Please enter your name',
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        message: {
-                            required: 'Please enter your message'
-                        }
-                    },
-                    // Ajax form submition
-                    submitHandler: function(form) {
-                        $(form).ajaxSubmit({
-                            success: function() {
-                                $("#contact-form").addClass('submited');
-                            }
-                        });
-                    },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
-
-                var $loginForm = $("#login-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        password: {
-                            required: true,
-                            minlength: 3,
-                            maxlength: 20
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        password: {
-                            required: 'Please enter your password'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
-
-                var $orderForm = $("#order-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        name: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        phone: {
-                            required: true
-                        },
-                        interested: {
-                            required: true
-                        },
-                        budget: {
-                            required: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        name: {
-                            required: 'Please enter your name'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        phone: {
-                            required: 'Please enter your phone number'
-                        },
-                        interested: {
-                            required: 'Please select interested service'
-                        },
-                        budget: {
-                            required: 'Please select your budget'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
-
-                // START AND FINISH DATE
-                $('#startdate').datepicker({
-                    dateFormat: 'dd.mm.yy',
-                    prevText: '<i class="fa fa-chevron-left"></i>',
-                    nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function(selectedDate) {
-                        $('#finishdate').datepicker('option', 'minDate', selectedDate);
-                    }
-                });
-
-                $('#finishdate').datepicker({
-                    dateFormat: 'dd.mm.yy',
-                    prevText: '<i class="fa fa-chevron-left"></i>',
-                    nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function(selectedDate) {
-                        $('#startdate').datepicker('option', 'maxDate', selectedDate);
-                    }
-                });
-
+                jQuery.validator.addMethod("val_fecha", function(value, element) {
+                    var d = value.split("-");
+                    return this.optional(element) || String(parseInt(d[0])).length == 4;
+                }, "¡Fecha ingresada invalida!");
 
 
             })
-
-        </script>
-
-        <!-- Your GOOGLE ANALYTICS CODE Below -->
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-            _gaq.push(['_trackPageview']);
-
-            (function() {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
 
         </script>
     </body>

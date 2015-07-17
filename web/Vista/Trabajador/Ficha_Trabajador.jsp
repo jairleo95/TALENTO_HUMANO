@@ -45,18 +45,15 @@
         <div class="spacing">
             <center><h1 class="spacing" style="font-weight: bold;">Fichas de Trabajador</h1></center>
             <br>
-
         </div>
     <center>
         <div class="container theme-showcase">
-
             <div class="form-group">
                 <label class="control-label">Elaborar Ficha :</label><br>
                 <a href="../../trabajador?opc=Form_Reg" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="fa fa-edit"></i></span>Agregar Nueva Ficha </a>
             </div>
             <br>
             <div>
-
                 <form method="post" action="../../trabajador" class="form-inline">                    
 
                     <div class="form-group">
@@ -114,8 +111,6 @@
                 %>
                 <tr>
                     <td><%out.println(i + 1);%></td>         
-
-
                     <%
 
                         if (tr.getAr_foto() == null) {%>
