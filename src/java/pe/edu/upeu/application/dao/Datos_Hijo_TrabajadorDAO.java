@@ -291,4 +291,42 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
         return Lista;
     }
 
+    @Override
+    public List<Map<String, ?>> Lis_Hijos_id_tr(String idtr) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select * from rhvd_detalle_hijo where ID_TRABAJADOR='" + idtr + "' and ES_DATOS_HIJO_TRABAJADOR = '1' ";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("idh", rs.getString("ID_DATOS_HIJOS_TRABAJADOR"));
+                rec.put("idtr", rs.getString("ID_TRABAJADOR"));
+                rec.put("ap_p", rs.getString("AP_PATERNO"));
+                rec.put("ap_m", rs.getString("AP_MATERNO"));
+                rec.put("no_hijo", rs.getString("NO_HIJO_TRABAJADOR"));
+                rec.put("fe_nac", rs.getString("FE_NACIMIENTO"));
+                rec.put("sexo", rs.getString("SEXO"));
+                rec.put("ti_doc", rs.getString("DE_TIP_DOC"));
+                rec.put("nu_doc", rs.getString("NU_DOC"));
+                rec.put("essalud", rs.getString("ESSALUD"));
+                rec.put("superior", rs.getString("SUPERIOR"));
+
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return Lista;
+    }
+
 }
