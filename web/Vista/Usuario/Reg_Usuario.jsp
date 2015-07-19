@@ -35,6 +35,7 @@
         <div class="row">
             <center>
                 <h1>Mantenimiento a Usuarios de  Personal</h1>
+                <a href="ListaUsuario.jsp">New</a>
                 <hr>
             </center>
                 <div class="contenedor">
