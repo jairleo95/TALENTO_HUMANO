@@ -123,12 +123,11 @@
         <div class="row">
             <div class="well-lg">
                 <div class=" col col-md-12">
-                    <table id="datatable_tabletools" class="table table-striped table-bordered table-hover tTabla" width="100%">
+                    <table class="table table-striped table-bordered table-hover tTabla" width="100%">
                         <thead>
                             <tr>
-                                <th data-hide="phone">ID</th>
-                                <th>Accion</th>
-                                <th data-class="expand">Nombres y Apellidos</th>
+                                <th>ID</th>
+                                <th>Nombres y Apellidos</th>
                                 <th>Rol</th>
                                 <th>Puesto</th>
                                 <th>Seccion</th>
@@ -137,6 +136,7 @@
                                 <th>Usuario</th>
                                 <th>Clave</th>
                                 <th>Estado</th>
+                                <th>Detalle</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -145,8 +145,12 @@
                                     v = (V_Var_Usuario) List_Usuario_var.get(i);
                             %>
                             <tr>
-                                <td><%=i + 1%></td>
                                 <td>
+                                    <input id="idTrabajador<%=i + 1%>" type="hidden" name="idTrabajador" value="<%=v.getId_trabajador()%>">
+                                    <input id="idUsuario<%=i + 1%>" type="hidden" name="idUsuario" value="<%=v.getId_usuario()%>">
+                                    <%=i + 1%>
+                                </td>
+                                <%--<!--<td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                             Accion <span class="caret"></span>
@@ -156,7 +160,7 @@
                                             <li><a class="eliminar" id="<%=i%>">Eliminar<input class="btnId<%=i%>" type="hidden" value="<%=v.getId_usuario()%>"></a></li>
                                         </ul>
                                     </div>
-                                </td>
+                                </td>-->--%>
                                 <td class="name"><a href="../../trabajador?idtr=<%=v.getId_trabajador()%>&opc=list"><%=v.getNo_trabajador() + " " + v.getAp_paterno() + " " + v.getAp_materno()%></a></td>
                                 <td><%=v.getNo_rol()%></td>
                                 <td><%=v.getNo_puesto()%></td>
@@ -171,13 +175,50 @@
                                 <%} else if (v.getEs_usuario().equals("0")) {%>
                                 <td><button class="activar btn btn-success" id="<%=i%>">Activar</button></td>
                                 <%}%>
+                                <td id="<%=i+1%>"><a class="verDetalle" href="#"><span class="fa fa-search"></span><span>Ver Detalle</span></a></td>
                             </tr>
                             <%}%> 
                         </tbody>
                     </table> 
                 </div>
             </div>
+            <div class="modal fade" id="myModalDetalle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Detalle</h4>
+                        </div>
+                        <form class="smart-form" action="../../Usuario">
+                            <div class="modal-body">
+                                <fieldset>
+                                    <div class="col col-md-12">
+                                        <label>Nombres y Apellidos</label>
+                                        <label class="lbNombres"></label>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="col col-md-12">
+                                        <label>Puesto</label>
+                                        <label class="lbPuesto"></label>
+                                    </div>
+                                </fieldset>
 
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <footer>
+                                    <input type="hidden" name="opc" value="Registrar Usuario">
+                                    <button type="submit" class="btn btn-primary" >Aceptar</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                </footer>
+
+                            </div>
+                        </form>               
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -189,6 +230,7 @@
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
+                var num=0;
 
                 $('.tTabla').dataTable({
                     // Tabletools options: 
@@ -216,6 +258,17 @@
                     },
                     "autoWidth": true
                 });
+                /*$('.tTabla').on('click', 'tr', function () {
+                 alert($(this).children('.identif').text());
+                 $('#myModalDetalle').modal()
+                 
+                 });;*/
+                $('.verDetalle').click(function () {
+                    num=$(this).parent().attr('id');
+                    $('.lbNombres').text($('#idTrabajador'+num).val() );
+                    $('#myModalDetalle').modal();
+                });
+
             });
 
         </script>
