@@ -47,6 +47,10 @@ public class CPrivilegio extends HttpServlet {
              String opc = request.getParameter("opc");
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
+            
+            if (opc.equals("MenuOpciones")) {
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/TEMPORAL.jsp");
+            }
         
             if(opc.equals("Listar_Rol")){
                 getServletContext().setAttribute("List_Rol", rol.List_Rol());

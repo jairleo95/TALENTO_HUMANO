@@ -72,6 +72,47 @@ and open the template in the editor.
                 </table>
             </div>
         </div>
+        <div id="myModalEdit" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Editar Rol</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <form class="smart-form">
+                            <section class="col col-md-12">
+                                <label class="label">Nombre</label>
+                                <label class=" input">
+                                    <input type="text" name="NOMBRE" class="form-control modNombre" >
+                                </label>
+                            </section>
+                            <section class="col col-md-12">
+                                <label class="label">Estado</label>
+                                <label class="select">
+                                    <select name="ESTADO" class="modEstado">
+                                        <option value="1">Activado</option>
+                                        <option value="0">Desactivado</option>
+                                    </select>
+                                    <i></i></label>
+                            </section>
+
+                        </form>  
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" id="modId" value="">
+                        <button type="button" class="btn btn-primary modAceptar" data-dismiss="modal">Aceptar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
@@ -128,17 +169,65 @@ and open the template in the editor.
                             for (var i = 0; i < lista.length; i++) {
                                 text += "<tr>";
                                 text += "<td>" + (i + 1) + "</td>";
-                                text += "<td>" + lista[i].no_rol + "</td>";
-                                if(lista[i].es_rol==0){
-                                    text+="<td><span class='label label-danger font-sm semi-bold'>Desactivado</span></td>";
-                                }else if(lista[i].es_rol==1){
-                                    text+="<td><span class='label label-success font-sm semi-bold'>Activado</span></td>";
+                                text += "<td class='nrol" + lista[i].id_rol + "'>" + lista[i].no_rol + "</td>";
+                                if (lista[i].es_rol == 0) {
+                                    text += "<td id='esrol" + lista[i].id_rol + "' class='0'><span class='label label-danger font-sm semi-bold'>Desactivado</span></td>";
+                                } else if (lista[i].es_rol == 1) {
+                                    text += "<td id='esrol" + lista[i].id_rol + "' class='1'><span class='label label-success font-sm semi-bold'>Activado</span></td>";
                                 }
-                                text += "<td>"+barra_acciones(lista[i].id_rol)+"</td>";
+                                text += "<td>" + barra_acciones(lista[i].id_rol) + "</td>";
                                 text += "</tr>";
                             }
                             crear_t();
                             $('.tbd').append(text);
+                            $('.btnModificar').click(function () {
+                                $('.modNombre').val($('.nrol' + $(this).attr('id')).text());
+                                if ($('#esrol' + $(this).attr('id')).attr('class') == '0') {
+                                    $('.modEstado [value=0]').attr('selected', 'selected');
+                                } else if ($('#esrol' + $(this).attr('id')).attr('class') == '1') {
+                                    $('.modEstado [value=1]').attr('selected', 'selected');
+                                }
+                                $('#modId').val($(this).attr('id'));
+
+                            });
+                            $('.modAceptar').click(function (e) {
+                                var idrol = $('#modId').val();
+                                var nrol = $('.modNombre').val();
+                                var esrol = $('.modEstado').val();
+                                $.SmartMessageBox({
+                                    title: "Editar Rol!",
+                                    content: "¿Guardar Cambios?",
+                                    buttons: '[No][Si]'
+                                }, function (ButtonPressed) {
+                                    if (ButtonPressed === "Si") {
+                                        $.post("../../../Roles?opc=Modificar", "id_rol=" + idrol + "&Nombre_Rol=" + nrol + "&Es_rol=" + esrol, function () {
+                                            list_rol();
+                                        });
+                                        $.smallBox({
+                                            title: "Editar Rol",
+                                            content: "<i class='fa fa-clock-o'></i> <i>El Rol ha sido modificado </i>",
+                                            color: "#659265",
+                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                            timeout: 2000
+                                        });
+                                    }
+                                    if (ButtonPressed === "No") {
+                                        $.smallBox({
+                                            title: "Editar Rol",
+                                            content: "<i class='fa fa-clock-o'></i> <i>Operacion Cancelada</i>",
+                                            color: "#C46A69",
+                                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                            timeout: 2000
+                                        });
+                                    }
+
+                                });
+                                e.preventDefault();
+
+                            });
+
+
+
                             $('.tabla_t').DataTable();
                         }
                     });
@@ -152,17 +241,17 @@ and open the template in the editor.
                     $('.cont_t').append(text);
                 }
                 function barra_acciones(idrol) {
-                        var tex = '<center><div class="btn-group">';
-                        tex += '<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';
-                        tex += 'Action <span class="caret"></span></button>';
-                        tex += '<ul class="dropdown-menu" role="menu">';
-                        tex += '<li><a href="#" id='+idrol+'>Modificar</a></li>';
-                        tex += '<li><a href="#" id='+idrol+'>Activar</a></li>';
-                        tex += '<li><a href="#" id='+idrol+'>Desactivar</a></li>';
-                        tex += '</ul>';
-                        tex += '</div></center>';
-                        return tex;
-                    }
+                    var tex = '<center><div class="btn-group">';
+                    tex += '<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';
+                    tex += 'Action <span class="caret"></span></button>';
+                    tex += '<ul class="dropdown-menu" role="menu">';
+                    tex += '<li><a class="btnModificar" href="#" id=' + idrol + ' data-toggle="modal" data-target="#myModalEdit">Modificar</a></li>';
+                    tex += '<li><a class="btnActivar" href="#" id=' + idrol + '>Activar</a></li>';
+                    tex += '<li><a class="btnDesactivar" href="#" id=' + idrol + '>Desactivar</a></li>';
+                    tex += '</ul>';
+                    tex += '</div></center>';
+                    return tex;
+                }
             });
         </script>
     </body>
