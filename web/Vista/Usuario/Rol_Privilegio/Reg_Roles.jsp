@@ -169,6 +169,7 @@ and open the template in the editor.
                     $.post("../../../Roles?opc=Listar_Rol", function (objJson) {
 
                         var lista = objJson.lista;
+                        
                         if (lista.length > 0) {
                             var text = "";
                             for (var i = 0; i < lista.length; i++) {

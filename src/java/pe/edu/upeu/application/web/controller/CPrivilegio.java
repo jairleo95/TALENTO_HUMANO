@@ -57,9 +57,9 @@ public class CPrivilegio extends HttpServlet {
         try {
 
             if (opc.equals("ListPrivilegio")) {
-                List<Map<String, ?>> lista = priv.List_Priv_Mod();
+                List<Map<String, ?>> list = priv.List_Priv_Mod();
                 rpta.put("rpta", "1");
-                rpta.put("Lista", lista);
+                rpta.put("Lista", list);
             }
 
             if (opc.equals("MenuOpciones")) {

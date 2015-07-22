@@ -4,7 +4,11 @@
     Created on : 22/07/2015, 10:22:15 AM
     Author     : Andres
 --%>
-
+<%
+    HttpSession sesion = request.getSession();
+    String id_user = (String) sesion.getAttribute("IDUSER");
+    if (id_user != null) {
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -60,15 +64,15 @@
         <script src="../../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-        <script type="text/javascript">
+        <script>
             $(document).ready(function () {
                 //$('.tablaT').DataTable();
 
                 listar_tabla();
                 function listar_tabla() {
                     $.post("../../../Privilegio?opc=ListPrivilegio", function (objJson) {
-                        var lista = objJson.lista;
-                        alert(objJson);
+                        var lista = objJson.Lista;
+                        alert(lista);
                         if (lista.length > 0) {
                             crearTabla();
                             var t="";
@@ -109,3 +113,8 @@
 
     </body>
 </html>
+
+<%} else {
+        response.sendRedirect("/TALENTO_HUMANO/");
+    }
+%>
