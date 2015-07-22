@@ -61,7 +61,11 @@ public class CPrivilegio extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("Lista", list);
             }
-
+            if (opc.equals("ListModulo")) {
+                List<Map<String, ?>> list = priv.List_Modulo();
+                rpta.put("rpta", "1");
+                rpta.put("Lista", list);
+            }
             if (opc.equals("MenuOpciones")) {
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/TEMPORAL.jsp");
             }
@@ -82,8 +86,8 @@ public class CPrivilegio extends HttpServlet {
              response.sendRedirect("Vista/Usuario/Rol_Privilegio/List_Privilegios.jsp");
              }*/
             if (opc.equals("Listar_Privilegio")) {
-                getServletContext().setAttribute("List_Privilegio", priv.List_Privilegio());
-                response.sendRedirect("Vista/Usuario/Rol_Privilegio/MantPrivilegio.jsp");
+                
+                response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Privilegio.jsp");
             }
             if (opc.equals("Desactivar_Priv")) {
                 String idrol = request.getParameter("id_priv");

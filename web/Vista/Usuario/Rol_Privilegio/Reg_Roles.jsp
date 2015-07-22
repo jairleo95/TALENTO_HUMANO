@@ -160,16 +160,25 @@ and open the template in the editor.
             $(document).ready(function () {
 
                 list_rol();
+                listar_tabla();
                 $('.reg').click(function () {
                     var data = $('.formm').serialize();
                     $.post("../../../Roles?opc=REGISTRAR", data, function () {
+                        list_rol();
+                        $.smallBox({
+                            title: "Crear Rol",
+                            content: "<i class='fa fa-clock-o'></i> <i>El Rol ha sido creado correctamente</i>",
+                            color: "#659265",
+                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                            timeout: 2000
+                        });
                     });
                 });
                 function list_rol() {
                     $.post("../../../Roles?opc=Listar_Rol", function (objJson) {
 
                         var lista = objJson.lista;
-                        
+
                         if (lista.length > 0) {
                             var text = "";
                             for (var i = 0; i < lista.length; i++) {
@@ -248,17 +257,11 @@ and open the template in the editor.
                     $('.cont_t').empty();
                     $('.cont_t').append(text);
                 }
-                function barra_acciones(idrol) {
-                    var tex = '<center><div class="btn-group">';
-                    tex += '<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';
-                    tex += 'Action <span class="caret"></span></button>';
-                    tex += '<ul class="dropdown-menu" role="menu">';
-                    tex += '<li><a class="btnModificar" href="#" id=' + idrol + ' data-toggle="modal" data-target="#myModalEdit">Modificar</a></li>';
-                    tex += '<li><a class="btnActivar" href="#" id=' + idrol + '>Activar</a></li>';
-                    tex += '<li><a class="btnDesactivar" href="#" id=' + idrol + '>Desactivar</a></li>';
-                    tex += '</ul>';
-                    tex += '</div></center>';
-                    return tex;
+                function listar_tabla() {
+                    $.post("../../../Privilegio?opc=ListPrivilegio", function (objJson) {
+                        var lista = objJson.Lista;
+                        alert(lista);
+                    });
                 }
             });
         </script>

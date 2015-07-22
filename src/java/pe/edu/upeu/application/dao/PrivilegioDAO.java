@@ -281,5 +281,32 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
         }
         return Lista;
     }
+
+    @Override
+    public List<Map<String, ?>> List_Modulo() {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select ID_MODULO, NO_MODULO from RHTV_MODULO";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id_md", rs.getString("ID_MODULO"));
+                rec.put("no_md", rs.getString("NO_MODULO"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
     
 }

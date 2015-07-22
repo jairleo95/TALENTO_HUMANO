@@ -28,6 +28,8 @@ public interface InterfacePrivilegioDAO {
     public List<Privilegio>List_Pri_Id(String id_Priv);
     public List<V_Privilegio_Rol>List_Pr_Rol();
     public List<Map<String,?>> List_Priv();
+    public List<Map<String,?>> List_Modulo();
     public List<Map<String,?>> List_Priv_Mod();
     public List<Map<String,?>> List_Priv_Mod_x_id(String id_mod);
+    
 }
