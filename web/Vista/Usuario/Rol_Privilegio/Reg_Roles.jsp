@@ -72,7 +72,7 @@ and open the template in the editor.
                 </table>
             </div>
         </div>
-        <div id="myModalEdit" class="modal fade" role="dialog">
+        <div id="myModalEdit" class="modal fade" role="document">
             <div class="modal-dialog">
 
                 <!-- Modal content-->
@@ -84,21 +84,26 @@ and open the template in the editor.
 
                     <div class="modal-body">
                         <form class="smart-form">
-                            <section class="col col-md-12">
-                                <label class="label">Nombre</label>
-                                <label class=" input">
-                                    <input type="text" name="NOMBRE" class="form-control modNombre" >
-                                </label>
-                            </section>
-                            <section class="col col-md-12">
-                                <label class="label">Estado</label>
-                                <label class="select">
-                                    <select name="ESTADO" class="modEstado">
-                                        <option value="1">Activado</option>
-                                        <option value="0">Desactivado</option>
-                                    </select>
-                                    <i></i></label>
-                            </section>
+                            <div class="row">
+                                <section class="col col-xs-12">
+                                    <label class="label">Nombre</label>
+                                    <label class=" input">
+                                        <input type="text" name="NOMBRE" class="form-control modNombre" >
+                                    </label>
+                                </section> 
+                            </div>
+                            <div class="row">
+                                <section class="col col-xs-12">
+                                    <label class="label">Estado</label>
+                                    <label class="select">
+                                        <select name="ESTADO" class="modEstado">
+                                            <option value="1">Activado</option>
+                                            <option value="0">Desactivado</option>
+                                        </select>
+                                        <i></i></label>
+                                </section>  
+                            </div>
+
 
                         </form>  
                     </div>
@@ -175,7 +180,7 @@ and open the template in the editor.
                                 } else if (lista[i].es_rol == 1) {
                                     text += "<td id='esrol" + lista[i].id_rol + "' class='1'><span class='label label-success font-sm semi-bold'>Activado</span></td>";
                                 }
-                                text += "<td>" + barra_acciones(lista[i].id_rol) + "</td>";
+                                text += '<td><center><a class="btnModificar btn btn-primary" href="#" id=' + lista[i].id_rol + ' data-toggle="modal" data-target="#myModalEdit">Modificar</a></center></td>';
                                 text += "</tr>";
                             }
                             crear_t();
@@ -190,41 +195,7 @@ and open the template in the editor.
                                 $('#modId').val($(this).attr('id'));
 
                             });
-                            $('.modAceptar').click(function (e) {
-                                var idrol = $('#modId').val();
-                                var nrol = $('.modNombre').val();
-                                var esrol = $('.modEstado').val();
-                                $.SmartMessageBox({
-                                    title: "Editar Rol!",
-                                    content: "¿Guardar Cambios?",
-                                    buttons: '[No][Si]'
-                                }, function (ButtonPressed) {
-                                    if (ButtonPressed === "Si") {
-                                        $.post("../../../Roles?opc=Modificar", "id_rol=" + idrol + "&Nombre_Rol=" + nrol + "&Es_rol=" + esrol, function () {
-                                            list_rol();
-                                        });
-                                        $.smallBox({
-                                            title: "Editar Rol",
-                                            content: "<i class='fa fa-clock-o'></i> <i>El Rol ha sido modificado </i>",
-                                            color: "#659265",
-                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                            timeout: 2000
-                                        });
-                                    }
-                                    if (ButtonPressed === "No") {
-                                        $.smallBox({
-                                            title: "Editar Rol",
-                                            content: "<i class='fa fa-clock-o'></i> <i>Operacion Cancelada</i>",
-                                            color: "#C46A69",
-                                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                            timeout: 2000
-                                        });
-                                    }
 
-                                });
-                                e.preventDefault();
-
-                            });
 
 
 
@@ -232,6 +203,42 @@ and open the template in the editor.
                         }
                     });
                 }
+                $('.modAceptar').click(function (e) {
+                    var idrol = $('#modId').val();
+                    var nrol = $('.modNombre').val();
+                    var esrol = $('.modEstado').val();
+                    $.SmartMessageBox({
+                        title: "Editar Rol!",
+                        content: "¿Guardar Cambios?",
+                        buttons: '[No][Si]'
+                    }, function (ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            $.post("../../../Roles?opc=Modificar", "id_rol=" + idrol + "&Nombre_Rol=" + nrol + "&Es_rol=" + esrol, function () {
+                                list_rol();
+                                $.smallBox({
+                                    title: "Editar Rol",
+                                    content: "<i class='fa fa-clock-o'></i> <i>El Rol ha sido modificado</i>",
+                                    color: "#659265",
+                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                    timeout: 2000
+                                });
+                            });
+
+                        }
+                        if (ButtonPressed === "No") {
+                            $.smallBox({
+                                title: "Editar Rol",
+                                content: "<i class='fa fa-clock-o'></i> <i>Operacion Cancelada</i>",
+                                color: "#C46A69",
+                                iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                timeout: 2000
+                            });
+                        }
+
+                    });
+                    e.preventDefault();
+
+                });
                 function crear_t() {
                     var text = '<table class="tabla_t table table-bordered table-hover table-striped"><thead><tr><th class="text-center semi-bold">Nro</th>';
                     text += '<th class="text-center semi-bold">Rol</th><th class="text-center semi-bold">Estado</th><th class="text-center semi-bold">Opciones</th>\n\
