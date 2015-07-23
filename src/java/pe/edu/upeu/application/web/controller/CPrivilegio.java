@@ -134,11 +134,23 @@ public class CPrivilegio extends HttpServlet {
                 String id_modulo = request.getParameter("modulo");
                 String di_url = request.getParameter("Di_url");
                 String es_privilegio = request.getParameter("Es_privilegio");
-                out.print("sasas");
                 String Ic_Link = request.getParameter("Ic_Link");
                 priv.Insert_Privilegio(no_link, di_url, es_privilegio, Ic_Link, id_modulo);
                 getServletContext().setAttribute("List_Privilegio", priv.List_Privilegio());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Privilegios.jsp");
+            }
+            if (opc.equals("REGISTRAR_PRIVILEGIO")) {
+                String no_link = request.getParameter("No_Link");
+                String id_modulo = request.getParameter("modulo");
+                String di_url = request.getParameter("Di_url");
+                String es_privilegio = request.getParameter("Es_privilegio");
+                String Ic_Link = request.getParameter("Ic_Link");
+                System.out.println(no_link);
+                System.out.println(id_modulo);
+                System.out.println(di_url);
+                System.out.println(es_privilegio);
+                System.out.println(Ic_Link);
+                priv.Insert_Privilegio(no_link, di_url, es_privilegio, Ic_Link, id_modulo);
             }
             if (opc.equals("Otorgar")) {
                 getServletContext().setAttribute("List_Rol", rol.List_Rol());

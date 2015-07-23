@@ -79,10 +79,9 @@
                             <div class="row">
                                 <section class="col col-xs-12">
                                     <label class="label">Modulo</label>
-                                    <input class="form-control" type="text" name="lmodulo" list="listModuloN">
+                                    <input class="form-control txtModuloN" type="text" name="lmoduloN" list="listModuloN">
                                     <datalist id="listModuloN">
-                                        <option value="A">
-                                        <option value="B">
+                                        <option value="SIN DATOS">
                                     </datalist>
                                 </section>
                             </div>
@@ -90,7 +89,7 @@
                                 <section class="col col-xs-12">
                                     <label class="label">Nombre de Privilegio</label>
                                     <label class="input">
-                                        <input class="form-control" type="text" maxlength="50" placeholder="Escribir Nombre">  
+                                        <input class="form-control txtPrN" type="text" maxlength="50" placeholder="Escribir Nombre">  
                                     </label>
 
                                 </section>
@@ -99,7 +98,7 @@
                                 <section class="col col-xs-12">
                                     <label class="label">Direccion Url</label>
                                     <label class="input">
-                                        <input class="form-control" type="text" maxlength="300" placeholder="Escribir Direccion">  
+                                        <input class="form-control txtUrlN" type="text" maxlength="300" placeholder="Escribir Direccion">  
                                     </label>
 
                                 </section>
@@ -108,7 +107,7 @@
                                 <section class="col col-xs-12">
                                     <label class="label">Icono</label>
                                     <label class="input">
-                                        <input class="form-control" type="text">  
+                                        <input class="form-control txtIconN" type="text">  
                                     </label>
 
                                 </section>
@@ -117,8 +116,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" id="modId" value="">
-                        <button type="button" class="btn btn-primary modAceptar" data-dismiss="modal">Aceptar</button>
+                        <input type="hidden" id="modIdN" value="">
+                        <button type="button" class="btn btn-primary modAceptarN" data-dismiss="modal">Aceptar</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 
                     </div>
@@ -144,8 +143,7 @@
                                     <label class="label">Modulo</label>
                                     <input class="form-control" type="text" list="listModuloE">
                                     <datalist id="listModuloE">
-                                        <option value="A">
-                                        <option value="B">
+                                        <option value="SIN DATOS">
                                     </datalist>
                                 </section>
                             </div>
@@ -204,6 +202,7 @@
         </div>
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
+        
         <script src="../../../js/libs/jquery-2.0.2.min.js" type="text/javascript"></script>
         <script src="../../../js/libs/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
         <script src="../../../js/bootstrap/bootstrap-modal.js" type="text/javascript"></script>
@@ -213,15 +212,16 @@
         <script src="../../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        <script src="../../../js/notification/SmartNotification.min.js"></script>
         <script>
             $(document).ready(function () {
                 $('.tablaT').DataTable();
 
                 listar_tabla();
-                
+
                 function listar_tabla() {
                     $.post("../../../Privilegio?opc=ListPrivilegio", function (objJson) {
-                        
+
                         var lista = objJson.Lista;
                         if (lista.length > 0) {
                             listar_modulo();
@@ -243,15 +243,52 @@
                             }
                             $('.tbodys').append(t);
 
-                            $('.btnNew').click(function () {
-
-                            });
 
                             $('.tablaT').DataTable();
 
                         }
                     });
                 }
+                $('.modAceptarN').click(function () {
+
+                    var data = "";
+
+                    data += "No_Link=" + $('.txtPrN').val();
+                    data += "&Di_url=" + $('.txtUrlN').val();
+                    data += "&Es_privilegio=1";
+                    data += "&Ic_Link=" + $('.txtIconN').val();
+                    var x = document.getElementById("listModuloN");
+                    var z = false;
+                    for (var i = 0; i < x.options.length; i++) {
+                        if ($('.txtModuloN').val() == x.options[i].value) {
+                            data += "&modulo=" + x.options[i].id;
+                            z = true;
+                        }
+                    }
+                    if (z = true) {
+                        $.post("../../../Privilegio?opc=REGISTRAR_PRIVILEGIO", data, function () {
+                            listar_tabla();
+                            $.smallBox({
+                                title: "Crear Privilegio",
+                                content: "<i class='fa fa-clock-o'></i> <i>El Privilegio ha sido creado correctamente</i>",
+                                color: "#659265",
+                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                timeout: 2000
+                            });
+                        });
+                    } else {
+                        $.smallBox({
+                            title: "Crear Privilegio",
+                            content: "<i class='fa fa-clock-o'></i> <i>Operacion Cancelada</i>",
+                            color: "#C46A69",
+                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                            timeout: 2000
+                        });
+                    }
+
+
+                    /**/
+                });
                 function listar_modulo() {
                     $.post("../../../Privilegio?opc=ListModulo", function (objJson) {
                         var lista = objJson.Lista;
@@ -260,7 +297,7 @@
                             $('#listModuloN').empty();
                             $('#listModuloE').empty();
                             for (var i = 0; i < lista.length; i++) {
-                                t += "<option id='" + lista[i].no_md +"' value='" + lista[i].no_md + "'>";
+                                t += "<option id='" + lista[i].id_md + "' value='" + lista[i].no_md + "'>";
                             }
                             $('#listModuloN').append(t);
                             $('#listModuloE').append(t);
