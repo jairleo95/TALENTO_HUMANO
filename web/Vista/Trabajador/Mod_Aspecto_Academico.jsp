@@ -664,7 +664,9 @@
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                         <select name="BANCO" id="banco" class="form-control input-group-sm">
                                                                             <option value=""   selected="">[SELECCIONE]</option>
-                                                                            <%for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
+                                                                            
+                                                                            <%
+                                                                            for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
                                                                                     Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                                                     cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(u);
                                                                                     if (cs.getNo_banco() != null) {
