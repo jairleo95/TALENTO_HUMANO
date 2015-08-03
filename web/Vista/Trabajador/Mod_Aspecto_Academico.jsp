@@ -415,6 +415,7 @@
                                             <div id="bootstrap-wizard-1" class="col-sm-12">
                                                 <form id="wizard-1" novalidate="novalidate" action="../../trabajador">
                                                     <% String edit = request.getParameter("edit");
+                                                       System.out.println(ListaridTrabajador.size()+"---listaridtrabajador");
                                                         for (int i = 0; i < ListaridTrabajador.size(); i++) {
                                                             V_Ficha_Trab_Num_C t = new V_Ficha_Trab_Num_C();
                                                             t = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(i);

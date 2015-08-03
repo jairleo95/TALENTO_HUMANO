@@ -464,7 +464,9 @@ public class CTrabajador extends HttpServlet {
         }
         if (opc.equals("Editar_Asp_Acad")) {
             String idtr = request.getParameter("idtr");
+            System.out.println(idtr+"-- id");
             String edit = request.getParameter("edit");
+            System.out.println(edit+"-- edit");
 
             getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
