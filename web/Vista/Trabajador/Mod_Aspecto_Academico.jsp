@@ -415,7 +415,6 @@
                                             <div id="bootstrap-wizard-1" class="col-sm-12">
                                                 <form id="wizard-1" novalidate="novalidate" action="../../trabajador">
                                                     <% String edit = request.getParameter("edit");
-                                                       System.out.println(ListaridTrabajador.size()+"---listaridtrabajador");
                                                         for (int i = 0; i < ListaridTrabajador.size(); i++) {
                                                             V_Ficha_Trab_Num_C t = new V_Ficha_Trab_Num_C();
                                                             t = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(i);
@@ -567,7 +566,7 @@
                                                                                     for (int q = 0; q < List_Carrera.size(); q++) {
                                                                                         Carrera c = new Carrera();
                                                                                         c = (Carrera) List_Carrera.get(q);
-                                                                                        if (c.getNo_carrera().trim().equals(t.getNo_carrera().trim())) {
+                                                                                        if (c.getNo_carrera().equals(t.getNo_carrera())) {
                                                                             %>
                                                                             <option value="<%=t.getId_universidad_carrera()%>" selected="" > <%=c.getNo_carrera()%></option>
                                                                             <%} else {%>
@@ -665,9 +664,10 @@
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                         <select name="BANCO" id="banco" class="form-control input-group-sm">
                                                                             <option value=""   selected="">[SELECCIONE]</option>
-                                                                            
+
                                                                             <%
-                                                                            for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
+
+                                                                                for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
                                                                                     Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                                                     cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(u);
                                                                                     if (cs.getNo_banco() != null) {
@@ -789,7 +789,8 @@
                                                         %>
 
                                                     </div>
-                                                    <div >
+                                                        <hr>
+                                                    <div class="row">
                                                         <center>
                                                             <button type="submit" class="btn btn-labeled btn-info" name="opc">
                                                                 <span class="btn-label">

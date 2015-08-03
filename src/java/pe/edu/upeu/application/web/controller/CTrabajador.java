@@ -8,6 +8,7 @@ package pe.edu.upeu.application.web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -42,6 +43,7 @@ import pe.edu.upeu.application.dao_imp.InterfacePadre_Madre_ConyugueDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
+import pe.edu.upeu.application.model.Cuenta_Sueldo;
 
 /**
  *
@@ -464,11 +466,19 @@ public class CTrabajador extends HttpServlet {
         }
         if (opc.equals("Editar_Asp_Acad")) {
             String idtr = request.getParameter("idtr");
-            System.out.println(idtr+"-- id");
             String edit = request.getParameter("edit");
-            System.out.println(edit+"-- edit");
+            boolean x = true;
 
-            getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
+            while (x) {
+                List<Cuenta_Sueldo> li1 = tr.List_Cuenta_Sueldo(idtr);
+                if (!li1.isEmpty()) {
+                    x=false;
+                    getServletContext().setAttribute("List_Cuenta_Sueldo", li1);
+                } else {
+                    tr.INSERT_CUENTA_SUELDO(null, null, null, null, "0", null, idtr, "0");
+                }
+            }
+
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             getServletContext().setAttribute("list_año", li.lista_años());
             getServletContext().setAttribute("List_Universidad", li.List_Universidad());

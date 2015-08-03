@@ -789,6 +789,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 cs.setId_trabajador(rs.getString("id_trabajador"));
                 cs.setEs_cuenta_sueldo(rs.getString("es_cuenta_sueldo"));
                 list.add(cs);
+                
             }
 
         } catch (SQLException e) {
