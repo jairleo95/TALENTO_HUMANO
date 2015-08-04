@@ -1019,6 +1019,7 @@
                                                             });
                                                         }
                                                         $(document).ready(function () {
+
                                                             $(".val_fe").change(function () {
                                                                 var fecha = $(this).val().split("-");
                                                                 if (fecha[0].length > 4) {
@@ -1970,7 +1971,7 @@
                 $("#subscription").attr('checked', false);
                 $("#nu_cuen").attr("maxlength", "21");
                 $("#nu_cuen").attr("minlength", "19");
-               // $("#nu_cuen").val("0011-")
+                // $("#nu_cuen").val("0011-")
                 $("#no_cuen_otros").hide();
                 $("#nu_cuen_otros").val("");
                 $("#texto").hide();
