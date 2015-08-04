@@ -260,7 +260,6 @@ and open the template in the editor.
                 function listar_tabla() {
                     $.post("../../../Privilegio?opc=ListPrivilegio", function (objJson) {
                         var lista = objJson.Lista;
-                        alert(lista);
                     });
                 }
             });

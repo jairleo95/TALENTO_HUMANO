@@ -594,7 +594,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>           
-                                                            <div class="col-sm-4" id="egreso" style="display: none">
+                                                            <div class="col-sm-4" id="egreso">
                                                                 <div class="form-group">
                                                                     <label>Año Egreso:</label>
                                                                     <div class="input-group">
@@ -622,7 +622,7 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="col-sm-4">   
+                                                                        <div class="col-sm-4" style="display: none;">   
                                                                 <div class="form-group">
                                                                     <label>Tipo Hora Pago Referencial:</label>
                                                                     <div class="input-group">
