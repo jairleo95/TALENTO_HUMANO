@@ -292,7 +292,11 @@
             tb.empty();
             var texto_html = '';
             $(".foot_sol").empty();
-
+            if (tipo == "2") {
+                $(".comentario").hide();
+            } else {
+                $(".comentario").show();
+            }
             $.post("../../solicitud_requerimiento", "opc=Ver_Solicitud&id=" + valor, function (objJson) {
                 tb.empty();
                 if (objJson.rpta == -1) {
@@ -327,7 +331,7 @@
                         $(".foot_sol").empty();
                         $(".foot_sol").append('<button type="button" class="btn btn-default btn-labeled" data-dismiss="modal"><span class="btn-label btn_cancel_form"><i class="fa fa-times"></i></span>Cancel</button><button class="btn btn-primary btn-labeled btn_procesar_sol"  type="button" ><span class="btn-label"><i class="fa fa-check"></i></span>Procesar</button>');
                     }
-                    if (tipo == "2") {
+                    if (tipo === '2') {
                         texto_html += '<tr><td>Comentario :</td><td>' + lista[i].comentario + '</td></tr>';
                     } else {
                         $(".data_procesar").val("&id=" + lista[i].id + "&tipo=" + lista[i].ti_plazo + "&fecha=" + lista[i].fecha_plazo);
@@ -396,7 +400,7 @@
                         text_html += '<tr>';
                         text_html += '<td>' + (g + 1) + '</td>';
                         text_html += '<td><div class="btn-group"> <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Accion <span class="caret"></span></button><ul class="dropdown-menu"><li><a href="../../dgp?iddgp=' + lista[g].id_dgp + '&idtr=' + lista[g].id_trabajador + '&opc=Detalle"> Ver Requerimiento</a></li> <li class="divider"></li>';
-                        if (tipo = "1") {
+                        if (tipo == "1") {
                             text_html += '<li><button class="btn btn-primary btn-labeled btn_sol" data-toggle="modal" type="button" data-target="#myModal" value="' + lista[g].id_solicitud_dgp + '"><span class="btn-label"><i class="fa fa-envelope"></i></span> Ver Solicitud</button></li></ul></div></td>';
 
                         } else {
@@ -422,11 +426,13 @@
                 }
                 if (tipo == "1") {
                     $(".btn_sol").click(function () {
+
                         listar_det_sol($(this).val(), tipo);
                     });
+
                 } else {
-                    $(".btn_aut_sol").click(function () {
-                        listar_det_sol($(this).val(), tipo);
+                    $(".btn_sol_aut").click(function () {
+                        listar_det_sol($(this).val(), "2");
                     });
                 }
 
