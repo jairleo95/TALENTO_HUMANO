@@ -17,15 +17,47 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <link type="text/css" rel="stylesheet" href="../../../css/Css_Detalle/CSS_DETALLE.css">
+        <!-- Basic Styles -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
 
-        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../../HTML_version/css/font-awesome.min.css">
-        <!-- <script type="text/javascript" src="../../../js-steps/jquery-1.11.1.js" "></script>-->
-        <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
-        <title>Familiares</title>
-        <script>
-            
-        </script>
+        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
+
+        <!-- SmartAdmin RTL Support is under construction
+                 This RTL CSS will be released in version 1.5
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> -->
+
+        <!-- We recommend you use "your_style.css" to override SmartAdmin
+             specific styles this will also ensure you retrain your customization with each SmartAdmin update.
+        <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
+
+        <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/demo.min.css">
+
+        <!-- FAVICONS -->
+        <link rel="shortcut icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
+
+        <!-- GOOGLE FONT -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+        <!-- Specifying a Webpage Icon for Web Clip 
+                 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+        <link rel="apple-touch-icon" href="../../../img/splash/sptouch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../../img/splash/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../../img/splash/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../../img/splash/touch-icon-ipad-retina.png">
+
+        <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <!-- Startup image for web apps -->
+        <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+        <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+        <link rel="apple-touch-startup-image" href="../../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
     </head>
     <body>
@@ -33,9 +65,6 @@
         <%
             HttpSession sesion = request.getSession(true);
             String rol = (String) sesion.getAttribute("IDROL");
-        %>
-
-        <%
             CConversion c = new CConversion();
             for (int q = 0; q < ListaridTrabajador.size(); q++) {
                 V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
@@ -139,9 +168,6 @@
                     </td></tr>
 
                 <%} else {%>
-
-
-
                 <tr><td colspan="2"> <label>Aun no se ha registrado los datos del cónyugue</label><br></td></tr> 
                         <%  if (rol.trim().equals("ROL-0002") || rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") || rol.trim().equals("ROL-0013")) {%>
                 <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Cónyugue</a></td></tr>
@@ -161,15 +187,15 @@
     <center>
 
         <%        if (LISTA_HIJOS.size() != 0) {
-                if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")|| rol.trim().equals("ROL-0013") ) {%>
-        <%@include file="List_Hijo.jsp" %>
+                if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") || rol.trim().equals("ROL-0013")) {%>
+        <div class="listar_hijos"></div>
         <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Agregar un hijo</a>
         <%}%>
         <%} else {%>
 
         <label>No se ha registrado ningun Hijo(a)</label><br>
 
-        <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001")|| rol.trim().equals("ROL-0013")) {%>
+        <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") || rol.trim().equals("ROL-0013")) {%>
         <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Registrar Hijos</a>
         <%}%>
     </center>
@@ -177,6 +203,145 @@
         }%>
 
 </body>
+<!--================================================== -->
+
+<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+
+<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script>
+    if (!window.jQuery) {
+        document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+    }
+</script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script>
+    if (!window.jQuery.ui) {
+        document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+    }
+</script>
+
+<!-- IMPORTANT: APP CONFIG -->
+<script src="../../../js/app.config.js"></script>
+
+<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+<script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+
+<!-- BOOTSTRAP JS -->
+<script src="../../../js/bootstrap/bootstrap.min.js"></script>
+
+<!-- CUSTOM NOTIFICATION -->
+<script src="../../../js/notification/SmartNotification.min.js"></script>
+
+<!-- JARVIS WIDGETS -->
+<script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
+
+<!-- EASY PIE CHARTS -->
+<script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+
+<!-- SPARKLINES -->
+<script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+
+<!-- JQUERY VALIDATE -->
+<script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
+
+<!-- JQUERY MASKED INPUT -->
+<script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+
+<!-- JQUERY SELECT2 INPUT -->
+<script src="../../../js/plugin/select2/select2.min.js"></script>
+
+<!-- JQUERY UI + Bootstrap Slider -->
+<script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+
+<!-- browser msie issue fix -->
+<script src="../../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+
+<!-- FastClick: For mobile devices -->
+<script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
+
+<!--[if IE 8]>
+
+<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+<![endif]-->
+
+<!-- Demo purpose only -->
+<script src="../../../js/demo.min.js"></script>
+
+<!-- MAIN APP JS FILE -->
+<script src="../../../js/app.min.js"></script>
+
+<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+<!-- Voice command : plugin -->
+<script type="text/javascript">
+    $(document).ready(
+            function () {
+                pageSetUp();
+                $.post("../../../familiar", "opc=Listar_Hijo_id_tr&idtr=<%=request.getParameter("idtr")%>", function (objJson) {
+                    var texto_html = '';
+                    var div = $(".listar_hijos");
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    } else {
+                        var lista = objJson.lista;
+                        if (lista.length == 0) {
+                        } else {
+                            texto_html += ' <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%" style="margin-left:0.5%;" >'
+                                    + '<thead><tr><th data-hide="phone">Nro</th><th data-class="expand">Apellidos y Nombres</th><th data-hide="phone">Fecha de nacimiento</th>'
+                                    + '<th data-hide="phone">Sexo</th><th data-hide="phone,tablet">Tipo de Documento</th><th data-hide="phone,tablet">Nro Documento</th>'
+                                    + '<th data-hide="phone,tablet">Essalud</th><th data-hide="phone,tablet">Est.Nivel Superior</th><th data-hide="phone,tablet" colspan="2">Opciones</th> </tr></thead>';
+                            texto_html += '<tbody>';
+                            for (var i = 0; i < lista.length; i++) {
+                                texto_html += '<tr>'
+                                        + '  <td>' + (i + 1) + '</td>'
+                                        + '<td >' + lista[i].ap_p + ' ' + lista[i].ap_m + ' ' + lista[i].no_hijo + '</td>'
+                                        + ' <td >' + lista[i].fe_nac + '</td>'
+                                        + '<td >' + lista[i].sexo + '</td>'
+                                        + '<td>' + lista[i].ti_doc + '</td>'
+                                        + '<td >' + lista[i].nu_doc + '</td>'
+                                        + '<td >' + lista[i].essalud + '</td>'
+                                        + '<td >' + lista[i].superior + '</td>'
+                                        + '<td >';
+    <% if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0001") | rol.trim().equals("ROL-0013")) {%>
+
+                                texto_html += '<a href = "../../../familiar?idhijo=' + lista[i].idh + '&idtr=' + lista[i].idtr + '&opc=modificar" class="btn btn-success btn-sm">'
+                                        + ' <i class="fa fa-pencil"></i></a>'
+                                        + ' <button type="button" class = "btn btn-danger btn-sm eliminar" value="../../../familiar?idhijo=' + lista[i].idh + '&idtr=' + lista[i].idtr + '&opc=eliminar">'
+                                        + ' <i class="fa fa-times"></i> </button>';
+
+    <%}%>
+                                texto_html += '</td></tr>';
+                            }
+                            texto_html += '</tbody></table>';
+                            div.append(texto_html);
+                        }
+                    }
+                    $(".eliminar").click(function () {
+                        var url = $(this).val();
+                        $.SmartMessageBox({
+                            title: "Eliminar Hijo!",
+                            content: "¿Esta seguro que desea eliminar un hijo?",
+                            buttons: '[No][Yes]'
+                        }, function (ButtonPressed) {
+                            if (ButtonPressed === "Yes") {
+                                window.location.href = url;
+
+                            }
+                            if (ButtonPressed === "No") {
+                                return false;
+                            }
+
+                        });
+                        return false;
+                    });
+                });
+            }
+    );
+</script>
 </html>
 
 <%} else {

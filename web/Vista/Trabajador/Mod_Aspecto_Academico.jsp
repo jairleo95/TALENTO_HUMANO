@@ -566,7 +566,7 @@
                                                                                     for (int q = 0; q < List_Carrera.size(); q++) {
                                                                                         Carrera c = new Carrera();
                                                                                         c = (Carrera) List_Carrera.get(q);
-                                                                                        if (c.getNo_carrera().trim().equals(t.getNo_carrera().trim())) {
+                                                                                        if (c.getNo_carrera().equals(t.getNo_carrera())) {
                                                                             %>
                                                                             <option value="<%=t.getId_universidad_carrera()%>" selected="" > <%=c.getNo_carrera()%></option>
                                                                             <%} else {%>
@@ -594,7 +594,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>           
-                                                            <div class="col-sm-4" id="egreso" style="display: none">
+                                                            <div class="col-sm-4" id="egreso">
                                                                 <div class="form-group">
                                                                     <label>Año Egreso:</label>
                                                                     <div class="input-group">
@@ -622,7 +622,7 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="col-sm-4">   
+                                                                        <div class="col-sm-4" style="display: none;">   
                                                                 <div class="form-group">
                                                                     <label>Tipo Hora Pago Referencial:</label>
                                                                     <div class="input-group">
@@ -664,7 +664,10 @@
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                         <select name="BANCO" id="banco" class="form-control input-group-sm">
                                                                             <option value=""   selected="">[SELECCIONE]</option>
-                                                                            <%for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
+
+                                                                            <%
+
+                                                                                for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
                                                                                     Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                                                     cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(u);
                                                                                     if (cs.getNo_banco() != null) {
@@ -786,7 +789,8 @@
                                                         %>
 
                                                     </div>
-                                                    <div >
+                                                        <hr>
+                                                    <div class="row">
                                                         <center>
                                                             <button type="submit" class="btn btn-labeled btn-info" name="opc">
                                                                 <span class="btn-label">

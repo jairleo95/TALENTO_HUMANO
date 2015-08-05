@@ -1019,6 +1019,7 @@
                                                             });
                                                         }
                                                         $(document).ready(function () {
+
                                                             $(".val_fe").change(function () {
                                                                 var fecha = $(this).val().split("-");
                                                                 if (fecha[0].length > 4) {
@@ -1970,7 +1971,7 @@
                 $("#subscription").attr('checked', false);
                 $("#nu_cuen").attr("maxlength", "21");
                 $("#nu_cuen").attr("minlength", "19");
-               // $("#nu_cuen").val("0011-")
+                // $("#nu_cuen").val("0011-")
                 $("#no_cuen_otros").hide();
                 $("#nu_cuen_otros").val("");
                 $("#texto").hide();
@@ -2086,9 +2087,6 @@
             $("#no_cuen_ban").hide();
             $("#generar").hide();
             $("#no_cuen_otros").hide();
-
-
-
             //  var r = "";
             $('#btn-agregar-cc').click(function () {
                 agregar_centro_costo();
@@ -2257,22 +2255,6 @@
                 return false;
             });
         });</script>
-
-    <!-- Your GOOGLE ANALYTICS CODE Below -->
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-        _gaq.push(['_trackPageview']);
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-
-    </script>
 </html>
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");

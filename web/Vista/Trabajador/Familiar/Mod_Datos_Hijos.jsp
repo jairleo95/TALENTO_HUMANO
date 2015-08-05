@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%    HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
@@ -67,9 +68,6 @@
         <style>
 
         </style>
-
-        <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
-        <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
         <link rel="stylesheet" href="../../../css/Css_Formulario/form.css"  type="text/css" > 
 
         <style>
@@ -83,20 +81,11 @@
         </style>
     </head>
     <body>
-
-
-
         <div id="main" role="main" style="margin-left: 0px;">
-
-
-
             <!-- MAIN CONTENT -->
             <div id="content">
-
-
                 <!-- widget grid -->
                 <section id="widget-grid" class="" >
-
                     <!-- row -->
                     <div class="row">
 
@@ -142,6 +131,7 @@
                                         <div class="row" >
                                             <form id="wizard-1" action="../../../familiar">
                                                 <%
+                                                    String rol = (String) sesion.getAttribute("IDROL");
                                                     for (int i = 0; i < Lista_hijo_individual.size(); i++) {
                                                         Datos_Hijo_Trabajador d = new Datos_Hijo_Trabajador();
                                                         d = (Datos_Hijo_Trabajador) Lista_hijo_individual.get(i);
@@ -238,7 +228,7 @@
                                                                     <label>Tipo Documento:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-flag fa-lg fa-fw"></i></span>
-                                                                        <select  name="TIPO_DOC_ID" class="form-control input-group-sm"   required="" >
+                                                                        <select  name="TIPO_DOC_ID" class="form-control input-group-sm ti_doc"   required="" >
                                                                             <option value="">[SELECCIONE]</option>
                                                                             <%
                                                                                 for (int h = 0; h < Listar_tipo_doc.size(); h++) {
@@ -262,7 +252,7 @@
                                                                     <label>Numero de Documento: </label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i><label class="edad"></label></span>
-                                                                        <input  name="NRO_DOC"  required="" value="<%= d.getNu_doc()%>"  class="form-control input-group-sm fecha" >
+                                                                        <input  name="NRO_DOC"  required="" value="<%= d.getNu_doc().trim()%>"  class="form-control input-group-sm nu_doc" >
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -331,19 +321,19 @@
                                                     <input type="hidden" name="idhijo" value="<%= d.getId_datos_hijos_trabajador()%>">
                                                     <input type="hidden" name="idtr" value="<%= d.getId_trabajador()%>">
                                                     <input type="hidden" name="opc" value="MODIFICAR HIJO">
-                                                    
+
                                                     <%}%>
 
 
 
                                                 </div>
-                                                        <center>
-                                                            <button type="submit" class="btn btn-labeled btn-info" name="opc">
-                                                                <span class="btn-label">
-                                                                    <i class="glyphicon glyphicon-pencil"></i>
-                                                                </span>Modificar
-                                                            </button>
-                                                        </center>
+                                                <center>
+                                                    <button type="submit" class="btn btn-labeled btn-info" name="opc">
+                                                        <span class="btn-label">
+                                                            <i class="glyphicon glyphicon-pencil"></i>
+                                                        </span>Modificar
+                                                    </button>
+                                                </center>
                                                 <!-- end widget content -->
                                             </form>
 
@@ -355,7 +345,7 @@
 
                                     </article>
                                     <!-- WIDGET END -->
-
+                                    <div class="listar_hijos"></div>
 
                                 </div>
 
@@ -369,6 +359,7 @@
                             <!-- END MAIN CONTENT -->
 
                     </div>
+
 
 
                     <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
@@ -448,172 +439,112 @@
                     <script src="../../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
                     <script src="../../../js/plugin/fuelux/wizard/wizard.min.js"></script>
                     <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
+                    <script src="../../../js/Js_Validar/Validar_Formulario.js"></script>
 
                     <script type="text/javascript">
 
                                                                                 // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
-                                                                                $(document).ready(function() {
-
+                                                                                $(document).ready(function () {
                                                                                     pageSetUp();
-
-
-
-
-                                                                                    var $validator = $("#wizard-1").validate({
-                                                                                        rules: {
-                                                                                            email: {
-                                                                                                required: true,
-                                                                                                email: "Your email address must be in the format of name@domain.com"
-                                                                                            },
-                                                                                            FECHA_NAC: {
-                                                                                                required: true,
-                                                                                                val_fecha: true
-                                                                                            }
-                                                                                            ,
-                                                                                            FECHA_NAC_H: {
-                                                                                                val_fecha: true
-                                                                                            }
-                                                                                            ,
-                                                                                            fname: {
-                                                                                                required: true
-                                                                                            },
-                                                                                            lname: {
-                                                                                                required: true
-                                                                                            },
-                                                                                            country: {
-                                                                                                required: true
-                                                                                            },
-                                                                                            city: {
-                                                                                                required: true
-                                                                                            },
-                                                                                            postal: {
-                                                                                                required: true,
-                                                                                                minlength: 4
-                                                                                            },
-                                                                                            wphone: {
-                                                                                                required: true,
-                                                                                                minlength: 10
-                                                                                            },
-                                                                                            hphone: {
-                                                                                                required: true,
-                                                                                                minlength: 10
-                                                                                            }
-                                                                                        },
-                                                                                        messages: {
-                                                                                            fname: "Por Favor Ingrese su Apellido Paterno",
-                                                                                            lname: "Please specify your Last name",
-                                                                                            email: {
-                                                                                                required: "We need your email address to contact you",
-                                                                                                email: "Your email address must be in the format of name@domain.com"
-                                                                                            }
-                                                                                        },
-                                                                                        highlight: function(element) {
-                                                                                            $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                                                                                        },
-                                                                                        unhighlight: function(element) {
-                                                                                            $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-                                                                                        },
-                                                                                        errorElement: 'span',
-                                                                                        errorClass: 'help-block',
-                                                                                        errorPlacement: function(error, element) {
-                                                                                            if (element.parent('.input-group').length) {
-                                                                                                error.insertAfter(element.parent());
+                                                                                    $.post("../../../familiar", "opc=Listar_Hijo_id_tr&idtr=<%=request.getParameter("idtr")%>", function (objJson) {
+                                                                                        var texto_html = '';
+                                                                                        var div = $(".listar_hijos");
+                                                                                        if (objJson.rpta == -1) {
+                                                                                            alert(objJson.mensaje);
+                                                                                            return;
+                                                                                        } else {
+                                                                                            var lista = objJson.lista;
+                                                                                            if (lista.length == 0) {
                                                                                             } else {
-                                                                                                error.insertAfter(element);
+                                                                                                texto_html += ' <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%" style="margin-left:0.5%;" >'
+                                                                                                        + '<thead><tr><th data-hide="phone">Nro</th><th data-class="expand">Apellidos y Nombres</th><th data-hide="phone">Fecha de nacimiento</th>'
+                                                                                                        + '<th data-hide="phone">Sexo</th><th data-hide="phone,tablet">Tipo de Documento</th><th data-hide="phone,tablet">Nro Documento</th>'
+                                                                                                        + '<th data-hide="phone,tablet">Essalud</th><th data-hide="phone,tablet">Est.Nivel Superior</th><th data-hide="phone,tablet" colspan="2">Opciones</th> </tr></thead>';
+                                                                                                texto_html += '<tbody>';
+                                                                                                for (var i = 0; i < lista.length; i++) {
+                                                                                                    texto_html += '<tr>'
+                                                                                                            + '  <td>' + (i + 1) + '</td>'
+                                                                                                            + '<td >' + lista[i].ap_p + ' ' + lista[i].ap_m + ' ' + lista[i].no_hijo + '</td>'
+                                                                                                            + ' <td >' + lista[i].fe_nac + '</td>'
+                                                                                                            + '<td >' + lista[i].sexo + '</td>'
+                                                                                                            + '<td>' + lista[i].ti_doc + '</td>'
+                                                                                                            + '<td >' + lista[i].nu_doc + '</td>'
+                                                                                                            + '<td >' + lista[i].essalud + '</td>'
+                                                                                                            + '<td >' + lista[i].superior + '</td>'
+                                                                                                            + '<td >';
+                        <% if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0001") | rol.trim().equals("ROL-0013")) {%>
+
+                                                                                                    texto_html += '<a href = "../../../familiar?idhijo=' + lista[i].idh + '&idtr=' + lista[i].idtr + '&opc=modificar" class="btn btn-success btn-sm">'
+                                                                                                            + ' <i class="fa fa-pencil"></i></a>'
+                                                                                                            + ' <button type="button" class = "btn btn-danger btn-sm eliminar" value="../../../familiar?idhijo=' + lista[i].idh + '&idtr=' + lista[i].idtr + '&opc=eliminar">'
+                                                                                                            + ' <i class="fa fa-times"></i> </button>';
+
+                        <%}%>
+                                                                                                    texto_html += '</td></tr>';
+                                                                                                }
+                                                                                                texto_html += '</tbody></table>';
+                                                                                                div.append(texto_html);
                                                                                             }
                                                                                         }
+                                                                                        $(".eliminar").click(function () {
+                                                                                            var url = $(this).val();
+                                                                                            $.SmartMessageBox({
+                                                                                                title: "Eliminar Hijo!",
+                                                                                                content: "¿Esta seguro que desea eliminar un hijo?",
+                                                                                                buttons: '[No][Yes]'
+                                                                                            }, function (ButtonPressed) {
+                                                                                                if (ButtonPressed === "Yes") {
+                                                                                                    window.location.href = url;
+
+                                                                                                }
+                                                                                                if (ButtonPressed === "No") {
+                                                                                                    return false;
+                                                                                                }
+
+                                                                                            });
+                                                                                            return false;
+                                                                                        });
                                                                                     });
-                                                                                    jQuery.validator.addMethod("val_fecha", function(value, element) {
+                                                                                    $(".nu_doc").numeric();
+                                                                                    $('#wizard-1').validate({
+                                                                                        // Rules for form validation
+                                                                                        rules: {
+                                                                                            FECHA_NAC: {
+                                                                                                val_fecha: true,
+                                                                                                val_edad: true
+                                                                                            }
+                                                                                        },
+                                                                                        // Do not change code below
+                                                                                        errorPlacement: function (error, element) {
+                                                                                            error.insertAfter(element.parent());
+                                                                                        }
+                                                                                    });
+                                                                                    jQuery.validator.addMethod("val_fecha", function (value, element) {
                                                                                         var d = value.split("-");
                                                                                         return this.optional(element) || String(parseInt(d[0])).length == 4;
                                                                                     }, "¡Fecha ingresada invalida!");
-
-                                                                                    $('#bootstrap-wizard-1').bootstrapWizard({
-                                                                                        'tabClass': 'form-wizard',
-                                                                                        'onNext': function(tab, navigation, index) {
-                                                                                            var $valid = $("#wizard-1").valid();
-                                                                                            if (!$valid) {
-                                                                                                $validator.focusInvalid();
-                                                                                                return false;
-                                                                                            } else {
-                                                                                                $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
-                                                                                                        'complete');
-                                                                                                $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
-                                                                                                        .html('<i class="fa fa-check"></i>');
+                                                                                    $(".ti_doc").change(
+                                                                                            function () {
+                                                                                                //$(".nu_doc").val("");
+                                                                                                if ($(this).val() == 1) {
+                                                                                                    $(".nu_doc").numeric(false, function () {
+                                                                                                    });
+                                                                                                    $(".nu_doc").attr("maxlength", "8");
+                                                                                                    $(".nu_doc").attr("minlength", "8");
+                                                                                                } else {
+                                                                                                    $(".nu_doc").removeNumeric();
+                                                                                                    $(".nu_doc").attr("maxlength", "10");
+                                                                                                    $(".nu_doc").removeAttr("minlength");
+                                                                                                    //    $(".doc").val("");
+                                                                                                }
+                                                                                                $(".doc").focus();
                                                                                             }
-                                                                                        }
-                                                                                    });
-
-
-                                                                                    // fuelux wizard
-                                                                                    var wizard = $('.wizard').wizard();
-
-                                                                                    wizard.on('finished', function(e, data) {
-                                                                                        //$("#fuelux-wizard").submit();
-                                                                                        //console.log("submitted!");
-                                                                                        $.smallBox({
-                                                                                            title: "Congratulations! Your form was submitted",
-                                                                                            content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-                                                                                            color: "#5F895F",
-                                                                                            iconSmall: "fa fa-check bounce animated",
-                                                                                            timeout: 4000
-                                                                                        });
-
-                                                                                    });
-
-
+                                                                                    );
                                                                                 })
 
                     </script>
-
-                    <!-- Your GOOGLE ANALYTICS CODE Below -->
-                    <script type="text/javascript">
-                        var _gaq = _gaq || [];
-                        _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-                        _gaq.push(['_trackPageview']);
-
-                        (function() {
-                            var ga = document.createElement('script');
-                            ga.type = 'text/javascript';
-                            ga.async = true;
-                            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                            var s = document.getElementsByTagName('script')[0];
-                            s.parentNode.insertBefore(ga, s);
-                        })();
-
-                    </script>
-
-                    <!--Solo numeros -->
-                    <script type="text/javascript">
-                        $("#docs, .doc_c").numeric();
-                        $("#doc, .doc_c").numeric(false, function() {
-                            alert("Solo Numeros Enteros");
-                            this.value = "";
-                            this.focus();
-                        });
-                        $(".positive").numeric({negative: false}, function() {
-                            alert("No negative values");
-                            this.value = "";
-                            this.focus();
-                        });
-                        $(".positive-integer").numeric({decimal: false, negative: false}, function() {
-                            alert("Positive integers only");
-                            this.value = "";
-                            this.focus();
-                        });
-
-                        $("#remove").click(
-                                function(e)
-                                {
-                                    e.preventDefault();
-                                    $(".numeric,.integer,.positive").removeNumeric();
-                                }
-                        );
-                    </script>
                     </body>
                     </html>
-                    <%@include  file="List_Hijo.jsp"%>
                     <%} else {
                             response.sendRedirect("/TALENTO_HUMANO/");
                         }

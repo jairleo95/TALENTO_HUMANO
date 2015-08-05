@@ -226,7 +226,7 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select *  from RHVD_SOLICITUD_REQUERIMIENTO where  id_solicitud_dgp='" + id.trim() + "'";
+            String sql = "select *  from RHVD_SOLICITUD_REQUERIMIENTO where  id_solicitud_dgp='" + id.trim() + "' and ES_SOLICITUD_DGP='1'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -242,6 +242,7 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
                 rec.put("solicitud", rs.getString("DE_SOLICITUD"));
                 rec.put("mes", rs.getString("mes_s"));
                 rec.put("es_aut", rs.getString("es_autorizar"));
+                rec.put("comentario", rs.getString("de_comentario"));
                 lista.add(rec);
             }
             rs.close();
@@ -311,11 +312,12 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
     }
 
     @Override
-    public List<Map<String, ?>> Listar_solicitud_Pendiente() {
+    public List<Map<String, ?>> Listar_solicitud(String tipo) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select *  from RHVD_SOLICITUD_REQUERIMIENTO  where es_autorizar='0'  ";
+            String sql = "select *  from RHVD_SOLICITUD_REQUERIMIENTO  where es_solicitud_dgp='1'  ";
+             sql +=" and  ES_AUTORIZAR='"+tipo+"'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -346,6 +348,7 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
                 rec.put("ti_plazo", rs.getString("ti_plazo"));
                 rec.put("fe_desde_s", rs.getString("fe_desde_s"));
                 rec.put("us_creacion", rs.getString("us_creacion"));
+                rec.put("comentario", rs.getString("de_comentario"));
                 lista.add(rec);
             }
             rs.close();

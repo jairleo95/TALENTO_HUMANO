@@ -27,7 +27,9 @@ public interface InterfaceDatos_Hijo_Trabajador {
 
     public void ELIMINAR_HIJO(String id_hijo, String id_trabajador);
 
-    public List<Map<String, ?>> Listar_hijo_filtro(String desde, String hasta,String edad,String nom,String pat,String mat,String dn,String gen);
-    
-    public List<Map<String,?>> Listar_Cumpleaños(String mes, String dia, String aps,String dep,String are,String sec,String pue,String fec,String edad,String ape,String mat,String nom,String tip,String num);
+    public List<Map<String, ?>> Listar_hijo_filtro(String desde, String hasta, String edad, String nom, String pat, String mat, String dn, String gen);
+
+    public List<Map<String, ?>> Listar_Cumpleaños(String mes, String dia, String aps, String dep, String are, String sec, String pue, String fec, String edad, String ape, String mat, String nom, String tip, String num);
+
+    public List<Map<String, ?>> Lis_Hijos_id_tr(String idtr);
 }

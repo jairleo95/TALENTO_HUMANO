@@ -200,7 +200,12 @@
 
                 <!-- logout button -->
                 <div id="logout" class="btn-header transparent pull-right">
-                    <span> <a href="menu?opc=logout" title="Sign Out" data-action="userLogout" data-logout-msg="¿Está complemetamente seguro de cerrar sesión?"><i class="fa fa-sign-out"></i></a> </span>
+                    <span> 
+                        <a href="menu?opc=logout" title="Sign Out" data-action="userLogout" data-logout-msg="¿Está complemetamente seguro de cerrar sesión?">
+                            <i class="fa fa-sign-out"></i>
+                            Salir
+                        </a> 
+                    </span>
                 </div>
                 <!-- end logout button -->
 

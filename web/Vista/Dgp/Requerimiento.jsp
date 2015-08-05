@@ -184,7 +184,7 @@
                                 </div>
                             </div><!--/ End 3rd service -->
                             <div class="col-md-3 col-sm-3">
-                                <div class="service-content">
+                                <div class="service-content last">
                                     <a href="Generar_Dgp.jsp?text=5"><span class="service-icon"><i class="fa fa-flask img-circle wow flipInX"></i></span></a>
                                     <h3>Extranjero</h3>
                                     <p>
@@ -192,7 +192,7 @@
                                     </p>
                                 </div>
                             </div><!--/ End 4th service -->
-                            <div class="col-md-3 col-sm-3">
+                            <div class="col-md-3 col-sm-3" style="display: none">
                                 <div class="service-content last">
                                     <a href="#."><span class="service-icon"><i class="fa fa-flask img-circle wow flipInX"></i></span></a>
                                     <h3>Tiempo Parcial (Trabajador Docente)</h3>
