@@ -50,7 +50,12 @@ public class CSolicitud_Requerimiento extends HttpServlet {
             response.sendRedirect("Vista/Solicitud/Reporte_Solicitud.jsp");
         }
         if (opc.equals("Listar_Sol_Pendientes")) {
-            List<Map<String, ?>> list = s.Listar_solicitud_Pendiente();
+            List<Map<String, ?>> list = s.Listar_solicitud("0");
+            rpta.put("rpta", "1");
+            rpta.put("lista", list);
+        }
+        if (opc.equals("Listar_Sol_Aut")) {
+            List<Map<String, ?>> list = s.Listar_solicitud("1");
             rpta.put("rpta", "1");
             rpta.put("lista", list);
         }
