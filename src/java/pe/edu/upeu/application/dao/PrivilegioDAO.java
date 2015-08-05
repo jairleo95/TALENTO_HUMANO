@@ -33,15 +33,17 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
         try {
             String id_Priv="";
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            
             cst = conn.conex.prepareCall("{CALL RHSP_INSERT_PRIV(?,?,?,?,?,?)}");
             cst.setString(1, id_Priv);
-            cst.setString(2, No_Link);
-            cst.setString(3, Di_url);
-            cst.setString(4, Es_privilegio);
-            cst.setString(5, Ic_Link);
-            cst.setString(6, Modulo);
+            cst.setString(2, No_Link.trim());
+            cst.setString(3, Di_url.trim());
+            cst.setString(4, Es_privilegio.trim());
+            cst.setString(5, Ic_Link.trim());
+            cst.setString(6, Modulo.trim());
             cst.execute();
         } catch (SQLException ex) {
+            System.out.println(ex);
         } finally {
             this.conn.close();
         }
@@ -239,6 +241,7 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
             }
             rs.close();
         } catch (SQLException e) {
+            System.out.println("error sql" + e);
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("Error!");
@@ -266,6 +269,33 @@ public class PrivilegioDAO implements InterfacePrivilegioDAO{
                 rec.put("id_pr", rs.getString("ID_PRIVILEGIO"));
                 rec.put("no_pr", rs.getString("NO_LINK"));
                 rec.put("es_pr", rs.getString("ES_PRIVILEGIO"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
+    @Override
+    public List<Map<String, ?>> List_Modulo() {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select ID_MODULO, NO_MODULO from RHTV_MODULO";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id_md", rs.getString("ID_MODULO"));
+                rec.put("no_md", rs.getString("NO_MODULO"));
                 Lista.add(rec);
             }
             rs.close();

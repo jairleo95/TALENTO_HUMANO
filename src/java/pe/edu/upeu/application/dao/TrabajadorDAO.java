@@ -713,7 +713,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     public String CuentaSueldoTra(String ID_TRABAJADOR) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select ES_CUENTA_SUELDO from RHTD_CUENTA_SUELDO where ID_TRABAJADOR = '" + ID_TRABAJADOR + "'";
-        String es_cs = null;
+        String es_cs = "0";
         try {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
@@ -789,6 +789,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 cs.setId_trabajador(rs.getString("id_trabajador"));
                 cs.setEs_cuenta_sueldo(rs.getString("es_cuenta_sueldo"));
                 list.add(cs);
+                
             }
 
         } catch (SQLException e) {

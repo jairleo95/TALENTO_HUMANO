@@ -59,6 +59,7 @@ import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
+
 /**
  *
  * @author Admin
@@ -235,7 +236,7 @@ public class CDgp extends HttpServlet {
             dia.add("vie");
             dia.add("sab");
             dia.add("dom");
-            
+
             String ID_DETALLE_HORARIO = request.getParameter("ID_DETALLE_HORARIO");
             String ES_DETALLE_HORARIO = "1";
             String ES_HORARIO = "1";
@@ -297,6 +298,12 @@ public class CDgp extends HttpServlet {
             }
 
             String ES_CUENTA_SUELDO = tr.CuentaSueldoTra(idtr);
+
+            while (ES_CUENTA_SUELDO == null) {
+                
+                tr.INSERT_CUENTA_SUELDO(null, null, null, null, "0", null, idtr, "0");
+                ES_CUENTA_SUELDO = tr.CuentaSueldoTra(idtr);
+            }
 
             getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
             getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));

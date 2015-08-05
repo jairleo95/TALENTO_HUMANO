@@ -105,7 +105,7 @@
                             <div class="about">
                                 <h5 class="about-heading">Sobre Recursos Humanos</h5>
                                 <p>
-                                    La Oficina de RRHH selecciona, evalúa, y capacita al personal idóneo para la formación integral de los estudiantes que han de 
+                                    "La Oficina de RRHH selecciona, evalúa, y capacita al personal idóneo para la formación integral de los estudiantes que han de 
                                     formarse profesionalmente y prestar un servicio a la Iglesia y la Sociedad para restaurar en el ser humano la imagen de Dios".
                                 </p>
                             </div>

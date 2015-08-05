@@ -105,6 +105,7 @@ public class CRoles extends HttpServlet {
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
             }
         } catch (Exception e) {
+            
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
         }

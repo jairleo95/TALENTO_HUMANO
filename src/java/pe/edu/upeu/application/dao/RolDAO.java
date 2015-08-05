@@ -36,9 +36,9 @@ public class RolDAO implements InterfaceRolDAO {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Rol r = new Rol();
-                r.setId_rol(rs.getString("id_rol"));
-                r.setNo_rol(rs.getString("no_rol"));
-                r.setEs_rol(rs.getString("es_rol"));
+                r.setId_rol(rs.getString("id_rol").trim());
+                r.setNo_rol(rs.getString("no_rol").trim());
+                r.setEs_rol(rs.getString("es_rol").trim());
                 list.add(r);
             }
 
