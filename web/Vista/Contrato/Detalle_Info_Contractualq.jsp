@@ -569,7 +569,16 @@
                     <td><input type="hidden" name="id_con" class="id_contrato" value="<%=n.getId_contrato()%>"></td>
                     <td><input type="hidden" name="puesto" class="id_pu" value="<%=n.getId_puesto()%>" ></td>
 
-                    <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><button name="opc" value="Imprimir" class="PLANTI btn btn-labeled btn-primary"><span class="btn-label"><i class="fa fa-print"></i></span>Imprimir</button></td></tr>
+                    <tr>
+                        <td class="text-info" colspan="8" style="text-align:center">
+                            <input class="button blue"  type="hidden" value="Editar">
+                            <button name="opc" value="Imprimir" class="PLANTI btn btn-labeled btn-primary">
+                                <span class="btn-label">
+                                    <i class="fa fa-print"></i>
+                                </span>Imprimir
+                            </button>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </form>
