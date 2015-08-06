@@ -424,7 +424,7 @@
                                                                         <label>Fecha Nacimiento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i><label class="edad"></label></span>
-                                                                            <input type="date" name="FECHA_NAC" required="" value="<%=t.getFe_nac()%>" id="edad"  class="form-control input-group-sm fecha" >
+                                                                            <input type="date" name="FECHA_NAC" readonly="" required="" value="<%=t.getFe_nac()%>" id="edad"  class="form-control input-group-sm fecha" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
