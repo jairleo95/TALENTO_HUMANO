@@ -44,6 +44,7 @@ public class CSolicitud_Requerimiento extends HttpServlet {
         InterfaceSolicitud_RequerimientoDAO s = new Solicitud_RequerimientoDAO();
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
+        String rol = (String) sesion.getAttribute("IDROL");
         Map<String, Object> rpta = new HashMap<String, Object>();
         if (opc.equals("Listar_Solicitud")) {
             getServletContext().setAttribute("Listar_solicitud", s.Listar_solicitud());
@@ -94,6 +95,9 @@ public class CSolicitud_Requerimiento extends HttpServlet {
             List<Map<String, ?>> list = s.List_solicitud_id(id);
             rpta.put("rpta", "1");
             rpta.put("lista", list);
+            if (rol.equals("ROL-0001")|rol.equals("ROL-0007")) {
+                rpta.put("permisos", "<button type=\"button\" class=\"btn btn-default btn-labeled\" data-dismiss=\"modal\"><span class=\"btn-label btn_cancel_form\"><i class=\"fa fa-times\"></i></span>Cancel</button><button class=\"btn btn-primary btn-labeled btn_procesar_sol\"  type=\"button\" ><span class=\"btn-label\"><i class=\"fa fa-check\"></i></span>Procesar</button>");
+            }
         }
         if (opc.equals("Procesar_Solicitud")) {
             String id = request.getParameter("id");
