@@ -191,7 +191,7 @@
                                                                 <%}%>
                                                             </label>
                                                         </section>
-                                                        <section  class="col col-6">
+                                                        <section  class="col col-6" style="display: none">
                                                             <label class="select" id="titu">CARGAR DATOS
                                                                 <select  class="btn-list-req" >
                                                                     <option value="" selected=""  >[SELECCIONE]</option>
@@ -266,12 +266,15 @@
                                                             <select name="IDPUESTO"  required="" >
                                                                 <option value="">[SELECCIONE]</option>
 
-                                                                <%
+                                                                <% 
                                                                     for (int j = 0; j < List_Puesto.size(); j++) {
                                                                         V_Puesto_Direccion p = new V_Puesto_Direccion();
                                                                         p = (V_Puesto_Direccion) List_Puesto.get(j);
                                                                 %>
-                                                                <option value="<%=p.getId_puesto()%>"><% out.println(p.getNo_puesto() + " | " + p.getNo_seccion() + " | " + p.getNo_area());%></option> <%} %>
+                                                                <option value="<%=p.getId_puesto()%>">
+                                                                    <% out.println(p.getNo_puesto() + " | " + p.getNo_seccion() + " | " + p.getNo_area());%>
+                                                                </option>
+                                                                <%} %>
                                                             </select>
                                                         </label>
                                                     </section>
