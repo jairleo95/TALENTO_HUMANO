@@ -494,7 +494,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public List<V_Es_Requerimiento> List_Incomplet(String iddep) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT i.*,f.AR_FOTO FROM ( select v.*,d.ID_REQUERIMIENTO,r.NO_REQ,d.FE_CREACION from RHVD_ESTADO_REQ v,RHTM_DGP d,RHTR_REQUERIMIENTO r where v.ID_DGP = d.ID_DGP and ID_DEPARTAMENTO='" + iddep.trim() + "' and r.ID_REQUERIMIENTO=d.ID_REQUERIMIENTO ORDER BY TO_NUMBER(SUBSTR(v.ID_DGP,5,LENGTH(v.ID_DGP))) DESC)i left outer join RHTR_FOTOS_TRABAJADOR f on (i.id_trabajador=f.ID_TRABAJADOR)";
+        String sql = "SELECT * FROM RHVD_ES_REQ_INCOMPLETO where ID_DEPARTAMENTO ='" + iddep + "'";
         //sql += (!"".equals(id_dep)) ? "where ID_DEPARTAMENTO='" + id_dep + "'" : "";
         //sql += "order by ID_DGP";
         List<V_Es_Requerimiento> Lista = new ArrayList<V_Es_Requerimiento>();
