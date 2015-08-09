@@ -6,10 +6,12 @@
 
 
 function list_select(objSelect, url, datos, opc, id) {
+     
     var text_html = "";
     objSelect.empty();
+    objSelect.removeClass("chosen-select");
     objSelect.append("<option  value='' >Cargando...</option>");
-    $.post(url, datos, function (objJson) {
+    $.post(url, datos, function(objJson) {
         objSelect.empty();
         if (objJson.rpta == -1) {
             alert(objJson.mensaje);
@@ -18,7 +20,7 @@ function list_select(objSelect, url, datos, opc, id) {
         var lista = objJson.lista;
         if (lista.length > 0) {
             objSelect.append("<option value=''>[SELECCIONE]</option>");
-            if (opc == "1") {
+            if (opc == "1" | opc == "4") {
                 for (var i = 0; i < lista.length; i++) {
                     if (id == lista[i].id) {
                         text_html += "<option selected value='" + lista[i].id + "'>" + lista[i].nombre + "</option>";
@@ -36,6 +38,23 @@ function list_select(objSelect, url, datos, opc, id) {
         }
         objSelect.append(text_html);
         text_html = "";
-
+        if (opc == "3") {
+            objSelect.addClass("chosen-select");
+             $(".chosen-select").trigger("chosen:updated");
+            var config = {
+                '.chosen-select': {no_results_text: 'Oops, nada encontrado!', allow_single_deselect: true},
+                '.chosen-select-width': {width: "95%"}
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+        }
+       
     });
+    if (opc == "3") {
+        /*sirve para validar cunado es required*/
+
+        $.validator.setDefaults({ignore: ":hidden:not(select)"})
+    }
+
 }

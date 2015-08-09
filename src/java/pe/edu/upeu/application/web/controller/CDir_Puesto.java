@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.AreaDAO;
 import pe.edu.upeu.application.dao.DepartamentoDao;
 import pe.edu.upeu.application.dao.DireccionDAO;
@@ -59,6 +60,8 @@ public class CDir_Puesto extends HttpServlet {
         Map<String, Object> rpta = new HashMap<String, Object>();
         String opc = request.getParameter("opc");
         PrintWriter out = response.getWriter();
+        HttpSession sesion = request.getSession(true);
+        String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         try {
 
             /*LOS QUE SIRVEN*/
@@ -68,7 +71,7 @@ public class CDir_Puesto extends HttpServlet {
                 rpta.put("lista", lista);
             }
             if (opc.equals("Listar_direccion_filial")) {
-                String id_fil=request.getParameter("id_fil");
+                String id_fil = request.getParameter("id_fil");
                 List<Map<String, ?>> lista = dir.List_Direccion_filial(id_fil);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
@@ -146,6 +149,14 @@ public class CDir_Puesto extends HttpServlet {
                 rpta.put("lista", lista);
 
             }
+            /*Listas para Registro DGP*/
+            if (opc.equals("List_Area_RDGP")) {
+                List<Map<String, ?>> lista = are.List_area_es(iddep);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+
+            }
+
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
