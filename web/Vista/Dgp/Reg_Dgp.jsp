@@ -202,7 +202,6 @@
                                                                     }
                                                                 }
                                                             });
-
                                                             lista_dgp.change(function() {
                                                                 $.post("../../dgp", "opc=Listar_Datos&idc=" + $(this).val(), function(objJson) {
                                                                     if (objJson.rpta == -1) {
@@ -244,13 +243,11 @@
                                                             });
                                                         });
                                                     </script>
-
                                                     <section>
                                                         <label class="label" id="titu">Puesto | Seccion | Area:</label>
                                                         <label class="select">
                                                             <select name="IDPUESTO"   required="" class="chosen-select select-puesto1" >
                                                                 <option value="">[SELECCIONE]</option>
-
                                                                 <%
                                                                     for (int j = 0; j < List_Puesto.size(); j++) {
                                                                         V_Puesto_Direccion p = new V_Puesto_Direccion();

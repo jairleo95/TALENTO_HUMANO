@@ -74,20 +74,19 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
     }
 
     @Override
-    public List<Map<String, ?>> Listar_Plazo(String tipo, String req, int dias, String dep) {
-
+    public List<Map<String, ?>> Listar_Plazo(String tipo, String req, int dias, String dep, String id_dep,String id_area) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = " select *  from rhvd_plazo where no_plazo is not null";
-
             sql += (!tipo.equals("")) ? " AND  ti_plazo  = '" + tipo.trim() + "'" : "";
             sql += (!tipo.equals("")) ? " AND  id_requerimiento  = '" + req.trim() + "'" : "";
             sql += (!dep.equals("")) ? " AND  ID_DEPARTAMENTO_TOLERANCIA  = '" + dep.trim() + "'" : "";
+            sql += (!id_dep.equals("")) ? " AND  ID_DEPARTAMENTO = '" + id_dep.trim() + "'" : "";
+            sql += (!id_area.equals("")) ? " AND  ID_AREA= '" + id_area.trim() + "'" : "";
 
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
-
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("id", rs.getString("id_plazo"));
                 rec.put("nom", rs.getString("no_plazo"));

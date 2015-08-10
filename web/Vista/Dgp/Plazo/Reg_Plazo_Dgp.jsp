@@ -30,19 +30,14 @@ Author     : JAIR
     </head>
     <body> 
     <center>
-
         <div id="main" role="main" style="margin: 0px;">
             <div id="content" >
-
                 <section id="widget-grid" class="">
                     <div class="row">
-
                         <div class="well">
                             <h1>Mantenimiento de Plazos de Requerimientos</h1>
                             <form    id="form-plazo" class="form_plazo smart-form">
-
                                 <div class="row">
-
                                     <section class="col col-4">
                                         <label><strong>Tipo de plazo :</strong></label>
                                         <label class="select"> <i class="icon-append fa fa-calendar"></i>
@@ -247,7 +242,7 @@ Author     : JAIR
 <script>
     function validar_fechas() {
         var data = "tipo=" + $(".tipo").val() + "&req=" + $(".req").val() + "&dias=" + $(".tolerancia").val() + "&dep=" + $(".dep_tolerancia").val();
-        $.post("../../../plazo_dgp", "opc=fecha_habilitada&" + data, function (objJson) {
+        $.post("../../../plazo_dgp", "opc=fecha_habilitada&" + data, function(objJson) {
             var fecha = objJson.fecha;
             $(".desde").attr("min", fecha);
             if ($(".desde").val() == "") {
@@ -264,7 +259,7 @@ Author     : JAIR
         b.empty();
         var text_html = "";
         b.append("<tr><td colspan='9'>Cargando...</td></tr>");
-        $.post("../../../plazo_dgp", $(".form_plazo").serialize() + "&opc=Listar_Plazo", function (objJson) {
+        $.post("../../../plazo_dgp", $(".form_plazo").serialize() + "&opc=Listar_Plazo", function(objJson) {
             b.empty();
             var lista = objJson.lista;
             if (objJson.rpta == -1) {
@@ -272,7 +267,6 @@ Author     : JAIR
                 return;
             }
             for (var i = 0; i < lista.length; i++) {
-
                 if (lista[i].estado == '1') {
                     text_html += "<tr class='success' >";
                 }
@@ -306,7 +300,7 @@ Author     : JAIR
             text_html = "";
 
             $(".Editar-Plazo").click(
-                    function () {
+                    function() {
                         $(".nombre_plazo").val($(".nombre" + $(this).val()).text());
                         $(".descripcion").val($(".det" + $(this).val()).text());
                         $(".desde").val($(".desde" + $(this).val()).text());
@@ -317,19 +311,19 @@ Author     : JAIR
                     }
             );
             $(".Eliminar-Plazo").click(
-                    function () {
+                    function() {
                         var valor = $(this).val();
                         $.SmartMessageBox({
                             title: "¡Advertencia!",
                             content: "¿Esta seguro de eliminar el plazo?",
                             buttons: '[No][Si]'
-                        }, function (ButtonPressed) {
+                        }, function(ButtonPressed) {
                             if (ButtonPressed === "Si") {
                                 $.ajax({
                                     url: "../../../plazo_dgp",
                                     data: "opc=Eliminar&plz=" + valor,
                                     type: "POST"
-                                }).done(function () {
+                                }).done(function() {
                                     listar();
                                     $.smallBox({
                                         title: "¡Procesado con exito!",
@@ -347,18 +341,23 @@ Author     : JAIR
             );
         });
     }
-    $(document).ready(function () {
+    $(document).ready(function() {
         pageSetUp();
-        $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+        $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
             $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
         });
-
+        $(".departamento").change(function() {
+            listar()
+        });
+        $(".area").change(function() {
+            listar()
+        });
         $(".desde").datepicker({
             dateFormat: "yy-mm-dd",
             defaultDate: "+1w",
             changeMonth: true,
             numberOfMonths: 2,
-            onClose: function (selectedDate) {
+            onClose: function(selectedDate) {
                 $(".hasta").datepicker("option", "minDate", selectedDate);
                 $(".hasta").datepicker("setDate", selectedDate);
             }
@@ -368,12 +367,12 @@ Author     : JAIR
             defaultDate: "+1w",
             changeMonth: true,
             numberOfMonths: 2,
-            onClose: function (selectedDate) {
+            onClose: function(selectedDate) {
                 $(".desde").datepicker("option", "maxDate", selectedDate);
             }
         });
         listar();
-        $.post("../../../requerimiento", "opc=Listar_tp", function (objJson) {
+        $.post("../../../requerimiento", "opc=Listar_tp", function(objJson) {
             var tp = $(".planilla");
             tp.empty();
             var lista = objJson.lista;
@@ -388,7 +387,7 @@ Author     : JAIR
             }
         });
 
-        $(".tipo").change(function () {
+        $(".tipo").change(function() {
             if ($(this).val() == '1') {
                 $(".tolerancia").val("0");
                 $(".tr_tolerancia").show();
@@ -404,8 +403,8 @@ Author     : JAIR
             }
             listar();
         });
-        $(".planilla").change(function () {
-            $.post("../../../requerimiento", "opc=Listar_req_id&id=" + $(this).val(), function (objJson) {
+        $(".planilla").change(function() {
+            $.post("../../../requerimiento", "opc=Listar_req_id&id=" + $(this).val(), function(objJson) {
                 var req = $(".req");
                 req.empty();
                 var lista = objJson.lista;
@@ -422,12 +421,12 @@ Author     : JAIR
             });
 
         });
-        $(".req").change(function () {
+        $(".req").change(function() {
             validar_fechas();
             listar();
         });
         $(".btn-registrar").click(
-                function () {
+                function() {
                     //$(this).attr("disabled", "true");
                     validar_fechas();
                     if ($(".form_plazo").valid()) {
@@ -435,7 +434,7 @@ Author     : JAIR
                             type: "post",
                             url: "../../../plazo_dgp",
                             data: "opc=Registrar&" + $("#form-plazo").serialize()
-                        }).done(function (objJson) {
+                        }).done(function(objJson) {
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
                                 return;
@@ -465,15 +464,15 @@ Author     : JAIR
 
                 }
         );
-        $(".desde").click(function () {
+        $(".desde").click(function() {
             validar_fechas();
         });
 
         list_select($(".direccion"), "../../../Direccion_Puesto", "opc=Listar_direccion");
-        $(".direccion").change(function () {
+        $(".direccion").change(function() {
             list_select($(".departamento"), "../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $(this).val());
         });
-        $(".departamento").change(function () {
+        $(".departamento").change(function() {
             list_select($(".area"), "../../../Direccion_Puesto", "opc=Listar_area2&" + "id=" + $(this).val());
         });
 

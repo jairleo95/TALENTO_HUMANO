@@ -90,11 +90,13 @@ public class CPlazo extends HttpServlet {
                 rpta.put("lista", lista);
             }
             if (opc.equals("Listar_Plazo")) {
+                String id_dep = request.getParameter("departamento");
+                String id_area = request.getParameter("area");
                 String tipo = request.getParameter("tipo");
                 String req = request.getParameter("id_req");
                 int dias = Integer.parseInt(request.getParameter("tolerancia"));
                 String dep = request.getParameter("dep_tolerancia");
-                List<Map<String, ?>> lista = pl.Listar_Plazo(tipo, req, dias, dep);
+                List<Map<String, ?>> lista = pl.Listar_Plazo(tipo, req, dias, dep,id_dep,id_area);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
