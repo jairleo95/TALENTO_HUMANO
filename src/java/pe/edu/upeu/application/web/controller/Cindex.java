@@ -74,7 +74,7 @@ public class Cindex extends HttpServlet {
             sesion.setAttribute("FECHA_MINIMA", us.fecha_actual());
             sesion.setAttribute("USER", user.getNo_usuario());
             sesion.setAttribute("IDPER", user.getId_empleado());
-            sesion.setAttribute("IDROL", user.getId_rol());
+            sesion.setAttribute("IDROL", user.getId_rol().trim());
             sesion.setAttribute("CL", user.getPw_usuario());
             sesion.setAttribute("PUESTO_ID", user.getId_puesto());
             sesion.setAttribute("AREA_ID", user.getId_area());

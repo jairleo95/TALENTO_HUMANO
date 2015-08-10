@@ -160,13 +160,6 @@
                                                             </ul>
                                                         </div>
                                                     </td> 
-                                                    <%
-                                                        /*require_once '../Modelo/Modelo_Imagen.php';
-                                                         $mod_f = new Modelo_Imagen();
-                                                         $idf = $mod_f->LIST_FOTO_TRABAJADOR($list_dgp[$index][0]);
-                                                         */
-                                                    %>
-
                                                     <% if (r.getAr_foto() == null) {%>
                                                     <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
                                                         <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
@@ -175,10 +168,6 @@
                                                     <% }%>
                                                     <td> <strong><%=r.getNo_req()%></strong></td>
                                                     <td> <strong><%=r.getFe_creacion()%></strong></td>
-
-
-
-
                                                 </tr>
                                                 <% }
                                                     List_Incomplet.clear();%>

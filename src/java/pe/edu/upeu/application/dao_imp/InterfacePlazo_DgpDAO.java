@@ -19,7 +19,7 @@ public interface InterfacePlazo_DgpDAO {
 
     public List<V_Dgp_Plazo> Lista_detalle_plazo(String id);
 
-    public List<Map<String, ?>> Listar_Plazo(String tipo,String req,int dias,String dep);
+     public List<Map<String, ?>> Listar_Plazo(String tipo, String req, int dias, String dep, String id_dep,String id_area);
 
     public List<Map<String, ?>> Listar_Plazo_id(String id_tipo, String iddgp);
 
