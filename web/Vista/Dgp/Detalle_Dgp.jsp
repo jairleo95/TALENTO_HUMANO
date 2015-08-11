@@ -1,3 +1,5 @@
+<%@page import="java.math.RoundingMode"%>
+<%@page import="java.math.BigDecimal"%>
 <%@page import="pe.edu.upeu.application.dao.Solicitud_RequerimientoDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceSolicitud_RequerimientoDAO"%>
 <%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
@@ -129,17 +131,22 @@
                                                     V_Det_DGP d = new V_Det_DGP();
                                                     d = (V_Det_DGP) LIST_ID_DGP.get(i);
                                                     iddgp = d.getId_dgp();
+                                                    BigDecimal cs= new BigDecimal(d.getCa_sueldo()).setScale(2, RoundingMode.UP);
+                                                    BigDecimal bev= new BigDecimal(d.getDe_bev()).setScale(2, RoundingMode.UP);
+                                                    BigDecimal bal= new BigDecimal(d.getCa_bono_alimentario()).setScale(2, RoundingMode.UP);
+                                                    BigDecimal bp= new BigDecimal(d.getCa_bonificacion_p()).setScale(2, RoundingMode.UP);
+                                                    BigDecimal total= new BigDecimal((d.getCa_bonificacion_p()+d.getCa_bono_alimentario()+d.getDe_bev()+d.getCa_sueldo())).setScale(2, RoundingMode.UP);
                                         %>
                                         <input type="hidden"  class="fe_desde_dgp" value="<%=FactoryConnectionDB.convertFecha3(d.getFe_desde())%>"/>
                                         <tr><td colspan="2" class="text-info table-bordered"><i class="fa fa-file"></i> REQUERIMIENTO : <%=d.getNo_req()%> </td></tr>
                                         <!--<label style="color: black; //font-family: cursive;"><h2><%=d.getNo_req()%></h2></label>
                                         --><tr><td  class="text-info table-bordered" style="text-align:align;">Fecha Desde:</td><td class="text-info table-bordered"><%=d.getFe_desde()%></td></tr>
                                         <tr ><td class="text-info table-bordered">Fecha Hasta:</td><td class="text-info table-bordered"><%=d.getFe_hasta()%></td></tr>
-                                        <tr><td class="text-info table-bordered">Sueldo : S/.</td><td class="text-info table-bordered"><%=d.getCa_sueldo()%></td></tr>
-                                        <tr><td class="text-info table-bordered">BEV: </td><td class="text-info table-bordered"><%=d.getDe_bev()%></td></tr>
-                                        <tr><td class="text-info table-bordered">Bono Alimentario : S/.</td><td  class="text-info table-bordered"><%=d.getCa_bono_alimentario()%></td></tr>
-                                        <tr><td class="text-info table-bordered">Bono Puesto : S/.</td><td  class="text-info table-bordered"><%=d.getCa_bonificacion_p()%></td></tr>
-                                        <tr style="color: red;"><td class="text-info table-bordered" >Sueldo Total : S/.</td><td class=" table-bordered" style="color-text:red; "><%=(d.getCa_sueldo() + d.getCa_bono_alimentario() + d.getDe_bev() + d.getCa_bonificacion_p())%></td></tr>
+                                        <tr><td class="text-info table-bordered">Sueldo : S/.</td><td class="text-info table-bordered"><%=cs.toPlainString() %></td></tr>
+                                        <tr><td class="text-info table-bordered">BEV: </td><td class="text-info table-bordered"><%=bev.toPlainString() %></td></tr>
+                                        <tr><td class="text-info table-bordered">Bono Alimentario : S/.</td><td  class="text-info table-bordered"><%=bal.toPlainString() %></td></tr>
+                                        <tr><td class="text-info table-bordered">Bono Puesto : S/.</td><td  class="text-info table-bordered"><%=bp.toPlainString() %></td></tr>
+                                        <tr style="color: red;"><td class="text-info table-bordered" >Sueldo Total : S/.</td><td class=" table-bordered" style="color-text:red; "><%=total.toPlainString() %></td></tr>
                                         <tr><td  Class="text-info table-bordered">Departamento:</td><td class="text-info table-bordered"><%=d.getNo_dep()%></td></tr>
                                         <tr><td  Class="text-info table-bordered">Puesto:</td><td class="text-info table-bordered"><%=d.getNo_puesto()%></td></tr>
                                         <input type="hidden" name="iddgp" value="<%=d.getId_dgp().trim()%>">

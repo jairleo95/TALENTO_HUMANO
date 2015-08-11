@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

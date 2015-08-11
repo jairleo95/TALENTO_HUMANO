@@ -339,7 +339,7 @@
                     $(".div-holi").text($(".DD").val());
                 });
                 $(".elimi").click(function() {
-                    var msg = confirm('¿tas seguro de eliminar?');
+                    var msg = confirm('¿Está seguro de eliminar?');
                     if (msg == true) {
                         return true;
                     } else {
