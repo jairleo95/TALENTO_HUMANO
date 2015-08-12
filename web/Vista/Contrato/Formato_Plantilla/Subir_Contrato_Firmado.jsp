@@ -167,6 +167,7 @@
                                                 </tr>
                                             </table>
                                             <button type="submit" class="btn btn-primary" style="align:center;"><i class="fa fa-upload"></i>Registrar</button>
+                                            <button type="button" class="btn btn-primary" onclick="window.history.back()"><i class="fa fa-backward"></i>&nbsp;Regresar</button>
                                             <%
                                                 if (can > 0) {
                                             %>
@@ -309,7 +310,7 @@
             function closedthis2() {
                 $.smallBox({
                     title: "¡Documento eliminado correctamente!",
-                    content: "ya puede ver eñ cambio",
+                    content: "ya puede ver el cambio",
                     color: "#739E73",
                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
                     timeout: 6000

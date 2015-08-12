@@ -374,6 +374,7 @@ public class CContrato extends HttpServlet {
                 getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
                 id_dgp = con.obt_dgp_x_dgp(id_cto);
                 getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_cto));
+                
                 getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
             }
             getServletContext().setAttribute("List_Anno_trabajador", a.List_Anno_trabajador_contrato(idtr));
