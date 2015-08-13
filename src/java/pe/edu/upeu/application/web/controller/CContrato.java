@@ -106,6 +106,10 @@ public class CContrato extends HttpServlet {
         String idpuesto = (String) sesion.getAttribute("PUESTO_ID");
         String idrol = (String) sesion.getAttribute("IDROL");
         /* try {*/
+        if (opc.equals("casos_especiales")) {
+            response.sendRedirect("Vista/Contrato/Gen_Contrato_CE.jsp");
+        }
+        
         if (opc.equals("enviar")) {
             String iddgp = request.getParameter("iddgp");
             String idtr = request.getParameter("idtr");

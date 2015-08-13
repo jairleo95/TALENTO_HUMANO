@@ -65,6 +65,7 @@ public class CFoto extends HttpServlet {
             // ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Usuario/Fotos/";
             ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web/Vista/Usuario/Fotos/";
             //ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Usuario\\Fotos";
+            System.out.println(ubicacion+"--ubicacion");
             //out.print(ubicacion);
             out.print(ubicacion);
             DiskFileItemFactory f = new DiskFileItemFactory();
