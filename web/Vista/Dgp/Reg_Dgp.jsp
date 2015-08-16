@@ -1,10 +1,8 @@
-
 <%@page import="pe.edu.upeu.application.model.Cuenta_Sueldo"%>
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
-
 %>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.When"%>
@@ -19,7 +17,6 @@
 <jsp:useBean id="Listar_Requerimiento" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="list_Cuenta_Sueldo" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="fecha_maxima_plazo" scope="application" class="java.lang.String"/>
-
 <!DOCTYPE html >
 <html>
     <head>
@@ -28,9 +25,7 @@
         <title> Registrar DGP </title>
         <meta name="description" content="">
         <meta name="author" content="">
-
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
         <!-- Basic Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
@@ -72,21 +67,30 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
-        <link rel="stylesheet" href="../../css/Css_Formulario/form.css"  type="text/css" > 
         <link rel="stylesheet" href="../../css/chosen.css"  type="text/css" > 
         <style>
             .td{
                 font-weight: bold;
             }
-
             #titu{
                 font-weight: bold;
                 color: #005cac;
                 // color: blue;
             }
-            p{
-                font-weight: bold; 
+            .cont{
+                margin: 0 auto;
+            }
+            .caja{
+                box-shadow: 2px 2px 5px #cccccc;
+                background-color: #ffffff;
+            }
+            .c_header{
+                color: #ffffff;
+                background-color: #3276b1;
+                border-color: #3276b1;
+            }
+            table{
+                border: 0px;
             }
         </style>
 
@@ -174,75 +178,14 @@
                                                                 <%}%>
                                                             </label>
                                                         </section>
-                                                        <section  class="col col-6" style="display: none">
+                                                        <section  class="col col-6" style="display: ">
                                                             <label class="select" id="titu">CARGAR DATOS
                                                                 <select  class="btn-list-req" >
                                                                     <option value="" selected=""  >[SELECCIONE]</option>
-
                                                                 </select>
                                                             </label>
                                                         </section>
                                                     </div>
-                                                    <script>
-
-                                                        $(document).ready(function() {
-                                                            var lista_dgp = $(".btn-list-req");
-                                                            $.post("../../dgp", "opc=Listar_Req&idtr=" + $(".id_tr").val(), function(objJson) {
-                                                                if (objJson.rpta == -1) {
-                                                                    alert(objJson.mensaje);
-                                                                    return;
-                                                                }
-                                                                var lista = objJson.lista;
-                                                                if (lista.length == 0) {
-                                                                    lista_dgp.empty();
-                                                                    lista_dgp.append('<option value="">[NO TIENE]</option>');
-                                                                } else {
-                                                                    for (var t = 0; t < lista.length; t++) {
-                                                                        lista_dgp.append('<option value="' + lista[t].id + '">' + lista[t].desc + '</option>');
-                                                                    }
-                                                                }
-                                                            });
-                                                            lista_dgp.change(function() {
-                                                                $.post("../../dgp", "opc=Listar_Datos&idc=" + $(this).val(), function(objJson) {
-                                                                    if (objJson.rpta == -1) {
-                                                                        alert(objJson.mensaje);
-                                                                        return;
-                                                                    }
-                                                                    var lis_datos = objJson.lista;
-                                                                    for (var v = 0; v < lis_datos.length; v++) {
-                                                                        $("#sueldo").val(lis_datos[v].sueldo);
-                                                                        $("#bono_al").val(lis_datos[v].bono_alimentario);
-                                                                        $("#bev").val(lis_datos[v].bev);
-                                                                        calcular_sueldo_total();
-                                                                        $(".ant_policiales").val(lis_datos[v].ant_pol);
-                                                                        $(".essalud").val(lis_datos[v].essalud);
-                                                                        $("#banco").val(lis_datos[v].banco);
-                                                                        cuenta_bancaria($("#banco").val());
-                                                                        $("#nu_cuen_otros").val(lis_datos[v].banco_otros);
-                                                                        $("#nu_cuen").val(lis_datos[v].cuenta);
-                                                                        $("#nu_cuen_ban").val(lis_datos[v].cuenta_bancaria);
-                                                                        $("#subscription").val(lis_datos[v].gen_cuenta);
-                                                                    }
-                                                                });
-                                                                $.post("../../centro_costo", "opc=Cargar_cc_DGP&id_c=" + $(this).val(), function(objJson) {
-                                                                    var lista = objJson.lista;
-
-                                                                    for (var i = 0; i < lista.length; i++) {
-                                                                        var dep_actual = $(".dep_actual").val();
-                                                                        if (lista[i].id_dep == dep_actual) {
-                                                                            $(".centro_costo1").val(lista[i].id_cc);
-                                                                            $(".porcentaje_cc").val(lista[i].porcent_cc);
-                                                                        } else {
-                                                                            var arr_cc = [lista[i].id_dir, lista[i].id_dep, "0", lista[i].porcent_cc, lista[i].id_cc];
-                                                                            agregar_centro_costo("1", arr_cc);
-                                                                        }
-                                                                    }
-                                                                });
-                                                                $("#horario").val("2");
-                                                                list_horario($("#horario").val());
-                                                            });
-                                                        });
-                                                    </script>
                                                     <section>
                                                         <label class="label" id="titu">Puesto | Seccion | Area:</label>
                                                         <label class="select">
@@ -265,6 +208,7 @@
                                                             <label class="label" id="titu"> Area:</label>
                                                             <label class="select">
                                                                 <select data-placeholder="Seleccionar Area"  class="select-area"required="" >
+                                                                    <option value="">[SELECCIONE]</option>  
                                                                 </select>
                                                             </label>
                                                         </section>
@@ -272,6 +216,7 @@
                                                             <label class="label" id="titu"> Sección:</label>
                                                             <label class="select">
                                                                 <select data-placeholder="Seleccionar Sección"  class="select-seccion"required="" >
+                                                                    <option value="">[SELECCIONE]</option>  
                                                                 </select>
                                                             </label>
                                                         </section>
@@ -279,6 +224,7 @@
                                                             <label class="label" id="titu"> Puesto:</label>
                                                             <label class="select">
                                                                 <select data-placeholder="Seleccionar Puesto"  class="select-puesto" required="" >
+                                                                    <option value="">[SELECCIONE]</option>  
                                                                 </select>
                                                             </label>
                                                         </section>
@@ -498,7 +444,6 @@
                                                             </label>
                                                         </section>
                                                     </div>
-
                                                     <%String es_cue_sue = request.getParameter("es_cs");%>
                                                     <input type="hidden" name="ESTADO" value="<%=es_cue_sue%>">
                                                     <%if (es_cue_sue.equals("0")) {%>
@@ -531,20 +476,16 @@
 
                                                         </section>
                                                         <section class="col col-4"  id="no_cuen_ban">
-
                                                             <label class="input" id="titu">Nro Cuenta Bancaria:
                                                                 <input type="text" name="CUENTA_BANC" id="nu_cuen_ban">
                                                             </label>
-
                                                         </section>
-
                                                         <section class="col col-6" id="generar">
                                                             <p style="font-weight:bold;">Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
                                                             <label class="checkbox" >
                                                                 <input type="checkbox" name="GEN_NU_CUEN" id="subscription"  value="1" >
                                                                 <i></i>Generar Nro de Cuenta Bancaria</label>
                                                         </section>
-
                                                     </div>
                                                     <%} else { %>
                                                     <%for (int i = 0; i < list_Cuenta_Sueldo.size(); i++) {
@@ -608,14 +549,9 @@
                                                         <%}
                                                         %>
                                                     </div>
-
                                                     <%}
                                                         }%>
-
-
                                                     <%}%>
-
-
                                                     <%if (idreq.equals("REQ-0010")) {%>  
                                                     <div class="">
                                                         <section class="col col-4" >
@@ -646,9 +582,7 @@
                                                     </div>
                                                     <div class="pago_cuotas_1">
                                                         <section class="col col-2">
-
                                                             <a type="button" class="btn btn-default btn-lg" id="btn_add" >Agregar</a>
-
                                                         </section>
                                                         <section class="col col-2" >
                                                             <label class="input" id="titu"> CUOTA:
@@ -669,7 +603,6 @@
                                                         <input type="hidden" value="1" name="CANT" class="cant" />
 
                                                     </div>
-
                                                     <%}%>
                                                     <%if (idreq.equals("REQ-0007") || idreq.equals("REQ-0008") || idreq.equals("REQ-0009") || idreq.equals("REQ-0001") || idreq.equals("REQ-0002") || idreq.equals("REQ-0003") || idreq.equals("REQ-0005")) {%>
                                                     <div  class="row" id="centro-costo_1" >
@@ -688,9 +621,6 @@
                                                     </div>
                                                     <input type="hidden" value="1" name="numero" class="cant-input" />
                                                     <%}%>
-
-
-                                                    <code class="ver"></code>
                                                     <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>">
                                                     <div id="div_2" class="contenido" style="display: none">
                                                         <table  class="table">
@@ -700,7 +630,6 @@
                                                             <tr><td class="td">Dias de Capacitacion:</td><td><input type="text" name="DIAS_CAPACITACION" ></td></tr>  
                                                         </table>
                                                     </div >
-
                                                     <div id="div_3" class="contenido" style="display:none ">
                                                         <table class="table">
                                                             <tr><td class="td">Monto del Honorario:</td><td><input type="text" name="MONTO_HONORARIO" ></td></tr>   
@@ -741,16 +670,12 @@
                                     <header>
                                         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
                                         <h2>Registrar Horario</h2>
-
                                     </header>
-
                                     <!-- widget div-->
                                     <div>
-
                                         <!-- widget edit box -->
                                         <div class="jarviswidget-editbox">
                                             <!-- This area used as dropdown edit box -->
-
                                         </div>
                                         <!-- end widget edit box -->
 
@@ -834,50 +759,79 @@
                                                         <section class="col col-2">
                                                             <label class="select" id="titu">DOMINGO
                                                                 <select id=select_dom >
-
                                                                     <option value="1">Habilitado</option>
                                                                     <option value="2" selected="">Deshabilitado</option>
                                                                 </select>
                                                             </label>
                                                         </section>
                                                     </div>
+
                                                     <div class="input-desp dias_semana">
-                                                        <table style="" id="show_lun" class="cont_lun"> 
-                                                            <tr><td align="center" colspan="2">Lunes</td></tr>
+                                                        <div class="cont">
+                                                            <section class="col col-sm-4 col-md-4">
+                                                                <div class="caja">
+                                                                    <table  id="show_lun" class="cont_lun table table-condensed table-bordered"> 
+                                                                        <tr class="c_header"><td style="text-align: center;" colspan="3">Lunes</td></tr>
 
-
-                                                        </table>
-
-                                                        <table id="show_mar" class="cont_mar">     
-                                                            <tr><td align="center" colspan="2">Martes</td></tr>
-
-                                                        </table>
-                                                        <table id="show_mie" class="cont_mie">     
-                                                            <tr ><td align="center" colspan="2">Miercoles</td></tr>
-
-                                                        </table>
-
-
-                                                        <table id="show_jue" class="cont_jue">     
-                                                            <tr><td align="center" colspan="2">Jueves</td></tr>
-
-                                                        </table>
-                                                        <table id="show_vie" class="cont_vie">     
-                                                            <tr><td align="center" colspan="2">Viernes</td></tr>
-
-                                                        </table>
-                                                        <table id="show_sab" class="cont_sab">     
-                                                            <tr><td align="center" colspan="2">Sábado</td></tr>
-
-                                                        </table>
-                                                        <table id="show_dom" class="cont_dom" >
-                                                            <tr><td align="center" colspan="2">Domingo</td></tr>
-
-                                                        </table>
-
-
+                                                                    </table>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                        <div class="cont">
+                                                            <section class="col col-sm-4 col-md-4">
+                                                                <div class="caja">
+                                                                    <table id="show_mar" class="cont_mar table table-condensed table-bordered">     
+                                                                        <tr class="c_header" ><td style="text-align: center;"  colspan="3">Martes</td></tr>
+                                                                    </table>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                        <div class="cont">
+                                                            <section class="col col-sm-4 col-md-4">
+                                                                <div class="caja">
+                                                                    <table id="show_mie" class="cont_mie table table-condensed table-bordered">     
+                                                                        <tr class="c_header"><td style="text-align: center;" colspan="3">Miercoles</td></tr>
+                                                                    </table>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                        <div class="cont">
+                                                            <section class="col col-sm-4 col-md-4">
+                                                                <div class="caja">
+                                                                    <table id="show_jue" class="cont_jue table table-condensed table-bordered">     
+                                                                        <tr class="c_header"><td style="text-align: center;" colspan="3">Jueves</td></tr>
+                                                                    </table>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                        <div class="cont">
+                                                            <section class="col col-sm-4 col-md-4">
+                                                                <div class="caja">
+                                                                    <table id="show_vie" class="cont_vie table table-condensed table-bordered">     
+                                                                        <tr class="c_header"><td style="text-align: center;" colspan="3">Viernes</td></tr>
+                                                                    </table>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                        <div class="cont">
+                                                            <section class="col col-sm-4 col-md-4">
+                                                                <div class="caja">
+                                                                    <table id="show_sab" class="cont_sab table table-condensed table-bordered">     
+                                                                        <tr class="c_header"><td style="text-align: center;"  colspan="3">Sábado</td></tr>
+                                                                    </table>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                        <div class="cont">
+                                                            <section class="col col-sm-4 col-md-4">
+                                                                <div class="caja">
+                                                                    <table id="show_dom" class="cont_dom table table-condensed table-bordered" >
+                                                                        <tr class="c_header"><td  style="text-align: center;" colspan="3">Domingo</td></tr>
+                                                                    </table>
+                                                                </div>
+                                                            </section>
+                                                        </div>
                                                         <div  class="row" >
-
                                                             <section class="col col-4">
                                                                 <label class="input" id="titu">
                                                                     <div class="h_total" style=" font-weight: bold;">Horas Totales : 00:00 horas</div>
@@ -886,8 +840,9 @@
                                                             </section>
                                                         </div>
 
-                                                        <input  type="hidden" name="dep_actual" value="<%=id_dep%>" class="dep_actual" />
+
                                                     </div>
+                                                    <input  type="hidden" name="dep_actual" value="<%=id_dep%>" class="dep_actual" />
                                                 </fieldset>
                                                 <footer>
                                                     <div class="div_info">
@@ -914,21 +869,16 @@
 
                             </article>
                             <!-- END COL -->
-
-
                             <input type="hidden" name="opc"  class="submit" value="Registrar">
                         </form>
-
-
                     </div>
-
                 </section>
+
             </div>
         </div>
 
+
     </body>
-
-
     <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
@@ -947,10 +897,8 @@
     <script src="../../js/app.config.js"></script>
     <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
     <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
-
     <!-- BOOTSTRAP JS -->
     <script src="../../js/bootstrap/bootstrap.min.js"></script>
-
     <!-- CUSTOM NOTIFICATION -->
     <script src="../../js/notification/SmartNotification.min.js"></script>
 
@@ -996,919 +944,13 @@
     <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
     <!-- Voice command : plugin -->
     <script src="../../js/speech/voicecommand.min.js"></script>
-
     <!-- PAGE RELATED PLUGIN(S) 
     <script src="..."></script>-->
     <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
     <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
-    <script type="text/javascript">
-
-                                                        // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                                                        function listar_mensaje_plazo(tipo, warning, info, req) {
-                                                            $.post("../../plazo_dgp", "opc=Listar&tipo=" + tipo, function(objJson) {
-                                                                warning.empty();
-                                                                info.empty();
-                                                                var lista = objJson.lista;
-                                                                if (objJson.rpta == -1) {
-                                                                    alert(objJson.mensaje);
-                                                                    return;
-                                                                }
-                                                                for (var i = 0; i < lista.length; i++) {
-                                                                    if (tipo == '2') {
-                                                                        warning.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'></a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
-                                                                        info.append('<div class="alert alert-info fade in"><button class="close" data-dismiss="alert">×</button><i class="fa-fw fa fa-info"></i><strong>¡Importante!</strong> Su requerimiento será procesado en el mes de <strong>' + lista[i].mes + '.</strong></div>');
-                                                                    } else if (tipo == '1') {
-                                                                        warning.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'></a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , se tiene " + lista[i].dias_tol + " dias de tolerancia para la fecha de inicio.</div>");
-                                                                        info.append('<div class="alert alert-warning fade in"><button class="close" data-dismiss="alert"></button><i class="fa-fw fa fa-warning"></i><strong>¡Advertencia - Inicio de contrato!</strong> el plazo establece que se debe registrar a partir de esta fecha de inicio  ' + lista[i].fe_tol + '.</div>');
-                                                                    }
-                                                                }
-                                                            });
-                                                        }
-                                                        $(document).ready(function() {
-
-                                                            $(".val_fe").change(function() {
-                                                                var fecha = $(this).val().split("-");
-                                                                if (fecha[0].length > 4) {
-                                                                    $(this).val("");
-                                                                }
-                                                            });
-                                                            pageSetUp();
-                                                            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
-                                                                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-                                                            });
-                                                            list_select($(".select-area"), "../../Direccion_Puesto", "opc=List_Area_RDGP", "3");
-                                                            $(".select-area").change(function() {
-                                                                list_select($(".select-seccion"), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(".select-area").val(), "3");
-                                                                $(".select-seccion,.select-puesto").val("");
-                                                                $(".chosen-select").trigger("chosen:updated");
-                                                            });
-                                                            $(".select-seccion").change(function() {
-                                                                list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".select-seccion").val(), "3");
-                                                            });
-                                                            $(".select-puesto").change(function() {
-                                                                $(".select-puesto1").val($(this).val());
-                                                                $(".chosen-select").trigger("chosen:updated");
-                                                            });
-                                                            $(".select-puesto1").change(function() {
-                                                                $(".select-area,.select-seccion,.select-puesto").val("");
-                                                                $(".chosen-select").trigger("chosen:updated");
-                                                            });
-                                                            $(".fe_inicio_dgp").change(function() {
-                                                                var fecha = $(this).val();
-                                                                $.post("../../dgp", "opc=Val_Fe_Inicio&fecha=" + fecha, function(objJson) {
-                                                                    if (objJson.estado) {
-                                                                        $.bigBox({
-                                                                            title: "¡Alerta de plazo no cumplido!",
-                                                                            content: "Si registra con esta fecha de inicio : " + fecha + ",  el requerimiento estara en fuera de plazo. ¡NECESITA HACER SOLICITUD AL TERMINAR REGISTRO!",
-                                                                            color: "#C79121",
-                                                                            icon: "fa fa-warning shake animated",
-                                                                            // number: "1",
-                                                                            //timeout: 15000
-                                                                        });
-                                                                    } else {
-                                                                        $.bigBox({
-                                                                            title: "¡Plazo cumplido!",
-                                                                            content: "Con la fecha de inicio :" + fecha + " el plazo para este requerimiento se cumplirá.",
-                                                                            color: "#739E73",
-                                                                            icon: "fa fa-shield fadeInLeft animated"
-                                                                                    // ,number: "1",
-                                                                                    //timeout: 15000
-                                                                        });
-                                                                    }
-                                                                });
-                                                            });
-                                                            $('#checkout-form').validate({
-                                                                // Rules for form validation
-                                                                rules: {
-                                                                    FEC_DESDE: {
-                                                                        val_fecha: true
-                                                                    },
-                                                                    FEC_HASTA: {
-                                                                        val_fecha: true
-                                                                    },
-                                                                    horas_totales: {
-                                                                        required: true
-                                                                    },
-                                                                    email: {
-                                                                        required: true,
-                                                                        email: true
-                                                                    },
-                                                                    phone: {
-                                                                        required: true
-                                                                    },
-                                                                    country: {
-                                                                        required: true
-                                                                    },
-                                                                    city: {
-                                                                        required: true
-                                                                    },
-                                                                    code: {
-                                                                        required: true,
-                                                                        digits: true
-                                                                    },
-                                                                    address: {
-                                                                        required: true
-                                                                    },
-                                                                    name: {
-                                                                        required: true
-                                                                    }
-                                                                },
-                                                                // Messages for form validation
-                                                                messages: {
-                                                                    horas_totales: {
-                                                                        max: 'Porfavor digite un horario que se menor a 48 Horas de Trabajo'
-                                                                    },
-                                                                    email: {
-                                                                        required: 'Please enter your email address',
-                                                                        email: 'Please enter a VALID email address'
-                                                                    }
-
-                                                                },
-                                                                // Do not change code below
-                                                                errorPlacement: function(error, element) {
-                                                                    error.insertAfter(element.parent());
-                                                                }
-                                                            });
-                                                            jQuery.validator.addMethod("val_fecha", function(value, element) {
-                                                                var d = value.split("-");
-                                                                return this.optional(element) || String(parseInt(d[0])).length == 4;
-                                                            }, "¡Fecha ingresada invalida!");
-                                                        })
-    </script>
-    <script>
-
-        $(document).ready(function() {
-            // $("#alerta_dgp").hide();
-            var b = $("#alerta_dgp");
-            var info = $(".div_info");
-            listar_mensaje_plazo("2", b, info);
-
-            var s = $(".info_1");
-            var t = $(".alert_1");
-            listar_mensaje_plazo("1", t, s);
-        });
-        var cantidad = 1;
-
-        $("#btn_add").click(function() {
-            var agregar = $('#fila-agregar');
-            var texto = "";
-            cantidad++;
-            texto += '<div class="row pago_cuotas_' + cantidad + '">';
-            texto += '<section class="col col-2"><label class="btn">';
-            texto += '<button type="button" class="eliminar' + cantidad + '"  >Eliminar</button>';
-            texto += '</label></section>';
-            texto += '<section class="col col-2" ><label class="input" id="titu">';
-            texto += '<input type="text" name="CUOTA_' + cantidad + '" id="cuota" required="" value="' + cantidad + '" >';
-            texto += '</label></section>';
-            texto += '<section class="col col-4" ><label class="input" id="titu">';
-            texto += '<input type="date" name="FEC_PAGAR_' + cantidad + '" id="datepicker" required="" >';
-            texto += '</label></section>';
-            texto += '<section class="col col-4" ><label class="input" id="titu">';
-            texto += '<input type="text" name="MONTO_' + cantidad + '" required="" class="monto" >';
-            texto += '</label></section>';
-            texto += '</div>';
-
-
-            agregar.append(texto);
-            periodo_pago(cantidad);
-            $(".cant").val(cantidad);
-            //alert($(".cant").val())
-            $(".eliminar" + cantidad).click(function() {
-                $(".pago_cuotas_" + cantidad).remove();
-                periodo_pago(cantidad);
-                cantidad--;
-                periodo_pago(cantidad);
-
-                //alert(cantidad)
-            });
-        });
-
-        $(document).ready(
-                function() {
-                    $("#sueldo").keyup(
-                            function() {
-                                var sueldo = parseFloat($("#sueldo").val());
-                                $(".monto").val(Math.round(sueldo));
-                            });
-                }
-        );
-        function periodo_pago(cantidad) {
-            var sueldo = parseFloat($("#sueldo").val());
-            var p_p = sueldo / cantidad;
-            $.each($(".monto"), function() {
-                $(".monto").val(p_p);
-            });
-        }
-
-        function calcular_sueldo_total() {
-            var x = parseFloat($("#sueldo").val());
-            var y = parseFloat($("#bono_al").val());
-            var w = parseFloat($("#bono_pu").val());
-            var z = parseFloat($("#bev").val());
-            var v = x + y + z + w;
-            $("#suel_total").text(Math.round(v * 100) / 100);
-        }
-        $(document).ready(
-                function() {
-                    $("#sueldo").keyup(
-                            function() {
-                                calcular_sueldo_total();
-                            }
-                    );
-                    $("#bono_al").keyup(
-                            function() {
-                                calcular_sueldo_total();
-                            }
-                    );
-                    $("#bev").keyup(
-                            function() {
-                                calcular_sueldo_total();
-                            }
-                    );
-                    $("#bono_pu").keyup(
-                            function() {
-                                calcular_sueldo_total();
-                            }
-                    );
-                }
-        );</script>
-    <script language="javascript" type="text/javascript">
-        $(document).ready(function() {
-            $(".contenido").hide();
-            /*TEMPORAL*/
-            //Planilla
-            //if ($("#combito").val()=="REQ-0001" | $("#combito").val() == "REQ-0002" | $("#combito").val() == "REQ-0003" | $(this).val() == "REQ-0004" | $(this).val() == "REQ-0005" | $(this).val() == "REQ-0006") {
-            if (true) {
-                $(".contenido").hide();
-                $("#div_1").show();
-            }
-            //Fuera PLanilla
-            if ($("#combito").val() == 7 | $(this).val() == 8 | $(this).val() == 9) {
-                $(".contenido").hide();
-                $("#div_2").show();
-            }
-            //Otros
-            if ($("#combito").val() == 10 | $(this).val() == 11 | $(this).val() == 12) {
-                $(".contenido").hide();
-                $("#div_3").show();
-            }
-
-        });</script>
-    <script language="javascript" type="text/javascript">
-        $(document).ready(
-                function mostrar() {
-
-                    $(".cont_lun").hide();
-                    $(".cont_mar").hide();
-                    $(".cont_mie").hide();
-                    $(".cont_jue").hide();
-                    $(".cont_vie").hide();
-                    $(".cont_sab").hide();
-                    $(".cont_dom").hide();
-
-
-                    $("#select_lun").change(
-                            function() {
-                                if ($(this).val() == 1) {
-                                    $("#show_lun").show();
-                                }
-                                if ($(this).val() == 2) {
-                                    $(".cont_lun").hide();
-                                    $("#show_lun input").val("00:00");
-                                }
-                                calcularHoras();
-                            }
-                    );
-                    $("#select_mar").change(
-                            function() {
-                                if ($(this).val() == 1) {
-                                    $("#show_mar").show();
-                                }
-                                if ($(this).val() == 2) {
-                                    $(".cont_mar").hide();
-                                    $("#show_mar input").val("00:00");
-                                }
-                                calcularHoras();
-                            }
-                    );
-                    $("#select_mie").change(
-                            function() {
-                                if ($(this).val() == 1) {
-                                    $("#show_mie").show();
-                                }
-                                if ($(this).val() == 2) {
-                                    $(".cont_mie").hide();
-                                    $("#show_mie input").val("00:00");
-                                }
-                                calcularHoras();
-                            }
-                    );
-                    $("#select_jue").change(
-                            function() {
-                                if ($(this).val() == 1) {
-                                    $("#show_jue").show();
-                                }
-                                if ($(this).val() == 2) {
-                                    $(".cont_jue").hide();
-                                    $("#show_jue input").val("00:00");
-                                }
-                                calcularHoras();
-                            }
-                    );
-                    $("#select_vie").change(
-                            function() {
-                                if ($(this).val() == 1) {
-                                    $("#show_vie").show();
-                                }
-                                if ($(this).val() == 2) {
-                                    $(".cont_vie").hide();
-                                    $("#show_vie input").val("00:00");
-                                }
-                                calcularHoras();
-                            }
-                    );
-                    $("#select_sab").change(
-                            function() {
-                                if ($(this).val() == 1) {
-                                    $("#show_sab").show();
-                                }
-                                if ($(this).val() == 2) {
-                                    $(".cont_sab").hide();
-                                    $("#show_sab input").val("00:00");
-                                }
-                                calcularHoras();
-                            }
-                    );
-                    $("#select_dom").change(
-                            function() {
-                                if ($(this).val() == 1) {
-                                    $("#show_dom").show();
-                                }
-                                if ($(this).val() == 2) {
-                                    $(".cont_dom").hide();
-                                    $("#show_dom input").val("00:00");
-                                }
-                                calcularHoras();
-                            }
-                    );
-                }
-
-        );</script>
-    <script  language="javascript" type="text/javascript">
-        function calcularHoras() {
-            var dias_semana = new Array("lun", "mar", "mie", "jue", "vie", "sab", "dom");
-            var acum = 0;
-            for (var i = 0; i < dias_semana.length; i++) {
-
-                for (var j = 0, max = 5; j < max; j++) {
-                    var horaTurno = 0;
-                    //var str = $("#HORA_DESDE_" + dias_semana[i] + j).val();
-                    var Desde = $(".HORA_DESDE_" + dias_semana[i] + (j + 1)).val();
-                    var Hasta = $(".HORA_HASTA_" + dias_semana[i] + (j + 1)).val();
-                    if ($(".HORA_DESDE_" + dias_semana[i] + (j + 1)).val() == null) {
-                        Desde = "00:00";
-                        Hasta = "00:00";
-                    }
-                    //  var arrDesde = $(str).val().split(":");
-                    //if (typeof Desde !== 'undefined' && typeof Hasta !== 'undefined') {
-                    var arrDesde = Desde.split(":");
-                    var arrHasta = Hasta.split(":");
-                    horaTurno = (((parseInt(arrHasta[0]) * 60) + (parseInt(arrHasta[1]))) - ((parseInt(arrDesde[0]) * 60) + (parseInt(arrDesde[1]))));
-                    // alert(horaTurno + Desde + ".HORA_DESDE_" + dias_semana[i] + (j + 1));
-                    acum = acum + horaTurno;
-                    // }
-                }
-            }
-            var minutos_totales = acum;
-            acum = acum / 60;
-            var min = ((acum - parseInt(acum)) * 60);
-            min = parseInt(min.toPrecision(2));
-            $(".h_total").text("Hora Semanal Total : " + parseInt(acum) + ":" + min + " Horas.");
-            $(".h_total").val(acum);
-            if (minutos_totales > 2880) {
-            }
-        }
-        function listar_dep_cc(x, opc, arr_cc) {
-
-            var cc_dep = $(".cc-dep" + x);
-            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function(objJson) {
-
-                cc_dep.empty();
-                cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    if (opc == "1") {
-                        if (arr_cc[1] == lista[i].id) {
-                            cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                            listar_centro_costo(x, opc, arr_cc);
-                        } else {
-                            cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                        }
-                    } else {
-                        cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                    }
-
-                }
-            });
-
-        }
-        function listar_centro_costo(x, opc, arr_cc) {
-
-            var centro_costo = $(".centro_costo" + x);
-            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function(objJson) {
-                centro_costo.empty();
-                centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    if (opc == "1") {
-                        if (arr_cc[4] == lista[i].id) {
-                            centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-
-
-
-                        } else {
-                            centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                        }
-                    } else {
-                        centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                    }
-
-                }
-            });
-
-        }
-        function listar_cc(num, opc, arr_cc) {
-            var select_cc = $(".select-cc");
-            $.post("../../centro_costo?opc=Listar_cc", function(objJson) {
-                //  select_cc.empty();
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    select_cc.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                }
-
-            });
-            var cc_dir = $(".cc-dir" + num);
-            $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    if (opc == "1") {
-                        if (arr_cc[0] == lista[i].id) {
-                            cc_dir.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                            listar_dep_cc(num, opc, arr_cc);
-                        } else {
-                            cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                        }
-                    } else {
-                        cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                    }
-                }
-            });
-            $(".cc-dir" + num).change(function() {
-
-                listar_dep_cc(num, "0", arr_cc);
-            });
-            $(".cc-dep" + num).change(function() {
-
-                listar_centro_costo(num, "0", arr_cc);
-            });
-            $(".remover" + num).click(function() {
-                $(".centro-costo_" + num).remove();
-                sumn_porcen_total();
-
-            });
-        }
-        function sumn_porcen_total() {
-            var acum = 0;
-            $.each($(".porcentaje_cc"), function() {
-                acum = acum + parseFloat($(this).val());
-            });
-            $(".total_porcentaje").val(acum);
-        }
-        function list_horario(valor) {
-            if (valor == 0) {
-                $(".cont_lun").hide();
-                $(".cont_mar").hide();
-                $(".cont_mie").hide();
-                $(".cont_jue").hide();
-                $(".cont_vie").hide();
-                $(".cont_sab").hide();
-                $(".cont_dom").hide();
-                $("#select_lun").val(2);
-                $("#select_mar").val(2);
-                $("#select_mie").val(2);
-                $("#select_jue").val(2);
-                $("#select_vie").val(2);
-                $("#select_sab").val(2);
-                $("#select_dom").val(2);
-            } else {
-                var dias_semana = new Array("lun", "mar", "mie", "jue", "vie", "sab", "dom");
-                $(".tr-dia").remove();
-                $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function(objJson) {
-                    var lista = objJson.lista;
-                    var text_html = '';
-                    var primera_fila = 0;
-                    for (var f = 0; f < dias_semana.length; f++) {
-                        var d = 0;
-                        for (var i = 0; i < lista.length; i++) {
-                            if (dias_semana[f] == lista[i].dia) {
-                                primera_fila++;
-                                var scntDiv = $('#show_' + dias_semana[f]);
-                                $(".cont_" + dias_semana[f]).show();
-                                $("#select_" + dias_semana[f]).val(lista[i].estado);
-                                if (lista[i].estado == '2') {
-                                    scntDiv.hide();
-                                } else if (lista[i].estado == '1') {
-                                    scntDiv.show();
-                                }
-                                text_html += '<tr class="tr-dia turno_' + (i + 1) + '" ><td>T' + (d + 1);
-                                text_html += ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dias_semana[f] + (d + 1) + '"   name="HORA_DESDE_' + dias_semana[f] + (d + 1);
-                                text_html += '" value="' + lista[i].desde + '"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + dias_semana[f] + (d + 1) + '"  value="' + lista[i].hasta + '" name="HORA_HASTA_' + dias_semana[f] + (d + 1)
-                                        + '" /><input type="hidden" name="DIA_' + dias_semana[f] + (d + 1) + '" class="nombre_dia_' + (i + 1) + '" value="' + dias_semana[f] + '" >';
-                                if (primera_fila == 1) {
-                                    text_html += '<button type="button" class="btn btn-primary agregar_turno" value="' + (i + 1) + '"><i class="fa fa-plus-square"></i></button></td></tr>';
-                                } else {
-                                    text_html += '<button type="button" class="btn btn-danger remover_turno" value="' + (i + 1) + '"><i class="fa  fa-minus-circle"></i></button></td></tr>';
-                                }
-                                d++;
-                                scntDiv.append(text_html);
-                                text_html = "";
-                            }
-                            // alert(dias_semana[f]);
-                        }
-                        primera_fila = 0;
-                    }
-                    calcularHoras();
-                    //$(".texto-h").mask("99:99", {placeholder: "X"});
-                    $(".texto-h").keyup(
-                            function() {
-                                calcularHoras();
-                            }
-                    );
-                    $(".remover_turno").click(function() {
-                        //alert($(this).val());
-                        $(".turno_" + $(this).val()).remove();
-                        calcularHoras();
-                    });
-                    $(".agregar_turno").click(function() {
-                        var turno = $('#show_' + $(".nombre_dia_" + $(this).val()).val() + ' .tr-dia').size() + 1;
-                        var dia = $(".nombre_dia_" + $(this).val()).val();
-                        var agregar_turno = $('#show_' + dia);
-                        var text_html = '';
-                        var i = $(".dias_semana .tr-dia").size();
-                        text_html += '<tr class="tr-dia turno_' + (i + 1) + '" ><td>T' + turno;
-                        text_html += ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dia + turno + '"   name="HORA_DESDE_' + dia + turno;
-                        text_html += '" value="00:00"  /></td><td><input type="text"  class="texto-h HORA_HASTA_' + dia + turno + '"  value="00:00" name="HORA_HASTA_' + dia + turno
-                                + '" /><input type="hidden" name="DIA_' + dia + turno + '" class="nombre_dia_' + (i + 1) + '" value="' + dia + '" >';
-                        text_html += '<button type="button" class="btn btn-danger remover_turno" value="' + (i + 1) + '"><i class="fa  fa-minus-circle"></i></button></td></tr>';
-                        agregar_turno.append(text_html);
-                        //$(".texto-h").mask("99:99", {placeholder: "X"});
-                        $(".remover_turno").click(function() {
-                            //alert($(this).val());
-                            $(".turno_" + $(this).val()).remove();
-                            calcularHoras();
-                        });
-                        $(".texto-h").keypress(
-                                function() {
-                                    calcularHoras();
-                                }
-                        );
-
-                    });
-
-                });
-
-            }
-
-
-        }
-
-        function cuenta_bancaria(banco) {
-            if (banco == '') {
-                $("#no_cuen").hide();
-                $("#no_cuen_ban").hide();
-                $("#generar").hide();
-                $("#texto").hide();
-                $("#no_cuen_otros").hide();
-            }
-            if (banco == '0') {
-                $("#no_cuen").hide();
-                $("#nu_cuen").val("");
-                $("#no_cuen_ban").hide();
-                $("#nu_cuen_ban").val("");
-                $("#no_cuen_otros").show();
-                $("#nu_cuen_otros").val("BBVA Banco Continental");
-                $("#nu_cuen_otros").attr('readonly', 'readonly');
-                //document.getElementById("nu_cuen_otros").readOnly = true;
-                $("#texto").show();
-                $("#generar").show();
-                $("#subscription").attr("required", "required");
-                $("#nu_cuen_otros").attr("required", "required");
-                $("#nu_cuen_otros").removeAttr('maxlength');
-                $("#nu_cuen_otros").removeAttr('minlength');
-
-            }
-            if (banco == '1') {
-                $("#generar").hide();
-                $("#no_cuen").show();
-                $("#nu_cuen").val("");
-                $("#nu_cuen").attr("required", "required");
-                $("#no_cuen_ban").hide();
-                $("#nu_cuen_ban").val("");
-                $("#subscription").attr('checked', false);
-                $("#nu_cuen").attr("maxlength", "21");
-                $("#nu_cuen").attr("minlength", "19");
-                // $("#nu_cuen").val("0011-")
-                $("#no_cuen_otros").hide();
-                $("#nu_cuen_otros").val("");
-                $("#texto").hide();
-            }
-            if (banco == '2') {
-
-                $("#generar").hide();
-                $("#subscription").attr('checked', false);
-                $("#no_cuen_ban").hide();
-                $("#nu_cuen_ban").val("");
-                $("#no_cuen").show();
-                $("#nu_cuen").val("");
-                $("#nu_cuen").attr("required", "required");
-                $("#nu_cuen_otros").removeAttr('maxlength');
-                $("#nu_cuen_otros").removeAttr('minlength');
-                $("#nu_cuen").removeAttr('maxlength');
-                $("#nu_cuen").removeAttr('minlength');
-                $("#nu_cuen").attr("maxlength", "14");
-                $("#nu_cuen").attr("minlength", "0");
-                //$("#nu_cuen").mask("99999999999999", {placeholder: "X"});
-                $("#no_cuen_otros").hide();
-                $("#nu_cuen_otros").val("");
-                $("#texto").hide();
-                $("#nu_cuen").valid();
-
-
-            }
-            if (banco == '3') {
-                $("#no_cuen").show();
-                $("#no_cuen").val("");
-                $("#nu_cuen").attr("required", "required");
-                $("#no_cuen_ban").show();
-                $("#no_cuen_ban").val("");
-                $("#nu_cuen_ban").attr("required", "required");
-                $("#no_cuen_otros").show();
-                $("#nu_cuen_otros").val("");
-                $("#nu_cuen_otros").attr("required", "required");
-                $("#generar").hide();
-                $("#subscription").attr('checked', false);
-                $("#texto").hide();
-                $("#nu_cuen_otros").removeAttr('readonly');
-                $("#nu_cuen_otros").removeAttr('maxlength');
-                $("#nu_cuen_otros").removeAttr('minlength');
-            }
-
-
-        }
-        var agregar = $('#fila-agregar');
-        var ag = $('#fila-agregar .porcentaje_cc').size() + 1;
-        var texto = "";
-
-        function agregar_centro_costo(opc, arr_cc) {
-
-            if (opc == "1") {
-                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
-                texto += '<div  class="row centro-costo_' + ag + '" >';
-                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
-                texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" value="' + arr_cc[3] + '" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
-                texto += '</div>';
-                agregar.append(texto);
-                listar_cc(ag, opc, arr_cc);
-                sumn_porcen_total();
-            } else {
-                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
-                texto += '<div  class="row centro-costo_' + ag + '" >';
-                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
-                texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
-                texto += '</div>';
-                agregar.append(texto);
-                listar_cc(ag);
-                var c_porcentaje = $(".porcentaje_cc").size();
-                $(".porcentaje_cc").val(Math.round((100 / c_porcentaje) * 100) / 100);
-                sumn_porcen_total();
-            }
-            texto = "";
-            $(".cant-input").val(ag);
-            ag++;
-            $(".porcentaje_cc").keyup(function() {
-                sumn_porcen_total();
-            });
-        }
-        function listar_tipo_horario() {
-            $.post("../../formato_horario", "opc=Listar_Tip_Horario", function(objJson) {
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                var horario = $("#horario");
-                horario.empty();
-                horario.append('<option value="" >[SELECCIONE]</option>');
-                for (var i = 0; i < lista.length; i++) {
-                    horario.append('<option value="' + lista[i].id + '" >' + lista[i].nombre + '</option>');
-                }
-
-            });
-        }
-        $(document).ready(function() {
-
-            listar_tipo_horario();
-            sumn_porcen_total();
-            $("#no_cuen").hide();
-            $("#no_cuen_ban").hide();
-            $("#generar").hide();
-            $("#no_cuen_otros").hide();
-            //  var r = "";
-            $('#btn-agregar-cc').click(function() {
-                agregar_centro_costo();
-            });
-            $("#banco").change(function() {
-                cuenta_bancaria($(this).val());
-                $("#nu_cuen").focus();
-                $("#es_cuenta").val(1);
-                //  alert($("#es_cuenta").val());
-            });
-            listar_cc();
-            $("#horario").change(
-                    function() {
-                        list_horario($(this).val());
-                    }
-            );
-        }
-        )
-                ;</script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-            $("#sueldo").numeric();
-            $("#bono_al").numeric();
-            $("#bev").numeric();
-            $("#nu_cuen").numeric();
-            $("#nu_cuen_ban").numeric();
-            // $(".texto-h").mask("99:99", {placeholder: "0"});
-            /* $("#sueldo").mask("99999.99", {placeholder: "0"});
-             $("#bono_al").mask("99999.99", {placeholder: "0"});
-             $("#bev").mask("99999.99", {placeholder: "0"});*/
-            var scntDiv = $('#show_lun');
-            var i = $('#show_lun .texto-h').size() + 1;
-            var s = $('#show_lun .tr-count').size() + 1;
-            $('#addScnt').click(function() {
-                $('<tr><td>T' + s + ' :</td><td><input type="text"   name="HORA_DESDE_lun' + i
-                        + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_lun' + i
-                        + '" value="" placeholder=" " /><input type="hidden" name="DIA_lun' + i
-                        + '" value="lun" ><input type="hidden" name="USER_CREACION_lun' + i
-                        + '"> <a href="#" id="remScnt">-</a></td></tr>').appendTo(scntDiv);
-                i++;
-                s++;
-                return false;
-            });
-            $('#remScnt').click(function() {
-                if (i > 2) {
-                    $(this).parents('tr').remove();
-                    //  $("#tr-d").remove();           
-                    i--;
-                    s--;
-                }
-                return false;
-            });
-        });
-        //MARTES
-        $(function() {
-            var scntDiv = $('#show_mar');
-            var i = $('#show_mar .texto-h').size() + 1;
-            var s = $('#show_mar .tr-count_2').size() + 1;
-            $('#add_2').click(function() {
-
-                $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="USER_CREACION_mar' + i + '"> <a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
-                i++;
-                s++;
-                return false;
-            });
-            $('.remove_2').click(function() {
-                if (i > 2) {
-                    $(this).parents('tr').remove();
-                    //  $("#tr-d").remove();           
-                    i--;
-                    s--;
-                }
-                return false;
-            });
-        });
-        //MIERCOLES
-        $(function() {
-            var scntDiv = $('#show_mie');
-            var i = $('#show_mie .texto-h').size() + 1;
-            var s = $('#show_mie .tr-count_3').size() + 1;
-            $('#add_3').click(function() {
-
-                $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mie' + i + '" value="mie" ><input type="hidden" name="USER_CREACION_mie' + i + '"> <a href="#" id="remove_3">-</a></td></tr>').appendTo(scntDiv);
-                i++;
-                s++;
-                return false;
-            });
-            $('.remove_3').click(function() {
-                if (i > 2) {
-                    $(this).parents('tr').remove();
-                    //  $("#tr-d").remove();           
-                    i--;
-                    s--;
-                }
-                return false;
-            });
-        });
-        //JUEVES
-        $(function() {
-            var scntDiv = $('#show_jue');
-            var i = $('#show_jue .texto-h').size() + 1;
-            var s = $('#show_jue .tr-count_4').size() + 1;
-            $('#add_4').click(function() {
-
-                $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_jue' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_jue' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_jue' + i + '" value="jue" ><input type="hidden" name="USER_CREACION_jue' + i + '"> <a href="#" id="remove_4">-</a></td></tr>').appendTo(scntDiv);
-                i++;
-                s++;
-                return false;
-            });
-            $('.remove_4').click(function() {
-                if (i > 2) {
-                    $(this).parents('tr').remove();
-                    //  $("#tr-d").remove();           
-                    i--;
-                    s--;
-                }
-                return false;
-            });
-        });
-        //VIERNES
-        $(function() {
-            var scntDiv = $('#show_vie');
-            var i = $('#show_vie .texto-h').size() + 1;
-            var s = $('#show_vie .tr-count_5').size() + 1;
-            $('#add_5').click(function() {
-
-                $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_vie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_vie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_vie' + i + '" value="vie" ><input type="hidden" name="USER_CREACION_vie' + i + '"> <a href="#" id="remove_5">-</a></td></tr>').appendTo(scntDiv);
-                i++;
-                s++;
-                return false;
-            });
-            $('.remove_5').click(function() {
-                if (i > 2) {
-                    $(this).parents('tr').remove();
-                    //  $("#tr-d").remove();           
-                    i--;
-                    s--;
-                }
-                return false;
-            });
-        });
-        //DOMINGO
-        $(function() {
-            var scntDiv = $('#show_sab');
-            var i = $('#show_sab .texto-h').size() + 1;
-            var s = $('#show_sab .tr-count_6').size() + 1;
-            $('#add_6').click(function() {
-
-                $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_dom' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_dom' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_dom' + i + '" value="dom" ><input type="hidden" name="USER_CREACION_dom' + i + '"> <a href="#" id="remove_6">-</a></td></tr>').appendTo(scntDiv);
-                i++;
-                s++;
-                return false;
-            });
-            $('.remove_6').click(function() {
-                if (i > 2) {
-                    $(this).parents('tr').remove();
-                    //  $("#tr-d").remove();           
-                    i--;
-                    s--;
-                }
-                return false;
-            });
-        });</script>
+    <script src="../../js/Js_DGP/Registrar/Reg_Dgp.js" type="text/javascript"></script>
 </html>
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");

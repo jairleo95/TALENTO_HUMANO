@@ -297,7 +297,7 @@ public class CTrabajador extends HttpServlet {
         }
         if ("actualizar".equals(opc)) {
             String idtr = request.getParameter("idtr");
-            String id_anno = request.getParameter("id_anno");
+            //String id_anno = request.getParameter("id_anno");
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim());
         }
@@ -308,7 +308,7 @@ public class CTrabajador extends HttpServlet {
         }
         if ("aut".equals(opc)) {
             String idtr = request.getParameter("idtr");
-            String id_contrato = con.Buscar_id_contrato_x_idtr(idtr);
+            //  String id_contrato = con.Buscar_id_contrato_x_idtr(idtr);
             /*if (cc.Lis_c_c_id_contr(id_contrato).size() > 0) {
              getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
              }
@@ -333,7 +333,7 @@ public class CTrabajador extends HttpServlet {
         }
         if ("registrar_aps".equals(opc)) {
             String idtr = request.getParameter("idtr");
-            String id_contrato = con.Buscar_id_contrato_x_idtr(idtr);
+            //String id_contrato = con.Buscar_id_contrato_x_idtr(idtr);
             /*if (cc.Lis_c_c_id_contr(id_contrato).size() > 0) {
              getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
              }
@@ -445,7 +445,6 @@ public class CTrabajador extends HttpServlet {
             String US_MODIF = iduser;
             String IP_USUARIO = tr.ip();
             String FE_MODIFICACION = "";
-
             String ES_CIVIL_A = request.getParameter("ES_CIVIL_A");
             String ES_REGISTRO = request.getParameter("ES_REGISTRO");
             if (!ES_CIVIL.equals(ES_CIVIL_A)) {
@@ -468,24 +467,25 @@ public class CTrabajador extends HttpServlet {
             String idtr = request.getParameter("idtr");
             String edit = request.getParameter("edit");
             boolean x = true;
-
+            List<Cuenta_Sueldo> li1 = tr.List_Cuenta_Sueldo(idtr);
             while (x) {
-                List<Cuenta_Sueldo> li1 = tr.List_Cuenta_Sueldo(idtr);
                 if (!li1.isEmpty()) {
-                    x=false;
+                    x = false;
                     getServletContext().setAttribute("List_Cuenta_Sueldo", li1);
                 } else {
                     tr.INSERT_CUENTA_SUELDO(null, null, null, null, "0", null, idtr, "0");
                 }
             }
-
+            if (li1.get(0).getEs_cuenta_sueldo().trim().equals("1")) {
+                edit = "ok";
+            }
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             getServletContext().setAttribute("list_año", li.lista_años());
             getServletContext().setAttribute("List_Universidad", li.List_Universidad());
             getServletContext().setAttribute("List_Carrera", li.List_Carrera());
             getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
-
             response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Academico.jsp?idtr=" + idtr + "&edit=" + edit);
+
         }
         if (opc.equals("Modificar_Asp_Acad")) {
             String idtr = request.getParameter("idtr");
@@ -524,7 +524,6 @@ public class CTrabajador extends HttpServlet {
                 ES_GEM_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
                 NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
             }
-
             String ES_CUENTA_SUELDO = request.getParameter("ES_CUENTA_SUELDO");
             if (NO_BANCO == null || NO_BANCO.equals("null")) {
                 ES_CUENTA_SUELDO = "0";
@@ -534,14 +533,13 @@ public class CTrabajador extends HttpServlet {
             tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr, ES_CUENTA_SUELDO);
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
-
             //out.print(editar);
-            out.print(NO_BANCO + "--");
-            out.print(NU_CUENTA + "--");
-            out.print(NU_CUENTA_BANC + "--");
-            out.print(ES_GEM_NU_CUENTA + "--");
-            out.print(NO_BANCO_OTROS + "--");
-            out.print(ES_CUENTA_SUELDO + "--");
+          /*  out.print(NO_BANCO + "--");
+             out.print(NU_CUENTA + "--");
+             out.print(NU_CUENTA_BANC + "--");
+             out.print(ES_GEM_NU_CUENTA + "--");
+             out.print(NO_BANCO_OTROS + "--");
+             out.print(ES_CUENTA_SUELDO + "--");*/
             if (editar.equals("ok")) {
                 response.sendRedirect("Vista/Trabajador/Aspecto_Academico.jsp?edit=" + editar + "&idtr=" + idtr);
             } else {
@@ -626,7 +624,6 @@ public class CTrabajador extends HttpServlet {
             tr.MOD_ASP_REL(LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, idtr, iduser, tr.ip());
             getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp");
-
         }
         if ("edit_perfil".equals(opc)) {
             String user = (String) sesion.getAttribute("IDUSER");
@@ -654,9 +651,7 @@ public class CTrabajador extends HttpServlet {
         if (opc.equals("reg_trb")) {
             response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
         }
-
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

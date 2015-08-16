@@ -17,7 +17,7 @@
 <%@page import="pe.edu.upeu.application.model.V_Ubigeo"%>
 <%@page import="pe.edu.upeu.application.model.Nacionalidad"%>
 
-<%    
+<%
     HttpSession sesion_1 = request.getSession(true);
     String iddep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");
     String iduser = (String) sesion_1.getAttribute("IDUSER");
@@ -93,13 +93,13 @@
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript">
             $(document).ready(
-                    function () {
+                    function() {
                         var tip = $("#pro_dir_l");
                         tip.empty();
                         var rg = $("#dep_dir_l").val();
                         var data = "id_dep=" + rg + "&opc=dep_nac";
                         tip.append('<option value="">Cargando...</option>').val('');
-                        $.post("../../ubigeo", data, function (objJson) {
+                        $.post("../../ubigeo", data, function(objJson) {
                             tip.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -121,7 +121,7 @@
                         var rg = $("#pro_dir_l").val();
                         var data = "id_dist=" + rg + "&opc=pro_nac";
                         ti.append('<option value="">Cargando...</option>').val('');
-                        $.post("../../ubigeo", data, function (objJson) {
+                        $.post("../../ubigeo", data, function(objJson) {
                             ti.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -138,36 +138,36 @@
                                 ti.append(item);
                             }
                         });
-                        
+
                         $(".doc, .doc_c").attr("maxlength", "8");
                         $(".doc, .doc_c").attr("minlength", "8");
                         //$(".doc, .doc_c").val("");
-                        
+
                         $("#nac").change(
-                                function () {
+                                function() {
                                     if ($("#nac").val() != "NAC-0193") {
                                         $("#dist").hide();
                                         $("#dist_nac").val("DST-001832");
-                                        
-                                        
+
+
                                     }
                                     if ($("#nac").val() == "NAC-0193") {
-                                        
+
                                         $("#dist").show();
                                     }
                                 }
                         );
-                        
-                        $("#sit_edu").change(function () {
+
+                        $("#sit_edu").change(function() {
                             if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
                                     | $("#sit_edu").val() == 'SED-0015'
                                     | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
                                     | $("#sit_edu").val() == 'SED-0017' | $("#sit_edu").val() == 'SED-0018'
                                     | $("#sit_edu").val() == 'SED-0019' | $("#sit_edu").val() == 'SED-0020'
                                     | $("#sit_edu").val() == 'SED-0021') {
-                                
+
                                 $("#es_inst_p").show();
-                                
+
                             }
                             else {
                                 $("#es_inst_p").hide();
@@ -182,19 +182,19 @@
                                 $("#institucion").find('select option:eq(0)').prop('selected', true);
                                 $("#carr").hide();
                                 $("#carr").find('select option:eq(0)').prop('selected', true);
-                                
+
                             }
-                            
+
                         });
-                        
-                        $("#es_inst_p").change(function () {
+
+                        $("#es_inst_p").change(function() {
                             if ($("#inst_peru").val() == "1") {
                                 $("#regimen").show();
                                 $("#egreso").show();
                                 $("#ti").show();
                                 $("#institucion").show();
                                 $("#carr").show();
-                                
+
                             } else {
                                 $("#regimen").hide();
                                 $("#egreso").hide();
@@ -205,63 +205,63 @@
                                 $("#egreso").find('select option:eq(0)').prop('selected', true);
                                 $("#institucion").find('select option:eq(0)').prop('selected', true);
                                 $("#carr").find('select option:eq(0)').prop('selected', true);
-                                
+
                             }
-                            
+
                         });
-                        
+
                         $(".select-doc").change(
-                                function () {
+                                function() {
                                     $(".doc").val("");
                                     if ($(".select-doc").val() == 1) {
-                                        $("#doc").numeric(false, function () {
+                                        $("#doc").numeric(false, function() {
                                         });
                                         $(".doc").attr("maxlength", "8");
                                         $(".doc").attr("minlength", "8");
-                                        
+
                                     }
                                     else {
-                                        
+
                                         $("#doc").removeNumeric();
                                         $(".doc").attr("maxlength", "10");
                                         $(".doc").removeAttr("minlength");
                                         //    $(".doc").val("");
                                     }
                                     $(".doc").focus();
-                                    
+
                                 }
                         );
                         $(".select-doc_c").change(
-                                function () {
+                                function() {
                                     $(".doc_c").val("");
                                     if ($(".select-doc_c").val() == 1) {
-                                        $(".doc_c").numeric(false, function () {
+                                        $(".doc_c").numeric(false, function() {
                                         });
                                         $(".doc_c").attr("maxlength", "8");
                                         $(".doc_c").attr("minlength", "8");
-                                        
+
                                     }
                                     else {
-                                        
+
                                         $(".doc_c").removeNumeric();
                                         $(".doc_c").attr("maxlength", "10");
                                         $(".doc_c").removeAttr("minlength");
                                         //    $(".doc").val("");
                                     }
-                                    
+
                                 }
                         );
                         //MOSTRAR ASPECTO ACADEMICO PARA MODIFICAR
-                        
+
                         if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
                                 | $("#sit_edu").val() == 'SED-0015'
                                 | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
                                 | $("#sit_edu").val() == 'SED-0017' | $("#sit_edu").val() == 'SED-0018'
                                 | $("#sit_edu").val() == 'SED-0019' | $("#sit_edu").val() == 'SED-0020'
                                 | $("#sit_edu").val() == 'SED-0021') {
-                            
+
                             $("#es_inst_p").show();
-                            
+
                         } else {
                             /*$("#es_inst_p").hide();
                              $("#es_inst_p").removeAttr("selected");
@@ -276,7 +276,7 @@
                              $("#carr").hide("");
                              $("#carr").removeAttr("selected");*/
                         }
-                        
+
                         if ($("#inst_peru").val() == "1") {
                             $("#regimen").show();
                             $("#egreso").show();
@@ -289,21 +289,21 @@
                             $("#ti").hide();
                             $("#institucion").hide();
                             $("#carr").hide();
-                            
+
                         }
-                        
+
                         //MOSTRAR CUENTA SUELDO PARA MODIFICAR
-                        
+
                     }
             );
         </script>
         <!--Alerta para la edad -->
         <script type="text/javascript">
             $(document).ready(
-                    function () {
+                    function() {
                         $(".alerta-req").hide();
                         $("#edad").change(
-                                function () {
+                                function() {
                                     $(".alerta-req").hide();
                                     var fecha = $("#edad").val();
                                     var fechaActual = new Date();
@@ -322,22 +322,22 @@
                                         diaCumple = diaCumple.substring(1, 2);
                                     }
                                     var edad = yyyyActual - yyyyCumple;
-                                    
+
                                     if ((mmActual < mmCumple) || (mmActual == mmCumple && diaActual < diaCumple)) {
                                         edad--;
                                     }
                                     $(".edad").text(edad + " años");
                                     if (edad < 18) {
-                                        
+
                                     }
-                                    
+
                                 }
                         );
-                        
+
                     }
-            
+
             );
-            
+
         </script>
         <style>
             #btn-duplicar{
@@ -508,21 +508,21 @@
                                                                                         Universidad un = new Universidad();
                                                                                         un = (Universidad) List_Universidad.get(y);
                                                                                         if (t.getNo_universidad().trim().equals(un.getNo_universidad().trim())) {
-                                                                                            
+
                                                                                             for (int r = 0; r < List_tipo_institucion.size(); r++) {
                                                                                                 Tipo_Institucion ti = new Tipo_Institucion();
                                                                                                 ti = (Tipo_Institucion) List_tipo_institucion.get(r);
-                                                                                                
+
                                                                                                 if (un.getId_tipo_institucion().trim().equals(ti.getId_tipo_institucion().trim())) {
                                                                             %>
                                                                             <option  value="<%=ti.getId_tipo_institucion()%>" selected=""><%=ti.getNo_tipo_institucion()%></option>
                                                                             <%
                                                                                                 }
                                                                                             }
-                                                                                            
+
                                                                                         }
                                                                                     }
-                                                                                
+
                                                                             %>
 
                                                                         </select>
@@ -622,7 +622,7 @@
                                                                 </div>
                                                             </div>
                                                             <% String rol = (String) sesion_1.getAttribute("IDROL");
-                                                            rol= rol.trim();
+                                                                rol = rol.trim();
                                                                 if (!rol.equals("ROL-0013")) {%>
 
                                                             <div class="col-sm-4">   
@@ -668,9 +668,7 @@
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                         <select name="BANCO" id="banco" class="form-control input-group-sm">
                                                                             <option value=""   selected="">[SELECCIONE]</option>
-
                                                                             <%
-                                                                                
                                                                                 for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
                                                                                     Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                                                     cs = (Cuenta_Sueldo) List_Cuenta_Sueldo.get(u);
@@ -923,11 +921,11 @@
     <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
 
-    <script>$(document).ready(function () {
+    <script>$(document).ready(function() {
                 var p = 1;
                 var texto_h = "";
-                $(".btn-reg-hijo").click(function () {
-                    
+                $(".btn-reg-hijo").click(function() {
+
                     var tabla_hijo = $(".tabla-hijo");
                     var ap_pat = $(".i_app_h");
                     var ap_mat = $(".i_apm_h");
@@ -938,7 +936,7 @@
                     var ndoc = $(".i_ndoc_h");
                     var essalud = $(".i_essalud_h");
                     var es_sup = $(".i_es_sup_h");
-                    
+
                     texto_h += ("<tr class='tr-hijo_" + p + "'>");
                     texto_h += ('<td ><label class="td-ap_pat' + p + '">' + ap_pat.val() + '</label><input type="hidden" value="' + ap_pat.val() + '" name="APELLIDO_P_H' + p + '" class="ap_p_h_' + p + '"/></td>');
                     texto_h += ('<td ><label class="td-ap_mat' + p + '">' + ap_mat.val() + '</label><input type="hidden" value="' + ap_mat.val() + '" name="APELLIDO_M_H' + p + '" class="ap_m_h_' + p + '"/></td>');
@@ -953,8 +951,8 @@
                     texto_h += ("</tr>");
                     tabla_hijo.append(texto_h);
                     // $(".codigo").text(texto_h);
-                    
-                    
+
+
                     ap_pat.val("");
                     ap_mat.val("");
                     nombre.val("");
@@ -964,8 +962,8 @@
                     ndoc.val("");
                     essalud.val("");
                     es_sup.val("");
-                    
-                    $(".btn-modificar_" + p).click(function () {
+
+                    $(".btn-modificar_" + p).click(function() {
                         ap_pat.val($(".ap_p_h_" + $(this).val()).val());
                         ap_mat.val($(".ap_m_h_" + $(this).val()).val());
                         nombre.val($(".no_h_" + $(this).val()).val());
@@ -975,11 +973,11 @@
                         ndoc.val($(".nu_doc_h_" + $(this).val()).val());
                         essalud.val($(".essalud_h_" + $(this).val()).val());
                         es_sup.val($(".es_sup_h_" + $(this).val()).val());
-                        
+
                         $(".btn-reg-hijo").hide();
                         $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
-                        $(".btn-mod-hijo").click(function () {
-                            
+                        $(".btn-mod-hijo").click(function() {
+
                             $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
                             $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
                             $(".no_h_" + $(this).val()).val(nombre.val());
@@ -989,7 +987,7 @@
                             $(".nu_doc_h_" + $(this).val()).val(ndoc.val());
                             $(".essalud_h_" + $(this).val()).val(essalud.val());
                             $(".es_sup_h_" + $(this).val()).val(es_sup.val());
-                            
+
                             $(".td-ap_pat" + $(this).val()).text(ap_pat.val());
                             $(".td-ap_mat" + $(this).val()).text(ap_mat.val());
                             $(".td-nom" + $(this).val()).text(nombre.val());
@@ -999,7 +997,7 @@
                             $(".td-ndoc" + $(this).val()).text(ndoc.val());
                             $(".td-essalud" + $(this).val()).text(essalud.val());
                             $(".td-es_sup" + $(this).val()).text(es_sup.val());
-                            
+
                             ap_pat.val("");
                             ap_mat.val("");
                             nombre.val("");
@@ -1011,20 +1009,20 @@
                             es_sup.val("");
                             $(".btn-reg-hijo").show();
                             $(".btn-mod-hijo").remove();
-                            
-                            
-                            
+
+
+
                         });
                     });
                     $(".num_hijo").val(p);
                     p++;
                     texto_h = "";
-                    
+
                 });
             });</script>
     <script>
         $(document).ready(
-                function () {
+                function() {
                     $("#no_cuen").hide();
                     $("#no_cuen_ban").hide();
                     $("#generar").hide();
@@ -1054,73 +1052,54 @@
                         document.getElementById("nu_cuen_ban").disabled = true;
                         document.getElementById("subscription").disabled = true;
                     }
-                    
-                    //alert($("#es_cuenta").val());
-                    
-                    $(".fecha").keyup(function () {
-                        
-                        /*var arr_date = $(this).val().split("-");
-                         if (arr_date[0].length > 4) {
-                         //return false;
-                         $(this).val("");
-                         $(".edad").val("");
-                         alert("fecha no valida");
-                         
-                         }*/
-                        
-                    });
-                    
-                    $("#banco").change(function () {
+                    $("#banco").change(function() {
                         cuenta_bancaria($(this).val());
                         $("#nu_cuen").focus();
                         //  alert($("#es_cuenta").val());
                     });
-                    
-                    $("#es_civil").change(function () {
+
+                    $("#es_civil").change(function() {
                         estado_civil($(this).val());
                     });
                     $("#DOM_A_D3").change(
-                            function () {
+                            function() {
                                 if ($("#DOM_A_D3").val() == "3") {
                                     $("#DOM_A_D4").val("Sin Numero");
                                 } else {
-                                    
+
                                     $("#DOM_A_D4").val("");
                                 }
-                                
+
                             }
                     );
                     $("#DOM_LEG_D3").change(
-                            function () {
+                            function() {
                                 if ($("#DOM_LEG_D3").val() == "3") {
                                     $("#DOM_LEG_D4").val("Sin Numero");
                                 } else {
-                                    
+
                                     $("#DOM_LEG_D4").val("");
                                 }
-                                
+
                             }
                     );
                     $("#reli").change(
-                            function () {
+                            function() {
                                 if ($("#reli").val() == "1") {
                                     $("#igle").attr("required", "required")
                                 } else {
-                                    
                                     $("#igle").removeAttr("required");
                                 }
-                                
+
                             }
                     );
-                    
+
                 });
-        
+
     </script>
     <script>
         function estado_civil(es_civil) {
             if (es_civil == '1' || es_civil == '3' || es_civil == '4' || es_civil == '5') {
-                // alert("estado civil");
-                
                 //REMOVE REQUIRED
                 $("#tra_upeu_con").removeAttr('required');
                 $("#nom_ape_con").removeAttr('required');
@@ -1128,7 +1107,7 @@
                 $("#doc_con").removeAttr('required');
                 $("#num_con").removeAttr('required');
                 $("#ins_vig_con").removeAttr('required');
-                
+
                 //ADD DISABLED
                 document.getElementById("tra_upeu_con").disabled = true;
                 document.getElementById("nom_ape_con").disabled = true;
@@ -1139,7 +1118,6 @@
             }
             if (es_civil == '2' || es_civil == '6') {
                 // alert("estado civil");
-                
                 //REMOVE REQUIRED
                 $("#tra_upeu_con").attr("required", "required");
                 $("#nom_ape_con").attr("required", "required");
@@ -1147,7 +1125,6 @@
                 $("#doc_con").attr("required", "required");
                 $("#num_con").attr("required", "required");
                 $("#ins_vig_con").removeAttr("required", "required");
-                
                 //ADD DISABLED
                 document.getElementById("tra_upeu_con").disabled = false;
                 document.getElementById("nom_ape_con").disabled = false;
@@ -1156,9 +1133,7 @@
                 document.getElementById("num_con").disabled = false;
                 document.getElementById("ins_vig_con").disabled = false;
             }
-            
         }
-        
         function cuenta_bancaria(banco) {
             if (banco == '') {
                 $("#no_cuen").hide();
@@ -1174,7 +1149,7 @@
                 $("#es_cuenta").val(0);
                 $("#subscription").attr('checked', false);
                 //alert($("#es_cuenta").val());
-                
+
             }
             if (banco == '0') {
                 $("#no_cuen").hide();
@@ -1210,7 +1185,7 @@
                 $("#es_cuenta").val(1);
             }
             if (banco == '2') {
-                
+
                 $("#generar").hide();
                 $("#subscription").attr('checked', false);
                 $("#no_cuen_ban").hide();
@@ -1230,8 +1205,6 @@
                 $("#texto").hide();
                 $("#nu_cuen").valid();
                 $("#es_cuenta").val(1);
-                
-                
             }
             if (banco == '3') {
                 $("#no_cuen").show();
@@ -1251,16 +1224,16 @@
                 $("#nu_cuen_otros").removeAttr('minlength');
                 $("#es_cuenta").val(1);
             }
-            
-            
+
+
         }
-        
+
     </script> 
     <script>
         $(document).ready(
-                function () {
+                function() {
                     $("#sis_pens").change(
-                            function () {
+                            function() {
                                 if ($("#sis_pens").val() != "1") {
                                     $(".n_afp").remove();
                                     $("#nom_afp").attr("disabled", true);
@@ -1268,28 +1241,22 @@
                                     $("#nom_afp").val("6");
                                 }
                                 if ($("#sis_pens").val() == "1") {
-                                    
+
                                     $("#nom_afp").val("");
                                     $("#nom_afp").removeAttr("disabled");
                                     $(".n_afp").remove();
                                 }
                             }
                     );
-                    
+
                 });
-        
+
     </script>
     <script type="text/javascript">
-        
+
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
-        
-        $(document).ready(function () {
-            
+        $(document).ready(function() {
             pageSetUp();
-            
-            
-            
-            
             var $validator = $("#wizard-1").validate({
                 rules: {
                     email: {
@@ -1304,49 +1271,16 @@
                     FECHA_NAC_H: {
                         val_fecha: true
                     }
-                    ,
-                    fname: {
-                        required: true
-                    },
-                    lname: {
-                        required: true
-                    },
-                    country: {
-                        required: true
-                    },
-                    city: {
-                        required: true
-                    },
-                    postal: {
-                        required: true,
-                        minlength: 4
-                    },
-                    wphone: {
-                        required: true,
-                        minlength: 10
-                    },
-                    hphone: {
-                        required: true,
-                        minlength: 10
-                    }
                 },
-                messages: {
-                    fname: "Please specify your First name",
-                    lname: "Please specify your Last name",
-                    email: {
-                        required: "We need your email address to contact you",
-                        email: "Your email address must be in the format of name@domain.com"
-                    }
-                },
-                highlight: function (element) {
+                highlight: function(element) {
                     $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
                 },
-                unhighlight: function (element) {
+                unhighlight: function(element) {
                     $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
                 },
                 errorElement: 'span',
                 errorClass: 'help-block',
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     if (element.parent('.input-group').length) {
                         error.insertAfter(element.parent());
                     } else {
@@ -1354,14 +1288,14 @@
                     }
                 }
             });
-            jQuery.validator.addMethod("val_fecha", function (value, element) {
+            jQuery.validator.addMethod("val_fecha", function(value, element) {
                 var d = value.split("-");
                 return this.optional(element) || String(parseInt(d[0])).length == 4;
             }, "¡Fecha ingresada invalida!");
-            
+
             $('#bootstrap-wizard-1').bootstrapWizard({
                 'tabClass': 'form-wizard',
-                'onNext': function (tab, navigation, index) {
+                'onNext': function(tab, navigation, index) {
                     var $valid = $("#wizard-1").valid();
                     if (!$valid) {
                         $validator.focusInvalid();
@@ -1374,12 +1308,9 @@
                     }
                 }
             });
-            
-            
             // fuelux wizard
             var wizard = $('.wizard').wizard();
-            
-            wizard.on('finished', function (e, data) {
+            wizard.on('finished', function(e, data) {
                 //$("#fuelux-wizard").submit();
                 //console.log("submitted!");
                 $.smallBox({
@@ -1389,76 +1320,53 @@
                     iconSmall: "fa fa-check bounce animated",
                     timeout: 4000
                 });
-                
             });
-            
-            
         })
-        
-    </script>
 
-    <!-- Your GOOGLE ANALYTICS CODE Below -->
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-        _gaq.push(['_trackPageview']);
-        
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-        
     </script>
-
     <!--Solo numeros -->
     <script type="text/javascript">
         $("#docs, .doc_c, #nu_cuen, #nu_cuen_ban").numeric();
-        $("#doc, .doc_c").numeric(false, function () {
+        $("#doc, .doc_c").numeric(false, function() {
             alert("Solo Numeros Enteros");
             this.value = "";
             this.focus();
         });
-        $(".positive").numeric({negative: false}, function () {
+        $(".positive").numeric({negative: false}, function() {
             alert("No negative values");
             this.value = "";
             this.focus();
         });
-        $(".positive-integer").numeric({decimal: false, negative: false}, function () {
+        $(".positive-integer").numeric({decimal: false, negative: false}, function() {
             alert("Positive integers only");
             this.value = "";
             this.focus();
         });
-        
+
         $("#remove").click(
-                function (e)
+                function(e)
                 {
                     e.preventDefault();
                     $(".numeric,.integer,.positive").removeNumeric();
                 }
         );
     </script>
-
     <!--boton duplicar-->
     <script>
         function  duplicar() {
-            
+
             var DAD1 = $("#DOM_A_D1").val();
             var DAD2 = $("#DOM_A_D2").val();
             var DAD3 = $("#DOM_A_D3").val();
             var DAD4 = $("#DOM_A_D4").val();
             var DAD5 = $("#DOM_A_D5").val();
             var DAD6 = $("#DOM_A_D6").val();
-            
+
             var DEP_A = $("#dep_dir_a").val();
-            
-            
+
+
             var DADIS = $("#DOM_A_DISTRITO").val();
             var PRO_ACT = $("#pro_dir_a").val();
-            
             $("#DOM_LEG_D1").val(DAD1);
             $("#DOM_LEG_D2").val(DAD2);
             $("#DOM_LEG_D3").val(DAD3);
@@ -1468,21 +1376,18 @@
             $("#DOM_LEG_DISTRITO").val(DADIS);
             $("#dep_dir_l").val(DEP_A);
             $("#pro_dir_l").val(PRO_ACT);
-            
         }
-        
-        
     </script>
     <!--Select dinamicos-->
     <script type="text/javascript">
         /*Ubigeo*/
-        $("#dep_nac").change(function () {
+        $("#dep_nac").change(function() {
             var ti = $("#pro_nac");
             ti.empty();
             var rg = $("#dep_nac").val();
             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1500,13 +1405,13 @@
                 }
             });
         });
-        $("#pro_nac").change(function () {
+        $("#pro_nac").change(function() {
             var ti = $("#dist_nac");
             ti.empty();
             var rg = $("#pro_nac").val();
             var data = "id_dist=" + rg + "&opc=pro_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1524,13 +1429,13 @@
                 }
             });
         });
-        $("#dep_dir_a").change(function () {
+        $("#dep_dir_a").change(function() {
             var ti = $("#pro_dir_a");
             ti.empty();
             var rg = $("#dep_dir_a").val();
             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1548,13 +1453,13 @@
                 }
             });
         });
-        $("#pro_dir_a").change(function () {
+        $("#pro_dir_a").change(function() {
             var ti = $("#DOM_A_DISTRITO");
             ti.empty();
             var rg = $("#pro_dir_a").val();
             var data = "id_dist=" + rg + "&opc=pro_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1572,13 +1477,13 @@
                 }
             });
         });
-        $("#dep_dir_l").change(function () {
+        $("#dep_dir_l").change(function() {
             var ti = $("#pro_dir_l");
             ti.empty();
             var rg = $("#dep_dir_l").val();
             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1596,13 +1501,13 @@
                 }
             });
         });
-        $("#pro_dir_l").change(function () {
+        $("#pro_dir_l").change(function() {
             var ti = $("#DOM_LEG_DISTRITO");
             ti.empty();
             var rg = $("#pro_dir_l").val();
             var data = "id_dist=" + rg + "&opc=pro_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1620,19 +1525,19 @@
                 }
             });
         });
-        
-        
-        
-        
+
+
+
+
         /*Datos Academicos*/
-        $("#rg").change(function () {
+        $("#rg").change(function() {
             var ti = $("#ti_inst");
             ti.empty();
             var rg = $("#rg").val();
             var data = "regimen=" + rg + "&opc=ti_inst";
-            
+
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function (objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1650,9 +1555,9 @@
                 }
             });
         });
-        
-        
-        $("#ti_inst").change(function () {
+
+
+        $("#ti_inst").change(function() {
             var inst = $("#inst");
             inst.empty();
             var ti = $("#ti_inst").val();
@@ -1661,7 +1566,7 @@
              }*/
             var data = "ti=" + ti + "&opc=institucion";
             inst.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function (objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 inst.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1679,17 +1584,13 @@
                 }
             });
         });
-        
-        $("#inst").change(function () {
+
+        $("#inst").change(function() {
             var carr = $("#carrera");
             carr.empty();
-            var insti = $("#inst").val();
-            /* if (sucursal == '000') {
-             return;
-             }*/
             var data = "inst=" + insti + "&opc=carrera";
             carr.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function (objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 carr.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1707,23 +1608,13 @@
                 }
             });
         });
-        /*$("#cboCuenta").change(function() {
-         var cuenta = $("#cboCuenta").val();
-         if (cuenta == "0") {
-         return;
-         }
-         alert("Cuenta: " + cuenta);
-         });*/
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var b = $(".tbodys");
-            
             $("#btnfiltrar").click(
-                    function () {
-                        
-                        
-                        $.post("../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function (objJson) {
+                    function() {
+                        $.post("../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function(objJson) {
                             b.empty();
                             var list = objJson.lista;
                             for (var i = 0; i < list.length; i++) {
@@ -1736,41 +1627,30 @@
                                 b.append("<input type ='hidden' class='tipo_" + i + "' value='" + list[i].TIPO + "' />");
                                 b.append("<input type ='hidden' class='nom_ape_" + i + "' value='" + list[i].NOM + " " + list[i].AP_PA + " " + list[i].AP_MA + "' />");
                                 if (typeof (list[i].ID_C) === "undefined") {
-                                    
+
                                     b.append('<td><button type="button" class="btn btn-primary btn-add-conyugue" value="' + i + '" data-dismiss="modal">Agregar</button></td>');
                                 } else {
                                     b.append('<td>Tiene conyugue</td>');
                                 }
                                 b.append("</tr>");
-                                
+
                             }
-                            
-                            $(".btn-add-conyugue").click(function () {
+
+                            $(".btn-add-conyugue").click(function() {
                                 var v = $(this).val();
                                 $(".nom_c").val($(".nom_ape_" + v).val());
                                 $(".f_nac").val($(".nac_" + v).val());
                                 $(".ti_documento").val($(".tipo_" + v).val());
                                 $(".num_doc").val($(".dni_" + v).val());
                                 $(".cony").val($(".trab_" + v).val());
-                                
-                                
-                                
-                                
-                                //$(".select-conyugue").val("1");
                             });
                         }
                         );
-                        
-                        
-                        
                     });
-            $(".btn-salir-busc, .close").click(function () {
-                
+            $(".btn-salir-busc, .close").click(function() {
                 $(".select-conyugue").val("0");
             });
-            
-            
-            $(".select-conyugue").change(function () {
+            $(".select-conyugue").change(function() {
                 if ($(this).val() == "1") {
                     $("#btn-mostrar").click();
                 }
@@ -1780,32 +1660,25 @@
                     $(".ti_documento").val("");
                     $(".num_doc").val("");
                     $(".cony").val("");
-                    
+
                 }
-                
+
             }
             );
             $("#btncancel").click(
-                    function () {
+                    function() {
                         document.formulario.reset();
                         b.empty();
                         html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
                         $(".tbodys").html(html);
                     }
             );
-            
         }
         );
-        
-        
     </script>
-
 </body>
-
 </html>
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
-    
-
 %>

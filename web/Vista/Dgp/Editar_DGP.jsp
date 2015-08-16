@@ -77,25 +77,34 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
-        <link rel="stylesheet" href="../../css/Css_Formulario/form.css"  type="text/css" > 
         <script language="javascript" type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
-
-
         <style>
-
             .td{
                 font-weight: bold;
             }
-
             #titu{
                 font-weight: bold;
                 color: #005cac;
                 // color: blue;
             }
-            p{
-                font-weight: bold; 
+            .cont{
+                margin: 0 auto;
             }
-
+            .caja{
+                box-shadow: 2px 2px 5px #cccccc;
+                background-color: #ffffff;
+            }
+            .c_header{
+                color: #ffffff;
+                background-color: #3276b1;
+                border-color: #3276b1;
+            }
+            table{
+                border: 0px;
+            }
+            .texto-h{
+                width:40px;
+            }
         </style>
 
         <%            HttpSession sesion = request.getSession(true);
@@ -785,53 +794,86 @@
                                                         </section>
                                                     </div>
                                                     <div class="input-desp dias_semana">
-                                                        <table style="" id="show_lun" class="cont_lun"> 
-                                                            <tr><td align="center" colspan="2">Lunes</td></tr>
+                                                        <div class="cont">
+                                                            <section class="col col-sm-4 col-md-4">
+                                                                <div class="caja">
+                                                                    <table  id="show_lun" class="cont_lun table table-condensed table-bordered"> 
+                                                                        <tr class="c_header"><td style="text-align: center;" colspan="3">Lunes</td></tr>
 
-
-                                                        </table>
-
-                                                        <table id="show_mar" class="cont_mar">     
-                                                            <tr><td align="center" colspan="2">Martes</td></tr>
-
-                                                        </table>
-                                                        <table id="show_mie" class="cont_mie">     
-                                                            <tr ><td align="center" colspan="2">Miercoles</td></tr>
-
-                                                        </table>
-
-
-                                                        <table id="show_jue" class="cont_jue">     
-                                                            <tr><td align="center" colspan="2">Jueves</td></tr>
-
-                                                        </table>
-                                                        <table id="show_vie" class="cont_vie">     
-                                                            <tr><td align="center" colspan="2">Viernes</td></tr>
-
-                                                        </table>
-                                                        <table id="show_sab" class="cont_sab">     
-                                                            <tr><td align="center" colspan="2">Sábado</td></tr>
-
-                                                        </table>
-                                                        <table id="show_dom" class="cont_dom" >
-                                                            <tr><td align="center" colspan="2">Domingo</td></tr>
-
-                                                        </table>
-
-
-                                                        <div  class="row" >
-
-                                                            <section class="col col-4">
-                                                                <label class="input" id="titu">
-                                                                    <div class="h_total" style=" font-weight: bold;">Horas Totales : 00:00 horas</div>
-                                                                    <input  readonly="" type="text" name="h_total" class=" h_total" required="" max="48"/>
-                                                                </label>
+                                                                    </table>
+                                                                </div>
                                                             </section>
                                                         </div>
-                                                        <input  type="hidden" name="dep_actual" value="" class="dep_actual" />
-                                                        <input  type="hidden" name="estado_de_horario" value="" class="modificacion-total" />
-                                                        <input  type="hidden" name="id_det_hor" value="<%=request.getParameter("id_det_hor")%>" class="id_det_hor" />
+                                                        <div class="cont">
+                                                            <section class="col col-sm-4 col-md-4">
+                                                                <div class="caja">
+                                                                    <table id="show_mar" class="cont_mar table table-condensed table-bordered">     
+                                                                        <tr class="c_header" ><td style="text-align: center;"  colspan="3">Martes</td></tr>
+                                                                    </table>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                        <div class="cont">
+                                                            <section class="col col-sm-4 col-md-4">
+                                                                <div class="caja">
+                                                                    <table id="show_mie" class="cont_mie table table-condensed table-bordered">     
+                                                                        <tr class="c_header"><td style="text-align: center;" colspan="3">Miercoles</td></tr>
+                                                                    </table>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                        <div class="cont">
+                                                            <section class="col col-sm-4 col-md-4">
+                                                                <div class="caja">
+                                                                    <table id="show_jue" class="cont_jue table table-condensed table-bordered">     
+                                                                        <tr class="c_header"><td style="text-align: center;" colspan="3">Jueves</td></tr>
+                                                                    </table>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                        <div class="cont">
+                                                            <section class="col col-sm-4 col-md-4">
+                                                                <div class="caja">
+                                                                    <table id="show_vie" class="cont_vie table table-condensed table-bordered">     
+                                                                        <tr class="c_header"><td style="text-align: center;" colspan="3">Viernes</td></tr>
+                                                                    </table>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                        <div class="cont">
+                                                            <section class="col col-sm-4 col-md-4">
+                                                                <div class="caja">
+                                                                    <table id="show_sab" class="cont_sab table table-condensed table-bordered">     
+                                                                        <tr class="c_header"><td style="text-align: center;"  colspan="3">Sábado</td></tr>
+                                                                    </table>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                        <div class="cont">
+                                                            <section class="col col-sm-4 col-md-4">
+                                                                <div class="caja">
+                                                                    <table id="show_dom" class="cont_dom table table-condensed table-bordered" >
+                                                                        <tr class="c_header"><td  style="text-align: center;" colspan="3">Domingo</td></tr>
+                                                                    </table>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+
+
                                                     </div>
+                                                    <div  class="row" >
+
+                                                        <section class="col col-4">
+                                                            <label class="input" id="titu">
+                                                                <div class="h_total" style=" font-weight: bold;">Horas Totales : 00:00 horas</div>
+                                                                <input  readonly="" type="text" name="h_total" class=" h_total" required="" max="48"/>
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                    <input  type="hidden" name="dep_actual" value="" class="dep_actual" />
+                                                    <input  type="hidden" name="estado_de_horario" value="" class="modificacion-total" />
+                                                    <input  type="hidden" name="id_det_hor" value="<%=request.getParameter("id_det_hor")%>" class="id_det_hor" />
+
                                                 </fieldset>
                                                 <footer>
                                                     <button type="submit" class="btn btn-primary btn-labeled">
@@ -888,7 +930,7 @@
                     }
                 });
             }
-            listar();
+            //listar();
         });
         var cantidad = 1;
 
@@ -1223,7 +1265,7 @@
                             dep = lista[i].id_dep_cc;
                             cc = lista[i].id;
                             listar_cc2(ag, dir, dep, cc);
-                            
+
                             /*texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" id="rem' + (i + 1) + '" onclick="Eliminar($(this).val());" disabled=""><i class="fa fa-minus fa-2x"></i></button></label></section>');
                              texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
                              texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
@@ -1249,7 +1291,7 @@
 
                         numero = 1;
                         ag++;
-                        CANT_T = (CANT_T +parseFloat(lista[i].ca_por_cc));
+                        CANT_T = (CANT_T + parseFloat(lista[i].ca_por_cc));
                     }
 
                     x.append(texto);
@@ -2220,8 +2262,7 @@
     <script src="..."></script>-->
     <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-    <script src="../../js/JQuery/jquery.maskMoney.js" type="text/javascript"></script>
-
+    <script src="../../js/Js_DGP/Registrar/Reg_Dgp.js" type="text/javascript"></script>
     <script type="text/javascript">
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!

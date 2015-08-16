@@ -1680,9 +1680,9 @@
                                                     }
                                                     $(document).ready(
                                                             function() {
-                                                                $("#next-step").on("submit", function() {
-                                                                    alert()
-                                                                })
+                                                                /* $("#next-step").on("submit", function() {
+                                                                 alert()
+                                                                 })*/
                                                                 var tip = $("#pro_dir_l");
                                                                 tip.empty();
                                                                 var rg = $("#dep_dir_l").val();
@@ -2039,7 +2039,7 @@
                             });
                 });</script>
     <script>$(document).ready(function() {
-        $(".i_ndoc_h").numeric(false);
+            $(".i_ndoc_h").numeric(false);
             var p = 1;
             var texto_h = "";
             $(".i_tdoc_h").change(function() {
@@ -2288,8 +2288,33 @@
                 return this.optional(element) || calcular_edad(value) > 0;
             }, "¡La edad debe ser mayor a cero!");
 
+            $('.step').click(function() {
+                var index = $('#bootstrap-wizard-1').bootstrapWizard('currentIndex');
+                if ($(this).find('i').hasClass("fa-check")) {
+                    if (!$("#wizard-1").valid() & $('.step').eq(index).find('i').hasClass("fa-check")) {
+                        $validator.focusInvalid();
+                        val_doc();
+                    } else {
+                        $('#bootstrap-wizard-1').bootstrapWizard('show', $('.step').index(this));
+                    }
+                } else {
+                    if (!$("#wizard-1").valid()) {
+                        $validator.focusInvalid();
+                        val_doc();
+                    } else {
+                        $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index).addClass(
+                                'complete');
+                        $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index).find('.step')
+                                .html('<i class="fa fa-check"></i>');
 
+                        if ($('.step').eq($('.step').index(this) - 1).find('i').hasClass("fa-check")) {
+                             $('#bootstrap-wizard-1').bootstrapWizard('show', $('.step').index(this));
+                        } 
+                    }
+                }
+            });
             function validateTab(index) {
+
                 var $valid = $("#wizard-1").valid();
                 if (!$valid) {
                     $validator.focusInvalid();
@@ -2306,24 +2331,12 @@
             $('#bootstrap-wizard-1').bootstrapWizard({
                 'tabClass': 'form-wizard',
                 onTabClick: function(tab, navigation, index) {
-                    return validateTab(index)
+                    //   return validateTab(index,tab)
+                    return false;
                 },
                 'onNext': function(tab, navigation, index) {
                     return validateTab(index)
                 }
-            });
-            // fuelux wizard
-            var wizard = $('.wizard').wizard();
-            wizard.on('finished', function(e, data) {
-                //$("#fuelux-wizard").submit();
-                //console.log("submitted!");
-                $.smallBox({
-                    title: "Congratulations! Your form was submitted",
-                    content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-                    color: "#5F895F",
-                    iconSmall: "fa fa-check bounce animated",
-                    timeout: 4000
-                });
             });
         })
 

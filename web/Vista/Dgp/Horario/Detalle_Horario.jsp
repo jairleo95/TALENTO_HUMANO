@@ -17,23 +17,17 @@
 
 <html>
     <head>
-
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Detalle Horario</title>
-
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
-
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/demo.min.css">
-
         <!-- #FAVICONS -->
         <link rel="shortcut icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
         <link rel="icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
-
         <!-- #GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
     </head>
@@ -54,8 +48,6 @@
             border: 0px;
         }
     </style>
-
-
     <body>
 
         <div class="well">
@@ -69,10 +61,8 @@
             </div>
         </div>
         <div class="cont">
-
             <%
                 InterfaceListaDAO l = new ListaDAO();
-
                 for (int i = 0; i < l.List_H().length; i++) {
                     int g = 0;
                     for (int s = 0; s < List_V_Horario.size(); s++) {
@@ -80,50 +70,32 @@
                         h = (V_Horario) List_V_Horario.get(s);
                         if (h.getDia_horario().trim().equals(l.List_H()[i][0])) {
                             if (g == 0) {%>
-
             <section class="col col-sm-4 col-md-4">
                 <div class="caja">
                     <table class="table table-condensed table-bordered">
-
                         <tr class="c_header"><td colspan="3"  style="text-align: center;"><% out.println(l.List_H()[i][1]);%></td></tr>   
-
                         <%}%>
-
                         <tr>
                             <%if (h.getHo_desde().equals("00:00") && h.getHo_hasta().equals("00:00")) {%>
-
                             <%} else {%>
                             <td class="text-center">Turno <%=g + 1%></td>
                             <td class="text-center"><%out.println(h.getHo_desde()); %> </td>
                             <td class="text-center"><%out.println(h.getHo_hasta());%></td>
                             <%}%>
                         </tr>
-
                         <% g++; %>
-
                         <%}%>
                         <%}%>
-
                     </table>
                 </div>
-
             </section>
-
-
             <%}%>
-
         </div>
-
-
         <%  if (request.getParameter("P2") != null) {
                 if (request.getParameter("P2").equals("1")) {%>
-
         <a href="../../../dgp?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd">Continuar</a>
-
-
         <%}
             }%>
-
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>

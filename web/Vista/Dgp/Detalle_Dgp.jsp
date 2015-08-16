@@ -230,26 +230,31 @@
 
                                         <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
                                         <input type="hidden" name="opc" value="MODIFICAR REQUERIMIENTO">   
-                                        <% if (idrol.trim().equals("ROL-0002") | idrol.trim().equals("ROL-0005") | idrol.trim().equals("ROL-0003")) {%>
                                     </table>
-                                    <table>
-                                        <tr><td> </td><td><a class="btn btn-primary btn-labeled" href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento"><span class="btn-label"><i class="glyphicon glyphicon-info-sign"></i></span>Ver Documentos</a></td><td><a class="btn btn-primary btn-labeled" href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar"><span class="btn-label"><i class="glyphicon glyphicon-info-sign"></i></span>Ver Horario</a></td></tr><%}%>
-                                    </table>
-                                    <%}
-                                        }%> 
+                                    <% if (idrol.trim().equals("ROL-0002") | idrol.trim().equals("ROL-0005") | idrol.trim().equals("ROL-0003")) {%>
+                                    <%
+                                        if (d.getEs_dgp() == null) {
+                                    %>
+                                    <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=<%=d.getId_dgp().trim()%>" class="btn btn-primary btn-labeled"><span class="btn-label"><i class="fa fa-pencil-square-o"></i></span> Editar DGP</a> 
+                                            <%}else {
+                                                    if (!d.getEs_dgp().trim().equals("1") | !d.getEs_dgp().trim().equals("0")) {
+                                            %>
+                                    <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=<%=d.getId_dgp().trim()%>" class="btn btn-primary btn-labeled"><span class="btn-label"><i class="fa fa-pencil-square-o"></i></span> Editar DGP</a> 
+                                            <%}
+                                        }%>
+                                    <a class="btn btn-primary btn-labeled" href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento"><span class="btn-label"><i class="glyphicon glyphicon-info-sign"></i></span>Ver Documentos</a>
+                                    <a class="btn btn-primary btn-labeled" href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar"><span class="btn-label"><i class="glyphicon glyphicon-info-sign"></i></span>Ver Horario</a>
+                                            <%}%>
+                                            <%}
+                                                }%> 
                                 </form>
-
-
                             </div>
-
-
                             <div class="row">
 
                                 <% if (request.getParameter("opc") != null) {
                                         if (request.getParameter("opc").equals("reg_doc")) {
 
                                 %>
-
                                 <h3 style="text-align: center;">Enviar Requerimiento</h3> 
                                 <form action="../../dgp" method="get" class="form_terminar_req">
                                     <input  type="hidden" value="<%=iddgp%>" name="iddgp">
@@ -396,17 +401,17 @@
                 list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize() + "&id=" + $(".dgp").val(), "1", $(".tipo").val());
 
             }
-            $(document).ready(function () {
+            $(document).ready(function() {
                 pageSetUp();
-                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
-                $(".btn_terminar").click(function () {
+                $(".btn_terminar").click(function() {
                     $.SmartMessageBox({
                         title: "¡Advertencia!",
                         content: "¿Esta seguro de enviar la solicitud?",
                         buttons: '[No][Si]'
-                    }, function (ButtonPressed) {
+                    }, function(ButtonPressed) {
                         if (ButtonPressed === "Si") {
                             $(".form_terminar_req").submit();
                         }
@@ -414,32 +419,32 @@
                         }
                     });
                 });
-                $(".btn_solicitud").click(function () {
+                $(".btn_solicitud").click(function() {
                     var body_modal = $(".body_mdal_sol");
                     body_modal.empty();
-                    $.post("../../solicitud_requerimiento", "opc=Val_Envio_Solicitud&iddgp=" + $(".dgp").val(), function (objJson) {
+                    $.post("../../solicitud_requerimiento", "opc=Val_Envio_Solicitud&iddgp=" + $(".dgp").val(), function(objJson) {
                         var html = objJson.html;
                         body_modal.append(html);
                         if (objJson.estado) {
                             listar_plazo_tipo($(".tipo"));
                         }
-                        $(".tipo").change(function () {
+                        $(".tipo").change(function() {
                             listar_plazo_tipo($(this));
                         });
 
-                        $(".sbm_solicitud").click(function (e) {
+                        $(".sbm_solicitud").click(function(e) {
                             if ($(".solicitud_plazo").valid() == true) {
                                 $.SmartMessageBox({
                                     title: "¡Advertencia!",
                                     content: "¿Esta seguro de enviar la solicitud?",
                                     buttons: '[No][Si]'
-                                }, function (ButtonPressed) {
+                                }, function(ButtonPressed) {
                                     if (ButtonPressed === "Si") {
                                         $.ajax({
                                             url: "../../solicitud_requerimiento",
                                             type: "post",
                                             data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud" + "&iddgp=" + $(".dgp").val()
-                                        }).done(function () {
+                                        }).done(function() {
                                             $('.solicitud_plazo')[0].reset();
                                             var $p = $(this).parent().parent();
                                             $p.removeClass('has-success');
@@ -453,7 +458,7 @@
                                                 iconSmall: "fa fa-check fa-2x fadeInRight animated",
                                                 timeout: 4000
                                             });
-                                        }).error(function () {
+                                        }).error(function() {
                                             $.smallBox({
                                                 title: "¡Error!",
                                                 content: "<i class='fa fa-clock-o'></i> <i>La solicitud no ha podido ser enviada...</i>",
@@ -467,29 +472,13 @@
                                     }
                                 });
                             }
-
                         });
                     });
                 });
             })
 
         </script>
-        <!-- Your GOOGLE ANALYTICS CODE Below -->
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-            _gaq.push(['_trackPageview']);
-
-            (function () {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-
-        </script>
+     
     </html>
     <%} else {
             response.sendRedirect("/TALENTO_HUMANO/");

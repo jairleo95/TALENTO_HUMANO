@@ -97,7 +97,6 @@
                                 data-widget-custombutton="false"
                                 data-widget-collapsed="true"
                                 data-widget-sortable="false"
-
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
