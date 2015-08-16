@@ -21,7 +21,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 <%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
-<%@page import="java.util.Calendar;"%>
+<%@page import="java.util.Calendar"%>
 <jsp:useBean id="List_contra_x_idcto" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_x_fun_x_idpu" scope="application" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Dom_D1_Id" scope="application" class="java.util.ArrayList"/>

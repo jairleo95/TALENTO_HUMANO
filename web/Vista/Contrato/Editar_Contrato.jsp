@@ -822,6 +822,7 @@
                                 <footer>
 
                                     <input type="hidden" name="opc"   value="MODIFICAR CONTRATO">
+                                    <button type="button" class="btn btn-primary pull-left" onclick="window.history.back()"><i class="fa fa-backward"></i>&nbsp;&nbsp;Regresar</button>
                                     <button type="submit" id="submit" class="btn btn-primary" >
                                         MODIFICAR CONTRATO
                                     </button>

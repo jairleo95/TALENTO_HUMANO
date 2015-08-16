@@ -57,6 +57,7 @@ public class CDocumento extends HttpServlet {
         String opc = request.getParameter("opc");
         HttpSession sesion = request.getSession(true);
         String user = (String) sesion.getAttribute("IDUSER");
+        String rol = (String) sesion.getAttribute("IDROL");
 
         // try {
         if (opc != null) {
@@ -73,6 +74,7 @@ public class CDocumento extends HttpServlet {
 
             }
             if (opc.equals("Ver_Documento")) {
+                if(rol.trim().equals("ROL-001"))
 
                 getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
                 int i = d.List_Req_nacionalidad(idtr);
@@ -146,7 +148,7 @@ public class CDocumento extends HttpServlet {
             //------>   ./var/www/html/files/   (con: pwd)
            // String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
           String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
-         // String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
+         //String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
 
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);

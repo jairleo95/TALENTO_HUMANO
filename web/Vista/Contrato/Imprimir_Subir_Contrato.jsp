@@ -135,7 +135,16 @@
     <center>
         <BR>
 
-        <%
+        
+
+        <form action="../../contrato" method="get">
+            <%String idanno = request.getParameter("anno");
+                if (List_contra_x_idcto.size() == 0) {%>
+            <h3>Aun no se ha hecho Contrato.</h3>
+            <%
+            } else {%>
+            
+            <%
             HttpSession Sesion = request.getSession(true);
             String idrol = (String) Sesion.getAttribute("IDROL");
             X_List_Id_Contrato_DGP n1 = new X_List_Id_Contrato_DGP();
@@ -151,13 +160,6 @@
             <strong>¡Advertencia!</strong> Usted no tiene acceso a imprimir ni subir el contrato...
         </div>
         <%}%>
-
-        <form action="../../contrato" method="get">
-            <%String idanno = request.getParameter("anno");
-                if (List_contra_x_idcto.size() == 0) {%>
-            <h3>Aun no se ha hecho Contrato.</h3>
-            <%
-            } else {%>
 
             <div>
                 <table class="table table-hover table-striped  table-responsive" style="border-radius: 30px ">
