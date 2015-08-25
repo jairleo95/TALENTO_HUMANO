@@ -238,8 +238,6 @@ public class CTrabajador extends HttpServlet {
             String ape_mat = request.getParameter("ape_mat");
             String ape_pat = request.getParameter("ape_pat");
             String id_req = request.getParameter("id_req");
-            // String all = request.getParameter("all");
-
             if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
                 String busc = (String) request.getParameter("busc");
                 if (busc != null) {

@@ -258,9 +258,6 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 
     @Override
     public List<V_Ficha_Trab_Num_C> Buscar_Trabajador_Requerimiento(String iddep, String dni, String nom, String ape_p, String ape_m, String id_req) {
-        /*if (dni != null || !"".equals(nom)) {
-
-         }*/
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select d.*, ES_PROCESO_TRABAJADOR(d.id_trabajador,'" + id_req + "') as es_proceso from (select * from RHVD_TRABAJADOR) d, RHVD_USUARIO u where u.id_usuario= d.id_usuario_creacion ";
         nom = nom.toUpperCase();
@@ -271,11 +268,9 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         sql += (!"".equals(ape_p)) ? " and upper(d.AP_PATERNO)like '%" + ape_p.trim() + "%'" : "";
         sql += (!"".equals(ape_m)) ? " and upper(d.AP_MATERNO)like '%" + ape_m.trim() + "%'" : "";
         sql += " order by d.ID_TRABAJADOR desc";
-
         List<V_Ficha_Trab_Num_C> list = new ArrayList<V_Ficha_Trab_Num_C>();
         try {
             ResultSet rs = this.conn.query(sql);
-
             while (rs.next()) {
                 V_Ficha_Trab_Num_C v = new V_Ficha_Trab_Num_C();
                 v.setNo_s_educativa(rs.getString("no_s_educativa"));

@@ -6,6 +6,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.model.Autorizacion;
 import pe.edu.upeu.application.model.V_Autorizar_Dgp;
 import pe.edu.upeu.application.model.X_List_De_Autorizacion;
@@ -16,15 +17,12 @@ import pe.edu.upeu.application.model.X_List_De_Autorizacion;
  */
 public interface InterfaceAutorizacionDAO {
 
-    public boolean Guardar_Autorizacion(String id_autorizacion, String id_dgp, String id_proceso, String estado, String detalle, String nu_pasos);
 
     public void Insert_Autorizacion(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String US_MODIF, String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS);
     
     public String Insert_Autorizacion_dev(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String US_MODIF, String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS);
 
     public List<String> Det_Autorizacion(String id_rpp);
-
-    public String Max_Id_Autorizacion();
 
     public List<X_List_De_Autorizacion> List_Detalle_Autorizacion(String iddgp, String idrp);
 
@@ -43,4 +41,6 @@ public interface InterfaceAutorizacionDAO {
     public List<V_Autorizar_Dgp> List_Autorizados (String id_puesto);
     
     public String Mes_plazo(String id_dgp);
+    
+     public List<Map<String, ?>> List_Dgp_Autorizados(String id_puesto);
 }

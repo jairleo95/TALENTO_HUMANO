@@ -251,7 +251,6 @@
                                             <td class="td1"  ><input type="hidden" id="mod_hue"  value="<%=emp.getCo_huella_digital()%>" name="cod_huella" size="5%" maxlength="6" size="20%" onblur="MOD_COD_HUELLA()"></td>
                                             <td class="td" colspan="2">
                                                 <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-green mod_huella" ><i class="fa fa-pencil fa-2x"></i></a>
-
                                             </td>
                                         </tr>
                                         <%}%>
@@ -261,7 +260,7 @@
                                 </td>
                                 <%
                                     String val_aps = emp.getCo_aps();
-                                    if (val_aps == null && ID_ROL.trim().equals("ROL-0001")) {%>
+                                    if (val_aps == null && ID_ROL.trim().equals("ROL-0001") | ID_ROL.equals("ROL-0009")) {%>
                                 <td >
                                     <table class="info-det" style="margin-left:50%;">
                                         <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
@@ -272,9 +271,10 @@
                                         <input type="hidden"name="nup" value="<%=nropaso%>">
                                         <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
                                         <tr><td class="td" colspan="2">Registrar codigo APS</td></tr>
-                                        <tr><td><input type="text" id="cod_ap" name="cod_aps" maxlength="6" onblur="VAL_COD_APS()"></td></tr>
-                                        <tr><td><input type="button" value="Registrar" name="" class=""></button</td></tr>
-                                        <!--<tr><td><button value="registrar_aps" name="opc" class="btn_aps">Registrar</button></td></tr>-->
+                                        <tr><td><input type="text" id="cod_ap" name="cod_aps"  maxlength="6" onblur="VAL_COD_APS()"></td></tr>
+                                        <tr><td>
+                                                <button type="submit" class=" btn btn-default txt-color-green mod_huella" ><i class="fa fa-pencil fa-2x"></i></button>
+                                            </td></tr>
                                     </table
                                 </td>
 
@@ -291,15 +291,14 @@
                                         <input type="hidden"name="nup" value="<%=nropaso%>">
                                         <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
                                         <tr><td class="td" colspan="3">Registrar Codigo de huella digital</td></tr>
-                                        <tr><td><input type="text" id="cod_hu" name="cod_huella" maxlength="6" onblur="VAL_COD_HUELLA()"></td></tr>
-                                        <tr><td><input type="button" value="Registrar" name="" class=""></button</td></tr>
+                                        <tr><td><input type="text" id="cod_hu" name="cod_huella"  maxlength="6" onblur="VAL_COD_HUELLA()" /></td></tr>
+                                        <tr><td>
+                                            <button type="submit" class=" btn btn-default txt-color-green mod_huella" ><i class="fa fa-pencil fa-2x"></i></button>
+                                            </td></tr>
                                         <!--<tr><td><button value="registrar_huella" name="opc">Registrar</button></td></tr>-->
                                     </table>
                                 </td>
                                 <%}%>
-
-
-
                             </table>
                     </td>
 

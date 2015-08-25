@@ -17,19 +17,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>Autorización</title>
-
         <meta name="description" content="">
         <meta name="author" content="">
-
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <!-- Basic Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
-
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
-
         <!-- SmartAdmin RTL Support is under construction
                  This RTL CSS will be released in version 1.5
         <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> -->
@@ -37,10 +33,8 @@
         <!-- We recommend you use "your_style.css" to override SmartAdmin
              specific styles this will also ensure you retrain your customization with each SmartAdmin update.
         <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
-
         <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/demo.min.css">
-
         <!-- FAVICONS -->
         <link rel="shortcut icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
         <link rel="icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
@@ -63,28 +57,24 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
         <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
-
-
         <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
         <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
-
-
-
+        <style>
+            .ui-datepicker-calendar {
+                display: none;
+            }
+        </style>
     </head>
     <%
         CConversion c = new CConversion();
         int t = List_id_Autorizacion.size();
     %>
-
-
     <%if (request.getParameter("r") != null) {
             if (request.getParameter("r").equals("ok")) {
     %>
-
     <body onload='exito("Procesado con exito!", "Usted ha realizado una autorización correctamente.");' class="body">
         <%
                 }
@@ -108,27 +98,6 @@
         %>
     <body class="body"  >
         <%}%> 
-        <script>
-
-            $(document).ready(function () {
-
-                var b = $("#alerta_dgp");
-                // $("#alerta_dgp").hide();
-                function listar() {
-                    $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
-                        b.empty();
-                        var lista = objJson.lista;
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-                        for (var i = 0; i < lista.length; i++) {
-                            b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
-                        }
-                    });
-                }
-                //listar();
-            });</script>
 
         <!-- MAIN PANEL -->
         <div id="main" role="main" style="margin-left: 0px;">
@@ -180,146 +149,7 @@
                                             String dep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");%>
                                     </div>
                                     <!-- end widget edit box -->
-                                    <script>
-                                        function exito(titulo, mensaje) {
-                                            $.smallBox({
-                                                title: titulo,
-                                                content: mensaje,
-                                                color: "#739E73",
-                                                iconSmall: "fa fa-cloud",
-                                                timeout: 3000
-                                            });
-                                        }
-                                        $(document).ready(function () {
-                                            $(".btn_pro_remuneracion").click(function () {
-                                                $.SmartMessageBox({
-                                                    title: "¡Advertencia!",
-                                                    content: "¿Esta seguro de procesar estos requerimientos?",
-                                                    buttons: '[No][Si]'
-                                                }, function (ButtonPressed) {
-                                                    if (ButtonPressed === "Si") {
-                                                        for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
-                                                            if ($(".env_rem" + i).prop('checked')) {
-                                                                $.ajax({
-                                                                    url: "../../autorizacion",
-                                                                    type: "POST",
-                                                                    data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
-                                                                }).done(function () {
-                                                                    window.location.href = "../../autorizacion";
-                                                                });
-                                                            }
-                                                        }
-                                                    }
-                                                    if (ButtonPressed === "No") {
-                                                    }
 
-                                                });
-                                            });
-                                            $(".btn_pro_firma").click(function () {
-                                                $.SmartMessageBox({
-                                                    title: "¡Advertencia!",
-                                                    content: "¿Esta seguro de procesar firmas a estos requerimientos?",
-                                                    buttons: '[No][Si]'
-                                                }, function (ButtonPressed) {
-                                                    if (ButtonPressed === "Si") {
-                                                        try {
-                                                            $.each($(".firm_contr"), function () {
-                                                                //alert($(this).val());
-                                                                if ($(this).prop('checked')) {
-                                                                    $.ajax({
-                                                                        url: "../../contrato",
-                                                                        type: "POST",
-                                                                        data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
-                                                                    }).done(function () {
-                                                                    });
-                                                                    $.ajax({
-                                                                        url: "../../autorizacion",
-                                                                        type: "POST",
-                                                                        data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
-                                                                    }).done(function () {
-                                                                        window.location.href = "../../autorizacion";
-                                                                    });
-                                                                }
-                                                            });
-                                                            // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
-                                                        }
-                                                        catch (err) {
-                                                            alert(err.message);
-                                                        } finally {
-                                                        }
-                                                    }
-                                                    if (ButtonPressed === "No") {
-                                                    }
-                                                });
-                                            });
-                                            $(".btn_cod_aps").click(function () {
-                                                $.SmartMessageBox({
-                                                    title: "¡Advertencia!",
-                                                    content: "¿Esta seguro de procesar codigos APS a estos requerimientos?",
-                                                    buttons: '[No][Si]'
-                                                }, function (ButtonPressed) {
-                                                    if (ButtonPressed === "Si") {
-                                                        for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
-                                                            if ($(".cod_aps" + r).val() != "") {
-                                                                $.ajax({
-                                                                    url: "../../trabajador",
-                                                                    type: "POST",
-                                                                    data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                                                }).done(function () {
-                                                                });
-                                                                $.ajax({
-                                                                    url: "../../autorizacion",
-                                                                    type: "POST",
-                                                                    data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                                                }).done(function () {
-                                                                    window.location.href = "../../autorizacion?opc=mens_cod_aps";
-                                                                });
-                                                            }
-                                                        }
-                                                    }
-                                                    if (ButtonPressed === "No") {
-                                                    }
-
-                                                });
-                                            });
-                                            $(".btn_cod_huella").click(function () {
-                                                $.SmartMessageBox({
-                                                    title: "¡Advertencia!",
-                                                    content: "¿Esta seguro de procesar codigos de huella a estos requerimientos?",
-                                                    buttons: '[No][Si]'
-                                                }, function (ButtonPressed) {
-                                                    if (ButtonPressed === "Si") {
-                                                        for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
-                                                            if ($(".cod_huella" + r).val() != "") {
-                                                                $.ajax({
-                                                                    url: "../../trabajador",
-                                                                    type: "POST",
-                                                                    data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                                                }).done(function () {
-                                                                });
-                                                                $.ajax({
-                                                                    url: "../../autorizacion",
-                                                                    type: "POST",
-                                                                    data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                                                }).done(function () {
-                                                                    window.location.href = "../../autorizacion?opc=mens_cod_huella";
-                                                                });
-                                                                $.ajax({
-                                                                    url: "../../autorizacion",
-                                                                    type: "POST",
-                                                                    data: "opc=Enviar_Correo" + $(".correos_" + r).val()
-                                                                }).done(function () {
-
-                                                                });
-                                                            }
-                                                        }
-                                                    }
-                                                    if (ButtonPressed === "No") {
-                                                    }
-
-                                                });
-                                            });
-                                        });</script>
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
                                         <%if (idrol.trim().equals("ROL-0006")) {
@@ -338,10 +168,8 @@
                                                 <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Acción</strong></th>
                                                     <th ><strong>MES</strong></th>
-
                                                     <th data-hide="phone,tablet"><strong>Foto</strong> </th>
                                                     <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
-
                                                     <th data-hide="phone,tablet"><strong>Puesto</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Area</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Departamento</strong></th>
@@ -352,10 +180,8 @@
                                                     <th  data-hide="phone,tablet">Motivo</th>  
                                                     <th  data-hide="phone,tablet">MFL</th>  
                                                         <% if (dep.equals("DPT-0019")) {%>
-
                                                     <th  ><strong>¿Cumplio Plazos?</strong></th>
                                                         <%if (idrol.trim().equals("ROL-0006")) {
-
                                                         %>
                                                     <th ><strong>¿Contrato Elaborado?</strong></th>
                                                     <th  ><strong>¿Firmo Contrato?</strong></th>
@@ -468,18 +294,12 @@
                                                     out.print("No registrado");
                                                 }%></td> 
                                                 <% if (dep.equals("DPT-0019")) {%>
-
-
                                             <td><%if (a.getVal_plazo() > 0) {
-
                                                 %>
                                                 <a href="../../plazo_dgp?opc=Ver_detalle_plazo&iddgp=<%=a.getId_dgp()%>" class="label label-danger" rel="popover-hover" data-placement="top" data-original-title="Record de plazos cumplidos" data-content="<%=a.getVer_list_plazo()%>" data-html="true"> <strong>No cumplio plazos</strong></a></td>
                                                 <%                                                        } else if (a.getVal_plazo() == 0) {
-
-
                                                 %>
                                             <a href="../../plazo_dgp?opc=Ver_detalle_plazo&iddgp=<%=a.getId_dgp()%>" class="label label-primary" rel="popover-hover" data-placement="top" data-original-title="Record de plazos cumplidos " data-content="<%=a.getVer_list_plazo()%>" data-html="true"> <strong>Cumplio plazos</strong></a></td>
-
                                             <%                                                                    }%>
                                             <%if (idrol.trim().equals("ROL-0006")) {
 
@@ -506,8 +326,6 @@
                                                         out.println("Si");
                                                     }
                                                 %></td>
-
-
                                             <td><%
                                                 if (Integer.parseInt(a.getVal_firm_contrato()) != 0 & Integer.parseInt(a.getElab_contrato()) != 0) {
                                                 %>
@@ -518,7 +336,6 @@
                                                     } else {
                                                         out.println("¡Falta Procesar!");
                                                     }
-
                                                 %></td>
                                             <td><%                                                if (a.getVal_contrato_adjunto() == 0) {
                                                     out.print("No");
@@ -526,12 +343,11 @@
                                                     out.print("Si");
                                                 }
                                                 %></td>
-
-                                            <%}%>
-                                            <%if (idrol.trim().equals("ROL-0009")) {%>
-                                            <%if (a.getVal_cod_aps_empleado() == 0) {
-                                                    num_cod_aps++;
-                                            %>
+                                                <%}%>
+                                                <%if (idrol.trim().equals("ROL-0009")) {%>
+                                                <%if (a.getVal_cod_aps_empleado() == 0) {
+                                                        num_cod_aps++;
+                                                %>
                                             <td>
                                                 <input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%>" style="width:50px"/>
                                                 <!--  <input type="text" id="cod_ap" name="cod_aps" maxlength="6" onblur="VAL_COD_APS()">-->
@@ -569,18 +385,11 @@
                         <!-- WIDGET END -->
                     </div>
                     <!-- end row -->
-
                     <div class="row">
-
-
                         <!-- NEW WIDGET START -->
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
                             <div id="alerta_dgp">
-
                             </div>
-
-
                             <!-- Widget ID (each widget will need unique ID)-->
                             <div class="jarviswidget jarviswidget-color-red" id="wid-id-1" data-widget-editbutton="false">
                                 <!-- widget options:
@@ -612,16 +421,44 @@
 
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
-
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
+                                                <tr>
+                                                    <th class="hasinput">
+
+
+                                                    </th>
+                                                    <th class="hasinput icon-addon" style="width:100px">
+                                                        <input   placeholder="Fecha" class="form-control filtrar_fecha">
+                                                        <label for="dateselect_filter" class="glyphicon glyphicon-calendar no-margin padding-top-15" rel="tooltip" title="" data-original-title="Filter Date"></label>
+                                                    </th>
+                                                    <th class="hasinput" style="width:16%">
+                                                        <input type="text" class="form-control" placeholder="Filtrar por nombre" />
+                                                    </th>
+                                                    <th class="hasinput" style="width:18%">
+                                                        <input type="text" class="form-control" placeholder="Filtrar por puesto" />
+                                                    </th>
+                                                    <th class="hasinput" style="width:18%">
+                                                        <input type="text" class="form-control" placeholder="Filtrar por area" />
+                                                    </th>
+                                                    <th class="hasinput" style="width:16%">
+                                                        <input type="text" class="form-control" placeholder="Filtrar por departamento" />
+                                                    </th>
+                                                    <th class="hasinput" style="width:20%" >
+                                                    </th>
+                                                    <th class="hasinput" >
+                                                    </th>
+                                                    <th class="hasinput">
+                                                    </th>
+                                                    <th class="hasinput" >
+                                                    </th>
+                                                    <th class="hasinput" >
+                                                    </th>
+                                                </tr>
                                                 <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
-
-                                                    <th ><strong>MES</strong></th>
-
+                                                    <th ><strong>MES PROCESADO</strong></th>
                                                     <!--<th data-hide="phone,tablet"><strong>Foto</strong> </th>-->
                                                     <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
-
                                                     <th data-hide="phone,tablet"><strong>Puesto</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Area</strong></th>
                                                     <th data-hide="phone,tablet"><strong>Departamento</strong></th>
@@ -631,59 +468,10 @@
                                                     <th  data-hide="phone,tablet">Fecha de Autorización</th>  
                                                     <th  data-hide="phone,tablet">Motivo</th>  
                                                     <th  data-hide="phone,tablet">MFL</th>  
-                                                        <%// if (dep.equals("DPT-0019")) {%>
-
-                                                    <!--<th  ><strong>¿Cumplio Plazos?</strong></th>-->
-                                                    <%//if (idrol.trim().equals("ROL-0006")) {
-
-                                                    %>
                                                 </tr>
                                             </thead>
-                                            <tbody> 
+                                            <tbody class="tbody_autorizado"> 
 
-                                                <%for (int f = 0; f < List_id_Autorizados.size(); f++) {
-
-                                                        V_Autorizar_Dgp a = new V_Autorizar_Dgp();
-                                                        a = (V_Autorizar_Dgp) List_id_Autorizados.get(f);
-                                                %>
-
-                                                <tr>
-                                                    <td><%=f + 1%></td>
-
-                                                    <td ><%=a.getMes_creacion()%></td>   
-
-                                                    <td ><%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%></td>
-                                                    <td ><%=a.getNo_puesto()%></td>   
-                                                    <td ><%=a.getNo_area()%></td>      
-                                                    <td ><%=a.getNo_dep()%></td>      
-                                                    <td ><%=a.getNo_req()%></td>      
-                                            <input type="hidden" class="val_aut<%=(f + 1)%>" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
-                                            <input type="hidden" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
-                                            <td><%=a.getFe_creacion()%></td>
-                                            <td><%=a.getFe_autorizacion()%></td>
-                                            <td><%if (a.getLi_motivo() != null) {
-                                                    if (a.getLi_motivo().trim().equals("1")) {
-                                                        out.print("Trabajdor Nuevo");
-                                                    }
-                                                    if (a.getLi_motivo().trim().equals("2")) {
-                                                        out.print("Renovación");
-                                                    }
-                                                } else {
-                                                    out.print("No registrado");
-                                                }%></td> 
-                                            <td><%if (a.getEs_mfl() != null) {
-                                                    if (a.getEs_mfl().trim().equals("0")) {
-                                                        out.print("No");
-                                                    }
-                                                    if (a.getEs_mfl().trim().equals("1")) {
-                                                        out.print("Si");
-                                                    }
-                                                } else {
-                                                    out.print("No registrado");
-                                                }%></td> 
-                                                <%
-                                                    }
-                                                    List_id_Autorizados.clear();%>
                                             </tbody>
                                         </table>
 
@@ -696,33 +484,14 @@
 
                             </div>
                             <!-- end widget -->
-
-
-
                         </article>
                         <!-- WIDGET END -->
-
                     </div>
-
                     <!-- end row -->
-
                 </section>
                 <!-- end widget grid -->
-
-
-
-
             </div>
         </div>
-
-
-
-
-
-
-
-
-
     </body>
 
     <!--================================================== -->
@@ -733,16 +502,16 @@
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
-                                        if (!window.jQuery) {
-                                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                        }
+        if (!window.jQuery) {
+            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+        }
     </script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>
-                                        if (!window.jQuery.ui) {
-                                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                        }
+        if (!window.jQuery.ui) {
+            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+        }
     </script>
 
     <!-- IMPORTANT: APP CONFIG -->
@@ -807,202 +576,286 @@
     <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+    <script>
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+    </script>
+    <script>
+        function exito(titulo, mensaje) {
+            $.smallBox({
+                title: titulo,
+                content: mensaje,
+                color: "#739E73",
+                iconSmall: "fa fa-cloud",
+                timeout: 3000
+            });
+        }
+        $(document).ready(function() {
+            $(".btn_pro_remuneracion").click(function() {
+                $.SmartMessageBox({
+                    title: "¡Advertencia!",
+                    content: "¿Esta seguro de procesar estos requerimientos?",
+                    buttons: '[No][Si]'
+                }, function(ButtonPressed) {
+                    if (ButtonPressed === "Si") {
+                        for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
+                            if ($(".env_rem" + i).prop('checked')) {
+                                $.ajax({
+                                    url: "../../autorizacion",
+                                    type: "POST",
+                                    data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
+                                }).done(function() {
+                                    window.location.href = "../../autorizacion";
+                                });
+                            }
+                        }
+                    }
+                    if (ButtonPressed === "No") {
+                    }
+                });
+            });
+            $(".btn_pro_firma").click(function() {
+                $.SmartMessageBox({
+                    title: "¡Advertencia!",
+                    content: "¿Esta seguro de procesar firmas a estos requerimientos?",
+                    buttons: '[No][Si]'
+                }, function(ButtonPressed) {
+                    if (ButtonPressed === "Si") {
+                        try {
+                            $.each($(".firm_contr"), function() {
+                                if ($(this).prop('checked')) {
+                                    $.ajax({
+                                        url: "../../contrato",
+                                        type: "POST",
+                                        data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
+                                    }).done(function() {
+                                    });
+                                    $.ajax({
+                                        url: "../../autorizacion",
+                                        type: "POST",
+                                        data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
+                                    }).done(function() {
+                                        window.location.href = "../../autorizacion";
+                                    });
+                                }
+                            });
+                            // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
+                        }
+                        catch (err) {
+                            alert(err.message);
+                        } finally {
+                        }
+                    }
+                    if (ButtonPressed === "No") {
+                    }
+                });
+            });
+            $(".btn_cod_aps").click(function() {
+                $.SmartMessageBox({
+                    title: "¡Advertencia!",
+                    content: "¿Esta seguro de procesar codigos APS a estos requerimientos?",
+                    buttons: '[No][Si]'
+                }, function(ButtonPressed) {
+                    if (ButtonPressed === "Si") {
+                        for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
+                            if ($(".cod_aps" + r).val() != "") {
+                                $.ajax({
+                                    url: "../../trabajador",
+                                    type: "POST",
+                                    data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
+                                }).done(function() {
+                                });
+                                $.ajax({
+                                    url: "../../autorizacion",
+                                    type: "POST",
+                                    data: "opc=Aceptar" + $(".val_aut" + r).val()
+                                }).done(function() {
+                                    window.location.href = "../../autorizacion?opc=mens_cod_aps";
+                                });
+                            }
+                        }
+                    }
+                    if (ButtonPressed === "No") {
+                    }
 
+                });
+            });
+            $(".btn_cod_huella").click(function() {
+                $.SmartMessageBox({
+                    title: "¡Advertencia!",
+                    content: "¿Esta seguro de procesar codigos de huella a estos requerimientos?",
+                    buttons: '[No][Si]'
+                }, function(ButtonPressed) {
+                    if (ButtonPressed === "Si") {
+                        for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
+                            if ($(".cod_huella" + r).val() != "") {
+                                $.ajax({
+                                    url: "../../trabajador",
+                                    type: "POST",
+                                    data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
+                                }).done(function() {
+                                });
+                                $.ajax({
+                                    url: "../../autorizacion",
+                                    type: "POST",
+                                    data: "opc=Aceptar" + $(".val_aut" + r).val()
+                                }).done(function() {
+                                    window.location.href = "../../autorizacion?opc=mens_cod_huella";
+                                });
+                                $.ajax({
+                                    url: "../../autorizacion",
+                                    type: "POST",
+                                    data: "opc=Enviar_Correo" + $(".correos_" + r).val()
+                                }).done(function() {
 
+                                });
+                            }
+                        }
+                    }
+                    if (ButtonPressed === "No") {
+                    }
+                });
+            });
+        });</script>
     <script type="text/javascript">
 
-                                        // DO NOT REMOVE : GLOBAL FUNCTIONS!
+        function listar_autorizados() {
+            var b = $(".tbody_autorizado");
+            b.empty();
+            var text_html = "";
+            $.post("../../autorizacion", "opc=List_Dgp_Aut", function(objJson) {
+                b.empty();
+                var lista = objJson.lista;
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                for (var i = 0; i < lista.length; i++) {
+                    text_html += "<tr>";
+                    text_html += "<td>" + (i + 1) + "</td>";
+                    text_html += "<td>" + lista[i].mes_año_aut + "</td>";
+                    text_html += "<td>" + lista[i].ap_p + " " + lista[i].ap_m + " " + lista[i].nombre + "</td>";
+                    text_html += "<td>" + lista[i].puesto + "</td>";
+                    text_html += "<td>" + lista[i].area + "</td>";
+                    text_html += "<td>" + lista[i].dep + "</td>";
+                    text_html += "<td>" + lista[i].req + "</td>";
+                    text_html += "<td>" + lista[i].fecha_c + "</td>";
+                    text_html += "<td>" + lista[i].fecha_aut + "</td>";
+                    if (lista[i].motivo == '1') {
+                        text_html += "<td>Trabajador Nuevo</td>";
+                    } else if (lista[i].motivo == '2') {
+                        text_html += "<td>Renovación</td>";
+                    }
+                    if (lista[i].mfl == '0') {
+                        text_html += "<td>No</td>";
+                    } else if (lista[i].mfl == '1') {
+                        text_html += "<td>Si</td>";
+                    }
+                    text_html += "</tr>";
+                }
+                b.append(text_html);
+                text_html = "";
+                var responsiveHelper_datatable_fixed_column = undefined;
+                var breakpointDefinition = {
+                    tablet: 1024,
+                    phone: 480
+                };
+                var otable = $('#dt_basic').DataTable({
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
+                            "t" +
+                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                    "autoWidth": true,
+                    "preDrawCallback": function() {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_datatable_fixed_column) {
+                            responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function(nRow) {
+                        responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function(oSettings) {
+                        responsiveHelper_datatable_fixed_column.respond();
+                    }
 
-                                        $(document).ready(function () {
+                });
+                // Apply the filter
+                $("#dt_basic thead th input[type=text]").on('keyup change', function() {
+                    otable.column($(this).parent().index() + ':visible').search(this.value).draw();
+                });
 
-                                            pageSetUp();
-                                            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-                                                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-                                            });
-                                            $(".cod_aps").numeric();
-                                            /* // DOM Position key index //
-                                             
-                                             l - Length changing (dropdown)
-                                             f - Filtering input (search)
-                                             t - The Table! (datatable)
-                                             i - Information (records)
-                                             p - Pagination (paging)
-                                             r - pRocessing 
-                                             < and > - div elements
-                                             <"#id" and > - div with an id
-                                             <"class" and > - div with a class
-                                             <"#id.class" and > - div with an id and class
-                                             
-                                             Also see: http://legacy.datatables.net/usage/features
-                                             */
+            });
+        }
+        $(document).ready(function() {
+            pageSetUp();
+            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+            });
+            $(".cod_aps").numeric();
+            listar_autorizados()
+            $('.filtrar_fecha').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'MM yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                onClose: function(dateText, inst) {
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).datepicker('setDate', new Date(year, month, 1));
+                  //  listar_autorizados()
+                }
 
-                                            /* BASIC ;*/
-                                            var responsiveHelper_dt_basic = undefined;
-                                            var responsiveHelper_datatable_fixed_column = undefined;
-                                            var responsiveHelper_datatable_col_reorder = undefined;
-                                            var responsiveHelper_datatable_tabletools = undefined;
-                                            var breakpointDefinition = {
-                                                tablet: 1024,
-                                                phone: 480
-                                            };
-                                            $('#dt_basic').dataTable({
-                                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                                                        "t" +
-                                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                                                "autoWidth": true,
-                                                "preDrawCallback": function () {
-                                                    // Initialize the responsive datatables helper once.
-                                                    if (!responsiveHelper_dt_basic) {
-                                                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                                                    }
-                                                },
-                                                "rowCallback": function (nRow) {
-                                                    responsiveHelper_dt_basic.createExpandIcon(nRow);
-                                                },
-                                                "drawCallback": function (oSettings) {
-                                                    responsiveHelper_dt_basic.respond();
-                                                }
-                                            });
-                                            $('#dt_basic1').dataTable({
-                                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                                                        "t" +
-                                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                                                "autoWidth": true,
-                                                "preDrawCallback": function () {
-                                                    // Initialize the responsive datatables helper once.
-                                                    if (!responsiveHelper_dt_basic) {
-                                                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic1'), breakpointDefinition);
-                                                    }
-                                                },
-                                                "rowCallback": function (nRow) {
-                                                    responsiveHelper_dt_basic.createExpandIcon(nRow);
-                                                },
-                                                "drawCallback": function (oSettings) {
-                                                    responsiveHelper_dt_basic.respond();
-                                                }
-                                            });
-                                            /* END BASIC */
+            });
 
-                                            /* COLUMN FILTER  */
-                                            var otable = $('#datatable_fixed_column').DataTable({
-                                                //"bFilter": false,
-                                                //"bInfo": false,
-                                                //"bLengthChange": false
-                                                //"bAutoWidth": false,
-                                                //"bPaginate": false,
-                                                //"bStateSave": true // saves sort state using localStorage
-                                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
-                                                        "t" +
-                                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                                                "autoWidth": true,
-                                                "preDrawCallback": function () {
-                                                    // Initialize the responsive datatables helper once.
-                                                    if (!responsiveHelper_datatable_fixed_column) {
-                                                        responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-                                                    }
-                                                },
-                                                "rowCallback": function (nRow) {
-                                                    responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-                                                },
-                                                "drawCallback": function (oSettings) {
-                                                    responsiveHelper_datatable_fixed_column.respond();
-                                                }
 
-                                            });
-                                            // custom toolbar
-                                            $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
-                                            // Apply the filter
-                                            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
+            /* BASIC ;*/
+            var responsiveHelper_dt_basic = undefined;
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
 
-                                                otable
-                                                        .column($(this).parent().index() + ':visible')
-                                                        .search(this.value)
-                                                        .draw();
-                                            });
-                                            /* END COLUMN FILTER */
 
-                                            /* COLUMN SHOW - HIDE */
-                                            $('#datatable_col_reorder').dataTable({
-                                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
-                                                        "t" +
-                                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                                                "autoWidth": true,
-                                                "preDrawCallback": function () {
-                                                    // Initialize the responsive datatables helper once.
-                                                    if (!responsiveHelper_datatable_col_reorder) {
-                                                        responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
-                                                    }
-                                                },
-                                                "rowCallback": function (nRow) {
-                                                    responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
-                                                },
-                                                "drawCallback": function (oSettings) {
-                                                    responsiveHelper_datatable_col_reorder.respond();
-                                                }
-                                            });
-                                            /* END COLUMN SHOW - HIDE */
-
-                                            /* TABLETOOLS */
-                                            $('#datatable_tabletools').dataTable({
-                                                // Tabletools options: 
-                                                //   https://datatables.net/extensions/tabletools/button_options
-                                                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
-                                                        "t" +
-                                                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                                                "oTableTools": {
-                                                    "aButtons": [
-                                                        "copy",
-                                                        "csv",
-                                                        "xls",
-                                                        {
-                                                            "sExtends": "pdf",
-                                                            "sTitle": "SmartAdmin_PDF",
-                                                            "sPdfMessage": "SmartAdmin PDF Export",
-                                                            "sPdfSize": "letter"
-                                                        },
-                                                        {
-                                                            "sExtends": "print",
-                                                            "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
-                                                        }
-                                                    ],
-                                                    "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
-                                                },
-                                                "autoWidth": true,
-                                                "preDrawCallback": function () {
-                                                    // Initialize the responsive datatables helper once.
-                                                    if (!responsiveHelper_datatable_tabletools) {
-                                                        responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
-                                                    }
-                                                },
-                                                "rowCallback": function (nRow) {
-                                                    responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-                                                },
-                                                "drawCallback": function (oSettings) {
-                                                    responsiveHelper_datatable_tabletools.respond();
-                                                }
-                                            });
-                                            /* END TABLETOOLS */
-
-                                        })
+            $('#dt_basic1').dataTable({
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                        "t" +
+                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                "autoWidth": true,
+                "preDrawCallback": function() {
+                    // Initialize the responsive datatables helper once.
+                    if (!responsiveHelper_dt_basic) {
+                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic1'), breakpointDefinition);
+                    }
+                },
+                "rowCallback": function(nRow) {
+                    responsiveHelper_dt_basic.createExpandIcon(nRow);
+                },
+                "drawCallback": function(oSettings) {
+                    responsiveHelper_dt_basic.respond();
+                }
+            });
+            /* END BASIC */
+        })
 
     </script>
-
-    <!-- Your GOOGLE ANALYTICS CODE Below -->
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-        _gaq.push(['_trackPageview']);
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-
 </html>
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");

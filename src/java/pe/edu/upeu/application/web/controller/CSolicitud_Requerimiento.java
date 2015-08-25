@@ -83,7 +83,7 @@ public class CSolicitud_Requerimiento extends HttpServlet {
         if (opc.equals("Reg_List_Solicitud")) {
             String iddgp = request.getParameter("iddgp");
             getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser, iddgp));
-            response.sendRedirect("Vista/Solicitud/Reg_List_Solicitud.jsp?iddgp=" + iddgp + "");
+           rpta.put("rpta", "1");
         }
         if (opc.equals("Ver_Detalle_Solicitud")) {
             String id = request.getParameter("id");

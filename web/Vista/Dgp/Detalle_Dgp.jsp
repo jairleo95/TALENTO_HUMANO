@@ -450,7 +450,7 @@
                                         $.ajax({
                                             url: "../../solicitud_requerimiento",
                                             type: "post",
-                                            data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud" + "&iddgp=" + $(".dgp").val()
+                                            data: $(".solicitud_plazo").serialize() + "&opc=Reg_List_Solicitud" + "&iddgp=" + $(".dgp").val()
                                         }).done(function() {
                                             $('.solicitud_plazo')[0].reset();
                                             var $p = $(this).parent().parent();

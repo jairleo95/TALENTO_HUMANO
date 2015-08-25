@@ -10,7 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
@@ -29,8 +31,8 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
 
     CConversion c = new CConversion();
     ConexionBD conn;
-    
-       @Override
+
+    @Override
     public void Insert_Autorizacion(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String US_MODIF, String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS) {
         CallableStatement cst;
 
@@ -55,7 +57,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error!"+ e.getMessage());
+            throw new RuntimeException("Error!" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -63,19 +65,6 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
-    }
-
-    
-    
-
-    @Override
-    public boolean Guardar_Autorizacion(String id_autorizacion, String id_dgp, String id_proceso, String estado, String detalle, String nu_pasos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String Max_Id_Autorizacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -427,18 +416,6 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             rs.next();
             list.add(rs.getString("id_pasos"));
             list.add(rs.getString("id_puesto"));
-            /* list.add(rs.getString("id_proceso"));
-             list.add(rs.getString("id_detalle_req_proceso"));
-             list.add(rs.getString("id_detalle_pasos"));
-             list.add(rs.getString("de_pasos"));
-             list.add(rs.getString("nu_pasos"));
-             list.add(rs.getString("co_pasos"));
-             list.add(rs.getString("no_proceso"));
-           
-             list.add(rs.getString("id_direccion"));
-             list.add(rs.getString("id_departamento"));
-             list.add(rs.getString("id_requerimiento"));*/
-
         } catch (SQLException e) {
         } finally {
             this.conn.close();
@@ -446,7 +423,6 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         return list;
     }
 
- 
     @Override
     public List<V_Autorizar_Dgp> List_Autorizados(String id_puesto) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -557,6 +533,46 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             this.conn.close();
         }
         return validar;
+    }
+
+    @Override
+    public List<Map<String, ?>> List_Dgp_Autorizados(String id_puesto) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT * FROM RHVD_DGP_AUTORIZADOS where ID_PUESTO = '" + id_puesto + "'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("nombre", rs.getString("no_trabajador"));
+                rec.put("ap_p", rs.getString("ap_paterno"));
+                rec.put("ap_m", rs.getString("ap_materno"));
+                rec.put("puesto", rs.getString("no_puesto"));
+                rec.put("req", rs.getString("no_req"));
+                rec.put("area", rs.getString("no_area"));
+                rec.put("fecha_c", rs.getString("fe_creacion"));
+                rec.put("fecha_aut", rs.getString("fe_autorizacion"));
+                rec.put("mes_año_aut", rs.getString("mes_año_aut"));
+                rec.put("dep", rs.getString("no_dep"));
+                rec.put("mes_c", rs.getString("mes_creacion"));
+                rec.put("motivo", rs.getString("LI_MOTIVO"));
+                rec.put("mfl", rs.getString("ES_MFL"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de autorizaciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
+
     }
 
 }

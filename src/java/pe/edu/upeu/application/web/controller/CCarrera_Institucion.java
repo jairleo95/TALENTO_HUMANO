@@ -40,8 +40,6 @@ public class CCarrera_Institucion extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        
-        
         Map<String, Object> rpta = new HashMap<String, Object>();
         InterfaceCarrera_UniversidadDAO model = new Carrera_UniversidadDAO();
         String opc = request.getParameter("opc");

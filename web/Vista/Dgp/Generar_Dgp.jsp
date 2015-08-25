@@ -15,8 +15,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
-
-        <title></title>
+        <title>Generar Requerimiento</title>
     </head>
     <body>
     <center>
@@ -97,10 +96,8 @@
                     <button type="submit" class="btn btn-labeled btn-default"><span class="btn-label"><i class="fa fa-search"></i></span>Buscar </button>
                     <a href="?cancel=true&text=<%=text%>" class="btn btn-labeled btn-danger"> <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>Cancelar </a>
                 </div>
-
             </form>
         </div>
-
         <hr/>
         <%
             int count = ListarTrabajador2.size();
@@ -110,7 +107,6 @@
                     ListarTrabajador2.clear();
                 }
             } else {
-
                 if (count == 0) {
         %>
         <strong>No se encontraron registros...</strong>
@@ -135,7 +131,6 @@
                     <% } else {%>
                 <td><img src="../Usuario/Fotos/<%=tr.getAr_foto()%>"  width="30"  height="30"></td>
                     <% }%>
-
                 <td><div ><a href="../../trabajador?idtr=<%=tr.getId_trabajador()%>&opc=list"><%=tr.getAp_paterno().toUpperCase() + " " + tr.getAp_materno().toUpperCase() + " " + tr.getNo_trabajador().toUpperCase()%></a></div></td>
                 <td><%if (tr.getNo_carrera() != null) {
                         out.println(tr.getNo_carrera());
@@ -150,7 +145,6 @@
                     %>
                     <a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form" 
                        class="btn btn-primary">Elaborar Requerimiento <i class="fa fa-arrow-circle-right"></i></a>
-
                     <%}%>
                 </td>
             </tr>
@@ -160,32 +154,21 @@
                     }
                 }%> 
         </table>
-
-        <?}}?>
-
     </center>
-
 </body>
  <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
 <script src="../../js/app.config.js"></script>
 <script src="../../js/bootstrap/bootstrap.min.js"></script>
 <script src="../../js/demo.min.js"></script>
-
 <script src="../../js/app.min.js"></script>
 <script type="text/javascript">
 
                         // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
                         $(document).ready(function () {
-
                             pageSetUp();
-
-
                         })
-
 </script>
 </html>
-
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
