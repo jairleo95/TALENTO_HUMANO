@@ -70,7 +70,7 @@ public class Cdocumento_adjunto extends HttpServlet {
         } else {
 
             //String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
-             String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Contratos_Adjuntos/";
+            String ubicacion = "/var/lib/tomcat7/webapps/ROOT/Vista/Contrato/Contratos_Adjuntos/";
             //String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Contrato\\Contratos_Adjuntos";
 
             DiskFileItemFactory f = new DiskFileItemFactory();

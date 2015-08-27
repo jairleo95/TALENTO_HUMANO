@@ -85,7 +85,7 @@
     </servlet>
     <servlet>
         <servlet-name>C_Renuncias</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.C_Renuncias</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.CRenuncias</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CFormato_Horario</servlet-name>

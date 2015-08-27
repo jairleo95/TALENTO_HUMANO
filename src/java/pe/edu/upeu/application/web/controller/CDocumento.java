@@ -53,7 +53,7 @@ public class CDocumento extends HttpServlet {
 
         String dgp = request.getParameter("iddgp");
         String idtr = request.getParameter("idtr");
-        String idctr = request.getParameter("idctr");
+        //   String idctr = request.getParameter("idctr");
         String opc = request.getParameter("opc");
         HttpSession sesion = request.getSession(true);
         String user = (String) sesion.getAttribute("IDUSER");
@@ -74,9 +74,9 @@ public class CDocumento extends HttpServlet {
 
             }
             if (opc.equals("Ver_Documento")) {
-                if(rol.trim().equals("ROL-001"))
-
-                getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
+                if (rol.trim().equals("ROL-001")) {
+                    getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
+                }
                 int i = d.List_Req_nacionalidad(idtr);
                 int num_ad = d.List_Adventista(idtr);
                 getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
@@ -146,9 +146,9 @@ public class CDocumento extends HttpServlet {
         } else {
 
             //------>   ./var/www/html/files/   (con: pwd)
-           String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
-         // String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
-         //String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
+            // String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
+            String ubicacion = "/var/lib/tomcat7/webapps/ROOT/Vista/Dgp/Documento/Archivo/";
+            //String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
 
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
@@ -277,11 +277,11 @@ public class CDocumento extends HttpServlet {
 
             if (pr != null) {
                 if (pr.equals("enter")) {
-                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + iddgp+"&a=t");
+                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + iddgp + "&a=t");
                 }
 
             } else {
-                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + iddgp+"&a=t");
+                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + iddgp + "&a=t");
             }
 
             /*} catch (FileUploadException e) {

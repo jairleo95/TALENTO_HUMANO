@@ -139,13 +139,17 @@
                     }
                     %></td>
                 <td>
-                    <%if (tr.getEs_proceso() != null) {%>
-                    <label> <%out.print(tr.getEs_proceso());%> </label>
-                    <% } else {
+                    <%if (tr.getEs_proceso() != null) {
+                            if (tr.getEs_proceso().equals("Contratado")) {
                     %>
-                    <a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form" 
-                       class="btn btn-primary">Elaborar Requerimiento <i class="fa fa-arrow-circle-right"></i></a>
-                    <%}%>
+                    <a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form" class="btn btn-primary">Elaborar Requerimiento (Contrato Activo) <i class="fa fa-arrow-circle-right"></i></a>
+                        <% } else {
+                        %>
+                    <label> <%out.print(tr.getEs_proceso());
+                        }%> </label>
+                        <% } else {%>
+                    <a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form" class="btn btn-primary">Elaborar Requerimiento <i class="fa fa-arrow-circle-right"></i></a>
+                        <%}%>
                 </td>
             </tr>
             <%
@@ -156,7 +160,7 @@
         </table>
     </center>
 </body>
- <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
+<script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
 <script src="../../js/app.config.js"></script>
 <script src="../../js/bootstrap/bootstrap.min.js"></script>
 <script src="../../js/demo.min.js"></script>
@@ -164,7 +168,7 @@
 <script type="text/javascript">
 
                         // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                        $(document).ready(function () {
+                        $(document).ready(function() {
                             pageSetUp();
                         })
 </script>

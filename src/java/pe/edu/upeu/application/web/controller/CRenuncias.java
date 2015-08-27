@@ -3,23 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.web.controller;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import pe.edu.upeu.application.dao.TrabajadorDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 
 /**
  *
  * @author joserodrigo
  */
-@WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
-public class NewServlet extends HttpServlet {
+public class CRenuncias extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,21 +32,35 @@ public class NewServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NewServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet NewServlet at " + getServletContext().getRealPath(".") + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out = response.getWriter();
+        String opc = request.getParameter("opc");
+        HttpSession sesion = request.getSession(true);
+        String idtr = request.getParameter("idtr");
+        String idreq = request.getParameter("idreq");
+        InterfaceTrabajadorDAO tr = new TrabajadorDAO();
+        String iddep = (String)sesion.getAttribute("DEPARTAMENTO_ID");
+
+        if ("Reg_renuncia".equals(request.getParameter("opc"))) {
+            String Tipo_planilla = tr.tipo_planilla(idtr);
+            /*if (Tipo_planilla.equals("TPL-0001")) {
+                idreq = "REQ-0015";
+            }
+            if (Tipo_planilla.equals("TPL-0002")) {
+                idreq = "REQ-0016";
+            }
+            if (Tipo_planilla.equals("TPL-0003")) {
+                idreq = "REQ-0017";
+            }*/
+            out.print(Tipo_planilla+idtr + idreq + iddep);
+           // getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
+          //  getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
+            //response.sendRedirect("Vista/Renuncias/Reg_Dgp_Renuncia.jsp?idreq=" + idreq);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

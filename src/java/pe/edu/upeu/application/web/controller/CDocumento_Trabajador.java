@@ -153,10 +153,10 @@ public class CDocumento_Trabajador extends HttpServlet {
         } else {
 
             //------>   ./var/www/html/files/   (con: pwd)
-          String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
-         // String ubicacion = getServletContext().getRealPath("/")+"Vista\\Dgp\\Docuemnto\\Archivo";
-            System.out.println(ubicacion+"--ubicacion");
-             //String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
+            //   String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
+            // String ubicacion = getServletContext().getRealPath("/")+"Vista\\Dgp\\Docuemnto\\Archivo";
+            // System.out.println(ubicacion+"--ubicacion");
+            String ubicacion = "/var/lib/tomcat7/webapps/ROOT/Vista/Dgp/Documento/Archivo/";
 //out.print(ubicacion);
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
@@ -164,7 +164,7 @@ public class CDocumento_Trabajador extends HttpServlet {
             ServletFileUpload upload = new ServletFileUpload(f);
             ServletRequestContext src = new ServletRequestContext(request);
             // try {
-            System.out.println(src.toString()+"--src");
+            System.out.println(src.toString() + "--src");
             List<FileItem> p = upload.parseRequest(src);
             int num_filas = 0;
             String iddgp = null;

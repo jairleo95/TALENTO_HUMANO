@@ -42,7 +42,7 @@ public class MCCosto extends HttpServlet {
         Map<String, Object> rpta = new HashMap<String, Object>();
         String opc = request.getParameter("opc");
         HttpSession sesion = request.getSession(true);
-        String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+        // String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         InterfaceCentroCosto cc = new CentroCostoDAO();
         try {
             if (opc.equals("menu")) {
