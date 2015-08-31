@@ -82,6 +82,7 @@ public class CPlantilla_Contractual extends HttpServlet {
             if (opc.equals("Imprimir")) {
                // String id_puesto = request.getParameter("puesto");
                 String id_planti_con = request.getParameter("id_plan_contr");
+                System.out.println(id_planti_con+"idplant");
                 String no_arch = pl.List_pl_con_x_id(id_planti_con);
                 String id_con = request.getParameter("id_con");
                  String id_puesto=pu.puesto(id_con);

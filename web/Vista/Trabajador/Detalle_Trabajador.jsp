@@ -293,7 +293,7 @@
                                         <tr><td class="td" colspan="3">Registrar Codigo de huella digital</td></tr>
                                         <tr><td><input type="text" id="cod_hu" name="cod_huella"  maxlength="6" onblur="VAL_COD_HUELLA()" /></td></tr>
                                         <tr><td>
-                                            <button type="submit" class=" btn btn-default txt-color-green mod_huella" ><i class="fa fa-pencil fa-2x"></i></button>
+                                                <button type="submit" class=" btn btn-default txt-color-green mod_huella" ><i class="fa fa-pencil fa-2x"></i></button>
                                             </td></tr>
                                         <!--<tr><td><button value="registrar_huella" name="opc">Registrar</button></td></tr>-->
                                     </table>
@@ -795,7 +795,7 @@
                                                         url: "../../empleado",
                                                         type: "POST",
                                                         data: "opc=validar_aps&co_aps=" + co_aps.value
-                                                    }).done(function(e) {
+                                                    }).done(function (e) {
                                                         // alert(e);
                                                         var cant = ($("#mod_aps").val());
                                                         if (cant.length > 5) {
@@ -810,7 +810,7 @@
                                                                 });
                                                             }
                                                         }
-                                                    }).fail(function(e) {
+                                                    }).fail(function (e) {
                                                         alert("Error: " + e);
                                                     });
                                                 }
@@ -822,7 +822,7 @@
                                                         url: "../../empleado",
                                                         type: "POST",
                                                         data: "opc=validar_aps&co_aps=" + co_aps.value
-                                                    }).done(function(e) {
+                                                    }).done(function (e) {
                                                         //alert(e);
                                                         var cant = ($("#cod_ap").val());
                                                         if (cant.length > 5) {
@@ -837,7 +837,7 @@
                                                                 });
                                                             }
                                                         }
-                                                    }).fail(function(e) {
+                                                    }).fail(function (e) {
                                                         alert("Error: " + e);
                                                     });
                                                 }
@@ -849,7 +849,7 @@
                                                         url: "../../empleado",
                                                         type: "POST",
                                                         data: "opc=validar_huella&co_hue=" + co_huel.value
-                                                    }).done(function(e) {
+                                                    }).done(function (e) {
                                                         var cant = $("#mod_hue").val();
                                                         if (cant.length > 5) {
                                                             if (e == 0) {
@@ -874,7 +874,7 @@
                                                         url: "../../empleado",
                                                         type: "POST",
                                                         data: "opc=validar_huella&co_hue=" + co_huel.value
-                                                    }).done(function(e) {
+                                                    }).done(function (e) {
                                                         // alert(e)
                                                         var cant = $("#cod_hu").val();
                                                         if (cant.length > 5) {
@@ -904,27 +904,27 @@
                                                 var result = e.target.result;
                                                 $('.ver_foto').attr("src", result);
                                             }
-                                            $(document).ready(function() {
+                                            $(document).ready(function () {
                                                 // pageSetUp();
-                                                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                                                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                                                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                                 });
                                                 //  $("#cod_ap").numeric();
-                                                $(".mod_huella").click(function() {
+                                                $(".mod_huella").click(function () {
                                                     $("#cel_hue").hide();
                                                     document.getElementById("mod_hue").type = "text";
                                                 });
-                                                $(".mod_co_aps").click(function() {
+                                                $(".mod_co_aps").click(function () {
                                                     $("#cel_aps").hide();
                                                     document.getElementById("mod_aps").type = "text";
 
                                                 });
 
-                                                $(".fe_desde_p, .fe_hasta_p").change(function() {
+                                                $(".fe_desde_p, .fe_hasta_p").change(function () {
                                                     var cuotas = $(".cuota_docente");
                                                     cuotas.empty();
 
-                                                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
+                                                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
                                                         var lista = objJson.lista;
                                                         if (objJson.rpta == -1) {
                                                             alert(objJson.mensaje);
@@ -938,36 +938,36 @@
 
 
 
-                                                $(".btn_guardar_ca").click(function() {
+                                                $(".btn_guardar_ca").click(function () {
                                                     $.ajax({
                                                         url: "../../carga_academica",
                                                         type: "POST",
                                                         data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                                                    }).done(function(ids) {
+                                                    }).done(function (ids) {
                                                         var arr_id = ids.split(":");
                                                         alert("Registrado con exito!...");
                                                         $(".proceso").val(arr_id[0]);
                                                         $(".dgp").val(arr_id[1]);
                                                         $(".btn_procesar").show();
-                                                    }).fail(function(e) {
+                                                    }).fail(function (e) {
                                                         alert("Error: " + e);
                                                     });
                                                 });
 
-                                                $(".btn_procesar").click(function() {
+                                                $(".btn_procesar").click(function () {
                                                     $.ajax({
                                                         url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                                                    }).done(function() {
+                                                    }).done(function () {
                                                         window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
                                                     });
                                                 });
 
-                                                $(".btn-autor").click(function(e) {
+                                                $(".btn-autor").click(function (e) {
                                                     $.SmartMessageBox({
                                                         title: "Alerta de Confirmaci?!",
                                                         content: "?sta totalmente seguro de autorizar este requerimiento?",
                                                         buttons: '[No][Si]'
-                                                    }, function(ButtonPressed) {
+                                                    }, function (ButtonPressed) {
                                                         if (ButtonPressed === "Si") {
                                                             // return true;
                                                             $(".form-aut").submit();
@@ -978,12 +978,12 @@
                                                     });
                                                     e.preventDefault();
                                                 });
-                                                $(".btn-rech").click(function(e) {
+                                                $(".btn-rech").click(function (e) {
                                                     $.SmartMessageBox({
                                                         title: "Alerta de Confirmaci?!",
                                                         content: "?sta totalmente seguro de rechazar este requerimiento?",
                                                         buttons: '[No][Si]'
-                                                    }, function(ButtonPressed) {
+                                                    }, function (ButtonPressed) {
                                                         if (ButtonPressed === "Si") {
                                                             $(".form-rech").submit();
                                                         }
@@ -994,10 +994,10 @@
                                                     })
                                                 });
 
-                                                $('.ver_foto').click(function() {
+                                                $('.ver_foto').click(function () {
                                                     $(".file-foto").click();
                                                 });
-                                                $('.file-foto').change(function(e) {
+                                                $('.file-foto').change(function (e) {
                                                     var t = e;
                                                     if (this.files[0].size <= 500000) {
                                                         var jForm = new FormData();
@@ -1010,7 +1010,7 @@
                                                             processData: false,
                                                             contentType: false,
                                                             data: jForm
-                                                        }).done(function(objJson) {
+                                                        }).done(function (objJson) {
                                                             if (objJson.rpta == -1) {
                                                                 alert(objJson.mensaje);
                                                                 return;
@@ -1027,12 +1027,12 @@
                                                     }
 
                                                 });
-                                                $(".btn-conti").click(function(e) {
+                                                $(".btn-conti").click(function (e) {
                                                     $.SmartMessageBox({
                                                         title: "Alerta de Confirmaci?!",
                                                         content: "?sta totalmente seguro de rechazar este requerimiento?",
                                                         buttons: '[No][Si]'
-                                                    }, function(ButtonPressed) {
+                                                    }, function (ButtonPressed) {
                                                         if (ButtonPressed === "Si") {
                                                             $(".form-rech").submit();
                                                             //$(".form-rech").submit();
@@ -1044,11 +1044,11 @@
                                                     e.preventDefault();
 
                                                 });
-                                                $(".fe_desde_p, .fe_hasta_p").change(function() {
+                                                $(".fe_desde_p, .fe_hasta_p").change(function () {
                                                     var cuotas = $(".cuota_docente");
                                                     cuotas.empty();
 
-                                                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
+                                                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
                                                         var lista = objJson.lista;
                                                         if (objJson.rpta == -1) {
                                                             alert(objJson.mensaje);
@@ -1059,36 +1059,36 @@
                                                         }
                                                     });
                                                 });
-                                                $(".btn_guardar_ca").click(function() {
+                                                $(".btn_guardar_ca").click(function () {
                                                     $.ajax({
                                                         url: "../../carga_academica",
                                                         type: "POST",
                                                         data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                                                    }).done(function(ids) {
+                                                    }).done(function (ids) {
                                                         var arr_id = ids.split(":");
                                                         alert("Registrado con exito!...");
                                                         $(".proceso").val(arr_id[0]);
                                                         $(".dgp").val(arr_id[1]);
                                                         $(".btn_procesar").show();
-                                                    }).fail(function(e) {
+                                                    }).fail(function (e) {
                                                         alert("Error: " + e);
                                                     });
                                                 });
 
-                                                $(".btn_procesar").click(function() {
+                                                $(".btn_procesar").click(function () {
                                                     $.ajax({
                                                         url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                                                    }).done(function() {
+                                                    }).done(function () {
                                                         window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
                                                     });
                                                 });
 
-                                                $(".btn-autor").click(function(e) {
+                                                $(".btn-autor").click(function (e) {
                                                     $.SmartMessageBox({
                                                         title: "Alerta de Confirmaci?!",
                                                         content: "?sta totalmente seguro de autorizar este requerimiento?",
                                                         buttons: '[No][Si]'
-                                                    }, function(ButtonPressed) {
+                                                    }, function (ButtonPressed) {
                                                         if (ButtonPressed === "Si") {
                                                             // return true;
                                                             $(".form-aut").submit();
@@ -1099,12 +1099,12 @@
                                                     });
                                                     e.preventDefault();
                                                 });
-                                                $(".btn-rech").click(function(e) {
+                                                $(".btn-rech").click(function (e) {
                                                     $.SmartMessageBox({
                                                         title: "Alerta de Confirmaci?!",
                                                         content: "?sta totalmente seguro de rechazar este requerimiento?",
                                                         buttons: '[No][Si]'
-                                                    }, function(ButtonPressed) {
+                                                    }, function (ButtonPressed) {
                                                         if (ButtonPressed === "Si") {
                                                             $(".btn-mos").click();
                                                             //$(".form-rech").submit();

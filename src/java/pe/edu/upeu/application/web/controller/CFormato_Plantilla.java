@@ -54,6 +54,7 @@ public class CFormato_Plantilla extends HttpServlet {
         InterfaceDireccionDAO dir = new DireccionDAO();
         String iduser = (String) sesion.getAttribute("IDUSER");
         String opc = request.getParameter("opc");
+        String ubicacion=getServletConfig().getServletContext().getRealPath("/")+"Vista/Contrato/Formato_Plantilla/Formato/";
         if (iduser != null) {
             try {
                 if (opc.equals("Asignar")) {
@@ -74,9 +75,7 @@ public class CFormato_Plantilla extends HttpServlet {
                 if (opc.equals("Actualizar")) {
                     String texto_html = request.getParameter("valor");
                     String id = request.getParameter("id");
-                    String ubicacion = "";
 
-                    ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
 
                     //ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                     File archivo = new File(ubicacion + id);
@@ -98,25 +97,23 @@ public class CFormato_Plantilla extends HttpServlet {
 
                 if (opc.equals("Listar")) {
                     String texto = "";
-                    String ubicacion = "";
                     String imprimir = "";
                     String no_archivo = request.getParameter("id");
                     /*   if (System.getProperty("sun.desktop").trim().equals("windows")) {
                      ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                      } else {*/
                     //ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-                    ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
+                    System.out.println(ubicacion+ no_archivo);
                     FileReader lector = new FileReader(ubicacion + no_archivo);
                     BufferedReader contenido = new BufferedReader(lector);
                     while ((texto = contenido.readLine()) != null) {
-                        imprimir = imprimir + texto;
+                        imprimir = imprimir + texto+"\n";
                     }
                     rpta.put("rpta", "1");
                     rpta.put("imprimir", imprimir);
                 }
                 if (opc.equals("Listar2")) {
                     String texto = "";
-                    String ubicacion = "";
                     String imprimir = "";
                     String no_archivo = request.getParameter("id");
                     String no_arhivo_or = pl.List_pl_con_x_id(no_archivo);
@@ -124,7 +121,6 @@ public class CFormato_Plantilla extends HttpServlet {
                      ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                      } else {*/
                     //ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-                    ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
                     //  }
                     FileReader lector = new FileReader(ubicacion + no_arhivo_or);
                     BufferedReader contenido = new BufferedReader(lector);
@@ -159,7 +155,6 @@ public class CFormato_Plantilla extends HttpServlet {
                     String SEC = request.getParameter("id_sec_asig");
                     String DIR = request.getParameter("id_di_asig");
                     String PUES = request.getParameter("id_pu_asig");
-                    String ubicacion = "";
                     String no_pl = request.getParameter("no_pl");
                     pl.Crear_Plantilla(no_pl, iduser);
                     String id_pl = pl.ob_id_pl_max();
@@ -169,7 +164,6 @@ public class CFormato_Plantilla extends HttpServlet {
                      ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                      } else {*/
                     //ubicacion = direccion_raiz + "/Vista/Contrato/Formato_Plantilla/Formato/";
-                    ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
                     //ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato";
                     //}
                     File archivo = new File(ubicacion + no_arch);
