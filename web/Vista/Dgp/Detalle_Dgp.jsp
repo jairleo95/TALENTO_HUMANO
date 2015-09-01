@@ -238,7 +238,7 @@
                                         <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
                                         <input type="hidden" name="opc" value="MODIFICAR REQUERIMIENTO">   
                                     </table>
-                                    <% if (idrol.trim().equals("ROL-0002") | idrol.trim().equals("ROL-0005") | idrol.trim().equals("ROL-0003")) {%>
+                                    <% if (idrol.trim().equals("ROL-0001")) {%>
                                     <%
                                         if (d.getEs_dgp() == null) {
                                     %>
