@@ -628,17 +628,11 @@
 
                                             </table>
                                             <footer>
-
-
-
-
-
                                                 <%   if (request.getParameter("pro") != null) {
                                                         if (request.getParameter("pro").equals("pr_dgp")) {
                                                             out.println("<input  type='hidden' value='enter' name='P2'/>");
                                                         }
                                                     }
-
                                                     if (request.getParameter("P2") != null) {
                                                         if (request.getParameter("P2").equals("TRUE")) {%>
                                                 <input  type='hidden' value='enter' name='P2'/>

@@ -300,7 +300,7 @@ public class CDgp extends HttpServlet {
             String ES_CUENTA_SUELDO = tr.CuentaSueldoTra(idtr);
 
             while (ES_CUENTA_SUELDO == null) {
-                
+
                 tr.INSERT_CUENTA_SUELDO(null, null, null, null, "0", null, idtr, "0");
                 ES_CUENTA_SUELDO = tr.CuentaSueldoTra(idtr);
             }
@@ -487,7 +487,13 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
             getServletContext().setAttribute("list_Cuenta_Sueldo", dgp.LIST_CUEN_SUEL(idtr));
             getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
-            response.sendRedirect("Vista/Dgp/Editar_DGP.jsp?es_cs=" + ES_CUENTA_SUELDO + "&can_cc=" + can_cc + "&id_det_hor=" + id_d_hor.trim());
+            String redirect = request.getParameter("redirect");
+            if (redirect != null) {
+                response.sendRedirect("Vista/Dgp/Editar_DGP.jsp?es_cs=" + ES_CUENTA_SUELDO + "&can_cc=" + can_cc + "&id_det_hor=" + id_d_hor.trim() + "&redirect=proceso_dgp");
+
+            } else {
+                response.sendRedirect("Vista/Dgp/Editar_DGP.jsp?es_cs=" + ES_CUENTA_SUELDO + "&can_cc=" + can_cc + "&id_det_hor=" + id_d_hor.trim());
+            }
         }
         if (opc.equals("Modificar")) {
             String FE_DESDE = request.getParameter("FEC_DESDE");
@@ -664,10 +670,17 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
             getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
             // getServletContext().setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(ID_DGP, idrp));
-            response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
 
+            String redireccionar = request.getParameter("redirect");
+            if (redireccionar != null) {
+                if (redireccionar.equals("proceso_dgp")) {
+                    response.sendRedirect("dgp?iddgp=" + ID_DGP + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
+
+                }
+            } else {
+                response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
+            }
         }
-
         if (opc.equals("Incompleto")) {
             getServletContext().setAttribute("List_Incomplet", dgp.List_Incomplet(iddep));
             response.sendRedirect("Vista/Dgp/List_req_incompl.jsp");

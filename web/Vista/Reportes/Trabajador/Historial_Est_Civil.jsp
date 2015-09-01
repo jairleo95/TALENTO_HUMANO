@@ -160,7 +160,6 @@
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
                 $(".btn_pro_reg").click(function() {
-
                     $.SmartMessageBox({
                         title: "¡Advertencia!",
                         content: "¿Esta seguro de procesar la(s) modificacione(s)?",
@@ -169,7 +168,6 @@
                         if (ButtonPressed === "Si") {
                             var t = 0;
                             $.each($(".registrado"), function() {
-
                                 if ($(this).prop('checked')) {
                                     $.ajax({
                                         url: "../../../RHistorial",
@@ -234,8 +232,6 @@
                 $('.tabla_t').DataTable();
 
             });
-
-
             $('.btnEnviar').click(function() {
                 ListarEC();
             });
@@ -260,7 +256,6 @@
                         crear_t();
                         $('.tabla_t').DataTable();
                     } else {
-
                         var t = "<tr>";
                         for (var i = 0; i < lista.length; i++) {
                             var ec_p;
@@ -302,7 +297,6 @@
                             if (lista[i].es_civil_a == 6) {
                                 ec_a = "Conviviente(a)"
                             }
-
                             t += "<td>" + (i + 1) + "</td>";
                             t += "<td>" + lista[i].no_tra + " " + lista[i].ap_pat + " " + lista[i].ap_mat + "</td>";
                             t += "<td>" + ec_p + "</td>";

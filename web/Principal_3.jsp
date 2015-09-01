@@ -380,18 +380,7 @@
 
                             </li>
 
-                            <li>
-                                <a href="#"><i class="fa fa-lg fa-fw fa-file"></i>Anulación de Requerimiento</a>
-                                <ul>
-                                    <li>
-                                        <a href="#">Item 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Item 2</a>
-                                    </li>
-
-                                </ul>
-                            </li>
+                          
                             <%}
                                 if (id_rol.trim().equals("ROL-0011") | id_rol.trim().equals("ROL-0001")) {%>
                             <li>
@@ -400,10 +389,6 @@
                             <%}%>
                         </ul>
                     </li>
-
-
-
-
                     <%} else {%>
 
                     <li class="li-privilegio">

@@ -420,65 +420,10 @@
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
-                                    <div class="widget-body no-padding">
-                                        <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th class="hasinput">
-
-
-                                                    </th>
-                                                    <th class="hasinput icon-addon" style="width:100px">
-                                                        <input   placeholder="Fecha" class="form-control filtrar_fecha">
-                                                        <label for="dateselect_filter" class="glyphicon glyphicon-calendar no-margin padding-top-15" rel="tooltip" title="" data-original-title="Filter Date"></label>
-                                                    </th>
-                                                    <th class="hasinput" style="width:16%">
-                                                        <input type="text" class="form-control" placeholder="Filtrar por nombre" />
-                                                    </th>
-                                                    <th class="hasinput" style="width:18%">
-                                                        <input type="text" class="form-control" placeholder="Filtrar por puesto" />
-                                                    </th>
-                                                    <th class="hasinput" style="width:18%">
-                                                        <input type="text" class="form-control" placeholder="Filtrar por area" />
-                                                    </th>
-                                                    <th class="hasinput" style="width:16%">
-                                                        <input type="text" class="form-control" placeholder="Filtrar por departamento" />
-                                                    </th>
-                                                    <th class="hasinput" style="width:20%" >
-                                                    </th>
-                                                    <th class="hasinput" >
-                                                    </th>
-                                                    <th class="hasinput">
-                                                    </th>
-                                                    <th class="hasinput" >
-                                                    </th>
-                                                    <th class="hasinput" >
-                                                    </th>
-                                                </tr>
-                                                <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
-                                                    <th ><strong>MES PROCESADO</strong></th>
-                                                    <!--<th data-hide="phone,tablet"><strong>Foto</strong> </th>-->
-                                                    <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Puesto</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Area</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Departamento</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
-                                                    <!--  <td>Departamento</td>-->
-                                                    <th  data-hide="phone,tablet">Fecha de Creación</th>  
-                                                    <th  data-hide="phone,tablet">Fecha de Autorización</th>  
-                                                    <th  data-hide="phone,tablet">Motivo</th>  
-                                                    <th  data-hide="phone,tablet">MFL</th>  
-                                                </tr>
-                                            </thead>
-                                            <tbody class="tbody_autorizado"> 
-
-                                            </tbody>
-                                        </table>
-
+                                    <div class="widget-body no-padding imprimir_tabla">
 
                                     </div>
                                     <!-- end widget content -->
-
                                 </div>
                                 <!-- end widget div -->
 
@@ -734,13 +679,92 @@
             });
         });</script>
     <script type="text/javascript">
+        var año = '';
+        var mes = '';
+        function crear_tabla() {
+            var texto_html = '';
+            texto_html += '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">'
+                    + '<thead><tr><th class="hasinput"></th>'
+                    + '<th class="hasinput icon-addon" style="width:100px"><input   placeholder="Fecha" class="form-control filtrar_fecha">'
+                    + ' <label for="dateselect_filter" class="glyphicon glyphicon-calendar no-margin padding-top-15" rel="tooltip" title="" data-original-title="Filter Date"></label>'
+                    + '  </th> <th class="hasinput" style="width:16%"><input type="text" class="form-control" placeholder="Filtrar por nombre" /></th>'
+                    + '<th class="hasinput" style="width:18%"><input type="text" class="form-control" placeholder="Filtrar por puesto" /> </th>'
+                    + '<th class="hasinput" style="width:18%"><input type="text" class="form-control" placeholder="Filtrar por area" /> </th>'
+                    + '<th class="hasinput" style="width:16%"><input type="text" class="form-control" placeholder="Filtrar por departamento" /></th>'
+                    + '<th class="hasinput" style="width:20%" > </th>'
+                    + ' <th class="hasinput" ></th>'
+                    + '  <th class="hasinput"></th>'
+                    + ' <th class="hasinput" > </th>'
+                    + ' <th class="hasinput" ></th></tr>'
+                    + '  <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>'
+                    + '<th ><strong>MES PROCESADO</strong></th>'
+                    + '  <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>'
+                    + '  <th data-hide="phone,tablet"><strong>Puesto</strong></th>'
+                    + '  <th data-hide="phone,tablet"><strong>Area</strong></th>'
+                    + '  <th data-hide="phone,tablet"><strong>Departamento</strong></th>'
+                    + '  <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>'
+                    + ' <th  data-hide="phone,tablet">Fecha de Creación</th> '
+                    + '<th  data-hide="phone,tablet">Fecha de Autorización</th>'
+                    + ' <th  data-hide="phone,tablet">Motivo</th>'
+                    + ' <th  data-hide="phone,tablet">MFL</th>  </tr>'
+                    + '</thead><tbody class="tbody_autorizado"> </tbody> </table>';
+            $('.imprimir_tabla').empty();
+            $('.imprimir_tabla').append(texto_html);
+            $('.filtrar_fecha').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'MM yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                onClose: function(dateText, inst) {
+                    filtrar_mes_año()
+                }
+            });
+            $('.filtrar_fecha').datepicker('setDate', new Date());
+        }
+        function filtrar_mes_año() {
+            //alert(año)
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $('.filtrar_fecha').datepicker('setDate', new Date(año, mes, 1));
+            mes = month;
+            año = year;
+            listar_autorizados(mes,año);
+        }
+        function reload_table() {
+            var responsiveHelper_datatable_fixed_column = undefined;
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+            var otable = $('#dt_basic').DataTable({
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
+                        "t" +
+                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                "autoWidth": true,
+                "preDrawCallback": function() {
+                    // Initialize the responsive datatables helper once.
+                    if (!responsiveHelper_datatable_fixed_column) {
+                        responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                    }
+                },
+                "rowCallback": function(nRow) {
+                    responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
+                },
+                "drawCallback": function(oSettings) {
+                    responsiveHelper_datatable_fixed_column.respond();
+                }
 
-        function listar_autorizados() {
-            var b = $(".tbody_autorizado");
-            b.empty();
+            });
+            // Apply the filter
+            $("#dt_basic thead th input[type=text]").on('keyup change', function() {
+                otable.column($(this).parent().index() + ':visible').search(this.value).draw();
+            });
+        }
+        function listar_autorizados(mes, año) {
             var text_html = "";
-            $.post("../../autorizacion", "opc=List_Dgp_Aut", function(objJson) {
-                b.empty();
+            $.post("../../autorizacion", "opc=List_Dgp_Aut&mes=" + mes + "&año=" + año, function(objJson) {
                 var lista = objJson.lista;
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -769,36 +793,10 @@
                     }
                     text_html += "</tr>";
                 }
-                b.append(text_html);
+                crear_tabla();
+                $(".tbody_autorizado").append(text_html);
                 text_html = "";
-                var responsiveHelper_datatable_fixed_column = undefined;
-                var breakpointDefinition = {
-                    tablet: 1024,
-                    phone: 480
-                };
-                var otable = $('#dt_basic').DataTable({
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function() {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_fixed_column) {
-                            responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function(nRow) {
-                        responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function(oSettings) {
-                        responsiveHelper_datatable_fixed_column.respond();
-                    }
-
-                });
-                // Apply the filter
-                $("#dt_basic thead th input[type=text]").on('keyup change', function() {
-                    otable.column($(this).parent().index() + ':visible').search(this.value).draw();
-                });
+                reload_table();
 
             });
         }
@@ -808,24 +806,9 @@
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
             $(".cod_aps").numeric();
-            listar_autorizados()
-            $('.filtrar_fecha').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                dateFormat: 'MM yy',
-                prevText: '<i class="fa fa-chevron-left"></i>',
-                nextText: '<i class="fa fa-chevron-right"></i>',
-                onClose: function(dateText, inst) {
-                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-                    $(this).datepicker('setDate', new Date(year, month, 1));
-                  //  listar_autorizados()
-                }
 
-            });
-
-
+            listar_autorizados(mes,año);
+           
             /* BASIC ;*/
             var responsiveHelper_dt_basic = undefined;
             var breakpointDefinition = {

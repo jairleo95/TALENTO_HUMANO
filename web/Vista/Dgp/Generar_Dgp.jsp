@@ -142,7 +142,7 @@
                     <%if (tr.getEs_proceso() != null) {
                             if (tr.getEs_proceso().equals("Contratado")) {
                     %>
-                    <a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form" class="btn btn-primary">Elaborar Requerimiento (Contrato Activo) <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="../../dgp?idtr=<%=tr.getId_trabajador()%>&idreq=<%=idreq%>&iddep=<%=iddep%>&opc=Reg_form" class="btn btn-primary">Elaborar Requerimiento (Tiene contrato activo) <i class="fa fa-arrow-circle-right"></i></a>
                         <% } else {
                         %>
                     <label> <%out.print(tr.getEs_proceso());

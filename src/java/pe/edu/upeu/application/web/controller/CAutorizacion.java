@@ -140,7 +140,14 @@ public class CAutorizacion extends HttpServlet {
                     //  response.sendRedirect("Prueba_Mail.jsp");
                 }
                 if (opc.equals("List_Dgp_Aut")) {
-                    List<Map<String, ?>> lista = a.List_Dgp_Autorizados(idp);
+                    String año = request.getParameter("año");
+                    int mes = 0;
+                    if (request.getParameter("mes") != null) {
+                        if (!request.getParameter("mes").equals("")) {
+                            mes = Integer.parseInt(request.getParameter("mes"));
+                        }
+                    }
+                    List<Map<String, ?>> lista = a.List_Dgp_Autorizados(idp, mes, año);
                     rpta.put("rpta", "1");
                     rpta.put("lista", lista);
                 }

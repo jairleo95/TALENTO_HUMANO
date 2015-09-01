@@ -42,5 +42,5 @@ public interface InterfaceAutorizacionDAO {
     
     public String Mes_plazo(String id_dgp);
     
-     public List<Map<String, ?>> List_Dgp_Autorizados(String id_puesto);
+  public List<Map<String, ?>> List_Dgp_Autorizados(String id_puesto, int mes, String año) ;
 }

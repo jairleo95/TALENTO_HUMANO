@@ -608,88 +608,88 @@ function listar_mensaje_plazo(tipo, warning, info, req) {
         }
     });
 }
-  function Listar_centro_costo1() {
-                                                            var x = $("#list-cc");
-                                                            $.post("../../centro_costo", "opc=Listar_centro_id_dgp&" + "id_dgp=" + $(".iddgp").val(), function(objJson) {
-                                                                if ($(".can_centro_cos").val() != 0) {
-                                                                    //alert($(".iddgp").val());
-                                                                    /*if (objJson.rpta == -1) {
-                                                                     alert(objJson.mensaje);
-                                                                     return;
-                                                                     }*/
-                                                                    var lista = objJson.lista;
-                                                                    x.empty();
-                                                                    var CANT_T = 0;
-                                                                    var numero = 1;
-                                                                    var texto = "";
-                                                                    cant_act = lista.length;
-                                                                    $(".cant-actualmente").val(cant_act);
-                                                                    //alert(lista.length);
-                                                                    texto += '<div class="row" ><section class="col col-1"><br><label  id="titu">Agregar:</label><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="btn-agregar-cc2" class=" btn btn-default txt-color-green btn-agregar-cc"><i class="fa fa-plus fa-2x"></i></a></label></section><section class="col col-2"><label class="input" id="titulo">%:<input type="text" name="PORCENTAJE_TOTAL" max="100" min="100" maxlength="3"  class="input-group-sm por_sum_to" id="bo_a" readonly=""></label></section></div>';
-                                                                    for (var i = 0; i < lista.length; i++) {
+function Listar_centro_costo1() {
+    var x = $("#list-cc");
+    $.post("../../centro_costo", "opc=Listar_centro_id_dgp&" + "id_dgp=" + $(".iddgp").val(), function(objJson) {
+        if ($(".can_centro_cos").val() != 0) {
+            //alert($(".iddgp").val());
+            /*if (objJson.rpta == -1) {
+             alert(objJson.mensaje);
+             return;
+             }*/
+            var lista = objJson.lista;
+            x.empty();
+            var CANT_T = 0;
+            var numero = 1;
+            var texto = "";
+            cant_act = lista.length;
+            $(".cant-actualmente").val(cant_act);
+            //alert(lista.length);
+            texto += '<div class="row" ><section class="col col-1"><br><label  id="titu">Agregar:</label><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="btn-agregar-cc2" class=" btn btn-default txt-color-green btn-agregar-cc"><i class="fa fa-plus fa-2x"></i></a></label></section><section class="col col-2"><label class="input" id="titulo">%:<input type="text" name="PORCENTAJE_TOTAL" max="100" min="100" maxlength="3"  class="input-group-sm por_sum_to" id="bo_a" readonly=""></label></section></div>';
+            for (var i = 0; i < lista.length; i++) {
 
-                                                                        numero = numero + i;
-                                                                        if ($(".can_centro_cos").val() == "1") {
-                                                                            texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
-                                                                            texto += '<div  class="row centro-costo_' + ag + '" >';
-                                                                            texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
-                                                                            texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                                                                            texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
-                                                                            texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '"  value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label> </section>';
-                                                                            texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar2($(this).val());"  disabled><i class="fa fa-minus fa-2x"></i></button></label></section>';
-                                                                            texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
-                                                                            var dir, dep, cc;
-                                                                            dir = lista[i].id_dir_cc;
-                                                                            dep = lista[i].id_dep_cc;
-                                                                            cc = lista[i].id;
-                                                                            listar_cc2(ag, dir, dep, cc);
+                numero = numero + i;
+                if ($(".can_centro_cos").val() == "1") {
+                    texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
+                    texto += '<div  class="row centro-costo_' + ag + '" >';
+                    texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
+                    texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
+                    texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
+                    texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '"  value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label> </section>';
+                    texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar2($(this).val());"  disabled><i class="fa fa-minus fa-2x"></i></button></label></section>';
+                    texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
+                    var dir, dep, cc;
+                    dir = lista[i].id_dir_cc;
+                    dep = lista[i].id_dep_cc;
+                    cc = lista[i].id;
+                    listar_cc2(ag, dir, dep, cc);
 
-                                                                            /*texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" id="rem' + (i + 1) + '" onclick="Eliminar($(this).val());" disabled=""><i class="fa fa-minus fa-2x"></i></button></label></section>');
-                                                                             texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
-                                                                             texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                                                                             texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';*/
-                                                                        } else {
-                                                                            texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
-                                                                            texto += '<div  class="row centro-costo_' + ag + '" >';
-                                                                            texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
-                                                                            texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                                                                            texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                                                                            texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '" value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label></section>';
-                                                                            texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar2($(this).val());" ><i class="fa fa-minus fa-2x"></i></button></label></section>';
-                                                                            texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
-                                                                            var dir, dep, cc;
-                                                                            dir = lista[i].id_dir_cc;
-                                                                            dep = lista[i].id_dep_cc;
-                                                                            cc = lista[i].id;
-                                                                            listar_cc2(ag, dir, dep, cc);
-                                                                            // texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" onclick="Eliminar($(this).val());"><i class="fa fa-minus fa-2x"></i></button></label></section>');
-                                                                        }
+                    /*texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" id="rem' + (i + 1) + '" onclick="Eliminar($(this).val());" disabled=""><i class="fa fa-minus fa-2x"></i></button></label></section>');
+                     texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
+                     texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
+                     texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';*/
+                } else {
+                    texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
+                    texto += '<div  class="row centro-costo_' + ag + '" >';
+                    texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
+                    texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
+                    texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled=""><option value="">[CENTRO COSTO]</option></select></label></section>';
+                    texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '" value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label></section>';
+                    texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar2($(this).val());" ><i class="fa fa-minus fa-2x"></i></button></label></section>';
+                    texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
+                    var dir, dep, cc;
+                    dir = lista[i].id_dir_cc;
+                    dep = lista[i].id_dep_cc;
+                    cc = lista[i].id;
+                    listar_cc2(ag, dir, dep, cc);
+                    // texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" onclick="Eliminar($(this).val());"><i class="fa fa-minus fa-2x"></i></button></label></section>');
+                }
 
-                                                                        //listar_cc2(ag, lista[i].id_dir_cc, lista[i].id_dep_cc, lista[i].id);
+                //listar_cc2(ag, lista[i].id_dir_cc, lista[i].id_dep_cc, lista[i].id);
 
-                                                                        numero = 1;
-                                                                        ag++;
-                                                                        CANT_T = (CANT_T + parseFloat(lista[i].ca_por_cc));
-                                                                    }
+                numero = 1;
+                ag++;
+                CANT_T = (CANT_T + parseFloat(lista[i].ca_por_cc));
+            }
 
-                                                                    x.append(texto);
-                                                                    $('#btn-agregar-cc2').click(function() {
-                                                                        agregar_centro_costo();
-                                                                    });
-                                                                    $(".por_sum_to").val(CANT_T);
-                                                                } else {
-                                                                    remover_fil();
-                                                                }
-                                                            });
-                                                        }
-        function dar_valor(caracter, num) {
-                                                            $(".porc" + num).val(caracter);
-                                                            var acum = 0;
-                                                            $.each($(".porcentaje_cc"), function() {
-                                                                acum = acum + parseFloat($(this).val());
-                                                            });
-                                                            $(".por_sum_to").val(acum);
-                                                        }                                                    
+            x.append(texto);
+            $('#btn-agregar-cc2').click(function() {
+                agregar_centro_costo();
+            });
+            $(".por_sum_to").val(CANT_T);
+        } else {
+            remover_fil();
+        }
+    });
+}
+function dar_valor(caracter, num) {
+    $(".porc" + num).val(caracter);
+    var acum = 0;
+    $.each($(".porcentaje_cc"), function() {
+        acum = acum + parseFloat($(this).val());
+    });
+    $(".por_sum_to").val(acum);
+}
 $(document).ready(function() {
     pageSetUp();
     $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
@@ -765,6 +765,7 @@ $(document).ready(function() {
     });
     $(".select-seccion").change(function() {
         list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".select-seccion").val(), "3");
+        $(".chosen-select").trigger("chosen:updated");
     });
     $(".select-puesto").change(function() {
         $(".select-puesto1").val($(this).val());
@@ -873,18 +874,18 @@ $(document).ready(function() {
         $(".monto").val(Math.round(sueldo));
     });
     $("#sueldo").keyup(function() {
-                calcular_sueldo_total();
-            }
+        calcular_sueldo_total();
+    }
     );
     $("#bono_al").keyup(function() {
-                calcular_sueldo_total();
-            });
+        calcular_sueldo_total();
+    });
     $("#bev").keyup(function() {
-                calcular_sueldo_total();
-            });
+        calcular_sueldo_total();
+    });
     $("#bono_pu").keyup(function() {
-                calcular_sueldo_total();
-            });
+        calcular_sueldo_total();
+    });
     $(".contenido").hide();
     /*TEMPORAL*/
     //Planilla
