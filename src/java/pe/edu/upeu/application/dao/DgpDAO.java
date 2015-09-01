@@ -138,7 +138,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public List<x_List_Id_Trab_Dgp> LIST_ID_TRAB_DGP(String id) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select TO_CHAR(dgp.FE_DESDE,'yyyy-mm-dd') AS FE_DESDE,TO_CHAR(dgp.FE_HASTA,'yyyy-mm-dd') AS FE_HASTA ,dgp.*,r.*,pd.* from RHTM_DGP dgp, RHTR_REQUERIMIENTO r ,RHVD_PUESTO_DIRECCION pd where  pd.ID_PUESTO=dgp.ID_PUESTO  and r.ID_REQUERIMIENTO= dgp.ID_REQUERIMIENTO and dgp.ID_TRABAJADOR='" + id + "'";
+        String sql = "select TO_CHAR(dgp.FE_DESDE,'dd-mm-yyyy') AS FE_DESDE,TO_CHAR(dgp.FE_HASTA,'dd-mm-yyyy') AS FE_HASTA ,dgp.*,r.*,pd.* from RHTM_DGP dgp, RHTR_REQUERIMIENTO r ,RHVD_PUESTO_DIRECCION pd where  pd.ID_PUESTO=dgp.ID_PUESTO  and r.ID_REQUERIMIENTO= dgp.ID_REQUERIMIENTO and dgp.ID_TRABAJADOR='" + id + "'";
         List<x_List_Id_Trab_Dgp> Lista = new ArrayList<x_List_Id_Trab_Dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -289,8 +289,11 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-
         String sql = "select * from RHVD_ES_REQUERIMIENTO where ID_DEPARTAMENTO='" + id_dep + "' AND ES_PORCENT IS NOT NULL  ORDER BY TO_NUMBER(SUBSTR(ID_DGP,5,LENGTH(ID_DGP))) DESC";
+        if(id_dep.equals("DPT-0019")){
+             sql = "select * from RHVD_ES_REQUERIMIENTO where ES_PORCENT IS NOT NULL  ORDER BY TO_NUMBER(SUBSTR(ID_DGP,5,LENGTH(ID_DGP))) DESC";
+        }
+
         //sql += (!"".equals(id_dep)) ? "where ID_DEPARTAMENTO='" + id_dep + "'" : "";
         //sql += "order by ID_DGP";
         List<V_Es_Requerimiento> Lista = new ArrayList<V_Es_Requerimiento>();
@@ -317,6 +320,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 v.setAut_actual(rs.getString("aut_actual"));
                 v.setMes_creacion(rs.getString("mes_creacion"));
                 v.setFe_creacion(rs.getString("fe_creacion"));
+                
                 Lista.add(v);
             }
         } catch (SQLException e) {

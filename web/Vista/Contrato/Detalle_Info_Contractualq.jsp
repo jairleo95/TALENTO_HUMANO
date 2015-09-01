@@ -198,8 +198,8 @@
                 </div>
             </div>
 
-            <script>$(document).ready(function() {
-                    $(".anno").change(function() {
+            <script>$(document).ready(function () {
+                    $(".anno").change(function () {
                         $(".btn_act").click();
                     });
                 });</script>
@@ -260,8 +260,14 @@
 
                                             cantidad = Double.parseDouble(cc.getCa_porcentaje()) + cantidad;
                                 %>
-                    <tr><td class="text-info table-bordered"><strong>Centro costo Nº <%=q + 1%>:</strong></td><td colspan="2" class="table-bordered" ><p><%=cc.getDe_centro_costo()%></p></td><td class="text-info table-bordered" colspan="2"><strong>Porcentaje</strong></td><td colspan="2"><p><%=cc.getCa_porcentaje()%> %</p> </td></tr><%}%>
-                    <tr><td class="text-info table-bordered"><strong>Total Porcentaje:</strong></td><td colspan="6" class="table-bordered" ><p><%=cantidad%> %</p></td></tr><%} else {%>
+                    <tr>
+                        <td class="text-info table-bordered"><strong>Centro costo Nº<%=q + 1%>:</strong></td>
+                        <td colspan="2" class="table-bordered" ><p><%=cc.getDe_centro_costo()+ " - " + cc.getCo_centro_costo() %></p></td>
+                        <td class="text-info table-bordered" colspan="2"><strong>Porcentaje</strong></td>
+                        <td colspan="2"><p><%=cc.getCa_porcentaje()%> %</p> </td></tr><%}%>
+                    <tr><td class="text-info table-bordered"><strong>Total Porcentaje:</strong></td>
+                        <td colspan="6" class="table-bordered" ><p><%=cantidad%> %</p></td>
+                    </tr><%} else {%>
                     <tr><td class="text-info table-bordered"><strong>Centro costo </strong></td><td colspan="6" class="table-bordered" ><p>No tiene</p></td></tr><%}%>
 
                     <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6" class="table-bordered" ><p><%
@@ -670,7 +676,7 @@
 
 // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                $(document).ready(function() {
+                $(document).ready(function () {
 
                     pageSetUp();
 
@@ -769,7 +775,7 @@
                             }
                         },
                         // Do not change code below
-                        errorPlacement: function(error, element) {
+                        errorPlacement: function (error, element) {
                             error.insertAfter(element.parent());
                         }
                     });
@@ -838,7 +844,7 @@
                             }
                         },
                         // Do not change code below
-                        errorPlacement: function(error, element) {
+                        errorPlacement: function (error, element) {
                             error.insertAfter(element.parent());
                         }
                     });
@@ -890,7 +896,7 @@
                             }
                         },
                         // Do not change code below
-                        errorPlacement: function(error, element) {
+                        errorPlacement: function (error, element) {
                             error.insertAfter(element.parent());
                         }
                     });
@@ -929,15 +935,15 @@
                             }
                         },
                         // Ajax form submition
-                        submitHandler: function(form) {
+                        submitHandler: function (form) {
                             $(form).ajaxSubmit({
-                                success: function() {
+                                success: function () {
                                     $("#comment-form").addClass('submited');
                                 }
                             });
                         },
                         // Do not change code below
-                        errorPlacement: function(error, element) {
+                        errorPlacement: function (error, element) {
                             error.insertAfter(element.parent());
                         }
                     });
@@ -971,15 +977,15 @@
                             }
                         },
                         // Ajax form submition
-                        submitHandler: function(form) {
+                        submitHandler: function (form) {
                             $(form).ajaxSubmit({
-                                success: function() {
+                                success: function () {
                                     $("#contact-form").addClass('submited');
                                 }
                             });
                         },
                         // Do not change code below
-                        errorPlacement: function(error, element) {
+                        errorPlacement: function (error, element) {
                             error.insertAfter(element.parent());
                         }
                     });
@@ -1008,7 +1014,7 @@
                             }
                         },
                         // Do not change code below
-                        errorPlacement: function(error, element) {
+                        errorPlacement: function (error, element) {
                             error.insertAfter(element.parent());
                         }
                     });
@@ -1053,7 +1059,7 @@
                             }
                         },
                         // Do not change code below
-                        errorPlacement: function(error, element) {
+                        errorPlacement: function (error, element) {
                             error.insertAfter(element.parent());
                         }
                     });
@@ -1063,7 +1069,7 @@
                         dateFormat: 'dd.mm.yy',
                         prevText: '<i class="fa fa-chevron-left"></i>',
                         nextText: '<i class="fa fa-chevron-right"></i>',
-                        onSelect: function(selectedDate) {
+                        onSelect: function (selectedDate) {
                             $('#finishdate').datepicker('option', 'minDate', selectedDate);
                         }
                     });
@@ -1072,7 +1078,7 @@
                         dateFormat: 'dd.mm.yy',
                         prevText: '<i class="fa fa-chevron-left"></i>',
                         nextText: '<i class="fa fa-chevron-right"></i>',
-                        onSelect: function(selectedDate) {
+                        onSelect: function (selectedDate) {
                             $('#startdate').datepicker('option', 'maxDate', selectedDate);
                         }
                     });
@@ -1089,7 +1095,7 @@
     _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
     _gaq.push(['_trackPageview']);
 
-    (function() {
+    (function () {
         var ga = document.createElement('script');
         ga.type = 'text/javascript';
         ga.async = true;
@@ -1113,17 +1119,17 @@
 <script>
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         //pageSetup();
-        $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+        $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
             $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
         });
-        $(".ck_habilitar_is").click(function() {
+        $(".ck_habilitar_is").click(function () {
             if ($(".ck_habilitar_is").prop('checked')) {
                 $.ajax({
                     url: "../../contrato",
                     data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=1"
-                }).done(function() {
+                }).done(function () {
                     $.smallBox({
                         title: "¡Alerta!",
                         content: "Se ha autortizado que la secretaria pueda subir e imprimir el contrato.",
@@ -1132,7 +1138,7 @@
                         timeout: 4000
                     });
 
-                }).fail(function(jqXHR, textStatus, errorThrown) {
+                }).fail(function (jqXHR, textStatus, errorThrown) {
                     $.smallBox({
                         title: "¡Error!",
                         // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
@@ -1146,7 +1152,7 @@
                 $.ajax({
                     url: "../../contrato",
                     data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=2"
-                }).done(function() {
+                }).done(function () {
                     $.smallBox({
                         title: "¡Alerta!",
                         content: "Se ha autortizado que la secretaria <strong>NO</strong> pueda subir e imprimir el contrato.",
@@ -1154,7 +1160,7 @@
                         iconSmall: "fa fa-cloud",
                         timeout: 4000
                     });
-                }).fail(function(jqXHR, textStatus, errorThrown) {
+                }).fail(function (jqXHR, textStatus, errorThrown) {
                     $.smallBox({
                         title: "¡Error!",
                         // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",

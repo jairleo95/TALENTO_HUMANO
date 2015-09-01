@@ -299,7 +299,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         return;
                     }
                     var imprimir = objJson.imprimir;
-                    // alert(imprimir);
                     editor.setData(imprimir);
                 });
 

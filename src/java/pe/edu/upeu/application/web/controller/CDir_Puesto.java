@@ -8,6 +8,7 @@ package pe.edu.upeu.application.web.controller;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,9 +97,23 @@ public class CDir_Puesto extends HttpServlet {
             }
             if (opc.equals("Listar_pu_id")) {
                 String id = request.getParameter("id");
+                String es_l = request.getParameter("esL");
                 List<Map<String, ?>> lista = p.Listar_Puesto_id(id);
-                rpta.put("rpta", "1");
-                rpta.put("lista", lista);
+                if (es_l != null) {
+                    
+                    List<Map<String, ?>> lista1 = new ArrayList<>();
+                    for (int i = 0; i < lista.size(); i++) {
+                        if (lista.get(i).get("estado").equals("1")) {
+                            lista1.add(lista.get(i));
+                        }
+                    }
+                    rpta.put("rpta", "1");
+                    rpta.put("lista", lista1);
+                } else {
+                    rpta.put("rpta", "1");
+                    rpta.put("lista", lista);
+                }
+
             }
             if (opc.equals("Listar_area")) {
                 String id_dep = request.getParameter("id_dep");

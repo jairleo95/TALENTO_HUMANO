@@ -64,7 +64,7 @@ public class PuestoDAO implements InterfacePuestoDAO {
     @Override
     public List<V_Puesto_Direccion> List_Puesto_Dep(String id_departamento) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select  * from RHVD_PUESTO_DIRECCION where id_departamento='" + id_departamento.trim() + "' ORDER BY no_puesto,no_seccion,no_area ASC";
+        String sql = "select  * from RHVD_PUESTO_DIRECCION where id_departamento='" + id_departamento.trim() + "' and ES_PUESTO='1' ORDER BY no_puesto,no_seccion,no_area ASC";
         List<V_Puesto_Direccion> list = new ArrayList<V_Puesto_Direccion>();
         try {
             ResultSet rs = this.conn.query(sql);

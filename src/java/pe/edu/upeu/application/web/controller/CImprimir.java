@@ -74,7 +74,8 @@ public class CImprimir extends HttpServlet {
                     list.add(id_con[i]);
                     alma = id_con[i].split("/");
                    // String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
-                    String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
+                    //String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
+                    String ubicacion=getServletConfig().getServletContext().getRealPath("/")+"Vista/Contrato/Formato_Plantilla/Formato/";
                     String no_arhivo_or = pl.List_pl_con_x_id(alma[1]);
                     FileReader lector = new FileReader(ubicacion + no_arhivo_or.trim());
                     BufferedReader contenido = new BufferedReader(lector);
