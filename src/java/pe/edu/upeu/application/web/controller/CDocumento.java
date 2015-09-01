@@ -144,8 +144,9 @@ public class CDocumento extends HttpServlet {
                 }
             }
         } else {
+            String ubicacion=getServletConfig().getServletContext().getRealPath("/")+"Vista/Dgp/Documento/Archivo/";
 
-             String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
+             //String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
             //String ubicacion = "/var/lib/tomcat7/webapps/ROOT/Vista/Dgp/Documento/Archivo/";
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
