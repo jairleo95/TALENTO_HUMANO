@@ -541,8 +541,8 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "SELECT * FROM RHVD_DGP_AUTORIZADOS where ID_PUESTO = '" + id_puesto + "' ";
-             sql +=(año!=null)?" AND to_number(TRIM(to_char(to_date(fe_creacion,'dd/mm/yy hh:mi:ss'),'mm')))='" +( mes+1) + "' AND TRIM(to_char(to_date(fe_creacion,'dd/mm/yy hh:mi:ss'),'YYYY'))='" + año + "' ":"  AND to_number(TRIM(to_char(to_date(fe_creacion,'dd/mm/yy hh:mi:ss'),'mm')))=to_number(to_char(sysdate,'mm')) AND TRIM(to_char(to_date(fe_creacion,'dd/mm/yy hh:mi:ss'),'YYYY'))=to_char(sysdate,'YYYY') ";
-            ResultSet rs = this.conn.query(sql);
+             sql +=(!año.equals(""))?" AND to_number(TRIM(to_char(to_date(fe_autorizacion,'dd/mm/yy hh:mi:ss'),'mm')))='" +( mes+1) + "' AND TRIM(to_char(to_date(fe_autorizacion,'dd/mm/yy hh:mi:ss'),'YYYY'))='" + año + "' ":"  AND to_number(TRIM(to_char(to_date(fe_autorizacion,'dd/mm/yy hh:mi:ss'),'mm')))=to_number(to_char(sysdate,'mm')) AND TRIM(to_char(to_date(fe_autorizacion,'dd/mm/yy hh:mi:ss'),'YYYY'))=to_char(sysdate,'YYYY') ";
+             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("nombre", rs.getString("no_trabajador"));

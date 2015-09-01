@@ -164,7 +164,6 @@ public class CDocumento_Trabajador extends HttpServlet {
             ServletFileUpload upload = new ServletFileUpload(f);
             ServletRequestContext src = new ServletRequestContext(request);
             // try {
-            System.out.println(src.toString() + "--src");
             List<FileItem> p = upload.parseRequest(src);
             int num_filas = 0;
             String iddgp = null;

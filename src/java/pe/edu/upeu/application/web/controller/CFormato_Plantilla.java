@@ -103,7 +103,6 @@ public class CFormato_Plantilla extends HttpServlet {
                      ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                      } else {*/
                     //ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-                    System.out.println(ubicacion+ no_archivo);
                     FileReader lector = new FileReader(ubicacion + no_archivo);
                     BufferedReader contenido = new BufferedReader(lector);
                     while ((texto = contenido.readLine()) != null) {
