@@ -138,7 +138,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public List<x_List_Id_Trab_Dgp> LIST_ID_TRAB_DGP(String id) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select TO_CHAR(dgp.FE_DESDE,'yyyy-mm-dd') AS FE_DESDE,TO_CHAR(dgp.FE_HASTA,'yyyy-mm-dd') AS FE_HASTA ,dgp.*,r.*,pd.* from RHTM_DGP dgp, RHTR_REQUERIMIENTO r ,RHVD_PUESTO_DIRECCION pd where  pd.ID_PUESTO=dgp.ID_PUESTO  and r.ID_REQUERIMIENTO= dgp.ID_REQUERIMIENTO and dgp.ID_TRABAJADOR='" + id + "'";
+        String sql = "select TO_CHAR(dgp.FE_DESDE,'dd-mm-yyyy') AS FE_DESDE,TO_CHAR(dgp.FE_HASTA,'dd-mm-yyyy') AS FE_HASTA ,dgp.*,r.*,pd.* from RHTM_DGP dgp, RHTR_REQUERIMIENTO r ,RHVD_PUESTO_DIRECCION pd where  pd.ID_PUESTO=dgp.ID_PUESTO  and r.ID_REQUERIMIENTO= dgp.ID_REQUERIMIENTO and dgp.ID_TRABAJADOR='" + id + "'";
         List<x_List_Id_Trab_Dgp> Lista = new ArrayList<x_List_Id_Trab_Dgp>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -320,6 +320,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 v.setAut_actual(rs.getString("aut_actual"));
                 v.setMes_creacion(rs.getString("mes_creacion"));
                 v.setFe_creacion(rs.getString("fe_creacion"));
+                
                 Lista.add(v);
             }
         } catch (SQLException e) {

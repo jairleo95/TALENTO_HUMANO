@@ -39,9 +39,9 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "";
             if (tipo.equals("1")) {
-                sql = "select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'yyyy-mm-dd')  as fe_desde ,to_char(fe_hasta,'yyyy-mm-dd')  as fe_hasta,TO_CHAR(fe_hasta,'MONTH','nls_date_language=spanish')  as mes, sysdate+CA_DIAS_TOLERANCIA as fe_tol, CA_DIAS_TOLERANCIA   from rhtr_plazo where es_plazo ='1' and id_requerimiento='0' and SYSDATE BETWEEN FE_DESDE AND FE_HASTA and ti_plazo='1'";
+                sql = "select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'dd-mm-yyyy')  as fe_desde ,to_char(fe_hasta,'dd-mm-yyyy')  as fe_hasta,TO_CHAR(fe_hasta,'MONTH','nls_date_language=spanish')  as mes, sysdate+CA_DIAS_TOLERANCIA as fe_tol, CA_DIAS_TOLERANCIA   from rhtr_plazo where es_plazo ='1' and id_requerimiento='0' and SYSDATE BETWEEN FE_DESDE AND FE_HASTA and ti_plazo='1'";
             } else if (tipo.equals("2")) {
-                sql = "select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'yyyy-mm-dd')  as fe_desde ,to_char(fe_hasta,'yyyy-mm-dd')  as fe_hasta,TO_CHAR(fe_hasta,'MONTH','nls_date_language=spanish')  as mes, sysdate+CA_DIAS_TOLERANCIA as fe_tol, CA_DIAS_TOLERANCIA   from rhtr_plazo where es_plazo ='1' and id_requerimiento='0' and SYSDATE BETWEEN FE_DESDE AND FE_HASTA and ti_plazo='2'";
+                sql = "select id_plazo,no_plazo,det_alerta ,to_char(fe_desde,'dd-mm-yyyy')  as fe_desde ,to_char(fe_hasta,'dd-mm-yyyy')  as fe_hasta,TO_CHAR(fe_hasta,'MONTH','nls_date_language=spanish')  as mes, sysdate+CA_DIAS_TOLERANCIA as fe_tol, CA_DIAS_TOLERANCIA   from rhtr_plazo where es_plazo ='1' and id_requerimiento='0' and SYSDATE BETWEEN FE_DESDE AND FE_HASTA and ti_plazo='2'";
             }
 
             ResultSet rs = this.conn.query(sql);

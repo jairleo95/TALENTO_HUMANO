@@ -1,3 +1,5 @@
+<%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -236,7 +238,10 @@
                                             %>
                                             <tr>
                                                 <td><strong><%=i + 1%></strong></td>
-                                                <td><%=r.getMes_creacion()%></td>
+                                                <%
+                                                InterfaceAutorizacionDAO ad= new AutorizacionDAO();
+                                                %>
+                                                <td><%=ad.Mes_plazo(r.getId_dgp().trim()) %></td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
