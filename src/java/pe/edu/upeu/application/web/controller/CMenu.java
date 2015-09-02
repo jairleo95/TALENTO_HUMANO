@@ -49,6 +49,7 @@ public class CMenu extends HttpServlet {
             } else if (opc != null & user != null) {
                 if (opc.equals("logout")) {
                     sesion.invalidate();
+                    
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                     dispatcher.forward(request, response);
                 }

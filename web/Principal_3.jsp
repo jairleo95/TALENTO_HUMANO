@@ -1010,7 +1010,7 @@
                 toggles.find(':checkbox').on('change', function () {
                     plotNow();
                 });
-                plotNow()
+                plotNow();
 
             });
 

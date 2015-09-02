@@ -234,7 +234,7 @@
                                         <tr>
                                             <td class="td" >Código APS:</td>
                                             <td class="td1" id="cel_aps" ><%=emp.getCo_aps()%></td>
-                                            <td class="td1" ><input type="hidden" id="mod_aps"  value="<%=emp.getCo_aps()%>" name="cod_aps" maxlength="6" size="5%" onblur="MOD_COD_APS()"></td>
+                                            <td class="td1" ><input type="hidden" id="mod_aps"  value="<%=emp.getCo_aps()%>" name="cod_aps"  maxlength="6" size="5%" onblur="MOD_COD_APS()"></td>
                                             <td class="td" colspan="2">
                                                 <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-green mod_co_aps"><i class="fa fa-pencil fa-2x"></i></a>
                                             </td>
@@ -798,7 +798,7 @@
                                                     }).done(function (e) {
                                                         // alert(e);
                                                         var cant = ($("#mod_aps").val());
-                                                        if (cant.length > 5) {
+                                                        if (cant.length > 1) {
                                                             if (e == 0) {
                                                                 window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#mod_aps").val() + "&idtr=" + $(".idtra").val() + "";
                                                             }
@@ -825,7 +825,7 @@
                                                     }).done(function (e) {
                                                         //alert(e);
                                                         var cant = ($("#cod_ap").val());
-                                                        if (cant.length > 5) {
+                                                        if (cant.length > 1) {
                                                             if (e == 0) {
                                                                 window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#cod_ap").val() + "&idtr=" + $(".idtra").val() + "";
                                                             }
@@ -851,7 +851,7 @@
                                                         data: "opc=validar_huella&co_hue=" + co_huel.value
                                                     }).done(function (e) {
                                                         var cant = $("#mod_hue").val();
-                                                        if (cant.length > 5) {
+                                                        if (cant.length > 1) {
                                                             if (e == 0) {
                                                                 window.location.href = "../../trabajador?opc=reg_huella&idtr=" + $(".idtra").val() + "&cod=" + $("#mod_hue").val() + "";
                                                             }
@@ -877,7 +877,7 @@
                                                     }).done(function (e) {
                                                         // alert(e)
                                                         var cant = $("#cod_hu").val();
-                                                        if (cant.length > 5) {
+                                                        if (cant.length > 1) {
                                                             if (e == 0) {
                                                                 window.location.href = "../../trabajador?opc=reg_huella&idtr=" + $(".idtra").val() + "&cod=" + $("#cod_hu").val() + "";
                                                             }

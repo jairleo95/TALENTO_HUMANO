@@ -783,6 +783,7 @@ $(document).ready(function() {
                     content: "Si registra con esta fecha de inicio : " + fecha + ",  el requerimiento estara en fuera de plazo. ¡NECESITA HACER SOLICITUD AL TERMINAR REGISTRO!",
                     color: "#C79121",
                     icon: "fa fa-warning shake animated",
+                    timeout: 3500
                     // number: "1",
                     //timeout: 15000
                 });
@@ -791,7 +792,8 @@ $(document).ready(function() {
                     title: "¡Plazo cumplido!",
                     content: "Con la fecha de inicio :" + fecha + " el plazo para este requerimiento se cumplirá.",
                     color: "#739E73",
-                    icon: "fa fa-shield fadeInLeft animated"
+                    icon: "fa fa-shield fadeInLeft animated",
+                    timeout: 3500
                             // ,number: "1",
                             //timeout: 15000
                 });

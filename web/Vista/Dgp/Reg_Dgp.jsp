@@ -20,7 +20,7 @@
 <!DOCTYPE html >
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset="ISO-8859-1" />
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
         <title> Registrar DGP </title>
         <meta name="description" content="">

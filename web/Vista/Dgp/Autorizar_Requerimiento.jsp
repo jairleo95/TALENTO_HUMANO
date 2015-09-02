@@ -525,7 +525,7 @@
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script>
         $.datepicker.regional['es'] = {
-            closeText: 'Cerrar',
+            closeText: 'Mostrar',
             currentText: 'Hoy',
             monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
             monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
