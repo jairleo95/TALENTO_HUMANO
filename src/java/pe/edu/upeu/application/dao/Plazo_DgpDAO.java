@@ -155,19 +155,27 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
     }
 
     @Override
-    public void UPDATE_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO) {
+    public void UPDATE_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO, String TI_PLAZO, int CA_DIAS_TOLERANCIA, String ID_DEPARTAMENTO_TOLERANCIA,String ID_DEPARTAMENTO, String ID_AREA) {
         try {
 
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_UPDATE_PLAZO( ?, ?, ?, ?, ?, ?)}");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_UPDATE_PLAZO( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, ID_PLAZO);
             cst.setString(2, NO_PLAZO);
             cst.setString(3, DET_ALERTA);
             cst.setString(4, c.convertFecha(FE_DESDE));
             cst.setString(5, c.convertFecha(FE_HASTA));
-            cst.setString(6, "1");
+            cst.setString(6, ES_PLAZO);
+            cst.setString(7, ID_DEPARTAMENTO);
+            cst.setString(8, TI_PLAZO);
+            cst.setInt(9, CA_DIAS_TOLERANCIA);
+            cst.setString(10, ID_DEPARTAMENTO_TOLERANCIA);
+            cst.setString(11, ID_DEPARTAMENTO);
+            cst.setString(12, ID_AREA);
             cst.execute();
         } catch (SQLException ex) {
+            System.out.println(ex);
+            
         } catch (ParseException ex) {
             Logger.getLogger(Plazo_DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
