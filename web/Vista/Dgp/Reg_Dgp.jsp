@@ -186,7 +186,7 @@
                                                             </label>
                                                         </section>
                                                     </div>
-                                                    <section>
+                                                            <section style="display: none">
                                                         <label class="label" id="titu">Puesto | Seccion | Area:</label>
                                                         <label class="select">
                                                             <select name="IDPUESTO"   required="" class="chosen-select select-puesto1" >

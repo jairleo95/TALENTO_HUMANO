@@ -293,6 +293,7 @@ Author     : JAIR
                     text_html += "<td >No activo</td>";
                 }
                 text_html += "<input type='hidden' value='" + lista[i].id_req + "'/>";
+                text_html += "<td><button  class='Editar-Plazo' value='" + lista[i].id + "'>Editar</button></td>";
                 text_html += "<td><button  class='Eliminar-Plazo' value='" + lista[i].id + "'>Eliminar</button></td>";
                 text_html += "</tr>";
             }

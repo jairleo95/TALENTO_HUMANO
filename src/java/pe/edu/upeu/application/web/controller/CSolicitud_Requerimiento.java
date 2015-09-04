@@ -77,11 +77,17 @@ public class CSolicitud_Requerimiento extends HttpServlet {
                 FE_DESDE = FE_DESDE + "-01";
             }
             s.INSERT_SOLICITUD_DGP(null, FE_DESDE, ID_DGP, ID_PLAZO, DE_SOLICITUD, ES_AUTORIZAR, ES_SOLICITUD_DGP, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, NO_USUARIO);
+            
             getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser, ID_DGP));
-            response.sendRedirect("Vista/Solicitud/Reg_List_Solicitud.jsp?iddgp=" + ID_DGP + "");
+            
+            //response.sendRedirect("Vista/Solicitud/Reg_List_Solicitud.jsp?iddgp=" + ID_DGP + "");
         }
         if (opc.equals("Reg_List_Solicitud")) {
             String iddgp = request.getParameter("iddgp");
+            String tipo = request.getParameter("tipo");
+            String idplazo = request.getParameter("plazo");
+            String desde = request.getParameter("desde");
+            String desc = request.getParameter("descripcion");
             getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser, iddgp));
            rpta.put("rpta", "1");
         }
@@ -153,7 +159,7 @@ public class CSolicitud_Requerimiento extends HttpServlet {
                         + "                                                <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">\n"
                         + "                                                    Cancelar\n"
                         + "                                                </button>\n"
-                        + "                                                <button type=\"button\" class=\"btn btn-primary sbm_solicitud\" >\n"
+                        + "                                                <button type=\"button\" class=\"btn btn-primary sbm_solicitud\" data-dismiss=\"modal\" >\n"
                         + "                                                    Enviar\n"
                         + "                                                </button>\n"
                         + "                                            </footer>\n"

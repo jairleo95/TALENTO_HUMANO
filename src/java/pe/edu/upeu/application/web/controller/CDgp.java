@@ -37,6 +37,7 @@ import pe.edu.upeu.application.dao.Periodo_PagoDAO;
 import pe.edu.upeu.application.dao.Plazo_DgpDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
+import pe.edu.upeu.application.dao.Solicitud_RequerimientoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAnnoDAO;
@@ -57,6 +58,7 @@ import pe.edu.upeu.application.dao_imp.InterfacePeriodo_PagoDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlazo_DgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceSolicitud_RequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 
@@ -114,6 +116,7 @@ public class CDgp extends HttpServlet {
         InterfaceUsuarioDAO usu = new UsuarioDAO();
         InterfaceDireccionDAO dir = new DireccionDAO();
         InterfacePeriodo_PagoDAO pp = new Periodo_PagoDAO();
+        InterfaceSolicitud_RequerimientoDAO s = new Solicitud_RequerimientoDAO();
         // try {
         if (opc.equals("Listar_Req")) {
             String id_tr = request.getParameter("idtr");
@@ -340,10 +343,11 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("VALIDAR_DGP_CONTR", dgp.VALIDAR_DGP_CONTR(ID_DGP, idtr));
             getServletContext().setAttribute("Cargar_dcc_dgp", cc.Cargar_dcc_dgp(ID_DGP));
             int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
+            boolean estado=s.Validar_Envio_Solicitud(ID_DGP.trim());
             getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
             // out.print(ID_DGP);
 
-            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc");
+            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc&est="+estado );
         }
         if (opc.equals("filtrar")) {
 

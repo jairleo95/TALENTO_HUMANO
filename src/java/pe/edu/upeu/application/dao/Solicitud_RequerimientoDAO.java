@@ -155,6 +155,7 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
             cst.execute();
             id = cst.getString(14);
         } catch (SQLException e) {
+            System.out.println(e);
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("ERROR :" + e.getMessage());

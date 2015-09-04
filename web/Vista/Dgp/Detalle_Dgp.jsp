@@ -1,3 +1,5 @@
+
+
 <%@page import="java.math.RoundingMode"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="pe.edu.upeu.application.dao.Solicitud_RequerimientoDAO"%>
@@ -270,19 +272,31 @@
                                         int val_btn = p.Validar_cumple_dias_pt2(iddgp.trim());
                                         %>
                                         <%if (val_btn == 0) {
-
-                                        %>
-                                        <label>Usted no ha cumplido con los dias de tolerancia del plazo <strong>Inicio de contrato</strong>, porfavor envie solicitud para la nueva fecha de inicio del trabajador.</label><br>
-                                        <%}%>
-                                        <button class="btn btn-primary btn-labeled btn_solicitud" data-toggle="modal" type="button" data-target="#myModal"><span class="btn-label"><i class="fa fa-envelope"></i></span>
+                                                if (request.getParameter("est").equals("true")) { %>
+                                        <label>Usted no ha cumplido con los dias de tolerancia del plazo <strong>Inicio de contrato</strong>, 
+                                            porfavor envie solicitud para la nueva fecha de inicio del trabajador.</label><br>
+                                        <button class="btn btn-primary btn-labeled btn_solicitud" data-toggle="modal" type="button" data-target="#myModal">
+                                            <span class="btn-label"><i class="fa fa-envelope"></i></span>
                                             SOLICITUD DE PLAZO
                                         </button>
-                                        <button type="button" class="btn btn-success btn-labeled btn_terminar" <%if (val_btn == 0) {
-                                                out.print("disabled");
-                                            }
-                                                %> ><span class="btn-label"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <button type="button" class="btn btn-success btn-labeled btn_terminar" disabled="true">
+                                            <span class="btn-label"><i class="fa fa-arrow-circle-right"></i></span>
                                             TERMINAR
                                         </button>
+                                        <%} else {%>
+                                        <button type="button" class="btn btn-success btn-labeled btn_terminar">
+                                            <span class="btn-label"><i class="fa fa-arrow-circle-right"></i></span>
+                                            TERMINAR
+                                        </button>
+                                                <%}%>
+                                        <%}else {%>
+                                        <button type="button" class="btn btn-success btn-labeled btn_terminar">
+                                            <span class="btn-label"><i class="fa fa-arrow-circle-right"></i></span>
+                                            TERMINAR
+                                        </button>
+                                        
+                                        <%}%>
+
                                     </footer>
                                     <input type="hidden" name="iddgp"  value="<%=iddgp%>" class="dgp" required="">
                                 </form>
@@ -407,17 +421,17 @@
                 list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize() + "&id=" + $(".dgp").val(), "1", $(".tipo").val());
 
             }
-            $(document).ready(function() {
+            $(document).ready(function () {
                 pageSetUp();
-                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
-                $(".btn_terminar").click(function() {
+                $(".btn_terminar").click(function () {
                     $.SmartMessageBox({
                         title: "¡Advertencia!",
-                        content: "¿Esta seguro de enviar la solicitud?",
+                        content: "¿Esta seguro(a) de enviar el Requerimiento?",
                         buttons: '[No][Si]'
-                    }, function(ButtonPressed) {
+                    }, function (ButtonPressed) {
                         if (ButtonPressed === "Si") {
                             $(".form_terminar_req").submit();
                         }
@@ -425,38 +439,40 @@
                         }
                     });
                 });
-                $(".btn_solicitud").click(function() {
+                $(".btn_solicitud").click(function () {
                     var body_modal = $(".body_mdal_sol");
                     body_modal.empty();
-                    $.post("../../solicitud_requerimiento", "opc=Val_Envio_Solicitud&iddgp=" + $(".dgp").val(), function(objJson) {
+                    $.post("../../solicitud_requerimiento", "opc=Val_Envio_Solicitud&iddgp=" + $(".dgp").val(), function (objJson) {
                         var html = objJson.html;
                         body_modal.append(html);
                         if (objJson.estado) {
                             listar_plazo_tipo($(".tipo"));
                         }
-                        $(".tipo").change(function() {
+                        $(".tipo").change(function () {
                             listar_plazo_tipo($(this));
                         });
 
-                        $(".sbm_solicitud").click(function(e) {
+                        $(".sbm_solicitud").click(function (e) {
                             if ($(".solicitud_plazo").valid() == true) {
                                 $.SmartMessageBox({
                                     title: "¡Advertencia!",
                                     content: "¿Esta seguro de enviar la solicitud?",
                                     buttons: '[No][Si]'
-                                }, function(ButtonPressed) {
+                                }, function (ButtonPressed) {
                                     if (ButtonPressed === "Si") {
                                         $.ajax({
                                             url: "../../solicitud_requerimiento",
                                             type: "post",
-                                            data: $(".solicitud_plazo").serialize() + "&opc=Reg_List_Solicitud" + "&iddgp=" + $(".dgp").val()
-                                        }).done(function() {
+                                            data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud" + "&iddgp=" + $(".dgp").val()
+                                        }).done(function () {
                                             $('.solicitud_plazo')[0].reset();
                                             var $p = $(this).parent().parent();
                                             $p.removeClass('has-success');
+                                            $('.btn_terminar').prop('disabled', false);
+                                            $('.btn_solicitud').prop('disabled', true);
                                             $("section > label").removeClass('state-success');
                                             /*vuelve a cargar el selector para evitar enviar solicitudes del mismo plazo*/
-                                            list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
+                                            //list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
                                             $.smallBox({
                                                 title: "¡Exito!",
                                                 content: "<i class='fa fa-clock-o'></i> <i>La solicitud ha sido enviada exitosamente...</i>",
@@ -464,7 +480,8 @@
                                                 iconSmall: "fa fa-check fa-2x fadeInRight animated",
                                                 timeout: 4000
                                             });
-                                        }).error(function() {
+
+                                        }).error(function () {
                                             $.smallBox({
                                                 title: "¡Error!",
                                                 content: "<i class='fa fa-clock-o'></i> <i>La solicitud no ha podido ser enviada...</i>",
@@ -476,6 +493,14 @@
                                     }
                                     if (ButtonPressed === "No") {
                                     }
+                                });
+                            } else {
+                                $.smallBox({
+                                    title: "¡Error!",
+                                    content: "<i class='fa fa-clock-o'></i> <i>Ingrese Datos correctos</i>",
+                                    color: "#C46A69",
+                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                    timeout: 4000
                                 });
                             }
                         });
