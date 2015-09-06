@@ -207,6 +207,12 @@
                     });
 
                 }
+                
+                function cargar_sec(id){
+                   $.post("../../MCCosto?opc=list_se",function(){
+                       
+                   });
+                }
 
                 function cargar_T() {
                     $.post("../../MCCosto?opc=list_ccosto", function (objJson) {

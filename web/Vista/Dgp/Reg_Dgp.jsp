@@ -178,7 +178,7 @@
                                                                 <%}%>
                                                             </label>
                                                         </section>
-                                                        <section  class="col col-6" style="display: ">
+                                                        <section  class="col col-6" style="display: none;">
                                                             <label class="select" id="titu">CARGAR DATOS
                                                                 <select  class="btn-list-req" >
                                                                     <option value="" selected=""  >[SELECCIONE]</option>
@@ -186,7 +186,25 @@
                                                             </label>
                                                         </section>
                                                     </div>
-                                                            <section style="display: none">
+                                                    <div class="row" >
+                                                        <section class="col col-6">
+                                                            <label class="select" id="titu">
+                                                                Motivo :<select name="MOTIVO" class="ant_policiales" required="" >
+                                                                    <option value="" >[SELECCIONE]</option>
+                                                                    <option value="1" selected="">Trabajdor Nuevo</option>
+                                                                    <option value="2">Renovación</option>
+                                                                </select>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-2" id="titu">MFL:
+                                                            <label class="toggle"  > 
+                                                                <input type="checkbox" value="1"   name="MFL" name="checkbox-toggle" >
+                                                                <i data-swchon-text="SI" data-swchoff-text="NO"></i>
+                                                            </label>
+                                                        </section>
+                                                    </div>
+
+                                                    <section style="display: none">
                                                         <label class="label" id="titu">Puesto | Seccion | Area:</label>
                                                         <label class="select">
                                                             <select name="IDPUESTO"   required="" class="chosen-select select-puesto1" >
@@ -229,6 +247,35 @@
                                                             </label>
                                                         </section>
                                                     </div>
+                                                    <%if (idreq.equals("REQ-0007") || idreq.equals("REQ-0008") || idreq.equals("REQ-0009") || idreq.equals("REQ-0001") || idreq.equals("REQ-0002") || idreq.equals("REQ-0003") || idreq.equals("REQ-0005")) {%>
+                                                    <div  class="row" id="centro-costo_1" >
+                                                        <section class="col col-4">
+                                                            <label class="select" id="titu">Centro de Costo Nº 1:
+                                                                <select name="CENTRO_COSTOS_1" class="select-cc centro_costo1" required="">
+                                                                    <option value="">[SELECCIONE]</option>
+                                                                </select>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-2">
+                                                            <label class="input" id="titu">%
+                                                                <input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/>
+                                                            </label>
+                                                        </section>
+
+
+                                                        <section class="col col-2">
+                                                            <label class="btn">
+                                                                <button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-2">
+                                                            <label class="input" style="font-weight: bold;color:red;">% Total :
+                                                                <input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  />
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                    <input type="hidden" value="1" name="numero" class="cant-input" />
+                                                    <%}%>
                                                     <section>
                                                         <label class="label" id="titu">Requerimiento :</label>
                                                         <label class="select">
@@ -249,23 +296,7 @@
                                                             </select> 
                                                         </label>
                                                     </section>
-                                                    <div class="row" >
-                                                        <section class="col col-6">
-                                                            <label class="select" id="titu">
-                                                                Motivo :<select name="MOTIVO" class="ant_policiales" required="" >
-                                                                    <option value="" >[SELECCIONE]</option>
-                                                                    <option value="1" selected="">Trabajdor Nuevo</option>
-                                                                    <option value="2">Renovación</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2" id="titu">MFL:
-                                                            <label class="toggle"  > 
-                                                                <input type="checkbox" value="1"   name="MFL" name="checkbox-toggle" >
-                                                                <i data-swchon-text="SI" data-swchoff-text="NO"></i>
-                                                            </label>
-                                                        </section>
-                                                    </div>
+
                                                     <div class="info_1">
                                                     </div>
                                                     <div class="row">
@@ -407,7 +438,7 @@
                                                         </section>
                                                         <section class="col col-3">
                                                             <label class="input"  id="titu"> 
-                                                                Bonificaion Puesto :<input type="text" maxlength="13"  value="0.0" name="BONO_PUESTO"  id="bono_pu">
+                                                                Bonificacion Puesto :<input type="text" maxlength="13"  value="0.0" name="BONO_PUESTO"  id="bono_pu">
                                                             </label>
                                                         </section>
                                                         <section class="col col-3">
@@ -488,7 +519,7 @@
                                                         </section>
                                                     </div>
                                                     <%} else { %>
-                                                     
+
                                                     <% System.out.println(list_Cuenta_Sueldo.size()+" -size");
                                                         for (int i = 0; i < list_Cuenta_Sueldo.size(); i++) {
                                                             Cuenta_Sueldo cs = new Cuenta_Sueldo();
@@ -500,7 +531,7 @@
 
                                                         <section class="col col-3" name="">
                                                             <label class="select" id="titu" >Cta Sueldo - Banco:
-                                                                
+
                                                                 <select name="BANCO"  required="" disabled="">
                                                                     <%if(cs.getNo_banco()!=null){%>
                                                                     <%if (cs.getNo_banco().equals("0")) { %>
@@ -519,7 +550,7 @@
                                                                     <option>Ninguno</option>
                                                                     <%}%>
                                                                 </select>
-                                                                
+
                                                             </label>
                                                         </section>
                                                         <%if (cs.getNo_banco_otros() != null) {%>
@@ -613,23 +644,7 @@
 
                                                     </div>
                                                     <%}%>
-                                                    <%if (idreq.equals("REQ-0007") || idreq.equals("REQ-0008") || idreq.equals("REQ-0009") || idreq.equals("REQ-0001") || idreq.equals("REQ-0002") || idreq.equals("REQ-0003") || idreq.equals("REQ-0005")) {%>
-                                                    <div  class="row" id="centro-costo_1" >
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">Centro de Costo Nº 1:
-                                                                <select name="CENTRO_COSTOS_1" class="select-cc centro_costo1" required="">
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/></label></section>
 
-
-                                                        <section class="col col-2"><label class="btn"><button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button></label></section>
-                                                        <section class="col col-2"><label class="input" style="font-weight: bold;color:red;">% Total :<input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  /></label></section>
-                                                    </div>
-                                                    <input type="hidden" value="1" name="numero" class="cant-input" />
-                                                    <%}%>
                                                     <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>">
                                                     <div id="div_2" class="contenido" style="display: none">
                                                         <table  class="table">

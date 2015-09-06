@@ -70,6 +70,12 @@ public class MCCosto extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            if (opc.equals("list_se")) {
+                String id = request.getParameter("id");
+                List<Map<String, ?>> lista = cc.List_Arxdep(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
             if (opc.equals("edit_cc")) {
                 String ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA;
                 ID_CENTRO_COSTO = request.getParameter("ID_CENTRO_COSTO");

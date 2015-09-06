@@ -219,4 +219,33 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
         return lista;
     }
 
+    @Override
+    public List<Map<String, ?>> List_SecxArea(String idArea) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            sql = "SELECT E.ID_DEPARTAMENTO, E.NO_DEP FROM RHTX_DEPARTAMENTO E, RHTX_DIRECCION I\n"
+                    + "WHERE E.ID_DIRECCION=I.ID_DIRECCION AND E.ID_DIRECCION='" + idArea + "'";
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("ID_DEPARTAMENTO"));
+                rec.put("nombre", rs.getString("NO_DEP"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
+    }
+
 }

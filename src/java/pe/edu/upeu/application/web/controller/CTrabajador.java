@@ -104,6 +104,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("list_año", li.lista_años());
 
             response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp");
+            
         }
         if (opc.equals("Registrar")) {
             String AP_PATERNO = request.getParameter("APELLIDO_P");

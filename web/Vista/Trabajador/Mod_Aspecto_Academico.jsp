@@ -666,8 +666,8 @@
                                                                     <label>Banco:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <select name="BANCO" id="banco" class="form-control input-group-sm">
-                                                                            <option value=""   selected="">[SELECCIONE]</option>
+                                                                        <select name="BANCO" id="banco" class="form-control input-group-sm" <% if(rol.equals("ROL-0002") || rol.equals("ROL-0005")|| rol.equals("ROL-0016")) out.print("disabled"); %>>
+                                                                            <option value=""   selected="" >[SELECCIONE]</option>
                                                                             <%
                                                                                 for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
                                                                                     Cuenta_Sueldo cs = new Cuenta_Sueldo();
