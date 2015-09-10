@@ -520,7 +520,7 @@
                                                     </div>
                                                     <%} else { %>
 
-                                                    <% System.out.println(list_Cuenta_Sueldo.size()+" -size");
+                                                    <% System.out.println(list_Cuenta_Sueldo.size() + " -size");
                                                         for (int i = 0; i < list_Cuenta_Sueldo.size(); i++) {
                                                             Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                             cs = (Cuenta_Sueldo) list_Cuenta_Sueldo.get(i);
@@ -533,7 +533,7 @@
                                                             <label class="select" id="titu" >Cta Sueldo - Banco:
 
                                                                 <select name="BANCO"  required="" disabled="">
-                                                                    <%if(cs.getNo_banco()!=null){%>
+                                                                    <%if (cs.getNo_banco() != null) {%>
                                                                     <%if (cs.getNo_banco().equals("0")) { %>
                                                                     <option >Ninguno</option>
                                                                     <%}
@@ -546,7 +546,7 @@
                                                                         if (cs.getNo_banco().equals("3")) { %>
                                                                     <option >Otros</option>
                                                                     <% }%>
-                                                                    <%}else{%>
+                                                                    <%} else {%>
                                                                     <option>Ninguno</option>
                                                                     <%}%>
                                                                 </select>
@@ -705,6 +705,8 @@
 
                                         <!-- widget content -->
                                         <div class="widget-body no-padding">
+                                            <div class="contheader"></div>
+                                            <div class="contDias"></div>
 
                                             <div class="smart-form" >
                                                 <header class="titulo_req">
@@ -882,6 +884,7 @@
                                             </div>
 
 
+
                                         </div>
                                         <!-- end widget content -->
 
@@ -900,6 +903,8 @@
 
             </div>
         </div>
+
+
 
 
     </body>
@@ -975,6 +980,12 @@
     <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
     <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
     <script src="../../js/Js_DGP/Registrar/Reg_Dgps.js" type="text/javascript"></script>
+    <script src="../../js/Js_Horario/horario.js" type="text/javascript"></script>
+    <script>
+                                                        $(document).ready(function () {
+                                                            plHeader($('.contheader'));
+                                                        });
+    </script>
 </html>
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");

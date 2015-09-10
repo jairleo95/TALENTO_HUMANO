@@ -5,10 +5,13 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -62,7 +65,9 @@ public class CHorario extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        Map<String, Object> rpta = new HashMap<String, Object>();
         PrintWriter out = response.getWriter();
 
         HttpSession sesion = request.getSession();
@@ -79,52 +84,56 @@ public class CHorario extends HttpServlet {
 
         String opc = request.getParameter("opc");
 
-        if (opc.equals("REGISTRAR HORARIO")) {
-
-            String ID_DETALLE_HORARIO = request.getParameter("ID_DETALLE_HORARIO");
-            String ID_DGP = request.getParameter("IDDETALLE_DGP");
-            String ES_DETALLE_HORARIO = "1";
-            //  String US_MODIFICACION = request.getParameter("USER_MODIFICACION");
-            // String FE_MODIFICACION = request.getParameter("FECHA_MODIFICACION");
-            String ES_HORARIO = "1";
-            String ID_TRABAJJADOR = request.getParameter("idtr");
-            String ID_TIPO_HORARIO = request.getParameter("HORARIO");
-            String ES_MOD_FORMATO = "1";
-            Double Ca_ho_total = Double.parseDouble(request.getParameter("h_total"));
-
-            ID_DETALLE_HORARIO = IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, ID_DGP, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO, Ca_ho_total);
-
-            //ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
-
-            for (int i = 0; i < dia.size(); i++) {
-                for (int j = 0; j < 10; j++) {
-                    String hora_desde = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
-                    String hora_hasta = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
-                    String d = request.getParameter("DIA_" + dia.get(i) + j);
-
-                    if (hora_desde != null & d != null & hora_hasta != null) {
-                        if (!hora_hasta.equals("") & !hora_desde.equals("") & !d.equals("")) {
-                            IHor.Insert_Horario(null,hora_desde,hora_hasta,d,ES_HORARIO,ID_DETALLE_HORARIO);
+        try {
+            if (opc.equals("REGISTRAR HORARIO")) {
+                String ID_DETALLE_HORARIO = request.getParameter("ID_DETALLE_HORARIO");
+                String ID_DGP = request.getParameter("IDDETALLE_DGP");
+                String ES_DETALLE_HORARIO = "1";
+                String ES_HORARIO = "1";
+                String ID_TRABAJJADOR = request.getParameter("idtr");
+                String ID_TIPO_HORARIO = request.getParameter("HORARIO");
+                String ES_MOD_FORMATO = "1";
+                Double Ca_ho_total = Double.parseDouble(request.getParameter("h_total"));
+                ID_DETALLE_HORARIO = IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, ID_DGP, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO, Ca_ho_total);
+                for (int i = 0; i < dia.size(); i++) {
+                    for (int j = 0; j < 10; j++) {
+                        String hora_desde = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
+                        String hora_hasta = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
+                        String d = request.getParameter("DIA_" + dia.get(i) + j);
+                        if (hora_desde != null & d != null & hora_hasta != null) {
+                            if (!hora_hasta.equals("") & !hora_desde.equals("") & !d.equals("")) {
+                                IHor.Insert_Horario(null, hora_desde, hora_hasta, d, ES_HORARIO, ID_DETALLE_HORARIO);
+                            }
                         }
                     }
+
                 }
 
+                getServletContext().setAttribute("List_V_Horario", IHor.List_V_Horario(ID_DGP));
+                getServletContext().setAttribute("List_H", Ilis.List_H());
+//out.print(ID_DGP);
+                response.sendRedirect("Vista/Dgp/Horario/Detalle_Horario.jsp?iddgp=" + ID_DGP + "&idtr=" + ID_TRABAJJADOR + "&P2=1");
             }
 
-            getServletContext().setAttribute("List_V_Horario", IHor.List_V_Horario(ID_DGP));
-            getServletContext().setAttribute("List_H", Ilis.List_H());
-//out.print(ID_DGP);
-            response.sendRedirect("Vista/Dgp/Horario/Detalle_Horario.jsp?iddgp=" + ID_DGP + "&idtr=" + ID_TRABAJJADOR + "&P2=1");
+            if (opc.equals("Listar")) {
+                String ID_DGP = request.getParameter("iddgp");
+                getServletContext().setAttribute("List_V_Horario", IHor.List_V_Horario(ID_DGP));
+                getServletContext().setAttribute("List_H", Ilis.List_H());
+
+                response.sendRedirect("Vista/Dgp/Horario/Detalle_Horario.jsp");
+
+            }
+            if (opc.equals("listaHorario")) {
+
+            }
+        } catch (Exception e) {
+            rpta.put("rpta", "-1");
+            rpta.put("mensaje", e.getMessage());
         }
-
-        if (opc.equals("Listar")) {
-            String ID_DGP = request.getParameter("iddgp");
-            getServletContext().setAttribute("List_V_Horario", IHor.List_V_Horario(ID_DGP));
-            getServletContext().setAttribute("List_H", Ilis.List_H());
-
-            response.sendRedirect("Vista/Dgp/Horario/Detalle_Horario.jsp");
-
-        }
+        Gson gson = new Gson();
+        out.println(gson.toJson(rpta));
+        out.flush();
+        out.close();
 
     }
 
