@@ -706,7 +706,9 @@
                                         <!-- widget content -->
                                         <div class="widget-body no-padding">
                                             <div class="contheader"></div>
-                                            <div class="contDias"></div>
+                                            <div class="contDias"></div><hr>
+                                            <div><fieldset class="cDia"></fieldset></div>
+                                            <div class="hTotal"></div>
 
                                             <div class="smart-form" >
                                                 <header class="titulo_req">
@@ -975,6 +977,7 @@
     <script src="../../js/speech/voicecommand.min.js"></script>
     <!-- PAGE RELATED PLUGIN(S) 
     <script src="..."></script>-->
+    <script src="../../js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
     <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
@@ -984,6 +987,7 @@
     <script>
                                                         $(document).ready(function () {
                                                             plHeader($('.contheader'));
+                                                            $('#timepicker').timepicker();
                                                         });
     </script>
 </html>
