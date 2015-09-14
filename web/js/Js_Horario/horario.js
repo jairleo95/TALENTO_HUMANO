@@ -137,6 +137,7 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
         } else {
             $('.dia_Lunes').remove();
         }
+        calc_Horas();
     });
     $('.iMartes').click(function () {
         if ($(this).is(':checked')) {
@@ -144,6 +145,7 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
         } else {
             $('.dia_Martes').remove();
         }
+        calc_Horas();
     });
     $('.iMiercoles').click(function () {
         if ($(this).is(':checked')) {
@@ -151,6 +153,7 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
         } else {
             $('.dia_Miercoles').remove();
         }
+        calc_Horas();
     });
     $('.iJueves').click(function () {
         if ($(this).is(':checked')) {
@@ -158,6 +161,7 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
         } else {
             $('.dia_Jueves').remove();
         }
+        calc_Horas();
     });
     $('.iViernes').click(function () {
         if ($(this).is(':checked')) {
@@ -165,6 +169,7 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
         } else {
             $('.dia_Viernes').remove();
         }
+        calc_Horas();
     });
     $('.iSabado').click(function () {
         if ($(this).is(':checked')) {
@@ -172,6 +177,7 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
         } else {
             $('.dia_Sabado').remove();
         }
+        calc_Horas();
     });
     $('.iDom').click(function () {
         if ($(this).is(':checked')) {
@@ -179,81 +185,109 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
         } else {
             $('.dia_Domingo').remove();
         }
+        calc_Horas();
     });
 }
 function diaL(cont, nombre) {
     var t = "";
     t += '<div class="col col-sm-6 dia_' + nombre + '">';
     t += '<div class="well" style="margin-bottom: 20px;">';
-    t += '<div class="row">';
+    t += '<div class="row cTim' + nombre + '">';
     t += '<div class="col col-sm-12">';
-    t += '<center><label class="font-md text-primary">' + nombre + '</label></center>';
+    t += '<a class="pull-right dupli' + nombre + '" href="#htotal"><i class="fa fa-copy"></i></a><center><label class="font-md text-primary">' + nombre + '</label></center>';
     t += '</div>';
+    t += '</div>';
+    t += '<div class="row">';
     t += '<div class="col col-xs-12">';
-    t += '<div class="col col-xs-2">T1</div>';
-    t += '<div class="col col-xs-5">';
-    t += '<div class="form-group">';
-    t += '<div class="input-group">';
-    t += '<input class="form-control tim1' + nombre + '" type="text" placeholder="Ingreso">';
-    t += '<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>';
-    t += '</div>';
-    t += '</div>';
-    t += '</div>';
-    t += '<div class="col col-xs-5">';
-    t += '<div class="form-group">';
-    t += '<div class="input-group">';
-    t += '<input class="form-control tim2' + nombre + '" type="text" placeholder="Salida">';
-    t += '<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>';
-    t += '</div>';
-    t += '</div>';
-    t += '</div>';
-    t += '</div>';
-    t += '<div class="col col-xs-12">';
-    t += '<div class="col col-xs-2">T2</div>';
-    t += '<div class="col col-xs-5">';
-    t += '<div class="form-group">';
-    t += '<div class="input-group">';
-    t += '<input class="form-control tim3' + nombre + '" type="text" placeholder="Ingreso">';
-    t += '<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>';
-    t += '</div>';
-    t += '</div>';
-    t += '</div>';
-    t += '<div class="col col-xs-5">';
-    t += '<div class="form-group">';
-    t += '<div class="input-group">';
-    t += '<input class="form-control tim4' + nombre + '" type="text" placeholder="Salida">';
-    t += '<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>';
-    t += '</div>';
-    t += '</div>';
-    t += '</div>';
+    t += '<a href="#" class="btn text-primary pull-right addTim' + nombre + '"><i class="fa fa-plus"></i></a>';
     t += '</div>';
     t += '</div>';
     t += '</div>';
     t += '</div>';
     cont.append(t);
+    timePick($('.cTim' + nombre), nombre);
+    timePick($('.cTim' + nombre), nombre);
     $('.tim1' + nombre).val("00:00");
     $('.tim2' + nombre).val("00:00");
     $('.tim3' + nombre).val("00:00");
     $('.tim4' + nombre).val("00:00");
     $('.tim1' + nombre).timepicker({
-        showMeridian: false
+        showMeridian: true
     });
     $('.tim2' + nombre).timepicker({
-        showMeridian: false
+        showMeridian: true
     });
     $('.tim3' + nombre).timepicker({
-        showMeridian: false
+        showMeridian: true
     });
     $('.tim4' + nombre).timepicker({
-        showMeridian: false
+        showMeridian: true
     });
     $('.tim1' + nombre).timepicker().on('changeTime.timepicker', function (e) {
-//    alert('The time is ' + e.time.value);
-//    alert('The hour is ' + e.time.hours);
-//    alert('The minute is ' + e.time.minutes);
-//    alert('The meridian is ' + e.time.meridian);
         calc_Horas();
     });
+    $('.tim2' + nombre).timepicker().on('changeTime.timepicker', function (e) {
+        calc_Horas();
+    });
+    $('.tim3' + nombre).timepicker().on('changeTime.timepicker', function (e) {
+        calc_Horas();
+    });
+    $('.tim4' + nombre).timepicker().on('changeTime.timepicker', function (e) {
+        calc_Horas();
+    });
+    $('.dupli' + nombre).click(function () {
+        var lista = new Array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo');
+        for (var i = 0; i < lista.length; i++) {
+            $('.tim1' + lista[i]).val($('.tim1' + nombre).val());
+            $('.tim2' + lista[i]).val($('.tim2' + nombre).val());
+            $('.tim3' + lista[i]).val($('.tim3' + nombre).val());
+            $('.tim4' + lista[i]).val($('.tim4' + nombre).val());
+        }
+        calc_Horas();
+    });
+    $('.addTim' + nombre).click(function () {
+        timePick($('.cTim' + nombre), nombre);
+    });
+
+}
+function timePick(cont, nombre) {
+    var t = "";
+    var c = $('.cTim' + nombre + ' input').size();
+    var te = (c / 2) + 1;
+    t += '<div class="col col-xs-12 tmpk' + te + nombre + '">';
+    t += '<div class="col col-xs-1">T' + te + '</div>';
+    t += '<div class="col col-xs-5">';
+    t += '<div class="form-group">';
+    t += '<div class="input-group">';
+    t += '<input class="form-control tim' + (c + 1) + nombre + '" type="text" placeholder="Ingreso">';
+    t += '<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>';
+    t += '</div>';
+    t += '</div>';
+    t += '</div>';
+    t += '<div class="col col-xs-5">';
+    t += '<div class="form-group">';
+    t += '<div class="input-group">';
+    t += '<input class="form-control tim' + (c + 1) + nombre + '" type="text" placeholder="Salida">';
+    t += '<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>';
+    t += '</div>';
+    t += '</div>';
+    t += '</div>';
+    t += '<div class="col col-xs-1">';
+    t += '<a class="btn text-danger delTim' + (c + 1) + nombre + '"><i class="fa fa-times"></i></a>';
+    t += '</div>';
+    t += '</div>';
+    cont.append(t);
+    $('.delTim' + (c + 1) + nombre).click(function () {
+        $('.tmpk' + te + nombre).remove();
+    });
+
+    $('.tim' + (c + 1) + nombre).timepicker({
+        showMeridian: true
+    });
+    $('.tim' + (c + 1) + nombre).timepicker().on('changeTime.timepicker', function (e) {
+        calc_Horas();
+    });
+
 
 }
 function calc_Horas() {
@@ -261,25 +295,33 @@ function calc_Horas() {
     var htotal = 0;
     var mintotal = 0;
     for (var i = 0; i < lista.length; i++) {
-        var a = $('.tim1' + lista[i]).val();
-        var b = $('.tim2' + lista[i]).val();
-        var c = $('.tim3' + lista[i]).val();
-        var d = $('.tim4' + lista[i]).val();
-        if (a !== undefined && b !== undefined && c !== undefined && d !== undefined) {
-            var ha = a.split(":");
-            var hb = b.split(":");
-            var hc = c.split(":");
-            var hd = d.split(":");
-            htotal =htotal+ (parseInt(hb[0]) - parseInt(ha[0])) + (parseInt(hd[0]) - parseInt(hc[0]));
-            mintotal = mintotal+ (parseInt(hb[1]) - parseInt(ha[1])) + (parseInt(hd[1]) - parseInt(hc[1]));
-            if(mintotal>60){
-                alert(mintotal%60);
+        var x = $('.cTim' + lista[i] + ' input').size();
+        x = (x / 2) + 1;
+        var y = 1;
+        for (var j = 0; j < x; j++) {
+            var a = $('.tim' + y + lista[i]).val();
+            var b = $('.tim' + (y + 1) + lista[i]).val();
+            y = y + 2;
+            if (a !== undefined && b !== undefined) {
+                var ha = a.split(":");
+                var hb = b.split(":");
+                htotal = htotal + (parseInt(hb[0]) - parseInt(ha[0])) ;
+                mintotal = mintotal + (parseInt(hb[1]) - parseInt(ha[1])) + (parseInt(hd[1]) - parseInt(hc[1]));
             }
         }
 
+        var c = $('.tim3' + lista[i]).val();
+        var d = $('.tim4' + lista[i]).val();
+
     }
-    var msg=htotal + " " + mintotal;
-    horasT($('.hTotal'),msg);
+    if (htotal < 0) {
+        htotal = 0;
+    }
+    var r = (htotal * 60) + mintotal;
+    htotal = Math.floor((r / 60));
+    mintotal = (r % 60);
+    var msg = htotal + " horas " + mintotal + " minutos";
+    horasT($('.hTotal'), msg);
 
 }
 function horasT(cont, hora) {
@@ -291,7 +333,7 @@ function horasT(cont, hora) {
     t += '<fieldset>';
     t += '<div class="col col-12">';
     t += '<div class="col col-sm-12">';
-    t += '<h4>Horas Totales : <span class="text-primary">' + hora + '</span></h4>';
+    t += '<h4>Horas Totales : <span class="text-primary"><strong>' + hora + '</strong></span></h4>';
     t += '</div>';
     t += '</div>';
     t += '</fieldset>';

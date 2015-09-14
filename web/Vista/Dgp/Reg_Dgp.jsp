@@ -708,7 +708,7 @@
                                             <div class="contheader"></div>
                                             <div class="contDias"></div><hr>
                                             <div><fieldset class="cDia"></fieldset></div>
-                                            <div class="hTotal"></div>
+                                            <div class="hTotal" id="htotal"></div>
 
                                             <div class="smart-form" >
                                                 <header class="titulo_req">
