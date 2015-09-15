@@ -709,6 +709,7 @@
                                             <div class="contDias"></div><hr>
                                             <div><fieldset class="cDia"></fieldset></div>
                                             <div class="hTotal" id="htotal"></div>
+                                            <div class="logs"></div>
 
                                             <div class="smart-form" >
                                                 <header class="titulo_req">
@@ -987,7 +988,6 @@
     <script>
                                                         $(document).ready(function () {
                                                             plHeader($('.contheader'));
-                                                            $('#timepicker').timepicker();
                                                         });
     </script>
 </html>
