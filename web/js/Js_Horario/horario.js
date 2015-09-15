@@ -6,7 +6,7 @@
 
 
 function cargar_horarios(sel, dep) {
-    
+
     $.post("../../formato_horario", "opc=Listar_Tip_Horario&dep=" + dep, function (objJson) {
         var lista = objJson.lista;
         sel.empty();
@@ -19,30 +19,25 @@ function cargar_horarios(sel, dep) {
 }
 function llenar_horario(valor) {
     $('.cDia').empty();
+    $('.btnGuardarH').hide();
     var dias_semana = new Array("lun", "mar", "mie", "jue", "vie", "sab", "dom");
+    plDiasl($('.contDias'), false, false, false, false, false, false, false);
     $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function (objJson) {
         var lista = objJson.lista;
-        var tmax = 1;
         for (var i = 0; i < lista.length; i++) {
-            for (var j = 0; j < dias_semana.length; j++) {
-                tmax=1;
-                if (lista[i].dia === dias_semana[j]) {
-                    var d = lista[i].turno;
-                    if (parseInt(d.substring(1)) > tmax) {
-                        tmax = parseInt(d.substring(1));
+            if (lista[i].estado !== '2') {
+                for (var j = 0; j < dias_semana.length; j++) {
+                    if (lista[i].dia === dias_semana[j]) {
+                        llenar_dia(dias_semana[j], lista[i].desde, lista[i].hasta, lista[i].turno, lista[i].estado);
                     }
                 }
             }
-            for (var j = 0; j < dias_semana.length; j++) {
-                if (lista[i].dia === dias_semana[j]) {
-                    llenar_dia(dias_semana[j], lista[i].desde, lista[i].hasta, lista[i].turno, lista[i].estado, tmax);
-                }
-            }
+
         }
     });
 }
-function llenar_dia(dia, desde, hasta, turno, estado, tmax) {
-    plDiasl($('.contDias'),false,false,false,false,false,false,false);
+function llenar_dia(dia, desde, hasta, turno, estado) {
+
     switch (dia) {
         case "lun":
             dia = "Lunes";
@@ -66,8 +61,39 @@ function llenar_dia(dia, desde, hasta, turno, estado, tmax) {
             dia = "Domingo";
             break;
     }
-    $('i' + dia).click();
+    desde = parseMeridian(desde);
+    hasta = parseMeridian(hasta);
+    if ($('.i' + dia).is(':checked')) {
+        timePick($('.cTim' + dia), dia, desde, hasta);
+    } else {
+        $('.i' + dia).attr("checked", true);
+        diaL($('.cDia'), dia, 0);
+        timePick($('.cTim' + dia), dia, desde, hasta);
+    }
+    calc_Horas();
+
     //diaL($('.cDia'), dia, tmax);
+}
+function parseMeridian(valor) {
+    var va = valor.split(":");
+    var x = parseInt(va[0]);
+    var y = va[1];
+    
+    if (x < 12) {
+        return x + ":" + y + " AM";
+    } else {
+        if (x === 12) {
+            return 12 + ":" + y + " PM";
+        } else {
+            return (x - 12) + ":" + y + " PM";
+        }
+
+    }
+}
+
+function modalGuardar(){
+    var cont = $('.iModal');
+    cont.empty();
 }
 
 function plHeader(cont) {
@@ -91,7 +117,7 @@ function plHeader(cont) {
     t += '</div>';
     t += '</div>';
     t += '<div class="col col-sm-2">';
-    t += '<a class="btn btn-primary btnGuardarH" style="margin-top : 18px">Guardar Horario</a>';
+    t += '<a class="btn btn-primary btnGuardarH" style="margin-top : 18px" data-toggle="modal" data-target="#myModalEdit" >Guardar Horario</a>';
     t += '</div>';
     t += '</div>';
     t += '</fieldset>';
@@ -104,9 +130,10 @@ function plHeader(cont) {
     $(".t_horario").change(function () {
         if ($(this).val() === 'CUSTOMIZE') {
             plDiasl($('.contDias'));
+            $('.cDia').empty();
         } else {
             if ($(this).val() !== 0) {
-                
+
                 llenar_horario($(this).val());
             }
         }
@@ -175,10 +202,10 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
     t += '<i></i>Sabado</label>';
     t += '<label class="checkbox">';
     if (dom) {
-        t += '<input class="iDom" type="checkbox" name="checkbox-inline" checked="checked">';
+        t += '<input class="iDomingo" type="checkbox" name="checkbox-inline" checked="checked">';
         diaL($('.cDia'), 'Domingo');
     } else {
-        t += '<input class="iDom" type="checkbox" name="checkbox-inline">';
+        t += '<input class="iDomingo" type="checkbox" name="checkbox-inline">';
     }
     t += '<i></i>Domingo</label>';
     t += '</div>';
@@ -241,7 +268,7 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
         siGuardar();
         calc_Horas();
     });
-    $('.iDom').click(function () {
+    $('.iDomingo').click(function () {
         if ($(this).is(':checked')) {
             diaL($('.cDia'), 'Domingo');
         } else {
@@ -253,17 +280,17 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
 
 }
 function siGuardar() {
-    if ($('.cDia input').size() > 0 && $('.t_horario').val() === 'CUSTOMIZE') {
+    if ($('.cDia input').size() > 0 ) {
         $('.btnGuardarH').show();
-        $('.hTotal').show();
+        //$('.hTotal').show();
     } else {
         $('.btnGuardarH').hide();
-        $('.hTotal').hide();
+        //$('.hTotal').hide();
     }
 
 }
 function diaL(cont, nombre, turnos) {
-    
+
     if (turnos === undefined) {
         turnos = 2;
     }
@@ -302,7 +329,7 @@ function diaL(cont, nombre, turnos) {
     });
 
 }
-function timePick(cont, nombre) {
+function timePick(cont, nombre, desde, hasta) {
     var t = "";
     var c = $('.cTim' + nombre + ' input').size();
     var te = (c / 2) + 1;
@@ -342,10 +369,18 @@ function timePick(cont, nombre) {
     });
     $('.tim' + (c + 1) + nombre).timepicker().on('changeTime.timepicker', function (e) {
         calc_Horas();
+        $('.btnGuardarH').show();
     });
     $('.tim' + (c + 2) + nombre).timepicker().on('changeTime.timepicker', function (e) {
         calc_Horas();
+        $('.btnGuardarH').show();
     });
+    if (desde !== undefined) {
+        $('.tim' + (c + 1) + nombre).val(desde);
+    }
+    if (hasta !== undefined) {
+        $('.tim' + (c + 2) + nombre).val(hasta);
+    }
 
 
 }
@@ -371,7 +406,11 @@ function calc_Horas() {
 //                if ((parseInt(hb[0]) - parseInt(ha[0])) <= 0) {
 
                 if (ha[1].indexOf("AM") !== -1 && hb[1].indexOf("PM") !== -1) {
-                    htotal = htotal + ((parseInt(hb[0]) + 12) - parseInt(ha[0]));
+                    if (hb[0].indexOf("12") !== -1) {
+                        htotal = htotal + (parseInt(hb[0]) - parseInt(ha[0]));
+                    } else {
+                        htotal = htotal + ((parseInt(hb[0]) + 12) - parseInt(ha[0]));
+                    }
                 }
                 if (ha[1].indexOf("PM") !== -1 && hb[1].indexOf("AM") !== -1) {
                     htotal = htotal + ((parseInt(hb[0]) + 12) - parseInt(ha[0]));

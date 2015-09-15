@@ -709,6 +709,39 @@
                                             <div class="contDias"></div><hr>
                                             <div><fieldset class="cDia"></fieldset></div>
                                             <div class="hTotal" id="htotal"></div>
+                                            <div id="myModalEdit" class="modal fade" role="document">
+                                                <div class="modal-dialog">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h4 class="modal-title">Guardar Horario</h4>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            
+                                                                <div class="row">
+                                                                    <section class="col col-xs-12 smart-form">
+                                                                        <label class="label">Nombre</label>
+                                                                        <label class=" input">
+                                                                            <input type="text" name="NOMBRE" class="form-control modNombre" placeholder="Nombre de Horario" >
+                                                                        </label>
+                                                                    </section> 
+                                                                </div>
+                                                            
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <input type="hidden" id="modId" value="">
+                                                            <button type="button" class="btn btn-primary modAceptar" data-dismiss="modal">Aceptar</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                             <div class="logs"></div>
 
                                             <div class="smart-form" >
@@ -987,7 +1020,7 @@
     <script src="../../js/Js_Horario/horario.js" type="text/javascript"></script>
     <script>
                                                         $(document).ready(function () {
-                                                            plHeader($('.contheader'));
+                                                            //plHeader($('.contheader'));
                                                         });
     </script>
 </html>
