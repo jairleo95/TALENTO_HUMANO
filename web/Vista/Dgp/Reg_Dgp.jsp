@@ -1018,11 +1018,6 @@
     <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
     <script src="../../js/Js_DGP/Registrar/Reg_Dgps.js" type="text/javascript"></script>
     <script src="../../js/Js_Horario/horario.js" type="text/javascript"></script>
-    <script>
-                                                        $(document).ready(function () {
-                                                            //plHeader($('.contheader'));
-                                                        });
-    </script>
 </html>
 <%} else {
         response.sendRedirect("/TALENTO_HUMANO/");

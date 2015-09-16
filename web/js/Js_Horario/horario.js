@@ -5,456 +5,502 @@
  */
 
 
-function cargar_horarios(sel, dep) {
+$(document).ready(function () {
+    var nInputs = 0;
+    plHeader($('.contheader'));
+    function cargar_horarios(sel, dep) {
 
-    $.post("../../formato_horario", "opc=Listar_Tip_Horario&dep=" + dep, function (objJson) {
-        var lista = objJson.lista;
-        sel.empty();
-        sel.append('<option value="0" >[SELECCIONE]</option>');
-        for (var i = 0; i < lista.length; i++) {
-            sel.append('<option value="' + lista[i].id + '" >' + lista[i].nombre + '</option>');
-        }
-        sel.append('<option value="CUSTOMIZE" >Personalizado</option>');
-    });
-}
-function llenar_horario(valor) {
-    $('.cDia').empty();
-    $('.btnGuardarH').hide();
-    var dias_semana = new Array("lun", "mar", "mie", "jue", "vie", "sab", "dom");
-    plDiasl($('.contDias'), false, false, false, false, false, false, false);
-    $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function (objJson) {
-        var lista = objJson.lista;
-        for (var i = 0; i < lista.length; i++) {
-            if (lista[i].estado !== '2') {
-                for (var j = 0; j < dias_semana.length; j++) {
-                    if (lista[i].dia === dias_semana[j]) {
-                        llenar_dia(dias_semana[j], lista[i].desde, lista[i].hasta, lista[i].turno, lista[i].estado);
+        $.post("../../formato_horario", "opc=Listar_Tip_Horario&dep=" + dep, function (objJson) {
+            var lista = objJson.lista;
+            sel.empty();
+            sel.append('<option value="0" >[SELECCIONE]</option>');
+            for (var i = 0; i < lista.length; i++) {
+                sel.append('<option value="' + lista[i].id + '" >' + lista[i].nombre + '</option>');
+            }
+            sel.append('<option value="CUSTOMIZE" >Personalizado</option>');
+        });
+    }
+    function llenar_horario(valor) {
+        $('.cDia').empty();
+        $('.btnGuardarH').hide();
+        var dias_semana = new Array("lun", "mar", "mie", "jue", "vie", "sab", "dom");
+        plDiasl($('.contDias'), false, false, false, false, false, false, false);
+        $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function (objJson) {
+            var lista = objJson.lista;
+            for (var i = 0; i < lista.length; i++) {
+                if (lista[i].estado !== '2') {
+                    for (var j = 0; j < dias_semana.length; j++) {
+                        if (lista[i].dia === dias_semana[j]) {
+                            llenar_dia(dias_semana[j], lista[i].desde, lista[i].hasta, lista[i].turno, lista[i].estado);
+                        }
                     }
                 }
+
+            }
+        });
+        nInputs = $('.cDia input').size();
+
+    }
+    function llenar_dia(dia, desde, hasta, turno, estado) {
+
+        switch (dia) {
+            case "lun":
+                dia = "Lunes";
+                break;
+            case "mar":
+                dia = "Martes";
+                break;
+            case "mie":
+                dia = "Miercoles";
+                break;
+            case "jue":
+                dia = "Jueves";
+                break;
+            case "vie":
+                dia = "Viernes";
+                break;
+            case "sab":
+                dia = "Sabado";
+                break;
+            case "dom":
+                dia = "Domingo";
+                break;
+        }
+        desde = parseMeridian(desde);
+        hasta = parseMeridian(hasta);
+        if ($('.i' + dia).is(':checked')) {
+            timePick($('.cTim' + dia), dia, desde, hasta);
+        } else {
+            $('.i' + dia).attr("checked", true);
+            diaL($('.cDia'), dia, 0);
+            timePick($('.cTim' + dia), dia, desde, hasta);
+        }
+        calc_Horas();
+
+        //diaL($('.cDia'), dia, tmax);
+    }
+    function parseMeridian(valor) {
+        var va = valor.split(":");
+        var x = parseInt(va[0]);
+        var y = va[1];
+
+        if (x < 12) {
+            return x + ":" + y + " AM";
+        } else {
+            if (x === 12) {
+                return 12 + ":" + y + " PM";
+            } else {
+                return (x - 12) + ":" + y + " PM";
             }
 
         }
-    });
-}
-function llenar_dia(dia, desde, hasta, turno, estado) {
-
-    switch (dia) {
-        case "lun":
-            dia = "Lunes";
-            break;
-        case "mar":
-            dia = "Martes";
-            break;
-        case "mie":
-            dia = "Miercoles";
-            break;
-        case "jue":
-            dia = "Jueves";
-            break;
-        case "vie":
-            dia = "Viernes";
-            break;
-        case "sab":
-            dia = "Sabado";
-            break;
-        case "dom":
-            dia = "Domingo";
-            break;
     }
-    desde = parseMeridian(desde);
-    hasta = parseMeridian(hasta);
-    if ($('.i' + dia).is(':checked')) {
-        timePick($('.cTim' + dia), dia, desde, hasta);
-    } else {
-        $('.i' + dia).attr("checked", true);
-        diaL($('.cDia'), dia, 0);
-        timePick($('.cTim' + dia), dia, desde, hasta);
+
+    function modalGuardar() {
+        var cont = $('.iModal');
+        cont.empty();
     }
-    calc_Horas();
 
-    //diaL($('.cDia'), dia, tmax);
-}
-function parseMeridian(valor) {
-    var va = valor.split(":");
-    var x = parseInt(va[0]);
-    var y = va[1];
-    
-    if (x < 12) {
-        return x + ":" + y + " AM";
-    } else {
-        if (x === 12) {
-            return 12 + ":" + y + " PM";
-        } else {
-            return (x - 12) + ":" + y + " PM";
-        }
+    function plHeader(cont) {
+        cont.hide();
+        var t = "";
+        t += '<div class="row">';
+        t += '<div class="col col-12">';
+        t += '<center><h2>Horario</h2></center>';
+        t += '</div>';
+        t += '</div>';
+        t += '<fieldset>';
+        t += '<div class="col col-12">';
+        t += '<div class="col col-sm-10">';
+        t += '<div class="smart-form">';
+        t += '<label>Tipo de Horario</label>';
+        t += '<label class="select">';
+        t += '<select class="t_horario" name="HORARIO">';
+        t += '<option>Seleccione</option>';
+        t += '</select>';
+        t += '<i></i></label>';
+        t += '</div>';
+        t += '</div>';
+        t += '<div class="col col-sm-2">';
+        t += '<a class="btn btn-primary btnGuardarH" style="margin-top : 18px" data-toggle="modal" data-target="#myModalEdit" >Guardar Horario</a>';
+        t += '</div>';
+        t += '</div>';
+        t += '</fieldset>';
+        t += '<hr>';
+        cont.empty();
+        cont.append(t);
+        cont.show(500);
+        cargar_horarios($('.t_horario'));
+        $('.btnGuardarH').hide();
+        $(".t_horario").change(function () {
+            if ($(this).val() === 'CUSTOMIZE') {
 
-    }
-}
-
-function modalGuardar(){
-    var cont = $('.iModal');
-    cont.empty();
-}
-
-function plHeader(cont) {
-    cont.hide();
-    var t = "";
-    t += '<div class="row">';
-    t += '<div class="col col-12">';
-    t += '<center><h2>Horario</h2></center>';
-    t += '</div>';
-    t += '</div>';
-    t += '<fieldset>';
-    t += '<div class="col col-12">';
-    t += '<div class="col col-sm-10">';
-    t += '<div class="smart-form">';
-    t += '<label>Tipo de Horario</label>';
-    t += '<label class="select">';
-    t += '<select class="t_horario">';
-    t += '<option>Seleccione</option>';
-    t += '</select>';
-    t += '<i></i></label>';
-    t += '</div>';
-    t += '</div>';
-    t += '<div class="col col-sm-2">';
-    t += '<a class="btn btn-primary btnGuardarH" style="margin-top : 18px" data-toggle="modal" data-target="#myModalEdit" >Guardar Horario</a>';
-    t += '</div>';
-    t += '</div>';
-    t += '</fieldset>';
-    t += '<hr>';
-    cont.empty();
-    cont.append(t);
-    cont.show(500);
-    cargar_horarios($('.t_horario'));
-    $('.btnGuardarH').hide();
-    $(".t_horario").change(function () {
-        if ($(this).val() === 'CUSTOMIZE') {
-            plDiasl($('.contDias'));
-            $('.cDia').empty();
-        } else {
-            if ($(this).val() !== 0) {
-
-                llenar_horario($(this).val());
+                plDiasl($('.contDias'));
+                $('.cDia').empty();
+                calc_Horas();
+            } else {
+                if ($(this).val() !== 0) {
+                    llenar_horario($(this).val());
+                }
             }
-        }
-
-
-    });
-}
-function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
-    var t = "";
-    t += '<fieldset>';
-    t += '<div class="col col-12">';
-    t += '<div class="col col-sm-12">';
-    t += '<h5>D&iacute;as Laborables</h5>';
-    t += '</div>';
-    t += '</div>';
-    t += '<div class="col col-12">';
-    t += '<div class="smart-form">';
-    t += '<div class="col col-sm-12 inline-group">';
-    t += '<label class="checkbox">';
-    if (lu) {
-        t += '<input class="iLunes" type="checkbox" name="checkbox-inline" checked="checked">';
-        diaL($('.cDia'), 'Lunes');
-    } else {
-        t += '<input class="iLunes" type="checkbox" name="checkbox-inline">';
+        });
     }
-    t += '<i></i>Lunes</label>';
-    t += '<label class="checkbox">';
-    if (ma) {
-        t += '<input class="iMartes" type="checkbox" name="checkbox-inline" checked="checked">';
-        diaL($('.cDia'), 'Martes');
-    } else {
-        t += '<input class="iMartes" type="checkbox" name="checkbox-inline">';
-    }
-    t += '<i></i>Martes</label>';
-    t += '<label class="checkbox">';
-    if (mi) {
-        t += '<input class="iMiercoles" type="checkbox" name="checkbox-inline" checked="checked">';
-        diaL($('.cDia'), 'Miercoles');
-    } else {
-        t += '<input class="iMiercoles" type="checkbox" name="checkbox-inline">';
-    }
-    t += '<i></i>Miercoles</label>';
-    t += '<label class="checkbox">';
-    if (ju) {
-        t += '<input class="iJueves" type="checkbox" name="checkbox-inline" checked="checked">';
-        diaL($('.cDia'), 'Jueves');
-    } else {
-        t += '<input class="iJueves" type="checkbox" name="checkbox-inline">';
-    }
-    t += '<i></i>Jueves</label>';
-    t += '<label class="checkbox">';
-    if (vi) {
-        t += '<input class="iViernes" type="checkbox" name="checkbox-inline" checked="checked">';
-        diaL($('.cDia'), 'Viernes');
-    } else {
-        t += '<input class="iViernes" type="checkbox" name="checkbox-inline">';
-    }
-    t += '<i></i>Viernes</label>';
-    t += '<label class="checkbox">';
-    if (sa) {
-        t += '<input class="iSabado" type="checkbox" name="checkbox-inline" checked="checked">';
-        diaL($('.cDia'), 'Sabado');
-    } else {
-        t += '<input class="iSabado" type="checkbox" name="checkbox-inline">';
-    }
-    t += '<i></i>Sabado</label>';
-    t += '<label class="checkbox">';
-    if (dom) {
-        t += '<input class="iDomingo" type="checkbox" name="checkbox-inline" checked="checked">';
-        diaL($('.cDia'), 'Domingo');
-    } else {
-        t += '<input class="iDomingo" type="checkbox" name="checkbox-inline">';
-    }
-    t += '<i></i>Domingo</label>';
-    t += '</div>';
-    t += '</div>';
-    t += '</div>';
-    t += '</fieldset>';
-    cont.empty();
-    cont.append(t);
-    $('.iLunes').click(function () {
-        if ($(this).is(':checked')) {
+    function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
+        var t = "";
+        t += '<fieldset>';
+        t += '<div class="col col-12">';
+        t += '<div class="col col-sm-12">';
+        t += '<h5>D&iacute;as Laborables</h5>';
+        t += '</div>';
+        t += '</div>';
+        t += '<div class="col col-12">';
+        t += '<div class="smart-form">';
+        t += '<div class="col col-sm-12 inline-group">';
+        t += '<label class="checkbox">';
+        if (lu) {
+            t += '<input class="iLunes" type="checkbox" name="checkbox-inline" checked="checked">';
             diaL($('.cDia'), 'Lunes');
         } else {
-            $('.dia_Lunes').remove();
+            t += '<input class="iLunes" type="checkbox" name="checkbox-inline">';
         }
-        siGuardar();
-        calc_Horas();
-    });
-    $('.iMartes').click(function () {
-        if ($(this).is(':checked')) {
+        t += '<i></i>Lunes</label>';
+        t += '<label class="checkbox">';
+        if (ma) {
+            t += '<input class="iMartes" type="checkbox" name="checkbox-inline" checked="checked">';
             diaL($('.cDia'), 'Martes');
         } else {
-            $('.dia_Martes').remove();
+            t += '<input class="iMartes" type="checkbox" name="checkbox-inline">';
         }
-        siGuardar();
-        calc_Horas();
-    });
-    $('.iMiercoles').click(function () {
-        if ($(this).is(':checked')) {
+        t += '<i></i>Martes</label>';
+        t += '<label class="checkbox">';
+        if (mi) {
+            t += '<input class="iMiercoles" type="checkbox" name="checkbox-inline" checked="checked">';
             diaL($('.cDia'), 'Miercoles');
         } else {
-            $('.dia_Miercoles').remove();
+            t += '<input class="iMiercoles" type="checkbox" name="checkbox-inline">';
         }
-        siGuardar();
-        calc_Horas();
-    });
-    $('.iJueves').click(function () {
-        if ($(this).is(':checked')) {
+        t += '<i></i>Miercoles</label>';
+        t += '<label class="checkbox">';
+        if (ju) {
+            t += '<input class="iJueves" type="checkbox" name="checkbox-inline" checked="checked">';
             diaL($('.cDia'), 'Jueves');
         } else {
-            $('.dia_Jueves').remove();
+            t += '<input class="iJueves" type="checkbox" name="checkbox-inline">';
         }
-        siGuardar();
-        calc_Horas();
-    });
-    $('.iViernes').click(function () {
-        if ($(this).is(':checked')) {
+        t += '<i></i>Jueves</label>';
+        t += '<label class="checkbox">';
+        if (vi) {
+            t += '<input class="iViernes" type="checkbox" name="checkbox-inline" checked="checked">';
             diaL($('.cDia'), 'Viernes');
         } else {
-            $('.dia_Viernes').remove();
+            t += '<input class="iViernes" type="checkbox" name="checkbox-inline">';
         }
-        siGuardar();
-        calc_Horas();
-    });
-    $('.iSabado').click(function () {
-        if ($(this).is(':checked')) {
+        t += '<i></i>Viernes</label>';
+        t += '<label class="checkbox">';
+        if (sa) {
+            t += '<input class="iSabado" type="checkbox" name="checkbox-inline" checked="checked">';
             diaL($('.cDia'), 'Sabado');
         } else {
-            $('.dia_Sabado').remove();
+            t += '<input class="iSabado" type="checkbox" name="checkbox-inline">';
         }
-        siGuardar();
-        calc_Horas();
-    });
-    $('.iDomingo').click(function () {
-        if ($(this).is(':checked')) {
+        t += '<i></i>Sabado</label>';
+        t += '<label class="checkbox">';
+        if (dom) {
+            t += '<input class="iDomingo" type="checkbox" name="checkbox-inline" checked="checked">';
             diaL($('.cDia'), 'Domingo');
         } else {
-            $('.dia_Domingo').remove();
+            t += '<input class="iDomingo" type="checkbox" name="checkbox-inline">';
         }
-        siGuardar();
-        calc_Horas();
-    });
+        t += '<i></i>Domingo</label>';
+        t += '</div>';
+        t += '</div>';
+        t += '</div>';
+        t += '</fieldset>';
+        cont.empty();
+        cont.append(t);
+        $('.iLunes').click(function () {
+            if ($(this).is(':checked')) {
+                diaL($('.cDia'), 'Lunes');
+            } else {
+                $('.dia_Lunes').remove();
+            }
+            siGuardar();
+            calc_Horas();
+        });
+        $('.iMartes').click(function () {
+            if ($(this).is(':checked')) {
+                diaL($('.cDia'), 'Martes');
+            } else {
+                $('.dia_Martes').remove();
+            }
+            siGuardar();
+            calc_Horas();
+        });
+        $('.iMiercoles').click(function () {
+            if ($(this).is(':checked')) {
+                diaL($('.cDia'), 'Miercoles');
+            } else {
+                $('.dia_Miercoles').remove();
+            }
+            siGuardar();
+            calc_Horas();
+        });
+        $('.iJueves').click(function () {
+            if ($(this).is(':checked')) {
+                diaL($('.cDia'), 'Jueves');
+            } else {
+                $('.dia_Jueves').remove();
+            }
+            siGuardar();
+            calc_Horas();
+        });
+        $('.iViernes').click(function () {
+            if ($(this).is(':checked')) {
+                diaL($('.cDia'), 'Viernes');
+            } else {
+                $('.dia_Viernes').remove();
+            }
+            siGuardar();
+            calc_Horas();
+        });
+        $('.iSabado').click(function () {
+            if ($(this).is(':checked')) {
+                diaL($('.cDia'), 'Sabado');
+            } else {
+                $('.dia_Sabado').remove();
+            }
+            siGuardar();
+            calc_Horas();
+        });
+        $('.iDomingo').click(function () {
+            if ($(this).is(':checked')) {
+                diaL($('.cDia'), 'Domingo');
+            } else {
+                $('.dia_Domingo').remove();
+            }
+            siGuardar();
+            calc_Horas();
+        });
 
-}
-function siGuardar() {
-    if ($('.cDia input').size() > 0 ) {
-        $('.btnGuardarH').show();
-        //$('.hTotal').show();
-    } else {
-        $('.btnGuardarH').hide();
-        //$('.hTotal').hide();
     }
+    function siGuardar() {
+        if (nInputs !== $('.cDia input').size()) {
+            if ($('.cDia input').size() < 0) {
+                $('.btnGuardarH').hide();
+            } else {
+                $('.btnGuardarH').show();
+            }
+            //$('.hTotal').show();
+        } else {
+            $('.btnGuardarH').hide();
+            //$('.hTotal').hide();
+        }
 
-}
-function diaL(cont, nombre, turnos) {
 
-    if (turnos === undefined) {
-        turnos = 2;
     }
-    var t = "";
-    t += '<div class="col col-sm-6 dia_' + nombre + '">';
-    t += '<div class="well" style="margin-bottom: 20px;">';
-    t += '<div class="row cTim' + nombre + '">';
-    t += '<div class="col col-sm-12">';
-    t += '<a class="pull-right dupli' + nombre + '" href="#htotal"><i class="fa fa-copy"></i></a><center><label class="font-md text-primary">' + nombre + '</label></center>';
-    t += '</div>';
-    t += '</div>';
-    t += '<div class="row">';
-    t += '<div class="col col-xs-12">';
-    t += '<a class="btn text-primary pull-right addTim' + nombre + '"><i class="fa fa-plus"></i></a>';
-    t += '</div>';
-    t += '</div>';
-    t += '</div>';
-    t += '</div>';
-    cont.append(t);
-    for (var i = 0; i < turnos; i++) {
-        timePick($('.cTim' + nombre), nombre);
-    }
+    function diaL(cont, nombre, turnos) {
 
-    $('.dupli' + nombre).click(function () {
+        if (turnos === undefined) {
+            turnos = 2;
+        }
+        var t = "";
+        t += '<div class="col col-sm-6 dia_' + nombre + '">';
+        t += '<div class="well" style="margin-bottom: 20px;">';
+        t += '<div class="row cTim' + nombre + '">';
+        t += '<div class="col col-sm-12">';
+        t += '<a class="pull-right dupli' + nombre + '" href="#htotal"><i class="fa fa-copy"></i></a><center><label class="font-md text-primary">' + nombre + '</label></center>';
+        t += '</div>';
+        t += '</div>';
+        t += '<div class="row">';
+        t += '<div class="col col-xs-12">';
+        t += '<a class="btn text-primary pull-right addTim' + nombre + '"><i class="fa fa-plus"></i></a>';
+        t += '</div>';
+        t += '</div>';
+        t += '</div>';
+        t += '</div>';
+        cont.append(t);
+        for (var i = 0; i < turnos; i++) {
+            timePick($('.cTim' + nombre), nombre);
+        }
+
+        $('.dupli' + nombre).click(function () {
+            var lista = new Array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo');
+            for (var i = 0; i < lista.length; i++) {
+                var x = $('.cTim' + lista[i] + ' input').size();
+                for (var j = 0; j < x; j++) {
+                    $('.tim' + (j + 1) + lista[i]).val($('.tim' + (j + 1) + nombre).val());
+                }
+            }
+            calc_Horas();
+        });
+        $('.addTim' + nombre).click(function () {
+            timePick($('.cTim' + nombre), nombre);
+            siGuardar();
+        });
+
+    }
+    function timePick(cont, nombre, desde, hasta) {
+        var t = "";
+        var c = $('.cTim' + nombre + ' span').size();
+        var te = (c / 2) + 1;
+        t += '<div class="col col-xs-12 tmpk' + te + nombre + '">';
+        t += '<div class="col col-xs-1">T' + te + '</div>';
+        t += '<div class="col col-xs-5">';
+        t += '<div class="form-group">';
+        t += '<div class="input-group">';
+        t += '<input class="form-control tim' + (c + 1) + nombre + '" type="text" placeholder="Ingreso" name="HORA_DESDE_"' + nombre.substring(0, 3).toLowerCase() + te + '">';
+        t += '<input type="hidden" name="DIA_' + nombre.substring(0, 3).toLowerCase() + te + '" value="' + nombre.substring(0, 3).toLowerCase() + '">';
+        t += '<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>';
+        t += '</div>';
+        t += '</div>';
+        t += '</div>';
+        t += '<div class="col col-xs-5">';
+        t += '<div class="form-group">';
+        t += '<div class="input-group">';
+        t += '<input class="form-control tim' + (c + 2) + nombre + '" type="text" placeholder="Salida" name="HORA_HASTA_"' + nombre.substring(0, 3).toLowerCase() + te + '">';
+        t += '<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>';
+        t += '</div>';
+        t += '</div>';
+        t += '</div>';
+        t += '<div class="col col-xs-1">';
+        t += '<a class="btn text-danger delTim' + te + nombre + '"><i class="fa fa-times"></i></a>';
+        t += '</div>';
+        t += '</div>';
+        cont.append(t);
+        $('.delTim' + te + nombre).click(function () {
+            $('.tmpk' + te + nombre).remove();
+            siGuardar();
+            calc_Horas();
+        });
+
+        $('.tim' + (c + 1) + nombre).timepicker({
+            showMeridian: true
+        });
+        $('.tim' + (c + 2) + nombre).timepicker({
+            showMeridian: true
+        });
+        $('.tim' + (c + 1) + nombre).timepicker().on('changeTime.timepicker', function (e) {
+            calc_Horas();
+            $('.btnGuardarH').show();
+        });
+        $('.tim' + (c + 2) + nombre).timepicker().on('changeTime.timepicker', function (e) {
+            calc_Horas();
+            $('.btnGuardarH').show();
+        });
+        if (desde !== undefined) {
+            $('.tim' + (c + 1) + nombre).val(desde);
+        }
+        if (hasta !== undefined) {
+            $('.tim' + (c + 2) + nombre).val(hasta);
+        }
+
+
+    }
+    function logs(msg) {
+        //$('.logs').empty();
+        $('.logs').append(msg + "<br>");
+    }
+    function calc_Horas() {
         var lista = new Array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo');
+        var htotal = 0;
+        var mintotal = 0;
         for (var i = 0; i < lista.length; i++) {
             var x = $('.cTim' + lista[i] + ' input').size();
-            for (var j = 0; j < x; j++) {
-                $('.tim' + (j + 1) + lista[i]).val($('.tim' + (j + 1) + nombre).val());
-            }
-        }
-        calc_Horas();
-    });
-    $('.addTim' + nombre).click(function () {
-        timePick($('.cTim' + nombre), nombre);
-    });
-
-}
-function timePick(cont, nombre, desde, hasta) {
-    var t = "";
-    var c = $('.cTim' + nombre + ' input').size();
-    var te = (c / 2) + 1;
-    t += '<div class="col col-xs-12 tmpk' + te + nombre + '">';
-    t += '<div class="col col-xs-1">T' + te + '</div>';
-    t += '<div class="col col-xs-5">';
-    t += '<div class="form-group">';
-    t += '<div class="input-group">';
-    t += '<input class="form-control tim' + (c + 1) + nombre + '" type="text" placeholder="Ingreso">';
-    t += '<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>';
-    t += '</div>';
-    t += '</div>';
-    t += '</div>';
-    t += '<div class="col col-xs-5">';
-    t += '<div class="form-group">';
-    t += '<div class="input-group">';
-    t += '<input class="form-control tim' + (c + 2) + nombre + '" type="text" placeholder="Salida">';
-    t += '<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>';
-    t += '</div>';
-    t += '</div>';
-    t += '</div>';
-    t += '<div class="col col-xs-1">';
-    t += '<a class="btn text-danger delTim' + te + nombre + '"><i class="fa fa-times"></i></a>';
-    t += '</div>';
-    t += '</div>';
-    cont.append(t);
-    $('.delTim' + te + nombre).click(function () {
-        $('.tmpk' + te + nombre).remove();
-        calc_Horas();
-    });
-
-    $('.tim' + (c + 1) + nombre).timepicker({
-        showMeridian: true
-    });
-    $('.tim' + (c + 2) + nombre).timepicker({
-        showMeridian: true
-    });
-    $('.tim' + (c + 1) + nombre).timepicker().on('changeTime.timepicker', function (e) {
-        calc_Horas();
-        $('.btnGuardarH').show();
-    });
-    $('.tim' + (c + 2) + nombre).timepicker().on('changeTime.timepicker', function (e) {
-        calc_Horas();
-        $('.btnGuardarH').show();
-    });
-    if (desde !== undefined) {
-        $('.tim' + (c + 1) + nombre).val(desde);
-    }
-    if (hasta !== undefined) {
-        $('.tim' + (c + 2) + nombre).val(hasta);
-    }
-
-
-}
-function logs(msg) {
-    //$('.logs').empty();
-    $('.logs').append(msg + "<br>");
-}
-function calc_Horas() {
-    var lista = new Array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo');
-    var htotal = 0;
-    var mintotal = 0;
-    for (var i = 0; i < lista.length; i++) {
-        var x = $('.cTim' + lista[i] + ' input').size();
-        var y = (x / 2);
-        var z = 1;
-        for (var j = 0; j < y; j++) {
-            var a = $('.tim' + z + lista[i]).val();
-            z = z + 1;
-            var b = $('.tim' + z + lista[i]).val();
-            if (a !== undefined && b !== undefined) {
-                var ha = a.split(":");
-                var hb = b.split(":");
+            var y = (x / 2);
+            var z = 1;
+            for (var j = 0; j < y; j++) {
+                var a = $('.tim' + z + lista[i]).val();
+                z = z + 1;
+                var b = $('.tim' + z + lista[i]).val();
+                if (a !== undefined && b !== undefined && a !== b) {
+                    var ha = a.split(":");
+                    var hb = b.split(":");
 //                if ((parseInt(hb[0]) - parseInt(ha[0])) <= 0) {
 
-                if (ha[1].indexOf("AM") !== -1 && hb[1].indexOf("PM") !== -1) {
-                    if (hb[0].indexOf("12") !== -1) {
-                        htotal = htotal + (parseInt(hb[0]) - parseInt(ha[0]));
-                    } else {
-                        htotal = htotal + ((parseInt(hb[0]) + 12) - parseInt(ha[0]));
+                    if (ha[1].indexOf("AM") !== -1 && hb[1].indexOf("PM") !== -1) {
+                        if (hb[0].indexOf("12") !== -1) {
+                            htotal = htotal + (parseInt(hb[0]) - parseInt(ha[0]));
+                        } else {
+                            htotal = htotal + ((parseInt(hb[0]) + 12) - parseInt(ha[0]));
+                        }
                     }
-                }
-                if (ha[1].indexOf("PM") !== -1 && hb[1].indexOf("AM") !== -1) {
-                    htotal = htotal + ((parseInt(hb[0]) + 12) - parseInt(ha[0]));
-                }
-                if (ha[1].indexOf("AM") !== -1 && hb[1].indexOf("AM") !== -1) {
-                    htotal = htotal + (parseInt(hb[0]) - parseInt(ha[0]));
-                }
-                if (ha[1].indexOf("PM") !== -1 && hb[1].indexOf("PM") !== -1) {
-                    htotal = htotal + (parseInt(hb[0]) - parseInt(ha[0]));
-                }
+                    if (ha[1].indexOf("PM") !== -1 && hb[1].indexOf("AM") !== -1) {
+                        if (hb[0].indexOf("12") !== -1) {
+                            htotal = htotal + (parseInt(hb[0]) - parseInt(ha[0]));
+                        } else {
+                            htotal = htotal + ((parseInt(hb[0]) + 12) - parseInt(ha[0]));
+                        }
+                        //htotal = htotal + ((parseInt(hb[0]) + 12) - parseInt(ha[0]));
+                    }
+                    if (ha[1].indexOf("AM") !== -1 && hb[1].indexOf("AM") !== -1) {
+                        if (ha[0].indexOf("12") !== -1) {
+                            if (hb[0].indexOf("12") !== -1) {
+                                htotal = htotal + ((parseInt(hb[0])) - parseInt(ha[0]));
+                            } else {
+                                htotal = htotal + ((parseInt(hb[0]) + 12) - parseInt(ha[0]));
+                            }
+                        } else {
+                            htotal = htotal + (parseInt(hb[0]) - parseInt(ha[0]));
+                        }
+                        //htotal = htotal + (parseInt(hb[0]) - parseInt(ha[0]));
+                    }
+                    if (ha[1].indexOf("PM") !== -1 && hb[1].indexOf("PM") !== -1) {
+
+                        if (ha[0].indexOf("12") !== -1) {
+                            if (hb[0].indexOf("12") !== -1) {
+                                htotal = htotal + ((parseInt(hb[0])) - parseInt(ha[0]));
+                            } else {
+                                htotal = htotal + ((parseInt(hb[0]) + 12) - parseInt(ha[0]));
+                            }
+                        } else {
+                            htotal = htotal + (parseInt(hb[0]) - parseInt(ha[0]));
+                        }
+
+                    }
 //
 //                } else {
 //                    htotal = htotal + (parseInt(hb[0]) - parseInt(ha[0]));
 //                }
 
-                mintotal = mintotal + (parseInt(hb[1]) - parseInt(ha[1]));
+                    mintotal = mintotal + (parseInt(hb[1]) - parseInt(ha[1]));
+                }
+                z = z + 1;
             }
-            z = z + 1;
+
         }
+        if (htotal < 0) {
+            htotal = 0;
+        }
+        var r = (htotal * 60) + mintotal;
+        htotal = Math.floor((r / 60));
+        mintotal = (r % 60);
+        var msg = htotal + " Horas " + mintotal + " Minutos";
+        horasT($('.hTotal'), msg, htotal, mintotal);
 
     }
-    if (htotal < 0) {
-        htotal = 0;
+    function horasT(cont, msg, htotal, mintotal) {
+        if (msg == undefined) {
+            msg = '00';
+        }
+        var t = "";
+        t += '<hr>';
+        t += '<fieldset>';
+        t += '<div class="col col-12">';
+        t += '<div class="col col-sm-12">';
+        t += '<input name="h_total" type="hidden" value=' + toDecimal(htotal, mintotal) + ' />';
+        t += '<h4>Horas Totales : <span class="text-primary"><strong>' + msg + '</strong></span></h4>';
+        t += '</div>';
+        t += '</div>';
+        t += '</fieldset>';
+        cont.empty();
+        cont.append(t);
     }
-    var r = (htotal * 60) + mintotal;
-    htotal = Math.floor((r / 60));
-    mintotal = (r % 60);
-    var msg = htotal + " Horas " + mintotal + " Minutos";
-    horasT($('.hTotal'), msg);
+    function toDecimal(hora, min) {
+        var m = parseFloat(min) / 60;
+        var h = parseFloat(hora);
+        var r = h + m;
+        r = r.toFixed(2);
+        return r;
+    }
 
-}
-function horasT(cont, hora) {
-    if (hora == undefined) {
-        hora = '00';
-    }
-    var t = "";
-    t += '<hr>';
-    t += '<fieldset>';
-    t += '<div class="col col-12">';
-    t += '<div class="col col-sm-12">';
-    t += '<h4>Horas Totales : <span class="text-primary"><strong>' + hora + '</strong></span></h4>';
-    t += '</div>';
-    t += '</div>';
-    t += '</fieldset>';
-    cont.empty();
-    cont.append(t);
-}
+});
