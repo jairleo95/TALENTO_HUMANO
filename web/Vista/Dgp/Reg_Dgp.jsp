@@ -706,10 +706,12 @@
                                         <!-- widget content -->
                                         <div class="widget-body no-padding">
                                             <div class="contheader"></div>
-                                            <div class="contDias"></div><hr>
+                                            <div class="contDias"></div>
                                             <div><fieldset class="cDia"></fieldset></div>
                                             <div class="hTotal" id="htotal"></div>
+                                            <br>
                                             <div id="myModalEdit" class="modal fade" role="document">
+                                                <input  type="hidden" name="dep_actual" value="<%=id_dep%>" class="dep_actual" />
                                                 <div class="modal-dialog">
 
                                                     <!-- Modal content-->
@@ -745,7 +747,7 @@
                                             <div class="logs"></div>
 
                                             <div class="smart-form" >
-                                                <header class="titulo_req">
+                                                <!--<header class="titulo_req">
 
                                                     <div class="spacing">
                                                         <center><h1 class="spacing" style="font-weight: bold; margin: 0px;  color: #005cac;"> Horario</h1></center>
@@ -904,13 +906,13 @@
 
 
                                                     </div>
-                                                    <input  type="hidden" name="dep_actual" value="<%=id_dep%>" class="dep_actual" />
-                                                </fieldset>
+                                                    <input  type="hidden" name="dep_actual" value="<%--<%=id_dep%>--%>" class="dep_actual" />
+                                                </fieldset>-->
                                                 <footer>
                                                     <div class="div_info">
 
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary btn-labeled">
+                                                    <button type="submit" class="btn btn-primary btn-labeled btnSig">
                                                         Siguiente  <i class="fa fa-arrow-circle-right"></i>
                                                     </button>
                                                     <button type="button" class="btn btn-default" onclick="window.history.back();">

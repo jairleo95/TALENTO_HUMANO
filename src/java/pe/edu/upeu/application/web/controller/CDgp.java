@@ -77,6 +77,7 @@ public class CDgp extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
@@ -699,6 +700,10 @@ public class CDgp extends HttpServlet {
         out.print(gson.toJson(rpta));
         out.flush();
         out.close();
+    }
+    
+    public void guardarHorario(){
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

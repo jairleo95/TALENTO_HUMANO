@@ -16,13 +16,14 @@ import pe.edu.upeu.application.model.Tipo_Horario;
  */
 public interface InterfaceFormato_HorarioDAO {
 
-    public void Insert_Horario(String ID_TIPO_HORARIO, String NO_HORARIO, String DE_HORARIO, String ES_HORARIO, Double CA_HORAS);
+    public void Insert_Horario(String ID_TIPO_HORARIO, String NO_HORARIO, String DE_HORARIO, String ES_HORARIO, Double CA_HORAS, String id_dep);
 
     public void Eliminar_turno(String id_turno);
 
     public List<Tipo_Horario> Listar_Tipo_Horario();
 
     public List<Map<String, ?>> List_Tipo_Horario();
+    public List<Map<String, ?>> List_Tipo_HorarioDep(String iddep);
 
     public List<Map<String, ?>> Lista_Plantilla_Puesto(String id);
 

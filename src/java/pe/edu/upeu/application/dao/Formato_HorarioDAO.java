@@ -27,16 +27,17 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
     ConexionBD conn;
 
     @Override
-    public void Insert_Horario(String ID_TIPO_HORARIO, String NO_HORARIO, String DE_HORARIO, String ES_HORARIO, Double CA_HORAS) {
+    public void Insert_Horario(String ID_TIPO_HORARIO, String NO_HORARIO, String DE_HORARIO, String ES_HORARIO, Double CA_HORAS, String id_dep) {
 
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_TIPO_HORARIO (?,?,?,?,?)}");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_TIPO_HORARIO (?,?,?,?,?,?)}");
             cst.setString(1, null);
             cst.setString(2, NO_HORARIO);
             cst.setString(3, DE_HORARIO);
             cst.setString(4, ES_HORARIO);
             cst.setDouble(5, CA_HORAS);
+            cst.setString(6, id_dep);
             cst.execute();
         } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
@@ -123,6 +124,35 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "select  * from RHTR_TIPO_HORARIO where trim(es_horario) ='1'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("ID_TIPO_HORARIO"));
+                rec.put("nombre", rs.getString("NO_HORARIO"));
+
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+
+    }
+    @Override
+    public List<Map<String, ?>> List_Tipo_HorarioDep(String iddep) {
+
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select  * from RHTR_TIPO_HORARIO where trim(es_horario) ='1' AND ( ID_DEPARTAMENTO='"+iddep+"' OR ID_DEPARTAMENTO IS NULL)";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();

@@ -8,16 +8,21 @@
 $(document).ready(function () {
     var nInputs = 0;
     plHeader($('.contheader'));
-    function cargar_horarios(sel, dep) {
-
+    $('.btnSig').hide();
+    function cargar_horarios(sel, dep, nombre) {
+        var x='0';
         $.post("../../formato_horario", "opc=Listar_Tip_Horario&dep=" + dep, function (objJson) {
             var lista = objJson.lista;
             sel.empty();
             sel.append('<option value="0" >[SELECCIONE]</option>');
             for (var i = 0; i < lista.length; i++) {
+                if(lista[i].nombre===nombre){
+                    x=lista[i].id;
+                }
                 sel.append('<option value="' + lista[i].id + '" >' + lista[i].nombre + '</option>');
             }
             sel.append('<option value="CUSTOMIZE" >Personalizado</option>');
+            sel.val(x);
         });
     }
     function llenar_horario(valor) {
@@ -76,8 +81,6 @@ $(document).ready(function () {
             timePick($('.cTim' + dia), dia, desde, hasta);
         }
         calc_Horas();
-
-        //diaL($('.cDia'), dia, tmax);
     }
     function parseMeridian(valor) {
         var va = valor.split(":");
@@ -133,16 +136,32 @@ $(document).ready(function () {
         cargar_horarios($('.t_horario'));
         $('.btnGuardarH').hide();
         $(".t_horario").change(function () {
+            
+            if($(this).val()=='0'){
+                $('.hTotal').hide();
+                $('.btnSig').hide();
+            }else{
+                $('.hTotal').show();
+                $('.btnSig').show();
+            }
             if ($(this).val() === 'CUSTOMIZE') {
-
                 plDiasl($('.contDias'));
                 $('.cDia').empty();
-                calc_Horas();
             } else {
                 if ($(this).val() !== 0) {
                     llenar_horario($(this).val());
                 }
             }
+            calc_Horas();
+        });
+        $('.modAceptar').click(function(){
+            var data="opc=GuardarFH";
+            data+="&NO_HORARIO="+$('.modNombre').val();
+            data+="&CA_HORAS="+$('.h_totales').val();
+            data+="&ID_DEP="+$('.dep_actual').val();
+            $.post("../../formato_horario",data,function(){
+                cargar_horarios($('.t_horario'),$('.dep_actual').val(),$('.modNombre').val());
+            });            
         });
     }
     function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
@@ -216,6 +235,7 @@ $(document).ready(function () {
         t += '</div>';
         t += '</div>';
         t += '</fieldset>';
+        t += '<hr>';
         cont.empty();
         cont.append(t);
         $('.iLunes').click(function () {
@@ -369,6 +389,7 @@ $(document).ready(function () {
         cont.append(t);
         $('.delTim' + te + nombre).click(function () {
             $('.tmpk' + te + nombre).remove();
+            $('.t_horario').val("CUSTOMIZE");
             siGuardar();
             calc_Horas();
         });
@@ -380,10 +401,12 @@ $(document).ready(function () {
             showMeridian: true
         });
         $('.tim' + (c + 1) + nombre).timepicker().on('changeTime.timepicker', function (e) {
+            $('.t_horario').val("CUSTOMIZE");
             calc_Horas();
             $('.btnGuardarH').show();
         });
         $('.tim' + (c + 2) + nombre).timepicker().on('changeTime.timepicker', function (e) {
+            $('.t_horario').val("CUSTOMIZE");
             calc_Horas();
             $('.btnGuardarH').show();
         });
@@ -487,7 +510,7 @@ $(document).ready(function () {
         t += '<fieldset>';
         t += '<div class="col col-12">';
         t += '<div class="col col-sm-12">';
-        t += '<input name="h_total" type="hidden" value=' + toDecimal(htotal, mintotal) + ' />';
+        t += '<input class="h_totales" name="h_total" type="hidden" value=' + toDecimal(htotal, mintotal) + ' />';
         t += '<h4>Horas Totales : <span class="text-primary"><strong>' + msg + '</strong></span></h4>';
         t += '</div>';
         t += '</div>';
