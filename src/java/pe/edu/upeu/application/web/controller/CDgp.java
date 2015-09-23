@@ -315,7 +315,7 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("list_Cuenta_Sueldo", dgp.LIST_CUEN_SUEL(idtr));
             getServletContext().setAttribute("fecha_maxima_plazo", plazo.fecha_maxima_plazo());
 
-            response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CUENTA_SUELDO);
+            response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CUENTA_SUELDO+"&as_f="+dht.ASIGNACION_F(idtr));
         }
         if (opc.equals("Reg_renuncia")) {
             String iddeph = request.getParameter("idep");

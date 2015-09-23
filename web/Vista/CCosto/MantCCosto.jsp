@@ -38,7 +38,7 @@
                             </section>
                         </div>
                         <div class="row">
-                            <section class="col col-sm-4">
+                            <section class="col col-sm-3">
                                 <label class="label">Direccion</label>
                                 <label class="select">
                                     <select class="indir">
@@ -46,7 +46,7 @@
                                     </select>
                                 </label>
                             </section>
-                            <section class="col col-sm-4">
+                            <section class="col col-sm-3">
                                 <label class="label">Departmento</label>
                                 <label class="select">
                                     <select class="indep">
@@ -54,10 +54,18 @@
                                     </select>
                                 </label>
                             </section>
-                            <section class="col col-sm-4">
-                                <label class="label">Area (Opcional)</label>
+                            <section class="col col-sm-3">
+                                <label class="label">Area</label>
                                 <label class="select">
                                     <select class="inarea">
+                                        <option>[Seleccione]</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="col col-sm-3">
+                                <label class="label">Seccion</label>
+                                <label class="select">
+                                    <select class="inseccion">
                                         <option>[Seleccione]</option>
                                     </select>
                                 </label>
@@ -138,7 +146,6 @@
                 $('.tabla_t').DataTable();
                 cargar_Dir();
                 cargar_T();
-
                 function cargar_Dir() {
                     $('.indir').empty();
                     $('.indir').append("<option>[Espere..]</option>");
@@ -155,6 +162,8 @@
                         $('.indep').append("<option>[Seleccionar Direccion]</option>");
                         $('.inarea').empty();
                         $('.inarea').append("<option>[Seleccionar Departamento]</option>");
+                        $('.inseccion').empty();
+                        $('.inseccion').append("<option>[Seleccionar Area]</option>");
                         $('.indir').change(function () {
                             var id = $(this).val();
                             $('.indep').empty();
@@ -203,15 +212,39 @@
                                 $('.inarea').append("<option value=" + lista[i].id + ">" + lista[i].nombre + "</option>");
                             }
                         }
+                        $('.inarea').change(function () {
+                            var iar = $(this).val();
+                            $('.inseccion').empty();
+                            $('.inseccion').append("<option>[Espere..]</option>");
+                            cargar_sec(iar);
+                        });
                         $('.inarea > option[value="' + sel + '"]').attr("selected", "selected");
                     });
 
                 }
-                
-                function cargar_sec(id){
-                   $.post("../../MCCosto?opc=list_se",function(){
-                       
-                   });
+
+                function cargar_sec(id, selec) {
+                    var sel = "";
+                    if (selec != undefined) {
+                        sel = selec;
+                    }
+                    if (id !== undefined) {
+                        $.post("../../MCCosto?opc=list_se&id=" + id, function (objJson) {
+                            var lista = objJson.lista;
+                            if (lista.length > 0) {
+                                $('.inseccion').empty();
+                                $('.inseccion').append("<option>[Seleccione]</option>");
+                                for (var i = 0; i < lista.length; i++) {
+                                    $('.inseccion').append("<option value=" + lista[i].id + ">" + lista[i].nombre + "</option>");
+                                }
+                            }
+                            $('.inseccion > option[value="' + sel + '"]').attr("selected", "selected");
+                        });
+                    } else {
+                        $('.inseccion').empty();
+                        $('.inseccion').append("<option>[Seleccione]</option>");
+                    }
+
                 }
 
                 function cargar_T() {
@@ -234,6 +267,11 @@
                                 } else {
                                     t += "<td class='narea" + i + "' style='background-color : #d6dde7'>Sin Asignar</td>";
                                 }
+                                if (lista[i].NO_SECCION != undefined) {
+                                    t += "<td class='nseccion" + i + "' id=" + lista[i].ID_SECCION + ">" + lista[i].NO_SECCION + "</td>";
+                                } else {
+                                    t += "<td class='nseccion" + i + "' style='background-color : #d6dde7'>Sin Asignar</td>";
+                                }
                                 t += "<td id=" + i + " ><a class='txt-color-blue btnEditar btn btn-default' id=" + lista[i].ID_CENTRO_COSTO + " value=" + lista[i].ID_DIRECCION + " ><i class='glyphicon glyphicon-pencil'></i> Editar</a>";
                                 t += "<a class='txt-color-redLight btnDel btn btn-default' id=" + lista[i].ID_CENTRO_COSTO + " ><i class='glyphicon glyphicon-remove'></i> Eliminar</a></td>";
                                 t += "</tr>";
@@ -251,6 +289,7 @@
                                 $('.indir > option[value="' + valdir + '"]').attr("selected", "selected");
                                 cargar_dep(valdir, $('.ndep' + valnum).attr('id'));
                                 cargar_ar($('.ndep' + valnum).attr('id'), $('.narea' + valnum).attr('id'));
+                                cargar_sec($('.narea' + valnum).attr('id'), $('.nseccion' + valnum).attr('id'));
                                 $('#icono').removeClass('glyphicon-ok');
                                 $('#icono').addClass('glyphicon-pencil');
                                 $('.btnSave').val('2');
@@ -263,8 +302,8 @@
                                     buttons: '[No][Si]'
                                 }, function (ButtonPressed) {
                                     if (ButtonPressed === "Si") {
-                                        var ID_CENTRO_COSTO=$('.ccc' + valnum).attr('id');
-                                        $.post("../../MCCosto?opc=del_cc&ID_CENTRO_COSTO="+ID_CENTRO_COSTO, function () {
+                                        var ID_CENTRO_COSTO = $('.ccc' + valnum).attr('id');
+                                        $.post("../../MCCosto?opc=del_cc&ID_CENTRO_COSTO=" + ID_CENTRO_COSTO, function () {
                                             cargar_T();
                                             $.smallBox({
                                                 title: "Eliminar Centro de Costo",
@@ -301,19 +340,17 @@
                         }, function (ButtonPressed) {
                             if (ButtonPressed === "Si") {
 
-                                var CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA, data;
+                                var CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA, ID_SECCION, data;
                                 CO_CENTRO_COSTO = $('.inccc').val();
                                 DE_CENTRO_COSTO = $('.indcc').val();
                                 ID_DEPARTAMENTO = $('.indep').val();
-                                if ($('.inarea').val() == "[Seleccione]") {
-                                    ID_AREA = null;
-                                } else {
-                                    ID_AREA = $('.inarea').val();
-                                }
+                                ID_AREA = $('.inarea').val();
+                                ID_SECCION = $('.inseccion').val();
                                 data = "&CO_CENTRO_COSTO=" + CO_CENTRO_COSTO;
                                 data += "&DE_CENTRO_COSTO=" + DE_CENTRO_COSTO;
                                 data += "&ID_DEPARTAMENTO=" + ID_DEPARTAMENTO;
                                 data += "&ID_AREA=" + ID_AREA;
+                                data += "&ID_SECCION=" + ID_SECCION;
                                 $.post("../../MCCosto?opc=add_cc", data, function () {
                                     cargar_T();
                                     $('.inccc').val("");
@@ -346,21 +383,19 @@
                             buttons: '[No][Si]'
                         }, function (ButtonPressed) {
                             if (ButtonPressed === "Si") {
-                                var ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA, data;
+                                var ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA, ID_SECCION, data;
                                 ID_CENTRO_COSTO = $('.ccc' + valnum).attr('id');
                                 CO_CENTRO_COSTO = $('.inccc').val();
                                 DE_CENTRO_COSTO = $('.indcc').val();
                                 ID_DEPARTAMENTO = $('.indep').val();
-                                if ($('.inarea').val() == "[Seleccione]") {
-                                    ID_AREA = null;
-                                } else {
-                                    ID_AREA = $('.inarea').val();
-                                }
+                                ID_AREA = $('.inarea').val();
+                                ID_SECCION = $('.inseccion').val();
                                 data = "ID_CENTRO_COSTO=" + ID_CENTRO_COSTO;
                                 data += "&CO_CENTRO_COSTO=" + CO_CENTRO_COSTO;
                                 data += "&DE_CENTRO_COSTO=" + DE_CENTRO_COSTO;
                                 data += "&ID_DEPARTAMENTO=" + ID_DEPARTAMENTO;
                                 data += "&ID_AREA=" + ID_AREA;
+                                data += "&ID_SECCION=" + ID_SECCION;
                                 $.post("../../MCCosto?opc=edit_cc", data, function () {
                                     cargar_T();
                                     $('.inccc').val("");
@@ -401,6 +436,7 @@
                     t += '         <td class="text-center semi-bold">Detalle</td>';
                     t += '         <td class="text-center semi-bold">Departamento</td>';
                     t += '         <td class="text-center semi-bold">Area</td>';
+                    t += '         <td class="text-center semi-bold">Seccion</td>';
                     t += '         <td class="text-center semi-bold" width="12%">Acciones</td>';
                     t += '     </tr>';
                     t += ' </thead>';

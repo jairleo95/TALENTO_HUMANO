@@ -43,6 +43,8 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
                 rec.put("NO_DEP", rs.getString("NO_DEP"));
                 rec.put("ID_AREA", rs.getString("ID_AREA"));
                 rec.put("NO_AREA", rs.getString("NO_AREA"));
+                rec.put("ID_SECCION", rs.getString("ID_SECCION"));
+                rec.put("NO_SECCION", rs.getString("NO_SECCION"));
                 lista.add(rec);
             }
         } catch (SQLException e) {
@@ -59,15 +61,16 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
     }
 
     @Override
-    public boolean crearCCosto(String CO_CENTRO_COSTO, String DE_CENTRO_COSTO, String ID_DEPARTAMENTO, String ID_AREA) {
+    public boolean crearCCosto(String CO_CENTRO_COSTO, String DE_CENTRO_COSTO, String ID_DEPARTAMENTO, String ID_AREA, String ID_SECCION) {
         boolean x = false;
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_INSERT_CENTRO_COSTO( ?, ?, ?, ?)}");
+            CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_INSERT_CENTRO_COSTO( ?, ?, ?, ?, ?)}");
             cst.setString(1, CO_CENTRO_COSTO);
             cst.setString(2, DE_CENTRO_COSTO);
             cst.setString(3, ID_DEPARTAMENTO);
             cst.setString(4, ID_AREA);
+            cst.setString(5, ID_SECCION);
             x = cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -84,16 +87,17 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
     }
 
     @Override
-    public boolean editarCCosto(String ID_CENTRO_COSTO, String CO_CENTRO_COSTO, String DE_CENTRO_COSTO, String ID_DEPARTAMENTO, String ID_AREA) {
-        boolean x=true;
+    public boolean editarCCosto(String ID_CENTRO_COSTO, String CO_CENTRO_COSTO, String DE_CENTRO_COSTO, String ID_DEPARTAMENTO, String ID_AREA, String ID_SECCION) {
+        boolean x = true;
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_MOD_CENTRO_COSTO( ?, ?, ?, ?, ?)}");
+            CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_MOD_CENTRO_COSTO( ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, ID_CENTRO_COSTO);
             cst.setString(2, CO_CENTRO_COSTO);
             cst.setString(3, DE_CENTRO_COSTO);
             cst.setString(4, ID_DEPARTAMENTO);
             cst.setString(5, ID_AREA);
+            cst.setString(6, ID_SECCION);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -111,7 +115,7 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
 
     @Override
     public boolean eliminarCCosto(String ID_CENTRO_COSTO) {
-        boolean x=true;
+        boolean x = true;
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_ELIMINAR_CENTRO_COSTO( ?)}");
@@ -196,7 +200,7 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
             sql = "SELECT A.ID_AREA,A.NO_AREA\n"
                     + "FROM RHTD_AREA A, RHTX_DEPARTAMENTO D\n"
                     + "WHERE A.ID_DEPARTAMENTO=D.ID_DEPARTAMENTO\n"
-                    + "AND D.ID_DEPARTAMENTO='"+iddep+"'";
+                    + "AND D.ID_DEPARTAMENTO='" + iddep + "'";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -224,13 +228,15 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            sql = "SELECT E.ID_DEPARTAMENTO, E.NO_DEP FROM RHTX_DEPARTAMENTO E, RHTX_DIRECCION I\n"
-                    + "WHERE E.ID_DIRECCION=I.ID_DIRECCION AND E.ID_DIRECCION='" + idArea + "'";
+            sql = "SELECT S.ID_SECCION, S.NO_SECCION\n"
+                    + "FROM RHTR_SECCION S,RHTD_AREA R\n"
+                    + "WHERE S.ID_AREA= R.ID_AREA\n"
+                    + "AND R.ID_AREA='"+idArea+"'";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                rec.put("id", rs.getString("ID_DEPARTAMENTO"));
-                rec.put("nombre", rs.getString("NO_DEP"));
+                rec.put("id", rs.getString("ID_SECCION"));
+                rec.put("nombre", rs.getString("NO_SECCION"));
                 lista.add(rec);
             }
             rs.close();

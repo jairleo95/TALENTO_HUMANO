@@ -446,6 +446,13 @@
                                                                 BEV :<input type="text" name="BEV" maxlength="13" value="0.0" id="bev">
                                                             </label>
                                                         </section>
+                                                        <%if(Integer.parseInt(request.getParameter("as_f"))>0){%>
+                                                        <section class="col col-3">
+                                                            <label class="input"  id="titu"> 
+                                                                Asig Familiar :<input readonly="readonly" type="text" name="ASIGNACION_FAMILIAR" maxlength="13" value="75.0" id="asigf">
+                                                            </label>
+                                                        </section>
+                                                        <%}%>
                                                         <section class="col col-3">
                                                             <label class="input"  id="titu"> 
                                                                 Sueldo Total :<div id="suel_total" style="color: red;">0.0</div>

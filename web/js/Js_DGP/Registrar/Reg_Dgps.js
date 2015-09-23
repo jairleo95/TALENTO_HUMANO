@@ -293,6 +293,11 @@ function calcular_sueldo_total() {
     var w = parseFloat($("#bono_pu").val());
     var z = parseFloat($("#bev").val());
     var v = x + y + z + w;
+    var f= parseInt($('#asigf').val());
+    if(f>0){
+        v=v+75;
+    }
+    
     $("#suel_total").text(Math.round(v * 100) / 100);
 }
 function calcularHoras() {

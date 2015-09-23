@@ -19,7 +19,7 @@ public interface InterfaceCentroCosto {
     public List<Map<String, ?>> List_Depxdir(String iddep);
     public List<Map<String, ?>> List_Arxdep(String iddep);
     public List<Map<String, ?>> List_SecxArea(String idArea);
-    public boolean crearCCosto(String CO_CENTRO_COSTO, String DE_CENTRO_COSTO, String ID_DEPARTAMENTO, String ID_AREA);
-    public boolean editarCCosto(String ID_CENTRO_COSTO, String CO_CENTRO_COSTO, String DE_CENTRO_COSTO, String ID_DEPARTAMENTO, String ID_AREA);
+    public boolean crearCCosto(String CO_CENTRO_COSTO, String DE_CENTRO_COSTO, String ID_DEPARTAMENTO, String ID_AREA, String ID_SECCION);
+    public boolean editarCCosto(String ID_CENTRO_COSTO, String CO_CENTRO_COSTO, String DE_CENTRO_COSTO, String ID_DEPARTAMENTO, String ID_AREA ,String ID_SECCION);
     public boolean eliminarCCosto(String ID_CENTRO_COSTO);
 }

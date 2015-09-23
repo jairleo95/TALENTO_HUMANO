@@ -72,26 +72,28 @@ public class MCCosto extends HttpServlet {
             }
             if (opc.equals("list_se")) {
                 String id = request.getParameter("id");
-                List<Map<String, ?>> lista = cc.List_Arxdep(id);
+                List<Map<String, ?>> lista = cc.List_SecxArea(id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
             if (opc.equals("edit_cc")) {
-                String ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA;
+                String ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA,ID_SECCION ;
                 ID_CENTRO_COSTO = request.getParameter("ID_CENTRO_COSTO");
                 CO_CENTRO_COSTO = request.getParameter("CO_CENTRO_COSTO");
                 DE_CENTRO_COSTO = request.getParameter("DE_CENTRO_COSTO");
                 ID_DEPARTAMENTO = request.getParameter("ID_DEPARTAMENTO");
                 ID_AREA = request.getParameter("ID_AREA");
-                cc.editarCCosto(ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA);
+                ID_SECCION = request.getParameter("ID_SECCION");
+                cc.editarCCosto(ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA, ID_SECCION);
             }
             if (opc.equals("add_cc")) {
-                String CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA;
+                String CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA,ID_SECCION;
                 CO_CENTRO_COSTO = request.getParameter("CO_CENTRO_COSTO");
                 DE_CENTRO_COSTO = request.getParameter("DE_CENTRO_COSTO");
                 ID_DEPARTAMENTO = request.getParameter("ID_DEPARTAMENTO");
                 ID_AREA = request.getParameter("ID_AREA");
-                cc.crearCCosto(CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA);
+                ID_SECCION = request.getParameter("ID_SECCION");
+                cc.crearCCosto(CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA,ID_SECCION);
             }
             if (opc.equals("del_cc")) {
                 String ID_CENTRO_COSTO;
