@@ -29,6 +29,7 @@ import pe.edu.upeu.application.dao.Detalle_Centro_Costo_DAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.DocumentoDAO;
+import pe.edu.upeu.application.dao.Formato_HorarioDAO;
 import pe.edu.upeu.application.dao.FuncionDAO;
 import pe.edu.upeu.application.dao.GrupoOcupacionesDAO;
 import pe.edu.upeu.application.dao.HorarioDAO;
@@ -50,6 +51,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceDetalle_Centro_Costo;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFuncionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceGrupo_ocupacionesDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
@@ -77,7 +79,6 @@ public class CDgp extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
@@ -86,7 +87,7 @@ public class CDgp extends HttpServlet {
 
         /*Declaramos*/
         HttpSession sesion = request.getSession(true);
-
+        
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         String idpuesto = (String) sesion.getAttribute("PUESTO_ID");
         String iduser = (String) sesion.getAttribute("IDUSER");
@@ -118,7 +119,8 @@ public class CDgp extends HttpServlet {
         InterfaceDireccionDAO dir = new DireccionDAO();
         InterfacePeriodo_PagoDAO pp = new Periodo_PagoDAO();
         InterfaceSolicitud_RequerimientoDAO s = new Solicitud_RequerimientoDAO();
-        // try {
+        InterfaceFormato_HorarioDAO ifo= new Formato_HorarioDAO();
+//         try {
         if (opc.equals("Listar_Req")) {
             String id_tr = request.getParameter("idtr");
             List<Map<String, ?>> lista = dgp.list_Req(id_tr);
@@ -137,7 +139,7 @@ public class CDgp extends HttpServlet {
             rpta.put("rpta", "1");
             rpta.put("estado", respuesta);
         }
-
+        
         if (opc.equals("Registrar")) {
             System.out.println("reg");
             String FE_DESDE = request.getParameter("FEC_DESDE");
@@ -241,7 +243,7 @@ public class CDgp extends HttpServlet {
             dia.add("vie");
             dia.add("sab");
             dia.add("dom");
-
+            
             String ID_DETALLE_HORARIO = request.getParameter("ID_DETALLE_HORARIO");
             String ES_DETALLE_HORARIO = "1";
             String ES_HORARIO = "1";
@@ -255,17 +257,18 @@ public class CDgp extends HttpServlet {
             for (int i = 0; i < dia.size(); i++) {
                 for (int j = 0; j < 10; j++) {
                     String hora_desde = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
-                    
+                    hora_desde = parser24(hora_desde);
                     String hora_hasta = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
+                    hora_hasta = parser24(hora_hasta);
                     String d = request.getParameter("DIA_" + dia.get(i) + j);
-
                     if (hora_desde != null & d != null & hora_hasta != null) {
                         if (!hora_hasta.equals("") & !hora_desde.equals("") & !d.equals("")) {
                             IHor.Insert_Horario(null, hora_desde, hora_hasta, d, ES_HORARIO, id_d_hor);
+                            ifo.Insert_Formato_Horario(null, "T"+j, d, hora_desde, hora_hasta, "1", ID_TIPO_HORARIO);
                         }
                     }
                 }
-
+                
             }
             getServletContext().setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
             int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
@@ -302,22 +305,22 @@ public class CDgp extends HttpServlet {
             if (idreq.equals("11")) {
                 idreq = "REQ-0011";
             }
-
+            
             String ES_CUENTA_SUELDO = tr.CuentaSueldoTra(idtr);
-
+            
             while (ES_CUENTA_SUELDO == null) {
-
+                
                 tr.INSERT_CUENTA_SUELDO(null, null, null, null, "0", null, idtr, "0");
                 ES_CUENTA_SUELDO = tr.CuentaSueldoTra(idtr);
             }
-
+            
             getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
             getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
             getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
             getServletContext().setAttribute("list_Cuenta_Sueldo", dgp.LIST_CUEN_SUEL(idtr));
             getServletContext().setAttribute("fecha_maxima_plazo", plazo.fecha_maxima_plazo());
-
-            response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CUENTA_SUELDO+"&as_f="+dht.ASIGNACION_F(idtr));
+            
+            response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CUENTA_SUELDO + "&as_f=" + dht.ASIGNACION_F(idtr));
         }
         if (opc.equals("Reg_renuncia")) {
             String iddeph = request.getParameter("idep");
@@ -337,42 +340,42 @@ public class CDgp extends HttpServlet {
             //getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
             //response.sendRedirect("Vista/Renuncias/Reg_Dgp_Renuncia.jsp?idreq=" + idreq);
         }
-
+        
         if (opc.equals("rd")) {
-
+            
             String ID_DGP = request.getParameter("iddgp");
             String ID_TRABAJADOR = request.getParameter("idtr");
             getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
             getServletContext().setAttribute("VALIDAR_DGP_CONTR", dgp.VALIDAR_DGP_CONTR(ID_DGP, idtr));
             getServletContext().setAttribute("Cargar_dcc_dgp", cc.Cargar_dcc_dgp(ID_DGP));
             int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
-            boolean estado=s.Validar_Envio_Solicitud(ID_DGP.trim());
+            boolean estado = s.Validar_Envio_Solicitud(ID_DGP.trim());
             getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
             // out.print(ID_DGP);
 
-            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc&est="+estado );
+            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc&est=" + estado);
         }
         if (opc.equals("filtrar")) {
-
+            
             getServletContext().setAttribute("List_Area", area.List_Area_ID(iddep));
             //    int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
             getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
-
+            
             response.sendRedirect("Vista/Dgp/Busc_Req_Autorizado.jsp");
         }
         if (opc.equals("Detalle")) {
-
+            
             String ID_DGP = request.getParameter("iddgp");
             String ID_TRABAJADOR = request.getParameter("idtr");
             getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
             getServletContext().setAttribute("Cargar_dcc_dgp", cc.Cargar_dcc_dgp(ID_DGP));
             int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
             getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
-
+            
             if (idrol.trim().equals("ROL-0006")) {
-
+                
                 if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("0")) {
-
+                    
                     String iddgp = request.getParameter("iddgp");
                     String id_dir = puesto.List_Puesto_x_iddgp(iddgp);
                     getServletContext().setAttribute("List_Anno", anno.List_Anno());
@@ -383,7 +386,7 @@ public class CDgp extends HttpServlet {
                     getServletContext().setAttribute("List_modalidad", con.List_modalidad());
                     getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
                     getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
-
+                    
                     int asig = dht.ASIGNACION_F(ID_TRABAJADOR);
                     Calendar fecha = new GregorianCalendar();
                     int año = fecha.get(Calendar.YEAR);
@@ -393,11 +396,11 @@ public class CDgp extends HttpServlet {
                     if (mes < 9 && dia < 9) {
                         fe_subs = año + "-" + "0" + (mes + 1) + "-" + "0" + dia;
                     }
-
+                    
                     if (mes < 9 && dia > 9) {
                         fe_subs = año + "-" + "0" + (mes + 1) + "-" + dia;
                     }
-
+                    
                     if (mes >= 9 && dia < 9) {
                         fe_subs = año + "-" + (mes + 1) + "-" + "0" + dia;
                     }
@@ -406,10 +409,10 @@ public class CDgp extends HttpServlet {
                     }
                     //out.println(id_dir);
                     response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig + "&id_direc=" + id_dir + "&fe_subs=" + fe_subs);
-
+                    
                 } else if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("1")) {
                     String ida1 = anno.List_Anno_Max_Cont(idtr);
-
+                    
                     String id_cto = con.Contrato_max(idtr);
                     String id_pu = puesto.puesto(id_cto);
                     getServletContext().setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador_contrato(idtr));
@@ -438,9 +441,9 @@ public class CDgp extends HttpServlet {
                     response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
                 }
             } else {
-
+                
                 response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
-
+                
             }
             //response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
         }
@@ -457,11 +460,11 @@ public class CDgp extends HttpServlet {
         if (opc.equals("User_Aut")) {
             String iddgp = request.getParameter("iddgp");
             getServletContext().setAttribute("USER_DGP", dgp.USER_DGP(iddgp));
-
+            
             response.sendRedirect("Vista/Dgp/User_Dgp.jsp");
         }
         if (opc.equals("List_Dgp_Tr")) {
-
+            
             getServletContext().setAttribute("LIST_ID_TRAB_DGP", dgp.LIST_ID_TRAB_DGP(idtr));
             response.sendRedirect("Vista/Trabajador/List_Dgp_Trabajador.jsp");
         }
@@ -472,15 +475,15 @@ public class CDgp extends HttpServlet {
             getServletContext().setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
             response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp?a=t");
         }
-
+        
         if (opc.equals("Listar")) {
-
+            
             getServletContext().setAttribute("List_Det_Dgp", dgp.LIST_DET_DGP(iddep));
             getServletContext().setAttribute("List_Trb_Mod_Rel", tr.LIST_TRABAJADOR_MOD_REL());
 
             // out.print(Idgp.LIST_DET_DGP(iddep).size());
             response.sendRedirect("Vista/Dgp/List_Dgp.jsp?iddep");
-
+            
         }
         if (opc.equals("MODIFICAR REQUERIMIENTO")) {
             String iddgp = request.getParameter("iddgp");
@@ -497,7 +500,7 @@ public class CDgp extends HttpServlet {
             String redirect = request.getParameter("redirect");
             if (redirect != null) {
                 response.sendRedirect("Vista/Dgp/Editar_DGP.jsp?es_cs=" + ES_CUENTA_SUELDO + "&can_cc=" + can_cc + "&id_det_hor=" + id_d_hor.trim() + "&redirect=proceso_dgp");
-
+                
             } else {
                 response.sendRedirect("Vista/Dgp/Editar_DGP.jsp?es_cs=" + ES_CUENTA_SUELDO + "&can_cc=" + can_cc + "&id_det_hor=" + id_d_hor.trim());
             }
@@ -507,7 +510,7 @@ public class CDgp extends HttpServlet {
             String FE_HASTA = request.getParameter("FEC_HASTA");
             double CA_SUELDO = Double.parseDouble(request.getParameter("SUELDO"));
             double BONO_PUESTO = 0.0;
-
+            
             String DE_DIAS_TRABAJO = request.getParameter("DIAS_TRABAJO");
             String ID_PUESTO = request.getParameter("IDPUESTO");
             String ID_REQUERIMIENTO = request.getParameter("IDREQUERIMIENTO");
@@ -572,7 +575,7 @@ public class CDgp extends HttpServlet {
             } else {
                 ES_MFL = "0";
             }
-
+            
             dgp.MODIFICAR_DGP(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, LI_MOTIVO, ES_MFL, BONO_PUESTO);
             String iddgp = dgp.MAX_ID_DGP();
             String ESTADO = request.getParameter("ESTADO");
@@ -596,7 +599,7 @@ public class CDgp extends HttpServlet {
              */
             int cant_inicial = Integer.parseInt(request.getParameter("cant_actual_anti"));
             int cant_ingresada = Integer.parseInt(request.getParameter("cant_ingresada"));
-
+            
             for (int j = 0; j < cant_inicial; j++) {
                 if (request.getParameter("id_d_cen_cos" + (j + 1)) != null) {
                     Double porcen = Double.parseDouble(request.getParameter("porcent_ant_" + (j + 1)));
@@ -616,7 +619,7 @@ public class CDgp extends HttpServlet {
             //  List<String> list = a.Det_Autorizacion(idrp);
             // a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "", "", list.get(1), idrp, list.get(0));
             String es_mod = request.getParameter("estado_de_horario");
-
+            
             if (es_mod.equals("1")) {
                 String id_de_horario = IHor.id_detalle_horario(ID_DGP);
                 IHor.ELIMINAR_HORARIO(id_de_horario);
@@ -628,9 +631,9 @@ public class CDgp extends HttpServlet {
                 dia.add("vie");
                 dia.add("sab");
                 dia.add("dom");
-
+                
                 String ID_DETALLE_HORARIO = request.getParameter("ID_DETALLE_HORARIO");
-
+                
                 String ES_DETALLE_HORARIO = "1";
                 String ES_HORARIO = "1";
                 String ID_TIPO_HORARIO = request.getParameter("HORARIO");
@@ -682,7 +685,7 @@ public class CDgp extends HttpServlet {
             if (redireccionar != null) {
                 if (redireccionar.equals("proceso_dgp")) {
                     response.sendRedirect("dgp?iddgp=" + ID_DGP + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
-
+                    
                 }
             } else {
                 response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
@@ -704,7 +707,37 @@ public class CDgp extends HttpServlet {
         out.close();
     }
     
-    public void guardarHorario(){
+    public static String parser24(String fecha) {
+        if (fecha != null) {
+            String ret = "";
+            String[] buffer = fecha.split(":");
+            int x = Integer.parseInt(buffer[0]);
+            String[] buffer2 = buffer[1].split(" ");
+            int y = Integer.parseInt(buffer2[0]);
+            String h = buffer2[1];
+            if (h.toUpperCase().equals("AM")) {
+                if (x < 12) {
+                    ret = x + ":" + y;
+                } else {
+                    if (x == 12) {
+                        ret = 0 + ":" + y;
+                    }
+                }
+            }
+            if (h.toUpperCase().equals("PM")) {
+                if (x < 12) {
+                    ret = (x + 12) + ":" + y;
+                } else {
+                    if (x == 12) {
+                        ret = x + ":" + y;
+                    }
+                }
+                
+            }
+            return ret;
+        }else{
+            return null;
+        }
         
     }
 

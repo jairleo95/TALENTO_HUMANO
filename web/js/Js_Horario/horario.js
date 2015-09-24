@@ -14,8 +14,7 @@ $(document).ready(function () {
     $('.btnSig').hide();
     $('.btnSig').click(function () {
         if (guardar) {
-            $('#myModalEdit').modal(function () {
-            });
+            $('#myModalEdit').modal();
         } else {
             $('.formDGP').submit();
         }
@@ -28,9 +27,9 @@ $(document).ready(function () {
         data += "&id_ar=" + $('.select-area').val();
         data += "&id_sec=" + $('.select-seccion').val();
         $.post("../../formato_horario", data, function () {
-            alert($('.formDGP').serializeArray());
-            $('.formDGP').submit();
+            cargar_horarios($('.t_horario'),true,$('.modNombre').val());
         });
+        
     });
 
 });
@@ -49,6 +48,10 @@ function cargar_horarios(sel, dep, nombre) {
         }
         sel.append('<option value="CUSTOMIZE" >Personalizado</option>');
         sel.val(x);
+        if(dep===true){
+            alert($('.t_horario').val());
+            $('.formDGP').submit();
+        }
     });
 }
 function llenar_horario(valor) {
@@ -391,7 +394,7 @@ function timePick(cont, nombre, desde, hasta) {
     t += '<div class="col col-xs-5">';
     t += '<div class="form-group">';
     t += '<div class="input-group">';
-    t += '<input class="form-control tim' + (c + 1) + nombre + '" type="text" placeholder="Ingreso" name="HORA_DESDE_"' + nombre.substring(0, 3).toLowerCase() + te + '">';
+    t += '<input class="form-control tim' + (c + 1) + nombre + '" type="text" placeholder="Ingreso" name="HORA_DESDE_' + nombre.substring(0, 3).toLowerCase() + te + '">';
     t += '<input type="hidden" name="DIA_' + nombre.substring(0, 3).toLowerCase() + te + '" value="' + nombre.substring(0, 3).toLowerCase() + '">';
     t += '<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>';
     t += '</div>';
@@ -400,7 +403,7 @@ function timePick(cont, nombre, desde, hasta) {
     t += '<div class="col col-xs-5">';
     t += '<div class="form-group">';
     t += '<div class="input-group">';
-    t += '<input class="form-control tim' + (c + 2) + nombre + '" type="text" placeholder="Salida" name="HORA_HASTA_"' + nombre.substring(0, 3).toLowerCase() + te + '">';
+    t += '<input class="form-control tim' + (c + 2) + nombre + '" type="text" placeholder="Salida" name="HORA_HASTA_' + nombre.substring(0, 3).toLowerCase() + te + '">';
     t += '<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>';
     t += '</div>';
     t += '</div>';
