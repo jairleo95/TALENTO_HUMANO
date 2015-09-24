@@ -68,7 +68,7 @@ public class CFormato_Horario extends HttpServlet {
                 String ES_HORARIO = request.getParameter("ES_HORARIO");
                 Double CA_HORAS = Double.parseDouble(request.getParameter("CA_HORAS"));
 
-                Ifh.Insert_Horario(ID_TIPO_HORARIO, NO_HORARIO, DE_HORARIO, ES_HORARIO, CA_HORAS, null);
+                Ifh.Insert_Horario(ID_TIPO_HORARIO, NO_HORARIO, DE_HORARIO, ES_HORARIO, CA_HORAS, null, null, null);
                 getServletContext().setAttribute("List_Tipo_Horario", Ifh.Listar_Tipo_Horario());
                 response.sendRedirect("Vista/Formato_Horario/Detalle_Formato_Horario.jsp");
 
@@ -77,9 +77,12 @@ public class CFormato_Horario extends HttpServlet {
                 String NO_HORARIO = request.getParameter("NO_HORARIO");
                 String DE_HORARIO = request.getParameter("DE_HORARIO");
                 String ES_HORARIO = "1";
-                String ID_DEP = request.getParameter("ID_DEP");
+                String ID_DEP = sesion.getAttribute("DEPARTAMENTO_ID").toString();
                 Double CA_HORAS = Double.parseDouble(request.getParameter("CA_HORAS"));
-                Ifh.Insert_Horario(null, NO_HORARIO, DE_HORARIO, ES_HORARIO, CA_HORAS, ID_DEP);
+                String id_ar = request.getParameter("id_ar");
+                String id_sec= request.getParameter("id_sec");
+                
+                Ifh.Insert_Horario(null, NO_HORARIO, DE_HORARIO, ES_HORARIO, CA_HORAS, ID_DEP, id_ar, id_sec);
             }
 
             if (opc.equals("Listar_Formato")) {
@@ -119,7 +122,8 @@ public class CFormato_Horario extends HttpServlet {
                 response.sendRedirect("Vista/Formato_Horario/List_Formato_Horario.jsp?nofor=" + nofor + "");
             }
             if (opc.equals("Listar_Tip_Horario")) {
-                List<Map<String, ?>> lista = Ifh.List_Tipo_HorarioDep(sesion.getAttribute("DEPARTAMENTO_ID").toString());
+                String id = request.getParameter("sec");
+                List<Map<String, ?>> lista = Ifh.List_Tipo_HorarioSec(id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
 

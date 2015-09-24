@@ -104,7 +104,7 @@
             <div id="content">
                 <section id="widget-grid" class="">
                     <div class="row">
-                        <form id="checkout-form" action="../../dgp"  novalidate="novalidate">
+                        <form id="checkout-form" class="formDGP" action="../../dgp"  novalidate="novalidate">
                             <!-- NEW COL START -->
                             <article class="col-sm-12 col-md-12 col-lg-6">
                                 <div id="alerta_dgp">
@@ -455,7 +455,7 @@
                                                         <%}%>
                                                         <section class="col col-3">
                                                             <label class="input"  id="titu"> 
-                                                                Sueldo Total :<div id="suel_total" style="color: red;">0.0</div>
+                                                                Remuneracion Computable :<div id="suel_total" style="color: red;">0.0</div>
                                                             </label>
                                                         </section>
                                                     </div>
@@ -919,7 +919,7 @@
                                                     <div class="div_info">
 
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary btn-labeled btnSig">
+                                                    <button type="button" class="btn btn-primary btn-labeled btnSig">
                                                         Siguiente  <i class="fa fa-arrow-circle-right"></i>
                                                     </button>
                                                     <button type="button" class="btn btn-default" onclick="window.history.back();">

@@ -73,7 +73,7 @@ public class MCCosto extends HttpServlet {
             if (opc.equals("list_se")) {
                 String id = request.getParameter("id");
                 List<Map<String, ?>> lista = cc.List_SecxArea(id);
-                rpta.put("rpta", "1");
+                rpta.put("rpta", lista.size());
                 rpta.put("lista", lista);
             }
             if (opc.equals("edit_cc")) {

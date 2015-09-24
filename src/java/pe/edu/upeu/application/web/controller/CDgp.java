@@ -139,6 +139,7 @@ public class CDgp extends HttpServlet {
         }
 
         if (opc.equals("Registrar")) {
+            System.out.println("reg");
             String FE_DESDE = request.getParameter("FEC_DESDE");
             String FE_HASTA = request.getParameter("FEC_HASTA");
             double CA_SUELDO = Double.parseDouble(request.getParameter("SUELDO"));
@@ -254,6 +255,7 @@ public class CDgp extends HttpServlet {
             for (int i = 0; i < dia.size(); i++) {
                 for (int j = 0; j < 10; j++) {
                     String hora_desde = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
+                    
                     String hora_hasta = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
                     String d = request.getParameter("DIA_" + dia.get(i) + j);
 

@@ -770,6 +770,7 @@ $(document).ready(function () {
     });
     $(".select-seccion").change(function () {
         list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".select-seccion").val() + "&esL=1", "3");
+        cargar_horarios($('.t_horario'));
     });
     $(".select-puesto").change(function () {
         $(".select-puesto1").val($(this).val());
