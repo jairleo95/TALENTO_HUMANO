@@ -23,6 +23,7 @@ public interface InterfaceFormato_HorarioDAO {
     public List<Tipo_Horario> Listar_Tipo_Horario();
 
     public List<Map<String, ?>> List_Tipo_Horario();
+    public List<Map<String, ?>> List_Tipo_Horarios();
     public List<Map<String, ?>> List_Tipo_HorarioDep(String iddep);
     public List<Map<String, ?>> List_Tipo_HorarioSec(String idsec);
 

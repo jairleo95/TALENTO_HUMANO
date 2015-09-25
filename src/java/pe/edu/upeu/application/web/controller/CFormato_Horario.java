@@ -89,6 +89,11 @@ public class CFormato_Horario extends HttpServlet {
                 getServletContext().setAttribute("List_Tipo_Horario", Ifh.Listar_Tipo_Horario());
                 response.sendRedirect("Vista/Formato_Horario/Detalle_Formato_Horario.jsp");
             }
+            if(opc.equals("LFH")){
+                List<Map<String, ?>> lista = Ifh.List_Tipo_Horarios();
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
+            }
 
             if (opc.equals("REGISTRAR_FOR_HORARIO")) {
                 String ID_FORMATO_HORARIO = request.getParameter(null);

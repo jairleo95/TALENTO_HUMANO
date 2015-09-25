@@ -93,7 +93,7 @@
                             <div class="pull-left login-desc-box-l">
                                 <h4 class="paragraph-header">Exitoso es aquel que puede establecer una base firme con los ladrillos que los demás le tiraron!</h4>
                                 <div class="login-app-icons">
-                                    <a href="http://recursoshumanos.upeu.edu.pe/" class="btn btn-danger btn-sm">Pagina Oficial</a>
+                                    <a href="http://recursoshumanos.upeu.edu.pe/" class="btn btn-primary btn-sm">Pagina Oficial</a>
                                 </div>
                             </div>
 
