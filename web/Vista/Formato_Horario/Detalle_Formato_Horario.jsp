@@ -269,6 +269,9 @@
                 $('.bca').show(300);
                 cargar_tabla();
                 cargar_dep();
+                $('.sel_dir').change(function(){
+                    cargar_dep();
+                });
 
                 $('.btnAgregar').click(function () {
                     toggleAgregar();
