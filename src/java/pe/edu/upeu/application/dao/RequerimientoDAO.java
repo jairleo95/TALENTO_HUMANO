@@ -48,14 +48,13 @@ public class RequerimientoDAO implements InterfaceRequerimientoDAO {
     }
 
     @Override
-    public String id_det_req_proc(String iddgp,String motivo) {
+    public String id_det_req_proc(String iddgp) {
         String Id = "";
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         try {
-            CallableStatement sentencia = this.conn.conex.prepareCall("{?=call RHFU_REQ_PRO_ID_DGP(?,?)}");
+            CallableStatement sentencia = this.conn.conex.prepareCall("{?=call RHFU_REQ_PRO_ID_DGP(?)}");
             sentencia.registerOutParameter(1, Types.VARCHAR);
             sentencia.setString(2, iddgp);
-            sentencia.setString(3, motivo);
             sentencia.executeQuery();
             Id = sentencia.getString(1);
      } catch (SQLException e) {

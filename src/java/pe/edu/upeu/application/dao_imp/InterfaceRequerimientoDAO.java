@@ -17,7 +17,7 @@ public interface InterfaceRequerimientoDAO {
 
     public List<Requerimiento> Listar_Requerimiento();
 
-    public String id_det_req_proc(String iddgp,String motivo);
+    public String id_det_req_proc(String iddgp);
 
     public List<Map<String, ?>> List_Req_tipo_planilla(String id_tp);
 

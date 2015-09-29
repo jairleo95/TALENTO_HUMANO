@@ -397,7 +397,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                                 cont2++;
                             }
                         }
-                       /* if (cont == cont2) {
+                        if (cont == cont2) {
                             int Estado_usu = 1;
                             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
                             CallableStatement cst = this.conn.conex.prepareCall("{CALL VAL_CUMPLE_PLAZO( ?, ?, ?)}");
@@ -413,15 +413,15 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                             cst.setString(2, id_plazo);
                             cst.setString(3, id_cum_plazo);
                             cst.execute();
-                        }*/
+                        }
                     } else if (cont == 0) {
-                       /* int Estado_usu = 0;
+                        int Estado_usu = 0;
                         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
                         CallableStatement cst = this.conn.conex.prepareCall("{CALL VAL_CUMPLE_PLAZO( ?, ?, ?)}");
                         cst.setInt(1, Estado_usu);
                         cst.setString(2, id_plazo);
                         cst.setString(3, id_cum_plazo);
-                        cst.execute();*/
+                        cst.execute();
                     }
                 } else if (estado.trim().equals("2")) {
                 }
