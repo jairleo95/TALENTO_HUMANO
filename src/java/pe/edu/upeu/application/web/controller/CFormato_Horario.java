@@ -90,6 +90,17 @@ public class CFormato_Horario extends HttpServlet {
                 
                 Ifh.Insert_Horario(null, NO_HORARIO, DE_HORARIO, ES_HORARIO, CA_HORAS, ID_DEP, id_ar, id_sec);
             }
+            if (opc.equals("GuardarFHAdmin")) {
+                String NO_HORARIO = request.getParameter("NO_HORARIO");
+                String DE_HORARIO = request.getParameter("DE_HORARIO");
+                String ES_HORARIO = "1";
+                String ID_DEP = request.getParameter("ID_DEPARTAMENTO");
+                Double CA_HORAS = Double.parseDouble(request.getParameter("CA_HORAS"));
+                String id_ar = request.getParameter("id_ar");
+                String id_sec= request.getParameter("id_sec");
+                
+                Ifh.Insert_Horario(null, NO_HORARIO, DE_HORARIO, ES_HORARIO, CA_HORAS, ID_DEP, id_ar, id_sec);
+            }
 
             if (opc.equals("Listar_Formato")) {
                 getServletContext().setAttribute("List_Tipo_Horario", Ifh.Listar_Tipo_Horario());

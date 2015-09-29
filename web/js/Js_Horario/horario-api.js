@@ -366,7 +366,7 @@ function timePick(cont, nombre, desde, hasta) {
     var c = $('.cTim' + nombre + ' span').size();
     var te = (c / 2) + 1;
     t += '<div class="col col-xs-12 tmpk' + te + nombre + '">';
-    t += '<div class="col col-xs-2">T' + te + '</div>';
+    t += '<div class="col col-xs-1">T' + te + '</div>';
     t += '<div class="col col-xs-4">';
     t += '<div class="form-group">';
     t += '<div class="input-group">';

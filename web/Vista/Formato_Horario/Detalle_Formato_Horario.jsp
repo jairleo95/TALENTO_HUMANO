@@ -67,8 +67,8 @@
                             <div class="row">
                                 <div class="col col-sm-3">
                                     <label class="select">
-                                        <select class="sel_dir">
-                                            <option>[Seleccionar Direccion]</option>
+                                        <select class="sel_dir" required="true">
+                                            <option value="">[Seleccionar Direccion]</option>
                                             <% for (int i = 0; i < Listar_Direccion.size(); i++) {
                                                     Direccion d = new Direccion();
                                                     d = (Direccion) Listar_Direccion.get(i);
@@ -80,24 +80,22 @@
                                 </div>
                                 <div class="col col-sm-3">
                                     <label class="select">
-                                        <select class="sel_dep">
-                                            <option>[Seleccionar Departamento]</option>
-                                            <option>Ninguno</option>
+                                        <select class="sel_dep" required="true">
+                                            <option value="">[Seleccionar Departamento]</option>
                                         </select>
                                         <i></i></label>
                                 </div>
                                 <div class="col col-sm-3">
                                     <label class="select">
-                                        <select data-placeholder="Seleccionar Area"  class="sel_area"required="" >
+                                        <select class="sel_area"required="" >
                                             <option value="">[Seleccionar Area]</option>  
                                         </select>
                                         <i></i></label>
                                 </div>
                                 <div class="col col-sm-3">
                                     <label class="select">
-                                        <select class="sel_seccion">
-                                            <option>[Seleccionar Seccion]</option>
-                                            <option>Ninguno</option>
+                                        <select class="sel_seccion" required="true">
+                                            <option value="">[Seleccionar Seccion]</option>
                                         </select>
                                         <i></i></label>
                                 </div>
@@ -107,7 +105,7 @@
                 </fieldset>
                 <div class="cont_Dias">
                 </div>
-                <form>
+                <form class="frm_Dias">
                     <fieldset class="cDia">
                     </fieldset>
                 </form>
@@ -263,14 +261,28 @@
         <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
         <script>
             $(document).ready(function () {
+                // Global Variables
+                var typeofSave = 1;
+
+                //Start
+
                 $('.tbd_t').DataTable();
                 plDiasl($('.cont_Dias'));
                 $('.cont_Dias').hide();
                 $('.bca').show(300);
                 cargar_tabla();
-                cargar_dep();
-                $('.sel_dir').change(function(){
-                    cargar_dep();
+                //TRIGGERS
+                $('.sel_dir').change(function () {
+                    var idDireccion = $(this).val();
+                    cargar_dep(idDireccion);
+                });
+                $('.sel_dep').change(function () {
+                    var idDep = $(this).val();
+                    cargar_area(idDep);
+                });
+                $('.sel_area').change(function () {
+                    var idArea = $(this).val();
+                    cargar_sec(idArea);
                 });
 
                 $('.btnAgregar').click(function () {
@@ -290,32 +302,95 @@
                     $('.bca').show(400);
                 });
 
-                function cargar_area() {
-                    $.post("../../Direccion_Puesto", "opc=List_Area_RDGP", function (objJson) {
-                        var lista = objJson.lista;
-                        var cont = $('.sel_area');
-                        cont.empty();
-                        var t = "";
-                        t += '<option value ="">[Seleccione Area]</option>';
-                        for (var i = 0; i < lista.length; i++) {
-                            t += '<option value="' + lista[i].id + '">' + lista[i].nombre + '</option>';
-                        }
-                        cont.append(t);
+                $('.btnGuardar').click(function () {
+                    var data, data1;
+                    data = $('.frm_Dias').serialize();
+                    data1 = "opc=GuardarFHAdmin&NO_HORARIO=" + $('.Nom_horario').val();
+                    data1 += "&DE_HORARIO=" + $('.det_horario').val();
+                    data1 += "&CA_HORAS=" + $('.h_totales').val();
+                    data1 += "&id_ar=" + $('.sel_area').val();
+                    data1 += "&id_sec=" + $('.sel_seccion').val();
+                    data1 += "&ID_DEPARTAMENTO=" + $('.sel_dep').val();
+                    alert(typeofSave);
+                    if (typeofSave === 1) {
+                        //Guardar
+                        $.post("../../formato_horario", data1, function () {
+                            
+                        });
+                    } else if (typeofSave === 2) {
+                        //Editar
+                    }
+                    alert(data1);
+                });
+                //funciones
 
+                function cargar_area(id) {
+                    var ti = $('.sel_area');
+                    ti.empty();
+                    var data = "opc=departamento" + "&idDepartamento=" + id;
+                    ti.append('<option value="">Cargando...</option>').val('');
+                    $.post("../../funcion", data, function (objJson) {
+                        ti.empty();
+                        if (objJson.rpta == -1) {
+                            alert(objJson.mensaje);
+                            return;
+                        }
+                        var lista = objJson.lista;
+                        if (lista.length > 0) {
+                            ti.append("<option value='0'>[Seleccione Area]</option>");
+                        } else {
+                            ti.append("<option value='0'>[]</option>");
+                        }
+                        for (var i = 0; i < lista.length; i++) {
+                            var item = "<option value='" + lista[i].id_ar + "'>" + lista[i].nom_ar + "</option>";
+                            ti.append(item);
+                        }
                     });
                 }
-                function cargar_dep() {
-                    $.post("../../formato_horario", "opc=cargar_dep", function (objJson) {
-                        var lista = objJson.lista;
-                        var cont = $('.sel_dep');
-                        cont.empty();
-                        var t = "";
-                        t += '<option value ="">[Seleccione Departamento]</option>';
-                        for (var i = 0; i < lista.length; i++) {
-                            t += '<option value="' + lista[i].id + '">' + lista[i].nom + '</option>';
+                function cargar_dep(idDir) {
+                    var ti = $('.sel_dep');
+                    ti.empty();
+                    var data = "opc=direccion" + "&idDireccion=" + idDir;
+                    ti.append('<option value="">Cargando...</option>').val('');
+                    $.post("../../funcion", data, function (objJson) {
+                        ti.empty();
+                        if (objJson.rpta == -1) {
+                            alert(objJson.mensaje);
+                            return;
                         }
-                        cont.append(t);
-
+                        var lista = objJson.lista;
+                        if (lista.length > 0) {
+                            ti.append("<option value='0'>[Seleccione Departamento]</option>");
+                        } else {
+                            ti.append("<option value='0'>[]</option>");
+                        }
+                        for (var i = 0; i < lista.length; i++) {
+                            var item = "<option value='" + lista[i].id_de + "'>" + lista[i].nom_de + "</option>";
+                            ti.append(item);
+                        }
+                    });
+                }
+                function cargar_sec(id) {
+                    var ti = $('.sel_seccion');
+                    ti.empty();
+                    var data = "opc=area" + "&idArea=" + id;
+                    ti.append('<option value="">Cargando...</option>').val('');
+                    $.post("../../funcion", data, function (objJson) {
+                        ti.empty();
+                        if (objJson.rpta == -1) {
+                            alert(objJson.mensaje);
+                            return;
+                        }
+                        var lista = objJson.lista;
+                        if (lista.length > 0) {
+                            ti.append("<option value='0'>[Seleccione Seccion]</option>");
+                        } else {
+                            ti.append("<option value='0'>[]</option>");
+                        }
+                        for (var i = 0; i < lista.length; i++) {
+                            var item = "<option value='" + lista[i].id_se + "'>" + lista[i].nom_se + "</option>";
+                            ti.append(item);
+                        }
                     });
                 }
 
@@ -362,6 +437,7 @@
                             crear_tabla();
                             $('.tbd').append(t);
                             $('.btnEditar').click(function () {
+                                typeofSave = 2;
                                 $('.frmHorario').trigger('reset');
                                 plDiasl($('.cont_Dias'));
                                 $('.cDia').empty();
