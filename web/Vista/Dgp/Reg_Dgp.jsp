@@ -96,7 +96,7 @@
 
         <%            HttpSession sesion = request.getSession(true);
             String id_dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
-            String fecha_min = (String) sesion.getAttribute("FECHA_MINIMA");
+          //  String fecha_min = (String) sesion.getAttribute("FECHA_MINIMA");
         %>
     </head>
     <body>   

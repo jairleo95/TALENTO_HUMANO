@@ -293,14 +293,10 @@ public class DgpDAO implements InterfaceDgpDAO {
         if(id_dep.equals("DPT-0019")){
              sql = "select * from RHVD_ES_REQUERIMIENTO where ES_PORCENT IS NOT NULL  ORDER BY TO_NUMBER(SUBSTR(ID_DGP,5,LENGTH(ID_DGP))) DESC";
         }
-
-        //sql += (!"".equals(id_dep)) ? "where ID_DEPARTAMENTO='" + id_dep + "'" : "";
-        //sql += "order by ID_DGP";
         List<V_Es_Requerimiento> Lista = new ArrayList<V_Es_Requerimiento>();
         try {
             ResultSet rs = this.conn.query(sql);
-
-            while (rs.next()) {
+            while (rs.next()){
                 V_Es_Requerimiento v = new V_Es_Requerimiento();
                 v.setId_trabajador(rs.getString("id_trabajador"));
                 v.setAp_paterno(rs.getString("ap_paterno"));
@@ -320,7 +316,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 v.setAut_actual(rs.getString("aut_actual"));
                 v.setMes_creacion(rs.getString("mes_creacion"));
                 v.setFe_creacion(rs.getString("fe_creacion"));
-                
+                v.setNo_dep(rs.getString("no_dep"));
                 Lista.add(v);
             }
         } catch (SQLException e) {
