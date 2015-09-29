@@ -224,7 +224,10 @@
                                                     <th data-hide="phone,tablet"><i class="fa fa-fw fa-building text-muted hidden-md hidden-sm hidden-xs"></i> Acciones</th>
 
                                                     <th data-class="expand">Nombre</th>
-                                                    <th data-hide="phone,tablet">Proceso</th>
+                                                    <th data-class="expand">Proceso</th>
+                                                        <%if (ID_DEP.equals("DPT-0019")) {%>
+                                                    <th data-hide="phone,tablet">Departamento</th>
+                                                    <%}%>
                                                     <th >Estado</th>
                                                 </tr>
                                             </thead>
@@ -277,6 +280,9 @@
                                                             out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso(), ID_DEP));
                                                         %>
                                                     </div></td>
+                                                    <%if (ID_DEP.equals("DPT-0019")) {%>
+                                                    <td><%=r.getNo_dep()%></td>
+                                                    <%} %>
                                                 <td><%if (r.getEs_dgp().equals("2")) {
                                                         out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
                                                     } else {

@@ -32,6 +32,15 @@ public class V_Es_Requerimiento {
     private String fe_creacion;
     private String mes_creacion;
     private String no_req;
+    private String no_dep;
+
+    public String getNo_dep() {
+        return no_dep;
+    }
+
+    public void setNo_dep(String no_dep) {
+        this.no_dep = no_dep;
+    }
 
     public String getFe_creacion() {
         return fe_creacion;
@@ -87,6 +96,7 @@ public class V_Es_Requerimiento {
         this.fe_creacion = fe_creacion;
         this.mes_creacion = mes_creacion;
         this.no_req = no_req;
+        this.no_dep = no_dep;
     }
 
     public V_Es_Requerimiento() {
@@ -109,6 +119,7 @@ public class V_Es_Requerimiento {
         this.fe_creacion = "";
         this.mes_creacion = "";
         this.no_req = "";
+        this.no_dep = "";
     }
     private String de_foto;
     private String id_foto;
