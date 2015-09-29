@@ -371,6 +371,9 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
                 rec.put("dep", rs.getString("NO_DEP"));
                 rec.put("area", rs.getString("NO_AREA"));
                 rec.put("seccion", rs.getString("NO_SECCION"));
+                rec.put("iddep", rs.getString("ID_DEPARTAMENTO"));
+                rec.put("idarea", rs.getString("ID_AREA"));
+                rec.put("idseccion", rs.getString("ID_SECCION"));
                 Lista.add(rec);
             }
             rs.close();

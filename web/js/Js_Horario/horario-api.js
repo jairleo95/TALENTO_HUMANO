@@ -411,8 +411,8 @@ function timePick(cont, nombre, desde, hasta) {
     $('.tim' + (c + 2) + nombre).timepicker().on('changeTime.timepicker', function (e) {
         $('.t_horario').val("CUSTOMIZE");
         calc_Horas();
-//        $('.btnGuardarH').show();
         guardar = true;
+        
     });
     if (desde !== undefined) {
         $('.tim' + (c + 1) + nombre).val(desde);
@@ -519,6 +519,7 @@ function horasT(cont, msg, htotal, mintotal) {
     t += '</div>';
     t += '</div>';
     t += '</fieldset>';
+    t += '<hr>';
     cont.empty();
     cont.append(t);
 }

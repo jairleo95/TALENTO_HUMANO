@@ -39,13 +39,13 @@
                             <a class="btn btn-primary btn-circle btn-lg btnAgregar" ><span><i class="fa fa-plus"></i></span></a>
                         </div>
                         <div class="col col-sm-1 bcg" style="display: none">
+                            <a class="btn btn-primary btn-circle btn-lg btnClose"><span><i class="fa fa-arrow-left"></i></span></a>
                             <a class="btn btn-success btn-circle btn-lg btnGuardar"><span><i class="fa fa-save"></i></span></a>
-                            <a class="btn btn-warning btn-circle btn-lg btnClose"><span><i class="fa fa-times"></i></span></a>
                         </div>
                     </section>
                 </fieldset>
+                <br>
                 <fieldset class="fcGuardar" style="display: none">
-                    <br>
                     <br>
                     <form class="smart-form frmHorario">
                         <section class="col col-sm-12">
@@ -57,12 +57,12 @@
                                 </div>
                                 <div class="col col-sm-3">
                                     <label class="input">
-                                        <input type="text" placeholder="Detalle" maxlength="100" class="form-control">
+                                        <input type="text" placeholder="Detalle" maxlength="100" class="form-control det_horario">
                                     </label>
                                 </div>
                                 <div class="col col-sm-2">
                                     <label class="select">
-                                        <select>
+                                        <select class="sel_dep">
                                             <option>[Seleccionar Departamento]</option>
                                             <option>Ninguno</option>
                                         </select>
@@ -70,15 +70,14 @@
                                 </div>
                                 <div class="col col-sm-2">
                                     <label class="select">
-                                        <select>
-                                            <option>[Seleccionar Area]</option>
-                                            <option>Ninguno</option>
+                                        <select data-placeholder="Seleccionar Area"  class="sel_area"required="" >
+                                            <option value="">[Seleccionar Area]</option>  
                                         </select>
                                         <i></i></label>
                                 </div>
                                 <div class="col col-sm-2">
                                     <label class="select">
-                                        <select>
+                                        <select class="sel_seccion">
                                             <option>[Seleccionar Seccion]</option>
                                             <option>Ninguno</option>
                                         </select>
@@ -96,7 +95,7 @@
                 </form>
                 <div class="hTotal" id="htotal">
                 </div>
-                <hr>
+                <br>
                 <fieldset>
                     <section class="col col-sm-12">
                         <div class="table-responsive cnt_t">
@@ -237,7 +236,10 @@
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script src="../../js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
+        <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
+        <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
         <script src="../../js/Js_Horario/horario-api.js" type="text/javascript"></script>
+        <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
         <script>
             $(document).ready(function () {
                 $('.tbd_t').DataTable();
@@ -245,27 +247,14 @@
                 $('.cont_Dias').hide();
                 $('.bca').show(300);
                 cargar_tabla();
+                cargar_area();
+                
                 $('.btnAgregar').click(function () {
                     toggleAgregar();
                 });
-                function toggleAgregar(){
-                    if ($('.fcGuardar').is(":visible")) {
-                        $('.fcGuardar').hide(200);
-                        $('.cont_Dias').hide(200);
-                        $('.cDia').hide(200);
-                        $('.hTotal').hide(200);
-                    } else {
-                        $('.fcGuardar').show(200);
-                        $('.cont_Dias').show(200);
-                        $('.cDia').show(200);
-                        $('.hTotal').show(200);
-                    }
-                }
+
                 $('.Nom_horario').keyup(function () {
-                    if ($('.bca').is(':visible')) {
-                        $('.bca').hide(200);
-                        $('.bcg').show(400);
-                    }
+                    toggleEditar();
                 });
                 $('.btnClose').click(function () {
                     $('.frmHorario').trigger('reset');
@@ -276,46 +265,81 @@
                     $('.bcg').hide(200);
                     $('.bca').show(400);
                 });
+                
+                function cargar_area(){
+                    $.post("../../Direccion_Puesto","opc=List_Area_RDGP", function(objJson){
+                        var lista=objJson.lista;
+                        var cont=$('.sel_area');
+                        cont.empty();
+                        var t="";
+                        for(var i=0;i<lista.length;i++){
+                            t+='<option value="'+lista[i].id+'">'+lista[i].nombre+'</option>';                            
+                        }
+                        cont.append(t);
+                        
+                    });
+                }
 
 
                 function cargar_tabla() {
-                    $.post("../../formato_horario?opc=LFH", function(objJson){
-                        var lista= objJson.lista;
-                        if(lista.length > 0){
-                            var t="";
-                            for(var i=0;i<lista.length;i++){
-                                if(lista[i].nombre===undefined){
-                                    lista[i].nombre='Sin Datos';
+                    $.post("../../formato_horario?opc=LFH", function (objJson) {
+                        var lista = objJson.lista;
+                        if (lista.length > 0) {
+                            var t = "";
+                            for (var i = 0; i < lista.length; i++) {
+                                var x = i + 1;
+                                if (lista[i].nombre === undefined) {
+                                    lista[i].nombre = 'Sin Datos';
                                 }
-                                if(lista[i].detalle === undefined){
-                                    lista[i].detalle='Sin Datos';
+                                if (lista[i].detalle === undefined) {
+                                    lista[i].detalle = 'Sin Datos';
                                 }
-                                if(lista[i].horas === undefined){
-                                    lista[i].horas='Sin Datos';
+                                if (lista[i].horas === undefined) {
+                                    lista[i].horas = 'Sin Datos';
                                 }
-                                if(lista[i].dep===undefined){
-                                    lista[i].dep='Sin Datos';
+                                if (lista[i].dep === undefined) {
+                                    lista[i].dep = 'Sin Datos';
                                 }
-                                if(lista[i].area===undefined){
-                                    lista[i].area='Sin Datos';
+                                if (lista[i].area === undefined) {
+                                    lista[i].area = 'Sin Datos';
                                 }
-                                if(lista[i].seccion===undefined){
-                                    lista[i].seccion='Sin Datos';
+                                if (lista[i].seccion === undefined) {
+                                    lista[i].seccion = 'Sin Datos';
                                 }
-                                
-                                t+="<tr>";
-                                t+="<td>"+(i+1)+"</td>";
-                                t+="<td>"+lista[i].nombre+"</td>";
-                                t+="<td>"+lista[i].detalle+"</td>";
-                                t+="<td>"+lista[i].horas+"</td>";
-                                t+="<td>"+lista[i].dep+"</td>";
-                                t+="<td>"+lista[i].area+"</td>";
-                                t+="<td>"+lista[i].seccion+"</td>";
-                                t+="<td><a class='btn btn-link'><span><i class='fa fa-pencil'></i></span></a><a class='btn btn-link'><span><i class='fa fa-times'></i></span></a></td>";
-                                t+="</tr>";
+
+                                t += "<tr id='" + lista[i].id + "'>";
+                                t += "<td>" + x + "</td>";
+                                t += "<td class='nombre" + x + "'>" + lista[i].nombre + "</td>";
+                                t += "<td class='detalle" + x + "'>" + lista[i].detalle + "</td>";
+                                t += "<td class='horas" + x + "'>" + lista[i].horas + "</td>";
+                                t += "<td id='" + lista[i].iddep + "' class='dep" + x + "'>" + lista[i].dep + "</td>";
+                                t += "<td id='" + lista[i].idarea + "' class='area" + x + "'>" + lista[i].area + "</td>";
+                                t += "<td id='" + lista[i].idseccion + "' class='seccion" + x + "'>" + lista[i].seccion + "</td>";
+                                t += "<td><a class='btn btn-link btnVer' target='blanck' href='../../formato_horario?opc=LISTAR_FORMATO_HORARIO&idth=" + lista[i].id + "&nofor=" + lista[i].nombre + "'><span><i class='fa fa-eye'></i></span></a>";
+                                t += "<a id='" + x + "' class='btn btn-link btnEditar' href='#'><span><i class='fa fa-pencil'></i></span></a>";
+                                t += "<a class='btn btn-link btnEliminar' href='#'><span><i class='fa fa-times'></i></span></a></td>";
+                                t += "</tr>";
                             }
                             crear_tabla();
                             $('.tbd').append(t);
+                            $('.btnEditar').click(function () {
+                                var num = $(this).attr('id');
+                                if ($('.bca').is(":visible")) {
+                                    $('.bca').hide(200);
+                                    $('.bcg').show(400);
+                                    $('.fcGuardar').show(200);
+                                    $('.cont_Dias').show(200);
+                                    $('.cDia').show(200);
+                                    $('.hTotal').show(200);
+                                }
+                                llenar_horario($(this).parent().parent().attr('id'));
+                                cargarDatos($('.Nom_horario'), $('.nombre' + num).text());
+                                if ($('.detalle' + num).text() === 'Sin Datos') {
+                                    cargarDatos($('.det_horario'), "");
+                                } else {
+                                    cargarDatos($('.det_horario'), $('.detalle' + num).text());
+                                }
+                            });
                             $('.tbd_t').DataTable();
                         }
                     });
@@ -323,15 +347,53 @@
                 }
                 function crear_tabla() {
                     var t = "";
-                    t+='<table class="table table-hover table-responsive table-striped tbd_t">';
-                    t+='<thead><tr><td>Nro</td><td>Nombre</td><td>Comentario</td><td>Cant Horas</td>';
-                    t+='<td>Departamento</td><td>Area</td><td>Seccion</td><td>Opciones</td></tr>';
-                    t+='</thead><tbody class="tbd"></tbody></table>';
+                    t += '<table class="table table-hover table-responsive table-striped tbd_t">';
+                    t += '<thead><tr><td>Nro</td><td>Nombre</td><td>Comentario</td><td>Cant Horas</td>';
+                    t += '<td>Departamento</td><td>Area</td><td>Seccion</td><td>Opciones</td></tr>';
+                    t += '</thead><tbody class="tbd"></tbody></table>';
                     $('.cnt_t').empty();
                     $('.cnt_t').append(t);
                 }
 
             });
+            function toggleAgregar() {
+                if ($('.fcGuardar').is(":visible")) {
+                    $('.fcGuardar').hide(200);
+                    $('.cont_Dias').hide(200);
+                    $('.cDia').hide(200);
+                    $('.hTotal').hide(200);
+                } else {
+                    $('.fcGuardar').show(200);
+                    $('.cont_Dias').show(200);
+                    $('.cDia').show(200);
+                    $('.hTotal').show(200);
+                }
+            }
+            function toggleEditar() {
+                if ($('.bca').is(':visible')) {
+                    $('.bca').hide(200);
+                    $('.bcg').show(400);
+                }
+            }
+            function disableElements(el) {
+                for (var i = 0; i < el.length; i++) {
+                    el[i].disabled = true;
+
+                    disableElements(el[i].children);
+                }
+            }
+
+            function enableElements(el) {
+                for (var i = 0; i < el.length; i++) {
+                    el[i].disabled = false;
+
+                    enableElements(el[i].children);
+                }
+            }
+            function cargarDatos(cont, valor) {
+                cont.val(valor);
+            }
+
         </script>
     </body>
 </html>
