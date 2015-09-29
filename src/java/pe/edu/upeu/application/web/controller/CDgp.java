@@ -214,7 +214,7 @@ public class CDgp extends HttpServlet {
                     tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, ID_TRABAJADOR, ES_CUENTA_SUELDO);
                 }
             }
-            String idrp = IReq.id_det_req_proc(iddgp);
+            String idrp = IReq.id_det_req_proc(iddgp,LI_MOTIVO);
             for (int i = 1; i <= cantidad; i++) {
                 String ID_PERIODO_PAG0 = null;
                 double NU_CUOTA = Double.parseDouble(request.getParameter("CUOTA_" + i));
@@ -449,8 +449,9 @@ public class CDgp extends HttpServlet {
         }
         if (opc.equals("Seguimiento")) {
             String iddgp = request.getParameter("iddgp");
-            String idrp = IReq.id_det_req_proc(iddgp);
-            getServletContext().setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(iddgp, idrp));
+            /*corregir*/
+            //String idrp = IReq.id_det_req_proc(iddgp,LI_MOTIVO);
+            /*getServletContext().setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(iddgp, idrp));*/
             response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
         }
         if (opc.equals("Proceso")) {
