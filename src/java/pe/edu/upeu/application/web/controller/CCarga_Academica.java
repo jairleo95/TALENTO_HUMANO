@@ -165,15 +165,12 @@ public class CCarga_Academica extends HttpServlet {
             for (int i = 0; i < carga.Lista_detalle_academico(ID_TRABAJADOR, facultad, eap).size(); i++) {
                 carga.INSERT_DETALLE_CARGA_ACADEMICA(null, ID_PROCESO_CARGA_AC.trim(), carga.Lista_detalle_academico(ID_TRABAJADOR, facultad, eap).get(i).getId_carga_academica(), "1");
             }
-            String idrp = IReq.id_det_req_proc(iddgp.trim());
+            //String idrp = IReq.id_det_req_proc(iddgp.trim());
             /* REGISTRAR PRIMERA AUTORIZACION*/
-            List<String> list = a.Det_Autorizacion(idrp);
-            //  a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "", "", list.get(1), idrp, list.get(0));
+            /*List<String> list = a.Det_Autorizacion(idrp);
             a.Insert_Autorizacion("", iddgp.trim(), "1", "P1", "", iduser, "", "", "", list.get(1).trim(), idrp.trim(), list.get(0));
 
-            /*Enviar Parametros*/
-            out.println((ID_PROCESO_CARGA_AC.trim() + ":" + iddgp.trim()).trim());
-
+*/
         }
     }
 

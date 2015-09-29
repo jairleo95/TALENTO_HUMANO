@@ -87,7 +87,6 @@ public class CDgp extends HttpServlet {
 
         /*Declaramos*/
         HttpSession sesion = request.getSession(true);
-        
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         String idpuesto = (String) sesion.getAttribute("PUESTO_ID");
         String iduser = (String) sesion.getAttribute("IDUSER");
@@ -448,6 +447,7 @@ public class CDgp extends HttpServlet {
         }
         if (opc.equals("Seguimiento")) {
             String iddgp = request.getParameter("iddgp");
+            /*corregir*/
             String idrp = IReq.id_det_req_proc(iddgp);
             getServletContext().setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(iddgp, idrp));
             response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
