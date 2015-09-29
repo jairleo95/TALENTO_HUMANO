@@ -13,6 +13,7 @@ $(document).ready(function () {
     plHeader($('.contheader'));
     $('.btnSig').hide();
     $('.btnSig').click(function () {
+        guardar=false;
         if (guardar) {
             $('#myModalEdit').modal();
         } else {
@@ -49,7 +50,6 @@ function cargar_horarios(sel, dep, nombre) {
         sel.append('<option value="CUSTOMIZE" >Personalizado</option>');
         sel.val(x);
         if(dep===true){
-            alert($('.t_horario').val());
             $('.formDGP').submit();
         }
     });
@@ -110,6 +110,7 @@ function llenar_dia(dia, desde, hasta, turno, estado) {
         diaL($('.cDia'), dia, 0);
         timePick($('.cTim' + dia), dia, desde, hasta);
     }
+    disableElements($('.cDia'));
     calc_Horas();
 }
 function parseMeridian(valor) {
@@ -183,9 +184,17 @@ function plHeader(cont) {
                 llenar_horario($(this).val());
             }
         }
+        disableElements($('.contDias'));
         calc_Horas();
     });
 }
+function disableElements(el) {
+                for (var i = 0; i < el.length; i++) {
+                    el[i].disabled = true;
+
+                    disableElements(el[i].children);
+                }
+            }
 function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
     var t = "";
     t += '<fieldset>';
@@ -390,8 +399,8 @@ function timePick(cont, nombre, desde, hasta) {
     var c = $('.cTim' + nombre + ' span').size();
     var te = (c / 2) + 1;
     t += '<div class="col col-xs-12 tmpk' + te + nombre + '">';
-    t += '<div class="col col-xs-1">T' + te + '</div>';
-    t += '<div class="col col-xs-5">';
+    t += '<div class="col col-xs-2">T' + te + '</div>';
+    t += '<div class="col col-xs-4">';
     t += '<div class="form-group">';
     t += '<div class="input-group">';
     t += '<input class="form-control tim' + (c + 1) + nombre + '" type="text" placeholder="Ingreso" name="HORA_DESDE_' + nombre.substring(0, 3).toLowerCase() + te + '">';
@@ -400,7 +409,7 @@ function timePick(cont, nombre, desde, hasta) {
     t += '</div>';
     t += '</div>';
     t += '</div>';
-    t += '<div class="col col-xs-5">';
+    t += '<div class="col col-xs-4">';
     t += '<div class="form-group">';
     t += '<div class="input-group">';
     t += '<input class="form-control tim' + (c + 2) + nombre + '" type="text" placeholder="Salida" name="HORA_HASTA_' + nombre.substring(0, 3).toLowerCase() + te + '">';
@@ -408,7 +417,7 @@ function timePick(cont, nombre, desde, hasta) {
     t += '</div>';
     t += '</div>';
     t += '</div>';
-    t += '<div class="col col-xs-1">';
+    t += '<div class="col col-xs-2">';
     t += '<a class="btn text-danger delTim' + te + nombre + '"><i class="fa fa-times"></i></a>';
     t += '</div>';
     t += '</div>';

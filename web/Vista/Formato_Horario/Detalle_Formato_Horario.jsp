@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Direccion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -13,6 +14,7 @@
 <%@page import="pe.edu.upeu.application.model.Tipo_Horario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="List_Tipo_Horario" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Direccion" scope="application" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -55,12 +57,28 @@
                                         <input type="text" placeholder="Nombre de Horario" maxlength="50" class="form-control Nom_horario">
                                     </label>
                                 </div>
-                                <div class="col col-sm-3">
+                                <div class="col col-sm-9">
                                     <label class="input">
                                         <input type="text" placeholder="Detalle" maxlength="100" class="form-control det_horario">
                                     </label>
                                 </div>
-                                <div class="col col-sm-2">
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col col-sm-3">
+                                    <label class="select">
+                                        <select class="sel_dir">
+                                            <option>[Seleccionar Direccion]</option>
+                                            <% for (int i = 0; i < Listar_Direccion.size(); i++) {
+                                                    Direccion d = new Direccion();
+                                                    d = (Direccion) Listar_Direccion.get(i);
+                                            %>
+                                            <option value="<%=d.getId_direccion()%>"><%=d.getNo_direccion()%></option>
+                                            <%}%>
+                                        </select>
+                                        <i></i></label>
+                                </div>
+                                <div class="col col-sm-3">
                                     <label class="select">
                                         <select class="sel_dep">
                                             <option>[Seleccionar Departamento]</option>
@@ -68,14 +86,14 @@
                                         </select>
                                         <i></i></label>
                                 </div>
-                                <div class="col col-sm-2">
+                                <div class="col col-sm-3">
                                     <label class="select">
                                         <select data-placeholder="Seleccionar Area"  class="sel_area"required="" >
                                             <option value="">[Seleccionar Area]</option>  
                                         </select>
                                         <i></i></label>
                                 </div>
-                                <div class="col col-sm-2">
+                                <div class="col col-sm-3">
                                     <label class="select">
                                         <select class="sel_seccion">
                                             <option>[Seleccionar Seccion]</option>
@@ -127,7 +145,7 @@
                         <div class="row">
                             <section class="col col-xs-12">
                                 <label class="label">Comentario</label>
-                                <label class="textarea">
+                                <label class="textarea ">
                                     <textarea name="DE_HORARIO" rows="4"></textarea>
                                 </label>
                             </section>
@@ -198,6 +216,9 @@
                     </div>
                 </section>
             </div>
+            <div class="logs">
+
+            </div>
 
         </div>
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
@@ -247,8 +268,8 @@
                 $('.cont_Dias').hide();
                 $('.bca').show(300);
                 cargar_tabla();
-                cargar_area();
-                
+                cargar_dep();
+
                 $('.btnAgregar').click(function () {
                     toggleAgregar();
                 });
@@ -265,18 +286,33 @@
                     $('.bcg').hide(200);
                     $('.bca').show(400);
                 });
-                
-                function cargar_area(){
-                    $.post("../../Direccion_Puesto","opc=List_Area_RDGP", function(objJson){
-                        var lista=objJson.lista;
-                        var cont=$('.sel_area');
+
+                function cargar_area() {
+                    $.post("../../Direccion_Puesto", "opc=List_Area_RDGP", function (objJson) {
+                        var lista = objJson.lista;
+                        var cont = $('.sel_area');
                         cont.empty();
-                        var t="";
-                        for(var i=0;i<lista.length;i++){
-                            t+='<option value="'+lista[i].id+'">'+lista[i].nombre+'</option>';                            
+                        var t = "";
+                        t += '<option value ="">[Seleccione Area]</option>';
+                        for (var i = 0; i < lista.length; i++) {
+                            t += '<option value="' + lista[i].id + '">' + lista[i].nombre + '</option>';
                         }
                         cont.append(t);
-                        
+
+                    });
+                }
+                function cargar_dep() {
+                    $.post("../../formato_horario", "opc=cargar_dep", function (objJson) {
+                        var lista = objJson.lista;
+                        var cont = $('.sel_dep');
+                        cont.empty();
+                        var t = "";
+                        t += '<option value ="">[Seleccione Departamento]</option>';
+                        for (var i = 0; i < lista.length; i++) {
+                            t += '<option value="' + lista[i].id + '">' + lista[i].nom + '</option>';
+                        }
+                        cont.append(t);
+
                     });
                 }
 
@@ -323,15 +359,11 @@
                             crear_tabla();
                             $('.tbd').append(t);
                             $('.btnEditar').click(function () {
+                                $('.frmHorario').trigger('reset');
+                                plDiasl($('.cont_Dias'));
+                                $('.cDia').empty();
+                                calc_Horas();
                                 var num = $(this).attr('id');
-                                if ($('.bca').is(":visible")) {
-                                    $('.bca').hide(200);
-                                    $('.bcg').show(400);
-                                    $('.fcGuardar').show(200);
-                                    $('.cont_Dias').show(200);
-                                    $('.cDia').show(200);
-                                    $('.hTotal').show(200);
-                                }
                                 llenar_horario($(this).parent().parent().attr('id'));
                                 cargarDatos($('.Nom_horario'), $('.nombre' + num).text());
                                 if ($('.detalle' + num).text() === 'Sin Datos') {
@@ -339,6 +371,15 @@
                                 } else {
                                     cargarDatos($('.det_horario'), $('.detalle' + num).text());
                                 }
+                                //if ($('.bca').is(":visible")) {
+                                $('.bca').hide(200);
+                                $('.bcg').show(400);
+                                $('.fcGuardar').show(200);
+                                $('.cont_Dias').show(200);
+                                $('.cDia').show(100);
+                                $('.hTotal').show(200);
+                                //}
+
                             });
                             $('.tbd_t').DataTable();
                         }

@@ -264,11 +264,10 @@ public class CDgp extends HttpServlet {
                     if (hora_desde != null & d != null & hora_hasta != null) {
                         if (!hora_hasta.equals("") & !hora_desde.equals("") & !d.equals("")) {
                             IHor.Insert_Horario(null, hora_desde, hora_hasta, d, ES_HORARIO, id_d_hor);
-                            ifo.Insert_Formato_Horario(null, "T"+j, d, hora_desde, hora_hasta, "1", ID_TIPO_HORARIO);
+                            //ifo.Insert_Formato_Horario(null, "T"+j, d, hora_desde, hora_hasta, "1", ID_TIPO_HORARIO);
                         }
                     }
                 }
-                
             }
             getServletContext().setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
             int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);

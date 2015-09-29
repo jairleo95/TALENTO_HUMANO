@@ -19,8 +19,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.Carrera_UniversidadDAO;
+import pe.edu.upeu.application.dao.DepartamentoDao;
+import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.Formato_HorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCarrera_UniversidadDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDepartamentoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO;
 
 /**
@@ -47,6 +51,8 @@ public class CFormato_Horario extends HttpServlet {
         HttpSession sesion = request.getSession(true);
 
         InterfaceFormato_HorarioDAO Ifh = new Formato_HorarioDAO();
+        InterfaceDepartamentoDAO dp= new DepartamentoDao();
+        InterfaceDireccionDAO di = new DireccionDAO();
 
         String opc = request.getParameter("opc");
         Map<String, Object> rpta = new HashMap<String, Object>();
@@ -87,6 +93,7 @@ public class CFormato_Horario extends HttpServlet {
 
             if (opc.equals("Listar_Formato")) {
                 getServletContext().setAttribute("List_Tipo_Horario", Ifh.Listar_Tipo_Horario());
+                getServletContext().setAttribute("Listar_Direccion", di.Listar_Direccion());
                 response.sendRedirect("Vista/Formato_Horario/Detalle_Formato_Horario.jsp");
             }
             if(opc.equals("LFH")){
@@ -131,7 +138,6 @@ public class CFormato_Horario extends HttpServlet {
                 List<Map<String, ?>> lista = Ifh.List_Tipo_HorarioSec(id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
-
             }
             if (opc.equals("Eliminar_turno")) {
                 String id_horario = request.getParameter("id_horario");
@@ -150,7 +156,9 @@ public class CFormato_Horario extends HttpServlet {
                 rpta.put("lista", lista);
             }
             if (opc.equals("cargar_dep")) {
-                                
+                List<Map<String,?>> lista= dp.List_departamento_2();
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
             }
 
         } catch (Exception e) {

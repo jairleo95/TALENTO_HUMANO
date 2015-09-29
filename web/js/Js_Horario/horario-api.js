@@ -31,12 +31,12 @@ function cargar_horarios(sel, dep, nombre) {
     });
 }
 function llenar_horario(valor) {
-    $('.cDia').empty();
 //    $('.btnGuardarH').hide();
     guardar = false;
     var dias_semana = new Array("lun", "mar", "mie", "jue", "vie", "sab", "dom");
     plDiasl($('.contDias'), false, false, false, false, false, false, false);
     $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function (objJson) {
+        
         var lista = objJson.lista;
         for (var i = 0; i < lista.length; i++) {
             if (lista[i].estado !== '2') {
@@ -50,7 +50,7 @@ function llenar_horario(valor) {
         }
     });
     nInputs = $('.cDia input').size();
-
+    
 }
 function llenar_dia(dia, desde, hasta, turno, estado) {
 
@@ -366,8 +366,8 @@ function timePick(cont, nombre, desde, hasta) {
     var c = $('.cTim' + nombre + ' span').size();
     var te = (c / 2) + 1;
     t += '<div class="col col-xs-12 tmpk' + te + nombre + '">';
-    t += '<div class="col col-xs-1">T' + te + '</div>';
-    t += '<div class="col col-xs-5">';
+    t += '<div class="col col-xs-2">T' + te + '</div>';
+    t += '<div class="col col-xs-4">';
     t += '<div class="form-group">';
     t += '<div class="input-group">';
     t += '<input class="form-control tim' + (c + 1) + nombre + '" type="text" placeholder="Ingreso" name="HORA_DESDE_' + nombre.substring(0, 3).toLowerCase() + te + '">';
@@ -376,7 +376,7 @@ function timePick(cont, nombre, desde, hasta) {
     t += '</div>';
     t += '</div>';
     t += '</div>';
-    t += '<div class="col col-xs-5">';
+    t += '<div class="col col-xs-4">';
     t += '<div class="form-group">';
     t += '<div class="input-group">';
     t += '<input class="form-control tim' + (c + 2) + nombre + '" type="text" placeholder="Salida" name="HORA_HASTA_' + nombre.substring(0, 3).toLowerCase() + te + '">';
@@ -384,7 +384,7 @@ function timePick(cont, nombre, desde, hasta) {
     t += '</div>';
     t += '</div>';
     t += '</div>';
-    t += '<div class="col col-xs-1">';
+    t += '<div class="col col-xs-2">';
     t += '<a class="btn text-danger delTim' + te + nombre + '"><i class="fa fa-times"></i></a>';
     t += '</div>';
     t += '</div>';
