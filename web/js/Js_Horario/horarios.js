@@ -405,7 +405,7 @@ function timePick(cont, nombre, desde, hasta) {
     t += '<div class="input-group">';
     t += '<input class="form-control tim' + (c + 1) + nombre + '" type="text" placeholder="Ingreso" name="HORA_DESDE_' + nombre.substring(0, 3).toLowerCase() + te + '">';
     t += '<input type="hidden" name="DIA_' + nombre.substring(0, 3).toLowerCase() + te + '" value="' + nombre.substring(0, 3).toLowerCase() + '">';
-    t += '<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>';
+    t += '<span></span>';
     t += '</div>';
     t += '</div>';
     t += '</div>';
@@ -413,7 +413,7 @@ function timePick(cont, nombre, desde, hasta) {
     t += '<div class="form-group">';
     t += '<div class="input-group">';
     t += '<input class="form-control tim' + (c + 2) + nombre + '" type="text" placeholder="Salida" name="HORA_HASTA_' + nombre.substring(0, 3).toLowerCase() + te + '">';
-    t += '<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>';
+    t += '<span></span>';
     t += '</div>';
     t += '</div>';
     t += '</div>';
