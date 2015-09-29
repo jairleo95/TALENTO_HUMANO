@@ -293,36 +293,54 @@
                     toggleEditar();
                 });
                 $('.btnClose').click(function () {
-                    $('.frmHorario').trigger('reset');
-                    plDiasl($('.cont_Dias'));
-                    $('.cDia').empty();
-                    calc_Horas();
-                    toggleAgregar();
-                    $('.bcg').hide(200);
-                    $('.bca').show(400);
+                    btnClose();
                 });
 
                 $('.btnGuardar').click(function () {
-                    var data, data1;
-                    data = $('.frm_Dias').serialize();
+                    var data1;
                     data1 = "opc=GuardarFHAdmin&NO_HORARIO=" + $('.Nom_horario').val();
                     data1 += "&DE_HORARIO=" + $('.det_horario').val();
                     data1 += "&CA_HORAS=" + $('.h_totales').val();
                     data1 += "&id_ar=" + $('.sel_area').val();
                     data1 += "&id_sec=" + $('.sel_seccion').val();
                     data1 += "&ID_DEPARTAMENTO=" + $('.sel_dep').val();
-                    alert(typeofSave);
                     if (typeofSave === 1) {
                         //Guardar
-                        $.post("../../formato_horario", data1, function () {
-                            
-                        });
+                        reg_th(data1,true);
+
                     } else if (typeofSave === 2) {
                         //Editar
+                        alert('editar');
                     }
-                    alert(data1);
                 });
                 //funciones
+                function reg_fh() {
+                    var data = $('.frm_Dias').serialize();
+                    alert(data);
+                    $.post("../../formato_horario?opc=REGISTRAR_FORMATOS", data, function(){
+                        cargar_tabla();
+                        btnClose();
+                    });
+                    
+
+                }
+                function reg_th(data, regfh) {
+                    $.post("../../formato_horario", data, function () {
+                        reset_select($('.sel_seccion'), "Seccion");
+                        reset_select($('.sel_dep'), "Departamento");
+                        reset_select($('.sel_area'), "Area");
+                        
+                        if(regfh){
+                            reg_fh();
+                        }else{
+                            cargar_tabla();
+                            btnClose();
+                        }
+                    });
+                }
+                function edit_th(id, data) {
+
+                }
 
                 function cargar_area(id) {
                     var ti = $('.sel_area');
@@ -337,15 +355,30 @@
                         }
                         var lista = objJson.lista;
                         if (lista.length > 0) {
-                            ti.append("<option value='0'>[Seleccione Area]</option>");
+                            ti.append("<option value=''>[Seleccione Area]</option>");
                         } else {
-                            ti.append("<option value='0'>[]</option>");
+                            ti.append("<option value=''>[]</option>");
                         }
                         for (var i = 0; i < lista.length; i++) {
                             var item = "<option value='" + lista[i].id_ar + "'>" + lista[i].nom_ar + "</option>";
                             ti.append(item);
                         }
                     });
+                }
+                function reset_select(cont, n) {
+                    cont.empty();
+                    var t = "<option value=''>[Seleccione " + n + "]</option>";
+                    cont.append(t);
+                }
+                function btnClose() {
+                    $('.frmHorario').trigger('reset');
+                    plDiasl($('.cont_Dias'));
+                    $('.cDia').empty();
+                    calc_Horas();
+                    toggleAgregar();
+                    $('.bcg').hide(200);
+                    $('.bca').show(400);
+                    typeofSave=1;
                 }
                 function cargar_dep(idDir) {
                     var ti = $('.sel_dep');
@@ -360,9 +393,9 @@
                         }
                         var lista = objJson.lista;
                         if (lista.length > 0) {
-                            ti.append("<option value='0'>[Seleccione Departamento]</option>");
+                            ti.append("<option value=''>[Seleccione Departamento]</option>");
                         } else {
-                            ti.append("<option value='0'>[]</option>");
+                            ti.append("<option value=''>[]</option>");
                         }
                         for (var i = 0; i < lista.length; i++) {
                             var item = "<option value='" + lista[i].id_de + "'>" + lista[i].nom_de + "</option>";
@@ -383,9 +416,9 @@
                         }
                         var lista = objJson.lista;
                         if (lista.length > 0) {
-                            ti.append("<option value='0'>[Seleccione Seccion]</option>");
+                            ti.append("<option value=''>[Seleccione Seccion]</option>");
                         } else {
-                            ti.append("<option value='0'>[]</option>");
+                            ti.append("<option value=''>[]</option>");
                         }
                         for (var i = 0; i < lista.length; i++) {
                             var item = "<option value='" + lista[i].id_se + "'>" + lista[i].nom_se + "</option>";
@@ -420,7 +453,6 @@
                                 if (lista[i].seccion === undefined) {
                                     lista[i].seccion = 'Sin Datos';
                                 }
-
                                 t += "<tr id='" + lista[i].id + "'>";
                                 t += "<td>" + x + "</td>";
                                 t += "<td class='nombre" + x + "'>" + lista[i].nombre + "</td>";
@@ -462,6 +494,7 @@
                             });
                             $('.tbd_t').DataTable();
                         }
+
                     });
 
                 }

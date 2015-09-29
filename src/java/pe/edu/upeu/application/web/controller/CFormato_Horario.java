@@ -51,7 +51,7 @@ public class CFormato_Horario extends HttpServlet {
         HttpSession sesion = request.getSession(true);
 
         InterfaceFormato_HorarioDAO Ifh = new Formato_HorarioDAO();
-        InterfaceDepartamentoDAO dp= new DepartamentoDao();
+        InterfaceDepartamentoDAO dp = new DepartamentoDao();
         InterfaceDireccionDAO di = new DireccionDAO();
 
         String opc = request.getParameter("opc");
@@ -86,8 +86,8 @@ public class CFormato_Horario extends HttpServlet {
                 String ID_DEP = sesion.getAttribute("DEPARTAMENTO_ID").toString();
                 Double CA_HORAS = Double.parseDouble(request.getParameter("CA_HORAS"));
                 String id_ar = request.getParameter("id_ar");
-                String id_sec= request.getParameter("id_sec");
-                
+                String id_sec = request.getParameter("id_sec");
+
                 Ifh.Insert_Horario(null, NO_HORARIO, DE_HORARIO, ES_HORARIO, CA_HORAS, ID_DEP, id_ar, id_sec);
             }
             if (opc.equals("GuardarFHAdmin")) {
@@ -95,10 +95,14 @@ public class CFormato_Horario extends HttpServlet {
                 String DE_HORARIO = request.getParameter("DE_HORARIO");
                 String ES_HORARIO = "1";
                 String ID_DEP = request.getParameter("ID_DEPARTAMENTO");
-                Double CA_HORAS = Double.parseDouble(request.getParameter("CA_HORAS"));
+                Double CA_HORAS = 0.0;
+                try {
+                    CA_HORAS = Double.parseDouble(request.getParameter("CA_HORAS"));
+                } catch (Exception e) {
+                    CA_HORAS = 0.0;
+                }
                 String id_ar = request.getParameter("id_ar");
-                String id_sec= request.getParameter("id_sec");
-                
+                String id_sec = request.getParameter("id_sec");
                 Ifh.Insert_Horario(null, NO_HORARIO, DE_HORARIO, ES_HORARIO, CA_HORAS, ID_DEP, id_ar, id_sec);
             }
 
@@ -107,10 +111,35 @@ public class CFormato_Horario extends HttpServlet {
                 getServletContext().setAttribute("Listar_Direccion", di.Listar_Direccion());
                 response.sendRedirect("Vista/Formato_Horario/Detalle_Formato_Horario.jsp");
             }
-            if(opc.equals("LFH")){
+            if (opc.equals("LFH")) {
                 List<Map<String, ?>> lista = Ifh.List_Tipo_Horarios();
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
+            }
+            if (opc.equals("ultimo_fh")) {
+                String id = Ifh.ultimo_Tipo_Horario();
+                rpta.put("rpta", "1");
+                rpta.put("lista", id);
+            }
+            if (opc.equals("REGISTRAR_FORMATOS")) {
+                String ID_FORMATO_HORARIO = null;
+                String ID_TIPO_HORARIO = Ifh.ultimo_Tipo_Horario();
+                String ES_F_HORARIO = "1";
+
+                for (int i = 0; i < dia.size(); i++) {
+                    for (int j = 0; j < 10; j++) {
+                        String HO_DESDE = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
+                        HO_DESDE = parser24(HO_DESDE);
+                        String HO_HASTA = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
+                        HO_HASTA = parser24(HO_HASTA);
+                        String NO_DIA = request.getParameter("DIA_" + dia.get(i) + j);
+                        if (HO_DESDE != null & NO_DIA != null & HO_HASTA != null) {
+                            if (!HO_HASTA.equals("") & !HO_DESDE.equals("") & !NO_DIA.equals("")) {
+                                Ifh.Insert_Formato_Horario(ID_FORMATO_HORARIO, "T" + j, NO_DIA, HO_DESDE, HO_HASTA, ES_F_HORARIO, ID_TIPO_HORARIO);
+                            }
+                        }
+                    }
+                }
             }
 
             if (opc.equals("REGISTRAR_FOR_HORARIO")) {
@@ -167,7 +196,7 @@ public class CFormato_Horario extends HttpServlet {
                 rpta.put("lista", lista);
             }
             if (opc.equals("cargar_dep")) {
-                List<Map<String,?>> lista= dp.List_departamento_2();
+                List<Map<String, ?>> lista = dp.List_departamento_2();
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
@@ -222,4 +251,37 @@ public class CFormato_Horario extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public static String parser24(String fecha) {
+        if (fecha != null) {
+            String ret = "";
+            String[] buffer = fecha.split(":");
+            int x = Integer.parseInt(buffer[0]);
+            String[] buffer2 = buffer[1].split(" ");
+            int y = Integer.parseInt(buffer2[0]);
+            String h = buffer2[1];
+            if (h.toUpperCase().equals("AM")) {
+                if (x < 12) {
+                    ret = x + ":" + y;
+                } else {
+                    if (x == 12) {
+                        ret = 0 + ":" + y;
+                    }
+                }
+            }
+            if (h.toUpperCase().equals("PM")) {
+                if (x < 12) {
+                    ret = (x + 12) + ":" + y;
+                } else {
+                    if (x == 12) {
+                        ret = x + ":" + y;
+                    }
+                }
+
+            }
+            return ret;
+        } else {
+            return null;
+        }
+
+    }
 }

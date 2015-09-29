@@ -28,7 +28,6 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
 
     @Override
     public void Insert_Horario(String ID_TIPO_HORARIO, String NO_HORARIO, String DE_HORARIO, String ES_HORARIO, Double CA_HORAS, String id_dep, String id_ar, String id_sec) {
-
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_TIPO_HORARIO (?,?,?,?,?,?,?,?)}");
@@ -42,6 +41,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
             cst.setString(8, id_sec);
             cst.execute();
         } catch (SQLException ex) {
+            System.out.println(ex);
             throw new RuntimeException(ex.getMessage());
         } finally {
             this.conn.close();
@@ -87,6 +87,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
             cst.setString(7, ID_TIPO_HORARIO);
             cst.execute();
         } catch (SQLException ex) {
+            System.out.println(ex);
             throw new RuntimeException(ex.getMessage());
         } finally {
             this.conn.close();
@@ -388,6 +389,30 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
             }
         }
         return Lista;
+    }
+
+    @Override
+    public String ultimo_Tipo_Horario() {
+        String id="";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT MAX(ID_TIPO_HORARIO) AS IDTH FROM RHTR_TIPO_HORARIO";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                id=rs.getString("IDTH");
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return id;
     }
 
 }
