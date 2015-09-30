@@ -324,7 +324,6 @@
                 //funciones
                 function reg_fh() {
                     var data = $('.frm_Dias').serialize();
-                    alert(data);
                     $.post("../../formato_horario?opc=REGISTRAR_FORMATOS", data, function () {
                         cargar_tabla();
                         btnClose();
@@ -372,10 +371,6 @@
                     ti.append('<option value="">Cargando...</option>').val('');
                     $.post("../../funcion", data, function (objJson) {
                         ti.empty();
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
                         var lista = objJson.lista;
                         if (lista.length > 0) {
                             ti.append("<option value=''>[Seleccione Area]</option>");
@@ -515,6 +510,13 @@
                                 $('.hTotal').show(200);
                                 //}
 
+                            });
+                            $('.btnEliminar').click(function(){
+                                var id= $(this).parent().parent().attr('id');
+                                
+                                $.post('../../formato_horario?opc=eliminar_fh&ID_HORARIO='+id, function(){
+                                    cargar_tabla();
+                                });                                
                             });
                             $('.tbd_t').DataTable();
                         }

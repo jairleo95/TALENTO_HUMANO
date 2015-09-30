@@ -158,8 +158,9 @@ public class CFormato_Horario extends HttpServlet {
             }
             if (opc.equals("eliminar_fh")) {
                 String ID_HORARIO = request.getParameter("ID_HORARIO");
-                Ifh.Eliminar_horario(ID_HORARIO);
+                System.out.println(ID_HORARIO);
                 Ifh.Eliminar_formato_horario(ID_HORARIO);
+                Ifh.Eliminar_horario(ID_HORARIO);
             }
             if (opc.equals("REGISTRAR_FORMATOS")) {
                 String ID_FORMATO_HORARIO = null;

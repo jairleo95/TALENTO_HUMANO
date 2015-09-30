@@ -441,10 +441,11 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
     public void Eliminar_horario(String id) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ELIMINAR_TURNO (?)}");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ELIMINAR_TIPO_HORARIO (?)}");
             cst.setString(1, id);
             cst.execute();
         } catch (SQLException ex) {
+            System.out.println(ex);
             throw new RuntimeException(ex.getMessage());
         } finally {
             this.conn.close();
@@ -459,6 +460,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
             cst.setString(1, id);
             cst.execute();
         } catch (SQLException ex) {
+            System.out.println(ex);
             throw new RuntimeException(ex.getMessage());
         } finally {
             this.conn.close();
