@@ -121,6 +121,46 @@ public class CFormato_Horario extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", id);
             }
+            if (opc.equals("editar_fh")) {
+                String ID_HORARIO = request.getParameter("ID_HORARIO");
+                String NO_HORARIO = request.getParameter("NO_HORARIO");
+                String DE_HORARIO = request.getParameter("DE_HORARIO");
+                String ES_HORARIO = "1";
+                String ID_DEP = request.getParameter("ID_DEPARTAMENTO");
+                Double CA_HORAS = 0.0;
+                try {
+                    CA_HORAS = Double.parseDouble(request.getParameter("CA_HORAS"));
+                } catch (Exception e) {
+                    CA_HORAS = 0.0;
+                }
+                String id_ar = request.getParameter("id_ar");
+                String id_sec = request.getParameter("id_sec");
+                Ifh.Editar_FH(ID_HORARIO, NO_HORARIO, DE_HORARIO, ES_HORARIO, CA_HORAS, ID_DEP, id_ar, id_sec);
+                Ifh.Eliminar_formato_horario(ID_HORARIO);
+                String ID_FORMATO_HORARIO = null;
+                String ES_F_HORARIO = "1";
+
+                for (int i = 0; i < dia.size(); i++) {
+                    for (int j = 0; j < 10; j++) {
+                        String HO_DESDE = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
+                        HO_DESDE = parser24(HO_DESDE);
+                        String HO_HASTA = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
+                        HO_HASTA = parser24(HO_HASTA);
+                        String NO_DIA = request.getParameter("DIA_" + dia.get(i) + j);
+                        if (HO_DESDE != null & NO_DIA != null & HO_HASTA != null) {
+                            if (!HO_HASTA.equals("") & !HO_DESDE.equals("") & !NO_DIA.equals("")) {
+                                Ifh.Insert_Formato_Horario(ID_FORMATO_HORARIO, "T" + j, NO_DIA, HO_DESDE, HO_HASTA, ES_F_HORARIO, ID_HORARIO);
+                            }
+                        }
+                    }
+                }
+                
+            }
+            if (opc.equals("eliminar_fh")) {
+                String ID_HORARIO = request.getParameter("ID_HORARIO");
+                Ifh.Eliminar_horario(ID_HORARIO);
+                Ifh.Eliminar_formato_horario(ID_HORARIO);
+            }
             if (opc.equals("REGISTRAR_FORMATOS")) {
                 String ID_FORMATO_HORARIO = null;
                 String ID_TIPO_HORARIO = Ifh.ultimo_Tipo_Horario();

@@ -17,8 +17,10 @@ import pe.edu.upeu.application.model.Tipo_Horario;
 public interface InterfaceFormato_HorarioDAO {
 
     public void Insert_Horario(String ID_TIPO_HORARIO, String NO_HORARIO, String DE_HORARIO, String ES_HORARIO, Double CA_HORAS, String id_dep, String id_ar, String id_sec);
-
+    public void Editar_FH(String ID_TIPO_HORARIO, String NO_HORARIO, String DE_HORARIO, String ES_HORARIO, Double CA_HORAS, String id_dep, String id_ar, String id_sec);
     public void Eliminar_turno(String id_turno);
+    public void Eliminar_horario(String id);
+    public void Eliminar_formato_horario(String id);
     public String ultimo_Tipo_Horario();
 
     public List<Tipo_Horario> Listar_Tipo_Horario();

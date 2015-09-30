@@ -238,6 +238,7 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
     cont.append(t);
     $('.iLunes').click(function () {
         if ($(this).is(':checked')) {
+            $('.dia_Lunes').remove();
             diaL($('.cDia'), 'Lunes');
         } else {
             $('.dia_Lunes').remove();
@@ -247,6 +248,7 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
     });
     $('.iMartes').click(function () {
         if ($(this).is(':checked')) {
+            $('.dia_Martes').remove();
             diaL($('.cDia'), 'Martes');
         } else {
             $('.dia_Martes').remove();
@@ -256,6 +258,7 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
     });
     $('.iMiercoles').click(function () {
         if ($(this).is(':checked')) {
+            $('.dia_Miercoles').remove();
             diaL($('.cDia'), 'Miercoles');
         } else {
             $('.dia_Miercoles').remove();
@@ -265,6 +268,7 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
     });
     $('.iJueves').click(function () {
         if ($(this).is(':checked')) {
+            $('.dia_Jueves').remove();
             diaL($('.cDia'), 'Jueves');
         } else {
             $('.dia_Jueves').remove();
@@ -274,6 +278,7 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
     });
     $('.iViernes').click(function () {
         if ($(this).is(':checked')) {
+            $('.dia_Viernes').remove();
             diaL($('.cDia'), 'Viernes');
         } else {
             $('.dia_Viernes').remove();
@@ -283,6 +288,7 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
     });
     $('.iSabado').click(function () {
         if ($(this).is(':checked')) {
+            $('.dia_Sabado').remove();
             diaL($('.cDia'), 'Sabado');
         } else {
             $('.dia_Sabado').remove();
@@ -292,6 +298,7 @@ function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
     });
     $('.iDomingo').click(function () {
         if ($(this).is(':checked')) {
+            $('.dia_Domingo').remove();
             diaL($('.cDia'), 'Domingo');
         } else {
             $('.dia_Domingo').remove();
@@ -330,7 +337,7 @@ function diaL(cont, nombre, turnos) {
     t += '<div class="well" style="margin-bottom: 20px;">';
     t += '<div class="row cTim' + nombre + '">';
     t += '<div class="col col-sm-12">';
-    t += '<a class="pull-right dupli' + nombre + '" href="#htotal"><i class="fa fa-copy"></i></a><center><label class="font-md text-primary">' + nombre + '</label></center>';
+    t += '<a class="pull-right dupli' + nombre + '" href="#"><i class="fa fa-copy"></i></a><center><label class="font-md text-primary">' + nombre + '</label></center>';
     t += '</div>';
     t += '</div>';
     t += '<div class="row">';

@@ -415,4 +415,54 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
         return id;
     }
 
+    @Override
+    public void Editar_FH(String ID_TIPO_HORARIO, String NO_HORARIO, String DE_HORARIO, String ES_HORARIO, Double CA_HORAS, String id_dep, String id_ar, String id_sec) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MODIFICAR_TIPO_HORARIO (?,?,?,?,?,?,?,?)}");
+            cst.setString(1, ID_TIPO_HORARIO);
+            cst.setString(2, NO_HORARIO);
+            cst.setString(3, DE_HORARIO);
+            cst.setString(4, ES_HORARIO);
+            cst.setDouble(5, CA_HORAS);
+            cst.setString(6, id_dep);
+            cst.setString(7, id_ar);
+            cst.setString(8, id_sec);
+            cst.execute();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            throw new RuntimeException(ex.getMessage());
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public void Eliminar_horario(String id) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ELIMINAR_TURNO (?)}");
+            cst.setString(1, id);
+            cst.execute();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public void Eliminar_formato_horario(String id) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ELIMINAR_FORMATO_HORARIO(?)}");
+            cst.setString(1, id);
+            cst.execute();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } finally {
+            this.conn.close();
+        }
+    }
+
 }

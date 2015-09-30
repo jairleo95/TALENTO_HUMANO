@@ -263,6 +263,7 @@
             $(document).ready(function () {
                 // Global Variables
                 var typeofSave = 1;
+                var idTipoH = undefined;
 
                 //Start
 
@@ -275,14 +276,17 @@
                 $('.sel_dir').change(function () {
                     var idDireccion = $(this).val();
                     cargar_dep(idDireccion);
+                    guardar = true;
                 });
                 $('.sel_dep').change(function () {
                     var idDep = $(this).val();
                     cargar_area(idDep);
+                    guardar = true;
                 });
                 $('.sel_area').change(function () {
                     var idArea = $(this).val();
                     cargar_sec(idArea);
+                    guardar = true;
                 });
 
                 $('.btnAgregar').click(function () {
@@ -290,7 +294,11 @@
                 });
 
                 $('.Nom_horario').keyup(function () {
+                    guardar = true;
                     toggleEditar();
+                });
+                $('.det_horario').keyup(function () {
+                    guardar = true;
                 });
                 $('.btnClose').click(function () {
                     btnClose();
@@ -306,22 +314,22 @@
                     data1 += "&ID_DEPARTAMENTO=" + $('.sel_dep').val();
                     if (typeofSave === 1) {
                         //Guardar
-                        reg_th(data1,true);
+                        reg_th(data1, true);
 
                     } else if (typeofSave === 2) {
                         //Editar
-                        alert('editar');
+                        edit_th(idTipoH);
                     }
                 });
                 //funciones
                 function reg_fh() {
                     var data = $('.frm_Dias').serialize();
                     alert(data);
-                    $.post("../../formato_horario?opc=REGISTRAR_FORMATOS", data, function(){
+                    $.post("../../formato_horario?opc=REGISTRAR_FORMATOS", data, function () {
                         cargar_tabla();
                         btnClose();
                     });
-                    
+
 
                 }
                 function reg_th(data, regfh) {
@@ -329,16 +337,31 @@
                         reset_select($('.sel_seccion'), "Seccion");
                         reset_select($('.sel_dep'), "Departamento");
                         reset_select($('.sel_area'), "Area");
-                        
-                        if(regfh){
+
+                        if (regfh) {
                             reg_fh();
-                        }else{
+                        } else {
                             cargar_tabla();
                             btnClose();
                         }
                     });
                 }
-                function edit_th(id, data) {
+                function edit_th(id) {
+                    var data = "opc=editar_fh&NO_HORARIO=" + $('.Nom_horario').val();
+                    data += "&ID_HORARIO=" + id;
+                    data += "&DE_HORARIO=" + $('.det_horario').val();
+                    data += "&CA_HORAS=" + $('.h_totales').val();
+                    data += "&id_ar=" + $('.sel_area').val();
+                    data += "&id_sec=" + $('.sel_seccion').val();
+                    data += "&ID_DEPARTAMENTO=" + $('.sel_dep').val();
+                    data += "&" + $('.frm_Dias').serialize();
+                    if (guardar === true) {
+                        $.post("../../formato_horario", data, function () {
+                            cargar_tabla();
+                            btnClose();
+                        });
+                    }
+
 
                 }
 
@@ -378,7 +401,7 @@
                     toggleAgregar();
                     $('.bcg').hide(200);
                     $('.bca').show(400);
-                    typeofSave=1;
+                    typeofSave = 1;
                 }
                 function cargar_dep(idDir) {
                     var ti = $('.sel_dep');
@@ -469,6 +492,7 @@
                             crear_tabla();
                             $('.tbd').append(t);
                             $('.btnEditar').click(function () {
+                                idTipoH = $(this).parent().parent().attr('id');
                                 typeofSave = 2;
                                 $('.frmHorario').trigger('reset');
                                 plDiasl($('.cont_Dias'));
