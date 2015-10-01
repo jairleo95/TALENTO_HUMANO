@@ -99,7 +99,7 @@ public class CCentro_Costo extends HttpServlet {
             }
             if (opc.equals("Lista_cc_seccion")) {
                 String id= request.getParameter("id");
-                List<Map<String, ?>> list = cc.listar_cc_area(id);
+                List<Map<String, ?>> list = cc.listar_cc_seccion(id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
