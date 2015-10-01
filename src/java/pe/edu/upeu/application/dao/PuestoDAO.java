@@ -192,6 +192,39 @@ public class PuestoDAO implements InterfacePuestoDAO {
         return lista;
 
     }
+    @Override
+    public List<Map<String, ?>> Listar_Puesto_id_es(String id) {
+
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = " select  *  from rhtr_puesto where id_seccion='" + id.trim() + "' AND ES_PUESTO='1' order by no_puesto";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_puesto"));
+                rec.put("nombre", rs.getString("no_puesto"));
+                rec.put("ncorto", rs.getString("NO_CORTO_PU"));
+                rec.put("estado", rs.getString("ES_PUESTO"));
+                rec.put("cgrupo", rs.getString("CO_GRUPO"));
+
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de puestos");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
+
+    }
 
     @Override
     public List<Map<String, ?>> List_puesto() {

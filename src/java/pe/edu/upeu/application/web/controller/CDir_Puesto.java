@@ -98,7 +98,7 @@ public class CDir_Puesto extends HttpServlet {
             if (opc.equals("Listar_pu_id")) {
                 String id = request.getParameter("id");
                 String es_l = request.getParameter("esL");
-                List<Map<String, ?>> lista = p.Listar_Puesto_id(id);
+                List<Map<String, ?>> lista = p.Listar_Puesto_id_es(id);
                 if (es_l != null) {
                     
                     List<Map<String, ?>> lista1 = new ArrayList<>();
