@@ -172,6 +172,34 @@ public class SeccionDAO implements InterfaceSeccionDAO{
         }
         return lista;
     }
+    @Override
+    public List<Map<String, ?>> List_sec_ida_Es(String id_are) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select * from RHTR_SECCION where ID_AREA='"+id_are.trim()+"' and ES_SECCION='1' order by no_seccion ";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_seccion"));
+                rec.put("nombre", rs.getString("no_seccion"));
+                rec.put("ncorto", rs.getString("NO_CORTO_SEC"));
+                rec.put("estado", rs.getString("ES_SECCION"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
+    }
 
     @Override
     public List<Seccion> LISTA_RH_SECCION_LIMA() {

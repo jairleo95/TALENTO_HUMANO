@@ -24,6 +24,7 @@ public interface InterfaceSeccionDAO {
     public List<Map<String, ?>> List_sec_id(String id_are);
 
     public List<Map<String, ?>> List_sec_ida(String id_are);
+    public List<Map<String, ?>> List_sec_ida_Es(String id_are);
 
     public List<Map<String, ?>> List_pu_id(String id_pu);
 

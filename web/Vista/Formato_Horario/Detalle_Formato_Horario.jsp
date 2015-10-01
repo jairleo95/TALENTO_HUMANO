@@ -28,6 +28,26 @@
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <title>JSP Page</title>
     </head>
+    <style>
+        .btnAgregar{
+            -webkit-box-shadow: 2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+            -moz-box-shadow:    2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+            box-shadow:         2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+        }
+        .btnGuardar{
+            -webkit-box-shadow: 2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+            -moz-box-shadow:    2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+            box-shadow:         2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+        }
+        .btnClose{
+            -webkit-box-shadow: 2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+            -moz-box-shadow:    2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+            box-shadow:         2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+        }
+        
+
+
+    </style>
 
     <body>
         <div class="well">
@@ -111,7 +131,9 @@
                 </form>
                 <div class="hTotal" id="htotal">
                 </div>
-                <br>
+            </div>
+            <br>              
+            <div class="row">
                 <fieldset>
                     <section class="col col-sm-12">
                         <div class="table-responsive cnt_t">
@@ -125,7 +147,7 @@
 
             </div>
         </div>
-        <div class="well">
+        <!--<div class="well">
             <form  class="smart-form" action="../../formato_horario">
                 <div class="row">
                     <center><h1>Formato de <small> Horarios</small></h1></center><br>
@@ -177,27 +199,27 @@
                                     <th width='10%'>Opción</th>
                                 </tr>
                             </thead>
-                            <%for (int i = 0; i < List_Tipo_Horario.size(); i++) {
-                                    Tipo_Horario th = new Tipo_Horario();
-                                    th = (Tipo_Horario) List_Tipo_Horario.get(i);
-                                    ;%>
-                            <tbody>
-                            <td><center><%=i + 1%></center></td>
-                            <td><%=th.getNo_horario()%></td>
-                            <% if (th.getDe_horario() == null) {%>
-                            <td>Sin Datos</td>
-                            <%} else {%>
-                            <td><%=th.getDe_horario()%></td>
-                            <%}%>
-                            <td><%=th.getCa_horas()%></td>
-                            <td><center>
-                                <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                                        Acciones
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                        <%if (th.getCa_formato().equals("0")) {%>
+        <%--   <%for (int i = 0; i < List_Tipo_Horario.size(); i++) {
+                   Tipo_Horario th = new Tipo_Horario();
+                   th = (Tipo_Horario) List_Tipo_Horario.get(i);
+                   ;%>
+           <tbody>
+           <td><center><%=i + 1%></center></td>
+           <td><%=th.getNo_horario()%></td>
+           <% if (th.getDe_horario() == null) {%>
+           <td>Sin Datos</td>
+           <%} else {%>
+           <td><%=th.getDe_horario()%></td>
+           <%}%>
+           <td><%=th.getCa_horas()%></td>
+           <td><center>
+               <div class="dropdown">
+                   <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                       Acciones
+                       <span class="caret"></span>
+                   </button>
+                   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                       <%if (th.getCa_formato().equals("0")) {%>
 
                                         <li role="presentation"><a role="menuitem"  href="Reg_Formato_Horario.jsp?idth=<%=th.getId_tipo_horario()%>&nofor=<%=th.getNo_horario()%>">Establecer Horarios</a></li>
                                             <%} else {%>
@@ -209,7 +231,7 @@
                             </center> </td>
 
                             </tbody>
-                            <%}%>
+                            <%}%>--%>
                         </table>
                     </div>
                 </section>
@@ -218,7 +240,7 @@
 
             </div>
 
-        </div>
+        </div>-->
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
@@ -234,9 +256,9 @@
         </script>
         <!--<script src="../../js/app.config.js"></script>
         <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
-        <script src="../../js/bootstrap/bootstrap.min.js"></script>
+        <script src="../../js/bootstrap/bootstrap.min.js"></script>-->
         <script src="../../js/notification/SmartNotification.min.js"></script>
-        <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
+        <!--<script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
         <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
         <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
         <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
@@ -314,11 +336,53 @@
                     data1 += "&ID_DEPARTAMENTO=" + $('.sel_dep').val();
                     if (typeofSave === 1) {
                         //Guardar
-                        reg_th(data1, true);
+                        $.SmartMessageBox({
+                            title: "Advertencia!",
+                            content: "¿Esta seguro(a) de guardar este Elemento?",
+                            buttons: '[No][Si]'
+                        }, function (ButtonPressed) {
+                            if (ButtonPressed === "Si") {
+                                reg_th(data1, true);
+                            }
+                            if (ButtonPressed === "No") {
+                                $.smallBox({
+                                    title: "Notificacion",
+                                    content: "<i class='fa fa-clock-o'></i> <i>Operacion Cancelada</i>",
+                                    color: "#C46A69",
+                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                    timeout: 4000
+                                });
+                                btnClose();
+                            }
+
+                        });
+
+
 
                     } else if (typeofSave === 2) {
                         //Editar
-                        edit_th(idTipoH);
+                        $.SmartMessageBox({
+                            title: "Advertencia!",
+                            content: "¿Esta seguro(a) de Editar este Elemnto?",
+                            buttons: '[No][Si]'
+                        }, function (ButtonPressed) {
+                            if (ButtonPressed === "Si") {
+                                edit_th(idTipoH);
+                            }
+                            if (ButtonPressed === "No") {
+                                $.smallBox({
+                                    title: "Notificacion",
+                                    content: "<i class='fa fa-clock-o'></i> <i>Operacion Cancelada</i>",
+                                    color: "#C46A69",
+                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                    timeout: 4000
+                                });
+                                btnClose();
+                            }
+
+
+                        });
+
                     }
                 });
                 //funciones
@@ -343,6 +407,13 @@
                             cargar_tabla();
                             btnClose();
                         }
+                        $.smallBox({
+                            title: "Notificacion",
+                            content: "<i class='fa fa-clock-o'></i> <i>Guardado con Éxito!</i>",
+                            color: "#659265",
+                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                            timeout: 4000
+                        });
                     });
                 }
                 function edit_th(id) {
@@ -479,7 +550,7 @@
                                 t += "<td id='" + lista[i].iddep + "' class='dep" + x + "'>" + lista[i].dep + "</td>";
                                 t += "<td id='" + lista[i].idarea + "' class='area" + x + "'>" + lista[i].area + "</td>";
                                 t += "<td id='" + lista[i].idseccion + "' class='seccion" + x + "'>" + lista[i].seccion + "</td>";
-                                t += "<td><a class='btn btn-link btnVer' target='blanck' href='../../formato_horario?opc=LISTAR_FORMATO_HORARIO&idth=" + lista[i].id + "&nofor=" + lista[i].nombre + "'><span><i class='fa fa-eye'></i></span></a>";
+                                t += "<td><a class='btn btn-link btnVer' target='_blanck' href='../../formato_horario?opc=LISTAR_FORMATO_HORARIO&idth=" + lista[i].id + "&nofor=" + lista[i].nombre + "'><span><i class='fa fa-eye'></i></span></a>";
                                 t += "<a id='" + x + "' class='btn btn-link btnEditar' href='#'><span><i class='fa fa-pencil'></i></span></a>";
                                 t += "<a class='btn btn-link btnEliminar' href='#'><span><i class='fa fa-times'></i></span></a></td>";
                                 t += "</tr>";
@@ -511,12 +582,39 @@
                                 //}
 
                             });
-                            $('.btnEliminar').click(function(){
-                                var id= $(this).parent().parent().attr('id');
-                                
-                                $.post('../../formato_horario?opc=eliminar_fh&ID_HORARIO='+id, function(){
-                                    cargar_tabla();
-                                });                                
+                            $('.btnEliminar').click(function () {
+                                var id = $(this).parent().parent().attr('id');
+                                $.SmartMessageBox({
+                                    title: "Advertencia!",
+                                    content: "¿Esta seguro(a) de Eliminar este Elemnto?",
+                                    buttons: '[No][Si]'
+                                }, function (ButtonPressed) {
+                                    if (ButtonPressed === "Si") {
+                                        $.post('../../formato_horario?opc=eliminar_fh&ID_HORARIO=' + id, function () {
+                                            cargar_tabla();
+                                            $.smallBox({
+                                                title: "Notificacion",
+                                                content: "<i class='fa fa-clock-o'></i> <i>Eliminado con Éxito!</i>",
+                                                color: "#659265",
+                                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                timeout: 4000
+                                            });
+
+                                        });
+                                    }
+                                    if (ButtonPressed === "No") {
+                                        $.smallBox({
+                                            title: "Notificacion",
+                                            content: "<i class='fa fa-clock-o'></i> <i>Operacion Cancelada</i>",
+                                            color: "#C46A69",
+                                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                            timeout: 4000
+                                        });
+                                    }
+
+                                });
+
+
                             });
                             $('.tbd_t').DataTable();
                         }

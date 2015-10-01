@@ -91,7 +91,7 @@ public class CDir_Puesto extends HttpServlet {
             }
             if (opc.equals("Listar_sec2")) {
                 String id_are = request.getParameter("id");
-                List<Map<String, ?>> lista = sec.List_sec_ida(id_are);
+                List<Map<String, ?>> lista = sec.List_sec_ida_Es(id_are);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
