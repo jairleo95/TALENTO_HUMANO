@@ -191,7 +191,7 @@
                                                             <label class="select" id="titu">
                                                                 Motivo :<select name="MOTIVO" class="ant_policiales" required="" >
                                                                     <option value="" >[SELECCIONE]</option>
-                                                                    <option value="1" selected="">Trabajdor Nuevo</option>
+                                                                    <option value="1" selected="">Trabajador Nuevo</option>
                                                                     <option value="2">Renovación</option>
                                                                 </select>
                                                             </label>

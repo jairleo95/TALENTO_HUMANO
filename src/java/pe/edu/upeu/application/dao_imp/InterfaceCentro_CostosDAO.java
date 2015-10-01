@@ -39,6 +39,8 @@ public interface InterfaceCentro_CostosDAO {
     public List<Centro_Costos> Lis_c_c_id_dgp(String id_dgp);
 
     public List<Map<String, ?>> Cargar_cc_dgp(String id_dgp);
+     public List<Map<String, ?>> listar_cc_area(String id);
+     public List<Map<String, ?>> listar_cc_seccion(String id);
 
     public List<Detalle_Centro_Costo> Cargar_dcc_dgp(String id_dgp);
 

@@ -233,7 +233,9 @@ function agregar_centro_costo(opc, arr_cc) {
     var agregar = $('#fila-agregar');
     var ag = $('#fila-agregar .porcentaje_cc').size() + 1;
     var texto = "";
+    /*se condiciona con 1  para saber si vamos a extraer los datos*/
     if (opc == "1") {
+
         texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
         texto += '<div  class="row centro-costo_' + ag + '" >';
         texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
@@ -249,6 +251,10 @@ function agregar_centro_costo(opc, arr_cc) {
         texto += '<div  class="row centro-costo_' + ag + '" >';
         texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
         texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
+        /* nuevo agregado : area y seccion*/
+        texto += '<section class="col col-3"><label class="select" id="titu"> Area :<select required=""  class="cc-area' + ag + '"><option value="">[AREA]</option></select></label></section>';
+        texto += '<section class="col col-3"><label class="select" id="titu"> Seccion :<select required=""  class="cc-seccion' + ag + '"><option value="">[SECCION]</option></select></label></section>';
+
         texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
         texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
         texto += '</div>';
@@ -293,11 +299,11 @@ function calcular_sueldo_total() {
     var w = parseFloat($("#bono_pu").val());
     var z = parseFloat($("#bev").val());
     var v = x + y + z + w;
-    var f= parseInt($('#asigf').val());
-    if(f>0){
-        v=v+75;
+    var f = parseInt($('#asigf').val());
+    if (f > 0) {
+        v = v + 75;
     }
-    
+
     $("#suel_total").text(Math.round(v * 100) / 100);
 }
 function calcularHoras() {
@@ -412,7 +418,18 @@ function listar_cc(num, opc, arr_cc) {
         listar_dep_cc(num, "0", arr_cc);
     });
     $(".cc-dep" + num).change(function () {
+        list_select($(".cc-area" + num), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(this).val());
         listar_centro_costo(num, "0", arr_cc);
+    });
+    $(".cc-area" + num).change(function () {
+        list_select($(".cc-seccion" + num), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(this).val());
+        list_cc_area($(this).val(), $(".centro_costo" + num));
+
+        //listar_centro_costo(num, "0", arr_cc);
+    });
+    $(".cc-seccion" + num).change(function () {
+        list_cc_seccion($(".cc-seccion" + num).val(), $(".centro_costo" + num));
+        //listar_centro_costo(num, "0", arr_cc);
     });
     $(".remover" + num).click(function () {
         $(".centro-costo_" + num).remove();
@@ -607,8 +624,8 @@ function listar_mensaje_plazo(tipo, warning, info, req) {
                 warning.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'></a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
                 info.append('<div class="alert alert-info fade in"><button class="close" data-dismiss="alert">×</button><i class="fa-fw fa fa-info"></i><strong>¡Importante!</strong> Su requerimiento será procesado en el mes de <strong>' + lista[i].mes + '.</strong></div>');
             } else if (tipo == '1') {
-               // warning.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'></a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , se tiene " + lista[i].dias_tol + " dias de tolerancia para la fecha de inicio.</div>");
-                info.append('<div class="alert alert-warning fade in"><button class="close" data-dismiss="alert"></button><i class="fa-fw fa fa-warning"></i><strong>¡Advertencia - Inicio de contrato!</strong> '+lista[i].dias_tol +' dias - plazo de envío respecto a la fecha de inicio' + '.</div>');
+                // warning.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'></a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , se tiene " + lista[i].dias_tol + " dias de tolerancia para la fecha de inicio.</div>");
+                info.append('<div class="alert alert-warning fade in"><button class="close" data-dismiss="alert"></button><i class="fa-fw fa fa-warning"></i><strong>¡Advertencia - Inicio de contrato!</strong> ' + lista[i].dias_tol + ' dias - plazo de envío respecto a la fecha de inicio' + '.</div>');
             }
         }
     });
@@ -676,7 +693,6 @@ function Listar_centro_costo1() {
                 ag++;
                 CANT_T = (CANT_T + parseFloat(lista[i].ca_por_cc));
             }
-
             x.append(texto);
             $('#btn-agregar-cc2').click(function () {
                 agregar_centro_costo();
@@ -684,6 +700,46 @@ function Listar_centro_costo1() {
             $(".por_sum_to").val(CANT_T);
         } else {
             remover_fil();
+        }
+    });
+}
+function list_cc_area(area, cc, dep) {
+    // cc = $(".centro_costo1");
+    $.post("../../centro_costo", "opc=Lista_cc_area&id=" + area, function (objJson) {
+        if (objJson.rpta == -1) {
+            alert(objJson.mensaje);
+            return;
+        }
+        var lista = objJson.lista;
+        if (lista.length == 0) {
+            //listarcc
+        } else {
+            for (var t = 0; t < lista.length; t++) {
+                cc.empty();
+                cc.append('<option value="">[SELECCIONE]</option>');
+                cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
+            }
+        }
+    });
+}
+
+function list_cc_seccion(seccion, cc) {
+    // cc = $(".centro_costo1");
+    $.post("../../centro_costo", "opc=Lista_cc_seccion&id=" + seccion, function (objJson) {
+        if (objJson.rpta == -1) {
+            alert(objJson.mensaje);
+            return;
+        }
+        var lista = objJson.lista;
+        if (lista.length == 0) {
+            /* si no ha nada listar todas las secciones del area*/
+            // list_cc_area($(".select-area").val(), $(".centro_costo1"));
+        } else {
+            for (var t = 0; t < lista.length; t++) {
+                cc.empty();
+                cc.append('<option value="">[SELECCIONE]</option>');
+                cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
+            }
         }
     });
 }
@@ -767,10 +823,13 @@ $(document).ready(function () {
         list_select($(".select-seccion"), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(".select-area").val(), "3");
         $(".select-seccion,.select-puesto").val("");
         $(".chosen-select").trigger("chosen:updated");
+        /*Filtrar Centro de costo*/
+        list_cc_area($(this).val(), $(".centro_costo1"));
     });
     $(".select-seccion").change(function () {
         list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".select-seccion").val() + "&esL=1", "3");
         cargar_horarios($('.t_horario'));
+        list_cc_seccion($(this).val(),$(".centro_costo1"));
     });
     $(".select-puesto").change(function () {
         $(".select-puesto1").val($(this).val());

@@ -91,6 +91,18 @@ public class CCentro_Costo extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
+            if (opc.equals("Lista_cc_area")) {
+                String id= request.getParameter("id");
+                List<Map<String, ?>> list = cc.listar_cc_area(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
+            if (opc.equals("Lista_cc_seccion")) {
+                String id= request.getParameter("id");
+                List<Map<String, ?>> list = cc.listar_cc_area(id);
+                rpta.put("rpta", "1");
+                rpta.put("lista", list);
+            }
             if (opc.equals("Eliminar_det_cc")) {
                 String id_dcc= request.getParameter("id_dcc");
                 cc.Eliminar_dcc(id_dcc);
