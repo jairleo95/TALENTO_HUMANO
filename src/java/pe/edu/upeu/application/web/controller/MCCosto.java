@@ -77,30 +77,31 @@ public class MCCosto extends HttpServlet {
                 rpta.put("lista", lista);
             }
             if (opc.equals("edit_cc")) {
-                String ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA,ID_SECCION ;
+                String ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA, ID_SECCION;
                 ID_CENTRO_COSTO = request.getParameter("ID_CENTRO_COSTO");
                 CO_CENTRO_COSTO = request.getParameter("CO_CENTRO_COSTO");
                 DE_CENTRO_COSTO = request.getParameter("DE_CENTRO_COSTO");
                 ID_DEPARTAMENTO = request.getParameter("ID_DEPARTAMENTO");
                 ID_AREA = request.getParameter("ID_AREA");
                 ID_SECCION = request.getParameter("ID_SECCION");
-                cc.editarCCosto(ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA, ID_SECCION);
+                String ID_DET_CC = request.getParameter("ID_DET_CC");
+                cc.editarCCosto(ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA, ID_SECCION, ID_DET_CC);
+                rpta.put("rpta", "1");
             }
             if (opc.equals("add_cc")) {
-                String CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA,ID_SECCION;
+                String CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA, ID_SECCION;
                 CO_CENTRO_COSTO = request.getParameter("CO_CENTRO_COSTO");
                 DE_CENTRO_COSTO = request.getParameter("DE_CENTRO_COSTO");
                 ID_DEPARTAMENTO = request.getParameter("ID_DEPARTAMENTO");
                 ID_AREA = request.getParameter("ID_AREA");
                 ID_SECCION = request.getParameter("ID_SECCION");
-                cc.crearCCosto(CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA,ID_SECCION);
+                cc.crearCCosto(CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA, ID_SECCION);
             }
             if (opc.equals("del_cc")) {
                 String ID_CENTRO_COSTO;
                 ID_CENTRO_COSTO = request.getParameter("ID_CENTRO_COSTO");
                 cc.eliminarCCosto(ID_CENTRO_COSTO);
             }
-
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());

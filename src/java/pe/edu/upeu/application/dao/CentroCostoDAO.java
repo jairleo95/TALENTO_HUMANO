@@ -75,7 +75,7 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error al cargar la lista de direcciones...");
+            throw new RuntimeException("Error al REGISTRAR CENTRO DE COSTOS...");
         } finally {
             try {
                 this.cnn.close();
@@ -87,17 +87,18 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
     }
 
     @Override
-    public boolean editarCCosto(String ID_CENTRO_COSTO, String CO_CENTRO_COSTO, String DE_CENTRO_COSTO, String ID_DEPARTAMENTO, String ID_AREA, String ID_SECCION) {
+    public boolean editarCCosto(String ID_CENTRO_COSTO, String CO_CENTRO_COSTO, String DE_CENTRO_COSTO, String ID_DEPARTAMENTO, String ID_AREA, String ID_SECCION, String id_det_cc) {
         boolean x = true;
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_MOD_CENTRO_COSTO( ?, ?, ?, ?, ?, ?)}");
+            CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_MOD_CENTRO_COSTO( ?, ?, ?, ?, ?, ?,?)}");
             cst.setString(1, ID_CENTRO_COSTO);
             cst.setString(2, CO_CENTRO_COSTO);
             cst.setString(3, DE_CENTRO_COSTO);
             cst.setString(4, ID_DEPARTAMENTO);
             cst.setString(5, ID_AREA);
             cst.setString(6, ID_SECCION);
+            cst.setString(7, id_det_cc);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -231,7 +232,7 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
             sql = "SELECT S.ID_SECCION, S.NO_SECCION\n"
                     + "FROM RHTR_SECCION S,RHTD_AREA R\n"
                     + "WHERE S.ID_AREA= R.ID_AREA\n"
-                    + "AND R.ID_AREA='"+idArea+"'";
+                    + "AND R.ID_AREA='" + idArea + "'";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
