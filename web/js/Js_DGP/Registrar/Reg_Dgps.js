@@ -710,13 +710,14 @@ function list_cc_area(area, cc, dep) {
             alert(objJson.mensaje);
             return;
         }
+       // alert(lista.length)
         var lista = objJson.lista;
         if (lista.length == 0) {
             //listarcc
-        } else {
+        } else {  
+            cc.empty();
+              cc.append('<option value="">[SELECCIONE]</option>');
             for (var t = 0; t < lista.length; t++) {
-                cc.empty();
-                cc.append('<option value="">[SELECCIONE]</option>');
                 cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
             }
         }

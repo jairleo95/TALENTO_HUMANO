@@ -370,7 +370,7 @@
                                             </tr>
                                             <% }
                                                 }
-                                                List_id_Autorizacion.clear();%>
+                                            %>
                                             </tbody>
                                         </table>
                                         <input class="num_aps" type="hidden" value="<%=num_cod_aps%>" />
@@ -551,13 +551,13 @@
                 timeout: 3000
             });
         }
-        $(document).ready(function() {
-            $(".btn_pro_remuneracion").click(function() {
+        $(document).ready(function () {
+            $(".btn_pro_remuneracion").click(function () {
                 $.SmartMessageBox({
                     title: "¡Advertencia!",
                     content: "¿Esta seguro de procesar estos requerimientos?",
                     buttons: '[No][Si]'
-                }, function(ButtonPressed) {
+                }, function (ButtonPressed) {
                     if (ButtonPressed === "Si") {
                         for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
                             if ($(".env_rem" + i).prop('checked')) {
@@ -565,7 +565,7 @@
                                     url: "../../autorizacion",
                                     type: "POST",
                                     data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
-                                }).done(function() {
+                                }).done(function () {
                                     window.location.href = "../../autorizacion";
                                 });
                             }
@@ -575,27 +575,27 @@
                     }
                 });
             });
-            $(".btn_pro_firma").click(function() {
+            $(".btn_pro_firma").click(function () {
                 $.SmartMessageBox({
                     title: "¡Advertencia!",
                     content: "¿Esta seguro de procesar firmas a estos requerimientos?",
                     buttons: '[No][Si]'
-                }, function(ButtonPressed) {
+                }, function (ButtonPressed) {
                     if (ButtonPressed === "Si") {
                         try {
-                            $.each($(".firm_contr"), function() {
+                            $.each($(".firm_contr"), function () {
                                 if ($(this).prop('checked')) {
                                     $.ajax({
                                         url: "../../contrato",
                                         type: "POST",
                                         data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
-                                    }).done(function() {
+                                    }).done(function () {
                                     });
                                     $.ajax({
                                         url: "../../autorizacion",
                                         type: "POST",
                                         data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
-                                    }).done(function() {
+                                    }).done(function () {
                                         window.location.href = "../../autorizacion";
                                     });
                                 }
@@ -611,12 +611,12 @@
                     }
                 });
             });
-            $(".btn_cod_aps").click(function() {
+            $(".btn_cod_aps").click(function () {
                 $.SmartMessageBox({
                     title: "¡Advertencia!",
                     content: "¿Esta seguro de procesar codigos APS a estos requerimientos?",
                     buttons: '[No][Si]'
-                }, function(ButtonPressed) {
+                }, function (ButtonPressed) {
                     if (ButtonPressed === "Si") {
                         for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
                             if ($(".cod_aps" + r).val() != "") {
@@ -624,13 +624,13 @@
                                     url: "../../trabajador",
                                     type: "POST",
                                     data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                }).done(function() {
+                                }).done(function () {
                                 });
                                 $.ajax({
                                     url: "../../autorizacion",
                                     type: "POST",
                                     data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                }).done(function() {
+                                }).done(function () {
                                     window.location.href = "../../autorizacion?opc=mens_cod_aps";
                                 });
                             }
@@ -641,12 +641,12 @@
 
                 });
             });
-            $(".btn_cod_huella").click(function() {
+            $(".btn_cod_huella").click(function () {
                 $.SmartMessageBox({
                     title: "¡Advertencia!",
                     content: "¿Esta seguro de procesar codigos de huella a estos requerimientos?",
                     buttons: '[No][Si]'
-                }, function(ButtonPressed) {
+                }, function (ButtonPressed) {
                     if (ButtonPressed === "Si") {
                         for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
                             if ($(".cod_huella" + r).val() != "") {
@@ -654,20 +654,20 @@
                                     url: "../../trabajador",
                                     type: "POST",
                                     data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                }).done(function() {
+                                }).done(function () {
                                 });
                                 $.ajax({
                                     url: "../../autorizacion",
                                     type: "POST",
                                     data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                }).done(function() {
+                                }).done(function () {
                                     window.location.href = "../../autorizacion?opc=mens_cod_huella";
                                 });
                                 $.ajax({
                                     url: "../../autorizacion",
                                     type: "POST",
                                     data: "opc=Enviar_Correo" + $(".correos_" + r).val()
-                                }).done(function() {
+                                }).done(function () {
 
                                 });
                             }
@@ -717,7 +717,7 @@
                 dateFormat: 'MM yy',
                 prevText: '<i class="fa fa-chevron-left"></i>',
                 nextText: '<i class="fa fa-chevron-right"></i>',
-                onClose: function(dateText, inst) {
+                onClose: function (dateText, inst) {
                     filtrar_mes_año()
                 }
             });
@@ -730,7 +730,7 @@
             $('.filtrar_fecha').datepicker('setDate', new Date(año, mes, 1));
             mes = month;
             año = year;
-            listar_autorizados(mes,año);
+            listar_autorizados(mes, año);
         }
         function reload_table() {
             var responsiveHelper_datatable_fixed_column = undefined;
@@ -743,28 +743,28 @@
                         "t" +
                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                 "autoWidth": true,
-                "preDrawCallback": function() {
+                "preDrawCallback": function () {
                     // Initialize the responsive datatables helper once.
                     if (!responsiveHelper_datatable_fixed_column) {
                         responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
                     }
                 },
-                "rowCallback": function(nRow) {
+                "rowCallback": function (nRow) {
                     responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
                 },
-                "drawCallback": function(oSettings) {
+                "drawCallback": function (oSettings) {
                     responsiveHelper_datatable_fixed_column.respond();
                 }
 
             });
             // Apply the filter
-            $("#dt_basic thead th input[type=text]").on('keyup change', function() {
+            $("#dt_basic thead th input[type=text]").on('keyup change', function () {
                 otable.column($(this).parent().index() + ':visible').search(this.value).draw();
             });
         }
         function listar_autorizados(mes, año) {
             var text_html = "";
-            $.post("../../autorizacion", "opc=List_Dgp_Aut&mes=" + mes + "&año=" + año, function(objJson) {
+            $.post("../../autorizacion", "opc=List_Dgp_Aut&mes=" + mes + "&año=" + año, function (objJson) {
                 var lista = objJson.lista;
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -800,15 +800,15 @@
 
             });
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
             pageSetUp();
-            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
             $(".cod_aps").numeric();
 
-            listar_autorizados(mes,año);
-           
+            listar_autorizados(mes, año);
+
             /* BASIC ;*/
             var responsiveHelper_dt_basic = undefined;
             var breakpointDefinition = {
@@ -822,16 +822,16 @@
                         "t" +
                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                 "autoWidth": true,
-                "preDrawCallback": function() {
+                "preDrawCallback": function () {
                     // Initialize the responsive datatables helper once.
                     if (!responsiveHelper_dt_basic) {
                         responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic1'), breakpointDefinition);
                     }
                 },
-                "rowCallback": function(nRow) {
+                "rowCallback": function (nRow) {
                     responsiveHelper_dt_basic.createExpandIcon(nRow);
                 },
-                "drawCallback": function(oSettings) {
+                "drawCallback": function (oSettings) {
                     responsiveHelper_dt_basic.respond();
                 }
             });
@@ -840,7 +840,9 @@
 
     </script>
 </html>
-<%} else {
+<%
+        List_id_Autorizacion.clear();
+    } else {
         response.sendRedirect("/TALENTO_HUMANO/");
     }
 %>

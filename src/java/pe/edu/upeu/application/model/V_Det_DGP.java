@@ -55,13 +55,69 @@ public class V_Det_DGP {
     private String ti_planilla;
     private String id_detalle_horario;
     private String no_dep;
+    private String no_area;
+    private String no_seccion;
+    private String no_trab_us_cr;
+    private String no_trab_us_mod;
+    private String nombre_trabajador;
+
+    public String getNombre_trabajador() {
+        return nombre_trabajador;
+    }
+
+    public void setNombre_trabajador(String nombre_trabajador) {
+        this.nombre_trabajador = nombre_trabajador;
+    }
+
+    public String getNo_area() {
+        return no_area;
+    }
+
+    public void setNo_area(String no_area) {
+        this.no_area = no_area;
+    }
+
+    public String getNo_seccion() {
+        return no_seccion;
+    }
+
+    public void setNo_seccion(String no_seccion) {
+        this.no_seccion = no_seccion;
+    }
+
+    public String getNo_trab_us_cr() {
+        return no_trab_us_cr;
+    }
+
+    public void setNo_trab_us_cr(String no_trab_us_cr) {
+        this.no_trab_us_cr = no_trab_us_cr;
+    }
+
+    public String getNo_trab_us_mod() {
+        return no_trab_us_mod;
+    }
+
+    public void setNo_trab_us_mod(String no_trab_us_mod) {
+        this.no_trab_us_mod = no_trab_us_mod;
+    }
+
+    public double getCa_asig_familiar() {
+        return ca_asig_familiar;
+    }
+
+    public void setCa_asig_familiar(double ca_asig_familiar) {
+        this.ca_asig_familiar = ca_asig_familiar;
+    }
+    private double ca_asig_familiar;
 
     public V_Det_DGP(String id_dgp, String fe_desde, String fe_hasta, Double ca_sueldo, String de_dias_trabajo, String no_puesto, String id_puesto, String id_requerimiento,
             String id_trabajador, String co_ruc, String de_lugar_servicio, String de_servicio, String de_periodo_pago, String de_domicilio_fiscal, String de_subvencion,
             String de_horario_capacitacion, String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String us_creacion, String fe_creacion, String us_modif,
             String fe_modif, String ip_usuario, String no_req, Double ca_bono_alimentario, Double de_bev, String de_antecedentes_policiales, String es_certificado_salud,
             String no_banco, String nu_cuenta, String nu_cuenta_banc, String es_gen_nu_cuenta, String no_banco_otros, String id_departamento, String id_direccion,
-            String id_seccion, String id_area, String id_tipo_planilla, String ti_planilla, String id_detalle_horario, String no_dep, String no_usuario_crea, String no_usuario_mod, String li_motivo, String es_mfl,Double ca_bonificacion_p) {
+            String id_seccion, String id_area, String id_tipo_planilla, String ti_planilla, String id_detalle_horario, String no_dep,
+            String no_usuario_crea, String no_usuario_mod, String li_motivo, String es_mfl, Double ca_bonificacion_p,
+            String no_area, String no_seccion, String no_trab_us_cr, String no_trab_us_mod, double ca_asig_familiar, String nombre_trabajador) {
         this.id_dgp = id_dgp;
         this.fe_desde = fe_desde;
         this.fe_hasta = fe_hasta;
@@ -104,7 +160,12 @@ public class V_Det_DGP {
         this.li_motivo = li_motivo;
         this.es_mfl = es_mfl;
         this.ca_bonificacion_p = ca_bonificacion_p;
-        
+        this.no_area = no_area;
+        this.no_seccion = no_seccion;
+        this.no_trab_us_cr = no_trab_us_cr;
+        this.no_trab_us_mod = no_trab_us_mod;
+        this.ca_asig_familiar = ca_asig_familiar;
+        this.nombre_trabajador = nombre_trabajador;
     }
 
     public V_Det_DGP() {
@@ -149,7 +210,13 @@ public class V_Det_DGP {
         this.no_usuario_mod = "";
         this.li_motivo = "";
         this.es_mfl = "";
-        this.ca_bonificacion_p =0.0 ;
+        this.ca_bonificacion_p = 0.0;
+        this.no_area = "";
+        this.no_seccion = "";
+        this.no_trab_us_cr = "";
+        this.no_trab_us_mod = "";
+        this.ca_asig_familiar = 0.0;
+        this.nombre_trabajador = "";
     }
 
     public Double getCa_bonificacion_p() {
@@ -159,7 +226,7 @@ public class V_Det_DGP {
     public void setCa_bonificacion_p(Double ca_bonificacion_p) {
         this.ca_bonificacion_p = ca_bonificacion_p;
     }
-    
+
     public String getNo_usuario_crea() {
         return no_usuario_crea;
     }
@@ -487,5 +554,5 @@ public class V_Det_DGP {
     public void setEs_mfl(String es_mfl) {
         this.es_mfl = es_mfl;
     }
-    
+
 }

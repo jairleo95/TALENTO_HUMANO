@@ -40,10 +40,14 @@ public class DgpDAO implements InterfaceDgpDAO {
     CConversion c = new CConversion();
 
     @Override
-    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO, String LI_MOTIVO, String ES_MFL, double BONO_PUESTO) {
+    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, 
+            String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION,
+            String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, 
+            String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, 
+            String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO, String LI_MOTIVO, String ES_MFL, double BONO_PUESTO, double ASIGNACION_FAMILIAR) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)}");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)}");
             cst.setString(1, null);
             cst.setString(2, c.convertFecha(FE_DESDE));
             cst.setString(3, c.convertFecha(FE_HASTA));
@@ -75,6 +79,7 @@ public class DgpDAO implements InterfaceDgpDAO {
             cst.setString(29, LI_MOTIVO);
             cst.setString(30, ES_MFL);
             cst.setDouble(31, BONO_PUESTO);
+            cst.setDouble(32, ASIGNACION_FAMILIAR);
             cst.execute();
 
         } catch (SQLException e) {
@@ -290,13 +295,13 @@ public class DgpDAO implements InterfaceDgpDAO {
     public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select * from RHVD_ES_REQUERIMIENTO where ID_DEPARTAMENTO='" + id_dep + "' AND ES_PORCENT IS NOT NULL  ORDER BY TO_NUMBER(SUBSTR(ID_DGP,5,LENGTH(ID_DGP))) DESC";
-        if(id_dep.equals("DPT-0019")){
-             sql = "select * from RHVD_ES_REQUERIMIENTO where ES_PORCENT IS NOT NULL  ORDER BY TO_NUMBER(SUBSTR(ID_DGP,5,LENGTH(ID_DGP))) DESC";
+        if (id_dep.equals("DPT-0019")) {
+            sql = "select * from RHVD_ES_REQUERIMIENTO where ES_PORCENT IS NOT NULL  ORDER BY TO_NUMBER(SUBSTR(ID_DGP,5,LENGTH(ID_DGP))) DESC";
         }
         List<V_Es_Requerimiento> Lista = new ArrayList<V_Es_Requerimiento>();
         try {
             ResultSet rs = this.conn.query(sql);
-            while (rs.next()){
+            while (rs.next()) {
                 V_Es_Requerimiento v = new V_Es_Requerimiento();
                 v.setId_trabajador(rs.getString("id_trabajador"));
                 v.setAp_paterno(rs.getString("ap_paterno"));
@@ -372,7 +377,6 @@ public class DgpDAO implements InterfaceDgpDAO {
         List<V_Det_DGP> Lista = new ArrayList<V_Det_DGP>();
         try {
             ResultSet rs = this.conn.query(sql);
-
             while (rs.next()) {
                 V_Det_DGP x = new V_Det_DGP();
                 x.setId_dgp(rs.getString("id_dgp"));
@@ -417,11 +421,24 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setLi_motivo(rs.getString("li_motivo"));
                 x.setEs_mfl(rs.getString("es_mfl"));
                 x.setCa_bonificacion_p(rs.getDouble("ca_bonificacion_p"));
+                x.setNo_area(rs.getString("NO_AREA"));
+                x.setNo_seccion(rs.getString("NO_SECCION"));
+                x.setNo_trab_us_cr(rs.getString("no_trab_us_cr"));
+                x.setNo_trab_us_mod(rs.getString("no_trab_us_mod"));
+                x.setCa_asig_familiar(rs.getDouble("ca_asig_familiar"));
+                x.setNombre_trabajador(rs.getString("nombre_trabajador"));
                 Lista.add(x);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return Lista;
     }
@@ -437,8 +454,15 @@ public class DgpDAO implements InterfaceDgpDAO {
                 Maxdgp = rs.getString(1);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return Maxdgp;
     }
@@ -454,8 +478,15 @@ public class DgpDAO implements InterfaceDgpDAO {
                 val = Integer.parseInt(rs.getString(1));
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return val;
     }
@@ -485,10 +516,16 @@ public class DgpDAO implements InterfaceDgpDAO {
             cst.setString(11, ID_DGP);
             cst.execute();
 
-        } catch (Exception ex) {
-            //  Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -515,8 +552,15 @@ public class DgpDAO implements InterfaceDgpDAO {
                 Lista.add(v);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return Lista;
     }
@@ -528,10 +572,16 @@ public class DgpDAO implements InterfaceDgpDAO {
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_RECHAZAR_DGP(?)}");
             cst.setString(1, IDDGP);
             cst.execute();
-        } catch (Exception ex) {
-            //  Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -543,10 +593,16 @@ public class DgpDAO implements InterfaceDgpDAO {
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_HABILITAR_DGP(?)}");
             cst.setString(1, IDDGP);
             cst.execute();
-        } catch (Exception ex) {
-            //  Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -930,10 +986,14 @@ public class DgpDAO implements InterfaceDgpDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
-        } catch (ParseException ex) {
-            Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
