@@ -169,7 +169,7 @@
                                         <section class="col col-2">
                                             <label class="select" id="titulo">Motivo :
                                                 <select disabled=""  class="input-group-sm">
-                                                    <%if (d.getLi_motivo()!= null) {%>
+                                                    <%if (d.getLi_motivo() != null) {%>
                                                     <%if (d.getLi_motivo().trim().equals("1")) {%>
                                                     <option  selected="selected">Trabajador Nuevo</option>   
                                                     <option  >renovación</option>   
@@ -177,7 +177,7 @@
                                                     <option >Trabajador Nuevo</option>   
                                                     <option selected="selected">renovación</option>   
                                                     <%}%>
-                                                    <%}else{%>
+                                                    <%} else {%>
                                                     <option selected="">NINGUNO</option>
                                                     <%}%>
                                                 </select>  
@@ -288,10 +288,10 @@
                                                     <option value="2">Contratado Independiente</option>
                                                     <option value="3">Enpleado</option>
                                                     <option value="4">Misionero</option>
-                                                    <option value="5">MFL-Práctica Pre-Profesional</option>
+                                                 <!--   <option value="5">MFL-Práctica Pre-Profesional</option>
                                                     <option value="6">MFL-Práctica Profesionales</option>
                                                     <option value="7">MFL-CLJ</option>
-                                                    <option value="8">MFL-Contrato</option>
+                                                    <option value="8">MFL-Contrato</option>-->
                                                 </select>
                                             </label>
                                         </section>
@@ -325,10 +325,15 @@
                                                 <input type="text" name="ca_bono_puesto" value="<%=d.getCa_bonificacion_p()%>" class="input-group-sm" required="" id="ca_bono_pu" readonly="">
                                             </label>
                                         </section>
-
+                                        <%int val_asigf = Integer.parseInt(request.getParameter("num"));%>
+                                        <section class="col col-2" >
+                                            <label class="input" id="titulo">Asignanción Familiar:
+                                                <input type="text" name="ASIG_FAMILIAR"  value="<%=d.getCa_asig_familiar()%>" class="input-group-sm" id="asig" readonly="">
+                                            </label>
+                                        </section>
                                         <section class="col col-1">
                                             <label class="input" id="titulo">Sueldo Total:
-                                                <input type="text" name="TOTAL_SUELDO" value="<%=d.getCa_bono_alimentario() + d.getCa_sueldo() + d.getDe_bev() + d.getCa_bonificacion_p()%>" class="input-group-sm" id="su_t" readonly="">
+                                                <input type="text" name="TOTAL_SUELDO" value="<%=d.getCa_bono_alimentario() + d.getCa_sueldo() + d.getCa_asig_familiar() + d.getDe_bev() + d.getCa_bonificacion_p()%>" class="input-group-sm" id="su_t" readonly="">
                                             </label>
                                         </section>
                                         <section class="col col-2">
@@ -336,12 +341,7 @@
                                                 <input type="text" name="TIPO_HORA_PAGO" value="0" class="input-group-sm" readonly="">
                                             </label>
                                         </section>
-                                        <%int total = Integer.parseInt(request.getParameter("num")); %>
-                                        <section class="col col-2" >
-                                            <label class="input" id="titulo">Asignanción Familiar:
-                                                <input type="text" name="ASIG_FAMILIAR" <%if (total == 0) {%>value="0" <%} else {%> value="75.0" <%}%> class="input-group-sm" id="asig" readonly="">
-                                            </label>
-                                        </section>
+
                                     </div>
                                     <!--<div class="modal-body">
         
@@ -816,7 +816,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $("#ca_bono_pu").numeric();
                 $("#remu").numeric();
                 $("#rein").numeric();
@@ -927,11 +927,11 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
-                jQuery.validator.addMethod("val_fecha", function(value, element) {
+                jQuery.validator.addMethod("val_fecha", function (value, element) {
                     var d = value.split("-");
                     return this.optional(element) || String(parseInt(d[0])).length == 4;
                 }, "¡Fecha ingresada invalida!");
@@ -1000,7 +1000,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1052,7 +1052,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1091,15 +1091,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function(form) {
+                    submitHandler: function (form) {
                         $(form).ajaxSubmit({
-                            success: function() {
+                            success: function () {
                                 $("#comment-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1133,15 +1133,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function(form) {
+                    submitHandler: function (form) {
                         $(form).ajaxSubmit({
-                            success: function() {
+                            success: function () {
                                 $("#contact-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1170,7 +1170,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1215,7 +1215,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1225,7 +1225,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function(selectedDate) {
+                    onSelect: function (selectedDate) {
                         $('#finishdate').datepicker('option', 'minDate', selectedDate);
                     }
                 });
@@ -1234,7 +1234,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function(selectedDate) {
+                    onSelect: function (selectedDate) {
                         $('#startdate').datepicker('option', 'maxDate', selectedDate);
                     }
                 });
@@ -1253,7 +1253,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -1268,7 +1268,7 @@
 
         function Listar_dep() {
             var s = $(".selec_dep");
-            $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function(objJson) {
+            $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function (objJson) {
                 s.empty();
                 var lista = objJson.lista;
                 s.append("<option value='' > [SELECCIONE] </option>");
@@ -1287,7 +1287,7 @@
         function Listar_area() {
             var s = $(".Selec_Area");
 
-            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function(objJson) {
+            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function (objJson) {
                 s.empty();
                 var lista = objJson.lista;
                 s.append("<option value='' > [SELECCIONE] </option>");
@@ -1306,7 +1306,7 @@
         function Listar_sec() {
             var s = $("#select_sec");
 
-            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function(objJson) {
+            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function (objJson) {
                 s.empty();
                 var lista = objJson.lista;
                 s.append("<option value='' > [SELECCIONE] </option>");
@@ -1323,7 +1323,7 @@
         function Listar_plantilla() {
             var s = $(".con_pl_pu");
 
-            $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function(objJson) {
+            $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function (objJson) {
                 s.empty();
                 var lista = objJson.lista;
                 s.append("<option value='' > [SELECCIONE] </option>");
@@ -1332,7 +1332,7 @@
                 }
             });
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             Listar_centro_costo();
 
@@ -1346,15 +1346,15 @@
             var d = $("#select_sec");
             var b = $("#selec_dep");
             var e = $("#pu_id_se");
-            $(".date").keyup(function() {
+            $(".date").keyup(function () {
                 $(".conteni").val($(".date").val());
             });
             // $.post("../../  ")
             $("#select_mod").change(
-                    function() {
+                    function () {
                         // alert("?MODALIDAD="+$("#select_mod").val());
 
-                        $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
+                        $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
                             a.empty();
                             var list = objJson.lista;
                             a.append("<option value='' > [SELECCIONE] </option>");
@@ -1366,8 +1366,8 @@
                         });
                     });
             $("#selec_dep").change(
-                    function() {
-                        $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
+                    function () {
+                        $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
                             c.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -1385,8 +1385,8 @@
                         });
                     });
             $("#select_dir").change(
-                    function() {
-                        $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function(objJson) {
+                    function () {
+                        $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
                             b.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -1404,8 +1404,8 @@
                         });
                     });
             $("#Selec_Area").change(
-                    function() {
-                        $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
+                    function () {
+                        $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
                             d.empty();
 
                             var list = objJson.lista;
@@ -1420,8 +1420,8 @@
                         });
                     });
             $("#select_sec").change(
-                    function() {
-                        $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function(objJson) {
+                    function () {
+                        $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
                             e.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -1440,9 +1440,9 @@
                         });
                     });
             $("#btn-registrar").click(
-                    function() {
+                    function () {
                         var pr = $("#select-proceso").val();
-                        $.post("../../paso", $("#form-paso").serialize(), function() {
+                        $.post("../../paso", $("#form-paso").serialize(), function () {
                             Listar_Paso(pr);
                         });
                         $("#btn-registrar").val("Registrar Paso");
@@ -1458,7 +1458,7 @@
 
             function Listar_centro_costo() {
                 var x = $("#fila-agregar");
-                $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
+                $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function (objJson) {
                     var lista = objJson.lista;
                     var numero = 1;
                     x.append('<div  class="row centro-costo_' + numero + '" >');

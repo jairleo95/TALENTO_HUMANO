@@ -12,19 +12,17 @@
         <title>JSP Page</title>
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
-
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
-
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/demo.min.css">
     </head>
     <body>
         <div class="well caja_t">
             <div class="row">
-                <form class="smart-form">
+                <form class="smart-form form_cc">
                     <section class="col-xs-10">
                         <div class="row">
-                            <section class="col col-sm-6">
+                            <section class="col col-sm-6" >
                                 <label class="label">Codigo</label>
                                 <label class="input">
                                     <input class="inccc" type="text" name="codigo" placeholder="Ingesar Codigo" maxlength="8">
@@ -41,7 +39,7 @@
                             <section class="col col-sm-3">
                                 <label class="label">Direccion</label>
                                 <label class="select">
-                                    <select class="indir">
+                                    <select class="indir" name=dir"">
                                         <option>[Seleccione]</option>
                                     </select>
                                 </label>
@@ -49,7 +47,7 @@
                             <section class="col col-sm-3">
                                 <label class="label">Departmento</label>
                                 <label class="select">
-                                    <select class="indep">
+                                    <select class="indep" name="dep">
                                         <option>[Seleccione]</option>
                                     </select>
                                 </label>
@@ -57,7 +55,7 @@
                             <section class="col col-sm-3">
                                 <label class="label">Area</label>
                                 <label class="select">
-                                    <select class="inarea">
+                                    <select class="inarea" name="area">
                                         <option>[Seleccione]</option>
                                     </select>
                                 </label>
@@ -65,9 +63,10 @@
                             <section class="col col-sm-3">
                                 <label class="label">Seccion</label>
                                 <label class="select">
-                                    <select class="inseccion">
+                                    <select class="inseccion" name="seccion">
                                         <option>[Seleccione]</option>
                                     </select>
+                                    <input type="hidden" name="id_cc" class="id_cc" />
                                 </label>
                             </section>
                         </div>
@@ -76,6 +75,7 @@
                         <section class="col col-xs-12">
                             <center>
                                 <button class="btn btn-primary btn-xl btn-circle btnSave" type="button" style="margin-top: 13%" value="1"><i id="icono" class="glyphicon glyphicon-ok"></i></button> 
+                                <button class="btn btn-danger btn-xl btn-circle btnCancel" type="button" style="margin-top: 13%; display:none" value="1"><i id="icono" class="glyphicon glyphicon-remove"></i></button> 
                             </center>
                         </section>
 
@@ -222,7 +222,6 @@
                     });
 
                 }
-
                 function cargar_sec(id, selec) {
                     var sel = "";
                     if (selec != undefined) {
@@ -247,16 +246,22 @@
 
                 }
 
-                function cargar_T() {
-                    $.post("../../MCCosto?opc=list_ccosto", function (objJson) {
+                function cargar_T(id) {
+                    var url = "";
+                    if (id != null) {
+                        url = "../../MCCosto?opc=list_ccosto&id=" + id;
+                    } else {
+                        url = "../../MCCosto?opc=list_ccosto";
+                    }
+                    $.post(url, function (objJson) {
                         var lista = objJson.lista;
                         if (lista.length > 0) {
                             var t = "";
                             for (var i = 0; i < lista.length; i++) {
                                 t += "<tr>";
                                 t += "<td>" + (i + 1) + "</td>";
-                                t += "<td class='ccc" + i + "' id=" + lista[i].ID_CENTRO_COSTO + ">" + lista[i].CO_CENTRO_COSTO + "</td>";
-                                t += "<td class='dcc" + i + "'>" + lista[i].DE_CENTRO_COSTO + "</td>";
+                                t += "<td class='ccc" + i + "' id=" + lista[i].ID_CENTRO_COSTO + "><label class='lb_co_cc" + i + "'>" + lista[i].CO_CENTRO_COSTO + "</label></td>";
+                                t += "<td class='dcc" + i + "'><label class='lb_de_cc" + i + "'>" + lista[i].DE_CENTRO_COSTO + "</label></td>";
                                 if (lista[i].NO_DEP != undefined) {
                                     t += "<td class='ndep" + i + "' id=" + lista[i].ID_DEPARTAMENTO + ">" + lista[i].NO_DEP + "</td>";
                                 } else {
@@ -272,18 +277,50 @@
                                 } else {
                                     t += "<td class='nseccion" + i + "' style='background-color : #d6dde7'>Sin Asignar</td>";
                                 }
+                                t += "<input type='hidden' class='id_cc" + i + "' value='" + lista[i].ID_CENTRO_COSTO + "' />";
                                 t += "<td id=" + i + " ><a class='txt-color-blue btnEditar btn btn-default' id=" + lista[i].ID_CENTRO_COSTO + " value=" + lista[i].ID_DIRECCION + " ><i class='glyphicon glyphicon-pencil'></i> Editar</a>";
+                                t += "<button type='button' class='txt-color-blue btn btn-default btn_asignar' value='" + i + "'  ><i class='glyphicon glyphicon-pencil'></i> Asginar</button>";
                                 t += "<a class='txt-color-redLight btnDel btn btn-default' id=" + lista[i].ID_CENTRO_COSTO + " ><i class='glyphicon glyphicon-remove'></i> Eliminar</a></td>";
                                 t += "</tr>";
                             }
                             crear_T();
                             $('.tbodys').append(t);
 
+                            $(".btn_asignar").click(function () {
+                                var v = $(this).val();
+                                $(".form_cc").hide();
+                                $(".form_cc").show('slow');
+                                $(".inccc").attr("readonly", "readonly");
+                                $(".indcc").attr("readonly", "readonly");
+                                $('#icono').removeClass('glyphicon-ok');
+                                $('#icono').addClass('fa fa-plus');
+                                //  alert($(".form_cc").serialize())
+                                $(".btnCancel").show();
+                                $('.btnSave').val('3');
+                                $(".inccc").val($(".lb_co_cc" + v).text());
+                                $(".indcc").val($(".lb_de_cc" + v).text());
+                                $(".id_cc").val($(".id_cc" + v).val());
+                                cargar_T($(".id_cc" + v).val());
+                            });
+
+                            $(".btnCancel").click(function () {
+                                $(".form_cc").hide();
+                                $(".form_cc")[0].reset();
+                                $(".form_cc").show('slow');
+                                $(".btnCancel").hide();
+                                $(".inccc").removeAttr("readonly");
+                                $(".indcc").removeAttr("readonly");
+                                $('#icono').removeClass('glyphicon-pencil');
+                                $('#icono').addClass('glyphicon-ok');
+                                cargar_T();
+                                $('.btnSave').val('1');
+                            });
                             $('.btnEditar').click(function () {
 
+                                $(".inccc").removeAttr("readonly");
+                                $(".indcc").removeAttr("readonly");
                                 valdir = $(this).attr('value');
                                 valnum = $(this).parent().attr('id');
-
                                 $('.inccc').val($('.ccc' + valnum).text());
                                 $('.indcc').val($('.dcc' + valnum).text());
                                 $('.indir > option[value="' + valdir + '"]').attr("selected", "selected");
@@ -425,6 +462,11 @@
                             }
 
                         });
+                    } else if ($('.btnSave').val() == 3) {
+                        $.post("../../MCCosto?opc=Asignar_cc", $(".form_cc").serialize() + "&id_cc=" + $(this).val(), function () {
+                            cargar_T($(".id_cc").val());
+                        });
+
                     }
                 });
                 function crear_T() {

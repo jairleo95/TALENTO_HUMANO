@@ -49,7 +49,13 @@ public class MCCosto extends HttpServlet {
                 response.sendRedirect("Vista/CCosto/MantCCosto.jsp");
             }
             if (opc.equals("list_ccosto")) {
-                List<Map<String, ?>> lista = cc.listarCcosto();
+                String id = request.getParameter("id");
+                List<Map<String, ?>> lista;
+                if (id != null) {
+                    lista = cc.listarCcosto(id);
+                } else {
+                    lista = cc.listarCcosto();
+                }
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
@@ -57,6 +63,14 @@ public class MCCosto extends HttpServlet {
                 List<Map<String, ?>> lista = cc.List_Direccion();
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
+            }
+            if (opc.equals("Asignar_cc")) {
+                String id_centro_costo = request.getParameter("id_cc");
+                String id_departamento = request.getParameter("dep");
+                String id_area = request.getParameter("area");
+                String id_seccion = request.getParameter("seccion");
+                cc.AsignarCentroCosto(id_centro_costo, id_departamento, id_area, id_seccion);
+                rpta.put("rpta", "1");
             }
             if (opc.equals("list_dep")) {
                 String id = request.getParameter("id");

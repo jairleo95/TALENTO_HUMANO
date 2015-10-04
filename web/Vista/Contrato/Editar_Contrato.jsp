@@ -331,7 +331,12 @@
                                                     } else {%>readonly=""<%}%>>
                                             </label>
                                         </section>
-
+                                        <section class="col col-2" >
+                                            <label class="input" id="titulo">Asignanción Familiar:
+                                                <input type="text" name="ASIG_FAMILIAR" value="<%=a.getCa_asig_familiar()%>"  class="input-group-sm" id="asig" <%if (a.getId_dgp() == null) {
+                                                    } else {%>readonly=""<%}%>>
+                                            </label>
+                                        </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Sueldo Total:
                                                 <input type="text" name="TOTAL_SUELDO" value="<%=a.getCa_sueldo_total()%>" class="input-group-sm" id="su_t" <%if (a.getId_dgp() == null) {
@@ -348,12 +353,7 @@
                                                         } else {%>readonly=""<%}%>>
                                             </label>
                                         </section>
-                                        <section class="col col-2" >
-                                            <label class="input" id="titulo">Asignanción Familiar:
-                                                <input type="text" name="ASIG_FAMILIAR" value="<%=a.getCa_asig_familiar()%>"  class="input-group-sm" id="asig" <%if (a.getId_dgp() == null) {
-                                                    } else {%>readonly=""<%}%>>
-                                            </label>
-                                        </section>
+
                                     </div>
                                     <!--<div class="modal-body">
         
@@ -856,16 +856,16 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-            if (!window.jQuery) {
-                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-            }
+                                        if (!window.jQuery) {
+                                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                        }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }
+                                        if (!window.jQuery.ui) {
+                                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                        }
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
@@ -928,438 +928,438 @@
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript">
 
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                                        // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function() {
-                $("#ca_bono_pu").numeric();
-                $("#remu").numeric();
-                $("#rein").numeric();
-                $("#bo_a").numeric();
-                $("#bev").numeric();
-                $("#su_t").numeric();
-                $("#asig").numeric();
-                pageSetUp();
+                                        $(document).ready(function () {
+                                            $("#ca_bono_pu").numeric();
+                                            $("#remu").numeric();
+                                            $("#rein").numeric();
+                                            $("#bo_a").numeric();
+                                            $("#bev").numeric();
+                                            $("#su_t").numeric();
+                                            $("#asig").numeric();
+                                            pageSetUp();
 
-                var $checkoutForm = $('#checkout-form').validate({
-                    // Rules for form validation
-                    rules: {
-                        fname: {
-                            required: true
-                        },
-                        FEC_DESDE: {
-                            val_fecha: true
-                        },
-                        FEC_HASTA: {
-                            val_fecha: true
-                        },
-                        lname: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        phone: {
-                            required: true
-                        },
-                        country: {
-                            required: true
-                        },
-                        city: {
-                            required: true
-                        },
-                        code: {
-                            required: true,
-                            digits: true
-                        },
-                        address: {
-                            required: true
-                        },
-                        name: {
-                            required: true
-                        },
-                        card: {
-                            required: true,
-                            creditcard: true
-                        },
-                        cvv: {
-                            required: true,
-                            digits: true
-                        },
-                        month: {
-                            required: true
-                        },
-                        year: {
-                            required: true,
-                            digits: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        fname: {
-                            required: 'Please enter your first name'
-                        },
-                        lname: {
-                            required: 'Please enter your last name'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        phone: {
-                            required: 'Please enter your phone number'
-                        },
-                        country: {
-                            required: 'Please select your country'
-                        },
-                        city: {
-                            required: 'Please enter your city'
-                        },
-                        code: {
-                            required: 'Please enter code',
-                            digits: 'Digits only please'
-                        },
-                        address: {
-                            required: 'Please enter your full address'
-                        },
-                        name: {
-                            required: 'Please enter name on your card'
-                        },
-                        card: {
-                            required: 'Please enter your card number'
-                        },
-                        cvv: {
-                            required: 'Enter CVV2',
-                            digits: 'Digits only'
-                        },
-                        month: {
-                            required: 'Select month'
-                        },
-                        year: {
-                            required: 'Enter year',
-                            digits: 'Digits only please'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
-                jQuery.validator.addMethod("val_fecha", function(value, element) {
-                    var d = value.split("-");
-                    return this.optional(element) || String(parseInt(d[0])).length == 4;
-                }, "¡Fecha ingresada invalida!");
+                                            var $checkoutForm = $('#checkout-form').validate({
+                                                // Rules for form validation
+                                                rules: {
+                                                    fname: {
+                                                        required: true
+                                                    },
+                                                    FEC_DESDE: {
+                                                        val_fecha: true
+                                                    },
+                                                    FEC_HASTA: {
+                                                        val_fecha: true
+                                                    },
+                                                    lname: {
+                                                        required: true
+                                                    },
+                                                    email: {
+                                                        required: true,
+                                                        email: true
+                                                    },
+                                                    phone: {
+                                                        required: true
+                                                    },
+                                                    country: {
+                                                        required: true
+                                                    },
+                                                    city: {
+                                                        required: true
+                                                    },
+                                                    code: {
+                                                        required: true,
+                                                        digits: true
+                                                    },
+                                                    address: {
+                                                        required: true
+                                                    },
+                                                    name: {
+                                                        required: true
+                                                    },
+                                                    card: {
+                                                        required: true,
+                                                        creditcard: true
+                                                    },
+                                                    cvv: {
+                                                        required: true,
+                                                        digits: true
+                                                    },
+                                                    month: {
+                                                        required: true
+                                                    },
+                                                    year: {
+                                                        required: true,
+                                                        digits: true
+                                                    }
+                                                },
+                                                // Messages for form validation
+                                                messages: {
+                                                    fname: {
+                                                        required: 'Please enter your first name'
+                                                    },
+                                                    lname: {
+                                                        required: 'Please enter your last name'
+                                                    },
+                                                    email: {
+                                                        required: 'Please enter your email address',
+                                                        email: 'Please enter a VALID email address'
+                                                    },
+                                                    phone: {
+                                                        required: 'Please enter your phone number'
+                                                    },
+                                                    country: {
+                                                        required: 'Please select your country'
+                                                    },
+                                                    city: {
+                                                        required: 'Please enter your city'
+                                                    },
+                                                    code: {
+                                                        required: 'Please enter code',
+                                                        digits: 'Digits only please'
+                                                    },
+                                                    address: {
+                                                        required: 'Please enter your full address'
+                                                    },
+                                                    name: {
+                                                        required: 'Please enter name on your card'
+                                                    },
+                                                    card: {
+                                                        required: 'Please enter your card number'
+                                                    },
+                                                    cvv: {
+                                                        required: 'Enter CVV2',
+                                                        digits: 'Digits only'
+                                                    },
+                                                    month: {
+                                                        required: 'Select month'
+                                                    },
+                                                    year: {
+                                                        required: 'Enter year',
+                                                        digits: 'Digits only please'
+                                                    }
+                                                },
+                                                // Do not change code below
+                                                errorPlacement: function (error, element) {
+                                                    error.insertAfter(element.parent());
+                                                }
+                                            });
+                                            jQuery.validator.addMethod("val_fecha", function (value, element) {
+                                                var d = value.split("-");
+                                                return this.optional(element) || String(parseInt(d[0])).length == 4;
+                                            }, "¡Fecha ingresada invalida!");
 
-                var $registerForm = $("#smart-form-register").validate({
-                    // Rules for form validation
-                    rules: {
-                        username: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        password: {
-                            required: true,
-                            minlength: 3,
-                            maxlength: 20
-                        },
-                        passwordConfirm: {
-                            required: true,
-                            minlength: 3,
-                            maxlength: 20,
-                            equalTo: '#password'
-                        },
-                        firstname: {
-                            required: true
-                        },
-                        lastname: {
-                            required: true
-                        },
-                        gender: {
-                            required: true
-                        },
-                        terms: {
-                            required: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        login: {
-                            required: 'Please enter your login'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        password: {
-                            required: 'Please enter your password'
-                        },
-                        passwordConfirm: {
-                            required: 'Please enter your password one more time',
-                            equalTo: 'Please enter the same password as above'
-                        },
-                        firstname: {
-                            required: 'Please select your first name'
-                        },
-                        lastname: {
-                            required: 'Please select your last name'
-                        },
-                        gender: {
-                            required: 'Please select your gender'
-                        },
-                        terms: {
-                            required: 'You must agree with Terms and Conditions'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
+                                            var $registerForm = $("#smart-form-register").validate({
+                                                // Rules for form validation
+                                                rules: {
+                                                    username: {
+                                                        required: true
+                                                    },
+                                                    email: {
+                                                        required: true,
+                                                        email: true
+                                                    },
+                                                    password: {
+                                                        required: true,
+                                                        minlength: 3,
+                                                        maxlength: 20
+                                                    },
+                                                    passwordConfirm: {
+                                                        required: true,
+                                                        minlength: 3,
+                                                        maxlength: 20,
+                                                        equalTo: '#password'
+                                                    },
+                                                    firstname: {
+                                                        required: true
+                                                    },
+                                                    lastname: {
+                                                        required: true
+                                                    },
+                                                    gender: {
+                                                        required: true
+                                                    },
+                                                    terms: {
+                                                        required: true
+                                                    }
+                                                },
+                                                // Messages for form validation
+                                                messages: {
+                                                    login: {
+                                                        required: 'Please enter your login'
+                                                    },
+                                                    email: {
+                                                        required: 'Please enter your email address',
+                                                        email: 'Please enter a VALID email address'
+                                                    },
+                                                    password: {
+                                                        required: 'Please enter your password'
+                                                    },
+                                                    passwordConfirm: {
+                                                        required: 'Please enter your password one more time',
+                                                        equalTo: 'Please enter the same password as above'
+                                                    },
+                                                    firstname: {
+                                                        required: 'Please select your first name'
+                                                    },
+                                                    lastname: {
+                                                        required: 'Please select your last name'
+                                                    },
+                                                    gender: {
+                                                        required: 'Please select your gender'
+                                                    },
+                                                    terms: {
+                                                        required: 'You must agree with Terms and Conditions'
+                                                    }
+                                                },
+                                                // Do not change code below
+                                                errorPlacement: function (error, element) {
+                                                    error.insertAfter(element.parent());
+                                                }
+                                            });
 
-                var $reviewForm = $("#review-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        name: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        review: {
-                            required: true,
-                            minlength: 20
-                        },
-                        quality: {
-                            required: true
-                        },
-                        reliability: {
-                            required: true
-                        },
-                        overall: {
-                            required: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        name: {
-                            required: 'Please enter your name'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: '<i class="fa fa-warning"></i><strong>Please enter a VALID email addres</strong>'
-                        },
-                        review: {
-                            required: 'Please enter your review'
-                        },
-                        quality: {
-                            required: 'Please rate quality of the product'
-                        },
-                        reliability: {
-                            required: 'Please rate reliability of the product'
-                        },
-                        overall: {
-                            required: 'Please rate the product'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
+                                            var $reviewForm = $("#review-form").validate({
+                                                // Rules for form validation
+                                                rules: {
+                                                    name: {
+                                                        required: true
+                                                    },
+                                                    email: {
+                                                        required: true,
+                                                        email: true
+                                                    },
+                                                    review: {
+                                                        required: true,
+                                                        minlength: 20
+                                                    },
+                                                    quality: {
+                                                        required: true
+                                                    },
+                                                    reliability: {
+                                                        required: true
+                                                    },
+                                                    overall: {
+                                                        required: true
+                                                    }
+                                                },
+                                                // Messages for form validation
+                                                messages: {
+                                                    name: {
+                                                        required: 'Please enter your name'
+                                                    },
+                                                    email: {
+                                                        required: 'Please enter your email address',
+                                                        email: '<i class="fa fa-warning"></i><strong>Please enter a VALID email addres</strong>'
+                                                    },
+                                                    review: {
+                                                        required: 'Please enter your review'
+                                                    },
+                                                    quality: {
+                                                        required: 'Please rate quality of the product'
+                                                    },
+                                                    reliability: {
+                                                        required: 'Please rate reliability of the product'
+                                                    },
+                                                    overall: {
+                                                        required: 'Please rate the product'
+                                                    }
+                                                },
+                                                // Do not change code below
+                                                errorPlacement: function (error, element) {
+                                                    error.insertAfter(element.parent());
+                                                }
+                                            });
 
-                var $commentForm = $("#comment-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        name: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        url: {
-                            url: true
-                        },
-                        comment: {
-                            required: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        name: {
-                            required: 'Enter your name',
-                        },
-                        email: {
-                            required: 'Enter your email address',
-                            email: 'Enter a VALID email'
-                        },
-                        url: {
-                            email: 'Enter a VALID url'
-                        },
-                        comment: {
-                            required: 'Please enter your comment'
-                        }
-                    },
-                    // Ajax form submition
-                    submitHandler: function(form) {
-                        $(form).ajaxSubmit({
-                            success: function() {
-                                $("#comment-form").addClass('submited');
-                            }
-                        });
-                    },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
+                                            var $commentForm = $("#comment-form").validate({
+                                                // Rules for form validation
+                                                rules: {
+                                                    name: {
+                                                        required: true
+                                                    },
+                                                    email: {
+                                                        required: true,
+                                                        email: true
+                                                    },
+                                                    url: {
+                                                        url: true
+                                                    },
+                                                    comment: {
+                                                        required: true
+                                                    }
+                                                },
+                                                // Messages for form validation
+                                                messages: {
+                                                    name: {
+                                                        required: 'Enter your name',
+                                                    },
+                                                    email: {
+                                                        required: 'Enter your email address',
+                                                        email: 'Enter a VALID email'
+                                                    },
+                                                    url: {
+                                                        email: 'Enter a VALID url'
+                                                    },
+                                                    comment: {
+                                                        required: 'Please enter your comment'
+                                                    }
+                                                },
+                                                // Ajax form submition
+                                                submitHandler: function (form) {
+                                                    $(form).ajaxSubmit({
+                                                        success: function () {
+                                                            $("#comment-form").addClass('submited');
+                                                        }
+                                                    });
+                                                },
+                                                // Do not change code below
+                                                errorPlacement: function (error, element) {
+                                                    error.insertAfter(element.parent());
+                                                }
+                                            });
 
-                var $contactForm = $("#contact-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        name: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        message: {
-                            required: true,
-                            minlength: 10
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        name: {
-                            required: 'Please enter your name',
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        message: {
-                            required: 'Please enter your message'
-                        }
-                    },
-                    // Ajax form submition
-                    submitHandler: function(form) {
-                        $(form).ajaxSubmit({
-                            success: function() {
-                                $("#contact-form").addClass('submited');
-                            }
-                        });
-                    },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
+                                            var $contactForm = $("#contact-form").validate({
+                                                // Rules for form validation
+                                                rules: {
+                                                    name: {
+                                                        required: true
+                                                    },
+                                                    email: {
+                                                        required: true,
+                                                        email: true
+                                                    },
+                                                    message: {
+                                                        required: true,
+                                                        minlength: 10
+                                                    }
+                                                },
+                                                // Messages for form validation
+                                                messages: {
+                                                    name: {
+                                                        required: 'Please enter your name',
+                                                    },
+                                                    email: {
+                                                        required: 'Please enter your email address',
+                                                        email: 'Please enter a VALID email address'
+                                                    },
+                                                    message: {
+                                                        required: 'Please enter your message'
+                                                    }
+                                                },
+                                                // Ajax form submition
+                                                submitHandler: function (form) {
+                                                    $(form).ajaxSubmit({
+                                                        success: function () {
+                                                            $("#contact-form").addClass('submited');
+                                                        }
+                                                    });
+                                                },
+                                                // Do not change code below
+                                                errorPlacement: function (error, element) {
+                                                    error.insertAfter(element.parent());
+                                                }
+                                            });
 
-                var $loginForm = $("#login-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        password: {
-                            required: true,
-                            minlength: 3,
-                            maxlength: 20
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        password: {
-                            required: 'Please enter your password'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
+                                            var $loginForm = $("#login-form").validate({
+                                                // Rules for form validation
+                                                rules: {
+                                                    email: {
+                                                        required: true,
+                                                        email: true
+                                                    },
+                                                    password: {
+                                                        required: true,
+                                                        minlength: 3,
+                                                        maxlength: 20
+                                                    }
+                                                },
+                                                // Messages for form validation
+                                                messages: {
+                                                    email: {
+                                                        required: 'Please enter your email address',
+                                                        email: 'Please enter a VALID email address'
+                                                    },
+                                                    password: {
+                                                        required: 'Please enter your password'
+                                                    }
+                                                },
+                                                // Do not change code below
+                                                errorPlacement: function (error, element) {
+                                                    error.insertAfter(element.parent());
+                                                }
+                                            });
 
-                var $orderForm = $("#order-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        name: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        phone: {
-                            required: true
-                        },
-                        interested: {
-                            required: true
-                        },
-                        budget: {
-                            required: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        name: {
-                            required: 'Please enter your name'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        phone: {
-                            required: 'Please enter your phone number'
-                        },
-                        interested: {
-                            required: 'Please select interested service'
-                        },
-                        budget: {
-                            required: 'Please select your budget'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
-                    }
-                });
+                                            var $orderForm = $("#order-form").validate({
+                                                // Rules for form validation
+                                                rules: {
+                                                    name: {
+                                                        required: true
+                                                    },
+                                                    email: {
+                                                        required: true,
+                                                        email: true
+                                                    },
+                                                    phone: {
+                                                        required: true
+                                                    },
+                                                    interested: {
+                                                        required: true
+                                                    },
+                                                    budget: {
+                                                        required: true
+                                                    }
+                                                },
+                                                // Messages for form validation
+                                                messages: {
+                                                    name: {
+                                                        required: 'Please enter your name'
+                                                    },
+                                                    email: {
+                                                        required: 'Please enter your email address',
+                                                        email: 'Please enter a VALID email address'
+                                                    },
+                                                    phone: {
+                                                        required: 'Please enter your phone number'
+                                                    },
+                                                    interested: {
+                                                        required: 'Please select interested service'
+                                                    },
+                                                    budget: {
+                                                        required: 'Please select your budget'
+                                                    }
+                                                },
+                                                // Do not change code below
+                                                errorPlacement: function (error, element) {
+                                                    error.insertAfter(element.parent());
+                                                }
+                                            });
 
-                // START AND FINISH DATE
-                $('#startdate').datepicker({
-                    dateFormat: 'dd.mm.yy',
-                    prevText: '<i class="fa fa-chevron-left"></i>',
-                    nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function(selectedDate) {
-                        $('#finishdate').datepicker('option', 'minDate', selectedDate);
-                    }
-                });
+                                            // START AND FINISH DATE
+                                            $('#startdate').datepicker({
+                                                dateFormat: 'dd.mm.yy',
+                                                prevText: '<i class="fa fa-chevron-left"></i>',
+                                                nextText: '<i class="fa fa-chevron-right"></i>',
+                                                onSelect: function (selectedDate) {
+                                                    $('#finishdate').datepicker('option', 'minDate', selectedDate);
+                                                }
+                                            });
 
-                $('#finishdate').datepicker({
-                    dateFormat: 'dd.mm.yy',
-                    prevText: '<i class="fa fa-chevron-left"></i>',
-                    nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function(selectedDate) {
-                        $('#startdate').datepicker('option', 'maxDate', selectedDate);
-                    }
-                });
-            })
+                                            $('#finishdate').datepicker({
+                                                dateFormat: 'dd.mm.yy',
+                                                prevText: '<i class="fa fa-chevron-left"></i>',
+                                                nextText: '<i class="fa fa-chevron-right"></i>',
+                                                onSelect: function (selectedDate) {
+                                                    $('#startdate').datepicker('option', 'maxDate', selectedDate);
+                                                }
+                                            });
+                                        })
         </script>
         <script type="text/javascript">
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
@@ -1373,7 +1373,7 @@
     <script>
             function Listar_dep() {
                 var s = $(".selec_dep");
-                $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function (objJson) {
                     s.empty();
                     var lista = objJson.lista;
                     s.append("<option value='' > [SELECCIONE] </option>");
@@ -1392,7 +1392,7 @@
             function Listar_area() {
                 var s = $(".Selec_Area");
 
-                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function (objJson) {
                     s.empty();
                     var lista = objJson.lista;
                     s.append("<option value='' > [SELECCIONE] </option>");
@@ -1410,7 +1410,7 @@
             function Listar_sec() {
                 var s = $("#select_sec");
 
-                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function (objJson) {
                     s.empty();
                     var lista = objJson.lista;
                     s.append("<option value='' > [SELECCIONE] </option>");
@@ -1425,7 +1425,7 @@
             }
             function Listar_pue() {
                 var s = $("#pu_id_se");
-                $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(".sec_pu").val(), function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(".sec_pu").val(), function (objJson) {
                     s.empty();
                     var lista = objJson.lista;
                     s.append("<option value='' > [SELECCIONE] </option>");
@@ -1443,7 +1443,7 @@
             function Listar_plantilla() {
                 var s = $(".con_pl_pu");
 
-                $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function(objJson) {
+                $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function (objJson) {
                     s.empty();
                     var lista = objJson.lista;
                     s.append("<option value='' > [SELECCIONE] </option>");
@@ -1459,7 +1459,7 @@
             function listar_sub_mod() {
                 var s = $("#select-sub-mod");
 
-                $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&" + "id=" + $(".id_mod_con").val(), function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&" + "id=" + $(".id_mod_con").val(), function (objJson) {
                     s.empty();
                     var lista = objJson.lista;
                     s.append("<option value='' > [SELECCIONE] </option>");
@@ -1478,7 +1478,7 @@
             }
             function Listar_Direccion() {
                 var cc_dir = $(".cc-dir");
-                $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
+                $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
@@ -1495,7 +1495,7 @@
             }
             function Listar_centro_costo() {
                 var x = $("#centros-costos-relleno");
-                $.post("../../centro_costo", "opc=Listar_centro_id_con&" + "id_con=" + $(".id_contrato").val(), function(objJson) {
+                $.post("../../centro_costo", "opc=Listar_centro_id_con&" + "id_con=" + $(".id_contrato").val(), function (objJson) {
                     if ($(".can_centro_cos").val() != 0) {
                         var lista = objJson.lista;
                         x.empty();
@@ -1564,7 +1564,7 @@
                                     );
                         }
                         x.append(texto);
-                        $('#btn-agregar-cc2').click(function() {
+                        $('#btn-agregar-cc2').click(function () {
                             agregar_centro_costo();
                         });
                         $(".por_sum_to").val(CANT_T);
@@ -1635,7 +1635,7 @@
                 texto = "";
                 $(".cant").val(ag);
                 ag++;
-                $(".porcentaje_cc").keyup(function() {
+                $(".porcentaje_cc").keyup(function () {
                     sumn_porcen_total();
                 });
             }
@@ -1658,14 +1658,14 @@
             function sumn_porcen_total() {
 
                 var acum = 0;
-                $.each($(".porcentaje_cc"), function() {
+                $.each($(".porcentaje_cc"), function () {
                     acum = acum + parseFloat($(this).val());
                 });
                 $(".por_sum_to").val(acum);
             }
             function listar_cc(num, opc, arr_cc) {
                 var cc_dir = $(".cc-dir" + num);
-                $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
+                $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
@@ -1684,19 +1684,19 @@
                         }
                     }
                 });
-                $(".cc-dir" + num).change(function() {
+                $(".cc-dir" + num).change(function () {
 
                     listar_dep_cc(num, "0", arr_cc);
 
                 });
-                $(".cc-dep" + num).change(function() {
+                $(".cc-dep" + num).change(function () {
                     listar_centro_costo2(num, "0", arr_cc);
                 });
-                $(".porcenttaj" + num).keyup(function() {
+                $(".porcenttaj" + num).keyup(function () {
                     $(".cont_dif" + num).val($(this).val());
                     // act_va_an();
                 });
-                $(".remover" + num).click(function() {
+                $(".remover" + num).click(function () {
                     $(".remover" + (num - 1)).removeAttr("disabled");
                     remover(num);
                     sumn_porcen_total();
@@ -1727,7 +1727,7 @@
             function listar_dep_cc(x, opc, arr_cc) {
 
                 var cc_dep = $(".cc-dep" + x);
-                $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function(objJson) {
+                $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function (objJson) {
 
                     cc_dep.empty();
                     cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
@@ -1754,7 +1754,7 @@
             function listar_centro_costo2(x, opc, arr_cc) {
 
                 var centro_costo = $(".centro_costo" + x);
-                $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function(objJson) {
+                $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function (objJson) {
                     centro_costo.empty();
                     centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
                     if (objJson.rpta == -1) {
@@ -1779,7 +1779,7 @@
                 });
             }
             function listar_cc2(num, dir, dep, cc) {
-                $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
+                $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
@@ -1795,19 +1795,19 @@
                         }
                     }
                 });
-                $("#cc-dir" + num).change(function() {
+                $("#cc-dir" + num).change(function () {
 
                     listar_dep_cc2(num);
                 });
-                $(".cc-dep" + num).change(function() {
+                $(".cc-dep" + num).change(function () {
 
                     listar_centro_costo2(num, "0", arr_cc);
                 });
                 //  alert(num);
-                $(".por-cen-" + num).keyup(function() {
+                $(".por-cen-" + num).keyup(function () {
                     sumn_porcen_total();
                 });
-                $(".remover" + num).click(function() {
+                $(".remover" + num).click(function () {
                     $(".remover" + (num - 1)).removeAttr("disabled");
                     remover(num);
                     sumn_porcen_total();
@@ -1823,7 +1823,7 @@
             }
             function listar_dep_cc2(x, dep, cc) {
                 var cc_dep = $(".cc-dep" + x);
-                $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function(objJson) {
+                $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function (objJson) {
 
                     cc_dep.empty();
                     cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
@@ -1846,7 +1846,7 @@
             function listar_centro_costo3(x, cc) {
 
                 var centro_costo = $(".centro_costo" + x);
-                $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function(objJson) {
+                $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function (objJson) {
                     centro_costo.empty();
                     centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
                     if (objJson.rpta == -1) {
@@ -1870,7 +1870,7 @@
 
                 var msg = confirm('Si aceptas se eliminara la informacion totalmente ¿aceptas?');
                 if (msg == true) {
-                    $.post("../../centro_costo", "opc=Eliminar_det_cc&" + "id_dcc=" + $(".id_dcc" + i).val(), function() {
+                    $.post("../../centro_costo", "opc=Eliminar_det_cc&" + "id_dcc=" + $(".id_dcc" + i).val(), function () {
                         ag--;
                         $(".remover" + i + 1).attr("disabled", "disabled");
                         remov(i);
@@ -1896,7 +1896,7 @@
             function remov(i) {
                 $(".centro-costo_" + i).remove();
             }
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 Listar_pue();
                 Listar_dep();
@@ -1912,18 +1912,18 @@
                 var d = $("#select_sec");
                 var b = $("#selec_dep");
                 var e = $("#pu_id_se");
-                $('#btn-agregar-cc').click(function() {
+                $('#btn-agregar-cc').click(function () {
 
                     agregar_centro_costo();
                 });
-                $(".date").keyup(function() {
+                $(".date").keyup(function () {
                     $(".conteni").val($(".date").val());
                 });
                 // $.post("../../  ")
                 $(".select_mod").change(
-                        function() {
+                        function () {
                             // alert("?MODALIDAD="+$("#select_mod").val());
-                            $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&id=" + $(".select_mod").val(), function(objJson) {
+                            $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&id=" + $(".select_mod").val(), function (objJson) {
                                 a.empty();
                                 if (objJson.rpta == -1) {
                                     alert(objJson.mensaje);
@@ -1935,14 +1935,14 @@
                                     for (var i = 0; i < list.length; i++) {
                                         a.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
                                     }
-                                }else{
+                                } else {
                                     a.append("<option value='' > [no hay] </option>");
                                 }
                             });
                         });
                 $("#selec_dep").change(
-                        function() {
-                            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
+                        function () {
+                            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
                                 c.empty();
                                 if (objJson.rpta == -1) {
                                     alert(objJson.mensaje);
@@ -1960,8 +1960,8 @@
                             });
                         });
                 $("#select_dir").change(
-                        function() {
-                            $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function(objJson) {
+                        function () {
+                            $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
                                 b.empty();
                                 if (objJson.rpta == -1) {
                                     alert(objJson.mensaje);
@@ -1979,8 +1979,8 @@
                             });
                         });
                 $("#Selec_Area").change(
-                        function() {
-                            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
+                        function () {
+                            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
                                 d.empty();
                                 var list = objJson.lista;
                                 d.append("<option value='' > [SELECCIONE] </option>");
@@ -1994,8 +1994,8 @@
                             });
                         });
                 $("#select_sec").change(
-                        function() {
-                            $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function(objJson) {
+                        function () {
+                            $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
                                 e.empty();
                                 if (objJson.rpta == -1) {
                                     alert(objJson.mensaje);
@@ -2014,9 +2014,9 @@
                             });
                         });
                 $("#btn-registrar").click(
-                        function() {
+                        function () {
                             var pr = $("#select-proceso").val();
-                            $.post("../../paso", $("#form-paso").serialize(), function() {
+                            $.post("../../paso", $("#form-paso").serialize(), function () {
                                 Listar_Paso(pr);
                             });
                             $("#btn-registrar").val("Registrar Paso");

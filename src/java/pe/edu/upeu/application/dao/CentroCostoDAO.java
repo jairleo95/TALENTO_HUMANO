@@ -8,6 +8,7 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +46,7 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
                 rec.put("NO_AREA", rs.getString("NO_AREA"));
                 rec.put("ID_SECCION", rs.getString("ID_SECCION"));
                 rec.put("NO_SECCION", rs.getString("NO_SECCION"));
+                rec.put("id_det_cc", rs.getString("ID_DEPART_CENTRO_COSTO"));
                 lista.add(rec);
             }
         } catch (SQLException e) {
@@ -57,7 +59,34 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
 
     @Override
     public List<Map<String, ?>> listarCcosto(String idCCosto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        sql = "SELECT * FROM RHVD_CENTRO_COSTO where id_centro_costo='" + idCCosto + "'";
+        List<Map<String, ?>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ResultSet rs = this.cnn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<>();
+                rec.put("ID_CENTRO_COSTO", rs.getString("ID_CENTRO_COSTO"));
+                rec.put("CO_CENTRO_COSTO", rs.getString("CO_CENTRO_COSTO"));
+                rec.put("DE_CENTRO_COSTO", rs.getString("DE_CENTRO_COSTO"));
+                rec.put("ID_DIRECCION", rs.getString("ID_DIRECCION"));
+                rec.put("NO_DIRECCION", rs.getString("NO_DIRECCION"));
+                rec.put("ID_DEPARTAMENTO", rs.getString("ID_DEPARTAMENTO"));
+                rec.put("NO_DEP", rs.getString("NO_DEP"));
+                rec.put("ID_AREA", rs.getString("ID_AREA"));
+                rec.put("NO_AREA", rs.getString("NO_AREA"));
+                rec.put("ID_SECCION", rs.getString("ID_SECCION"));
+                rec.put("NO_SECCION", rs.getString("NO_SECCION"));
+                rec.put("id_det_cc", rs.getString("ID_DEPART_CENTRO_COSTO"));
+                lista.add(rec);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } finally {
+            this.cnn.close();
+        }
+        return lista;
     }
 
     @Override
@@ -126,6 +155,36 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public boolean AsignarCentroCosto(String ID_CENTRO_COSTO, String id_departamento, String id_area, String id_seccion) {
+        boolean x = true;
+        String id = "";
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_INSERT_DEPART_CENTRO_C( ?,?,?,?,?,?,?)}");
+            cst.setString(1, null);
+            cst.setString(2, id_departamento);
+            cst.setString(3, id_area);
+            cst.setString(4, id_seccion);
+            cst.setString(5, null);
+            cst.setString(6, ID_CENTRO_COSTO);
+            cst.registerOutParameter(7, Types.CHAR);
+            cst.execute();
+            id = cst.getString(7);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error...");
         } finally {
             try {
                 this.cnn.close();

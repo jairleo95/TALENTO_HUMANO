@@ -736,9 +736,9 @@ function list_cc_seccion(seccion, cc) {
             /* si no ha nada listar todas las secciones del area*/
             // list_cc_area($(".select-area").val(), $(".centro_costo1"));
         } else {
-            for (var t = 0; t < lista.length; t++) {
                 cc.empty();
                 cc.append('<option value="">[SELECCIONE]</option>');
+            for (var t = 0; t < lista.length; t++) {
                 cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
             }
         }
