@@ -75,7 +75,8 @@
     <%if (request.getParameter("r") != null) {
             if (request.getParameter("r").equals("ok")) {
     %>
-    <body onload='exito("Procesado con exito!", "Usted ha realizado una autorización correctamente.");' class="body">
+    <body onload='exito("Procesado con exito!", "Usted ha realizado una autorización correctamente.");
+            nobackbutton();' class="body">
         <%
                 }
             }%>
@@ -83,7 +84,8 @@
                 if (request.getParameter("m").equals("si")) {
         %>
 
-    <body onload='exito("Procesado con exito!", "Codigo APS ingresado correctamente");' class="body">
+    <body onload='exito("Procesado con exito!", "Codigo APS ingresado correctamente");
+            nobackbutton();' class="body">
         <%
                 }
             }%>
@@ -91,12 +93,13 @@
                 if (request.getParameter("h").equals("si")) {
         %>
 
-    <body onload='exito("Procesado con exito!", "Codigo huella ingresado correctamente");' class="body">
+    <body onload='exito("Procesado con exito!", "Codigo huella ingresado correctamente");
+            nobackbutton();' class="body">
         <%
             }
         } else {
         %>
-    <body class="body"  >
+    <body class="body" onload="nobackbutton();"  >
         <%}%> 
 
         <!-- MAIN PANEL -->
@@ -542,6 +545,15 @@
         $.datepicker.setDefaults($.datepicker.regional['es']);
     </script>
     <script>
+        function nobackbutton() {
+
+            window.location.hash = "no-back-button";
+            window.location.hash = "Again-No-back-button" //chrome
+
+            window.onhashchange = function () {
+                window.location.hash = "no-back-button";
+            }
+        }
         function exito(titulo, mensaje) {
             $.smallBox({
                 title: titulo,

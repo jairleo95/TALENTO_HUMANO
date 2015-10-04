@@ -161,13 +161,14 @@
             if (request.getParameter("a").equals("t")) {
     %>
 
-    <body onload="closedthis();">
+    <body onload="closedthis();
+            nobackbutton();">
 
         <%
             }
         } else {
         %>
-    <body class="">
+    <body class="" onload="nobackbutton()">
         <%}%>
         <!-- MAIN PANEL -->
         <div id="main" role="main" style="margin-left: 0px;">
@@ -227,7 +228,7 @@
                                                     <th data-class="expand">Proceso</th>
                                                         <%if (ID_DEP.equals("DPT-0019")) {%>
                                                     <th data-hide="phone,tablet">Departamento</th>
-                                                    <%}%>
+                                                        <%}%>
                                                     <th >Estado</th>
                                                 </tr>
                                             </thead>
@@ -242,9 +243,9 @@
                                             <tr>
                                                 <td><strong><%=i + 1%></strong></td>
                                                 <%
-                                                InterfaceAutorizacionDAO ad= new AutorizacionDAO();
+                                                    InterfaceAutorizacionDAO ad = new AutorizacionDAO();
                                                 %>
-                                                <td><%=ad.Mes_plazo(r.getId_dgp().trim()) %></td>
+                                                <td><%=ad.Mes_plazo(r.getId_dgp().trim())%></td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -281,8 +282,8 @@
                                                         %>
                                                     </div></td>
                                                     <%if (ID_DEP.equals("DPT-0019")) {%>
-                                                    <td><%=r.getNo_dep()%></td>
-                                                    <%} %>
+                                                <td><%=r.getNo_dep()%></td>
+                                                <%} %>
                                                 <td><%if (r.getEs_dgp().equals("2")) {
                                                         out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
                                                     } else {
@@ -746,7 +747,15 @@
 
         </script>
         <script type="text/javascript">
+            function nobackbutton() {
 
+                window.location.hash = "no-back-button";
+                window.location.hash = "Again-No-back-button" //chrome
+
+                window.onhashchange = function () {
+                    window.location.hash = "no-back-button";
+                }
+            }
             function iterar_aut(s, t) {
                 var i = 1;
                 $('.prog_aut' + s + ' .new-circle').removeClass().addClass('new-circle');
@@ -778,22 +787,6 @@
 
 
             });</script>
-
-        <!-- Your GOOGLE ANALYTICS CODE Below -->
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-            _gaq.push(['_trackPageview']);
-            (function () {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
-
     </body>
 
 </html>
