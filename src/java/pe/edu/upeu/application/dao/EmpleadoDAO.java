@@ -395,7 +395,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     @Override
     public List<Empleado> id_empleadox_ide(String ide) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHTD_EMPLEADO WHERE ID_TRABAJADOR = '" + ide.trim() + "'";
+        String sql = "SELECT * FROM RHTD_EMPLEADO WHERE ID_TRABAJADOR = '" + ide.trim() + "' and es_empleado='1'";
         List<Empleado> List = new ArrayList<Empleado>();
         try {
             ResultSet rs = this.conn.query(sql);

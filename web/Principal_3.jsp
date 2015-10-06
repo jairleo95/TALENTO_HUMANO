@@ -380,7 +380,7 @@
 
                             </li>
 
-                          
+
                             <%}
                                 if (id_rol.trim().equals("ROL-0011") | id_rol.trim().equals("ROL-0001")) {%>
                             <li>
@@ -688,15 +688,21 @@
              }*/
 
         }
+
+        var websocket = new WebSocket("ws://localhost:8092/TALENTO_HUMANO/server");
+        function sendMessage() {
+            websocket.send("mensaje");
+
+        }
+        websocket.onmessage = function processMessage(objJson) {
+            alert(objJson.message)
+        }
         $(document).ready(function () {
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
             pageSetUp();
 
             // alert('<%="Maximum Inactive Interval of Session in Seconds is : " + sesion.getMaxInactiveInterval() / 60%>');
-
-
-
             /*
              * PAGE RELATED SCRIPTS
              */
@@ -1272,7 +1278,7 @@
         //out.print("<script>window.location.href = '../../menu?'</script>");
        /* RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
          dispatcher.forward(request, response);*/
-        response.sendRedirect("/TALENTO_HUMANO/");
+        out.print("<script> window.location.href = '/TALENTO_HUMANO/';</script>");
     }
 
 

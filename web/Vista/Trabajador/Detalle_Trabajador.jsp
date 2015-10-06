@@ -219,6 +219,7 @@
                                         <tr><td class="td" style="width:65%">Fecha de Nacimiento :</td><td class="td1"><%=c.convertFecha5(trb.getFe_nac())%></td></tr>
                                     </table>
                                 </td>
+
                                 <%String ID_ROL = (String) sesion.getAttribute("IDROL");
                                     for (int e = 0; e < id_empleadox_ide.size(); e++) {
                                         Empleado emp = new Empleado();
@@ -232,11 +233,15 @@
 
                                                 if (val_aps > 0) {%>
                                         <tr>
+
                                             <td class="td" >Código APS:</td>
                                             <td class="td1" id="cel_aps" ><%=emp.getCo_aps()%></td>
+
                                             <td class="td1" ><input type="hidden" id="mod_aps"  value="<%=emp.getCo_aps()%>" name="cod_aps"  maxlength="6" size="5%" onblur="MOD_COD_APS()"></td>
                                             <td class="td" colspan="2">
+                                                <%if (!ID_ROL.trim().equals("ROL-0013")) {%>
                                                 <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-green mod_co_aps"><i class="fa fa-pencil fa-2x"></i></a>
+                                                    <%}%>
                                             </td>
                                         </tr>
                                         <%}
@@ -250,7 +255,9 @@
                                             <td class="td1" id="cel_hue" ><%=emp.getCo_huella_digital()%></td>
                                             <td class="td1"  ><input type="hidden" id="mod_hue"  value="<%=emp.getCo_huella_digital()%>" name="cod_huella" size="5%" maxlength="6" size="20%" onblur="MOD_COD_HUELLA()"></td>
                                             <td class="td" colspan="2">
+                                                <%if (!ID_ROL.trim().equals("ROL-0013")) {%>
                                                 <a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-green mod_huella" ><i class="fa fa-pencil fa-2x"></i></a>
+                                                    <%}%>
                                             </td>
                                         </tr>
                                         <%}%>
@@ -748,7 +755,7 @@
 <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
 <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
 
-<script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
+
 <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
 <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
 <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
@@ -905,10 +912,14 @@
                                                 $('.ver_foto').attr("src", result);
                                             }
                                             $(document).ready(function () {
-                                                // pageSetUp();
+
+                                                pageSetUp();
                                                 $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                                                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                                 });
+
+
+
                                                 //  $("#cod_ap").numeric();
                                                 $(".mod_huella").click(function () {
                                                     $("#cel_hue").hide();
@@ -918,80 +929,6 @@
                                                     $("#cel_aps").hide();
                                                     document.getElementById("mod_aps").type = "text";
 
-                                                });
-
-                                                $(".fe_desde_p, .fe_hasta_p").change(function () {
-                                                    var cuotas = $(".cuota_docente");
-                                                    cuotas.empty();
-
-                                                    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
-                                                        var lista = objJson.lista;
-                                                        if (objJson.rpta == -1) {
-                                                            alert(objJson.mensaje);
-                                                            return;
-                                                        }
-                                                        for (var i = 0; i < lista.length; i++) {
-                                                            cuotas.append(lista[i].html);
-                                                        }
-                                                    });
-                                                });
-
-
-
-                                                $(".btn_guardar_ca").click(function () {
-                                                    $.ajax({
-                                                        url: "../../carga_academica",
-                                                        type: "POST",
-                                                        data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                                                    }).done(function (ids) {
-                                                        var arr_id = ids.split(":");
-                                                        alert("Registrado con exito!...");
-                                                        $(".proceso").val(arr_id[0]);
-                                                        $(".dgp").val(arr_id[1]);
-                                                        $(".btn_procesar").show();
-                                                    }).fail(function (e) {
-                                                        alert("Error: " + e);
-                                                    });
-                                                });
-
-                                                $(".btn_procesar").click(function () {
-                                                    $.ajax({
-                                                        url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                                                    }).done(function () {
-                                                        window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
-                                                    });
-                                                });
-
-                                                $(".btn-autor").click(function (e) {
-                                                    $.SmartMessageBox({
-                                                        title: "Alerta de Confirmaci?!",
-                                                        content: "?sta totalmente seguro de autorizar este requerimiento?",
-                                                        buttons: '[No][Si]'
-                                                    }, function (ButtonPressed) {
-                                                        if (ButtonPressed === "Si") {
-                                                            // return true;
-                                                            $(".form-aut").submit();
-                                                        }
-                                                        if (ButtonPressed === "No") {
-                                                            return false;
-                                                        }
-                                                    });
-                                                    e.preventDefault();
-                                                });
-                                                $(".btn-rech").click(function (e) {
-                                                    $.SmartMessageBox({
-                                                        title: "Alerta de Confirmaci?!",
-                                                        content: "?sta totalmente seguro de rechazar este requerimiento?",
-                                                        buttons: '[No][Si]'
-                                                    }, function (ButtonPressed) {
-                                                        if (ButtonPressed === "Si") {
-                                                            $(".form-rech").submit();
-                                                        }
-                                                        if (ButtonPressed === "No") {
-                                                            return false;
-                                                        }
-
-                                                    })
                                                 });
 
                                                 $('.ver_foto').click(function () {
@@ -1027,9 +964,10 @@
                                                     }
 
                                                 });
+
                                                 $(".btn-conti").click(function (e) {
                                                     $.SmartMessageBox({
-                                                        title: "Alerta de Confirmaci?!",
+                                                        title: "Alerta de Confirmación",
                                                         content: "?sta totalmente seguro de rechazar este requerimiento?",
                                                         buttons: '[No][Si]'
                                                     }, function (ButtonPressed) {
@@ -1044,6 +982,7 @@
                                                     e.preventDefault();
 
                                                 });
+
                                                 $(".fe_desde_p, .fe_hasta_p").change(function () {
                                                     var cuotas = $(".cuota_docente");
                                                     cuotas.empty();
@@ -1059,6 +998,7 @@
                                                         }
                                                     });
                                                 });
+
                                                 $(".btn_guardar_ca").click(function () {
                                                     $.ajax({
                                                         url: "../../carga_academica",
@@ -1085,13 +1025,15 @@
 
                                                 $(".btn-autor").click(function (e) {
                                                     $.SmartMessageBox({
-                                                        title: "Alerta de Confirmaci?!",
-                                                        content: "?sta totalmente seguro de autorizar este requerimiento?",
+                                                        title: "Alerta de Confirmación!",
+                                                        content: "Esta totalmente seguro de autorizar este requerimiento?",
                                                         buttons: '[No][Si]'
                                                     }, function (ButtonPressed) {
                                                         if (ButtonPressed === "Si") {
                                                             // return true;
                                                             $(".form-aut").submit();
+                                                            //window.parent.sendMessage();
+                                                            //window.parent.ppp()
                                                         }
                                                         if (ButtonPressed === "No") {
                                                             return false;
@@ -1101,13 +1043,13 @@
                                                 });
                                                 $(".btn-rech").click(function (e) {
                                                     $.SmartMessageBox({
-                                                        title: "Alerta de Confirmaci?!",
+                                                        title: "Alerta de Confirmación!",
                                                         content: "?sta totalmente seguro de rechazar este requerimiento?",
                                                         buttons: '[No][Si]'
                                                     }, function (ButtonPressed) {
                                                         if (ButtonPressed === "Si") {
                                                             $(".btn-mos").click();
-                                                            //$(".form-rech").submit();
+                                                            $(".form-rech").submit();
                                                         }
                                                         if (ButtonPressed === "No") {
                                                             return false;
@@ -1116,11 +1058,12 @@
                                                     });
                                                     e.preventDefault();
                                                 });
+
                                             });</script>
 
 </body>
 </html>
 <%} else {
-        response.sendRedirect("/TALENTO_HUMANO/");
+        out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
     }
 %> 

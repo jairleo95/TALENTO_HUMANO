@@ -92,7 +92,7 @@
     </body>
 </html>
 <%} else {
-        response.sendRedirect("/TALENTO_HUMANO/");
+        out.print("<script> window.location.href = '/TALENTO_HUMANO/';</script>");
     }
 
 

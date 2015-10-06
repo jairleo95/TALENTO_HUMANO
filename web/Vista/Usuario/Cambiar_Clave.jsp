@@ -155,6 +155,6 @@ and open the template in the editor.
 <%@include file="List_Usuario.jsp" %>
 
 <%} else {
-        response.sendRedirect("/TALENTO_HUMANO/");
+        out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
     }
 %>

@@ -778,6 +778,6 @@
 </html>
 
 <%} else {
-        response.sendRedirect("/TALENTO_HUMANO/");
+        out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
     }
 %>

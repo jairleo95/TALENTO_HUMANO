@@ -391,7 +391,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 </html>
 
 <%} else {
-        response.sendRedirect("/TALENTO_HUMANO/");
+        out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
     }
 
 

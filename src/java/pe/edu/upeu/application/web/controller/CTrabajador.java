@@ -104,7 +104,7 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("list_año", li.lista_años());
 
             response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp");
-            
+
         }
         if (opc.equals("Registrar")) {
             String AP_PATERNO = request.getParameter("APELLIDO_P");
@@ -633,6 +633,8 @@ public class CTrabajador extends HttpServlet {
             getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
             getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
             getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
+
+            getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?edit=ok&idtr=" + idtr);
         }
         if (opc.equals("Form_Cambiar_Clave")) {
@@ -651,6 +653,7 @@ public class CTrabajador extends HttpServlet {
             response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
