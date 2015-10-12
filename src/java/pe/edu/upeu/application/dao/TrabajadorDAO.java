@@ -12,11 +12,8 @@ import java.net.UnknownHostException;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -137,15 +134,12 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 
     @Override
     public List<V_Ficha_Trab_Num_C> Buscar_Ficha_Trabajador(String iddep, String dni, String nom, String ape_p, String ape_m) {
-        /*if (dni != null || !"".equals(nom)) {
-
-         }*/
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select d.*,RHFU_VIG_CON (d.id_trabajador) as VI_CONTRATO from (select * from RHVD_TRABAJADOR) d, RHVD_USUARIO u where u.id_usuario= d.id_usuario_creacion ";
         nom = nom.toUpperCase();
         ape_p = ape_p.toUpperCase();
         ape_m = ape_m.toUpperCase();
-        sql += (!"".equals(dni)) ? " and d.NU_DOC='" + dni + "'" : "";
+        sql += (!"".equals(dni)) ? " and trim(d.NU_DOC)='" + dni.trim() + "'" : "";
         sql += (!"".equals(nom)) ? " and upper(d.NO_TRABAJADOR)like '%" + nom.trim() + "%'" : "";
         sql += (!"".equals(ape_p)) ? " and upper(d.AP_PATERNO)like '%" + ape_p.trim() + "%'" : "";
         sql += (!"".equals(ape_m)) ? " and upper(d.AP_MATERNO)like '%" + ape_m.trim() + "%'" : "";

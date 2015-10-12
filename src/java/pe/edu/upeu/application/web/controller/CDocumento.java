@@ -74,7 +74,8 @@ public class CDocumento extends HttpServlet {
 
             }
             if (opc.equals("Ver_Documento")) {
-                if (rol.trim().equals("ROL-001")) {
+               // if (rol.trim().equals("ROL-001")) {
+                if (true) {
                     getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
                 }
                 int i = d.List_Req_nacionalidad(idtr);

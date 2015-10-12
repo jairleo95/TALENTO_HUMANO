@@ -21,6 +21,8 @@
     HttpSession sesion_1 = request.getSession(true);
     String iddep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");
     String iduser = (String) sesion_1.getAttribute("IDUSER");
+    String rol = (String) sesion_1.getAttribute("IDROL");
+    rol = rol.trim();
 
 %>
 
@@ -621,8 +623,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <% String rol = (String) sesion_1.getAttribute("IDROL");
-                                                                rol = rol.trim();
+                                                            <%
                                                                 if (!rol.equals("ROL-0013")) {%>
 
                                                             <div class="col-sm-4">   
@@ -630,8 +631,8 @@
                                                                     <label>Tipo Hora Pago Referencial:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-money fa-lg fa-fw"></i></span>
-                                                                        <input class="form-control input-group-sm" value="<%if (t.getCa_tipo_hora_pago_refeerencial() == null || t.getCa_tipo_hora_pago_refeerencial().trim().equals("null")) {
-                                                                                out.print("");
+                                                                        <input class="form-control input-group-sm" value="<%if (t.getCa_tipo_hora_pago_refeerencial() == null) {
+                                                                                out.print("0");
                                                                             } else {
                                                                                 out.print(t.getCa_tipo_hora_pago_refeerencial());
                                                                             }%>"   type="text" name="TIPO_HORA_PAGO_REFEERENCIAL" maxlength="6">
@@ -666,7 +667,9 @@
                                                                     <label>Banco:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <select name="BANCO" id="banco" class="form-control input-group-sm" <% if(rol.equals("ROL-0002") || rol.equals("ROL-0005")|| rol.equals("ROL-0016")) out.print("disabled"); %>>
+                                                                        <select name="BANCO" id="banco" class="form-control input-group-sm" <% if (rol.equals("ROL-0002") || rol.equals("ROL-0005") || rol.equals("ROL-0016")) {
+                                                                                out.print("disabled");
+                                                                            } %>>
                                                                             <option value=""   selected="" >[SELECCIONE]</option>
                                                                             <%
                                                                                 for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
@@ -1023,6 +1026,8 @@
     <script>
         $(document).ready(
                 function() {
+
+                    var rol = '<%=rol%>';
                     $("#no_cuen").hide();
                     $("#no_cuen_ban").hide();
                     $("#generar").hide();
@@ -1045,7 +1050,7 @@
                         document.getElementById("nu_cuen_otros").readOnly = true;
                         $("#texto").show();
                     }
-                    if ($("#editar").val() === 'ok') {
+                    if ($("#editar").val() === 'ok' & rol !=='ROL-0001') {
                         document.getElementById("banco").disabled = true;
                         document.getElementById("nu_cuen_otros").disabled = true;
                         document.getElementById("nu_cuen").disabled = true;

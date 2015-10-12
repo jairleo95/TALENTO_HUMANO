@@ -190,47 +190,52 @@ public class CTrabajador extends HttpServlet {
             String ES_CUENTA_SUELDO = request.getParameter("ES_CUENTA_SUELDO");
             String CO_UNIVERSITARIO = request.getParameter("COD_UNI");
 
-            tr.INSERT_TRABAJADOR(null, AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, ES_SEXO, LI_GRUPO_SANGUINEO, DE_REFERENCIA, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, CA_TIPO_HORA_PAGO_REFEERENCIAL, ES_FACTOR_RH, LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, CM_OBSERVACIONES, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, AP_NOMBRES_PADRE, AP_NOMBRES_MADRE,
-                    ES_TRABAJA_UPEU_C, AP_NOMBRES_C, FE_NAC_C, ID_TIPO_DOC_C, NU_DOC_C, LI_INSCRIPCION_VIG_ESSALUD_C, ID_CONYUGUE, CO_UNIVERSITARIO);
-            String idtr = tr.MAX_ID_DATOS_TRABAJADOR();
-            tr.INSERT_CUENTA_SUELDO(null, NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr, ES_CUENTA_SUELDO);
-            tr.INSERT_HIST_RELIGION(null, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, "1", idtr, iduser, FE_MODIF);
-            US_MODIF = iduser;
-            IP_USUARIO = tr.ip();
-            tr.UPDATE_ID_CONYUGUE(idtr, ID_CONYUGUE, US_MODIF, IP_USUARIO);
-            for (int i = 1; i <= num_hijo; i++) {
-                String AP_PATERNO_H = request.getParameter("APELLIDO_P_H" + i);
-                String AP_MATERNO_H = request.getParameter("APELLIDO_M_H" + i);
-                String NO_HIJO_TRABAJADOR = request.getParameter("NOMBRE_H" + i);
-                String FE_NACIMIENTO = request.getParameter("FECHA_NAC_H" + i);
-                String ES_SEXO_H = request.getParameter("SEXO_H" + i);
-                String ES_TIPO_DOC = request.getParameter("TIPO_DOC_ID_H" + i);
-                String NU_DOC_H = request.getParameter("NRO_DOC_H" + i);
-                String ES_PRESENTA_DOCUMENTO = null;
-                String ES_INSCRIPCION_VIG_ESSALUD = request.getParameter("ESSALUD_H" + i);
-                String ES_ESTUDIO_NIV_SUPERIOR = request.getParameter("EST_SUP_H" + i);
-                String ES_DATOS_HIJO_TRABAJADOR = "1";
-                if (NU_DOC_H != null) {
-                    if (!NU_DOC_H.equals("")) {
-                        h.INSERT_DATOS_HIJO_TRABAJADOR(null, idtr, AP_PATERNO_H, AP_MATERNO_H, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO_H, ES_TIPO_DOC, NU_DOC_H, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR);
+            if (tr.val_nu_doc(NU_DOC)) {
+                out.print("<script>alert('Trabajador ya existe!') window.history.back();</script>");
+            } else {
+
+                tr.INSERT_TRABAJADOR(null, AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, ES_SEXO, LI_GRUPO_SANGUINEO, DE_REFERENCIA, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, CA_TIPO_HORA_PAGO_REFEERENCIAL, ES_FACTOR_RH, LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, CM_OBSERVACIONES, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, AP_NOMBRES_PADRE, AP_NOMBRES_MADRE,
+                        ES_TRABAJA_UPEU_C, AP_NOMBRES_C, FE_NAC_C, ID_TIPO_DOC_C, NU_DOC_C, LI_INSCRIPCION_VIG_ESSALUD_C, ID_CONYUGUE, CO_UNIVERSITARIO);
+                String idtr = tr.MAX_ID_DATOS_TRABAJADOR();
+                tr.INSERT_CUENTA_SUELDO(null, NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr, ES_CUENTA_SUELDO);
+                tr.INSERT_HIST_RELIGION(null, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, "1", idtr, iduser, FE_MODIF);
+                US_MODIF = iduser;
+                IP_USUARIO = tr.ip();
+                tr.UPDATE_ID_CONYUGUE(idtr, ID_CONYUGUE, US_MODIF, IP_USUARIO);
+                for (int i = 1; i <= num_hijo; i++) {
+                    String AP_PATERNO_H = request.getParameter("APELLIDO_P_H" + i);
+                    String AP_MATERNO_H = request.getParameter("APELLIDO_M_H" + i);
+                    String NO_HIJO_TRABAJADOR = request.getParameter("NOMBRE_H" + i);
+                    String FE_NACIMIENTO = request.getParameter("FECHA_NAC_H" + i);
+                    String ES_SEXO_H = request.getParameter("SEXO_H" + i);
+                    String ES_TIPO_DOC = request.getParameter("TIPO_DOC_ID_H" + i);
+                    String NU_DOC_H = request.getParameter("NRO_DOC_H" + i);
+                    String ES_PRESENTA_DOCUMENTO = null;
+                    String ES_INSCRIPCION_VIG_ESSALUD = request.getParameter("ESSALUD_H" + i);
+                    String ES_ESTUDIO_NIV_SUPERIOR = request.getParameter("EST_SUP_H" + i);
+                    String ES_DATOS_HIJO_TRABAJADOR = "1";
+                    if (NU_DOC_H != null) {
+                        if (!NU_DOC_H.equals("")) {
+                            h.INSERT_DATOS_HIJO_TRABAJADOR(null, idtr, AP_PATERNO_H, AP_MATERNO_H, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO_H, ES_TIPO_DOC, NU_DOC_H, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR);
+                        }
                     }
                 }
-            }
 
-            //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
-            getServletContext().setAttribute("Documentos", d.Documentos());
-            getServletContext().setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
-            getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
-            int s = d.List_Req_nacionalidad(idtr);
-            int num_ad = d.List_Adventista(idtr);
-            int count = d.count_documentos_x_tra(idtr);
-            if (count > 0) {
-                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&dt=ok");
-            } else {
-                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE&dt=ok");
+                //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+                getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
+                getServletContext().setAttribute("Documentos", d.Documentos());
+                getServletContext().setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
+                getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+                int s = d.List_Req_nacionalidad(idtr);
+                int num_ad = d.List_Adventista(idtr);
+                int count = d.count_documentos_x_tra(idtr);
+                if (count > 0) {
+                    response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&dt=ok");
+                } else {
+                    response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE&dt=ok");
+                }
+                //response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "&a=t");
             }
-            //response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "&a=t");
         }
         if (opc.equals("Buscar")) {
             String Buscar = request.getParameter("busqueda");

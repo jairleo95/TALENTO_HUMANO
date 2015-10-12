@@ -23,6 +23,7 @@
     HttpSession sesion_1 = request.getSession(true);
     String iddep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");
     String iduser = (String) sesion_1.getAttribute("IDUSER");
+    String rol = (String) sesion_1.getAttribute("IDROL");
 
 %>
 <jsp:useBean id="List_Carrera" scope="application" class="java.util.ArrayList"/>
@@ -149,21 +150,21 @@
                         $(".doc, .doc_c").attr("maxlength", "8");
                         $(".doc, .doc_c").attr("minlength", "8");
                         //$(".doc, .doc_c").val("");
-                        if($("#nac").val() != "NAC-0193"){
+                        if ($("#nac").val() != "NAC-0193") {
                             $("#dist").hide();
                         }
-                        
+
                         $("#nac").change(
                                 function() {
                                     if ($("#nac").val() != "NAC-0193") {
                                         $("#dist").hide();
-                                         $("#dist_nac").val("DST-001835");
-                                        
+                                        $("#dist_nac").val("DST-001835");
+
                                     }
                                     if ($("#nac").val() == "NAC-0193") {
                                         $("#dist").show();
-                                       
-                                         
+
+
                                     }
                                 }
                         );
@@ -209,7 +210,7 @@
 
                         });
 
-                        
+
                         $(".select-doc_c").change(
                                 function() {
                                     $(".doc_c").val("");
@@ -424,7 +425,8 @@
                                                                         <label>Fecha Nacimiento:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i><label class="edad"></label></span>
-                                                                            <input type="date" name="FECHA_NAC" readonly="" required="" value="<%=t.getFe_nac()%>" id="edad"  class="form-control input-group-sm fecha" >
+                                                                            
+                                                                            <input type="date" name="FECHA_NAC" <%if (!rol.equals("ROL-0001")) out.print("readonly=''");   %> required="" value="<%=t.getFe_nac()%>" id="edad"  class="form-control input-group-sm fecha" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -690,9 +692,9 @@
                                                                         <label>Telefono:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-phone fa-lg fa-fw"></i></span>
-                                                                            <%if(t.getTe_trabajador() != null){%>
+                                                                                <%if (t.getTe_trabajador() != null) {%>
                                                                             <input type="text" name="TELEFONO"  value="<%=t.getTe_trabajador().trim()%>"  data-mask="(99) 999-9999" data-mask-placeholder= "X"   maxlength="50"  class="form-control input-group-sm telefono" >
-                                                                            <%}else{%>
+                                                                            <%} else {%>
                                                                             <input type="text" name="TELEFONO"  value=""  data-mask="(99) 999-9999" data-mask-placeholder= "X"   maxlength="50"  class="form-control input-group-sm telefono" >
                                                                             <%}%>
                                                                         </div>
@@ -703,11 +705,11 @@
                                                                         <label>Celular:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-mobile fa-lg fa-fw"></i></span>
-                                                                            <%if(t.getCl_tra() != null){%>
+                                                                                <%if (t.getCl_tra() != null) {%>
                                                                             <input type="text" name="CELULAR" value="<%=t.getCl_tra().trim()%>"  data-mask="999-999-999" data-mask-placeholder= "X" formnovalidate maxlength="38" class="form-control input-group-sm" >
-                                                                          <%}else{%>
+                                                                            <%} else {%>
                                                                             <input type="text" name="CELULAR" value=""  data-mask="999-999-999" data-mask-placeholder= "X" formnovalidate maxlength="38" class="form-control input-group-sm" >
-                                                                             <%}%>
+                                                                            <%}%>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -900,14 +902,14 @@
                                                                 </div>
                                                             </div>
                                                             <% CConversion c = new CConversion();
-                                                            String edit = request.getParameter("edit");
+                                                                String edit = request.getParameter("edit");
                                                             %>
                                                             <!--<input type="text" value="<%=t.getFe_nac()%>"> -->               
                                                             <%String idtr = request.getParameter("idtr");%>
                                                             <input type="hidden" name="editar" id="editar" value="<%=edit%>"/>
                                                             <input type="hidden" name="idtr" value="<%=idtr.trim()%>"/>
                                                             <input type="hidden" name="opc" value="Modificar_Dat_Gen">
-                                                            <input type="hidden" name="TI_DOC" value="<%=t.getTi_doc() %>">
+                                                            <input type="hidden" name="TI_DOC" value="<%=t.getTi_doc()%>">
                                                             <input type="hidden" name="NU_DOC" value="<%=t.getNu_doc()%>">
                                                             <input type="hidden" name="IDTR" value="<%=t.getId_trabajador()%>">
                                                             <input type="hidden" name="ES_CIVIL_A" value="<%=t.getEs_civil()%>">
@@ -1044,7 +1046,7 @@
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script>$(document).ready(function() {
                                                                                     $('#doc').click(function() {
-                                                                                       // $('#doc').val("");
+                                                                                        // $('#doc').val("");
                                                                                     });
                                                                                     if ($(".select-doc").val() == 1) {
                                                                                         $("#doc").numeric(false, function() {
@@ -1185,7 +1187,7 @@
                     $("#no_cuen_ban").hide();
                     $("#generar").hide();
                     $("#no_cuen_otros").hide();
-                    
+
                     //alert($("#es_cuenta").val());
                     $(".fecha").keyup(function() {
 
@@ -1199,13 +1201,13 @@
                          }*/
 
                     });
-                    if($("#editar").val() === 'ok'){
-                    document.getElementById("select-doc").disabled = true;
-                    document.getElementById("doc").disabled = true;
-                    document.getElementById("fname").readOnly = true;
-                    document.getElementById("lname").readOnly = true;
-                    document.getElementById("lname1").readOnly = true;
-                 
+                    if ($("#editar").val() === 'ok') {
+                        document.getElementById("select-doc").disabled = true;
+                        document.getElementById("doc").disabled = true;
+                        document.getElementById("fname").readOnly = true;
+                        document.getElementById("lname").readOnly = true;
+                        document.getElementById("lname1").readOnly = true;
+
                     }
                     $("#banco").change(function() {
                         cuenta_bancaria($(this).val());
@@ -1295,9 +1297,9 @@
             }
 
         }
-        function editarusuario (editar){
+        function editarusuario(editar) {
             if (editar)
-        } 
+        }
         function cuenta_bancaria(banco) {
 
             if (banco == '1') {
