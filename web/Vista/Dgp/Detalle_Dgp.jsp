@@ -169,7 +169,7 @@
                                                         Detalle_Centro_Costo dcc = new Detalle_Centro_Costo();
                                                         dcc = (Detalle_Centro_Costo) Cargar_dcc_dgp.get(p);
                                             %>
-                                        <tr><td class="text-info table-bordered">Centro de Costo N° <%=p + 1%></td><td class="text-info table-bordered"><%=dcc.getDe_centro_costo()%></td></tr>
+                                        <tr><td class="text-info table-bordered">Centro de Costo N° <%=p + 1%></td><td class="text-info table-bordered"><%=dcc.getDe_centro_costo()%>&nbsp;&nbsp;&nbsp;<span class="text-success">  Codigo : <%=dcc.getCo_centro_costo()%></span></td></tr>
                                             <%}
                                             } else {%>
                                         <tr><td class="text-info table-bordered">Centro de Costo </td><td class="text-info table-bordered">No tiene Centro de costo </td></tr>
