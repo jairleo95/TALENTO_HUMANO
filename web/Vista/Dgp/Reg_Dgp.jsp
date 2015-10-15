@@ -438,7 +438,7 @@
                                                         </section>
                                                         <section class="col col-3">
                                                             <label class="input"  id="titu"> 
-                                                                Bonificacion Puesto :<input type="text" maxlength="13"  value="0.0" name="BONO_PUESTO"  id="bono_pu">
+                                                                Bono por Funci&oacute;n :<input type="text" maxlength="13"  value="0.0" name="BONO_PUESTO"  id="bono_pu">
                                                             </label>
                                                         </section>
                                                         <section class="col col-3">
@@ -455,7 +455,7 @@
                                                         <%}%>
                                                         <section class="col col-3">
                                                             <label class="input"  id="titu"> 
-                                                                Remuneracion Computable :<div id="suel_total" style="color: red;">0.0</div>
+                                                                Total Remunerativo :<div id="suel_total" style="color: red;">0.0</div>
                                                             </label>
                                                         </section>
                                                     </div>

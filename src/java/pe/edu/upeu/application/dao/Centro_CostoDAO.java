@@ -348,7 +348,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
     @Override
     public List<Detalle_Centro_Costo> Cargar_dcc_dgp(String id) {
         this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select  CC.ID_DGP , cc.ID_CENTRO_COSTO,d.ID_DIRECCION,c.ID_DEPARTAMENTO,c.ID_AREA,cc.CA_PORCENTAJE,c.DE_CENTRO_COSTO from RHTD_DETALLE_CENTRO_COSTO cc , RHVD_CENTRO_COSTO c , RHTX_DIRECCION d , RHTX_DEPARTAMENTO dp where cc.ID_CENTRO_COSTO = c.ID_CENTRO_COSTO  and dp.ID_DEPARTAMENTO = c.ID_DEPARTAMENTO  and cc.ES_DETALLE_CC='1'  and dp.ID_DIRECCION = d.ID_DIRECCION and cc.id_dgp='" + id + "'";
+        String sql = "select  CC.ID_DGP, c.CO_CENTRO_COSTO , cc.ID_CENTRO_COSTO,d.ID_DIRECCION,c.ID_DEPARTAMENTO,c.ID_AREA,cc.CA_PORCENTAJE,c.DE_CENTRO_COSTO from RHTD_DETALLE_CENTRO_COSTO cc , RHVD_CENTRO_COSTO c , RHTX_DIRECCION d , RHTX_DEPARTAMENTO dp where cc.ID_CENTRO_COSTO = c.ID_CENTRO_COSTO  and dp.ID_DEPARTAMENTO = c.ID_DEPARTAMENTO  and cc.ES_DETALLE_CC='1'  and dp.ID_DIRECCION = d.ID_DIRECCION and cc.id_dgp='" + id + "'";
         List<Detalle_Centro_Costo> Lista = new ArrayList<Detalle_Centro_Costo>();
         try {
             ResultSet rs = this.cnn.query(sql);
@@ -360,6 +360,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
                 d.setId_area(rs.getString("id_area"));
                 d.setCa_porcentaje(rs.getDouble("ca_porcentaje"));
                 d.setDe_centro_costo(rs.getString("de_centro_costo"));
+                d.setCo_centro_costo(rs.getString("CO_CENTRO_COSTO"));
                 Lista.add(d);
             }
         } catch (SQLException e) {
