@@ -96,7 +96,7 @@
 
         <%            HttpSession sesion = request.getSession(true);
             String id_dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
-          //  String fecha_min = (String) sesion.getAttribute("FECHA_MINIMA");
+            //  String fecha_min = (String) sesion.getAttribute("FECHA_MINIMA");
         %>
     </head>
     <body>   
@@ -446,7 +446,7 @@
                                                                 BEV :<input type="text" name="BEV" maxlength="13" value="0.0" id="bev">
                                                             </label>
                                                         </section>
-                                                        <%if(Integer.parseInt(request.getParameter("as_f"))>0){%>
+                                                        <%if (Integer.parseInt(request.getParameter("as_f")) > 0) {%>
                                                         <section class="col col-3">
                                                             <label class="input"  id="titu"> 
                                                                 Asig Familiar :<input readonly="readonly" type="text" name="ASIGNACION_FAMILIAR" maxlength="13" value="75.0" id="asigf">
@@ -729,16 +729,16 @@
                                                         </div>
 
                                                         <div class="modal-body">
-                                                            
-                                                                <div class="row">
-                                                                    <section class="col col-xs-12 smart-form">
-                                                                        <label class="label">Nombre</label>
-                                                                        <label class=" input">
-                                                                            <input type="text" name="NOMBRE" class="form-control modNombre" placeholder="Nombre de Horario" >
-                                                                        </label>
-                                                                    </section> 
-                                                                </div>
-                                                            
+
+                                                            <div class="row">
+                                                                <section class="col col-xs-12 smart-form">
+                                                                    <label class="label">Nombre</label>
+                                                                    <label class=" input">
+                                                                        <input type="text" name="NOMBRE" class="form-control modNombre" placeholder="Nombre de Horario" >
+                                                                    </label>
+                                                                </section> 
+                                                            </div>
+
                                                         </div>
                                                         <div class="modal-footer">
                                                             <input type="hidden" id="modId" value="">
@@ -1027,6 +1027,28 @@
     <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
     <script src="../../js/Js_DGP/Registrar/Reg_Dgps.js" type="text/javascript"></script>
     <script src="../../js/Js_Horario/horarios.js" type="text/javascript"></script>
+    <script>
+                                                        function listar_mensaje_plazo(tipo, warning, info, req) {
+                                                            $.post("../../plazo_dgp", "opc=Listar&tipo=" + tipo, function (objJson) {
+                                                                warning.empty();
+                                                                info.empty();
+                                                                var lista = objJson.lista;
+                                                                if (objJson.rpta == -1) {
+                                                                    alert(objJson.mensaje);
+                                                                    return;
+                                                                }
+                                                                for (var i = 0; i < lista.length; i++) {
+                                                                    if (tipo == '2') {
+                                                                        warning.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'></a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
+                                                                        info.append('<div class="alert alert-info fade in" style="font-size:20px"><button class="close" data-dismiss="alert">×</button><i class="fa-fw fa fa-info"></i><strong>¡Importante!</strong> Su requerimiento será procesado en el mes de <strong>' + lista[i].mes + '.</strong></div>');
+                                                                    } else if (tipo == '1') {
+                                                                        // warning.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'></a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , se tiene " + lista[i].dias_tol + " dias de tolerancia para la fecha de inicio.</div>");
+                                                                        info.append('<div class="alert alert-warning fade in" ><button class="close" data-dismiss="alert"></button><i class="fa-fw fa fa-warning"></i><strong>¡Advertencia - Inicio de contrato!</strong> ' + lista[i].dias_tol + ' dias - plazo de envío respecto a la fecha de inicio' + '.</div>');
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
+    </script>
 </html>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
