@@ -514,8 +514,8 @@ public class CTrabajador extends HttpServlet {
             String ES_GEM_NU_CUENTA = "";
             String NO_BANCO_OTROS = "";
             if (editar.equals("ok")) {
-                NO_BANCO = (request.getParameter("BAN").equals("null")) ? null : request.getParameter("BAN");
-                NU_CUENTA = (request.getParameter("CUEN").equals("null")) ? null : request.getParameter("CUEN");
+                NO_BANCO = (request.getParameter("BANCO").equals("null")) ? null : request.getParameter("BANCO");
+                NU_CUENTA = (request.getParameter("CUENTA").equals("null")) ? null : request.getParameter("CUENTA");
                 //String NU_CUENTA_BANC = (request.getParameter("CUENTA_BANC") == null) ? "0" : "no tiene";
                 NU_CUENTA_BANC = (request.getParameter("CUEN_BAN").equals("null")) ? null : request.getParameter("CUEN_BAN");
                 ES_GEM_NU_CUENTA = (request.getParameter("GCC"));

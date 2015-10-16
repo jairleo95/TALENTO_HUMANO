@@ -158,8 +158,8 @@
                                         <tr><td class="text-info table-bordered">BEV: </td><td class="text-info table-bordered"><%=bev.toPlainString()%></td></tr>
                                         <tr><td class="text-info table-bordered">Bono Alimentario : S/.</td><td  class="text-info table-bordered"><%=bal.toPlainString()%></td></tr>
                                         <tr><td class="text-info table-bordered">Asignación Familiar : S/.</td><td  class="text-info table-bordered"><%=d.getCa_asig_familiar()%></td></tr>
-                                        <tr><td class="text-info table-bordered">Bono Puesto : S/.</td><td  class="text-info table-bordered"><%=bp.toPlainString()%></td></tr>
-                                        <tr style="color: red;"><td class="text-info table-bordered" >Remuneración Computable : S/.</td><td class=" table-bordered" style="color-text:red; "><%=total.toPlainString()%></td></tr>
+                                        <tr><td class="text-info table-bordered">Bono por Funcion : S/.</td><td  class="text-info table-bordered"><%=bp.toPlainString()%></td></tr>
+                                        <tr style="color: red;"><td class="text-info table-bordered" >Total Remunerativo : S/.</td><td class=" table-bordered" style="color-text:red; "><%=total.toPlainString()%></td></tr>
                                         <tr><td  Class="text-info table-bordered">Departamento:</td><td class="text-info table-bordered"><%=d.getNo_dep()%></td></tr>
                                         <tr><td  Class="text-info table-bordered">Area :</td><td class="text-info table-bordered"><%=d.getNo_area()%></td></tr>
                                         <tr><td  Class="text-info table-bordered">Sección :</td><td class="text-info table-bordered"><%=d.getNo_seccion()%></td></tr>
