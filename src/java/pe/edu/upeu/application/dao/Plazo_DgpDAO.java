@@ -74,7 +74,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
     }
 
     @Override
-    public List<Map<String, ?>> Listar_Plazo(String tipo, String req, int dias, String dep, String id_dep,String id_area) {
+    public List<Map<String, ?>> Listar_Plazo(String tipo, String req, int dias, String dep, String id_dep, String id_area) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -155,7 +155,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
     }
 
     @Override
-    public void UPDATE_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO, String TI_PLAZO, int CA_DIAS_TOLERANCIA, String ID_DEPARTAMENTO_TOLERANCIA,String ID_DEPARTAMENTO, String ID_AREA) {
+    public void UPDATE_PLAZO(String ID_PLAZO, String NO_PLAZO, String DET_ALERTA, String FE_DESDE, String FE_HASTA, String ES_PLAZO, String ID_REQUERIMIENTO, String TI_PLAZO, int CA_DIAS_TOLERANCIA, String ID_DEPARTAMENTO_TOLERANCIA, String ID_DEPARTAMENTO, String ID_AREA) {
         try {
 
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -175,7 +175,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
             cst.execute();
         } catch (SQLException ex) {
             System.out.println(ex);
-            
+
         } catch (ParseException ex) {
             Logger.getLogger(Plazo_DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -325,6 +325,25 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                 }
             }
             rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    @Override
+    public void Val_Es_Plazo() {
+
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cs = this.conn.conex.prepareCall("{CALL RHSP_VAL_ESTADO_PLAZO()}");
+            cs.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {

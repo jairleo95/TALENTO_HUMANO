@@ -96,8 +96,9 @@ public class Cindex extends HttpServlet {
             pl.Validar_Cumplimiento_plazo_t2();
             pl.Validar_Cumplimiento_plazo_t1();
             dgp.VAL_DGP_PASOS();
-           // cto.VALIDAR_FE_CESE_CON();
+            // cto.VALIDAR_FE_CESE_CON();
             pl.validar_Vig_plazos();
+            pl.Val_Es_Plazo();
             cto.VALIDAR_FE_HASTA_CON();
             response.sendRedirect("menu");
             out.print("EXITO!");
