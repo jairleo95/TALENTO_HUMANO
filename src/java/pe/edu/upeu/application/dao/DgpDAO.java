@@ -40,10 +40,10 @@ public class DgpDAO implements InterfaceDgpDAO {
     CConversion c = new CConversion();
 
     @Override
-    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, 
+    public void INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO,
             String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION,
-            String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, 
-            String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, 
+            String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION,
+            String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES,
             String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO, String LI_MOTIVO, String ES_MFL, double BONO_PUESTO, double ASIGNACION_FAMILIAR) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -82,12 +82,16 @@ public class DgpDAO implements InterfaceDgpDAO {
             cst.setDouble(32, ASIGNACION_FAMILIAR);
             cst.execute();
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
-        } catch (ParseException ex) {
-            Logger.getLogger(DgpDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -132,10 +136,16 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setPaso(rs.getString("paso"));
                 Lista.add(x);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return Lista;
     }
@@ -192,9 +202,16 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setNo_puesto(rs.getString("no_puesto"));
                 Lista.add(x);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return Lista;
     }
@@ -225,9 +242,16 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setEs_dgp(rs.getString("es_dgp"));
                 Lista.add(x);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return Lista;
     }
@@ -267,9 +291,16 @@ public class DgpDAO implements InterfaceDgpDAO {
                 Lista.add(x);
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return Lista;
     }
@@ -324,9 +355,16 @@ public class DgpDAO implements InterfaceDgpDAO {
                 v.setNo_dep(rs.getString("no_dep"));
                 Lista.add(v);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return Lista;
     }
@@ -344,13 +382,18 @@ public class DgpDAO implements InterfaceDgpDAO {
                 X.setTotal(rs.getString("total"));
                 X.setId_dgp(rs.getString("id_dgp"));
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
-
-            return Lista;
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
-
+        return Lista;
     }
 
     @Override
@@ -363,9 +406,16 @@ public class DgpDAO implements InterfaceDgpDAO {
             while (rs.next()) {
                 TOTAL = Integer.parseInt(rs.getString(1));
             }
-        } catch (SQLException e) {
+         } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return TOTAL;
     }
@@ -890,10 +940,16 @@ public class DgpDAO implements InterfaceDgpDAO {
                 cs.setEs_cuenta_sueldo(rs.getString("es_cuenta_sueldo"));
                 list.add(cs);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+          } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
