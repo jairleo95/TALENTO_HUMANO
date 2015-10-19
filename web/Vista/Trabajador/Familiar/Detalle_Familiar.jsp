@@ -89,8 +89,10 @@
                             %></td></tr>
                             <%if (tr.getAp_nombres_madre() == null || tr.getAp_nombres_padre() == null) {%>
                             <%  if (rol.trim().equals("ROL-0002") || rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") | rol.trim().equals("ROL-0013")) {%>
-                    <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Padres.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Padres</a></td></tr>
+                    <tr><td colspan="2"> <a class="btn btn-primary" href="Reg_Padres.jsp?idtr=<%=request.getParameter("idtr")%>">Registrar Padres</a></td></tr>
                     <%}%>
+                    <%} else {%>
+                    <tr><td colspan="2"> <a class="btn btn-success" href="../../../familiar?opc=Modificar_Padres&idtr=<%=request.getParameter("idtr")%>">Modificar Padres</a></td></tr>
                     <%}%>
                 </table>
             </div>
@@ -170,13 +172,14 @@
                 <%} else {%>
                 <tr><td colspan="2"> <label>Aun no se ha registrado los datos del cónyugue</label><br></td></tr> 
                         <%  if (rol.trim().equals("ROL-0002") || rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") || rol.trim().equals("ROL-0013")) {%>
-                <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Agregar Cónyugue</a></td></tr>
+                <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Registrar Cónyugue</a></td></tr>
                 <%}%>
                 <%}%>
-                <%if (tr.getAp_nombres_c() != null && tr.getAp_nombres_madre() != null && tr.getAp_nombres_padre() != null) {%>
+                <%//if (tr.getAp_nombres_c() != null && tr.getAp_nombres_madre() != null && tr.getAp_nombres_padre() != null) {%>
+                <%if (tr.getAp_nombres_c() != null ) {%>
                 <input type="hidden" name="idtra" value="<%=tr.getId_trabajador().trim()%>">
                 <input type="hidden" name="opc" value="Editar_Familiar">
-                <tr><td colspan="2"><input class="btn btn-success" type="submit" value="EDITAR"></td></tr>
+                <tr><td colspan="2"><input class="btn btn-success" type="submit" value="Modificar Cónyugue"></td></tr>
                         <%}%>
 
             </table>
@@ -189,7 +192,7 @@
         <%        if (LISTA_HIJOS.size() != 0) {
                 if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") || rol.trim().equals("ROL-0013")) {%>
         <div class="listar_hijos"></div>
-        <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Agregar un hijo</a>
+        <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Registrar un hijo</a>
         <%}%>
         <%} else {%>
 
@@ -278,9 +281,9 @@
 <!-- Voice command : plugin -->
 <script type="text/javascript">
     $(document).ready(
-            function () {
+            function() {
                 pageSetUp();
-                $.post("../../../familiar", "opc=Listar_Hijo_id_tr&idtr=<%=request.getParameter("idtr")%>", function (objJson) {
+                $.post("../../../familiar", "opc=Listar_Hijo_id_tr&idtr=<%=request.getParameter("idtr")%>", function(objJson) {
                     var texto_html = '';
                     var div = $(".listar_hijos");
                     if (objJson.rpta == -1) {
@@ -320,13 +323,13 @@
                             div.append(texto_html);
                         }
                     }
-                    $(".eliminar").click(function () {
+                    $(".eliminar").click(function() {
                         var url = $(this).val();
                         $.SmartMessageBox({
                             title: "Eliminar Hijo!",
                             content: "¿Esta seguro que desea eliminar un hijo?",
                             buttons: '[No][Yes]'
-                        }, function (ButtonPressed) {
+                        }, function(ButtonPressed) {
                             if (ButtonPressed === "Yes") {
                                 window.location.href = url;
 
@@ -344,7 +347,10 @@
 </script>
 </html>
 
-<%} else {
+<%}
+
+    
+        else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
     }
 %>

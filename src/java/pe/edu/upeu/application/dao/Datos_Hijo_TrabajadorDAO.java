@@ -296,7 +296,7 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select * from rhvd_detalle_hijo where ID_TRABAJADOR='" + idtr + "' and ES_DATOS_HIJO_TRABAJADOR = '1' ";
+            String sql = "select ID_DATOS_HIJOS_TRABAJADOR, ID_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_HIJO_TRABAJADOR,TO_CHAR( TO_DATE(FE_NACIMIENTO,'YYYY/MM/DD'),'DD/MM/YYYY') AS FE_NACIMIENTO , SEXO, NU_DOC, ES_PRESENTA_DOCUMENTO, ESSALUD, SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR, DE_TIP_DOC from rhvd_detalle_hijo where ID_TRABAJADOR='" + idtr + "' and ES_DATOS_HIJO_TRABAJADOR = '1' ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
