@@ -13,7 +13,7 @@
 <jsp:useBean id="LIST_EVALUACION" scope="session" class="java.util.ArrayList"/>
 
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 
 <html>

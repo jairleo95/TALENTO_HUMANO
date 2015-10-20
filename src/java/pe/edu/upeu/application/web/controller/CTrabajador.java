@@ -62,7 +62,8 @@ public class CTrabajador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         Map<String, Object> rpta = new HashMap<String, Object>();
         /*  try {*/
@@ -361,7 +362,7 @@ public class CTrabajador extends HttpServlet {
         }
         if ("registrar_huella".equals(opc)) {
             String idtr = request.getParameter("idtr");
-         //   String id_contrato = con.Buscar_id_contrato_x_idtr(idtr);
+            //   String id_contrato = con.Buscar_id_contrato_x_idtr(idtr);
             /*if (cc.Lis_c_c_id_contr(id_contrato).size() > 0) {
              sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
              }
@@ -623,7 +624,7 @@ public class CTrabajador extends HttpServlet {
             String NO_AP_AUTORIDAD = request.getParameter("AUT_APELLIDOSNOMBRES");
             String CL_AUTORIDAD = request.getParameter("AUT_CELULAR");
             String FE_MODIF = "";
-            out.print(idtr);
+            out.print(NO_AP_AUTORIDAD);
             tr.INSERT_HIST_RELIGION(null, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, "1", idtr, iduser, FE_MODIF);
             tr.MOD_ASP_REL(LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, idtr, iduser, tr.ip());
             sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));

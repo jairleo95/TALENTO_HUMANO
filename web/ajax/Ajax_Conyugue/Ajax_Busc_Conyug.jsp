@@ -12,7 +12,7 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 
 
 <%

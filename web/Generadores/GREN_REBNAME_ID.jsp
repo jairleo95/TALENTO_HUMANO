@@ -8,7 +8,7 @@
 <%@page import="pe.edu.upeu.application.factory.Conexion"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Connection"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <%
     ResultSet rs= null;

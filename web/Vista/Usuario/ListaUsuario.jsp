@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="pe.edu.upeu.application.model.V_Var_Usuario"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@page import="pe.edu.upeu.application.model.V_List_Empleado"%>
 <%@page import="pe.edu.upeu.application.model.Rol"%>
 <jsp:useBean id="Listar_Emp" scope="session" class="java.util.ArrayList"/>
