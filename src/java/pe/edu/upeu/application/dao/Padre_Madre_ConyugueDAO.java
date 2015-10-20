@@ -12,8 +12,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfacePadre_Madre_ConyugueDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -89,9 +90,16 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
                 pmc.setId_trabajador(rs.getString("id_trabajador"));
                 list.add(pmc);
             }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -115,9 +123,71 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
             cst.setString(11, IP_USUARIO);
             cst.execute();
         } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
+    }
+
+    @Override
+    public boolean MOD_PADRES(String AP_NOMBRES_PADRE, String AP_NOMBRES_MADRE, String ID_TRABAJADOR, String USER) {
+        CallableStatement cst;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cst = conn.conex.prepareCall("{CALL RHSP_MOD_PADRES( ?, ?, ?, ?, ?)}");
+            cst.setString(1, AP_NOMBRES_PADRE);
+            cst.setString(2, AP_NOMBRES_MADRE);
+            cst.setString(3, ID_TRABAJADOR);
+            cst.setString(4, USER);
+            cst.setString(5, FactoryConnectionDB.detalle_ip());
+            cst.execute();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public List<Map<String, ?>> Listar_Padres(String id) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select  id_trabajador,AP_NOMBRES_PADRE,AP_NOMBRES_MADRE  from RHTM_TRABAJADOR where id_trabajador='" + id + "'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_trabajador"));
+                rec.put("padre", rs.getString("AP_NOMBRES_PADRE"));
+                rec.put("madre", rs.getString("AP_NOMBRES_MADRE"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
+
     }
 
     @Override

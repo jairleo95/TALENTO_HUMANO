@@ -24,5 +24,7 @@ public interface InterfaceReporteDAO {
     public List<Map<String, ?>> lirtar_trabajor_Navidad(String mes);
 
     public List<Map<String, ?>> Reporte_Datos_Gen(String aps, String dep, String are, String sec, String puesto, String edad, String ape, String mat, String nom, String num);
+    
+    public List<Map<String, ?>> reporte_hijos(String sql);
 
 }

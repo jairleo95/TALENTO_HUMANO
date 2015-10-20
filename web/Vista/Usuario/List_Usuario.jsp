@@ -305,7 +305,7 @@
                 /* END COLUMN SHOW - HIDE */
 
                 /* TABLETOOLS */
-                $('#datatable_tabletools').dataTable({
+                $('#datatable_tabletoolss').dataTable({
                     // Tabletools options: 
                     //   https://datatables.net/extensions/tabletools/button_options
                     "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +

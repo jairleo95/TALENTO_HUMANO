@@ -245,4 +245,56 @@ public class ReporteDAO implements InterfaceReporteDAO {
         return Lista;
     }
 
+    @Override
+    public List<Map<String, ?>> reporte_hijos(String sql) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("AP_PATERNO", rs.getString("AP_PATERNO"));
+                rec.put("AP_MATERNO", rs.getString("AP_MATERNO"));
+                rec.put("NO_TRABAJADOR", rs.getString("NO_TRABAJADOR"));
+                rec.put("TI_DOC", rs.getString("TI_DOC"));
+                rec.put("NU_DOC", rs.getString("NU_DOC"));
+                rec.put("ID_TRABAJADOR", rs.getString("ID_TRABAJADOR"));
+                rec.put("NO_DEP", rs.getString("NO_DEP"));
+                rec.put("ID_AREA", rs.getString("ID_AREA"));
+                rec.put("NO_AREA", rs.getString("NO_AREA"));
+                rec.put("ID_SECCION", rs.getString("ID_SECCION"));
+                rec.put("NO_SECCION", rs.getString("NO_SECCION"));
+                rec.put("ID_PUESTO", rs.getString("ID_PUESTO"));
+                rec.put("NO_PUESTO", rs.getString("NO_PUESTO"));
+                rec.put("ID_EMPLEADO", rs.getString("ID_EMPLEADO"));
+                rec.put("CO_APS", rs.getString("CO_APS"));
+                rec.put("ID_CONTRATO", rs.getString("ID_CONTRATO"));
+                rec.put("TI_CONTRATO", rs.getString("TI_CONTRATO"));
+                rec.put("ID_DATOS_HIJOS_TRABAJADOR", rs.getString("ID_DATOS_HIJOS_TRABAJADOR"));
+                rec.put("AP_PATERNO_HIJO", rs.getString("AP_PATERNO_HIJO"));
+                rec.put("AP_MATERNO_HIJO", rs.getString("AP_MATERNO_HIJO"));
+                rec.put("NO_HIJO_TRABAJADOR", rs.getString("NO_HIJO_TRABAJADOR"));
+                rec.put("ES_SEXO", rs.getString("ES_SEXO"));
+                rec.put("FE_NACIMIENTO", rs.getString("FE_NACIMIENTO"));
+                rec.put("ES_TIPO_DOC", rs.getString("ES_TIPO_DOC"));
+                rec.put("NU_DOC_HIJO", rs.getString("NU_DOC_HIJO"));
+                rec.put("AP_NOMBRES_C", rs.getString("AP_NOMBRES_C"));
+                rec.put("NU_DOC_C", rs.getString("NU_DOC_C"));
+                rec.put("ES_TRABAJA_UPEU_C", rs.getString("ES_TRABAJA_UPEU_C"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return Lista;
+    }
+
 }

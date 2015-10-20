@@ -142,7 +142,7 @@
                                 <header>
                                     <center>
                                         <span class="widget-icon"> <i class="fa fa-male"></i> </span>
-                                        <h2>MODIFICAR ASPECTO FAMILIAR</h2>
+                                        <h2>MODIFICAR CONYUGUE</h2>
                                     </center>
 
                                 </header>
@@ -173,42 +173,6 @@
 
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="tab1">
-
-
-                                                            <h3>-PADRES</h3>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <label>Apellidos y Nombres del Padre:</label>
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm"  value="<%if (t.getAp_nombres_padre() != null) {
-                                                                                    out.print(t.getAp_nombres_padre());
-                                                                                } else {
-                                                                                    out.print("");
-                                                                                }%>" type="text" name="APELLIDOS_NOMBRES_PADRE"  id="as" required="" onblur="this.value = this.value.toUpperCase()" maxlength="50">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <label>Apellidos  y Nombres de la Madre:</label>
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm" value="<%if (t.getAp_nombres_madre() != null) {
-                                                                                    out.print(t.getAp_nombres_madre());
-                                                                                } else {
-                                                                                    out.print("");
-                                                                                }%>" type="text" name="APELLIDOS_NOMBRES_MADRE" id="DOM_A_D4" required="" onblur="this.value = this.value.toUpperCase()" maxlength="50">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                            <h3>-CONYUGUE</h3>
                                                             <div class="row">
                                                                 <div class="col-sm-4">
 
@@ -304,7 +268,7 @@
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="INSCRIPCION_VIG_ESSALUD"  class="form-control input-group-sm" required="">
                                                                                 <%if (t.getLi_inscripcion_vig_essalud_c() != null) {
-                                                                                if (t.getLi_inscripcion_vig_essalud_c().trim().equals("1")) {%>
+                                                                                        if (t.getLi_inscripcion_vig_essalud_c().trim().equals("1")) {%>
                                                                                 <option value="1" selected="">Si</option>
                                                                                 <option value="0">No</option>
                                                                                 <%} else if (t.getLi_inscripcion_vig_essalud_c().trim().equals("0")) {%>
@@ -787,10 +751,7 @@
 </body>
 
 </html>
-<%}
-
-    
-        else {
+<%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
     }
 %>

@@ -5,13 +5,19 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pe.edu.upeu.application.dao.ReporteDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceReporteDAO;
 
 /**
  *
@@ -19,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "CReporte_Hijo", urlPatterns = {"/CReporte_Hijo"})
 public class CReporte_Hijo extends HttpServlet {
+    InterfaceReporteDAO rep= new ReporteDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,10 +38,28 @@ public class CReporte_Hijo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-                    }
+        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out= response.getWriter();
+        Map<String, Object> rpta= new HashMap<>();
+        String opc =request.getParameter("opc");
+        List<Map<String,?>> lista;
+        try {
+            if (opc.equals("reporte_hijos")) {
+                String sql="SELECT * FROM RHVD_REPORTE_HIJOS ORDER BY AP_PATERNO";
+                lista= rep.reporte_hijos(sql);
+                rpta.put("lista", lista);
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        Gson gson= new Gson();
+        out.print(gson.toJson(rpta));
+        out.flush();
+        out.close();
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

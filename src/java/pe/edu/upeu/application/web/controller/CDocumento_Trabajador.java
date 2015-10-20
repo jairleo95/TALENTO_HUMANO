@@ -156,8 +156,8 @@ public class CDocumento_Trabajador extends HttpServlet {
             //   String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Dgp\\Documento\\Archivo";
             // String ubicacion = getServletContext().getRealPath("/")+"Vista\\Dgp\\Docuemnto\\Archivo";
             // System.out.println(ubicacion+"--ubicacion");
-            String ubicacion = "/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
-            //String ubicacion = getServletConfig().getServletContext().getRealPath("/")+ "Vista/Dgp/Documento/Archivo/";
+            //String ubicacion = "/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
+            String ubicacion = getServletConfig().getServletContext().getRealPath("/")+ "Vista/Dgp/Documento/Archivo/";
 //out.print(ubicacion);
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
