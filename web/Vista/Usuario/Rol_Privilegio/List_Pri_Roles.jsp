@@ -11,7 +11,7 @@
 --%>
 <%@page import="pe.edu.upeu.application.model.V_Privilegio_Rol"%>
 <jsp:useBean id="List_Pr_Rol" scope="session" class="java.util.ArrayList"/>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>

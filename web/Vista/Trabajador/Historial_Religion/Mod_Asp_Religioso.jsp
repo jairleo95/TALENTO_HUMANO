@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <jsp:useBean id="ListaridTrabajador" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
@@ -145,7 +145,7 @@
                                                                 <div class="col-sm-4">
 
                                                                     <div class="form-group">
-                                                                        <label>ReligiÃ³n:</label>
+                                                                        <label>Religión:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
                                                                             <select name="RELIGION"   required=""   class="form-control input-group-sm" id="reli">
@@ -154,22 +154,22 @@
                                                                                         if (trb.getLi_religion().equals("1")) {%>
                                                                                 <option value="1" selected="">Adventida</option> 
                                                                                 <option value="2" >Catolico</option> 
-                                                                                <option value="3" >Ã“tros</option> 
+                                                                                <option value="3" >Ótros</option> 
                                                                                 <%}
                                                                                     if (trb.getLi_religion().equals("2")) {%>
                                                                                 <option value="1" >Adventida</option> 
                                                                                 <option value="2" selected="">Catolico</option> 
-                                                                                <option value="3" >Ã“tros</option> 
+                                                                                <option value="3" >Ótros</option> 
                                                                                 <%}
                                                                                     if (trb.getLi_religion().equals("3")) {%>
                                                                                 <option value="1" >Adventida</option> 
                                                                                 <option value="2" >Catolico</option> 
-                                                                                <option value="3" selected="">Ã“tros</option> 
+                                                                                <option value="3" selected="">Ótros</option> 
                                                                                 <%}
                                                                                 } else {%>
                                                                                 <option value="1" >Adventida</option> 
                                                                                 <option value="2" >Catolico</option> 
-                                                                                <option value="3" >Ã“tros</option> 
+                                                                                <option value="3" >Ótros</option> 
                                                                                 <%}%>
                                                                             </select>
                                                                         </div>
@@ -475,7 +475,7 @@
                 jQuery.validator.addMethod("val_fecha", function(value, element) {
                     var d = value.split("-");
                     return this.optional(element) || String(parseInt(d[0])).length == 4;
-                }, "Â¡Fecha ingresada invalida!");
+                }, "¡Fecha ingresada invalida!");
 
                 $('#bootstrap-wizard-1').bootstrapWizard({
                     'tabClass': 'form-wizard',

@@ -16,7 +16,7 @@
 <%@page import="pe.edu.upeu.application.model.V_Usuario"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <jsp:useBean id="listarURL" scope="session" class="java.util.ArrayList"/>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>

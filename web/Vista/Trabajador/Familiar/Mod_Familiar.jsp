@@ -11,7 +11,7 @@
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
 %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@page import="pe.edu.upeu.application.model.Padre_Madre_Conyugue"%>
 <jsp:useBean id="ListaridTrabajador" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_tipo_doc" scope="session" class="java.util.ArrayList"/>

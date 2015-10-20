@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <meta charset="windows-1252">
         <link type="text/css" rel="stylesheet" href="../../../css/Css_Detalle/CSS_DETALLE.css">
         <!-- Basic Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
@@ -281,9 +281,9 @@
 <!-- Voice command : plugin -->
 <script type="text/javascript">
     $(document).ready(
-            function() {
+            function () {
                 pageSetUp();
-                $.post("../../../familiar", "opc=Listar_Hijo_id_tr&idtr=<%=request.getParameter("idtr")%>", function(objJson) {
+                $.post("../../../familiar", "opc=Listar_Hijo_id_tr&idtr=<%=request.getParameter("idtr")%>", function (objJson) {
                     var texto_html = '';
                     var div = $(".listar_hijos");
                     if (objJson.rpta == -1) {
@@ -323,13 +323,13 @@
                             div.append(texto_html);
                         }
                     }
-                    $(".eliminar").click(function() {
+                    $(".eliminar").click(function () {
                         var url = $(this).val();
                         $.SmartMessageBox({
                             title: "Eliminar Hijo!",
                             content: "¿Esta seguro que desea eliminar un hijo?",
                             buttons: '[No][Yes]'
-                        }, function(ButtonPressed) {
+                        }, function (ButtonPressed) {
                             if (ButtonPressed === "Yes") {
                                 window.location.href = url;
 

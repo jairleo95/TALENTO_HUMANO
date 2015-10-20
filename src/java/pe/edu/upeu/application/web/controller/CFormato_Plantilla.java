@@ -54,7 +54,7 @@ public class CFormato_Plantilla extends HttpServlet {
         InterfaceDireccionDAO dir = new DireccionDAO();
         String iduser = (String) sesion.getAttribute("IDUSER");
         String opc = request.getParameter("opc");
-        String ubicacion=getServletConfig().getServletContext().getRealPath("/")+"Vista/Contrato/Formato_Plantilla/Formato/";
+        String ubicacion = "/PLANTILLAS_RRHH/";
         if (iduser != null) {
             try {
                 if (opc.equals("Asignar")) {
@@ -76,13 +76,12 @@ public class CFormato_Plantilla extends HttpServlet {
                     String texto_html = request.getParameter("valor");
                     String id = request.getParameter("id");
 
-
                     //ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                     File archivo = new File(ubicacion + id);
                     if (archivo.exists()) {
                         //  archivo.delete();
                         FileWriter escribir = new FileWriter(archivo);
-                    // aqui se hace un append al archivo existente
+                        // aqui se hace un append al archivo existente
                         //FileWriter escribir = new FileWriter(archivo,true);
                         escribir.write(texto_html);
                         escribir.close();
@@ -106,7 +105,7 @@ public class CFormato_Plantilla extends HttpServlet {
                     FileReader lector = new FileReader(ubicacion + no_archivo);
                     BufferedReader contenido = new BufferedReader(lector);
                     while ((texto = contenido.readLine()) != null) {
-                        imprimir = imprimir + texto+"\n";
+                        imprimir = imprimir + texto + "\n";
                     }
                     rpta.put("rpta", "1");
                     rpta.put("imprimir", imprimir);

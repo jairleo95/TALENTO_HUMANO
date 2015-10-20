@@ -41,7 +41,7 @@
 <jsp:useBean id="List_Distrito" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_tipo_doc" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
-<html lang="en-us">
+<html >
     <head>
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->

@@ -10,7 +10,7 @@ Created on : 08-nov-2014, 15:58:07
 Author     : JAIR
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>

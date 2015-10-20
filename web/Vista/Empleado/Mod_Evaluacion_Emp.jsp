@@ -11,7 +11,7 @@
 --%>
 
 <%@page import="pe.edu.upeu.application.model.Evaluacion_Emp"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 
 
 <jsp:useBean id="LIST_EVALUACION" scope="session" class="java.util.ArrayList"/>
