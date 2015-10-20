@@ -31,37 +31,37 @@
             </div>
         </div>
         <div class="well">
-            <form class="smart-form">
+            <form class="smart-form" id="formdatos">
                 <div class="row">
                     <section class="col col-xs-12">
                         <div class="col col-xs-3">
                             <label class="label">Nombre</label>
                             <label class="input">
-                                <input class="form-control" type="text" placeholder="Nombres">
+                                <input class="form-control" type="text" placeholder="Nombres" name="nombre">
                             </label>
                         </div>
                         <div class="col col-xs-2">
                             <label class="label">Apellido Paterno</label>
                             <label class="input">
-                                <input class="form-control" type="text" placeholder="Paterno">
+                                <input class="form-control" type="text" placeholder="Paterno" name="paterno">
                             </label>
                         </div>
                         <div class="col col-xs-2">
                             <label class="label">Apellido Materno</label>
                             <label class="input">
-                                <input class="form-control" type="text" placeholder="Materno">
+                                <input class="form-control" type="text" placeholder="Materno" name="materno">
                             </label>
                         </div>
                         <div class="col col-xs-2">
                             <label class="label">DNI</label>
                             <label class="input">
-                                <input class="form-control" type="text" placeholder="DNI">
+                                <input class="form-control" type="text" placeholder="DNI" name="dni">
                             </label>
                         </div>
                         <div class="col col-xs-3">
                             <label class="label">Genero</label>
                             <label class="select">
-                                <select>
+                                <select name="genero">
                                     <option value="">[Seleccione]</option>
                                     <option value="F">Femenino</option>
                                     <option value="M">Masculino</option>
@@ -76,26 +76,26 @@
                         <div class="col col-xs-3">
                             <label class="label">Edad Especifica</label>
                             <label class="input">
-                                <input class="form-control" type="text" placeholder="Edad">
+                                <input class="form-control" type="text" placeholder="Edad" name="edad">
                             </label>
                         </div>
                         <div class="col col-xs-3">
                             <label class="label">Desde</label>
                             <label class="input">
-                                <input class="form-control" type="date" placeholder="Desde">
+                                <input class="form-control" type="date" placeholder="Desde" name="desde">
                             </label>
                         </div>
                         <div class="col col-xs-3">
                             <label class="label">Hasta</label>
                             <label class="input">
-                                <input class="form-control" type="date" placeholder="Hasta">
+                                <input class="form-control" type="date" placeholder="Hasta" name="hasta">
                             </label>
                         </div>
                     </section>                    
                 </div>
                 <div style="float: right">
-                    <a class="btn btn-primary btn-circle btn-lg"><i class="fa fa-search"></i></a>
-                    <a class="btn btn-danger btn-circle btn-lg"><i class="fa fa-times"></i></a>
+                    <a class="btn btn-primary btn-circle btn-lg btnBuscar"><i class="fa fa-search"></i></a>
+                    <a class="btn btn-danger btn-circle btn-lg" onclick="javascript:document.getElementById('formdatos').reset();"><i class="fa fa-times"></i></a>
                 </div>
             </form>
         </div>
@@ -143,16 +143,16 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-            if (!window.jQuery) {
-                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-            }
+                        if (!window.jQuery) {
+                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                        }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }
+                        if (!window.jQuery.ui) {
+                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                        }
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
@@ -217,109 +217,185 @@
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script >
-            $(document).ready(function () {
+                        $(document).ready(function () {
 
-                pageSetUp();
-                setTable();
-                buscar();
-
-                function buscar() {
-                    $.post("../../CReporte_Hijo?opc=reporte_hijos", function (objJson) {
-                        var lista = objJson.lista;
-                        if (lista.length > 0) {
-                            var t = "";
-                            for (var i = 0; i < lista.length; i++) {
-                                t += "<tr>";
-                                t += "<td>" + (i + 1) + "</td>";
-                                t += "<td>" + lista[i].AP_PATERNO+" "+ lista[i].AP_MATERNO+" "+ lista[i].NO_TRABAJADOR + "</td>";
-                                t += "<td>" + lista[i].NU_DOC + "</td>";
-                                t += "<td>" + lista[i].NO_DEP + "</td>";
-                                t += "<td>" + lista[i].NO_AREA + "</td>";
-                                t += "<td>" + lista[i].NO_SECCION + "</td>";
-                                t += "<td>" + lista[i].NO_PUESTO + "</td>";
-                                t += "<td>" + lista[i].CO_APS + "</td>";
-                                t += "<td>" + lista[i].TI_CONTRATO + "</td>";
-                                t += "<td>" + lista[i].TI_CONTRATO + "</td>";
-                                t += "<td>" + lista[i].AP_PATERNO_HIJO+" "+lista[i].AP_MATERNO_HIJO+" "+lista[i].NO_HIJO_TRABAJADOR + "</td>";
-                                t += "<td>" + lista[i].ES_SEXO + "</td>";
-                                t += "<td>" + lista[i].FE_NACIMIENTO + "</td>";
-                                t += "<td>" + lista[i].FE_NACIMIENTO + "</td>";
-                                t += "<td>" + lista[i].ES_TIPO_DOC + "</td>";
-                                t += "<td>" + lista[i].NU_DOC_HIJO + "</td>";
-                                t += "<td>" + lista[i].AP_NOMBRES_C + "</td>";
-                                t += "<td>" + lista[i].NU_DOC_C + "</td>";
-                                t += "<td>" + lista[i].ES_TRABAJA_UPEU_C + "</td>";
-                                t += "</tr>";
-                            }
-                            crear_tabla();
-                            $('.tbdHijos').append(t);
+                            pageSetUp();
                             setTable();
 
-                        }
-                    });
-                }
-                function crear_tabla() {
-                    var t = "";
-                    t += '<h3>Reporte</h3><table id="tabladato" class="table table-striped table-responsive table-bordered">';
-                    t += ' <thead><tr><td>#</td><td>Apellidos y Nombres(Trabajador)</td><td>DNI</td><td>Departamento</td>';
-                    t += '<td>Area</td><td>Seccion</td><td>Puesto</td><td>APS</td><td>Condicion</td>';
-                    t += '<td>Tipo de Contrato</td><td>Apellidos y Nombres(Hijo)</td><td>Sexo</td>';
-                    t += '<td>Nacimiento</td><td>Edad</td><td>Tipo documento</td><td>Nro Documento</td><td>Apellidos y Nombres(Conyuge)</td>';
-                    t += '<td>DNI</td><td>Trabaja UPeU</td></tr></thead><tbody class="tbdHijos"></tbody></table>';
-                    $('.cont_t').empty();
-                    $('.cont_t').append(t);
-                }
+                            //BUSCAR
+                            $('.btnBuscar').click(function () {
+                                buscar();
+                            });
 
+                            function buscar() {
+                                var data = $('#formdatos').serialize();
+                                $.post("../../CReporte_Hijo?opc=reporte_hijos", data, function (objJson) {
+                                    var lista = objJson.lista;
+                                    if (lista.length > 0) {
+                                        var t = "";
+                                        for (var i = 0; i < lista.length; i++) {
+                                            if(lista[i].AP_PATERNO===undefined){
+                                                lista[i].AP_PATERNO='Sin Datos';
+                                            }
+                                            if(lista[i].AP_MATERNO===undefined){
+                                                lista[i].AP_MATERNO='Sin Datos';
+                                            }
+                                            if(lista[i].NO_TRABAJADOR===undefined){
+                                                lista[i].NO_TRABAJADOR='Sin Datos';
+                                            }
+                                            if(lista[i].NU_DOC===undefined){
+                                                lista[i].NU_DOC='Sin Datos';
+                                            }
+                                            if(lista[i].NO_DEP===undefined){
+                                                lista[i].NO_DEP='Sin Datos';
+                                            }
+                                            if(lista[i].NO_AREA===undefined){
+                                                lista[i].NO_AREA='Sin Datos';
+                                            }
+                                            if(lista[i].NO_SECCION===undefined){
+                                                lista[i].NO_SECCION='Sin Datos';
+                                            }
+                                            if(lista[i].NO_PUESTO===undefined){
+                                                lista[i].NO_PUESTO='Sin Datos';
+                                            }
+                                            if(lista[i].CO_APS===undefined){
+                                                lista[i].CO_APS='Sin Datos';
+                                            }
+                                            if(lista[i].TI_CONTRATO===undefined){
+                                                lista[i].TI_CONTRATO='Sin Datos';
+                                            }
+                                            if(lista[i].AP_PATERNO_HIJO===undefined){
+                                                lista[i].AP_PATERNO_HIJO='Sin Datos';
+                                            }
+                                            if(lista[i].AP_MATERNO_HIJO===undefined){
+                                                lista[i].AP_MATERNO_HIJO='Sin Datos';
+                                            }
+                                            if(lista[i].NO_HIJO_TRABAJADOR===undefined){
+                                                lista[i].NO_HIJO_TRABAJADOR='Sin Datos';
+                                            }
+                                            if(lista[i].ES_SEXO===undefined){
+                                                lista[i].ES_SEXO='Sin Datos';
+                                            }
+                                            if(lista[i].FE_NACIMIENTO===undefined){
+                                                lista[i].FE_NACIMIENTO='Sin Datos';
+                                            }
+                                            if(lista[i].ES_TIPO_DOC===undefined){
+                                                lista[i].ES_TIPO_DOC='Sin Datos';
+                                            }
+                                            if(lista[i].ES_TRABAJA_UPEU_C===undefined){
+                                                lista[i].ES_TRABAJA_UPEU_C='Sin Datos';
+                                            }
+                                            if(lista[i].NU_DOC_HIJO===undefined){
+                                                lista[i].NU_DOC_HIJO='Sin Datos';
+                                            }
+                                            if(lista[i].AP_NOMBRES_C===undefined){
+                                                lista[i].AP_NOMBRES_C='Sin Datos';
+                                            }
+                                            if(lista[i].NU_DOC_C===undefined){
+                                                lista[i].NU_DOC_C='Sin Datos';
+                                            }
+                                        
+                                            t += "<tr>";
+                                            t += "<td>" + (i + 1) + "</td>";
+                                            t += "<td>" + lista[i].AP_PATERNO + " " + lista[i].AP_MATERNO + " " + lista[i].NO_TRABAJADOR + "</td>";
+                                            t += "<td>" + lista[i].NU_DOC + "</td>";
+                                            t += "<td>" + lista[i].NO_DEP + "</td>";
+                                            t += "<td>" + lista[i].NO_AREA + "</td>";
+                                            t += "<td>" + lista[i].NO_SECCION + "</td>";
+                                            t += "<td>" + lista[i].NO_PUESTO + "</td>";
+                                            t += "<td>" + lista[i].CO_APS + "</td>";
+                                            t += "<td>" + lista[i].TI_CONTRATO + "</td>";
+                                            t += "<td>" + lista[i].TI_CONTRATO + "</td>";
+                                            t += "<td>" + lista[i].AP_PATERNO_HIJO + " " + lista[i].AP_MATERNO_HIJO + " " + lista[i].NO_HIJO_TRABAJADOR + "</td>";
+                                            t += "<td>" + lista[i].ES_SEXO + "</td>";
+                                            t += "<td>" + lista[i].FE_NACIMIENTO + "</td>";
+                                            t += "<td>" + lista[i].FE_NACIMIENTO + "</td>";
+                                            t += "<td>" + lista[i].ES_TIPO_DOC + "</td>";
+                                            t += "<td>" + lista[i].NU_DOC_HIJO + "</td>";
+                                            t += "<td>" + lista[i].AP_NOMBRES_C + "</td>";
+                                            t += "<td>" + lista[i].NU_DOC_C + "</td>";
+                                            t += "<td>" + lista[i].ES_TRABAJA_UPEU_C + "</td>";
+                                            t += "</tr>";
+                                        }
+                                        crear_tabla();
+                                        $('.tbdHijos').append(t);
+                                        setTable();
 
-                function setTable() {
-                    var responsiveHelper_datatable_tabletools = undefined;
-
-                    var breakpointDefinition = {
-                        tablet: 1024,
-                        phone: 480
-                    };
-
-                    $('#tabladato').dataTable({
-                        // Tabletools options: 
-                        //   https://datatables.net/extensions/tabletools/button_options
-                        "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
-                                "t" +
-                                "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                        "oTableTools": {
-                            "aButtons": [
-                                "copy",
-                                "csv",
-                                "xls",
-                                {
-                                    "sExtends": "pdf",
-                                    "sTitle": "SmartAdmin_PDF",
-                                    "sPdfMessage": "SmartAdmin PDF Export",
-                                    "sPdfSize": "letter"
-                                },
-                                {
-                                    "sExtends": "print",
-                                    "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
-                                }
-                            ],
-                            "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
-                        },
-                        "autoWidth": false,
-                        "preDrawCallback": function () {
-                            // Initialize the responsive datatables helper once.
-                            if (!responsiveHelper_datatable_tabletools) {
-                                responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#tabladato'), breakpointDefinition);
+                                    } else {
+                                        $.smallBox({
+                                            title: "No hay Resultados para su busqueda",
+                                            content: "<i class='fa fa-clock-o'></i> <i>Vuelva a Intentarlo</i>",
+                                            color: "#f0ad4e",
+                                            iconSmall: "fa fa-thumbs-up bounce animated",
+                                            timeout: 4000
+                                        });
+                                        crear_tabla();
+                                        setTable();
+                                    }
+                                });
                             }
-                        },
-                        "rowCallback": function (nRow) {
-                            responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-                        },
-                        "drawCallback": function (oSettings) {
-                            responsiveHelper_datatable_tabletools.respond();
-                        }
-                    });
-                }
-            });
+                            function crear_tabla() {
+                                var t = "";
+                                t += '<h3>Reporte</h3><table id="tabladato" class="table table-striped table-responsive table-bordered">';
+                                t += ' <thead><tr><td>#</td><td>Apellidos y Nombres(Trabajador)</td><td>DNI</td><td>Departamento</td>';
+                                t += '<td>Area</td><td>Seccion</td><td>Puesto</td><td>APS</td><td>Condicion</td>';
+                                t += '<td>Tipo de Contrato</td><td>Apellidos y Nombres(Hijo)</td><td>Sexo</td>';
+                                t += '<td>Nacimiento</td><td>Edad</td><td>Tipo documento</td><td>Nro Documento</td><td>Apellidos y Nombres(Conyuge)</td>';
+                                t += '<td>DNI</td><td>Trabaja UPeU</td></tr></thead><tbody class="tbdHijos"></tbody></table>';
+                                $('.cont_t').empty();
+                                $('.cont_t').append(t);
+                            }
+
+
+                            function setTable() {
+                                var responsiveHelper_datatable_tabletools = undefined;
+
+                                var breakpointDefinition = {
+                                    tablet: 1024,
+                                    phone: 480
+                                };
+
+                                $('#tabladato').dataTable({
+                                    // Tabletools options: 
+                                    //   https://datatables.net/extensions/tabletools/button_options
+                                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
+                                            "t" +
+                                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                                    "oTableTools": {
+                                        "aButtons": [
+                                            "copy",
+                                            "csv",
+                                            "xls",
+                                            {
+                                                "sExtends": "pdf",
+                                                "sTitle": "SmartAdmin_PDF",
+                                                "sPdfMessage": "SmartAdmin PDF Export",
+                                                "sPdfSize": "letter"
+                                            },
+                                            {
+                                                "sExtends": "print",
+                                                "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
+                                            }
+                                        ],
+                                        "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
+                                    },
+                                    "autoWidth": false,
+                                    "preDrawCallback": function () {
+                                        // Initialize the responsive datatables helper once.
+                                        if (!responsiveHelper_datatable_tabletools) {
+                                            responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#tabladato'), breakpointDefinition);
+                                        }
+                                    },
+                                    "rowCallback": function (nRow) {
+                                        responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+                                    },
+                                    "drawCallback": function (oSettings) {
+                                        responsiveHelper_datatable_tabletools.respond();
+                                    }
+                                });
+                            }
+                        });
         </script>
-        
+
     </body>
 </html>

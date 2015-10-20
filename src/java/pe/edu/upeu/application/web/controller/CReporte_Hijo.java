@@ -47,8 +47,48 @@ public class CReporte_Hijo extends HttpServlet {
         List<Map<String,?>> lista;
         try {
             if (opc.equals("reporte_hijos")) {
-                String sql="SELECT * FROM RHVD_REPORTE_HIJOS ORDER BY AP_PATERNO";
+                String sql="SELECT * FROM RHVD_REPORTE_HIJOS";
+                String nombre=request.getParameter("nombre");
+                String paterno=request.getParameter("paterno");
+                String materno=request.getParameter("materno");
+                String genero=request.getParameter("genero");
+                String edad=request.getParameter("edad");
+                String desde=request.getParameter("desde");
+                String hasta=request.getParameter("hasta");
+                String dni=request.getParameter("dni");
+                int cont=0;
+                if (!nombre.equals("")) cont++;
+                if (!paterno.equals("")) cont++;
+                if (!materno.equals("")) cont++;
+                if (!edad.equals("")) cont++;
+                if (!genero.equals("")) cont++;
+                if (!desde.equals("")) cont++;
+                if (!hasta.equals("")) cont++;
+                if (!dni.equals("")) cont++;
+                if(cont>0)sql+=" WHERE";
+                if (!nombre.equals("")) {
+                    sql+=" UPPER(NO_HIJO_TRABAJADOR) LIKE UPPER('%"+nombre+"%')";
+                }
+                if (!paterno.equals("")) {
+                    if(cont>1)sql+=" AND";
+                    sql+=" UPPER(AP_PATERNO_HIJO) LIKE UPPER('%"+paterno+"%')";
+                }
+                if (!materno.equals("")) {
+                    if(cont>1)sql+=" AND";
+                    sql+=" UPPER(AP_MATERNO_HIJO) LIKE UPPER('%"+materno+"%')";
+                }
+                if (!genero.equals("")) {
+                    if(cont>1)sql+=" AND";
+                    sql+=" UPPER(ES_SEXO) LIKE UPPER('%"+genero+"%')";
+                }
+                if (!dni.equals("")) {
+                    if(cont>1)sql+=" AND";
+                    sql+=" UPPER(NU_DOC_HIJO) LIKE UPPER('%"+dni+"%')";
+                }
+                sql+=" ORDER BY AP_PATERNO";
+                System.out.println(sql);
                 lista= rep.reporte_hijos(sql);
+                System.out.println(lista.size());
                 rpta.put("lista", lista);
             }
             
