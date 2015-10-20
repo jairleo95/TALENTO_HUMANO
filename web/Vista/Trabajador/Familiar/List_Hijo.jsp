@@ -9,7 +9,7 @@
     if (id_user_1 != null) {
 %>
 <%@page import="pe.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
-<jsp:useBean id="LISTA_HIJO" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="LISTA_HIJO" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

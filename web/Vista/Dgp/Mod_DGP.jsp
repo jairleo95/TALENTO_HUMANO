@@ -11,11 +11,11 @@
 <%@page import="pe.edu.upeu.application.model.Puesto"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <%@page import="pe.edu.upeu.application.model.X_List_id_dgp"%>
-<jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_Trabajador_id" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Det_Puesto" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_Requerimiento" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="LIST_ID_DGP" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Trabajador_id" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Puesto" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Det_Puesto" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Requerimiento" scope="session" class="java.util.ArrayList"/>
 
 <!DOCTYPE html >
 <html>

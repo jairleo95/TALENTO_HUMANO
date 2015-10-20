@@ -8,14 +8,14 @@
 <%@page import="pe.edu.upeu.application.model.Area"%>
 <%@page import="pe.edu.upeu.application.model.Departamento"%>
 <%@page import="pe.edu.upeu.application.model.Datos_Generales"%>
-<jsp:useBean id="Reporte_Datos_Generales" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Departamento_Lima" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Area_Lima" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="LISTA_RH_SECCION_LIMA" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Puesto_lima" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Nacionalidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_SituacionEducativa" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Carrera" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Reporte_Datos_Generales" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Departamento_Lima" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Area_Lima" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="LISTA_RH_SECCION_LIMA" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Puesto_lima" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Nacionalidad" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_SituacionEducativa" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Carrera" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
     <head>

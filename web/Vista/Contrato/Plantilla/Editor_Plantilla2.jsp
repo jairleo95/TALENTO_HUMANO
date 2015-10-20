@@ -18,7 +18,7 @@
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
 <%@page import="pe.edu.upeu.application.model.X_List_dat_tr_plantilla"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="lista" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="lista" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="">
     <head>

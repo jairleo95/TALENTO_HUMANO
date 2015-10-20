@@ -12,11 +12,11 @@
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
-<jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Ubigeo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Dom_D1_Id" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Dom_D5_Id" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Dom_D3_Id" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="ListaridTrabajador" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Ubigeo" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Dom_D1_Id" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Dom_D5_Id" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Dom_D3_Id" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

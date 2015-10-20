@@ -26,19 +26,19 @@
 
 <!--CONTRATO-->
 
-<jsp:useBean id="LISTAR_ANNO" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_Direccion" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="ASIGNACION_F" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_modalidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="list_reg_labo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_centro_costo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_grup_ocu" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="LISTAR_ANNO" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Puesto" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Direccion" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="LIST_ID_DGP" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="ASIGNACION_F" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_modalidad" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="list_reg_labo" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_centro_costo" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_grup_ocu" scope="session" class="java.util.ArrayList"/>
 <!--DGP-->
-<jsp:useBean id="Listar_Trabajador_id" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Det_Puesto" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_Requerimiento" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Trabajador_id" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Det_Puesto" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Requerimiento" scope="session" class="java.util.ArrayList"/>
 
 <!DOCTYPE html >
 <html>

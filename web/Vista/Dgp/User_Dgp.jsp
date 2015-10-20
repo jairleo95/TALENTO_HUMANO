@@ -5,7 +5,7 @@
     if (id_user_1 != null) {
 %>
 <%@page import="pe.edu.upeu.application.model.X_User_dgp"%>
-<jsp:useBean class="java.util.ArrayList" id="USER_DGP" scope="application"/>
+<jsp:useBean class="java.util.ArrayList" id="USER_DGP" scope="session"/>
 <!DOCTYPE html >
 <html lang="">
     <head>

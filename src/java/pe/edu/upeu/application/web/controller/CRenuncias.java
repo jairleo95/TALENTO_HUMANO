@@ -56,8 +56,8 @@ public class CRenuncias extends HttpServlet {
                 idreq = "REQ-0017";
             }*/
             out.print(Tipo_planilla+idtr + idreq + iddep);
-           // getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
-          //  getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
+           // sesion.setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
+          //  sesion.setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
             //response.sendRedirect("Vista/Renuncias/Reg_Dgp_Renuncia.jsp?idreq=" + idreq);
         }
 

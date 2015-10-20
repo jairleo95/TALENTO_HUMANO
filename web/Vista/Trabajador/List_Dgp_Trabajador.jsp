@@ -7,7 +7,7 @@
 %>
 
 <%@page import="pe.edu.upeu.application.model.x_List_Id_Trab_Dgp"%>
-<jsp:useBean id="LIST_ID_TRAB_DGP" class="java.util.ArrayList" scope="application"/>
+<jsp:useBean id="LIST_ID_TRAB_DGP" class="java.util.ArrayList" scope="session"/>
 <!DOCTYPE html>
 <html>
     <head>

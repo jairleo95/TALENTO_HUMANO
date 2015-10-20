@@ -47,7 +47,7 @@ public class CSolicitud_Requerimiento extends HttpServlet {
         String rol = (String) sesion.getAttribute("IDROL");
         Map<String, Object> rpta = new HashMap<String, Object>();
         if (opc.equals("Listar_Solicitud")) {
-            getServletContext().setAttribute("Listar_solicitud", s.Listar_solicitud());
+            sesion.setAttribute("Listar_solicitud", s.Listar_solicitud());
             response.sendRedirect("Vista/Solicitud/Reporte_Solicitud.jsp");
         }
         if (opc.equals("Listar_Sol_Pendientes")) {
@@ -78,7 +78,7 @@ public class CSolicitud_Requerimiento extends HttpServlet {
             }
             s.INSERT_SOLICITUD_DGP(null, FE_DESDE, ID_DGP, ID_PLAZO, DE_SOLICITUD, ES_AUTORIZAR, ES_SOLICITUD_DGP, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, NO_USUARIO);
             
-            getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser, ID_DGP));
+            sesion.setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser, ID_DGP));
             
             //response.sendRedirect("Vista/Solicitud/Reg_List_Solicitud.jsp?iddgp=" + ID_DGP + "");
         }
@@ -88,12 +88,12 @@ public class CSolicitud_Requerimiento extends HttpServlet {
             String idplazo = request.getParameter("plazo");
             String desde = request.getParameter("desde");
             String desc = request.getParameter("descripcion");
-            getServletContext().setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser, iddgp));
+            sesion.setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser, iddgp));
            rpta.put("rpta", "1");
         }
         if (opc.equals("Ver_Detalle_Solicitud")) {
             String id = request.getParameter("id");
-            getServletContext().setAttribute("Detalle_Solicitud", s.Listar_solicitud_id(id));
+            sesion.setAttribute("Detalle_Solicitud", s.Listar_solicitud_id(id));
             response.sendRedirect("Vista/Solicitud/Detalle_Solicitud.jsp");
         }
         if (opc.equals("Ver_Solicitud")) {

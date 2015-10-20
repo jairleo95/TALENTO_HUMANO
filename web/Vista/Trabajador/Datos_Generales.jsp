@@ -10,7 +10,7 @@
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
-<jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="ListaridTrabajador" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

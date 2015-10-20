@@ -7,7 +7,7 @@
 <%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
 <%@page import="pe.edu.upeu.application.model.X_List_dat_tr_plantilla"%>
-<jsp:useBean id="LIST_DAT_TR_PLANTILLA" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="LIST_DAT_TR_PLANTILLA" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 
 <html>

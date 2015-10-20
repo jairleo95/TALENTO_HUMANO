@@ -7,8 +7,8 @@
 <%@page import="pe.edu.upeu.application.model.Auto_Mostrar"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
-<jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Auto_mostrar" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="ListaridTrabajador" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Auto_mostrar" scope="session" class="java.util.ArrayList"/>
 
 <!DOCTYPE html>
 

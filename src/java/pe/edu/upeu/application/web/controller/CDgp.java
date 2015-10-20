@@ -292,11 +292,11 @@ public class CDgp extends HttpServlet {
                     }
                 }
             }
-            getServletContext().setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
+            sesion.setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
             int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
             int num_ad = doc.List_Adventista(ID_TRABAJADOR);
-            getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
-            getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
+            sesion.setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
+            sesion.setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
             response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&idtr=" + ID_TRABAJADOR);
             // response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
 
@@ -336,11 +336,11 @@ public class CDgp extends HttpServlet {
                 ES_CUENTA_SUELDO = tr.CuentaSueldoTra(idtr);
             }
 
-            getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
-            getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
-            getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("list_Cuenta_Sueldo", dgp.LIST_CUEN_SUEL(idtr));
-            getServletContext().setAttribute("fecha_maxima_plazo", plazo.fecha_maxima_plazo());
+            sesion.setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
+            sesion.setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
+            sesion.setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("list_Cuenta_Sueldo", dgp.LIST_CUEN_SUEL(idtr));
+            sesion.setAttribute("fecha_maxima_plazo", plazo.fecha_maxima_plazo());
 
             response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CUENTA_SUELDO + "&as_f=" + dht.ASIGNACION_F(idtr));
         }
@@ -358,8 +358,8 @@ public class CDgp extends HttpServlet {
                 idreq = "REQ-0017";
             }
             out.print(iddeph + idtr + idreq + iddep);
-            //getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
-            //getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
+            //sesion.setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
+            //sesion.setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
             //response.sendRedirect("Vista/Renuncias/Reg_Dgp_Renuncia.jsp?idreq=" + idreq);
         }
 
@@ -367,21 +367,21 @@ public class CDgp extends HttpServlet {
 
             String ID_DGP = request.getParameter("iddgp");
             String ID_TRABAJADOR = request.getParameter("idtr");
-            getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
-            getServletContext().setAttribute("VALIDAR_DGP_CONTR", dgp.VALIDAR_DGP_CONTR(ID_DGP, idtr));
-            getServletContext().setAttribute("Cargar_dcc_dgp", cc.Cargar_dcc_dgp(ID_DGP));
+            sesion.setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
+            sesion.setAttribute("VALIDAR_DGP_CONTR", dgp.VALIDAR_DGP_CONTR(ID_DGP, idtr));
+            sesion.setAttribute("Cargar_dcc_dgp", cc.Cargar_dcc_dgp(ID_DGP));
             int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
             boolean estado = s.Validar_Envio_Solicitud(ID_DGP.trim());
-            getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
+            sesion.setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
             // out.print(ID_DGP);
 
             response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc&est=" + estado);
         }
         if (opc.equals("filtrar")) {
 
-            getServletContext().setAttribute("List_Area", area.List_Area_ID(iddep));
+            sesion.setAttribute("List_Area", area.List_Area_ID(iddep));
             //    int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
-            getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
+            sesion.setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
 
             response.sendRedirect("Vista/Dgp/Busc_Req_Autorizado.jsp");
         }
@@ -389,10 +389,10 @@ public class CDgp extends HttpServlet {
 
             String ID_DGP = request.getParameter("iddgp");
             String ID_TRABAJADOR = request.getParameter("idtr");
-            getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
-            getServletContext().setAttribute("Cargar_dcc_dgp", cc.Cargar_dcc_dgp(ID_DGP));
+            sesion.setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
+            sesion.setAttribute("Cargar_dcc_dgp", cc.Cargar_dcc_dgp(ID_DGP));
             int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
-            getServletContext().setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
+            sesion.setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
 
             if (idrol.trim().equals("ROL-0006")) {
 
@@ -400,14 +400,14 @@ public class CDgp extends HttpServlet {
 
                     String iddgp = request.getParameter("iddgp");
                     String id_dir = puesto.List_Puesto_x_iddgp(iddgp);
-                    getServletContext().setAttribute("List_Anno", anno.List_Anno());
-                    getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
-                    getServletContext().setAttribute("List_Puesto", puesto.List_Puesto());
-                    getServletContext().setAttribute("Listar_Direccion", dir.Listar_Direccion());
-                    getServletContext().setAttribute("List_anno_max", anno.List_anno_max());
-                    getServletContext().setAttribute("List_modalidad", con.List_modalidad());
-                    getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
-                    getServletContext().setAttribute("List_grup_ocu", gr.List_grup_ocu());
+                    sesion.setAttribute("List_Anno", anno.List_Anno());
+                    sesion.setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
+                    sesion.setAttribute("List_Puesto", puesto.List_Puesto());
+                    sesion.setAttribute("Listar_Direccion", dir.Listar_Direccion());
+                    sesion.setAttribute("List_anno_max", anno.List_anno_max());
+                    sesion.setAttribute("List_modalidad", con.List_modalidad());
+                    sesion.setAttribute("list_reg_labo", con.list_reg_labo());
+                    sesion.setAttribute("List_grup_ocu", gr.List_grup_ocu());
 
                     int asig = dht.ASIGNACION_F(ID_TRABAJADOR);
                     Calendar fecha = new GregorianCalendar();
@@ -437,29 +437,29 @@ public class CDgp extends HttpServlet {
 
                     String id_cto = con.Contrato_max(idtr);
                     String id_pu = puesto.puesto(id_cto);
-                    getServletContext().setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador_contrato(idtr));
-                    getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
-                    getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
-                    getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
-                    getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
-                    getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
-                    getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-                    getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
-                    getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+                    sesion.setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador_contrato(idtr));
+                    sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
+                    sesion.setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
+                    sesion.setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
+                    sesion.setAttribute("List_Usuario", usu.List_Usuario());
+                    sesion.setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
+                    sesion.setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+                    sesion.setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
+                    sesion.setAttribute("list_reg_labo", con.list_reg_labo());
                     response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
                 } else {
                     String ida1 = anno.List_Anno_Max_Cont(idtr);
                     String id_cto = con.Contrato_max(idtr);
                     String id_pu = puesto.puesto(id_cto);
-                    getServletContext().setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador_contrato(idtr));
-                    getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
-                    getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
-                    getServletContext().setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
-                    getServletContext().setAttribute("List_Usuario", usu.List_Usuario());
-                    getServletContext().setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
-                    getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
-                    getServletContext().setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-                    getServletContext().setAttribute("list_reg_labo", con.list_reg_labo());
+                    sesion.setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador_contrato(idtr));
+                    sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
+                    sesion.setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
+                    sesion.setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
+                    sesion.setAttribute("List_Usuario", usu.List_Usuario());
+                    sesion.setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
+                    sesion.setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
+                    sesion.setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+                    sesion.setAttribute("list_reg_labo", con.list_reg_labo());
                     response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
                 }
             } else {
@@ -473,36 +473,36 @@ public class CDgp extends HttpServlet {
             String iddgp = request.getParameter("iddgp");
             /*corregir*/
             String idrp = IReq.id_det_req_proc(iddgp);
-            getServletContext().setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(iddgp, idrp));
+            sesion.setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(iddgp, idrp));
             response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
         }
         if (opc.equals("Proceso")) {
-            getServletContext().setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
+            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
             response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
         }
         if (opc.equals("User_Aut")) {
             String iddgp = request.getParameter("iddgp");
-            getServletContext().setAttribute("USER_DGP", dgp.USER_DGP(iddgp));
+            sesion.setAttribute("USER_DGP", dgp.USER_DGP(iddgp));
 
             response.sendRedirect("Vista/Dgp/User_Dgp.jsp");
         }
         if (opc.equals("List_Dgp_Tr")) {
 
-            getServletContext().setAttribute("LIST_ID_TRAB_DGP", dgp.LIST_ID_TRAB_DGP(idtr));
+            sesion.setAttribute("LIST_ID_TRAB_DGP", dgp.LIST_ID_TRAB_DGP(idtr));
             response.sendRedirect("Vista/Trabajador/List_Dgp_Trabajador.jsp");
         }
         if (opc.equals("Terminar")) {
             String iddgp = request.getParameter("iddgp");
             out.print(iddgp);
             dgp.REG_DGP_FINAL(iddgp);
-            getServletContext().setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
+            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
             response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp?a=t");
         }
 
         if (opc.equals("Listar")) {
 
-            getServletContext().setAttribute("List_Det_Dgp", dgp.LIST_DET_DGP(iddep));
-            getServletContext().setAttribute("List_Trb_Mod_Rel", tr.LIST_TRABAJADOR_MOD_REL());
+            sesion.setAttribute("List_Det_Dgp", dgp.LIST_DET_DGP(iddep));
+            sesion.setAttribute("List_Trb_Mod_Rel", tr.LIST_TRABAJADOR_MOD_REL());
 
             // out.print(Idgp.LIST_DET_DGP(iddep).size());
             response.sendRedirect("Vista/Dgp/List_Dgp.jsp?iddep");
@@ -515,11 +515,11 @@ public class CDgp extends HttpServlet {
             idtr = dgp.obt_idtr_x_dgp(iddgp);
             String ES_CUENTA_SUELDO = tr.CuentaSueldoTra(idtr);
             out.println(idtr + " " + iddgp + "" + idreq + "" + iddep + "" + idpuesto);
-            getServletContext().setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
-            getServletContext().setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
-            getServletContext().setAttribute("list_Cuenta_Sueldo", dgp.LIST_CUEN_SUEL(idtr));
-            getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
+            sesion.setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
+            sesion.setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
+            sesion.setAttribute("list_Cuenta_Sueldo", dgp.LIST_CUEN_SUEL(idtr));
+            sesion.setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
             String redirect = request.getParameter("redirect");
             if (redirect != null) {
                 response.sendRedirect("Vista/Dgp/Editar_DGP.jsp?es_cs=" + ES_CUENTA_SUELDO + "&can_cc=" + can_cc + "&id_det_hor=" + id_d_hor.trim() + "&redirect=proceso_dgp");
@@ -697,12 +697,12 @@ public class CDgp extends HttpServlet {
                 }
             }
             // out.print(id_d_hor + "---" + ID_TIPO_HORARIO + "---" + horas_totales);
-            getServletContext().setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
+            sesion.setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
             int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
             int num_ad = doc.List_Adventista(ID_TRABAJADOR);
-            getServletContext().setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
-            getServletContext().setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
-            // getServletContext().setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(ID_DGP, idrp));
+            sesion.setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
+            sesion.setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
+            // sesion.setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(ID_DGP, idrp));
 
             String redireccionar = request.getParameter("redirect");
             if (redireccionar != null) {
@@ -715,7 +715,7 @@ public class CDgp extends HttpServlet {
             }
         }
         if (opc.equals("Incompleto")) {
-            getServletContext().setAttribute("List_Incomplet", dgp.List_Incomplet(iddep));
+            sesion.setAttribute("List_Incomplet", dgp.List_Incomplet(iddep));
             response.sendRedirect("Vista/Dgp/List_req_incompl.jsp");
         }
 

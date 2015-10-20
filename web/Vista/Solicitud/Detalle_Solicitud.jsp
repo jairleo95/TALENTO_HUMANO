@@ -1,6 +1,6 @@
 <%@page import="pe.edu.upeu.application.model.V_Solicitud_Requerimiento"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="Detalle_Solicitud" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Detalle_Solicitud" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

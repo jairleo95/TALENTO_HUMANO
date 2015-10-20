@@ -5,7 +5,7 @@
     if (id_user != null) {
 %>
 
-<jsp:useBean id="Listar_solicitud" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_solicitud" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

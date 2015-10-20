@@ -49,13 +49,14 @@ public class CMenu extends HttpServlet {
             } else if (opc != null & user != null) {
                 if (opc.equals("logout")) {
                     sesion.invalidate();
-                    
+
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                     dispatcher.forward(request, response);
                 }
                 if (opc.equals("List_Privilegios")) {
                     String id_modulo = request.getParameter("idmod");
-                    getServletContext().setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
+                    sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
+                    //sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal_3.jsp");
                     dispatcher.forward(request, response);
 
@@ -63,7 +64,8 @@ public class CMenu extends HttpServlet {
 
             } else if (idrol.trim().equals("ROL-0013")) {
                 String id_modulo = "MOD-0001";
-                getServletContext().setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
+                sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
+                //sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal_3.jsp");
                 dispatcher.forward(request, response);
             } else {

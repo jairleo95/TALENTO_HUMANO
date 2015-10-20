@@ -8,7 +8,7 @@
 <%@page import="pe.edu.upeu.application.dao.DgpDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceDgpDAO"%>
 <%@page import="pe.edu.upeu.application.model.V_Autorizar_Dgp"%>
-<jsp:useBean id="List_Autorizacion_Academico" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Autorizacion_Academico" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

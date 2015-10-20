@@ -72,7 +72,7 @@ public class CReporte_Historial extends HttpServlet {
                 rpta.put("lista", list);
             }
             if (opc.equals("hist_es_civil")) {
-                getServletContext().setAttribute("List_Estado_Civil", li.List_Estado_Civil());
+                sesion.setAttribute("List_Estado_Civil", li.List_Estado_Civil());
                 response.sendRedirect("Vista/Reportes/Trabajador/Historial_Est_Civil.jsp");
             }
             if (opc.equals("list_hist_es_civil")) {

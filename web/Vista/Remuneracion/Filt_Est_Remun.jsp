@@ -6,8 +6,8 @@
 %>
 <%@page import="pe.edu.upeu.application.model.Requerimiento"%>
 <%@page import="pe.edu.upeu.application.model.Area"%>
-<jsp:useBean id="List_Area" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean class="java.util.ArrayList" scope="application"  id="Listar_Requerimiento"/>
+<jsp:useBean id="List_Area" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean class="java.util.ArrayList" scope="session"  id="Listar_Requerimiento"/>
 <%
     HttpSession sesion = request.getSession(true);
     String id_user = (String) sesion.getAttribute("IDUSER");

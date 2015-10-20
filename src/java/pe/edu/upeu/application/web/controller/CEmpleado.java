@@ -46,7 +46,7 @@ public class CEmpleado extends HttpServlet {
             String ID_Empleado = Iem.ID_Empleado(ID_Trabajador);
             String estado = Iem.ES_Empleado(ID_Empleado);
 
-            getServletContext().setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_Empleado));
+            sesion.setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_Empleado));
             if (estado != null) {
                 if (estado.equals("1")) {
                     response.sendRedirect("Vista/Empleado/List_Evaluacion_Emp.jsp?idemp=" + ID_Empleado);
@@ -67,13 +67,13 @@ public class CEmpleado extends HttpServlet {
 
             String ID_EMPLEADO = Iem.ID_Empleado(ID_TRABAJADOR);
             Iem.Insert_Evaluacion_Emp(ID_EVALUACION_EMP, ES_EVALUACION, RE_EVALUACION, ID_EMPLEADO);
-            getServletContext().setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_EMPLEADO));
+            sesion.setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_EMPLEADO));
             response.sendRedirect("Vista/Empleado/List_Evaluacion_Emp.jsp?idemp=" + ID_EMPLEADO);
         }
         if (opc.equals("Editar")) {
             String ID_EMP = request.getParameter("idemp");
 
-            getServletContext().setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_EMP));
+            sesion.setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_EMP));
 
             response.sendRedirect("Vista/Empleado/Mod_Evaluacion_Emp.jsp?idemp=" + ID_EMP);
         }
@@ -82,7 +82,7 @@ public class CEmpleado extends HttpServlet {
             String RE_EVALUACION = request.getParameter("RE_EVALUACION");
             String ID_EMPLEADO = request.getParameter("ID_EMPLEADO");
             Iem.Mod_Evaluacion_emp(RE_EVALUACION, ID_EMPLEADO);
-            getServletContext().setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_EMPLEADO));
+            sesion.setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_EMPLEADO));
             response.sendRedirect("Vista/Empleado/List_Evaluacion_Emp.jsp?idemp=" + ID_EMPLEADO);
 
         }
@@ -93,9 +93,9 @@ public class CEmpleado extends HttpServlet {
             String idrol = (String) sesion.getAttribute("IDROL");
             
             if(idrol.trim().equals("ROL-0001")){
-            getServletContext().setAttribute("List_Empleado", Iem.Listar_Empleado());
+            sesion.setAttribute("List_Empleado", Iem.Listar_Empleado());
             }else{
-            getServletContext().setAttribute("List_Empleado", Iem.Listar_Empleado(iddepa));
+            sesion.setAttribute("List_Empleado", Iem.Listar_Empleado(iddepa));
             }
             out.print(iddepa);
             out.print(idrol);

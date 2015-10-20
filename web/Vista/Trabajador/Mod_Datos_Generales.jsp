@@ -26,19 +26,19 @@
     String rol = (String) sesion_1.getAttribute("IDROL");
 
 %>
-<jsp:useBean id="List_Carrera" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Universidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Situacion_Educativa" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_zona" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_via" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="list_año" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Carrera" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Universidad" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Situacion_Educativa" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_zona" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_via" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="list_año" scope="session" class="java.util.ArrayList"/>
 
-<jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Nacionalidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Departamento" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Provincia" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Distrito" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_tipo_doc" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="ListaridTrabajador" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Nacionalidad" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Departamento" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Provincia" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Distrito" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_tipo_doc" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>

@@ -61,7 +61,7 @@ public class CFuncion extends HttpServlet {
         /* TODO output your page here. You may use following sample code. */
         try {
             if (opc.equals("princpal_funcion")) {
-                getServletContext().setAttribute("Listar_Direccion", di.Listar_Direccion());
+                sesion.setAttribute("Listar_Direccion", di.Listar_Direccion());
                 response.sendRedirect("Vista/Funciones/Otorgar_funciones.jsp");
             }
             
@@ -82,7 +82,7 @@ public class CFuncion extends HttpServlet {
                 rpta.put("lista", list);
             }
             if (opc.equals("otorgar_funciones")) {
-                getServletContext().setAttribute("Listar_Direccion", di.Listar_Direccion());
+                sesion.setAttribute("Listar_Direccion", di.Listar_Direccion());
                 response.sendRedirect("Vista/Funciones/Otorgar_funciones.jsp");
             }
             if (opc.equals("otorgar")) {

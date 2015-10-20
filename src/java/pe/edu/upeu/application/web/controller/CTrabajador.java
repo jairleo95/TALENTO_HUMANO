@@ -93,15 +93,15 @@ public class CTrabajador extends HttpServlet {
         InterfaceDatos_Hijo_Trabajador h = new Datos_Hijo_TrabajadorDAO();
 
         if (opc.equals("Form_Reg")) {
-            getServletContext().setAttribute("List_Carrera", li.List_Carrera());
-            getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
-            getServletContext().setAttribute("List_Universidad", li.List_Universidad());
-            getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
-            getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
-            getServletContext().setAttribute("Listar_via", dir.Listar_via());
-            getServletContext().setAttribute("Listar_zona", dir.Listar_zona());
-            getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
-            getServletContext().setAttribute("list_año", li.lista_años());
+            sesion.setAttribute("List_Carrera", li.List_Carrera());
+            sesion.setAttribute("List_Nacionalidad", li.List_Nacionalidad());
+            sesion.setAttribute("List_Universidad", li.List_Universidad());
+            sesion.setAttribute("List_Departamento", ub.List_Departamento());
+            sesion.setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
+            sesion.setAttribute("Listar_via", dir.Listar_via());
+            sesion.setAttribute("Listar_zona", dir.Listar_zona());
+            sesion.setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
+            sesion.setAttribute("list_año", li.lista_años());
 
             response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp");
 
@@ -221,11 +221,11 @@ public class CTrabajador extends HttpServlet {
                     }
                 }
 
-                //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-                getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
-                getServletContext().setAttribute("Documentos", d.Documentos());
-                getServletContext().setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
-                getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+                //sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+                sesion.setAttribute("List_Hijos", d.List_Hijos(idtr));
+                sesion.setAttribute("Documentos", d.Documentos());
+                sesion.setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
+                sesion.setAttribute("List_Conyugue", d.List_Conyugue(idtr));
                 int s = d.List_Req_nacionalidad(idtr);
                 int num_ad = d.List_Adventista(idtr);
                 int count = d.count_documentos_x_tra(idtr);
@@ -247,7 +247,7 @@ public class CTrabajador extends HttpServlet {
             if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
                 String busc = (String) request.getParameter("busc");
                 if (busc != null) {
-                    getServletContext().setAttribute("ListarTrabajador2", tr.Buscar_Trabajador_Requerimiento(iddep, dni, nom, ape_pat, ape_mat, id_req));
+                    sesion.setAttribute("ListarTrabajador2", tr.Buscar_Trabajador_Requerimiento(iddep, dni, nom, ape_pat, ape_mat, id_req));
                     getServletContext().setAttribute(nom, dgp.VAL_OPC_DGP(dni));
                     response.sendRedirect("Vista/Dgp/Generar_Dgp.jsp?text=" + Text);
                 }
@@ -263,7 +263,7 @@ public class CTrabajador extends HttpServlet {
             String ape_mat = request.getParameter("ape_mat");
             String ape_pat = request.getParameter("ape_pat");
             if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
-                getServletContext().setAttribute("ListarTrabajador", tr.Buscar_Ficha_Trabajador(iddep, dni, nom, ape_pat, ape_mat));
+                sesion.setAttribute("ListarTrabajador", tr.Buscar_Ficha_Trabajador(iddep, dni, nom, ape_pat, ape_mat));
                 getServletContext().setAttribute(nom, dgp.VAL_OPC_DGP(dni));
                 response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
             } else {
@@ -272,13 +272,13 @@ public class CTrabajador extends HttpServlet {
         }
         if ("list".equals(opc)) {
             String idtr = request.getParameter("idtr");
-            getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("List_Universidad", li.List_Universidad());
-            getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
-            getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
-            getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
-            getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
+            sesion.setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
+            sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("List_Universidad", li.List_Universidad());
+            sesion.setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
+            sesion.setAttribute("List_Ubigeo", ub.List_Distrito());
+            sesion.setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
+            sesion.setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
 //out.print(idtr);            
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
         }
@@ -289,12 +289,12 @@ public class CTrabajador extends HttpServlet {
             if (op != null) {
                 me = "t";
             }
-            getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("List_Universidad", li.List_Universidad());
-            getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
-            getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
-            getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
+            sesion.setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
+            sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("List_Universidad", li.List_Universidad());
+            sesion.setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
+            sesion.setAttribute("List_Ubigeo", ub.List_Distrito());
+            sesion.setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
 
             //String num_doc = tr.REG_DOC_TRABAJADOR(idtr);
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&ms=" + me);
@@ -302,19 +302,19 @@ public class CTrabajador extends HttpServlet {
         if ("actualizar".equals(opc)) {
             String idtr = request.getParameter("idtr");
             //String id_anno = request.getParameter("id_anno");
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim());
         }
         if ("Documento_Trabajador".equals(opc)) {
             String idtr = request.getParameter("idtr");
-            getServletContext().setAttribute("Lis_doc_trabajador_hab", d.Lis_doc_trabajador_hab(idtr));
+            sesion.setAttribute("Lis_doc_trabajador_hab", d.Lis_doc_trabajador_hab(idtr));
             response.sendRedirect("Vista/Trabajador/List_Doc_Trabajador.jsp?idtr=" + idtr);
         }
         if ("aut".equals(opc)) {
             String idtr = request.getParameter("idtr");
             //  String id_contrato = con.Buscar_id_contrato_x_idtr(idtr);
             /*if (cc.Lis_c_c_id_contr(id_contrato).size() > 0) {
-             getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
+             sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
              }
              */
             int val_aps = 0;
@@ -328,10 +328,10 @@ public class CTrabajador extends HttpServlet {
             int num_c_dgp = dgp.VALIDAR_DGP_CONTRATO(iddgp);
             val_aps = em.val_cod_aps_empleado(idtr);
             val_huella = em.val_cod_huella(idtr);
-            getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
-            getServletContext().setAttribute("List_", li.List_Auto_mostrar(idrol));
+            sesion.setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
+            sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
+            sesion.setAttribute("List_", li.List_Auto_mostrar(idrol));
 
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps + "&val_huella=" + val_huella);
         }
@@ -339,7 +339,7 @@ public class CTrabajador extends HttpServlet {
             String idtr = request.getParameter("idtr");
             //String id_contrato = con.Buscar_id_contrato_x_idtr(idtr);
             /*if (cc.Lis_c_c_id_contr(id_contrato).size() > 0) {
-             getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
+             sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
              }
              */
             int val_huella = 0;
@@ -354,16 +354,16 @@ public class CTrabajador extends HttpServlet {
             int num_c_dgp = dgp.VALIDAR_DGP_CONTRATO(iddgp);
             int val_aps = em.val_cod_aps_empleado(idtr);
             val_huella = em.val_cod_huella(idtr);
-            getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
+            sesion.setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
+            sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps + "&val_huella=" + val_huella);
         }
         if ("registrar_huella".equals(opc)) {
             String idtr = request.getParameter("idtr");
-            String id_contrato = con.Buscar_id_contrato_x_idtr(idtr);
+         //   String id_contrato = con.Buscar_id_contrato_x_idtr(idtr);
             /*if (cc.Lis_c_c_id_contr(id_contrato).size() > 0) {
-             getServletContext().setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
+             sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
              }
              */
             int val_huella = 0;
@@ -378,35 +378,35 @@ public class CTrabajador extends HttpServlet {
             int num_c_dgp = dgp.VALIDAR_DGP_CONTRATO(iddgp);
             int val_aps = em.val_cod_aps_empleado(idtr);
             val_huella = em.val_cod_huella(idtr);
-            getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
+            sesion.setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
+            sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps + "&val_huella=" + val_huella);
         }
         if ("reg_aps_masivo".equals(opc)) {
             String idtr = request.getParameter("idtr");
             int co_aps = Integer.parseInt(request.getParameter("cod"));
             em.Reg_aps(idtr, co_aps);
-            getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
+            sesion.setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "");
         }
         if ("reg_huella".equals(opc)) {
             String idtr = request.getParameter("idtr");
             int cod_huella = Integer.parseInt(request.getParameter("cod"));
             em.Reg_cod_huella(idtr, cod_huella);
-            getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
+            sesion.setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "");
         }
 
         if (opc.equals("Editar_Dat_Gen")) {
             String idtr = request.getParameter("idtr");
             String edit = request.getParameter("edit");
-            getServletContext().setAttribute("3e", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
-            getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
-            getServletContext().setAttribute("List_Provincia", ub.List_Provincia());
-            getServletContext().setAttribute("List_Distrito", ub.List_DistritoTra());
-            getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
+            sesion.setAttribute("3e", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("List_Nacionalidad", li.List_Nacionalidad());
+            sesion.setAttribute("List_Departamento", ub.List_Departamento());
+            sesion.setAttribute("List_Provincia", ub.List_Provincia());
+            sesion.setAttribute("List_Distrito", ub.List_DistritoTra());
+            sesion.setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
 
             response.sendRedirect("Vista/Trabajador/Mod_Datos_Generales.jsp?idtr=" + idtr + "&edit=" + edit);
         }
@@ -456,7 +456,7 @@ public class CTrabajador extends HttpServlet {
             }
             tr.MOD_DAT_GEN(AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, ES_SEXO, LI_GRUPO_SANGUINEO, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, ES_FACTOR_RH, idtr, US_MODIF, IP_USUARIO);
 
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
 
             //out.print(TI_DOC + "--" + NU_DOC);
             out.print(ES_REGISTRO);
@@ -475,7 +475,7 @@ public class CTrabajador extends HttpServlet {
             while (x) {
                 if (!li1.isEmpty()) {
                     x = false;
-                    getServletContext().setAttribute("List_Cuenta_Sueldo", li1);
+                    sesion.setAttribute("List_Cuenta_Sueldo", li1);
                 } else {
                     tr.INSERT_CUENTA_SUELDO(null, null, null, null, "0", null, idtr, "0");
                 }
@@ -483,11 +483,11 @@ public class CTrabajador extends HttpServlet {
             if (li1.get(0).getEs_cuenta_sueldo().trim().equals("1")) {
                 edit = "ok";
             }
-            getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
-            getServletContext().setAttribute("list_año", li.lista_años());
-            getServletContext().setAttribute("List_Universidad", li.List_Universidad());
-            getServletContext().setAttribute("List_Carrera", li.List_Carrera());
-            getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
+            sesion.setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
+            sesion.setAttribute("list_año", li.lista_años());
+            sesion.setAttribute("List_Universidad", li.List_Universidad());
+            sesion.setAttribute("List_Carrera", li.List_Carrera());
+            sesion.setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
             response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Academico.jsp?idtr=" + idtr + "&edit=" + edit);
 
         }
@@ -535,8 +535,8 @@ public class CTrabajador extends HttpServlet {
                 ES_CUENTA_SUELDO = "1";
             }
             tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, idtr, ES_CUENTA_SUELDO);
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
+            sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
             //out.print(editar);
           /*  out.print(NO_BANCO + "--");
              out.print(NU_CUENTA + "--");
@@ -552,34 +552,34 @@ public class CTrabajador extends HttpServlet {
         }
         if (opc.equals("Listar_Asp_Social")) {
             String idtr = request.getParameter("idtr");
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("Listar_via", dir.Listar_via());
-            getServletContext().setAttribute("Listar_zona", dir.Listar_zona());
-            getServletContext().setAttribute("ListarDir_Dom", li.List_Dom_D3_Id());
-            getServletContext().setAttribute("List_Provincia", ub.List_Provincia());
-            getServletContext().setAttribute("List_Distrito", ub.List_DistritoTra());
-            getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
-            getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
-            getServletContext().setAttribute("List_Dom_D1_Id", l.List_Dom_D1_Id());
-            getServletContext().setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
-            getServletContext().setAttribute("List_Dom_D3_Id", l.List_Dom_D3_Id());
+            sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("Listar_via", dir.Listar_via());
+            sesion.setAttribute("Listar_zona", dir.Listar_zona());
+            sesion.setAttribute("ListarDir_Dom", li.List_Dom_D3_Id());
+            sesion.setAttribute("List_Provincia", ub.List_Provincia());
+            sesion.setAttribute("List_Distrito", ub.List_DistritoTra());
+            sesion.setAttribute("List_Ubigeo", ub.List_Distrito());
+            sesion.setAttribute("List_Departamento", ub.List_Departamento());
+            sesion.setAttribute("List_Dom_D1_Id", l.List_Dom_D1_Id());
+            sesion.setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
+            sesion.setAttribute("List_Dom_D3_Id", l.List_Dom_D3_Id());
 
             response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp?idtr=" + idtr);
         }
 
         if (opc.equals("Editar_Asp_Soc")) {
             String idtr = request.getParameter("idtr");
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("Listar_via", dir.Listar_via());
-            getServletContext().setAttribute("Listar_zona", dir.Listar_zona());
-            getServletContext().setAttribute("ListarDir_Dom", li.List_Dom_D3_Id());
-            getServletContext().setAttribute("List_Provincia", ub.List_Provincia());
-            getServletContext().setAttribute("List_Distrito", ub.List_DistritoTra());
-            getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
-            getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
-            getServletContext().setAttribute("List_Dom_D1_Id", l.List_Dom_D1_Id());
-            getServletContext().setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
-            getServletContext().setAttribute("List_Dom_D3_Id", l.List_Dom_D3_Id());
+            sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("Listar_via", dir.Listar_via());
+            sesion.setAttribute("Listar_zona", dir.Listar_zona());
+            sesion.setAttribute("ListarDir_Dom", li.List_Dom_D3_Id());
+            sesion.setAttribute("List_Provincia", ub.List_Provincia());
+            sesion.setAttribute("List_Distrito", ub.List_DistritoTra());
+            sesion.setAttribute("List_Ubigeo", ub.List_Distrito());
+            sesion.setAttribute("List_Departamento", ub.List_Departamento());
+            sesion.setAttribute("List_Dom_D1_Id", l.List_Dom_D1_Id());
+            sesion.setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
+            sesion.setAttribute("List_Dom_D3_Id", l.List_Dom_D3_Id());
 
             response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Social.jsp?idtr=" + idtr);
         }
@@ -606,12 +606,12 @@ public class CTrabajador extends HttpServlet {
             String US_MODIF = iduser;
             String IP_USUARIO = tr.ip();
             tr.MOD_ASPEC_SOCIAL(LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, idtr, US_MODIF, IP_USUARIO);
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp?idtr=" + idtr);
         }
         if ("Editar_Asp_Rel".equals(opc)) {
             String idtr = request.getParameter("idtr");
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             response.sendRedirect("Vista/Trabajador/Historial_Religion/Mod_Asp_Religioso.jsp?idtr=" + idtr + "&iduser=" + iduser);
         }
         if ("Modificar_Asp_Rel".equals(opc)) {
@@ -626,20 +626,20 @@ public class CTrabajador extends HttpServlet {
             out.print(idtr);
             tr.INSERT_HIST_RELIGION(null, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, "1", idtr, iduser, FE_MODIF);
             tr.MOD_ASP_REL(LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, idtr, iduser, tr.ip());
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp");
         }
         if ("edit_perfil".equals(opc)) {
             String user = (String) sesion.getAttribute("IDUSER");
             String idtr = tr.ID_TRB(user);
-            getServletContext().setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
-            getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            getServletContext().setAttribute("List_Universidad", li.List_Universidad());
-            getServletContext().setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
-            getServletContext().setAttribute("List_Ubigeo", ub.List_Distrito());
-            getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
+            sesion.setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
+            sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            sesion.setAttribute("List_Universidad", li.List_Universidad());
+            sesion.setAttribute("List_tipo_institucion", cu.List_Tipo_Ins());
+            sesion.setAttribute("List_Ubigeo", ub.List_Distrito());
+            sesion.setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
 
-            getServletContext().setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
+            sesion.setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
             response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?edit=ok&idtr=" + idtr);
         }
         if (opc.equals("Form_Cambiar_Clave")) {

@@ -6,7 +6,7 @@
 
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="ListaridTrabajador" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

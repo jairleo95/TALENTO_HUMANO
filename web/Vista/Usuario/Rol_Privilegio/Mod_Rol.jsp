@@ -4,7 +4,7 @@
     if (id_user != null) {
 %>
 <%@page import="pe.edu.upeu.application.model.Rol"%>
-<jsp:useBean id="Listar_Rol_id" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Rol_id" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

@@ -19,9 +19,9 @@
 <%@page import="java.util.List"%>
 <%@page import="pe.edu.upeu.application.dao.DgpDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceDgpDAO"%>
-<jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="LIST_ID_USER" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Cargar_dcc_dgp" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="LIST_ID_DGP" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="LIST_ID_USER" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Cargar_dcc_dgp" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

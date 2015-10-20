@@ -6,7 +6,7 @@
     if (id_user_1 != null) {
 %>
 <%@page import="pe.edu.upeu.application.model.V_List_Empleado"%>
-<jsp:useBean id="List_Empleado" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Empleado" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en-us">
     <head>

@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.Plazo_DgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlazo_DgpDAO;
 
@@ -42,6 +43,7 @@ public class CPlazo extends HttpServlet {
         PrintWriter out = response.getWriter();
         InterfacePlazo_DgpDAO pl = new Plazo_DgpDAO();
         Map<String, Object> rpta = new HashMap<String, Object>();
+        HttpSession sesion = request.getSession(true);
         try {
             String opc = request.getParameter("opc");
             if (opc.equals("Mantenimiento")) {
@@ -81,14 +83,14 @@ public class CPlazo extends HttpServlet {
                 String DET_ALERTA = request.getParameter("descripcion");
                 String FE_DESDE = request.getParameter("desde");
                 String FE_HASTA = request.getParameter("hasta");
-                String ES_PLAZO= "1";
+                String ES_PLAZO = "1";
                 String ID_REQUERIMIENTO = request.getParameter("id_req");
                 String TI_PLAZO = request.getParameter("tipo");
                 int CA_DIAS_TOLERANCIA = Integer.parseInt(request.getParameter("tolerancia"));
                 String ID_DEPARTAMENTO_TOLERANCIA = request.getParameter("dep_tolerancia");
                 String DEP = "0";
                 String AREA = "0";
-                pl.UPDATE_PLAZO(ID_PLAZO, NO_PLAZO, DET_ALERTA, FE_DESDE, FE_HASTA, ES_PLAZO,ID_REQUERIMIENTO,TI_PLAZO,CA_DIAS_TOLERANCIA,ID_DEPARTAMENTO_TOLERANCIA,DEP,AREA);
+                pl.UPDATE_PLAZO(ID_PLAZO, NO_PLAZO, DET_ALERTA, FE_DESDE, FE_HASTA, ES_PLAZO, ID_REQUERIMIENTO, TI_PLAZO, CA_DIAS_TOLERANCIA, ID_DEPARTAMENTO_TOLERANCIA, DEP, AREA);
             }
             if (opc.equals("Listar")) {
                 String tipo = request.getParameter("tipo");
@@ -103,7 +105,7 @@ public class CPlazo extends HttpServlet {
                 String req = request.getParameter("id_req");
                 int dias = Integer.parseInt(request.getParameter("tolerancia"));
                 String dep = request.getParameter("dep_tolerancia");
-                List<Map<String, ?>> lista = pl.Listar_Plazo(tipo, req, dias, dep,id_dep,id_area);
+                List<Map<String, ?>> lista = pl.Listar_Plazo(tipo, req, dias, dep, id_dep, id_area);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
@@ -113,7 +115,7 @@ public class CPlazo extends HttpServlet {
             }
             if (opc.equals("Ver_detalle_plazo")) {
                 String iddgp = request.getParameter("iddgp");
-                getServletContext().setAttribute("Lista_detalle_plazo", pl.Lista_detalle_plazo(iddgp));
+                sesion.setAttribute("Lista_detalle_plazo", pl.Lista_detalle_plazo(iddgp));
                 response.sendRedirect("Vista/Dgp/Plazo/Detalle_Plazo.jsp");
             }
             if (opc.equals("List_id_plazo")) {

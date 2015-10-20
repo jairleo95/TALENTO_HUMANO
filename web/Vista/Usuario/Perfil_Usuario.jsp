@@ -6,7 +6,7 @@
 %>
 <%@page import="pe.edu.upeu.application.model.V_Usuario"%>
 <%@page import="pe.edu.upeu.application.model.V_Var_Usuario"%>
-<jsp:useBean id="Lista_Usuarios" scope="application" class="java.util.ArrayList" />
+<jsp:useBean id="Lista_Usuarios" scope="session" class="java.util.ArrayList" />
 <!DOCTYPE html>
 <html >
     <head>

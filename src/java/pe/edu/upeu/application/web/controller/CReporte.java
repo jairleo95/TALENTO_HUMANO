@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.AreaDAO;
 import pe.edu.upeu.application.dao.Carrera_UniversidadDAO;
 import pe.edu.upeu.application.dao.Datos_Hijo_TrabajadorDAO;
@@ -68,17 +69,18 @@ public class CReporte extends HttpServlet {
         PrintWriter out = response.getWriter();
         Map<String, Object> rpta = new HashMap<String, Object>();
         String opc = request.getParameter("opc");
+        HttpSession sesion = request.getSession(true);
         try {
             //Reportes
             if (opc.equals("reporte1")) {
-                getServletContext().setAttribute("Reporte_Datos_Generales", r.Reporte_Datos_Generales());
-                getServletContext().setAttribute("List_Departamento_Lima", d.List_Departamento_Lima());
-                getServletContext().setAttribute("List_Area_Lima", a.List_Area_Lima());
-                getServletContext().setAttribute("LISTA_RH_SECCION_LIMA", s.LISTA_RH_SECCION_LIMA());
-                getServletContext().setAttribute("List_Puesto_lima", p.List_Puesto_lima());
-                getServletContext().setAttribute("List_Nacionalidad", n.List_Nacionalidad());
-                getServletContext().setAttribute("List_SituacionEducativa", se.List_SituacionEducativa());
-                getServletContext().setAttribute("List_Carrera", ca.List_Carrera());
+                sesion.setAttribute("Reporte_Datos_Generales", r.Reporte_Datos_Generales());
+                sesion.setAttribute("List_Departamento_Lima", d.List_Departamento_Lima());
+                sesion.setAttribute("List_Area_Lima", a.List_Area_Lima());
+                sesion.setAttribute("LISTA_RH_SECCION_LIMA", s.LISTA_RH_SECCION_LIMA());
+                sesion.setAttribute("List_Puesto_lima", p.List_Puesto_lima());
+                sesion.setAttribute("List_Nacionalidad", n.List_Nacionalidad());
+                sesion.setAttribute("List_SituacionEducativa", se.List_SituacionEducativa());
+                sesion.setAttribute("List_Carrera", ca.List_Carrera());
                 response.sendRedirect("Vista/Reportes/newjsp.jsp");
             }
             if (opc.equals("reporte_hijo")) {
@@ -111,7 +113,7 @@ public class CReporte extends HttpServlet {
                 String mat = request.getParameter("materno");
                 String tip = request.getParameter("tipo");
                 String nun = request.getParameter("numero");
-                List<Map<String, ?>> lista = RP.listar_padre_hi(desde, hasta, edad,aps,dep,are,sec,pue,nom,pat,mat,nun,tip);
+                List<Map<String, ?>> lista = RP.listar_padre_hi(desde, hasta, edad, aps, dep, are, sec, pue, nom, pat, mat, nun, tip);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }

@@ -17,17 +17,17 @@
 <%@page import="pe.edu.upeu.application.model.DGP"%>
 <%@page import="pe.edu.upeu.application.model.Anno"%>
 
-<jsp:useBean id="List_Anno" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_Direccion" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="ASIGNACION_F" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_anno_max" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_modalidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="list_reg_labo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_centro_costo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_grup_ocu" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_dgp" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Anno" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Puesto" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Direccion" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="LIST_ID_DGP" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="ASIGNACION_F" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_anno_max" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_modalidad" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="list_reg_labo" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_centro_costo" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_grup_ocu" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_dgp" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 <html>
     <head>

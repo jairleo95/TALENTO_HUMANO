@@ -12,7 +12,7 @@
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
 <%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
 <%@page import="pe.edu.upeu.application.web.controller.CHorario"%>
-<jsp:useBean id="List_V_Horario" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_V_Horario" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 
 <html>

@@ -4,7 +4,7 @@
 %>
 
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
-<jsp:useBean id="List_ID_User" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_ID_User" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.

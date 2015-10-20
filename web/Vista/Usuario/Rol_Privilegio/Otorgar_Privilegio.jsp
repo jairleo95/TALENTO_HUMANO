@@ -5,8 +5,8 @@
 %>
 <%@page import="pe.edu.upeu.application.model.Privilegio"%>
 <%@page import="pe.edu.upeu.application.model.Rol"%>
-<jsp:useBean id="List_Privilegio" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Rol" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Privilegio" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Rol" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.

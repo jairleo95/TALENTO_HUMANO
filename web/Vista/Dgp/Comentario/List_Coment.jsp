@@ -5,7 +5,7 @@
     if (id_user != null) {
 %>
 <%@page import="pe.edu.upeu.application.model.X_List_Comen_DGP"%>
-<jsp:useBean id="List_Comentario_DGP" class="java.util.ArrayList" scope="application"/>
+<jsp:useBean id="List_Comentario_DGP" class="java.util.ArrayList" scope="session"/>
 <!DOCTYPE html >
 <html>
     <head>

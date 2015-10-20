@@ -4,8 +4,8 @@
 %>
 <%@page import="pe.edu.upeu.application.model.V_List_Empleado"%>
 <%@page import="pe.edu.upeu.application.model.Rol"%>
-<jsp:useBean id="Listar_Emp" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Rol" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Emp" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Rol" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

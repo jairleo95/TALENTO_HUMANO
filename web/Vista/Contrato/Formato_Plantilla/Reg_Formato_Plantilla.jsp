@@ -11,7 +11,7 @@
 Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
 -->
-<jsp:useBean id="Listar_Direccion_X" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Direccion_X" scope="session" class="java.util.ArrayList"/>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">

@@ -2,7 +2,7 @@
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
-    HttpSession sesion_1 = request.getSession();
+    HttpSession sesion_1 = request.getSession(true);
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
 %>
@@ -13,9 +13,9 @@
 <%@page import="pe.edu.upeu.application.model.Auto_Mostrar"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
-<jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Auto_mostrar" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="id_empleadox_ide" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="ListaridTrabajador" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Auto_mostrar" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="id_empleadox_ide" scope="session" class="java.util.ArrayList"/>
 
 <!DOCTYPE html>
 
@@ -410,7 +410,7 @@
                 <li>
                     <%if (cl.trim().equals(user.trim())) {
                     %>
-                    <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2" rel="tooltip" data-placement="top" data-original-title="<h1><b>One</b> <em>Really</em> big tip!</h1>" data-html="true" ><i class="fa fa-lock"></i> Contraseña <span class="badge bg-color-red pull-right inbox-badge">¡Cambiar!</span></a>
+                    <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2" rel="tooltip" data-placement="top" data-original-title="<h1>Importante!</h1>" data-html="true" ><i class="fa fa-lock"></i> Contraseña <span class="badge bg-color-red pull-right inbox-badge">¡Cambiar!</span></a>
                     <%} else {%>
                     <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"  ><i class="fa fa-lock"></i> Contraseña</a>
                     <%}%>

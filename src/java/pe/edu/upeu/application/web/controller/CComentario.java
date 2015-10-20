@@ -50,13 +50,13 @@ public class CComentario extends HttpServlet {
             String FE_MODIFICACION = null;
             String ES_COMENTARIO_DGP = "1";
             x.INSERT_COMENTARIO_DGP(ID_COMENTARIO_DGP, ID_DGP, ID_AUTORIZACION, CM_COMENTARIO, idu, FE_CREACION, US_MODIFICACION, FE_MODIFICACION, ES_COMENTARIO_DGP);
-            getServletContext().setAttribute("List_Comentario_DGP", x.List_Comentario_DGP(ID_DGP));
+            sesion.setAttribute("List_Comentario_DGP", x.List_Comentario_DGP(ID_DGP));
             response.sendRedirect("Vista/Dgp/Comentario/Reg_Comentario.jsp?iddgp="+ID_DGP);
         }
         if (opc.equals("Comentar_Dgp")) {
 
         String iddgp=request.getParameter("iddgp");
-            getServletContext().setAttribute("List_Comentario_DGP", x.List_Comentario_DGP(iddgp));
+            sesion.setAttribute("List_Comentario_DGP", x.List_Comentario_DGP(iddgp));
             response.sendRedirect("Vista/Dgp/Comentario/Reg_Comentario.jsp?iddgp="+iddgp);
         }
 

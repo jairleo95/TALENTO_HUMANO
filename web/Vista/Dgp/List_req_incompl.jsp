@@ -5,7 +5,7 @@
     if (id_user_1 != null) {
 %>
 <%@page import="pe.edu.upeu.application.model.V_Es_Requerimiento"%>
-<jsp:useBean class="java.util.ArrayList" id="List_Incomplet" scope="application" />
+<jsp:useBean class="java.util.ArrayList" id="List_Incomplet" scope="session" />
 <!DOCTYPE html>
 <html lang="en-us">
     <head>

@@ -15,13 +15,13 @@
 <%@page import="pe.edu.upeu.application.model.V_Puesto_Direccion"%>
 <%@page import="pe.edu.upeu.application.model.Puesto"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
-<jsp:useBean id="Listar_Trabajador_id" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="LIST_ID_DGP" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Puesto" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Det_Puesto" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_Requerimiento" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="list_Cuenta_Sueldo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="fecha_maxima_plazo" scope="application" class="java.lang.String"/>
+<jsp:useBean id="Listar_Trabajador_id" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="LIST_ID_DGP" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Puesto" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Det_Puesto" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Requerimiento" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="list_Cuenta_Sueldo" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="fecha_maxima_plazo" scope="session" class="java.lang.String"/>
 
 <!DOCTYPE html >
 <html>

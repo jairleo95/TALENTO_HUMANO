@@ -73,15 +73,15 @@ public class CCarga_Academica extends HttpServlet {
             String dni = request.getParameter("nro_doc");
             String idtr = carga.DNI_ID_TRABAJADOR(dni);
             if (idtr.equals("")) {
-                getServletContext().setAttribute("List_Carrera", li.List_Carrera());
-                getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
-                getServletContext().setAttribute("List_Universidad", li.List_Universidad());
-                getServletContext().setAttribute("List_Departamento", ub.List_Departamento());
-                getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
-                getServletContext().setAttribute("Listar_via", dir.Listar_via());
-                getServletContext().setAttribute("Listar_zona", dir.Listar_zona());
-                getServletContext().setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
-                getServletContext().setAttribute("list_año", li.lista_años());
+                sesion.setAttribute("List_Carrera", li.List_Carrera());
+                sesion.setAttribute("List_Nacionalidad", li.List_Nacionalidad());
+                sesion.setAttribute("List_Universidad", li.List_Universidad());
+                sesion.setAttribute("List_Departamento", ub.List_Departamento());
+                sesion.setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
+                sesion.setAttribute("Listar_via", dir.Listar_via());
+                sesion.setAttribute("Listar_zona", dir.Listar_zona());
+                sesion.setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
+                sesion.setAttribute("list_año", li.lista_años());
 
                 String no_trabajador = request.getParameter("no_tr");
                 String ap_p = request.getParameter("ap_p");
@@ -90,8 +90,8 @@ public class CCarga_Academica extends HttpServlet {
                 response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp?nro_doc=" + dni + "&ap_p=" + ap_p + "&ap_m=" + ap_m + "&ti_doc=" + ti_doc + "&no_tr=" + no_trabajador);
             } else {
                 String hl = request.getParameter("hl");
-                getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-                getServletContext().setAttribute("Lista_detalle_academico", carga.Lista_detalle_academico(idtr, facu, eap));
+                sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+                sesion.setAttribute("Lista_detalle_academico", carga.Lista_detalle_academico(idtr, facu, eap));
                 //response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "id=" + cripto.Encriptar("idtr:" + idtr));
                 response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "idtr=" + idtr + "&academico=true" + "&hl=" + hl + "&eap=" + eap + "&facultad=" + facu);
             }
@@ -102,7 +102,7 @@ public class CCarga_Academica extends HttpServlet {
             carga.PROCESAR_CARGA_ACADEMICA(idpro, iddgp);
         }
         if (opc.equals("Reporte_Carga_Academica")) {
-            getServletContext().setAttribute("ListCarAca", carga.ListCarAca());
+            sesion.setAttribute("ListCarAca", carga.ListCarAca());
             response.sendRedirect("Vista/Academico/Carga_Academica/Rep_Carga_Academica.jsp");
         }
         if (opc.equals("Registrar_CA")) {

@@ -58,7 +58,7 @@ public class CImprimir extends HttpServlet {
                 for (int i = 0; i < id_con.length; i++) {
                     list.add(id_con[i]);
                 }
-                getServletContext().setAttribute("lista", list);
+                sesion.setAttribute("lista", list);
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/Impresion_Masiva.jsp");
                 // out.print(list.get(0).toString());
             }
@@ -84,8 +84,8 @@ public class CImprimir extends HttpServlet {
                     }
                     texto.add(imprimir);
                 }
-                getServletContext().setAttribute("lista", list);
-                getServletContext().setAttribute("texto", texto);
+                sesion.setAttribute("lista", list);
+                sesion.setAttribute("texto", texto);
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/Impresion_Masiva2.jsp");
                 // out.print(list.get(0).toString());
             }

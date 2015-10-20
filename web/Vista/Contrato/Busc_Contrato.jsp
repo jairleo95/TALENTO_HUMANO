@@ -9,9 +9,9 @@
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%@page import="pe.edu.upeu.application.model.Requerimiento"%>
 <%@page import="pe.edu.upeu.application.model.Area"%>
-<jsp:useBean id="Listar_Direccion" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean class="java.util.ArrayList" scope="application"  id="Listar_Requerimiento"/>
-<jsp:useBean class="java.util.ArrayList" scope="application"  id="List_Area_ID"/>
+<jsp:useBean id="Listar_Direccion" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean class="java.util.ArrayList" scope="session"  id="Listar_Requerimiento"/>
+<jsp:useBean class="java.util.ArrayList" scope="session"  id="List_Area_ID"/>
 <%    HttpSession sesion_1 = request.getSession(true);
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     String id_dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");

@@ -6,8 +6,8 @@
 <%@page import="pe.edu.upeu.application.model.X_Detalle_Privilegio"%>
 <%@page import="pe.edu.upeu.application.model.Rol"%>
 <%@page import="pe.edu.upeu.application.model.Privilegio"%>
-<jsp:useBean id="List_det_pri_id" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Privilegio" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_det_pri_id" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Privilegio" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

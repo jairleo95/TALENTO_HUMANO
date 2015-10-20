@@ -84,15 +84,15 @@ public class Cindex extends HttpServlet {
             sesion.setAttribute("DEPARTAMENTO_ID", user.getId_departamento());
             sesion.setAttribute("PUESTO", user.getNo_puesto());
 
-            getServletContext().setAttribute("LIST_MODULO", Irol.LISTAR_MODULOS(user.getId_rol()));
-            //getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));
-           /* getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
-             getServletContext().setAttribute("List_Carrera", li.List_Carrera());
-             getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
-             getServletContext().setAttribute("List_Universidad", li.List_Universidad());
-             getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
-             getServletContext().setAttribute("List_Det_Puesto", pu.List_Det_Puesto());
-             getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());*/
+            sesion.setAttribute("LIST_MODULO", Irol.LISTAR_MODULOS(user.getId_rol()));
+            //sesion.setAttribute("listarURL", Irol.listarURL(user.getId_rol()));
+           /* sesion.setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
+             sesion.setAttribute("List_Carrera", li.List_Carrera());
+             sesion.setAttribute("List_Nacionalidad", li.List_Nacionalidad());
+             sesion.setAttribute("List_Universidad", li.List_Universidad());
+             sesion.setAttribute("List_Distrito", ub.List_Distrito());
+             sesion.setAttribute("List_Det_Puesto", pu.List_Det_Puesto());
+             sesion.setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());*/
             pl.Validar_Cumplimiento_plazo_t2();
             pl.Validar_Cumplimiento_plazo_t1();
             dgp.VAL_DGP_PASOS();

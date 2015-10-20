@@ -22,16 +22,16 @@
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP"%>
 
-<jsp:useBean id="List_contra_x_idcto" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Situacion_Actual" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Planilla" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="list_Condicion_contrato" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_tipo_contrato" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="list_reg_labo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Usuario" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Lis_c_c_id_contr" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Anno_trabajador" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_x_fun_x_idpu" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_contra_x_idcto" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Situacion_Actual" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Planilla" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="list_Condicion_contrato" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_tipo_contrato" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="list_reg_labo" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Usuario" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Lis_c_c_id_contr" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Anno_trabajador" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_x_fun_x_idpu" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

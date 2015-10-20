@@ -68,7 +68,7 @@ public class CFormato_Plantilla extends HttpServlet {
                     response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
                 }
                 if (opc.equals("asignar")) {
-                    getServletContext().setAttribute("Listar_Direccion_X", dir.Listar_Direccion());
+                    sesion.setAttribute("Listar_Direccion_X", dir.Listar_Direccion());
                     response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
                 }
                 // String direccion_raiz = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web";

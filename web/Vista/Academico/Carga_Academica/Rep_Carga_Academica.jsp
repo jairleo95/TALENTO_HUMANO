@@ -2,7 +2,7 @@
 <%@page import="pe.edu.upeu.application.model.Carga_Academica"%>
 <%@page import="pe.edu.upeu.application.dao.Carga_AcademicaDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO"%>
-<jsp:useBean id="ListCarAca" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="ListCarAca" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
 

@@ -28,8 +28,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
 <%@page import="java.util.Calendar;"%>
-<jsp:useBean id="lista" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="texto" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="lista" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="texto" scope="session" class="java.util.ArrayList"/>
 <html>
     <head>
         <meta charset="utf-8">

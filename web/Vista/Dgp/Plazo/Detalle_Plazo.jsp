@@ -13,7 +13,7 @@
 <%@page import="pe.edu.upeu.application.model.V_Dgp_Plazo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<jsp:useBean id="Lista_detalle_plazo" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Lista_detalle_plazo" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>

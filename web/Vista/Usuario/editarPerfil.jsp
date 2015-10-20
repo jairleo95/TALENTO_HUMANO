@@ -16,14 +16,14 @@
     String iduser = (String) sesion.getAttribute("IDUSER");
 
 %>
-<jsp:useBean id="Lista_Usuarios" scope="application" class="java.util.ArrayList" />
-<jsp:useBean id="List_Nacionalidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Departamento" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_zona" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_via" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Provincia" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Distrito" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Lista_Usuarios" scope="session" class="java.util.ArrayList" />
+<jsp:useBean id="List_Nacionalidad" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Departamento" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_zona" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_via" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="ListaridTrabajador" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Provincia" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Distrito" scope="session" class="java.util.ArrayList"/>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

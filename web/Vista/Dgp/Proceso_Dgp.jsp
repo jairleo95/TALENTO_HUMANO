@@ -14,7 +14,7 @@
 <%@page import="java.util.List"%>
 <%@page import="pe.edu.upeu.application.model.V_Es_Requerimiento"%>
 
-<jsp:useBean class="java.util.ArrayList" id="LIST_DGP_PROCESO" scope="application" />
+<jsp:useBean class="java.util.ArrayList" id="LIST_DGP_PROCESO" scope="session" />
 <!DOCTYPE html>
 <html lang="en-us">
     <head>

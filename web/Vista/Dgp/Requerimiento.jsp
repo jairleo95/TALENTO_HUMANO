@@ -4,7 +4,7 @@
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
 %>
-<jsp:useBean class="java.util.ArrayList" id="LIST_DGP_PROCESO" scope="application" />
+<jsp:useBean class="java.util.ArrayList" id="LIST_DGP_PROCESO" scope="session" />
 <!DOCTYPE html>
 <html lang="en-us">
     <head>

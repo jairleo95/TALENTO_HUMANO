@@ -12,7 +12,7 @@
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO"%>
 <%@page import="pe.edu.upeu.application.dao.Formato_HorarioDAO"%>
 <%@page import="pe.edu.upeu.application.model.Formato_Horario"%>
-<jsp:useBean id="LISTAR_FORMATO_HORARIO" scope="application" class="java.util.ArrayList" />
+<jsp:useBean id="LISTAR_FORMATO_HORARIO" scope="session" class="java.util.ArrayList" />
 <!DOCTYPE html>
 <html>
     <head>

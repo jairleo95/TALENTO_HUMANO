@@ -13,8 +13,8 @@
 
 <%@page import="pe.edu.upeu.application.model.Tipo_Horario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="List_Tipo_Horario" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_Direccion" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Tipo_Horario" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Direccion" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

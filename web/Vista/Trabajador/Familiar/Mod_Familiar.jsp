@@ -13,8 +13,8 @@
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="pe.edu.upeu.application.model.Padre_Madre_Conyugue"%>
-<jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_tipo_doc" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="ListaridTrabajador" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_tipo_doc" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>

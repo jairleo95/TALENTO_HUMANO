@@ -11,8 +11,8 @@
     String iddep = (String) request.getAttribute("DEPARTAMENTO_ID");
 
 %>
-<jsp:useBean id="ListarTrabajador" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Carrera" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="ListarTrabajador" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Carrera" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

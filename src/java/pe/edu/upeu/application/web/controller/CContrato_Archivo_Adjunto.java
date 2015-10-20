@@ -118,7 +118,7 @@ public class CContrato_Archivo_Adjunto extends HttpServlet {
                 out.print(upload.getFileSizeMax());
             }
 
-            //getServletContext().setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
+            //sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
             //Thread.sleep(2000);
             // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
             // out.println("Archivo subido correctamente");

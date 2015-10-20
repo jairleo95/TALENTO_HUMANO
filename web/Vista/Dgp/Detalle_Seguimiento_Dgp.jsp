@@ -6,7 +6,7 @@
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
 %>
-<jsp:useBean class="java.util.ArrayList" id="Det_Autorizacion" scope="application" />
+<jsp:useBean class="java.util.ArrayList" id="Det_Autorizacion" scope="session" />
 <%@page import="pe.edu.upeu.application.model.X_List_De_Autorizacion"%>
 <!DOCTYPE html >
 <html lang="">

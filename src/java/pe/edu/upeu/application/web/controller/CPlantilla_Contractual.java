@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.ContratoDAO;
 import pe.edu.upeu.application.dao.FuncionDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
@@ -44,12 +45,10 @@ public class CPlantilla_Contractual extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     InterfacePuestoDAO pu = new PuestoDAO();
     InterfaceTrabajadorDAO tr = new TrabajadorDAO();
     InterfaceListaDAO l = new ListaDAO();
-    
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("UTF-8");
@@ -60,6 +59,7 @@ public class CPlantilla_Contractual extends HttpServlet {
         InterfaceContratoDAO con = new ContratoDAO();
         InterfaceFuncionDAO fu = new FuncionDAO();
         Map<String, Object> rpta = new HashMap<String, Object>();
+        HttpSession sesion = request.getSession(true);
         try {
             if (opc.equals("List_planti")) {
                 String idpu = request.getParameter("id_pu");
@@ -75,42 +75,41 @@ public class CPlantilla_Contractual extends HttpServlet {
             if (opc.equals("cargar")) {
                 String no_arch = request.getParameter("Imprimir");
                 String id_con = request.getParameter("id_con");
-                getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_con));
-                //getServletContext().setAttribute("", tr.Calculaedad(idtraba));
+                sesion.setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_con));
+                //sesion.setAttribute("", tr.Calculaedad(idtraba));
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/reg_formato.jsp?no_arc=" + no_arch);
             }
             if (opc.equals("Imprimir")) {
-               // String id_puesto = request.getParameter("puesto");
+                // String id_puesto = request.getParameter("puesto");
                 String id_planti_con = request.getParameter("id_plan_contr");
                 String no_arch = pl.List_pl_con_x_id(id_planti_con);
                 String id_con = request.getParameter("id_con");
-                 String id_puesto=pu.puesto(id_con);
+                String id_puesto = pu.puesto(id_con);
                 out.print(no_arch);
-                getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_puesto));
-                getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_con));
-                getServletContext().setAttribute("List_Dom_D1_Id", l.List_Dom_D1_Id());
-                getServletContext().setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
+                sesion.setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_puesto));
+                sesion.setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_con));
+                sesion.setAttribute("List_Dom_D1_Id", l.List_Dom_D1_Id());
+                sesion.setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
                 //out.print(getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"Vista\\Contrato\\Formato_Plantilla\\Formato");
-                out.print(id_puesto);
                 response.sendRedirect("Vista/Contrato/Formato_Plantilla/reg_formato.jsp?&no_arc=" + no_arch);
             }
             /*if (opc.equals("Imprimir masiva")) {
-               // String id_puesto = request.getParameter("puesto");
-                String[] id_con = request.getParameterValues("Imprimir");
-                List<String> contratos=new ArrayList<String>();
-                for(int i=0;i<id_con.length;i++){
-                    contratos.add(id_con[i]);
-                }
-               // String no_arch = pl.List_pl_con_x_id(id_planti_con);
-                 //String id_puesto=pu.puesto(id_con);
-               // out.print(no_arch);
-                getServletContext().setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_puesto));
-                getServletContext().setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_con));
-                //out.print(getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"Vista\\Contrato\\Formato_Plantilla\\Formato");
-                //out.print(id_puesto);
-                //response.sendRedirect("Vista/Contrato/Formato_Plantilla/reg_formato.jsp?&no_arc=" + no_arch);
-            }*/
-            
+             // String id_puesto = request.getParameter("puesto");
+             String[] id_con = request.getParameterValues("Imprimir");
+             List<String> contratos=new ArrayList<String>();
+             for(int i=0;i<id_con.length;i++){
+             contratos.add(id_con[i]);
+             }
+             // String no_arch = pl.List_pl_con_x_id(id_planti_con);
+             //String id_puesto=pu.puesto(id_con);
+             // out.print(no_arch);
+             sesion.setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_puesto));
+             sesion.setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_con));
+             //out.print(getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"Vista\\Contrato\\Formato_Plantilla\\Formato");
+             //out.print(id_puesto);
+             //response.sendRedirect("Vista/Contrato/Formato_Plantilla/reg_formato.jsp?&no_arc=" + no_arch);
+             }*/
+
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());

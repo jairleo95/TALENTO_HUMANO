@@ -11,11 +11,11 @@
 <%@page import="pe.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
 <%@page import="pe.edu.upeu.application.model.Padre_Madre_Conyugue"%>
 <%@page import="pe.edu.upeu.application.model.V_Reg_Dgp_Tra"%>
-<jsp:useBean id="List_Hijos" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Conyugue" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Adventista" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Lis_doc_trabajador" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Documentos" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Hijos" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Conyugue" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Adventista" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Lis_doc_trabajador" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Documentos" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html >
     <head>

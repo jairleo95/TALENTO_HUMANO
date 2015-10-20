@@ -8,13 +8,13 @@
 <%@page import="pe.edu.upeu.application.model.V_Contrato_dgp"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
-<jsp:useBean id="List_contrato" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Anno" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_Direccion" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="list_reg_labo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_modalidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_grup_ocu" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="list_cc_x_con" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_contrato" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Anno" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Direccion" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="list_reg_labo" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_modalidad" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_grup_ocu" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="list_cc_x_con" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 <html>
     <head>

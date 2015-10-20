@@ -63,10 +63,10 @@ public class CDocumento_Trabajador extends HttpServlet {
             if (opc.equals("Eliminar")) {
                 String id_doc_adj = request.getParameter("id_doc");
                 d.Desactivar_doc(id_doc_adj);
-                getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
-                getServletContext().setAttribute("Documentos", d.Documentos());
-                getServletContext().setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
-                getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+                sesion.setAttribute("List_Hijos", d.List_Hijos(idtr));
+                sesion.setAttribute("Documentos", d.Documentos());
+                sesion.setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
+                sesion.setAttribute("List_Conyugue", d.List_Conyugue(idtr));
                 int s = d.List_Req_nacionalidad(idtr);
                 int num_ad = d.List_Adventista(idtr);
                 //    response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE");
@@ -82,20 +82,20 @@ public class CDocumento_Trabajador extends HttpServlet {
             }
             if (opc.equals("Ver_Documento")) {
 
-                getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
+                sesion.setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
                 int i = d.List_Req_nacionalidad(idtr);
                 int num_ad = d.List_Adventista(idtr);
-                getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
-                getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+                sesion.setAttribute("List_Hijos", d.List_Hijos(idtr));
+                sesion.setAttribute("List_Conyugue", d.List_Conyugue(idtr));
 
                 response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad);
             }
             if (opc.equals("Reg_Pro_Dgp")) {
-                getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
+                sesion.setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
                 int i = d.List_Req_nacionalidad(idtr);
                 int num_ad = d.List_Adventista(idtr);
-                getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
-                getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+                sesion.setAttribute("List_Hijos", d.List_Hijos(idtr));
+                sesion.setAttribute("List_Conyugue", d.List_Conyugue(idtr));
 
                 response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp");
             }
@@ -118,11 +118,11 @@ public class CDocumento_Trabajador extends HttpServlet {
                         //d.INSERT_DOCUMENTO_ADJUNTO(null, iddgp, iddoc, estado, user, null, null, null, null, desc, AR_DATO_ARCHIVO, NO_ARCHIVO, TA_ARCHIVO, AR_FILE_TYPE, idctr);
                     }
                 }
-                getServletContext().setAttribute("List_doc_req_pla", d.List_doc_req_pla(iddgp, idtr));
+                sesion.setAttribute("List_doc_req_pla", d.List_doc_req_pla(iddgp, idtr));
                 int s = d.List_Req_nacionalidad(idtr);
                 int num_ad = d.List_Adventista(idtr);
-                getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
-                getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+                sesion.setAttribute("List_Hijos", d.List_Hijos(idtr));
+                sesion.setAttribute("List_Conyugue", d.List_Conyugue(idtr));
 
                 String pr = request.getParameter("P2");
                 if (pr != null) {
@@ -136,10 +136,10 @@ public class CDocumento_Trabajador extends HttpServlet {
 
             if (("Listar_doc").equals(opc)) {
 
-                getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
-                getServletContext().setAttribute("Documentos", d.Documentos());
-                getServletContext().setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
-                getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+                sesion.setAttribute("List_Hijos", d.List_Hijos(idtr));
+                sesion.setAttribute("Documentos", d.Documentos());
+                sesion.setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
+                sesion.setAttribute("List_Conyugue", d.List_Conyugue(idtr));
                 int s = d.List_Req_nacionalidad(idtr);
                 int num_ad = d.List_Adventista(idtr);
                 int count = d.count_documentos_x_tra(idtr);
@@ -287,10 +287,10 @@ public class CDocumento_Trabajador extends HttpServlet {
 
             }
 
-            getServletContext().setAttribute("List_Hijos", d.List_Hijos(idtr));
-            getServletContext().setAttribute("Documentos", d.Documentos());
-            getServletContext().setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
-            getServletContext().setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+            sesion.setAttribute("List_Hijos", d.List_Hijos(idtr));
+            sesion.setAttribute("Documentos", d.Documentos());
+            sesion.setAttribute("Lis_doc_trabajador", d.Lis_doc_trabajador(idtr));
+            sesion.setAttribute("List_Conyugue", d.List_Conyugue(idtr));
 
             int s = d.List_Req_nacionalidad(idtr);
             int num_ad = d.List_Adventista(idtr);

@@ -14,7 +14,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-<jsp:useBean id="LIST_EVALUACION" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="LIST_EVALUACION" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

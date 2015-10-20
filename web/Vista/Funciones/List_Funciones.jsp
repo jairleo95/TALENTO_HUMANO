@@ -5,7 +5,7 @@
 --%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="pe.edu.upeu.application.model.Funciones"%>
-<jsp:useBean id="Listar_funciones" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_funciones" scope="session" class="java.util.ArrayList"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -6,7 +6,7 @@
 %>
 <%@page import="pe.edu.upeu.application.model.X_Lis_Empleados"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
-<jsp:useBean id="Buscar_Empl" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Buscar_Empl" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>

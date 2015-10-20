@@ -26,13 +26,13 @@
 
 %>
 
-<jsp:useBean id="List_Cuenta_Sueldo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="list_año" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_tipo_institucion" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Universidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Carrera" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Situacion_Educativa" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Cuenta_Sueldo" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="list_año" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_tipo_institucion" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Universidad" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="ListaridTrabajador" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Carrera" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Situacion_Educativa" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>

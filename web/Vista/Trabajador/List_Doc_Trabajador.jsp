@@ -11,7 +11,7 @@
     if (id_user_1 != null) {
 %>
 <%@page import="pe.edu.upeu.application.model.V_Documento_Trabajador"%>
-<jsp:useBean id="Lis_doc_trabajador_hab" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Lis_doc_trabajador_hab" scope="session" class="java.util.ArrayList"/>
 
 <!DOCTYPE html>
 <html>

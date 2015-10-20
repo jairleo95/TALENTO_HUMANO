@@ -6,8 +6,8 @@
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
 
-<jsp:useBean id="Lista_hijo_individual" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="Listar_tipo_doc" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="Lista_hijo_individual" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_tipo_doc" scope="session" class="java.util.ArrayList"/>
 
 <!DOCTYPE html>
 <html>

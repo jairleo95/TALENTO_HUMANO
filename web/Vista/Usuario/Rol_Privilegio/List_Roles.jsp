@@ -11,7 +11,7 @@
 --%>
 
 <%@page import="pe.edu.upeu.application.model.Rol"%>
-<jsp:useBean id="List_Rol" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Rol" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>     

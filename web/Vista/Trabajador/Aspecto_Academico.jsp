@@ -14,10 +14,10 @@
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
-<jsp:useBean id="ListaridTrabajador" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Cuenta_Sueldo" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Universidad" scope="application" class="java.util.ArrayList"/>
-<jsp:useBean id="List_tipo_institucion" scope="application" class="java.util.ArrayList"/>
+<jsp:useBean id="ListaridTrabajador" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Cuenta_Sueldo" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_Universidad" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_tipo_institucion" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
