@@ -76,8 +76,8 @@
                         <div class="col col-xs-3">
                             <label class="label">Edad Especifica</label>
                             <label class="input">
-                                <input class="form-control" type="text" placeholder="Edad" name="edad">
-                            </label>
+                                <input class="form-control" type="number" placeholder="Edad" name="edad" min="0">
+                                </label>
                         </div>
                         <div class="col col-xs-3">
                             <label class="label">Desde</label>
@@ -263,6 +263,46 @@
                                             }
                                             if(lista[i].TI_CONTRATO===undefined){
                                                 lista[i].TI_CONTRATO='Sin Datos';
+                                            }else{
+                                                lista[i].TI_CONTRATO=parseInt(lista[i].TI_CONTRATO)+1-1;
+                                                switch(lista[i].TI_CONTRATO){
+                                                    case 1:
+                                                        lista[i].TI_CONTRATO='Necesidad de Mercado';
+                                                        break;
+                                                    case 2:
+                                                        lista[i].TI_CONTRATO='Incremento de Actividad';
+                                                        break;
+                                                    case 3:
+                                                        lista[i].TI_CONTRATO='Servicio Especifico';
+                                                        break;
+                                                    case 4:
+                                                        lista[i].TI_CONTRATO='Inicio de Actividad';
+                                                        break;
+                                                    case 5:
+                                                        lista[i].TI_CONTRATO='Tiempo Parcial';
+                                                        break;
+                                                    case 6:
+                                                        lista[i].TI_CONTRATO='Indeterminado';
+                                                        break;
+                                                    case 7:
+                                                        lista[i].TI_CONTRATO='Extranjero';
+                                                        break;
+                                                    case 8:
+                                                        lista[i].TI_CONTRATO='Suplencia';
+                                                        break;
+                                                    case 9:
+                                                        lista[i].TI_CONTRATO='Contrato Civil';
+                                                        break;
+                                                    case 10:
+                                                        lista[i].TI_CONTRATO='De Temporada';
+                                                        break;
+                                                    case 11:
+                                                        lista[i].TI_CONTRATO='Locacion de Servicios';
+                                                        break;
+                                                    case 12:
+                                                        lista[i].TI_CONTRATO='No Domiciliados';
+                                                        break;
+                                                }
                                             }
                                             if(lista[i].AP_PATERNO_HIJO===undefined){
                                                 lista[i].AP_PATERNO_HIJO='Sin Datos';
@@ -279,11 +319,45 @@
                                             if(lista[i].FE_NACIMIENTO===undefined){
                                                 lista[i].FE_NACIMIENTO='Sin Datos';
                                             }
+                                            if(lista[i].EDAD_HIJO===undefined){
+                                                lista[i].EDAD_HIJO='Sin Datos';
+                                            }
                                             if(lista[i].ES_TIPO_DOC===undefined){
                                                 lista[i].ES_TIPO_DOC='Sin Datos';
+                                            }else{
+                                                if(lista[i].ES_TIPO_DOC==='1'){
+                                                    lista[i].ES_TIPO_DOC="DNI";
+                                                }
+                                                if(lista[i].ES_TIPO_DOC==='2'){
+                                                    lista[i].ES_TIPO_DOC="BOLETA DE INSCRIPCION MILITAR";
+                                                }
+                                                if(lista[i].ES_TIPO_DOC==='3'){
+                                                    lista[i].ES_TIPO_DOC="CARNÉ DE EXTRANJERÍA";
+                                                }
+                                                if(lista[i].ES_TIPO_DOC==='4'){
+                                                    lista[i].ES_TIPO_DOC="PASAPORTE";
+                                                }
+                                                if(lista[i].ES_TIPO_DOC==='5'){
+                                                    lista[i].ES_TIPO_DOC="PARTIDA DE NACIMIENTO";
+                                                }
+                                                if(lista[i].ES_TIPO_DOC==='6'){
+                                                    lista[i].ES_TIPO_DOC="LIBRETA ELECTORAL";
+                                                }
+                                                if(lista[i].ES_TIPO_DOC==='7'){
+                                                    lista[i].ES_TIPO_DOC="LIBRETA MILITAR";
+                                                }
+                                                if(lista[i].ES_TIPO_DOC==='8'){
+                                                    lista[i].ES_TIPO_DOC="PERMISO PARA MENORES";
+                                                }
                                             }
                                             if(lista[i].ES_TRABAJA_UPEU_C===undefined){
                                                 lista[i].ES_TRABAJA_UPEU_C='Sin Datos';
+                                            }else{
+                                                if(lista[i].ES_TRABAJA_UPEU_C==='1'){
+                                                    lista[i].ES_TRABAJA_UPEU_C='Si';
+                                                }else{
+                                                    lista[i].ES_TRABAJA_UPEU_C='No';
+                                                }
                                             }
                                             if(lista[i].NU_DOC_HIJO===undefined){
                                                 lista[i].NU_DOC_HIJO='Sin Datos';
@@ -292,6 +366,9 @@
                                                 lista[i].AP_NOMBRES_C='Sin Datos';
                                             }
                                             if(lista[i].NU_DOC_C===undefined){
+                                                lista[i].NU_DOC_C='Sin Datos';
+                                            }
+                                            if(lista[i].ID_CONTRATO===undefined){
                                                 lista[i].NU_DOC_C='Sin Datos';
                                             }
                                         
@@ -304,12 +381,17 @@
                                             t += "<td>" + lista[i].NO_SECCION + "</td>";
                                             t += "<td>" + lista[i].NO_PUESTO + "</td>";
                                             t += "<td>" + lista[i].CO_APS + "</td>";
-                                            t += "<td>" + lista[i].TI_CONTRATO + "</td>";
+                                            if(lista[i].ID_CONTRATO===undefined){
+                                                t += "<td></td>";
+                                            }else{
+                                                t += "<td>" + lista[i].TI_CONTRATO + "</td>";
+                                            }
+                                            
                                             t += "<td>" + lista[i].TI_CONTRATO + "</td>";
                                             t += "<td>" + lista[i].AP_PATERNO_HIJO + " " + lista[i].AP_MATERNO_HIJO + " " + lista[i].NO_HIJO_TRABAJADOR + "</td>";
                                             t += "<td>" + lista[i].ES_SEXO + "</td>";
-                                            t += "<td>" + lista[i].FE_NACIMIENTO + "</td>";
-                                            t += "<td>" + lista[i].FE_NACIMIENTO + "</td>";
+                                            t += "<td>" + lista[i].FE_NACIMIENTO_HIJO + "</td>";
+                                            t += "<td>" + lista[i].EDAD_HIJO + "</td>";
                                             t += "<td>" + lista[i].ES_TIPO_DOC + "</td>";
                                             t += "<td>" + lista[i].NU_DOC_HIJO + "</td>";
                                             t += "<td>" + lista[i].AP_NOMBRES_C + "</td>";

@@ -275,12 +275,13 @@ public class ReporteDAO implements InterfaceReporteDAO {
                 rec.put("AP_MATERNO_HIJO", rs.getString("AP_MATERNO_HIJO"));
                 rec.put("NO_HIJO_TRABAJADOR", rs.getString("NO_HIJO_TRABAJADOR"));
                 rec.put("ES_SEXO", rs.getString("ES_SEXO"));
-                rec.put("FE_NACIMIENTO", rs.getString("FE_NACIMIENTO"));
+                rec.put("FE_NACIMIENTO_HIJO", rs.getString("FE_NACIMIENTO_HIJO"));
                 rec.put("ES_TIPO_DOC", rs.getString("ES_TIPO_DOC"));
                 rec.put("NU_DOC_HIJO", rs.getString("NU_DOC_HIJO"));
                 rec.put("AP_NOMBRES_C", rs.getString("AP_NOMBRES_C"));
                 rec.put("NU_DOC_C", rs.getString("NU_DOC_C"));
                 rec.put("ES_TRABAJA_UPEU_C", rs.getString("ES_TRABAJA_UPEU_C"));
+                rec.put("EDAD_HIJO", rs.getString("EDAD_HIJO"));
                 Lista.add(rec);
             }
             rs.close();
