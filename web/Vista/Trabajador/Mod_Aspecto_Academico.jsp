@@ -1593,7 +1593,7 @@
         $("#inst").change(function() {
             var carr = $("#carrera");
             carr.empty();
-            var data = "inst=" + insti + "&opc=carrera";
+            var data = "inst=" + $(this).val() + "&opc=carrera";
             carr.append('<option value="">Cargando...</option>').val('');
             $.post("../../detalle_carrera", data, function(objJson) {
                 carr.empty();

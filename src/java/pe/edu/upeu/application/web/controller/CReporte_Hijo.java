@@ -47,13 +47,60 @@ public class CReporte_Hijo extends HttpServlet {
         List<Map<String,?>> lista;
         try {
             if (opc.equals("reporte_hijos")) {
-                String sql="SELECT * FROM RHVD_REPORTE_HIJOS ORDER BY AP_PATERNO";
+                String sql="SELECT * FROM RHVD_REPORTE_HIJOS";
+                String nombre=request.getParameter("nombre");
+                String paterno=request.getParameter("paterno");
+                String materno=request.getParameter("materno");
+                String genero=request.getParameter("genero");
+                String edad=request.getParameter("edad");
+                String desde=request.getParameter("desde");
+                String hasta=request.getParameter("hasta");
+                String dni=request.getParameter("dni");
+                int cont=0;
+                if (!nombre.equals("")) cont++;
+                if (!paterno.equals("")) cont++;
+                if (!materno.equals("")) cont++;
+                if (!edad.equals("")) cont++;
+                if (!genero.equals("")) cont++;
+                if (!desde.equals("")&&!hasta.equals("")) cont++;
+                if (!dni.equals("")) cont++;
+                if(cont>0)sql+=" WHERE";
+                if (!nombre.equals("")) {
+                    sql+=" UPPER(NO_HIJO_TRABAJADOR) LIKE UPPER('%"+nombre+"%')";
+                }
+                if (!paterno.equals("")) {
+                    if((sql.length()-sql.indexOf("WHERE"))>5)sql+=" AND";
+                    sql+=" UPPER(AP_PATERNO_HIJO) LIKE UPPER('%"+paterno+"%')";
+                }
+                if (!materno.equals("")) {
+                    if((sql.length()-sql.indexOf("WHERE"))>5)sql+=" AND";
+                    sql+=" UPPER(AP_MATERNO_HIJO) LIKE UPPER('%"+materno+"%')";
+                }
+                if (!genero.equals("")) {
+                    if((sql.length()-sql.indexOf("WHERE"))>5)sql+=" AND";
+                    sql+=" UPPER(ES_SEXO) LIKE UPPER('%"+genero+"%')";
+                }
+                if (!dni.equals("")) {
+                    if((sql.length()-sql.indexOf("WHERE"))>5)sql+=" AND";
+                    sql+=" UPPER(NU_DOC_HIJO) LIKE UPPER('%"+dni+"%')";
+                }
+                if (!edad.equals("")) {
+                    if((sql.length()-sql.indexOf("WHERE"))>5)sql+=" AND";
+                    sql+=" EDAD_HIJO="+edad;
+                }
+                if (!desde.equals("") && !hasta.equals("")) {
+                    if((sql.length()-sql.indexOf("WHERE"))>5)sql+=" AND";
+                    sql+=" (FE_NACIMIENTO_HIJO>=TO_DATE('"+desde+"','yyyy-mm-dd') AND FE_NACIMIENTO_HIJO<=TO_DATE('"+hasta+"','yyyy-mm-dd'))";
+                }
+                sql+=" ORDER BY AP_PATERNO";
+                System.out.println(sql);
                 lista= rep.reporte_hijos(sql);
                 rpta.put("lista", lista);
             }
             
         } catch (Exception e) {
             System.out.println(e);
+            rpta.put("err", "Error al Procesar los Datos, intentelo nuevamente");
         }
         Gson gson= new Gson();
         out.print(gson.toJson(rpta));
