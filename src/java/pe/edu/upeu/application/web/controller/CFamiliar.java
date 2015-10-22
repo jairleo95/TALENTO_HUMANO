@@ -210,7 +210,6 @@ public class CFamiliar extends HttpServlet {
                    sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(ID_TRABAJADOR));
                    sesion.setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(ID_TRABAJADOR));
                    sesion.setAttribute("LISTA_HIJO", h.LISTA_HIJOS(ID_TRABAJADOR));
-                    // out.println(idtr);
                     response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + ID_TRABAJADOR);
                 } catch (ParseException ex) {
                     Logger.getLogger(CFamiliar.class.getName()).log(Level.SEVERE, null, ex);

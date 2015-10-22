@@ -81,16 +81,18 @@
             if (request.getParameter("a").trim().equals("t")) {
     %>
 
-    <body onload="closedthis();">
+    <body onload="closedthis();
+            nobackbutton();">
 
         <%
             }
             if (request.getParameter("a").trim().equals("e")) {%>
-    <body onload="closedthis2()">
+    <body onload="closedthis2();
+            nobackbutton();">
         <%}
         } else {
         %>
-    <body class="">
+    <body class="" onload="nobackbutton()">
         <%}%>
         <%
             HttpSession sesion_1 = request.getSession(true);
@@ -99,8 +101,6 @@
             int num_ad = Integer.parseInt(request.getParameter("num_ad"));
             String id_ctr = "";
             InterfaceDocumentoDAO doc_ = new DocumentoDAO();
-
-            //String id_dgp = "";
         %>
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
         <!-- MAIN PANEL -->
@@ -787,6 +787,15 @@
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="../../../js/notification/SmartNotification.min.js"></script>
         <script type="text/javascript">
+                                                    function nobackbutton() {
+
+                                                        window.location.hash = "no-back-button";
+                                                        window.location.hash = "Again-No-back-button" //chrome
+
+                                                        window.onhashchange = function () {
+                                                            window.location.hash = "no-back-button";
+                                                        }
+                                                    }
                                                     function closedthis() {
                                                         $.smallBox({
                                                             title: "¡Documento registrada correctamente!",
@@ -805,15 +814,15 @@
                                                             timeout: 6000
                                                         });
                                                     }
-                                                    $(document).ready(function() {
+                                                    $(document).ready(function () {
 
                                                         pageSetUp();
-                                                        $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                                                        $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                                                             $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                                         });
 
 
-                                                        $.each($(".file"), function(i) {
+                                                        $.each($(".file"), function (i) {
 
                                                             if ((i + 1) == 0) {
                                                                 $(".btn_reg_doc").hide();
@@ -823,11 +832,11 @@
                                                             }
 
                                                         });
-                                                        $(".DD").change(function() {
+                                                        $(".DD").change(function () {
 
                                                             $(".div-holi").text($(".DD").val());
                                                         });
-                                                        $(".elimi").click(function() {
+                                                        $(".elimi").click(function () {
                                                             var msg = confirm('¿Está seguro de eliminar?');
                                                             if (msg == true) {
                                                                 return true;
@@ -869,7 +878,7 @@
                 browseClass: "btn btn-primary btn-sm",
                 removeClass: "btn btn-danger btn-sm",
                 //allowedFileTypes: ['image', 'video', 'flash'],
-                slugCallback: function(filename) {
+                slugCallback: function (filename) {
                     return filename.replace('(', '_').replace(']', '_');
                 }
             });
@@ -889,14 +898,14 @@
                     {kvId: '10'}
                 ],
             });
-            $(".btn-warning").on('click', function() {
+            $(".btn-warning").on('click', function () {
                 if ($('#file-4').attr('disabled')) {
                     $('#file-4').fileinput('enable');
                 } else {
                     $('#file-4').fileinput('disable');
                 }
             });
-            $(".btn-info").on('click', function() {
+            $(".btn-info").on('click', function () {
                 $('#file-4').fileinput('refresh', {previewClass: 'bg-info'});
             });
             /*
@@ -907,7 +916,7 @@
              alert('File browse clicked for #file-4');
              });
              */
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $("#test-upload").fileinput({
                     'showPreview': false,
                     'allowedFileExtensions': ['jpg', 'png', 'gif'],
@@ -924,7 +933,7 @@
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;

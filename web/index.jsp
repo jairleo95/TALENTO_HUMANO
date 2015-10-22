@@ -55,8 +55,8 @@
         <script src="js/Js_Index/index.js" type="text/javascript"></script>
 
         <script language="Javascript" type="text/javascript">
-            document.oncontextmenu = function() {
-                return false;
+            document.oncontextmenu = function () {
+                // return false;
             }
         </script>
 
@@ -69,7 +69,7 @@
 
     </head>
 
-    <body class="animated fadeInDown">
+    <body class="animated fadeInDown" onload="nobackbutton();">
 
         <header id="header">
 
@@ -87,8 +87,8 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm" >
                         <h1 class="txt-color-red login-header-big">Gestión del Talento Humano</h1>
-                       
-                          <div class="hero">
+
+                        <div class="hero">
 
                             <div class="pull-left login-desc-box-l">
                                 <h4 class="paragraph-header">Exitoso es aquel que puede establecer una base firme con los ladrillos que los demás le tiraron!</h4>
@@ -109,7 +109,7 @@
                                     formarse profesionalmente y prestar un servicio a la Iglesia y la Sociedad para restaurar en el ser humano la imagen de Dios".
                                 </p>
                             </div>
-                           
+
                         </div>
 
                     </div>
@@ -134,7 +134,7 @@
                                         <label class="input"> <i class="icon-append fa fa-lock"></i>
                                             <input type="password" name="clave" required="" />
                                             <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Ingrese la contraseña</b> </label>
-                                        
+
                                     </section>
 
                                     <section>
@@ -152,29 +152,29 @@
                             </form>
                         </div>
                         <div id="mensaje"  class="tooltip-arrow"></div>
-                        
+
                     </div>
                 </div>
             </div>
 
         </div>
-        
+
         <!--================================================== -->	
 
         <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
         <script src="js/plugin/pace/pace.min.js"></script>
-        
+
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script> if (!window.jQuery) {
-                document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
-            }</script>
+            document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+        }</script>
 
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script> if (!window.jQuery.ui) {
-                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }</script>
+            document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+        }</script>
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events 		
         <script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
@@ -196,41 +196,50 @@
 
         <!-- MAIN APP JS FILE -->
         <script src="js/app.min.js"></script>
-
         <script type="text/javascript">
-            runAllForms();
+        document.oncontextmenu = function () {
+            return false;
+        }
+        runAllForms();
+        function nobackbutton() {
+            window.location.hash = "no-back-button";
+            window.location.hash = "Again-No-back-button" //chrome
+            window.onhashchange = function () {
+                window.location.hash = "";
+            }
+        }
 
-            $(function() {
-                // Validation
-                $("#login-form").validate({
-                    // Rules for form validation
-                    rules: {
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        password: {
-                            required: true,
-                            minlength: 3,
-                            maxlength: 20
-                        }
+        $(function () {
+            // Validation
+            $("#login-form").validate({
+                // Rules for form validation
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
                     },
-                    // Messages for form validation
-                    messages: {
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        password: {
-                            required: 'Please enter your password'
-                        }
-                    },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
+                    password: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20
                     }
-                });
+                },
+                // Messages for form validation
+                messages: {
+                    email: {
+                        required: 'Please enter your email address',
+                        email: 'Please enter a VALID email address'
+                    },
+                    password: {
+                        required: 'Please enter your password'
+                    }
+                },
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
             });
+        });
         </script>
 
     </body>

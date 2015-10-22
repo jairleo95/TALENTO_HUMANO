@@ -54,7 +54,7 @@ public class CFormato_Plantilla extends HttpServlet {
         InterfaceDireccionDAO dir = new DireccionDAO();
         String iduser = (String) sesion.getAttribute("IDUSER");
         String opc = request.getParameter("opc");
-        String ubicacion = "/PLANTILLAS_RRHH/";
+        String ubicacion=getServletConfig().getServletContext().getRealPath("/")+"Vista/Contrato/Formato_Plantilla/Formato/";
         if (iduser != null) {
             try {
                 if (opc.equals("Asignar")) {

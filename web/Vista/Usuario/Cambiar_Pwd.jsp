@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Detalle Historial</title>
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
@@ -23,31 +22,31 @@
                     <div class="row">
 
                         <div class="well">
-                            <h1 class="text-center"><strong>Cambiar ContraseÃ±a  </strong> <small>  </small></h1><br>
+                            <h1 class="text-center"><strong>Cambiar Contraseña  </strong> <small>  </small></h1><br>
                             <form class="smart-form form_cambiar_clave" >
                                 <div class="row">
 
                                     <div class="col col-lg-12">
-                                        <section class="col col-sm-4">ContraseÃ±a actual:
+                                        <section class="col col-sm-4">Contraseña actual:
                                             <label class="input"> <i class="icon-append fa fa-lock"></i>
                                                 <input type="password" name="password1" placeholder="Clave Actual"  required="">
-                                                <b class="tooltip tooltip-bottom-right">Ingrese su contraseÃ±a actual</b> </label>
+                                                <b class="tooltip tooltip-bottom-right">Ingrese su contraseña actual</b> </label>
                                         </section>
-                                        <section class="col col-sm-4">Escribir nueva contraseÃ±a:
+                                        <section class="col col-sm-4">Escribir nueva contraseña:
                                             <label class="input"> <i class="icon-append fa fa-lock"></i>
                                                 <input type="password" name="password2" placeholder="Clave Nueva" id="password" required="">
-                                                <b class="tooltip tooltip-bottom-right">No olvides tu contraseÃ±a</b> </label>
+                                                <b class="tooltip tooltip-bottom-right">No olvides tu contraseña</b> </label>
                                         </section>
-                                        <section class="col col-sm-4">Confirmar ContraseÃ±a:
+                                        <section class="col col-sm-4">Confirmar Contraseña:
                                             <label class="input"> <i class="icon-append fa fa-lock"></i>
                                                 <input type="password" name="passwordConfirm" placeholder="Repetir Clave Nueva" required="">
-                                                <b class="tooltip tooltip-bottom-right">No olvides tu contraseÃ±a</b> </label>
+                                                <b class="tooltip tooltip-bottom-right">No olvides tu contraseña</b> </label>
                                         </section>
                                     </div>
                                 </div>
                                 <footer>
                                     <button type="button" class="btn_validar_form btn btn-primary">
-                                        Cambiar ContraseÃ±a 
+                                        Cambiar Contraseña 
                                     </button>
                                 </footer>
                             </form>
@@ -156,16 +155,16 @@
                             $("section > label").removeClass('state-success');
                             if (e == '0') {
                                 $.smallBox({
-                                    title: "Error de validaciÃ³n",
-                                    content: "<i class='fa fa-clock-o'></i> <i>ContraseÃ±a actual incorrecta, intente de nuevo...</i>",
+                                    title: "Error de validación",
+                                    content: "<i class='fa fa-clock-o'></i> <i>Contraseña actual incorrecta, intente de nuevo...</i>",
                                     color: "#C46A69",
                                     iconSmall: "fa fa-times fa-2x fadeInRight animated",
                                     timeout: 4000
                                 });
                             } else if (e == '1') {
                                 $.smallBox({
-                                    title: "Cambio de contraseÃ±a",
-                                    content: "<i class='fa fa-clock-o'></i> <i>Se ha modificado la contraseÃ±a correctamente...</i>",
+                                    title: "Cambio de contraseña",
+                                    content: "<i class='fa fa-clock-o'></i> <i>Se ha modificado la contraseña correctamente...</i>",
                                     color: "#659265",
                                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
                                     timeout: 4000
@@ -195,14 +194,14 @@
                     // Messages for form validation
                     messages: {
                         clave: {
-                            required: 'Ingrese su contraseÃ±a'
+                            required: 'Ingrese su contraseña'
                         },
                         password: {
-                            required: 'Ingrese una contraseÃ±a nueva'
+                            required: 'Ingrese una contraseña nueva'
                         },
                         passwordConfirm: {
                             required: 'Please enter your password one more time',
-                            equalTo: 'La contraseÃ±as no son iguales'
+                            equalTo: 'La contraseñas no son iguales'
                         }
                     },
                     // Do not change code below

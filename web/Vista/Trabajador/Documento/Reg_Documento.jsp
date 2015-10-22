@@ -82,7 +82,7 @@
         </script>
     </head>
 
-    <body onload="closedthis();">
+    <body onload="closedthis();nobackbutton();">
 
         <%
             HttpSession sesion_1 = request.getSession(true);
@@ -799,6 +799,7 @@
         <script src="../../../js/bootstrap/fileinput.js" type="text/javascript"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
         <script>
+
                                                     $("#file-0").fileinput({
                                                         'allowedFileExtensions': ['jpg', 'png', 'gif'],
                                                     });
@@ -878,12 +879,19 @@
                                                     });
         </script>
         <script type="text/javascript">
-
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+            function nobackbutton() {
+                window.location.hash = "no-back-button";
+                window.location.hash = "Again-No-back-button" //chrome
+                window.onhashchange = function () {
+                    window.location.hash = "no-back-button";
+                }
+            }
 
             $(document).ready(function () {
 
                 pageSetUp();
+
+
                 $.each($(".file"), function (i) {
 
                     if ((i + 1) == 0) {
