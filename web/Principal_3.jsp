@@ -83,6 +83,7 @@
 
         <!-- HEADER -->
         <header id="header">
+
             <div id="logo-group" >
                 <!-- PLACE YOUR LOGO HERE -->
                 <span id="logo"> <img src="img/logo_rrhh.jpg" style=" position: absolute;top: 6px; width:130px; height:36px " alt="Talento Humano"> </span>
@@ -90,6 +91,8 @@
 
                 <!-- Note: The activity badge color changes when clicked and resets the number to 0
                 Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
+                <%if (false) {
+                %>
                 <span id="activity" class="activity-dropdown"> <i class="fa fa-user"></i> <b class="badge"> 21 </b> </span>
 
                 <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
@@ -130,9 +133,11 @@
                     <!-- end footer -->
 
                 </div>
+                <%}%>
                 <!-- END AJAX-DROPDOWN -->
             </div>
-
+            <%if (false) {
+            %>
             <!-- projects dropdown -->
             <div class="project-context hidden-xs">
 
@@ -160,6 +165,7 @@
             </div>
             <!-- end projects dropdown -->
 
+            <%}%>
             <!-- pulled right: nav area -->
             <div class="pull-right">
 
@@ -433,7 +439,7 @@
             <div id="ribbon">
 
                 <span class="ribbon-button-alignment"> 
-                    <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true">
+                    <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> ¡Alerta! Esto actualizará la pagina." data-html="true">
                         <i class="fa fa-refresh"></i>
                     </span> 
                 </span>
@@ -516,7 +522,8 @@
                 <div class="col-xs-12 col-sm-6">
                     <span class="txt-color-white">AlphaTeam © 2015</span>
                 </div>
-
+                <%if (false) {
+                %>
                 <div class="col-xs-6 col-sm-6 text-right hidden-xs">
                     <div class="txt-color-white inline-block">
                         <i class="txt-color-blueLight hidden-mobile">Last account activity <i class="fa fa-clock-o"></i> <strong>52 mins ago &nbsp;</strong> </i>
@@ -561,6 +568,7 @@
                         </div>
                     </div>
                 </div>
+                <%}%>
             </div>
         </div>
         <!-- END PAGE FOOTER -->

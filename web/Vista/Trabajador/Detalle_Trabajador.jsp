@@ -2,11 +2,10 @@
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
-    HttpSession sesion_1 = request.getSession(true);
+    HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
 %>
-
 
 <%@page import="pe.edu.upeu.application.model.Empleado"%>
 <%@page import="javax.print.DocFlavor.STRING"%>
@@ -73,6 +72,10 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+
+        <link rel="stylesheet" type="text/css" href="../../js/shadowbox/shadowbox.css"/>
+        <link rel="stylesheet" type="text/css" href=".../../js/shadowbox/style.css"/>
+
         <style type="text/css">
             body{
 
@@ -184,13 +187,12 @@
             </div>
             <%}
                 }%>
-
             <table  style="background-color: white " class="table-det" cellpadding="0">
                 <%                    if (t.getNo_ar_foto() == null) {
                 %>
                 <tr><td class="td2" >
                        <!-- <a class="btn btn-primary" href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>" style="position: relative; margin: 0px; " >Subir foto</a>-->
-                        <img style=" border: 3px solid grey ; position:relative;  margin: 0px; cursor: pointer"  class="ver_foto"  src="../../imagenes/avatar_default.jpg"  width="100"  height="100"> 
+                        <a class="a_foto"> <img style=" border: 3px solid grey ; position:relative;  margin: 0px; cursor: pointer"  class="ver_foto"  src="../../imagenes/avatar_default.jpg"  width="100"  height="100"> </a>
                         <form action="../../foto" method="POST" enctype="multipart/form-data" class="form-subir-foto">
                             <input type="hidden" name="idtr" class="idtr" id="input-file" value="<%=t.getId_trabajador()%>">
                             <input style="display:none" class="file-foto" type="file" name="archivo" required="">
@@ -198,28 +200,27 @@
                     </td>
                     <%
                     } else {%>
-                <tr><td class="td2"><img style="border: 3px solid grey ; position:absolute; left:0.5%; top: 6%;" src="../Usuario/Fotos/<%=t.getAr_foto()%>" width="100" height="100" ></td>
-                        <%}%>
+                <tr><td class="td2"><a class="mustang-gallery" title="<%=t.getAr_foto()%>"  href="../Usuario/Fotos/<%=t.getAr_foto()%>" ><img style=" border: 3px solid grey ; position:relative;  margin: 0px; cursor: pointer" src="../Usuario/Fotos/<%=t.getAr_foto()%>" class="borde" width="100" height="100" ></a></td>
+                            <%}%>
                     <td>
                         <div>
                             <!--<form action="../../trabajador" method="post">-->
-                            <table   class="info-det" >
+                            <table   class="info-det"  >
                                 <%
                                     CConversion c = new CConversion();
                                     for (int index = 0; index < ListaridTrabajador.size(); index++) {
                                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
                                 %>
-                                <td height="70" width="585px">
+                                <td height="70" width="590px">
                                     <table>
                                         <button data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">asas</button>
                                         <tr><td class="td">Nombre :</td><td class="td1"><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
                                         <tr><td class="td">Apellido Paterno :</td><td class="td1"><%=trb.getAp_paterno().toUpperCase()%></td></tr>
                                         <tr><td class="td">Apellido Materno :</td><td class="td1"><%=trb.getAp_materno().toUpperCase()%></td></tr>
-                                        <tr><td class="td" style="width:65%">Fecha de Nacimiento :</td><td class="td1"><%=c.convertFecha5(trb.getFe_nac())%></td></tr>
+                                        <tr><td class="td" style="width:68%">Fecha de Nacimiento :</td><td class="td1"><%=c.convertFecha5(trb.getFe_nac())%></td></tr>
                                     </table>
                                 </td>
-
                                 <%String ID_ROL = (String) sesion.getAttribute("IDROL");
                                     for (int e = 0; e < id_empleadox_ide.size(); e++) {
                                         Empleado emp = new Empleado();
@@ -233,7 +234,6 @@
 
                                                 if (val_aps > 0) {%>
                                         <tr>
-
                                             <td class="td" >Código APS:</td>
                                             <td class="td1" id="cel_aps" ><%=emp.getCo_aps()%></td>
 
@@ -410,7 +410,7 @@
                 <li>
                     <%if (cl.trim().equals(user.trim())) {
                     %>
-                    <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2" rel="tooltip" data-placement="top" data-original-title="<h1>Importante!</h1>" data-html="true" ><i class="fa fa-lock"></i> Contraseña <span class="badge bg-color-red pull-right inbox-badge">¡Cambiar!</span></a>
+                    <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2" rel="" data-placement="top" data-original-title="<h1><b>One</b> <em>Really</em> big tip!</h1>" data-html="true" ><i class="fa fa-lock"></i> Contraseña <span class="badge bg-color-red pull-right inbox-badge">¡Cambiar!</span></a>
                     <%} else {%>
                     <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"  ><i class="fa fa-lock"></i> Contraseña</a>
                     <%}%>
@@ -716,8 +716,8 @@
 <!-- JQUERY MASKED INPUT -->
 <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
-<!-- JQUERY SELECT2 INPUT -->
-<script src="../../js/plugin/select2/select2.min.js"></script>
+<!-- JQUERY SELECT2 INPUT 
+<script src="../../js/plugin/select2/select2.min.js"></script>-->
 
 <!-- JQUERY UI + Bootstrap Slider -->
 <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
@@ -775,10 +775,14 @@
 <script src="../../js/plugin/x-editable/x-editable.min.js"></script>
 <script src="../../js/plugin/typeahead/typeahead.min.js"></script>
 <script src="../../js/plugin/typeahead/typeaheadjs.min.js"></script>
+
+
+<script type="text/javascript" src="../../js/shadowbox/demo.js"></script>
+<script type="text/javascript" src="../../js/shadowbox/shadowbox.js"></script>
 <script>
                                             function closedthis() {
                                                 $.smallBox({
-                                                    title: "?icha de trabajador registrada correctamente!",
+                                                    title: "¡Ficha de trabajador registrada correctamente!",
                                                     content: "ya puede visualizar toda la informacion del trabajador...",
                                                     color: "#739E73",
                                                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
@@ -788,7 +792,7 @@
 
                                             function closedthis2() {
                                                 $.smallBox({
-                                                    title: "?ontrato Especial registrado con exito!",
+                                                    title: "¡Contrato Especial registrado con exito!",
                                                     content: "ya puede visualizar el contrato en Detalle del Trabajador",
                                                     color: "#739E73",
                                                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
@@ -812,7 +816,7 @@
                                                             else {
                                                                 alert("Este codigo ya esta registrado!")
                                                                 $.SmartMessageBox({
-                                                                    title: "Este Código APS ya fue registrado!",
+                                                                    title: "Este código APS ya fue registrado!",
                                                                     content: "Por favor Ingrese un Código APS distinto",
                                                                 });
                                                             }
@@ -874,7 +878,6 @@
                                                 }
                                             }
                                             function VAL_COD_HUELLA() {
-
                                                 if ($("#cod_hu").val() != "") {
                                                     var co_huel = document.getElementById("cod_hu");
                                                     $.ajax({
@@ -892,7 +895,7 @@
                                                                 alert("Este codigo ya esta registrado!")
                                                                 $.SmartMessageBox({
                                                                     title: "Este Código de Huella ya fue registrado!",
-                                                                    content: "Por favor Ingrese un Codigo de Huella distinto",
+                                                                    content: "Por favor Ingrese un Código de Huella distinto",
                                                                 });
                                                             }
                                                         }
@@ -909,17 +912,21 @@
                                             }
                                             function fileOnload(e) {
                                                 var result = e.target.result;
-                                                $('.ver_foto').attr("src", result);
+                                                //  $('.ver_foto').attr("src", result);
+                                            }
+                                            function validar_shadowbox() {
+                                                $.each($(".mustang-gallery"), function () {
+                                                    Shadowbox.init({
+                                                        overlayOpacity: 0.8
+                                                    }, setupDemos);
+                                                });
                                             }
                                             $(document).ready(function () {
-
                                                 pageSetUp();
                                                 $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                                                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                                 });
-
-
-
+                                                validar_shadowbox();
                                                 //  $("#cod_ap").numeric();
                                                 $(".mod_huella").click(function () {
                                                     $("#cel_hue").hide();
@@ -928,8 +935,8 @@
                                                 $(".mod_co_aps").click(function () {
                                                     $("#cel_aps").hide();
                                                     document.getElementById("mod_aps").type = "text";
-
                                                 });
+
 
                                                 $('.ver_foto').click(function () {
                                                     $(".file-foto").click();
@@ -946,29 +953,51 @@
                                                             cache: false,
                                                             processData: false,
                                                             contentType: false,
-                                                            data: jForm
-                                                        }).done(function (objJson) {
-                                                            if (objJson.rpta == -1) {
-                                                                alert(objJson.mensaje);
-                                                                return;
-                                                            } else {
+                                                            data: jForm,
+                                                            success: function (objJson) {
+                                                                if (objJson.rpta === "-1") {
+                                                                    $.smallBox({
+                                                                        title: "¡Alerta!",
+                                                                        content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar su imagen...</i>",
+                                                                        color: "#C46A69",
+                                                                        iconSmall: "fa fa-cloud bounce animated",
+                                                                        timeout: 7000
+                                                                    });
+                                                                } else if (objJson.rpta === "1") {
+                                                                    addImage(e);
+                                                                    this.timer = setTimeout(function () {
+                                                                        $('.a_foto').addClass("mustang-gallery");
+                                                                        $('.ver_foto').addClass("borde");
+                                                                        $('.a_foto').attr("href", "../Usuario/Fotos/" + objJson.archivo);
+                                                                        $('.a_foto').attr("title", objJson.archivo);
+                                                                        $('.ver_foto').attr("src", "../Usuario/Fotos/" + objJson.archivo);
+                                                                        $(".borde").removeClass("ver_foto");
+                                                                        $(".form-subir-foto").remove();
+                                                                        validar_shadowbox();
 
-                                                                $(".mensaje").text(objJson.mensaje);
+                                                                        $.smallBox({
+                                                                            title: "¡Felicitaciones!",
+                                                                            content: "<i class='fa fa-clock-o'></i> <i>Su imagen se ha subido con éxito...</i>",
+                                                                            color: "#296191",
+                                                                            iconSmall: "fa fa-cloud bounce animated",
+                                                                            timeout: 7000
+                                                                        });
+                                                                    }, 3000);
+                                                                }
                                                             }
+                                                        }).fail(function (objJson) {
+                                                            //alert(ajaxSettings);
                                                         });
-                                                        addImage(e);
-
                                                     } else {
-                                                        alert("Archivo no permitido, su tama? debe ser menor a 500 KB");
+                                                        alert("Archivo no permitido, su tamaño debe ser menor a 500 KB");
                                                         $(this).val('');
                                                     }
-
                                                 });
 
                                                 $(".btn-conti").click(function (e) {
                                                     $.SmartMessageBox({
                                                         title: "Alerta de Confirmación",
-                                                        content: "?sta totalmente seguro de rechazar este requerimiento?",
+                                                        content: "¿Está totalmente seguro de rechazar este requerimiento?",
                                                         buttons: '[No][Si]'
                                                     }, function (ButtonPressed) {
                                                         if (ButtonPressed === "Si") {
@@ -1025,8 +1054,8 @@
 
                                                 $(".btn-autor").click(function (e) {
                                                     $.SmartMessageBox({
-                                                        title: "Alerta de Confirmación!",
-                                                        content: "Esta totalmente seguro de autorizar este requerimiento?",
+                                                        title: "¡Alerta de Confirmación!",
+                                                        content: "¿Está totalmente seguro de autorizar este requerimiento?",
                                                         buttons: '[No][Si]'
                                                     }, function (ButtonPressed) {
                                                         if (ButtonPressed === "Si") {
@@ -1044,7 +1073,7 @@
                                                 $(".btn-rech").click(function (e) {
                                                     $.SmartMessageBox({
                                                         title: "Alerta de Confirmación!",
-                                                        content: "?sta totalmente seguro de rechazar este requerimiento?",
+                                                        content: "¿Está totalmente seguro de rechazar este requerimiento?",
                                                         buttons: '[No][Si]'
                                                     }, function (ButtonPressed) {
                                                         if (ButtonPressed === "Si") {

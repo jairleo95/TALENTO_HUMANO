@@ -118,8 +118,14 @@
                                     <!-- widget edit box -->
                                     <div >
                                         <!-- This area used as dropdown edit box -->
-                                        <a class="btn btn-success" href="../../documento_trabajador?idtr=<%=request.getParameter("idtr")%>&opc=Listar_doc" style="color:#343434;"><i class="fa fa-eye"></i><%if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001")) {
-                                            out.print("REGISTRAR DOCUMENTOS");}else{out.print(" VISUALIZAR DOCUMENTOS");}%> </a>
+                                        <%//if (!rol.trim().equals("ROL-0013")) {%>
+                                        <%if (rol.trim().equals("ROL-0013")) {%>
+
+                                        <a href="../../documento_trabajador?idtr=<%=request.getParameter("idtr")%>&opc=Listar_doc" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><%if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001")) {
+                                                out.print("Registrar Documentos");
+                                            } else {
+                                                    out.print(" Visualizar Documentos");
+                                                }%>  </a>      <%}%>
                                     </div>
                                     <!-- end widget edit box -->
 
@@ -131,13 +137,12 @@
                                                     <th data-hide="phone" style="color:black;with:15%;text-align:center;">Nro</th>
                                                     <th data-class="expand" style="color:black;with:40%;text-align:center;">Nombres </th>
                                                     <th data-hide="phone,tablet" style="color:black;with:30%;text-align:center;" >Documento</th>
-                                                    <th data-hide="phone" style="color:black;with:15%;text-align:center;">Descrición</th>
+                                                    <th data-hide="phone" style="color:black;with:15%;text-align:center;">Descripción</th>
                                                 </tr>  
                                             </thead>
                                             <tbody>
 
                                                 <%  if (Lis_doc_trabajador_hab.size() == 0) {%>
-                                                <tr>NO TIENE REGISTRADO NINGUN DOCUMENTO EN ESTE MOMENTO</tr>
                                                 <%} else {%>
                                                 <%for (int i = 0; i < Lis_doc_trabajador_hab.size(); i++) {
                                                         Lis_Doc_tra d = new Lis_Doc_tra();
@@ -147,7 +152,12 @@
                                                     <td style="color:black;with:15%;text-align:center;"><%=i + 1%></td>
                                                     <td style="color:#1E90FF;with:40%;text-align:center;"><%=d.getNo_documento()%></td>
                                                     <td style="color:#1E90FF;with:30%;text-align:center;"><%out.print(doc_.List_file_url2(d.getId_documento_adjunto().trim()));%></a></td>
+                                                        <%if (d.getDe_documento_adjunto() != null) {
+                                                        %>
                                                     <td style="color:black;with:15%;text-align:center;"><%=d.getDe_documento_adjunto()%></td>
+                                                    <%} else {%>
+                                                    <td style="color:black;with:15%;text-align:center;">No Registrado</td>
+                                                    <%}%>
                                                 </tr>
                                                 <% }
                                                     }%>
@@ -286,7 +296,7 @@
             /* dark red  */
             var $chrt_mono = "#000";
 
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 // DO NOT REMOVE : GLOBAL FUNCTIONS!
                 pageSetUp();
@@ -415,7 +425,7 @@
                         }
                     });
 
-                    $("#sin-chart").bind("plotclick", function(event, pos, item) {
+                    $("#sin-chart").bind("plotclick", function (event, pos, item) {
                         if (item) {
                             $("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
                             plot.highlight(item.series, item.datapoint);
@@ -705,7 +715,7 @@
                             tickDecimals: 0
                         },
                         yaxis: {
-                            tickFormatter: function(v) {
+                            tickFormatter: function (v) {
                                 return v + " cm";
                             }
                         },
@@ -736,7 +746,7 @@
                                 label: {
                                     show: false,
                                     radius: 2 / 3,
-                                    formatter: function(label, series) {
+                                    formatter: function (label, series) {
                                         return '<div style="font-size:11px;text-align:center;padding:4px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
                                     },
                                     threshold: 0.1
@@ -862,7 +872,7 @@
 
                     // setup control widget
                     var updateInterval = 1000;
-                    $("#updating-chart").val(updateInterval).change(function() {
+                    $("#updating-chart").val(updateInterval).change(function () {
                         var v = $(this).val();
                         if (v && !isNaN(+v)) {
                             updateInterval = +v;
@@ -926,7 +936,7 @@
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 pageSetUp();
 
@@ -962,16 +972,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_dt_basic) {
                             responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_dt_basic.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_dt_basic.respond();
                     }
                 });
@@ -990,16 +1000,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_fixed_column) {
                             responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_fixed_column.respond();
                     }
 
@@ -1009,7 +1019,7 @@
                 $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
 
                 // Apply the filter
-                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function() {
+                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
 
                     otable
                             .column($(this).parent().index() + ':visible')
@@ -1025,16 +1035,16 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_col_reorder) {
                             responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_col_reorder.respond();
                     }
                 });
@@ -1067,16 +1077,16 @@
                         "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
                     },
                     "autoWidth": true,
-                    "preDrawCallback": function() {
+                    "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_tabletools) {
                             responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
                         }
                     },
-                    "rowCallback": function(nRow) {
+                    "rowCallback": function (nRow) {
                         responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
                     },
-                    "drawCallback": function(oSettings) {
+                    "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_tabletools.respond();
                     }
                 });
@@ -1093,7 +1103,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function() {
+            (function () {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;

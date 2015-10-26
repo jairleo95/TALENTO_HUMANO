@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pe.edu.upeu.application.web.controller;
 
 import com.google.gson.Gson;
@@ -38,15 +33,6 @@ import pe.edu.upeu.application.model.Renombrar;
  */
 public class CFoto extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, FileUploadException, Exception {
         response.setContentType("application/json");
@@ -57,17 +43,8 @@ public class CFoto extends HttpServlet {
         String ubicacion = "";
         Map<String, Object> rpta = new HashMap<String, Object>();
         try {
-            /*if (System.getProperty("sun.desktop").trim().equals("windows")) {
-             ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "\\Vista\\Usuario\\Fotos";
-             } else {
-             ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Usuario/Fotos/";
-             }*/
-            ubicacion = "/TALENTO_HUMANO/Vista/Usuario/Fotos/";
-            //ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web/Vista/Usuario/Fotos/";
-            //ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Usuario\\Fotos";
-          //  System.out.println(ubicacion + "--ubicacion");
-            //out.print(ubicacion);
-            out.print(ubicacion);
+            // ubicacion = "/TALENTO_HUMANO/Vista/Usuario/Fotos/";
+            ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Usuario\\Fotos";
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);
             f.setRepository(new File(ubicacion));
@@ -77,24 +54,21 @@ public class CFoto extends HttpServlet {
             String idtr = null;
             String nombre_archivo = null;
             String no_original = null;
+            String tipo_archivo = null;
             long sizeInBytes = 0;
             Iterator it = p.iterator();
             while (it.hasNext()) {
-
                 FileItem item = (FileItem) it.next();
-
                 if (item.isFormField()) {
-
                     String nombre = item.getFieldName();
                     String valor = item.getString();
                     if (nombre.equals("idtr") & idtr == null) {
                         idtr = valor;
                     }
-
                 } else {
-
                     String fieldName = item.getFieldName();
                     sizeInBytes = item.getSize();
+                    tipo_archivo = item.getContentType();
                     Calendar fecha = new GregorianCalendar();
                     int hora = fecha.get(Calendar.HOUR_OF_DAY);
                     int min = fecha.get(Calendar.MINUTE);
@@ -108,20 +82,12 @@ public class CFoto extends HttpServlet {
                         no_original = no_original;
                         nombre_archivo = nombre_archivo;
                     }
-
                 }
-
             }
+            foto.INSERT_FOTOS_TRABAJADOR(null, null, nombre_archivo, no_original, String.valueOf(sizeInBytes), tipo_archivo, idtr);
+            rpta.put("rpta", "1");
+            rpta.put("archivo", nombre_archivo);
 
-            foto.INSERT_FOTOS_TRABAJADOR(null, null, nombre_archivo, no_original, no_original, String.valueOf(sizeInBytes), idtr);
-
-            //sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-            //Thread.sleep(2000);
-            // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
-            // out.println("Archivo subido correctamente");
-            out.println(no_original);
-            out.println(nombre_archivo);
-            out.println(sizeInBytes);
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
@@ -131,7 +97,6 @@ public class CFoto extends HttpServlet {
         out.flush();
         out.close();
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
