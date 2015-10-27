@@ -178,35 +178,10 @@
                                                                                                                 </article>
                                                                                                                 <!-- WIDGET END -->
 
+
+
+
                                                                                                             </div>
-
-                                                                                                            <!-- end row -->
-
-                                                                                                            <!-- end row -->
-
-                                                                                                        </section>
-                                                                                                        <!-- end widget grid -->
-
-                                                                                                    </div>
-                                                                                                    <!-- END MAIN CONTENT -->
-
-                                                                                                </div>
-                                                                                                <!-- END MAIN PANEL -->
-
-                                                                                                <!-- MAIN PANEL -->
-                                                                                                <div id="main" role="main" style="margin-left: 0px;">
-
-
-                                                                                                    <!-- REPORTE DE TRABAJADORES MODICADOS EN RELIGION -->
-                                                                                                    <!-- MAIN CONTENT -->
-                                                                                                    <div id="content">
-
-
-
-                                                                                                        <!-- widget grid -->
-                                                                                                        <section id="widget-grid" class="">
-
-                                                                                                            <!-- row -->
                                                                                                             <div class="row">
 
                                                                                                                 <!-- NEW WIDGET START -->
@@ -246,7 +221,7 @@
                                                                                                                             <!-- widget content -->
                                                                                                                             <div class="widget-body no-padding">
 
-                                                                                                                                <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
+                                                                                                                                <table id="datatable_tabletools2" class="table table-striped table-bordered table-hover" width="100%">
                                                                                                                                     <thead>
                                                                                                                                         <tr>
                                                                                                                                             <th data-hide="phone">ID</th>
@@ -307,7 +282,6 @@
                                                                                                                 <!-- WIDGET END -->
 
                                                                                                             </div>
-
                                                                                                             <!-- end row -->
 
                                                                                                             <!-- end row -->
@@ -319,6 +293,13 @@
                                                                                                     <!-- END MAIN CONTENT -->
 
                                                                                                 </div>
+                                                                                                <!-- END MAIN PANEL -->
+
+                                                                                                <!-- MAIN PANEL -->
+
+
+
+
                                                                                                 <!-- END MAIN PANEL -->
 
 
@@ -1229,25 +1210,48 @@
                                                                                                         });
 
                                                                                                         /* END TABLETOOLS */
+                                                                                                        
+                                                                                                           $('#datatable_tabletools2').dataTable({
+                                                                                                            // Tabletools options: 
+                                                                                                            //   https://datatables.net/extensions/tabletools/button_options
+                                                                                                            "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
+                                                                                                                    "t" +
+                                                                                                                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                                                                                                            "oTableTools": {
+                                                                                                                "aButtons": [
+                                                                                                                    "copy",
+                                                                                                                    "csv",
+                                                                                                                    "xls",
+                                                                                                                    {
+                                                                                                                        "sExtends": "pdf",
+                                                                                                                        "sTitle": "Requerimientos_PDF",
+                                                                                                                        "sPdfMessage": "Requeriemintos PDF Export",
+                                                                                                                        "sPdfSize": "letter"
+                                                                                                                    },
+                                                                                                                    {
+                                                                                                                        "sExtends": "print",
+                                                                                                                        "sMessage": "Generado por AlfaTeam <i>(presiona Esc para cerrar)</i>"
+                                                                                                                    }
+                                                                                                                ],
+                                                                                                                "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
+                                                                                                            },
+                                                                                                            "autoWidth": true,
+                                                                                                            "preDrawCallback": function () {
+                                                                                                                // Initialize the responsive datatables helper once.
+                                                                                                                if (!responsiveHelper_datatable_tabletools) {
+                                                                                                                    responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools2'), breakpointDefinition);
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "rowCallback": function (nRow) {
+                                                                                                                responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+                                                                                                            },
+                                                                                                            "drawCallback": function (oSettings) {
+                                                                                                                responsiveHelper_datatable_tabletools.respond();
+                                                                                                            }
+                                                                                                        });
 
                                                                                                     })
 
-                                                                                                </script>
-
-                                                                                                <!-- Your GOOGLE ANALYTICS CODE Below -->
-                                                                                                <script type="text/javascript">
-                                                                                                    var _gaq = _gaq || [];
-                                                                                                    _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-                                                                                                    _gaq.push(['_trackPageview']);
-
-                                                                                                    (function () {
-                                                                                                        var ga = document.createElement('script');
-                                                                                                        ga.type = 'text/javascript';
-                                                                                                        ga.async = true;
-                                                                                                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                                                                                                        var s = document.getElementsByTagName('script')[0];
-                                                                                                        s.parentNode.insertBefore(ga, s);
-                                                                                                    })();
                                                                                                 </script>
 
                                                                                             </body>

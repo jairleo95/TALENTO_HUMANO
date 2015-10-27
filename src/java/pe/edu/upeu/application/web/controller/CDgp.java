@@ -140,7 +140,7 @@ public class CDgp extends HttpServlet {
         }
 
         if (opc.equals("Registrar")) {
-            System.out.println("reg");
+           // System.out.println("reg");
             String FE_DESDE = request.getParameter("FEC_DESDE");
             String FE_HASTA = request.getParameter("FEC_HASTA");
             double CA_SUELDO = Double.parseDouble(request.getParameter("SUELDO"));
@@ -298,8 +298,6 @@ public class CDgp extends HttpServlet {
             sesion.setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
             sesion.setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
             response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&idtr=" + ID_TRABAJADOR);
-            // response.sendRedirect("Vista/Dgp/Horario/Reg_Horario.jsp?iddgp=" + iddgp + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
-
         }
         if (opc.equals("Reg_form")) {
             /* TEMPORAL*/
