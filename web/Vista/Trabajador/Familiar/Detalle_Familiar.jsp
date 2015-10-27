@@ -8,7 +8,6 @@
 %>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%@page import="pe.edu.upeu.application.model.Padre_Madre_Conyugue"%>
-<jsp:useBean id="List_PMC" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="LISTA_HIJOS" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="ListaridTrabajador" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="Lista_Tipo_Doc" scope="session" class="java.util.ArrayList"/>

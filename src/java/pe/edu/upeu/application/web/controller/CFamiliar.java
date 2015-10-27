@@ -72,7 +72,7 @@ public class CFamiliar extends HttpServlet {
                 String ID_CONYUGUE = request.getParameter("CONYUGUE");
 
                 pmc.INSERT_CONYUGUE(ES_TRABAJA_UPEU_CONYUGUE, AP_NOMBRES_CONYUGUE, FE_NAC_CONYUGUE, TI_DOC_ID, NU_DOC, LI_INSCRIPCION_VIG_ESSALUD, user, tr.ip(), ID_TRABAJADOR, ID_CONYUGUE);
-               sesion.setAttribute("List_PMC", pmc.List_PMC(ID_TRABAJADOR));
+            //   sesion.setAttribute("List_PMC", pmc.List_PMC(ID_TRABAJADOR));
                sesion.setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(ID_TRABAJADOR));
                sesion.setAttribute("LISTA_HIJO", h.LISTA_HIJOS(ID_TRABAJADOR));
                sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(ID_TRABAJADOR));
@@ -85,7 +85,7 @@ public class CFamiliar extends HttpServlet {
                 String ID_TRABAJADOR = request.getParameter("idtr");
 
                 pmc.INSERT_PADRES(AP_NOMBRES_MADRE, AP_NOMBRES_PADRE, ID_TRABAJADOR, user, tr.ip());
-               sesion.setAttribute("List_PMC", pmc.List_PMC(ID_TRABAJADOR));
+               //sesion.setAttribute("List_PMC", pmc.List_PMC(ID_TRABAJADOR));
                sesion.setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(ID_TRABAJADOR));
                sesion.setAttribute("LISTA_HIJO", h.LISTA_HIJOS(ID_TRABAJADOR));
                sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(ID_TRABAJADOR));
@@ -93,7 +93,6 @@ public class CFamiliar extends HttpServlet {
             }
             if (opc.equals("Detalle_Familiar")) {
                 String idtr = request.getParameter("idtr");
-               sesion.setAttribute("List_PMC", pmc.List_PMC(idtr));
                sesion.setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(idtr));
                sesion.setAttribute("LISTA_HIJO", h.LISTA_HIJOS(idtr));
                sesion.setAttribute("Lista_Tipo_Doc", td.Listar_tipo_doc());
@@ -158,7 +157,7 @@ public class CFamiliar extends HttpServlet {
                 String ES_INSCRIPCION_VIG_ESSALUD = request.getParameter("INSCRIPCION_VIG_ESSALUD");
                 String ES_ESTUDIO_NIV_SUPERIOR = request.getParameter("ESTUD_NIV_SUPERIOR");
                 h.MOD_HIJOS_TRAB(ID_DATOS_HIJOS_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO, ES_TIPO_DOC, NU_DOC, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, user);
-               sesion.setAttribute("List_PMC", pmc.List_PMC(idtr));
+               //sesion.setAttribute("List_PMC", pmc.List_PMC(idtr));
                sesion.setAttribute("LISTA_HIJOS", h.LISTA_HIJOS(idtr));
                sesion.setAttribute("LISTA_HIJO", h.LISTA_HIJOS(idtr));
                 response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + idtr);
@@ -176,7 +175,7 @@ public class CFamiliar extends HttpServlet {
                 String padre = request.getParameter("APELLIDOS_NOMBRES_PADRE");
                 String madre = request.getParameter("APELLIDOS_NOMBRES_MADRE");
                 pmc.MOD_PADRES(padre, madre, idtr, user);
-               sesion.setAttribute("List_PMC", pmc.List_PMC(idtr));
+               //sesion.setAttribute("List_PMC", pmc.List_PMC(idtr));
                  sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
                 response.sendRedirect("Vista/Trabajador/Familiar/Detalle_Familiar.jsp?idtr=" + idtr);
             }
