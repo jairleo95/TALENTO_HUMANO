@@ -119,7 +119,7 @@
                                     <div >
                                         <!-- This area used as dropdown edit box -->
                                         <%//if (!rol.trim().equals("ROL-0013")) {%>
-                                        <%if (rol.trim().equals("ROL-0013")) {%>
+                                        <%if (!rol.trim().equals("ROL-0013")) {%>
 
                                         <a href="../../documento_trabajador?idtr=<%=request.getParameter("idtr")%>&opc=Listar_doc" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><%if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001")) {
                                                 out.print("Registrar Documentos");
@@ -1097,21 +1097,6 @@
 
         </script>
 
-        <!-- Your GOOGLE ANALYTICS CODE Below -->
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-            _gaq.push(['_trackPageview']);
-
-            (function () {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
     </center>
 </body>
 </html>
