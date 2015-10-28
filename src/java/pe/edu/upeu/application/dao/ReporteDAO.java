@@ -293,6 +293,7 @@ public class ReporteDAO implements InterfaceReporteDAO {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
         return Lista;

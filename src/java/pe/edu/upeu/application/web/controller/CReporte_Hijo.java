@@ -82,7 +82,7 @@ public class CReporte_Hijo extends HttpServlet {
                 }
                 if (!dni.equals("")) {
                     if((sql.length()-sql.indexOf("WHERE"))>5)sql+=" AND";
-                    sql+=" UPPER(NU_DOC_HIJO) LIKE UPPER('%"+dni+"%')";
+                    sql+=" NU_DOC_HIJO ='"+dni+"'";
                 }
                 if (!edad.equals("")) {
                     if((sql.length()-sql.indexOf("WHERE"))>5)sql+=" AND";
