@@ -26,6 +26,6 @@
 <h5 style="text-align:justify"><span style="font-size:12px">Estando de acuerdo en todo el contenido del presente contrato, firmamos en señal de conformidad, en _____________________, al [fe_suscripcion].</span></h5>
 </div>
 
-<p><span style="font-size:11px">                                                   <img alt="" src="http://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Firma_Salvador_Allende.svg/800px-Firma_Salvador_Allende.svg.png" style="height:40px; position:absolute; width:131px" /></span></p>
+<p><span style="font-size:11px">                                                   <img alt="" src="http://gth.upeu.edu.pe/TALENTO_HUMANO/Archivo/Firmas/FIR-0001_Rengifo.jpg" style="height:40px; position:absolute; width:131px" /></span></p>
 
 <p><span style="font-size:11px"><strong>                                                               EMPLEADOR                                                        TRABAJADOR (A)</strong></span></p>
