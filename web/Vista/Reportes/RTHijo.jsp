@@ -382,12 +382,14 @@
                                             t += "<td>" + lista[i].NO_PUESTO + "</td>";
                                             t += "<td>" + lista[i].CO_APS + "</td>";
                                             if(lista[i].ID_CONTRATO===undefined){
-                                                t += "<td></td>";
+                                                t += "<td>Sin Contrato</td>";
+                                                t += "<td>Sin Contrato</td>";
                                             }else{
+                                                t += "<td>Contratado</td>";
                                                 t += "<td>" + lista[i].TI_CONTRATO + "</td>";
                                             }
                                             
-                                            t += "<td>" + lista[i].TI_CONTRATO + "</td>";
+                                            
                                             t += "<td>" + lista[i].AP_PATERNO_HIJO + " " + lista[i].AP_MATERNO_HIJO + " " + lista[i].NO_HIJO_TRABAJADOR + "</td>";
                                             t += "<td>" + lista[i].ES_SEXO + "</td>";
                                             t += "<td>" + lista[i].FE_NACIMIENTO_HIJO + "</td>";

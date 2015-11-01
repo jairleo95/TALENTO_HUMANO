@@ -1026,7 +1026,7 @@
     <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
     <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
     <script src="../../js/Js_DGP/Registrar/Reg_Dgps.js" type="text/javascript"></script>
-    <script src="../../js/Js_Horario/horarios.js" type="text/javascript"></script>
+    <script src="../../js/Js_Horario/horario.js" type="text/javascript"></script>
     <script>
                                                         function listar_mensaje_plazo(tipo, warning, info, req) {
                                                             $.post("../../plazo_dgp", "opc=Listar&tipo=" + tipo, function (objJson) {
