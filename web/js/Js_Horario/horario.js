@@ -13,10 +13,12 @@ $(document).ready(function () {
     plHeader($('.contheader'));
     $('.btnSig').hide();
     $('.btnSig').click(function () {
-        guardar=false;
+        guardar = false;
         if (guardar) {
             $('#myModalEdit').modal();
         } else {
+            enableElements($('.cDia'));
+            $('.cDia').hide(500);
             $('.formDGP').submit();
         }
 
@@ -28,9 +30,9 @@ $(document).ready(function () {
         data += "&id_ar=" + $('.select-area').val();
         data += "&id_sec=" + $('.select-seccion').val();
         $.post("../../formato_horario", data, function () {
-            cargar_horarios($('.t_horario'),true,$('.modNombre').val());
+            cargar_horarios($('.t_horario'), true, $('.modNombre').val());
         });
-        
+
     });
 
 });
@@ -47,9 +49,9 @@ function cargar_horarios(sel, dep, nombre) {
             }
             sel.append('<option value="' + lista[i].id + '" >' + lista[i].nombre + '</option>');
         }
-        sel.append('<option value="CUSTOMIZE" >Personalizado</option>');
+        sel.append('<option value="CUSTOMIZE" disabled>Personalizado</option>');
         sel.val(x);
-        if(dep===true){
+        if (dep === true) {
             $('.formDGP').submit();
         }
     });
@@ -189,12 +191,25 @@ function plHeader(cont) {
     });
 }
 function disableElements(el) {
-                for (var i = 0; i < el.length; i++) {
-                    el[i].disabled = true;
-
-                    disableElements(el[i].children);
-                }
-            }
+    for (var i = 0; i < el.length; i++) {
+        if(el[i].value!==undefined){
+            el[i].readOnly=true;
+        }else{
+          el[i].disabled=true;  
+        }
+        disableElements(el[i].children);
+    }
+}
+function enableElements(el) {
+    for (var i = 0; i < el.length; i++) {
+        if(el[i].value!==undefined){
+            el[i].removeAttribute("readOnly");
+        }else{
+          el[i].removeAttribute("disabled");  
+        }
+        enableElements(el[i].children);
+    }
+}
 function plDiasl(cont, lu, ma, mi, ju, vi, sa, dom) {
     var t = "";
     t += '<fieldset>';
