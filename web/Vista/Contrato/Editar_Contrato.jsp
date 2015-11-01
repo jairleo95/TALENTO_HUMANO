@@ -229,7 +229,7 @@
                                         </section>
                                         <section class="col col-3" id="titulo">
                                             <label class="select" id="titulo">Dirección:
-                                                <select name="DIRECCION" class="select_dir input-group-sm" id="select_dir">
+                                                <select name="DIRECCION" disabled="" class="select_dir input-group-sm" id="select_dir">
                                                     <%
                                                         for (int c = 0; c < Listar_Direccion.size(); c++) {
                                                             Direccion dir = new Direccion();
@@ -249,26 +249,26 @@
                                         </section>
                                         <section class="sec_dep col col-3" id="titulo">
                                             <label class="select" id="titulo">Departamento:
-                                                <select name="DEPARTAMENTO_ID" class="selec_dep input-group-sm"  id="selec_dep">
+                                                <select name="DEPARTAMENTO_ID" disabled="" class="selec_dep input-group-sm"  id="selec_dep">
                                                     <option value="">[SELECCIONE]</option>
                                                 </select>  </label>
                                         </section>
                                         <section class="sec_are col col-3" id="titulo">
                                             <label class="select" id="titulo">Area:
-                                                <select name="AREA_ID" class="Selec_Area input-group-sm" id="Selec_Area">
+                                                <select name="AREA_ID" disabled="" class="Selec_Area input-group-sm" id="Selec_Area">
                                                     <option value="">[SELECCIONE]</option>
                                                 </select>  
                                             </label>
                                         </section>
                                         <section class="sec_sec col col-3" id="titulo">
                                             <label class="select" id="titulo">Sección:
-                                                <select name="SECCION_ID" class="select_sec input-group-sm" id="select_sec">
+                                                <select name="SECCION_ID" disabled="" class="select_sec input-group-sm" id="select_sec">
                                                     <option value="">[SELECCIONE]</option>
                                                 </select>  </label>
                                         </section>
                                         <section class="col col-3" id="titulo">
                                             <label class="select" id="titulo">Puesto:
-                                                <select name="PUESTO_ID" required="" class="pu_id_se input-group-sm" id="pu_id_se">
+                                                <select name="PUESTO_ID" required="" disabled="" class="pu_id_se input-group-sm" id="pu_id_se">
                                                     <option value="" selected="selected"></option>
                                                     <option value=""></option>
                                                 </select>  </label>

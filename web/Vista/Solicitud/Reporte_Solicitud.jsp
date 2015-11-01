@@ -122,7 +122,7 @@
                     </div>
                     <!-- end row -->
                     <div class="row">
-                        
+
                         <!-- NEW WIDGET START -->
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div id="alerta_dgp">
@@ -174,7 +174,7 @@
                 </section>
                 <!-- end widget grid -->
 
-                
+
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -188,7 +188,7 @@
                             <div class="modal-body">
                                 <div class="div_load"></div>
                                 <table class="table table-hover table-striped  table-responsive tabla_detalle_sol" ></table>
-                                
+
                                 <form class="smart-form comentario">Comentario:<label class="textarea"><textarea rows="3"  required="" name="comentario" placeholder="Información adicional"></textarea></label></form>
                                 <input  type="hidden" value="" class="data_procesar" />
                             </div>
@@ -301,8 +301,9 @@
                 $(".comentario").show();
             }
             $(".div_load").append('<img src="../../img/load.gif" class="img-responsive center-block"/>')
-            $.post("../../solicitud_requerimiento", "opc=Ver_Solicitud&id=" + valor, function(objJson) {
-                tb.empty();$(".div_load").empty();
+            $.post("../../solicitud_requerimiento", "opc=Ver_Solicitud&id=" + valor, function (objJson) {
+                tb.empty();
+                $(".div_load").empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
@@ -344,20 +345,20 @@
                 texto_html += '';
                 tb.append(texto_html);
                 texto_html = "";
-                $(".btn_procesar_sol").click(function() {
+                $(".btn_procesar_sol").click(function () {
                     if ($(".comentario").valid() == true) {
                         $.SmartMessageBox({
                             title: "¡Advertencia!",
                             content: "¿Esta seguro de procesar esta solicitud?",
                             buttons: '[No][Si]'
-                        }, function(ButtonPressed) {
+                        }, function (ButtonPressed) {
                             if (ButtonPressed === "Si") {
 
                                 $.ajax({
                                     url: "../../solicitud_requerimiento",
                                     data: "opc=Procesar_Solicitud" + $(".data_procesar").val() + "&" + $(".comentario").serialize(),
                                     type: "post"
-                                }).done(function() {
+                                }).done(function () {
                                     $(".btn_cancel_form").click();
                                     $.smallBox({
                                         title: "¡Procesado con exito!",
@@ -393,7 +394,7 @@
                 t_body = $(".tbody_Sol_Aut");
                 table_sol = $(".table_sol_aut");
             }
-            $.post("../../solicitud_requerimiento", url, function(objJson) {
+            $.post("../../solicitud_requerimiento", url, function (objJson) {
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
@@ -403,7 +404,9 @@
                     for (var g = 0; g < lista.length; g++) {
                         text_html += '<tr>';
                         text_html += '<td>' + (g + 1) + '</td>';
-                        text_html += '<td><div class="btn-group"> <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Accion <span class="caret"></span></button><ul class="dropdown-menu"><li><a href="../../dgp?iddgp=' + lista[g].id_dgp + '&idtr=' + lista[g].id_trabajador + '&opc=Detalle"> Ver Requerimiento</a></li> <li class="divider"></li>';
+                        text_html += '<td><div class="btn-group"> <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Accion <span class="caret"></span></button><ul class="dropdown-menu"><li><a href="../../dgp?iddgp=' + lista[g].id_dgp + '&idtr=' + lista[g].id_trabajador + '&opc=Detalle"> Ver Requerimiento</a></li>';
+                        text_html += '<li><a href="../../documento?iddgp=' + lista[g].id_dgp + '&idtr=' + lista[g].id_trabajador + '&opc=Listar_doc">Continuar registro</a></li>  <li class="divider"></li>';
+
                         if (tipo == "1") {
                             text_html += '<li><button class="btn btn-primary btn-labeled btn_sol" data-toggle="modal" type="button" data-target="#myModal" value="' + lista[g].id_solicitud_dgp + '"><span class="btn-label"><i class="fa fa-envelope"></i></span> Ver Solicitud</button></li></ul></div></td>';
 
@@ -429,13 +432,13 @@
                     table_sol.DataTable();
                 }
                 if (tipo == "1") {
-                    $(".btn_sol").click(function() {
+                    $(".btn_sol").click(function () {
 
                         listar_det_sol($(this).val(), tipo);
                     });
 
                 } else {
-                    $(".btn_sol_aut").click(function() {
+                    $(".btn_sol_aut").click(function () {
                         listar_det_sol($(this).val(), "2");
                     });
                 }
@@ -443,9 +446,9 @@
             });
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             pageSetUp();
-            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
             $(".cod_aps").numeric();
@@ -482,16 +485,16 @@
                         "t" +
                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                 "autoWidth": true,
-                "preDrawCallback": function() {
+                "preDrawCallback": function () {
                     // Initialize the responsive datatables helper once.
                     if (!responsiveHelper_dt_basic) {
                         responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
                     }
                 },
-                "rowCallback": function(nRow) {
+                "rowCallback": function (nRow) {
                     responsiveHelper_dt_basic.createExpandIcon(nRow);
                 },
-                "drawCallback": function(oSettings) {
+                "drawCallback": function (oSettings) {
                     responsiveHelper_dt_basic.respond();
                 }
             });
@@ -509,16 +512,16 @@
                         "t" +
                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                 "autoWidth": true,
-                "preDrawCallback": function() {
+                "preDrawCallback": function () {
                     // Initialize the responsive datatables helper once.
                     if (!responsiveHelper_datatable_fixed_column) {
                         responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
                     }
                 },
-                "rowCallback": function(nRow) {
+                "rowCallback": function (nRow) {
                     responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
                 },
-                "drawCallback": function(oSettings) {
+                "drawCallback": function (oSettings) {
                     responsiveHelper_datatable_fixed_column.respond();
                 }
 
@@ -526,7 +529,7 @@
             // custom toolbar
             $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
             // Apply the filter
-            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function() {
+            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
 
                 otable
                         .column($(this).parent().index() + ':visible')
@@ -541,16 +544,16 @@
                         "t" +
                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
                 "autoWidth": true,
-                "preDrawCallback": function() {
+                "preDrawCallback": function () {
                     // Initialize the responsive datatables helper once.
                     if (!responsiveHelper_datatable_col_reorder) {
                         responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
                     }
                 },
-                "rowCallback": function(nRow) {
+                "rowCallback": function (nRow) {
                     responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
                 },
-                "drawCallback": function(oSettings) {
+                "drawCallback": function (oSettings) {
                     responsiveHelper_datatable_col_reorder.respond();
                 }
             });
@@ -582,16 +585,16 @@
                     "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
                 },
                 "autoWidth": true,
-                "preDrawCallback": function() {
+                "preDrawCallback": function () {
                     // Initialize the responsive datatables helper once.
                     if (!responsiveHelper_datatable_tabletools) {
                         responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
                     }
                 },
-                "rowCallback": function(nRow) {
+                "rowCallback": function (nRow) {
                     responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
                 },
-                "drawCallback": function(oSettings) {
+                "drawCallback": function (oSettings) {
                     responsiveHelper_datatable_tabletools.respond();
                 }
             });

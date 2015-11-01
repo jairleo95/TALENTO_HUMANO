@@ -11,7 +11,6 @@
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO"%>
 <%@page import="pe.edu.upeu.application.model.V_Autorizar_Dgp"%>
 <jsp:useBean id="List_id_Autorizacion" scope="session" class="java.util.ArrayList"/>
-<jsp:useBean id="List_id_Autorizados" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
     <head>
