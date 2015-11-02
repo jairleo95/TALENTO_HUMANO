@@ -1,3 +1,7 @@
+<%@page import="pe.edu.upeu.application.dao.Tipo_DocumentoDAO"%>
+<%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
 <%@page import="pe.edu.upeu.application.web.controller.CCriptografiar"%>
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
@@ -205,20 +209,43 @@
                     <td>
                         <div>
                             <!--<form action="../../trabajador" method="post">-->
-                            <table   class="info-det"  >
+                            <table   class="info-det"   >
                                 <%
                                     CConversion c = new CConversion();
                                     for (int index = 0; index < ListaridTrabajador.size(); index++) {
                                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
                                 %>
-                                <td height="70" width="590px">
-                                    <table>
+                                <td height="70" width="600px">
+                                    <table style="width:300px">
                                         <button data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">asas</button>
                                         <tr><td class="td">Nombre :</td><td class="td1"><%=trb.getNo_trabajador().toUpperCase()%></td></tr>
                                         <tr><td class="td">Apellido Paterno :</td><td class="td1"><%=trb.getAp_paterno().toUpperCase()%></td></tr>
                                         <tr><td class="td">Apellido Materno :</td><td class="td1"><%=trb.getAp_materno().toUpperCase()%></td></tr>
-                                        <tr><td class="td" style="width:68%">Fecha de Nacimiento :</td><td class="td1"><%=c.convertFecha5(trb.getFe_nac())%></td></tr>
+                                        <tr><td class="td" >Fecha de Nacimiento :</td><td class="td1"><%=c.convertFecha5(trb.getFe_nac())%></td></tr>
+                                            <%if (idrol.trim().equals("ROL-0009")) {
+                                            %>
+                                        <tr><td class="td" >Tipo de documento</td><td class="td1"><%=c.convertFecha5(trb.getFe_nac())%></td></tr>
+                                        <tr><td class="td" >Tipo Documento:</td><td>
+                                                <%
+                                                    InterfaceTipo_DocumentoDAO itd = new Tipo_DocumentoDAO();
+
+                                                    for (int k = 0; k < itd.Listar_tipo_doc().size(); k++) {
+                                                        Tipo_Documento td = new Tipo_Documento();
+                                                        td = (Tipo_Documento) itd.Listar_tipo_doc().get(k);
+                                                        if (trb.getTi_doc() != null) {
+                                                            if (td.getId_tipo_doc_ident().trim().equals(trb.getTi_doc().trim())) {
+                                                                out.print(td.getDe_tdoc_abreviada());
+                                                            }
+                                                        } else {
+                                                            out.print("NO REGISTRADO");
+                                                        }
+                                                    }
+                                                %>
+
+                                            </td></tr>
+                                        <tr><td class="td" >Numero de documento</td><td class="td1"><%=trb.getNu_doc()%></td></tr>
+                                            <%}%>
                                     </table>
                                 </td>
                                 <%String ID_ROL = (String) sesion.getAttribute("IDROL");
@@ -492,7 +519,7 @@
                 <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
                 <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
                 <button class="btn btn-labeled btn-success btn-autor" type="submit">
-                    <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>ENVIAR 
+                    <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>PROCESAR REQUERIMIENTO 
                 </button>
             </table>
         </form>

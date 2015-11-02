@@ -782,6 +782,12 @@
                     return;
                 }
                 for (var i = 0; i < lista.length; i++) {
+                    if ((i + 1) < lista.length) {
+                        if (lista[i].id_dgp == lista[i + 1].id_dgp) {
+                            i++;
+                        }
+                    }
+                    //alert(lista[i + 1].id_dgp)
                     text_html += "<tr>";
                     text_html += "<td>" + (i + 1) + "</td>";
                     text_html += "<td>" + lista[i].mes_año_aut + "</td>";
@@ -803,6 +809,8 @@
                         text_html += "<td>Si</td>";
                     }
                     text_html += "</tr>";
+
+
                 }
                 crear_tabla();
                 $(".tbody_autorizado").append(text_html);

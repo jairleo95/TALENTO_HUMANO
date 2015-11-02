@@ -220,18 +220,18 @@
                                         </section  >
                                         <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box" id="id_dgp" >                              
                                         <section class="col col-2">
-                                            <label class="input" id="titulo">Desde: 
+                                            <label class="input" id="titulo">Fecha de Inicio: 
                                                 <input type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" class=" input-group-sm" required="">
                                             </label>
                                         </section>
                                         <section class="col col-2">
-                                            <label class="input" id="titulo">Hasta: 
+                                            <label class="input" id="titulo">Fecha de Cese: 
                                                 <input type="date" name="FEC_HASTA" value="<%=c.convertFecha3(d.getFe_hasta())%>" class="input-group-sm" required="">
                                             </label>
                                         </section>
                                         <section class="col col-3" id="titulo">
                                             <label class="select" id="titulo">Dirección:
-                                                <select name="DIRECCION" class="select_dir input-group-sm" id="select_dir" disabled="">
+                                                <select name="DIRECCION" class="select_dir input-group-sm" disabled=""  id="select_dir" >
                                                     <option value="" >[SELECCIONE]</option>
                                                     <%for (int g = 0; g < Listar_Direccion.size(); g++) {
                                                             Direccion di = new Direccion();
@@ -250,23 +250,24 @@
                                             <label class="select" id="titulo">Departamento:
                                                 <select name="DEPARTAMENTO_ID" class="selec_dep input-group-sm" disabled="" id="selec_dep">
                                                     <option value="">[SELECCIONE]</option>
-                                                </select>  </label>
+                                                </select>  
+                                            </label>
                                         </section>
                                         <section class="sec_are col col-3" id="titulo">
                                             <label class="select" id="titulo">Area:
-                                                <select name="AREA_ID" class="Selec_Area input-group-sm"  disabled="" id="Selec_Area">
+                                                <select name="AREA_ID" class="Selec_Area input-group-sm"  disabled=""  id="Selec_Area">
                                                     <option value="">[SELECCIONE]</option>
                                                 </select>  </label>
                                         </section>
                                         <section class="sec_sec col col-3" id="titulo">
                                             <label class="select" id="titulo">Sección:
-                                                <select name="SECCION_ID" class="select_sec input-group-sm" disabled="" id="select_sec">
+                                                <select name="SECCION_ID" class="select_sec input-group-sm" disabled=""  id="select_sec">
                                                     <option value="">[SELECCIONE]</option>
                                                 </select>  </label>
                                         </section>
                                         <section class="col col-3" id="titulo">
                                             <label class="select" id="titulo">Puesto:
-                                                <select name="PUESTO_ID" required="" class="pu_id_se input-group-sm" disabled="" id="pu_id_se">
+                                                <select name="PUESTO_ID" required="" class="pu_id_se input-group-sm" disabled=""  id="pu_id_se">
                                                     <%  for (int j = 0; j < List_Puesto.size(); j++) {%>
                                                     <%Puesto p = new Puesto();
                                                         p = (Puesto) List_Puesto.get(j);
@@ -280,6 +281,11 @@
                                                         }%>
                                                 </select>  </label>
                                         </section>
+                                        <input name="DEPARTAMENTO_ID"  type="hidden" value="<%=d.getId_departamento()%>" />
+                                        <input name="AREA_ID"  type="hidden" value="<%=d.getId_area()%>" />
+                                        <input name="SECCION_ID"  type="hidden" value="<%=d.getId_seccion()%>" />
+                                        <input name="PUESTO_ID"  type="hidden" value="<%=d.getId_puesto()%>" />
+                                        <input name="DIRECCION"  type="hidden" value="<%=d.getId_direccion()%>" />
                                         <section class="col col-3">
                                             <label class="select" id="titulo">Condición:
                                                 <select name="CONDICION" class="input-group-sm" >
@@ -288,10 +294,10 @@
                                                     <option value="2">Contratado Independiente</option>
                                                     <option value="3">Enpleado</option>
                                                     <option value="4">Misionero</option>
-                                                 <!--   <option value="5">MFL-Práctica Pre-Profesional</option>
-                                                    <option value="6">MFL-Práctica Profesionales</option>
-                                                    <option value="7">MFL-CLJ</option>
-                                                    <option value="8">MFL-Contrato</option>-->
+                                                    <!--   <option value="5">MFL-Práctica Pre-Profesional</option>
+                                                       <option value="6">MFL-Práctica Profesionales</option>
+                                                       <option value="7">MFL-CLJ</option>
+                                                       <option value="8">MFL-Contrato</option>-->
                                                 </select>
                                             </label>
                                         </section>
@@ -1346,6 +1352,15 @@
             var d = $("#select_sec");
             var b = $("#selec_dep");
             var e = $("#pu_id_se");
+
+            c.attr("disabled", true);
+            d.attr("disabled", true);
+            b.attr("disabled", true);
+            e.attr("disabled", true);
+            $(".select_dir").attr("disabled", true);
+
+
+
             $(".date").keyup(function () {
                 $(".conteni").val($(".date").val());
             });

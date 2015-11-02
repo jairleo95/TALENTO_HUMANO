@@ -273,6 +273,11 @@
                                                     <option value=""></option>
                                                 </select>  </label>
                                         </section>
+                                                        <input name="DEPARTAMENTO_ID"  type="hidden" value="<%=a.getId_departamento()%>" />
+                                        <input name="AREA_ID"  type="hidden" value="<%=a.getId_area()%>" />
+                                        <input name="SECCION_ID"  type="hidden" value="<%=a.getId_seccion()%>" />
+                                        <input name="PUESTO_ID"  type="hidden" value="<%=a.getId_puesto()%>" />
+                                        <input name="DIRECCION"  type="hidden" value="<%=a.getId_direccion()%>" />
                                         <section class="col col-3">
                                             <label class="select" id="titulo">Condición:
                                                 <select name="CONDICION" class="input-group-sm" required="">
