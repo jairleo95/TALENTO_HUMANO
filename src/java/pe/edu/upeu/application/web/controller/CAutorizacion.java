@@ -147,7 +147,7 @@ public class CAutorizacion extends HttpServlet {
                             mes = Integer.parseInt(request.getParameter("mes"));
                         }
                     }
-                    List<Map<String, ?>> lista = a.List_Dgp_Autorizados(idp, mes, año);
+                    List<Map<String, ?>> lista = a.List_Dgp_Autorizados(iduser, mes, año);
                     rpta.put("rpta", "1");
                     rpta.put("lista", lista);
                 }

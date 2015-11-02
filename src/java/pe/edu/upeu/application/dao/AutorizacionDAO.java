@@ -536,11 +536,11 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public List<Map<String, ?>> List_Dgp_Autorizados(String id_puesto, int mes, String año) {
+    public List<Map<String, ?>> List_Dgp_Autorizados(String id_usuario, int mes, String año) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT id_dgp,MES_AÑO_AUT, AñO_PROCESAMIENTO, MES_PROCESAMIENTO, MES_CREACION, NO_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_PUESTO, ID_PUESTO, NO_AREA, NO_DEP, NO_REQ, DE_PASOS, FE_CREACION, FE_AUTORIZACION, LI_MOTIVO, ES_MFL FROM RHVD_DGP_AUTORIZADOS where ID_PUESTO = '" + id_puesto + "' ";
+            String sql = "SELECT id_dgp,MES_AÑO_AUT, AñO_PROCESAMIENTO, MES_PROCESAMIENTO, MES_CREACION, NO_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_PUESTO, ID_PUESTO, NO_AREA, NO_DEP, NO_REQ, DE_PASOS, FE_CREACION, FE_AUTORIZACION, LI_MOTIVO, ES_MFL FROM RHVD_DGP_AUTORIZADOS where US_CREACION = '" + id_usuario + "' ";
              sql +=(!año.equals(""))?" AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))='" +( mes+1) + "' AND TRIM(año_procesamiento)='" + año + "' ":"  AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))=to_number(to_char(sysdate,'mm')) AND TRIM(año_procesamiento)=to_char(sysdate,'YYYY') ";
              ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
