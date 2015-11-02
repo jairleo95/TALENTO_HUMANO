@@ -521,7 +521,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     @Override
     public String Mes_plazo(String id_dgp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT TO_CHAR(pl.FE_HASTA,'MONTH','nls_date_language=spanish') as mes_hasta FROM RHTR_CUMPLIMIENTO_PLAZO cp,RHTR_PLAZO pl WHERE  pl.ID_PLAZO = cp.ID_PLAZO and pl.TI_PLAZO='2' and pl.ES_PLAZO='1' and cp.ID_DGP='"+id_dgp.trim()+"'";
+        String sql = "SELECT TO_CHAR(pl.FE_HASTA,'MONTH','nls_date_language=spanish') as mes_hasta FROM RHTR_CUMPLIMIENTO_PLAZO cp,RHTR_PLAZO pl WHERE  pl.ID_PLAZO = cp.ID_PLAZO and pl.TI_PLAZO='2' and pl.ES_PLAZO='1' and cp.ID_DGP='" + id_dgp.trim() + "'";
         String validar = "";
         try {
             ResultSet rs = this.conn.query(sql);
@@ -540,9 +540,11 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT id_dgp,MES_AÑO_AUT, AñO_PROCESAMIENTO, MES_PROCESAMIENTO, MES_CREACION, NO_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_PUESTO, ID_PUESTO, NO_AREA, NO_DEP, NO_REQ, DE_PASOS, FE_CREACION, FE_AUTORIZACION, LI_MOTIVO, ES_MFL FROM RHVD_DGP_AUTORIZADOS where US_CREACION = '" + id_usuario + "' ";
-             sql +=(!año.equals(""))?" AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))='" +( mes+1) + "' AND TRIM(año_procesamiento)='" + año + "' ":"  AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))=to_number(to_char(sysdate,'mm')) AND TRIM(año_procesamiento)=to_char(sysdate,'YYYY') ";
-             ResultSet rs = this.conn.query(sql);
+            String sql = "SELECT * FROM RHVD_DGP_AUTORIZADOS WHERE US_CREACION='" + id_usuario + "'  ";
+            /* sql += (!año.equals("")) ? " AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))='"
+             + (mes + 1) + "' AND TRIM(año_procesamiento)='" + año
+             + "' " : "  AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))=to_number(to_char(sysdate,'mm')) AND TRIM(año_procesamiento)=to_char(sysdate,'YYYY') "*/;
+            ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("nombre", rs.getString("no_trabajador"));
@@ -565,7 +567,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error al cargar la lista de autorizaciones...");
+            throw new RuntimeException("Error al cargar la lista de autorizaciones..." + e.getMessage());
         } finally {
             try {
                 this.conn.close();
