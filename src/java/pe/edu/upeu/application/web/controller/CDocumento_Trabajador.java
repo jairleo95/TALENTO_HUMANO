@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -174,7 +175,7 @@ public class CDocumento_Trabajador extends HttpServlet {
             String dt = null;
             List<String> list_files = new ArrayList<String>();
             Iterator itera = p.iterator();
-
+  Random rnd = new Random();
             while (itera.hasNext()) {
                 FileItem i_n_f = (FileItem) itera.next();
 
@@ -243,7 +244,8 @@ public class CDocumento_Trabajador extends HttpServlet {
                             if (!item.getName().equals("")) {
 
                                 //out.println(item.getFieldName() + " : " + item.getName());
-                                nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase();
+                                //nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase();
+                                nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num ;
                                 no_original = item.getName();
                                 Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
                                 thread.start();

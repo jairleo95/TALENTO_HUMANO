@@ -75,7 +75,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <% HttpSession sesion_1 = request.getSession(true);
-            String iduser = (String) sesion.getAttribute("IDUSER");
+            // String iduser = (String) sesion.getAttribute("IDUSER");
             String id_rol = (String) session.getAttribute("IDROL");%>
         <style type="text/css">
 
@@ -522,16 +522,16 @@
                                         </section>
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Semanal:
-                                                <input type="text" name="HORAS_SEMANA" value="48" class="input-group-sm" required="">
+                                                <input type="text" name="HORAS_SEMANA" value="<%=d.getCa_horas_horario()%>" class="input-group-sm" required="">
                                             </label>
                                         </section>
-                                        </section>
+
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Mensual:
-                                                <input type="text" name="NRO_HORAS_LAB" value="192" class="input-group-sm" required="">
+                                                <input type="text" name="NRO_HORAS_LAB" value="<%=d.getCa_horas_horario() * 4%>" class="input-group-sm" required="">
                                             </label>
                                         </section>
-                                        </section>
+                                      
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Dias:
                                                 <input type="text" name="DIAS" value="30" class="input-group-sm" required="">

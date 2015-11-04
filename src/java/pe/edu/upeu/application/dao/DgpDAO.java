@@ -477,6 +477,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setNo_trab_us_mod(rs.getString("no_trab_us_mod"));
                 x.setCa_asig_familiar(rs.getDouble("ca_asig_familiar"));
                 x.setNombre_trabajador(rs.getString("nombre_trabajador"));
+                x.setCa_horas_horario(rs.getDouble("ca_horas_horario"));
                 Lista.add(x);
             }
         } catch (SQLException e) {

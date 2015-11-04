@@ -60,6 +60,15 @@ public class V_Det_DGP {
     private String no_trab_us_cr;
     private String no_trab_us_mod;
     private String nombre_trabajador;
+    private double ca_horas_horario;
+
+    public double getCa_horas_horario() {
+        return ca_horas_horario;
+    }
+
+    public void setCa_horas_horario(double ca_horas_horario) {
+        this.ca_horas_horario = ca_horas_horario;
+    }
 
     public String getNombre_trabajador() {
         return nombre_trabajador;
@@ -117,7 +126,7 @@ public class V_Det_DGP {
             String no_banco, String nu_cuenta, String nu_cuenta_banc, String es_gen_nu_cuenta, String no_banco_otros, String id_departamento, String id_direccion,
             String id_seccion, String id_area, String id_tipo_planilla, String ti_planilla, String id_detalle_horario, String no_dep,
             String no_usuario_crea, String no_usuario_mod, String li_motivo, String es_mfl, Double ca_bonificacion_p,
-            String no_area, String no_seccion, String no_trab_us_cr, String no_trab_us_mod, double ca_asig_familiar, String nombre_trabajador) {
+            String no_area, String no_seccion, String no_trab_us_cr, String no_trab_us_mod, double ca_asig_familiar, String nombre_trabajador,double ca_horas_horario) {
         this.id_dgp = id_dgp;
         this.fe_desde = fe_desde;
         this.fe_hasta = fe_hasta;
@@ -166,6 +175,7 @@ public class V_Det_DGP {
         this.no_trab_us_mod = no_trab_us_mod;
         this.ca_asig_familiar = ca_asig_familiar;
         this.nombre_trabajador = nombre_trabajador;
+        this.ca_horas_horario = ca_horas_horario;
     }
 
     public V_Det_DGP() {
@@ -217,6 +227,7 @@ public class V_Det_DGP {
         this.no_trab_us_mod = "";
         this.ca_asig_familiar = 0.0;
         this.nombre_trabajador = "";
+        this.ca_horas_horario = 0.0;
     }
 
     public Double getCa_bonificacion_p() {
