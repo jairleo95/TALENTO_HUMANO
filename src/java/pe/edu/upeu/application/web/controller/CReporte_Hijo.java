@@ -56,6 +56,14 @@ public class CReporte_Hijo extends HttpServlet {
                 String desde=request.getParameter("desde");
                 String hasta=request.getParameter("hasta");
                 String dni=request.getParameter("dni");
+                nombre=nombre+"";
+                paterno= paterno+"";
+                materno=materno+"";
+                genero=genero+"";
+                edad=edad+"";
+                desde=desde+"";
+                hasta=hasta+"";
+                dni=dni+"";
                 int cont=0;
                 if (!nombre.equals("")) cont++;
                 if (!paterno.equals("")) cont++;
@@ -100,7 +108,7 @@ public class CReporte_Hijo extends HttpServlet {
             
         } catch (Exception e) {
             System.out.println(e);
-            rpta.put("err", "Error al Procesar los Datos, intentelo nuevamente");
+            rpta.put("err", "Error al Procesar los Datos, intentelo nuevamente"+ e);
         }
         Gson gson= new Gson();
         out.print(gson.toJson(rpta));
