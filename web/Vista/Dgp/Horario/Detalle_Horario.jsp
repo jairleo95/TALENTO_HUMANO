@@ -63,8 +63,12 @@
         <div class="cont">
             <%
                 InterfaceListaDAO l = new ListaDAO();
+                if(List_V_Horario.size()==0){
+                        out.print("<center><h3>No sujeto a Fiscalizacion</h3></center>");
+                    }
                 for (int i = 0; i < l.List_H().length; i++) {
                     int g = 0;
+                    
                     for (int s = 0; s < List_V_Horario.size(); s++) {
                         V_Horario h = new V_Horario();
                         h = (V_Horario) List_V_Horario.get(s);
