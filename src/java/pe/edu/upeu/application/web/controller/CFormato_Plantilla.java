@@ -54,7 +54,7 @@ public class CFormato_Plantilla extends HttpServlet {
         InterfaceDireccionDAO dir = new DireccionDAO();
         String iduser = (String) sesion.getAttribute("IDUSER");
         String opc = request.getParameter("opc");
-        String ubicacion=getServletConfig().getServletContext().getRealPath("/")+"Vista/Contrato/Formato_Plantilla/Formato/";
+        String ubicacion = getServletConfig().getServletContext().getRealPath("/") + "Vista/Contrato/Formato_Plantilla/Formato/";
         if (iduser != null) {
             try {
                 if (opc.equals("Asignar")) {
@@ -154,21 +154,16 @@ public class CFormato_Plantilla extends HttpServlet {
                     String DIR = request.getParameter("id_di_asig");
                     String PUES = request.getParameter("id_pu_asig");
                     String no_pl = request.getParameter("no_pl");
+
                     pl.Crear_Plantilla(no_pl, iduser);
                     String id_pl = pl.ob_id_pl_max();
                     pl.Insertar_pertenencia(id_pl, DIR, DEP, AREA, SEC, PUES, iduser);
                     String no_arch = pl.Obt_no_arch();
-                    /*if (System.getProperty("sun.desktop").trim().equals("windows")) {
-                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-                     } else {*/
-                    //ubicacion = direccion_raiz + "/Vista/Contrato/Formato_Plantilla/Formato/";
-                    //ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato";
-                    //}
                     File archivo = new File(ubicacion + no_arch);
                     FileWriter escribir = new FileWriter(archivo, true);
                     escribir.write(texto_html);
                     escribir.close();
-                    response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
+                    rpta.put("rpta", "1");
                 }
             } catch (Exception e) {
                 rpta.put("rpta", "-1");

@@ -195,7 +195,6 @@
                 <%                    if (t.getNo_ar_foto() == null) {
                 %>
                 <tr><td class="td2" >
-                       <!-- <a class="btn btn-primary" href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>" style="position: relative; margin: 0px; " >Subir foto</a>-->
                         <a class="a_foto"> <img style=" border: 3px solid grey ; position:relative;  margin: 0px; cursor: pointer"  class="ver_foto"  src="../../imagenes/avatar_default.jpg"  width="100"  height="100"> </a>
                         <form action="../../foto" method="POST" enctype="multipart/form-data" class="form-subir-foto">
                             <input type="hidden" name="idtr" class="idtr" id="input-file" value="<%=t.getId_trabajador()%>">
@@ -208,7 +207,6 @@
                             <%}%>
                     <td>
                         <div>
-                            <!--<form action="../../trabajador" method="post">-->
                             <table   class="info-det"   >
                                 <%
                                     CConversion c = new CConversion();
@@ -248,22 +246,25 @@
                                             <%}%>
                                     </table>
                                 </td>
-                                <%String ID_ROL = (String) sesion.getAttribute("IDROL");
+
+                                <!-- iNICIO codigos aps y huella-->
+                                <input type="hidden"  class="idtr" value="<%=t.getId_trabajador()%>">
+                                <%
+                                    String ID_ROL = (String) sesion.getAttribute("IDROL");
                                     for (int e = 0; e < id_empleadox_ide.size(); e++) {
                                         Empleado emp = new Empleado();
                                         emp = (Empleado) id_empleadox_ide.get(e);
 
                                 %>
-                                <td >
+                                <td>
                                     <table class="info-det" style="margin-left:30%;"  >
-                                        <%                                               if (emp.getCo_aps() != null) {
+                                        <%                                            if (emp.getCo_aps() != null) {
                                                 int val_aps = Integer.parseInt(emp.getCo_aps());
 
                                                 if (val_aps > 0) {%>
                                         <tr>
                                             <td class="td" >Código APS:</td>
                                             <td class="td1" id="cel_aps" ><%=emp.getCo_aps()%></td>
-
                                             <td class="td1" ><input type="hidden" id="mod_aps"  value="<%=emp.getCo_aps()%>" name="cod_aps"  maxlength="6" size="5%" onblur="MOD_COD_APS()"></td>
                                             <td class="td" colspan="2">
                                                 <%if (!ID_ROL.trim().equals("ROL-0013")) {%>
@@ -271,8 +272,7 @@
                                                     <%}%>
                                             </td>
                                         </tr>
-                                        <%}
-                                        %>
+                                        <%}%>
                                         <%}%>
                                         <%if (emp.getCo_huella_digital() != null) {
 
@@ -295,41 +295,33 @@
                                 <%
                                     String val_aps = emp.getCo_aps();
                                     if (val_aps == null && ID_ROL.trim().equals("ROL-0001") | ID_ROL.equals("ROL-0009")) {%>
-                                <td >
+                                <td>
                                     <table class="info-det" style="margin-left:50%;">
-                                        <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
-                                        <input type="hidden" name="puesto_id" value="<%=idp%>">
-                                        <input type="hidden" name="cod" value="<%=cod%>">
-                                        <input type="hidden" name="idpasos" value="<%=id_pasos%>">
-                                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>">
-                                        <input type="hidden"name="nup" value="<%=nropaso%>">
                                         <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
                                         <tr><td class="td" colspan="2">Registrar codigo APS</td></tr>
                                         <tr><td><input type="text" id="cod_ap" name="cod_aps"  maxlength="6" onblur="VAL_COD_APS()"></td></tr>
-                                        <tr><td>
+                                        <tr>
+                                            <td>
                                                 <button type="submit" class=" btn btn-default txt-color-green mod_huella" ><i class="fa fa-pencil fa-2x"></i></button>
-                                            </td></tr>
-                                    </table
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
+                                <%}%>
 
-                                <%}
+                                <%
                                     String val_hue = emp.getCo_huella_digital();
                                     if (val_hue == null && ID_ROL.trim().equals("ROL-0001")) {%>
-                                <td >
+                                <td>
                                     <table class="info-det" style="margin-left:50%;">
-                                        <input type="hidden" name="iddetalle_dgp" value="<%=iddgp%>">
-                                        <input type="hidden" name="puesto_id" value="<%=idp%>">
-                                        <input type="hidden" name="cod" value="<%=cod%>">
-                                        <input type="hidden" name="idpasos" value="<%=id_pasos%>">
-                                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>">
-                                        <input type="hidden"name="nup" value="<%=nropaso%>">
                                         <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
                                         <tr><td class="td" colspan="3">Registrar Codigo de huella digital</td></tr>
                                         <tr><td><input type="text" id="cod_hu" name="cod_huella"  maxlength="6" onblur="VAL_COD_HUELLA()" /></td></tr>
-                                        <tr><td>
+                                        <tr>
+                                            <td>
                                                 <button type="submit" class=" btn btn-default txt-color-green mod_huella" ><i class="fa fa-pencil fa-2x"></i></button>
-                                            </td></tr>
-                                        <!--<tr><td><button value="registrar_huella" name="opc">Registrar</button></td></tr>-->
+                                            </td>
+                                        </tr>
                                     </table>
                                 </td>
                                 <%}%>
@@ -337,6 +329,8 @@
                     </td>
 
                     <%}%>
+
+                    <!-- FIN DE codigos aps y huella-->
             </table>
             <!-- </form>-->
         </div>
@@ -868,7 +862,7 @@
                                                                 window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#cod_ap").val() + "&idtr=" + $(".idtra").val() + "";
                                                             }
                                                             else {
-                                                                alert("Este codigo ya esta registrado!")
+                                                                //  alert("Este codigo ya esta registrado!")
                                                                 $.SmartMessageBox({
                                                                     title: "Este Código APS ya fue registrado!",
                                                                     content: "Por favor Ingrese un Código APS distinto",
@@ -964,6 +958,14 @@
                                                     document.getElementById("mod_aps").type = "text";
                                                 });
 
+                                                $.ajax({
+                                                    url: "../../trabajador",
+                                                    data: "opc=Mostrar_Cod_APS&tr=" + $('.idtr').val(),
+                                                    type: 'POST',
+                                                    success: function (data, textStatus, jqXHR) {
+                                                      //  alert(data.msg)
+                                                    }
+                                                });
 
                                                 $('.ver_foto').click(function () {
                                                     $(".file-foto").click();

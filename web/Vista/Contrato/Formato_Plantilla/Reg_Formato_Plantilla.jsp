@@ -67,7 +67,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
 // its initialization.
-            CKEDITOR.on('instanceReady', function(ev) {
+            CKEDITOR.on('instanceReady', function (ev) {
                 // Show the editor name and description in the browser status bar.
                 document.getElementById('eMessage').innerHTML = 'Instance <code>' + ev.editor.name + '<\/code> loaded.';
 
@@ -212,7 +212,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 ap.append("<input type='hidden' value='" + editor + "' name='valor'>");
             }
             function lis_dep(b) {
-                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
                     b.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -232,7 +232,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function  lis_dir_id(d, valor) {
 
 
-                $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor.trim(), function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor.trim(), function (objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -253,7 +253,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function list_area_id(c, valor) {
 
 
-                $.post("../../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function (objJson) {
                     c.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -272,7 +272,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
             }
             function list_sec_id(d, valor) {
-                $.post("../../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -293,7 +293,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
             function mostrar_plantilla(valor) {
                 var editor = CKEDITOR.instances.editor1;
-                $.post("../../../formato_plantilla", "opc=Listar&id=" + valor, function(objJson) {
+                $.post("../../../formato_plantilla", "opc=Listar&id=" + valor, function (objJson) {
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
@@ -306,7 +306,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             function Listar_Plantilla() {
                 var d = $(".tbody-plantilla");
                 var texto = "";
-                $.post("../../../formato_plantilla", "opc=List_Plamtillas&" + "id_dir=" + $(".dir").val() + "&id_dep=" + $(".dep").val() + "&id_are=" + $(".area").val() + "&sec=" + $(".seccion").val() + "&id_pu=" + $(".puesto").val(), function(objJson) {
+                $.post("../../../formato_plantilla", "opc=List_Plamtillas&" + "id_dir=" + $(".dir").val() + "&id_dep=" + $(".dep").val() + "&id_are=" + $(".area").val() + "&sec=" + $(".seccion").val() + "&id_pu=" + $(".puesto").val(), function (objJson) {
                     d.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -339,21 +339,21 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     else {
                         d.append("<tr><td>NO HAY PLANTILLAS</td></tr>");
                     }
-                    $(".btn-cargar_pl").click(function() {
+                    $(".btn-cargar_pl").click(function () {
                         //alert();
                         mostrar_plantilla($(".plantilla" + $(this).val()).val());
                         $(".id_pl").val($(".plantilla" + $(this).val()).val());
                         $(".id_pc").val($(".id_plantilla" + $(this).val()).val());
 
                     });
-                    $(".btn-Desac_pl").click(function() {
+                    $(".btn-Desac_pl").click(function () {
 
                         var idpp = $(".idplpu" + $(this).val()).val();
                         var opc = "Desactivar_pp";
                         Desac_Plantilla(idpp, opc);
 
                     });
-                    $(".btn-Activ_pl").click(function() {
+                    $(".btn-Activ_pl").click(function () {
 
                         var idpp = $(".idplpu" + $(this).val()).val();
                         var opc = "activar_pp";
@@ -367,19 +367,17 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 });
             }
             function Activar_Plantilla(id_pp, opc) {
-                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function() {
+                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function () {
                     Listar_Plantilla();
                 });
             }
             function Desac_Plantilla(id_pp, opc) {
-                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function() {
+                $.post("../../../formato_plantilla", "opc=" + opc + "&id_pp=" + id_pp, function () {
                     Listar_Plantilla();
                 });
             }
             function  lis_sel(d, valor, opc) {
-
-
-                $.post("../../../Direccion_Puesto", "opc=" + opc + "&" + "id=" + valor, function(objJson) {
+                $.post("../../../Direccion_Puesto", "opc=" + opc + "&" + "id=" + valor, function (objJson) {
                     d.empty();
                     var list = objJson.lista;
                     d.append("<option value='0' selected=''> [TODOS] </option>");
@@ -391,10 +389,9 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         d.append("<option value='0' > [] </option>");
                     }
                 });
-
             }
-            function list_dir_fil(c) {
-                $.post("../../../Direccion_Puesto", "opc=Listar_direccion_filial&id_fil=" + $(".fil").val(), function(objJson) {
+            function list_dir_fil(c, fil) {
+                $.post("../../../Direccion_Puesto", "opc=Listar_direccion_filial&id_fil=" + fil.val(), function (objJson) {
                     c.empty();
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -412,21 +409,21 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 });
             }
 
-            $(document).ready(function() {
+            $(document).ready(function () {
                 var b = $(".dir");
                 //lis_dep(b);
                 var c = $(".dir_as");
                 //list_dir(c);
                 // Listar_Plantilla();
-                $(".fil").change(function() {
+                $(".fil").change(function () {
                     var c = $(".dir");
-                    list_dir_fil(c);
+                    list_dir_fil(c, $(this));
                 });
-                $(".fil_as").change(function() {
+                $(".fil_as").change(function () {
                     var c = $(".dir_as");
-                    list_dir_fil(c);
+                    list_dir_fil(c, $(this));
                 });
-                $("#dir").change(function() {
+                $("#dir").change(function () {
                     var d = $(".dep");
                     var valor = $("#dir").val();
                     lis_dir_id(d, valor);
@@ -434,25 +431,25 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     Listar_Plantilla();
 
                 });
-                $(".dep").change(function() {
+                $(".dep").change(function () {
                     Listar_Plantilla();
                     list_area_id($(".area"), $(this).val());
 
                     //list_plantillas($(this).val());
                 });
 
-                $(".area").change(function() {
+                $(".area").change(function () {
                     var d = $(".seccion");
                     Listar_Plantilla();
                     list_sec_id(d, $(this).val());
                     //list_plantillas($(this).val());
                 });
 
-                $(".seccion").change(function() {
+                $(".seccion").change(function () {
                     //list_plantillas($(this).val());
                     Listar_Plantilla()
                     var e = $(".puesto");
-                    $.post("../../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(this).val(), function(objJson) {
+                    $.post("../../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(this).val(), function (objJson) {
                         e.empty();
                         if (objJson.rpta == -1) {
                             alert(objJson.mensaje);
@@ -470,12 +467,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         }
                     });
                 });
-                $(".puesto").change(function() {
+                $(".puesto").change(function () {
                     Listar_Plantilla();
                     //list_plantillas($(this).val());
 
                 });
-                $(".dir_as").change(function() {
+                $(".dir_as").change(function () {
                     var d = $(".dep_as");
                     var valor = $(".dir_as").val();
                     var opc = "Listar_dir_dep";
@@ -483,28 +480,28 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     $("#di_sig").val(valor.trim());
 
                 });
-                $(".dep_as").change(function() {
+                $(".dep_as").change(function () {
                     var d = $(".area_as");
                     var valor = $(".dep_as").val();
                     var opc = "Listar_area2";
                     lis_sel(d, valor, opc);
                     $("#de_sig").val(valor.trim());
                 });
-                $(".area_as").change(function() {
+                $(".area_as").change(function () {
                     var d = $(".seccion_as");
                     var valor = $(".area_as").val();
                     var opc = "Listar_sec2";
                     lis_sel(d, valor, opc);
                     $("#ar_sig").val(valor.trim());
                 });
-                $(".seccion_as").change(function() {
+                $(".seccion_as").change(function () {
                     var d = $(".puesto_as");
                     var valor = $(".seccion_as").val();
                     var opc = "Listar_pu_id";
                     lis_sel(d, valor, opc);
                     $("#se_sig").val(valor.trim());
                 });
-                $(".puesto_as").change(function() {
+                $(".puesto_as").change(function () {
                     $("#pu_sig").val($(".puesto_as").val().trim());
 
                 })
@@ -517,149 +514,169 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <body class="body  desktop-detected pace-done" style="cursor: auto;">
 
         <div id="main" style="margin-left: 0px;" >
-            <div id="content" class="widget-body">
-                <div class="contenido" >
 
-                    <article class=" col-sm-12 col-md-12 col-lg-6">
+            <div id="content" >
+                <section id="widget-grid" class="">
+                    <div class="row">
+                        <article class=" col-sm-12 col-md-12 col-lg-6">
 
-                        <div class=" jarviswidget well" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
-                            <div class="row">
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
-                                    <h2>Markdown API</h2>
+                            <div class=" jarviswidget well" id="wid-id-5" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
+                                <div class="row">
+                                    <header>
+                                        <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
+                                        <h2>Markdown API</h2>
 
-                                </header>
-                                <div>
+                                    </header>
+                                    <div>
 
-                                    <div class="widget-body col-lg-12" align="center">
+                                        <div class="widget-body col-lg-12" align="center">
 
-                                        <h3>CARGAR PLANTILLAS</h3>
-                                        <div class="col-sm-12 col-md-12 col-lg-12" width="50%" >
-                                            <section class="col col-12" style="width:100%;align:cemter;" align="center">
-                                                <label class="select">Filial:
-                                                    <select class="fil form-control" id="fil" name="id_di" >
-                                                        <option value="" >[Filial]</option>
-                                                        <option value="1" >Filial Lima</option>
-                                                        <option value="2" >Filial Juliaca</option>
-                                                        <option value="5" >Filial Tarapoto</option>
-                                                    </select>   
-                                                </label>
-                                            </section>
-                                            <section class="col col-12" style="width:100%;align:cemter;" align="center">
-                                                <label class="select">Dirección:
-                                                    <select class="dir form-control" id="dir" name="id_di" >
-                                                        <option value="" >[Direccion]</option>
-                                                    </select>   
-                                                </label>
-                                            </section>
+                                            <h3>CARGAR PLANTILLAS</h3>
+                                            <div class="col-sm-12 col-md-12 col-lg-12" width="50%" >
+                                                <section class="col col-12" >
+                                                    <label class="select">Filial:
+                                                        <select class="fil form-control" id="fil" name="id_di" >
+                                                            <option value="" >[Filial]</option>
+                                                            <option value="1" >Filial Lima</option>
+                                                            <option value="2" >Filial Juliaca</option>
+                                                            <option value="5" >Filial Tarapoto</option>
+                                                        </select>   
+                                                    </label>
+                                                </section>
+                                                <section class="col col-12" >
+                                                    <label class="select">Dirección:
+                                                        <select class="dir form-control" id="dir" name="id_di" >
+                                                            <option value="" >[Direccion]</option>
+                                                        </select>   
+                                                    </label>
+                                                </section>
 
-                                            <section class="col col-12" style="width:100%;align:cemter;" align="center">
-                                                <label>Departamento:
-                                                    <select class="dep form-control" id="dep" name="id_dep" >
-                                                        <option value="">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
-                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center">
-                                                <label>Area:
-                                                    <select class="area form-control" id="area" name="id_are" >
-                                                        <option value="">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
+                                                <section class="col col-12">
+                                                    <label>Departamento:
+                                                        <select class="dep form-control" id="dep" name="id_dep" >
+                                                            <option value="">[TODO]</option>
+                                                        </select>
+                                                    </label>
+                                                </section>
+                                                <section class="col col-12">
+                                                    <label>Area:
+                                                        <select class="area form-control" id="area" name="id_are" >
+                                                            <option value="">[TODO]</option>
+                                                        </select>
+                                                    </label>
+                                                </section>
 
-                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center">
-                                                <label>Sección:
-                                                    <select class="seccion form-control" id="seccion" name="id_sec" >
-                                                        <option value="">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
-                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center">
-                                                <label>Puesto:
-                                                    <select class="puesto form-control" id="puesto" name="id_pu" >
-                                                        <option value="">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
+                                                <section class="col col-12">
+                                                    <label>Sección:
+                                                        <select class="seccion form-control" id="seccion" name="id_sec" >
+                                                            <option value="">[TODO]</option>
+                                                        </select>
+                                                    </label>
+                                                </section>
+                                                <section class="col col-12" >
+                                                    <label>Puesto:
+                                                        <select class="puesto form-control" id="puesto" name="id_pu" >
+                                                            <option value="">[TODO]</option>
+                                                        </select>
+                                                    </label>
+                                                </section>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </article>
-                    <article class=" col-sm-12 col-md-12 col-lg-6">
+                        </article>
+                        <article class=" col-sm-12 col-md-12 col-lg-6">
 
-                        <div class=" jarviswidget well" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
-                            <div class="row">
-                                <!-- </div>
-                                 <div class="row">-->
+                            <div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" role="widget" style="">
+                                <header role="heading"><div class="jarviswidget-ctrls" role="menu">   <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse"><i class="fa fa-minus "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a></div>
+                                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                                    <h2>Asignar Plantillas</h2>
 
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
-
-                                </header>
-                                <div>
+                                    <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+                                <div role="content">
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
 
                                     </div>
-                                    <div class="widget-body col-lg-12" align="center">
-                                        <h3>ASIGNAR PLANTILLAS</h3>
-                                        <div class="col-sm-12 col-md-12 col-lg-12" width="50%">
-                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center">
-                                                <label>Filial:
-                                                    <select class="fil_as form-control" id="dir_as"  >
-                                                        <option value="">[Filial]</option>
-                                                        <option value="">Filial Lima</option>
-                                                        <option value="">Filial Juliaca</option>
-                                                        <option value="">Filial Tarapoto</option>
-                                                    </select>   
-                                                </label>
-                                            </section>
-                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center">
-                                                <label>Dirección:
-                                                    <select class="dir_as form-control" id="dir_as"  >
-                                                        <option value="">[Direccion]</option>
-                                                    </select>   
-                                                </label>
-                                            </section>
-                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center">
-                                                <label>Departamento:
-                                                    <select class="dep_as form-control" id="dep_as" >
-                                                        <option value="0">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
-                                            <section class="col col-12" style="width:100%;align:cemter;" align="center" >
-                                                <label>Area:
-                                                    <select class="area_as form-control" id="area_as" >
-                                                        <option value="0">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
-                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center" >
-                                                <label>Sección:
-                                                    <select class="seccion_as form-control col-5" id="seccion_as"  >
-                                                        <option value="0">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
-                                            <section class="col col-12"  style="width:100%;align:cemter;" align="center">
-                                                <label>Puesto:
-                                                    <select class="puesto_as form-control" id="puesto_as"  >
-                                                        <option value="0">[TODO]</option>
-                                                    </select>
-                                                </label>
-                                            </section>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
+                                    <div class="widget-body no-padding">
 
-                    <div>
+                                        <form id="checkout-form" class="smart-form" novalidate="novalidate">
+                                            <header>
+                                                <h3>Asignar Plantillas</h3>
+                                            </header>
+                                            <fieldset>
+                                                <div class="row"> 
+                                                    <section class="col col-4" >
+                                                        <label class="select">Filial:
+                                                            <select class="fil_as form-control" >
+                                                                <option value="">[Filial]</option>
+                                                                <option value="1">Filial Lima</option>
+                                                                <option value="2">Filial Juliaca</option>
+                                                                <option value="5">Filial Tarapoto</option>
+                                                            </select>   
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-4" >
+                                                        <label class="select">Dirección:
+                                                            <select class="dir_as form-control"   >
+                                                                <option value="0">[Direccion]</option>
+                                                            </select>   
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-4" >
+                                                        <label class="select">Departamento:
+                                                            <select class="dep_as form-control"  >
+                                                                <option value="0">[TODO]</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-4" >
+                                                        <label class="select">Area:
+                                                            <select class="area_as form-control" >
+                                                                <option value="0">[TODO]</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-4"   >
+                                                        <label class="select">Sección:
+                                                            <select class="seccion_as form-control col-5"   >
+                                                                <option value="0">[TODO]</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-4" >
+                                                        <label  class="select">Puesto:
+                                                            <select class="puesto_as form-control"  >
+                                                                <option value="0">[TODO]</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                </div>
+
+
+                                            </fieldset>
+
+
+                                            <footer>
+                                                <button type="submit" class="btn btn-primary">
+                                                    Aceptar
+                                                </button>
+                                            </footer>
+                                        </form>
+
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                        </article>
+                    </div>
+                    <div class="row">
                         <legend align="center">Plantillas</legend>      
                         <table class="table table-striped table-bordered table-hover dataTable no-footer">
                             <thead>
@@ -675,218 +692,217 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <article class=" col-sm-12 col-md-12 col-lg-4">
-                    <div class="jarviswidget well" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
-                        <header>
-                            <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
-                            <h2>NOMENCLATURA</h2>
 
-                        </header>
-                        <div>
-                            <div class="jarviswidget-editbox">
-                                <!-- This area used as dropdown edit box -->
 
-                            </div>
-                            <div class="widget-body">
+                    <div class="row">
+                        <article class=" col-sm-12 col-md-12 col-lg-4">
+                            <div class="jarviswidget well" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
+                                    <h2>NOMENCLATURA</h2>
 
-                                <h3>NOMENCLATURA</h3>
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th><i class="fa  fa-align-left"> </i> Nomenclatura</th>
-                                            <th><i class="fa fa-chain"> </i>  Significado</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ><td><code>[nombre]</code></td><td>Nombre del trabajador</td></tr>
-                                        <tr><td><code>[app]</code></td><td>Apellido Paterno del trabajador</td></tr>
-                                        <tr><td><code>[apm]</code></td><td>Apellido Materno del trabajador</td></tr>
-                                        <tr><td><code>[dni]</code></td><td>Dni del trabajador</td></tr>
-                                        <tr><td><code>[dir]</code></td><td>direccion del trabajador</td></tr>
-                                        <tr><td><code>[prov]</code></td><td>Provincia actual</td></tr>
-                                        <tr><td><code>[dist]</code></td><td>Distrito en el que estan</td></tr>
-                                        <tr><td><code>[dep]</code></td><td>Departamento en donde se va a desenpeñar</td></tr>
-                                        <tr><td><code>[desde]</code></td><td>fecha de Inicio del contrato</td></tr>
-                                        <tr><td><code>[hasta]</code></td><td>Fecha de Fin del contrato</td></tr>
-                                        <tr><td><code>[puesto]</code></td><td>Puesto que va a desempeñar</td></tr>
-                                        <tr><td><code>[fe_suscripcion]</code></td><td>Fecha de suscripcion</td></tr>
-                                        <tr><td><code>[sueldo]</code></td><td>Sueldo del trabajador</td></tr>
-                                        <tr><td><code>[horas]</code></td><td>Horas de trabajo semanales</td></tr>
-                                        <tr><td><code>[cursos]</code></td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
-                                        <tr><td><code>[funciones_pr]</code></td><td>Funciones primarias que va a desempeñar en el puesto</td></tr>
-                                        <tr><td><code>[funciones_sec]</code></td><td>Funciones secundarias que va a desempeñar en el puesto</td></tr>
-                                        <tr><td><code>[moneda]</code></td><td>Tipo de moneda de pago</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <article class="col-sm-12 col-md-12 col-lg-8">
-                    <div class="jarviswidget jarviswidget-color-blue" id="wid-id-0"  data-widget-editbutton="false"  data-widget-fullscreenbutton="false" data-widget-sortable="false">
+                                </header>
+                                <div>
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
 
-                        <header>
-                            <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
-                            <h2>Editar Platilla</h2>
-
-                        </header>
-
-                        <!-- widget div-->
-                        <div>
-
-                            <!-- widget edit box -->
-                            <div class="jarviswidget-editbox">
-                                <!-- This area used as dropdown edit box -->
-
-                            </div>
-                            <!-- end widget edit box -->
-
-                            <!-- widget content -->
-                            <div class="widget-body no-padding">
-
-                                <form class="ckeditor_form" action="../../../formato_plantilla" method="post" style="width:100%;" align="center">
-                                    <h3></h3>
-                                    <legend><h3>EDITAR PLANTILLAS</h3></legend>
-                                    <h3><strong>NOMBRE PLANTILLA</strong></h3>
-
-                                    <button type="submit" value="Asignar" onclick="leer();" name="opc">Asignar Plantilla</button>
-                                    <button  onclick="procesar_texto();" type="button">Procesar </button>
-                                    <input type="hidden" name="id_dep_asig" id="di_sig">
-                                    <input type="hidden" name="id_are_asig" id="de_sig">
-                                    <input type="hidden" name="id_sec_asig" id="ar_sig">
-                                    <input type="hidden" name="id_di_asig" id="se_sig">
-                                    <input type="hidden" name="id_pu_asig" id="pu_sig">
-                                    <input type="text" class="nombre_pl form-control" name="no_pl" ><br><br>
-                                    <textarea cols="100" id="editor1" name="editor1" >
-                                    </textarea>
-                                    <script>
-                                        // Replace the <textarea id="editor1"> with an CKEditor instance.
-                                        /* config.toolbar = 'Full';
-                                         
-                                         config.toolbar_Full =
-                                         [
-                                         ['Source', '-', 'Save', 'NewPage', 'Preview', '-', 'Templates'],
-                                         ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Print', 'SpellChecker', 'Scayt'],
-                                         ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
-                                         ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
-                                         '/',
-                                         ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
-                                         ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
-                                         ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-                                         ['Link', 'Unlink', 'Anchor'],
-                                         ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
-                                         '/',
-                                         ['Styles', 'Format', 'Font', 'FontSize'],
-                                         ['TextColor', 'BGColor'],
-                                         ['Maximize', 'ShowBlocks', '-', 'About']
-                                         ];*/
-                                        /* CKEDITOR.replace('editor1', {
-                                         on: {
-                                         focus: onFocus,
-                                         blur: onBlur,
-                                         // Check for availability of corresponding plugins.
-                                         pluginsLoaded: function(evt) {
-                                         
-                                         
-                                         var doc = CKEDITOR.document, ed = evt.editor;
-                                         if (!ed.getCommand('bold'))
-                                         doc.getById('exec-bold').hide();
-                                         if (!ed.getCommand('link'))
-                                         doc.getById('exec-link').hide();
-                                         }
-                                         
-                                         }, height: '1024px'});*/
-                                        CKEDITOR.replace('editor1',
-                                                {
-                                                    toolbar:
-                                                            [['Source', '-', 'NewPage', 'Preview', '-', 'Templates'],
-                                                                ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Print', 'SpellChecker', 'Scayt'],
-                                                                ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
-                                                                ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
-                                                                '/',
-                                                                ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
-                                                                ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
-                                                                ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-                                                                ['Link', 'Unlink', 'Anchor'],
-                                                                ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
-                                                                '/',
-                                                                ['Styles', 'Format', 'Font', 'FontSize'],
-                                                                ['TextColor', 'BGColor'],
-                                                                ['Maximize', 'ShowBlocks', '-', 'About'],
-                                                                ['Styles', 'Format'],
-                                                                ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', '-', 'About']
-                                                            ],
-                                                    height: '1024px'
-                                                });
-                                    </script>
-                                    <div id="eButtons" >
-                                        <input  type="hidden" name="id" value="" class="id_pl"/>
-                                        <input  type="hidden" name="id_pc" value="" class="id_pc"/>
-                                        <button type="submit" value="Actualizar" onclick="leer();" name="opc">Actualizar Plantilla</button>
-                                        <button type="submit" value="Crear_Plantilla" name="opc" onclick="leer();">Crear Plantilla</button>
                                     </div>
-                                    <div id="shortcut">
-                                        <ul>
-                                            <li>
-                                                <a href="#inbox.html" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-envelope fa-4x"></i> <span>Mail <span class="label pull-right bg-color-darken">14</span></span> </span> </a>
-                                            </li>
-                                            <li>
-                                                <a href="#calendar.html" class="jarvismetro-tile big-cubes bg-color-orangeDark"> <span class="iconbox"> <i class="fa fa-calendar fa-4x"></i> <span>Calendar</span> </span> </a>
-                                            </li>
-                                            <li>
-                                                <a href="#gmap-xml.html" class="jarvismetro-tile big-cubes bg-color-purple"> <span class="iconbox"> <i class="fa fa-map-marker fa-4x"></i> <span>Maps</span> </span> </a>
-                                            </li>
-                                            <li>
-                                                <a href="#invoice.html" class="jarvismetro-tile big-cubes bg-color-blueDark"> <span class="iconbox"> <i class="fa fa-book fa-4x"></i> <span>Invoice <span class="label pull-right bg-color-darken">99</span></span> </span> </a>
-                                            </li>
-                                            <li>
-                                                <a href="#gallery.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i class="fa fa-picture-o fa-4x"></i> <span>Gallery </span> </span> </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"> <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>My Profile </span> </span> </a>
-                                            </li>
-                                        </ul>
+                                    <div class="widget-body">
+
+                                        <h3>NOMENCLATURA</h3>
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th><i class="fa  fa-align-left"> </i> Nomenclatura</th>
+                                                    <th><i class="fa fa-chain"> </i>  Significado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ><td><code>[nombre]</code></td><td>Nombre del trabajador</td></tr>
+                                                <tr><td><code>[app]</code></td><td>Apellido Paterno del trabajador</td></tr>
+                                                <tr><td><code>[apm]</code></td><td>Apellido Materno del trabajador</td></tr>
+                                                <tr><td><code>[dni]</code></td><td>Dni del trabajador</td></tr>
+                                                <tr><td><code>[dir]</code></td><td>direccion del trabajador</td></tr>
+                                                <tr><td><code>[prov]</code></td><td>Provincia actual</td></tr>
+                                                <tr><td><code>[dist]</code></td><td>Distrito en el que estan</td></tr>
+                                                <tr><td><code>[dep]</code></td><td>Departamento en donde se va a desenpeñar</td></tr>
+                                                <tr><td><code>[desde]</code></td><td>fecha de Inicio del contrato</td></tr>
+                                                <tr><td><code>[hasta]</code></td><td>Fecha de Fin del contrato</td></tr>
+                                                <tr><td><code>[puesto]</code></td><td>Puesto que va a desempeñar</td></tr>
+                                                <tr><td><code>[fe_suscripcion]</code></td><td>Fecha de suscripcion</td></tr>
+                                                <tr><td><code>[sueldo]</code></td><td>Sueldo del trabajador</td></tr>
+                                                <tr><td><code>[horas]</code></td><td>Horas de trabajo semanales</td></tr>
+                                                <tr><td><code>[cursos]</code></td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
+                                                <tr><td><code>[funciones_pr]</code></td><td>Funciones primarias que va a desempeñar en el puesto</td></tr>
+                                                <tr><td><code>[funciones_sec]</code></td><td>Funciones secundarias que va a desempeñar en el puesto</td></tr>
+                                                <tr><td><code>[moneda]</code></td><td>Tipo de moneda de pago</td></tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </form>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="col-sm-12 col-md-12 col-lg-8">
+                            <div class="jarviswidget jarviswidget-color-blue" id="wid-id-0"  data-widget-editbutton="false"  data-widget-fullscreenbutton="false" data-widget-sortable="false">
+
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
+                                    <h2>Editar Platilla</h2>
+
+                                </header>
+
+                                <!-- widget div-->
+                                <div>
+
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+
+                                    </div>
+                                    <!-- end widget edit box -->
+
+                                    <!-- widget content -->
+                                    <div class="widget-body no-padding">
+
+                                        <form class="ckeditor_form form_editor" action="../../../formato_plantilla" method="post" style="width:100%;" align="center">
+                                            <button type="submit" value="Asignar" onclick="leer();" name="opc">Asignar Plantilla</button>
+                                            <!--<button  onclick="procesar_texto();" type="button">Procesar </button>
+                                            -->
+                                            <div id="eButtons" >
+                                                <input  type="hidden" name="id" value="" class="id_pl"/>
+                                                <input  type="hidden" name="id_pc" value="" class="id_pc"/>
+                                                <button type="submit" value="Actualizar" onclick="leer();" name="opc">Actualizar Plantilla</button>
+                                                <button type="button" value="Crear_Plantilla"  onclick="leer();" name="opc" class="btn btn-primary btn-circle btn-lg btn_crear"><i class="glyphicon glyphicon-floppy-disk"></i></button>
+                                            </div>
+                                            <input type="hidden" name="id_dep_asig" id="di_sig">
+                                            <input type="hidden" name="id_are_asig" id="de_sig">
+                                            <input type="hidden" name="id_sec_asig" id="ar_sig">
+                                            <input type="hidden" name="id_di_asig" id="se_sig">
+                                            <input type="hidden" name="id_pu_asig" id="pu_sig">
+                                            <h3><strong>NOMBRE PLANTILLA</strong></h3>
+                                            <input type="text" required="" class="nombre_pl form-control" name="no_pl" ><br><br>
+                                            <textarea cols="100" id="editor1" name="editor1" >
+                                            </textarea>
+                                            <script>
+                                                // Replace the <textarea id="editor1"> with an CKEditor instance.
+                                                /* config.toolbar = 'Full';
+                                                 
+                                                 config.toolbar_Full =
+                                                 [
+                                                 ['Source', '-', 'Save', 'NewPage', 'Preview', '-', 'Templates'],
+                                                 ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Print', 'SpellChecker', 'Scayt'],
+                                                 ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
+                                                 ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
+                                                 '/',
+                                                 ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
+                                                 ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
+                                                 ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                                                 ['Link', 'Unlink', 'Anchor'],
+                                                 ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
+                                                 '/',
+                                                 ['Styles', 'Format', 'Font', 'FontSize'],
+                                                 ['TextColor', 'BGColor'],
+                                                 ['Maximize', 'ShowBlocks', '-', 'About']
+                                                 ];*/
+                                                /* CKEDITOR.replace('editor1', {
+                                                 on: {
+                                                 focus: onFocus,
+                                                 blur: onBlur,
+                                                 // Check for availability of corresponding plugins.
+                                                 pluginsLoaded: function(evt) {
+                                                 
+                                                 
+                                                 var doc = CKEDITOR.document, ed = evt.editor;
+                                                 if (!ed.getCommand('bold'))
+                                                 doc.getById('exec-bold').hide();
+                                                 if (!ed.getCommand('link'))
+                                                 doc.getById('exec-link').hide();
+                                                 }
+                                                 
+                                                 }, height: '1024px'});*/
+                                                CKEDITOR.replace('editor1',
+                                                        {
+                                                            toolbar:
+                                                                    [['Source', '-', 'NewPage', 'Preview', '-', 'Templates'],
+                                                                        ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Print', 'SpellChecker', 'Scayt'],
+                                                                        ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
+                                                                        ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
+                                                                        '/',
+                                                                        ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
+                                                                        ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
+                                                                        ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                                                                        ['Link', 'Unlink', 'Anchor'],
+                                                                        ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
+                                                                        '/',
+                                                                        ['Styles', 'Format', 'Font', 'FontSize'],
+                                                                        ['TextColor', 'BGColor'],
+                                                                        ['Maximize', 'ShowBlocks', '-', 'About'],
+                                                                        ['Styles', 'Format'],
+                                                                        ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', '-', 'About']
+                                                                    ],
+                                                            height: '1024px'
+                                                        });
+                                            </script>
+
+                                            <div id="shortcut">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#inbox.html" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-envelope fa-4x"></i> <span>Mail <span class="label pull-right bg-color-darken">14</span></span> </span> </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#calendar.html" class="jarvismetro-tile big-cubes bg-color-orangeDark"> <span class="iconbox"> <i class="fa fa-calendar fa-4x"></i> <span>Calendar</span> </span> </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#gmap-xml.html" class="jarvismetro-tile big-cubes bg-color-purple"> <span class="iconbox"> <i class="fa fa-map-marker fa-4x"></i> <span>Maps</span> </span> </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#invoice.html" class="jarvismetro-tile big-cubes bg-color-blueDark"> <span class="iconbox"> <i class="fa fa-book fa-4x"></i> <span>Invoice <span class="label pull-right bg-color-darken">99</span></span> </span> </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#gallery.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i class="fa fa-picture-o fa-4x"></i> <span>Gallery </span> </span> </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"> <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>My Profile </span> </span> </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    <!-- end widget content -->
+
+                                </div>
+                                <!-- end widget div -->
 
                             </div>
-                            <!-- end widget content -->
+                            <!-- end widget -->
 
-                        </div>
-                        <!-- end widget div -->
+                        </article>
+                        <!-- END COL -->
+
 
                     </div>
-                    <!-- end widget -->
-
-                </article>
-                <!-- END COL -->
-
-
+                </section>
             </div>
 
-        </section>
-
+        </div>
     </div>
-</div>
 </body>
 <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
 
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script>
-                                            if (!window.jQuery) {
-                                                document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                            }
+                                                if (!window.jQuery) {
+                                                    document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                }
 </script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script>
-                                            if (!window.jQuery.ui) {
-                                                document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                            }
+                                                if (!window.jQuery.ui) {
+                                                    document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                }
 </script>
 
 <!-- IMPORTANT: APP CONFIG -->
@@ -946,32 +962,47 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
 <!-- PAGE RELATED PLUGIN(S) -->
 
-
 <script type="text/javascript">
-                                            // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                                            $(document).ready(function() {
-                                                pageSetUp();
-                                            })
+                                                // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                                                $(document).ready(function () {
+                                                    pageSetUp();
+                                                    $(".btn_crear").click(function () {
+                                                        if ($(".form_editor").valid()) {
+                                                            $.ajax({
+                                                                url: "../../../formato_plantilla",
+                                                                data: $(".form_editor").serialize() + "&opc=Crear_Plantilla",
+                                                                type: 'POST',
+                                                                success: function (data, textStatus, jqXHR) {
+                                                                    if (data.rpta === "1") {
+                                                                        $(".form_editor")[0].reset();
+                                                                        $.smallBox({
+                                                                            title: "¡Felicitaciones!",
+                                                                            content: "<i class='fa fa-clock-o'></i> <i>El formato de plantilla contractual se ha subido con éxito...</i>",
+                                                                            color: "#296191",
+                                                                            iconSmall: "fa fa-cloud bounce animated",
+                                                                            timeout: 7000
+                                                                        });
+
+                                                                    } else if (data.rpta === "-1") {
+                                                                        $.smallBox({
+                                                                            title: "¡Alerta!",
+                                                                            content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar su plantilla...</i>",
+                                                                            color: "#C46A69",
+                                                                            iconSmall: "fa fa-cloud bounce animated",
+                                                                            timeout: 7000
+                                                                        });
+                                                                    }
+                                                                    // alert(data.mensaje);
+                                                                }
+                                                            });
+                                                            return false;
+                                                        } else {
+                                                            return false;
+                                                        }
+                                                    });
+                                                })
 
 </script>
-
-<!-- Your GOOGLE ANALYTICS CODE Below -->
-<script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(ga, s);
-    })();
-
-</script>
-
 </html>
 
 <%} else {

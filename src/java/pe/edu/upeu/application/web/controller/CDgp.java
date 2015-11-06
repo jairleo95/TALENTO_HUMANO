@@ -140,7 +140,6 @@ public class CDgp extends HttpServlet {
         }
 
         if (opc.equals("Registrar")) {
-           // System.out.println("reg");
             String FE_DESDE = request.getParameter("FEC_DESDE");
             String FE_HASTA = request.getParameter("FEC_HASTA");
             double CA_SUELDO = Double.parseDouble(request.getParameter("SUELDO"));
@@ -167,7 +166,6 @@ public class CDgp extends HttpServlet {
             double DE_BEV = 0.0;
             double ASIGNACION_FAMILIAR = 0.0;
             //----CA_CENTRO_COSTOS NO EXISTE EN TABLA RHTM_DGP---
-            //double CA_CENTRO_COSTOS = 0.0;
             /*Fuera de planilla*/
             if (ID_REQUERIMIENTO.equals("REQ-0007") || ID_REQUERIMIENTO.equals("REQ-0008") || ID_REQUERIMIENTO.equals("REQ-0009") || ID_REQUERIMIENTO.equals("REQ-0010") || ID_REQUERIMIENTO.equals("REQ-0011")) {
                 CA_BONO_ALIMENTARIO = 0.0;
@@ -275,8 +273,6 @@ public class CDgp extends HttpServlet {
             Double horas_totales = Double.parseDouble(request.getParameter("h_total"));
             String id_d_hor = "";
             id_d_hor = IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, iddgp, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO, horas_totales);
-
-            //   ID_DETALLE_HORARIO = IHor.Max_id_Detalle_Horario();
             for (int i = 0; i < dia.size(); i++) {
                 for (int j = 0; j < 10; j++) {
                     String hora_desde = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
@@ -355,14 +351,9 @@ public class CDgp extends HttpServlet {
             if (Tipo_planilla.equals("TPL-0003")) {
                 idreq = "REQ-0017";
             }
-            out.print(iddeph + idtr + idreq + iddep);
-            //sesion.setAttribute("List_Puesto", pu.List_Puesto_Dep(iddep));
-            //sesion.setAttribute("Listar_Trabajador_id", tr.ListaridTrabajador(idtr));
-            //response.sendRedirect("Vista/Renuncias/Reg_Dgp_Renuncia.jsp?idreq=" + idreq);
         }
 
         if (opc.equals("rd")) {
-
             String ID_DGP = request.getParameter("iddgp");
             String ID_TRABAJADOR = request.getParameter("idtr");
             sesion.setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
@@ -371,16 +362,11 @@ public class CDgp extends HttpServlet {
             int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
             boolean estado = s.Validar_Envio_Solicitud(ID_DGP.trim());
             sesion.setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
-            // out.print(ID_DGP);
-
             response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc&est=" + estado);
         }
         if (opc.equals("filtrar")) {
-
             sesion.setAttribute("List_Area", area.List_Area_ID(iddep));
-            //    int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
             sesion.setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
-
             response.sendRedirect("Vista/Dgp/Busc_Req_Autorizado.jsp");
         }
         if (opc.equals("Detalle")) {
@@ -427,7 +413,6 @@ public class CDgp extends HttpServlet {
                     if (mes >= 9 && dia > 9) {
                         fe_subs = año + "-" + (mes + 1) + "-" + dia;
                     }
-                    //out.println(id_dir);
                     response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig + "&id_direc=" + id_dir + "&fe_subs=" + fe_subs);
 
                 } else if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("1")) {
@@ -498,11 +483,8 @@ public class CDgp extends HttpServlet {
         }
 
         if (opc.equals("Listar")) {
-
             sesion.setAttribute("List_Det_Dgp", dgp.LIST_DET_DGP(iddep));
             sesion.setAttribute("List_Trb_Mod_Rel", tr.LIST_TRABAJADOR_MOD_REL());
-
-            // out.print(Idgp.LIST_DET_DGP(iddep).size());
             response.sendRedirect("Vista/Dgp/List_Dgp.jsp?iddep");
 
         }
@@ -553,7 +535,6 @@ public class CDgp extends HttpServlet {
             double CA_BONO_ALIMENTARIO = 0.0;
             double DE_BEV = 0.0;
             //----CA_CENTRO_COSTOS NO EXISTE EN TABLA RHTM_DGP---
-            //double CA_CENTRO_COSTOS = 0.0;
 
             /*Fuera de planilla*/
             if (ID_REQUERIMIENTO.equals("REQ-0007") || ID_REQUERIMIENTO.equals("REQ-0008") || ID_REQUERIMIENTO.equals("REQ-0009") || ID_REQUERIMIENTO.equals("REQ-0010") || ID_REQUERIMIENTO.equals("REQ-0011")) {
@@ -605,19 +586,6 @@ public class CDgp extends HttpServlet {
                     tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, ID_TRABAJADOR, ES_CUENTA_SUELDO);
                 }
             }
-
-            //out.print(NU_CUENTA);
-            //out.print(NU_CUENTA_BANC);
-            // String idrp = IReq.id_det_req_proc(ID_DGP);
-
-            /*for (int g = 1; g <= NUMERO; g++) {
-             String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
-             double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
-             if (ID_CENTRO_COSTO != null && porcentaje != 0.0) {
-             dcc.INSERT_DETALLE_CENTRO_COSTO(null, ID_CENTRO_COSTO, iddgp, porcentaje, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, null, "1");
-             }
-             }
-             */
             int cant_inicial = Integer.parseInt(request.getParameter("cant_actual_anti"));
             int cant_ingresada = Integer.parseInt(request.getParameter("cant_ingresada"));
 
@@ -694,7 +662,6 @@ public class CDgp extends HttpServlet {
                     }
                 }
             }
-            // out.print(id_d_hor + "---" + ID_TIPO_HORARIO + "---" + horas_totales);
             sesion.setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
             int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
             int num_ad = doc.List_Adventista(ID_TRABAJADOR);
