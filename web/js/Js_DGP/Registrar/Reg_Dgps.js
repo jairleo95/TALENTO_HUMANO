@@ -563,7 +563,7 @@ function cuenta_bancaria(banco) {
         $("#nu_cuen_ban").val("");
         $("#subscription").attr('checked', false);
         $("#nu_cuen").attr("maxlength", "21");
-        $("#nu_cuen").attr("minlength", "19");
+        $("#nu_cuen").attr("minlength", "18");
         // $("#nu_cuen").val("0011-")
         $("#no_cuen_otros").hide();
         $("#nu_cuen_otros").val("");

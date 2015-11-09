@@ -17,8 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.Carrera_UniversidadDAO;
-import pe.edu.upeu.application.dao.Centro_CostoDAO;
-import pe.edu.upeu.application.dao.ContratoDAO;
 import pe.edu.upeu.application.dao.Datos_Hijo_TrabajadorDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DireccionDAO;
@@ -30,8 +28,6 @@ import pe.edu.upeu.application.dao.Tipo_DocumentoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UbigeoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCarrera_UniversidadDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceCentro_CostosDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDatos_Hijo_Trabajador;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
@@ -190,6 +186,11 @@ public class CTrabajador extends HttpServlet {
                     String NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
                     String ES_CUENTA_SUELDO = request.getParameter("ES_CUENTA_SUELDO");
                     String CO_UNIVERSITARIO = request.getParameter("COD_UNI");
+
+                    //VALIDACIONES CUENTA SUELDO
+                   /* if (NO_BANCO == null & ES_GEM_NU_CUENTA.equals("0")) {
+                         ES_CUENTA_SUELDO = "0";
+                    }*/
 
                     if (tr.val_nu_doc(NU_DOC)) {
                         out.print("<script>alert('Trabajador ya existe!') window.history.back();</script>");
