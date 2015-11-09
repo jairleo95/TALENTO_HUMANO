@@ -13,7 +13,6 @@
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
 <jsp:useBean id="Listar_Trabajador_id" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Puesto" scope="session" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Det_Puesto" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Requerimiento" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="list_Cuenta_Sueldo" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="fecha_maxima_plazo" scope="session" class="java.lang.String"/>
@@ -359,11 +358,13 @@
                                                         </section>
                                                     </div>
                                                     <%} else { %>
-                                                    <%for (int i = 0; i < list_Cuenta_Sueldo.size(); i++) {
+                                                    <%
+                                                       
+                                                        for (int i = 0; i < list_Cuenta_Sueldo.size(); i++) {
                                                             Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                             cs = (Cuenta_Sueldo) list_Cuenta_Sueldo.get(i);
-
                                                     %>
+                                                  
                                                     <div class="row"> 
                                                         <section class="col col-3" name="">
                                                             <label class="select" id="titu" >Cta Sueldo - Banco:
@@ -527,7 +528,8 @@
                                                     </div>
                                                     <%} else { %>
 
-                                                    <% System.out.println(list_Cuenta_Sueldo.size() + " -size");
+                                                    <%
+                                                        System.out.println(list_Cuenta_Sueldo.size() + " -size");
                                                         for (int i = 0; i < list_Cuenta_Sueldo.size(); i++) {
                                                             Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                             cs = (Cuenta_Sueldo) list_Cuenta_Sueldo.get(i);

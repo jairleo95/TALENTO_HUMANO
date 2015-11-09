@@ -189,7 +189,9 @@
     <center>
 
         <%        if (LISTA_HIJOS.size() != 0) {
-                if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") || rol.trim().equals("ROL-0013")) {%>
+        //        if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") || rol.trim().equals("ROL-0013")) {
+                if (true) {
+        %>
         <div class="listar_hijos"></div>
         <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Registrar un hijo</a>
         <%}%>
@@ -197,7 +199,10 @@
 
         <label>No se ha registrado ningun Hijo(a)</label><br>
 
-        <%  if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") || rol.trim().equals("ROL-0013")) {%>
+        <%
+            //if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") || rol.trim().equals("ROL-0013")) {
+        if(true){
+        %>
         <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Registrar Hijos</a>
         <%}%>
     </center>
