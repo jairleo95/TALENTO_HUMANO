@@ -65,7 +65,8 @@ public class CFormato_Plantilla extends HttpServlet {
                     String PUES = request.getParameter("id_pu_asig");
                     String id = request.getParameter("id_pc");
                     pl.Insertar_pertenencia(id, DIR, DEP, AREA, SEC, PUES, iduser);
-                    response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
+                    //  response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
+                    rpta.put("rpta", "1");
                 }
                 if (opc.equals("asignar")) {
                     sesion.setAttribute("Listar_Direccion_X", dir.Listar_Direccion());
@@ -75,8 +76,6 @@ public class CFormato_Plantilla extends HttpServlet {
                 if (opc.equals("Actualizar")) {
                     String texto_html = request.getParameter("valor");
                     String id = request.getParameter("id");
-
-                    //ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                     File archivo = new File(ubicacion + id);
                     if (archivo.exists()) {
                         //  archivo.delete();
@@ -90,8 +89,7 @@ public class CFormato_Plantilla extends HttpServlet {
                         escribir.write(texto_html);
                         escribir.close();
                     }
-                    //out.print(texto_html +id);
-                    response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
+                    rpta.put("rpta", "1");
                 }
 
                 if (opc.equals("Listar")) {

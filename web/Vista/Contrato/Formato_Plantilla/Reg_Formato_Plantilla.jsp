@@ -208,8 +208,9 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
             function leer() {
                 var ap = $(".ckeditor_form");
+                $(".valor_editor").remove();
                 var editor = CKEDITOR.instances.editor1.getData();
-                ap.append("<input type='hidden' value='" + editor + "' name='valor'>");
+                ap.append("<input type='hidden' class='valor_editor' value='" + editor + "' name='valor'>");
             }
             function lis_dep(b) {
                 $.post("../../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
@@ -315,22 +316,21 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     var list = objJson.lista;
                     if (list.length > 0) {
                         for (var i = 0; i < list.length; i++) {
-                            texto += '<tr>';
-                            texto += '<td align="center">' + (i + 1) + '</td>';
-                            texto += '<td align="center">' + list[i].nom_pl + '</td>';
-                            if (list[i].es_pl === '1') {
-                                texto += '<td align="center">Activado</td>';
-                            } else {
-                                texto += '<td align="center">Desactivado</td>';
-                            }
+                            texto += '<tr style="height:5px" class="tr_li_plantilla" data-value="' + i + '">';
+                            texto += '<td align="center" style="width:.5%">' + (i + 1) + '</td>';
+                            texto += '<td ><i class="fa fa-file-text"></i> ' + list[i].nom_pl + '</td>';
+                            /* if (list[i].es_pl === '1') {
+                             texto += '<td align="center">Activado</td>';
+                             } else {
+                             texto += '<td align="center">Desactivado</td>';
+                             }*/
                             texto += '<input type="hidden" value="' + list[i].id + '" class="id_plantilla' + i + '" />';
                             texto += '<input type="hidden" value="' + list[i].nom_ar + '" class="plantilla' + i + '" />';
                             texto += '<input type="hidden" value="' + list[i].id_pp + '" class="idplpu' + i + '" />';
-                            texto += '<td align="center"><button  type="button" value="' + i + '" class="btn btn-primary btn-cargar_pl">Cargar</button></td>';
                             if (list[i].es_pl === '1') {
-                                texto += '<td align="center" ><button style="width: 100px" type="button" value="' + i + '" class="btn btn-danger btn-Desac_pl">Desactivar</button></td>';
+                                texto += '<td align="center" ><button style="width: 100px" type="button" value="' + i + '" class="btn btn-xs btn-danger btn-Desac_pl">Desactivar</button></td>';
                             } else {
-                                texto += '<td align="center"><button style="width: 100px" type="button" value="' + i + '" class=" btn btn-success btn-Activ_pl">Activar</button></td>';
+                                texto += '<td align="center"><button style="width: 100px" type="button" value="' + i + '" class=" btn btn-xs btn-success btn-Activ_pl">Activar</button></td>';
                             }
                         }
                         texto += '</tr>';
@@ -339,13 +339,30 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     else {
                         d.append("<tr><td>NO HAY PLANTILLAS</td></tr>");
                     }
-                    $(".btn-cargar_pl").click(function () {
-                        //alert();
-                        mostrar_plantilla($(".plantilla" + $(this).val()).val());
-                        $(".id_pl").val($(".plantilla" + $(this).val()).val());
-                        $(".id_pc").val($(".id_plantilla" + $(this).val()).val());
 
-                    });
+                    document.getElementById("table_plantilla").onselectstart = function ()
+                    {
+                        return false;
+                    }
+
+                    $(".tr_li_plantilla").dblclick(function () {
+                        $(".tr_li_plantilla").removeClass("success");
+                        $(this).addClass("success");
+                        var valor = $(this).data('value');
+                        mostrar_plantilla($(".plantilla" + valor).val());
+                        $(".id_pl").val($(".plantilla" + valor).val());
+                        $(".id_pc").val($(".id_plantilla" + valor).val());
+
+                        $.smallBox({
+                            title: "¡Alerta!",
+                            content: $(this).data('value'),
+                            color: "#C46A69",
+                            iconSmall: "fa fa-cloud bounce animated",
+                            timeout: 7000
+                        });
+                        var editor = CKEDITOR.instances.editor1;
+                        editor.focus();
+                    })
                     $(".btn-Desac_pl").click(function () {
 
                         var idpp = $(".idplpu" + $(this).val()).val();
@@ -410,6 +427,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
 
             $(document).ready(function () {
+
                 var b = $(".dir");
                 //lis_dep(b);
                 var c = $(".dir_as");
@@ -519,71 +537,89 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 <section id="widget-grid" class="">
                     <div class="row">
                         <article class=" col-sm-12 col-md-12 col-lg-6">
+                            <div class="jarviswidget jarviswidget-sortable" id="wid-id-5" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" role="widget" style="">
+                                <header role="heading"><div class="jarviswidget-ctrls" role="menu">   <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse"><i class="fa fa-minus "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a></div>
+                                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                                    <h2>Cargar Plantillas</h2>
 
-                            <div class=" jarviswidget well" id="wid-id-5" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
-                                <div class="row">
-                                    <header>
-                                        <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
-                                        <h2>Markdown API</h2>
+                                    <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                                </header>
+                                <div role="content">
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
 
-                                    </header>
-                                    <div>
+                                    </div>
 
-                                        <div class="widget-body col-lg-12" align="center">
+                                    <div class="widget-body no-padding" >
 
-                                            <h3>CARGAR PLANTILLAS</h3>
-                                            <div class="col-sm-12 col-md-12 col-lg-12" width="50%" >
-                                                <section class="col col-12" >
-                                                    <label class="select">Filial:
-                                                        <select class="fil form-control" id="fil" name="id_di" >
-                                                            <option value="" >[Filial]</option>
-                                                            <option value="1" >Filial Lima</option>
-                                                            <option value="2" >Filial Juliaca</option>
-                                                            <option value="5" >Filial Tarapoto</option>
-                                                        </select>   
-                                                    </label>
-                                                </section>
-                                                <section class="col col-12" >
-                                                    <label class="select">Dirección:
-                                                        <select class="dir form-control" id="dir" name="id_di" >
-                                                            <option value="" >[Direccion]</option>
-                                                        </select>   
-                                                    </label>
-                                                </section>
+                                        <form id="checkout-form" class="smart-form" novalidate="novalidate">
+                                            <header>
+                                                <h3>Cargar Plantillas</h3>
+                                            </header>
+                                            <fieldset>
 
-                                                <section class="col col-12">
-                                                    <label>Departamento:
-                                                        <select class="dep form-control" id="dep" name="id_dep" >
-                                                            <option value="">[TODO]</option>
-                                                        </select>
-                                                    </label>
-                                                </section>
-                                                <section class="col col-12">
-                                                    <label>Area:
-                                                        <select class="area form-control" id="area" name="id_are" >
-                                                            <option value="">[TODO]</option>
-                                                        </select>
-                                                    </label>
-                                                </section>
 
-                                                <section class="col col-12">
-                                                    <label>Sección:
-                                                        <select class="seccion form-control" id="seccion" name="id_sec" >
-                                                            <option value="">[TODO]</option>
-                                                        </select>
-                                                    </label>
-                                                </section>
-                                                <section class="col col-12" >
-                                                    <label>Puesto:
-                                                        <select class="puesto form-control" id="puesto" name="id_pu" >
-                                                            <option value="">[TODO]</option>
-                                                        </select>
-                                                    </label>
-                                                </section>
-                                            </div>
-                                        </div>
+                                                <div class="row"> 
+                                                    <section class="col col-4" >
+                                                        <label class="select">Filial:
+                                                            <select class="fil form-control" id="fil" name="id_di" >
+                                                                <option value="" >[Filial]</option>
+                                                                <option value="1" >Filial Lima</option>
+                                                                <option value="2" >Filial Juliaca</option>
+                                                                <option value="5" >Filial Tarapoto</option>
+                                                            </select>   
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-4" >
+                                                        <label class="select">Dirección:
+                                                            <select class="dir form-control" id="dir" name="id_di" >
+                                                                <option value="" >[Direccion]</option>
+                                                            </select>   
+                                                        </label>
+                                                    </section>
+
+                                                    <section class="col col-4">
+                                                        <label class="select" >Departamento:
+                                                            <select class="dep form-control" id="dep" name="id_dep" >
+                                                                <option value="">[TODO]</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                </div> 
+                                                <div class="row">
+                                                    <section class="col col-4">
+                                                        <label class="select">Area:
+                                                            <select class="area form-control" id="area" name="id_are" >
+                                                                <option value="">[TODO]</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+
+                                                    <section class="col col-4">
+                                                        <label class="select">Sección:
+                                                            <select class="seccion form-control" id="seccion" name="id_sec" >
+                                                                <option value="">[TODO]</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-4" >
+                                                        <label class="select">Puesto:
+                                                            <select class="puesto form-control" id="puesto" name="id_pu" >
+                                                                <option value="">[TODO]</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                            </fieldset>
+                                            <footer>
+                                                <button type="submit" class="btn btn-primary">
+                                                    Aceptar
+                                                </button>
+                                            </footer>
+                                        </form>
                                     </div>
                                 </div>
+
                             </div>
                         </article>
                         <article class=" col-sm-12 col-md-12 col-lg-6">
@@ -594,6 +630,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                     <h2>Asignar Plantillas</h2>
 
                                     <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+
                                 <div role="content">
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
@@ -678,13 +715,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     </div>
                     <div class="row">
                         <legend align="center">Plantillas</legend>      
-                        <table class="table table-striped table-bordered table-hover dataTable no-footer">
+                        <table class="table table-striped table-bordered table-hover dataTable no-footer" id="table_plantilla">
                             <thead>
                                 <tr>
                                     <th align="center" style="text-align:center;">Nro</th>
                                     <th align="center" style="text-align:center;">Nombre Plantilla</th>
-                                    <th align="center" style="text-align:center;">Estado Plantilla Puesto</th>
-                                    <th colspan="2" style="text-align:center;">Acciones</th>
+                                    <th S style="text-align:center;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody class="tbody-plantilla">
@@ -765,14 +801,13 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                     <div class="widget-body no-padding">
 
                                         <form class="ckeditor_form form_editor" action="../../../formato_plantilla" method="post" style="width:100%;" align="center">
-                                            <button type="submit" value="Asignar" onclick="leer();" name="opc">Asignar Plantilla</button>
                                             <!--<button  onclick="procesar_texto();" type="button">Procesar </button>
                                             -->
                                             <div id="eButtons" >
                                                 <input  type="hidden" name="id" value="" class="id_pl"/>
                                                 <input  type="hidden" name="id_pc" value="" class="id_pc"/>
-                                                <button type="submit" value="Actualizar" onclick="leer();" name="opc">Actualizar Plantilla</button>
                                                 <button type="button" value="Crear_Plantilla"  onclick="leer();" name="opc" class="btn btn-primary btn-circle btn-lg btn_crear"><i class="glyphicon glyphicon-floppy-disk"></i></button>
+                                                <button type="button" value="Asignar"  onclick="leer();" name="opc" class="btn btn-primary btn-circle btn-lg btn_asignar"><i class="glyphicon glyphicon-share-alt"></i></button>
                                             </div>
                                             <input type="hidden" name="id_dep_asig" id="di_sig">
                                             <input type="hidden" name="id_are_asig" id="de_sig">
@@ -966,6 +1001,60 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                 // DO NOT REMOVE : GLOBAL FUNCTIONS!
                                                 $(document).ready(function () {
                                                     pageSetUp();
+                                                    var editor = CKEDITOR.instances.editor1;
+                                                    editor.on('change', function () {
+                                                        leer();
+                                                        $.ajax({
+                                                            url: "../../../formato_plantilla",
+                                                            data: $(".form_editor").serialize() + "&opc=Actualizar",
+                                                            type: 'POST',
+                                                            success: function (data, textStatus, jqXHR) {
+                                                                $.smallBox({
+                                                                    content: "<i class='fa fa-clock-o'></i> <i>Actualizando...</i>",
+                                                                    color: "#296191",
+                                                                    iconSmall: "fa fa-cloud bounce animated",
+                                                                    timeout: 7000
+                                                                });
+                                                            }
+                                                        });
+                                                        /* $.smallBox({
+                                                         title: "¡Felicitaciones!",
+                                                         content: "<i class='fa fa-clock-o'></i> <i>El formato de plantilla contractual se ha actualizado con éxito...</i>",
+                                                         color: "#296191",
+                                                         iconSmall: "fa fa-cloud bounce animated",
+                                                         timeout: 7000
+                                                         });*/
+                                                    });
+                                                    $(".btn_asignar").click(function () {
+                                                        $.ajax({
+                                                            url: "../../../formato_plantilla",
+                                                            data: $(".form_editor").serialize() + "&opc=Asignar",
+                                                            type: 'POST',
+                                                            success: function (data, textStatus, jqXHR) {
+                                                                if (data.rpta === "1") {
+                                                                    $(".form_editor")[0].reset();
+                                                                    $.smallBox({
+                                                                        title: "¡Felicitaciones!",
+                                                                        content: "<i class='fa fa-clock-o'></i> <i>El formato de plantilla contractual se ha subido con éxito...</i>",
+                                                                        color: "#296191",
+                                                                        iconSmall: "fa fa-cloud bounce animated",
+                                                                        timeout: 7000
+                                                                    });
+
+                                                                } else if (data.rpta === "-1") {
+                                                                    $.smallBox({
+                                                                        title: "¡Alerta!",
+                                                                        content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar su plantilla...</i>",
+                                                                        color: "#C46A69",
+                                                                        iconSmall: "fa fa-cloud bounce animated",
+                                                                        timeout: 7000
+                                                                    });
+                                                                }
+                                                            }
+                                                        });
+
+                                                    })
+
                                                     $(".btn_crear").click(function () {
                                                         if ($(".form_editor").valid()) {
                                                             $.ajax({
