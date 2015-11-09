@@ -17,23 +17,19 @@ public class V_Horario {
     private String ho_desde;
     private String ho_hasta;
     private String id_horario;
-
-    public V_Horario(String id_dgp, String id_detalle_horario, String dia_horario, String ho_desde, String ho_hasta, String id_horario) {
-        this.id_dgp = id_dgp;
-        this.id_detalle_horario = id_detalle_horario;
-        this.dia_horario = dia_horario;
-        this.ho_desde = ho_desde;
-        this.ho_hasta = ho_hasta;
-        this.id_horario = id_horario;
-    }
+    private String no_ti_horario;
 
     public V_Horario() {
+    }
+
+    public V_Horario(String id_dgp, String id_detalle_horario, String dia_horario, String ho_desde, String ho_hasta, String id_horario, String no_ti_horario) {
         this.id_dgp = id_dgp;
         this.id_detalle_horario = id_detalle_horario;
         this.dia_horario = dia_horario;
         this.ho_desde = ho_desde;
         this.ho_hasta = ho_hasta;
         this.id_horario = id_horario;
+        this.no_ti_horario = no_ti_horario;
     }
 
     public String getId_dgp() {
@@ -83,5 +79,15 @@ public class V_Horario {
     public void setId_horario(String id_horario) {
         this.id_horario = id_horario;
     }
+
+    public String getNo_ti_horario() {
+        return no_ti_horario;
+    }
+
+    public void setNo_ti_horario(String no_ti_horario) {
+        this.no_ti_horario = no_ti_horario;
+    }
+
+    
     
 }
