@@ -59,6 +59,7 @@ public class HorarioDAO implements InterfaceHorarioDAO {
                 Vh.setId_detalle_horario(rs.getString("id_detalle_horario"));
                 Vh.setId_dgp(rs.getString("id_dgp"));
                 Vh.setId_horario(rs.getString("id_horario"));
+                Vh.setNo_ti_horario(rs.getString("no_horario"));
                 list.add(Vh);
             }
         } catch (SQLException e) {

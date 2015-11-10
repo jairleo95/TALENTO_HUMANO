@@ -63,22 +63,27 @@
         <div class="cont">
             <%
                 InterfaceListaDAO l = new ListaDAO();
-                if(List_V_Horario.size()==0){
-                        out.print("<center><h3>No sujeto a Fiscalizacion</h3></center>");
-                    }
+                if (List_V_Horario.size() == 0) {
+                    out.print("<center><h3>Tipo de Horario:&nbsp;<strong>No sujeto a Fiscaslización</strong></h3></center><hr>");
+                }else{
+                    V_Horario h = new V_Horario();
+                        h = (V_Horario) List_V_Horario.get(0);
+                        out.print("<center><h3>Tipo de Horario:&nbsp; <strong>"+h.getNo_ti_horario() +"</strong></h3></center><hr>");
+                }
                 for (int i = 0; i < l.List_H().length; i++) {
                     int g = 0;
-                    
+
                     for (int s = 0; s < List_V_Horario.size(); s++) {
                         V_Horario h = new V_Horario();
                         h = (V_Horario) List_V_Horario.get(s);
                         if (h.getDia_horario().trim().equals(l.List_H()[i][0])) {
                             if (g == 0) {%>
+                            
             <section class="col col-sm-4 col-md-4">
                 <div class="caja">
                     <table class="table table-condensed table-bordered">
                         <tr class="c_header"><td colspan="3"  style="text-align: center;"><% out.println(l.List_H()[i][1]);%></td></tr>   
-                        <%}%>
+                            <%}%>
                         <tr>
                             <%if (h.getHo_desde().equals("00:00") && h.getHo_hasta().equals("00:00")) {%>
                             <%} else {%>
