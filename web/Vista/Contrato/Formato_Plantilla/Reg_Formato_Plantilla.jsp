@@ -335,6 +335,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         }
                         texto += '</tr>';
                         d.append(texto);
+                        $(".tabla_plant").show('slow');
                     }
                     else {
                         d.append("<tr><td>NO HAY PLANTILLAS</td></tr>");
@@ -535,247 +536,279 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
             <div id="content" >
                 <section id="widget-grid" class="">
+
                     <div class="row">
-                        <article class=" col-sm-12 col-md-12 col-lg-6">
-                            <div class="jarviswidget jarviswidget-sortable" id="wid-id-5" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" role="widget" style="">
-                                <header role="heading"><div class="jarviswidget-ctrls" role="menu">   <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse"><i class="fa fa-minus "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a></div>
-                                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Cargar Plantillas</h2>
-
-                                    <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
-                                </header>
-                                <div role="content">
-                                    <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
-
-                                    </div>
-
-                                    <div class="widget-body no-padding" >
-
-                                        <form id="checkout-form" class="smart-form" novalidate="novalidate">
-                                            <header>
-                                                <h3>Cargar Plantillas</h3>
-                                            </header>
-                                            <fieldset>
 
 
-                                                <div class="row"> 
-                                                    <section class="col col-4" >
-                                                        <label class="select">Filial:
-                                                            <select class="fil form-control" id="fil" name="id_di" >
-                                                                <option value="" >[Filial]</option>
-                                                                <option value="1" >Filial Lima</option>
-                                                                <option value="2" >Filial Juliaca</option>
-                                                                <option value="5" >Filial Tarapoto</option>
-                                                            </select>   
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-4" >
-                                                        <label class="select">Dirección:
-                                                            <select class="dir form-control" id="dir" name="id_di" >
-                                                                <option value="" >[Direccion]</option>
-                                                            </select>   
-                                                        </label>
-                                                    </section>
-
-                                                    <section class="col col-4">
-                                                        <label class="select" >Departamento:
-                                                            <select class="dep form-control" id="dep" name="id_dep" >
-                                                                <option value="">[TODO]</option>
-                                                            </select>
-                                                        </label>
-                                                    </section>
-                                                </div> 
-                                                <div class="row">
-                                                    <section class="col col-4">
-                                                        <label class="select">Area:
-                                                            <select class="area form-control" id="area" name="id_are" >
-                                                                <option value="">[TODO]</option>
-                                                            </select>
-                                                        </label>
-                                                    </section>
-
-                                                    <section class="col col-4">
-                                                        <label class="select">Sección:
-                                                            <select class="seccion form-control" id="seccion" name="id_sec" >
-                                                                <option value="">[TODO]</option>
-                                                            </select>
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-4" >
-                                                        <label class="select">Puesto:
-                                                            <select class="puesto form-control" id="puesto" name="id_pu" >
-                                                                <option value="">[TODO]</option>
-                                                            </select>
-                                                        </label>
-                                                    </section>
-                                                </div>
-                                            </fieldset>
-                                            <footer>
-                                                <button type="submit" class="btn btn-primary">
-                                                    Aceptar
-                                                </button>
-                                            </footer>
-                                        </form>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </article>
-                        <article class=" col-sm-12 col-md-12 col-lg-6">
-
-                            <div class="jarviswidget jarviswidget-sortable" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" role="widget" style="">
-                                <header role="heading"><div class="jarviswidget-ctrls" role="menu">   <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse"><i class="fa fa-minus "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a></div>
-                                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Asignar Plantillas</h2>
-
-                                    <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
-
-                                <div role="content">
-                                    <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
-
-                                    </div>
-                                    <div class="widget-body no-padding">
-
-                                        <form id="checkout-form" class="smart-form" novalidate="novalidate">
-                                            <header>
-                                                <h3>Asignar Plantillas</h3>
-                                            </header>
-                                            <fieldset>
-                                                <div class="row"> 
-                                                    <section class="col col-4" >
-                                                        <label class="select">Filial:
-                                                            <select class="fil_as form-control" >
-                                                                <option value="">[Filial]</option>
-                                                                <option value="1">Filial Lima</option>
-                                                                <option value="2">Filial Juliaca</option>
-                                                                <option value="5">Filial Tarapoto</option>
-                                                            </select>   
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-4" >
-                                                        <label class="select">Dirección:
-                                                            <select class="dir_as form-control"   >
-                                                                <option value="0">[Direccion]</option>
-                                                            </select>   
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-4" >
-                                                        <label class="select">Departamento:
-                                                            <select class="dep_as form-control"  >
-                                                                <option value="0">[TODO]</option>
-                                                            </select>
-                                                        </label>
-                                                    </section>
-                                                </div>
-                                                <div class="row">
-                                                    <section class="col col-4" >
-                                                        <label class="select">Area:
-                                                            <select class="area_as form-control" >
-                                                                <option value="0">[TODO]</option>
-                                                            </select>
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-4"   >
-                                                        <label class="select">Sección:
-                                                            <select class="seccion_as form-control col-5"   >
-                                                                <option value="0">[TODO]</option>
-                                                            </select>
-                                                        </label>
-                                                    </section>
-                                                    <section class="col col-4" >
-                                                        <label  class="select">Puesto:
-                                                            <select class="puesto_as form-control"  >
-                                                                <option value="0">[TODO]</option>
-                                                            </select>
-                                                        </label>
-                                                    </section>
-                                                </div>
-
-
-                                            </fieldset>
-
-
-                                            <footer>
-                                                <button type="submit" class="btn btn-primary">
-                                                    Aceptar
-                                                </button>
-                                            </footer>
-                                        </form>
-
-                                    </div>
-
-
-
-                                </div>
-
-                            </div>
-                        </article>
-                    </div>
-                    <div class="row">
-                        <legend align="center">Plantillas</legend>      
-                        <table class="table table-striped table-bordered table-hover dataTable no-footer" id="table_plantilla">
-                            <thead>
-                                <tr>
-                                    <th align="center" style="text-align:center;">Nro</th>
-                                    <th align="center" style="text-align:center;">Nombre Plantilla</th>
-                                    <th S style="text-align:center;">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tbody-plantilla">
-                                <tr><td colspan="4" align="center">SELECCIONA UNA OPCION</td></tr>
-                            </tbody>
-                        </table>
                     </div>
 
 
                     <div class="row">
                         <article class=" col-sm-12 col-md-12 col-lg-4">
-                            <div class="jarviswidget well" id="wid-id-4" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
-                                    <h2>NOMENCLATURA</h2>
+                            <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
 
+                                <header>
+                                    <ul class="nav nav-tabs pull-left in">
+
+                                        <li class="active">
+
+                                            <a data-toggle="tab" href="#hr1"> <i class="fa fa-lg fa-arrow-circle-o-down"></i> <span class="hidden-mobile hidden-tablet"> Plantillas </span> </a>
+
+                                        </li>
+
+                                        <li>
+                                            <a data-toggle="tab" href="#hr2"> <i class="fa fa-lg fa-arrow-circle-o-up"></i> <span class="hidden-mobile hidden-tablet">Info <span class="label bg-color-blue txt-color-white"> label <i class="fa fa-exclamation"></i> </span> </span> </a>
+                                        </li>
+
+                                    </ul>
                                 </header>
+                                <!-- widget div-->
                                 <div>
+
+                                    <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
 
                                     </div>
+                                    <!-- end widget edit box -->
+
+                                    <!-- widget content -->
                                     <div class="widget-body">
 
-                                        <h3>NOMENCLATURA</h3>
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th><i class="fa  fa-align-left"> </i> Nomenclatura</th>
-                                                    <th><i class="fa fa-chain"> </i>  Significado</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr ><td><code>[nombre]</code></td><td>Nombre del trabajador</td></tr>
-                                                <tr><td><code>[app]</code></td><td>Apellido Paterno del trabajador</td></tr>
-                                                <tr><td><code>[apm]</code></td><td>Apellido Materno del trabajador</td></tr>
-                                                <tr><td><code>[dni]</code></td><td>Dni del trabajador</td></tr>
-                                                <tr><td><code>[dir]</code></td><td>direccion del trabajador</td></tr>
-                                                <tr><td><code>[prov]</code></td><td>Provincia actual</td></tr>
-                                                <tr><td><code>[dist]</code></td><td>Distrito en el que estan</td></tr>
-                                                <tr><td><code>[dep]</code></td><td>Departamento en donde se va a desenpeñar</td></tr>
-                                                <tr><td><code>[desde]</code></td><td>fecha de Inicio del contrato</td></tr>
-                                                <tr><td><code>[hasta]</code></td><td>Fecha de Fin del contrato</td></tr>
-                                                <tr><td><code>[puesto]</code></td><td>Puesto que va a desempeñar</td></tr>
-                                                <tr><td><code>[fe_suscripcion]</code></td><td>Fecha de suscripcion</td></tr>
-                                                <tr><td><code>[sueldo]</code></td><td>Sueldo del trabajador</td></tr>
-                                                <tr><td><code>[horas]</code></td><td>Horas de trabajo semanales</td></tr>
-                                                <tr><td><code>[cursos]</code></td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
-                                                <tr><td><code>[funciones_pr]</code></td><td>Funciones primarias que va a desempeñar en el puesto</td></tr>
-                                                <tr><td><code>[funciones_sec]</code></td><td>Funciones secundarias que va a desempeñar en el puesto</td></tr>
-                                                <tr><td><code>[moneda]</code></td><td>Tipo de moneda de pago</td></tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="hr1">
+
+                                                <div class="tabbable tabs-below">
+                                                    <div class="tab-content padding-10">
+                                                        <div class="tab-pane fade in active" id="AA">
+                                                            <form id="checkout-form" class="smart-form" novalidate="novalidate">
+                                                                <header>
+                                                                    <h3>Cargar Plantillas</h3>
+                                                                </header>
+                                                                <fieldset>
+
+
+                                                                    <div class="row"> 
+                                                                        <section class="col col-4" >
+                                                                            <label class="select">Filial:
+                                                                                <select class="fil form-control" id="fil" name="id_di" >
+                                                                                    <option value="" >[Filial]</option>
+                                                                                    <option value="1" >Filial Lima</option>
+                                                                                    <option value="2" >Filial Juliaca</option>
+                                                                                    <option value="5" >Filial Tarapoto</option>
+                                                                                </select>   
+                                                                            </label>
+                                                                        </section>
+                                                                        <section class="col col-4" >
+                                                                            <label class="select">Dirección:
+                                                                                <select class="dir form-control" id="dir" name="id_di" >
+                                                                                    <option value="" >[Direccion]</option>
+                                                                                </select>   
+                                                                            </label>
+                                                                        </section>
+
+                                                                        <section class="col col-4">
+                                                                            <label class="select" >Departamento:
+                                                                                <select class="dep form-control" id="dep" name="id_dep" >
+                                                                                    <option value="">[TODO]</option>
+                                                                                </select>
+                                                                            </label>
+                                                                        </section>
+                                                                    </div> 
+                                                                    <div class="row">
+                                                                        <section class="col col-4">
+                                                                            <label class="select">Area:
+                                                                                <select class="area form-control" id="area" name="id_are" >
+                                                                                    <option value="">[TODO]</option>
+                                                                                </select>
+                                                                            </label>
+                                                                        </section>
+
+                                                                        <section class="col col-4">
+                                                                            <label class="select">Sección:
+                                                                                <select class="seccion form-control" id="seccion" name="id_sec" >
+                                                                                    <option value="">[TODO]</option>
+                                                                                </select>
+                                                                            </label>
+                                                                        </section>
+                                                                        <section class="col col-4" >
+                                                                            <label class="select">Puesto:
+                                                                                <select class="puesto form-control" id="puesto" name="id_pu" >
+                                                                                    <option value="">[TODO]</option>
+                                                                                </select>
+                                                                            </label>
+                                                                        </section>
+                                                                    </div>
+                                                                </fieldset>
+                                                                <button type="button" class="btn btn-default btn-circle btn-lg"><i class="glyphicon glyphicon-search"></i></button>
+                                                                <button type="button" class="btn btn-default btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
+
+                                                            </form>
+                                                            <table style="display: none" class="table table-striped table-bordered table-hover dataTable no-footer tabla_plant" id="table_plantilla">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th align="center" style="text-align:center;">Nro</th>
+                                                                        <th align="center" style="text-align:center;">Nombre Plantilla</th>
+                                                                        <th S style="text-align:center;">Acciones</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="tbody-plantilla">
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                        <div class="tab-pane fade" id="BB">
+                                                            <form id="checkout-form" class="smart-form" novalidate="novalidate">
+                                                                <header>
+                                                                    <h3>Asignar Plantillas</h3>
+                                                                </header>
+                                                                <fieldset>
+                                                                    <div class="row"> 
+                                                                        <section class="col col-4" >
+                                                                            <label class="select">Filial:
+                                                                                <select class="fil_as form-control" >
+                                                                                    <option value="">[Filial]</option>
+                                                                                    <option value="1">Filial Lima</option>
+                                                                                    <option value="2">Filial Juliaca</option>
+                                                                                    <option value="5">Filial Tarapoto</option>
+                                                                                </select>   
+                                                                            </label>
+                                                                        </section>
+                                                                        <section class="col col-4" >
+                                                                            <label class="select">Dirección:
+                                                                                <select class="dir_as form-control"   >
+                                                                                    <option value="0">[Direccion]</option>
+                                                                                </select>   
+                                                                            </label>
+                                                                        </section>
+                                                                        <section class="col col-4" >
+                                                                            <label class="select">Departamento:
+                                                                                <select class="dep_as form-control"  >
+                                                                                    <option value="0">[TODO]</option>
+                                                                                </select>
+                                                                            </label>
+                                                                        </section>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <section class="col col-4" >
+                                                                            <label class="select">Area:
+                                                                                <select class="area_as form-control" >
+                                                                                    <option value="0">[TODO]</option>
+                                                                                </select>
+                                                                            </label>
+                                                                        </section>
+                                                                        <section class="col col-4"   >
+                                                                            <label class="select">Sección:
+                                                                                <select class="seccion_as form-control col-5"   >
+                                                                                    <option value="0">[TODO]</option>
+                                                                                </select>
+                                                                            </label>
+                                                                        </section>
+                                                                        <section class="col col-4" >
+                                                                            <label  class="select">Puesto:
+                                                                                <select class="puesto_as form-control"  >
+                                                                                    <option value="0">[TODO]</option>
+                                                                                </select>
+                                                                            </label>
+                                                                        </section>
+                                                                    </div>
+
+
+                                                                </fieldset>
+
+
+                                                                <footer>
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        Aceptar
+                                                                    </button>
+                                                                </footer>
+                                                            </form>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="CC">
+                                                            <p>
+                                                                Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <ul class="nav nav-tabs">
+                                                        <li class="active">
+                                                            <a data-toggle="tab" href="#AA">Tab 1</a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-toggle="tab" href="#BB">Tab 2</a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-toggle="tab" href="#CC">Tab 3</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                            <div class="tab-pane" id="hr2">
+
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active">
+                                                        <a href="#iss1" data-toggle="tab">Nomenclatura</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#iss2" data-toggle="tab">Item 2</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#iss3" data-toggle="tab">Item 3</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content padding-10">
+                                                    <div class="tab-pane fade in active" id="iss1">
+                                                        <table class="table table-bordered table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th><i class="fa  fa-align-left"> </i> Nomenclatura</th>
+                                                                    <th><i class="fa fa-chain"> </i>  Significado</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ><td><code>[nombre]</code></td><td>Nombre del trabajador</td></tr>
+                                                                <tr><td><code>[app]</code></td><td>Apellido Paterno del trabajador</td></tr>
+                                                                <tr><td><code>[apm]</code></td><td>Apellido Materno del trabajador</td></tr>
+                                                                <tr><td><code>[dni]</code></td><td>Dni del trabajador</td></tr>
+                                                                <tr><td><code>[dir]</code></td><td>direccion del trabajador</td></tr>
+                                                                <tr><td><code>[prov]</code></td><td>Provincia actual</td></tr>
+                                                                <tr><td><code>[dist]</code></td><td>Distrito en el que estan</td></tr>
+                                                                <tr><td><code>[dep]</code></td><td>Departamento en donde se va a desenpeñar</td></tr>
+                                                                <tr><td><code>[desde]</code></td><td>fecha de Inicio del contrato</td></tr>
+                                                                <tr><td><code>[hasta]</code></td><td>Fecha de Fin del contrato</td></tr>
+                                                                <tr><td><code>[puesto]</code></td><td>Puesto que va a desempeñar</td></tr>
+                                                                <tr><td><code>[fe_suscripcion]</code></td><td>Fecha de suscripcion</td></tr>
+                                                                <tr><td><code>[sueldo]</code></td><td>Sueldo del trabajador</td></tr>
+                                                                <tr><td><code>[horas]</code></td><td>Horas de trabajo semanales</td></tr>
+                                                                <tr><td><code>[cursos]</code></td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
+                                                                <tr><td><code>[funciones_pr]</code></td><td>Funciones primarias que va a desempeñar en el puesto</td></tr>
+                                                                <tr><td><code>[funciones_sec]</code></td><td>Funciones secundarias que va a desempeñar en el puesto</td></tr>
+                                                                <tr><td><code>[moneda]</code></td><td>Tipo de moneda de pago</td></tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="iss2">
+                                                        <p>
+                                                            Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.
+                                                        </p>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="iss3">
+                                                        <p>
+                                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table.
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
                                     </div>
+                                    <!-- end widget content -->
+
                                 </div>
+                                <!-- end widget div -->
+
                             </div>
                         </article>
                         <article class="col-sm-12 col-md-12 col-lg-8">
@@ -800,22 +833,33 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
 
+
                                         <form class="ckeditor_form form_editor" action="../../../formato_plantilla" method="post" style="width:100%;" align="center">
                                             <!--<button  onclick="procesar_texto();" type="button">Procesar </button>
                                             -->
+                                            <br>
+                                            <div class="row">
+
+                                                <div class="col-lg-8">
+                                                    <input type="text" required="" class="form-control nombre_pl" name="no_pl" placeholder="Nombre de la Plantilla...">
+                                                </div>
+                                                <div class="col-lg-4"> 
+                                                    <button type="button" value="Crear_Plantilla"  onclick="leer();" name="opc" class="btn btn-primary btn-circle btn-lg btn_crear"><i class="glyphicon glyphicon-floppy-disk"></i></button>
+                                                    <button type="button" value="Asignar"  onclick="leer();" name="opc" class="btn btn-primary btn-circle btn-lg btn_asignar"><i class="glyphicon glyphicon-share-alt"></i></button>
+                                                </div>
+                                                <!-- /.col-lg-6 -->
+                                            </div><!-- /.row -->
+
                                             <div id="eButtons" >
                                                 <input  type="hidden" name="id" value="" class="id_pl"/>
                                                 <input  type="hidden" name="id_pc" value="" class="id_pc"/>
-                                                <button type="button" value="Crear_Plantilla"  onclick="leer();" name="opc" class="btn btn-primary btn-circle btn-lg btn_crear"><i class="glyphicon glyphicon-floppy-disk"></i></button>
-                                                <button type="button" value="Asignar"  onclick="leer();" name="opc" class="btn btn-primary btn-circle btn-lg btn_asignar"><i class="glyphicon glyphicon-share-alt"></i></button>
                                             </div>
                                             <input type="hidden" name="id_dep_asig" id="di_sig">
                                             <input type="hidden" name="id_are_asig" id="de_sig">
                                             <input type="hidden" name="id_sec_asig" id="ar_sig">
                                             <input type="hidden" name="id_di_asig" id="se_sig">
                                             <input type="hidden" name="id_pu_asig" id="pu_sig">
-                                            <h3><strong>NOMBRE PLANTILLA</strong></h3>
-                                            <input type="text" required="" class="nombre_pl form-control" name="no_pl" ><br><br>
+                                          
                                             <textarea cols="100" id="editor1" name="editor1" >
                                             </textarea>
                                             <script>

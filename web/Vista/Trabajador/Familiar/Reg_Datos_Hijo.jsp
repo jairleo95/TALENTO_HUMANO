@@ -82,7 +82,7 @@
                 <!-- widget content -->
                 <div class="widget-body no-padding">
 
-                    <form action="../../../familiar" id="checkout-form" class="smart-form" >
+                    <form action="../../../familiar" id="checkout-form" class="smart-form"  >
 
                         <header>
                             <b>HIJOS</b>
@@ -107,13 +107,13 @@
                                 </section>
                                 <section class="col col-4">
                                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                        <input type="date" name="FECHA_NAC" placeholder="Fecha de Nacimiento dd/mm/yy" class="date" required="">
+                                        <input type="date" name="FECHA_NAC"  class="date" required="">
                                     </label>
                                 </section>
                                 <section class="col col-4">
                                     <label class="select">
                                         <select name="SEXO" required="" >
-                                            <option value="" selected=""  disabled="">Sexo</option>
+                                            <option value="" selected="" >[Sexo]</option>
                                             <option value="M">Masculino</option>
                                             <option value="F">Femenino</option>
 
@@ -123,12 +123,12 @@
                                 <section class="col col-4">
                                     <label class="select">
                                         <select name="TIPO_DOC_ID" required="" class="ti_doc">
-                                            <option value="" selected=""  disabled="">Tipo de Documento</option>
+                                            <option value="" selected="">[Tipo de Documento]</option>
                                             <%for (int i = 0; i < idoc.Listar_tipo_doc().size(); i++) {
                                                     Tipo_Documento t = new Tipo_Documento();
                                                     t = (Tipo_Documento) idoc.Listar_tipo_doc().get(i);
                                             %>
-                                            <option value="<%=t.getId_tipo_doc_ident()%>"><%=t.getDe_tdoc_abreviada()%></option>    
+                                            <option value="<%=t.getId_tipo_doc_ident().trim()%>"><%=t.getDe_tdoc_abreviada()%></option>    
                                             <%
                                                 }
                                             %>
@@ -143,7 +143,7 @@
                                 <section class="col col-4">
                                     <label class="select">
                                         <select name="INSCRIPCION_VIG_ESSALUD" required="">
-                                            <option value="" selected="" disabled="">Inscripción Vigente en Essalud</option>
+                                            <option value="" selected="" >[Inscripción Vigente en Essalud]</option>
                                             <option value="1">Si</option>
                                             <option value="0">No</option>
                                         </select> 
@@ -152,7 +152,7 @@
                                 <section class="col col-4">
                                     <label class="select">
                                         <select name="ESTUD_NIV_SUPERIOR" required="">
-                                            <option value="" selected="" disabled="">Estudio de Nivel Superior</option>
+                                            <option value="" selected="" >[Estudio de Nivel Superior]</option>
                                             <option value="1">Si</option>
                                             <option value="0">No</option>
                                         </select> 
@@ -163,7 +163,7 @@
                         <input type="hidden" name="opc"  value="REGISTRAR HIJO">
                         <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>"  >
                         <footer>
-                            <button type="submit" class="btn btn-primary" name="opc">
+                            <button type="submit" class="btn btn-primary" >
                                 Registrar
                             </button>
                         </footer>
@@ -325,8 +325,7 @@
                     // Rules for form validation
                     rules: {
                         FECHA_NAC: {
-                            val_fecha: true,
-                            val_edad: true
+                            val_fecha: true
                         }
                     },
                     // Do not change code below
