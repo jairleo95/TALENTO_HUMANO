@@ -371,6 +371,10 @@ public class CDgp extends HttpServlet {
         }
         if (opc.equals("Detalle")) {
 
+            String autorizar = request.getParameter("contrato");
+            if (autorizar == null) {
+                autorizar = "";
+            }
             String ID_DGP = request.getParameter("iddgp");
             String ID_TRABAJADOR = request.getParameter("idtr");
             sesion.setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(ID_DGP));
@@ -378,10 +382,8 @@ public class CDgp extends HttpServlet {
             int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
             sesion.setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
 
-            if (idrol.trim().equals("ROL-0006")) {
-
+            if (idrol.trim().equals("ROL-0006") & autorizar.equals("true")) {
                 if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("0")) {
-
                     String iddgp = request.getParameter("iddgp");
                     String id_dir = puesto.List_Puesto_x_iddgp(iddgp);
                     sesion.setAttribute("List_Anno", anno.List_Anno());
@@ -450,7 +452,6 @@ public class CDgp extends HttpServlet {
                 response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
 
             }
-            //response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&idgp=" + ID_DGP);
         }
         if (opc.equals("Seguimiento")) {
             String iddgp = request.getParameter("iddgp");

@@ -45,18 +45,30 @@ public class CSolicitud_Requerimiento extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
         String rol = (String) sesion.getAttribute("IDROL");
+        String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         Map<String, Object> rpta = new HashMap<String, Object>();
         if (opc.equals("Listar_Solicitud")) {
             sesion.setAttribute("Listar_solicitud", s.Listar_solicitud());
             response.sendRedirect("Vista/Solicitud/Reporte_Solicitud.jsp");
         }
         if (opc.equals("Listar_Sol_Pendientes")) {
-            List<Map<String, ?>> list = s.Listar_solicitud("0");
+            List<Map<String, ?>> list;
+            if (rol.equals("ROL-0001")) {
+                list = s.Listar_solicitud("0", null);
+            } else {
+                list = s.Listar_solicitud("0", iddep);
+            }
+
             rpta.put("rpta", "1");
             rpta.put("lista", list);
         }
         if (opc.equals("Listar_Sol_Aut")) {
-            List<Map<String, ?>> list = s.Listar_solicitud("1");
+            List<Map<String, ?>> list;
+            if (rol.equals("ROL-0001")) {
+                list = s.Listar_solicitud("1", null);
+            } else {
+                list = s.Listar_solicitud("1", iddep);
+            }
             rpta.put("rpta", "1");
             rpta.put("lista", list);
         }
@@ -77,10 +89,8 @@ public class CSolicitud_Requerimiento extends HttpServlet {
                 FE_DESDE = FE_DESDE + "-01";
             }
             s.INSERT_SOLICITUD_DGP(null, FE_DESDE, ID_DGP, ID_PLAZO, DE_SOLICITUD, ES_AUTORIZAR, ES_SOLICITUD_DGP, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, NO_USUARIO);
-            
+
             sesion.setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser, ID_DGP));
-            
-            //response.sendRedirect("Vista/Solicitud/Reg_List_Solicitud.jsp?iddgp=" + ID_DGP + "");
         }
         if (opc.equals("Reg_List_Solicitud")) {
             String iddgp = request.getParameter("iddgp");
@@ -89,7 +99,7 @@ public class CSolicitud_Requerimiento extends HttpServlet {
             String desde = request.getParameter("desde");
             String desc = request.getParameter("descripcion");
             sesion.setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser, iddgp));
-           rpta.put("rpta", "1");
+            rpta.put("rpta", "1");
         }
         if (opc.equals("Ver_Detalle_Solicitud")) {
             String id = request.getParameter("id");
@@ -101,7 +111,7 @@ public class CSolicitud_Requerimiento extends HttpServlet {
             List<Map<String, ?>> list = s.List_solicitud_id(id);
             rpta.put("rpta", "1");
             rpta.put("lista", list);
-            if (rol.equals("ROL-0001")|rol.equals("ROL-0007")) {
+            if (rol.equals("ROL-0001") | rol.equals("ROL-0007")) {
                 rpta.put("permisos", "<button type=\"button\" class=\"btn btn-default btn-labeled\" data-dismiss=\"modal\"><span class=\"btn-label btn_cancel_form\"><i class=\"fa fa-times\"></i></span>Cancel</button><button class=\"btn btn-primary btn-labeled btn_procesar_sol\"  type=\"button\" ><span class=\"btn-label\"><i class=\"fa fa-check\"></i></span>Procesar</button>");
             }
         }
