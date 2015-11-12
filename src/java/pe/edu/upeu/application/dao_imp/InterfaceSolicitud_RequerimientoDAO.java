@@ -17,7 +17,7 @@ public interface InterfaceSolicitud_RequerimientoDAO {
 
     public List<V_Solicitud_Requerimiento> Listar_solicitud();
 
-    public List<Map<String, ?>> Listar_solicitud(String tipo);
+    public List<Map<String, ?>> Listar_solicitud(String tipo,String iddep);
 
     public List<V_Solicitud_Requerimiento> Listar_solicitud_id(String id_solicitud);
 

@@ -313,12 +313,13 @@ public class Solicitud_RequerimientoDAO implements InterfaceSolicitud_Requerimie
     }
 
     @Override
-    public List<Map<String, ?>> Listar_solicitud(String tipo) {
+    public List<Map<String, ?>> Listar_solicitud(String tipo, String iddep) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "select *  from RHVD_SOLICITUD_REQUERIMIENTO  where es_solicitud_dgp='1'  ";
-             sql +=" and  ES_AUTORIZAR='"+tipo+"'";
+            sql += " and  ES_AUTORIZAR='" + tipo + "'";
+            sql += (iddep != null) ? " and  ID_DEPARTAMENTO='" + iddep + "'" : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
