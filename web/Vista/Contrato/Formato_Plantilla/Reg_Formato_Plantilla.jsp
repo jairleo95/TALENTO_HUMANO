@@ -355,11 +355,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         $(".id_pc").val($(".id_plantilla" + valor).val());
 
                         $.smallBox({
-                            title: "¡Alerta!",
-                            content: $(this).data('value'),
-                            color: "#C46A69",
+                            content: "<i class='fa fa-clock-o'></i> <i>La plantilla ha sido cargada con exito...</i>",
+                            color: "#296191",
                             iconSmall: "fa fa-cloud bounce animated",
-                            timeout: 7000
+                            timeout: 3000
                         });
                         var editor = CKEDITOR.instances.editor1;
                         editor.focus();
@@ -428,6 +427,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
 
             $(document).ready(function () {
+
+                pageSetUp();
+                $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                });
 
                 var b = $(".dir");
                 //lis_dep(b);
@@ -545,7 +549,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
                     <div class="row">
                         <article class=" col-sm-12 col-md-12 col-lg-4">
-                            <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
+                            <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false"
+                                 data-widget-fullscreenbutton="false"
+                                 data-widget-custombutton="false" 
+                                 data-widget-deletebutton="false"
+                                 data-widget-sortable="false">
 
                                 <header>
                                     <ul class="nav nav-tabs pull-left in">
@@ -581,7 +589,72 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                 <div class="tabbable tabs-below">
                                                     <div class="tab-content padding-10">
                                                         <div class="tab-pane fade in active" id="AA">
-                                                            <form id="checkout-form" class="smart-form" novalidate="novalidate">
+                                                            <form id="checkout-form" class="smart-form form_asignar" novalidate="novalidate" style="display:none;">
+                                                                <header>
+                                                                    <h3>Asignar Plantillas</h3>
+                                                                </header>
+                                                                <fieldset>
+                                                                    <div class="row"> 
+                                                                        <section class="col col-4" >
+                                                                            <label class="select">Filial:
+                                                                                <select class="fil_as form-control" required="">
+                                                                                    <option value="">[Filial]</option>
+                                                                                    <option value="1">Filial Lima</option>
+                                                                                    <option value="2">Filial Juliaca</option>
+                                                                                    <option value="5">Filial Tarapoto</option>
+                                                                                </select>   
+                                                                            </label>
+                                                                        </section>
+                                                                        <section class="col col-4" >
+                                                                            <label class="select">Dirección:
+                                                                                <select class="dir_as form-control"  required="" >
+                                                                                    <option value="0">[Direccion]</option>
+                                                                                </select>   
+                                                                            </label>
+                                                                        </section>
+                                                                        <section class="col col-4" >
+                                                                            <label class="select">Departamento:
+                                                                                <select class="dep_as form-control"  >
+                                                                                    <option value="0">[TODO]</option>
+                                                                                </select>
+                                                                            </label>
+                                                                        </section>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <section class="col col-4" >
+                                                                            <label class="select">Area:
+                                                                                <select class="area_as form-control" >
+                                                                                    <option value="0">[TODO]</option>
+                                                                                </select>
+                                                                            </label>
+                                                                        </section>
+                                                                        <section class="col col-4"   >
+                                                                            <label class="select">Sección:
+                                                                                <select class="seccion_as form-control col-5"   >
+                                                                                    <option value="0">[TODO]</option>
+                                                                                </select>
+                                                                            </label>
+                                                                        </section>
+                                                                        <section class="col col-4" >
+                                                                            <label  class="select">Puesto:
+                                                                                <select class="puesto_as form-control"  >
+                                                                                    <option value="0">[TODO]</option>
+                                                                                </select>
+                                                                            </label>
+                                                                        </section>
+                                                                    </div>
+
+
+                                                                </fieldset>
+
+
+                                                                <footer>
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        Aceptar
+                                                                    </button>
+                                                                </footer>
+                                                            </form>
+                                                            <form id="checkout-form" class="smart-form form_cargar" novalidate="novalidate">
                                                                 <header>
                                                                     <h3>Cargar Plantillas</h3>
                                                                 </header>
@@ -658,71 +731,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
                                                         </div>
                                                         <div class="tab-pane fade" id="BB">
-                                                            <form id="checkout-form" class="smart-form" novalidate="novalidate">
-                                                                <header>
-                                                                    <h3>Asignar Plantillas</h3>
-                                                                </header>
-                                                                <fieldset>
-                                                                    <div class="row"> 
-                                                                        <section class="col col-4" >
-                                                                            <label class="select">Filial:
-                                                                                <select class="fil_as form-control" >
-                                                                                    <option value="">[Filial]</option>
-                                                                                    <option value="1">Filial Lima</option>
-                                                                                    <option value="2">Filial Juliaca</option>
-                                                                                    <option value="5">Filial Tarapoto</option>
-                                                                                </select>   
-                                                                            </label>
-                                                                        </section>
-                                                                        <section class="col col-4" >
-                                                                            <label class="select">Dirección:
-                                                                                <select class="dir_as form-control"   >
-                                                                                    <option value="0">[Direccion]</option>
-                                                                                </select>   
-                                                                            </label>
-                                                                        </section>
-                                                                        <section class="col col-4" >
-                                                                            <label class="select">Departamento:
-                                                                                <select class="dep_as form-control"  >
-                                                                                    <option value="0">[TODO]</option>
-                                                                                </select>
-                                                                            </label>
-                                                                        </section>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <section class="col col-4" >
-                                                                            <label class="select">Area:
-                                                                                <select class="area_as form-control" >
-                                                                                    <option value="0">[TODO]</option>
-                                                                                </select>
-                                                                            </label>
-                                                                        </section>
-                                                                        <section class="col col-4"   >
-                                                                            <label class="select">Sección:
-                                                                                <select class="seccion_as form-control col-5"   >
-                                                                                    <option value="0">[TODO]</option>
-                                                                                </select>
-                                                                            </label>
-                                                                        </section>
-                                                                        <section class="col col-4" >
-                                                                            <label  class="select">Puesto:
-                                                                                <select class="puesto_as form-control"  >
-                                                                                    <option value="0">[TODO]</option>
-                                                                                </select>
-                                                                            </label>
-                                                                        </section>
-                                                                    </div>
 
-
-                                                                </fieldset>
-
-
-                                                                <footer>
-                                                                    <button type="submit" class="btn btn-primary">
-                                                                        Aceptar
-                                                                    </button>
-                                                                </footer>
-                                                            </form>
                                                         </div>
                                                         <div class="tab-pane fade" id="CC">
                                                             <p>
@@ -812,7 +821,11 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                             </div>
                         </article>
                         <article class="col-sm-12 col-md-12 col-lg-8">
-                            <div class="jarviswidget jarviswidget-color-blue" id="wid-id-0"  data-widget-editbutton="false"  data-widget-fullscreenbutton="false" data-widget-sortable="false">
+                            <div class="jarviswidget jarviswidget-color-blue" id="wid-id-0"  
+                                 data-widget-editbutton="false"  
+                                 data-widget-fullscreenbutton="false"
+                                 data-widget-deletebutton="false"
+                                 data-widget-sortable="false" >
 
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
@@ -845,10 +858,20 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                 </div>
                                                 <div class="col-lg-4"> 
                                                     <button type="button" value="Crear_Plantilla"  onclick="leer();" name="opc" class="btn btn-primary btn-circle btn-lg btn_crear"><i class="glyphicon glyphicon-floppy-disk"></i></button>
-                                                    <button type="button" value="Asignar"  onclick="leer();" name="opc" class="btn btn-primary btn-circle btn-lg btn_asignar"><i class="glyphicon glyphicon-share-alt"></i></button>
+                                                    <button type="button" value="Asignar"  onclick="leer();" rel="tooltip" data-placement="bottom" data-original-title="Asginar Plantilla" name="opc" class="btn btn-primary btn-circle btn-lg btn_asignar"><i class="glyphicon glyphicon-share-alt"></i></button>
                                                 </div>
                                                 <!-- /.col-lg-6 -->
                                             </div><!-- /.row -->
+                                            <div class="alert alert-warning fade in">
+                                                <button class="close" data-dismiss="alert">
+                                                    ×
+                                                </button>
+                                                <i class="fa-fw fa fa-refresh"></i> <strong></strong> Guardando...</div>
+                                            <div class="alert alert-info fade in"><i class="fa-fw fa fa-info"></i><strong></strong> Todos los cambios guardados</div>
+                                            <div class="alert alert-danger fade in"> <i class="fa-fw fa fa-times"></i>
+                                                <strong></strong> Ocurrió un error al guardar
+                                            </div>
+
 
                                             <div id="eButtons" >
                                                 <input  type="hidden" name="id" value="" class="id_pl"/>
@@ -859,7 +882,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                             <input type="hidden" name="id_sec_asig" id="ar_sig">
                                             <input type="hidden" name="id_di_asig" id="se_sig">
                                             <input type="hidden" name="id_pu_asig" id="pu_sig">
-                                          
+
                                             <textarea cols="100" id="editor1" name="editor1" >
                                             </textarea>
                                             <script>
@@ -1070,32 +1093,35 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                          });*/
                                                     });
                                                     $(".btn_asignar").click(function () {
-                                                        $.ajax({
-                                                            url: "../../../formato_plantilla",
-                                                            data: $(".form_editor").serialize() + "&opc=Asignar",
-                                                            type: 'POST',
-                                                            success: function (data, textStatus, jqXHR) {
-                                                                if (data.rpta === "1") {
-                                                                    $(".form_editor")[0].reset();
-                                                                    $.smallBox({
-                                                                        title: "¡Felicitaciones!",
-                                                                        content: "<i class='fa fa-clock-o'></i> <i>El formato de plantilla contractual se ha subido con éxito...</i>",
-                                                                        color: "#296191",
-                                                                        iconSmall: "fa fa-cloud bounce animated",
-                                                                        timeout: 7000
-                                                                    });
 
-                                                                } else if (data.rpta === "-1") {
-                                                                    $.smallBox({
-                                                                        title: "¡Alerta!",
-                                                                        content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar su plantilla...</i>",
-                                                                        color: "#C46A69",
-                                                                        iconSmall: "fa fa-cloud bounce animated",
-                                                                        timeout: 7000
-                                                                    });
-                                                                }
-                                                            }
-                                                        });
+                                                        $(".form_cargar").hide();
+                                                        $(".form_asignar").show(200);
+                                                        /*  $.ajax({
+                                                         url: "../../../formato_plantilla",
+                                                         data: $(".form_editor").serialize() + "&opc=Asignar",
+                                                         type: 'POST',
+                                                         success: function (data, textStatus, jqXHR) {
+                                                         if (data.rpta === "1") {
+                                                         $(".form_editor")[0].reset();
+                                                         $.smallBox({
+                                                         title: "¡Felicitaciones!",
+                                                         content: "<i class='fa fa-clock-o'></i> <i>El formato de plantilla contractual se ha subido con éxito...</i>",
+                                                         color: "#296191",
+                                                         iconSmall: "fa fa-cloud bounce animated",
+                                                         timeout: 7000
+                                                         });
+                                                         
+                                                         } else if (data.rpta === "-1") {
+                                                         $.smallBox({
+                                                         title: "¡Alerta!",
+                                                         content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar su plantilla...</i>",
+                                                         color: "#C46A69",
+                                                         iconSmall: "fa fa-cloud bounce animated",
+                                                         timeout: 7000
+                                                         });
+                                                         }
+                                                         }
+                                                         });*/
 
                                                     })
 
