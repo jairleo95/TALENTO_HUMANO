@@ -188,7 +188,7 @@ public class CTrabajador extends HttpServlet {
                     String CO_UNIVERSITARIO = request.getParameter("COD_UNI");
 
                     //VALIDACIONES CUENTA SUELDO
-                    if (NO_BANCO == null & ES_GEM_NU_CUENTA.equals("0")) {
+                    if (NO_BANCO.equals("") && ES_GEM_NU_CUENTA.equals("0")) {
                         ES_CUENTA_SUELDO = "0";
                     } else {
                         ES_CUENTA_SUELDO = "1";

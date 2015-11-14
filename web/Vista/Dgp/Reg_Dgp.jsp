@@ -529,11 +529,9 @@
                                                     <%} else { %>
 
                                                     <%
-                                                        System.out.println(list_Cuenta_Sueldo.size() + " -size");
                                                         for (int i = 0; i < list_Cuenta_Sueldo.size(); i++) {
                                                             Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                             cs = (Cuenta_Sueldo) list_Cuenta_Sueldo.get(i);
-                                                            System.out.println(cs.getId_trabajador());
 
                                                     %>
                                                     <div class="row"> 
