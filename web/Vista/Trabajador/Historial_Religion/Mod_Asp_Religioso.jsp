@@ -152,7 +152,7 @@
                                                                                 <option value="" disabled="" selected="">[SELECCIONE]</option> 
                                                                                 <%if (trb.getLi_religion() != null) {
                                                                                         if (trb.getLi_religion().equals("1")) {%>
-                                                                                <option value="1" selected="">Adventida</option> 
+                                                                                <option value="1" selected="">Adventista</option> 
                                                                                 <option value="2" >Catolico</option> 
                                                                                 <option value="3" >Ótros</option> 
                                                                                 <%}

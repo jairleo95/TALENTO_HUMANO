@@ -207,12 +207,12 @@
         <div>
             <form action="">
                 <%
-
+                    
                     CConversion c = new CConversion();
-
+                    
                     HttpSession Sesion = request.getSession(true);
                     String idrol = (String) Sesion.getAttribute("IDROL");
-
+                    
                 %>
                 <%for (int b = 0; b < List_contra_x_idcto.size(); b++) {
                         X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
@@ -221,7 +221,7 @@
 
                 <%if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0001")) {
                 %>
-                <div class="smart-form">¿Decidir la secretaria de departamento o area lo suba e imprima el contrato?<label class='toggle'><input type='checkbox' value='1'  class='ck_habilitar_is'  name='estado' name='checkbox-toggle' <%
+                <div class="smart-form">¿Decidir la secretaria de departamento o area lo suba e imprima el contrato?<label class='toggle'><input type='checkbox' value='1'  class='ck_habilitar_is'  name='estado' name='checkbox-toggle' <%    
                     if (Integer.parseInt(n.getEs_secre_is()) == 1) {
                         out.print("checked");
                     }
@@ -257,7 +257,7 @@
                                         for (int q = 0; q < Lis_c_c_id_contr.size(); q++) {
                                             Centro_Costos cc = new Centro_Costos();
                                             cc = (Centro_Costos) Lis_c_c_id_contr.get(q);
-
+                                            
                                             cantidad = Double.parseDouble(cc.getCa_porcentaje()) + cantidad;
                                 %>
                     <tr>
@@ -273,7 +273,7 @@
                     <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6" class="table-bordered" ><p><%
                         if (n.getLi_condicion() != null) {
                             for (int h = 0; h < list_Condicion_contrato.size(); h++) {
-
+                                
                                 if (n.getLi_condicion().trim().equals(h + 1 + "")) {
                                     out.println(list_Condicion_contrato.get(h));
                                 }
@@ -304,6 +304,15 @@
                         } else {
                             out.print("0");
                         }%> </td></tr>
+                    <tr><td class="text-info table-bordered"><strong>Religion:</strong></td><td class="table-bordered" colspan="6"><strong class="text-danger"><%if (n.getLi_religion().equals("1")) {
+                            out.print("Adventista");
+                        } else if (n.getLi_religion().equals("2")) {
+                            out.print("Católico");
+                        } else if (n.getLi_religion().equals("3")) {
+                            out.print("Otro");
+                        } else if (n.getLi_religion() == null) {
+                            out.print("Ninguna");
+                        }%></strong></td></tr>
                     <tr><td class="text-info table-bordered"><strong>Tipo Pago Horas:</strong></td><td class="table-bordered"  colspan="6"><%
                         if (n.getTi_hora_pago() != null) {
                             out.print(n.getTi_hora_pago());
@@ -430,7 +439,7 @@
                             }
                         } else {
                             out.println("NO DEFINIDO");
-
+                            
                         }
                             %> </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>¿Firmo contrato?:</strong></td><td class="table-bordered" colspan="6"><%
@@ -447,7 +456,7 @@
                                     } else {
                                         out.println("aun no se firma");
                                     }
-
+                                    
                                 }%></td></tr>
 
                     <!--  <tr><td>Nro. de Contrato:</td><td><?/* echo $list_rhc[$index][39];*/?> </td></tr>   -->
@@ -471,7 +480,7 @@
 
                     <%if (false) {
                     %>
-                    <tr><td class="text-info table-bordered"><strong>Situacion Actual:</strong></td><td class="table-bordered" colspan="6"><%
+                    <tr><td class="text-info table-bordered"><strong>Situacion Actual:</strong></td><td class="table-bordered" colspan="6"><%    
                         if (n.getEs_contrato() != null) {
                             if (n.getEs_contrato().trim().equals("1")) {
                                 out.print("Activo");
@@ -679,13 +688,13 @@
 
 
 <script type="text/javascript">
-
+                
 // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
+                
                 $(document).ready(function () {
-
+                    
                     pageSetUp();
-
+                    
                     var $checkoutForm = $('#checkout-form').validate({
                         // Rules for form validation
                         rules: {
@@ -785,7 +794,7 @@
                             error.insertAfter(element.parent());
                         }
                     });
-
+                    
                     var $registerForm = $("#smart-form-register").validate({
                         // Rules for form validation
                         rules: {
@@ -854,7 +863,7 @@
                             error.insertAfter(element.parent());
                         }
                     });
-
+                    
                     var $reviewForm = $("#review-form").validate({
                         // Rules for form validation
                         rules: {
@@ -906,7 +915,7 @@
                             error.insertAfter(element.parent());
                         }
                     });
-
+                    
                     var $commentForm = $("#comment-form").validate({
                         // Rules for form validation
                         rules: {
@@ -953,7 +962,7 @@
                             error.insertAfter(element.parent());
                         }
                     });
-
+                    
                     var $contactForm = $("#contact-form").validate({
                         // Rules for form validation
                         rules: {
@@ -995,7 +1004,7 @@
                             error.insertAfter(element.parent());
                         }
                     });
-
+                    
                     var $loginForm = $("#login-form").validate({
                         // Rules for form validation
                         rules: {
@@ -1024,7 +1033,7 @@
                             error.insertAfter(element.parent());
                         }
                     });
-
+                    
                     var $orderForm = $("#order-form").validate({
                         // Rules for form validation
                         rules: {
@@ -1069,7 +1078,7 @@
                             error.insertAfter(element.parent());
                         }
                     });
-
+                    
                     // START AND FINISH DATE
                     $('#startdate').datepicker({
                         dateFormat: 'dd.mm.yy',
@@ -1079,7 +1088,7 @@
                             $('#finishdate').datepicker('option', 'minDate', selectedDate);
                         }
                     });
-
+                    
                     $('#finishdate').datepicker({
                         dateFormat: 'dd.mm.yy',
                         prevText: '<i class="fa fa-chevron-left"></i>',
@@ -1088,11 +1097,11 @@
                             $('#startdate').datepicker('option', 'maxDate', selectedDate);
                         }
                     });
-
-
-
+                    
+                    
+                    
                 })
-
+                
 </script>
 
 <!-- Your GOOGLE ANALYTICS CODE Below -->
@@ -1100,7 +1109,7 @@
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
     _gaq.push(['_trackPageview']);
-
+    
     (function () {
         var ga = document.createElement('script');
         ga.type = 'text/javascript';
@@ -1109,7 +1118,7 @@
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(ga, s);
     })();
-
+    
 </script>
 <!-- IMPORTANT: APP CONFIG -->
 <script src="../../js/app.config.js"></script>
@@ -1123,8 +1132,8 @@
 <!-- CUSTOM NOTIFICATION -->
 <script src="../../js/notification/SmartNotification.min.js"></script>
 <script>
-
-
+    
+    
     $(document).ready(function () {
         //pageSetup();
         $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
@@ -1143,7 +1152,7 @@
                         iconSmall: "fa fa-cloud",
                         timeout: 4000
                     });
-
+                    
                 }).fail(function (jqXHR, textStatus, errorThrown) {
                     $.smallBox({
                         title: "¡Error!",
@@ -1178,13 +1187,13 @@
                 });
             }
         });
-
-
+        
+        
     });
 </script>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
     }
-
+    
 
 %>
