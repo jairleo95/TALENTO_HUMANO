@@ -120,6 +120,9 @@ public class CDgp extends HttpServlet {
         InterfaceSolicitud_RequerimientoDAO s = new Solicitud_RequerimientoDAO();
         InterfaceFormato_HorarioDAO ifo = new Formato_HorarioDAO();
 //         try {
+        
+        
+        
         if (opc.equals("Listar_Req")) {
             String id_tr = request.getParameter("idtr");
             List<Map<String, ?>> lista = dgp.list_Req(id_tr);
