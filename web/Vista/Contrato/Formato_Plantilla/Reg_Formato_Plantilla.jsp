@@ -7,11 +7,6 @@
     if (id_user != null) {
 %>
 <!DOCTYPE html>
-<!--
-Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
-For licensing, see LICENSE.md or http://ckeditor.com/license
--->
-<jsp:useBean id="Listar_Direccion_X" scope="session" class="java.util.ArrayList"/>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -415,13 +410,13 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         return;
                     }
                     var list = objJson.lista;
-                    c.append("<option value='0' selected=''> [SELECCIONE] </option>");
+                    c.append("<option value='' > [SELECCIONE] </option>");
                     if (list.length !== 0) {
                         for (var i = 0; i < list.length; i++) {
                             c.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
                         }
                     } else {
-                        c.append("<option value='0' > [] </option>");
+                        c.append("<option value='' > [] </option>");
                     }
                 });
             }
@@ -608,7 +603,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                                         <section class="col col-4" >
                                                                             <label class="select">Dirección:
                                                                                 <select class="dir_as form-control"  required="" >
-                                                                                    <option value="0">[Direccion]</option>
+                                                                                    <option value="">[Direccion]</option>
                                                                                 </select>   
                                                                             </label>
                                                                         </section>
@@ -862,16 +857,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                                 </div>
                                                 <!-- /.col-lg-6 -->
                                             </div><!-- /.row -->
-                                            <div class="alert alert-warning fade in">
-                                                <button class="close" data-dismiss="alert">
-                                                    ×
-                                                </button>
-                                                <i class="fa-fw fa fa-refresh"></i> <strong></strong> Guardando...</div>
-                                            <div class="alert alert-info fade in"><i class="fa-fw fa fa-info"></i><strong></strong> Todos los cambios guardados</div>
-                                            <div class="alert alert-danger fade in"> <i class="fa-fw fa fa-times"></i>
-                                                <strong></strong> Ocurrió un error al guardar
+                                            <div class="status_plantilla">
                                             </div>
-
 
                                             <div id="eButtons" >
                                                 <input  type="hidden" name="id" value="" class="id_pl"/>
@@ -885,67 +872,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
                                             <textarea cols="100" id="editor1" name="editor1" >
                                             </textarea>
-                                            <script>
-                                                // Replace the <textarea id="editor1"> with an CKEditor instance.
-                                                /* config.toolbar = 'Full';
-                                                 
-                                                 config.toolbar_Full =
-                                                 [
-                                                 ['Source', '-', 'Save', 'NewPage', 'Preview', '-', 'Templates'],
-                                                 ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Print', 'SpellChecker', 'Scayt'],
-                                                 ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
-                                                 ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
-                                                 '/',
-                                                 ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
-                                                 ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
-                                                 ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-                                                 ['Link', 'Unlink', 'Anchor'],
-                                                 ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
-                                                 '/',
-                                                 ['Styles', 'Format', 'Font', 'FontSize'],
-                                                 ['TextColor', 'BGColor'],
-                                                 ['Maximize', 'ShowBlocks', '-', 'About']
-                                                 ];*/
-                                                /* CKEDITOR.replace('editor1', {
-                                                 on: {
-                                                 focus: onFocus,
-                                                 blur: onBlur,
-                                                 // Check for availability of corresponding plugins.
-                                                 pluginsLoaded: function(evt) {
-                                                 
-                                                 
-                                                 var doc = CKEDITOR.document, ed = evt.editor;
-                                                 if (!ed.getCommand('bold'))
-                                                 doc.getById('exec-bold').hide();
-                                                 if (!ed.getCommand('link'))
-                                                 doc.getById('exec-link').hide();
-                                                 }
-                                                 
-                                                 }, height: '1024px'});*/
-                                                CKEDITOR.replace('editor1',
-                                                        {
-                                                            toolbar:
-                                                                    [['Source', '-', 'NewPage', 'Preview', '-', 'Templates'],
-                                                                        ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Print', 'SpellChecker', 'Scayt'],
-                                                                        ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
-                                                                        ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
-                                                                        '/',
-                                                                        ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
-                                                                        ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
-                                                                        ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-                                                                        ['Link', 'Unlink', 'Anchor'],
-                                                                        ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
-                                                                        '/',
-                                                                        ['Styles', 'Format', 'Font', 'FontSize'],
-                                                                        ['TextColor', 'BGColor'],
-                                                                        ['Maximize', 'ShowBlocks', '-', 'About'],
-                                                                        ['Styles', 'Format'],
-                                                                        ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', '-', 'About']
-                                                                    ],
-                                                            height: '1024px'
-                                                        });
-                                            </script>
-
                                             <div id="shortcut">
                                                 <ul>
                                                     <li>
@@ -995,16 +921,16 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script>
-                                                if (!window.jQuery) {
-                                                    document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                }
+                                                        if (!window.jQuery) {
+                                                            document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                        }
 </script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script>
-                                                if (!window.jQuery.ui) {
-                                                    document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                }
+                                                        if (!window.jQuery.ui) {
+                                                            document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                        }
 </script>
 
 <!-- IMPORTANT: APP CONFIG -->
@@ -1065,101 +991,138 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 <!-- PAGE RELATED PLUGIN(S) -->
 
 <script type="text/javascript">
-                                                // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                                                $(document).ready(function () {
-                                                    pageSetUp();
-                                                    var editor = CKEDITOR.instances.editor1;
-                                                    editor.on('change', function () {
-                                                        leer();
-                                                        $.ajax({
-                                                            url: "../../../formato_plantilla",
-                                                            data: $(".form_editor").serialize() + "&opc=Actualizar",
-                                                            type: 'POST',
-                                                            success: function (data, textStatus, jqXHR) {
-                                                                $.smallBox({
-                                                                    content: "<i class='fa fa-clock-o'></i> <i>Actualizando...</i>",
-                                                                    color: "#296191",
-                                                                    iconSmall: "fa fa-cloud bounce animated",
-                                                                    timeout: 7000
-                                                                });
+                                                        // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                                                        function status_plantilla(status) {
+                                                            var div_status_pl = $(".status_plantilla");
+                                                            div_status_pl.empty();
+                                                            if (status === '0') {
+                                                                div_status_pl.append('<div class="alert alert-warning fade in"> <button class="close" data-dismiss="alert"> ×</button> <i class="fa-fw fa fa-refresh"></i> <strong></strong> Guardando...</div>');
+                                                            } else if (status === '1') {
+                                                                div_status_pl.append('<div class="alert alert-info fade in"><i class="fa-fw fa fa-info"></i><strong></strong> Todos los cambios guardados</div>');
+                                                            } else if (status === '-1') {
+                                                                div_status_pl.append('<div class="alert alert-danger fade in"> <i class="fa-fw fa fa-times"></i><strong></strong> Ocurrió un error al guardar</div>');
+                                                            } else {
+                                                                div_status_pl.append('<div class="alert alert-danger fade in"> <i class="fa-fw fa fa-times"></i><strong></strong> Ocurrió un error al guardar</div>');
                                                             }
-                                                        });
-                                                        /* $.smallBox({
-                                                         title: "¡Felicitaciones!",
-                                                         content: "<i class='fa fa-clock-o'></i> <i>El formato de plantilla contractual se ha actualizado con éxito...</i>",
-                                                         color: "#296191",
-                                                         iconSmall: "fa fa-cloud bounce animated",
-                                                         timeout: 7000
-                                                         });*/
-                                                    });
-                                                    $(".btn_asignar").click(function () {
 
-                                                        $(".form_cargar").hide();
-                                                        $(".form_asignar").show(200);
-                                                        /*  $.ajax({
-                                                         url: "../../../formato_plantilla",
-                                                         data: $(".form_editor").serialize() + "&opc=Asignar",
-                                                         type: 'POST',
-                                                         success: function (data, textStatus, jqXHR) {
-                                                         if (data.rpta === "1") {
-                                                         $(".form_editor")[0].reset();
-                                                         $.smallBox({
-                                                         title: "¡Felicitaciones!",
-                                                         content: "<i class='fa fa-clock-o'></i> <i>El formato de plantilla contractual se ha subido con éxito...</i>",
-                                                         color: "#296191",
-                                                         iconSmall: "fa fa-cloud bounce animated",
-                                                         timeout: 7000
-                                                         });
-                                                         
-                                                         } else if (data.rpta === "-1") {
-                                                         $.smallBox({
-                                                         title: "¡Alerta!",
-                                                         content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar su plantilla...</i>",
-                                                         color: "#C46A69",
-                                                         iconSmall: "fa fa-cloud bounce animated",
-                                                         timeout: 7000
-                                                         });
-                                                         }
-                                                         }
-                                                         });*/
-
-                                                    })
-
-                                                    $(".btn_crear").click(function () {
-                                                        if ($(".form_editor").valid()) {
-                                                            $.ajax({
-                                                                url: "../../../formato_plantilla",
-                                                                data: $(".form_editor").serialize() + "&opc=Crear_Plantilla",
-                                                                type: 'POST',
-                                                                success: function (data, textStatus, jqXHR) {
-                                                                    if (data.rpta === "1") {
-                                                                        $(".form_editor")[0].reset();
-                                                                        $.smallBox({
-                                                                            title: "¡Felicitaciones!",
-                                                                            content: "<i class='fa fa-clock-o'></i> <i>El formato de plantilla contractual se ha subido con éxito...</i>",
-                                                                            color: "#296191",
-                                                                            iconSmall: "fa fa-cloud bounce animated",
-                                                                            timeout: 7000
-                                                                        });
-
-                                                                    } else if (data.rpta === "-1") {
-                                                                        $.smallBox({
-                                                                            title: "¡Alerta!",
-                                                                            content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar su plantilla...</i>",
-                                                                            color: "#C46A69",
-                                                                            iconSmall: "fa fa-cloud bounce animated",
-                                                                            timeout: 7000
-                                                                        });
-                                                                    }
-                                                                    // alert(data.mensaje);
+                                                        }
+                                                        $(document).ready(function () {
+                                                            pageSetUp();
+                                                            $(".form_asignar").validate({
+                                                                errorPlacement: function (error, element) {
+                                                                    error.insertAfter(element.parent());
                                                                 }
                                                             });
-                                                            return false;
-                                                        } else {
-                                                            return false;
-                                                        }
-                                                    });
-                                                })
+                                                            CKEDITOR.replace('editor1',
+                                                                    {
+                                                                        toolbar:
+                                                                                [['Source', '-', 'NewPage', 'Preview', '-', 'Templates'],
+                                                                                    ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Print', 'SpellChecker', 'Scayt'],
+                                                                                    ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
+                                                                                    ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
+                                                                                    '/',
+                                                                                    ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
+                                                                                    ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
+                                                                                    ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                                                                                    ['Link', 'Unlink', 'Anchor'],
+                                                                                    ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
+                                                                                    '/',
+                                                                                    ['Styles', 'Format', 'Font', 'FontSize'],
+                                                                                    ['TextColor', 'BGColor'],
+                                                                                    ['Maximize', 'ShowBlocks', '-', 'About'],
+                                                                                    ['Styles', 'Format'],
+                                                                                    ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', '-', 'About']
+                                                                                ],
+                                                                        height: '1024px'
+                                                                    });
+
+                                                            var editor = CKEDITOR.instances.editor1;
+                                                            editor.on('change', function () {
+                                                                leer();
+                                                                status_plantilla('0');
+                                                                $.ajax({
+                                                                    url: "../../../formato_plantilla",
+                                                                    data: $(".form_editor").serialize() + "&opc=Actualizar",
+                                                                    type: 'POST',
+                                                                    success: function (data, textStatus, jqXHR) {
+                                                                        setTimeout(function () {
+                                                                            status_plantilla(data.rpta);
+                                                                        }, 1000);
+
+                                                                    }
+                                                                });
+                                                            });
+                                                            $(".btn_asignar").click(function () {
+
+                                                                $(".form_cargar").hide();
+                                                                $(".form_asignar").show(200);
+                                                                if ($(".form_asignar").valid() == true) {
+                                                                    alert()
+                                                                }
+                                                                /*  $.ajax({
+                                                                 url: "../../../formato_plantilla",
+                                                                 data: $(".form_editor").serialize() + "&opc=Asignar",
+                                                                 type: 'POST',
+                                                                 success: function (data, textStatus, jqXHR) {
+                                                                 if (data.rpta === "1") {
+                                                                 $(".form_editor")[0].reset();
+                                                                 $.smallBox({
+                                                                 title: "¡Felicitaciones!",
+                                                                 content: "<i class='fa fa-clock-o'></i> <i>El formato de plantilla contractual se ha subido con éxito...</i>",
+                                                                 color: "#296191",
+                                                                 iconSmall: "fa fa-cloud bounce animated",
+                                                                 timeout: 7000
+                                                                 });
+                                                                 
+                                                                 } else if (data.rpta === "-1") {
+                                                                 $.smallBox({
+                                                                 title: "¡Alerta!",
+                                                                 content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar su plantilla...</i>",
+                                                                 color: "#C46A69",
+                                                                 iconSmall: "fa fa-cloud bounce animated",
+                                                                 timeout: 7000
+                                                                 });
+                                                                 }
+                                                                 }
+                                                                 });*/
+
+                                                            });
+
+                                                            $(".btn_crear").click(function () {
+                                                                if ($(".form_editor").valid()) {
+                                                                    $.ajax({
+                                                                        url: "../../../formato_plantilla",
+                                                                        data: $(".form_editor").serialize() + "&opc=Crear_Plantilla",
+                                                                        type: 'POST',
+                                                                        success: function (data, textStatus, jqXHR) {
+                                                                            if (data.rpta === "1") {
+                                                                                $(".form_editor")[0].reset();
+                                                                                $.smallBox({
+                                                                                    title: "¡Felicitaciones!",
+                                                                                    content: "<i class='fa fa-clock-o'></i> <i>El formato de plantilla contractual se ha subido con éxito...</i>",
+                                                                                    color: "#296191",
+                                                                                    iconSmall: "fa fa-cloud bounce animated",
+                                                                                    timeout: 7000
+                                                                                });
+
+                                                                            } else if (data.rpta === "-1") {
+                                                                                $.smallBox({
+                                                                                    title: "¡Alerta!",
+                                                                                    content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar su plantilla...</i>",
+                                                                                    color: "#C46A69",
+                                                                                    iconSmall: "fa fa-cloud bounce animated",
+                                                                                    timeout: 7000
+                                                                                });
+                                                                            }
+                                                                            // alert(data.mensaje);
+                                                                        }
+                                                                    });
+                                                                    return false;
+                                                                } else {
+                                                                    return false;
+                                                                }
+                                                            });
+                                                        })
 
 </script>
 </html>
