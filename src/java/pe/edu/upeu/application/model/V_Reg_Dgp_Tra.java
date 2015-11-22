@@ -50,6 +50,7 @@ public class V_Reg_Dgp_Tra {
     private String es_rec_fisico;
     private String no_usuario;
     private String id_dgp;
+    private String id_datos_hijo;
 
     public String getId_document() {
         return id_document;
@@ -363,7 +364,14 @@ public class V_Reg_Dgp_Tra {
         this.id_dgp = id_dgp;
     }
 
-    public V_Reg_Dgp_Tra(String id_document, String id_tipo_plani, String id_requerimient, String documento, String ti_planilla, String planilla, String iddgp, String fe_desde, String fe_hasta, Double ca_sueldo, String de_dias_trabajo, String id_puesto, String id_requerimiento, String id_trabajador, String co_ruc, String de_lugar_servicio, String de_servicio, String de_periodo_pago, String de_domicilio_fiscal, String de_subvencion, String de_horario_capacitacion, String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String ti_documento, String es_obligatorio, String id_documento_adjunto, String id_documentos, String es_documento_adjunto, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String de_documento_adjunto, String id_contrato, String es_rec_fisico, String no_usuario, String id_dgp) {
+    public V_Reg_Dgp_Tra(String id_document, String id_tipo_plani, String id_requerimient, String documento, String ti_planilla, 
+            String planilla, String iddgp, String fe_desde, String fe_hasta, Double ca_sueldo, String de_dias_trabajo, String id_puesto,
+            String id_requerimiento, String id_trabajador, String co_ruc, String de_lugar_servicio, String de_servicio, 
+            String de_periodo_pago, String de_domicilio_fiscal, String de_subvencion, String de_horario_capacitacion,
+            String de_horario_refrigerio, String de_dias_capacitacion, String es_dgp, String ti_documento, String es_obligatorio, 
+            String id_documento_adjunto, String id_documentos, String es_documento_adjunto, String us_creacion, String fe_creacion,
+            String us_modif, String fe_modif, String ip_usuario, String de_documento_adjunto, String id_contrato, String es_rec_fisico,
+            String no_usuario, String id_dgp,String id_datos_hijo) {
         this.id_document = id_document;
         this.id_tipo_plani = id_tipo_plani;
         this.id_requerimient = id_requerimient;
@@ -403,6 +411,7 @@ public class V_Reg_Dgp_Tra {
         this.es_rec_fisico = es_rec_fisico;
         this.no_usuario = no_usuario;
         this.id_dgp = id_dgp;
+        this.id_datos_hijo = id_datos_hijo;
     }
 
     public V_Reg_Dgp_Tra() {
@@ -445,6 +454,15 @@ public class V_Reg_Dgp_Tra {
         this.es_rec_fisico = "";
         this.no_usuario = "";
         this.id_dgp = "";
+        this.id_datos_hijo = "";
+    }
+
+    public String getId_datos_hijo() {
+        return id_datos_hijo;
+    }
+
+    public void setId_datos_hijo(String id_datos_hijo) {
+        this.id_datos_hijo = id_datos_hijo;
     }
 
 }

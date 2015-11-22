@@ -43,7 +43,7 @@ public class CFoto extends HttpServlet {
         String ubicacion = "";
         Map<String, Object> rpta = new HashMap<String, Object>();
         try {
-            ubicacion = "/TALENTO_HUMANO/Vista/Usuario/Fotos/";
+            ubicacion = getServletConfig().getServletContext().getRealPath("/") +"Vista/Usuario/Fotos/";
             // ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Usuario\\Fotos";
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);

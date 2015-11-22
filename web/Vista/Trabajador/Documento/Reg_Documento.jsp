@@ -82,14 +82,15 @@
         </script>
     </head>
 
-    <body onload="closedthis();nobackbutton();">
+    <body onload="closedthis();
+            nobackbutton();">
 
         <%
             HttpSession sesion_1 = request.getSession(true);
             String rol = (String) sesion_1.getAttribute("IDROL");
             int n_nac = Integer.parseInt(request.getParameter("n_nac"));
             int num_ad = Integer.parseInt(request.getParameter("num_ad"));
-            String id_ctr = "";
+            String id_hijo_faltante = "";
             InterfaceDocumentoDAO doc_ = new DocumentoDAO();
 
             //String id_dgp = "";
@@ -127,25 +128,24 @@
                     <!-- START ROW -->
                     <div class="row">
                         <!-- NEW COL START -->
-                        <article class="col-sm-12 col-md-12 col-lg-12">
+                        <article class="col-sm-12 col-md-12 col-lg-12" >
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
-                                <!-- widget options:
+                            <div class="jarviswidget jarviswidget-color-purple" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">     <!-- widget options:
                                         usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
                                         
-                                        data-widget-colorbutton="false"	
+                                      
                                         data-widget-editbutton="false"
                                         data-widget-togglebutton="false"
-                                        data-widget-deletebutton="false"
-                                        data-widget-fullscreenbutton="false"
+                                       
+                                       
                                         data-widget-custombutton="false"
                                         data-widget-collapsed="true" 
                                         data-widget-sortable="false"
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>REGISTRAR DOCUMENTO ADJUNTO </h2>				
+                                    <h2>Registrar Documento</h2>				
                                 </header>
 
 
@@ -195,7 +195,7 @@
 
                                                         <td  style="width:50%;" align="center">
                                                             <table class="table table-striped ">
-                                                                <tr><td align="center" style="border:1px solid;border-color: #D2691E;height:30%"><strong><%=d.getNo_documento()%></strong></td></tr>
+                                                                <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong><%=d.getNo_documento()%></strong></td></tr>
                                                                 <tr>
                                                                     <td class="caji<%=(i + 1)%>" align="center"><% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
                                                                         <div class="form-group">
@@ -257,7 +257,7 @@
 
                                                         <td  style="text-align:center;" align="center" >
                                                             <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
-                                                            <a type="button"  class="btn btn-file btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                            <a type="button"  class="btn btn-danger btn-sm btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                             <%} else {
                                                                     out.print("");
                                                                 }%>
@@ -277,7 +277,7 @@
 
                                                     <td style="width:50%;" align="center">
                                                         <table class="table table-striped ">
-                                                            <tr><td align="center" style="border:1px solid;border-color: #D2691E;height:30%"><strong><%=d.getNo_documento()%></strong></td></tr><br><br>
+                                                            <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong><%=d.getNo_documento()%></strong></td></tr>
                                                             <tr>
                                                                 <td class="caji<%=(i + 1)%>" align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
@@ -340,7 +340,7 @@
                                                     </td>
                                                     <td  style="text-align:center;" align="center">
                                                         <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
-                                                        <a type="button"  class="btn btn-file btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                        <a type="button"  class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
                                                             }%>
@@ -365,7 +365,7 @@
                                                     <td  style="width:50%;" align="center">
                                                         <table class="table table-striped">
                                                             <tr>
-                                                                <td align="center" style="border:1px solid;border-color: #D2691E;height:30%">
+                                                                <td align="center" style="border:1px solid;border-color: #D2691E;">
                                                                     <strong><%  if (d.getTi_documento().trim().equals("ACMA")) {
                                                                             out.println("ACTA DE MATRIMONIO CON: <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
                                                                         }
@@ -434,7 +434,7 @@
                                                     </td>
                                                     <td  style="text-align:center;" align="center">
                                                         <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
-                                                        <a type="button"  class="btn btn-file btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                        <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
                                                             }%>
@@ -453,17 +453,18 @@
                                                         for (int kk = 0; kk < List_Hijos.size(); kk++) {
                                                             Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();
                                                             h = (Datos_Hijo_Trabajador) List_Hijos.get(kk);
+                                                            if (d.getId_datos_hijo() == null) {
                                                 %>
-
 
                                                 <tr>
                                                     <td  style="width:50%;" align="center">
                                                         <table class="table table-striped ">
-                                                            <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr><br><br>
+                                                            <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
                                                             <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
                                                                     <div class="form-group">
                                                                         <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
+                                                                        <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
                                                                     </div>
                                                                     <% } else { %>
                                                                     <% if (d.getId_documento_adjunto() == null) { %>
@@ -520,7 +521,88 @@
                                                     </td>
                                                     <td  style="text-align:center;" align="center">
                                                         <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
-                                                        <a type="button"  class="btn btn-file btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                        <a type="button"  class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                        <%} else {
+                                                                out.print("");
+                                                            }%>
+                                                    </td>
+                                                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
+                                                </tr>  
+
+
+                                                <%
+                                                   
+                                                } else {
+
+                                                    if (h.getVal_doc() > 0 & d.getId_datos_hijo().equals(h.getId_datos_hijos_trabajador().trim())) {
+                                                        //   i++;
+%>
+                                                <tr>
+                                                    <td  style="width:50%;" align="center">
+                                                        <table class="table table-striped ">
+                                                            <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
+                                                            <tr><td class="caji<%=(i + 1)%>"  align="center">
+                                                                    <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
+                                                                    <div class="form-group">
+                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
+                                                                        <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
+                                                                    </div>
+                                                                    <% } else { %>
+                                                                    <% if (d.getId_documento_adjunto() == null) { %>
+                                                                    <label class="null">No Registrado</label>
+                                                                    <% } else {%>
+                                                                    <%
+                                                                        out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));
+                                                                    %>
+
+                                                                    <% }
+                                                                        } %>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+
+                                                    <td  style="text-align:center;" align="center">
+                                                        <label>DESCRIPCION:</label><BR>
+                                                        <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
+                                                        <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                        <% } else { %>
+                                                        <% if (d.getDe_documento_adjunto() == null) { %>
+                                                        <label class="null" >No Registrado</label><BR><BR>
+                                                        <% } else {%>
+                                                        <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
+
+                                                        <% } %>
+                                                        <% } %>    
+                                                        <%if (d.getEs_documento_adjunto() == null) {%>
+                                                        <section class="col col-10" style="text-align:center;" align="center">
+                                                            <%}%>
+                                                            <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
+                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                                <% } else { %>
+                                                                <% if (d.getEs_documento_adjunto() == null) { %>
+
+                                                            <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
+                                                                <% } else { %>
+                                                            <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
+
+                                                                ¿RECIBIDO EN FISICO?:<BR><img src="Aprobado.png" width="20" height="20">
+                                                                <%
+                                                                } else {
+
+                                                                %>
+                                                                ¿RECIBIDO EN FISICO?:<BR><img src="Desaprobado.png" width="20" height="20">
+                                                            </label>
+                                                            <% }
+                                                                    }
+                                                                }%>
+                                                            <%if (d.getEs_documento_adjunto() == null) {%>
+                                                        </section>
+                                                        <%}%>
+                                                    </td>
+                                                    <td  style="text-align:center;" align="center">
+                                                        <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
+                                                        <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
                                                             }%>
@@ -529,6 +611,55 @@
                                                 </tr>  
 
                                                 <%
+
+                                                } else if (h.getVal_doc() == 0 & !id_hijo_faltante.equals(h.getId_datos_hijos_trabajador())) {
+                                                  // out.print(kk);
+                                                %>
+                                                <tr>
+                                                    <td  style="width:50%;" align="center">
+                                                        <table class="table table-striped ">
+                                                            <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
+                                                            <tr><td class="caji<%=(i + 1)%>"  align="center">
+                                                                    <% if ((rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
+                                                                    <div class="form-group">
+                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
+                                                                        <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
+                                                                    </div>
+                                                                    <% } else { %>
+                                                                    <label class="null">No Registrado</label>
+                                                                    <% } %>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+
+                                                    <td  style="text-align:center;" align="center">
+                                                        <label>DESCRIPCION:</label><BR>
+                                                        <% if ((rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
+                                                        <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                        <% } else { %>
+                                                        <label class="null" >No Registrado</label><BR><BR>
+                                                        <% } %> 
+
+
+                                                        <section class="col col-10" style="text-align:center;" align="center">
+                                                            <% if ((rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
+                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                                <% } else {%>
+                                                            <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
+                                                                <% }%>
+                                                        </section>
+                                                    </td>
+                                                    <td  style="text-align:center;" align="center">
+                                                    </td>
+                                                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
+                                                </tr> 
+
+                                                <%
+                                                                    id_hijo_faltante = h.getId_datos_hijos_trabajador();
+                                                                }
+
+                                                            }
                                                             i++;
                                                         }
                                                 %>
@@ -539,7 +670,7 @@
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
                                                 <td  style="width:50%;" align="center">
                                                     <table class="table table-striped ">
-                                                        <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong><%=d.getNo_documento()%></strong></td></tr><br><br>
+                                                        <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong><%=d.getNo_documento()%></strong></td></tr>
                                                         <tr><td class="caji<%=(i + 1)%>" align="center"> <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
                                                                 <div class="form-group">
                                                                     <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" >
@@ -603,10 +734,10 @@
                                                     <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
                                                     <%if (request.getParameter("P2") == null & request.getParameter("pro") == null) {
                                                     %>
-                                                    <a type="button"  class="btn btn-file btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                    <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                     <%} else if (request.getParameter("P2") != null & request.getParameter("pro") != null) {
                                                     %>
-                                                    <a type="button"  class="btn btn-file btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>&P2=TRUE"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                    <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>&P2=TRUE"><i class="fa fa-trash-o"></i> Eliminar</a>
 
                                                     <%                                                       } %>
                                                     <%} else {
@@ -827,15 +958,11 @@
                                                         maxFileSize: 500,
                                                         maxFilesNum: 10,
                                                         //allowedFileTypes: ['image', 'video', 'flash'],
-                                                        slugCallback: function (filename) {
+                                                        slugCallback: function(filename) {
                                                             return filename.replace('(', '_').replace(']', '_');
                                                         }
                                                     });
-                                                    /*
-                                                     $(".file").on('fileselect', function(event, n, l) {
-                                                     alert('File Selected. Name: ' + l + ', Num: ' + n);
-                                                     });
-                                                     */
+                                              
                                                     $("#file-3").fileinput({
                                                         showUpload: false,
                                                         showCaption: false,
@@ -847,14 +974,14 @@
                                                             {kvId: '10'}
                                                         ],
                                                     });
-                                                    $(".btn-warning").on('click', function () {
+                                                    $(".btn-warning").on('click', function() {
                                                         if ($('#file-4').attr('disabled')) {
                                                             $('#file-4').fileinput('enable');
                                                         } else {
                                                             $('#file-4').fileinput('disable');
                                                         }
                                                     });
-                                                    $(".btn-info").on('click', function () {
+                                                    $(".btn-info").on('click', function() {
                                                         $('#file-4').fileinput('refresh', {previewClass: 'bg-info'});
                                                     });
                                                     /*
@@ -865,34 +992,30 @@
                                                      alert('File browse clicked for #file-4');
                                                      });
                                                      */
-                                                    $(document).ready(function () {
+                                                    $(document).ready(function() {
                                                         $("#test-upload").fileinput({
                                                             'showPreview': false,
                                                             'allowedFileExtensions': ['jpg', 'png', 'gif'],
                                                             'elErrorContainer': '#errorBlock'
                                                         });
-                                                        /*
-                                                         $("#test-upload").on('fileloaded', function(event, file, previewId, index) {
-                                                         alert('i = ' + index + ', id = ' + previewId + ', file = ' + file.name);
-                                                         });
-                                                         */
+                                                     
                                                     });
         </script>
         <script type="text/javascript">
             function nobackbutton() {
                 window.location.hash = "no-back-button";
                 window.location.hash = "Again-No-back-button" //chrome
-                window.onhashchange = function () {
-                    window.location.hash = "no-back-button";
+                window.onhashchange = function() {
+                    window.location.hash = "";
                 }
             }
 
-            $(document).ready(function () {
+            $(document).ready(function() {
 
                 pageSetUp();
 
 
-                $.each($(".file"), function (i) {
+                $.each($(".file"), function(i) {
 
                     if ((i + 1) == 0) {
                         $(".btn_reg_doc").hide();
@@ -905,12 +1028,12 @@
 
 
 
-                $(".DD").change(function () {
+                $(".DD").change(function() {
 
                     $(".div-holi").text($(".DD").val());
 
                 });
-                $(".elimi").click(function () {
+                $(".elimi").click(function() {
                     var msg = confirm('¿estas seguro de eliminar?');
                     if (msg == true) {
                         return true;
@@ -1020,7 +1143,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1089,7 +1212,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1141,7 +1264,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1180,15 +1303,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function (form) {
+                    submitHandler: function(form) {
                         $(form).ajaxSubmit({
-                            success: function () {
+                            success: function() {
                                 $("#comment-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1222,15 +1345,15 @@
                         }
                     },
                     // Ajax form submition
-                    submitHandler: function (form) {
+                    submitHandler: function(form) {
                         $(form).ajaxSubmit({
-                            success: function () {
+                            success: function() {
                                 $("#contact-form").addClass('submited');
                             }
                         });
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1259,7 +1382,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1304,7 +1427,7 @@
                         }
                     },
                     // Do not change code below
-                    errorPlacement: function (error, element) {
+                    errorPlacement: function(error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
@@ -1314,7 +1437,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
+                    onSelect: function(selectedDate) {
                         $('#finishdate').datepicker('option', 'minDate', selectedDate);
                     }
                 });
@@ -1323,7 +1446,7 @@
                     dateFormat: 'dd.mm.yy',
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
+                    onSelect: function(selectedDate) {
                         $('#startdate').datepicker('option', 'maxDate', selectedDate);
                     }
                 });
@@ -1339,7 +1462,7 @@
             _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
             _gaq.push(['_trackPageview']);
 
-            (function () {
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;

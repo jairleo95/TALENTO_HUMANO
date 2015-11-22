@@ -1090,7 +1090,7 @@
                                                         if (ButtonPressed === "Si") {
                                                             // return true;
                                                             $(".form-aut").submit();
-                                                            //window.parent.sendMessage();
+                                                            window.parent.sendMessage();
                                                             //window.parent.ppp()
                                                         }
                                                         if (ButtonPressed === "No") {

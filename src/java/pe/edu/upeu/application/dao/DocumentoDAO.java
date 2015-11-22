@@ -50,8 +50,15 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 list.add(d);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" +e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         return list;
@@ -59,7 +66,6 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
 
     @Override
     public String List_files(String id) {
-        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         String texto_html = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -88,7 +94,6 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             try {
                 this.conn.close();
             } catch (Exception e) {
-
                 throw new RuntimeException(e.getMessage());
             }
         }
@@ -97,15 +102,12 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
 
     @Override
     public String List_files_tra(String id) {
-        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         String texto_html = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "select a.NO_FILE,a.NO_ORIGINAL  from RHTV_ARCHIVO_DOCUMENTO a ,  RHTV_DOCUMENTO_ADJUNTO d where d.ID_DOCUMENTO_ADJUNTO = a.ID_DOCUMENTO_ADJUNTO  and  a.id_documento_adjunto='" + id + "' and a.ES_FILE='1'";
             ResultSet rs = this.conn.query(sql);
-
             while (rs.next()) {
-
                 texto_html = texto_html + "<img src=\"../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "\" />";
             }
             rs.close();
@@ -126,7 +128,6 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
 
     @Override
     public String List_file_url(String id) {
-        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         String texto_html = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -164,7 +165,6 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
 
     @Override
     public String List_file_url2(String id) {
-        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         String texto_html = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -256,9 +256,16 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 d.setTi_documento(rs.getString("ti_documento"));
                 list.add(d);
             }
-        } catch (SQLException e) {
+       } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" +e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -266,11 +273,10 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public List<Datos_Hijo_Trabajador> List_Hijos(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHTD_DATOS_HIJO_TRABAJADOR where id_trabajador='" + id_trabajador.trim() + "' and (sysdate-fe_nacimiento)/360<18";
+        String sql = "select RHTD_DATOS_HIJO_TRABAJADOR.*, rhfu_val_doc_hijo(ID_DATOS_HIJOS_TRABAJADOR) as val_doc from RHTD_DATOS_HIJO_TRABAJADOR where id_trabajador='" + id_trabajador.trim() + "' and (sysdate-fe_nacimiento)/360<18 and ES_DATOS_HIJO_TRABAJADOR='1'";
         List<Datos_Hijo_Trabajador> list = new ArrayList<Datos_Hijo_Trabajador>();
         try {
             ResultSet rs = this.conn.query(sql);
-
             while (rs.next()) {
                 Datos_Hijo_Trabajador dht = new Datos_Hijo_Trabajador();
                 dht.setAp_materno(rs.getString("ap_materno"));
@@ -291,11 +297,19 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 dht.setNu_doc(rs.getString("nu_doc"));
                 dht.setUs_creacion(rs.getString("us_creacion"));
                 dht.setUs_modif(rs.getString("us_modif"));
+                dht.setVal_doc(rs.getInt("val_doc"));
                 list.add(dht);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" +e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         return list;
@@ -317,10 +331,16 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 list.add(pmc);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" +e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
-
         return list;
     }
 
@@ -333,9 +353,16 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             ResultSet rs = this.conn.query(sql);
             rs.next();
             religion = rs.getInt("num");
-        } catch (SQLException e) {
+       } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" +e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         return religion;
@@ -351,8 +378,15 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             rs.next();
             nacionalidad = rs.getInt("num");
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" +e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         return nacionalidad;
@@ -361,7 +395,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public List<V_Reg_Dgp_Tra> List_doc_req_pla(String iddgp, String idtra) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHVD_REQ_DGP_TRA  where IDDGP='" + iddgp + "' AND ID_TRABAJADOR='" + idtra + "' ORDER BY NU_ORDEN_DOC ";
+        String sql = "SELECT *  FROM RHVD_REQ_DGP_TRA  where IDDGP='" + iddgp + "' AND ID_TRABAJADOR='" + idtra + "' ORDER BY NU_ORDEN_DOC ";
         List<V_Reg_Dgp_Tra> x = new ArrayList<V_Reg_Dgp_Tra>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -407,6 +441,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 v.setId_contrato(rs.getString("id_contrato"));
                 v.setEs_rec_fisico(rs.getString("es_rec_fisico"));
                 v.setId_dgp(rs.getString("id_dgp"));
+                v.setId_datos_hijo(rs.getString("ID_DATOS_HIJO"));
                 x.add(v);
             }
         } catch (SQLException e) {
@@ -424,15 +459,16 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     }
 
     @Override
-    public void INSERT_DGP_DOC_ADJ(String ID_DGP_DOC_ADJ, String ID_DGP, String ID_DOCUMENTO_ADJUNTO, String ES_DGP_DOC_ADJ, String idtr) {
+    public void INSERT_DGP_DOC_ADJ(String ID_DGP_DOC_ADJ, String ID_DGP, String ID_DOCUMENTO_ADJUNTO, String ES_DGP_DOC_ADJ, String idtr, String idh) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP_DOC_ADJ( ?, ?, ?, ? ,?)} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP_DOC_ADJ( ?, ?, ?, ? ,?,?)} ");
             cst.setString(1, null);
             cst.setString(2, ID_DGP.trim());
             cst.setString(3, ID_DOCUMENTO_ADJUNTO.trim());
             cst.setString(4, ES_DGP_DOC_ADJ);
             cst.setString(5, idtr.trim());
+            cst.setString(6, idh);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -551,10 +587,16 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             rs.next();
             num = rs.getInt(1);
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" +e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
-
         return num;
     }
 
@@ -653,8 +695,15 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             rs.next();
             num = rs.getInt(1);
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" +e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         return num;
@@ -675,9 +724,16 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 d.setTi_documento(rs.getString("TI_DOCUMENTO"));
                 list.add(d);
             }
-        } catch (SQLException e) {
+       } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" +e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -704,6 +760,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 v.setEs_documento(rs.getString("ES_DOCUMENTO"));
                 v.setEs_dgp_doc_adj(rs.getString("ES_DGP_DOC_ADJ"));
                 v.setDe_documento_adjunto(rs.getString("DE_DOCUMENTO_ADJUNTO"));
+                v.setId_datos_hijo(rs.getString("ID_DATOS_HIJO"));
                 x.add(v);
             }
         } catch (SQLException e) {
@@ -721,15 +778,16 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     }
 
     @Override
-    public void INSERT_DGP_DOC_tra(String ID_DGP_DOC_ADJ, String ID_DGP, String ID_DOCUMENTO_ADJUNTO, String ES_DGP_DOC_ADJ, String idtr) {
+    public void INSERT_DGP_DOC_tra(String ID_DGP_DOC_ADJ, String ID_DGP, String ID_DOCUMENTO_ADJUNTO, String ES_DGP_DOC_ADJ, String idtr,String idh) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP_DOC_ADJ( ?, ?, ?, ? ,?)} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP_DOC_ADJ( ?, ?, ?, ? ,?,?)} ");
             cst.setString(1, null);
             cst.setString(2, null);
             cst.setString(3, ID_DOCUMENTO_ADJUNTO.trim());
             cst.setString(4, ES_DGP_DOC_ADJ);
             cst.setString(5, idtr.trim());
+            cst.setString(6, idh);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -771,7 +829,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR" +e.getMessage());
         } finally {
             try {
                 this.conn.close();

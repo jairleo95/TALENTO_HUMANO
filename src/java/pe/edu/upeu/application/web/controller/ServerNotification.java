@@ -30,7 +30,7 @@ import javax.websocket.server.*;
  *
  * @author Jairleo95
  */
-@ServerEndpoint("/server")
+@ServerEndpoint("/serverGth")
 public class ServerNotification {
 
     static Set<Session> chatRoomUser = Collections.synchronizedSet(new HashSet<Session>());

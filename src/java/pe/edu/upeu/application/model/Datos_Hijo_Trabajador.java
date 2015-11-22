@@ -29,8 +29,17 @@ public class Datos_Hijo_Trabajador {
     private String fe_modif;
     private String ip_usuario;
     private String es_datos_hijo_trabajador;
+    private int val_doc;
 
-    public Datos_Hijo_Trabajador(String id_datos_hijos_trabajador, String id_trabajador, String ap_paterno, String ap_materno, String no_hijo_trabajador, String fe_nacimiento, String es_sexo, String es_tipo_doc, String nu_doc, String es_presenta_documento, String es_inscripcion_vig_essalud, String es_estudio_niv_superior, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String es_datos_hijo_trabajador) {
+    public int getVal_doc() {
+        return val_doc;
+    }
+
+    public void setVal_doc(int val_doc) {
+        this.val_doc = val_doc;
+    }
+
+    public Datos_Hijo_Trabajador(String id_datos_hijos_trabajador, String id_trabajador, String ap_paterno, String ap_materno, String no_hijo_trabajador, String fe_nacimiento, String es_sexo, String es_tipo_doc, String nu_doc, String es_presenta_documento, String es_inscripcion_vig_essalud, String es_estudio_niv_superior, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String es_datos_hijo_trabajador, int val_doc) {
         this.id_datos_hijos_trabajador = id_datos_hijos_trabajador;
         this.id_trabajador = id_trabajador;
         this.ap_paterno = ap_paterno;
@@ -49,9 +58,11 @@ public class Datos_Hijo_Trabajador {
         this.fe_modif = fe_modif;
         this.ip_usuario = ip_usuario;
         this.es_datos_hijo_trabajador = es_datos_hijo_trabajador;
+        this.val_doc = val_doc;
     }
-    public Datos_Hijo_Trabajador(){
-    this.id_datos_hijos_trabajador = "";
+
+    public Datos_Hijo_Trabajador() {
+        this.id_datos_hijos_trabajador = "";
         this.id_trabajador = "";
         this.ap_paterno = "";
         this.ap_materno = "";
@@ -69,6 +80,7 @@ public class Datos_Hijo_Trabajador {
         this.fe_modif = "";
         this.ip_usuario = "";
         this.es_datos_hijo_trabajador = "";
+        this.val_doc = 0;
     }
 
     public String getId_datos_hijos_trabajador() {
@@ -214,6 +226,5 @@ public class Datos_Hijo_Trabajador {
     public void setEs_datos_hijo_trabajador(String es_datos_hijo_trabajador) {
         this.es_datos_hijo_trabajador = es_datos_hijo_trabajador;
     }
-    
-    
+
 }

@@ -50,9 +50,9 @@ public class Cindex extends HttpServlet {
         String Usuario = request.getParameter("username");
         String Clave = request.getParameter("clave");
 
-        InterfaceListaDAO li = new ListaDAO();
+     //   InterfaceListaDAO li = new ListaDAO();
         //   InterfaceDgpDAO dgp = new DgpDAO();
-        InterfaceUbigeoDAO ub = new UbigeoDAO();
+       // InterfaceUbigeoDAO ub = new UbigeoDAO();
         //  InterfaceTrabajadorDAO tr = new TrabajadorDAO();
         InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
         InterfaceRolDAO Irol = new RolDAO();

@@ -38,38 +38,42 @@ public class CMenu extends HttpServlet {
         try {
             InterfaceRolDAO Irol = new RolDAO();
             String opc = request.getParameter("opc");
-
             HttpSession sesion = request.getSession(true);
+            String IDUSER = (String) sesion.getAttribute("IDUSER");
             String user = (String) sesion.getAttribute("USER");
             String idrol = (String) sesion.getAttribute("IDROL");
+            if (IDUSER != null) {
 
-            if (opc == null && !idrol.trim().equals("ROL-0013")) {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Modulos.jsp");
-                dispatcher.forward(request, response);
-            } else if (opc != null & user != null) {
-                if (opc.equals("logout")) {
-                    sesion.invalidate();
+                if (opc == null && !idrol.trim().equals("ROL-0013")) {
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Modulos.jsp");
+                    dispatcher.forward(request, response);
+                } else if (opc != null & user != null) {
+                    if (opc.equals("logout")) {
+                        sesion.invalidate();
 
+                        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+                        dispatcher.forward(request, response);
+                    }
+                    if (opc.equals("List_Privilegios")) {
+                        String id_modulo = request.getParameter("idmod");
+                        sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
+                        //sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
+                        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal.jsp");
+                        dispatcher.forward(request, response);
+
+                    }
+
+                } else if (idrol.trim().equals("ROL-0013")) {
+                    String id_modulo = "MOD-0001";
+                    sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal.jsp");
+                    dispatcher.forward(request, response);
+                } else {
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                     dispatcher.forward(request, response);
                 }
-                if (opc.equals("List_Privilegios")) {
-                    String id_modulo = request.getParameter("idmod");
-                    sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
-                    //sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
-                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal_3.jsp");
-                    dispatcher.forward(request, response);
-
-                }
-
-            } else if (idrol.trim().equals("ROL-0013")) {
-                String id_modulo = "MOD-0001";
-                sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
-                //sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal_3.jsp");
-                dispatcher.forward(request, response);
             } else {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/");
                 dispatcher.forward(request, response);
             }
         } finally {
