@@ -266,7 +266,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     @Override
     public List<Datos_Hijo_Trabajador> List_Hijos(String id_trabajador) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHTD_DATOS_HIJO_TRABAJADOR where id_trabajador='" + id_trabajador.trim() + "' and (sysdate-fe_nacimiento)/360<18";
+        String sql = "select * from RHTD_DATOS_HIJO_TRABAJADOR where id_trabajador='" + id_trabajador.trim() + "' and (sysdate-fe_nacimiento)/360<18 and ES_DATOS_HIJO_TRABAJADOR='1'";
         List<Datos_Hijo_Trabajador> list = new ArrayList<Datos_Hijo_Trabajador>();
         try {
             ResultSet rs = this.conn.query(sql);
