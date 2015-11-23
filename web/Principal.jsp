@@ -469,12 +469,12 @@
 
             <!-- MAIN CONTENT -->
             <div id="content">
-                
+
                 <div class="row">
                     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
                         <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home" id="icon_menu"></i><label class="titulo_menu" >Inicio</label><span> </span></h1>
                     </div>
-                    <h1 class="ajax-loading-animation"><i class="fa fa-cog fa-spin"></i> Cargando...</h1>
+
                     <!-- <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
                          <ul id="sparks" class="">
                              <li class="sparks-info">
@@ -501,9 +501,9 @@
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
                     <!-- row -->
-                    <div class="row">
-
-                        <iframe id="myframe" name="myframe"  class="iframe_menu" scrolling="si"  width="100%" height="800" frameborder="0" src="Vista/inicio.jsp"></iframe>
+                    <div class="row ">
+                        <div class="animacion_load"></div>
+                        <iframe id="myframe" name="myframe"  style="display:none;"  class="iframe_principal" scrolling="si"  width="100%" height="800" frameborder="0" src="Vista/inicio.jsp"></iframe>
                     </div>
 
                     <!-- end row -->
@@ -694,7 +694,7 @@
 
         <script>
         document.oncontextmenu = function() {
-            //   return false;
+            return false;
         }
         function nobackbutton() {
             window.location.hash = "no-back-button";
@@ -715,24 +715,36 @@
         websocket.onmessage = function processMessage(objJson) {
             alert(objJson.message)
         }
+    
+        document.getElementById('myframe').onload = function() {
+         
+           // setTimeout(function() {
+                $(".iframe_principal").show(100);
+                $(".animacion_load").empty();
+          //  }, 1000);
+        };
         $(document).ready(function() {
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
             pageSetUp();
-//sendMessage()
+            //sendMessage()
             // alert('<%="Maximum Inactive Interval of Session in Seconds is : " + sesion.getMaxInactiveInterval() / 60%>');
             /*
              * PAGE RELATED SCRIPTS
              */
+
+
             $(".menu-item-parent").parent().click(function() {
-                $(".titulo_menu").text(" "+$(this).text());
-              $("#icon_menu").removeClass();
-                 $("#icon_menu").addClass($(this).data('value'));
-                 $("#icon_menu").removeClass("fa-lg");
+                $(".titulo_menu").text(" " + $(this).text());
+                $("#icon_menu").removeClass();
+                $("#icon_menu").addClass($(this).data('value'));
+                $("#icon_menu").removeClass("fa-lg");
             });
             $(".li-privilegio").click(function() {
                 $(".li-privilegio").removeClass("active");
                 $(this).addClass("active");
+                 $(".iframe_principal").hide();
+                  $(".animacion_load").append('<h1 class="ajax-loading-animation"><i class="fa fa-cog fa-spin"></i> Cargando...</h1>');
             });
             $(".js-status-update a").click(function() {
                 var selText = $(this).text();
