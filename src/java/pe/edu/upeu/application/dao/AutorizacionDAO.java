@@ -521,7 +521,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     @Override
     public String Mes_plazo(String id_dgp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT TO_CHAR(pl.FE_HASTA,'MONTH','nls_date_language=spanish') as mes_hasta FROM RHTR_CUMPLIMIENTO_PLAZO cp,RHTR_PLAZO pl WHERE  pl.ID_PLAZO = cp.ID_PLAZO and pl.TI_PLAZO='2' and pl.ES_PLAZO='1' and cp.ID_DGP='" + id_dgp.trim() + "'";
+        String sql = "SELECT TO_CHAR(pl.FE_HASTA,'MONTH','nls_date_language=spanish') as mes_hasta FROM RHTR_CUMPLIMIENTO_PLAZO cp,RHTR_PLAZO pl WHERE  pl.ID_PLAZO = cp.ID_PLAZO and pl.TI_PLAZO='2'  and cp.ID_DGP='" + id_dgp.trim() + "'";
         String validar = "";
         try {
             ResultSet rs = this.conn.query(sql);

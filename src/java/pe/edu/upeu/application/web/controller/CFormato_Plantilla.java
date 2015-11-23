@@ -65,23 +65,19 @@ public class CFormato_Plantilla extends HttpServlet {
                     String PUES = request.getParameter("id_pu_asig");
                     String id = request.getParameter("id_pc");
                     pl.Insertar_pertenencia(id, DIR, DEP, AREA, SEC, PUES, iduser);
-                    //  response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
                     rpta.put("rpta", "1");
                 }
                 if (opc.equals("asignar")) {
                     sesion.setAttribute("Listar_Direccion_X", dir.Listar_Direccion());
                     response.sendRedirect("Vista/Contrato/Formato_Plantilla/Reg_Formato_Plantilla.jsp");
                 }
-                // String direccion_raiz = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web";
                 if (opc.equals("Actualizar")) {
                     String texto_html = request.getParameter("valor");
                     String id = request.getParameter("id");
                     File archivo = new File(ubicacion + id);
                     if (archivo.exists()) {
-                        //  archivo.delete();
                         FileWriter escribir = new FileWriter(archivo);
                         // aqui se hace un append al archivo existente
-                        //FileWriter escribir = new FileWriter(archivo,true);
                         escribir.write(texto_html);
                         escribir.close();
                     } else {
@@ -96,10 +92,6 @@ public class CFormato_Plantilla extends HttpServlet {
                     String texto = "";
                     String imprimir = "";
                     String no_archivo = request.getParameter("id");
-                    /*   if (System.getProperty("sun.desktop").trim().equals("windows")) {
-                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-                     } else {*/
-                    //ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                     FileReader lector = new FileReader(ubicacion + no_archivo);
                     BufferedReader contenido = new BufferedReader(lector);
                     while ((texto = contenido.readLine()) != null) {
@@ -113,11 +105,6 @@ public class CFormato_Plantilla extends HttpServlet {
                     String imprimir = "";
                     String no_archivo = request.getParameter("id");
                     String no_arhivo_or = pl.List_pl_con_x_id(no_archivo);
-                    /*   if (System.getProperty("sun.desktop").trim().equals("windows")) {
-                     ubicacion = direccion_raiz + "\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-                     } else {*/
-                    //ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-                    //  }
                     FileReader lector = new FileReader(ubicacion + no_arhivo_or);
                     BufferedReader contenido = new BufferedReader(lector);
                     while ((texto = contenido.readLine()) != null) {
@@ -167,14 +154,14 @@ public class CFormato_Plantilla extends HttpServlet {
                 rpta.put("rpta", "-1");
                 rpta.put("mensaje", e.getMessage());
             }
-            Gson gson = new Gson();
-            out.println(gson.toJson(rpta));
-            out.flush();
-            out.close();
         } else {
-            out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
-        }
+            rpta.put("rpta", "-1");
 
+        }
+        Gson gson = new Gson();
+        out.println(gson.toJson(rpta));
+        out.flush();
+        out.close();
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
