@@ -39,9 +39,16 @@ public class Comentario_DGPDAO implements InterfaceComentario_DGPDAO {
             cst.setString(7, FE_MODIFICACION);
             cst.setString(8, ES_COMENTARIO_DGP);
             cst.execute();
-        } catch (SQLException ex) {
+       } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -85,9 +92,16 @@ public class Comentario_DGPDAO implements InterfaceComentario_DGPDAO {
                 cd.setFe_creacion(rs.getString("fe_creacion"));
                 list.add(cd);
             }
-        } catch (SQLException e) {
+      } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -102,9 +116,16 @@ public class Comentario_DGPDAO implements InterfaceComentario_DGPDAO {
             while (rs.next()) {
                 info_comentario = rs.getString("INF");
             }
-        } catch (SQLException e) {
+      } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return info_comentario;
     }

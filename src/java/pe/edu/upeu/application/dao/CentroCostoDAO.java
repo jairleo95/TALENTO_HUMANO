@@ -49,10 +49,16 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
                 rec.put("id_det_cc", rs.getString("ID_DEPART_CENTRO_COSTO"));
                 lista.add(rec);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+       } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.cnn.close();
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return lista;
     }
@@ -81,10 +87,16 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
                 rec.put("id_det_cc", rs.getString("ID_DEPART_CENTRO_COSTO"));
                 lista.add(rec);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+      } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.cnn.close();
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return lista;
     }

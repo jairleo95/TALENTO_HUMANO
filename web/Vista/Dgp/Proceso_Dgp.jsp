@@ -155,15 +155,12 @@
 
         </style>
     </head>
-    <%  //String num = request.getParameter("num");
-        // int num_doc = Integer.parseInt(num);
+    <%
         if (request.getParameter("a") != null) {
             if (request.getParameter("a").equals("t")) {
     %>
-
     <body onload="closedthis();
             nobackbutton();">
-
         <%
             }
         } else {
@@ -252,7 +249,6 @@
                                                             Accion <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu">
-
                                                             <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>
                                                             <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=Seguimiento">Ver Historial</a> </li>
                                                             <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></li>
@@ -268,57 +264,37 @@
                                                 <% if (r.getAr_foto() == null) {%>
                                                 <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
                                                     <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
-
                                                         <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a>
-
-
-                                                    <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
-
                                                 </td>
-
-                                                <td><div class="new-progress prog_aut<%=(i + 1)%>"  >
+                                                <%} else {%>
+                                                <td>
+                                                    <img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
+                                                        <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> 
+                                                </td>
+                                                <%}%>
+                                                <td>
+                                                    <div class="new-progress prog_aut<%=(i + 1)%>"  >
                                                         <%
                                                             out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso(), ID_DEP));
                                                         %>
-                                                    </div></td>
-                                                    <%if (ID_DEP.equals("DPT-0019")) {%>
+                                                    </div>
+                                                </td>
+                                                <%if (ID_DEP.equals("DPT-0019")) {%>
                                                 <td><%=r.getNo_dep()%></td>
                                                 <%} %>
-                                                <td><%if (r.getEs_dgp().equals("2")) {
+                                                <td>
+                                                    <%if (r.getEs_dgp().equals("2")) {
                                                         out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
                                                     } else {
                                                         out.print(" <span class='label label-primary'>En Proceso</span>");
-                                                    }%></td>
-                                                    <% } else {%>
-                                                <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
-
-                                                        <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> 
-
-
-
-
-                                                    <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
+                                                    }%>
                                                 </td>
-                                                <td><div class="new-progress prog_aut<%=(i + 1)%>"  >
-                                                        <%
-                                                            out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso(), ID_DEP));
-                                                        %>
-                                                    </div></td>
-                                                <td>  <%if (r.getEs_dgp().equals("2")) {
-                                                        out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
-                                                    } else {
-                                                        out.print(" <span class='label label-primary'>En Proceso</span>");
-                                                    }%></td>
-                                                    <% }%>
                                             </tr>
                                             <% }
-                                                LIST_DGP_PROCESO.clear();%>
-
-
+                                                LIST_DGP_PROCESO.clear();
+                                            %>
                                             </tbody>
                                         </table>
-
-
                                     </div>
                                     <!-- end widget content -->
 

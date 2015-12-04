@@ -45,9 +45,16 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 us.setPw_usuario(rs.getString("pw_usuario"));
                 list.add(us);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         return list;
@@ -70,9 +77,16 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 us.setPw_usuario(rs.getString("pw_usuario"));
                 list.add(us);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         return list;
@@ -107,9 +121,16 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 us.setAp_materno(rs.getString("ap_materno"));
                 list.add(us);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         return list;
@@ -135,9 +156,16 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 num = 0;
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return num;
 
@@ -221,11 +249,17 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
 
                 list.add(v);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
-
         return list;
     }
 
@@ -240,8 +274,15 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             cst.setString(3, clave);
             cst.execute();
         } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -254,9 +295,15 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             cst.setString(1, ID);
             cst.execute();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -276,9 +323,16 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 us.setPw_usuario(rs.getString("pw_usuario"));
                 list.add(us);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -298,8 +352,15 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             cst.setString(6, es_usuario);
             cst.execute();
         } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -332,9 +393,16 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 v.setEs_usuario(rs.getString("es_usuario"));
                 list.add(v);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         return list;
@@ -369,9 +437,16 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 v.setEs_usuario(rs.getString("es_usuario"));
                 list.add(v);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         return list;
@@ -388,8 +463,15 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             cst.setString(3, no_user);
             cst.execute();
         } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -402,8 +484,15 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             cst.setString(1, id_usuario);
             cst.execute();
         } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -416,8 +505,15 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             cst.setString(1, id_usuario);
             cst.execute();
         } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -451,12 +547,16 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             cst.setString(19, IP_USUARIO);
 
             cst.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error al modificar perfil de  usuario...");
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
     }
@@ -471,9 +571,16 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             while (rs.next()) {
                 fecha = rs.getString(1);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return fecha;
     }

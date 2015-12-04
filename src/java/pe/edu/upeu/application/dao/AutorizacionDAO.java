@@ -258,9 +258,16 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 list.add(x);
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         return list;
@@ -323,9 +330,16 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setVal_contrato_adjunto(rs.getInt("val_contrato_adjunto"));
                 list.add(v);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -380,9 +394,16 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setCo_huella_digital(rs.getInt("CO_HUELLA_DIGITAL"));
                 list.add(v);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -416,9 +437,16 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             rs.next();
             list.add(rs.getString("id_pasos"));
             list.add(rs.getString("id_puesto"));
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -450,9 +478,16 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setEs_mfl(rs.getString("ES_MFL"));
                 list.add(v);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -478,12 +513,16 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             cst.registerOutParameter(13, Types.CHAR);
             cst.execute();
             id = cst.getString(13);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } catch (Exception ex) {
-            Logger.getLogger(AutorizacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return id;
     }
@@ -528,9 +567,16 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             while (rs.next()) {
                 validar = rs.getString("mes_hasta");
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return validar;
     }

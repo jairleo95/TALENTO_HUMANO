@@ -55,7 +55,6 @@ public class Cindex extends HttpServlet {
         // InterfaceUbigeoDAO ub = new UbigeoDAO();
         //  InterfaceTrabajadorDAO tr = new TrabajadorDAO();
        /* InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
-       
          InterfacePuestoDAO pu = new PuestoDAO();*/
         InterfaceDgpDAO dgp = new DgpDAO();
         InterfaceContratoDAO cto = new ContratoDAO();
@@ -63,7 +62,6 @@ public class Cindex extends HttpServlet {
 
         if (Usuario.equals("") && Clave.equals("")) {
             out.print("ERROR");
-
         } else if (us.Val_Usuario(Usuario, Clave).size() == 1) {
             List<V_Usuario> u = us.Val_Usuario(Usuario, Clave);
             V_Usuario user = new V_Usuario();
@@ -89,17 +87,8 @@ public class Cindex extends HttpServlet {
                 sesion.setAttribute("NOMBRE_AP", user.getAp_paterno() + " " + user.getAp_materno() + " " + user.getNo_trabajador());
             }
             sesion.setAttribute("LIST_MODULO", Irol.LISTAR_MODULOS(user.getId_rol()));
-            //getServletContext().setAttribute("listarURL", Irol.listarURL(user.getId_rol()));
-           /* getServletContext().setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
-             getServletContext().setAttribute("List_Carrera", li.List_Carrera());
-             getServletContext().setAttribute("List_Nacionalidad", li.List_Nacionalidad());
-             getServletContext().setAttribute("List_Universidad", li.List_Universidad());
-             getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
-             getServletContext().setAttribute("List_Det_Puesto", pu.List_Det_Puesto());
-             getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());*/
-
-            //pl.Validar_Cumplimiento_plazo_t2();
-            //pl.Validar_Cumplimiento_plazo_t1();
+             pl.Validar_Cumplimiento_plazo_t2();
+            pl.Validar_Cumplimiento_plazo_t1();
             //esta funcion valida los procesos de dgp se terminen cuando esten en el ultimo paso
             dgp.VAL_DGP_PASOS();
             // cto.VALIDAR_FE_CESE_CON();

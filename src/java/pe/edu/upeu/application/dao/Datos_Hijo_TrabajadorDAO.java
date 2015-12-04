@@ -95,9 +95,16 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
                 t.setEs_datos_hijo_trabajador(rs.getString("es_datos_hijo_trabajador"));
                 Lista.add(t);
             }
-        } catch (SQLException e) {
+       } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return Lista;
     }
@@ -112,9 +119,16 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
             while (rs.next()) {
                 TOTAL = Integer.parseInt(rs.getString(1));
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return TOTAL;
     }
@@ -187,9 +201,16 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
                 t.setEs_datos_hijo_trabajador(rs.getString("es_datos_hijo_trabajador"));
                 Lista.add(t);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return Lista;
 

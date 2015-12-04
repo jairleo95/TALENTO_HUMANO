@@ -432,15 +432,20 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                             cst.setString(2, id_plazo);
                             cst.setString(3, id_cum_plazo);
                             cst.execute();
+                            
+
                         } //NO EXISTE NINGUN USUARIO PROXIMO A RRHH
                         else if (cont2 == 0) {
+                            System.out.print("OK" + cont2);
+                         /*     ConexionBD conn2;
                             int Estado_usu = 0;
-                            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-                            CallableStatement cst = this.conn.conex.prepareCall("{CALL VAL_CUMPLE_PLAZO( ?, ?, ?)}");
-                            cst.setInt(1, Estado_usu);
-                            cst.setString(2, id_plazo);
-                            cst.setString(3, id_cum_plazo);
-                            cst.execute();
+                             conn2 = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+                             CallableStatement cst = conn2.conex.prepareCall("{CALL VAL_CUMPLE_PLAZO( ?, ?, ?)}");
+                             cst.setInt(1, Estado_usu);
+                             cst.setString(2, id_plazo);
+                             cst.setString(3, id_cum_plazo);
+                           cst.execute();*/
+                          
                         }
                     } //caso contrario no existe ningun usuario proximo a autorizar (no esta en proceso)
                     else if (cont == 0) {
@@ -451,6 +456,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                         cst.setString(2, id_plazo);
                         cst.setString(3, id_cum_plazo);
                         cst.execute();
+                        
                     }
                 } else if (estado.trim().equals("2")) {
                 }
@@ -505,6 +511,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                                 CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESHABI_CUMPL_PLAZO( ?)}");
                                 cst.setString(1, id_cumplimiento_plazo);
                                 cst.execute();
+                                
                             } else if (dia == 0 || dia > 0) {
                             }
                         } else if (mes > 0) {
