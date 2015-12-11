@@ -5,10 +5,8 @@
  */
 
 package pe.edu.upeu.application.dao_imp;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import pe.edu.upeu.application.model.Plantilla_Contractual;
 /**
  *
  * @author joserodrigo

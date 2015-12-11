@@ -105,7 +105,7 @@ Author     : JAIR
                                 <div class="row">
                                     <section class="col col-4">
                                         <label class="select" id="titu">
-                                            DirecciÃ³n :<select name="direccion" class="direccion"  >
+                                            Dirección :<select name="direccion" class="direccion"  >
                                                 <option value="" >[SELECCIONE]</option>
                                             </select>
                                         </label>
@@ -315,8 +315,8 @@ Author     : JAIR
                     function() {
                         var valor = $(this).val();
                         $.SmartMessageBox({
-                            title: "Â¡Advertencia!",
-                            content: "Â¿Esta seguro de eliminar el plazo?",
+                            title: "¡Advertencia!",
+                            content: "¿Esta seguro de eliminar el plazo?",
                             buttons: '[No][Si]'
                         }, function(ButtonPressed) {
                             if (ButtonPressed === "Si") {
@@ -327,7 +327,7 @@ Author     : JAIR
                                 }).done(function() {
                                     listar();
                                     $.smallBox({
-                                        title: "Â¡Procesado con exito!",
+                                        title: "¡Procesado con exito!",
                                         content: "<i class='fa fa-clock-o'></i> <i>Se ha eliminado el plazo correctamente...</i>",
                                         color: "#659265",
                                         iconSmall: "fa fa-check fa-2x fadeInRight animated",
@@ -443,7 +443,7 @@ Author     : JAIR
                                 listar();
                                 $("#form-plazo")[0].reset();
                                 $.smallBox({
-                                    title: "Â¡Registrado!",
+                                    title: "¡Registrado!",
                                     content: "<i class='fa fa-clock-o'></i> <i>El plazo se ha registrado correctamente...</i>",
                                     color: "#659265",
                                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
@@ -455,7 +455,7 @@ Author     : JAIR
                     } else {
                         $(this).removeAttr("disabled");
                         $.smallBox({
-                            title: "Â¡AtenciÃ³n!",
+                            title: "¡Atención!",
                             content: "<i class='fa fa-ban'></i> <i>Complete los campos...</i>",
                             color: "red",
                             iconSmall: "bounce animated",
