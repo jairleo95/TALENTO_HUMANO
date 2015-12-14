@@ -359,12 +359,12 @@
                                                     </div>
                                                     <%} else { %>
                                                     <%
-                                                       
+
                                                         for (int i = 0; i < list_Cuenta_Sueldo.size(); i++) {
                                                             Cuenta_Sueldo cs = new Cuenta_Sueldo();
                                                             cs = (Cuenta_Sueldo) list_Cuenta_Sueldo.get(i);
                                                     %>
-                                                  
+
                                                     <div class="row"> 
                                                         <section class="col col-3" name="">
                                                             <label class="select" id="titu" >Cta Sueldo - Banco:
