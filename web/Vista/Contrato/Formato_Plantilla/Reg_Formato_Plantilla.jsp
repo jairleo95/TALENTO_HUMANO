@@ -82,7 +82,7 @@
                                         </li>
 
                                         <li>
-                                            <a data-toggle="tab" href="#hr2"> <i class="fa fa-lg fa-arrow-circle-o-up"></i> <span class="hidden-mobile hidden-tablet">Info <span class="label bg-color-blue txt-color-white"> label <i class="fa fa-exclamation"></i> </span> </span> </a>
+                                            <a data-toggle="tab" href="#hr2"> <i class="fa fa-lg fa-arrow-circle-o-up"></i> <span class="hidden-mobile hidden-tablet">Info <span class="label bg-color-blue txt-color-white"> Importante <i class="fa fa-exclamation"></i> </span> </span> </a>
                                         </li>
 
                                     </ul>
@@ -250,16 +250,16 @@
                                                             </p>
                                                         </div>
                                                     </div>
-                                                    <ul class="nav nav-tabs">
-                                                        <li class="active">
-                                                            <a data-toggle="tab" href="#AA">Tab 1</a>
-                                                        </li>
+                                                    <!--  <ul class="nav nav-tabs">
+                                                         <li class="active">
+                                                             <a data-toggle="tab" href="#AA">Listar</a>
+                                                         </li>
                                                         <li>
-                                                            <a data-toggle="tab" href="#BB">Tab 2</a>
-                                                        </li>
-                                                        <li>
-                                                            <a data-toggle="tab" href="#CC">Tab 3</a>
-                                                        </li>
+                                                             <a data-toggle="tab" href="#BB">Tab 2</a>
+                                                         </li>
+                                                         <li>
+                                                             <a data-toggle="tab" href="#CC">Tab 3</a>
+                                                         </li>-->
                                                     </ul>
                                                 </div>
 
@@ -270,12 +270,12 @@
                                                     <li class="active">
                                                         <a href="#iss1" data-toggle="tab">Nomenclatura</a>
                                                     </li>
-                                                    <li>
-                                                        <a href="#iss2" data-toggle="tab">Item 2</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#iss3" data-toggle="tab">Item 3</a>
-                                                    </li>
+                                                    <!-- <li>
+                                                         <a href="#iss2" data-toggle="tab">Item 2</a>
+                                                     </li>
+                                                     <li>
+                                                         <a href="#iss3" data-toggle="tab">Item 3</a>
+                                                     </li>-->
                                                 </ul>
                                                 <div class="tab-content padding-10">
                                                     <div class="tab-pane fade in active" id="iss1">
@@ -308,7 +308,7 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    <div class="tab-pane fade" id="iss2">
+                                                    <!--<div class="tab-pane fade" id="iss2">
                                                         <p>
                                                             Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.
                                                         </p>
@@ -317,18 +317,15 @@
                                                         <p>
                                                             Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table.
                                                         </p>
-                                                    </div>
+                                                    </div>-->
                                                 </div>
 
                                             </div>
                                         </div>
-
                                     </div>
                                     <!-- end widget content -->
-
                                 </div>
                                 <!-- end widget div -->
-
                             </div>
                         </article>
                         <article class="col-sm-12 col-md-12 col-lg-8">
@@ -337,20 +334,15 @@
                                  data-widget-fullscreenbutton="false"
                                  data-widget-deletebutton="false"
                                  data-widget-sortable="false" >
-
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-pencil"></i> </span>
                                     <h2>Editar Platilla</h2>
-
                                 </header>
-
                                 <!-- widget div-->
                                 <div>
-
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
-
                                     </div>
                                     <!-- end widget edit box -->
 
@@ -363,12 +355,11 @@
                                             -->
                                             <br>
                                             <div class="row">
-
                                                 <div class="col-lg-8">
-                                                    <input type="text" required="" class="form-control nombre_pl" name="no_pl" placeholder="Nombre de la Plantilla...">
+                                                    <input type="text" required="" class="form-control nombre_pl" name="no_pl" maxlength="200" placeholder="Nombre de la Plantilla...">
                                                 </div>
                                                 <div class="col-lg-4"> 
-                                                    <button type="button" value="Crear_Plantilla"  onclick="leer();" name="opc" class="btn btn-primary btn-circle btn-lg btn_crear"><i class="glyphicon glyphicon-floppy-disk"></i></button>
+                                                    <!--<button type="button" value="Crear_Plantilla"  onclick="leer();" name="opc" class="btn btn-primary btn-circle btn-lg btn_crear"><i class="glyphicon glyphicon-floppy-disk"></i></button>-->
                                                     <button type="button" value="Asignar"  onclick="leer();" rel="tooltip" data-placement="bottom" data-original-title="Asginar Plantilla" name="opc" class="btn btn-primary btn-circle btn-lg btn_asignar"><i class="glyphicon glyphicon-share-alt"></i></button>
                                                 </div>
                                                 <!-- /.col-lg-6 -->
@@ -376,14 +367,13 @@
                                             <div class="status_plantilla">
                                             </div>
 
-                                            <div id="eButtons" >
-                                                <input  type="text" name="id" value="" class="id_pl"/>
-                                                <input  type="text" name="id_pc" value="" class="id_pc"/>
-                                            </div>
-                                            <input type="hidden" name="id_dep_asig" id="di_sig">
-                                            <input type="hidden" name="id_are_asig" id="de_sig">
-                                            <input type="hidden" name="id_sec_asig" id="ar_sig">
-                                            <input type="hidden" name="id_di_asig" id="se_sig">
+
+                                            <input  type="hidden" name="id" value="" class="id_pl"/>
+                                            <input  type="hidden" name="id_pc" value="" class="id_pc"/>
+                                            <input type="hidden" name="id_dep_asig" id="de_sig">
+                                            <input type="hidden" name="id_are_asig" id="ar_sig">
+                                            <input type="hidden" name="id_sec_asig" id="se_sig">
+                                            <input type="hidden" name="id_di_asig" id="di_sig">
                                             <input type="hidden" name="id_pu_asig" id="pu_sig">
 
                                             <textarea cols="100" id="editor1" name="editor1" >
@@ -781,6 +771,7 @@
                                                                     return false;
                                                                 }
 
+
                                                                 $(".tr_li_plantilla").dblclick(function () {
                                                                     $(".tr_li_plantilla").removeClass("success");
                                                                     $(this).addClass("success");
@@ -873,7 +864,6 @@
                                                             }
 
                                                         }
-
 </script>
 
 <script type="text/javascript">
@@ -882,10 +872,22 @@
         $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
             $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
         });
+        $(".nombre_pl").keyup(function () {
+            status_plantilla('0');
+            if ($(".id_pl").val() != "" & $(this).val() != "") {
+                $.ajax({
+                    url: "../../../formato_plantilla", type: 'POST', data: "nom_pl=" + $(this).val() + "&id=" + $(".id_pc").val() + "&opc=UpdateNameFile", success: function (data, textStatus, jqXHR) {
+                        Listar_Plantilla();
+                        status_plantilla(data.rpta);
+                    }
+                });
+            }
+        });
         $(".btn_asignar").click(function () {
             $(".form_cargar").hide();
             $("#form_asignar").show(200);
-            if ($("#form_asignar").valid()) {
+            //  $(".form_editor").valid();
+            if ($("#form_asignar").valid() & $(".form_editor").valid()) {
                 var opc = "";
                 if ($(".id_pc").val() == "") {
                     opc = "Crear_Plantilla";

@@ -1,25 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pe.edu.upeu.application.dao;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.spi.DirStateFactory;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaContractualDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
-import pe.edu.upeu.application.model.Plantilla_Contractual;
 
 /**
  *
@@ -168,7 +158,7 @@ public class PlantillaContractualDAO implements InterfacePlantillaContractualDAO
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error!");
+            throw new RuntimeException("Error!" + e.getMessage());
         } finally {
             try {
                 this.cnn.close();
@@ -247,6 +237,30 @@ public class PlantillaContractualDAO implements InterfacePlantillaContractualDAO
         } finally {
             this.cnn.close();
         }
+    }
+
+    @Override
+    public boolean Update_Name_File(String id, String nombre) {
+        boolean x = false;
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.cnn.conex.prepareCall("{CALL rhsp_update_nombre_plantilla(?,? )}");
+            cst.setString(1, id);
+            cst.setString(2, nombre);
+            cst.execute();
+            x = true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" + e.getMessage());
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
     }
 
 }
