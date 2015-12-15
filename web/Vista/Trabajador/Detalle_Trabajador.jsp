@@ -57,7 +57,7 @@
         <!-- FAVICONS -->
         <link rel="shortcut icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
         <link rel="icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
-
+        <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
         <!-- GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
@@ -567,37 +567,28 @@
                 <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
                 <input type="hidden" name="IDPASOS" value="<%=id_pasos%>" 
                        <tr><td><input type="hidden" name="opc"  class="submit" value="Rechazar"/></td></tr>
-                <div class="modal fade" id="myModal6" tabindex="-1" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content" align="center">
-                            <div class="smart-form">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                        &times;
-                                    </button>
-                                </div>
-                                <div class="modal-body no-padding">
-                                    <fieldset>
-                                        <section>
-                                            <h1 class="h1" style="color:#218FDD ; font-size:20px;"><strong>MOTIVO</strong></h1>
-                                            <label class="textarea">
-                                                <textarea rows="3" placeholder="Inserte Comentario" maxlength="200" required="" name="comentario"></textarea>
-                                            </label>
-                                        </section>
-                                    </fieldset>
-                                    <footer align="center">
-                                        <button type="submit" class="btn btn-primary btn-conti">
-                                            Continuar
-                                        </button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal" >
-                                            Cancel
-                                        </button>
-                                    </footer>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+           <div class="modal-content">
+                <div class="modal-header">
+                          <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel"> Motivo </h4>
                 </div>
+                       <div class="modal-body">
+                         <legend>Comentario : </legend>
+                         <div class="area-coment" style="display: block;">
+                                 <textarea rows="3" placeholder="Inserte Comentario" maxlength="200" required="" class="mensaje" name="comentario"></textarea>
+                                <div class="contador">
+                               </div>
+                          </div>
+                      </div>
+                    <div class="modal-footer">
+                     <button type="submit" class="btn btn-primary btn-conti"> Continuar </button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal" > Cancel </button>
+                   </div>
+             </div>
+          </div>
+      </div>
                 <a data-toggle="modal" href="#myModal6" class="btn btn-labeled btn-danger"><span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>RECHAZAR</a>
             </table>
         </form>   

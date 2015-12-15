@@ -1,19 +1,57 @@
-/*
- * It is advised not to edit the smartadmin_production.css
- * as this will override any changes you make in the 
- * later versions of this theme. 
- * 
- * We advise that you use use this CSS to override 
- * SmartAdmin styles. 
- * 
- * Rename the stylesheet to whatever your liking so it will stay
- * unique to you with each update of SmartAdmin.
- */
 
-/*
- * INDEX
- * 
- * - HTML
- * - BODY
- * - CUSTOM STYLES
- */
+                                        .area-coment{
+                                            display: none;
+                                        }
+                                        .mensaje{
+                                            width:550px;
+                                            height: 70px;
+                                            max-width: 550px;
+                                            border-radius: 5px;
+                                            border: solid 1px #0c95be;
+                                        }
+
+                                        .contador{
+                                            font-size: 13px;
+                                            color: #ff3333;
+
+                                        }
+                                        .indicador{
+                                            font-size: 13px;
+                                            color: #8899a6;
+                                        }
+                                        .thumbnail {
+                                            padding:0px;
+                                        }
+                                        .panel {
+                                            position:relative;
+                                        }
+                                        .panel>.panel-heading:after,.panel>.panel-heading:before{
+                                            position:absolute;
+                                            top:11px;left:-16px;
+                                            right:100%;
+                                            width:0;
+                                            height:0;
+                                            display:block;
+                                            content:" ";
+                                            border-color:transparent;
+                                            border-style:solid solid outset;
+                                            pointer-events:none;
+                                        }
+                                        .panel>.panel-heading:after{
+                                            border-width:7px;
+                                            border-right-color:#9cb4c5;
+                                            margin-top:1px;
+                                            margin-left:2px;
+                                        }
+                                        .panel>.panel-heading:before{
+                                            border-right-color:#9cb4c5;
+                                            border-width:8px;
+                                        }
+                                        .todoc{outline: none;}
+                                        .avatart.img{
+                                            margin-top: 0px;
+                                            float:  5px , 0px ;
+                                            border-radius: 50%;
+                                            
+                                            
+                                        }

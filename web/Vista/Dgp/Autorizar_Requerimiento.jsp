@@ -61,6 +61,7 @@
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
         <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
         <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
+        <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
         <style>
             .ui-datepicker-calendar {
                 display: none;
@@ -218,6 +219,7 @@
                                                 <tr>
                                                     <td><%=f + 1%></td>
                                                     <td>
+               
                                                         <div class="btn-group">
                                                             <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                                                 Accion <span class="caret"></span>
@@ -225,7 +227,7 @@
                                                             <ul class="dropdown-menu">
                                                                 <li><a href="../../dgp?iddgp=<%=a.getId_dgp().trim()%>&opc=Seguimiento">Ver Proceso</a></li>
                                                                 <li><a href="../../documento?iddgp=<%=a.getId_dgp().trim()%>&idtr=<%=a.getId_trabajador().trim()%>&opc=Reg_Pro_Dgp">Ver Documentos</a></li>
-                                                                <li><a href="../../comentario?iddgp=<%=a.getId_dgp().trim()%>&idp=<%=a.getId_puesto()%>&opc=Comentar_Dgp">Comentar</a></li>    
+                                                                <li><a  data-valor="<%=a.getId_dgp().trim()%>;<%=a.getId_trabajador().trim()%>;<%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%>" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjax('')" >Comentario</a></li>
                                                                     <% if (Integer.parseInt(a.getElab_contrato()) > 0) {
                                                                     %>
                                                                 <li><a href="../../contrato?idtr=<%=a.getId_trabajador().trim()%>&opc=Detalle_Contractual">Ver Contrato</a></li>
@@ -261,15 +263,15 @@
                                                     </td>
                                                     <td ><%out.print(aupl.Mes_plazo(a.getId_dgp()));%></td>   
                                                     <% if (a.getAr_foto() == null) {%>
-                                                    <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
+                                                    <td><img class="user_avatar_<%=a.getId_trabajador()%>" src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
                                                         <% } else {%>
-                                                    <td><img src="../Usuario/Fotos/<%=a.getAr_foto()%>"  width="30"  height="30"></td>
+                                                    <td><img class="user_avatar_<%=a.getId_trabajador()%>" src="../Usuario/Fotos/<%=a.getAr_foto()%>"  width="30"  height="30"></td>
                                                         <% }%>
                                                     <td ><%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%></td>
-                                                    <td ><%=a.getNo_puesto()%></td>   
-                                                    <td ><%=a.getNo_area()%></td>      
-                                                    <td ><%=a.getNo_dep()%></td>      
-                                                    <td ><%=a.getNo_req()%></td>      
+                                                    <td ><%=a.getNo_puesto()%></td>
+                                                    <td ><%=a.getNo_area()%></td>
+                                                    <td ><%=a.getNo_dep()%></td>
+                                                    <td ><%=a.getNo_req()%></td>
                                             <input type="hidden" class="val_aut<%=(f + 1)%>" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                             <input type="hidden" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                             <input type="hidden" class="correos_<%=(f + 1)%>" value="&IDTR=<%=a.getId_trabajador()%>&co_inst=<%=a.getDi_correo_inst()%>&co_pers=<%=a.getDi_correo_personal()%>"/>
@@ -439,8 +441,45 @@
                 <!-- end widget grid -->
             </div>
         </div>
-    </body>
+ <!-------------- Modal  ----------->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="datos_trabajador text-left">
+                        </div>
+                        <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
+                    </div>
+                    <div class="modal-body">
 
+                        <button class="add-coment btn btn-primary btn-block">Add Comentario</button>
+                    <div class="area-coment">
+                            <form class="comentari-form" method="post">
+                                <textarea class="mensaje"></textarea>
+                                <p></p>
+                                <input name="idDgp" class="idDgp" type="hidden" value="">
+                                <div class="contador">
+                            </form>
+                         </div>
+                    </div>
+
+                    <div class="comentarios">
+                        <div>
+                                <legend>Comentarios </legend>
+                                <div class="comentario-dgp"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" onclick="Registrar()" class="comet btn btn-success">Comentar</button>
+                    </div>
+                </div>
+            </div>
+           </div>
+        </div>
+    </body>
+    <script src="../../js/coment/myfunctions.js" type="text/javascript"></script>
     <!--================================================== -->
 
     <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
@@ -523,7 +562,6 @@
     <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script>
         $.datepicker.regional['es'] = {
