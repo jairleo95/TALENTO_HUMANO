@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pe.edu.upeu.application.web.controller;
 
 import com.google.gson.Gson;
@@ -27,10 +22,6 @@ import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaContractualDAO;
 
-/**
- *
- * @author ALFA 3
- */
 public class CFormato_Plantilla extends HttpServlet {
 
     /**
@@ -87,7 +78,15 @@ public class CFormato_Plantilla extends HttpServlet {
                     }
                     rpta.put("rpta", "1");
                 }
-
+                if (opc.equals("UpdateNameFile")) {
+                    String id = request.getParameter("id");
+                    String nombre_pl = request.getParameter("nom_pl");
+                    if (pl.Update_Name_File(id, nombre_pl)) {
+                        rpta.put("rpta", "1");
+                    } else {
+                        rpta.put("rpta", "-1");
+                    }
+                }
                 if (opc.equals("Listar")) {
                     String texto = "";
                     String imprimir = "";
