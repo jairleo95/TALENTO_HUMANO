@@ -31,13 +31,10 @@ $table-paging-button-hover: #111;
 //
 // Functions / mixins
 //
-@function tint( $color, $percent ) {
-  @return mix(white, $color, $percent);
-}
-
+/*
 @function shade( $color, $percent ) {
   @return mix(black, $color, $percent);
-}
+}*/
 
 @mixin gradient( $from, $to ) {
   background-color: $from;

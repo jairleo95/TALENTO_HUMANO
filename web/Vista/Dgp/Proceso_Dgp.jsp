@@ -239,7 +239,7 @@
                                                     V_Es_Requerimiento r = new V_Es_Requerimiento();
                                                     r = (V_Es_Requerimiento) LIST_DGP_PROCESO.get(i);
                                             %>
-                                            <tr data-valor="<%=r.getId_dgp().trim()%>" class="click" >
+                                            <tr>
                                                 <td><strong><%=i + 1%></strong></td>
                                                 <%
                                                     InterfaceAutorizacionDAO ad = new AutorizacionDAO();
@@ -254,7 +254,7 @@
                                                             <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>
                                                             <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=Seguimiento">Ver Historial</a> </li>
                                                             <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></li>
-                                                            <li><a data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjax('')" >Comentario</a></li>
+                                                            <li><a data-valor="<%=r.getId_dgp().trim()%>;<%=r.getId_trabajador().trim()%>;<%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%>" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjax('')" >Comentario</a></li>
                                                             <li><a href="../../solicitud_requerimiento?iddgp=<%=r.getId_dgp().trim()%>&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>
                                                             <li class="divider"></li><li>
                                                             <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Detalle">Ver Requerimiento</a> </li>
@@ -265,13 +265,13 @@
 
                                                 </td> 
                                                 <% if (r.getAr_foto() == null) {%>
-                                                <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
+                                                <td><img class="user_avatar_<%=r.getId_trabajador()%>"  src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
                                                     <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
                                                         <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a>
                                                 </td>
                                                 <%} else {%>
                                                 <td>
-                                                    <img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
+                                                    <img class="user_avatar_<%=r.getId_trabajador()%>" src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
                                                         <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> 
                                                 </td>
                                                 <%}%>
@@ -292,6 +292,7 @@
                                                             out.print(" <span class='label label-primary'>En Proceso</span>");
                                                         }%>
                                                 </td>
+                                                
                                             </tr>
                                             <% }
                                                 LIST_DGP_PROCESO.clear();
@@ -304,6 +305,8 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <div class="datos_trabajador text-left">
+                                                            </div>
                                                             <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
                                                         </div>
                                                         <div class="modal-body">

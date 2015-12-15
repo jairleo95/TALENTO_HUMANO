@@ -1,4 +1,4 @@
-
+var insert = true;
 //----------------- Script comentario --------------------------
 
              $( ".add-coment" ).click(function() {
@@ -8,9 +8,8 @@
               $( ".add-coment" ).css({ display: "none" });
               });
               
-              
               var valor, contador, parrafo;
-                $('<p class="indicador">Tienes 150 caracteres restantes</p>').appendTo('#contador');
+                $('<p class="indicador">Tienes 500 caracteres restantes</p>').appendTo('.contador');
               $('.mensaje').keydown(function(){
                 contador = 500;
                 $('.advertencia').remove();
@@ -35,25 +34,36 @@
                    }
                $(".comentari-form").reset();
                $(".comentario-dgp").empty();
+               $(".contador").empty();
+               $(".datos_trabajador").empty();
+               insert = true;
               });
-              
-              $(".click").click(function(e) {
-                    e.preventDefault();
-                    var data = $(this).attr("data-valor");
-                    console.log(data);
-                    $('.idDgp').val(data);
+
+          $(".click").hover(function(e) {
+             var data = $(this).attr("data-valor");
+             var d = data.split(";");
+             var imgs = '.user_avatar_'+d[1];
+             var img =$(imgs).attr('src');
+             console.log(img);
+              $('.idDgp').val(d[0]);
+           if(insert){
+               $('.datos_trabajador').append('<h3>'+d[2]+'  <img src="'+img+'" style="border-radius: 50%; " class="avatart text-right" width="60"  height="50" /></h3>');
+               insert = false;
+
+             }
               });
+
 //--------------------- jalar comentarios --------------
         function sendAjax(parm) {
-        $(".comentario-dgp").append('<img class="img-load col-sm-5" src="../../imagenes/por-favor-espere.gif"/>');
-	
         var idDgp = $('.idDgp').val();
         var url1 = '../../comentario?iddgp=';
 	var url = url1.trim()+idDgp+'&opc=list';
         var tipo = parm;
-        var td = 'todo';
         var ln = 0;
         var cant_coment = 0;
+        if(idDgp == null){
+
+        }
 	$.ajax({
 		url: url,
 		type: 'POST',
@@ -70,7 +80,7 @@
                         if(cant_coment == 1){
                              tipo +='todo';
                         }
-                           
+
                         if(tipo == "todo"){
                               var contenido= '<div class="row">'+
                             '<div class="col-sm-1">'+
@@ -94,8 +104,8 @@
                             '</div>';
                             $(".comentario-dgp").append(contenido);
                             if(ln == 1){
-               $('<button class="todoc btn btn-default btn-block" onclick="listodo()"> + <span class="glyphicon glyphicon-comment"> </span> '+
-                       cant_coment+' comentarios </button> ').appendTo('.mas-coment');
+                            $('<button class="todoc btn btn-default btn-block" onclick="listodo()"> + <span class="glyphicon glyphicon-comment"> </span> '+
+                            cant_coment+' comentarios </button> ').appendTo('.mas-coment');
 
                             }
                             }else{
@@ -139,6 +149,7 @@
                    }
                $(".comentari-form").reset();
                $(".comentario-dgp").empty();
+               $(".contador").empty();
                sendAjax('') ;
 
   }
