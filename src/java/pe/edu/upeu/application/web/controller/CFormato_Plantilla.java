@@ -22,10 +22,6 @@ import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaContractualDAO;
 
-/**
- *
- * @author ALFA 3
- */
 public class CFormato_Plantilla extends HttpServlet {
 
     /**
