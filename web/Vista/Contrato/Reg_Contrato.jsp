@@ -802,7 +802,6 @@
 
     </body>
     <script>
-
             function Listar_dep() {
                 var s = $(".selec_dep");
                 $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function (objJson) {

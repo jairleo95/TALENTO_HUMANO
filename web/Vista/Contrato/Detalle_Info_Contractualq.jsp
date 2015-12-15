@@ -1,9 +1,9 @@
-<%@page import="pe.edu.upeu.application.model.Funciones"%>
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
 %>
+<%@page import="pe.edu.upeu.application.model.Funciones"%>
 <%@page import="pe.edu.upeu.application.model.Anno"%>
 <%@page import="pe.edu.upeu.application.model.Grupo_Ocupaciones"%>
 <%@page import="pe.edu.upeu.application.model.Sub_Modalidad"%>
@@ -207,12 +207,12 @@
         <div>
             <form action="">
                 <%
-                    
+
                     CConversion c = new CConversion();
-                    
                     HttpSession Sesion = request.getSession(true);
                     String idrol = (String) Sesion.getAttribute("IDROL");
-                    
+                    InterfaceContratoDAO oContrato = new ContratoDAO();
+
                 %>
                 <%for (int b = 0; b < List_contra_x_idcto.size(); b++) {
                         X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
@@ -221,7 +221,7 @@
 
                 <%if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0001")) {
                 %>
-                <div class="smart-form">¿Decidir la secretaria de departamento o area lo suba e imprima el contrato?<label class='toggle'><input type='checkbox' value='1'  class='ck_habilitar_is'  name='estado' name='checkbox-toggle' <%    
+                <div class="smart-form">¿Decidir la secretaria de departamento o area lo suba e imprima el contrato?<label class='toggle'><input type='checkbox' value='1'  class='ck_habilitar_is'  name='estado' name='checkbox-toggle' <%
                     if (Integer.parseInt(n.getEs_secre_is()) == 1) {
                         out.print("checked");
                     }
@@ -237,8 +237,20 @@
                         <%}%>
                         <%}
                             if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0007") || /*idrol.trim().equals("ROL-0009") || */ idrol.trim().equals("ROL-0001")) {%>
+                        <%if (idrol.trim().equals("ROL-0006")) {
+                                //validar si puede editar contrato
+                                if (oContrato.validar_editar_contrato(id_user, ID_CTO)) {
+                        %>
                 <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Editar&idc=<%=n.getId_contrato()%>&idtr=<%=request.getParameter("idtr")%>&id_dg=<%=request.getParameter("id_dg")%>" > <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Editar Contrato</a>
-                        <%}%>
+                <br>   
+                <br>   
+                <p class="alert alert-info"><i class="fa fa-info"></i> ¡Una vez procesado la informacion usted ya no podra <strong>editar</strong> este contrato!</p>
+                <%
+                    }
+                } else {%>
+                <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Editar&idc=<%=n.getId_contrato()%>&idtr=<%=request.getParameter("idtr")%>&id_dg=<%=request.getParameter("id_dg")%>" > <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Editar Contrato</a>
+                        <%}
+                            }%>
                         <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
                 <table class="table table-hover table-striped  table-responsive">
                     <tr><td class="text-info table-bordered"><strong>Fecha de Inicio: </strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info table-bordered" colspan="2"><strong>Fecha de Cese:</strong></td><td class="table-bordered" colspan="2"><%if (n.getFe_hasta() != null) {
@@ -257,7 +269,7 @@
                                         for (int q = 0; q < Lis_c_c_id_contr.size(); q++) {
                                             Centro_Costos cc = new Centro_Costos();
                                             cc = (Centro_Costos) Lis_c_c_id_contr.get(q);
-                                            
+
                                             cantidad = Double.parseDouble(cc.getCa_porcentaje()) + cantidad;
                                 %>
                     <tr>
@@ -273,7 +285,7 @@
                     <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6" class="table-bordered" ><p><%
                         if (n.getLi_condicion() != null) {
                             for (int h = 0; h < list_Condicion_contrato.size(); h++) {
-                                
+
                                 if (n.getLi_condicion().trim().equals(h + 1 + "")) {
                                     out.println(list_Condicion_contrato.get(h));
                                 }
@@ -439,7 +451,7 @@
                             }
                         } else {
                             out.println("NO DEFINIDO");
-                            
+
                         }
                             %> </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>¿Firmo contrato?:</strong></td><td class="table-bordered" colspan="6"><%
@@ -456,7 +468,7 @@
                                     } else {
                                         out.println("aun no se firma");
                                     }
-                                    
+
                                 }%></td></tr>
 
                     <!--  <tr><td>Nro. de Contrato:</td><td><?/* echo $list_rhc[$index][39];*/?> </td></tr>   -->
@@ -480,7 +492,7 @@
 
                     <%if (false) {
                     %>
-                    <tr><td class="text-info table-bordered"><strong>Situacion Actual:</strong></td><td class="table-bordered" colspan="6"><%    
+                    <tr><td class="text-info table-bordered"><strong>Situacion Actual:</strong></td><td class="table-bordered" colspan="6"><%
                         if (n.getEs_contrato() != null) {
                             if (n.getEs_contrato().trim().equals("1")) {
                                 out.print("Activo");
@@ -549,38 +561,11 @@
                         <%}%>
                         <%}%>
                     </tr>
-                    <tr></tr>
-
                     <%}%>
-
-
-
-
-
-
                 </table>
             </form>
-            <div>
-                <table>
-                    <!--   <tr><td>Nro. Documento:</td><td><? /*echo $list_rhc[$index][43];?> </td></tr>   
-                   <tr><td>Pares:</td><td><? echo $list_rhc[$index][36];?> </td></tr>   
-                     <tr><td>Apoyo:</td><td><? echo $list_rhc[$index][41];*/?> </td></tr>   -->
-                    <%/*
-                         if (List_Planilla.size() != 0) {
-                         for (int a = 0; a < List_Planilla.size(); a++) {
-                         X_List_Plantilla f = new X_List_Plantilla();
-                         f = (X_List_Plantilla) List_Planilla.get(a);*/
-
-                        /* <tr><td class="text-info table-bordered" colspan="2"></td><td ><input class="button blue"  type="submit" value="Editar"></td>*/
-
-                        /*}
-                         }*/%>
-
-                </table>
-            </div>
         </div>
-        <%if (Integer.parseInt(n.getEs_secre_is()) == 2 && idrol.trim().equals("ROL-0002")) {
-        %>
+        <%if (Integer.parseInt(n.getEs_secre_is()) == 2 && idrol.trim().equals("ROL-0002")) {%>
         <%} else if (!idrol.trim().equals("ROL-0009")) {%>
         <form action="../../plantilla_contractual" method="post" class="formu">
             <div class="Contenido">
@@ -611,13 +596,13 @@
 
     <%}%>
 </body>
-<script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
+<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script>
                 if (!window.jQuery) {
-                    document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+                    document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
                 }
 </script>
 
@@ -627,573 +612,68 @@
                     document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
                 }
 </script>
-
-<!-- IMPORTANT: APP CONFIG -->
-<script src="../../js/app.config.js"></script>
-
-<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-<script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
-
-<!-- BOOTSTRAP JS -->
-<script src="../../js/bootstrap/bootstrap.min.js"></script>
-
-<!-- CUSTOM NOTIFICATION -->
-<script src="../../js/notification/SmartNotification.min.js"></script>
-
-<!-- JARVIS WIDGETS -->
-<script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
-
-<!-- EASY PIE CHARTS -->
-<script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
-
-<!-- SPARKLINES -->
-<script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
-
-<!-- JQUERY VALIDATE -->
-<script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
-
-<!-- JQUERY MASKED INPUT -->
-<script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
-
-<!-- JQUERY SELECT2 INPUT -->
-<script src="../../js/plugin/select2/select2.min.js"></script>
-
-<!-- JQUERY UI + Bootstrap Slider -->
-<script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
-
-<!-- browser msie issue fix -->
-<script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
-
-<!-- FastClick: For mobile devices -->
-<script src="../../js/plugin/fastclick/fastclick.min.js"></script>
-
-<!--[if IE 8]>
-
-<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-
-<![endif]-->
-
-<!-- Demo purpose only -->
-<script src="../../js/demo.min.js"></script>
-
-<!-- MAIN APP JS FILE -->
-<script src="../../js/app.min.js"></script>
-
-<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-<!-- Voice command : plugin -->
-<script src="../../js/speech/voicecommand.min.js"></script>
-
-<!-- PAGE RELATED PLUGIN(S) -->
-<script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
-
-
-<script type="text/javascript">
-                
-// DO NOT REMOVE : GLOBAL FUNCTIONS!
-                
-                $(document).ready(function () {
-                    
-                    pageSetUp();
-                    
-                    var $checkoutForm = $('#checkout-form').validate({
-                        // Rules for form validation
-                        rules: {
-                            fname: {
-                                required: true
-                            },
-                            lname: {
-                                required: true
-                            },
-                            email: {
-                                required: true,
-                                email: true
-                            },
-                            phone: {
-                                required: true
-                            },
-                            country: {
-                                required: true
-                            },
-                            city: {
-                                required: true
-                            },
-                            code: {
-                                required: true,
-                                digits: true
-                            },
-                            address: {
-                                required: true
-                            },
-                            name: {
-                                required: true
-                            },
-                            card: {
-                                required: true,
-                                creditcard: true
-                            },
-                            cvv: {
-                                required: true,
-                                digits: true
-                            },
-                            month: {
-                                required: true
-                            },
-                            year: {
-                                required: true,
-                                digits: true
-                            }
-                        },
-                        // Messages for form validation
-                        messages: {
-                            fname: {
-                                required: 'Please enter your first name'
-                            },
-                            lname: {
-                                required: 'Please enter your last name'
-                            },
-                            email: {
-                                required: 'Please enter your email address',
-                                email: 'Please enter a VALID email address'
-                            },
-                            phone: {
-                                required: 'Please enter your phone number'
-                            },
-                            country: {
-                                required: 'Please select your country'
-                            },
-                            city: {
-                                required: 'Please enter your city'
-                            },
-                            code: {
-                                required: 'Please enter code',
-                                digits: 'Digits only please'
-                            },
-                            address: {
-                                required: 'Please enter your full address'
-                            },
-                            name: {
-                                required: 'Please enter name on your card'
-                            },
-                            card: {
-                                required: 'Please enter your card number'
-                            },
-                            cvv: {
-                                required: 'Enter CVV2',
-                                digits: 'Digits only'
-                            },
-                            month: {
-                                required: 'Select month'
-                            },
-                            year: {
-                                required: 'Enter year',
-                                digits: 'Digits only please'
-                            }
-                        },
-                        // Do not change code below
-                        errorPlacement: function (error, element) {
-                            error.insertAfter(element.parent());
-                        }
-                    });
-                    
-                    var $registerForm = $("#smart-form-register").validate({
-                        // Rules for form validation
-                        rules: {
-                            username: {
-                                required: true
-                            },
-                            email: {
-                                required: true,
-                                email: true
-                            },
-                            password: {
-                                required: true,
-                                minlength: 3,
-                                maxlength: 20
-                            },
-                            passwordConfirm: {
-                                required: true,
-                                minlength: 3,
-                                maxlength: 20,
-                                equalTo: '#password'
-                            },
-                            firstname: {
-                                required: true
-                            },
-                            lastname: {
-                                required: true
-                            },
-                            gender: {
-                                required: true
-                            },
-                            terms: {
-                                required: true
-                            }
-                        },
-                        // Messages for form validation
-                        messages: {
-                            login: {
-                                required: 'Please enter your login'
-                            },
-                            email: {
-                                required: 'Please enter your email address',
-                                email: 'Please enter a VALID email address'
-                            },
-                            password: {
-                                required: 'Please enter your password'
-                            },
-                            passwordConfirm: {
-                                required: 'Please enter your password one more time',
-                                equalTo: 'Please enter the same password as above'
-                            },
-                            firstname: {
-                                required: 'Please select your first name'
-                            },
-                            lastname: {
-                                required: 'Please select your last name'
-                            },
-                            gender: {
-                                required: 'Please select your gender'
-                            },
-                            terms: {
-                                required: 'You must agree with Terms and Conditions'
-                            }
-                        },
-                        // Do not change code below
-                        errorPlacement: function (error, element) {
-                            error.insertAfter(element.parent());
-                        }
-                    });
-                    
-                    var $reviewForm = $("#review-form").validate({
-                        // Rules for form validation
-                        rules: {
-                            name: {
-                                required: true
-                            },
-                            email: {
-                                required: true,
-                                email: true
-                            },
-                            review: {
-                                required: true,
-                                minlength: 20
-                            },
-                            quality: {
-                                required: true
-                            },
-                            reliability: {
-                                required: true
-                            },
-                            overall: {
-                                required: true
-                            }
-                        },
-                        // Messages for form validation
-                        messages: {
-                            name: {
-                                required: 'Please enter your name'
-                            },
-                            email: {
-                                required: 'Please enter your email address',
-                                email: '<i class="fa fa-warning"></i><strong>Please enter a VALID email addres</strong>'
-                            },
-                            review: {
-                                required: 'Please enter your review'
-                            },
-                            quality: {
-                                required: 'Please rate quality of the product'
-                            },
-                            reliability: {
-                                required: 'Please rate reliability of the product'
-                            },
-                            overall: {
-                                required: 'Please rate the product'
-                            }
-                        },
-                        // Do not change code below
-                        errorPlacement: function (error, element) {
-                            error.insertAfter(element.parent());
-                        }
-                    });
-                    
-                    var $commentForm = $("#comment-form").validate({
-                        // Rules for form validation
-                        rules: {
-                            name: {
-                                required: true
-                            },
-                            email: {
-                                required: true,
-                                email: true
-                            },
-                            url: {
-                                url: true
-                            },
-                            comment: {
-                                required: true
-                            }
-                        },
-                        // Messages for form validation
-                        messages: {
-                            name: {
-                                required: 'Enter your name',
-                            },
-                            email: {
-                                required: 'Enter your email address',
-                                email: 'Enter a VALID email'
-                            },
-                            url: {
-                                email: 'Enter a VALID url'
-                            },
-                            comment: {
-                                required: 'Please enter your comment'
-                            }
-                        },
-                        // Ajax form submition
-                        submitHandler: function (form) {
-                            $(form).ajaxSubmit({
-                                success: function () {
-                                    $("#comment-form").addClass('submited');
-                                }
-                            });
-                        },
-                        // Do not change code below
-                        errorPlacement: function (error, element) {
-                            error.insertAfter(element.parent());
-                        }
-                    });
-                    
-                    var $contactForm = $("#contact-form").validate({
-                        // Rules for form validation
-                        rules: {
-                            name: {
-                                required: true
-                            },
-                            email: {
-                                required: true,
-                                email: true
-                            },
-                            message: {
-                                required: true,
-                                minlength: 10
-                            }
-                        },
-                        // Messages for form validation
-                        messages: {
-                            name: {
-                                required: 'Please enter your name',
-                            },
-                            email: {
-                                required: 'Please enter your email address',
-                                email: 'Please enter a VALID email address'
-                            },
-                            message: {
-                                required: 'Please enter your message'
-                            }
-                        },
-                        // Ajax form submition
-                        submitHandler: function (form) {
-                            $(form).ajaxSubmit({
-                                success: function () {
-                                    $("#contact-form").addClass('submited');
-                                }
-                            });
-                        },
-                        // Do not change code below
-                        errorPlacement: function (error, element) {
-                            error.insertAfter(element.parent());
-                        }
-                    });
-                    
-                    var $loginForm = $("#login-form").validate({
-                        // Rules for form validation
-                        rules: {
-                            email: {
-                                required: true,
-                                email: true
-                            },
-                            password: {
-                                required: true,
-                                minlength: 3,
-                                maxlength: 20
-                            }
-                        },
-                        // Messages for form validation
-                        messages: {
-                            email: {
-                                required: 'Please enter your email address',
-                                email: 'Please enter a VALID email address'
-                            },
-                            password: {
-                                required: 'Please enter your password'
-                            }
-                        },
-                        // Do not change code below
-                        errorPlacement: function (error, element) {
-                            error.insertAfter(element.parent());
-                        }
-                    });
-                    
-                    var $orderForm = $("#order-form").validate({
-                        // Rules for form validation
-                        rules: {
-                            name: {
-                                required: true
-                            },
-                            email: {
-                                required: true,
-                                email: true
-                            },
-                            phone: {
-                                required: true
-                            },
-                            interested: {
-                                required: true
-                            },
-                            budget: {
-                                required: true
-                            }
-                        },
-                        // Messages for form validation
-                        messages: {
-                            name: {
-                                required: 'Please enter your name'
-                            },
-                            email: {
-                                required: 'Please enter your email address',
-                                email: 'Please enter a VALID email address'
-                            },
-                            phone: {
-                                required: 'Please enter your phone number'
-                            },
-                            interested: {
-                                required: 'Please select interested service'
-                            },
-                            budget: {
-                                required: 'Please select your budget'
-                            }
-                        },
-                        // Do not change code below
-                        errorPlacement: function (error, element) {
-                            error.insertAfter(element.parent());
-                        }
-                    });
-                    
-                    // START AND FINISH DATE
-                    $('#startdate').datepicker({
-                        dateFormat: 'dd.mm.yy',
-                        prevText: '<i class="fa fa-chevron-left"></i>',
-                        nextText: '<i class="fa fa-chevron-right"></i>',
-                        onSelect: function (selectedDate) {
-                            $('#finishdate').datepicker('option', 'minDate', selectedDate);
-                        }
-                    });
-                    
-                    $('#finishdate').datepicker({
-                        dateFormat: 'dd.mm.yy',
-                        prevText: '<i class="fa fa-chevron-left"></i>',
-                        nextText: '<i class="fa fa-chevron-right"></i>',
-                        onSelect: function (selectedDate) {
-                            $('#startdate').datepicker('option', 'maxDate', selectedDate);
-                        }
-                    });
-                    
-                    
-                    
-                })
-                
-</script>
-
-<!-- Your GOOGLE ANALYTICS CODE Below -->
-<script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-    _gaq.push(['_trackPageview']);
-    
-    (function () {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(ga, s);
-    })();
-    
-</script>
-<!-- IMPORTANT: APP CONFIG -->
-<script src="../../js/app.config.js"></script>
-
-<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-<script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
-
-<!-- BOOTSTRAP JS -->
-<script src="../../js/bootstrap/bootstrap.min.js"></script>
-
 <!-- CUSTOM NOTIFICATION -->
 <script src="../../js/notification/SmartNotification.min.js"></script>
 <script>
-    
-    
-    $(document).ready(function () {
-        //pageSetup();
-        $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-            $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-        });
-        $(".ck_habilitar_is").click(function () {
-            if ($(".ck_habilitar_is").prop('checked')) {
-                $.ajax({
-                    url: "../../contrato",
-                    data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=1"
-                }).done(function () {
-                    $.smallBox({
-                        title: "¡Alerta!",
-                        content: "Se ha autortizado que la secretaria pueda subir e imprimir el contrato.",
-                        color: "#296191",
-                        iconSmall: "fa fa-cloud",
-                        timeout: 4000
+                $(document).ready(function () {
+                    $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                        $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                     });
-                    
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                    $.smallBox({
-                        title: "¡Error!",
-                        // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
-                        content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
-                        color: "#C46A69",
-                        iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                        timeout: 6000
+                    $(".ck_habilitar_is").click(function () {
+                        if ($(".ck_habilitar_is").prop('checked')) {
+                            $.ajax({
+                                url: "../../contrato",
+                                data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=1"
+                            }).done(function () {
+                                $.smallBox({
+                                    title: "¡Alerta!",
+                                    content: "Se ha autortizado que la secretaria pueda subir e imprimir el contrato.",
+                                    color: "#296191",
+                                    iconSmall: "fa fa-cloud",
+                                    timeout: 4000
+                                });
+
+                            }).fail(function (jqXHR, textStatus, errorThrown) {
+                                $.smallBox({
+                                    title: "¡Error!",
+                                    // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
+                                    content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
+                                    color: "#C46A69",
+                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                    timeout: 6000
+                                });
+                            });
+                        } else {
+                            $.ajax({
+                                url: "../../contrato",
+                                data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=2"
+                            }).done(function () {
+                                $.smallBox({
+                                    title: "¡Alerta!",
+                                    content: "Se ha autortizado que la secretaria <strong>NO</strong> pueda subir e imprimir el contrato.",
+                                    color: "#C79121",
+                                    iconSmall: "fa fa-cloud",
+                                    timeout: 4000
+                                });
+                            }).fail(function (jqXHR, textStatus, errorThrown) {
+                                $.smallBox({
+                                    title: "¡Error!",
+                                    // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
+                                    content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
+                                    color: "#C46A69",
+                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                    timeout: 6000
+                                });
+                            });
+                        }
                     });
+
+
                 });
-            } else {
-                $.ajax({
-                    url: "../../contrato",
-                    data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=2"
-                }).done(function () {
-                    $.smallBox({
-                        title: "¡Alerta!",
-                        content: "Se ha autortizado que la secretaria <strong>NO</strong> pueda subir e imprimir el contrato.",
-                        color: "#C79121",
-                        iconSmall: "fa fa-cloud",
-                        timeout: 4000
-                    });
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                    $.smallBox({
-                        title: "¡Error!",
-                        // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
-                        content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
-                        color: "#C46A69",
-                        iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                        timeout: 6000
-                    });
-                });
-            }
-        });
-        
-        
-    });
 </script>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
     }
-    
+
 
 %>

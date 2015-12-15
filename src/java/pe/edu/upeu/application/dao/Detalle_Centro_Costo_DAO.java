@@ -38,10 +38,16 @@ public class Detalle_Centro_Costo_DAO implements InterfaceDetalle_Centro_Costo {
             cst.setString(10, ID_CONTRATO);
             cst.setString(11, ES_DETALLE_CC);
             cst.execute();
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex.getMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -56,8 +62,14 @@ public class Detalle_Centro_Costo_DAO implements InterfaceDetalle_Centro_Costo {
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 }

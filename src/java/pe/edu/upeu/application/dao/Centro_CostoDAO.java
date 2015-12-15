@@ -517,14 +517,15 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
                 Lista.add(rec);
             }
             rs.close();
-        } catch (SQLException e) {
+       } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error!");
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
         return Lista;

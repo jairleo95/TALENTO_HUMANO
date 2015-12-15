@@ -13,9 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.spi.DirStateFactory;
 import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -23,7 +20,6 @@ import pe.edu.upeu.application.model.Anno;
 import pe.edu.upeu.application.model.Contrato_Adjunto;
 import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.Modalidad;
-import pe.edu.upeu.application.model.Plantilla_Contractual;
 import pe.edu.upeu.application.model.Regimen_Laboral;
 import pe.edu.upeu.application.model.Sub_Modalidad;
 import pe.edu.upeu.application.model.V_Contrato_dgp;
@@ -113,13 +109,16 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setDouble(61, ca_bonificacion_p);
             cst.setString(62, ES_MFL);
             cst.execute();
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex.getMessage());
-
-        } catch (ParseException ex) {
-            Logger.getLogger(ContratoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -202,8 +201,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 list.add(v);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -219,8 +225,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 list.add(rs.getString("id_trabajador"));
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -249,8 +262,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 list.add(rhf);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -298,8 +318,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 list.add(aitd);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -315,16 +342,33 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 validar = rs.getInt("1");
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return validar;
     }
 
     @Override
     public void Venc_Cont() {
-        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        this.conn.ejecutar(" begin venc_contrato; end;");
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            this.conn.ejecutar(" begin venc_contrato; end;");
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
     }
 
     @Override
@@ -343,8 +387,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 list.add(aitd);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -365,8 +416,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 list.add(aitd);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -388,9 +446,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 id_con = rs.getString(1);
             }
         } catch (SQLException e) {
-
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return id_con;
     }
@@ -406,8 +470,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 id_Tr = rs.getString(1);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return id_Tr;
     }
@@ -423,9 +494,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 id_anno = rs.getString(1);
             }
         } catch (SQLException e) {
-
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return id_anno;
     }
@@ -449,8 +526,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 list.add(a);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -466,9 +550,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 id_anno = rs.getString(1);
             }
         } catch (SQLException e) {
-
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return id_anno;
     }
@@ -591,9 +681,16 @@ public class ContratoDAO implements InterfaceContratoDAO {
             while (rs.next()) {
                 Maxcto = rs.getString(1);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return Maxcto;
     }
@@ -608,9 +705,16 @@ public class ContratoDAO implements InterfaceContratoDAO {
             while (rs.next()) {
                 Maxcto = rs.getString(1);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return Maxcto;
     }
@@ -691,8 +795,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 list.add(v);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -875,7 +986,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error al cargar la lista de puestos");
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -904,8 +1015,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 list.add(v);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -921,8 +1039,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 validar = rs.getInt(1);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return validar;
     }
@@ -935,9 +1060,16 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst = conn.conex.prepareCall("{CALL RHSP_DELETE_CONTRATOS_SUBIDOS(?)}");
             cst.setString(1, id_contrato.trim());
             cst.execute();
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -1038,8 +1170,15 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 list.add(v);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -1115,13 +1254,16 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(60, ID_PLANTILLA_CONTRACTUAL);
             cst.setDouble(61, ca_bonificacion_p);
             cst.execute();
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex.getMessage());
-
-        } catch (ParseException ex) {
-            Logger.getLogger(ContratoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (ParseException e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -1201,5 +1343,28 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
+    }
+
+    @Override
+    public boolean validar_editar_contrato(String iduser, String idcontrato) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ResultSet rs = this.conn.query("select  count(*)  from RHTV_AUTORIZACION where US_CREACION ='" + iduser + "' and ID_DGP in (select ID_DGP from rhtm_contrato where ID_CONTRATO='" + idcontrato + "')");
+            if (rs.next()) {
+                x = (rs.getInt(1) == 0);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al insertar archivo");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
     }
 }

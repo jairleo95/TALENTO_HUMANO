@@ -15,7 +15,6 @@ import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Carrera;
 import pe.edu.upeu.application.model.Tipo_Institucion;
-import pe.edu.upeu.application.model.Universidad;
 
 /**
  *
@@ -40,14 +39,15 @@ public class Carrera_UniversidadDAO implements InterfaceCarrera_UniversidadDAO {
                 lista.add(rec);
             }
             rs.close();
-        } catch (SQLException e) {
+       } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
         return lista;
@@ -68,14 +68,15 @@ public class Carrera_UniversidadDAO implements InterfaceCarrera_UniversidadDAO {
                 lista.add(rec);
             }
             rs.close();
-        } catch (SQLException e) {
+      } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR: ...");
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
         return lista;
@@ -125,8 +126,15 @@ public class Carrera_UniversidadDAO implements InterfaceCarrera_UniversidadDAO {
                 list.add(ti);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -145,8 +153,15 @@ public class Carrera_UniversidadDAO implements InterfaceCarrera_UniversidadDAO {
                 list.add(p);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }

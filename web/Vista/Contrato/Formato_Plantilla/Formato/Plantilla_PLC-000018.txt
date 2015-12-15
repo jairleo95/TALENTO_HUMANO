@@ -1,23 +1,15 @@
-<h4 style="text-align:center"> </h4>
-
 <ol>
 	<li style="text-align:justify">
-	<h5><span style="font-size:12px">Formular, en el medio informático a su alcance y entregar el (los) sílabo (s) de la (s) asignatura (s), completando los requisitos exigidos, como: programas, planes, conjunto de actividades de la asignatura, y a reformularlos en su contenido, alcances, términos y evaluaciones, conforme lo determinen la escuela académica profesional y/o facultad o el Vicerrectorado, dentro de los plazos establecidos.</span></h5>
+	<h5> </h5>
 	</li>
 	<li style="text-align:justify">
-	<h5><span style="font-size:12px">Cumplir estricta y puntualmente el horario asignado a sus actividades académicas, sin ninguna tolerancia de ingreso o ausencia</span></h5>
+	<h5><span style="font-size:12px">lkmkjnjknjk</span></h5>
 	</li>
 	<li style="text-align:justify">
-	<h5><span style="font-size:12px">No puede cambiar los horarios asignados, ni postergar o variar las actividades académicas, curriculares o extracurriculares asignadas, salvo  autorización expresa por las autoridades de la universidad.</span></h5>
+	<h5><span style="font-size:12px">ñkjnkljnjk+</span></h5>
 	</li>
 	<li style="text-align:justify">
-	<h5><span style="font-size:12px">Garantizar un mínimo de aptitud,  nivel académico y profesional (preparación de clases, material didáctico o de enseñanza, etc) durante el desarrollo de las asignaturas.</span></h5>
-	</li>
-	<li style="text-align:justify">
-	<h5><span style="font-size:12px">Dedicar sus habilidades, aptitudes a las labores estrictamente académicas; salvo comunicación de la universidad.</span></h5>
-	</li>
-	<li style="text-align:justify">
-	<h5><span style="font-size:12px">Abstenerse de disponer, ordenar, actuar o intervenir en asuntos administrativos (matrícula, variación de matrícula de asignaturas, horario, cambio de grupo de estudio, etc.), por ser de entera exclusividad de la universidad, salvo autorización expresa  de las autoridades universitarias.</span></h5>
+	<h5><span style="font-size:12px">kjlkjstenerse de disponer, ordenar, actuar o intervenir en asuntos administrativos (matrícula, variación de matrícula de asignaturas, horario, cambio de grupo de estudio, etc.), por ser de entera exclusividad de la universidad, salvo autorización expresa  de las autoridades universitarias.</span></h5>
 	</li>
 	<li style="text-align:justify">
 	<h5><span style="font-size:12px">Observar y hacer cumplir a sus alumnos, las disposiciones, reglamentos y normas de conducta, vestimenta  dentro del aula, laboratorios, centro de prácticas, eventos u otros actos académicos o extra académicos.</span></h5>
