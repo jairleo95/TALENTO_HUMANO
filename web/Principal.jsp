@@ -691,37 +691,41 @@
 
 
         <script>
-        document.oncontextmenu = function() {
+        document.oncontextmenu = function () {
             return false;
         }
         function nobackbutton() {
             window.location.hash = "no-back-button";
             window.location.hash = "Again-No-back-button" //chrome
-            window.onhashchange = function() {
+            window.onhashchange = function () {
                 window.location.hash = "";
             }
         }
 
         var websocket = new WebSocket("ws://" + document.location.host + "/TALENTO_HUMANO/serverGth");
-        websocket.onmessage = function(e) {
-            console.log(e.data);
-        };
+        /*websocket.onmessage = function(e) {
+         console.log(e.data);
+         };*/
+        websocket.onmessage = function processMessage(message) {
+            var jsonData = JSON.parse(message.data);
+            if (jsonData.message != null) {
+                alert(jsonData.message);
+                // messagesTextArea.value += jsonData.message + "\n";
+            }
+        }
         function sendMessage() {
             websocket.send("mensaje");
+        }
 
-        }
-        websocket.onmessage = function processMessage(objJson) {
-            alert(objJson.message)
-        }
-    
-        document.getElementById('myframe').onload = function() {
-         
-           // setTimeout(function() {
-                $(".iframe_principal").show(100);
-                $(".animacion_load").empty();
-          //  }, 1000);
+
+        document.getElementById('myframe').onload = function () {
+
+            // setTimeout(function() {
+            $(".iframe_principal").show(100);
+            $(".animacion_load").empty();
+            //  }, 1000);
         };
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
             pageSetUp();
@@ -732,19 +736,19 @@
              */
 
 
-            $(".menu-item-parent").parent().click(function() {
+            $(".menu-item-parent").parent().click(function () {
                 $(".titulo_menu").text(" " + $(this).text());
                 $("#icon_menu").removeClass();
                 $("#icon_menu").addClass($(this).data('value'));
                 $("#icon_menu").removeClass("fa-lg");
             });
-            $(".li-privilegio").click(function() {
+            $(".li-privilegio").click(function () {
                 $(".li-privilegio").removeClass("active");
                 $(this).addClass("active");
-                 $(".iframe_principal").hide();
-                  $(".animacion_load").append('<h1 class="ajax-loading-animation"><i class="fa fa-cog fa-spin"></i> Cargando...</h1>');
+                $(".iframe_principal").hide();
+                $(".animacion_load").append('<h1 class="ajax-loading-animation"><i class="fa fa-cog fa-spin"></i> Cargando...</h1>');
             });
-            $(".js-status-update a").click(function() {
+            $(".js-status-update a").click(function () {
                 var selText = $(this).text();
                 var $this = $(this);
                 $this.parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');

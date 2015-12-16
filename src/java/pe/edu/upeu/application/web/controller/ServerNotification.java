@@ -41,18 +41,17 @@ public class ServerNotification {
     }
 
     @OnMessage
-    public void handleMessage(String message, Session session) throws IOException {
-        /* String userName = (String) userSession.getUserProperties().get("username");
-         if (userName == null) {
-         userSession.getUserProperties().put("username", message);
-         userSession.getBasicRemote().sendText(buildJsonData("system", "estas conectado a :" + message));
-         } else {
-         Iterator<Session> iterator = chatRoomUser.iterator();
-         while (iterator.hasNext()) {
-         iterator.next().getBasicRemote().sendText(buildJsonData(userName, message));
-         }
-         }*/
-        session.getBasicRemote().sendText(buildJsonData(session.getId(), message));
+    public void handleMessage(String message, Session userSession) throws IOException {
+        String userName = (String) userSession.getUserProperties().get("username");
+        if (userName == null) {
+            userSession.getUserProperties().put("username", message);
+            userSession.getBasicRemote().sendText(buildJsonData("system", "estas conectado a :" + message));
+        } else {
+            Iterator<Session> iterator = chatRoomUser.iterator();
+            while (iterator.hasNext()) {
+                iterator.next().getBasicRemote().sendText(buildJsonData(userName, message));
+            }
+        }
     }
 
     private String buildJsonData(String username, String message) {
@@ -60,8 +59,10 @@ public class ServerNotification {
         //rpta.put("message", username + ": " + message);
         rpta.put("message", "sdlñjsdfgñfg");
         Gson gson = new Gson();
-        return gson.toJson(rpta);
+        // return gson.toJson(rpta);
+        return "{\"message\":\"Hola\"}";
     }
+
     @OnClose
     public void handleClose(Session id) {
         chatRoomUser.remove(id);

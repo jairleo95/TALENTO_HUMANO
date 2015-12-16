@@ -1,3 +1,9 @@
+
+<%
+    HttpSession sesion_1 = request.getSession();
+    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+    if (id_user_1 != null) {
+%>
 <%@page import="pe.edu.upeu.application.dao.Tipo_DocumentoDAO"%>
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO"%>
@@ -5,12 +11,6 @@
 <%@page import="pe.edu.upeu.application.web.controller.CCriptografiar"%>
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
-<%
-    HttpSession sesion_1 = request.getSession();
-    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
-    if (id_user_1 != null) {
-%>
-
 <%@page import="pe.edu.upeu.application.model.Empleado"%>
 <%@page import="javax.print.DocFlavor.STRING"%>
 <%@page import="pe.edu.upeu.application.model.Auto_Mostrar"%>
@@ -567,28 +567,28 @@
                 <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
                 <input type="hidden" name="IDPASOS" value="<%=id_pasos%>" 
                        <tr><td><input type="hidden" name="opc"  class="submit" value="Rechazar"/></td></tr>
-    <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-           <div class="modal-content">
-                <div class="modal-header">
-                          <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="myModalLabel"> Motivo </h4>
+                <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel"> Motivo </h4>
+                            </div>
+                            <div class="modal-body">
+                                <legend>Comentario : </legend>
+                                <div class="area-coment" style="display: block;">
+                                    <textarea rows="3" placeholder="Inserte Comentario" maxlength="200" required="" class="mensaje" name="comentario"></textarea>
+                                    <div class="contador">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary btn-conti"> Continuar </button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" > Cancel </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                       <div class="modal-body">
-                         <legend>Comentario : </legend>
-                         <div class="area-coment" style="display: block;">
-                                 <textarea rows="3" placeholder="Inserte Comentario" maxlength="200" required="" class="mensaje" name="comentario"></textarea>
-                                <div class="contador">
-                               </div>
-                          </div>
-                      </div>
-                    <div class="modal-footer">
-                     <button type="submit" class="btn btn-primary btn-conti"> Continuar </button>
-                     <button type="button" class="btn btn-default" data-dismiss="modal" > Cancel </button>
-                   </div>
-             </div>
-          </div>
-      </div>
                 <a data-toggle="modal" href="#myModal6" class="btn btn-labeled btn-danger"><span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>RECHAZAR</a>
             </table>
         </form>   
@@ -954,7 +954,7 @@
                                                     data: "opc=Mostrar_Cod_APS&tr=" + $('.idtr').val(),
                                                     type: 'POST',
                                                     success: function (data, textStatus, jqXHR) {
-                                                      //  alert(data.msg)
+                                                        //  alert(data.msg)
                                                     }
                                                 });
 
