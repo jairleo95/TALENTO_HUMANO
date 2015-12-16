@@ -969,21 +969,21 @@
     </script>
     <!-- IMPORTANT: APP CONFIG -->
     <script src="../../js/app.config.js"></script>
-    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-    <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events
+    <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
     <!-- BOOTSTRAP JS -->
     <script src="../../js/bootstrap/bootstrap.min.js"></script>
     <!-- CUSTOM NOTIFICATION -->
     <script src="../../js/notification/SmartNotification.min.js"></script>
 
-    <!-- JARVIS WIDGETS -->
-    <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
+    <!-- JARVIS WIDGETS 
+    <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>-->
 
-    <!-- EASY PIE CHARTS -->
-    <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+    <!-- EASY PIE CHARTS 
+    <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
 
-    <!-- SPARKLINES -->
-    <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+    <!-- SPARKLINES 
+    <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>-->
 
     <!-- JQUERY VALIDATE -->
     <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
@@ -994,8 +994,8 @@
     <!-- JQUERY SELECT2 INPUT -->
     <script src="../../js/plugin/select2/select2.min.js"></script>
 
-    <!-- JQUERY UI + Bootstrap Slider -->
-    <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+    <!-- JQUERY UI + Bootstrap Slider 
+    <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
 
     <!-- browser msie issue fix -->
     <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
@@ -1016,16 +1016,15 @@
     <script src="../../js/app.min.js"></script>
 
     <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-    <!-- Voice command : plugin -->
-    <script src="../../js/speech/voicecommand.min.js"></script>
-    <!-- PAGE RELATED PLUGIN(S) 
-    <script src="..."></script>-->
+    <!-- Voice command : plugin 
+    <script src="../../js/speech/voicecommand.min.js"></script>-->
+    <!-- PAGE RELATED PLUGIN(S) -->
     <script src="../../js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
     <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
     <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
-    <script src="../../js/Js_DGP/Registrar/Reg_Dgps.js" type="text/javascript"></script>
+    <script src="../../js/Js_DGP/Registrar/Reg_Dgps.js" type="text/javascript" ></script>
     <script src="../../js/Js_Horario/horario.js" type="text/javascript"></script>
     <script>
                                                         function listar_mensaje_plazo(tipo, warning, info, req) {
@@ -1043,7 +1042,7 @@
                                                                         info.append('<div class="alert alert-info fade in" style="font-size:20px"><button class="close" data-dismiss="alert">×</button><i class="fa-fw fa fa-info"></i><strong>¡Importante!</strong> Su requerimiento será procesado en el mes de <strong>' + lista[i].mes + '.</strong></div>');
                                                                     } else if (tipo == '1') {
                                                                         // warning.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'></a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , se tiene " + lista[i].dias_tol + " dias de tolerancia para la fecha de inicio.</div>");
-                                                                        info.append('<div class="alert alert-warning fade in" ><button class="close" data-dismiss="alert"></button><i class="fa-fw fa fa-warning"></i><strong>¡Advertencia - Inicio de contrato!</strong> ' + lista[i].dias_tol + ' dias - plazo de envío respecto a la fecha de inicio' + '.</div>');
+                                                                        info.append('<div class="alert alert-warning fade in" ><button class="close" data-dismiss="alert"></button><i class="fa-fw fa fa-warning"></i><strong>¡Advertencia - Inicio de contrato!</strong> ' + lista[i].dias_tol + ' dias - ' + lista[i].det + '' + '.</div>');
                                                                     }
                                                                 }
                                                             });

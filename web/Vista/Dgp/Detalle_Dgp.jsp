@@ -1,3 +1,8 @@
+<%
+    HttpSession sesion_1 = request.getSession();
+    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+    if (id_user_1 != null) {
+%>
 <%@page import="java.math.RoundingMode"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="pe.edu.upeu.application.dao.Solicitud_RequerimientoDAO"%>
@@ -5,11 +10,7 @@
 <%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfacePlazo_DgpDAO"%>
 <%@page import="pe.edu.upeu.application.dao.Plazo_DgpDAO"%>
-<%
-    HttpSession sesion_1 = request.getSession();
-    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
-    if (id_user_1 != null) {
-%><%@page import="pe.edu.upeu.application.model.Detalle_Centro_Costo"%>
+<%@page import="pe.edu.upeu.application.model.Detalle_Centro_Costo"%>
 <%@page import="pe.edu.upeu.application.model.Centro_Costos"%>
 <%@page import="pe.edu.upeu.application.dao.UsuarioDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO"%>
@@ -170,8 +171,8 @@
                                                         dcc = (Detalle_Centro_Costo) Cargar_dcc_dgp.get(p);
                                             %>
                                         <tr><td class="text-info table-bordered">Centro de Costo N° <%=p + 1%></td><td class="text-info table-bordered"><%=dcc.getDe_centro_costo()%>&nbsp;&nbsp;&nbsp;<span class="text-success">  Codigo : <%=dcc.getCo_centro_costo()%></span></td></tr>
-                                            <%}
-                                            } else {%>
+                                        <%}
+                                        } else {%>
                                         <tr><td class="text-info table-bordered">Centro de Costo </td><td class="text-info table-bordered">No tiene Centro de costo </td></tr>
                                         <%}%>
 
@@ -266,45 +267,57 @@
 
                                 <% if (request.getParameter("opc") != null) {
                                         if (request.getParameter("opc").equals("reg_doc")) {
+                                            InterfacePlazo_DgpDAO p = new Plazo_DgpDAO();
+                                            InterfaceSolicitud_RequerimientoDAO s = new Solicitud_RequerimientoDAO();
+                                            int val_btn = p.Validar_cumple_dias_pt2(iddgp.trim());
+                                            boolean x = false;
                                 %>
                                 <h3 style="text-align: center;">Enviar Requerimiento</h3> 
+                                <%if (val_btn == 0) {
+                                        x = s.Validar_Envio_Solicitud(iddgp.trim());
+                                        if (x) {%>
+                                <input type="hidden" name="iddgp"  value="<%=iddgp%>" class="dgp" required="">   
+                                <div class="aviso_cumplimiento">
+
+                                    <div class="alert alert-warning fade in div_dgp">
+                                        <button class="close" data-dismiss="alert">
+                                            ×
+                                        </button>
+                                        <i class="fa-fw fa fa-warning"></i>
+                                        <strong>Advertencia</strong> Usted no ha cumplido con los dias de tolerancia del plazo <strong>Inicio de contrato</strong>, 
+                                        porfavor envie solicitud para la nueva fecha de inicio del trabajador.
+                                    </div>
+                                </div> 
+
+                                <br>
+                                <button class="btn btn-primary btn-labeled btn_solicitud" data-toggle="modal" type="button" data-target="#myModal">
+                                    <span class="btn-label"><i class="fa fa-envelope"></i></span>
+                                    SOLICITUD DE PLAZO
+                                </button>
+                                <button type="button" class="btn btn-success btn-labeled" disabled="true">
+                                    <span class="btn-label"><i class="fa fa-arrow-circle-right"></i></span>
+                                    TERMINAR
+                                </button>
+                                <%}%>
+                                <%}%>
+                                <%if (x == false & val_btn != 0) {
+                                %>
                                 <form action="../../dgp" method="get" class="form_terminar_req">
                                     <input  type="hidden" value="<%=iddgp%>" name="iddgp">
                                     <input type="hidden" value="Terminar" name="opc">
-                                    <footer> <%
-                                        InterfacePlazo_DgpDAO p = new Plazo_DgpDAO();
-                                        int val_btn = p.Validar_cumple_dias_pt2(iddgp.trim());
-                                        %>
-                                        <%if (val_btn == 0) {
-                                                if (request.getParameter("est").equals("true")) { %>
-                                        <label>Usted no ha cumplido con los dias de tolerancia del plazo <strong>Inicio de contrato</strong>, 
-                                            porfavor envie solicitud para la nueva fecha de inicio del trabajador.</label><br>
-                                        <button class="btn btn-primary btn-labeled btn_solicitud" data-toggle="modal" type="button" data-target="#myModal">
-                                            <span class="btn-label"><i class="fa fa-envelope"></i></span>
-                                            SOLICITUD DE PLAZO
-                                        </button>
-                                        <button type="button" class="btn btn-success btn-labeled btn_terminar" disabled="true">
-                                            <span class="btn-label"><i class="fa fa-arrow-circle-right"></i></span>
-                                            TERMINAR
-                                        </button>
-                                        <%} else {%>
+                                    <footer> 
                                         <button type="button" class="btn btn-success btn-labeled btn_terminar">
                                             <span class="btn-label"><i class="fa fa-arrow-circle-right"></i></span>
                                             TERMINAR
                                         </button>
-                                        <%}%>
-                                        <%} else {%>
-                                        <button type="button" class="btn btn-success btn-labeled btn_terminar">
-                                            <span class="btn-label"><i class="fa fa-arrow-circle-right"></i></span>
-                                            TERMINAR
-                                        </button>
-
-                                        <%}%>
-
                                     </footer>
                                     <input type="hidden" name="iddgp"  value="<%=iddgp%>" class="dgp" required="">
                                 </form>
-                                <%}
+                                <%} else if (x == false & val_btn == 0) {
+                                %>
+                                <div class="alert alert-success fade in div_dgp"><button class="close" data-dismiss="alert">×</button><i class="fa-fw fa fa-check"></i>Usted tiene una solicitud en proceso, una vez que se haya autorizado se podrá procesar el <strong>requerimiento</strong>.</div>
+                                <%}%>
+                                <%    }
                                     }%>
                             </div>
                         </section>
@@ -362,23 +375,23 @@
         <!-- JARVIS WIDGETS -->
         <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-        <!-- EASY PIE CHARTS -->
-        <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+        <!-- EASY PIE CHARTS 
+        <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
 
-        <!-- SPARKLINES -->
-        <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+        <!-- SPARKLINES -
+        <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>->
 
         <!-- JQUERY VALIDATE -->
         <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-        <!-- JQUERY MASKED INPUT -->
-        <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+        <!-- JQUERY MASKED INPUT 
+        <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
 
         <!-- JQUERY SELECT2 INPUT -->
         <script src="../../js/plugin/select2/select2.min.js"></script>
 
-        <!-- JQUERY UI + Bootstrap Slider -->
-        <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+        <!-- JQUERY UI + Bootstrap Slider 
+        <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
 
         <!-- browser msie issue fix -->
         <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
@@ -399,121 +412,13 @@
         <script src="../../js/app.min.js"></script>
 
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-        <!-- Voice command : plugin -->
-        <script src="../../js/speech/voicecommand.min.js"></script>
+        <!-- Voice command : plugin
+        <script src="../../js/speech/voicecommand.min.js"></script> -->
 
-        <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+        <!-- PAGE RELATED PLUGIN(S)
+        <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script> -->
         <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
-
-
-        <script type="text/javascript">
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
-            function listar_plazo_tipo(tipo) {
-                if (tipo.val() == '2') {
-                    $(".fe_inicio").val("");
-                    $(".fe_inicio").attr("type", "month");
-                    $(".lb_fecha_solicitud").text("Mes :");
-                    $(".tipo_fecha").val("month");
-                }
-                if (tipo.val() == '1') {
-                    $(".fe_inicio").attr("type", "date");
-                    $(".fe_inicio").val($(".fe_desde_dgp").val());
-                    $(".lb_fecha_solicitud").text("Fecha de Inicio :");
-                    $(".tipo_fecha").val("date");
-                }
-                list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize() + "&id=" + $(".dgp").val(), "1", $(".tipo").val());
-
-            }
-            $(document).ready(function () {
-                pageSetUp();
-                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-                });
-                $(".btn_terminar").click(function () {
-                    $.SmartMessageBox({
-                        title: "¡Advertencia!",
-                        content: "¿Esta seguro(a) de enviar el Requerimiento?",
-                        buttons: '[No][Si]'
-                    }, function (ButtonPressed) {
-                        if (ButtonPressed === "Si") {
-                            $(".form_terminar_req").submit();
-                        }
-                        if (ButtonPressed === "No") {
-                        }
-                    });
-                });
-                $(".btn_solicitud").click(function () {
-                    var body_modal = $(".body_mdal_sol");
-                    body_modal.empty();
-                    $.post("../../solicitud_requerimiento", "opc=Val_Envio_Solicitud&iddgp=" + $(".dgp").val(), function (objJson) {
-                        var html = objJson.html;
-                        body_modal.append(html);
-                        if (objJson.estado) {
-                            listar_plazo_tipo($(".tipo"));
-                        }
-                        $(".tipo").change(function () {
-                            listar_plazo_tipo($(this));
-                        });
-
-                        $(".sbm_solicitud").click(function (e) {
-                            if ($(".solicitud_plazo").valid() == true) {
-                                $.SmartMessageBox({
-                                    title: "¡Advertencia!",
-                                    content: "¿Esta seguro de enviar la solicitud?",
-                                    buttons: '[No][Si]'
-                                }, function (ButtonPressed) {
-                                    if (ButtonPressed === "Si") {
-                                        $.ajax({
-                                            url: "../../solicitud_requerimiento",
-                                            type: "post",
-                                            data: $(".solicitud_plazo").serialize() + "&opc=Registrar_solicitud" + "&iddgp=" + $(".dgp").val()
-                                        }).done(function () {
-                                            $('.solicitud_plazo')[0].reset();
-                                            var $p = $(this).parent().parent();
-                                            $p.removeClass('has-success');
-                                            $('.btn_terminar').prop('disabled', false);
-                                            $('.btn_solicitud').prop('disabled', true);
-                                            $("section > label").removeClass('state-success');
-                                            /*vuelve a cargar el selector para evitar enviar solicitudes del mismo plazo*/
-                                            //list_select($(".plazo"), "../../plazo_dgp?opc=List_id_plazo", $(".solicitud_plazo").serialize(), "1", $(".tipo").val());
-                                            $.smallBox({
-                                                title: "¡Exito!",
-                                                content: "<i class='fa fa-clock-o'></i> <i>La solicitud ha sido enviada exitosamente...</i>",
-                                                color: "#659265",
-                                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                timeout: 4000
-                                            });
-
-                                        }).error(function () {
-                                            $.smallBox({
-                                                title: "¡Error!",
-                                                content: "<i class='fa fa-clock-o'></i> <i>La solicitud no ha podido ser enviada...</i>",
-                                                color: "#C46A69",
-                                                iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                                timeout: 4000
-                                            });
-                                        });
-                                    }
-                                    if (ButtonPressed === "No") {
-                                    }
-                                });
-                            } else {
-                                $.smallBox({
-                                    title: "¡Error!",
-                                    content: "<i class='fa fa-clock-o'></i> <i>Ingrese Datos correctos</i>",
-                                    color: "#C46A69",
-                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                    timeout: 4000
-                                });
-                            }
-                        });
-                    });
-                });
-            })
-
-        </script>
-
+        <script src="../../js/Js_DGP/Detalle/Js_Detallle_dgp-api.js" type="text/javascript" charset="UTF-8"></script>
     </html>
     <%} else {
             out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
