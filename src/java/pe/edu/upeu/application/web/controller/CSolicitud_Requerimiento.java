@@ -94,12 +94,15 @@ public class CSolicitud_Requerimiento extends HttpServlet {
         }
         if (opc.equals("Reg_List_Solicitud")) {
             String iddgp = request.getParameter("iddgp");
-            String tipo = request.getParameter("tipo");
-            String idplazo = request.getParameter("plazo");
-            String desde = request.getParameter("desde");
-            String desc = request.getParameter("descripcion");
+            /**
+             * String tipo = request.getParameter("tipo"); String idplazo =
+             * request.getParameter("plazo"); String desde =
+             * request.getParameter("desde"); String desc =
+             * request.getParameter("descripcion");
+             */
             sesion.setAttribute("List_Solicitud_User", s.Listar_solicitud_id_us(iduser, iddgp));
-            rpta.put("rpta", "1");
+            //response.sendRedirect("Vista/Solicitud/");
+            // rpta.put("rpta", "1");
         }
         if (opc.equals("Ver_Detalle_Solicitud")) {
             String id = request.getParameter("id");
