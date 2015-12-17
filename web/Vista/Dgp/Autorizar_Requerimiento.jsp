@@ -1,11 +1,12 @@
-<%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
-<%@page import="pe.edu.upeu.application.model.Usuario"%>
+
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
 %>
+<%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
+<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%@page import="pe.edu.upeu.application.dao.DgpDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceDgpDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO"%>
@@ -57,11 +58,6 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
-        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
-        <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
-        <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
         <style>
             .ui-datepicker-calendar {
                 display: none;
@@ -219,7 +215,7 @@
                                                 <tr>
                                                     <td><%=f + 1%></td>
                                                     <td>
-               
+
                                                         <div class="btn-group">
                                                             <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                                                 Accion <span class="caret"></span>
@@ -441,7 +437,7 @@
                 <!-- end widget grid -->
             </div>
         </div>
- <!-------------- Modal  ----------->
+        <!-------------- Modal  ----------->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -454,20 +450,20 @@
                     <div class="modal-body">
 
                         <button class="add-coment btn btn-primary btn-block">Add Comentario</button>
-                    <div class="area-coment">
+                        <div class="area-coment">
                             <form class="comentari-form" method="post">
                                 <textarea class="mensaje"></textarea>
                                 <p></p>
                                 <input name="idDgp" class="idDgp" type="hidden" value="">
                                 <div class="contador">
                             </form>
-                         </div>
+                        </div>
                     </div>
 
                     <div class="comentarios">
                         <div>
-                                <legend>Comentarios </legend>
-                                <div class="comentario-dgp"></div>
+                            <legend>Comentarios </legend>
+                            <div class="comentario-dgp"></div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -476,428 +472,430 @@
                     </div>
                 </div>
             </div>
-           </div>
         </div>
-    </body>
-    <script src="../../js/coment/myfunctions.js" type="text/javascript"></script>
-    <!--================================================== -->
+    </div>
+</body>
+<script src="../../js/coment/myfunctions.js" type="text/javascript"></script>
+<!--================================================== -->
 
-    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
-    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-    <script>
-        if (!window.jQuery) {
-            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script>
+                            if (!window.jQuery) {
+                                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                            }
+</script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script>
+                            if (!window.jQuery.ui) {
+                                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                            }
+</script>
+
+<!-- IMPORTANT: APP CONFIG -->
+<script src="../../js/app.config.js"></script>
+
+<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+<script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+
+<!-- BOOTSTRAP JS -->
+<script src="../../js/bootstrap/bootstrap.min.js"></script>
+
+<!-- CUSTOM NOTIFICATION -->
+<script src="../../js/notification/SmartNotification.min.js"></script>
+
+<!-- JARVIS WIDGETS -->
+<script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
+
+<!-- EASY PIE CHARTS 
+<script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
+
+<!-- SPARKLINES 
+<script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>-->
+
+<!-- JQUERY VALIDATE 
+<script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>-->
+
+<!-- JQUERY MASKED INPUT 
+<script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
+
+<!-- JQUERY SELECT2 INPUT 
+<script src="../../js/plugin/select2/select2.min.js"></script>-->
+
+<!-- JQUERY UI + Bootstrap Slider 
+<script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
+
+<!-- browser msie issue fix -->
+<script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+
+<!-- FastClick: For mobile devices -->
+<script src="../../js/plugin/fastclick/fastclick.min.js"></script>
+
+<!--[if IE 8]>
+
+<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+<![endif]-->
+
+<!-- Demo purpose only -->
+<script src="../../js/demo.min.js"></script>
+
+<!-- MAIN APP JS FILE -->
+<script src="../../js/app.min.js"></script>
+
+<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT
+<!-- Voice command : plugin -->
+<script src="../../js/speech/voicecommand.min.js"></script> -->
+
+<!-- PAGE RELATED PLUGIN(S) 
+<script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>-->
+
+<script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
+<script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
+<script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+
+<script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+<script>
+                            $.datepicker.regional['es'] = {
+                                closeText: 'Mostrar',
+                                currentText: 'Hoy',
+                                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+                                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+                                weekHeader: 'Sm',
+                                dateFormat: 'dd/mm/yy',
+                                firstDay: 1,
+                                isRTL: false,
+                                showMonthAfterYear: false,
+                                yearSuffix: ''
+                            };
+                            $.datepicker.setDefaults($.datepicker.regional['es']);
+</script>
+<script>
+    function nobackbutton() {
+
+        window.location.hash = "no-back-button";
+        window.location.hash = "Again-No-back-button" //chrome
+
+        window.onhashchange = function () {
+            window.location.hash = "";
         }
-    </script>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-    <script>
-        if (!window.jQuery.ui) {
-            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-        }
-    </script>
-
-    <!-- IMPORTANT: APP CONFIG -->
-    <script src="../../js/app.config.js"></script>
-
-    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-    <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
-
-    <!-- BOOTSTRAP JS -->
-    <script src="../../js/bootstrap/bootstrap.min.js"></script>
-
-    <!-- CUSTOM NOTIFICATION -->
-    <script src="../../js/notification/SmartNotification.min.js"></script>
-
-    <!-- JARVIS WIDGETS -->
-    <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
-
-    <!-- EASY PIE CHARTS -->
-    <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
-
-    <!-- SPARKLINES -->
-    <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
-
-    <!-- JQUERY VALIDATE -->
-    <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
-
-    <!-- JQUERY MASKED INPUT -->
-    <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
-
-    <!-- JQUERY SELECT2 INPUT 
-    <script src="../../js/plugin/select2/select2.min.js"></script>-->
-
-    <!-- JQUERY UI + Bootstrap Slider -->
-    <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
-
-    <!-- browser msie issue fix -->
-    <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
-
-    <!-- FastClick: For mobile devices -->
-    <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
-
-    <!--[if IE 8]>
-    
-    <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-    
-    <![endif]-->
-
-    <!-- Demo purpose only -->
-    <script src="../../js/demo.min.js"></script>
-
-    <!-- MAIN APP JS FILE -->
-    <script src="../../js/app.min.js"></script>
-
-    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-    <!-- Voice command : plugin -->
-    <script src="../../js/speech/voicecommand.min.js"></script>
-
-    <!-- PAGE RELATED PLUGIN(S) -->
-    <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
-    <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
-    <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
-    <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-    <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-    <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-    <script>
-        $.datepicker.regional['es'] = {
-            closeText: 'Mostrar',
-            currentText: 'Hoy',
-            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
-            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-            weekHeader: 'Sm',
-            dateFormat: 'dd/mm/yy',
-            firstDay: 1,
-            isRTL: false,
-            showMonthAfterYear: false,
-            yearSuffix: ''
-        };
-        $.datepicker.setDefaults($.datepicker.regional['es']);
-    </script>
-    <script>
-        function nobackbutton() {
-
-            window.location.hash = "no-back-button";
-            window.location.hash = "Again-No-back-button" //chrome
-
-            window.onhashchange = function () {
-                window.location.hash = "";
-            }
-        }
-        function exito(titulo, mensaje) {
-            $.smallBox({
-                title: titulo,
-                content: mensaje,
-                color: "#739E73",
-                iconSmall: "fa fa-cloud",
-                timeout: 3000
+    }
+    function exito(titulo, mensaje) {
+        $.smallBox({
+            title: titulo,
+            content: mensaje,
+            color: "#739E73",
+            iconSmall: "fa fa-cloud",
+            timeout: 3000
+        });
+    }
+    $(document).ready(function () {
+        $(".btn_pro_remuneracion").click(function () {
+            $.SmartMessageBox({
+                title: "¡Advertencia!",
+                content: "¿Esta seguro de procesar estos requerimientos?",
+                buttons: '[No][Si]'
+            }, function (ButtonPressed) {
+                if (ButtonPressed === "Si") {
+                    for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
+                        if ($(".env_rem" + i).prop('checked')) {
+                            $.ajax({
+                                url: "../../autorizacion",
+                                type: "POST",
+                                data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
+                            }).done(function () {
+                                window.location.href = "../../autorizacion";
+                            });
+                        }
+                    }
+                }
+                if (ButtonPressed === "No") {
+                }
             });
-        }
-        $(document).ready(function () {
-            $(".btn_pro_remuneracion").click(function () {
-                $.SmartMessageBox({
-                    title: "¡Advertencia!",
-                    content: "¿Esta seguro de procesar estos requerimientos?",
-                    buttons: '[No][Si]'
-                }, function (ButtonPressed) {
-                    if (ButtonPressed === "Si") {
-                        for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
-                            if ($(".env_rem" + i).prop('checked')) {
+        });
+        $(".btn_pro_firma").click(function () {
+            $.SmartMessageBox({
+                title: "¡Advertencia!",
+                content: "¿Esta seguro de procesar firmas a estos requerimientos?",
+                buttons: '[No][Si]'
+            }, function (ButtonPressed) {
+                if (ButtonPressed === "Si") {
+                    try {
+                        $.each($(".firm_contr"), function () {
+                            if ($(this).prop('checked')) {
+                                $.ajax({
+                                    url: "../../contrato",
+                                    type: "POST",
+                                    data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
+                                }).done(function () {
+                                });
                                 $.ajax({
                                     url: "../../autorizacion",
                                     type: "POST",
-                                    data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
+                                    data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
                                 }).done(function () {
                                     window.location.href = "../../autorizacion";
                                 });
                             }
-                        }
+                        });
+                        // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
                     }
-                    if (ButtonPressed === "No") {
+                    catch (err) {
+                        alert(err.message);
+                    } finally {
                     }
-                });
+                }
+                if (ButtonPressed === "No") {
+                }
             });
-            $(".btn_pro_firma").click(function () {
-                $.SmartMessageBox({
-                    title: "¡Advertencia!",
-                    content: "¿Esta seguro de procesar firmas a estos requerimientos?",
-                    buttons: '[No][Si]'
-                }, function (ButtonPressed) {
-                    if (ButtonPressed === "Si") {
-                        try {
-                            $.each($(".firm_contr"), function () {
-                                if ($(this).prop('checked')) {
-                                    $.ajax({
-                                        url: "../../contrato",
-                                        type: "POST",
-                                        data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
-                                    }).done(function () {
-                                    });
-                                    $.ajax({
-                                        url: "../../autorizacion",
-                                        type: "POST",
-                                        data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
-                                    }).done(function () {
-                                        window.location.href = "../../autorizacion";
-                                    });
-                                }
+        });
+        $(".btn_cod_aps").click(function () {
+            $.SmartMessageBox({
+                title: "¡Advertencia!",
+                content: "¿Esta seguro de procesar codigos APS a estos requerimientos?",
+                buttons: '[No][Si]'
+            }, function (ButtonPressed) {
+                if (ButtonPressed === "Si") {
+                    for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
+                        if ($(".cod_aps" + r).val() != "") {
+                            $.ajax({
+                                url: "../../trabajador",
+                                type: "POST",
+                                data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
+                            }).done(function () {
                             });
-                            // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
-                        }
-                        catch (err) {
-                            alert(err.message);
-                        } finally {
-                        }
-                    }
-                    if (ButtonPressed === "No") {
-                    }
-                });
-            });
-            $(".btn_cod_aps").click(function () {
-                $.SmartMessageBox({
-                    title: "¡Advertencia!",
-                    content: "¿Esta seguro de procesar codigos APS a estos requerimientos?",
-                    buttons: '[No][Si]'
-                }, function (ButtonPressed) {
-                    if (ButtonPressed === "Si") {
-                        for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
-                            if ($(".cod_aps" + r).val() != "") {
-                                $.ajax({
-                                    url: "../../trabajador",
-                                    type: "POST",
-                                    data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                }).done(function () {
-                                });
-                                $.ajax({
-                                    url: "../../autorizacion",
-                                    type: "POST",
-                                    data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                }).done(function () {
-                                    window.location.href = "../../autorizacion?opc=mens_cod_aps";
-                                });
-                            }
+                            $.ajax({
+                                url: "../../autorizacion",
+                                type: "POST",
+                                data: "opc=Aceptar" + $(".val_aut" + r).val()
+                            }).done(function () {
+                                window.location.href = "../../autorizacion?opc=mens_cod_aps";
+                            });
                         }
                     }
-                    if (ButtonPressed === "No") {
-                    }
-
-                });
-            });
-            $(".btn_cod_huella").click(function () {
-                $.SmartMessageBox({
-                    title: "¡Advertencia!",
-                    content: "¿Esta seguro de procesar codigos de huella a estos requerimientos?",
-                    buttons: '[No][Si]'
-                }, function (ButtonPressed) {
-                    if (ButtonPressed === "Si") {
-                        for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
-                            if ($(".cod_huella" + r).val() != "") {
-                                $.ajax({
-                                    url: "../../trabajador",
-                                    type: "POST",
-                                    data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                                }).done(function () {
-                                });
-                                $.ajax({
-                                    url: "../../autorizacion",
-                                    type: "POST",
-                                    data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                }).done(function () {
-                                    window.location.href = "../../autorizacion?opc=mens_cod_huella";
-                                });
-                                $.ajax({
-                                    url: "../../autorizacion",
-                                    type: "POST",
-                                    data: "opc=Enviar_Correo" + $(".correos_" + r).val()
-                                }).done(function () {
-
-                                });
-                            }
-                        }
-                    }
-                    if (ButtonPressed === "No") {
-                    }
-                });
-            });
-        });</script>
-    <script type="text/javascript">
-        var año = '';
-        var mes = '';
-        function crear_tabla() {
-            var texto_html = '';
-            texto_html += '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">'
-                    + '<thead><tr><th class="hasinput"></th>'
-                    + '<th class="hasinput icon-addon" style="width:100px"><input   placeholder="Fecha" class="form-control filtrar_fecha">'
-                    + ' <label for="dateselect_filter" class="glyphicon glyphicon-calendar no-margin padding-top-15" rel="tooltip" title="" data-original-title="Filter Date"></label>'
-                    + '  </th> <th class="hasinput" style="width:16%"><input type="text" class="form-control" placeholder="Filtrar por nombre" /></th>'
-                    + '<th class="hasinput" style="width:18%"><input type="text" class="form-control" placeholder="Filtrar por puesto" /> </th>'
-                    + '<th class="hasinput" style="width:18%"><input type="text" class="form-control" placeholder="Filtrar por area" /> </th>'
-                    + '<th class="hasinput" style="width:16%"><input type="text" class="form-control" placeholder="Filtrar por departamento" /></th>'
-                    + '<th class="hasinput" style="width:20%" > </th>'
-                    + ' <th class="hasinput" ></th>'
-                    + '  <th class="hasinput"></th>'
-                    + ' <th class="hasinput" > </th>'
-                    + ' <th class="hasinput" ></th></tr>'
-                    + '  <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>'
-                    + '<th ><strong>MES PROCESADO</strong></th>'
-                    + '  <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>'
-                    + '  <th data-hide="phone,tablet"><strong>Puesto</strong></th>'
-                    + '  <th data-hide="phone,tablet"><strong>Area</strong></th>'
-                    + '  <th data-hide="phone,tablet"><strong>Departamento</strong></th>'
-                    + '  <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>'
-                    + ' <th  data-hide="phone,tablet">Fecha de Creación</th> '
-                    + '<th  data-hide="phone,tablet">Fecha de Autorización</th>'
-                    + ' <th  data-hide="phone,tablet">Motivo</th>'
-                    + ' <th  data-hide="phone,tablet">MFL</th>  </tr>'
-                    + '</thead><tbody class="tbody_autorizado"> </tbody> </table>';
-            $('.imprimir_tabla').empty();
-            $('.imprimir_tabla').append(texto_html);
-            $('.filtrar_fecha').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                dateFormat: 'MM yy',
-                prevText: '<i class="fa fa-chevron-left"></i>',
-                nextText: '<i class="fa fa-chevron-right"></i>',
-                onClose: function (dateText, inst) {
-                    filtrar_mes_año()
                 }
-            });
-            $('.filtrar_fecha').datepicker('setDate', new Date());
-        }
-        function filtrar_mes_año() {
-            //alert(año)
-            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-            $('.filtrar_fecha').datepicker('setDate', new Date(año, mes, 1));
-            mes = month;
-            año = year;
-            listar_autorizados(mes, año);
-        }
-        function reload_table() {
-            var responsiveHelper_datatable_fixed_column = undefined;
-            var breakpointDefinition = {
-                tablet: 1024,
-                phone: 480
-            };
-            var otable = $('#dt_basic').DataTable({
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
-                        "t" +
-                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                "autoWidth": true,
-                "preDrawCallback": function () {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_datatable_fixed_column) {
-                        responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                    }
-                },
-                "rowCallback": function (nRow) {
-                    responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-                },
-                "drawCallback": function (oSettings) {
-                    responsiveHelper_datatable_fixed_column.respond();
+                if (ButtonPressed === "No") {
                 }
 
             });
-            // Apply the filter
-            $("#dt_basic thead th input[type=text]").on('keyup change', function () {
-                otable.column($(this).parent().index() + ':visible').search(this.value).draw();
-            });
-        }
-        function listar_autorizados(mes, año) {
-            var text_html = "";
-            $.post("../../autorizacion", "opc=List_Dgp_Aut&mes=" + mes + "&año=" + año, function (objJson) {
-                var lista = objJson.lista;
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var count =0;
-                for (var i = 0; i < lista.length; i++) {
-                    if ((i + 1) < lista.length) {
-                        if (lista[i].id_dgp == lista[i + 1].id_dgp) {
-                            i++;
+        });
+        $(".btn_cod_huella").click(function () {
+            $.SmartMessageBox({
+                title: "¡Advertencia!",
+                content: "¿Esta seguro de procesar codigos de huella a estos requerimientos?",
+                buttons: '[No][Si]'
+            }, function (ButtonPressed) {
+                if (ButtonPressed === "Si") {
+                    for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
+                        if ($(".cod_huella" + r).val() != "") {
+                            $.ajax({
+                                url: "../../trabajador",
+                                type: "POST",
+                                data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
+                            }).done(function () {
+                            });
+                            $.ajax({
+                                url: "../../autorizacion",
+                                type: "POST",
+                                data: "opc=Aceptar" + $(".val_aut" + r).val()
+                            }).done(function () {
+                                window.location.href = "../../autorizacion?opc=mens_cod_huella";
+                            });
+                            $.ajax({
+                                url: "../../autorizacion",
+                                type: "POST",
+                                data: "opc=Enviar_Correo" + $(".correos_" + r).val()
+                            }).done(function () {
+
+                            });
                         }
                     }
-                    count++;
-                    //alert(lista[i + 1].id_dgp)
-                    text_html += "<tr>";
-                    text_html += "<td>" + (count) + "</td>";
-                    text_html += "<td>" + lista[i].mes_año_aut + "</td>";
-                    text_html += "<td>" + lista[i].ap_p + " " + lista[i].ap_m + " " + lista[i].nombre + "</td>";
-                    text_html += "<td>" + lista[i].puesto + "</td>";
-                    text_html += "<td>" + lista[i].area + "</td>";
-                    text_html += "<td>" + lista[i].dep + "</td>";
-                    text_html += "<td>" + lista[i].req + "</td>";
-                    text_html += "<td>" + lista[i].fecha_c + "</td>";
-                    text_html += "<td>" + lista[i].fecha_aut + "</td>";
-                    if (lista[i].motivo == '1') {
-                        text_html += "<td>Trabajador Nuevo</td>";
-                    } else if (lista[i].motivo == '2') {
-                        text_html += "<td>Renovación</td>";
-                    }
-                    if (lista[i].mfl == '0') {
-                        text_html += "<td>No</td>";
-                    } else if (lista[i].mfl == '1') {
-                        text_html += "<td>Si</td>";
-                    }
-                    text_html += "</tr>";
-
-
                 }
-                crear_tabla();
-                $(".tbody_autorizado").append(text_html);
-                text_html = "";
-                reload_table();
-
-            });
-        }
-        $(document).ready(function () {
-            pageSetUp();
-            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-            });
-            $(".cod_aps").numeric();
-
-            listar_autorizados(mes, año);
-
-            /* BASIC ;*/
-            var responsiveHelper_dt_basic = undefined;
-            var breakpointDefinition = {
-                tablet: 1024,
-                phone: 480
-            };
-
-
-            $('#dt_basic1').dataTable({
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                        "t" +
-                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                "autoWidth": true,
-                "preDrawCallback": function () {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_dt_basic) {
-                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic1'), breakpointDefinition);
-                    }
-                },
-                "rowCallback": function (nRow) {
-                    responsiveHelper_dt_basic.createExpandIcon(nRow);
-                },
-                "drawCallback": function (oSettings) {
-                    responsiveHelper_dt_basic.respond();
+                if (ButtonPressed === "No") {
                 }
             });
-            /* END BASIC */
-        })
+        });
+    });</script>
+<script type="text/javascript">
+    var año = '';
+    var mes = '';
+    function crear_tabla() {
+        var texto_html = '';
+        texto_html += '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">'
+                + '<thead><tr><th class="hasinput"></th>'
+                + '<th class="hasinput icon-addon" style="width:100px"><input   placeholder="Fecha" class="form-control filtrar_fecha">'
+                + ' <label for="dateselect_filter" class="glyphicon glyphicon-calendar no-margin padding-top-15" rel="tooltip" title="" data-original-title="Filter Date"></label>'
+                + '  </th> <th class="hasinput" style="width:16%"><input type="text" class="form-control" placeholder="Filtrar por nombre" /></th>'
+                + '<th class="hasinput" style="width:18%"><input type="text" class="form-control" placeholder="Filtrar por puesto" /> </th>'
+                + '<th class="hasinput" style="width:18%"><input type="text" class="form-control" placeholder="Filtrar por area" /> </th>'
+                + '<th class="hasinput" style="width:16%"><input type="text" class="form-control" placeholder="Filtrar por departamento" /></th>'
+                + '<th class="hasinput" style="width:20%" > </th>'
+                + ' <th class="hasinput" ></th>'
+                + '  <th class="hasinput"></th>'
+                + ' <th class="hasinput" > </th>'
+                + ' <th class="hasinput" ></th></tr>'
+                + '  <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>'
+                + '<th ><strong>MES PROCESADO</strong></th>'
+                + '  <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>'
+                + '  <th data-hide="phone,tablet"><strong>Puesto</strong></th>'
+                + '  <th data-hide="phone,tablet"><strong>Area</strong></th>'
+                + '  <th data-hide="phone,tablet"><strong>Departamento</strong></th>'
+                + '  <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>'
+                + ' <th  data-hide="phone,tablet">Fecha de Creación</th> '
+                + '<th  data-hide="phone,tablet">Fecha de Autorización</th>'
+                + ' <th  data-hide="phone,tablet">Motivo</th>'
+                + ' <th  data-hide="phone,tablet">MFL</th>  </tr>'
+                + '</thead><tbody class="tbody_autorizado"> </tbody> </table>';
+        $('.imprimir_tabla').empty();
+        $('.imprimir_tabla').append(texto_html);
+        $('.filtrar_fecha').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: 'MM yy',
+            prevText: '<i class="fa fa-chevron-left"></i>',
+            nextText: '<i class="fa fa-chevron-right"></i>',
+            onClose: function (dateText, inst) {
+                filtrar_mes_año()
+            }
+        });
+        $('.filtrar_fecha').datepicker('setDate', new Date());
+    }
+    function filtrar_mes_año() {
+        //alert(año)
+        var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+        var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+        $('.filtrar_fecha').datepicker('setDate', new Date(año, mes, 1));
+        mes = month;
+        año = year;
+        listar_autorizados(mes, año);
+    }
+    function reload_table() {
+        var responsiveHelper_datatable_fixed_column = undefined;
+        var breakpointDefinition = {
+            tablet: 1024,
+            phone: 480
+        };
+        var otable = $('#dt_basic').DataTable({
+            "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
+                    "t" +
+                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+            "autoWidth": true,
+            "preDrawCallback": function () {
+                // Initialize the responsive datatables helper once.
+                if (!responsiveHelper_datatable_fixed_column) {
+                    responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                }
+            },
+            "rowCallback": function (nRow) {
+                responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
+            },
+            "drawCallback": function (oSettings) {
+                responsiveHelper_datatable_fixed_column.respond();
+            }
 
-    </script>
+        });
+        // Apply the filter
+        $("#dt_basic thead th input[type=text]").on('keyup change', function () {
+            otable.column($(this).parent().index() + ':visible').search(this.value).draw();
+        });
+    }
+    function listar_autorizados(mes, año) {
+        var text_html = "";
+        $.post("../../autorizacion", "opc=List_Dgp_Aut&mes=" + mes + "&año=" + año, function (objJson) {
+            var lista = objJson.lista;
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
+            }
+            var count = 0;
+            for (var i = 0; i < lista.length; i++) {
+                if ((i + 1) < lista.length) {
+                    if (lista[i].id_dgp == lista[i + 1].id_dgp) {
+                        i++;
+                    }
+                }
+                count++;
+                //alert(lista[i + 1].id_dgp)
+                text_html += "<tr>";
+                text_html += "<td>" + (count) + "</td>";
+                text_html += "<td>" + lista[i].mes_año_aut + "</td>";
+                text_html += "<td>" + lista[i].ap_p + " " + lista[i].ap_m + " " + lista[i].nombre + "</td>";
+                text_html += "<td>" + lista[i].puesto + "</td>";
+                text_html += "<td>" + lista[i].area + "</td>";
+                text_html += "<td>" + lista[i].dep + "</td>";
+                text_html += "<td>" + lista[i].req + "</td>";
+                text_html += "<td>" + lista[i].fecha_c + "</td>";
+                text_html += "<td>" + lista[i].fecha_aut + "</td>";
+                if (lista[i].motivo == '1') {
+                    text_html += "<td>Trabajador Nuevo</td>";
+                } else if (lista[i].motivo == '2') {
+                    text_html += "<td>Renovación</td>";
+                }
+                if (lista[i].mfl == '0') {
+                    text_html += "<td>No</td>";
+                } else if (lista[i].mfl == '1') {
+                    text_html += "<td>Si</td>";
+                }
+                text_html += "</tr>";
+
+
+            }
+            crear_tabla();
+            $(".tbody_autorizado").append(text_html);
+            text_html = "";
+            reload_table();
+
+        });
+    }
+    $(document).ready(function () {
+        pageSetUp();
+        $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+            $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+        });
+        $(".cod_aps").numeric();
+
+        listar_autorizados(mes, año);
+
+        /* BASIC ;*/
+        var responsiveHelper_dt_basic = undefined;
+        var breakpointDefinition = {
+            tablet: 1024,
+            phone: 480
+        };
+
+
+        $('#dt_basic1').dataTable({
+            "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                    "t" +
+                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+            "autoWidth": true,
+            "preDrawCallback": function () {
+                // Initialize the responsive datatables helper once.
+                if (!responsiveHelper_dt_basic) {
+                    responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic1'), breakpointDefinition);
+                }
+            },
+            "rowCallback": function (nRow) {
+                responsiveHelper_dt_basic.createExpandIcon(nRow);
+            },
+            "drawCallback": function (oSettings) {
+                responsiveHelper_dt_basic.respond();
+            }
+        });
+        /* END BASIC */
+    })
+
+</script>
 </html>
 <%
         List_id_Autorizacion.clear();

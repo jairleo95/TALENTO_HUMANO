@@ -28,12 +28,12 @@
 
 
         <!-- Basic Styles -->
-        <link rel="stylesheet" type="text/css" media="screen" href="HTML_version/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="HTML_version/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-        <link rel="stylesheet" type="text/css" media="screen" href="HTML_version/css/smartadmin-production.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="HTML_version/css/smartadmin-skins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
 
         <!-- SmartAdmin RTL Support is under construction
                  This RTL CSS will be released in version 1.5
@@ -44,30 +44,30 @@
         <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
 
         <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-        <link rel="stylesheet" type="text/css" media="screen" href="HTML_version/css/demo.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
 
         <!-- FAVICONS -->
-        <link rel="shortcut icon" href="HTML_version/img/favicon/favicon.ico" type="image/x-icon">
-        <link rel="icon" href="HTML_version/img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
 
         <!-- GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
         <!-- Specifying a Webpage Icon for Web Clip 
                  Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
-        <link rel="apple-touch-icon" href="HTML_version/img/splash/sptouch-icon-iphone.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="HTML_version/img/splash/touch-icon-ipad.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="HTML_version/img/splash/touch-icon-iphone-retina.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="HTML_version/img/splash/touch-icon-ipad-retina.png">
+        <link rel="apple-touch-icon" href="img/splash/sptouch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="img/splash/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="img/splash/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="img/splash/touch-icon-ipad-retina.png">
 
         <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
         <!-- Startup image for web apps -->
-        <link rel="apple-touch-startup-image" href="HTML_version/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
-        <link rel="apple-touch-startup-image" href="HTML_version/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
-        <link rel="apple-touch-startup-image" href="HTML_version/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        <link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+        <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+        <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <script type="text/javascript" src="js/JQuery/jquery.autoheight.js"></script>
 
     </head>
@@ -689,7 +689,6 @@
         <!-- Full Calendar 
         <script src="js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>-->
 
-
         <script>
         document.oncontextmenu = function () {
             return false;
@@ -701,41 +700,32 @@
                 window.location.hash = "";
             }
         }
-
+        /*WEBSOCKET*/
         var websocket = new WebSocket("ws://" + document.location.host + "/TALENTO_HUMANO/serverGth");
-        /*websocket.onmessage = function(e) {
-         console.log(e.data);
-         };*/
         websocket.onmessage = function processMessage(message) {
             var jsonData = JSON.parse(message.data);
             if (jsonData.message != null) {
-                alert(jsonData.message);
+                $.smallBox({
+                    title: "Se ha autorizado un requerimiento...",
+                    content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+                    color: "#296191",
+                    iconSmall: "fa fa-thumbs-up bounce animated",
+                    timeout: 4000
+                });
+
                 // messagesTextArea.value += jsonData.message + "\n";
             }
         }
         function sendMessage() {
             websocket.send("mensaje");
         }
-
-
         document.getElementById('myframe').onload = function () {
-
-            // setTimeout(function() {
             $(".iframe_principal").show(100);
             $(".animacion_load").empty();
-            //  }, 1000);
         };
         $(document).ready(function () {
-
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
             pageSetUp();
-            //sendMessage()
             // alert('<%="Maximum Inactive Interval of Session in Seconds is : " + sesion.getMaxInactiveInterval() / 60%>');
-            /*
-             * PAGE RELATED SCRIPTS
-             */
-
-
             $(".menu-item-parent").parent().click(function () {
                 $(".titulo_menu").text(" " + $(this).text());
                 $("#icon_menu").removeClass();

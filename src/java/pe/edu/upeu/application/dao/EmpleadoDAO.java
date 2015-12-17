@@ -160,9 +160,8 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
         }
         return list;
     }
-    
-    
- @Override
+
+    @Override
     public List<V_List_Empleado> Listar_Empleado() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "SELECT * FROM RHVD_LIST_EMPLEADO order by id_contrato desc";
@@ -265,7 +264,6 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
         }
         return list;
     }
-    
 
     @Override
     public List<V_List_Empleado> Listar_Emp() {
@@ -439,7 +437,8 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     }
 
     @Override
-    public void Reg_aps(String idtr, int aps) {
+    public boolean Reg_aps(String idtr, int aps) {
+        boolean x = false;
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -447,6 +446,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
             cst.setString(1, idtr);
             cst.setInt(2, aps);
             cst.execute();
+            x = true;
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
@@ -458,6 +458,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
+        return x;
     }
 
     @Override
@@ -509,7 +510,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     public int val_aps(String co_aps) {
         int cant = 0;
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT COUNT (*) FROM RHTD_EMPLEADO WHERE CO_APS = '"+co_aps+"' ";
+        String sql = "SELECT COUNT (*) FROM RHTD_EMPLEADO WHERE CO_APS = '" + co_aps + "' ";
         try {
             ResultSet rs = this.conn.query(sql);
             rs.next();
@@ -532,7 +533,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     public int val_huella(String co_hue) {
         int cant = 0;
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT COUNT (*) FROM RHTD_EMPLEADO WHERE CO_HUELLA_DIGITAL = '"+co_hue+"' ";
+        String sql = "SELECT COUNT (*) FROM RHTD_EMPLEADO WHERE CO_HUELLA_DIGITAL = '" + co_hue + "' ";
         try {
             ResultSet rs = this.conn.query(sql);
             rs.next();

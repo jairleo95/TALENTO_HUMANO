@@ -315,8 +315,8 @@
                                 <td>
                                     <table class="info-det" style="margin-left:50%;">
                                         <input type="hidden" name="idtr" value="<%=idtra%>" class="idtra">
-                                        <tr><td class="td" colspan="3">Registrar Codigo de huella digital</td></tr>
-                                        <tr><td><input type="text" id="cod_hu" name="cod_huella"  maxlength="6" onblur="VAL_COD_HUELLA()" /></td></tr>
+                                        <tr><td class="td" colspan="3">Código de huella digital</td></tr>
+                                        <tr><td><div class="div_co_huella"><input type="text" id="cod_hu" name="cod_huella"  maxlength="6" onblur="VAL_COD_HUELLA()" /></div></td></tr>
                                         <tr>
                                             <td>
                                                 <button type="submit" class=" btn btn-default txt-color-green mod_huella" ><i class="fa fa-pencil fa-2x"></i></button>
@@ -713,26 +713,26 @@
 <!-- CUSTOM NOTIFICATION -->
 <script src="../../js/notification/SmartNotification.min.js"></script>
 
-<!-- JARVIS WIDGETS -->
-<script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
+<!-- JARVIS WIDGETS 
+<script src="../../js/smartwidgets/jarvis.widget.min.js"></script>-->
 
-<!-- EASY PIE CHARTS -->
-<script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+<!-- EASY PIE CHARTS 
+<script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
 
-<!-- SPARKLINES -->
-<script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+<!-- SPARKLINES 
+<script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>-->
 
 <!-- JQUERY VALIDATE -->
 <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-<!-- JQUERY MASKED INPUT -->
-<script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+<!-- JQUERY MASKED INPUT 
+<script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
 
 <!-- JQUERY SELECT2 INPUT 
 <script src="../../js/plugin/select2/select2.min.js"></script>-->
 
-<!-- JQUERY UI + Bootstrap Slider -->
-<script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+<!-- JQUERY UI + Bootstrap Slider 
+<script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
 
 <!-- browser msie issue fix -->
 <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
@@ -756,24 +756,24 @@
 <!-- Voice command : plugin -->
 <script src="../../js/speech/voicecommand.min.js"></script>
 
-<!-- PAGE RELATED PLUGIN(S) -->
+<!-- PAGE RELATED PLUGIN(S) 
 <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
 
 
 <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
 <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
+-->
 
-<script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
 <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
 
 
-<script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
-<script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
+
+<!--<script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
 <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
 <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
 
-<!-- PAGE RELATED PLUGIN(S) -->
+ PAGE RELATED PLUGIN(S)
 <script src="../../js/plugin/maxlength/bootstrap-maxlength.min.js"></script>
 <script src="../../js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
 <script src="../../js/plugin/clockpicker/clockpicker.min.js"></script>
@@ -786,11 +786,12 @@
 <script src="../../js/plugin/x-editable/jquery.mockjax.min.js"></script>
 <script src="../../js/plugin/x-editable/x-editable.min.js"></script>
 <script src="../../js/plugin/typeahead/typeahead.min.js"></script>
-<script src="../../js/plugin/typeahead/typeaheadjs.min.js"></script>
-
-
+<script src="../../js/plugin/typeahead/typeaheadjs.min.js"></script> -->
+<script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
+<script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
 <script type="text/javascript" src="../../js/shadowbox/demo.js"></script>
 <script type="text/javascript" src="../../js/shadowbox/shadowbox.js"></script>
+
 <script>
                                             function closedthis() {
                                                 $.smallBox({
@@ -819,14 +820,12 @@
                                                         type: "POST",
                                                         data: "opc=validar_aps&co_aps=" + co_aps.value
                                                     }).done(function (e) {
-                                                        // alert(e);
                                                         var cant = ($("#mod_aps").val());
                                                         if (cant.length > 1) {
                                                             if (e == 0) {
                                                                 window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#mod_aps").val() + "&idtr=" + $(".idtra").val() + "";
                                                             }
                                                             else {
-                                                                alert("Este codigo ya esta registrado!")
                                                                 $.SmartMessageBox({
                                                                     title: "Este código APS ya fue registrado!",
                                                                     content: "Por favor Ingrese un Código APS distinto",
@@ -846,14 +845,12 @@
                                                         type: "POST",
                                                         data: "opc=validar_aps&co_aps=" + co_aps.value
                                                     }).done(function (e) {
-                                                        //alert(e);
                                                         var cant = ($("#cod_ap").val());
                                                         if (cant.length > 1) {
                                                             if (e == 0) {
                                                                 window.location.href = "../../trabajador?opc=reg_aps_masivo&cod=" + $("#cod_ap").val() + "&idtr=" + $(".idtra").val() + "";
                                                             }
                                                             else {
-                                                                //  alert("Este codigo ya esta registrado!")
                                                                 $.SmartMessageBox({
                                                                     title: "Este Código APS ya fue registrado!",
                                                                     content: "Por favor Ingrese un Código APS distinto",
@@ -876,10 +873,10 @@
                                                         var cant = $("#mod_hue").val();
                                                         if (cant.length > 1) {
                                                             if (e == 0) {
+
                                                                 window.location.href = "../../trabajador?opc=reg_huella&idtr=" + $(".idtra").val() + "&cod=" + $("#mod_hue").val() + "";
                                                             }
                                                             else {
-                                                                alert("Este codigo ya esta registrado!")
                                                                 $.SmartMessageBox({
                                                                     title: "Este Código de Huella ya fue registrado!",
                                                                     content: "Por favor Ingrese un Codigo de Huella distinto",
@@ -897,14 +894,28 @@
                                                         type: "POST",
                                                         data: "opc=validar_huella&co_hue=" + co_huel.value
                                                     }).done(function (e) {
-                                                        // alert(e)
                                                         var cant = $("#cod_hu").val();
                                                         if (cant.length > 1) {
                                                             if (e == 0) {
-                                                                window.location.href = "../../trabajador?opc=reg_huella&idtr=" + $(".idtra").val() + "&cod=" + $("#cod_hu").val() + "";
+                                                                $.ajax({
+                                                                    url: "../../trabajador", data: "opc=reg_huella&idtr=" + $(".idtra").val() + "&cod=" + $("#cod_hu").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
+                                                                        if (data.rpta == "1") {
+                                                                            $.smallBox({
+                                                                                title: "Se ha registrado exitosamente el codigo de huella...",
+                                                                                content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+                                                                                color: "#296191",
+                                                                                iconSmall: "fa fa-thumbs-up bounce animated",
+                                                                                timeout: 4000
+                                                                            });
+                                                                        } else {
+
+                                                                        }
+                                                                    }
+                                                                });
+
+                                                                //  window.location.href = "?opc=reg_huella&idtr=" + $(".idtra").val() + "&cod=" + $("#cod_hu").val() + "";
                                                             }
                                                             else {
-                                                                alert("Este codigo ya esta registrado!")
                                                                 $.SmartMessageBox({
                                                                     title: "Este Código de Huella ya fue registrado!",
                                                                     content: "Por favor Ingrese un Código de Huella distinto",
@@ -939,13 +950,13 @@
                                                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                                 });
                                                 validar_shadowbox();
-                                                //  $("#cod_ap").numeric();
+                                                // $("#cod_ap").numeric();
                                                 $(".mod_huella").click(function () {
                                                     $("#cel_hue").hide();
                                                     document.getElementById("mod_hue").type = "text";
                                                 });
                                                 $(".mod_co_aps").click(function () {
-                                                    $("#cel_aps").hide();
+                                                    $("#cel_aps").hide(200);
                                                     document.getElementById("mod_aps").type = "text";
                                                 });
 
@@ -954,7 +965,6 @@
                                                     data: "opc=Mostrar_Cod_APS&tr=" + $('.idtr').val(),
                                                     type: 'POST',
                                                     success: function (data, textStatus, jqXHR) {
-                                                        //  alert(data.msg)
                                                     }
                                                 });
 
@@ -1006,7 +1016,6 @@
                                                                 }
                                                             }
                                                         }).fail(function (objJson) {
-                                                            //alert(ajaxSettings);
                                                         });
                                                     } else {
                                                         alert("Archivo no permitido, su tamaño debe ser menor a 500 KB");
@@ -1079,10 +1088,8 @@
                                                         buttons: '[No][Si]'
                                                     }, function (ButtonPressed) {
                                                         if (ButtonPressed === "Si") {
-                                                            // return true;
                                                             $(".form-aut").submit();
                                                             window.parent.sendMessage();
-                                                            //window.parent.ppp()
                                                         }
                                                         if (ButtonPressed === "No") {
                                                             return false;

@@ -29,7 +29,7 @@ public interface InterfaceEmpleadoDAO {
     public String ES_Empleado (String idemp);
     public List<Evaluacion_Emp> Listar_Evaluacion_Emp (String id_emp);
     public void Mod_Evaluacion_emp ( String RE_EVALUACION, String ID_EMPLEADO);
-    public void Reg_aps(String idtr,int aps);
+    public boolean Reg_aps(String idtr,int aps);
     public void Reg_cod_huella(String idtr,int cod_huella);
     public int val_aps (String co_aps);
     public int val_huella (String co_hue);
