@@ -5,18 +5,14 @@
  */
 package pe.edu.upeu.application.dao;
 
-import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -406,7 +402,7 @@ public class DgpDAO implements InterfaceDgpDAO {
             while (rs.next()) {
                 TOTAL = Integer.parseInt(rs.getString(1));
             }
-         } catch (SQLException ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("ERROR : " + e.getMessage());
@@ -941,7 +937,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 cs.setEs_cuenta_sueldo(rs.getString("es_cuenta_sueldo"));
                 list.add(cs);
             }
-          } catch (SQLException ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("ERROR : " + e.getMessage());

@@ -678,10 +678,11 @@
                                 type: "POST",
                                 data: "opc=Aceptar" + $(".val_aut" + r).val()
                             }).done(function () {
-                                window.location.href = "../../autorizacion?opc=mens_cod_aps";
+
                             });
                         }
                     }
+                    window.location.href = "../../autorizacion?opc=mens_cod_aps";
                 }
                 if (ButtonPressed === "No") {
                 }
@@ -708,7 +709,7 @@
                                 type: "POST",
                                 data: "opc=Aceptar" + $(".val_aut" + r).val()
                             }).done(function () {
-                                window.location.href = "../../autorizacion?opc=mens_cod_huella";
+
                             });
                             $.ajax({
                                 url: "../../autorizacion",
@@ -719,6 +720,7 @@
                             });
                         }
                     }
+                    window.location.href = "../../autorizacion?opc=mens_cod_huella";
                 }
                 if (ButtonPressed === "No") {
                 }
