@@ -813,7 +813,7 @@
           
         </script>
         
-     <script src="../../js/coment/myfunctions.js" type="text/javascript"></script>
+     <script src="../../js/coment/coment.js" type="text/javascript"></script>
     </body>
 
 </html>

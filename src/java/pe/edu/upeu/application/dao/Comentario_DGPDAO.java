@@ -59,7 +59,7 @@ public class Comentario_DGPDAO implements InterfaceComentario_DGPDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from rhtr_comentario_dgp cm, rhvd_usuario u where cm.us_creacion=u.id_usuario and cm.id_dgp='" + id_dgp + "' order by cm.id_comentario_dgp ASC";
+        String sql = "select * from rhtr_comentario_dgp cm, rhvd_usuario_temp u where cm.us_creacion=u.id_usuario and cm.id_dgp='" + id_dgp + "' order by cm.id_comentario_dgp ASC";
         try {
             ResultSet rs = this.conn.query(sql);
             
@@ -94,6 +94,7 @@ public class Comentario_DGPDAO implements InterfaceComentario_DGPDAO {
                 cd.put("ap_paterno",rs.getString("ap_paterno"));
                 cd.put("ap_materno",rs.getString("ap_materno"));
                 cd.put("fe_creacion",rs.getString("fe_creacion"));
+                cd.put("ar_foto",rs.getString("ar_foto"));
               lista.add(cd);
             }
       } catch (SQLException ex) {
