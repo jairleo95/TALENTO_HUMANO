@@ -79,6 +79,10 @@
                 width: 95%;
                 // margin: 0;
             }
+            .autoHeight{
+                border-style:none;            
+            }
+
         </style>
     </head>
     <%          if (request.getParameter("ms") != null) {
@@ -136,7 +140,7 @@
             </div>
             <%}
                 }%>
-            <div class="row">
+            <div class="row" style="padding-bottom: 10px;">
                 <div class="col-md-4">
                     <div class="media">
                         <%if (t.getNo_ar_foto() == null) {%>
@@ -189,147 +193,112 @@
                 <!-- INICIO codigos aps y huella-->
                 <input type="hidden"  class="idtr" value="<%=t.getId_trabajador()%>">
                 <div class="col-md-4">
-                    <div class="row">
-                        <div class="form-group">
-                            <label class="control-label col-md-4" for="prepend"> <strong>  Código APS:</strong></label>
-                            <div class="col-md-8">
-                                <div class="input-group input-group-sm">
-
-                                    <div class="icon-addon addon-sm">
-                                        <input type="text" placeholder="APS" maxlength="6" class="form-control txtCodigoAPS">
-                                        <label for="email" class="glyphicon glyphicon-info-sign" rel="tooltip" title="Escribir código APS"></label>
-                                    </div>
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default btnCodigoAPS" type="button" rel="tooltip" title="Actualizar"><i class="glyphicon glyphicon-ok"></i></button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class='row row_cod_aps'>
                     </div>
                     <div class='row row_cod_huella'>
                     </div>
-
-                    <%   if (ID_ROL.trim().equals("ROL-0001") | ID_ROL.equals("ROL-0009")) {%>
-                    <strong>  Código APS:</strong>
-                    <input type="text"   name="cod_aps"  maxlength="6" size="5%" class="form-control">
-                    <%if (!ID_ROL.trim().equals("ROL-0013")) {%>
-                    <button type="button"  class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
-                        <%}%>
-                        <%}%>
-                    <br>
-
                 </div>
                 <div class="col-md-4">
-                    <strong>Datos completados: </strong><br>
-                    <div class="easy-pie-chart txt-color-blue easyPieChart" data-percent="46" data-pie-size="100">
-                        <span class="percent percent-sign txt-color-blue font-lg semi-bold">46</span>
-                    </div>
-
+                    <center><strong>Datos completados: </strong><br>
+                        <div class="easy-pie-chart txt-color-blue easyPieChart" data-percent="46" data-pie-size="100">
+                            <span class="percent percent-sign txt-color-blue font-lg semi-bold">46</span>
+                        </div>
+                    </center>
                 </div>
             </div>
             <!-- FIN DE codigos aps y huella-->
             <!-- widget div-->
-            <div>
-                <!-- widget edit box -->
-                <div class="jarviswidget-editbox">
-                    <!-- This area used as dropdown edit box -->
+
+
+            <div class="row" style="padding-top: 0px;">
+
+                <ul  class="nav nav-tabs bordered tab_detalle_trabajador">
+                    <%
+                        if (List_Auto_mostrar.size() == 1 && aut != null) {
+                            for (int r = 0; r < List_Auto_mostrar.size(); r++) {
+                                Auto_Mostrar a = new Auto_Mostrar();
+                                a = (Auto_Mostrar) List_Auto_mostrar.get(r);
+                    %>
+                    <li >
+                        <a href="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Datos de Requerimientos</a>
+                    </li>
+                    <%}
+                        }%>
+                    <%if (iddep != null) {
+
+                            if ((iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0005"))) {
+                    %>
+                    <li>
+                        <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
+                    </li>
+                    <%}
+                        }%>
+                    <li class="active" >
+                        <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
+                    </li>
+                    <li>
+                        <a href="Aspecto_Academico.jsp?edit=<%=edit%>" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
+                    </li>
+                    <li >
+                        <a href="../../trabajador?idtr=<%=idtr%>&opc=Listar_Asp_Social" target="myframe2"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
+                    </li>
+                    <li>
+                        <a href="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" target="myframe2"><i class="fa fa-group fa-gear"></i> Familiares </a>
+                    </li>
+                    <%if (!idrol.trim().equals("ROL-0013")) {
+                    %>
+                    <li >
+                        <a href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="myframe2"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
+                    </li>
+                    <%}%>
+                    <li>
+                        <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
+                    </li>
+
+                    <%if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
+                    %>
+                    <li >
+                        <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Empleado</a>
+                    </li>
+                    <%}%>
+                    <%if (idtr.equals(idtr_session)) {
+
+                    %>
+                    <li>
+                        <%if (cl.trim().equals(user.trim())) {
+                        %>
+                        <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2" rel="" data-placement="top" data-original-title="<h1><b>One</b> <em>Really</em> big tip!</h1>" data-html="true" ><i class="fa fa-lock"></i> Contraseña <span class="badge bg-color-red pull-right inbox-badge">¡Cambiar!</span></a>
+                        <%} else {%>
+                        <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"  ><i class="fa fa-lock"></i> Contraseña</a>
+                        <%}%>
+                    </li>
+                    <%}%>
+                    <%if (idrol.trim().equals("ROL-0002") | ID_ROL.trim().equals("ROL-0001")) {
+                    %>
+                    <li>
+                        <a href="../../contrato?idtr=<%=idtr%>&opc=SI_CONNTRATO" target="myframe2"><i class="fa fa-male fa-gear"></i> Imprimir / Subir Contratos </a>
+                    </li>
+                    <%}%>
+                </ul>
+
+                <div id="myTabContent1" class="tab-content padding-10">
+                    <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
+                            for (int r = 0; r < List_Auto_mostrar.size(); r++) {
+                                Auto_Mostrar a = new Auto_Mostrar();
+                                a = (Auto_Mostrar) List_Auto_mostrar.get(r);
+                    %>
+                    <iframe id="myframe2" name="myframe2" class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" width="100%" height="100%" ></iframe>
+                    <%}
+                        List_Auto_mostrar.clear();
+                    } else {%>
+                    <iframe id="myframe2" name="myframe2" width="100%" height="800" scrolling="si" frameborder="0" src="Datos_Generales.jsp?edit=<%=edit%>"></iframe>
+                    <%}%>
                 </div>
-                <!-- end widget edit box -->
-
-                <!-- widget content -->
-                <div class="widget-body">
-
-
-                    <hr class="simple">
-                    <ul id="myTab1" class="nav nav-tabs bordered">
-                        <%
-                            if (List_Auto_mostrar.size() == 1 && aut != null) {
-                                for (int r = 0; r < List_Auto_mostrar.size(); r++) {
-                                    Auto_Mostrar a = new Auto_Mostrar();
-                                    a = (Auto_Mostrar) List_Auto_mostrar.get(r);
-                        %>
-                        <li >
-                            <a href="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Datos de Requerimientos</a>
-                        </li>
-                        <%}
-                            }%>
-                        <%if (iddep != null) {
-
-                                if ((iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0005"))) {
-                        %>
-                        <li>
-                            <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
-                        </li>
-                        <%}
-                            }%>
-                        <li >
-                            <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
-                        </li>
-                        <li>
-                            <a href="Aspecto_Academico.jsp?edit=<%=edit%>" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
-                        </li>
-                        <li >
-                            <a href="../../trabajador?idtr=<%=idtr%>&opc=Listar_Asp_Social" target="myframe2"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
-                        </li>
-                        <li>
-                            <a href="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" target="myframe2"><i class="fa fa-group fa-gear"></i> Familiares </a>
-                        </li>
-                        <%if (!idrol.trim().equals("ROL-0013")) {
-                        %>
-                        <li >
-                            <a href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="myframe2"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
-                        </li>
-                        <%}%>
-                        <li>
-                            <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
-                        </li>
-
-                        <%if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
-                        %>
-                        <li >
-                            <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Empleado</a>
-                        </li>
-                        <%}%>
-                        <%if (idtr.equals(idtr_session)) {
-
-                        %>
-                        <li>
-                            <%if (cl.trim().equals(user.trim())) {
-                            %>
-                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2" rel="" data-placement="top" data-original-title="<h1><b>One</b> <em>Really</em> big tip!</h1>" data-html="true" ><i class="fa fa-lock"></i> Contraseña <span class="badge bg-color-red pull-right inbox-badge">¡Cambiar!</span></a>
-                            <%} else {%>
-                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"  ><i class="fa fa-lock"></i> Contraseña</a>
-                            <%}%>
-                        </li>
-                        <%}%>
-                        <%if (idrol.trim().equals("ROL-0002") | ID_ROL.trim().equals("ROL-0001")) {
-                        %>
-                        <li>
-                            <a href="../../contrato?idtr=<%=idtr%>&opc=SI_CONNTRATO" target="myframe2"><i class="fa fa-male fa-gear"></i> Imprimir / Subir Contratos </a>
-                        </li>
-                        <%}%>
-                    </ul>
-
-                    <div id="myTabContent1" class="tab-content padding-10">
-                        <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
-                                for (int r = 0; r < List_Auto_mostrar.size(); r++) {
-                                    Auto_Mostrar a = new Auto_Mostrar();
-                                    a = (Auto_Mostrar) List_Auto_mostrar.get(r);
-                        %>
-                        <iframe id="myframe2" name="myframe2" class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" width="100%" height="100%" ></iframe>
-                        <%}
-                            List_Auto_mostrar.clear();
-                        } else {%>
-                        <iframe id="myframe2" name="myframe2" width="100%" height="800" scrolling="si" frameborder="0" src="Datos_Generales.jsp?edit=<%=edit%>"></iframe>
-                        <%}%>
-                    </div>
-                </div>
-
-                <!-- end widget content -->
-
             </div>
+
+            <!-- end widget content -->
+
+
             <!-- end widget div -->
 
         </div>        
@@ -343,11 +312,6 @@
 
             %>
             <center>
-                <%                    if (idrol.trim().equals("ROL-0006")) {
-                        int vnc = Integer.parseInt(request.getParameter("vnc"));
-                        if (vnc > 0) {
-
-                %>
                 <form class="form-aut" action="../../autorizacion" method="post" > 
                     <table > 
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
@@ -357,74 +321,25 @@
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
                         <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
                         <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
+                                <%
+                                    if (idrol.trim().equals("ROL-0006")) {
+                                        int vnc = Integer.parseInt(request.getParameter("vnc"));
+                                        if (vnc > 0) {
+                                %>
                         <button class="btn btn-labeled btn-success btn-autor" type="submit">
-                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>PROCESAR 
-                        </button>
+                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>PROCESAR  </button>
+                                <%
+                                    }
+                                } else {%>
+
+                        <!--INICIO DE  validacion-->
+                        <div class="validacionBtnAutorizar"></div><br>
+                        
+                        <!--fin validacion-->
+                        <%}%>
                     </table>
                 </form>
-                <%
-                    }
-                } else {
-                    if (idrol.trim().equals("ROL-0009")) {
-                        int val_aps = Integer.parseInt(request.getParameter("val_aps"));
-                        if (val_aps > 0) {
-                %>
 
-                <form class="form-aut" action="../../autorizacion" method="post" > 
-                    <table > 
-                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
-                        <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
-                        <input type="hidden" name="COD" value="<%=cod%>"  >               
-                        <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
-                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
-                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
-                        <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
-                        <button class="btn btn-labeled btn-success btn-autor" type="submit">
-                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>PROCESAR REQUERIMIENTO 
-                        </button>
-                    </table>
-                </form>
-                <%}
-                } else {%>
-                <% if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
-                        int val_huella = Integer.parseInt(request.getParameter("val_huella"));
-                        if (val_huella > 0) {%>
-                <form class="form-aut" action="../../autorizacion" method="post" > 
-                    <table > 
-                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
-                        <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
-                        <input type="hidden" name="COD" value="<%=cod%>"  >               
-                        <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
-                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
-                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
-                        <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
-                        <button class="btn btn-labeled btn-success btn-autor" type="submit">
-                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>AUTORIZAR REQUERIMIENTO 
-                        </button>
-
-                    </table>
-                </form>
-                <%}
-                } else {%>
-                <form class="form-aut" action="../../autorizacion" method="post" > 
-                    <table > 
-                        <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
-                        <input type="hidden" name="NROPASO" value="<%=nropaso%>"  >                
-                        <input type="hidden" name="COD" value="<%=cod%>"  >               
-                        <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
-                        <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
-                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>"   >
-                        <tr><td><input type="hidden" name="opc"  class="submit" value="Aceptar"/></td></tr>
-                        <button class="btn btn-labeled btn-success btn-autor" type="submit">
-                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>AUTORIZAR REQUERIMIENTO 
-                        </button>
-
-                    </table>
-                </form>
-                <%}%>
-
-                <%}
-                    }%>
                 <form class="form-rech" action="../../autorizacion" method="post">
                     <table>
                         <input type="hidden" name="IDDETALLE_DGP"  value="<%=iddgp%>"  >           
@@ -635,25 +550,20 @@
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
 
 
-
-        <!--<script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
-        
-         PAGE RELATED PLUGIN(S)
-        <script src="../../js/plugin/maxlength/bootstrap-maxlength.min.js"></script>
-        <script src="../../js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
-        <script src="../../js/plugin/clockpicker/clockpicker.min.js"></script>
-        <script src="../../js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js"></script>
-        <script src="../../js/plugin/noUiSlider/jquery.nouislider.min.js"></script>
-        <script src="../../js/plugin/ion-slider/ion.rangeSlider.min.js"></script>
-        <script src="../../js/plugin/colorpicker/bootstrap-colorpicker.min.js"></script>
-        <script src="../../js/plugin/knob/jquery.knob.min.js"></script>
-        <script src="../../js/plugin/x-editable/moment.min.js"></script>
-        <script src="../../js/plugin/x-editable/jquery.mockjax.min.js"></script>
-        <script src="../../js/plugin/x-editable/x-editable.min.js"></script>
-        <script src="../../js/plugin/typeahead/typeahead.min.js"></script>
-        <script src="../../js/plugin/typeahead/typeaheadjs.min.js"></script> -->
+        <!-- PAGE RELATED PLUGIN(S)
+         <script src="../../js/plugin/maxlength/bootstrap-maxlength.min.js"></script>
+         <script src="../../js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+         <script src="../../js/plugin/clockpicker/clockpicker.min.js"></script>
+         <script src="../../js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js"></script>
+         <script src="../../js/plugin/noUiSlider/jquery.nouislider.min.js"></script>
+         <script src="../../js/plugin/ion-slider/ion.rangeSlider.min.js"></script>
+         <script src="../../js/plugin/colorpicker/bootstrap-colorpicker.min.js"></script>
+         <script src="../../js/plugin/knob/jquery.knob.min.js"></script>
+         <script src="../../js/plugin/x-editable/moment.min.js"></script>
+         <script src="../../js/plugin/x-editable/jquery.mockjax.min.js"></script>
+         <script src="../../js/plugin/x-editable/x-editable.min.js"></script>
+         <script src="../../js/plugin/typeahead/typeahead.min.js"></script>
+         <script src="../../js/plugin/typeahead/typeaheadjs.min.js"></script> -->
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript" src="../../js/shadowbox/demo.js"></script>
@@ -686,6 +596,21 @@
                     $(".btnHuellaDigital").click(function () {
                         Actualizar_Cod_Huella();
                     });
+                    $(".btnHuellaDigital").attr("rel", "tooltip");
+                    $(".btnHuellaDigital").attr("title", "Actualizar");
+                }
+            });
+        }
+        function Listar_Cod_APS() {
+            var row_cod_aps = $(".row_cod_aps");
+            row_cod_aps.empty();
+            $.ajax({
+                url: "../../empleado", data: "opc=ShowAPS&idtr=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
+                    row_cod_aps.append(data.value);
+                    $(".btnCodigoAPS").click(function () {
+                        Actualizar_Cod_APS();
+                        ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
+                    });
                 }
             });
         }
@@ -702,6 +627,8 @@
                             url: "../../empleado", data: "opc=reg_huella&idtr=" + $(".idtr").val() + "&cod=" + co_huella, type: 'POST', success: function (data, textStatus, jqXHR) {
                                 if (data.rpta === "1") {
                                     // Listar_Cod_Huella();
+                                    /*validar los botones de autorizar req*/
+                                    ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
                                     $.smallBox({
                                         title: "Se ha actualizado exitosamente el codigo de huella...",
                                         content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
@@ -745,6 +672,8 @@
                             url: "../../empleado", data: "opc=reg_aps&idtr=" + $(".idtr").val() + "&cod=" + co_aps, type: 'POST', success: function (data, textStatus, jqXHR) {
                                 if (data.rpta === "1") {
                                     // Listar_Cod_Huella();
+                                    /*validar los botones de autorizar req*/
+                                    ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
                                     $.smallBox({
                                         title: "Se ha actualizado exitosamente el codigo APS...",
                                         content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
@@ -794,16 +723,51 @@
                 }, setupDemos);
             });
         }
+        function ValBtnAutorizarDgp(trabajador, divBotones) {
+            divBotones.empty();
+            $.ajax({
+                url: "../../autorizacion", data: "opc=ValBtnAutorizacion&trabajador=" + trabajador, type: 'POST', success: function (data, textStatus, jqXHR) {
+                    if (data.rpta === "1") {
+                        divBotones.append(data.data);
+                        $(".btn-autor").click(function (e) {
+                            $.SmartMessageBox({
+                                title: "¡Alerta de Confirmación!",
+                                content: "¿Está totalmente seguro de autorizar este requerimiento?",
+                                buttons: '[No][Si]'
+                            }, function (ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+                                    $(".form-aut").submit();
+                                    window.parent.sendMessage();
+                                }
+                                if (ButtonPressed === "No") {
+                                    return false;
+                                }
+                            });
+                            e.preventDefault();
+                        });
+                    } else {
+                        /*error*/
+                    }
+                }
+            });
+        }
         $(document).ready(function () {
+            Listar_Cod_Huella();
+            Listar_Cod_APS();
+            ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
             pageSetUp();
             $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
+            $(".tab_detalle_trabajador li").click(function () {
+                $(".tab_detalle_trabajador li").removeClass("active");
+                $(this).addClass("active");
+            });
             validar_shadowbox();
             // $("#cod_ap").numeric();
-            Listar_Cod_Huella();
-            $(".mod_co_aps").click(function () {
 
+            $(".btnCodigoAPS").click(function () {
+                Actualizar_Cod_APS();
             });
 
             $('.ver_foto').click(function () {

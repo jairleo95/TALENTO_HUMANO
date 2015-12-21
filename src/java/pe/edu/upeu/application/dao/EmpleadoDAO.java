@@ -660,4 +660,34 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
 
     }
 
+    @Override
+    public List<Map<String, ?>> List_co_aps(String idtr) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select id_empleado,id_trabajador,co_aps  from rhtd_empleado where id_trabajador='" + idtr + "'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("ide", rs.getString("id_empleado"));
+                rec.put("idtr", rs.getString("id_trabajador"));
+                rec.put("aps", rs.getString("co_aps"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return Lista;
+
+    }
+
 }

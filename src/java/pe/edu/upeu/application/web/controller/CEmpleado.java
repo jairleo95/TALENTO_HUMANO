@@ -139,7 +139,7 @@ public class CEmpleado extends HttpServlet {
                                 + "                                        <label for='email' class='glyphicon glyphicon-info-sign' rel='tooltip' title='Escribir código de Huella Digital'></label>"
                                 + "                                    </div>"
                                 + "                                    <span class='input-group-btn'>"
-                                + "                                        <button class='btn btn-default btnHuellaDigital' type='button' rel='tooltip' title='Actualizar' ><i class='glyphicon glyphicon-ok'></i></button>"
+                                + "                                        <button class='btn btn-default btnHuellaDigital' type='button' ><i class='glyphicon glyphicon-ok'></i></button>"
                                 + "                                    </span>"
                                 + "                                </div>"
                                 + "                            </div>"
@@ -152,6 +152,44 @@ public class CEmpleado extends HttpServlet {
                 } else {
                     html = "                        <div class='form-group'>"
                             + "                            <label class='control-label col-md-12' for='prepend'> <strong>  Código de Huella Digital: </strong>" + (" No registrado") + "</label>"
+                            + "                        </div>";
+                }
+
+                rpta.put("value", html);
+                rpta.put("rpta", "1");
+            }
+            if (opc.equals("ShowAPS")) {
+
+                String idtr = request.getParameter("idtr");
+                String html = "";
+                List<Map<String, ?>> Lista = Iem.List_co_aps(idtr);
+                if (Lista.size() > 0) {
+                    String codigo = "";
+                    Map<String, ?> x = Lista.get(0);
+                    codigo = String.valueOf(x.get("aps"));
+                    if (idrol.trim().equals("ROL-0001")| idrol.equals("ROL-0009")) {
+                        html = "                        <div class='form-group'>"
+                                + "                            <label class='control-label col-md-4' for='prepend'> <strong>  Código APS:" + "</strong></label>"
+                                + "                            <div class='col-md-8'>"
+                                + "                                <div class='input-group input-group-sm'>"
+                                + "                                    <div class='icon-addon addon-sm'>"
+                                + "                                        <input type='text' value='" + ((!codigo.equals("null")) ? codigo : "") + "' placeholder='APS' maxlength='6' class='form-control txtCodigoAPS'>"
+                                + "                                        <label for='email' class='glyphicon glyphicon-info-sign' rel='tooltip' title='Escribir código de APS'></label>"
+                                + "                                    </div>"
+                                + "                                    <span class='input-group-btn'>"
+                                + "                                        <button class='btn btn-default btnCodigoAPS' type='button' rel='tooltip' title='Actualizar' ><i class='glyphicon glyphicon-ok'></i></button>"
+                                + "                                    </span>"
+                                + "                                </div>"
+                                + "                            </div>"
+                                + "                        </div>";
+                    } else {
+                        html = "                        <div class='form-group'>"
+                                + "                            <label class='control-label col-md-12' for='prepend'> <strong>  Código APS: </strong>" + ((!codigo.equals("null")) ? codigo : " No registrado") + "</label>"
+                                + "                        </div>";
+                    }
+                } else {
+                    html = "                        <div class='form-group'>"
+                            + "                            <label class='control-label col-md-12' for='prepend'> <strong>  Código APS: </strong>" + (" No registrado") + "</label>"
                             + "                        </div>";
                 }
 

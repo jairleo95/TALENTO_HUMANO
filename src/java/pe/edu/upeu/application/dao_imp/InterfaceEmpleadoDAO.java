@@ -52,4 +52,6 @@ public interface InterfaceEmpleadoDAO {
     public int val_huella(String co_hue);
 
     public List<Map<String, ?>> List_co_huella(String idtr);
+
+    public List<Map<String, ?>> List_co_aps(String idtr);
 }

@@ -47,6 +47,7 @@ public class CAutorizacion extends HttpServlet {
             String ide = (String) sesion.getAttribute("IDPER");
             String idp = (String) sesion.getAttribute("PUESTO_ID");
             String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+            String idrol = (String) sesion.getAttribute("IDROL");
 
             Map<String, Object> rpta = new HashMap<String, Object>();
             String opc = request.getParameter("opc");
@@ -153,6 +154,39 @@ public class CAutorizacion extends HttpServlet {
                         rpta.put("rpta", "1");
                         rpta.put("lista", lista);
                     }
+                    if (opc.equals("ValBtnAutorizacion")) {
+                        String html = "";
+                        String idtr = request.getParameter("trabajador");
+                        if (idrol.trim().equals("ROL-0009")) {
+                            int val_aps = val_aps = e.val_cod_aps_empleado(idtr);
+                            if (val_aps > 0) {
+                                html = "<button class='btn btn-labeled btn-success btn-autor' type='submit'>"
+                                        + "                            <span class='btn-label'><i class='glyphicon glyphicon-ok'></i></span>PROCESAR REQUERIMIENTO "
+                                        + "                        </button>";
+                            } else {
+                                html = "<div class='alert alert-warning fade in'><i class='fa-fw fa fa-warning'></i><strong>Atención!</strong> Usted no puede <strong>AUTORIZAR</strong> el requerimiento, debe primero registrar el <strong>Código APS</strong>.</div>";
+                            }
+                        } else {
+                            if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {
+                                int val_huella = e.val_cod_huella(idtr);
+                                if (val_huella > 0) {
+                                    html = "<button class='btn btn-labeled btn-success btn-autor' type='submit'>"
+                                            + "                            <span class='btn-label'><i class='glyphicon glyphicon-ok'></i></span>AUTORIZAR REQUERIMIENTO "
+                                            + "                        </button>";
+
+                                } else {
+                                    html = "<div class='alert alert-warning fade in'><i class='fa-fw fa fa-warning'></i><strong>Atención!</strong> Usted no puede <strong>AUTORIZAR</strong> el requerimiento, debe primero registrar el <strong>Código de Huella Digital</strong>.</div>";
+                                }
+                            } else {
+                                html = "<button class='btn btn-labeled btn-success btn-autor' type='submit'>"
+                                        + "                            <span class='btn-label'><i class='glyphicon glyphicon-ok'></i></span>AUTORIZAR REQUERIMIENTO "
+                                        + "                        </button>";
+                            }
+                        }
+                        rpta.put("rpta", "1");
+                        rpta.put("data", html);
+                    }
+
                 } else {
 
                     String idpu = e.Id_Puesto_Personal(ide);
