@@ -587,6 +587,10 @@ public class CTrabajador extends HttpServlet {
                 if (opc.equals("reg_trb")) {
                     response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
                 }
+                if (opc.equals("ShowPorcentageTrabajador")) {
+                    String id = request.getParameter("id");
+                    rpta.put("porcentaje", tr.ShowPorcentageTrabajador(id));
+                }
 
             } catch (Exception e) {
                 rpta.put("rpta", "-1");

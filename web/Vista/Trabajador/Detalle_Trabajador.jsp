@@ -1,4 +1,6 @@
 
+<%@page import="pe.edu.upeu.application.dao.TrabajadorDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO"%>
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
@@ -199,10 +201,18 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <center><strong>Datos completados: </strong><br>
-                        <div class="easy-pie-chart txt-color-blue easyPieChart" data-percent="46" data-pie-size="100">
-                            <span class="percent percent-sign txt-color-blue font-lg semi-bold">46</span>
+                    <%
+                        InterfaceTrabajadorDAO iTr = new TrabajadorDAO();
+                        int porcentaje = iTr.ShowPorcentageTrabajador(idtr);
+                    %>
+                    <center><strong>Datos Completados: </strong><br>
+                        <div class="showPorcentage">
+                            <div class="easy-pie-chart txt-color-blue easyPieChart pcDatosCompTrabajador" data-percent="<%=porcentaje%>" data-pie-size="100"  >
+                                <span class="percent percent-sign txt-color-blue font-lg semi-bold spDatosCompTrabajador"><%=porcentaje%></span>
+                            </div>
+
                         </div>
+
                     </center>
                 </div>
             </div>
@@ -219,7 +229,7 @@
                                 Auto_Mostrar a = new Auto_Mostrar();
                                 a = (Auto_Mostrar) List_Auto_mostrar.get(r);
                     %>
-                    <li >
+                    <li  class="active" >
                         <a href="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Datos de Requerimientos</a>
                     </li>
                     <%}
@@ -233,7 +243,7 @@
                     </li>
                     <%}
                         }%>
-                    <li class="active" >
+                    <li >
                         <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
                     </li>
                     <li>
@@ -334,7 +344,7 @@
 
                         <!--INICIO DE  validacion-->
                         <div class="validacionBtnAutorizar"></div><br>
-                        
+
                         <!--fin validacion-->
                         <%}%>
                     </table>
@@ -751,10 +761,19 @@
                 }
             });
         }
+        function porcentaje_datos(trabajador) {
+            $.ajax({
+                url: "../../trabajador", data: "opc=ShowPorcentageTrabajador&id=" + trabajador, type: 'POST', success: function (data, textStatus, jqXHR) {
+                    $('.pcDatosCompTrabajador').data('easyPieChart').update(data.porcentaje);
+                }
+            });
+        }
+
         $(document).ready(function () {
             Listar_Cod_Huella();
             Listar_Cod_APS();
             ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
+            //  porcentaje_datos($(".idtr").val());
             pageSetUp();
             $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
@@ -765,6 +784,13 @@
             });
             validar_shadowbox();
             // $("#cod_ap").numeric();
+
+            setTimeout(function () {
+                document.getElementById('myframe2').onload = function () {
+                    porcentaje_datos($(".idtr").val());
+                };
+            }, 5000);
+
 
             $(".btnCodigoAPS").click(function () {
                 Actualizar_Cod_APS();
@@ -806,7 +832,6 @@
                                     $(".borde").removeClass("ver_foto");
                                     $(".form-subir-foto").remove();
                                     validar_shadowbox();
-
                                     $.smallBox({
                                         title: "¡Felicitaciones!",
                                         content: "<i class='fa fa-clock-o'></i> <i>Su imagen se ha subido con éxito...</i>",

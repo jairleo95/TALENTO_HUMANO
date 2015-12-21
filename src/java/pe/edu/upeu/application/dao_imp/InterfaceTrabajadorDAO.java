@@ -6,6 +6,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.model.Cuenta_Sueldo;
 import pe.edu.upeu.application.model.Trabajador;
 import pe.edu.upeu.application.model.Universidad_Carrera;
@@ -65,10 +66,12 @@ public interface InterfaceTrabajadorDAO {
     public boolean val_nu_doc(String nu_doc);
 
     public String ip();
-    
+
     public String Cod_aps_x_idt(String id_trabajador);
-    
+
     public String Cod_huella_x_idt(String id_trabajador);
-    
+
     public int cod_uni_unico(String cod_uni);
+
+    public int  ShowPorcentageTrabajador(String idtr);
 }
