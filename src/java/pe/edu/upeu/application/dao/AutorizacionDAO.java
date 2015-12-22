@@ -276,7 +276,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     @Override
     public List<V_Autorizar_Dgp> List_id_Autorizacion(String id_aurotizacion, String id_user) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select *  from rhvd_autorizar_dgp where id_puesto='" + id_aurotizacion.trim() + "'";
+        String sql = "select ID_TRABAJADOR, NO_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_PUESTO, NU_PASOS, ID_DGP, CO_PASOS, ID_DETALLE_REQ_PROCESO, DE_PASOS, ID_DEPARTAMENTO, ID_PUESTO, ID_REQUERIMIENTO, ID_TIPO_PLANILLA, NO_REQ, ID_PASOS, NO_USUARIO, ID_USUARIO, NO_SECCION, NO_AREA, FE_CREACION, VAL_PLAZO, AR_FOTO, DE_FOTO, ID_FOTO, NO_AR_FOTO, TA_AR_FOTO, TI_AR_FOTO, VER_LIST_PLAZO, ELAB_CONTRATO, VAL_FIRM_CONTRATO, NO_DEP, MES_CREACION, VAL_COD_APS_EMPLEADO, VAL_COD_HUELLA_EMP, CO_APS, CO_HUELLA_DIGITAL, LI_MOTIVO, ES_MFL, DI_CORREO_PERSONAL, DI_CORREO_INST, VAL_CONTRATO_ADJUNTO  from rhvd_autorizar_dgp where id_puesto='" + id_aurotizacion.trim() + "'";
         sql += (!"".equals(id_user)) ? " and id_usuario='" + id_user.trim() + "'" : "";
         sql += (true) ? " order by fe_creacion " : "";
 
@@ -614,6 +614,46 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("Error al cargar la lista de autorizaciones..." + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
+
+    }
+
+    @Override
+    public List<Map<String, ?>> List_procesar_req() {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select ID_DGP, NO_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_PUESTO, NO_SECCION, NO_AREA, NO_DEP, NO_REQ, ES_ACTIV_SIS_ESTADO, ES_PROC_ASIGNACION_F, ID_TRABAJADOR  from rhvd_req_proc_area_rem";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("iddgp", rs.getString("ID_DGP"));
+                rec.put("nombre", rs.getString("NO_TRABAJADOR"));
+                rec.put("ap_p", rs.getString("ap_paterno"));
+                rec.put("ap_m", rs.getString("AP_MATERNO"));
+                rec.put("puesto", rs.getString("NO_PUESTO"));
+                rec.put("seccion", rs.getString("NO_SECCION"));
+                rec.put("area", rs.getString("NO_AREA"));
+                rec.put("dep", rs.getString("NO_DEP"));
+                rec.put("req", rs.getString("NO_REQ"));
+                rec.put("es_activ_sis", rs.getString("ES_ACTIV_SIS_ESTADO"));
+                rec.put("es_asignacion_f", rs.getString("ES_PROC_ASIGNACION_F"));
+                rec.put("idtr", rs.getString("ID_TRABAJADOR"));
+
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de requerimientos..." + e.getMessage());
         } finally {
             try {
                 this.conn.close();

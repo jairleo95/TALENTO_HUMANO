@@ -187,13 +187,21 @@ public class CAutorizacion extends HttpServlet {
                         rpta.put("data", html);
                     }
 
+                }
+                if (opc.equals("ShowListProcesarReq")) {
+                    List<Map<String, ?>> lista = a.List_procesar_req();
+                    rpta.put("rpta", "1");
+                    rpta.put("lista", lista);
+                }
+
+                if (opc.equals("ListProcesarReq")) {
+
+                    response.sendRedirect("Vista/Dgp/Procesar_Req.jsp");
                 } else {
 
                     String idpu = e.Id_Puesto_Personal(ide);
                     sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
-                    sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                     out.print(a.List_Autorizados(idpu).size());
-                    out.print(idpu);
                     response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
 
                 }
