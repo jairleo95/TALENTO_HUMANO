@@ -189,6 +189,7 @@ public class CAutorizacion extends HttpServlet {
                         rpta.put("data", html);
                     }
                     if (opc.equals("ShowListProcesarReq")) {
+                        boolean tipo = Boolean.parseBoolean(request.getParameter("tipo"));
                         int tipo_usuario = 0;
                         if (idrol.equals("ROL-0009")) {
                             tipo_usuario = 1;
