@@ -44,13 +44,13 @@ public class CAutorizacion extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         InterfaceCorreoDAO correo = new CorreoDAO();
         String iduser = (String) sesion.getAttribute("IDUSER");
+        CCriptografiar cr = new CCriptografiar();
         if (iduser != null) {
 
             String ide = (String) sesion.getAttribute("IDPER");
             String idp = (String) sesion.getAttribute("PUESTO_ID");
             String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
             String idrol = (String) sesion.getAttribute("IDROL");
-
             Map<String, Object> rpta = new HashMap<String, Object>();
             String opc = request.getParameter("opc");
             try {
@@ -189,16 +189,65 @@ public class CAutorizacion extends HttpServlet {
                         rpta.put("data", html);
                     }
                     if (opc.equals("ShowListProcesarReq")) {
-                        List<Map<String, ?>> lista = a.List_procesar_req();
+                        int tipo_usuario = 0;
+                        if (idrol.equals("ROL-0009")) {
+                            tipo_usuario = 1;
+                        } else if (idrol.equals("")) {
+                            tipo_usuario = 2;
+                        } else if (idrol.equals("")) {
+                            tipo_usuario = 3;
+                        }
+                        String html_table = "<table id='dt_basic' class='table table-striped table-bordered table-hover' width='100%'>"
+                                + "<thead><tr>"
+                                + "<th class='hasinput' colspan='6' style='width:95%' ></th> "
+                                + "<th class='hasinput'  ><center><button  class='btn btn-primary btn-circle btn-lg btnAsigFam'><i class='glyphicon glyphicon-ok'></i></button></center></th>"
+                                + " <th class='hasinput' ><center><button  class='btn bg-color-blueDark txt-color-white  btn-circle btn-lg btnActSisEs'><i class='glyphicon glyphicon-ok'></i></button></center></th>"
+                                + "</tr>"
+                                + "  <tr data-hide='phone,tablet'> <th><strong>Nro</strong></th>"
+                                + " <th data-class='expand' ><strong>Apellidos Y Nombres</strong></th>"
+                                + "  <th data-hide='phone,tablet'><strong>Puesto</strong></th>"
+                                + " <th data-hide='phone,tablet'><strong>Area</strong></th>"
+                                + "  <th data-hide='phone,tablet'><strong>Departamento</strong></th>"
+                                + "  <th data-hide='phone,tablet'><strong>Requerimiento</strong></th>"
+                                + " <th  data-hide='phone,tablet'>Asig. Fam.</th> "
+                                + "<th  data-hide='phone,tablet'>Sist. Estado</th>"
+                                + "</tr></thead><tbody class='tbody_procesar_req'> </tbody> </table>";
+                        List<Map<String, ?>> lista = a.List_procesar_req(true, tipo_usuario);
+                        String text_html = "";
+                        for (int i = 0; i < lista.size(); i++) {
+                            Map<String, ?> x = lista.get(i);
+                            //x.get("idtr")  String idtr = cr.Encriptar(x.get("idtr") + "");
+                            text_html += "<tr>";
+                            text_html += "<td>" + (i + 1) + "</td>";
+                            text_html += "<td><a href='../../trabajador?idtr=" + x.get("idtr") + "&opc=list'>" + x.get("ap_p") + " " + x.get("ap_m") + " " + x.get("nombre") + "</a></td>";
+                            text_html += "<td>" + x.get("puesto") + "</td>";
+                            text_html += "<td>" + x.get("area") + "</td>";
+                            text_html += "<td>" + x.get("dep") + "</td>";
+                            text_html += "<td>" + x.get("req") + "</td>";
+                            if (x.get("es_asignacion_f").equals("0")) {
+                                text_html += "<td class='smart-form'><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' class='chkAsigFam" + (i) + "' value='" + x.get("iddgp") + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>";
+                            } else {
+                                text_html += "<td>Si</td>";
+                            }
+                            if (x.get("es_activ_sis").equals("0")) {
+                                text_html += "<td class='smart-form' ><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' class='chkActSistEs" + (i) + "' value='" + x.get("iddgp") + "' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>";
+                            } else {
+                                text_html += "<td>Si</td>";
+                            }
+                            text_html += "</tr>";
+                        }
                         rpta.put("rpta", "1");
-                        rpta.put("lista", lista);
+                        rpta.put("lista", lista.size());
+                        rpta.put("text_html", text_html);
+                        rpta.put("html_table", html_table);
                     }
                     if (opc.equals("ListProcesarReq")) {
                         response.sendRedirect("Vista/Dgp/Procesar_Req.jsp");
                     }
-                    if (opc.equals("UpdateStatusDgp_AsignFam")) {
+                    if (opc.equals("UpdateStatusDgp_Procesar")) {
+                        int tipo = Integer.parseInt(request.getParameter("tipo"));
                         String[] array = request.getParameterValues("json[]");
-                        a.UpdateDgp_EstadoProcesar(array, 1);
+                        a.UpdateDgp_EstadoProcesar(array, tipo);
                         rpta.put("rpta", "1");
                     }
                 } else {

@@ -633,12 +633,22 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public List<Map<String, ?>> List_procesar_req() {
+    public List<Map<String, ?>> List_procesar_req(boolean tipo_list, int tipo_user) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "select ID_DGP, NO_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_PUESTO, NO_SECCION, NO_AREA, NO_DEP, NO_REQ, ES_ACTIV_SIS_ESTADO, ES_PROC_ASIGNACION_F, "
-                    + "ID_TRABAJADOR  from rhvd_req_proc_area_rem";
+                    + "ID_TRABAJADOR  from rhvd_req_proc_area_rem ";
+            if (!tipo_list) {
+                if (tipo_user == 1) {
+                    sql += " where ES_ACTIV_SIS_ESTADO =1 and ES_PROC_ASIGNACION_F=1";
+                } else if (tipo_user == 2) {
+                    sql += " where ES_PROC_ASIGNACION_F=1";
+                } else if (tipo_user == 3) {
+                    sql += " where ES_ACTIV_SIS_ESTADO =1";
+                }
+            }
+
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();

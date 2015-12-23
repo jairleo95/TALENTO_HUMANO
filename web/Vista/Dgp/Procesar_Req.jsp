@@ -197,35 +197,16 @@
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
     <script type="text/javascript">
-        function crear_tabla() {
-            var texto_html = '';
-            texto_html += '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">'
-                    + '<thead><tr>'
-                    + '<th class="hasinput" colspan="6" style="width:95%" ></th> '
-                    + '<th class="hasinput"  ><center><button  class="btn btn-primary btn-circle btn-lg btnAsigFam"><i class="glyphicon glyphicon-ok"></i></button></center></th>'
-                    + ' <th class="hasinput" ><center><button  class="btn bg-color-blueDark txt-color-white  btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button></center></th>'
-                    + '</tr>'
-                    + '  <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>'
-                    + '  <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>'
-                    + '  <th data-hide="phone,tablet"><strong>Puesto</strong></th>'
-                    + '  <th data-hide="phone,tablet"><strong>Area</strong></th>'
-                    + '  <th data-hide="phone,tablet"><strong>Departamento</strong></th>'
-                    + '  <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>'
-                    + ' <th  data-hide="phone,tablet">Asig. Fam.</th> '
-                    + '<th  data-hide="phone,tablet">Sist. Estado</th>'
-                    + '</tr></thead><tbody class="tbody_procesar_req"> </tbody> </table>';
-            $('.imprimir_tabla').empty();
-            $('.imprimir_tabla').append(texto_html);
-        }
+
         function reload_table() {
             var breakpointDefinition = {
                 tablet: 1024,
                 phone: 480
             };
             var responsiveHelper_dt_basic = undefined;
-            var responsiveHelper_datatable_fixed_column = undefined;
-            var responsiveHelper_datatable_col_reorder = undefined;
-            var responsiveHelper_datatable_tabletools = undefined;
+            /*  var responsiveHelper_datatable_fixed_column = undefined;
+             var responsiveHelper_datatable_col_reorder = undefined;
+             var responsiveHelper_datatable_tabletools = undefined;*/
 
             var otable = $('#dt_basic').dataTable({
                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
@@ -251,87 +232,117 @@
                 otable.column($(this).parent().index() + ':visible').search(this.value).draw();
             });
         }
+        function procesar_lista(lista, tipo) {
+            var array_id_dgp = [];
+            var pos = 0;
+            var url = (tipo === 1) ? "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo=1" : "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo=2";
+            if (tipo === 1) {
+                for (var i = 0, max = lista; i < max; i++) {
+                    if ($(".chkAsigFam" + i).prop('checked')) {
+                        array_id_dgp[pos] = $(".chkAsigFam" + i).val();
+                        pos++;
+                    }
+                }
+            } else if (tipo === 2) {
+                for (var i = 0, max = lista; i < max; i++) {
+                    if ($(".chkActSistEs" + i).prop('checked')) {
+                        array_id_dgp[pos] = $(".chkActSistEs" + i).val();
+                        pos++;
+                    }
+                }
+            }
+
+            if (array_id_dgp.length > 0) {
+                //alert()
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: {json: array_id_dgp},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.rpta == "1") {
+                            $.SmartMessageBox({
+                                title: "¡Atención!",
+                                content: "¿Está seguro de procesar " + array_id_dgp.length + " requerimiento(s)?",
+                                buttons: '[No][Si]'
+                            }, function (ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+                                    listar_autorizados();
+                                    $.smallBox({
+                                        title: "Se ha procesado correctamente los requerimientos...",
+                                        content: "<i class='fa fa-clock-o'></i> <i>2 segundos atras...</i>",
+                                        color: "#296191",
+                                        iconSmall: "fa fa-thumbs-up bounce animated",
+                                        timeout: 4000
+                                    });
+                                }
+
+                            });
+                        } else {
+                            $.smallBox({
+                                title: "¡Atención!",
+                                content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar los requerimientos...</i>",
+                                color: "#C46A69",
+                                iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                timeout: 4000
+                            });
+                        }
+
+
+                    },
+                    error: function () {
+                        $.smallBox({
+                            title: "¡Atención!",
+                            content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar los requerimientos...</i>",
+                            color: "#C46A69",
+                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                            timeout: 4000
+                        });
+
+                    }
+                });
+            }
+        }
         function listar_autorizados() {
-            var text_html = "";
+            // var text_html = "";
             $.post("../../autorizacion", "opc=ShowListProcesarReq", function (objJson) {
                 var lista = objJson.lista;
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
-                } else {
-                    for (var i = 0; i < lista.length; i++) {
-                        text_html += "<tr>";
-                        text_html += "<td>" + (i + 1) + "</td>";
-                        text_html += "<td>" + lista[i].ap_p + " " + lista[i].ap_m + " " + lista[i].nombre + "</td>";
-                        text_html += "<td>" + lista[i].puesto + "</td>";
-                        text_html += "<td>" + lista[i].area + "</td>";
-                        text_html += "<td>" + lista[i].dep + "</td>";
-                        text_html += "<td>" + lista[i].req + "</td>";
-                        if (lista[i].es_asignacion_f == "0") {
-                            text_html += "<td class='smart-form'><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' id='chkAsigFam" + (i) + "' value='" + lista[i].iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>";
-                        } else {
-                            text_html += "<td>Si</td>";
-                        }
-                        if (lista[i].es_activ_sis == "0") {
-                            text_html += "<td class='smart-form' ><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>";
-                        } else {
-                            text_html += "<td>" + lista[i].es_activ_sis + "</td>";
-                        }
-                        text_html += "</tr>";
-
-                    }
+                } else {/*
+                 for (var i = 0; i < lista.length; i++) {
+                 text_html += "<tr>";
+                 text_html += "<td>" + (i + 1) + "</td>";
+                 text_html += "<td><a href='../../trabajador?idtr=" + lista[i].idtr + "&opc=list'>" + lista[i].ap_p + " " + lista[i].ap_m + " " + lista[i].nombre + "</a></td>";
+                 text_html += "<td>" + lista[i].puesto + "</td>";
+                 text_html += "<td>" + lista[i].area + "</td>";
+                 text_html += "<td>" + lista[i].dep + "</td>";
+                 text_html += "<td>" + lista[i].req + "</td>";
+                 if (lista[i].es_asignacion_f == "0") {
+                 text_html += "<td class='smart-form'><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' class='chkAsigFam" + (i) + "' value='" + lista[i].iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>";
+                 } else {
+                 text_html += "<td>Si</td>";
+                 }
+                 if (lista[i].es_activ_sis == "0") {
+                 text_html += "<td class='smart-form' ><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' class='chkActSistEs" + (i) + "' value='" + lista[i].iddgp + "' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>";
+                 } else {
+                 text_html += "<td>Si</td>";
+                 }
+                 text_html += "</tr>";
+                 
+                 }*/
+                    $('.imprimir_tabla').empty();
+                    $('.imprimir_tabla').append(objJson.html_table);
+                    $(".tbody_procesar_req").append(objJson.text_html);
+                    $(".btnAsigFam").click(function () {
+                        procesar_lista(lista, 1);
+                    });
+                    $(".btnActSisEs").click(function () {
+                        procesar_lista(lista, 2);
+                    });
+                    reload_table();
                 }
-                crear_tabla();
-                $(".tbody_procesar_req").append(text_html);
-
-                text_html = "";
-                $(".btnAsigFam").click(function () {
-                    var array_id_dgp = [];
-                    var pos = 0;
-                    for (var i = 0, max = lista.length; i < max; i++) {
-                        if ($("#chkAsigFam" + i).prop('checked')) {
-                            array_id_dgp[pos] = $("#chkAsigFam" + i).val();
-                            pos++;
-                        }
-                    }
-                    if (array_id_dgp.length > 0) {
-                        $.ajax({
-                            url: "../../autorizacion?opc=UpdateStatusDgp_AsignFam",
-                            type: "POST",
-                            data: {json: array_id_dgp},
-                            dataType: 'json',
-                            success: function (data) {
-                                listar_autorizados();
-
-                                $.SmartMessageBox({
-                                    title: "Smart Alert!",
-                                    content: "This is a confirmation box. Can be programmed for button callback",
-                                    buttons: '[No][Si]'
-                                }, function (ButtonPressed) {
-                                    if (ButtonPressed === "Si") {
-                                        $.smallBox({
-                                            title: "Se ha autorizado un requerimiento...",
-                                            content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-                                            color: "#296191",
-                                            iconSmall: "fa fa-thumbs-up bounce animated",
-                                            timeout: 4000
-                                        });
-                                    }
-
-                                });
-
-
-
-                            },
-                            error: function () {
-
-                            }
-                        });
-                    }
-
-                });
-                reload_table();
-
             });
         }
         $(document).ready(function () {

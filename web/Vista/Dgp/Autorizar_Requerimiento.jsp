@@ -648,7 +648,7 @@
                         // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
                     }
                     catch (err) {
-                        alert(err.message);
+                     
                     } finally {
                     }
                 }
