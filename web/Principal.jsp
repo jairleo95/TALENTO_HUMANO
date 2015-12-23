@@ -337,15 +337,15 @@
                     <div class="avatar-user col-md-3">
                         <a href="javascript:void(0);" id="show-shortcut" >
                             <% if (sesion.getAttribute("AR_FOTO") != null) {%>
-                            <img src="Vista/Usuario/Fotos/<%out.println(sesion.getAttribute("AR_FOTO")); %>" alt="me" class="online" />
+                            <img src="Vista/Usuario/Fotos/<%out.println(sesion.getAttribute("AR_FOTO")); %>"  />
                             <%} else {%>
-                            <img src="imagenes/avatar_default.jpg" alt="me" class="online" />
+                            <img src="imagenes/avatar_default.jpg"  />
                             <%}%>
                         </a>  
                     </div>
                     <div class="col-md-9">
-                        <div class="login-info text-center">
-                            <span> <%out.println((String) sesion.getAttribute("USER")); %></span>  
+                        <div class="login-info text-right">
+                            <span class="spanuser"> <%out.println((String) sesion.getAttribute("USER")); %></span>  
                         </div>
 
                         <div class="login-info text-right">
@@ -355,7 +355,7 @@
                 </div>
 
             </div>
-            <div class="login-info text-center"></div>
+            
 
             <!-- end user info -->
 
