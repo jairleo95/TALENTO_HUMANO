@@ -198,11 +198,9 @@
                                             </thead>
                                             <tbody> 
                                                 <%
-                                                    String iddgp = request.getParameter("iddgp");
-                                                    String idtr = request.getParameter("idtr");
                                                     int num_cod_aps = 0;
                                                     int num_cod_huella = 0;
-                                                    InterfaceDgpDAO dgp = new DgpDAO();
+                                                 //   InterfaceDgpDAO dgp = new DgpDAO();
                                                     if (t == 0) {
                                                 %>
                                                 <!-- <tr><td colspan="9" align="center"><h3>No hay ningún DGP por autorizar...</h3></td></tr>-->
@@ -234,7 +232,7 @@
                                                                 <li>
                                                                 <li>
                                                                     <%
-                                                                        int num = dgp.VALIDAR_DGP_CONTR(a.getId_dgp(), a.getId_trabajador());
+                                                                        int num = a.getVal_dgp_cotrato();
                                                                     %>
                                                                     <a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>">
                                                                         <%
@@ -607,7 +605,7 @@
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
                     for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
-                        if ($(".env_rem" + i).prop('checked')) {
+                            if ($(".env_rem" + i).prop('checked')) {
                             $.ajax({
                                 url: "../../autorizacion",
                                 type: "POST",
@@ -650,7 +648,7 @@
                         // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
                     }
                     catch (err) {
-                        alert(err.message);
+                     
                     } finally {
                     }
                 }

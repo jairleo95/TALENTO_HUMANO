@@ -53,6 +53,15 @@ public class V_Autorizar_Dgp {
     private String di_correo_personal;
     private String di_correo_inst;
     private int val_contrato_adjunto;
+    private int val_dgp_cotrato;
+
+    public int getVal_dgp_cotrato() {
+        return val_dgp_cotrato;
+    }
+
+    public void setVal_dgp_cotrato(int val_dgp_cotrato) {
+        this.val_dgp_cotrato = val_dgp_cotrato;
+    }
 
     public int getVal_contrato_adjunto() {
         return val_contrato_adjunto;
@@ -148,7 +157,7 @@ public class V_Autorizar_Dgp {
             String id_requerimiento, String id_tipo_planilla, String no_req, String id_pasos, String no_usuario, String id_usuario, String no_seccion, String no_area,
             String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, String ti_ar_foto, String fe_creacion, int val_plazo, String ver_list_plazo,
             String elab_contrato, String val_firm_contrato, String no_dep, String mes_creacion, int val_cod_aps_empleado, int val_cod_huella, int co_aps, int co_huella_digital,
-            String li_motivo, String es_mfl, String di_correo_personal, String di_correo_inst, String fe_autorizacion, int val_contrato_adjunto) {
+            String li_motivo, String es_mfl, String di_correo_personal, String di_correo_inst, String fe_autorizacion, int val_contrato_adjunto, int val_dgp_cotrato) {
         this.id_trabajador = id_trabajador;
         this.no_trabajador = no_trabajador;
         this.ap_paterno = ap_paterno;
@@ -192,6 +201,7 @@ public class V_Autorizar_Dgp {
         this.di_correo_personal = di_correo_personal;
         this.di_correo_inst = di_correo_inst;
         this.val_contrato_adjunto = val_contrato_adjunto;
+        this.val_dgp_cotrato = val_dgp_cotrato;
     }
 
     public V_Autorizar_Dgp() {
@@ -238,6 +248,7 @@ public class V_Autorizar_Dgp {
         this.di_correo_personal = "";
         this.di_correo_inst = "";
         this.val_contrato_adjunto = 0;
+        this.val_dgp_cotrato = 0;
     }
 
     public int getCo_aps() {

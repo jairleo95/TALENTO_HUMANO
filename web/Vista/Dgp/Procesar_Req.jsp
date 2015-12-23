@@ -65,7 +65,7 @@
                             <div id="alerta_dgp">
                             </div>
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-blue" id="wid-id-1" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-blue" id="wid-id-1" data-widget-editbutton="false"  data-widget-deletebutton="false">
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -185,7 +185,7 @@
     <script src="../../js/app.min.js"></script>
 
     <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT
-    <!-- Voice command : plugin -->
+    <!-- Voice command : plugin 
     <script src="../../js/speech/voicecommand.min.js"></script> -->
 
     <!-- PAGE RELATED PLUGIN(S) 
@@ -196,121 +196,153 @@
     <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-
-    <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script type="text/javascript">
-        var año = '';
-        var mes = '';
-        function crear_tabla() {
-            var texto_html = '';
-            texto_html += '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">'
-                    + '<thead><tr><th class="hasinput"></th>'
-                    + '<th class="hasinput icon-addon" style="width:100px"><input   placeholder="Fecha" class="form-control filtrar_fecha">'
-                    + ' <label for="dateselect_filter" class="glyphicon glyphicon-calendar no-margin padding-top-15" rel="tooltip" title="" data-original-title="Filter Date"></label>'
-                    + '  </th> <th class="hasinput" style="width:16%"><input type="text" class="form-control" placeholder="Filtrar por nombre" /></th>'
-                    + '<th class="hasinput" style="width:18%"><input type="text" class="form-control" placeholder="Filtrar por puesto" /> </th>'
-                    + '<th class="hasinput" style="width:18%"><input type="text" class="form-control" placeholder="Filtrar por area" /> </th>'
-                    + '<th class="hasinput" style="width:16%"><input type="text" class="form-control" placeholder="Filtrar por departamento" /></th>'
-                    + '<th class="hasinput" style="width:20%" > </th>'
-                    + ' <th class="hasinput" ></th>'
-                    + '  <th class="hasinput"></th>'
-                    + ' <th class="hasinput" > </th>'
-                    + ' <th class="hasinput" ></th></tr>'
-                    + '  <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>'
-                    + '<th ><strong>MES PROCESADO</strong></th>'
-                    + '  <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>'
-                    + '  <th data-hide="phone,tablet"><strong>Puesto</strong></th>'
-                    + '  <th data-hide="phone,tablet"><strong>Area</strong></th>'
-                    + '  <th data-hide="phone,tablet"><strong>Departamento</strong></th>'
-                    + '  <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>'
-                    + ' <th  data-hide="phone,tablet">Fecha de Creación</th> '
-                    + '<th  data-hide="phone,tablet">Fecha de Autorización</th>'
-                    + ' <th  data-hide="phone,tablet">Motivo</th>'
-                    + ' <th  data-hide="phone,tablet">MFL</th>  </tr>'
-                    + '</thead><tbody class="tbody_procesar_req"> </tbody> </table>';
-            $('.imprimir_tabla').empty();
-            $('.imprimir_tabla').append(texto_html);
-            $('.filtrar_fecha').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                dateFormat: 'MM yy',
-                prevText: '<i class="fa fa-chevron-left"></i>',
-                nextText: '<i class="fa fa-chevron-right"></i>',
-                onClose: function (dateText, inst) {
-                    filtrar_mes_año()
-                }
-            });
-            $('.filtrar_fecha').datepicker('setDate', new Date());
-        }
 
         function reload_table() {
-            var responsiveHelper_datatable_fixed_column = undefined;
             var breakpointDefinition = {
                 tablet: 1024,
                 phone: 480
             };
-            var otable = $('#dt_basic').DataTable({
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
+            var responsiveHelper_dt_basic = undefined;
+            /*  var responsiveHelper_datatable_fixed_column = undefined;
+             var responsiveHelper_datatable_col_reorder = undefined;
+             var responsiveHelper_datatable_tabletools = undefined;*/
+
+            var otable = $('#dt_basic').dataTable({
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
                         "t" +
                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                 "autoWidth": true,
                 "preDrawCallback": function () {
                     // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_datatable_fixed_column) {
-                        responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                    if (!responsiveHelper_dt_basic) {
+                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
                     }
                 },
                 "rowCallback": function (nRow) {
-                    responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
+                    responsiveHelper_dt_basic.createExpandIcon(nRow);
                 },
                 "drawCallback": function (oSettings) {
-                    responsiveHelper_datatable_fixed_column.respond();
+                    responsiveHelper_dt_basic.respond();
                 }
-
             });
+
             // Apply the filter
             $("#dt_basic thead th input[type=text]").on('keyup change', function () {
                 otable.column($(this).parent().index() + ':visible').search(this.value).draw();
             });
         }
+        function procesar_lista(lista, tipo) {
+            var array_id_dgp = [];
+            var pos = 0;
+            var url = (tipo === 1) ? "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo=1" : "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo=2";
+            if (tipo === 1) {
+                for (var i = 0, max = lista; i < max; i++) {
+                    if ($(".chkAsigFam" + i).prop('checked')) {
+                        array_id_dgp[pos] = $(".chkAsigFam" + i).val();
+                        pos++;
+                    }
+                }
+            } else if (tipo === 2) {
+                for (var i = 0, max = lista; i < max; i++) {
+                    if ($(".chkActSistEs" + i).prop('checked')) {
+                        array_id_dgp[pos] = $(".chkActSistEs" + i).val();
+                        pos++;
+                    }
+                }
+            }
+
+            if (array_id_dgp.length > 0) {
+                //alert()
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: {json: array_id_dgp},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.rpta == "1") {
+                            $.SmartMessageBox({
+                                title: "¡Atención!",
+                                content: "¿Está seguro de procesar " + array_id_dgp.length + " requerimiento(s)?",
+                                buttons: '[No][Si]'
+                            }, function (ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+                                    listar_autorizados();
+                                    $.smallBox({
+                                        title: "Se ha procesado correctamente los requerimientos...",
+                                        content: "<i class='fa fa-clock-o'></i> <i>2 segundos atras...</i>",
+                                        color: "#296191",
+                                        iconSmall: "fa fa-thumbs-up bounce animated",
+                                        timeout: 4000
+                                    });
+                                }
+
+                            });
+                        } else {
+                            $.smallBox({
+                                title: "¡Atención!",
+                                content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar los requerimientos...</i>",
+                                color: "#C46A69",
+                                iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                timeout: 4000
+                            });
+                        }
+
+
+                    },
+                    error: function () {
+                        $.smallBox({
+                            title: "¡Atención!",
+                            content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar los requerimientos...</i>",
+                            color: "#C46A69",
+                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                            timeout: 4000
+                        });
+
+                    }
+                });
+            }
+        }
         function listar_autorizados() {
-            var text_html = "";
+            // var text_html = "";
             $.post("../../autorizacion", "opc=ShowListProcesarReq", function (objJson) {
                 var lista = objJson.lista;
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
-                } else {
-                    for (var i = 0; i < lista.length; i++) {
-                        text_html += "<tr>";
-                        text_html += "<td>" + (i+1) + "</td>";
-                        text_html += "<td>" + lista[i].mes_año_aut + "</td>";
-                        text_html += "<td>" + lista[i].ap_p + " " + lista[i].ap_m + " " + lista[i].nombre + "</td>";
-                        text_html += "<td>" + lista[i].puesto + "</td>";
-                        text_html += "<td>" + lista[i].area + "</td>";
-                        text_html += "<td>" + lista[i].dep + "</td>";
-                        text_html += "<td>" + lista[i].req + "</td>";
-                        text_html += "<td>" + lista[i].fecha_c + "</td>";
-                        text_html += "<td>" + lista[i].fecha_aut + "</td>";
-                        if (lista[i].motivo == '1') {
-                            text_html += "<td>Trabajador Nuevo</td>";
-                        } else if (lista[i].motivo == '2') {
-                            text_html += "<td>Renovación</td>";
-                        }
-                        if (lista[i].mfl == '0') {
-                            text_html += "<td>No</td>";
-                        } else if (lista[i].mfl == '1') {
-                            text_html += "<td>Si</td>";
-                        }
-                        text_html += "</tr>";
-                    }
+                } else {/*
+                 for (var i = 0; i < lista.length; i++) {
+                 text_html += "<tr>";
+                 text_html += "<td>" + (i + 1) + "</td>";
+                 text_html += "<td><a href='../../trabajador?idtr=" + lista[i].idtr + "&opc=list'>" + lista[i].ap_p + " " + lista[i].ap_m + " " + lista[i].nombre + "</a></td>";
+                 text_html += "<td>" + lista[i].puesto + "</td>";
+                 text_html += "<td>" + lista[i].area + "</td>";
+                 text_html += "<td>" + lista[i].dep + "</td>";
+                 text_html += "<td>" + lista[i].req + "</td>";
+                 if (lista[i].es_asignacion_f == "0") {
+                 text_html += "<td class='smart-form'><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' class='chkAsigFam" + (i) + "' value='" + lista[i].iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>";
+                 } else {
+                 text_html += "<td>Si</td>";
+                 }
+                 if (lista[i].es_activ_sis == "0") {
+                 text_html += "<td class='smart-form' ><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' class='chkActSistEs" + (i) + "' value='" + lista[i].iddgp + "' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>";
+                 } else {
+                 text_html += "<td>Si</td>";
+                 }
+                 text_html += "</tr>";
+                 
+                 }*/
+                    $('.imprimir_tabla').empty();
+                    $('.imprimir_tabla').append(objJson.html_table);
+                    $(".tbody_procesar_req").append(objJson.text_html);
+                    $(".btnAsigFam").click(function () {
+                        procesar_lista(lista, 1);
+                    });
+                    $(".btnActSisEs").click(function () {
+                        procesar_lista(lista, 2);
+                    });
+                    reload_table();
                 }
-                crear_tabla();
-                $(".tbody_procesar_req").append(text_html);
-                text_html = "";
-                reload_table();
-
             });
         }
         $(document).ready(function () {
@@ -318,9 +350,7 @@
             $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
-            $(".cod_aps").numeric();
-
-            //listar_autorizados(mes, año);
+            listar_autorizados();
 
         })
 

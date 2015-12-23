@@ -13,30 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import pe.edu.upeu.application.dao.ContratoDAO;
-import pe.edu.upeu.application.dao.DgpDAO;
-import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.Plazo_DgpDAO;
-import pe.edu.upeu.application.dao.PuestoDAO;
-import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao.RolDAO;
-import pe.edu.upeu.application.dao.UbigeoDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlazo_DgpDAO;
-import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRolDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 import pe.edu.upeu.application.model.V_Usuario;
 
-/**
- *
- * @author Docente
- */
 public class Cindex extends HttpServlet {
 
     InterfaceUsuarioDAO us = new UsuarioDAO();
@@ -50,14 +34,6 @@ public class Cindex extends HttpServlet {
         String Usuario = request.getParameter("username");
         String Clave = request.getParameter("clave");
         InterfaceRolDAO Irol = new RolDAO();
-        //   InterfaceListaDAO li = new ListaDAO();
-        //   InterfaceDgpDAO dgp = new DgpDAO();
-        // InterfaceUbigeoDAO ub = new UbigeoDAO();
-        //  InterfaceTrabajadorDAO tr = new TrabajadorDAO();
-       /* InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
-         InterfacePuestoDAO pu = new PuestoDAO();*/
-        InterfaceDgpDAO dgp = new DgpDAO();
-        InterfaceContratoDAO cto = new ContratoDAO();
         InterfacePlazo_DgpDAO pl = new Plazo_DgpDAO();
 
         if (Usuario.equals("") && Clave.equals("")) {
@@ -88,18 +64,24 @@ public class Cindex extends HttpServlet {
                 sesion.setAttribute("NOMBRE_AP", user.getAp_paterno() + " " + user.getAp_materno() + " " + user.getNo_trabajador());
             }
             sesion.setAttribute("LIST_MODULO", Irol.LISTAR_MODULOS(user.getId_rol()));
-             pl.Validar_Cumplimiento_plazo_t2();
-            pl.Validar_Cumplimiento_plazo_t1();
-            //esta funcion valida los procesos de dgp se terminen cuando esten en el ultimo paso
-            dgp.VAL_DGP_PASOS();
+            /*FALTA VALIDAR ESTOS DOS PROCEDIMIENTOS*/
+            //   pl.Validar_Cumplimiento_plazo_t2();
+            // pl.Validar_Cumplimiento_plazo_t1();
+            
+            
+            //esta funcion valida los procesos de dgp se terminen cuando esten en el ultimo paso(SE PUSO EN UN JOB de cada 60 minutos)
+          //  dgp.VAL_DGP_PASOS();
+            
             // cto.VALIDAR_FE_CESE_CON();
 
             //validacion es lo mismo que Val_Es_Plazo();
             //pl.validar_Vig_plazos();
             //it's ok
-            pl.Val_Es_Plazo();
+            /*este procedimiento se puso en un job cada un dia de intervalo*/
+            //pl.Val_Es_Plazo();
 
-            cto.VALIDAR_FE_HASTA_CON();
+            /*este procedmiento se puso en un job de cada un dia de intervalo*/
+          //  cto.VALIDAR_FE_HASTA_CON();
             response.sendRedirect("menu");
             out.print("EXITO!");
         } else {
@@ -110,6 +92,6 @@ public class Cindex extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }
