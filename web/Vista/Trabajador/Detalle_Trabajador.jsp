@@ -85,6 +85,16 @@
                 border-style:none;            
             }
 
+              .ui-progressbar {
+             position: relative;
+                 }
+             .progress-label {
+               position: absolute;
+                left: 50%;
+                top: 4px;
+                font-weight: bold;
+                text-shadow: 1px 1px 0 #fff;
+              }
         </style>
     </head>
     <%          if (request.getParameter("ms") != null) {
@@ -145,15 +155,20 @@
             <div class="row" style="padding-bottom: 10px;">
                 <div class="col-md-4">
                     <div class="media">
+                        <!--  upload foto -->
                         <%if (t.getNo_ar_foto() == null) {%>
                         <a class="a_foto pull-left"> <img  class="ver_foto media-object"  src="../../imagenes/avatar_default.jpg"  width="100"  height="100"> </a>
                         <form action="../../foto" method="POST" enctype="multipart/form-data" class="form-subir-foto">
                             <input type="hidden" name="idtr" class="idtr" id="input-file" value="<%=t.getId_trabajador()%>">
                             <input style="display:none" class="file-foto" type="file" name="archivo" required="">
                         </form>
+                        <div style="display:none" id="progressbar"><div class="progress-label">Loading...</div></div>
+                        <div style="display:none" class="guardar-img">
+                            <button class="btn btn-xs btn-success">Guargar Imagen</button>
+                        </div>
                         <%} else {%>
                         <a class="mustang-gallery pull-left" title="<%=t.getAr_foto()%>"  href="../Usuario/Fotos/<%=t.getAr_foto()%>" ><img  src="../Usuario/Fotos/<%=t.getAr_foto()%>" class="borde" width="100" height="100" ></a>
-                            <%}%>
+                        <%}%>
                         <div class="media-body">
                             <%
                                 CConversion c = new CConversion();
@@ -578,6 +593,7 @@
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript" src="../../js/shadowbox/demo.js"></script>
         <script type="text/javascript" src="../../js/shadowbox/shadowbox.js"></script>
+        <script src="../../js/upload-foto/upload-foto.js" type="text/javascript"></script>
         <script>
         function closedthis() {
             $.smallBox({
@@ -723,8 +739,38 @@
             reader.readAsDataURL(file);
         }
         function fileOnload(e) {
-            var result = e.target.result;
-            //  $('.ver_foto').attr("src", result);
+           var result = e.target.result
+            $(function() {
+              $("#progressbar").show(200);
+                var progressbar = $( "#progressbar" ),
+                progressLabel = $( ".progress-label" );
+
+                progressbar.progressbar({
+                value: false,
+                change: function() {
+                progressLabel.text( progressbar.progressbar( "value" ) + "%" );
+                },
+                complete: function() {
+                progressLabel.text( "Complete!" );
+                $("#progressbar").hide(200);
+              }
+            });
+
+            function progress() {
+              var val = progressbar.progressbar( "value" ) || 0;
+
+              progressbar.progressbar( "value", val + 2 );
+
+              if ( val < 99 ) {
+                setTimeout( progress, 68 );
+              }
+            }
+
+            setTimeout( progress, 100 );
+          });
+            // $('.ver_foto').attr("src", result);
+            
+            
         }
         function validar_shadowbox() {
             $.each($(".mustang-gallery"), function () {
@@ -799,6 +845,7 @@
             $('.ver_foto').click(function () {
                 $(".file-foto").click();
             });
+            
             $('.file-foto').change(function (e) {
                 var t = e;
                 if (this.files[0].size <= 500000) {
@@ -837,9 +884,9 @@
                                         content: "<i class='fa fa-clock-o'></i> <i>Su imagen se ha subido con éxito...</i>",
                                         color: "#296191",
                                         iconSmall: "fa fa-cloud bounce animated",
-                                        timeout: 7000
+                                        timeout: 6000
                                     });
-                                }, 3000);
+                                }, 4000);
                             }
                         }
                     }).fail(function (objJson) {
