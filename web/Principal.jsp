@@ -26,7 +26,7 @@
         <meta http-equiv="Pragma" content="no-cache" />
 
 
-
+        <link href="css/your_style.css" rel="stylesheet" type="text/css"/>
         <!-- Basic Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
@@ -332,24 +332,31 @@
         <aside id="left-panel">
 
             <!-- User info -->
-            <div class="login-info">
-                <span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
+            <div class="logininfo">
+                <div class="row">
+                    <div class="avatar-user col-md-3">
+                        <a href="javascript:void(0);" id="show-shortcut" >
+                            <% if (sesion.getAttribute("AR_FOTO") != null) {%>
+                            <img src="Vista/Usuario/Fotos/<%out.println(sesion.getAttribute("AR_FOTO")); %>" alt="me" class="online" />
+                            <%} else {%>
+                            <img src="imagenes/avatar_default.jpg" alt="me" class="online" />
+                            <%}%>
+                        </a>  
+                    </div>
+                    <div class="col-md-9">
+                        <div class="login-info text-center">
+                            <span> <%out.println((String) sesion.getAttribute("USER")); %></span>  
+                        </div>
 
-                    <a href="javascript:void(0);" id="show-shortcut" >
-                        <img src="imagenes/avatar_default.jpg" alt="me" class="online" /> 
-                        <span>
-                            <%out.println((String) sesion.getAttribute("USER")); %>  
-                        </span>
-
-
-
-                    </a> 
-                </span>
+                        <div class="login-info text-right">
+                            <span ><%out.println((String) sesion.getAttribute("NOMBRE_AP")); %> </span> 
+                        </div>
+                    </div>
+                </div>
 
             </div>
-            <div class="login-info text-center">
-                <span ><%out.println((String) sesion.getAttribute("NOMBRE_AP")); %> </span> 
-            </div>
+            <div class="login-info text-center"></div>
+
             <!-- end user info -->
 
             <!-- NAVIGATION : This navigation is also responsive
@@ -419,7 +426,7 @@
                 </ul>
 
             </nav>
-            <span class="minifyme" data-action="minifyMenu">
+            <span id="btn-ocultar" class="minifyme" data-action="minifyMenu">
                 <i class="fa fa-arrow-circle-left hit"></i> 
             </span>
 
@@ -658,6 +665,7 @@
         <script src="js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>-->
 
         <script>
+            var btnclose = 0;
         document.oncontextmenu = function () {
             return false;
         }
@@ -716,6 +724,16 @@
 
         });
 
+         $("#btn-ocultar").click(function (){
+             if(btnclose == 0){
+                 $(".logininfo").css({display : "none"});
+                 btnclose +=1;
+             }else{
+                 $(".logininfo").css({display : "block"});
+                 btnclose = 0;
+             }
+             
+         });
         </script>
     </body>
 

@@ -48,10 +48,18 @@
                                             border-width:8px;
                                         }
                                         .todoc{outline: none;}
-                                        .avatart.img{
-                                            margin-top: 0px;
-                                            float:  5px , 0px ;
+                                        .txt_mensaje{
+                                            width:550px;
+                                            height: 70px;
+                                            max-width: 550px;
+                                            border-radius: 5px;
+                                            border: solid 1px #0c95be;
+                                        }
+                                        .avatar-user img{
+                                            margin-top: 8px;
+                                            position: absolute;
                                             border-radius: 50%;
-                                            
-                                            
+                                            height: 80px;
+                                            width: 80px;
+                                            z-index: 1;
                                         }
