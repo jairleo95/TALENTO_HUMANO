@@ -185,7 +185,7 @@
     <script src="../../js/app.min.js"></script>
 
     <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT
-    <!-- Voice command : plugin -->
+    <!-- Voice command : plugin 
     <script src="../../js/speech/voicecommand.min.js"></script> -->
 
     <!-- PAGE RELATED PLUGIN(S) 
@@ -196,54 +196,27 @@
     <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-
-    <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script type="text/javascript">
-        var año = '';
-        var mes = '';
         function crear_tabla() {
             var texto_html = '';
             texto_html += '<table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">'
-                    + '<thead><tr><th class="hasinput"></th>'
-                    + '<th class="hasinput icon-addon" style="width:100px"><input   placeholder="Fecha" class="form-control filtrar_fecha">'
-                    + ' <label for="dateselect_filter" class="glyphicon glyphicon-calendar no-margin padding-top-15" rel="tooltip" title="" data-original-title="Filter Date"></label>'
-                    + '  </th> <th class="hasinput" style="width:16%"><input type="text" class="form-control" placeholder="Filtrar por nombre" /></th>'
-                    + '<th class="hasinput" style="width:18%"><input type="text" class="form-control" placeholder="Filtrar por puesto" /> </th>'
-                    + '<th class="hasinput" style="width:18%"><input type="text" class="form-control" placeholder="Filtrar por area" /> </th>'
-                    + '<th class="hasinput" style="width:16%"><input type="text" class="form-control" placeholder="Filtrar por departamento" /></th>'
-                    + '<th class="hasinput" style="width:20%" > </th>'
-                    + ' <th class="hasinput" ></th>'
-                    + '  <th class="hasinput"></th>'
-                    + ' <th class="hasinput" > </th>'
-                    + ' <th class="hasinput" ></th></tr>'
+                    + '<thead><tr>'
+                    + '<th class="hasinput" colspan="6" style="width:95%" ></th> '
+                    + '<th class="hasinput"  ><center><button  class="btn btn-primary btn-circle btn-lg btnAsigFam"><i class="glyphicon glyphicon-ok"></i></button></center></th>'
+                    + ' <th class="hasinput" ><center><button  class="btn bg-color-blueDark txt-color-white  btn-circle btn-lg"><i class="glyphicon glyphicon-ok"></i></button></center></th>'
+                    + '</tr>'
                     + '  <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>'
-                    + '<th ><strong>MES PROCESADO</strong></th>'
                     + '  <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>'
                     + '  <th data-hide="phone,tablet"><strong>Puesto</strong></th>'
                     + '  <th data-hide="phone,tablet"><strong>Area</strong></th>'
                     + '  <th data-hide="phone,tablet"><strong>Departamento</strong></th>'
                     + '  <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>'
-                    + ' <th  data-hide="phone,tablet">Fecha de Creación</th> '
-                    + '<th  data-hide="phone,tablet">Fecha de Autorización</th>'
-                    + ' <th  data-hide="phone,tablet">Motivo</th>'
-                    + ' <th  data-hide="phone,tablet">MFL</th>  </tr>'
-                    + '</thead><tbody class="tbody_procesar_req"> </tbody> </table>';
+                    + ' <th  data-hide="phone,tablet">Asig. Fam.</th> '
+                    + '<th  data-hide="phone,tablet">Sist. Estado</th>'
+                    + '</tr></thead><tbody class="tbody_procesar_req"> </tbody> </table>';
             $('.imprimir_tabla').empty();
             $('.imprimir_tabla').append(texto_html);
-            $('.filtrar_fecha').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                dateFormat: 'MM yy',
-                prevText: '<i class="fa fa-chevron-left"></i>',
-                nextText: '<i class="fa fa-chevron-right"></i>',
-                onClose: function (dateText, inst) {
-                    filtrar_mes_año()
-                }
-            });
-            $('.filtrar_fecha').datepicker('setDate', new Date());
         }
-
         function reload_table() {
             var responsiveHelper_datatable_fixed_column = undefined;
             var breakpointDefinition = {
@@ -284,31 +257,52 @@
                 } else {
                     for (var i = 0; i < lista.length; i++) {
                         text_html += "<tr>";
-                        text_html += "<td>" + (i+1) + "</td>";
-                        text_html += "<td>" + lista[i].mes_año_aut + "</td>";
+                        text_html += "<td>" + (i + 1) + "</td>";
                         text_html += "<td>" + lista[i].ap_p + " " + lista[i].ap_m + " " + lista[i].nombre + "</td>";
                         text_html += "<td>" + lista[i].puesto + "</td>";
                         text_html += "<td>" + lista[i].area + "</td>";
                         text_html += "<td>" + lista[i].dep + "</td>";
                         text_html += "<td>" + lista[i].req + "</td>";
-                        text_html += "<td>" + lista[i].fecha_c + "</td>";
-                        text_html += "<td>" + lista[i].fecha_aut + "</td>";
-                        if (lista[i].motivo == '1') {
-                            text_html += "<td>Trabajador Nuevo</td>";
-                        } else if (lista[i].motivo == '2') {
-                            text_html += "<td>Renovación</td>";
-                        }
-                        if (lista[i].mfl == '0') {
-                            text_html += "<td>No</td>";
-                        } else if (lista[i].mfl == '1') {
+                        if (lista[i].es_asignacion_f == "0") {
+                            text_html += "<td class='smart-form'><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' id='chkAsigFam" + (i) + "' value='" + lista[i].iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>";
+                        } else {
                             text_html += "<td>Si</td>";
                         }
+                        if (lista[i].es_activ_sis == "0") {
+                            text_html += "<td class='smart-form' ><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>";
+                        } else {
+                            text_html += "<td>" + lista[i].es_activ_sis + "</td>";
+                        }
                         text_html += "</tr>";
+
                     }
                 }
                 crear_tabla();
                 $(".tbody_procesar_req").append(text_html);
+
                 text_html = "";
+                $(".btnAsigFam").click(function () {
+                    var array_id_dgp = [];
+                    var pos = 0;
+                    for (var i = 0, max = lista.length; i < max; i++) {
+                        if ($("#chkAsigFam" + i).prop('checked')) {
+                            array_id_dgp[pos] = $("#chkAsigFam" + i).val();
+                            pos++;
+                        }
+                    }
+                    $.ajax({
+                        url: "../../autorizacion?opc=UpdateStatusDgp_AsignFam",
+                        type: "POST",
+                        data: {json: array_id_dgp},
+                        dataType: 'json',
+                        success: function (data) {
+                            listar_autorizados();
+                        },
+                        error: function () {
+
+                        }
+                    });
+                });
                 reload_table();
 
             });
@@ -318,9 +312,7 @@
             $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
-            $(".cod_aps").numeric();
-
-            //listar_autorizados(mes, año);
+            listar_autorizados();
 
         })
 

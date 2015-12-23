@@ -304,17 +304,19 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public void VAL_DGP_PASOS() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select id_dgp from RHTM_DGP where es_dgp='0'";
         try {
-            ResultSet rs = this.conn.query(sql);
-            while (rs.next()) {
-                CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_VAL_DGP(?)}");
-                cst.setString(1, rs.getString("id_dgp"));
-                cst.execute();
-            }
-        } catch (SQLException e) {
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_VAL_DGP }");
+            cst.execute();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -517,7 +519,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public int VALIDAR_DGP_CONTR(String id_dgp, String id_tr) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select count(*) from rhtm_contrato  where id_dgp ='" + id_dgp.trim() + "' and  ES_FIRMO_CONTRATO is not null and id_trabajador='" + id_tr.trim() + "'";
+        String sql = "select count(*) from rhtm_contrato  where id_dgp ='" + id_dgp + "' and  ES_FIRMO_CONTRATO is not null and id_trabajador='" + id_tr + "'";
         int val = 0;
         try {
             ResultSet rs = this.conn.query(sql);

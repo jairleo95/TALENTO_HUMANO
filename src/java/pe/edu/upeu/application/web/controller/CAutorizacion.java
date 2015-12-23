@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -186,25 +188,27 @@ public class CAutorizacion extends HttpServlet {
                         rpta.put("rpta", "1");
                         rpta.put("data", html);
                     }
-
-                }
-                if (opc.equals("ShowListProcesarReq")) {
-                    List<Map<String, ?>> lista = a.List_procesar_req();
-                    rpta.put("rpta", "1");
-                    rpta.put("lista", lista);
-                }
-
-                if (opc.equals("ListProcesarReq")) {
-
-                    response.sendRedirect("Vista/Dgp/Procesar_Req.jsp");
+                    if (opc.equals("ShowListProcesarReq")) {
+                        List<Map<String, ?>> lista = a.List_procesar_req();
+                        rpta.put("rpta", "1");
+                        rpta.put("lista", lista);
+                    }
+                    if (opc.equals("ListProcesarReq")) {
+                        response.sendRedirect("Vista/Dgp/Procesar_Req.jsp");
+                    }
+                    if (opc.equals("UpdateStatusDgp_AsignFam")) {
+                        String[] array = request.getParameterValues("json[]");
+                        a.UpdateDgp_EstadoProcesar(array, 1);
+                        rpta.put("rpta", "1");
+                    }
                 } else {
-
+                    Logger.getLogger(getClass().getName()).log(Level.INFO, ide);
                     String idpu = e.Id_Puesto_Personal(ide);
                     sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                     out.print(a.List_Autorizados(idpu).size());
                     response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
-
                 }
+
             } catch (Exception ex) {
                 rpta.put("rpta", "-1");
                 rpta.put("mensaje", ex.getMessage());
