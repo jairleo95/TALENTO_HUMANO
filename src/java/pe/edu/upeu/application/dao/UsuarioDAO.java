@@ -93,6 +93,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
 
     }
 
+
     @Override
     public List<V_Usuario> Val_Usuario(String Usuario, String PWD) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -103,7 +104,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             ResultSet rs = this.conn.query(sql.toString());
             while (rs.next()) {
                 V_Usuario us = new V_Usuario();
-                us.setId_usuario(rs.getString("id_usuario"));
+                us.setId_usuario(rs.getString("id_usuario").trim());
                 us.setId_trabajador(rs.getString("id_trabajador"));
                 us.setId_rol(rs.getString("id_rol"));
                 us.setId_empleado(rs.getString("id_empleado"));
@@ -119,6 +120,8 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 us.setNo_trabajador(rs.getString("no_trabajador"));
                 us.setAp_paterno(rs.getString("ap_paterno"));
                 us.setAp_materno(rs.getString("ap_materno"));
+                us.setAr_foto(rs.getString("ar_foto"));
+                
                 list.add(us);
             }
         } catch (SQLException ex) {

@@ -55,7 +55,17 @@ private String id_departamento_ub;
 private String no_departamento_ub;
 private String no_provincia_ub;
 private String no_distrito_ub;
+private String ar_foto;
 
+    public String getAr_foto() {
+        return ar_foto;
+    }
+
+    public void setAr_foto(String ar_foto) {
+        this.ar_foto = ar_foto;
+    }
+
+  
     public String getId_trabajador() {
         return id_trabajador;
     }
@@ -400,7 +410,8 @@ private String no_distrito_ub;
         this.no_distrito_ub = no_distrito_ub;
     }
 
-    public V_Usuario(String id_trabajador, String id_usuario, String id_rol, String id_empleado, String no_usuario, String pw_usuario, String no_puesto, String id_puesto, String no_area, String id_area, String no_dep, String id_departamento, String no_direccion, String id_direccion, String id_seccion, String no_seccion, String no_trabajador, String ap_paterno, String ap_materno, String fe_creacion, String cl_tra, String te_trabajador, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String di_correo_personal, String di_correo_inst, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_distrito_ub, String id_provincia_ub, String id_departamento_ub, String no_departamento_ub, String no_provincia_ub, String no_distrito_ub) {
+    public V_Usuario(String ar_foto, String id_trabajador, String id_usuario, String id_rol, String id_empleado, String no_usuario, String pw_usuario, String no_puesto, String id_puesto, String no_area, String id_area, String no_dep, String id_departamento, String no_direccion, String id_direccion, String id_seccion, String no_seccion, String no_trabajador, String ap_paterno, String ap_materno, String fe_creacion, String cl_tra, String te_trabajador, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String di_correo_personal, String di_correo_inst, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_distrito_ub, String id_provincia_ub, String id_departamento_ub, String no_departamento_ub, String no_provincia_ub, String no_distrito_ub) {
+        this.ar_foto = ar_foto;
         this.id_trabajador = id_trabajador;
         this.id_usuario = id_usuario;
         this.id_rol = id_rol;
@@ -489,6 +500,7 @@ private String no_distrito_ub;
         this.no_departamento_ub = "";
         this.no_provincia_ub = "";
         this.no_distrito_ub = "";
+        this.ar_foto = "";
     }
 
 

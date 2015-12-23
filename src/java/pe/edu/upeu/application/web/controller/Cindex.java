@@ -57,6 +57,7 @@ public class Cindex extends HttpServlet {
             sesion.setAttribute("SECCION", user.getNo_seccion());
             sesion.setAttribute("DEPARTAMENTO_ID", user.getId_departamento());
             sesion.setAttribute("PUESTO", user.getNo_puesto());
+            sesion.setAttribute("AR_FOTO", user.getAr_foto());
             if (user.getAp_paterno() == null) {
                 sesion.setAttribute("NOMBRE_AP", "");
             } else {

@@ -450,7 +450,7 @@
                         <button class="add-coment btn btn-primary btn-block">Add Comentario</button>
                         <div class="area-coment">
                             <form class="comentari-form" method="post">
-                                <textarea class="mensaje"></textarea>
+                                <textarea class="txt_mensaje"></textarea>
                                 <p></p>
                                 <input name="idDgp" class="idDgp" type="hidden" value="">
                                 <div class="contador">
