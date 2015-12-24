@@ -189,7 +189,7 @@ public class CAutorizacion extends HttpServlet {
                         rpta.put("data", html);
                     }
                     if (opc.equals("ShowListProcesarReq")) {
-                        boolean tipo = Boolean.parseBoolean(request.getParameter("tipo"));
+                        boolean tipo_lista = Boolean.parseBoolean((request.getParameter("tipo_lista")));
                         int tipo_usuario = 0;
                         if (idrol.equals("ROL-0009")) {
                             tipo_usuario = 1;
@@ -198,22 +198,45 @@ public class CAutorizacion extends HttpServlet {
                         } else if (idrol.equals("")) {
                             tipo_usuario = 3;
                         }
-                        String html_table = "<table id='dt_basic' class='table table-striped table-bordered table-hover' width='100%'>"
-                                + "<thead><tr>"
-                                + "<th class='hasinput' colspan='6' style='width:95%' ></th> "
-                                + "<th class='hasinput'  ><center><button  class='btn btn-primary btn-circle btn-lg btnAsigFam'><i class='glyphicon glyphicon-ok'></i></button></center></th>"
-                                + " <th class='hasinput' ><center><button  class='btn bg-color-blueDark txt-color-white  btn-circle btn-lg btnActSisEs'><i class='glyphicon glyphicon-ok'></i></button></center></th>"
-                                + "</tr>"
-                                + "  <tr data-hide='phone,tablet'> <th><strong>Nro</strong></th>"
-                                + " <th data-class='expand' ><strong>Apellidos Y Nombres</strong></th>"
-                                + "  <th data-hide='phone,tablet'><strong>Puesto</strong></th>"
-                                + " <th data-hide='phone,tablet'><strong>Area</strong></th>"
-                                + "  <th data-hide='phone,tablet'><strong>Departamento</strong></th>"
-                                + "  <th data-hide='phone,tablet'><strong>Requerimiento</strong></th>"
-                                + " <th  data-hide='phone,tablet'>Asig. Fam.</th> "
-                                + "<th  data-hide='phone,tablet'>Sist. Estado</th>"
-                                + "</tr></thead><tbody class='tbody_procesar_req'> </tbody> </table>";
-                        List<Map<String, ?>> lista = a.List_procesar_req(true, tipo_usuario);
+                        String html_table = "";
+                        if (tipo_lista) {
+                            html_table += "<table id='table_procesar' class='table table-striped table-bordered table-hover' width='100%'>";
+                            html_table += "<thead><tr>"
+                                    + "<th class='hasinput' colspan='6' style='width:95%' ></th> "
+                                    + "<th class='hasinput'  ><center><button  class='btn btn-primary btn-circle btn-lg btnAsigFam'><i class='glyphicon glyphicon-ok'></i></button></center></th>"
+                                    + " <th class='hasinput' ><center><button  class='btn bg-color-blueDark txt-color-white  btn-circle btn-lg btnActSisEs'><i class='glyphicon glyphicon-ok'></i></button></center></th>"
+                                    + "</tr>"
+                                    + "  <tr data-hide='phone,tablet'> <th><strong>Nro</strong></th>"
+                                    + " <th data-class='expand' ><strong>Apellidos Y Nombres</strong></th>"
+                                    + "  <th data-hide='phone,tablet'><strong>Puesto</strong></th>"
+                                    + " <th data-hide='phone,tablet'><strong>Area</strong></th>"
+                                    + "  <th data-hide='phone,tablet'><strong>Departamento</strong></th>"
+                                    + "  <th data-hide='phone,tablet'><strong>Requerimiento</strong></th>"
+                                    + " <th  data-hide='phone,tablet'>Asig. Fam.</th> "
+                                    + "<th  data-hide='phone,tablet'>Sist. Estado</th>"
+                                    + "</tr></thead>";
+                        } else {
+
+                            html_table += "<table id='table_autorizados' class='table table-striped table-bordered table-hover' width='100%'>";
+                            html_table += "<thead>"
+                                    + "  <tr data-hide='phone,tablet'> <th><strong>Nro</strong></th>"
+                                    + " <th data-class='expand' ><strong>Apellidos Y Nombres</strong></th>"
+                                    + "  <th data-hide='phone,tablet'><strong>Puesto</strong></th>"
+                                    + " <th data-hide='phone,tablet'><strong>Area</strong></th>"
+                                    + "  <th data-hide='phone,tablet'><strong>Departamento</strong></th>"
+                                    + "  <th data-hide='phone,tablet'><strong>Requerimiento</strong></th>"
+                                    + " <th  data-hide='phone,tablet'>Asig. Fam.</th> "
+                                    + "<th  data-hide='phone,tablet'>Sist. Estado</th>"
+                                    + "</tr></thead>";
+                        }
+
+                        if (tipo_lista) {
+                            html_table += "<tbody class='tbody_procesar_req'> </tbody> ";
+                        } else {
+                            html_table += "<tbody class='tbody_procesar_req_aut'> </tbody> ";
+                        }
+                        html_table += "</table>";
+                        List<Map<String, ?>> lista = a.List_procesar_req(tipo_lista, tipo_usuario);
                         String text_html = "";
                         for (int i = 0; i < lista.size(); i++) {
                             Map<String, ?> x = lista.get(i);
@@ -250,6 +273,7 @@ public class CAutorizacion extends HttpServlet {
                         String[] array = request.getParameterValues("json[]");
                         a.UpdateDgp_EstadoProcesar(array, tipo);
                         rpta.put("rpta", "1");
+                        rpta.put("aaas", array);
                     }
                 } else {
                     Logger.getLogger(getClass().getName()).log(Level.INFO, ide);

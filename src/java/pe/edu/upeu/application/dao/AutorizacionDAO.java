@@ -638,7 +638,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "select ID_DGP, NO_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_PUESTO, NO_SECCION, NO_AREA, NO_DEP, NO_REQ, ES_ACTIV_SIS_ESTADO, ES_PROC_ASIGNACION_F, "
-                    + "ID_TRABAJADOR  from rhvd_req_proc_area_rem ";
+                    + "ID_TRABAJADOR  from rhvd_req_proc_area_rem  ";
             if (!tipo_list) {
                 if (tipo_user == 1) {
                     sql += " where ES_ACTIV_SIS_ESTADO =1 and ES_PROC_ASIGNACION_F=1";
@@ -646,6 +646,14 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                     sql += " where ES_PROC_ASIGNACION_F=1";
                 } else if (tipo_user == 3) {
                     sql += " where ES_ACTIV_SIS_ESTADO =1";
+                }
+            } else if (tipo_list) {
+                if (tipo_user == 1) {
+                    sql += " where ES_ACTIV_SIS_ESTADO =0 or ES_PROC_ASIGNACION_F=0";
+                } else if (tipo_user == 2) {
+                    sql += " where ES_PROC_ASIGNACION_F=0";
+                } else if (tipo_user == 3) {
+                    sql += " where ES_ACTIV_SIS_ESTADO =0";
                 }
             }
 

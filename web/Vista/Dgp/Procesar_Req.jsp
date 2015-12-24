@@ -106,6 +106,53 @@
                         </article>
                         <!-- WIDGET END -->
                     </div>
+                    <div class="row">
+                        <!-- NEW WIDGET START -->
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div id="alerta_dgp">
+                            </div>
+                            <!-- Widget ID (each widget will need unique ID)-->
+                            <div class="jarviswidget jarviswidget-color-blue" id="wid-id-1" data-widget-editbutton="false"  data-widget-deletebutton="false">
+                                <!-- widget options:
+                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                                data-widget-colorbutton="false"
+                                data-widget-editbutton="false"
+                                data-widget-togglebutton="false"
+                                data-widget-deletebutton="false"
+                                data-widget-fullscreenbutton="false"
+                                data-widget-custombutton="false"
+                                data-widget-collapsed="true"
+                                data-widget-sortable="false"
+
+                                -->
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <h2>Requerimientos Procesados</h2>
+                                </header>
+                                <!-- widget div-->
+                                <div>
+
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+
+                                    </div>
+                                    <!-- end widget edit box -->
+
+                                    <!-- widget content -->
+                                    <div class="widget-body no-padding imprimir_tabla_aut">
+
+                                    </div>
+                                    <!-- end widget content -->
+                                </div>
+                                <!-- end widget div -->
+
+                            </div>
+                            <!-- end widget -->
+                        </article>
+                        <!-- WIDGET END -->
+                    </div>
                     <!-- end row -->
                 </section>
                 <!-- end widget grid -->
@@ -198,7 +245,7 @@
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
     <script type="text/javascript">
 
-        function reload_table() {
+        function reload_table(table) {
             var breakpointDefinition = {
                 tablet: 1024,
                 phone: 480
@@ -208,7 +255,7 @@
              var responsiveHelper_datatable_col_reorder = undefined;
              var responsiveHelper_datatable_tabletools = undefined;*/
 
-            var otable = $('#dt_basic').dataTable({
+            table.dataTable({
                 "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
                         "t" +
                         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
@@ -216,7 +263,7 @@
                 "preDrawCallback": function () {
                     // Initialize the responsive datatables helper once.
                     if (!responsiveHelper_dt_basic) {
-                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper(table, breakpointDefinition);
                     }
                 },
                 "rowCallback": function (nRow) {
@@ -226,16 +273,11 @@
                     responsiveHelper_dt_basic.respond();
                 }
             });
-
-            // Apply the filter
-            $("#dt_basic thead th input[type=text]").on('keyup change', function () {
-                otable.column($(this).parent().index() + ':visible').search(this.value).draw();
-            });
         }
-        function procesar_lista(lista, tipo) {
+        function procesar_lista(lista, tipo, tipo_lista) {
             var array_id_dgp = [];
             var pos = 0;
-            var url = (tipo === 1) ? "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo=1" : "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo=2";
+            var url = (tipo === 1) ? "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo_lista=" + tipo_lista + "&tipo=1" : "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo_lista=" + tipo_lista + "&tipo=2";
             if (tipo === 1) {
                 for (var i = 0, max = lista; i < max; i++) {
                     if ($(".chkAsigFam" + i).prop('checked')) {
@@ -253,7 +295,6 @@
             }
 
             if (array_id_dgp.length > 0) {
-                //alert()
                 $.ajax({
                     url: url,
                     type: "POST",
@@ -267,7 +308,8 @@
                                 buttons: '[No][Si]'
                             }, function (ButtonPressed) {
                                 if (ButtonPressed === "Si") {
-                                    listar_autorizados();
+                                    listar_autorizados(true);
+                                    listar_autorizados(false);
                                     $.smallBox({
                                         title: "Se ha procesado correctamente los requerimientos...",
                                         content: "<i class='fa fa-clock-o'></i> <i>2 segundos atras...</i>",
@@ -303,45 +345,37 @@
                 });
             }
         }
-        function listar_autorizados() {
-            // var text_html = "";
-            $.post("../../autorizacion", "opc=ShowListProcesarReq", function (objJson) {
+        function listar_autorizados(tipo_lista) {
+      
+            $.post("../../autorizacion", "opc=ShowListProcesarReq&tipo_lista=" + tipo_lista, function (objJson) {
                 var lista = objJson.lista;
-                if (objJson.rpta == -1) {
+                if (objJson.rpta === -1) {
                     alert(objJson.mensaje);
                     return;
-                } else {/*
-                 for (var i = 0; i < lista.length; i++) {
-                 text_html += "<tr>";
-                 text_html += "<td>" + (i + 1) + "</td>";
-                 text_html += "<td><a href='../../trabajador?idtr=" + lista[i].idtr + "&opc=list'>" + lista[i].ap_p + " " + lista[i].ap_m + " " + lista[i].nombre + "</a></td>";
-                 text_html += "<td>" + lista[i].puesto + "</td>";
-                 text_html += "<td>" + lista[i].area + "</td>";
-                 text_html += "<td>" + lista[i].dep + "</td>";
-                 text_html += "<td>" + lista[i].req + "</td>";
-                 if (lista[i].es_asignacion_f == "0") {
-                 text_html += "<td class='smart-form'><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' class='chkAsigFam" + (i) + "' value='" + lista[i].iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>";
-                 } else {
-                 text_html += "<td>Si</td>";
-                 }
-                 if (lista[i].es_activ_sis == "0") {
-                 text_html += "<td class='smart-form' ><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' class='chkActSistEs" + (i) + "' value='" + lista[i].iddgp + "' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>";
-                 } else {
-                 text_html += "<td>Si</td>";
-                 }
-                 text_html += "</tr>";
-                 
-                 }*/
-                    $('.imprimir_tabla').empty();
-                    $('.imprimir_tabla').append(objJson.html_table);
-                    $(".tbody_procesar_req").append(objJson.text_html);
+                } else {
+                    if (tipo_lista) {
+                        $('.imprimir_tabla').empty();
+                        $('.imprimir_tabla').append(objJson.html_table);
+                        $(".tbody_procesar_req").append(objJson.text_html);
+                    } else {
+                        $('.imprimir_tabla_aut').empty();
+                        $('.imprimir_tabla_aut').append(objJson.html_table);
+                        $(".tbody_procesar_req_aut").append(objJson.text_html);
+                    }
+
+
                     $(".btnAsigFam").click(function () {
-                        procesar_lista(lista, 1);
+                        procesar_lista(lista, 1, tipo_lista);
                     });
                     $(".btnActSisEs").click(function () {
-                        procesar_lista(lista, 2);
+                        procesar_lista(lista, 2, tipo_lista);
                     });
-                    reload_table();
+                    if (tipo_lista) {
+                        reload_table($("#table_procesar"));
+                    } else {
+                     reload_table($("#table_autorizados"));
+                    }
+
                 }
             });
         }
@@ -350,7 +384,8 @@
             $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
-            listar_autorizados();
+            listar_autorizados(true);
+             listar_autorizados(false);
 
         })
 
