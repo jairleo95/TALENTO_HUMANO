@@ -9,7 +9,9 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -35,8 +37,15 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
             rs.next();
             id = rs.getString("id_puesto");
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error: " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return id;
     }
@@ -51,8 +60,15 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
             cst.setString(1, id_tra);
             cst.execute();
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error: " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
     }
@@ -155,14 +171,20 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
                 list.add(v);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error: " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
-    
-    
- @Override
+
+    @Override
     public List<V_List_Empleado> Listar_Empleado() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "SELECT * FROM RHVD_LIST_EMPLEADO order by id_contrato desc";
@@ -260,12 +282,18 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
                 list.add(v);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error: " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
-    
 
     @Override
     public List<V_List_Empleado> Listar_Emp() {
@@ -299,8 +327,15 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
                 list.add(em);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error: " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -317,8 +352,14 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
             eva.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error: " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -332,8 +373,15 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
             rs.next();
             idemp = rs.getString("ID_EMPLEADO");
         } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error: " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return idemp;
     }
@@ -347,9 +395,16 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
             ResultSet rs = this.conn.query(sql);
             rs.next();
             es_eva = rs.getString("ES_EVALUACION");
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
+            throw new RuntimeException("Error: " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return es_eva;
     }
@@ -369,9 +424,16 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
                 eva.setId_empleado("id_empleado");
                 List.add(eva);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
+            throw new RuntimeException("Error: " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return List;
 
@@ -386,9 +448,16 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
             cst.setString(1, RE_EVALUACION);
             cst.setString(2, ID_EMPLEADO);
             cst.execute();
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error: " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
@@ -408,9 +477,16 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
                 eva.setEs_empleado("es_empleado");
                 List.add(eva);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
+            throw new RuntimeException("Error: " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return List;
     }
@@ -439,7 +515,8 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     }
 
     @Override
-    public void Reg_aps(String idtr, int aps) {
+    public boolean Reg_aps(String idtr, int aps) {
+        boolean x = false;
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -447,6 +524,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
             cst.setString(1, idtr);
             cst.setInt(2, aps);
             cst.execute();
+            x = true;
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
@@ -458,6 +536,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
+        return x;
     }
 
     @Override
@@ -509,7 +588,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     public int val_aps(String co_aps) {
         int cant = 0;
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT COUNT (*) FROM RHTD_EMPLEADO WHERE CO_APS = '"+co_aps+"' ";
+        String sql = "SELECT COUNT (*) FROM RHTD_EMPLEADO WHERE CO_APS = '" + co_aps + "' ";
         try {
             ResultSet rs = this.conn.query(sql);
             rs.next();
@@ -532,7 +611,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     public int val_huella(String co_hue) {
         int cant = 0;
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT COUNT (*) FROM RHTD_EMPLEADO WHERE CO_HUELLA_DIGITAL = '"+co_hue+"' ";
+        String sql = "SELECT COUNT (*) FROM RHTD_EMPLEADO WHERE CO_HUELLA_DIGITAL = '" + co_hue + "' ";
         try {
             ResultSet rs = this.conn.query(sql);
             rs.next();
@@ -540,7 +619,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error al validar codigo huella");
+            throw new RuntimeException("Error al validar codigo huella" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -549,6 +628,66 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
             }
         }
         return cant;
+    }
+
+    @Override
+    public List<Map<String, ?>> List_co_huella(String idtr) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select id_empleado,id_trabajador,CO_HUELLA_DIGITAL  from rhtd_empleado where id_trabajador='" + idtr + "'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("ide", rs.getString("id_empleado"));
+                rec.put("idtr", rs.getString("id_trabajador"));
+                rec.put("codigo_huella", rs.getString("CO_HUELLA_DIGITAL"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return Lista;
+
+    }
+
+    @Override
+    public List<Map<String, ?>> List_co_aps(String idtr) {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select id_empleado,id_trabajador,co_aps  from rhtd_empleado where id_trabajador='" + idtr + "'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("ide", rs.getString("id_empleado"));
+                rec.put("idtr", rs.getString("id_trabajador"));
+                rec.put("aps", rs.getString("co_aps"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return Lista;
+
     }
 
 }

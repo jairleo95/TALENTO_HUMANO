@@ -84,7 +84,7 @@ public class CFoto extends HttpServlet {
                     }
                 }
             }
-            foto.INSERT_FOTOS_TRABAJADOR(null, null, nombre_archivo, no_original, String.valueOf(sizeInBytes), tipo_archivo, idtr);
+            //foto.INSERT_FOTOS_TRABAJADOR(null, null, nombre_archivo, no_original, String.valueOf(sizeInBytes), tipo_archivo, idtr);
             rpta.put("rpta", "1");
             rpta.put("archivo", nombre_archivo);
 

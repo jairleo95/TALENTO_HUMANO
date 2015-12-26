@@ -308,8 +308,8 @@
                                                 $('.btnPro').click(function () {
 
                                                     $.SmartMessageBox({
-                                                        title: "Â¡Advertencia!",
-                                                        content: "Â¿Esta seguro de procesar las modificaciones?",
+                                                        title: "¡Advertencia!",
+                                                        content: "¿Esta seguro de procesar las modificaciones?",
                                                         buttons: '[No][Si]'
                                                     }, function (buttonPressed) {
                                                         if (buttonPressed === "Si") {

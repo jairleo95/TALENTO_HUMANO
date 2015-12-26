@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import oracle.sql.ARRAY;
+import oracle.sql.ArrayDescriptor;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -258,9 +260,16 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 list.add(x);
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         return list;
@@ -269,8 +278,12 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     @Override
     public List<V_Autorizar_Dgp> List_id_Autorizacion(String id_aurotizacion, String id_user) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select *  from rhvd_autorizar_dgp where id_puesto='" + id_aurotizacion.trim() + "'";
-        sql += (!"".equals(id_user)) ? " and id_usuario='" + id_user.trim() + "'" : "";
+        String sql = "select ID_TRABAJADOR, NO_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_PUESTO, NU_PASOS, ID_DGP, CO_PASOS, ID_DETALLE_REQ_PROCESO, DE_PASOS, ID_DEPARTAMENTO, "
+                + "ID_PUESTO, ID_REQUERIMIENTO, ID_TIPO_PLANILLA, NO_REQ, ID_PASOS, NO_USUARIO, ID_USUARIO, NO_SECCION,"
+                + " NO_AREA, FE_CREACION, VAL_PLAZO, AR_FOTO, DE_FOTO, ID_FOTO, NO_AR_FOTO, TA_AR_FOTO, TI_AR_FOTO, VER_LIST_PLAZO, "
+                + "ELAB_CONTRATO, VAL_FIRM_CONTRATO, NO_DEP, MES_CREACION, VAL_COD_APS_EMPLEADO, VAL_COD_HUELLA_EMP, CO_APS, CO_HUELLA_DIGITAL, LI_MOTIVO,"
+                + " ES_MFL, DI_CORREO_PERSONAL, DI_CORREO_INST, VAL_CONTRATO_ADJUNTO ,val_dgp_contrato  from rhvd_autorizar_dgp where id_puesto='" + id_aurotizacion + "'";
+        sql += (!"".equals(id_user)) ? " and id_usuario='" + id_user + "'" : "";
         sql += (true) ? " order by fe_creacion " : "";
 
         List<V_Autorizar_Dgp> list = new ArrayList<V_Autorizar_Dgp>();
@@ -278,7 +291,6 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 V_Autorizar_Dgp v = new V_Autorizar_Dgp();
-
                 v.setId_trabajador(rs.getString("id_trabajador"));
                 v.setNo_trabajador(rs.getString("no_trabajador"));
                 v.setAp_paterno(rs.getString("ap_paterno"));
@@ -321,11 +333,20 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setDi_correo_personal(rs.getString("DI_CORREO_PERSONAL"));
                 v.setDi_correo_inst(rs.getString("DI_CORREO_INST"));
                 v.setVal_contrato_adjunto(rs.getInt("val_contrato_adjunto"));
+                v.setVal_dgp_cotrato(rs.getInt("val_dgp_contrato"));
                 list.add(v);
             }
-        } catch (SQLException e) {
+            Logger.getLogger(getClass().getName()).log(Level.INFO, sql);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -380,9 +401,16 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setCo_huella_digital(rs.getInt("CO_HUELLA_DIGITAL"));
                 list.add(v);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -416,9 +444,16 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             rs.next();
             list.add(rs.getString("id_pasos"));
             list.add(rs.getString("id_puesto"));
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -450,9 +485,16 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setEs_mfl(rs.getString("ES_MFL"));
                 list.add(v);
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
@@ -478,12 +520,16 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             cst.registerOutParameter(13, Types.CHAR);
             cst.execute();
             id = cst.getString(13);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } catch (Exception ex) {
-            Logger.getLogger(AutorizacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return id;
     }
@@ -528,9 +574,16 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             while (rs.next()) {
                 validar = rs.getString("mes_hasta");
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return validar;
     }
@@ -576,6 +629,91 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             }
         }
         return lista;
+
+    }
+
+    @Override
+    public List<Map<String, ?>> List_procesar_req(boolean tipo_list, int tipo_user) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select ID_DGP, NO_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_PUESTO, NO_SECCION, NO_AREA, NO_DEP, NO_REQ, ES_ACTIV_SIS_ESTADO, ES_PROC_ASIGNACION_F, "
+                    + "ID_TRABAJADOR  from rhvd_req_proc_area_rem  ";
+            if (!tipo_list) {
+                if (tipo_user == 1) {
+                    sql += " where ES_ACTIV_SIS_ESTADO =1 and ES_PROC_ASIGNACION_F=1";
+                } else if (tipo_user == 2) {
+                    sql += " where ES_PROC_ASIGNACION_F=1";
+                } else if (tipo_user == 3) {
+                    sql += " where ES_ACTIV_SIS_ESTADO =1";
+                }
+            } else if (tipo_list) {
+                if (tipo_user == 1) {
+                    sql += " where ES_ACTIV_SIS_ESTADO =0 or ES_PROC_ASIGNACION_F=0";
+                } else if (tipo_user == 2) {
+                    sql += " where ES_PROC_ASIGNACION_F=0";
+                } else if (tipo_user == 3) {
+                    sql += " where ES_ACTIV_SIS_ESTADO =0";
+                }
+            }
+
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("iddgp", rs.getString("ID_DGP"));
+                rec.put("nombre", rs.getString("NO_TRABAJADOR"));
+                rec.put("ap_p", rs.getString("ap_paterno"));
+                rec.put("ap_m", rs.getString("AP_MATERNO"));
+                rec.put("puesto", rs.getString("NO_PUESTO"));
+                rec.put("seccion", rs.getString("NO_SECCION"));
+                rec.put("area", rs.getString("NO_AREA"));
+                rec.put("dep", rs.getString("NO_DEP"));
+                rec.put("req", rs.getString("NO_REQ"));
+                rec.put("es_activ_sis", rs.getString("ES_ACTIV_SIS_ESTADO"));
+                rec.put("es_asignacion_f", rs.getString("ES_PROC_ASIGNACION_F"));
+                rec.put("idtr", rs.getString("ID_TRABAJADOR"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de requerimientos..." + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
+
+    }
+
+    @Override
+    public boolean UpdateDgp_EstadoProcesar(String[] iddgp, int tipo) {
+        boolean x = false;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ArrayDescriptor des = ArrayDescriptor.createDescriptor("ARRAY_ID_DGP", conn.conex);
+            ARRAY array_to_pass = new ARRAY(des, conn.conex, iddgp);
+            CallableStatement st = conn.conex.prepareCall("call actualizar_dgps(?,?)");
+            st.setArray(1, array_to_pass);
+            st.setInt(2, tipo);
+            st.execute();
+            x = true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error procesar estados..." + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
 
     }
 

@@ -13,7 +13,9 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -778,7 +780,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
                 cs.setId_trabajador(rs.getString("id_trabajador"));
                 cs.setEs_cuenta_sueldo(rs.getString("es_cuenta_sueldo"));
                 list.add(cs);
-                
+
             }
 
         } catch (SQLException e) {
@@ -1046,7 +1048,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     public int cod_uni_unico(String cod_uni) {
         int n = 0;
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select count (*) from RHTM_TRABAJADOR where CO_UNIVERSITARIO = '"+cod_uni+"'";
+        String sql = "select count (*) from RHTM_TRABAJADOR where CO_UNIVERSITARIO = '" + cod_uni + "'";
         try {
             ResultSet rs = this.conn.query(sql);
             rs.next();
@@ -1063,5 +1065,40 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             }
         }
         return n;
+    }
+
+    @Override
+    public int ShowPorcentageTrabajador(String idtr) {
+        int porcentaje = 0;
+        int acum = 0;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT * FROM rhtm_trabajador where id_trabajador ='" + idtr + "' ";
+            ResultSet rs = this.conn.query(sql);
+            if (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                for (int i = 1; i < 75; i++) {
+                    if (rs.getString(i) == null) {
+
+                    } else {
+                        acum++;
+                    }
+                }
+                porcentaje = (int) ((acum / 75.0) * 100);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return porcentaje;
+
     }
 }

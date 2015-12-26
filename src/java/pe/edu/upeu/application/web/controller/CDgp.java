@@ -363,9 +363,10 @@ public class CDgp extends HttpServlet {
             sesion.setAttribute("VALIDAR_DGP_CONTR", dgp.VALIDAR_DGP_CONTR(ID_DGP, idtr));
             sesion.setAttribute("Cargar_dcc_dgp", cc.Cargar_dcc_dgp(ID_DGP));
             int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
-            boolean estado = s.Validar_Envio_Solicitud(ID_DGP.trim());
+            //boolean estado = s.Validar_Envio_Solicitud(ID_DGP.trim());
             sesion.setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
-            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc&est=" + estado);
+           // response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc&est=" + estado);
+            response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc");
         }
         if (opc.equals("filtrar")) {
             sesion.setAttribute("List_Area", area.List_Area_ID(iddep));

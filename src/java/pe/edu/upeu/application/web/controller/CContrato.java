@@ -109,7 +109,7 @@ public class CContrato extends HttpServlet {
         if (opc.equals("casos_especiales")) {
             response.sendRedirect("Vista/Contrato/Gen_Contrato_CE.jsp");
         }
-        
+
         if (opc.equals("enviar")) {
             String iddgp = request.getParameter("iddgp");
             String idtr = request.getParameter("idtr");
@@ -327,24 +327,7 @@ public class CContrato extends HttpServlet {
         }
 
         if (opc.equals("Detalle_Contractual")) {
-
             String idtr = request.getParameter("idtr");
-            /*String ida1 = a.List_Anno_Max_Cont(idtr);
-             String id_cto = con.Contrato_max(idtr);
-             sesion.setAttribute("List_Anno_trabajador", a.List_Anno_trabajador(idtr));
-             sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
-             sesion.setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
-             sesion.setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
-             //sesion.setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
-             sesion.setAttribute("List_Usuario", usu.List_Usuario());
-             sesion.setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
-             sesion.setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-             sesion.setAttribute("list_reg_labo", con.list_reg_labo());
-             sesion.setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr, ida1));
-             sesion.setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr));
-             sesion.setAttribute("List_Jefe", l.List_Jefe());
-             out.print(id_cto + ida1 + idtr);*/
-
             String ida1 = a.List_Anno_Max_Cont(idtr);
             String id_dgp = "";
             String id_cto = con.Contrato_max(idtr);
@@ -354,18 +337,24 @@ public class CContrato extends HttpServlet {
                 id_dgp = con.obt_dgp_x_dgp(id_cto);
                 sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_cto));
                 sesion.setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
+                sesion.setAttribute("List_Anno_trabajador", a.List_Anno_trabajador_contrato(idtr));
+                sesion.setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
+                sesion.setAttribute("List_Usuario", usu.List_Usuario());
+                sesion.setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
+                sesion.setAttribute("List_tipo_contrato", l.List_tipo_contrato());
+                sesion.setAttribute("list_reg_labo", con.list_reg_labo());
+            } else {
+                sesion.removeAttribute("List_x_fun_x_idpu");
+                sesion.removeAttribute("Lis_c_c_id_contr");
+                sesion.removeAttribute("List_contra_x_idcto");
+                sesion.removeAttribute("List_Anno_trabajador");
+                sesion.removeAttribute("List_Situacion_Actual");
+                sesion.removeAttribute("List_Usuario");
+                sesion.removeAttribute("list_Condicion_contrato");
+                sesion.removeAttribute("List_tipo_contrato");
+                sesion.removeAttribute("list_reg_labo");
             }
-            sesion.setAttribute("List_Anno_trabajador", a.List_Anno_trabajador_contrato(idtr));
-            sesion.setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
-            //sesion.setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
-            sesion.setAttribute("List_Usuario", usu.List_Usuario());
-            sesion.setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
-            sesion.setAttribute("List_tipo_contrato", l.List_tipo_contrato());
-            sesion.setAttribute("list_reg_labo", con.list_reg_labo());
-            out.print(id_cto);
             response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto + "&id_dg=" + id_dgp);
-
-            //response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
         }
         if (opc.equals("SI_CONNTRATO")) {
 
@@ -378,7 +367,7 @@ public class CContrato extends HttpServlet {
                 sesion.setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
                 id_dgp = con.obt_dgp_x_dgp(id_cto);
                 sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_cto));
-                
+
                 sesion.setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
             }
             sesion.setAttribute("List_Anno_trabajador", a.List_Anno_trabajador_contrato(idtr));
@@ -779,9 +768,9 @@ public class CContrato extends HttpServlet {
             int num_ad = doc.List_Adventista(ID_TRABAJADOR);
             sesion.setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
             sesion.setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
-           /* out.print(ID_TIPO_HORARIO + "-");
-            out.print(ID_DETALLE_HORARIO + "-");
-            out.print(ID_SUB_MODALIDAD);*/
+            /* out.print(ID_TIPO_HORARIO + "-");
+             out.print(ID_DETALLE_HORARIO + "-");
+             out.print(ID_SUB_MODALIDAD);*/
             String idctr = con.Contrato_max(ID_TRABAJADOR);
             //response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + ID_TRABAJADOR + "&idctr=" + idctr + "&dce=Doc_CE");
             response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&req=si&idtr=" + ID_TRABAJADOR + "&P2=TRUE&ms=ok");
@@ -821,7 +810,7 @@ public class CContrato extends HttpServlet {
             String id_cto = request.getParameter("id_cto");
             con.validar_contrato(id_cto);
         }
-        if(opc.equals("gen_cont")){
+        if (opc.equals("gen_cont")) {
             response.sendRedirect("Vista/Contrato/Gen_Contrato_CE.jsp");
         }
         /*} catch (Exception e) {

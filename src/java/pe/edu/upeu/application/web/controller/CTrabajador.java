@@ -79,19 +79,14 @@ public class CTrabajador extends HttpServlet {
                 InterfaceEmpleadoDAO em = new EmpleadoDAO();
                 InterfaceDgpDAO dgp = new DgpDAO();
                 InterfaceDireccionDAO dir = new DireccionDAO();
-                //InterfaceCentro_CostosDAO cc = new Centro_CostoDAO();
                 InterfaceTipo_DocumentoDAO tdoc = new Tipo_DocumentoDAO();
-                //   InterfaceContratoDAO con = new ContratoDAO();
                 InterfaceCarrera_UniversidadDAO cu = new Carrera_UniversidadDAO();
                 InterfaceHist_Estado_CivilDAO ec = new Hist_Estado_CivilDAO();
                 String opc = "";
                 String Text = "";
                 opc = (String) request.getParameter("opc");
                 Text = (String) request.getParameter("text");
-
-                //InterfacePadre_Madre_ConyugueDAO pmc = new Padre_Madre_ConyugueDAO();
                 InterfaceDatos_Hijo_Trabajador h = new Datos_Hijo_TrabajadorDAO();
-
                 if (opc.equals("Form_Reg")) {
                     sesion.setAttribute("List_Carrera", li.List_Carrera());
                     sesion.setAttribute("List_Nacionalidad", li.List_Nacionalidad());
@@ -102,9 +97,7 @@ public class CTrabajador extends HttpServlet {
                     sesion.setAttribute("Listar_zona", dir.Listar_zona());
                     sesion.setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
                     sesion.setAttribute("list_año", li.lista_años());
-
                     response.sendRedirect("Vista/Trabajador/Reg_Trabajador.jsp");
-
                 }
                 if (opc.equals("Registrar")) {
                     String AP_PATERNO = request.getParameter("APELLIDO_P");
@@ -340,45 +333,6 @@ public class CTrabajador extends HttpServlet {
                     }
 
                 }
-
-                if ("registrar_aps".equals(opc)) {
-                    String idtr = request.getParameter("idtr");
-                    int val_huella = 0;
-                    String iddgp = request.getParameter("iddetalle_dgp");
-                    String puesto_id = request.getParameter("puesto_id");
-                    String cod = request.getParameter("cod");
-                    String idpasos = request.getParameter("idpasos");
-                    String drp = request.getParameter("IDDETALLE_REQ_PROCESO");
-                    String np = request.getParameter("nup");
-                    int co_aps = Integer.parseInt(request.getParameter("cod_aps"));
-                    em.Reg_aps(idtr, co_aps);
-                    int num_c_dgp = dgp.VALIDAR_DGP_CONTRATO(iddgp);
-                    int val_aps = em.val_cod_aps_empleado(idtr);
-                    val_huella = em.val_cod_huella(idtr);
-                    sesion.setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
-                    sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-                    sesion.setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
-                    response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps + "&val_huella=" + val_huella);
-                }
-                if ("registrar_huella".equals(opc)) {
-                    String idtr = request.getParameter("idtr");
-                    int val_huella = 0;
-                    String iddgp = request.getParameter("iddetalle_dgp");
-                    String puesto_id = request.getParameter("puesto_id");
-                    String cod = request.getParameter("cod");
-                    String idpasos = request.getParameter("idpasos");
-                    String drp = request.getParameter("IDDETALLE_REQ_PROCESO");
-                    String np = request.getParameter("nup");
-                    int co_huella = Integer.parseInt(request.getParameter("cod_huella"));
-                    em.Reg_cod_huella(idtr, co_huella);
-                    int num_c_dgp = dgp.VALIDAR_DGP_CONTRATO(iddgp);
-                    int val_aps = em.val_cod_aps_empleado(idtr);
-                    val_huella = em.val_cod_huella(idtr);
-                    sesion.setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
-                    sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-                    sesion.setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
-                    response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps + "&val_huella=" + val_huella);
-                }
                 if ("reg_aps_masivo".equals(opc)) {
                     String idtr = request.getParameter("idtr");
                     int co_aps = Integer.parseInt(request.getParameter("cod"));
@@ -386,14 +340,12 @@ public class CTrabajador extends HttpServlet {
                     sesion.setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
                     response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "");
                 }
-                if ("reg_huella".equals(opc)) {
+                if ("registrar_huella".equals(opc)) {
                     String idtr = request.getParameter("idtr");
-                    int cod_huella = Integer.parseInt(request.getParameter("cod"));
-                    em.Reg_cod_huella(idtr, cod_huella);
-                    sesion.setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
-                    response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "");
+                    int co_huella = Integer.parseInt(request.getParameter("cod"));
+                    em.Reg_cod_huella(idtr, co_huella);
+                    rpta.put("rpta", "1");
                 }
-
                 if (opc.equals("Editar_Dat_Gen")) {
                     String idtr = request.getParameter("idtr");
                     String edit = request.getParameter("edit");
@@ -403,7 +355,6 @@ public class CTrabajador extends HttpServlet {
                     sesion.setAttribute("List_Provincia", ub.List_Provincia());
                     sesion.setAttribute("List_Distrito", ub.List_DistritoTra());
                     sesion.setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
-
                     response.sendRedirect("Vista/Trabajador/Mod_Datos_Generales.jsp?idtr=" + idtr + "&edit=" + edit);
                 }
                 if (opc.equals("Modificar_Dat_Gen")) {
@@ -416,7 +367,6 @@ public class CTrabajador extends HttpServlet {
                     String FE_NAC = request.getParameter("FECHA_NAC");
                     String ID_NACIONALIDAD = request.getParameter("NACIONALIDAD");
                     String ID_DEPARTAMENTO = null;
-
                     String ID_PROVINCIA = null;
                     String ID_DISTRITO = request.getParameter("DISTRITO");
                     String TI_DOC = "";
@@ -636,6 +586,10 @@ public class CTrabajador extends HttpServlet {
                 }
                 if (opc.equals("reg_trb")) {
                     response.sendRedirect("Vista/Trabajador/Ficha_Trabajador.jsp");
+                }
+                if (opc.equals("ShowPorcentageTrabajador")) {
+                    String id = request.getParameter("id");
+                    rpta.put("porcentaje", tr.ShowPorcentageTrabajador(id));
                 }
 
             } catch (Exception e) {

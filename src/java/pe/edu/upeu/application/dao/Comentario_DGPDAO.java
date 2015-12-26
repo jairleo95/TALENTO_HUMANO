@@ -9,7 +9,9 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfaceComentario_DGPDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -39,57 +41,74 @@ public class Comentario_DGPDAO implements InterfaceComentario_DGPDAO {
             cst.setString(7, FE_MODIFICACION);
             cst.setString(8, ES_COMENTARIO_DGP);
             cst.execute();
-        } catch (SQLException ex) {
+       } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
     }
 
     @Override
-    public List<X_List_Comen_DGP> List_Comentario_DGP(String id_dgp) {
+    public List<Map<String, ?>> List_Comentario_DGP(String id_dgp) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from rhtr_comentario_dgp cm, rhvd_usuario u where cm.us_creacion=u.id_usuario and cm.id_dgp='" + id_dgp + "' order by cm.id_comentario_dgp desc";
-        List<X_List_Comen_DGP> list = new ArrayList<X_List_Comen_DGP>();
+        String sql = "select * from rhtr_comentario_dgp cm, rhvd_usuario_temp u where cm.us_creacion=u.id_usuario and cm.id_dgp='" + id_dgp + "' order by cm.id_comentario_dgp ASC";
         try {
             ResultSet rs = this.conn.query(sql);
             
             while (rs.next()) {
-                X_List_Comen_DGP cd = new X_List_Comen_DGP();
-                cd.setId_comentario_dgp(rs.getString("id_comentario_dgp"));
-                cd.setId_dgp(rs.getString("id_dgp"));
-                cd.setId_autorizacion(rs.getString("id_autorizacion"));
-                cd.setCm_comentario(rs.getString("cm_comentario"));
-                cd.setUs_creacion(rs.getString("us_creacion"));
-                cd.setFe_creacion(rs.getString("fe_creacion"));
-                cd.setUs_modificacion(rs.getString("us_modificacion"));
-                cd.setFe_modificacion(rs.getString("fe_modificacion"));
-                cd.setEs_comentario_dgp(rs.getString("es_comentario_dgp"));
-                cd.setId_trabajador(rs.getString("id_trabajador"));
-                cd.setId_rol(rs.getString("id_rol"));
-                cd.setId_empleado(rs.getString("id_empleado"));
-                cd.setNo_usuario(rs.getString("no_usuario"));
-                cd.setPw_usuario(rs.getString("pw_usuario"));
-                cd.setNo_puesto(rs.getString("no_puesto"));
-                cd.setId_puesto(rs.getString("id_puesto"));
-                cd.setNo_area(rs.getString("no_area"));
-                cd.setId_area(rs.getString("id_area"));
-                cd.setNo_dep(rs.getString("no_dep"));
-                cd.setId_departamento(rs.getString("id_departamento"));
-                cd.setNo_direccion(rs.getString("no_direccion"));
-                cd.setId_direccion(rs.getString("id_direccion"));
-                cd.setId_seccion(rs.getString("id_seccion"));
-                cd.setNo_seccion(rs.getString("no_seccion"));
-                cd.setNo_trabajador(rs.getString("no_trabajador"));
-                cd.setAp_paterno(rs.getString("ap_paterno"));
-                cd.setAp_materno(rs.getString("ap_materno"));
-                cd.setFe_creacion(rs.getString("fe_creacion"));
-                list.add(cd);
+                Map<String, Object> cd = new HashMap<String, Object>();
+
+                cd.put("id_comentario_dgp",rs.getString("id_comentario_dgp"));
+                cd.put("id_dgp",rs.getString("id_dgp"));
+                cd.put("id_utorizacion",rs.getString("id_autorizacion"));
+                cd.put("cm_comentaio",rs.getString("cm_comentario"));
+                cd.put("us_creacion",rs.getString("us_creacion"));
+                cd.put("fe_creacion",rs.getString("fe_creacion"));
+                cd.put("us_modificacion",rs.getString("us_modificacion"));
+                cd.put("fe_modificacion",rs.getString("fe_modificacion"));
+                cd.put("es_comentario_dgp",rs.getString("es_comentario_dgp"));
+                cd.put("id_trabajador",rs.getString("id_trabajador"));
+                cd.put("id_rol",rs.getString("id_rol"));
+                cd.put("id_empleado",rs.getString("id_empleado"));
+                cd.put("no_usuario",rs.getString("no_usuario"));
+                cd.put("pw_usuario",rs.getString("pw_usuario"));
+                cd.put("no_puesto",rs.getString("no_puesto"));
+                cd.put("id_puesto",rs.getString("id_puesto"));
+                cd.put("no_area",rs.getString("no_area"));
+                cd.put("id_area",rs.getString("id_area"));
+                cd.put("no_dep",rs.getString("no_dep"));
+                cd.put("id_departamento",rs.getString("id_departamento"));
+                cd.put("no_direccion",rs.getString("no_direccion"));
+                cd.put("id_direccion",rs.getString("id_direccion"));
+                cd.put("id_seccion",rs.getString("id_seccion"));
+                cd.put("no_seccion",rs.getString("no_seccion"));
+                cd.put("no_trabajador",rs.getString("no_trabajador"));
+                cd.put("ap_paterno",rs.getString("ap_paterno"));
+                cd.put("ap_materno",rs.getString("ap_materno"));
+                cd.put("fe_creacion",rs.getString("fe_creacion"));
+                cd.put("ar_foto",rs.getString("ar_foto"));
+              lista.add(cd);
             }
-        } catch (SQLException e) {
+      } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
-        return list;
+        return lista;
     }
 
     @Override
@@ -102,9 +121,16 @@ public class Comentario_DGPDAO implements InterfaceComentario_DGPDAO {
             while (rs.next()) {
                 info_comentario = rs.getString("INF");
             }
-        } catch (SQLException e) {
+      } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return info_comentario;
     }

@@ -17,9 +17,8 @@ import pe.edu.upeu.application.model.X_List_De_Autorizacion;
  */
 public interface InterfaceAutorizacionDAO {
 
-
     public void Insert_Autorizacion(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String US_MODIF, String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS);
-    
+
     public String Insert_Autorizacion_dev(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String US_MODIF, String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS);
 
     public List<String> Det_Autorizacion(String id_rpp);
@@ -33,14 +32,18 @@ public interface InterfaceAutorizacionDAO {
     public List<Autorizacion> NO_List_DGP();
 
     public void Elim_Aut(String id_Autorizacion);
-    
-    public void Insert_comentario_Aut(String ID_COMENTARIO_DGP_SP,String id_autorizacion,String id_dgp,String us_creacion,String es_comentario,String fe_creacion,String comentario);
+
+    public void Insert_comentario_Aut(String ID_COMENTARIO_DGP_SP, String id_autorizacion, String id_dgp, String us_creacion, String es_comentario, String fe_creacion, String comentario);
 
     public int Val_Aut_DGP_M(String id_dgp);
-    
-    public List<V_Autorizar_Dgp> List_Autorizados (String id_puesto);
-    
+
+    public List<V_Autorizar_Dgp> List_Autorizados(String id_puesto);
+
     public String Mes_plazo(String id_dgp);
-    
-  public List<Map<String, ?>> List_Dgp_Autorizados(String id_usuario, int mes, String año) ;
+
+    public List<Map<String, ?>> List_Dgp_Autorizados(String id_usuario, int mes, String año);
+
+    public List<Map<String, ?>> List_procesar_req(boolean tipo_list,int tipo_user);
+
+    public boolean UpdateDgp_EstadoProcesar(String[] iddgp, int tipo);
 }

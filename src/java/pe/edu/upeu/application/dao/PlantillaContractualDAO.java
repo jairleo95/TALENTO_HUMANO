@@ -1,25 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pe.edu.upeu.application.dao;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.spi.DirStateFactory;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaContractualDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
-import pe.edu.upeu.application.model.Plantilla_Contractual;
 
 /**
  *
@@ -153,7 +143,7 @@ public class PlantillaContractualDAO implements InterfacePlantillaContractualDAO
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT pl.ID_PLANTILLA_CONTRACTUAL,pl.NO_PLANTILLA,pl.NO_ARCHIVO,p.ES_PLANTILLA_PUESTO,p.ID_PLANTILLA_PUESTO FROM RHTC_PLANTILLA_PUESTO p, RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_DIRECCION='0'AND p.ID_DEPARTAMENTO='0'AND p.ID_AREA='0'AND p.ID_SECCION='0'AND p.ID_PUESTO='0'AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL,pl.NO_PLANTILLA,pl.NO_ARCHIVO,p.ES_PLANTILLA_PUESTO,p.ID_PLANTILLA_PUESTO FROM RHTC_PLANTILLA_PUESTO p,RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_PUESTO='" + id_pu.trim() + "'AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL,pl.NO_PLANTILLA,pl.NO_ARCHIVO,p.ES_PLANTILLA_PUESTO,p.ID_PLANTILLA_PUESTO FROM RHTC_PLANTILLA_PUESTO p, RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_SECCION='" + id_sec.trim() + "'AND p.ID_PUESTO='0'AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL,pl.NO_PLANTILLA,pl.NO_ARCHIVO, p.ES_PLANTILLA_PUESTO,p.ID_PLANTILLA_PUESTO FROM RHTC_PLANTILLA_PUESTO p, RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_AREA='" + id_are.trim() + "'AND p.ID_SECCION='0'AND p.ID_PUESTO='0'AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL, pl.NO_PLANTILLA, pl.NO_ARCHIVO,p.ES_PLANTILLA_PUESTO,ID_PLANTILLA_PUESTO FROM RHTC_PLANTILLA_PUESTO p, RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_DEPARTAMENTO='" + id_dep.trim() + "'AND p.ID_AREA='0'AND p.ID_SECCION='0'AND p.ID_PUESTO='0'AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL,pl.NO_PLANTILLA,pl.NO_ARCHIVO,p.ES_PLANTILLA_PUESTO,p.ID_PLANTILLA_PUESTO FROM RHTC_PLANTILLA_PUESTO p,RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_DIRECCION='" + id_dir.trim() + "'AND p.ID_DEPARTAMENTO='0'AND p.ID_AREA='0'AND p.ID_SECCION='0'AND p.ID_PUESTO='0'AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL";
+            String sql = "select cc.* ,dd.no_direccion,dd.no_dep,dd.no_area,dd.no_seccion,dd.no_puesto from ( SELECT pl.ID_PLANTILLA_CONTRACTUAL,pl.NO_PLANTILLA,pl.NO_ARCHIVO,p.ES_PLANTILLA_PUESTO,p.ID_PLANTILLA_PUESTO FROM RHTC_PLANTILLA_PUESTO p, RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_DIRECCION='0'AND p.ID_DEPARTAMENTO='0'AND p.ID_AREA='0'AND p.ID_SECCION='0'AND p.ID_PUESTO='0'AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL,pl.NO_PLANTILLA,pl.NO_ARCHIVO,p.ES_PLANTILLA_PUESTO,p.ID_PLANTILLA_PUESTO FROM RHTC_PLANTILLA_PUESTO p,RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_PUESTO='" + id_pu.trim() + "'AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL,pl.NO_PLANTILLA,pl.NO_ARCHIVO,p.ES_PLANTILLA_PUESTO,p.ID_PLANTILLA_PUESTO FROM RHTC_PLANTILLA_PUESTO p, RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_SECCION='" + id_sec.trim() + "'AND p.ID_PUESTO='0'AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL,pl.NO_PLANTILLA,pl.NO_ARCHIVO, p.ES_PLANTILLA_PUESTO,p.ID_PLANTILLA_PUESTO FROM RHTC_PLANTILLA_PUESTO p, RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_AREA='" + id_are.trim() + "'AND p.ID_SECCION='0'AND p.ID_PUESTO='0'AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL, pl.NO_PLANTILLA, pl.NO_ARCHIVO,p.ES_PLANTILLA_PUESTO,ID_PLANTILLA_PUESTO FROM RHTC_PLANTILLA_PUESTO p, RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_DEPARTAMENTO='" + id_dep.trim() + "'AND p.ID_AREA='0'AND p.ID_SECCION='0'AND p.ID_PUESTO='0'AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL UNION SELECT pl.ID_PLANTILLA_CONTRACTUAL,pl.NO_PLANTILLA,pl.NO_ARCHIVO,p.ES_PLANTILLA_PUESTO,p.ID_PLANTILLA_PUESTO FROM RHTC_PLANTILLA_PUESTO p,RHTC_PLANTILLA_CONTRACTUAL pl WHERE p.ID_DIRECCION='" + id_dir.trim() + "'AND p.ID_DEPARTAMENTO='0'AND p.ID_AREA='0'AND p.ID_SECCION='0'AND p.ID_PUESTO='0'AND pl.ID_PLANTILLA_CONTRACTUAL = p.ID_PLANTILLA_CONTRACTUAL ) cc , (select  pp.ID_PLANTILLA_PUESTO,case when d.NO_DIRECCION is null then 'Todos' else d.NO_DIRECCION end  as no_direccion, case when de.NO_DEP is null then  'Todos' else de.NO_DEP end as no_dep, case when a.NO_AREA is null then 'Todos'  else a.NO_AREA end as no_area, case when s.NO_SECCION is null then 'Todos' else s.NO_SECCION end as no_seccion,case when  pu.NO_PUESTO is null then 'Todos' else pu.NO_PUESTO   end as no_puesto from RHTC_PLANTILLA_PUESTO pp  left outer join RHTX_DIRECCION d on (pp.ID_DIRECCION=d.ID_DIRECCION) left outer join RHTX_DEPARTAMENTO de on (de.ID_DEPARTAMENTO=pp.ID_DEPARTAMENTO) left outer join RHTD_AREA a on (a.id_area=pp.ID_AREA) left outer join RHTR_SECCION s on (s.ID_SECCION=pp.ID_SECCION) left outer join RHTR_PUESTO pu on (pu.ID_PUESTO=pp.id_puesto) ) dd where dd.id_plantilla_puesto=cc.id_plantilla_puesto";
             ResultSet rs = this.cnn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -162,13 +152,14 @@ public class PlantillaContractualDAO implements InterfacePlantillaContractualDAO
                 rec.put("nom_ar", rs.getString("NO_ARCHIVO"));
                 rec.put("es_pl", rs.getString("ES_PLANTILLA_PUESTO"));
                 rec.put("id_pp", rs.getString("ID_PLANTILLA_PUESTO"));
+                rec.put("direccion", "<strong> Dirección: </strong> "+rs.getString("no_direccion") + " <strong>Area: </strong>" + rs.getString("no_dep") + "<strong> Departamento:</strong> " + rs.getString("no_area") +" <strong>Sección: </strong>"+ rs.getString("no_seccion") + " <strong>Puesto: </strong>" + rs.getString("no_puesto"));
                 Lista.add(rec);
             }
             rs.close();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error!");
+            throw new RuntimeException("Error!" + e.getMessage());
         } finally {
             try {
                 this.cnn.close();
@@ -247,6 +238,30 @@ public class PlantillaContractualDAO implements InterfacePlantillaContractualDAO
         } finally {
             this.cnn.close();
         }
+    }
+
+    @Override
+    public boolean Update_Name_File(String id, String nombre) {
+        boolean x = false;
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.cnn.conex.prepareCall("{CALL rhsp_update_nombre_plantilla(?,? )}");
+            cst.setString(1, id);
+            cst.setString(2, nombre);
+            cst.execute();
+            x = true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" + e.getMessage());
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
     }
 
 }

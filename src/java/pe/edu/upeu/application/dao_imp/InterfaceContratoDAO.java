@@ -88,5 +88,7 @@ public interface InterfaceContratoDAO {
     
     public void validar_contrato(String id_cto);
     
+    public boolean validar_editar_contrato(String iduser,String idcontrato);
+    
    
 }

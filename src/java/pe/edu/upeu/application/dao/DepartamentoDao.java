@@ -41,9 +41,16 @@ public class DepartamentoDao implements InterfaceDepartamentoDAO {
                 d.setNo_dep(rs.getString("no_dep"));
                 list.add(d);
             }
-        } catch (SQLException e) {
+       } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }

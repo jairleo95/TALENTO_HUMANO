@@ -17,8 +17,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
-
         <title> TALENTO HUMANO </title>
         <meta name="description" content="">
         <meta name="author" content="">
@@ -28,14 +26,14 @@
         <meta http-equiv="Pragma" content="no-cache" />
 
 
-
+        <link href="css/your_style.css" rel="stylesheet" type="text/css"/>
         <!-- Basic Styles -->
-        <link rel="stylesheet" type="text/css" media="screen" href="HTML_version/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="HTML_version/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-        <link rel="stylesheet" type="text/css" media="screen" href="HTML_version/css/smartadmin-production.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="HTML_version/css/smartadmin-skins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
 
         <!-- SmartAdmin RTL Support is under construction
                  This RTL CSS will be released in version 1.5
@@ -46,30 +44,30 @@
         <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
 
         <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-        <link rel="stylesheet" type="text/css" media="screen" href="HTML_version/css/demo.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
 
         <!-- FAVICONS -->
-        <link rel="shortcut icon" href="HTML_version/img/favicon/favicon.ico" type="image/x-icon">
-        <link rel="icon" href="HTML_version/img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
 
         <!-- GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
         <!-- Specifying a Webpage Icon for Web Clip 
                  Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
-        <link rel="apple-touch-icon" href="HTML_version/img/splash/sptouch-icon-iphone.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="HTML_version/img/splash/touch-icon-ipad.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="HTML_version/img/splash/touch-icon-iphone-retina.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="HTML_version/img/splash/touch-icon-ipad-retina.png">
+        <link rel="apple-touch-icon" href="img/splash/sptouch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="img/splash/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="img/splash/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="img/splash/touch-icon-ipad-retina.png">
 
         <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
         <!-- Startup image for web apps -->
-        <link rel="apple-touch-startup-image" href="HTML_version/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
-        <link rel="apple-touch-startup-image" href="HTML_version/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
-        <link rel="apple-touch-startup-image" href="HTML_version/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        <link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+        <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+        <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <script type="text/javascript" src="js/JQuery/jquery.autoheight.js"></script>
 
     </head>
@@ -334,24 +332,31 @@
         <aside id="left-panel">
 
             <!-- User info -->
-            <div class="login-info">
-                <span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
+            <div class="logininfo">
+                <div class="row">
+                    <div class="avatar-user col-md-3">
+                        <a href="javascript:void(0);" id="show-shortcut" >
+                            <% if (sesion.getAttribute("AR_FOTO") != null) {%>
+                            <img src="Vista/Usuario/Fotos/<%out.println(sesion.getAttribute("AR_FOTO")); %>"  />
+                            <%} else {%>
+                            <img src="imagenes/avatar_default.jpg"  />
+                            <%}%>
+                        </a>  
+                    </div>
+                    <div class="col-md-9">
+                        <div class="login-info text-right">
+                            <span class="spanuser"> <%out.println((String) sesion.getAttribute("USER")); %></span>  
+                        </div>
 
-                    <a href="javascript:void(0);" id="show-shortcut" >
-                        <img src="imagenes/avatar_default.jpg" alt="me" class="online" /> 
-                        <span>
-                            <%out.println((String) sesion.getAttribute("USER")); %>  
-                        </span>
-
-
-
-                    </a> 
-                </span>
+                        <div class="login-info text-right">
+                            <span ><%out.println((String) sesion.getAttribute("NOMBRE_AP")); %> </span> 
+                        </div>
+                    </div>
+                </div>
 
             </div>
-            <div class="login-info text-center">
-                <span ><%out.println((String) sesion.getAttribute("NOMBRE_AP")); %> </span> 
-            </div>
+            
+
             <!-- end user info -->
 
             <!-- NAVIGATION : This navigation is also responsive
@@ -421,7 +426,7 @@
                 </ul>
 
             </nav>
-            <span class="minifyme" data-action="minifyMenu">
+            <span id="btn-ocultar" class="minifyme" data-action="minifyMenu">
                 <i class="fa fa-arrow-circle-left hit"></i> 
             </span>
 
@@ -465,58 +470,26 @@
 
             </div>
             <!-- END RIBBON -->
-
-
             <!-- MAIN CONTENT -->
             <div id="content">
-
-                <div class="row">
-                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                <div class="row"  >
+                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4" >
                         <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home" id="icon_menu"></i><label class="titulo_menu" >Inicio</label><span> </span></h1>
                     </div>
-
-                    <!-- <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
-                         <ul id="sparks" class="">
-                             <li class="sparks-info">
-                                 <h5> My Income <span class="txt-color-blue">$47,171</span></h5>
-                                 <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
-                                     1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
-                                 </div>
-                             </li>
-                             <li class="sparks-info">
-                                 <h5> Site Traffic <span class="txt-color-purple"><i class="fa fa-arrow-circle-up"></i>&nbsp;45%</span></h5>
-                                 <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
-                                     110,150,300,130,400,240,220,310,220,300, 270, 210
-                                 </div>
-                             </li>
-                             <li class="sparks-info">
-                                 <h5> Site Orders <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
-                                 <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
-                                     110,150,300,130,400,240,220,310,220,300, 270, 210
-                                 </div>
-                             </li>
-                         </ul>
-                     </div>-->
                 </div>
-                <!-- widget grid -->
-                <section id="widget-grid" class="">
-                    <!-- row -->
-                    <div class="row ">
+                <!-- row -->
+                <div class="row ">
+                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
                         <div class="animacion_load"></div>
-                        <iframe id="myframe" name="myframe"  style="display:none;"  class="iframe_principal" scrolling="si"  width="100%" height="800" frameborder="0" src="Vista/inicio.jsp"></iframe>
                     </div>
-
-                    <!-- end row -->
-
-                </section>
+                    <iframe id="myframe" name="myframe"  style="display:none;"  class="iframe_principal" scrolling="si"  width="100%" height="800" frameborder="0" src="Vista/inicio.jsp"></iframe>
+                </div>
+                <!-- end row -->
                 <!-- end widget grid -->
-
             </div>
             <!-- END MAIN CONTENT -->
-
         </div>
         <!-- END MAIN PANEL -->
-
         <!-- PAGE FOOTER -->
         <div class="page-footer">
             <div class="row">
@@ -691,62 +664,57 @@
         <!-- Full Calendar 
         <script src="js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>-->
 
-
         <script>
-        document.oncontextmenu = function() {
+            var btnclose = 0;
+        document.oncontextmenu = function () {
             return false;
         }
         function nobackbutton() {
             window.location.hash = "no-back-button";
             window.location.hash = "Again-No-back-button" //chrome
-            window.onhashchange = function() {
+            window.onhashchange = function () {
                 window.location.hash = "";
             }
         }
-
+        /*WEBSOCKET*/
         var websocket = new WebSocket("ws://" + document.location.host + "/TALENTO_HUMANO/serverGth");
-        websocket.onmessage = function(e) {
-            console.log(e.data);
-        };
+        websocket.onmessage = function processMessage(message) {
+            var jsonData = JSON.parse(message.data);
+            if (jsonData.message != null) {
+                $.smallBox({
+                    title: "Se ha autorizado un requerimiento...",
+                    content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+                    color: "#296191",
+                    iconSmall: "fa fa-thumbs-up bounce animated",
+                    timeout: 4000
+                });
+
+                // messagesTextArea.value += jsonData.message + "\n";
+            }
+        }
         function sendMessage() {
             websocket.send("mensaje");
-
         }
-        websocket.onmessage = function processMessage(objJson) {
-            alert(objJson.message)
-        }
-    
-        document.getElementById('myframe').onload = function() {
-         
-           // setTimeout(function() {
-                $(".iframe_principal").show(100);
-                $(".animacion_load").empty();
-          //  }, 1000);
+        document.getElementById('myframe').onload = function () {
+            $(".iframe_principal").show(100);
+            $(".animacion_load").empty();
         };
-        $(document).ready(function() {
-
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+        $(document).ready(function () {
             pageSetUp();
-            //sendMessage()
             // alert('<%="Maximum Inactive Interval of Session in Seconds is : " + sesion.getMaxInactiveInterval() / 60%>');
-            /*
-             * PAGE RELATED SCRIPTS
-             */
-
-
-            $(".menu-item-parent").parent().click(function() {
+            $(".menu-item-parent").parent().click(function () {
                 $(".titulo_menu").text(" " + $(this).text());
                 $("#icon_menu").removeClass();
                 $("#icon_menu").addClass($(this).data('value'));
                 $("#icon_menu").removeClass("fa-lg");
             });
-            $(".li-privilegio").click(function() {
+            $(".li-privilegio").click(function () {
                 $(".li-privilegio").removeClass("active");
                 $(this).addClass("active");
-                 $(".iframe_principal").hide();
-                  $(".animacion_load").append('<h1 class="ajax-loading-animation"><i class="fa fa-cog fa-spin"></i> Cargando...</h1>');
+                $(".iframe_principal").hide();
+                $(".animacion_load").append('<h1 class="ajax-loading-animation"><i class="fa fa-cog fa-spin"></i> Cargando...</h1>');
             });
-            $(".js-status-update a").click(function() {
+            $(".js-status-update a").click(function () {
                 var selText = $(this).text();
                 var $this = $(this);
                 $this.parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
@@ -756,6 +724,16 @@
 
         });
 
+         $("#btn-ocultar").click(function (){
+             if(btnclose == 0){
+                 $(".logininfo").css({display : "none"});
+                 btnclose +=1;
+             }else{
+                 $(".logininfo").css({display : "block"});
+                 btnclose = 0;
+             }
+             
+         });
         </script>
     </body>
 

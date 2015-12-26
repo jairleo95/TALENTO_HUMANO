@@ -68,6 +68,8 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
+        
         <style type="text/css">
             *, *:after, *:before {
                 /*    margin: 0;
@@ -155,15 +157,12 @@
 
         </style>
     </head>
-    <%  //String num = request.getParameter("num");
-        // int num_doc = Integer.parseInt(num);
+    <%
         if (request.getParameter("a") != null) {
             if (request.getParameter("a").equals("t")) {
     %>
-
     <body onload="closedthis();
             nobackbutton();">
-
         <%
             }
         } else {
@@ -218,7 +217,7 @@
                                     <div class="widget-body no-padding">
 
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
-                                            <thead>			                
+                                            <thead>
                                                 <tr>
                                                     <th data-hide="phone">Nro</th>
                                                     <th>MES</th>
@@ -252,73 +251,91 @@
                                                             Accion <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu">
-
                                                             <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>
                                                             <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=Seguimiento">Ver Historial</a> </li>
                                                             <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></li>
-                                                            <li><a href="../../comentario?iddgp=<%=r.getId_dgp().trim()%>&opc=Comentar_Dgp">Comentarios</a></li>    
-                                                            <li><a href="../../solicitud_requerimiento?iddgp=<%=r.getId_dgp().trim()%>&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>    
+                                                            <li><a data-valor="<%=r.getId_dgp().trim()%>;<%=r.getId_trabajador().trim()%>;<%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%>" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjax('')" >Comentario</a></li>
+                                                            <li><a href="../../solicitud_requerimiento?iddgp=<%=r.getId_dgp().trim()%>&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>
                                                             <li class="divider"></li><li>
                                                             <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Detalle">Ver Requerimiento</a> </li>
                                                             </li>
+                                                            
                                                         </ul>
                                                     </div>
 
                                                 </td> 
                                                 <% if (r.getAr_foto() == null) {%>
-                                                <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
+                                                <td><img class="user_avatar_<%=r.getId_trabajador()%>"  src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
                                                     <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
-
                                                         <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a>
-
-
-                                                    <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
-
                                                 </td>
-
-                                                <td><div class="new-progress prog_aut<%=(i + 1)%>"  >
+                                                <%} else {%>
+                                                <td>
+                                                    <img class="user_avatar_<%=r.getId_trabajador()%>" src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
+                                                        <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> 
+                                                </td>
+                                                <%}%>
+                                                <td>
+                                                    <div class="new-progress prog_aut<%=(i + 1)%>"  >
                                                         <%
                                                             out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso(), ID_DEP));
                                                         %>
-                                                    </div></td>
-                                                    <%if (ID_DEP.equals("DPT-0019")) {%>
+                                                    </div>
+                                                </td>
+                                                <%if (ID_DEP.equals("DPT-0019")) {%>
                                                 <td><%=r.getNo_dep()%></td>
                                                 <%} %>
-                                                <td><%if (r.getEs_dgp().equals("2")) {
-                                                        out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
-                                                    } else {
-                                                        out.print(" <span class='label label-primary'>En Proceso</span>");
-                                                    }%></td>
-                                                    <% } else {%>
-                                                <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
-
-                                                        <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> 
-
-
-
-
-                                                    <input type="hidden" class="num_aut<%=(i + 1)%>" value="<%=r.getAut_actual()%>"/>
+                                                <td>
+                                                    <%if (r.getEs_dgp().equals("2")) {
+                                                            out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
+                                                        } else {
+                                                            out.print(" <span class='label label-primary'>En Proceso</span>");
+                                                        }%>
                                                 </td>
-                                                <td><div class="new-progress prog_aut<%=(i + 1)%>"  >
-                                                        <%
-                                                            out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso(), ID_DEP));
-                                                        %>
-                                                    </div></td>
-                                                <td>  <%if (r.getEs_dgp().equals("2")) {
-                                                        out.print(" <span class='label label-danger'>Fuera de Proceso</span>");
-                                                    } else {
-                                                        out.print(" <span class='label label-primary'>En Proceso</span>");
-                                                    }%></td>
-                                                    <% }%>
+                                                
                                             </tr>
                                             <% }
-                                                LIST_DGP_PROCESO.clear();%>
-
-
+                                                LIST_DGP_PROCESO.clear();
+                                            %>
                                             </tbody>
                                         </table>
-
-
+                                            <!-------------- Modal  ----------->
+                                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <div class="datos_trabajador text-left">
+                                                            </div>
+                                                            <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                               
+                                                            <button class="add-coment btn btn-primary btn-block">Add Comentario</button>
+                                                        <div class="area-coment">
+                                                                <form class="comentari-form" method="post">
+                                                                    <textarea class="mensaje"></textarea>
+                                                                    <p></p>
+                                                                    <input name="idDgp" class="idDgp" type="hidden" value="">
+                                                                    <div class="contador">
+                                                                </form>
+                                                             </div>
+                                                        </div>
+                                        
+                                                        <div class="comentarios">
+                                                            <div>
+                                                                    <legend>Comentarios </legend>
+                                                                    <div class="comentario-dgp"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
+                                                            <button type="button" onclick="Registrar()" class="comet btn btn-success">Comentar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               </div>
+                                            </div>
                                     </div>
                                     <!-- end widget content -->
 
@@ -780,13 +797,23 @@
                 /* for (var u = 0; u < $(".tamaño").val() + 1; u++) {
                  iterar_aut(u, parseInt($(".num_aut" + u).val()) + 2);
                  }*/
-
-
-
                 //$('.new-progress .new-bar').removeClass().addClass('new-bar');
+                $('#coment-1').click(function() {
+                    console.log("jalar comentario");
+                    $.get('../../comentario?iddgp=DGP-000119&opc=Comentar_Dgp', function(responseJson) {
+                    var $select = $('.comentarios');
+                    $select.find('h2').remove();
+                    $.each(responseJson, function(value) {
+                    $('<p>').text(value).appendTo($select);
+                     });
+                    });
+                   });
 
-
-            });</script>
+            });
+          
+        </script>
+        
+     <script src="../../js/coment/coment.js" type="text/javascript"></script>
     </body>
 
 </html>

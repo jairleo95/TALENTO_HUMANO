@@ -97,7 +97,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                 rec.put("req", rs.getString("no_req"));
                 rec.put("planilla", rs.getString("ti_planilla"));
                 rec.put("estado", rs.getString("es_plazo"));
-                rec.put("tipo", rs.getString("ti_plazo").trim());
+                rec.put("tipo", rs.getString("ti_plazo"));
                 rec.put("dep_tol", rs.getString("NO_DEP_TOL"));
                 rec.put("dep", rs.getString("NO_DEP"));
                 rec.put("area", rs.getString("NO_AREA"));
@@ -325,14 +325,15 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                 }
             }
             rs.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
     }
@@ -344,14 +345,15 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cs = this.conn.conex.prepareCall("{CALL RHSP_VAL_ESTADO_PLAZO()}");
             cs.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
     }
@@ -369,14 +371,15 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
             cs.setString(5, dep);
             cs.execute();
             fecha = cs.getString(1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
         return fecha;
@@ -390,7 +393,9 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         String estado = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT pl.ID_PLAZO,cp.ID_CUMPLIMIENTO_PLAZO ,cp.ID_DGP,pl.FE_DESDE,pl.FE_HASTA,cp.ES_CUMPLE_PLAZO FROM RHTR_CUMPLIMIENTO_PLAZO cp, RHTR_PLAZO pl WHERE pl.ID_PLAZO = cp.ID_PLAZO and pl.TI_PLAZO='2'";
+
+            //Busco los CUMPLIMIENTOS DE DGP DE PLAZO  TIPO 2
+            String sql = "SELECT pl.ID_PLAZO,cp.ID_CUMPLIMIENTO_PLAZO ,cp.ID_DGP,pl.FE_DESDE,pl.FE_HASTA,cp.ES_CUMPLE_PLAZO FROM RHTR_CUMPLIMIENTO_PLAZO cp, RHTR_PLAZO pl WHERE pl.ID_PLAZO = cp.ID_PLAZO and pl.TI_PLAZO='2' AND pl.ES_PLAZO='1'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 id_plazo = rs.getString("ID_PLAZO");
@@ -398,24 +403,30 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                 id_dgp = rs.getString("ID_DGP");
                 estado = rs.getString("ES_CUMPLE_PLAZO");
                 if (estado.trim().equals("0")) {
-                } else if (estado.trim().equals("1")) {
+
+                } // ELEJIR Los DGP cuyo cumpliemiento esta ok 
+                else if (estado.trim().equals("1")) {
                     String dep = "";
                     int cont = 0;
                     int cont2 = 0;
+                    //ELEJIR LOS DGP EN PROCESO
                     String Sqlcont = "SELECT COUNT(*) FROM RHVD_USER_AUT u ,RHTC_PASOS p , RHVD_USUARIO du WHERE u.ID_EMPLEADO   =du.ID_EMPLEADO AND u.ID_PASOS = p.ID_PASOS AND u.ID_DGP ='" + id_dgp.trim() + "'AND TRIM(u.ID_PUESTO)<>'0'";
                     ResultSet rscon = this.conn.query(Sqlcont);
                     while (rscon.next()) {
+                        //Contamos los registros
                         cont = rscon.getInt(1);
                     }
+                    //SI ESTA EN PROCESO
                     if (cont > 0) {
                         String sql2 = "SELECT u.ID_TRABAJADOR, u.ID_ROL, u.ID_DEPARTAMENTO, du.NO_TRABAJADOR ,du.AP_PATERNO,du.AP_MATERNO, p.DE_PASOS AS paso FROM RHVD_USER_AUT u ,RHTC_PASOS p , RHVD_USUARIO du WHERE u.ID_EMPLEADO   =du.ID_EMPLEADO AND u.ID_PASOS = p.ID_PASOS AND u.ID_DGP ='" + id_dgp.trim() + "'AND TRIM(u.ID_PUESTO)<>'0'";
                         ResultSet rs1 = this.conn.query(sql2);
                         while (rs1.next()) {
                             dep = rs1.getString("ID_DEPARTAMENTO");
                             if (dep.trim().equals("DPT-0019")) {
+                                //valida la llegada a rrhh
                                 cont2++;
                             }
-                        }
+                        }// EXISTEN USUARIOS PROXIMOS A RRHH
                         if (cont == cont2) {
                             int Estado_usu = 1;
                             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -424,16 +435,22 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                             cst.setString(2, id_plazo);
                             cst.setString(3, id_cum_plazo);
                             cst.execute();
-                        } else if (cont2 == 0) {
-                            int Estado_usu = 0;
-                            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-                            CallableStatement cst = this.conn.conex.prepareCall("{CALL VAL_CUMPLE_PLAZO( ?, ?, ?)}");
-                            cst.setInt(1, Estado_usu);
-                            cst.setString(2, id_plazo);
-                            cst.setString(3, id_cum_plazo);
-                            cst.execute();
+
+                        } //NO EXISTE NINGUN USUARIO PROXIMO A RRHH
+                        else if (cont2 == 0) {
+                            System.out.print("OK" + cont2);
+                            /*     ConexionBD conn2;
+                             int Estado_usu = 0;
+                             conn2 = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+                             CallableStatement cst = conn2.conex.prepareCall("{CALL VAL_CUMPLE_PLAZO( ?, ?, ?)}");
+                             cst.setInt(1, Estado_usu);
+                             cst.setString(2, id_plazo);
+                             cst.setString(3, id_cum_plazo);
+                             cst.execute();*/
+
                         }
-                    } else if (cont == 0) {
+                    } //caso contrario no existe ningun usuario proximo a autorizar (no esta en proceso)
+                    else if (cont == 0) {
                         int Estado_usu = 0;
                         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
                         CallableStatement cst = this.conn.conex.prepareCall("{CALL VAL_CUMPLE_PLAZO( ?, ?, ?)}");
@@ -441,6 +458,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                         cst.setString(2, id_plazo);
                         cst.setString(3, id_cum_plazo);
                         cst.execute();
+
                     }
                 } else if (estado.trim().equals("2")) {
                 }
@@ -468,7 +486,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
         Double ano = 0.0;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT pl.ID_PLAZO,cp.ID_CUMPLIMIENTO_PLAZO ,cp.ID_DGP,pl.FE_DESDE,(extract (month from pl.FE_HASTA) -  extract(month from sysdate))as meses_con,(extract (day from pl.FE_HASTA) -  extract(day from sysdate))as dia_con,(extract (year from pl.FE_HASTA) -  extract(year from sysdate))as anno_con ,cp.ES_CUMPLE_PLAZO FROM RHTR_CUMPLIMIENTO_PLAZO cp, RHTR_PLAZO pl WHERE pl.ID_PLAZO = cp.ID_PLAZO and pl.TI_PLAZO='1'";
+            String sql = "SELECT pl.ID_PLAZO,cp.ID_CUMPLIMIENTO_PLAZO ,cp.ID_DGP,pl.FE_DESDE,(extract (month from pl.FE_HASTA) -  extract(month from sysdate))as meses_con,(extract (day from pl.FE_HASTA) -  extract(day from sysdate))as dia_con,(extract (year from pl.FE_HASTA) -  extract(year from sysdate))as anno_con ,cp.ES_CUMPLE_PLAZO FROM RHTR_CUMPLIMIENTO_PLAZO cp, RHTR_PLAZO pl WHERE pl.ID_PLAZO = cp.ID_PLAZO and pl.TI_PLAZO='1' AND pl.ES_PLAZO='1'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 id = rs.getString("ID_PLAZO");
@@ -495,6 +513,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                                 CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_DESHABI_CUMPL_PLAZO( ?)}");
                                 cst.setString(1, id_cumplimiento_plazo);
                                 cst.execute();
+
                             } else if (dia == 0 || dia > 0) {
                             }
                         } else if (mes > 0) {
