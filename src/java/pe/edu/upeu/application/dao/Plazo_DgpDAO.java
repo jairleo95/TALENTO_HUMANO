@@ -97,7 +97,7 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
                 rec.put("req", rs.getString("no_req"));
                 rec.put("planilla", rs.getString("ti_planilla"));
                 rec.put("estado", rs.getString("es_plazo"));
-                rec.put("tipo", rs.getString("ti_plazo"));
+                rec.put("tipo", rs.getString("ti_plazo").trim());
                 rec.put("dep_tol", rs.getString("NO_DEP_TOL"));
                 rec.put("dep", rs.getString("NO_DEP"));
                 rec.put("area", rs.getString("NO_AREA"));

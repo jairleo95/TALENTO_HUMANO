@@ -97,13 +97,13 @@ public class Cindex extends HttpServlet {
              getServletContext().setAttribute("List_Distrito", ub.List_Distrito());
              getServletContext().setAttribute("List_Det_Puesto", pu.List_Det_Puesto());
              getServletContext().setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());*/
-            pl.Validar_Cumplimiento_plazo_t2();
-            pl.Validar_Cumplimiento_plazo_t1();
-            dgp.VAL_DGP_PASOS();
+           // pl.Validar_Cumplimiento_plazo_t2();
+           // pl.Validar_Cumplimiento_plazo_t1();
+           // dgp.VAL_DGP_PASOS();
             // cto.VALIDAR_FE_CESE_CON();
-            pl.validar_Vig_plazos();
-            pl.Val_Es_Plazo();
-            cto.VALIDAR_FE_HASTA_CON();
+          //  pl.validar_Vig_plazos();
+            //pl.Val_Es_Plazo();
+            //cto.VALIDAR_FE_HASTA_CON();
             response.sendRedirect("menu");
             out.print("EXITO!");
         } else {

@@ -27,16 +27,43 @@ Author     : JAIR
         <link rel="icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
         <!-- #GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+        <style>
+            .btnAgregar{
+                -webkit-box-shadow: 2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+                -moz-box-shadow:    2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+                box-shadow:         2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+            }
+            .btn-registrar{
+                -webkit-box-shadow: 2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+                -moz-box-shadow:    2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+                box-shadow:         2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+            }
+            .btnClose{
+                -webkit-box-shadow: 2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+                -moz-box-shadow:    2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+                box-shadow:         2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+            }
+        </style>
     </head>
     <body> 
-    <center>
         <div id="main" role="main" style="margin: 0px;">
             <div id="content" >
                 <section id="widget-grid" class="">
                     <div class="row">
                         <div class="well">
-                            <h1>Mantenimiento de Plazos de Requerimientos</h1>
-                            <form    id="form-plazo" class="form_plazo smart-form">
+                            <center><h1>Plazos de Requerimientos</h1></center>
+                            <div class="row ">
+
+                                <section class="col col-sm-12"> 
+                                    <button type="button"  id="btn-registrar" class="btn btn-default btn-circle btn-lg btn-registrar" style="float:right;display:none" rel="tooltip" data-placement="top" data-original-title="Guardar"><i class="glyphicon glyphicon-floppy-disk"></i> 
+                                    </button>
+                                    <button type="button"   class="btn btn-primary btn-circle btn-lg btnAgregar" style="float:right;display:none"  rel="tooltip"  data-placement="top" data-original-title="Agregar" ><i class="glyphicon glyphicon-plus"></i> 
+                                    </button>
+                                    <button type="button"   class="btn btn-danger btn-circle btn-lg btnClose" style="float:right;display:none"  rel="tooltip" data-placement="top" data-original-title="Cancelar"  ><i class="glyphicon glyphicon-remove"></i> 
+                                    </button>
+                                </section>
+                            </div>
+                            <form    id="form-plazo" class="form_plazo smart-form"style="display:none" >
                                 <div class="row">
                                     <section class="col col-4">
                                         <label><strong>Tipo de plazo :</strong></label>
@@ -69,7 +96,7 @@ Author     : JAIR
                                 </div>
                                 <section>
                                     <label class="textarea"> 										
-                                        <textarea rows="3" name="descripcion" placeholder="Descripci贸n" required="" class="descripcion" ></textarea> 
+                                        <textarea rows="3" name="descripcion" placeholder="Descripci髇" required="" class="descripcion" ></textarea> 
                                     </label>
                                 </section>
                                 <div class="row ">
@@ -105,7 +132,7 @@ Author     : JAIR
                                 <div class="row">
                                     <section class="col col-4">
                                         <label class="select" id="titu">
-                                            Direcci贸n :<select name="direccion" class="direccion"  >
+                                            Direcci髇 :<select name="direccion" class="direccion"  >
                                                 <option value="" >[SELECCIONE]</option>
                                             </select>
                                         </label>
@@ -126,14 +153,6 @@ Author     : JAIR
                                         </label>
                                     </section>
                                 </div>
-
-                                <footer>
-                                    <button type="button"  id="btn-registrar" class="btn btn-primary btn-registrar"> 
-                                        Registrar 
-                                    </button>
-                                </footer>
-
-
                             </form>
                         </div>
                     </div>
@@ -148,17 +167,17 @@ Author     : JAIR
                                         <td class="text-center semi-bold">Nro</td>
                                         <td class="text-center semi-bold">Tipo Plazo</td>
                                         <td class="text-center semi-bold">Nombre Plazo</td>
-                                        <td class="text-center semi-bold">Descripci贸n</td>
+                                        <td class="text-center semi-bold">Descripci髇</td>
                                         <td class="text-center semi-bold">Desde</td>
                                         <td class="text-center semi-bold">Hasta</td>
                                         <td class="text-center semi-bold">Tipo de Planilla</td>
                                         <td class="text-center semi-bold">Requerimiento</td>
                                         <td class="text-center semi-bold">Dep. Tolerancia</td>
-                                        <td class="text-center semi-bold">Dias de tolerancia</td>
+                                        <td class="text-center semi-bold" >Dias de tolerancia</td>
                                         <td class="text-center semi-bold">Departamento</td>
                                         <td class="text-center semi-bold">Area</td>
-                                        <td class="text-center semi-bold">Estado</td>
-                                        <td class="text-center semi-bold">Editar</td>
+                                        <td class="text-center semi-bold" >Estado</td>
+                                        <td class="text-center semi-bold" style="width:8%">Editar</td>
                                     </tr>
                                 </thead>
                                 <tbody  class="tbodys" >
@@ -170,316 +189,332 @@ Author     : JAIR
             </div>
         </div>
 
+    </body>
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script>
+        if (!window.jQuery) {
+            document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
+        }
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>
+        if (!window.jQuery.ui) {
+            document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+        }
+    </script>
+    <!-- IMPORTANT: APP CONFIG -->
+    <script src="../../../js/app.config.js"></script>
 
-    </center>
-</body>
-<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-<script>
-    if (!window.jQuery) {
-        document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
-    }
-</script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script>
-    if (!window.jQuery.ui) {
-        document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-    }
-</script>
-<!-- IMPORTANT: APP CONFIG -->
-<script src="../../../js/app.config.js"></script>
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+    <script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
 
-<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-<script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
-
-<!-- BOOTSTRAP JS -->
-<script src="../../../js/bootstrap/bootstrap.min.js"></script>
+    <!-- BOOTSTRAP JS -->
+    <script src="../../../js/bootstrap/bootstrap.min.js"></script>
 
 
-<!-- CUSTOM NOTIFICATION -->
-<script src="../../../js/notification/SmartNotification.min.js"></script>
+    <!-- CUSTOM NOTIFICATION -->
+    <script src="../../../js/notification/SmartNotification.min.js"></script>
 
-<!-- JARVIS WIDGETS -->
-<script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
+    <!-- JARVIS WIDGETS -->
+    <script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-<!-- EASY PIE CHARTS -->
-<script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+    <!-- EASY PIE CHARTS 
+    <script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
 
-<!-- SPARKLINES -->
-<script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+    <!-- SPARKLINES -->
+    <script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
 
-<!-- JQUERY VALIDATE -->
-<script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
+    <!-- JQUERY VALIDATE -->
+    <script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-<!-- JQUERY MASKED INPUT -->
-<script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+    <!-- JQUERY MASKED INPUT 
+    <script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
 
-<!-- JQUERY SELECT2 INPUT -->
-<script src="../../../js/plugin/select2/select2.min.js"></script>
+    <!-- JQUERY SELECT2 INPUT -->
+    <script src="../../../js/plugin/select2/select2.min.js"></script>
 
-<!-- JQUERY UI + Bootstrap Slider -->
-<script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+    <!-- JQUERY UI + Bootstrap Slider -->
+    <script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
 
-<!-- browser msie issue fix -->
-<script src="../../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+    <!-- browser msie issue fix -->
+    <script src="../../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 
-<!-- FastClick: For mobile devices -->
-<script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
-
-
-<script src="../../../js/demo.min.js"></script>
-
-<!-- MAIN APP JS FILE -->
-<script src="../../../js/app.min.js"></script>
-
-<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-<!-- Voice command : plugin -->
-<script src="../../../js/speech/voicecommand.min.js"></script>
-
-<script src="../../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
+    <!-- FastClick: For mobile devices -->
+    <script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
 
 
-<script>
-    function validar_fechas() {
-        var data = "tipo=" + $(".tipo").val() + "&req=" + $(".req").val() + "&dias=" + $(".tolerancia").val() + "&dep=" + $(".dep_tolerancia").val();
-        $.post("../../../plazo_dgp", "opc=fecha_habilitada&" + data, function(objJson) {
-            var fecha = objJson.fecha;
-            $(".desde").attr("min", fecha);
-            if ($(".desde").val() == "") {
-                $(".desde").val(fecha);
-            } else {
-            }
-            $(".desde").removeAttr("readonly");
-            $(".hasta").attr("min", fecha);
-            $(".hasta").removeAttr("readonly");
-        });
-    }
-    function listar() {
-        var b = $(".tbodys");
-        b.empty();
-        var text_html = "";
-        b.append("<tr><td colspan='9'>Cargando...</td></tr>");
-        $.post("../../../plazo_dgp", $(".form_plazo").serialize() + "&opc=Listar_Plazo", function(objJson) {
+    <script src="../../../js/demo.min.js"></script>
+
+    <!-- MAIN APP JS FILE -->
+    <script src="../../../js/app.min.js"></script>
+
+    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+    <!-- Voice command : plugin 
+    <script src="../../../js/speech/voicecommand.min.js"></script>-->
+
+    <script src="../../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
+
+
+    <script>
+        function validar_fechas() {
+            var data = "tipo=" + $(".tipo").val() + "&req=" + $(".req").val() + "&dias=" + $(".tolerancia").val() + "&dep=" + $(".dep_tolerancia").val();
+            $.post("../../../plazo_dgp", "opc=fecha_habilitada&" + data, function(objJson) {
+                var fecha = objJson.fecha;
+                $(".desde").attr("min", fecha);
+                if ($(".desde").val() == "") {
+                    $(".desde").val(fecha);
+                } else {
+                }
+                $(".desde").removeAttr("readonly");
+                $(".hasta").attr("min", fecha);
+                $(".hasta").removeAttr("readonly");
+            });
+        }
+        function listar() {
+            var b = $(".tbodys");
             b.empty();
-            var lista = objJson.lista;
-            if (objJson.rpta == -1) {
-                alert(objJson.mensaje);
-                return;
-            }
-            for (var i = 0; i < lista.length; i++) {
-                if (lista[i].estado == '1') {
-                    text_html += "<tr class='success' >";
+            var text_html = "";
+            b.append("<tr><td colspan='9'>Cargando...</td></tr>");
+            $.post("../../../plazo_dgp", $(".form_plazo").serialize() + "&opc=Listar_Plazo", function(objJson) {
+                b.empty();
+                var lista = objJson.lista;
+                if (objJson.rpta == -1) {
+                    alert(objJson.mensaje);
+                    return;
                 }
-                else if (lista[i].estado == '0') {
-                    text_html += "<tr class='danger' >";
-                }
-                text_html += "<td>" + (i + 1) + "</td>";
-                text_html += "<td class='tipo" + i + "'>" + lista[i].tipo + "</td>";
-                text_html += "<td class='nombre" + i + "'>" + lista[i].nom + "</td>";
-                text_html += "<td class='det" + i + "'>" + lista[i].det + "</td>";
-                text_html += "<td class='desde" + i + "'>" + lista[i].desde + "</td>";
-                text_html += "<td class='hasta" + i + "'>" + lista[i].hasta + "</td>";
-                text_html += "<td class='planilla" + i + "'>" + lista[i].planilla + "</td>";
-                text_html += "<td >" + lista[i].req + "</td>";
-                text_html += "<td >" + lista[i].dep_tol + "</td>";
-                text_html += "<td >" + lista[i].dias + "</td>";
-                text_html += "<td >" + lista[i].dep + "</td>";
-                text_html += "<td >" + lista[i].area + "</td>";
-
-                if (lista[i].estado == '1') {
-                    text_html += "<td  >Activo</td>";
-                }
-                else if (lista[i].estado == '0') {
-                    text_html += "<td >No activo</td>";
-                }
-                text_html += "<input type='hidden' value='" + lista[i].id_req + "'/>";
-                text_html += "<td><button  class='Editar-Plazo' value='" + lista[i].id + "'>Editar</button></td>";
-                text_html += "<td><button  class='Eliminar-Plazo' value='" + lista[i].id + "'>Eliminar</button></td>";
-                text_html += "</tr>";
-            }
-            b.append(text_html);
-            text_html = "";
-
-            $(".Editar-Plazo").click(
-                    function() {
-                        $(".nombre_plazo").val($(".nombre" + $(this).val()).text());
-                        $(".descripcion").val($(".det" + $(this).val()).text());
-                        $(".desde").val($(".desde" + $(this).val()).text());
-                        $(".hasta").val($(".hasta" + $(this).val()).text());
-                        $("#form-plazo").append("<input type='hidden' name='ID' value='" + $(".id" + $(this).val()).text() + "'  />");
-                        $("#btn-registrar").val("Modificar");
-                        $(".opc").val("Modificar");
+                for (var i = 0; i < lista.length; i++) {
+                    if (lista[i].estado == '1') {
+                        text_html += "<tr class='success' >";
                     }
-            );
-            $(".Eliminar-Plazo").click(
-                    function() {
-                        var valor = $(this).val();
-                        $.SmartMessageBox({
-                            title: "隆Advertencia!",
-                            content: "驴Esta seguro de eliminar el plazo?",
-                            buttons: '[No][Si]'
-                        }, function(ButtonPressed) {
-                            if (ButtonPressed === "Si") {
-                                $.ajax({
-                                    url: "../../../plazo_dgp",
-                                    data: "opc=Eliminar&plz=" + valor,
-                                    type: "POST"
-                                }).done(function() {
-                                    listar();
-                                    $.smallBox({
-                                        title: "隆Procesado con exito!",
-                                        content: "<i class='fa fa-clock-o'></i> <i>Se ha eliminado el plazo correctamente...</i>",
-                                        color: "#659265",
-                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                        timeout: 4000
+                    else if (lista[i].estado == '0') {
+                        text_html += "<tr class='danger' >";
+                    }
+                    text_html += "<td>" + (i + 1) + "</td>";
+                    if (lista[i].tipo === "1") {
+                        text_html += "<td class='tipo" + i + "'>Inicio de Contrato</td>";
+                    } else if (lista[i].tipo === "2") {
+                        text_html += "<td class='tipo" + i + "'>Ingreso a planilla</td>";
+                    }
+
+                    text_html += "<td class='nombre" + i + "'>" + lista[i].nom + "</td>";
+                    text_html += "<td class='det" + i + "'>" + lista[i].det + "</td>";
+                    text_html += "<td class='desde" + i + "'>" + lista[i].desde + "</td>";
+                    text_html += "<td class='hasta" + i + "'>" + lista[i].hasta + "</td>";
+                    text_html += "<td class='planilla" + i + "'>" + lista[i].planilla + "</td>";
+                    text_html += "<td >" + lista[i].req + "</td>";
+                    text_html += "<td >" + lista[i].dep_tol + "</td>";
+                    text_html += "<td >" + lista[i].dias + "</td>";
+                    text_html += "<td >" + lista[i].dep + "</td>";
+                    text_html += "<td >" + lista[i].area + "</td>";
+
+                    if (lista[i].estado == '1') {
+                        text_html += "<td  >Activo</td>";
+                    }
+                    else if (lista[i].estado == '0') {
+                        text_html += "<td >No activo</td>";
+                    }
+                    text_html += "<input type='hidden' value='" + lista[i].id_req + "'/>";
+                    text_html += "<td><button class='btn btn-success btn-sm Editar-Plazo' value='" + lista[i].id + "'><i class='fa fa-pencil'></i></button>";
+                    text_html += "<button class='btn btn-danger btn-sm Eliminar-Plazo' value='" + lista[i].id + "'><i class='fa fa-times'></i></button></td>";
+                    text_html += "</tr>";
+                }
+                b.append(text_html);
+                text_html = "";
+
+                $(".Editar-Plazo").click(
+                        function() {
+                            $(".nombre_plazo").val($(".nombre" + $(this).val()).text());
+                            $(".descripcion").val($(".det" + $(this).val()).text());
+                            $(".desde").val($(".desde" + $(this).val()).text());
+                            $(".hasta").val($(".hasta" + $(this).val()).text());
+                            $("#form-plazo").append("<input type='hidden' name='ID' value='" + $(".id" + $(this).val()).text() + "'  />");
+                            $("#btn-registrar").val("Modificar");
+                            $(".opc").val("Modificar");
+                        }
+                );
+                $(".Eliminar-Plazo").click(
+                        function() {
+                            var valor = $(this).val();
+                            $.SmartMessageBox({
+                                title: "dvertencia!",
+                                content: "縀sta seguro de eliminar el plazo?",
+                                buttons: '[No][Si]'
+                            }, function(ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+                                    $.ajax({
+                                        url: "../../../plazo_dgp",
+                                        data: "opc=Eliminar&plz=" + valor,
+                                        type: "POST"
+                                    }).done(function() {
+                                        listar();
+                                        $.smallBox({
+                                            title: "rocesado con exito!",
+                                            content: "<i class='fa fa-clock-o'></i> <i>Se ha eliminado el plazo correctamente...</i>",
+                                            color: "#659265",
+                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                            timeout: 4000
+                                        });
                                     });
-                                });
-                            }
-                            if (ButtonPressed === "No") {
-                            }
-                        });
-                    }
-            );
-        });
-    }
-    $(document).ready(function() {
-        pageSetUp();
-        $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
-            $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-        });
-        $(".departamento").change(function() {
-            listar()
-        });
-        $(".area").change(function() {
-            listar()
-        });
-        $(".desde").datepicker({
-            dateFormat: "yy-mm-dd",
-            defaultDate: "+1w",
-            changeMonth: true,
-            numberOfMonths: 2,
-            onClose: function(selectedDate) {
-                $(".hasta").datepicker("option", "minDate", selectedDate);
-                $(".hasta").datepicker("setDate", selectedDate);
-            }
-        });
-        $(".hasta").datepicker({
-            dateFormat: "yy-mm-dd",
-            defaultDate: "+1w",
-            changeMonth: true,
-            numberOfMonths: 2,
-            onClose: function(selectedDate) {
-                $(".desde").datepicker("option", "maxDate", selectedDate);
-            }
-        });
-        listar();
-        $.post("../../../requerimiento", "opc=Listar_tp", function(objJson) {
-            var tp = $(".planilla");
-            tp.empty();
-            var lista = objJson.lista;
-            if (objJson.rpta == -1) {
-                alert(objJson.mensaje);
-                return;
-            }
-            var lista = objJson.lista;
-            tp.append("<option value='0'>[Todos]</option>");
-            for (var t = 0; t < lista.length; t++) {
-                tp.append("<option value='" + lista[t].id + "'>" + lista[t].nombre + "</option>");
-            }
-        });
-
-        $(".tipo").change(function() {
-            if ($(this).val() == '1') {
-                $(".tolerancia").val("0");
-                $(".tr_tolerancia").show();
-                $(".tr_dep_tolerancia").hide();
-                $(".dep_tolerancia").val("0");
-
-            } else if ($(this).val() == '2') {
-                $(".tr_tolerancia").hide();
-                $(".tolerancia").val("0");
-                $(".tr_dep_tolerancia").show();
-                $(".dep_tolerancia").val("DPT-0019");
-
-            }
+                                }
+                                if (ButtonPressed === "No") {
+                                }
+                            });
+                        }
+                );
+            });
+        }
+        $(document).ready(function() {
+            pageSetUp();
+            $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+            });
+            $(".btnAgregar").show(300);
+            $(".btnAgregar").click(function() {
+                $(".btn-registrar").show(200);
+                $(".btnClose").show(200);
+                $(".form_plazo").show(200);
+                $(this).hide(200);
+            });
+            $(".btnClose").click(function() {
+                $(".btnAgregar").show(200);
+                $(".form_plazo").hide(200);
+                $(".btn-registrar").hide(200);
+                $(this).hide(200);
+            });
+            $(".departamento").change(function() {
+                listar()
+            });
+            $(".area").change(function() {
+                listar()
+            });
+            $(".desde").datepicker({
+                dateFormat: "yy-mm-dd",
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 2,
+                onClose: function(selectedDate) {
+                    $(".hasta").datepicker("option", "minDate", selectedDate);
+                    $(".hasta").datepicker("setDate", selectedDate);
+                }
+            });
+            $(".hasta").datepicker({
+                dateFormat: "yy-mm-dd",
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 2,
+                onClose: function(selectedDate) {
+                    $(".desde").datepicker("option", "maxDate", selectedDate);
+                }
+            });
             listar();
-        });
-        $(".planilla").change(function() {
-            $.post("../../../requerimiento", "opc=Listar_req_id&id=" + $(this).val(), function(objJson) {
-                var req = $(".req");
-                req.empty();
+            $.post("../../../requerimiento", "opc=Listar_tp", function(objJson) {
+                var tp = $(".planilla");
+                tp.empty();
                 var lista = objJson.lista;
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
                 }
                 var lista = objJson.lista;
-                req.append("<option value='' selected =''>[Seleccione]</option>");
-                req.append("<option value='0'>[Todos]</option>");
+                tp.append("<option value='0'>[Todos]</option>");
                 for (var t = 0; t < lista.length; t++) {
-                    req.append("<option value='" + lista[t].id + "'>" + lista[t].nombre + "</option>");
+                    tp.append("<option value='" + lista[t].id + "'>" + lista[t].nombre + "</option>");
                 }
             });
 
-        });
-        $(".req").change(function() {
-            validar_fechas();
-            listar();
-        });
-        $(".btn-registrar").click(
-                function() {
-                    //$(this).attr("disabled", "true");
-                    validar_fechas();
-                    if ($(".form_plazo").valid()) {
-                        $.ajax({
-                            type: "post",
-                            url: "../../../plazo_dgp",
-                            data: "opc=Registrar&" + $("#form-plazo").serialize()
-                        }).done(function(objJson) {
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            } else {
-                                listar();
-                                $("#form-plazo")[0].reset();
-                                $.smallBox({
-                                    title: "隆Registrado!",
-                                    content: "<i class='fa fa-clock-o'></i> <i>El plazo se ha registrado correctamente...</i>",
-                                    color: "#659265",
-                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                    timeout: 4000
-                                });
-                                //$(this).removeAttr("disabled");
-                            }
-                        });
-                    } else {
-                        $(this).removeAttr("disabled");
-                        $.smallBox({
-                            title: "隆Atenci贸n!",
-                            content: "<i class='fa fa-ban'></i> <i>Complete los campos...</i>",
-                            color: "red",
-                            iconSmall: "bounce animated",
-                            timeout: 4000
-                        });
-                    }
+            $(".tipo").change(function() {
+                if ($(this).val() == '1') {
+                    $(".tolerancia").val("0");
+                    $(".tr_tolerancia").show();
+                    $(".tr_dep_tolerancia").hide();
+                    $(".dep_tolerancia").val("0");
+
+                } else if ($(this).val() == '2') {
+                    $(".tr_tolerancia").hide();
+                    $(".tolerancia").val("0");
+                    $(".tr_dep_tolerancia").show();
+                    $(".dep_tolerancia").val("DPT-0019");
 
                 }
-        );
-        $(".desde").click(function() {
-            validar_fechas();
+                listar();
+            });
+            $(".planilla").change(function() {
+                $.post("../../../requerimiento", "opc=Listar_req_id&id=" + $(this).val(), function(objJson) {
+                    var req = $(".req");
+                    req.empty();
+                    var lista = objJson.lista;
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var lista = objJson.lista;
+                    req.append("<option value='' selected =''>[Seleccione]</option>");
+                    req.append("<option value='0'>[Todos]</option>");
+                    for (var t = 0; t < lista.length; t++) {
+                        req.append("<option value='" + lista[t].id + "'>" + lista[t].nombre + "</option>");
+                    }
+                });
+
+            });
+            $(".req").change(function() {
+                validar_fechas();
+                listar();
+            });
+            $(".btn-registrar").click(
+                    function() {
+                        //$(this).attr("disabled", "true");
+                        validar_fechas();
+                        if ($(".form_plazo").valid()) {
+                            $.ajax({
+                                type: "post",
+                                url: "../../../plazo_dgp",
+                                data: "opc=Registrar&" + $("#form-plazo").serialize()
+                            }).done(function(objJson) {
+                                if (objJson.rpta == -1) {
+                                    alert(objJson.mensaje);
+                                    return;
+                                } else {
+                                    listar();
+                                    $("#form-plazo")[0].reset();
+                                    $.smallBox({
+                                        title: "隆Registrado!",
+                                        content: "<i class='fa fa-clock-o'></i> <i>El plazo se ha registrado correctamente...</i>",
+                                        color: "#659265",
+                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                        timeout: 4000
+                                    });
+                                    //$(this).removeAttr("disabled");
+                                }
+                            });
+                        } else {
+                            $(this).removeAttr("disabled");
+                            $.smallBox({
+                                title: "tenci髇!",
+                                content: "<i class='fa fa-ban'></i> <i>Complete los campos...</i>",
+                                color: "red",
+                                iconSmall: "bounce animated",
+                                timeout: 4000
+                            });
+                        }
+
+                    }
+            );
+            $(".desde").click(function() {
+                validar_fechas();
+            });
+
+            list_select($(".direccion"), "../../../Direccion_Puesto", "opc=Listar_direccion");
+            $(".direccion").change(function() {
+                list_select($(".departamento"), "../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $(this).val());
+            });
+            $(".departamento").change(function() {
+                list_select($(".area"), "../../../Direccion_Puesto", "opc=Listar_area2&" + "id=" + $(this).val());
+            });
+
         });
 
-        list_select($(".direccion"), "../../../Direccion_Puesto", "opc=Listar_direccion");
-        $(".direccion").change(function() {
-            list_select($(".departamento"), "../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $(this).val());
-        });
-        $(".departamento").change(function() {
-            list_select($(".area"), "../../../Direccion_Puesto", "opc=Listar_area2&" + "id=" + $(this).val());
-        });
-
-    });
-
-</script>
+    </script>
 </html>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
