@@ -633,26 +633,27 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public List<Map<String, ?>> List_procesar_req(boolean tipo_list, int tipo_user) {
+    public List<Map<String, ?>> List_procesar_req(boolean tipo_list, boolean permisoAsigFam, boolean permisoEsSistema) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select ID_DGP, NO_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_PUESTO, NO_SECCION, NO_AREA, NO_DEP, NO_REQ, ES_ACTIV_SIS_ESTADO, ES_PROC_ASIGNACION_F, "
-                    + "ID_TRABAJADOR  from rhvd_req_proc_area_rem  ";
+            String sql = "select ID_DGP, NO_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_PUESTO, NO_SECCION, NO_AREA, NO_DEP, "
+                    + "NO_REQ, ES_ACTIV_SIS_ESTADO, ES_PROC_ASIGNACION_F, "
+                    + "ID_TRABAJADOR ,MES_PROCESAMIENTO_DGP,ANNO_PROCESAMIENTO_DGP from rhvd_req_proc_area_rem  ";
             if (!tipo_list) {
-                if (tipo_user == 1) {
+                if (permisoAsigFam & permisoEsSistema) {
                     sql += " where ES_ACTIV_SIS_ESTADO =1 and ES_PROC_ASIGNACION_F=1";
-                } else if (tipo_user == 2) {
+                } else if (permisoAsigFam) {
                     sql += " where ES_PROC_ASIGNACION_F=1";
-                } else if (tipo_user == 3) {
+                } else if (permisoEsSistema) {
                     sql += " where ES_ACTIV_SIS_ESTADO =1";
                 }
             } else if (tipo_list) {
-                if (tipo_user == 1) {
+                if (permisoAsigFam & permisoEsSistema) {
                     sql += " where ES_ACTIV_SIS_ESTADO =0 or ES_PROC_ASIGNACION_F=0";
-                } else if (tipo_user == 2) {
+                } else if (permisoAsigFam) {
                     sql += " where ES_PROC_ASIGNACION_F=0";
-                } else if (tipo_user == 3) {
+                } else if (permisoEsSistema) {
                     sql += " where ES_ACTIV_SIS_ESTADO =0";
                 }
             }
@@ -672,6 +673,8 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 rec.put("es_activ_sis", rs.getString("ES_ACTIV_SIS_ESTADO"));
                 rec.put("es_asignacion_f", rs.getString("ES_PROC_ASIGNACION_F"));
                 rec.put("idtr", rs.getString("ID_TRABAJADOR"));
+                rec.put("mes", rs.getString("MES_PROCESAMIENTO_DGP"));
+                rec.put("anno", rs.getString("ANNO_PROCESAMIENTO_DGP"));
                 lista.add(rec);
             }
             rs.close();
@@ -691,15 +694,48 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public boolean UpdateDgp_EstadoProcesar(String[] iddgp, int tipo) {
-        boolean x = false;
+    public List<Map<String, ?>> ShowCkbEstado_procesarIndiviual(String iddgp) {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select ID_DGP,ES_ACTIV_SIS_ESTADO, ES_PROC_ASIGNACION_F  from rhvd_req_proc_area_rem where id_dgp='" + iddgp + "' ";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("iddgp", rs.getString("ID_DGP"));
+                rec.put("es_sis_estado", rs.getString("ES_ACTIV_SIS_ESTADO"));
+                rec.put("es_asig_fam", rs.getString("ES_PROC_ASIGNACION_F"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar componentes..." + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
+
+    }
+
+    @Override
+    public boolean UpdateDgp_EstadoProcesar(String[] iddgp, int tipo, boolean estado) {
+        boolean x = false;
+
+        try {
+            int e = (estado) ? 1 : 0;
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             ArrayDescriptor des = ArrayDescriptor.createDescriptor("ARRAY_ID_DGP", conn.conex);
             ARRAY array_to_pass = new ARRAY(des, conn.conex, iddgp);
-            CallableStatement st = conn.conex.prepareCall("call actualizar_dgps(?,?)");
+            CallableStatement st = conn.conex.prepareCall("call actualizar_dgps(?,?,?)");
             st.setArray(1, array_to_pass);
             st.setInt(2, tipo);
+            st.setInt(3, e);
             st.execute();
             x = true;
         } catch (SQLException e) {

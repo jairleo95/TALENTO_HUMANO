@@ -43,7 +43,8 @@ public interface InterfaceAutorizacionDAO {
 
     public List<Map<String, ?>> List_Dgp_Autorizados(String id_usuario, int mes, String año);
 
-    public List<Map<String, ?>> List_procesar_req(boolean tipo_list,int tipo_user);
+    public List<Map<String, ?>> List_procesar_req(boolean tipo_list,boolean permisoAsigFam,boolean permisoEsSistema);
 
-    public boolean UpdateDgp_EstadoProcesar(String[] iddgp, int tipo);
+    public boolean UpdateDgp_EstadoProcesar(String[] iddgp, int tipo, boolean estado);
+    public List<Map<String, ?>>  ShowCkbEstado_procesarIndiviual(String iddgp);
 }

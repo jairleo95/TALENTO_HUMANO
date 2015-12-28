@@ -273,7 +273,11 @@ public class CTrabajador extends HttpServlet {
                     sesion.setAttribute("List_Ubigeo", ub.List_Distrito());
                     sesion.setAttribute("Listar_tipo_doc", tdoc.Listar_tipo_doc());
                     sesion.setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
+                    if (request.getParameter("dgp")!=null) {
+                          response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr+"&dgp="+request.getParameter("dgp"));
+                    }else{
                     response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr);
+                    }
                 }
                 if ("list_reg_tra".equals(opc)) {
                     String idtr = request.getParameter("idtr");

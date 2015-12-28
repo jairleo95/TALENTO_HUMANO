@@ -277,7 +277,8 @@
         function procesar_lista(lista, tipo, tipo_lista) {
             var array_id_dgp = [];
             var pos = 0;
-            var url = (tipo === 1) ? "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo_lista=" + tipo_lista + "&tipo=1" : "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo_lista=" + tipo_lista + "&tipo=2";
+            var estado =  true;
+            var url = (tipo === 1) ? "../../autorizacion?opc=UpdateStatusDgp_Procesar&estado=" + estado + "&tipo=1" : "../../autorizacion?opc=UpdateStatusDgp_Procesar&estado=" + estado + "&tipo=2";
             if (tipo === 1) {
                 for (var i = 0, max = lista; i < max; i++) {
                     if ($(".chkAsigFam" + i).prop('checked')) {

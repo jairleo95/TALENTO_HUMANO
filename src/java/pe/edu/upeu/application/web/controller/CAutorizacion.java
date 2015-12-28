@@ -53,6 +53,22 @@ public class CAutorizacion extends HttpServlet {
             String idrol = (String) sesion.getAttribute("IDROL");
             Map<String, Object> rpta = new HashMap<String, Object>();
             String opc = request.getParameter("opc");
+            /*permisos*/
+            boolean permisoAsigFam = false;
+            boolean permisoEsSistema = false;
+            switch (idrol) {
+                case "ROL-0009":
+                    permisoAsigFam = true;
+                    permisoEsSistema = true;
+                    break;
+                case "ROL-0017":
+                    permisoAsigFam = true;
+                    break;
+                case "ROL-0018":
+                    permisoEsSistema = true;
+                    break;
+            }
+
             try {
                 if (opc != null) {
                     if (opc.equals("Aceptar")) {
@@ -190,44 +206,38 @@ public class CAutorizacion extends HttpServlet {
                     }
                     if (opc.equals("ShowListProcesarReq")) {
                         boolean tipo_lista = Boolean.parseBoolean((request.getParameter("tipo_lista")));
-                        int tipo_usuario = 0;
-                        if (idrol.equals("ROL-0009")) {
-                            tipo_usuario = 1;
-                        } else if (idrol.equals("")) {
-                            tipo_usuario = 2;
-                        } else if (idrol.equals("")) {
-                            tipo_usuario = 3;
-                        }
                         String html_table = "";
                         if (tipo_lista) {
                             html_table += "<table id='table_procesar' class='table table-striped table-bordered table-hover' width='100%'>";
-                            html_table += "<thead><tr>"
-                                    + "<th class='hasinput' colspan='6' style='width:95%' ></th> "
-                                    + "<th class='hasinput'  ><center><button  class='btn btn-primary btn-circle btn-lg btnAsigFam'><i class='glyphicon glyphicon-ok'></i></button></center></th>"
-                                    + " <th class='hasinput' ><center><button  class='btn bg-color-blueDark txt-color-white  btn-circle btn-lg btnActSisEs'><i class='glyphicon glyphicon-ok'></i></button></center></th>"
-                                    + "</tr>"
+                            html_table += "<thead><tr>";
+                            html_table += (permisoAsigFam & permisoEsSistema) ? " <th class='hasinput' colspan='7' style='width:95%' ></th>" : "<th class='hasinput' colspan='7' style='width:95%' ></th>";
+                            html_table += (permisoAsigFam) ? "<th class='hasinput'  ><center><button  class='btn btn-primary btn-circle btn-lg btnAsigFam'><i class='glyphicon glyphicon-ok'></i></button></center></th>" : "";
+                            html_table += (permisoEsSistema) ? " <th class='hasinput' ><center><button  class='btn bg-color-blueDark txt-color-white  btn-circle btn-lg btnActSisEs'><i class='glyphicon glyphicon-ok'></i></button></center></th>" : "";
+                            html_table += "</tr>"
                                     + "  <tr data-hide='phone,tablet'> <th><strong>Nro</strong></th>"
+                                    + "  <th><strong>Mes - Año </strong></th>"
                                     + " <th data-class='expand' ><strong>Apellidos Y Nombres</strong></th>"
                                     + "  <th data-hide='phone,tablet'><strong>Puesto</strong></th>"
                                     + " <th data-hide='phone,tablet'><strong>Area</strong></th>"
                                     + "  <th data-hide='phone,tablet'><strong>Departamento</strong></th>"
-                                    + "  <th data-hide='phone,tablet'><strong>Requerimiento</strong></th>"
-                                    + " <th  data-hide='phone,tablet'>Asig. Fam.</th> "
-                                    + "<th  data-hide='phone,tablet'>Sist. Estado</th>"
-                                    + "</tr></thead>";
+                                    + "  <th data-hide='phone,tablet'><strong>Requerimiento</strong></th>";
+                            html_table += (permisoAsigFam) ? " <th  data-hide='phone,tablet'>Asig. Fam.</th> " : "";
+                            html_table += (permisoEsSistema) ? "<th  data-hide='phone,tablet'>Sist. Estado</th>" : "";
+                            html_table += "</tr></thead>";
                         } else {
 
                             html_table += "<table id='table_autorizados' class='table table-striped table-bordered table-hover' width='100%'>";
                             html_table += "<thead>"
                                     + "  <tr data-hide='phone,tablet'> <th><strong>Nro</strong></th>"
+                                                 + "   <th><strong>Mes - Año </strong></th>"
                                     + " <th data-class='expand' ><strong>Apellidos Y Nombres</strong></th>"
                                     + "  <th data-hide='phone,tablet'><strong>Puesto</strong></th>"
                                     + " <th data-hide='phone,tablet'><strong>Area</strong></th>"
                                     + "  <th data-hide='phone,tablet'><strong>Departamento</strong></th>"
-                                    + "  <th data-hide='phone,tablet'><strong>Requerimiento</strong></th>"
-                                    + " <th  data-hide='phone,tablet'>Asig. Fam.</th> "
-                                    + "<th  data-hide='phone,tablet'>Sist. Estado</th>"
-                                    + "</tr></thead>";
+                                    + "  <th data-hide='phone,tablet'><strong>Requerimiento</strong></th>";
+                            html_table += (permisoAsigFam) ? " <th  data-hide='phone,tablet'>Asig. Fam.</th> " : "";
+                            html_table += (permisoEsSistema) ? "<th  data-hide='phone,tablet'>Sist. Estado</th>" : "";
+                            html_table += "</tr></thead>";
                         }
 
                         if (tipo_lista) {
@@ -236,27 +246,28 @@ public class CAutorizacion extends HttpServlet {
                             html_table += "<tbody class='tbody_procesar_req_aut'> </tbody> ";
                         }
                         html_table += "</table>";
-                        List<Map<String, ?>> lista = a.List_procesar_req(tipo_lista, tipo_usuario);
+                        List<Map<String, ?>> lista = a.List_procesar_req(tipo_lista, permisoAsigFam,permisoEsSistema);
                         String text_html = "";
                         for (int i = 0; i < lista.size(); i++) {
                             Map<String, ?> x = lista.get(i);
                             //x.get("idtr")  String idtr = cr.Encriptar(x.get("idtr") + "");
                             text_html += "<tr>";
                             text_html += "<td>" + (i + 1) + "</td>";
-                            text_html += "<td><a href='../../trabajador?idtr=" + x.get("idtr") + "&opc=list'>" + x.get("ap_p") + " " + x.get("ap_m") + " " + x.get("nombre") + "</a></td>";
+                            text_html += "<td>" + x.get("mes")  + " - "+ x.get("anno")+"</td>";
+                            text_html += "<td><a href='../../trabajador?idtr=" + x.get("idtr") + "&opc=list&dgp=" + x.get("iddgp") + "'>" + x.get("ap_p") + " " + x.get("ap_m") + " " + x.get("nombre") + "</a></td>";
                             text_html += "<td>" + x.get("puesto") + "</td>";
                             text_html += "<td>" + x.get("area") + "</td>";
                             text_html += "<td>" + x.get("dep") + "</td>";
                             text_html += "<td>" + x.get("req") + "</td>";
                             if (x.get("es_asignacion_f").equals("0")) {
-                                text_html += "<td class='smart-form'><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' class='chkAsigFam" + (i) + "' value='" + x.get("iddgp") + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>";
+                                text_html += (permisoAsigFam) ? "<td class='smart-form'><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' class='chkAsigFam" + (i) + "' value='" + x.get("iddgp") + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>" : "";
                             } else {
-                                text_html += "<td>Si</td>";
+                                text_html += (permisoAsigFam) ? "<td>Si</td>" : "";
                             }
                             if (x.get("es_activ_sis").equals("0")) {
-                                text_html += "<td class='smart-form' ><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' class='chkActSistEs" + (i) + "' value='" + x.get("iddgp") + "' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>";
+                                text_html += (permisoEsSistema) ? "<td class='smart-form' ><center><label class='toggle'><input type='checkbox' name='checkbox-toggle' class='chkActSistEs" + (i) + "' value='" + x.get("iddgp") + "' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></center></td>" : "";
                             } else {
-                                text_html += "<td>Si</td>";
+                                text_html += (permisoEsSistema) ? "<td>Si</td>" : "";
                             }
                             text_html += "</tr>";
                         }
@@ -269,11 +280,35 @@ public class CAutorizacion extends HttpServlet {
                         response.sendRedirect("Vista/Dgp/Procesar_Req.jsp");
                     }
                     if (opc.equals("UpdateStatusDgp_Procesar")) {
+                        boolean estado = Boolean.parseBoolean(request.getParameter("estado"));
                         int tipo = Integer.parseInt(request.getParameter("tipo"));
                         String[] array = request.getParameterValues("json[]");
-                        a.UpdateDgp_EstadoProcesar(array, tipo);
+                        a.UpdateDgp_EstadoProcesar(array, tipo, estado);
                         rpta.put("rpta", "1");
                         rpta.put("aaas", array);
+                    }
+                    if (opc.equals("ShowCkbEstado_procesarIndiviual")) {
+                        String iddgp = request.getParameter("iddgp");
+
+                        List<Map<String, ?>> lista = a.ShowCkbEstado_procesarIndiviual(iddgp);
+                        Map<String, ?> x = lista.get(0);
+                        int es_sis = Integer.parseInt(x.get("es_sis_estado") + "");
+                        int es_asiFam = Integer.parseInt(x.get("es_asig_fam") + "");
+                        String html_ckbAsigFam = "";
+                        String html_ckbEs_Sis = "";
+                        if (es_asiFam == 0) {
+                            html_ckbAsigFam += (permisoAsigFam) ? "<label class='toggle'><input type='checkbox' name='checkbox-toggle' class='ckbAsigFam' value='" + iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label>" : "No";
+                        } else if (es_asiFam == 1) {
+                            html_ckbAsigFam += (permisoAsigFam) ? "<label class='toggle'><input type='checkbox' checked='' name='checkbox-toggle' class='ckbAsigFam' value='" + iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label>" : "Si";
+                        }
+                        if (es_sis == 0) {
+                            html_ckbEs_Sis += (permisoEsSistema) ? "<label class='toggle'><input type='checkbox'  name='checkbox-toggle' class='ckbEstSistema' value='" + iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label>" : "No";
+                        } else if (es_sis == 1) {
+                            html_ckbEs_Sis += (permisoEsSistema) ? "<label class='toggle'><input type='checkbox' checked='' name='checkbox-toggle' class='ckbEstSistema' value='" + iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label>" : "Si";
+                        }
+                        rpta.put("ckbAsigFam", html_ckbAsigFam);
+                        rpta.put("ckbEs_Sis", html_ckbEs_Sis);
+                        rpta.put("rpta", "1");
                     }
                 } else {
                     Logger.getLogger(getClass().getName()).log(Level.INFO, ide);

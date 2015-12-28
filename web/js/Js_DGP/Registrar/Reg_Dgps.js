@@ -1,3 +1,9 @@
+$("#bono_pu").numeric();
+$("#sueldo").numeric();
+$("#bono_al").numeric();
+$("#bev").numeric();
+$("#nu_cuen").numeric();
+$("#nu_cuen_ban").numeric();
 function mostrar() {
     $(".cont_lun").hide();
     $(".cont_mar").hide();
@@ -691,13 +697,13 @@ function list_cc_area(area, cc, dep) {
             alert(objJson.mensaje);
             return;
         }
-       // alert(lista.length)
+        // alert(lista.length)
         var lista = objJson.lista;
         if (lista.length == 0) {
             //listarcc
-        } else {  
+        } else {
             cc.empty();
-              cc.append('<option value="">[SELECCIONE]</option>');
+            cc.append('<option value="">[SELECCIONE]</option>');
             for (var t = 0; t < lista.length; t++) {
                 cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
             }
@@ -717,8 +723,8 @@ function list_cc_seccion(seccion, cc) {
             /* si no ha nada listar todas las secciones del area*/
             // list_cc_area($(".select-area").val(), $(".centro_costo1"));
         } else {
-                cc.empty();
-                cc.append('<option value="">[SELECCIONE]</option>');
+            cc.empty();
+            cc.append('<option value="">[SELECCIONE]</option>');
             for (var t = 0; t < lista.length; t++) {
                 cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
             }
@@ -811,7 +817,7 @@ $(document).ready(function () {
     $(".select-seccion").change(function () {
         list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".select-seccion").val() + "&esL=1", "3");
         cargar_horarios($('.t_horario'));
-        list_cc_seccion($(this).val(),$(".centro_costo1"));
+        list_cc_seccion($(this).val(), $(".centro_costo1"));
     });
     $(".select-puesto").change(function () {
         $(".select-puesto1").val($(this).val());
@@ -974,11 +980,7 @@ $(document).ready(function () {
                 list_horario($(this).val());
             }
     );
-    $("#sueldo").numeric();
-    $("#bono_al").numeric();
-    $("#bev").numeric();
-    $("#nu_cuen").numeric();
-    $("#nu_cuen_ban").numeric();
+
     // $(".texto-h").mask("99:99", {placeholder: "0"});
     /* $("#sueldo").mask("99999.99", {placeholder: "0"});
      $("#bono_al").mask("99999.99", {placeholder: "0"});

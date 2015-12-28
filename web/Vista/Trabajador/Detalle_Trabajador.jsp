@@ -85,16 +85,16 @@
                 border-style:none;            
             }
 
-              .ui-progressbar {
-             position: relative;
-                 }
-             .progress-label {
-               position: absolute;
+            .ui-progressbar {
+                position: relative;
+            }
+            .progress-label {
+                position: absolute;
                 left: 50%;
                 top: 4px;
                 font-weight: bold;
                 text-shadow: 1px 1px 0 #fff;
-              }
+            }
         </style>
     </head>
     <%          if (request.getParameter("ms") != null) {
@@ -168,7 +168,7 @@
                         </div>
                         <%} else {%>
                         <a class="mustang-gallery pull-left" title="<%=t.getAr_foto()%>"  href="../Usuario/Fotos/<%=t.getAr_foto()%>" ><img  src="../Usuario/Fotos/<%=t.getAr_foto()%>" class="borde" width="100" height="100" ></a>
-                        <%}%>
+                            <%}%>
                         <div class="media-body">
                             <%
                                 CConversion c = new CConversion();
@@ -214,6 +214,18 @@
                     </div>
                     <div class='row row_cod_huella'>
                     </div>
+                    <%if (iddgp != null) {
+                    %>
+                    <input type="hidden" class="dgp" value="<%=iddgp%>" >
+                    <div class='row smart-form row_procesar_req'>
+                        <div class="col-md-8"><strong>¿Asignación Familiar?</strong></div>
+                        <div class="col-md-4 col_procesar_asigFam"></div>
+                    </div>
+                    <div class='row smart-form row_procesar_sistema'>
+                        <div class="col-md-8"><strong>¿Sistema de estado?</strong></div>
+                        <div class="col-md-4 col_procesar_sis"></div>
+                    </div>
+                    <%}%>
                 </div>
                 <div class="col-md-4">
                     <%
@@ -595,6 +607,40 @@
         <script type="text/javascript" src="../../js/shadowbox/shadowbox.js"></script>
         <script src="../../js/upload-foto/upload-foto.js" type="text/javascript"></script>
         <script>
+        function procesar_req_individual(ckb, tipo, iddgp) {
+            var array_id_dgp = [];
+            var estado = false;
+            array_id_dgp[0] = ckb.val();
+            if (ckb.prop('checked')) {
+                estado = true;
+            } else {
+                estado = false;
+            }
+            var url = (tipo === 1) ? "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo=1&estado=" + estado : "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo=2&estado=" + estado;
+            $.ajax({
+                url: url, data: {json: array_id_dgp}, type: 'POST', dataType: 'json', success: function(data, textStatus, jqXHR) {
+                    if (data.rpta === "1") {
+                        //  ShowCbk_Procesar_Ind(iddgp);
+                        $.smallBox({
+                            title: "Se ha procesado correctamente el requerimiento...",
+                            content: "<i class='fa fa-clock-o'></i> <i>2 segundos atras...</i>",
+                            color: "#296191",
+                            iconSmall: "fa fa-thumbs-up bounce animated",
+                            timeout: 4000
+                        });
+                    } else if (data.rpta === "-1") {
+                        $.smallBox({
+                            title: "¡Atención!",
+                            content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar el requerimiento...</i>",
+                            color: "#C46A69",
+                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                            timeout: 4000
+                        });
+                    }
+
+                }
+            });
+        }
         function closedthis() {
             $.smallBox({
                 title: "¡Ficha de trabajador registrada correctamente!",
@@ -617,9 +663,12 @@
             var row_cod_huella = $(".row_cod_huella");
             row_cod_huella.empty();
             $.ajax({
-                url: "../../empleado", data: "opc=ShowHuella&idtr=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
+                url: "../../empleado", data: "opc=ShowHuella&idtr=" + $(".idtr").val(), type: 'POST', success: function(data, textStatus, jqXHR) {
                     row_cod_huella.append(data.value);
-                    $(".btnHuellaDigital").click(function () {
+                    $(".textCodHuella").keypress(function(event) {
+                        return /\d/.test(String.fromCharCode(event.keyCode));
+                    });
+                    $(".btnHuellaDigital").click(function() {
                         Actualizar_Cod_Huella();
                     });
                     $(".btnHuellaDigital").attr("rel", "tooltip");
@@ -631,9 +680,12 @@
             var row_cod_aps = $(".row_cod_aps");
             row_cod_aps.empty();
             $.ajax({
-                url: "../../empleado", data: "opc=ShowAPS&idtr=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
+                url: "../../empleado", data: "opc=ShowAPS&idtr=" + $(".idtr").val(), type: 'POST', success: function(data, textStatus, jqXHR) {
                     row_cod_aps.append(data.value);
-                    $(".btnCodigoAPS").click(function () {
+                    $(".txtCodigoAPS").keypress(function(event) {
+                        return /\d/.test(String.fromCharCode(event.keyCode));
+                    });
+                    $(".btnCodigoAPS").click(function() {
                         Actualizar_Cod_APS();
                         ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
                     });
@@ -647,20 +699,17 @@
                     url: "../../empleado",
                     type: "POST",
                     data: "opc=validar_huella&co_hue=" + co_huella
-                }).done(function (e) {
+                }).done(function(e) {
                     if (e.huella == 0) {
                         $.ajax({
-                            url: "../../empleado", data: "opc=reg_huella&idtr=" + $(".idtr").val() + "&cod=" + co_huella, type: 'POST', success: function (data, textStatus, jqXHR) {
+                            url: "../../empleado", data: "opc=reg_huella&idtr=" + $(".idtr").val() + "&cod=" + co_huella, type: 'POST', success: function(data, textStatus, jqXHR) {
                                 if (data.rpta === "1") {
                                     // Listar_Cod_Huella();
-                                    /*validar los botones de autorizar req*/
-                                    ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
+                                    /*validar los botones de autorizar req*/                                     ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
                                     $.smallBox({
                                         title: "Se ha actualizado exitosamente el codigo de huella...",
                                         content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-                                        color: "#296191",
-                                        iconSmall: "fa fa-thumbs-up bounce animated",
-                                        timeout: 4000
+                                        color: "#296191", iconSmall: "fa fa-thumbs-up bounce animated", timeout: 4000
                                     });
 
                                 } else {
@@ -692,10 +741,10 @@
                     url: "../../empleado",
                     type: "POST",
                     data: "opc=validar_aps&co_aps=" + co_aps
-                }).done(function (e) {
+                }).done(function(e) {
                     if (e.aps == 0) {
                         $.ajax({
-                            url: "../../empleado", data: "opc=reg_aps&idtr=" + $(".idtr").val() + "&cod=" + co_aps, type: 'POST', success: function (data, textStatus, jqXHR) {
+                            url: "../../empleado", data: "opc=reg_aps&idtr=" + $(".idtr").val() + "&cod=" + co_aps, type: 'POST', success: function(data, textStatus, jqXHR) {
                                 if (data.rpta === "1") {
                                     // Listar_Cod_Huella();
                                     /*validar los botones de autorizar req*/
@@ -723,8 +772,7 @@
                     else {
                         $.SmartMessageBox({
                             title: "¡Este Código APS ya fue registrado!",
-                            content: "Por favor Ingrese un Código APS distinto"
-                        });
+                            content: "Por favor Ingrese un Código APS distinto"});
                     }
 
                 });
@@ -739,41 +787,38 @@
             reader.readAsDataURL(file);
         }
         function fileOnload(e) {
-           var result = e.target.result
+            var result = e.target.result
             $(function() {
-              $("#progressbar").show(200);
-                var progressbar = $( "#progressbar" ),
-                progressLabel = $( ".progress-label" );
+                $("#progressbar").show(200);
+                var progressbar = $("#progressbar"),
+                        progressLabel = $(".progress-label");
 
                 progressbar.progressbar({
-                value: false,
-                change: function() {
-                progressLabel.text( progressbar.progressbar( "value" ) + "%" );
-                },
-                complete: function() {
-                progressLabel.text( "Complete!" );
-                $("#progressbar").hide(200);
-              }
+                    value: false,
+                    change: function() {
+                        progressLabel.text(progressbar.progressbar("value") + "%");
+                    },
+                    complete: function() {
+                        progressLabel.text("Complete!");
+                        $("#progressbar").hide(200);
+                    }});
+
+                function progress() {
+                    var val = progressbar.progressbar("value") || 0;
+
+                    progressbar.progressbar("value", val + 2);
+
+                    if (val < 99) {
+                        setTimeout(progress, 68);
+                    }
+                }
+
+                setTimeout(progress, 100);
             });
-
-            function progress() {
-              var val = progressbar.progressbar( "value" ) || 0;
-
-              progressbar.progressbar( "value", val + 2 );
-
-              if ( val < 99 ) {
-                setTimeout( progress, 68 );
-              }
-            }
-
-            setTimeout( progress, 100 );
-          });
             // $('.ver_foto').attr("src", result);
-            
-            
         }
         function validar_shadowbox() {
-            $.each($(".mustang-gallery"), function () {
+            $.each($(".mustang-gallery"), function() {
                 Shadowbox.init({
                     overlayOpacity: 0.8
                 }, setupDemos);
@@ -782,15 +827,15 @@
         function ValBtnAutorizarDgp(trabajador, divBotones) {
             divBotones.empty();
             $.ajax({
-                url: "../../autorizacion", data: "opc=ValBtnAutorizacion&trabajador=" + trabajador, type: 'POST', success: function (data, textStatus, jqXHR) {
+                url: "../../autorizacion", data: "opc=ValBtnAutorizacion&trabajador=" + trabajador, type: 'POST', success: function(data, textStatus, jqXHR) {
                     if (data.rpta === "1") {
                         divBotones.append(data.data);
-                        $(".btn-autor").click(function (e) {
+                        $(".btn-autor").click(function(e) {
                             $.SmartMessageBox({
                                 title: "¡Alerta de Confirmación!",
                                 content: "¿Está totalmente seguro de autorizar este requerimiento?",
                                 buttons: '[No][Si]'
-                            }, function (ButtonPressed) {
+                            }, function(ButtonPressed) {
                                 if (ButtonPressed === "Si") {
                                     $(".form-aut").submit();
                                     window.parent.sendMessage();
@@ -809,44 +854,63 @@
         }
         function porcentaje_datos(trabajador) {
             $.ajax({
-                url: "../../trabajador", data: "opc=ShowPorcentageTrabajador&id=" + trabajador, type: 'POST', success: function (data, textStatus, jqXHR) {
+                url: "../../trabajador", data: "opc=ShowPorcentageTrabajador&id=" + trabajador, type: 'POST', success: function(data, textStatus, jqXHR) {
                     $('.pcDatosCompTrabajador').data('easyPieChart').update(data.porcentaje);
+                }});
+        }
+        function ShowCbk_Procesar_Ind(iddgp) {
+            var div = $(".col_procesar_asigFam");
+            var div2 = $(".col_procesar_sis");
+            div.empty();
+            div2.empty();
+            $.ajax({
+                url: "../../autorizacion", data: "opc=ShowCkbEstado_procesarIndiviual&iddgp=" + iddgp, type: 'POST', success: function(data, textStatus, jqXHR) {
+                    if (data.rpta === "1") {
+                        div.append(data.ckbAsigFam);
+                        div2.append(data.ckbEs_Sis);
+                        $(".ckbAsigFam").click(function() {
+                            var tipo = 1;
+                            var ckbAsigFam = $(".ckbAsigFam");
+                            procesar_req_individual(ckbAsigFam, tipo, iddgp);
+                        });
+                        $(".ckbEstSistema").click(function() {
+                            var tipo = 2;
+                            var ckb = $(".ckbEstSistema");
+                            procesar_req_individual(ckb, tipo, iddgp);
+                        });
+                    }
                 }
             });
-        }
 
-        $(document).ready(function () {
+        }
+        $(document).ready(function() {
             Listar_Cod_Huella();
             Listar_Cod_APS();
+            ShowCbk_Procesar_Ind($(".dgp").val());
             ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
-            //  porcentaje_datos($(".idtr").val());
             pageSetUp();
-            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
-            $(".tab_detalle_trabajador li").click(function () {
+            $(".tab_detalle_trabajador li").click(function() {
                 $(".tab_detalle_trabajador li").removeClass("active");
                 $(this).addClass("active");
             });
             validar_shadowbox();
-            // $("#cod_ap").numeric();
-
-            setTimeout(function () {
-                document.getElementById('myframe2').onload = function () {
+            setTimeout(function() {
+                document.getElementById('myframe2').onload = function() {
                     porcentaje_datos($(".idtr").val());
                 };
             }, 5000);
 
 
-            $(".btnCodigoAPS").click(function () {
+            $(".btnCodigoAPS").click(function() {
                 Actualizar_Cod_APS();
             });
-
-            $('.ver_foto').click(function () {
+            $('.ver_foto').click(function() {
                 $(".file-foto").click();
             });
-            
-            $('.file-foto').change(function (e) {
+            $('.file-foto').change(function(e) {
                 var t = e;
                 if (this.files[0].size <= 500000) {
                     var jForm = new FormData();
@@ -859,7 +923,7 @@
                         processData: false,
                         contentType: false,
                         data: jForm,
-                        success: function (objJson) {
+                        success: function(objJson) {
                             if (objJson.rpta === "-1") {
                                 $.smallBox({
                                     title: "¡Alerta!",
@@ -870,7 +934,7 @@
                                 });
                             } else if (objJson.rpta === "1") {
                                 addImage(e);
-                                this.timer = setTimeout(function () {
+                                this.timer = setTimeout(function() {
                                     $('.a_foto').addClass("mustang-gallery");
                                     $('.ver_foto').addClass("borde");
                                     $('.a_foto').attr("href", "../Usuario/Fotos/" + objJson.archivo);
@@ -889,7 +953,7 @@
                                 }, 4000);
                             }
                         }
-                    }).fail(function (objJson) {
+                    }).fail(function(objJson) {
                     });
                 } else {
                     alert("Archivo no permitido, su tamaño debe ser menor a 500 KB");
@@ -897,12 +961,12 @@
                 }
             });
 
-            $(".btn-conti").click(function (e) {
+            $(".btn-conti").click(function(e) {
                 $.SmartMessageBox({
                     title: "Alerta de Confirmación",
                     content: "¿Está totalmente seguro de rechazar este requerimiento?",
                     buttons: '[No][Si]'
-                }, function (ButtonPressed) {
+                }, function(ButtonPressed) {
                     if (ButtonPressed === "Si") {
                         $(".form-rech").submit();
                         //$(".form-rech").submit();
@@ -915,11 +979,11 @@
 
             });
 
-            $(".fe_desde_p, .fe_hasta_p").change(function () {
+            $(".fe_desde_p, .fe_hasta_p").change(function() {
                 var cuotas = $(".cuota_docente");
                 cuotas.empty();
 
-                $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
+                $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
                     var lista = objJson.lista;
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -931,36 +995,36 @@
                 });
             });
 
-            $(".btn_guardar_ca").click(function () {
+            $(".btn_guardar_ca").click(function() {
                 $.ajax({
                     url: "../../carga_academica",
                     type: "POST",
                     data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                }).done(function (ids) {
+                }).done(function(ids) {
                     var arr_id = ids.split(":");
                     alert("Registrado con exito!...");
                     $(".proceso").val(arr_id[0]);
                     $(".dgp").val(arr_id[1]);
                     $(".btn_procesar").show();
-                }).fail(function (e) {
+                }).fail(function(e) {
                     alert("Error: " + e);
                 });
             });
 
-            $(".btn_procesar").click(function () {
+            $(".btn_procesar").click(function() {
                 $.ajax({
                     url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                }).done(function () {
+                }).done(function() {
                     window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
                 });
             });
 
-            $(".btn-autor").click(function (e) {
+            $(".btn-autor").click(function(e) {
                 $.SmartMessageBox({
                     title: "¡Alerta de Confirmación!",
                     content: "¿Está totalmente seguro de autorizar este requerimiento?",
                     buttons: '[No][Si]'
-                }, function (ButtonPressed) {
+                }, function(ButtonPressed) {
                     if (ButtonPressed === "Si") {
                         $(".form-aut").submit();
                         window.parent.sendMessage();
@@ -971,12 +1035,12 @@
                 });
                 e.preventDefault();
             });
-            $(".btn-rech").click(function (e) {
+            $(".btn-rech").click(function(e) {
                 $.SmartMessageBox({
                     title: "Alerta de Confirmación!",
                     content: "¿Está totalmente seguro de rechazar este requerimiento?",
                     buttons: '[No][Si]'
-                }, function (ButtonPressed) {
+                }, function(ButtonPressed) {
                     if (ButtonPressed === "Si") {
                         $(".btn-mos").click();
                         $(".form-rech").submit();
@@ -984,11 +1048,9 @@
                     if (ButtonPressed === "No") {
                         return false;
                     }
-
                 });
                 e.preventDefault();
             });
-
         });</script>
 
     </body>

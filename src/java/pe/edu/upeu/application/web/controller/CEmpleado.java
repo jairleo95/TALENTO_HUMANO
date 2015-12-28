@@ -131,7 +131,9 @@ public class CEmpleado extends HttpServlet {
                     codigo = String.valueOf(x.get("codigo_huella"));
                     if (idrol.trim().equals("ROL-0001")) {
                         html = "                        <div class='form-group'>"
-                                + "                            <label class='control-label col-md-4' for='prepend'> <strong>  Código de Huella Digital:" + "</strong></label>"
+                                + "                          <div class='col-md-4' >"
+                                + "                             <label class='control-label' for='prepend'> <strong>  Código de Huella Digital:" + "</strong></label>"
+                                + "                          </div>"
                                 + "                            <div class='col-md-8'>"
                                 + "                                <div class='input-group input-group-sm'>"
                                 + "                                    <div class='icon-addon addon-sm'>"
@@ -167,10 +169,12 @@ public class CEmpleado extends HttpServlet {
                     String codigo = "";
                     Map<String, ?> x = Lista.get(0);
                     codigo = String.valueOf(x.get("aps"));
-                    if (idrol.trim().equals("ROL-0001")| idrol.equals("ROL-0009")) {
+                    if (idrol.trim().equals("ROL-0001") | idrol.equals("ROL-0009")) {
                         html = "                        <div class='form-group'>"
-                                + "                            <label class='control-label col-md-4' for='prepend'> <strong>  Código APS:" + "</strong></label>"
-                                + "                            <div class='col-md-8'>"
+                                + "                             <div class='col-md-4'>"
+                                + "                               <label class='control-label' for='prepend'> <strong>  Código APS:" + "</strong></label>"
+                                + "                             </div>                      "
+                                + "                          <div class='col-md-8'>"
                                 + "                                <div class='input-group input-group-sm'>"
                                 + "                                    <div class='icon-addon addon-sm'>"
                                 + "                                        <input type='text' value='" + ((!codigo.equals("null")) ? codigo : "") + "' placeholder='APS' maxlength='6' class='form-control txtCodigoAPS'>"

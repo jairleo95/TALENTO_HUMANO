@@ -287,28 +287,74 @@ Author     : JAIR
                     if (lista[i].estado == '1') {
                         text_html += "<tr class='success' >";
                     }
-            );
-            $(".Eliminar-Plazo").click(
-                    function() {
-                        var valor = $(this).val();
-                        $.SmartMessageBox({
-                            title: "¡Advertencia!",
-                            content: "¿Esta seguro de eliminar el plazo?",
-                            buttons: '[No][Si]'
-                        }, function(ButtonPressed) {
-                            if (ButtonPressed === "Si") {
-                                $.ajax({
-                                    url: "../../../plazo_dgp",
-                                    data: "opc=Eliminar&plz=" + valor,
-                                    type: "POST"
-                                }).done(function() {
-                                    listar();
-                                    $.smallBox({
-                                        title: "¡Procesado con exito!",
-                                        content: "<i class='fa fa-clock-o'></i> <i>Se ha eliminado el plazo correctamente...</i>",
-                                        color: "#659265",
-                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                        timeout: 4000
+                    else if (lista[i].estado == '0') {
+                        text_html += "<tr class='danger' >";
+                    }
+                    text_html += "<td>" + (i + 1) + "</td>";
+                    if (lista[i].tipo === "1") {
+                        text_html += "<td class='tipo" + i + "'>Inicio de Contrato</td>";
+                    } else if (lista[i].tipo === "2") {
+                        text_html += "<td class='tipo" + i + "'>Ingreso a planilla</td>";
+                    }
+
+                    text_html += "<td class='nombre" + i + "'>" + lista[i].nom + "</td>";
+                    text_html += "<td class='det" + i + "'>" + lista[i].det + "</td>";
+                    text_html += "<td class='desde" + i + "'>" + lista[i].desde + "</td>";
+                    text_html += "<td class='hasta" + i + "'>" + lista[i].hasta + "</td>";
+                    text_html += "<td class='planilla" + i + "'>" + lista[i].planilla + "</td>";
+                    text_html += "<td >" + lista[i].req + "</td>";
+                    text_html += "<td >" + lista[i].dep_tol + "</td>";
+                    text_html += "<td >" + lista[i].dias + "</td>";
+                    text_html += "<td >" + lista[i].dep + "</td>";
+                    text_html += "<td >" + lista[i].area + "</td>";
+
+                    if (lista[i].estado == '1') {
+                        text_html += "<td  >Activo</td>";
+                    }
+                    else if (lista[i].estado == '0') {
+                        text_html += "<td >No activo</td>";
+                    }
+                    text_html += "<input type='hidden' value='" + lista[i].id_req + "'/>";
+                    text_html += "<td><button class='btn btn-success btn-sm Editar-Plazo' value='" + lista[i].id + "'><i class='fa fa-pencil'></i></button>";
+                    text_html += "<button class='btn btn-danger btn-sm Eliminar-Plazo' value='" + lista[i].id + "'><i class='fa fa-times'></i></button></td>";
+                    text_html += "</tr>";
+                }
+                b.append(text_html);
+                text_html = "";
+
+                $(".Editar-Plazo").click(
+                        function() {
+                            $(".nombre_plazo").val($(".nombre" + $(this).val()).text());
+                            $(".descripcion").val($(".det" + $(this).val()).text());
+                            $(".desde").val($(".desde" + $(this).val()).text());
+                            $(".hasta").val($(".hasta" + $(this).val()).text());
+                            $("#form-plazo").append("<input type='hidden' name='ID' value='" + $(".id" + $(this).val()).text() + "'  />");
+                            $("#btn-registrar").val("Modificar");
+                            $(".opc").val("Modificar");
+                        }
+                );
+                $(".Eliminar-Plazo").click(
+                        function() {
+                            var valor = $(this).val();
+                            $.SmartMessageBox({
+                                title: "¡Advertencia!",
+                                content: "¿Esta seguro de eliminar el plazo?",
+                                buttons: '[No][Si]'
+                            }, function(ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+                                    $.ajax({
+                                        url: "../../../plazo_dgp",
+                                        data: "opc=Eliminar&plz=" + valor,
+                                        type: "POST"
+                                    }).done(function() {
+                                        listar();
+                                        $.smallBox({
+                                            title: "¡Procesado con exito!",
+                                            content: "<i class='fa fa-clock-o'></i> <i>Se ha eliminado el plazo correctamente...</i>",
+                                            color: "#659265",
+                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                            timeout: 4000
+                                        });
                                     });
                                 }
                                 if (ButtonPressed === "No") {
@@ -377,47 +423,18 @@ Author     : JAIR
                 }
             });
 
-        });
-        $(".req").change(function() {
-            validar_fechas();
-            listar();
-        });
-        $(".btn-registrar").click(
-                function() {
-                    //$(this).attr("disabled", "true");
-                    validar_fechas();
-                    if ($(".form_plazo").valid()) {
-                        $.ajax({
-                            type: "post",
-                            url: "../../../plazo_dgp",
-                            data: "opc=Registrar&" + $("#form-plazo").serialize()
-                        }).done(function(objJson) {
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            } else {
-                                listar();
-                                $("#form-plazo")[0].reset();
-                                $.smallBox({
-                                    title: "¡Registrado!",
-                                    content: "<i class='fa fa-clock-o'></i> <i>El plazo se ha registrado correctamente...</i>",
-                                    color: "#659265",
-                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                    timeout: 4000
-                                });
-                                //$(this).removeAttr("disabled");
-                            }
-                        });
-                    } else {
-                        $(this).removeAttr("disabled");
-                        $.smallBox({
-                            title: "¡Atención!",
-                            content: "<i class='fa fa-ban'></i> <i>Complete los campos...</i>",
-                            color: "red",
-                            iconSmall: "bounce animated",
-                            timeout: 4000
-                        });
-                    }
+            $(".tipo").change(function() {
+                if ($(this).val() == '1') {
+                    $(".tolerancia").val("0");
+                    $(".tr_tolerancia").show();
+                    $(".tr_dep_tolerancia").hide();
+                    $(".dep_tolerancia").val("0");
+
+                } else if ($(this).val() == '2') {
+                    $(".tr_tolerancia").hide();
+                    $(".tolerancia").val("0");
+                    $(".tr_dep_tolerancia").show();
+                    $(".dep_tolerancia").val("DPT-0019");
 
                 }
                 listar();
