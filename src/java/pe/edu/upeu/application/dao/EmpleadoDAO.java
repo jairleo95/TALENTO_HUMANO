@@ -52,7 +52,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
 
     @Override
     public void VALIDAR_EMPLEADO(String id_tra) {
-
+/*sirve para agregar usuarios al sistema cmo usuarios trbajadorres*/
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);

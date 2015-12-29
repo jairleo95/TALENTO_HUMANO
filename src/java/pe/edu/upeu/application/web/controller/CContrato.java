@@ -512,7 +512,7 @@ public class CContrato extends HttpServlet {
 
             String ida1 = a.List_Anno_Max_Cont(idtr1);
 
-            out.print(id_contrato + idtr1 + ida1);
+           // out.print(id_contrato + idtr1 + ida1);
 
             sesion.setAttribute("List_Anno_trabajador", a.List_Anno_trabajador_contrato(idtr1));
             sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr1));

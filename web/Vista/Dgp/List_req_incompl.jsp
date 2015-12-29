@@ -1,10 +1,11 @@
-<%@page import="pe.edu.upeu.application.model.Usuario"%>
+
+<%@page import="pe.edu.upeu.application.model.V_Es_Req_Incompleto"%>
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
 %>
-<%@page import="pe.edu.upeu.application.model.V_Es_Requerimiento"%>
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
 <jsp:useBean class="java.util.ArrayList" id="List_Incomplet" scope="session" />
 <!DOCTYPE html>
 <html lang="en-us">
@@ -125,38 +126,34 @@
                                                     <th data-hide="phone">Nro</th>
                                                     <th data-hide="phone"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Acciones</th>
                                                     <th>Nombre</th>
+                                                    <th>Departamento</th>
+                                                    <th>Area</th>
+                                                    <th>Sección</th>
+                                                    <th>Puesto</th>
                                                     <th>Nombre requerimiento</th>
-                                                    <th>Fecha creacion</th>
+                                                    <th>Fecha Creación</th>
 
                                                 </tr>
                                             </thead>
                                             <tbody>
-
-
-
-
                                                 <%for (int i = 0; i < List_Incomplet.size(); i++) {
-                                                        V_Es_Requerimiento r = new V_Es_Requerimiento();
-                                                        r = (V_Es_Requerimiento) List_Incomplet.get(i);
+                                                        V_Es_Req_Incompleto r = new V_Es_Req_Incompleto();
+                                                        r = (V_Es_Req_Incompleto) List_Incomplet.get(i);
                                                 %>
                                                 <tr>
                                                     <td><strong><%=i + 1%></strong></td>
                                                     <td>
-
                                                         <div class="btn-group">
                                                             <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                                                 Accion <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu">
-
-                                                               <!-- <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Requerimientos</a></li>-->
-                                                                <!--<li><a href="../../horario?iddgp=<%=r.getId_dgp()%>&opc=Listar">Horario</a> </li>-->
                                                                 <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Listar_doc">Continuar registro</a></li> 
-                                                               
+
                                                                 <li class="divider"></li>
                                                                 <li>
                                                                 <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Detalle">Ver Requerimiento</a> </li>
-                                                               
+
                                                             </ul>
                                                         </div>
                                                     </td> 
@@ -165,8 +162,12 @@
                                                         <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
                                                         <% } else {%>
                                                     <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="60"  height="60"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
-                                                    <% }%>
-                                                    <td> <strong><%=r.getNo_req()%></strong></td>
+                                                        <% }%>
+                                                    <td> <%=r.getNo_dep()%></td>
+                                                    <td> <%=r.getNo_area()%></td>
+                                                    <td> <%=r.getNo_seccion()%></td>
+                                                    <td> <%=r.getNo_puesto()%></td>
+                                                    <td> <%=r.getNo_req()%></td>
                                                     <td> <strong><%=r.getFe_creacion()%></strong></td>
                                                 </tr>
                                                 <% }
@@ -186,7 +187,7 @@
                             </div>
                             <!-- end widget -->
 
-                         
+
 
                         </article>
                         <!-- WIDGET END -->
@@ -219,14 +220,14 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
             if (!window.jQuery) {
-                document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
             }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
             if (!window.jQuery.ui) {
-                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
             }
         </script>
 
@@ -239,29 +240,29 @@
         <!-- BOOTSTRAP JS -->
         <script src="../../js/bootstrap/bootstrap.min.js"></script>
 
-        <!-- CUSTOM NOTIFICATION -->
-        <script src="../../js/notification/SmartNotification.min.js"></script>
+        <!-- CUSTOM NOTIFICATION 
+        <script src="../../js/notification/SmartNotification.min.js"></script>-->
 
         <!-- JARVIS WIDGETS -->
         <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-        <!-- EASY PIE CHARTS -->
-        <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+        <!-- EASY PIE CHARTS 
+        <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
 
-        <!-- SPARKLINES -->
-        <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+        <!-- SPARKLINES 
+        <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>-->
 
-        <!-- JQUERY VALIDATE -->
-        <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
+        <!-- JQUERY VALIDATE 
+        <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>-->
 
-        <!-- JQUERY MASKED INPUT -->
-        <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+        <!-- JQUERY MASKED INPUT 
+        <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
 
-        <!-- JQUERY SELECT2 INPUT -->
-        <script src="../../js/plugin/select2/select2.min.js"></script>
+        <!-- JQUERY SELECT2 INPUT 
+        <script src="../../js/plugin/select2/select2.min.js"></script>-->
 
-        <!-- JQUERY UI + Bootstrap Slider -->
-        <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+        <!-- JQUERY UI + Bootstrap Slider 
+        <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
 
         <!-- browser msie issue fix -->
         <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
@@ -282,8 +283,8 @@
         <script src="../../js/app.min.js"></script>
 
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-        <!-- Voice command : plugin -->
-        <script src="../../js/speech/voicecommand.min.js"></script>
+        <!-- Voice command : plugin 
+        <script src="../../js/speech/voicecommand.min.js"></script>-->
 
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
@@ -300,21 +301,6 @@
 
                 pageSetUp();
 
-                /* // DOM Position key index //
-                 
-                 l - Length changing (dropdown)
-                 f - Filtering input (search)
-                 t - The Table! (datatable)
-                 i - Information (records)
-                 p - Pagination (paging)
-                 r - pRocessing 
-                 < and > - div elements
-                 <"#id" and > - div with an id
-                 <"class" and > - div with a class
-                 <"#id.class" and > - div with an id and class
-                 
-                 Also see: http://legacy.datatables.net/usage/features
-                 */
 
                 /* BASIC ;*/
                 var responsiveHelper_dt_basic = undefined;
@@ -347,112 +333,6 @@
                 });
 
                 /* END BASIC */
-
-                /* COLUMN FILTER  */
-                var otable = $('#datatable_fixed_column').DataTable({
-                    //"bFilter": false,
-                    //"bInfo": false,
-                    //"bLengthChange": false
-                    //"bAutoWidth": false,
-                    //"bPaginate": false,
-                    //"bStateSave": true // saves sort state using localStorage
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function() {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_fixed_column) {
-                            responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function(nRow) {
-                        responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function(oSettings) {
-                        responsiveHelper_datatable_fixed_column.respond();
-                    }
-
-                });
-
-                // custom toolbar
-                $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
-
-                // Apply the filter
-                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function() {
-
-                    otable
-                            .column($(this).parent().index() + ':visible')
-                            .search(this.value)
-                            .draw();
-
-                });
-                /* END COLUMN FILTER */
-
-                /* COLUMN SHOW - HIDE */
-                $('#datatable_col_reorder').dataTable({
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function() {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_col_reorder) {
-                            responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function(nRow) {
-                        responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function(oSettings) {
-                        responsiveHelper_datatable_col_reorder.respond();
-                    }
-                });
-
-                /* END COLUMN SHOW - HIDE */
-
-                /* TABLETOOLS */
-                $('#datatable_tabletools').dataTable({
-                    // Tabletools options: 
-                    //   https://datatables.net/extensions/tabletools/button_options
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                    "oTableTools": {
-                        "aButtons": [
-                            "copy",
-                            "csv",
-                            "xls",
-                            {
-                                "sExtends": "pdf",
-                                "sTitle": "SmartAdmin_PDF",
-                                "sPdfMessage": "SmartAdmin PDF Export",
-                                "sPdfSize": "letter"
-                            },
-                            {
-                                "sExtends": "print",
-                                "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
-                            }
-                        ],
-                        "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
-                    },
-                    "autoWidth": true,
-                    "preDrawCallback": function() {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_tabletools) {
-                            responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function(nRow) {
-                        responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function(oSettings) {
-                        responsiveHelper_datatable_tabletools.respond();
-                    }
-                });
-
-                /* END TABLETOOLS */
-
             })
 
         </script>
