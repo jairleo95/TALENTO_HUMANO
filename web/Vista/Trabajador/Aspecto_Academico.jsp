@@ -22,9 +22,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
-        <script src=" ../../../../js1/jquery-1.11.1.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
         <title></title>
 
     </head>
@@ -44,7 +43,7 @@
                 <tr><td class="text-info">I.E.Peruana:</td>
                     <td>
                         <%if (trb.getEs_inst_educ_peru() == null) {
-                                out.print("NO REGISTRADO");
+                                out.print("No registrado");
                             } else {
                                 if (trb.getEs_inst_educ_peru().trim().equals("1")) {
                                     out.print("Si");
@@ -56,7 +55,7 @@
                 </tr>
                 <tr><td class="text-info">Regimen.I.E:</td><td>
                         <%if (trb.getLi_reg_inst_educativa() == null) {
-                                out.print("NO REGISTRADO");
+                                out.print("No registrado");
                             } else {
                                 if (trb.getLi_reg_inst_educativa().trim().equals("1")) {
                                     out.print("Pública");
@@ -88,7 +87,7 @@
                     } else {
 
                     %>
-                    <td>NO REGISTRADO</td>
+                    <td>No registrado</td>
                     <%}%>
                 </tr>
                 <tr><td class="text-info">Centro de Estudios:</td>
@@ -105,33 +104,33 @@
                         }
                     } else {
                     %>
-                    <td>NO REGISTRADO</td> 
+                    <td>No registrado</td> 
                     <%}%>
                 </tr>
                 <!--<tr><td class="text-info">Grado Acádemico:</td><td><%%></td></tr>-->
                 <tr><td class="text-info">Carrera:</td><td><%if (trb.getNo_carrera() == null) {
-                        out.print("NO REGISTRADO");
+                        out.print("No registrado");
                     } else {
                         out.print(trb.getNo_carrera());
                     }%></td></tr>
                 <!--<tr><td class="text-info">Titulo Profesional:</td><td><%%></td></tr>-->
                 <tr><td class="text-info">Código Universitario:</td><td><%if (trb.getCo_universitario() == null) {
-                        out.print("NO REGISTRADO");
+                        out.print("No registrado");
                     } else {
                         out.print(trb.getCo_universitario());
                     }%></td></tr>
                 <tr><td class="text-info">Tipo de Hora Referencial:</td><td><%if (trb.getCa_tipo_hora_pago_refeerencial() == null || trb.getCa_tipo_hora_pago_refeerencial().trim().equals("null")) {
-                        out.print("NO REGISTRADO");
+                        out.print("No registrado");
                     } else {
                         out.print(trb.getCa_tipo_hora_pago_refeerencial());
                     }%></td></tr>
                 <tr><td class="text-info">Año Egreso:</td><td><%if (trb.getDe_anno_egreso() == null) {
-                        out.print("NO REGISTRADO");
+                        out.print("No registrado");
                     } else {
                         out.print(trb.getDe_anno_egreso());
                     }%></td></tr>
                 <tr><td class="text-info">Otros Estudios:</td><td><%if (trb.getCm_otros_estudios() == null) {
-                        out.print("NO REGISTRADO");
+                        out.print("No registrado");
                     } else {
                         out.print(trb.getCm_otros_estudios());
                     }%></td></tr>

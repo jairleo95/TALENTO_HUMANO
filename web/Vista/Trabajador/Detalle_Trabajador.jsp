@@ -222,7 +222,7 @@
                         <div class="col-md-4 col_procesar_asigFam"></div>
                     </div>
                     <div class='row smart-form row_procesar_sistema'>
-                        <div class="col-md-8"><strong>¿Sistema de estado?</strong></div>
+                        <div class="col-md-8"><strong>¿T-REGISTRO?</strong></div>
                         <div class="col-md-4 col_procesar_sis"></div>
                     </div>
                     <%}%>

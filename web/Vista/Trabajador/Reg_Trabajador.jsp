@@ -1,10 +1,12 @@
-
-<%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
+        String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+        String iduser = (String) sesion.getAttribute("IDUSER");
+
 %>
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%@page import="pe.edu.upeu.application.model.Via"%>
 <%@page import="pe.edu.upeu.application.model.Zona"%>
@@ -14,12 +16,6 @@
 <%@page import="pe.edu.upeu.application.model.Carrera"%>
 <%@page import="pe.edu.upeu.application.model.V_Ubigeo"%>
 <%@page import="pe.edu.upeu.application.model.Nacionalidad"%>
-<%
-    HttpSession sesion_1 = request.getSession(true);
-    String iddep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");
-    String iduser = (String) sesion_1.getAttribute("IDUSER");
-
-%>
 <jsp:useBean id="List_Nacionalidad" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Departamento" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Carrera" scope="session" class="java.util.ArrayList"/>
@@ -82,12 +78,6 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
-
-
-        <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
-        <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-
         <style>
             #btn-duplicar{
                 margin: 1%;
@@ -162,7 +152,6 @@
                                     %>
                                     <!-- widget content -->
                                     <div class="widget-body">
-
                                         <div class="row">
                                             <form id="wizard-1" novalidate="novalidate" action="../../trabajador">
                                                 <div id="bootstrap-wizard-1" class="col-sm-12">
@@ -185,7 +174,6 @@
                                                     </div>
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="tab1">
-
                                                             <h3><strong>Paso 1 </strong> - Datos del Trabajador</h3>
                                                             <div class="row">
                                                                 <div class="col-sm-4">
@@ -635,7 +623,7 @@
                                                                     <div class="form-group class_cod">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-th fa-lg fa-fw"></i></span>
-                                                                            <input class="form-control input-group-sm cod_uni" id="doc" type="text" name="COD_UNI" maxlength="9" placeholder="Codigo Universitario" onblur="cod_uni_unico()">
+                                                                            <input class="form-control input-group-sm cod_uni"  type="text" name="COD_UNI" maxlength="9" placeholder="Codigo Universitario" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1084,7 +1072,6 @@
                                                                 <div class="col-sm-4">
 
                                                                     <div class="form-group">
-
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <select  class="form-control input-group-sm"  id="reli" required="" name="RELIGION">
@@ -1096,11 +1083,13 @@
 
                                                                         </div>
                                                                     </div>
+                                                                    
+                                                                </div>
+                                                                <div  class="col-sm-4 smart-form">
+                                                                    <label class='toggle state-error'>¿Autorizar descuento de Diezmo? <label>   </label> <input type='checkbox'   name='diezmo' class='cbkDiezmo' value='1'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label>
                                                                 </div>
                                                                 <div class="col-sm-4">
-
                                                                     <div class="form-group">
-
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"    placeholder="Iglesia" type="text" name="IGLESIA"   maxlength="30" id="igle">
@@ -1108,7 +1097,9 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-4">
+                                                            </div>
+                                                            <div class="row"> 
+                                                                   <div class="col-sm-4">
 
                                                                     <div class="form-group">
 
@@ -1119,10 +1110,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-                                                            </div>
-                                                            <div class="row"> 
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
 
                                                                     <div class="form-group">
 
@@ -1138,7 +1126,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
 
                                                                     <div class="form-group">
 
@@ -1149,7 +1137,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-4">
 
                                                                     <div class="form-group">
 
@@ -1622,11 +1610,11 @@
     <!-- JARVIS WIDGETS -->
     <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-    <!-- EASY PIE CHARTS -->
-    <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+    <!-- EASY PIE CHARTS 
+    <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
 
-    <!-- SPARKLINES -->
-    <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+    <!-- SPARKLINES 
+    <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>-->
 
     <!-- JQUERY VALIDATE -->
     <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
@@ -1637,8 +1625,8 @@
     <!-- JQUERY SELECT2 INPUT -->
     <script src="../../js/plugin/select2/select2.min.js"></script>
 
-    <!-- JQUERY UI + Bootstrap Slider -->
-    <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+    <!-- JQUERY UI + Bootstrap Slider
+    <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script> -->
 
     <!-- browser msie issue fix -->
     <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
@@ -1659,8 +1647,8 @@
     <script src="../../js/app.min.js"></script>
 
     <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-    <!-- Voice command : plugin -->
-    <script src="../../js/speech/voicecommand.min.js"></script>
+    <!-- Voice command : plugin 
+    <script src="../../js/speech/voicecommand.min.js"></script>-->
 
     <!-- PAGE RELATED PLUGIN(S) -->
     <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
@@ -1668,35 +1656,35 @@
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script type="text/javascript" src="../../js/Js_Validar/Validar_Formulario.js"></script>
     <script type="text/javascript">
-        function nobackbutton() {
+                                                    function nobackbutton() {
 
-            window.location.hash = "no-back-button";
-            window.location.hash = "Again-No-back-button" //chrome
+                                                        window.location.hash = "no-back-button";
+                                                        window.location.hash = "Again-No-back-button" //chrome
 
-            window.onhashchange = function () {
-                window.location.hash = "no-back-button";
-            }
-        }
-                                                    function val_doc() {
-                                                        if ($(".doc").valid()) {
+                                                        window.onhashchange = function() {
+                                                            window.location.hash = "no-back-button";
+                                                        }
+                                                    }
+                                                    function val_doc(valor) {
+                                                        var x = false;
+                                                        if (true) {
                                                             $.ajax({
+                                                                async: false,
                                                                 url: "../../trabajador",
-                                                                data: "opc=Val_num_Doc&doc=" + $(".doc").val(),
+                                                                data: "opc=Val_num_Doc&doc=" + valor,
                                                                 type: "post"
-                                                            }).done(function (e) {
-                                                                if (e == 'true') {
-                                                                    $(".class_doc").removeClass("has-success");
-                                                                    $(".class_doc").addClass("has-error");
-                                                                    $(".class_doc").children().remove('.help-block');
-                                                                    $(".class_doc").append('<span  class="help-block">¡El numero de documento ya existe!</span>');
+                                                            }).done(function(e) {
+                                                                if (e.nu_doc) {
+                                                                    x = false;
                                                                 } else {
-                                                                    $(".class_doc").children().remove('.help-block');
+                                                                    x = true;
                                                                 }
                                                             });
                                                         }
+                                                        return x;
                                                     }
                                                     $(document).ready(
-                                                            function () {
+                                                            function() {
                                                                 /* $("#next-step").on("submit", function() {
                                                                  alert()
                                                                  })*/
@@ -1705,7 +1693,7 @@
                                                                 var rg = $("#dep_dir_l").val();
                                                                 var data = "id_dep=" + rg + "&opc=dep_nac";
                                                                 tip.append('<option value="">Cargando...</option>').val('');
-                                                                $.post("../../ubigeo", data, function (objJson) {
+                                                                $.post("../../ubigeo", data, function(objJson) {
                                                                     tip.empty();
                                                                     if (objJson.rpta == -1) {
                                                                         alert(objJson.mensaje);
@@ -1727,7 +1715,7 @@
                                                                 var rg = $("#pro_dir_l").val();
                                                                 var data = "id_dist=" + rg + "&opc=pro_nac";
                                                                 ti.append('<option value="">Cargando...</option>').val('');
-                                                                $.post("../../ubigeo", data, function (objJson) {
+                                                                $.post("../../ubigeo", data, function(objJson) {
                                                                     ti.empty();
                                                                     if (objJson.rpta == -1) {
                                                                         alert(objJson.mensaje);
@@ -1749,7 +1737,7 @@
                                                                 //  $(".doc, .doc_c").val("");
 
                                                                 $("#nac").change(
-                                                                        function () {
+                                                                        function() {
                                                                             if ($("#nac").val() != "NAC-0193") {
                                                                                 $("#dist").hide();
                                                                                 $("#dist_nac").val("DST-001832");
@@ -1759,7 +1747,7 @@
                                                                             }
                                                                         }
                                                                 );
-                                                                $("#sit_edu").change(function () {
+                                                                $("#sit_edu").change(function() {
                                                                     if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
                                                                             | $("#sit_edu").val() == 'SED-0015'
                                                                             | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
@@ -1784,7 +1772,7 @@
                                                                         $("#carr").find('select option:eq(0)').prop('selected', true);
                                                                     }
                                                                 });
-                                                                $("#es_inst_p").change(function () {
+                                                                $("#es_inst_p").change(function() {
                                                                     if ($("#inst_peru").val() == "1") {
                                                                         $("#regimen").show();
                                                                         $("#egreso").show();
@@ -1800,10 +1788,10 @@
                                                                     }
                                                                 });
                                                                 $(".select-doc").change(
-                                                                        function () {
+                                                                        function() {
                                                                             $(".doc").val("");
                                                                             if ($(".select-doc").val() == 1) {
-                                                                                $("#doc").numeric(false, function () {
+                                                                                $("#doc").numeric(false, function() {
                                                                                 });
                                                                                 $(".doc").attr("maxlength", "8");
                                                                                 $(".doc").attr("minlength", "8");
@@ -1817,10 +1805,10 @@
                                                                         }
                                                                 );
                                                                 $(".select-doc_c").change(
-                                                                        function () {
+                                                                        function() {
                                                                             $(".doc_c").val("");
                                                                             if ($(".select-doc_c").val() == 1) {
-                                                                                $(".doc_c").numeric(false, function () {
+                                                                                $(".doc_c").numeric(false, function() {
                                                                                 });
                                                                                 $(".doc_c").attr("maxlength", "8");
                                                                                 $(".doc_c").attr("minlength", "8");
@@ -1835,27 +1823,24 @@
 
                                                                         }
                                                                 );
-                                                                $(".doc").keyup(function () {
-                                                                    val_doc();
-                                                                });
                                                             }
                                                     );</script>
     <script>
         $(document).ready(
-                function () {
+                function() {
                     $(".alerta-req").hide();
-                    $("#edad").change(function () {
+                    $("#edad").change(function() {
                         $(".alerta-req").hide();
                         var edad = calcular_edad($("#edad").val());
                         $(".edad").text(edad + " años");
                     });
-                    $(".fe_nac_c").change(function () {
+                    $(".fe_nac_c").change(function() {
                         $(".alerta-req").hide();
                         var edad = calcular_edad($(this).val());
                         $(".text_edad").text(edad + " años");
                     });
                     $("#sis_pens").change(
-                            function () {
+                            function() {
                                 if ($("#sis_pens").val() != "1") {
                                     $(".n_afp").remove();
                                     $("#nom_afp").attr("disabled", true);
@@ -1872,23 +1857,26 @@
                     );
                 });</script>
     <script>
+        $(".cod_uni").keypress(function(event) {
+            return /\d/.test(String.fromCharCode(event.keyCode));
+        });
         function cod_uni_unico() {
+            var x = false;
             $.ajax({
+                async: false,
                 url: "../../trabajador",
                 type: "POST",
                 data: "opc=validar_cod_uni&" + "cod_uni=" + $(".cod_uni").val()
-            }).done(function (e) {
-                if (e > 0) {
-                    $(".class_cod").removeClass("has-success");
-                    $(".class_cod").addClass("has-error");
-                    $(".class_cod").children().remove('.help-block');
-                    $(".class_cod").append('<span  class="help-block">¡El codigo ya existe!</span>');
+            }).done(function(e) {
+                if (e.cod > 0) {
+                    x = false;
                 } else {
-                    $(".class_cod").children().remove('.help-block');
+                    x = true;
                 }
-            }).fail(function (e) {
+            }).fail(function(e) {
                 alert("Error: " + e);
             });
+            return x;
         }
         function estado_civil(es_civil) {
             if (es_civil == '1' || es_civil == '3' || es_civil == '4' || es_civil == '5') {
@@ -2015,21 +2003,21 @@
     </script>
     <script>
         $(document).ready(
-                function () {
+                function() {
                     $("#no_cuen").hide();
                     $("#no_cuen_ban").hide();
                     $("#generar").hide();
                     $("#texto").hide();
                     $("#no_cuen_otros").hide();
-                    $("#banco").change(function () {
+                    $("#banco").change(function() {
                         cuenta_bancaria($(this).val());
                         $("#nu_cuen").focus();
                     });
-                    $("#es_civil").change(function () {
+                    $("#es_civil").change(function() {
                         estado_civil($(this).val());
                     });
                     $("#DOM_A_D3").change(
-                            function () {
+                            function() {
                                 if ($("#DOM_A_D3").val() == "3") {
                                     $("#DOM_A_D4").val("Sin Numero");
                                 } else {
@@ -2038,7 +2026,7 @@
                             }
                     );
                     $("#DOM_LEG_D3").change(
-                            function () {
+                            function() {
                                 if ($("#DOM_LEG_D3").val() == "3") {
                                     $("#DOM_LEG_D4").val("Sin Numero");
                                 } else {
@@ -2047,7 +2035,7 @@
                             }
                     );
                     $("#reli").change(
-                            function () {
+                            function() {
                                 if ($("#reli").val() == "1") {
                                     $("#igle").attr("required", "required")
                                 } else {
@@ -2055,11 +2043,11 @@
                                 }
                             });
                 });</script>
-    <script>$(document).ready(function () {
+    <script>$(document).ready(function() {
             $(".i_ndoc_h").numeric(false);
             var p = 1;
             var texto_h = "";
-            $(".i_tdoc_h").change(function () {
+            $(".i_tdoc_h").change(function() {
                 $(".i_ndoc_h").val("");
                 if ($(this).val() == 1) {
                     $(".i_ndoc_h").numeric(false);
@@ -2072,7 +2060,7 @@
                 }
                 $(".i_ndoc_h").focus();
             });
-            $(".btn-reg-hijo").click(function () {
+            $(".btn-reg-hijo").click(function() {
                 var tabla_hijo = $(".tabla-hijo");
                 var ap_pat = $(".i_app_h");
                 var ap_mat = $(".i_apm_h");
@@ -2188,12 +2176,12 @@
                     texto_h = "";
                     //  $(".num_hijo").val($(".tr_item_hijo").length);
                 }
-                $(".btn_remover").click(function () {
+                $(".btn_remover").click(function() {
                     $('.tr-hijo_' + $(this).val()).remove();
                     // $(".num_hijo").val($(".tr_item_hijo").length);
                 });
 
-                $(".btn-modificar_" + p).click(function () {
+                $(".btn-modificar_" + p).click(function() {
                     ap_pat.val($(".ap_p_h_" + $(this).val()).val());
                     ap_mat.val($(".ap_m_h_" + $(this).val()).val());
                     nombre.val($(".no_h_" + $(this).val()).val());
@@ -2205,7 +2193,7 @@
                     es_sup.val($(".es_sup_h_" + $(this).val()).val());
                     $(".btn-reg-hijo").hide();
                     $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
-                    $(".btn-mod-hijo").click(function () {
+                    $(".btn-mod-hijo").click(function() {
                         $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
                         $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
                         $(".no_h_" + $(this).val()).val(nombre.val());
@@ -2241,7 +2229,7 @@
         });</script>
     <script type="text/javascript">
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
-        $(document).ready(function () {
+        $(document).ready(function() {
             pageSetUp();
             var $validator = $("#wizard-1").validate({
                 rules: {
@@ -2270,6 +2258,11 @@
                     hphone: {
                         required: true,
                         minlength: 10
+                    }, NRO_DOC: {
+                        val_doc: true
+                    }, COD_UNI: {
+                        val_cod_uni: true
+                        
                     }
                 },
                 messages: {
@@ -2280,15 +2273,15 @@
                         email: "Your email address must be in the format of name@domain.com"
                     }
                 },
-                highlight: function (element) {
+                highlight: function(element) {
                     $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
                 },
-                unhighlight: function (element) {
+                unhighlight: function(element) {
                     $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
                 },
                 errorElement: 'span',
                 errorClass: 'help-block',
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     if (element.parent('.input-group').length) {
                         error.insertAfter(element.parent());
                     } else {
@@ -2297,27 +2290,32 @@
                 }
             });
 
-            jQuery.validator.addMethod("val_fecha", function (value, element) {
+            jQuery.validator.addMethod("val_fecha", function(value, element) {
                 var d = value.split("-");
                 return this.optional(element) || String(parseInt(d[0])).length == 4;
             }, "¡Fecha ingresada invalida!");
-            jQuery.validator.addMethod("val_edad", function (value, element) {
+            jQuery.validator.addMethod("val_edad", function(value, element) {
                 return this.optional(element) || calcular_edad(value) > 0;
             }, "¡La edad debe ser mayor a cero!");
 
-            $('.step').click(function () {
+            jQuery.validator.addMethod("val_doc", function(value, element) {
+                return this.optional(element) || val_doc(value);
+            }, "¡Numero de documento ya existe!");
+            jQuery.validator.addMethod("val_cod_uni", function(value, element) {
+                return this.optional(element) || cod_uni_unico();
+            }, "¡Código universitario ya existe!");
+
+            $('.step').click(function() {
                 var index = $('#bootstrap-wizard-1').bootstrapWizard('currentIndex');
                 if ($(this).find('i').hasClass("fa-check")) {
                     if (!$("#wizard-1").valid() & $('.step').eq(index).find('i').hasClass("fa-check")) {
                         $validator.focusInvalid();
-                        val_doc();
                     } else {
                         $('#bootstrap-wizard-1').bootstrapWizard('show', $('.step').index(this));
                     }
                 } else {
                     if (!$("#wizard-1").valid()) {
                         $validator.focusInvalid();
-                        val_doc();
                     } else {
                         $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index).addClass(
                                 'complete');
@@ -2331,11 +2329,9 @@
                 }
             });
             function validateTab(index) {
-
                 var $valid = $("#wizard-1").valid();
                 if (!$valid) {
                     $validator.focusInvalid();
-                    val_doc()
                     return false;
                 } else {
                     $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
@@ -2347,52 +2343,37 @@
             }
             $('#bootstrap-wizard-1').bootstrapWizard({
                 'tabClass': 'form-wizard',
-                onTabClick: function (tab, navigation, index) {
+                onTabClick: function(tab, navigation, index) {
                     //   return validateTab(index,tab)
                     return false;
                 },
-                'onNext': function (tab, navigation, index) {
-                    return validateTab(index)
+                'onNext': function(tab, navigation, index) {
+                    return validateTab(index);
                 }
             });
         })
 
     </script>
-
-    <!-- Your GOOGLE ANALYTICS CODE Below -->
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-        _gaq.push(['_trackPageview']);
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();</script>
-
     <!--Solo numeros -->
     <script type="text/javascript">
         $("#docs, .doc_c, #nu_cuen, #nu_cuen_ban").numeric();
-        $("#doc, .doc_c").numeric(false, function () {
+        $("#doc, .doc_c").numeric(false, function() {
             alert("Solo Numeros Enteros");
             this.value = "";
             this.focus();
         });
-        $(".positive").numeric({negative: false}, function () {
+        $(".positive").numeric({negative: false}, function() {
             alert("No negative values");
             this.value = "";
             this.focus();
         });
-        $(".positive-integer").numeric({decimal: false, negative: false}, function () {
+        $(".positive-integer").numeric({decimal: false, negative: false}, function() {
             alert("Positive integers only");
             this.value = "";
             this.focus();
         });
         $("#remove").click(
-                function (e)
+                function(e)
                 {
                     e.preventDefault();
                     $(".numeric,.integer,.positive").removeNumeric();
@@ -2428,13 +2409,13 @@
     <!--Select dinamicos-->
     <script type="text/javascript">
         /*Ubigeo*/
-        $("#dep_nac").change(function () {
+        $("#dep_nac").change(function() {
             var ti = $("#pro_nac");
             ti.empty();
             var rg = $("#dep_nac").val();
             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2452,13 +2433,13 @@
                 }
             });
         });
-        $("#pro_nac").change(function () {
+        $("#pro_nac").change(function() {
             var ti = $("#dist_nac");
             ti.empty();
             var rg = $("#pro_nac").val();
             var data = "id_dist=" + rg + "&opc=pro_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2477,13 +2458,13 @@
             });
         });
         // ============ DIRECCION ===========
-        $("#dep_dir_a").change(function () {
+        $("#dep_dir_a").change(function() {
             var ti = $("#pro_dir_a");
             ti.empty();
             var rg = $("#dep_dir_a").val();
             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2501,13 +2482,13 @@
                 }
             });
         });
-        $("#pro_dir_a").change(function () {
+        $("#pro_dir_a").change(function() {
             var ti = $("#DOM_A_DISTRITO");
             ti.empty();
             var rg = $("#pro_dir_a").val();
             var data = "id_dist=" + rg + "&opc=pro_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2526,7 +2507,7 @@
             });
         });
         //PROVINCIA
-        $("#dep_dir_l").change(function () {
+        $("#dep_dir_l").change(function() {
             var ti = $("#pro_dir_l");
             var rg = $("#dep_dir_l").val();
             list_prov_id_dep(rg, ti, "0", "")
@@ -2534,7 +2515,7 @@
         function list_prov_id_dep(rg, ti, selected, id_select) {
             var data = "id_dep=" + rg + "&opc=dep_nac";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2567,7 +2548,7 @@
             });
         }
         //DISTRITO
-        $("#pro_dir_l").change(function () {
+        $("#pro_dir_l").change(function() {
             var ti = $("#DOM_LEG_DISTRITO");
             var rg = $("#pro_dir_l").val();
             list_dist_id_prov(rg, ti, "0", "");
@@ -2576,7 +2557,7 @@
             var data = "id_dist=" + rg + "&opc=pro_nac";
             ti.append('<option value="">Cargando...</option>').val('');
             ti.empty();
-            $.post("../../ubigeo", data, function (objJson) {
+            $.post("../../ubigeo", data, function(objJson) {
 
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2608,13 +2589,13 @@
             });
         }
         /*Datos Academicos*/
-        $("#rg").change(function () {
+        $("#rg").change(function() {
             var ti = $("#ti_inst");
             ti.empty();
             var rg = $("#rg").val();
             var data = "regimen=" + rg + "&opc=ti_inst";
             ti.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function (objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 ti.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2632,13 +2613,13 @@
                 }
             });
         });
-        $("#ti_inst").change(function () {
+        $("#ti_inst").change(function() {
             var inst = $("#inst");
             inst.empty();
             var ti = $("#ti_inst").val();
             var data = "ti=" + ti + "&opc=institucion";
             inst.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function (objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 inst.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2656,13 +2637,13 @@
                 }
             });
         });
-        $("#inst").change(function () {
+        $("#inst").change(function() {
             var carr = $("#carrera");
             carr.empty();
             var insti = $("#inst").val();
             var data = "inst=" + insti + "&opc=carrera";
             carr.append('<option value="">Cargando...</option>').val('');
-            $.post("../../detalle_carrera", data, function (objJson) {
+            $.post("../../detalle_carrera", data, function(objJson) {
                 carr.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -2682,11 +2663,11 @@
         });
     </script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var b = $(".tbodys");
             $("#btnfiltrar").click(
-                    function () {
-                        $.post("../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function (objJson) {
+                    function() {
+                        $.post("../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function(objJson) {
                             b.empty();
                             var list = objJson.lista;
                             for (var i = 0; i < list.length; i++) {
@@ -2705,7 +2686,7 @@
                                 }
                                 b.append("</tr>");
                             }
-                            $(".btn-add-conyugue").click(function () {
+                            $(".btn-add-conyugue").click(function() {
                                 var v = $(this).val();
                                 $(".nom_c").val($(".nom_ape_" + v).val());
                                 $(".f_nac").val($(".nac_" + v).val());
@@ -2717,11 +2698,11 @@
                         }
                         );
                     });
-            $(".btn-salir-busc, .close").click(function () {
+            $(".btn-salir-busc, .close").click(function() {
 
                 $(".select-conyugue").val("0");
             });
-            $(".select-conyugue").change(function () {
+            $(".select-conyugue").change(function() {
                 if ($(this).val() == "1") {
                     $("#btn-mostrar").click();
                 }
@@ -2735,7 +2716,7 @@
             }
             );
             $("#btncancel").click(
-                    function () {
+                    function() {
                         document.formulario.reset();
                         b.empty();
                         html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'

@@ -222,7 +222,7 @@ public class CAutorizacion extends HttpServlet {
                                     + "  <th data-hide='phone,tablet'><strong>Departamento</strong></th>"
                                     + "  <th data-hide='phone,tablet'><strong>Requerimiento</strong></th>";
                             html_table += (permisoAsigFam) ? " <th  data-hide='phone,tablet'>Asig. Fam.</th> " : "";
-                            html_table += (permisoEsSistema) ? "<th  data-hide='phone,tablet'>Sist. Estado</th>" : "";
+                            html_table += (permisoEsSistema) ? "<th  data-hide='phone,tablet'>T-REGISTRO</th>" : "";
                             html_table += "</tr></thead>";
                         } else {
 
@@ -236,7 +236,7 @@ public class CAutorizacion extends HttpServlet {
                                     + "  <th data-hide='phone,tablet'><strong>Departamento</strong></th>"
                                     + "  <th data-hide='phone,tablet'><strong>Requerimiento</strong></th>";
                             html_table += (permisoAsigFam) ? " <th  data-hide='phone,tablet'>Asig. Fam.</th> " : "";
-                            html_table += (permisoEsSistema) ? "<th  data-hide='phone,tablet'>Sist. Estado</th>" : "";
+                            html_table += (permisoEsSistema) ? "<th  data-hide='phone,tablet'>T-REGISTRO</th>" : "";
                             html_table += "</tr></thead>";
                         }
 
