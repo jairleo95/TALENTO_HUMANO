@@ -8,6 +8,10 @@ package pe.edu.upeu.application.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import pe.edu.upeu.application.dao_imp.InterfaceFotos_TrabajadorDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
@@ -60,6 +64,40 @@ public class Fotos_TrabajadorDAO implements InterfaceFotos_TrabajadorDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
+    }
+
+    @Override
+    public List<Map<String, ?>> Fotos_usuario(String idtr,String tipo) {
+        
+    List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+    String tabla ;     
+          if(tipo.equals("todo")){
+           tabla ="rhth_fotos_trabajador";    
+          }else{
+           tabla ="rhtr_fotos_trabajador";
+          }
+        this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from "+tabla+" where id_trabajador= '"+idtr+"'";
+        try {
+            ResultSet rs = this.cnn.query(sql);
+            
+            while (rs.next()) {
+                Map<String, Object> cd = new HashMap<String, Object>();
+                cd.put("ar_foto",rs.getString("ar_foto"));
+              lista.add(cd);
+            }
+      } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
+        } finally {
+            try {
+                this.cnn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
     }
 
 }

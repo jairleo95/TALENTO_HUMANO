@@ -334,16 +334,17 @@
             <!-- User info -->
             <div class="logininfo">
                 <div class="row">
-                    <div class="avatar-user col-md-3">
+                    <div class="avatar-user col-md-4">
+                            <input id="id_trabajador" type="hidden" value="<%out.println(sesion.getAttribute("IDTR"));%>" />
                         <a href="javascript:void(0);" id="show-shortcut" >
                             <% if (sesion.getAttribute("AR_FOTO") != null) {%>
-                            <img src="Vista/Usuario/Fotos/<%out.println(sesion.getAttribute("AR_FOTO")); %>"  />
+                            <img id="foto_usuario" src="Vista/Usuario/Fotos/<%out.println(sesion.getAttribute("AR_FOTO")); %>"  />
                             <%} else {%>
-                            <img src="imagenes/avatar_default.jpg"  />
+                            <img id="foto_usuario" src="imagenes/avatar_default.jpg"  />
                             <%}%>
                         </a>  
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <div class="login-info text-right">
                             <span class="spanuser"> <%out.println((String) sesion.getAttribute("USER")); %></span>  
                         </div>
@@ -699,7 +700,10 @@
             $(".iframe_principal").show(100);
             $(".animacion_load").empty();
         };
+        
         $(document).ready(function () {
+            console.log("inicializando ....");
+            getAvatar();
             pageSetUp();
             // alert('<%="Maximum Inactive Interval of Session in Seconds is : " + sesion.getMaxInactiveInterval() / 60%>');
             $(".menu-item-parent").parent().click(function () {
@@ -721,7 +725,25 @@
                 $this.parents('.dropdown-menu').find('li').removeClass('active');
                 $this.parent().addClass('active');
             });
+            
+             function getAvatar(){
+                 $.ajax({
+                     url : "./foto",
+                     type: "POST",
+                     data: "getfoto=getfoto&tipo=perfil&idtra="+ $('#id_trabajador').val(),
+                     success : getImagen,
+                     error: errors
+                 });
+                 function getImagen(data){
+                     console.log(data);
 
+                 }
+                 function errors(data){
+                     console.log($('#id_trabajador').val());
+                     console.log("error"+data)
+                 }
+                 
+             }
         });
 
          $("#btn-ocultar").click(function (){
@@ -732,7 +754,7 @@
                  $(".logininfo").css({display : "block"});
                  btnclose = 0;
              }
-             
+          
          });
         </script>
     </body>

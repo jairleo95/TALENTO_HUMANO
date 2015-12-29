@@ -155,20 +155,21 @@
             <div class="row" style="padding-bottom: 10px;">
                 <div class="col-md-4">
                     <div class="media">
-                        <!--  upload foto -->
-                        <%if (t.getNo_ar_foto() == null) {%>
-                        <a class="a_foto pull-left"> <img  class="ver_foto media-object"  src="../../imagenes/avatar_default.jpg"  width="100"  height="100"> </a>
                         <form action="../../foto" method="POST" enctype="multipart/form-data" class="form-subir-foto">
                             <input type="hidden" name="idtr" class="idtr" id="input-file" value="<%=t.getId_trabajador()%>">
                             <input style="display:none" class="file-foto" type="file" name="archivo" required="">
                         </form>
+                        <!--  upload foto -->
+                        <%if (t.getNo_ar_foto() == null) {%>
+                        <a class="a_foto pull-left"><img  class="ver_foto media-object"  src="../../imagenes/avatar_default.jpg"  width="100"  height="100"> </a>
+                        <a class="ver_foto btn btn-xs btn-danger">Cambiar Imagen</a>
                         <div style="display:none" id="progressbar"><div class="progress-label">Loading...</div></div>
-                        <div style="display:none" class="guardar-img">
-                            <button class="btn btn-xs btn-success">Guargar Imagen</button>
-                        </div>
                         <%} else {%>
                         <a class="mustang-gallery pull-left" title="<%=t.getAr_foto()%>"  href="../Usuario/Fotos/<%=t.getAr_foto()%>" ><img  src="../Usuario/Fotos/<%=t.getAr_foto()%>" class="borde" width="100" height="100" ></a>
-                            <%}%>
+                           
+                        <a class="ver_foto btn btn-xs btn-danger">Cambiar Imagen</a>
+                        <div style="display:none" id="progressbar"><div class="progress-label">Loading...</div></div>
+                        <%}%>
                         <div class="media-body">
                             <%
                                 CConversion c = new CConversion();
@@ -605,9 +606,10 @@
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript" src="../../js/shadowbox/demo.js"></script>
         <script type="text/javascript" src="../../js/shadowbox/shadowbox.js"></script>
-        <script src="../../js/upload-foto/upload-foto.js" type="text/javascript"></script>
+        <script src="../../js/JQuery/jquery.session.js" type="text/javascript"></script>
         <script>
-        function procesar_req_individual(ckb, tipo, iddgp) {
+            var foto_subido = "";
+        function procesar_req_individual(ckb, tipo, iddgp) {          
             var array_id_dgp = [];
             var estado = false;
             array_id_dgp[0] = ckb.val();
@@ -815,7 +817,6 @@
 
                 setTimeout(progress, 100);
             });
-            // $('.ver_foto').attr("src", result);
         }
         function validar_shadowbox() {
             $.each($(".mustang-gallery"), function() {
@@ -883,6 +884,7 @@
             });
 
         }
+        
         $(document).ready(function() {
             Listar_Cod_Huella();
             Listar_Cod_APS();
@@ -911,6 +913,7 @@
                 $(".file-foto").click();
             });
             $('.file-foto').change(function(e) {
+                console.log("load foto");
                 var t = e;
                 if (this.files[0].size <= 500000) {
                     var jForm = new FormData();
@@ -924,6 +927,7 @@
                         contentType: false,
                         data: jForm,
                         success: function(objJson) {
+                            console.log(objJson);
                             if (objJson.rpta === "-1") {
                                 $.smallBox({
                                     title: "¡Alerta!",
@@ -937,11 +941,20 @@
                                 this.timer = setTimeout(function() {
                                     $('.a_foto').addClass("mustang-gallery");
                                     $('.ver_foto').addClass("borde");
-                                    $('.a_foto').attr("href", "../Usuario/Fotos/" + objJson.archivo);
-                                    $('.a_foto').attr("title", objJson.archivo);
+                                    foto_subido = "Vista/Usuario/Fotos/" + objJson.archivo;
                                     $('.ver_foto').attr("src", "../Usuario/Fotos/" + objJson.archivo);
+                                    var padre = $(window.parent.document.getElementById('foto_usuario'));
+                                    var idtra = $(window.parent.document.getElementById('id_trabajador')).val();
+                                    console.log(idtra);
+                                    console.log($(".idtr").val());
+                                    if(idtra.trim() == $(".idtr").val().trim()){
+                                       
+                                       $(padre).attr("src", "Vista/Usuario/Fotos/" + objJson.archivo); 
+                                    }
                                     $(".borde").removeClass("ver_foto");
-                                    $(".form-subir-foto").remove();
+                                    $(".borde").attr("src", "../Usuario/Fotos/" + objJson.archivo);
+                                    $("a.mustang-gallery").attr("href", "../Usuario/Fotos/" + objJson.archivo);
+                                    //$(".form-subir-foto").remove();
                                     validar_shadowbox();
                                     $.smallBox({
                                         title: "¡Felicitaciones!",
@@ -960,6 +973,8 @@
                     $(this).val('');
                 }
             });
+            
+           
 
             $(".btn-conti").click(function(e) {
                 $.SmartMessageBox({
