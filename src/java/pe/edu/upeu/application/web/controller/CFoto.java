@@ -38,10 +38,18 @@ public class CFoto extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
+        String opc = request.getParameter("opc");
+        String idtra = request.getParameter("idtra");
+        String tipo = request.getParameter("tipo");
         InterfaceFotos_TrabajadorDAO foto = new Fotos_TrabajadorDAO();
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
         String ubicacion = "";
         Map<String, Object> rpta = new HashMap<String, Object>();
+        
+        if(true){
+           // rpta.put("rpta", foto.Fotos_usuario(idtra.trim(), tipo)); 
+        }
+        
         try {
             ubicacion = getServletConfig().getServletContext().getRealPath("/") +"Vista/Usuario/Fotos/";
             // ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Usuario\\Fotos";
@@ -84,7 +92,7 @@ public class CFoto extends HttpServlet {
                     }
                 }
             }
-            //foto.INSERT_FOTOS_TRABAJADOR(null, null, nombre_archivo, no_original, String.valueOf(sizeInBytes), tipo_archivo, idtr);
+            foto.INSERT_FOTOS_TRABAJADOR(null, null, nombre_archivo, no_original, String.valueOf(sizeInBytes), tipo_archivo, idtr);
             rpta.put("rpta", "1");
             rpta.put("archivo", nombre_archivo);
 
@@ -92,11 +100,13 @@ public class CFoto extends HttpServlet {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
         }
+        
         Gson gson = new Gson();
         out.print(gson.toJson(rpta));
         out.flush();
         out.close();
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
