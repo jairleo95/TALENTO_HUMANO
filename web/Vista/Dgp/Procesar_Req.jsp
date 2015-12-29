@@ -388,7 +388,7 @@
             listar_autorizados(true);
              listar_autorizados(false);
 
-        })
+        });
 
     </script>
 </html>

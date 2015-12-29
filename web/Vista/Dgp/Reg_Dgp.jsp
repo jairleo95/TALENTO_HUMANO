@@ -95,7 +95,6 @@
 
         <%            HttpSession sesion = request.getSession(true);
             String id_dep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
-            //  String fecha_min = (String) sesion.getAttribute("FECHA_MINIMA");
         %>
     </head>
     <body>   
@@ -128,7 +127,6 @@
                                     <header>
                                         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
                                         <h2>Registrar Requerimiento</h2>
-
                                     </header>
 
                                     <!-- widget div-->
@@ -160,11 +158,13 @@
 
                                                     <%                                                        /*Temporal*/
                                                         String idreq = request.getParameter("idreq");
-
+                                                        String id = "";
                                                         for (int i = 0; i < Listar_Trabajador_id.size(); i++) {
                                                             V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
                                                             tr = (V_Ficha_Trab_Num_C) Listar_Trabajador_id.get(i);
+                                                            id = tr.getId_trabajador();
                                                     %>
+                                                    <input  type="hidden" class="idtr" value="<%=id%>"/>
                                                     <div class="row">
                                                         <input value= "<%=tr.getId_trabajador()%>"  type="hidden" id="" />
                                                         <section class="col col-6">
@@ -260,8 +260,6 @@
                                                                 <input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/>
                                                             </label>
                                                         </section>
-
-
                                                         <section class="col col-2">
                                                             <label class="btn">
                                                                 <button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>
@@ -274,6 +272,8 @@
                                                         </section>
                                                     </div>
                                                     <input type="hidden" value="1" name="numero" class="cant-input" />
+                                                    <div class="div_input_diezmo">
+                                                            </div>
                                                     <%}%>
                                                     <section>
                                                         <label class="label" id="titu">Requerimiento :</label>
@@ -482,6 +482,12 @@
                                                                 </select>
                                                             </label>
                                                         </section>
+                                                        <div class="col col-4">
+                                                            <div class="div_input_diezmo">
+                                                            </div>
+
+                                                        </div>
+
                                                     </div>
                                                     <%String es_cue_sue = request.getParameter("es_cs");%>
                                                     <input type="hidden" name="ESTADO" value="<%=es_cue_sue%>">
@@ -614,6 +620,8 @@
                                                                 <input type="text" name="DOMICILIO_FISCAL" id="" required="" >
                                                             </label>
                                                         </section>
+                                                        <div class="div_input_diezmo">
+                                                            </div>
                                                         <%}%>
                                                         <%if (idreq.equals("REQ-0010") || idreq.equals("REQ-0011")) {%>
                                                         <section class="col col-6" >
@@ -648,10 +656,10 @@
                                                         </section>
                                                         <input type="hidden" value="1" name="ES_PERIODO" />
                                                         <input type="hidden" value="1" name="CANT" class="cant" />
-
+                                                        <div class="div_input_diezmo">
+                                                            </div>
                                                     </div>
                                                     <%}%>
-
                                                     <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>">
                                                     <div id="div_2" class="contenido" style="display: none">
                                                         <table  class="table">
@@ -659,14 +667,17 @@
                                                             <tr><td class="td">Horario de Capacitacion:</td><td><input type="text" name="HORARIO_CAPACITACION"  ></td></tr>   
                                                             <tr><td class="td">Horario de Refrigerio:</td><td><input type="text" name="HORARIO_REFRIGERIO"  ></td></tr>  
                                                             <tr><td class="td">Dias de Capacitacion:</td><td><input type="text" name="DIAS_CAPACITACION" ></td></tr>  
+                                                            <tr><div class="div_input_diezmo">
+                                                            </div></tr>  
                                                         </table>
                                                     </div >
                                                     <div id="div_3" class="contenido" style="display:none ">
                                                         <table class="table">
                                                             <tr><td class="td">Monto del Honorario:</td><td><input type="text" name="MONTO_HONORARIO" ></td></tr>   
+                                                            <tr><div class="div_input_diezmo">
+                                                            </div></tr>   
                                                         </table>
                                                     </div>
-
                                                 </fieldset>
                                             </div>
 
@@ -754,167 +765,7 @@
                                             <div class="logs"></div>
 
                                             <div class="smart-form" >
-                                                <!--<header class="titulo_req">
 
-                                                    <div class="spacing">
-                                                        <center><h1 class="spacing" style="font-weight: bold; margin: 0px;  color: #005cac;"> Horario</h1></center>
-                                                        <br>
-
-                                                    </div>
-                                                </header>
-
-                                                <fieldset>
-
-                                                    <section>
-                                                        <label class="label" id="titu">Tipo de Horario :</label>
-                                                        <label class="select">
-
-                                                            <select id="horario" required="" name="HORARIO" >
-                                                                <option value="">[SELECCIONE]</option>
-                                                                <option value="0">Editable</option>
-
-                                                            </select>
-
-                                                        </label>
-                                                    </section>
-                                                    <div class="row">
-                                                        <section class="col col-2">
-                                                            <label class="select" id="titu">LUNES
-                                                                <select id=select_lun >
-                                                                    <option value="1">Habilitado</option>
-                                                                    <option value="2" selected="">Deshabilitado</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2">
-                                                            <label class="select" id="titu">MARTES
-                                                                <select id=select_mar >
-                                                                    <option value="1">Habilitado</option>
-                                                                    <option value="2" selected="">Deshabilitado</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2" >
-                                                            <label class="select" id="titu">MIERCOLES
-                                                                <select id=select_mie  >
-                                                                    <option value="1">Habilitado</option>
-                                                                    <option value="2" selected="">Deshabilitado</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2">
-                                                            <label class="select" id="titu">JUEVES
-                                                                <select id=select_jue  >
-                                                                    <option value="1">Habilitado</option>
-                                                                    <option value="2" selected="">Deshabilitado</option>
-                                                                </select> 
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2">
-                                                            <label class="select" id="titu">VIERNES
-                                                                <select id=select_vie  >
-                                                                    <option value="1">Habilitado</option>
-                                                                    <option value="2" selected="">Deshabilitado</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2">
-                                                            <label class="select" id="titu">SABADO
-                                                                <select id=select_sab  >
-                                                                    <option value="1">Habilitado</option>
-                                                                    <option value="2" selected="">Deshabilitado</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-
-                                                        <section class="col col-2">
-                                                            <label class="select" id="titu">DOMINGO
-                                                                <select id=select_dom >
-                                                                    <option value="1">Habilitado</option>
-                                                                    <option value="2" selected="">Deshabilitado</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                    </div>
-
-                                                    <div class="input-desp dias_semana">
-                                                        <div class="cont">
-                                                            <section class="col col-sm-4 col-md-4">
-                                                                <div class="caja">
-                                                                    <table  id="show_lun" class="cont_lun table table-condensed table-bordered"> 
-                                                                        <tr class="c_header"><td style="text-align: center;" colspan="3">Lunes</td></tr>
-
-                                                                    </table>
-                                                                </div>
-                                                            </section>
-                                                        </div>
-                                                        <div class="cont">
-                                                            <section class="col col-sm-4 col-md-4">
-                                                                <div class="caja">
-                                                                    <table id="show_mar" class="cont_mar table table-condensed table-bordered">     
-                                                                        <tr class="c_header" ><td style="text-align: center;"  colspan="3">Martes</td></tr>
-                                                                    </table>
-                                                                </div>
-                                                            </section>
-                                                        </div>
-                                                        <div class="cont">
-                                                            <section class="col col-sm-4 col-md-4">
-                                                                <div class="caja">
-                                                                    <table id="show_mie" class="cont_mie table table-condensed table-bordered">     
-                                                                        <tr class="c_header"><td style="text-align: center;" colspan="3">Miercoles</td></tr>
-                                                                    </table>
-                                                                </div>
-                                                            </section>
-                                                        </div>
-                                                        <div class="cont">
-                                                            <section class="col col-sm-4 col-md-4">
-                                                                <div class="caja">
-                                                                    <table id="show_jue" class="cont_jue table table-condensed table-bordered">     
-                                                                        <tr class="c_header"><td style="text-align: center;" colspan="3">Jueves</td></tr>
-                                                                    </table>
-                                                                </div>
-                                                            </section>
-                                                        </div>
-                                                        <div class="cont">
-                                                            <section class="col col-sm-4 col-md-4">
-                                                                <div class="caja">
-                                                                    <table id="show_vie" class="cont_vie table table-condensed table-bordered">     
-                                                                        <tr class="c_header"><td style="text-align: center;" colspan="3">Viernes</td></tr>
-                                                                    </table>
-                                                                </div>
-                                                            </section>
-                                                        </div>
-                                                        <div class="cont">
-                                                            <section class="col col-sm-4 col-md-4">
-                                                                <div class="caja">
-                                                                    <table id="show_sab" class="cont_sab table table-condensed table-bordered">     
-                                                                        <tr class="c_header"><td style="text-align: center;"  colspan="3">Sábado</td></tr>
-                                                                    </table>
-                                                                </div>
-                                                            </section>
-                                                        </div>
-                                                        <div class="cont">
-                                                            <section class="col col-sm-4 col-md-4">
-                                                                <div class="caja">
-                                                                    <table id="show_dom" class="cont_dom table table-condensed table-bordered" >
-                                                                        <tr class="c_header"><td  style="text-align: center;" colspan="3">Domingo</td></tr>
-                                                                    </table>
-                                                                </div>
-                                                            </section>
-                                                        </div>
-                                                        <div  class="row" >
-                                                            <section class="col col-4">
-                                                                <label class="input" id="titu">
-                                                                    <div class="h_total" style=" font-weight: bold;">Horas Totales : 00:00 horas</div>
-                                                                    <input  readonly="" type="text" name="h_total" class=" h_total" required="" max="48"/>
-                                                                </label>
-                                                            </section>
-                                                        </div>
-
-
-                                                    </div>
-                                                    <input  type="hidden" name="dep_actual" value="<%--<%=id_dep%>--%>" class="dep_actual" />
-                                                </fieldset>-->
                                                 <footer>
                                                     <div class="div_info">
 
@@ -927,9 +778,6 @@
                                                     </button>
                                                 </footer>
                                             </div>
-
-
-
                                         </div>
                                         <!-- end widget content -->
 
@@ -948,10 +796,6 @@
 
             </div>
         </div>
-
-
-
-
     </body>
     <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>

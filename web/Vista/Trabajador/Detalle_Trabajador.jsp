@@ -215,6 +215,10 @@
                     </div>
                     <div class='row row_cod_huella'>
                     </div>
+                    <div class="row">
+                        <div class="col-md-8"><strong>¿Descuento de Diezmo? </strong></div>
+                        <div class="col-md-4"><%=(trb.getEs_diezmo().equals("1")?"Si":"No")%></div>
+                    </div>
                     <%if (iddgp != null) {
                     %>
                     <input type="hidden" class="dgp" value="<%=iddgp%>" >
@@ -229,10 +233,8 @@
                     <%}%>
                 </div>
                 <div class="col-md-4">
-                    <%
-                        InterfaceTrabajadorDAO iTr = new TrabajadorDAO();
-                        int porcentaje = iTr.ShowPorcentageTrabajador(idtr);
-                    %>
+                    <% InterfaceTrabajadorDAO iTr = new TrabajadorDAO();
+                        int porcentaje = iTr.ShowPorcentageTrabajador(idtr);%>
                     <center><strong>Datos Completados: </strong><br>
                         <div class="showPorcentage">
                             <div class="easy-pie-chart txt-color-blue easyPieChart pcDatosCompTrabajador" data-percent="<%=porcentaje%>" data-pie-size="100"  >
@@ -620,7 +622,7 @@
             }
             var url = (tipo === 1) ? "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo=1&estado=" + estado : "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo=2&estado=" + estado;
             $.ajax({
-                url: url, data: {json: array_id_dgp}, type: 'POST', dataType: 'json', success: function(data, textStatus, jqXHR) {
+                url: url, data: {json: array_id_dgp}, type: 'POST', dataType: 'json', success: function (data, textStatus, jqXHR) {
                     if (data.rpta === "1") {
                         //  ShowCbk_Procesar_Ind(iddgp);
                         $.smallBox({
@@ -665,12 +667,12 @@
             var row_cod_huella = $(".row_cod_huella");
             row_cod_huella.empty();
             $.ajax({
-                url: "../../empleado", data: "opc=ShowHuella&idtr=" + $(".idtr").val(), type: 'POST', success: function(data, textStatus, jqXHR) {
+                url: "../../empleado", data: "opc=ShowHuella&idtr=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
                     row_cod_huella.append(data.value);
-                    $(".textCodHuella").keypress(function(event) {
+                    $(".textCodHuella").keypress(function (event) {
                         return /\d/.test(String.fromCharCode(event.keyCode));
                     });
-                    $(".btnHuellaDigital").click(function() {
+                    $(".btnHuellaDigital").click(function () {
                         Actualizar_Cod_Huella();
                     });
                     $(".btnHuellaDigital").attr("rel", "tooltip");
@@ -682,12 +684,12 @@
             var row_cod_aps = $(".row_cod_aps");
             row_cod_aps.empty();
             $.ajax({
-                url: "../../empleado", data: "opc=ShowAPS&idtr=" + $(".idtr").val(), type: 'POST', success: function(data, textStatus, jqXHR) {
+                url: "../../empleado", data: "opc=ShowAPS&idtr=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
                     row_cod_aps.append(data.value);
-                    $(".txtCodigoAPS").keypress(function(event) {
+                    $(".txtCodigoAPS").keypress(function (event) {
                         return /\d/.test(String.fromCharCode(event.keyCode));
                     });
-                    $(".btnCodigoAPS").click(function() {
+                    $(".btnCodigoAPS").click(function () {
                         Actualizar_Cod_APS();
                         ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
                     });
@@ -701,10 +703,10 @@
                     url: "../../empleado",
                     type: "POST",
                     data: "opc=validar_huella&co_hue=" + co_huella
-                }).done(function(e) {
+                }).done(function (e) {
                     if (e.huella == 0) {
                         $.ajax({
-                            url: "../../empleado", data: "opc=reg_huella&idtr=" + $(".idtr").val() + "&cod=" + co_huella, type: 'POST', success: function(data, textStatus, jqXHR) {
+                            url: "../../empleado", data: "opc=reg_huella&idtr=" + $(".idtr").val() + "&cod=" + co_huella, type: 'POST', success: function (data, textStatus, jqXHR) {
                                 if (data.rpta === "1") {
                                     // Listar_Cod_Huella();
                                     /*validar los botones de autorizar req*/                                     ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
@@ -743,10 +745,10 @@
                     url: "../../empleado",
                     type: "POST",
                     data: "opc=validar_aps&co_aps=" + co_aps
-                }).done(function(e) {
+                }).done(function (e) {
                     if (e.aps == 0) {
                         $.ajax({
-                            url: "../../empleado", data: "opc=reg_aps&idtr=" + $(".idtr").val() + "&cod=" + co_aps, type: 'POST', success: function(data, textStatus, jqXHR) {
+                            url: "../../empleado", data: "opc=reg_aps&idtr=" + $(".idtr").val() + "&cod=" + co_aps, type: 'POST', success: function (data, textStatus, jqXHR) {
                                 if (data.rpta === "1") {
                                     // Listar_Cod_Huella();
                                     /*validar los botones de autorizar req*/
@@ -790,17 +792,17 @@
         }
         function fileOnload(e) {
             var result = e.target.result
-            $(function() {
+            $(function () {
                 $("#progressbar").show(200);
                 var progressbar = $("#progressbar"),
                         progressLabel = $(".progress-label");
 
                 progressbar.progressbar({
                     value: false,
-                    change: function() {
+                    change: function () {
                         progressLabel.text(progressbar.progressbar("value") + "%");
                     },
-                    complete: function() {
+                    complete: function () {
                         progressLabel.text("Complete!");
                         $("#progressbar").hide(200);
                     }});
@@ -819,7 +821,7 @@
             });
         }
         function validar_shadowbox() {
-            $.each($(".mustang-gallery"), function() {
+            $.each($(".mustang-gallery"), function () {
                 Shadowbox.init({
                     overlayOpacity: 0.8
                 }, setupDemos);
@@ -828,15 +830,15 @@
         function ValBtnAutorizarDgp(trabajador, divBotones) {
             divBotones.empty();
             $.ajax({
-                url: "../../autorizacion", data: "opc=ValBtnAutorizacion&trabajador=" + trabajador, type: 'POST', success: function(data, textStatus, jqXHR) {
+                url: "../../autorizacion", data: "opc=ValBtnAutorizacion&trabajador=" + trabajador, type: 'POST', success: function (data, textStatus, jqXHR) {
                     if (data.rpta === "1") {
                         divBotones.append(data.data);
-                        $(".btn-autor").click(function(e) {
+                        $(".btn-autor").click(function (e) {
                             $.SmartMessageBox({
                                 title: "¡Alerta de Confirmación!",
                                 content: "¿Está totalmente seguro de autorizar este requerimiento?",
                                 buttons: '[No][Si]'
-                            }, function(ButtonPressed) {
+                            }, function (ButtonPressed) {
                                 if (ButtonPressed === "Si") {
                                     $(".form-aut").submit();
                                     window.parent.sendMessage();
@@ -855,7 +857,7 @@
         }
         function porcentaje_datos(trabajador) {
             $.ajax({
-                url: "../../trabajador", data: "opc=ShowPorcentageTrabajador&id=" + trabajador, type: 'POST', success: function(data, textStatus, jqXHR) {
+                url: "../../trabajador", data: "opc=ShowPorcentageTrabajador&id=" + trabajador, type: 'POST', success: function (data, textStatus, jqXHR) {
                     $('.pcDatosCompTrabajador').data('easyPieChart').update(data.porcentaje);
                 }});
         }
@@ -865,16 +867,16 @@
             div.empty();
             div2.empty();
             $.ajax({
-                url: "../../autorizacion", data: "opc=ShowCkbEstado_procesarIndiviual&iddgp=" + iddgp, type: 'POST', success: function(data, textStatus, jqXHR) {
+                url: "../../autorizacion", data: "opc=ShowCkbEstado_procesarIndiviual&iddgp=" + iddgp, type: 'POST', success: function (data, textStatus, jqXHR) {
                     if (data.rpta === "1") {
                         div.append(data.ckbAsigFam);
                         div2.append(data.ckbEs_Sis);
-                        $(".ckbAsigFam").click(function() {
+                        $(".ckbAsigFam").click(function () {
                             var tipo = 1;
                             var ckbAsigFam = $(".ckbAsigFam");
                             procesar_req_individual(ckbAsigFam, tipo, iddgp);
                         });
-                        $(".ckbEstSistema").click(function() {
+                        $(".ckbEstSistema").click(function () {
                             var tipo = 2;
                             var ckb = $(".ckbEstSistema");
                             procesar_req_individual(ckb, tipo, iddgp);
@@ -891,25 +893,25 @@
             ShowCbk_Procesar_Ind($(".dgp").val());
             ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
             pageSetUp();
-            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
+            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
-            $(".tab_detalle_trabajador li").click(function() {
+            $(".tab_detalle_trabajador li").click(function () {
                 $(".tab_detalle_trabajador li").removeClass("active");
                 $(this).addClass("active");
             });
             validar_shadowbox();
-            setTimeout(function() {
-                document.getElementById('myframe2').onload = function() {
+            setTimeout(function () {
+                document.getElementById('myframe2').onload = function () {
                     porcentaje_datos($(".idtr").val());
                 };
             }, 5000);
 
 
-            $(".btnCodigoAPS").click(function() {
+            $(".btnCodigoAPS").click(function () {
                 Actualizar_Cod_APS();
             });
-            $('.ver_foto').click(function() {
+            $('.ver_foto').click(function () {
                 $(".file-foto").click();
             });
             $('.file-foto').change(function(e) {
@@ -938,7 +940,7 @@
                                 });
                             } else if (objJson.rpta === "1") {
                                 addImage(e);
-                                this.timer = setTimeout(function() {
+                                this.timer = setTimeout(function () {
                                     $('.a_foto').addClass("mustang-gallery");
                                     $('.ver_foto').addClass("borde");
                                     foto_subido = "Vista/Usuario/Fotos/" + objJson.archivo;
@@ -966,7 +968,7 @@
                                 }, 4000);
                             }
                         }
-                    }).fail(function(objJson) {
+                    }).fail(function (objJson) {
                     });
                 } else {
                     alert("Archivo no permitido, su tamaño debe ser menor a 500 KB");
@@ -976,12 +978,12 @@
             
            
 
-            $(".btn-conti").click(function(e) {
+            $(".btn-conti").click(function (e) {
                 $.SmartMessageBox({
                     title: "Alerta de Confirmación",
                     content: "¿Está totalmente seguro de rechazar este requerimiento?",
                     buttons: '[No][Si]'
-                }, function(ButtonPressed) {
+                }, function (ButtonPressed) {
                     if (ButtonPressed === "Si") {
                         $(".form-rech").submit();
                         //$(".form-rech").submit();
@@ -994,11 +996,11 @@
 
             });
 
-            $(".fe_desde_p, .fe_hasta_p").change(function() {
+            $(".fe_desde_p, .fe_hasta_p").change(function () {
                 var cuotas = $(".cuota_docente");
                 cuotas.empty();
 
-                $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function(objJson) {
+                $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
                     var lista = objJson.lista;
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
@@ -1010,36 +1012,36 @@
                 });
             });
 
-            $(".btn_guardar_ca").click(function() {
+            $(".btn_guardar_ca").click(function () {
                 $.ajax({
                     url: "../../carga_academica",
                     type: "POST",
                     data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                }).done(function(ids) {
+                }).done(function (ids) {
                     var arr_id = ids.split(":");
                     alert("Registrado con exito!...");
                     $(".proceso").val(arr_id[0]);
                     $(".dgp").val(arr_id[1]);
                     $(".btn_procesar").show();
-                }).fail(function(e) {
+                }).fail(function (e) {
                     alert("Error: " + e);
                 });
             });
 
-            $(".btn_procesar").click(function() {
+            $(".btn_procesar").click(function () {
                 $.ajax({
                     url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                }).done(function() {
+                }).done(function () {
                     window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
                 });
             });
 
-            $(".btn-autor").click(function(e) {
+            $(".btn-autor").click(function (e) {
                 $.SmartMessageBox({
                     title: "¡Alerta de Confirmación!",
                     content: "¿Está totalmente seguro de autorizar este requerimiento?",
                     buttons: '[No][Si]'
-                }, function(ButtonPressed) {
+                }, function (ButtonPressed) {
                     if (ButtonPressed === "Si") {
                         $(".form-aut").submit();
                         window.parent.sendMessage();
@@ -1050,12 +1052,12 @@
                 });
                 e.preventDefault();
             });
-            $(".btn-rech").click(function(e) {
+            $(".btn-rech").click(function (e) {
                 $.SmartMessageBox({
                     title: "Alerta de Confirmación!",
                     content: "¿Está totalmente seguro de rechazar este requerimiento?",
                     buttons: '[No][Si]'
-                }, function(ButtonPressed) {
+                }, function (ButtonPressed) {
                     if (ButtonPressed === "Si") {
                         $(".btn-mos").click();
                         $(".form-rech").submit();
