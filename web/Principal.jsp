@@ -334,7 +334,7 @@
             <!-- User info -->
             <div class="logininfo">
                 <div class="row">
-                    <div class="avatar-user col-md-4">
+                    <div class="avatar-user col-md-3">
                             <input id="id_trabajador" type="hidden" value="<%out.println(sesion.getAttribute("IDTR"));%>" />
                         <a href="javascript:void(0);" id="show-shortcut" >
                             <% if (sesion.getAttribute("AR_FOTO") != null) {%>
@@ -344,7 +344,7 @@
                             <%}%>
                         </a>  
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="login-info text-right">
                             <span class="spanuser"> <%out.println((String) sesion.getAttribute("USER")); %></span>  
                         </div>
@@ -730,7 +730,7 @@
                  $.ajax({
                      url : "./foto",
                      type: "POST",
-                     data: "getfoto=getfoto&tipo=perfil&idtra="+ $('#id_trabajador').val(),
+                     data: "getfoto=true&tipo=perfil&idtra="+ $('#id_trabajador').val(),
                      success : getImagen,
                      error: errors
                  });

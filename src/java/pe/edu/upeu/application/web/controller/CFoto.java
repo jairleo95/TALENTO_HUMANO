@@ -1,6 +1,7 @@
 package pe.edu.upeu.application.web.controller;
 
 import com.google.gson.Gson;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Constants;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.HTMLEditorKit;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -38,7 +40,7 @@ public class CFoto extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        String opc = request.getParameter("opc");
+        String opc = request.getParameter("getfoto");
         String idtra = request.getParameter("idtra");
         String tipo = request.getParameter("tipo");
         InterfaceFotos_TrabajadorDAO foto = new Fotos_TrabajadorDAO();
