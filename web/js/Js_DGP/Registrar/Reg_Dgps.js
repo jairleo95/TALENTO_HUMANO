@@ -739,16 +739,78 @@ function dar_valor(caracter, num) {
     });
     $(".por_sum_to").val(acum);
 }
+function showEsDiezmo() {
+    var obj = $(".div_input_diezmo");
+    obj.hide(100);
+    obj.empty();
+    $.ajax({
+        url: "../../trabajador", data: "opc=ShowEsDiezmoTrabajador&id=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
+            if (data.rpta) {
+                obj.append(data.html);
+                obj.show(100);
+                $(".cbkDiezmo").click(function () {
+                    $.SmartMessageBox({
+                        title: "&iexcl;Alerta!",
+                        content: "Esta seguro de modificar la autorizaci&oacute;n de descuento diezmo?",
+                        buttons: '[No][Si]'
+                    }, function (ButtonPressed) {
+                        if (ButtonPressed === "Si") {
+                            if ($(".cbkDiezmo").prop("checked")) {
+                                $.ajax({
+                                    url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=0", type: 'POST', success: function (data, textStatus, jqXHR) {
+                                        if (data.status) {
+                                            $(".cbkDiezmo").prop("checked", false);
+                                            $.smallBox({
+                                                title: "&iexcl;Atenci&oacute;n!",
+                                                content: "<i class='fa fa-clock-o'></i> <i>Se neg&oacute; el descuento de diezmo...</i>",
+                                                color: "#C46A69",
+                                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                timeout: 6000
+                                            });
+                                        }
+
+                                    }
+                                });
+                            } else {
+                                $.ajax({
+                                    url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=1", type: 'POST', success: function (data, textStatus, jqXHR) {
+                                        if (data.status) {
+                                            $(".cbkDiezmo").prop("checked", true);
+                                            $.smallBox({
+                                                title: "&iexcl;Atenci&oacute;n!",
+                                                content: "<i class='fa fa-clock-o'></i> <i>Se autoriz&oacute; el descuento de diezmo...</i>",
+                                                color: "#659265",
+                                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                timeout: 6000
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+                            showEsDiezmo();
+
+
+                        }
+                    });
+                    return false;
+
+
+                });
+            }
+        }
+    });
+}
 $(document).ready(function () {
     pageSetUp();
     $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
         $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
     });
-
+    showEsDiezmo();
     mostrar();
+
     var lista_dgp = $(".btn-list-req");
     $.post("../../dgp", "opc=Listar_Req&idtr=" + $(".id_tr").val(), function (objJson) {
-        if (objJson.rpta == -1) {
+        if (objJson.rpta === -1) {
             alert(objJson.mensaje);
             return;
         }
