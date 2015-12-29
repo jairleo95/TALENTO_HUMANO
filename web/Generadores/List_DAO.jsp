@@ -11,18 +11,11 @@
 
 <!DOCTYPE html>
 <%
-
             ResultSet rs = null;
             Statement stmt2 = null;
-            
             Connection cx = Conexion.getConex();
-
             stmt2 = cx.createStatement();
-            rs = stmt2.executeQuery("select table_name, initcap(SUBSTR(COLUMN_NAME,1,2))||lower(SUBSTR(COLUMN_NAME,3,LENGTH(COLUMN_NAME))),column_name,data_type from user_tab_columns  where table_name='RHVD_SOLICITUD_REQUERIMIENTO'");
-
-   
-    
-    
+            rs = stmt2.executeQuery("select table_name, initcap(SUBSTR(COLUMN_NAME,1,2))||lower(SUBSTR(COLUMN_NAME,3,LENGTH(COLUMN_NAME))),column_name,data_type from user_tab_columns  where table_name='RHVD_ES_REQ_INCOMPLETO'");
 %>
 <html>
     <head>

@@ -45,7 +45,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title>Registrar Trabajador</title>
+        <title>Modificar Trabajador</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -97,7 +97,6 @@
 
         </style>
 
-        <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript">
             $(document).ready(
@@ -611,6 +610,13 @@
                                                                                 <option value="4">Viudo(a)</option>
                                                                                 <option value="5">Separado(a)</option>
                                                                                 <option value="6" selected="">Conviviente(a)</option>
+                                                                                <%}else{%>
+                                                                                 <option value="1">Soltero(a)</option>
+                                                                                <option value="2">Casado(a)</option>
+                                                                                <option value="3" >Divorciado(a)</option>
+                                                                                <option value="4">Viudo(a)</option>
+                                                                                <option value="5">Separado(a)</option>
+                                                                                <option value="6">Conviviente(a)</option>
                                                                                 <%}%>
                                                                             </select>
 
@@ -1809,22 +1815,13 @@
                 }
             });
         });
-        /*$("#cboCuenta").change(function() {
-         var cuenta = $("#cboCuenta").val();
-         if (cuenta == "0") {
-         return;
-         }
-         alert("Cuenta: " + cuenta);
-         });*/
+       
     </script>
     <script>
         $(document).ready(function() {
             var b = $(".tbodys");
-
             $("#btnfiltrar").click(
                     function() {
-
-
                         $.post("../../ajax/Ajax_Conyugue/Ajax_Busc_Conyug.jsp", $("#frm_filtro").serialize(), function(objJson) {
                             b.empty();
                             var list = objJson.lista;

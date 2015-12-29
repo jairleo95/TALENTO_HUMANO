@@ -15,13 +15,13 @@ import java.sql.DriverManager;
 public class Conexion {
 
     public static Connection getConex() throws Exception {
-        String usuario = "PROCESOSRH";
-        String password = "PROCESOSRH";
+        String usuario = "procesosrh";
+        String password = "gestionrrhh";
 //        String host = "localhost";
         String host = "localhost";
         String puerto = "1521";
 //        String sid = "xe";
-        String sid = "XE";
+        String sid = "orcl";
         String driver = "oracle.jdbc.driver.OracleDriver";
         String url = "jdbc:oracle:thin:" + usuario + "/" + password + "@" + host + ":" + puerto + ":" + sid;
 
