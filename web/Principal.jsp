@@ -379,7 +379,7 @@
 
                     <%  if (dp.getId_privilegio().equals("PRV-000012")) {%>
                     <li class="li-privilegio">
-                        <a href="#" data-value="fa fa-lg fa-fw fa-windows"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">Generar Requerimiento</span></a>
+                        <a href="#" data-value="fa fa-lg fa-fw fa-windows"><i class="fa fa-lg fa-fw fa-file-text"></i> <span class="menu-item-parent">Generar Requerimiento</span></a>
                         <ul>
                             <%if (!id_rol.trim().equals("ROL-0011") | id_rol.trim().equals("ROL-0001")) {
                             %>

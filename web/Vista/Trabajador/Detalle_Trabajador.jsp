@@ -918,6 +918,9 @@
         }
 
         $(document).ready(function () {
+            getAvatar("perfil",idtrl);
+            getAvatar("todo",idtrl);
+
             Listar_Cod_Huella();
             Listar_Cod_APS();
             ShowCbk_Procesar_Ind($(".dgp").val());
