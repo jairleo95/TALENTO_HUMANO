@@ -337,11 +337,7 @@
                     <div class="avatar-user col-md-3">
                             <input id="id_trabajador" type="hidden" value="<%out.println(sesion.getAttribute("IDTR"));%>" />
                         <a href="javascript:void(0);" id="show-shortcut" >
-                            <% if (sesion.getAttribute("AR_FOTO") != null) {%>
-                            <img id="foto_usuario" src="Vista/Usuario/Fotos/<%out.println(sesion.getAttribute("AR_FOTO")); %>"  />
-                            <%} else {%>
                             <img id="foto_usuario" src="imagenes/avatar_default.jpg"  />
-                            <%}%>
                         </a>  
                     </div>
                     <div class="col-md-9">
@@ -350,7 +346,7 @@
                         </div>
 
                         <div class="login-info text-right">
-                            <span ><%out.println((String) sesion.getAttribute("NOMBRE_AP")); %> </span> 
+                            <span ><%out.println((String) sesion.getAttribute("NOMBRE_AP").toString().trim()); %> </span> 
                         </div>
                     </div>
                 </div>
@@ -702,8 +698,8 @@
         };
         
         $(document).ready(function () {
-            console.log("inicializando ....");
-            getAvatar();
+            var idtra = $('#id_trabajador').val()
+            getAvatar("perfil",idtra);
             pageSetUp();
             // alert('<%="Maximum Inactive Interval of Session in Seconds is : " + sesion.getMaxInactiveInterval() / 60%>');
             $(".menu-item-parent").parent().click(function () {
@@ -726,20 +722,22 @@
                 $this.parent().addClass('active');
             });
             
-             function getAvatar(){
+             function getAvatar(tipo,idtra){
                  $.ajax({
                      url : "./foto",
                      type: "POST",
-                     data: "getfoto=true&tipo=perfil&idtra="+ $('#id_trabajador').val(),
+                     data: "opc=getfoto&tipo="+tipo+"&idtra="+idtra,
                      success : getImagen,
                      error: errors
                  });
                  function getImagen(data){
-                     console.log(data);
-
+                  $.each(data,function(i , datos){
+                      $.each(datos, function(i , obj){
+                     $('#foto_usuario').attr("src", "Vista/Usuario/Fotos/"+obj.ar_foto);
+                      });
+                  });
                  }
                  function errors(data){
-                     console.log($('#id_trabajador').val());
                      console.log("error"+data)
                  }
                  

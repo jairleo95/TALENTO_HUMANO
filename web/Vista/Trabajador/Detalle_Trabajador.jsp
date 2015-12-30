@@ -155,21 +155,17 @@
             <div class="row" style="padding-bottom: 10px;">
                 <div class="col-md-4">
                     <div class="media">
+                        <!--  upload foto --> 
                         <form action="../../foto" method="POST" enctype="multipart/form-data" class="form-subir-foto">
                             <input type="hidden" name="idtr" class="idtr" id="input-file" value="<%=t.getId_trabajador()%>">
                             <input style="display:none" class="file-foto" type="file" name="archivo" required="">
                         </form>
-                        <!--  upload foto -->
-                        <%if (t.getNo_ar_foto() == null) {%>
-                        <a class="a_foto pull-left"><img  class="ver_foto media-object"  src="../../imagenes/avatar_default.jpg"  width="100"  height="100"> </a>
-                        <a class="ver_foto btn btn-xs btn-danger">Cambiar Imagen</a>
+                            <a class="avatar mustang-gallery pull-left" ><img src="../../imagenes/avatar_default.jpg" class="borde" width="100" height="100" ></a>
+                            <div class="foto-user" style="display: none;">
+                            </div>
+                        <a class="ver_foto btn btn-xs btn-warning">Cambiar Imagen</a>
                         <div style="display:none" id="progressbar"><div class="progress-label">Loading...</div></div>
-                        <%} else {%>
-                        <a class="mustang-gallery pull-left" title="<%=t.getAr_foto()%>"  href="../Usuario/Fotos/<%=t.getAr_foto()%>" ><img  src="../Usuario/Fotos/<%=t.getAr_foto()%>" class="borde" width="100" height="100" ></a>
-                           
-                        <a class="ver_foto btn btn-xs btn-danger">Cambiar Imagen</a>
-                        <div style="display:none" id="progressbar"><div class="progress-label">Loading...</div></div>
-                        <%}%>
+
                         <div class="media-body">
                             <%
                                 CConversion c = new CConversion();
@@ -202,6 +198,7 @@
                             <strong>Numero de documento:</strong> <%=trb.getNu_doc()%><br>
                             <%}%>
                         </div>
+
                     </div>
 
                 </div>
@@ -606,11 +603,10 @@
          <script src="../../js/plugin/typeahead/typeaheadjs.min.js"></script> -->
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-        <script type="text/javascript" src="../../js/shadowbox/demo.js"></script>
-        <script type="text/javascript" src="../../js/shadowbox/shadowbox.js"></script>
+        <script src="../../js/shadowbox/shadowbox.js" type="text/javascript"></script>
         <script src="../../js/JQuery/jquery.session.js" type="text/javascript"></script>
         <script>
-            var foto_subido = "";
+      var idtrl = $(".idtr").val().trim();
         function procesar_req_individual(ckb, tipo, iddgp) {          
             var array_id_dgp = [];
             var estado = false;
@@ -782,50 +778,17 @@
                 });
             }
         }
-        function addImage(e) {
-            var file = e.target.files[0], imageType = /image.*/;
-            if (!file.type.match(imageType))
-                return;
-            var reader = new FileReader();
-            reader.onload = fileOnload;
-            reader.readAsDataURL(file);
-        }
-        function fileOnload(e) {
-            var result = e.target.result
-            $(function () {
-                $("#progressbar").show(200);
-                var progressbar = $("#progressbar"),
-                        progressLabel = $(".progress-label");
-
-                progressbar.progressbar({
-                    value: false,
-                    change: function () {
-                        progressLabel.text(progressbar.progressbar("value") + "%");
-                    },
-                    complete: function () {
-                        progressLabel.text("Complete!");
-                        $("#progressbar").hide(200);
-                    }});
-
-                function progress() {
-                    var val = progressbar.progressbar("value") || 0;
-
-                    progressbar.progressbar("value", val + 2);
-
-                    if (val < 99) {
-                        setTimeout(progress, 68);
-                    }
-                }
-
-                setTimeout(progress, 100);
-            });
-        }
+      
         function validar_shadowbox() {
-            $.each($(".mustang-gallery"), function () {
+            
                 Shadowbox.init({
                     overlayOpacity: 0.8
-                }, setupDemos);
-            });
+                });
+                Shadowbox.setup("a.mustang-gallery", {
+                               gallery:        "mustang",
+                               continuous:     true,
+                               counterType:    "skip"
+                               });
         }
         function ValBtnAutorizarDgp(trabajador, divBotones) {
             divBotones.empty();
@@ -888,6 +851,8 @@
         }
         
         $(document).ready(function() {
+            getAvatar("perfil",idtrl);
+            getAvatar("todo",idtrl);
             Listar_Cod_Huella();
             Listar_Cod_APS();
             ShowCbk_Procesar_Ind($(".dgp").val());
@@ -911,73 +876,6 @@
             $(".btnCodigoAPS").click(function () {
                 Actualizar_Cod_APS();
             });
-            $('.ver_foto').click(function () {
-                $(".file-foto").click();
-            });
-            $('.file-foto').change(function(e) {
-                console.log("load foto");
-                var t = e;
-                if (this.files[0].size <= 500000) {
-                    var jForm = new FormData();
-                    jForm.append("idtr", $('.idtr').val());
-                    jForm.append("archivo", $('.file-foto').get(0).files[0]);
-                    $.ajax({
-                        type: "POST",
-                        url: "../../foto",
-                        cache: false,
-                        processData: false,
-                        contentType: false,
-                        data: jForm,
-                        success: function(objJson) {
-                            console.log(objJson);
-                            if (objJson.rpta === "-1") {
-                                $.smallBox({
-                                    title: "¡Alerta!",
-                                    content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar su imagen...</i>",
-                                    color: "#C46A69",
-                                    iconSmall: "fa fa-cloud bounce animated",
-                                    timeout: 7000
-                                });
-                            } else if (objJson.rpta === "1") {
-                                addImage(e);
-                                this.timer = setTimeout(function () {
-                                    $('.a_foto').addClass("mustang-gallery");
-                                    $('.ver_foto').addClass("borde");
-                                    foto_subido = "Vista/Usuario/Fotos/" + objJson.archivo;
-                                    $('.ver_foto').attr("src", "../Usuario/Fotos/" + objJson.archivo);
-                                    var padre = $(window.parent.document.getElementById('foto_usuario'));
-                                    var idtra = $(window.parent.document.getElementById('id_trabajador')).val();
-                                    console.log(idtra);
-                                    console.log($(".idtr").val());
-                                    if(idtra.trim() == $(".idtr").val().trim()){
-                                       
-                                       $(padre).attr("src", "Vista/Usuario/Fotos/" + objJson.archivo); 
-                                    }
-                                    $(".borde").removeClass("ver_foto");
-                                    $(".borde").attr("src", "../Usuario/Fotos/" + objJson.archivo);
-                                    $("a.mustang-gallery").attr("href", "../Usuario/Fotos/" + objJson.archivo);
-                                    //$(".form-subir-foto").remove();
-                                    validar_shadowbox();
-                                    $.smallBox({
-                                        title: "¡Felicitaciones!",
-                                        content: "<i class='fa fa-clock-o'></i> <i>Su imagen se ha subido con éxito...</i>",
-                                        color: "#296191",
-                                        iconSmall: "fa fa-cloud bounce animated",
-                                        timeout: 6000
-                                    });
-                                }, 4000);
-                            }
-                        }
-                    }).fail(function (objJson) {
-                    });
-                } else {
-                    alert("Archivo no permitido, su tamaño debe ser menor a 500 KB");
-                    $(this).val('');
-                }
-            });
-            
-           
-
             $(".btn-conti").click(function (e) {
                 $.SmartMessageBox({
                     title: "Alerta de Confirmación",
@@ -1068,8 +966,151 @@
                 });
                 e.preventDefault();
             });
-        });</script>
+        });
+            
+        
+        function addImage(e) {
+            var file = e.target.files[0], imageType = /image.*/;
+            if (!file.type.match(imageType))
+                return;
+            var reader = new FileReader();
+            reader.onload = fileOnload;
+            reader.readAsDataURL(file);
+        }
+        function fileOnload(e) {
+            var result = e.target.result
+            $(function () {
+                $("#progressbar").show(200);
+                var progressbar = $("#progressbar"),
+                        progressLabel = $(".progress-label");
 
+                progressbar.progressbar({
+                    value: false,
+                    change: function () {
+                        progressLabel.text(progressbar.progressbar("value") + "%");
+                    },
+                    complete: function () {
+                        progressLabel.text("Complete!");
+                        $("#progressbar").hide(200);
+                    }});
+
+                function progress() {
+                    var val = progressbar.progressbar("value") || 0;
+
+                    progressbar.progressbar("value", val + 2);
+
+                    if (val < 99) {
+                        setTimeout(progress, 68);
+                    }
+                }
+
+                setTimeout(progress, 100);
+            });
+        }
+            $('.ver_foto').click(function () {
+                $(".file-foto").click();
+            });
+            $('.file-foto').change(function(e) {
+                console.log("load foto");
+                var t = e;
+                if (this.files[0].size <= 500000) {
+                    var jForm = new FormData();
+                    jForm.append("idtr", $('.idtr').val());
+                    jForm.append("archivo", $('.file-foto').get(0).files[0]);
+                    $.ajax({
+                        type: "POST",
+                        url: "../../foto",
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        data: jForm,
+                        success: function(objJson) {
+                            console.log(objJson);
+                            if (objJson.rpta === "-1") {
+                                $.smallBox({
+                                    title: "¡Alerta!",
+                                    content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar su imagen...</i>",
+                                    color: "#C46A69",
+                                    iconSmall: "fa fa-cloud bounce animated",
+                                    timeout: 7000
+                                });
+                            } else if (objJson.rpta === "1") {
+                                addImage(e);
+                                this.timer = setTimeout(function () {
+                                    $('.a_foto').removeClass("mustang-gallery");
+                                    $('.ver_foto').addClass("borde");
+                                    $('.ver_foto').attr("src", "../Usuario/Fotos/" + objJson.archivo);
+                                    var padre = $(window.parent.document.getElementById('foto_usuario'));
+                                    var idtra = $(window.parent.document.getElementById('id_trabajador')).val();
+                                    if(idtra.trim() == $(".idtr").val().trim()){ 
+                                      /// getAvatar("todo",idtrl); 
+                                    $(padre).attr("src", "Vista/Usuario/Fotos/" + objJson.archivo);
+                                    }
+                                    $(".borde").removeClass("ver_foto");
+                                    $(".borde").attr("src", "../Usuario/Fotos/" + objJson.archivo);
+                                    $("a.mustang-gallery").attr("href", "../Usuario/Fotos/" + objJson.archivo);
+                                    //$(".form-subir-foto").remove();
+                                    $.smallBox({
+                                        title: "¡Felicitaciones!",
+                                        content: "<i class='fa fa-clock-o'></i> <i>Su imagen se ha subido con éxito...</i>",
+                                        color: "#296191",
+                                        iconSmall: "fa fa-cloud bounce animated",
+                                        timeout: 6000
+                                    });
+                                }, 4000);
+                            }
+                        }
+                    }).fail(function (objJson) {
+                    });
+                } else {
+                    alert("Archivo no permitido, su tamaño debe ser menor a 500 KB");
+                    $(this).val('');
+                }
+            });
+            
+            function getAvatar(tipo,idtra){
+                console.log("geAvatar");
+                 $.ajax({
+                     url : "../../foto",
+                     type: "POST",
+                     data: "opc=getfoto&tipo="+tipo+"&idtra="+idtra,
+                     success : getImagen,
+                     error: errors
+                 });
+                 function getImagen(data){
+                  $.each(data,function(i , datos){
+                      $.each(datos, function(i , obj){
+                     if(tipo == 'todo'){
+                      var imgens = '<a class="mustang-gallery pull-left" href="../../Vista/Usuario/Fotos/'+obj.ar_foto+'" >'+
+                            '<img class="img-thumbnail" title="foto '+i+'" src="../../Vista/Usuario/Fotos/'+
+                               obj.ar_foto+'"style="width:100px; height:100px;" /></a>';
+                       
+                       $('.foto-user').append(imgens);
+                       $('.fotos').append(imgens);
+                       
+                     }else{
+                     $('.borde').attr("src", "../../Vista/Usuario/Fotos/"+obj.ar_foto);
+                     $(".avatar").attr("href", "../../Vista/Usuario/Fotos/"+obj.ar_foto);
+                     $("#sb-player").attr("href", "../../Usuario/Fotos/" + obj.ar_foto);
+                     console.log(obj.ar_foto);
+                           }
+                      });
+                  });
+                 }
+                 function errors(data){
+                     console.log("error"+data)
+                 }     
+               }
+               
+              $('.avatar').click(function () {
+                  console.log("mostar-imegen");
+                  var cont = '<div class="fotos panel panel-info" style="opacity: 5; "></div>';
+                  $('#sb-overlay').html(cont);
+                   getAvatar("todo",idtrl);
+                   validar_shadowbox();
+                });
+        </script>
+        
     </body>
 </html>
 <%} else {
