@@ -166,7 +166,7 @@
                         <div style="display:none" id="progressbar"><div class="progress-label">Loading...</div></div>
                         <%} else {%>
                         <a class="mustang-gallery pull-left" title="<%=t.getAr_foto()%>"  href="../Usuario/Fotos/<%=t.getAr_foto()%>" ><img  src="../Usuario/Fotos/<%=t.getAr_foto()%>" class="borde" width="100" height="100" ></a>
-                           
+
                         <a class="ver_foto btn btn-xs btn-danger">Cambiar Imagen</a>
                         <div style="display:none" id="progressbar"><div class="progress-label">Loading...</div></div>
                         <%}%>
@@ -216,8 +216,14 @@
                     <div class='row row_cod_huella'>
                     </div>
                     <div class="row">
-                        <div class="col-md-8"><strong>¿Descuento de Diezmo? </strong></div>
-                        <div class="col-md-4"><%=(trb.getEs_diezmo().equals("1")?"Si":"No")%></div>
+                        <div class="col-md-4"><strong>Descuento de Diezmo</strong></div>
+                        <%if (ID_ROL.equals("ROL-0001")) {%>
+                        <div class="col-md-8 div_input_diezmo"></div>
+                        <%} else {
+                        %>
+                        <div class="col-md-8"<%=(trb.getEs_diezmo().equals("1") ? "Si" : "No")%>></div>
+                        <%}%>
+
                     </div>
                     <%if (iddgp != null) {
                     %>
@@ -610,8 +616,8 @@
         <script type="text/javascript" src="../../js/shadowbox/shadowbox.js"></script>
         <script src="../../js/JQuery/jquery.session.js" type="text/javascript"></script>
         <script>
-            var foto_subido = "";
-        function procesar_req_individual(ckb, tipo, iddgp) {          
+        var foto_subido = "";
+        function procesar_req_individual(ckb, tipo, iddgp) {
             var array_id_dgp = [];
             var estado = false;
             array_id_dgp[0] = ckb.val();
@@ -886,13 +892,76 @@
             });
 
         }
-        
-        $(document).ready(function() {
+        function showEsDiezmo() {
+            var obj = $(".div_input_diezmo");
+            obj.hide(100);
+            obj.empty();
+            $.ajax({
+                url: "../../trabajador", data: "opc=ModDiezmoDetalleTrabajador&id=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
+                    if (data.rpta) {
+                        obj.append(data.html);
+                        obj.show(100);
+                        $(".cbkDiezmo").click(function () {
+                            $.SmartMessageBox({
+                                title: "&iexcl;Alerta!",
+                                content: "Esta seguro de modificar la autorizaci&oacute;n de descuento diezmo?",
+                                buttons: '[No][Si]'
+                            }, function (ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+                                    if ($(".cbkDiezmo").prop("checked")) {
+                                        $.ajax({
+                                            url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=0", type: 'POST', success: function (data, textStatus, jqXHR) {
+                                                if (data.status) {
+                                                    $(".cbkDiezmo").prop("checked", false);
+                                                    $.smallBox({
+                                                        title: "&iexcl;Atenci&oacute;n!",
+                                                        content: "<i class='fa fa-clock-o'></i> <i>Se neg&oacute; el descuento de diezmo...</i>",
+                                                        color: "#C46A69",
+                                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                        timeout: 6000
+                                                    });
+                                                }
+
+                                            }
+                                        });
+                                    } else {
+                                        $.ajax({
+                                            url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=1", type: 'POST', success: function (data, textStatus, jqXHR) {
+                                                if (data.status) {
+                                                    $(".cbkDiezmo").prop("checked", true);
+                                                    $.smallBox({
+                                                        title: "&iexcl;Atenci&oacute;n!",
+                                                        content: "<i class='fa fa-clock-o'></i> <i>Se autoriz&oacute; el descuento de diezmo...</i>",
+                                                        color: "#659265",
+                                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                        timeout: 6000
+                                                    });
+                                                }
+                                            }
+                                        });
+                                    }
+                                    showEsDiezmo();
+
+
+                                }
+                            });
+                            return false;
+
+
+                        });
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function () {
             Listar_Cod_Huella();
             Listar_Cod_APS();
             ShowCbk_Procesar_Ind($(".dgp").val());
             ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
+
             pageSetUp();
+
             $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
@@ -906,7 +975,7 @@
                     porcentaje_datos($(".idtr").val());
                 };
             }, 5000);
-
+            showEsDiezmo();
 
             $(".btnCodigoAPS").click(function () {
                 Actualizar_Cod_APS();
@@ -914,7 +983,7 @@
             $('.ver_foto').click(function () {
                 $(".file-foto").click();
             });
-            $('.file-foto').change(function(e) {
+            $('.file-foto').change(function (e) {
                 console.log("load foto");
                 var t = e;
                 if (this.files[0].size <= 500000) {
@@ -928,7 +997,7 @@
                         processData: false,
                         contentType: false,
                         data: jForm,
-                        success: function(objJson) {
+                        success: function (objJson) {
                             console.log(objJson);
                             if (objJson.rpta === "-1") {
                                 $.smallBox({
@@ -949,9 +1018,9 @@
                                     var idtra = $(window.parent.document.getElementById('id_trabajador')).val();
                                     console.log(idtra);
                                     console.log($(".idtr").val());
-                                    if(idtra.trim() == $(".idtr").val().trim()){
-                                       
-                                       $(padre).attr("src", "Vista/Usuario/Fotos/" + objJson.archivo); 
+                                    if (idtra.trim() == $(".idtr").val().trim()) {
+
+                                        $(padre).attr("src", "Vista/Usuario/Fotos/" + objJson.archivo);
                                     }
                                     $(".borde").removeClass("ver_foto");
                                     $(".borde").attr("src", "../Usuario/Fotos/" + objJson.archivo);
@@ -975,8 +1044,8 @@
                     $(this).val('');
                 }
             });
-            
-           
+
+
 
             $(".btn-conti").click(function (e) {
                 $.SmartMessageBox({

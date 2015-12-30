@@ -526,7 +526,7 @@ public class CContrato extends HttpServlet {
 
             // sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_contrato));
             sesion.setAttribute("List_id_Contrato_DGP", con.List_id_Contrato_DGP(idtr1, ida1));
-            sesion.setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr1));
+           // sesion.setAttribute("List_Anno_Id_Tr_DGP", con.List_Anno_Id_Tr_DGP(idtr1));
             sesion.setAttribute("List_Jefe", l.List_Jefe());
             sesion.setAttribute("List_Planilla", pl.List_Planilla(ID_DIRECCION, ID_DEPARTAMENTO, ID_SEC, ID_PUESTO, ID_AREA));
             sesion.setAttribute("List_ID_User", usu.List_ID_User(US_CREACION));

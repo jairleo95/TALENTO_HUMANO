@@ -637,6 +637,32 @@ public class CTrabajador extends HttpServlet {
                     rpta.put("html", html);
                     rpta.put("rpta", "1");
                 }
+                if (opc.equals("ModDiezmoDetalleTrabajador")) {
+                    String idtr = request.getParameter("id");
+                    int i = tr.ShowEsDiezmoTrabajador(idtr);
+                    String html = "";
+                    html += "   <div class='input-group'> "
+                                + "          <span class='form-control' style='padding: 5px;padding-left: 10px'> ¿Autorizar descuento?</span>     "
+                            + "          <span class='input-group-addon'>";
+                    html += "                              <span class='onoffswitch'>";
+                    if (i == 1) {
+                        html += "                                <input type='checkbox' name='diezmo' value='1' checked=''   class='onoffswitch-checkbox cbkDiezmo' id='st3'>";
+                    } else if (i == 0) {
+                        html += "                                <input type='checkbox' name='diezmo' value='1'    class='onoffswitch-checkbox cbkDiezmo' id='st3'>";
+                    }
+                    html += "                                   <label class='onoffswitch-label' for='st3'> ";
+
+                    html += "                                   <span class='onoffswitch-inner' data-swchon-text='SI' data-swchoff-text='NO'></span> ";
+                    html += "                                     <span class='onoffswitch-switch'></span> ";
+                    html += "                                      </label> ";
+                    html += "                              </span>";
+                    html += "                      </span>"
+                            + "</div>"
+                            + "</div>";
+
+                    rpta.put("html", html);
+                    rpta.put("rpta", "1");
+                }
             } catch (Exception e) {
                 rpta.put("rpta", "-1");
                 rpta.put("mensaje", e.getMessage());

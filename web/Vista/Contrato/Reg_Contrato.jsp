@@ -75,649 +75,550 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <% HttpSession sesion_1 = request.getSession(true);
-            // String iduser = (String) sesion.getAttribute("IDUSER");
             String id_rol = (String) session.getAttribute("IDROL");%>
         <style type="text/css">
-
             #titulo{
-
                 font-weight: bold;
                 color: #005cac;
             }
 
-            .header{
-
-
-                background-color: #474747;
-                padding: 0%;
-
-                font-family: arial;
-                font-size: 130%;
-                text-align: center;
-                color: white;
-
+            #titu{
+                font-weight: bold;
+                color: #005cac;
             }
-            #submit{
-                font-weight:bold;
-                padding-left: 4%;
-                padding-right: 4%;
-            }
-
         </style>
     </head>
-
-
     <body>
         <!-- Widget ID (each widget will need unique ID)-->
-
-
         <div id="main" role="main" style="margin:0px;">
             <div id="content" >
-                <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <section id="widget-grid" class="">
+                    <div class="row">
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                    <!-- widget options:
-                            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-                            
-                            data-widget-colorbutton="false"	
-                            data-widget-editbutton="false"
-                            data-widget-togglebutton="false"
-                            data-widget-deletebutton="false"
-                            data-widget-fullscreenbutton="false"
-                            data-widget-custombutton="false"
-                            data-widget-collapsed="true" 
-                            data-widget-sortable="false"
-                            
-                    -->
-                    <header>
-                        <!--<div   class="header" style=" width:100%; border:2px solid red">Detalle del Trabajador</div> -->
-                        <div class="header">
-                            <span class="widget-icon"> <i class="fa fa-edit"></i> Ficha Contractual</span>
-                        </div>
-                    </header>
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" 
+                                 data-widget-togglebutton="false"
+                                 data-widget-deletebutton="false"
+                                 data-widget-fullscreenbutton="false">
+                                <!-- widget options:
+                                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                                        
+                                        data-widget-colorbutton="false"	
+                                        data-widget-editbutton="false"
+                                        data-widget-togglebutton="false"
+                                        data-widget-deletebutton="false"
+                                        data-widget-fullscreenbutton="false"
+                                        data-widget-custombutton="false"
+                                        data-widget-collapsed="true" 
+                                        data-widget-sortable="false"
+                                        
+                                -->
+                                <header>
+                                    <span class="widget-icon"> <i class="glyphicon glyphicon-edit"></i> </span>
+                                    <h2 class="font-md"><strong>Ficha </strong> <i>Contractual</i></h2>
+                                </header>
 
-                    <!-- widget div-->
-                    <div>
+                                <!-- widget div-->
+                                <div>
 
-                        <!-- widget edit box -->
-                        <div class="jarviswidget-editbox">
-                            <!-- This area used as dropdown edit box -->
-
-                        </div>
-                        <!-- end widget edit box -->
-
-                        <!-- widget content -->
-                        <div class="widget-body no-padding">
-
-                            <%CConversion c = new CConversion();
-                                for (int u = 0; u < LIST_ID_DGP.size(); u++) {
-                                    V_Det_DGP d = new V_Det_DGP();
-                                    d = (V_Det_DGP) LIST_ID_DGP.get(u);
-
-                                    if (d.getId_dgp() == null) {
-                            %>
-
-                            <label>Todavia no se ha almacenado El DGP,¿desea contratar sin  antes elaborar un DGP?</label>  
-                            <br>
-                            <a href="Reg_Contrato.php?hac_cont=1&idtr=<? echo $idtr;?>">Hacer Contrato de Todas Maneras</a>
-
-                            <%} else {%>
-
-                            <form action="../../contrato" id="checkout-form" class="smart-form"  method="POST" novalidate="novalidate">
-
-                                <fieldset id="fila-agregar">
-                                    <div class="row">
-                                        <section class="col col-2">
-                                            <label class="select" id="titulo">Motivo :
-                                                <select disabled=""  class="input-group-sm">
-                                                    <%if (d.getLi_motivo() != null) {%>
-                                                    <%if (d.getLi_motivo().trim().equals("1")) {%>
-                                                    <option  selected="selected">Trabajador Nuevo</option>   
-                                                    <option  >renovación</option>   
-                                                    <%} else {%>
-                                                    <option >Trabajador Nuevo</option>   
-                                                    <option selected="selected">renovación</option>   
-                                                    <%}%>
-                                                    <%} else {%>
-                                                    <option selected="">NINGUNO</option>
-                                                    <%}%>
-                                                </select>  
-                                            </label>
-                                        </section >
-                                        <section class="col col-1" style=" margin-top:2%;">
-                                            <label class="toggle" id="titulo" > MFL:
-                                                <%if (d.getEs_mfl().trim().equals("1")) {%>
-                                                <input type="checkbox" name="checkbox-toggle" disabled="" checked="" >
-                                                <%} else {%>
-                                                <input type="checkbox" name="checkbox-toggle" disabled=""  >
-                                                <%}%>
-                                                <i data-swchoff-text="NO"  data-swchon-text="SI"></i>       
-
-                                            </label>
-                                        </section>
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
                                     </div>
-                                    <div class="row" >
-                                        <input type="hidden" name="id_rol_ses" id="id_rol_s" value="<%=id_rol%>">
-                                        <input type="hidden" name="TIPO_PLANILLA"  value="<%=d.getId_tipo_planilla()%>">
-                                        <input type="hidden" name="HORARIO"  value="<%=d.getId_detalle_horario()%>">
-                                        <section class="col col-2">
-                                            <label class="select" id="titulo">Año:
-                                                <select name="AÑO_ID" required="" class="input-group-sm">
-                                                    <%  for (int i = 0; i < List_Anno.size(); i++) {
-                                                            Anno a = new Anno();
-                                                            a = (Anno) List_Anno.get(i);
-                                                            for (int e = 0; e < List_anno_max.size(); e++) {
-                                                                Anno w = new Anno();
-                                                                w = (Anno) List_anno_max.get(e);
-                                                    %>
-                                                    <%if (a.getId_anno().trim().equals(w.getId_anno())) {%>
-                                                    <option value="<%=a.getId_anno()%>" selected="selected"><%=a.getNo_anno()%></option>
-                                                    <%} else {%>
-                                                    <option value="<%=a.getId_anno()%>"><%=a.getNo_anno()%></option>
-                                                    <%}
-                                                            }
-                                                        }%>
-                                                </select>  </label>
-                                        </section  >
-                                        <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box" id="id_dgp" >                              
-                                        <section class="col col-2">
-                                            <label class="input" id="titulo">Fecha de Inicio: 
-                                                <input type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" class=" input-group-sm" required="">
-                                            </label>
-                                        </section>
-                                        <section class="col col-2">
-                                            <label class="input" id="titulo">Fecha de Cese: 
-                                                <input type="date" name="FEC_HASTA" value="<%=c.convertFecha3(d.getFe_hasta())%>" class="input-group-sm" required="">
-                                            </label>
-                                        </section>
-                                        <section class="col col-3" id="titulo">
-                                            <label class="select" id="titulo">Dirección:
-                                                <select name="DIRECCION" class="select_dir input-group-sm" disabled=""  id="select_dir" >
-                                                    <option value="" >[SELECCIONE]</option>
-                                                    <%for (int g = 0; g < Listar_Direccion.size(); g++) {
-                                                            Direccion di = new Direccion();
-                                                            di = (Direccion) Listar_Direccion.get(g);
-                                                            String id_direc = request.getParameter("id_direc");
-                                                            if (id_direc.trim().equals(di.getId_direccion().trim())) {
-                                                    %>
-                                                    <option value="<%=di.getId_direccion()%>" selected=""><%=di.getNo_direccion()%></option>
-                                                    <%} else {%>
-                                                    <option value="<%=di.getId_direccion()%>"><%=di.getNo_direccion()%></option>
-                                                    <%}
-                                                        }%>
-                                                </select>  </label>
-                                        </section>
-                                        <section class="sec_dep col col-3" id="titulo">
-                                            <label class="select" id="titulo">Departamento:
-                                                <select name="DEPARTAMENTO_ID" class="selec_dep input-group-sm" disabled="" id="selec_dep">
-                                                    <option value="">[SELECCIONE]</option>
-                                                </select>  
-                                            </label>
-                                        </section>
-                                        <section class="sec_are col col-3" id="titulo">
-                                            <label class="select" id="titulo">Area:
-                                                <select name="AREA_ID" class="Selec_Area input-group-sm"  disabled=""  id="Selec_Area">
-                                                    <option value="">[SELECCIONE]</option>
-                                                </select>  </label>
-                                        </section>
-                                        <section class="sec_sec col col-3" id="titulo">
-                                            <label class="select" id="titulo">Sección:
-                                                <select name="SECCION_ID" class="select_sec input-group-sm" disabled=""  id="select_sec">
-                                                    <option value="">[SELECCIONE]</option>
-                                                </select>  </label>
-                                        </section>
-                                        <section class="col col-3" id="titulo">
-                                            <label class="select" id="titulo">Puesto:
-                                                <select name="PUESTO_ID" required="" class="pu_id_se input-group-sm" disabled=""  id="pu_id_se">
-                                                    <%  for (int j = 0; j < List_Puesto.size(); j++) {%>
-                                                    <%Puesto p = new Puesto();
-                                                        p = (Puesto) List_Puesto.get(j);
-                                                        if (d.getId_puesto().equals(p.getId_puesto())) {%>
+                                    <!-- end widget edit box -->
+                                    <!-- widget content -->
+                                    <div class="widget-body no-padding">
 
-                                                    <option value="<%=p.getId_puesto()%>" selected="selected"><%=p.getNo_puesto()%></option>
-                                                    <%} else {%>
-                                                    <option value="<%=p.getId_puesto()%>"><%=p.getNo_puesto()%></option>
+                                        <%CConversion c = new CConversion();
+                                            for (int u = 0; u < LIST_ID_DGP.size(); u++) {
+                                                V_Det_DGP d = new V_Det_DGP();
+                                                d = (V_Det_DGP) LIST_ID_DGP.get(u);
 
-                                                    <%}
-                                                        }%>
-                                                </select>  </label>
-                                        </section>
-                                        <input name="DEPARTAMENTO_ID"  type="hidden" value="<%=d.getId_departamento()%>" />
-                                        <input name="AREA_ID"  type="hidden" value="<%=d.getId_area()%>" />
-                                        <input name="SECCION_ID"  type="hidden" value="<%=d.getId_seccion()%>" />
-                                        <input name="PUESTO_ID"  type="hidden" value="<%=d.getId_puesto()%>" />
-                                        <input name="DIRECCION"  type="hidden" value="<%=d.getId_direccion()%>" />
-                                        <section class="col col-3">
-                                            <label class="select" id="titulo">Condición:
-                                                <select name="CONDICION" class="input-group-sm" >
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <option value="1">Contratado</option>
-                                                    <option value="2">Contratado Independiente</option>
-                                                    <option value="3">Enpleado</option>
-                                                    <option value="4">Misionero</option>
-                                                    <!--   <option value="5">MFL-Práctica Pre-Profesional</option>
-                                                       <option value="6">MFL-Práctica Profesionales</option>
-                                                       <option value="7">MFL-CLJ</option>
-                                                       <option value="8">MFL-Contrato</option>-->
-                                                </select>
-                                            </label>
-                                        </section>
-
-                                    </div>
-
-                                    <div class="row">
-
-                                        <section class="col col-2">
-                                            <label class="input" id="titulo">Remuneración:
-                                                <input type="text" name="SUELDO" value="<%=d.getCa_sueldo()%>" class="input-group-sm" id="remu" readonly="">
-                                            </label>
-                                        </section>
-                                        <section class="col col-1">
-                                            <label class="input" id="titulo">Reintegro:
-                                                <input type="text" name="REINTEGRO" value="0" class="input-group-sm" id="rein" readonly="">
-                                            </label>
-                                        </section>
-                                        <section class="col col-2">
-                                            <label class="input" id="titulo">Bono Alimentario:
-                                                <input type="text" name="BONO_ALIMENTO" value="<%=d.getCa_bono_alimentario()%>" class="input-group-sm" id="bo_a" readonly="">
-                                            </label>
-                                        </section>
-                                        <section class="col col-1">
-                                            <label class="input" id="titulo">BEV:
-                                                <input type="text" name="BEV" value="<%=d.getDe_bev()%>" class="input-group-sm" id="bev" readonly="">
-                                            </label>
-                                        </section>
-                                        <section class="col col-1">
-                                            <label class="input" id="titulo">Bono puesto:
-                                                <input type="text" name="ca_bono_puesto" value="<%=d.getCa_bonificacion_p()%>" class="input-group-sm" required="" id="ca_bono_pu" readonly="">
-                                            </label>
-                                        </section>
-                                        <%int val_asigf = Integer.parseInt(request.getParameter("num"));%>
-                                        <section class="col col-2" >
-                                            <label class="input" id="titulo">Asignanción Familiar:
-                                                <input type="text" name="ASIG_FAMILIAR"  value="<%=d.getCa_asig_familiar()%>" class="input-group-sm" id="asig" readonly="">
-                                            </label>
-                                        </section>
-                                        <section class="col col-1">
-                                            <label class="input" id="titulo">Sueldo Total:
-                                                <input type="text" name="TOTAL_SUELDO" value="<%=d.getCa_bono_alimentario() + d.getCa_sueldo() + d.getCa_asig_familiar() + d.getDe_bev() + d.getCa_bonificacion_p()%>" class="input-group-sm" id="su_t" readonly="">
-                                            </label>
-                                        </section>
-                                        <section class="col col-2">
-                                            <label class="input" id="titulo">Tipo Horas Pago:
-                                                <input type="text" name="TIPO_HORA_PAGO" value="0" class="input-group-sm" readonly="">
-                                            </label>
-                                        </section>
-
-                                    </div>
-                                    <!--<div class="modal-body">
-        
-                                        <div class="row">
-                                            <div id="contenido">
-                                                <div >
-        
-                                                    <form class="form-inline" id="frm_filtro" method="post" name="formulario"  >
-        
-                                                        <div class="row">
-                                                            <div class="form-group" >
-                                                                <label class="control-label" >Nombres</label><br>
-                                                                <input type="text"  class="form-control"  name="nom" maxlength="80" >
-                                                            </div>
-                                                            <div class="form-group" >
-                                                                <label class="control-label" >Apellido Paterno</label><br>
-                                                                <input type="text"  class="form-control"  name="ap_pa" maxlength="80">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="form-group">
-                                                                <label class="control-label" >Apellido Materno</label><br>
-                                                                <input type="text"  class="form-control"  name="ap_ma" maxlength="80" >
-                                                            </div>
-        
-                                                            <div class="form-group">
-                                                                <label class="control-label" >DNI:</label><br>
-                                                                <input type="text"  class="form-control"  onKeyPress="return checkIt(event)"   name="dni" maxlength="8">
-                                                            </div>
-                                                        </div>
-        
-                                                        <div class="row">
-        
-                                                            <div class="form-group">                            
-                                                                <button type="button" class="btn btn-primary" id="btnfiltrar" >Buscar</button>
-                                                            </div>
-                                                            <div class="form-group">  
-                                                                <a href="javascript:;"  id="btncancel" class="btn btn-primary" >Cancelar</a>
-                                                            </div>
-        
-                                                        </div>
-        
-                                                    </form>
-        
-                                                </div> 
-        
-                                                <hr/>
-        
-                                                <table  id="data"  >
-                                                    <thead class="tab_cabe">
-                                                        <tr>
-                                                            <td><span title="NOMBRE_AP">Nombres y Apellidos</span></td>
-                                                            <td><span  >DNI</span></td>
-                                                            <td></td>
-        
-                                                        </tr>
-                                                    </thead>
-        
-                                                    <tbody class="tbodys">
-                                                    </tbody>
-                                                </table>
-        
-                                            </div>
-                                        </div>
-        
-        
-        
-                                    </div>-->
-                                </fieldset>
-
-                                <fieldset>
-                                    <div class="row">
-                                        <section class="col col-4">
-                                            <label class="select" id="titulo">Regimen Laboral Mintra:
-                                                <select name="REG_LAB_MINTRA" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <%for (int q = 0; q < list_reg_labo.size(); q++) {
-                                                            Regimen_Laboral re = new Regimen_Laboral();
-                                                            re = (Regimen_Laboral) list_reg_labo.get(q);
-                                                    %>
-                                                    <option value="<%=re.getId_regimen_laboral()%>"><%=re.getDe_regimen_l()%></option>
-                                                    <%}%>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="select" id="titulo">Modalidad:
-                                                <select name="MODALIDAD" class="input-group-sm" id="select_mod" required="">
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <%for (int l = 0; l < List_modalidad.size(); l++) {
-                                                            Modalidad mo = new Modalidad();
-                                                            mo = (Modalidad) List_modalidad.get(l);
-
-                                                    %>
-                                                    <option value="<%=mo.getId_modalidad()%>"><%=mo.getDe_modalidad()%></option>
-                                                    <%}%>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="select" id="titulo">SUB-Modalidad:
-                                                <select name="SUB_MODALIDAD" class="input-group-sm" id="select-sub-mod" required="">
-                                                    <option value="">[SELECCIONE]</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="select" id="titulo">Tipo Contratación:
-                                                <select name="REG_LAB_MINTRA" class="input-group-sm" >
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <option value="I">INICIO</option>
-                                                    <option value="R">RENOVACION</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="select" id="titulo">Codigo Grupo de Ocupaciones:
-                                                <select name="CO_GRUPO_OCU" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <%for (int gr = 0; gr < List_grup_ocu.size(); gr++) {
-                                                            Grupo_Ocupaciones g = new Grupo_Ocupaciones();
-                                                            g = (Grupo_Ocupaciones) List_grup_ocu.get(gr);
-                                                    %>
-                                                    <option value="<%=g.getId_grupo_ocupacion()%>"><%=g.getDe_grupo_ocupacion()%></option>
-                                                    <%}%>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <%String Fecha = request.getParameter("fe_subs");%>
-                                            <label class="input" id="titulo">Fecha de Suscripción: 
-                                                <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm"  value="<%=Fecha%>">
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="select" id="titulo">Tipo de Modeda:
-                                                <select name="TIPO_MONEDA" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <option value="01" selected="">SOLES</option>
-                                                    <option value="02">DOLARES</option>
-                                                    <option value="03">EUROS</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="select" id="titulo">Tipo Remuneracion Variable:
-                                                <select name="REM_VARIABLE" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <option value="1">DESTAJO</option>
-                                                    <option value="2">COMISIONES</option>
-                                                    <option value="3">NINGUNO</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="select" id="titulo">Remuneración en Especie:
-                                                <select name="REM_ESPECIE" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <option value="1">SI</option>
-                                                    <option value="0">NO</option>
-                                                </select>
-                                            </label>
-                                        </section>
-
-                                    </div>
-                                </fieldset>
-
-                                <fieldset>
-                                    <h6><label id="titulo">Horas:</label></h6>
-                                    <div class="row" >
-
-                                        </section>
-                                        <section class="col col-2">
-                                            <label class="input" id="titulo">Semanal:
-                                                <input type="text" name="HORAS_SEMANA" value="<%=d.getCa_horas_horario()%>" class="input-group-sm" required="">
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-2">
-                                            <label class="input" id="titulo">Mensual:
-                                                <input type="text" name="NRO_HORAS_LAB" value="<%=d.getCa_horas_horario() * 4%>" class="input-group-sm" required="">
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-2">
-                                            <label class="input" id="titulo">Dias:
-                                                <input type="text" name="DIAS" value="30" class="input-group-sm" required="">
-                                            </label>
-                                        </section>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset>
-                                    <div class="row">
-                                        <section class="col col-4">
-                                            <label class="select" id="titulo">Tipo Trabajador.
-                                                <select name="TIPO_TRABAJADOR" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <option value="1" selected>Empleado</option>
-                                                    <option value="2">Obrero</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="select" id="titulo">Regimen Laboral: 
-                                                <select name="REGIMEN_LABORAL" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <option value="1" selected>Privado</option>
-                                                    <option value="2" selected>Público</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="select" id="titulo"> Discapacidad:
-                                                <select name="DISCAPACIDAD" class="input-group-sm" required="">
-                                                    <option value="">[SLECCIONE]</option>
-                                                    <option value="1" selected>No</option>
-                                                    <option value="2">Si</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="select" id="titulo">Regimen Pensionario:
-                                                <select name="REGIMEN_PENSIONARIO" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <option value="1" selected>Privado</option>
-                                                    <option value="2">SNP</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="select" id="titulo">Tipo Contrato::
-                                                <select name="TIPO_CONTRATO" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <option value="1">Necesidad de Mercado</option>
-                                                    <option value="2">Incremento de Actividad</option>
-                                                    <option value="3">Servicio Especifico</option>
-                                                    <option value="4">Inicio de Actividad</option>
-                                                    <option value="5">Tiempo Parcial</option>
-                                                    <option value="6">Indeterminado</option>
-                                                    <option value="7">Extranjero</option>
-                                                    <option value="8">Suplencia</option>
-                                                    <option value="9">Contrato Civil</option>
-                                                    <option value="10">De Temporada</option>
-                                                    <option value="11">Locacion de Servicios</option>
-                                                    <option value="12">No Domiciliados</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <%
-                                            if (d.getId_tipo_planilla().trim().equals("TPL-0001")) {
-
+                                                if (d.getId_dgp() == null) {
                                         %>
-                                        <section class="col col-4">
-                                            <label class="select" id="titulo">Tipo Convenio:
-                                                <select name="TIPO_CONVENIO" class="input-group-sm" >
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <option value="1">CLJ</option>
-                                                    <option value="2">PPP</option>
-                                                    <option value="3">PP</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <%}%>
+
+
+                                        <%} else {%>
+
+                                        <form action="../../contrato" id="checkout-form" class="smart-form"  method="POST" novalidate="novalidate">
+                                            <fieldset>
+                                                <div class="row">
+                                                    <section class="col col-3">
+                                                        <label class="select" id="titulo">Motivo :
+                                                            <select disabled=""  class="input-group-sm">
+                                                                <%if (d.getLi_motivo() != null) {%>
+                                                                <%if (d.getLi_motivo().trim().equals("1")) {%>
+                                                                <option  selected="selected">Trabajador Nuevo</option>   
+                                                                <option  >renovación</option>   
+                                                                <%} else {%>
+                                                                <option >Trabajador Nuevo</option>   
+                                                                <option selected="selected">renovación</option>   
+                                                                <%}%>
+                                                                <%} else {%>
+                                                                <option selected="">NINGUNO</option>
+                                                                <%}%>
+                                                            </select>  
+                                                        </label>
+                                                    </section >
+                                                    <section class="col col-3" >
+                                                        <label id="titulo" >MFL:</label>
+                                                        <label class="toggle"  > 
+                                                            <%if (d.getEs_mfl().trim().equals("1")) {%>
+                                                            <input type="checkbox" name="checkbox-toggle" disabled="" checked="" >
+                                                            <%} else {%>
+                                                            <input type="checkbox" name="checkbox-toggle" disabled=""  >
+                                                            <%}%>
+                                                            <i data-swchoff-text="NO"  data-swchon-text="SI"></i>       
+
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3" >
+                                                        <div class="div_input_diezmo">
+                                                        </div>
+                                                    </section>
+
+                                                </div>
+                                                <div class="row" >
+                                                    <input type="hidden" name="id_rol_ses" id="id_rol_s" value="<%=id_rol%>">
+                                                    <input type="hidden" name="TIPO_PLANILLA"  value="<%=d.getId_tipo_planilla()%>">
+                                                    <input type="hidden" name="HORARIO"  value="<%=d.getId_detalle_horario()%>">
+                                                    <input type="hidden" value="ANN-000004" name="AÑO_ID" />
+                                                    <input type="hidden" name="IDDETALLE_DGP" value="<%=d.getId_dgp()%>" class="text-box" id="id_dgp" >                              
+                                                    <input type="hidden"  value="<%=d.getId_trabajador()%>" class="idtr">                              
+                                                    <section class="col col-3">
+                                                        <label class="input" id="titulo">Fecha de Inicio: 
+                                                            <input type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" class=" input-group-sm" required="">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="input" id="titulo">Fecha de Cese: 
+                                                            <input type="date" name="FEC_HASTA" value="<%=c.convertFecha3(d.getFe_hasta())%>" class="input-group-sm" required="">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3" id="titulo">
+                                                        <label class="select" id="titulo">Dirección:
+                                                            <select name="DIRECCION" class="select_dir input-group-sm" disabled=""  id="select_dir" >
+                                                                <option value="" >[SELECCIONE]</option>
+                                                                <%for (int g = 0; g < Listar_Direccion.size(); g++) {
+                                                                        Direccion di = new Direccion();
+                                                                        di = (Direccion) Listar_Direccion.get(g);
+                                                                        String id_direc = request.getParameter("id_direc");
+                                                                        if (id_direc.trim().equals(di.getId_direccion().trim())) {
+                                                                %>
+                                                                <option value="<%=di.getId_direccion()%>" selected=""><%=di.getNo_direccion()%></option>
+                                                                <%} else {%>
+                                                                <option value="<%=di.getId_direccion()%>"><%=di.getNo_direccion()%></option>
+                                                                <%}
+                                                                    }%>
+                                                            </select>  </label>
+                                                    </section>
+                                                    <section class="sec_dep col col-3" id="titulo">
+                                                        <label class="select" id="titulo">Departamento:
+                                                            <select name="DEPARTAMENTO_ID" class="selec_dep input-group-sm" disabled="" id="selec_dep">
+                                                                <option value="">[SELECCIONE]</option>
+                                                            </select>  
+                                                        </label>
+                                                    </section>
+                                                    <section class="sec_are col col-3" id="titulo">
+                                                        <label class="select" id="titulo">Area:
+                                                            <select name="AREA_ID" class="Selec_Area input-group-sm"  disabled=""  id="Selec_Area">
+                                                                <option value="">[SELECCIONE]</option>
+                                                            </select>  </label>
+                                                    </section>
+                                                    <section class="sec_sec col col-3" id="titulo">
+                                                        <label class="select" id="titulo">Sección:
+                                                            <select name="SECCION_ID" class="select_sec input-group-sm" disabled=""  id="select_sec">
+                                                                <option value="">[SELECCIONE]</option>
+                                                            </select>  </label>
+                                                    </section>
+                                                    <section class="col col-3" id="titulo">
+                                                        <label class="select" id="titulo">Puesto:
+                                                            <select name="PUESTO_ID" required="" class="pu_id_se input-group-sm" disabled=""  id="pu_id_se">
+                                                                <%  for (int j = 0; j < List_Puesto.size(); j++) {%>
+                                                                <%Puesto p = new Puesto();
+                                                                    p = (Puesto) List_Puesto.get(j);
+                                                                    if (d.getId_puesto().equals(p.getId_puesto())) {%>
+
+                                                                <option value="<%=p.getId_puesto()%>" selected="selected"><%=p.getNo_puesto()%></option>
+                                                                <%} else {%>
+                                                                <option value="<%=p.getId_puesto()%>"><%=p.getNo_puesto()%></option>
+
+                                                                <%}
+                                                                    }%>
+                                                            </select>  </label>
+                                                    </section>
+                                                    <input name="DEPARTAMENTO_ID"  type="hidden" value="<%=d.getId_departamento()%>" />
+                                                    <input name="AREA_ID"  type="hidden" value="<%=d.getId_area()%>" />
+                                                    <input name="SECCION_ID"  type="hidden" value="<%=d.getId_seccion()%>" />
+                                                    <input name="PUESTO_ID"  type="hidden" value="<%=d.getId_puesto()%>" />
+                                                    <input name="DIRECCION"  type="hidden" value="<%=d.getId_direccion()%>" />
+                                                    <section class="col col-3">
+                                                        <label class="select" id="titulo">Condición:
+                                                            <select name="CONDICION" class="input-group-sm" >
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="1">Contratado</option>
+                                                                <option value="2">Contratado Independiente</option>
+                                                                <option value="3">Enpleado</option>
+                                                                <option value="4">Misionero</option>
+                                                                <!--   <option value="5">MFL-Práctica Pre-Profesional</option>
+                                                                   <option value="6">MFL-Práctica Profesionales</option>
+                                                                   <option value="7">MFL-CLJ</option>
+                                                                   <option value="8">MFL-Contrato</option>-->
+                                                            </select>
+                                                        </label>
+                                                    </section>
+
+                                                </div>
+
+                                                <div class="row">
+
+                                                    <section class="col col-3">
+                                                        <label class="input" id="titulo">Remuneración:
+                                                            <input type="text" name="SUELDO" value="<%=d.getCa_sueldo()%>" class="input-group-sm" id="remu" readonly="">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="input" id="titulo">Reintegro:
+                                                            <input type="text" name="REINTEGRO" value="0" class="input-group-sm" id="rein" readonly="">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="input" id="titulo">Bono Alim.:
+                                                            <input type="text" name="BONO_ALIMENTO" value="<%=d.getCa_bono_alimentario()%>" class="input-group-sm" id="bo_a" readonly="">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="input" id="titulo">BEV:
+                                                            <input type="text" name="BEV" value="<%=d.getDe_bev()%>" class="input-group-sm" id="bev" readonly="">
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-3">
+                                                        <label class="input" id="titulo">Bono puesto:
+                                                            <input type="text" name="ca_bono_puesto" value="<%=d.getCa_bonificacion_p()%>" class="input-group-sm" required="" id="ca_bono_pu" readonly="">
+                                                        </label>
+                                                    </section>
+                                                    <%int val_asigf = Integer.parseInt(request.getParameter("num"));%>
+                                                    <section class="col col-3" >
+                                                        <label class="input" id="titulo">Asig. Familiar:
+                                                            <input type="text" name="ASIG_FAMILIAR"  value="<%=d.getCa_asig_familiar()%>" class="input-group-sm" id="asig" readonly="">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="input" id="titulo">Sueldo Total:
+                                                            <input type="text" name="TOTAL_SUELDO" value="<%=d.getCa_bono_alimentario() + d.getCa_sueldo() + d.getCa_asig_familiar() + d.getDe_bev() + d.getCa_bonificacion_p()%>" class="input-group-sm" id="su_t" readonly="">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="input" id="titulo">Tipo Horas Pago:
+                                                            <input type="text" name="TIPO_HORA_PAGO" value="0" class="input-group-sm" readonly="">
+                                                        </label>
+                                                    </section>
+
+                                                </div>
+                                                <div class="row" id="fila-agregar">
+
+                                                </div>
+
+                                            </fieldset>
+
+                                            <fieldset>
+                                                <div class="row">
+                                                    <section class="col col-3">
+                                                        <label class="select" id="titulo">Regimen Laboral Mintra:
+                                                            <select name="REG_LAB_MINTRA" class="input-group-sm" required="">
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <%for (int q = 0; q < list_reg_labo.size(); q++) {
+                                                                        Regimen_Laboral re = new Regimen_Laboral();
+                                                                        re = (Regimen_Laboral) list_reg_labo.get(q);
+                                                                %>
+                                                                <option value="<%=re.getId_regimen_laboral()%>"><%=re.getDe_regimen_l()%></option>
+                                                                <%}%>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="select" id="titulo">Modalidad:
+                                                            <select name="MODALIDAD" class="input-group-sm" id="select_mod" required="">
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <%for (int l = 0; l < List_modalidad.size(); l++) {
+                                                                        Modalidad mo = new Modalidad();
+                                                                        mo = (Modalidad) List_modalidad.get(l);
+
+                                                                %>
+                                                                <option value="<%=mo.getId_modalidad()%>"><%=mo.getDe_modalidad()%></option>
+                                                                <%}%>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="select" id="titulo">SUB-Modalidad:
+                                                            <select name="SUB_MODALIDAD" class="input-group-sm" id="select-sub-mod" required="">
+                                                                <option value="">[SELECCIONE]</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="select" id="titulo">Tipo Contratación:
+                                                            <select name="REG_LAB_MINTRA" class="input-group-sm" >
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="I">INICIO</option>
+                                                                <option value="R">RENOVACION</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+
+
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-3">
+                                                        <label class="select" id="titulo">Cod. Grupo de Ocupaciones:
+                                                            <select name="CO_GRUPO_OCU" class="input-group-sm" required="">
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <%for (int gr = 0; gr < List_grup_ocu.size(); gr++) {
+                                                                        Grupo_Ocupaciones g = new Grupo_Ocupaciones();
+                                                                        g = (Grupo_Ocupaciones) List_grup_ocu.get(gr);
+                                                                %>
+                                                                <option value="<%=g.getId_grupo_ocupacion()%>"><%=g.getDe_grupo_ocupacion()%></option>
+                                                                <%}%>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <%String Fecha = request.getParameter("fe_subs");%>
+                                                        <label class="input" id="titulo">Fecha de Suscripción: 
+                                                            <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm"  value="<%=Fecha%>" />
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label class="select" id="titulo">Tipo de Modeda:
+                                                            <select name="TIPO_MONEDA" class="input-group-sm" required="">
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="01" selected="">SOLES</option>
+                                                                <option value="02">DOLARES</option>
+                                                                <option value="03">EUROS</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label class="select" id="titulo">Tipo Rem. Variable:
+                                                            <select name="REM_VARIABLE" class="input-group-sm" required="">
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="1">DESTAJO</option>
+                                                                <option value="2">COMISIONES</option>
+                                                                <option value="3">NINGUNO</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label class="select" id="titulo">Remuneración en Especie:
+                                                            <select name="REM_ESPECIE" class="input-group-sm" required="">
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="1">SI</option>
+                                                                <option value="0">NO</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                            </fieldset>
+
+                                            <fieldset>
+                                                <h6><label id="titulo">Horas:</label></h6>
+                                                <div class="row" >
+                                                    <section class="col col-4">
+                                                        <label class="input" id="titulo">Semanal:
+                                                            <input type="text" name="HORAS_SEMANA" value="<%=d.getCa_horas_horario()%>" class="input-group-sm" required="">
+                                                        </label>
+                                                    </section>
+
+                                                    <section class="col col-4">
+                                                        <label class="input" id="titulo">Mensual:
+                                                            <input type="text" name="NRO_HORAS_LAB" value="<%=d.getCa_horas_horario() * 4%>" class="input-group-sm" required="">
+                                                        </label>
+                                                    </section>
+
+                                                    <section class="col col-4">
+                                                        <label class="input" id="titulo">Dias:
+                                                            <input type="text" name="DIAS" value="30" class="input-group-sm" required="">
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                            </fieldset>
+
+                                            <fieldset>
+                                                <div class="row">
+                                                    <section class="col col-4">
+                                                        <label class="select" id="titulo">Tipo Trabajador.
+                                                            <select name="TIPO_TRABAJADOR" class="input-group-sm" required="">
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="1" selected>Empleado</option>
+                                                                <option value="2">Obrero</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-4">
+                                                        <label class="select" id="titulo">Regimen Laboral: 
+                                                            <select name="REGIMEN_LABORAL" class="input-group-sm" required="">
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="1" selected>Privado</option>
+                                                                <option value="2" selected>Público</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-4">
+                                                        <label class="select" id="titulo"> Discapacidad:
+                                                            <select name="DISCAPACIDAD" class="input-group-sm" required="">
+                                                                <option value="">[SLECCIONE]</option>
+                                                                <option value="1" selected>No</option>
+                                                                <option value="2">Si</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-4">
+                                                        <label class="select" id="titulo">Regimen Pensionario:
+                                                            <select name="REGIMEN_PENSIONARIO" class="input-group-sm" required="">
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="1" selected>Privado</option>
+                                                                <option value="2">SNP</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-4">
+                                                        <label class="select" id="titulo">Tipo Contrato::
+                                                            <select name="TIPO_CONTRATO" class="input-group-sm" required="">
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="1">Necesidad de Mercado</option>
+                                                                <option value="2">Incremento de Actividad</option>
+                                                                <option value="3">Servicio Especifico</option>
+                                                                <option value="4">Inicio de Actividad</option>
+                                                                <option value="5">Tiempo Parcial</option>
+                                                                <option value="6">Indeterminado</option>
+                                                                <option value="7">Extranjero</option>
+                                                                <option value="8">Suplencia</option>
+                                                                <option value="9">Contrato Civil</option>
+                                                                <option value="10">De Temporada</option>
+                                                                <option value="11">Locacion de Servicios</option>
+                                                                <option value="12">No Domiciliados</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <%
+                                                        if (d.getId_tipo_planilla().trim().equals("TPL-0001")) {
+
+                                                    %>
+                                                    <section class="col col-4">
+                                                        <label class="select" id="titulo">Tipo Convenio:
+                                                            <select name="TIPO_CONVENIO" class="input-group-sm" >
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="1">CLJ</option>
+                                                                <option value="2">PPP</option>
+                                                                <option value="3">PP</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <%}%>
+                                                </div>
+                                            </fieldset>
+
+                                            <fieldset>
+                                                <section>
+                                                    <label class="label" id="titulo">Observación:  </label>
+                                                    <label class="textarea">
+                                                        <textarea rows="3"  name="OBSERVACION" cols="35" rows="6" ></textarea>
+                                                    </label>
+                                                </section>
+                                            </fieldset>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <!--<section class="col col-4">
+                                                        <label class="select" id="titulo">Situación Actual:
+                                                            <select name="ESTADO_CONTRATO" class="input-group-sm" required="">
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="1" selected="" >Activo</option>
+                                                                <option value="2">Término de Contrato</option>
+                                                                <option value="3">Renuncia Voluntaria</option>
+                                                                <option value="4">Traslado a otra Filial/Institucion</option>
+                                                                <option value="5">No Inicio Relación Laboral</option>
+                                                                <option value="6">Cambio de Modalidad Contractual</option>
+                                                                <option value="7">Abandono de Trabajo</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>-->
+                                                    <section class="col col-3">
+                                                        <label class="select" id="titulo">Filial donde Trabaja:
+                                                            <select name="FILIAL" class="input-group-sm" required="">
+                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="1" selected >Lima</option>
+                                                                <option value="2">Juliaca</option>
+                                                                <option value="3">Tarapoto</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                    <!--<section class="col col-4">
+                                                        <label class="input" id="titulo">Fecha Cese: 
+                                                            <input type="date" name="FEC_CESE"  class="input-group-sm" required="">
+                                                        </label>
+                                                    </section>-->
+                                                    <section class="col col-2">
+                                                        <label class="input" id="titulo">RUC UPEU:
+                                                            <input type="text" name="EMP_RUC" value="20138122256" maxlength="20" class="input-group-sm" required="">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label class="input" id="titulo">Cod. Sucursal:
+                                                            <input type="text" name="SUCURSAL" value="-1" maxlength="3" class="input-group-sm" required="">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <label class="input" id="titulo">MYPE:
+                                                            <input type="text" name="MYPE" value="N"  maxlength="2" class="input-group-sm" required="">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3">
+                                                        <label class="select" id="titulo" style="color:red">Plantilla de Contrato:
+                                                            <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm"  required="">
+                                                                <option value="">[SELECCIONE]</option>
+                                                            </select>
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                                <input type="hidden" name="ENTREGAR_DOC_REGLAMENTOS"  value="0" class="text-box" >
+                                                <input type="hidden" name="REGISTRO_HUELLA"  value="0" class="text-box" > 
+                                                <input type="hidden" name="REGISTRO_SISTEM_REMU" value="0" class="text-box" >
+                                                <input type="hidden" name="ESTADO" value="1" class="text-box" > 
+                                                <input type="hidden" value="<%=d.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" >
+
+                                            </fieldset>
+                                            <input type="hidden" value="<%=d.getId_departamento()%>" class="dep_pu">
+                                            <input type="hidden" value="<%=d.getId_area()%>" class="area_pu">
+                                            <input type="hidden" value="<%=d.getId_direccion()%>" class="dir_pu">
+                                            <input type="hidden" value="<%=d.getId_seccion()%>" class="sec_pu">
+                                            <input type="hidden" value="<%=d.getId_puesto()%>" class="id_pu_dgp">
+                                            <footer>
+                                                <input type="hidden" name="opc"   value="REGISTRAR CONTRATO">
+                                                <button type="submit" id="submit" class="btn btn-primary">
+                                                    REGISTRAR CONTRATO
+                                                </button>
+                                                <a type="button" class="btn btn-success" href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar">Ver Horario</a>
+                                                <a type="button" class="btn btn-success" href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a>
+                                            </footer>
+                                        </form>
+                                        <%}
+                                            }%>
                                     </div>
-                                </fieldset>
+                                    <!-- end widget content -->
 
+                                </div>
+                                <!-- end widget div -->
 
-                                <fieldset>
-                                    <div class="">
-                                        <section class="col col-12">
-                                            <label class="textarea" id="titulo">Observación:  </label>
-                                            <textarea  name="OBSERVACION"  class="input-group-sm " cols="35" rows="6"></textarea>
-                                        </section>
-
-                                    </div>
-
-                                    <!--<div>
-                                      <section>
-                                        <label class="textarea" id="titulo">Observación2:</label>										
-                                        <textarea rows="5" rows="6" name="comment" placeholder=""></textarea> 
-                                    </section>
-                                    </div>-->
-
-                                </fieldset>
-                                <fieldset>
-                                    <div class="row">
-                                        <!--<section class="col col-4">
-                                            <label class="select" id="titulo">Situación Actual:
-                                                <select name="ESTADO_CONTRATO" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <option value="1" selected="" >Activo</option>
-                                                    <option value="2">Término de Contrato</option>
-                                                    <option value="3">Renuncia Voluntaria</option>
-                                                    <option value="4">Traslado a otra Filial/Institucion</option>
-                                                    <option value="5">No Inicio Relación Laboral</option>
-                                                    <option value="6">Cambio de Modalidad Contractual</option>
-                                                    <option value="7">Abandono de Trabajo</option>
-                                                </select>
-                                            </label>
-                                        </section>-->
-                                        <section class="col col-3">
-                                            <label class="select" id="titulo">Filial donde Trabaja:
-                                                <select name="FILIAL" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
-                                                    <option value="1" selected >Lima</option>
-                                                    <option value="2">Juliaca</option>
-                                                    <option value="3">Tarapoto</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                        <!--<section class="col col-4">
-                                            <label class="input" id="titulo">Fecha Cese: 
-                                                <input type="date" name="FEC_CESE"  class="input-group-sm" required="">
-                                            </label>
-                                        </section>-->
-                                        <section class="col col-3">
-                                            <label class="input" id="titulo">RUC UPEU:
-                                                <input type="text" name="EMP_RUC" value="20138122256" maxlength="20" class="input-group-sm" required="">
-                                            </label>
-                                        </section>
-                                        <section class="col col-3">
-                                            <label class="input" id="titulo">Cod. Sucursal:
-                                                <input type="text" name="SUCURSAL" value="-1" maxlength="3" class="input-group-sm" required="">
-                                            </label>
-                                        </section>
-                                        <section class="col col-3">
-                                            <label class="input" id="titulo">MYPE:
-                                                <input type="text" name="MYPE" value="N"  maxlength="2" class="input-group-sm" required="">
-                                            </label>
-                                        </section>
-                                        <section class="col col-3">
-                                            <label class="select" id="titulo" style="color:red">Plantilla de Contrato:
-                                                <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm"  required="">
-                                                    <option value="">[SELECCIONE]</option>
-                                                </select>
-                                            </label>
-                                        </section>
-                                    </div>
-                                    <input type="hidden" name="ENTREGAR_DOC_REGLAMENTOS"  value="0" class="text-box" >
-                                    <input type="hidden" name="REGISTRO_HUELLA"  value="0" class="text-box" > 
-                                    <input type="hidden" name="REGISTRO_SISTEM_REMU" value="0" class="text-box" >
-                                    <input type="hidden" name="ESTADO" value="1" class="text-box" > 
-                                    <input type="hidden" value="<%=d.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="text-box" >
-
-                                </fieldset>
-                                <input type="hidden" value="<%=d.getId_departamento()%>" class="dep_pu">
-                                <input type="hidden" value="<%=d.getId_area()%>" class="area_pu">
-                                <input type="hidden" value="<%=d.getId_direccion()%>" class="dir_pu">
-                                <input type="hidden" value="<%=d.getId_seccion()%>" class="sec_pu">
-                                <input type="hidden" value="<%=d.getId_puesto()%>" class="id_pu_dgp">
-                                <footer>
-                                    <input type="hidden" name="opc"   value="REGISTRAR CONTRATO">
-                                    <button type="submit" id="submit" class="btn btn-primary">
-                                        REGISTRAR CONTRATO
-                                    </button>
-                                    <a type="button" class="btn btn-success" href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar">Ver Horario</a>
-                                    <a type="button" class="btn btn-success" href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a>
-                                </footer>
-                            </form>
-                            <%}
-                                }%>
-                        </div>
-                        <!-- end widget content -->
-
-                    </div>
-                    <!-- end widget div -->
-
-                </div>
+                            </div>
+                        </article>
+                    </div>   
+                </section>
             </div>
+
+
 
         </div>
 
@@ -757,16 +658,13 @@
         <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 
         <!-- EASY PIE CHARTS -->
-        <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
 
         <!-- SPARKLINES -->
-        <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
 
         <!-- JQUERY VALIDATE -->
         <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
         <!-- JQUERY MASKED INPUT -->
-        <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
         <!-- JQUERY SELECT2 INPUT -->
         <script src="../../js/plugin/select2/select2.min.js"></script>
@@ -794,7 +692,6 @@
 
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
         <!-- Voice command : plugin -->
-        <script src="../../js/speech/voicecommand.min.js"></script>
 
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
@@ -868,7 +765,6 @@
                 });
             }
             $(document).ready(function () {
-
                 $("#ca_bono_pu").numeric();
                 $("#remu").numeric();
                 $("#rein").numeric();
@@ -878,6 +774,10 @@
                 $("#asig").numeric();
                 pageSetUp();
 
+                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                });
+                showEsDiezmo();
                 var $checkoutForm = $('#checkout-form').validate({
                     // Rules for form validation
                     rules: {
@@ -889,93 +789,6 @@
                         },
                         FEC_HASTA: {
                             val_fecha: true
-                        },
-                        lname: {
-                            required: true
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        phone: {
-                            required: true
-                        },
-                        country: {
-                            required: true
-                        },
-                        city: {
-                            required: true
-                        },
-                        code: {
-                            required: true,
-                            digits: true
-                        },
-                        address: {
-                            required: true
-                        },
-                        name: {
-                            required: true
-                        },
-                        card: {
-                            required: true,
-                            creditcard: true
-                        },
-                        cvv: {
-                            required: true,
-                            digits: true
-                        },
-                        month: {
-                            required: true
-                        },
-                        year: {
-                            required: true,
-                            digits: true
-                        }
-                    },
-                    // Messages for form validation
-                    messages: {
-                        fname: {
-                            required: 'Please enter your first name'
-                        },
-                        lname: {
-                            required: 'Please enter your last name'
-                        },
-                        email: {
-                            required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
-                        },
-                        phone: {
-                            required: 'Please enter your phone number'
-                        },
-                        country: {
-                            required: 'Please select your country'
-                        },
-                        city: {
-                            required: 'Please enter your city'
-                        },
-                        code: {
-                            required: 'Please enter code',
-                            digits: 'Digits only please'
-                        },
-                        address: {
-                            required: 'Please enter your full address'
-                        },
-                        name: {
-                            required: 'Please enter name on your card'
-                        },
-                        card: {
-                            required: 'Please enter your card number'
-                        },
-                        cvv: {
-                            required: 'Enter CVV2',
-                            digits: 'Digits only'
-                        },
-                        month: {
-                            required: 'Select month'
-                        },
-                        year: {
-                            required: 'Enter year',
-                            digits: 'Digits only please'
                         }
                     },
                     // Do not change code below
@@ -989,7 +802,6 @@
                 }, "¡Fecha ingresada invalida!");
 
                 Listar_centro_costo();
-
                 Listar_dep();
                 Listar_sec();
                 Listar_area();
@@ -1118,7 +930,67 @@
 
 
 
+                function showEsDiezmo() {
+                    var obj = $(".div_input_diezmo");
+                    obj.hide(100);
+                    obj.empty();
+                    $.ajax({
+                        url: "../../trabajador", data: "opc=ShowEsDiezmoTrabajador&id=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
+                            if (data.rpta) {
+                                obj.append(data.html);
+                                obj.show(100);
+                                $(".cbkDiezmo").click(function () {
+                                    $.SmartMessageBox({
+                                        title: "&iexcl;Alerta!",
+                                        content: "Esta seguro de modificar la autorizaci&oacute;n de descuento diezmo?",
+                                        buttons: '[No][Si]'
+                                    }, function (ButtonPressed) {
+                                        if (ButtonPressed === "Si") {
+                                            if ($(".cbkDiezmo").prop("checked")) {
+                                                $.ajax({
+                                                    url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=0", type: 'POST', success: function (data, textStatus, jqXHR) {
+                                                        if (data.status) {
+                                                            $(".cbkDiezmo").prop("checked", false);
+                                                            $.smallBox({
+                                                                title: "&iexcl;Atenci&oacute;n!",
+                                                                content: "<i class='fa fa-clock-o'></i> <i>Se neg&oacute; el descuento de diezmo...</i>",
+                                                                color: "#C46A69",
+                                                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                                timeout: 6000
+                                                            });
+                                                        }
 
+                                                    }
+                                                });
+                                            } else {
+                                                $.ajax({
+                                                    url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=1", type: 'POST', success: function (data, textStatus, jqXHR) {
+                                                        if (data.status) {
+                                                            $(".cbkDiezmo").prop("checked", true);
+                                                            $.smallBox({
+                                                                title: "&iexcl;Atenci&oacute;n!",
+                                                                content: "<i class='fa fa-clock-o'></i> <i>Se autoriz&oacute; el descuento de diezmo...</i>",
+                                                                color: "#659265",
+                                                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                                timeout: 6000
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                            showEsDiezmo();
+
+
+                                        }
+                                    });
+                                    return false;
+
+
+                                });
+                            }
+                        }
+                    });
+                }
                 function Listar_centro_costo() {
                     var x = $("#fila-agregar");
                     $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function (objJson) {
@@ -1127,7 +999,7 @@
                         x.append('<div  class="row centro-costo_' + numero + '" >');
                         for (var i = 0; i < lista.length; i++) {
                             numero = numero + i;
-                            if ($("#id_rol_s").val() == 'ROL-0001') {
+                            if ($("#id_rol_s").val() === 'ROL-0001') {
                                 x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section><div class="form-group"><button type="button" class="btn btn-primary" id="Seleccionar_centro" >Buscar</button></div>');
                             } else {
                                 x.append('</label><section class="col col-5"><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></label></section>');

@@ -134,7 +134,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="glyphicon glyphicon-inbox"></i> </span>
-                                      <h2 class="font-md"><strong>Requerimientos por </strong> <i>Autorizar</i></h2>
+                                    <h2 class="font-md"><strong>Requerimientos por </strong> <i>Autorizar</i></h2>
                                 </header>
                                 <!-- widget div-->
                                 <div>
@@ -151,69 +151,84 @@
 
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
-                                        <%if (idrol.trim().equals("ROL-0006")) {
-                                        %>
-                                        <button type="button" class="btn btn-success btn_pro_firma">Procesar Firmas</button>
-                                        <button type="button" class="btn btn-default btn_pro_remuneracion">Procesar a remuneraciones</button>
-                                        <%}%>
-                                        <%if (idrol.trim().equals("ROL-0009")) {%>
-                                        <button type="button" class="btn btn-success btn_cod_aps">Procesar codigos</button>
-                                        <%}%>
-                                        <%if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {%>
-                                        <button type="button" class="btn btn-success btn_cod_huella">Procesar codigos</button>
-                                        <%}%>
+
+
                                         <table id="dt_basic1" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
-                                                <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Acción</strong></th>
-                                                    <th ><strong>MES</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Foto</strong> </th>
-                                                    <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Puesto</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Area</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Departamento</strong></th>
-                                                    <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
-                                                    <!--  <td>Departamento</td>-->
-                                                    <th data-hide="phone,tablet"><strong>Descripción</strong></th>
-                                                    <th  data-hide="phone,tablet">Fecha de Creación</th>  
-                                                    <th  data-hide="phone,tablet">Motivo</th>  
-                                                    <th  data-hide="phone,tablet">MFL</th>  
-                                                        <% if (dep.equals("DPT-0019")) {%>
-                                                    <th  ><strong>¿Cumplio Plazos?</strong></th>
-                                                        <%if (idrol.trim().equals("ROL-0006")) {
-                                                        %>
-                                                    <th ><strong>¿Contrato Elaborado?</strong></th>
-                                                    <th  ><strong>¿Firmo Contrato?</strong></th>
-                                                    <th ><strong>Enviar a Rem.</strong></th>
-                                                    <th ><strong>¿Contrato Subido?</strong></th>
-                                                        <%}
-                                                            }%>
-                                                        <%if (idrol.trim().equals("ROL-0009")) {%>
-                                                    <th><strong>Código APS</strong></th>
-                                                        <%}%>
-                                                        <%if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {%>
-                                                    <th><strong>Código Huella</strong></th>
-                                                        <%}%>
-                                                </tr>
+                                                <%if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {%>
+                                                <tr>
+                                                    <th class='hasinput' colspan='14' style='width:95%' ></th>
+                                                    <th class='hasinput'  style='' >
+                                            <center>
+                                                <button   rel="tooltip" data-placement="left" data-original-title="Autorizar y Procesar codigo de huella digital"  class='btn btn-warning btn-circle btn-lg  btn_cod_huella'>
+                                                    <i class='glyphicon glyphicon-ok'></i></button></center></th>
+                                            </tr>
+                                            <%}%>
+                                            <%if (idrol.trim().equals("ROL-0009")) {%>
+                                            <tr>
+                                                <th class='hasinput' colspan='14' style='width:95%' ></th>
+                                                <th class='hasinput'  style='' >
+                                            <center><button   rel="tooltip" data-placement="left" data-original-title="Autorizar y Procesar código aps"  class='btn bg-color-magenta txt-color-white btn-circle btn-lg  btn_cod_aps'>
+                                                    <i class='glyphicon glyphicon-ok'></i></button></center></th>
+                                            </tr>
+
+                                            <%}%>
+
+
+                                            <%if (idrol.trim().equals("ROL-0006")) {
+                                            %>
+                                            <tr>
+                                                <th class='hasinput' colspan='15' style='width:95%' ></th>
+                                                <th class='hasinput'  style='' ><center><button   rel="tooltip" data-placement="top" data-original-title="Procesar Firmas"  class='btn btn-primary btn-circle btn-lg btn_pro_firma'><i class='glyphicon glyphicon-ok'></i></button></center></th>
+                                            <th class='hasinput'  style='' ><center><button  rel="tooltip" data-placement="top" data-original-title="Procesar a remuneraciones"  class='btn btn-default btn-circle btn-lg btn_pro_remuneracion'><i class='glyphicon glyphicon-ok'></i></button></center></th>
+                                            <th class='hasinput'   ></th>      
+                                            </tr>
+                                            <%}%>
+                                            <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
+                                                <th data-hide="phone,tablet"><strong>Acción</strong></th>
+                                                <th ><strong>MES</strong></th>
+                                                <th data-hide="phone,tablet"><strong>Foto</strong> </th>
+                                                <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>
+                                                <th data-hide="phone,tablet"><strong>Puesto</strong></th>
+                                                <th data-hide="phone,tablet"><strong>Area</strong></th>
+                                                <th data-hide="phone,tablet"><strong>Departamento</strong></th>
+                                                <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>
+                                                <!--  <td>Departamento</td>-->
+                                                <th data-hide="phone,tablet"><strong>Descripción</strong></th>
+                                                <th  data-hide="phone,tablet">Fecha de Creación</th>  
+                                                <th  data-hide="phone,tablet">Motivo</th>  
+                                                <th  data-hide="phone,tablet">MFL</th>  
+                                                    <% if (dep.equals("DPT-0019")) {%>
+                                                <th  ><strong>¿Cumplio Plazos?</strong></th>
+                                                    <%if (idrol.trim().equals("ROL-0006")) {
+                                                    %>
+                                                <th ><strong>¿Contrato Elaborado?</strong></th>
+                                                <th  ><strong>¿Firmo Contrato?</strong></th>
+                                                <th ><strong>Enviar a Rem.</strong></th>
+                                                <th ><strong>¿Contrato Subido?</strong></th>
+                                                    <%}
+                                                        }%>
+                                                    <%if (idrol.trim().equals("ROL-0009")) {%>
+                                                <th><strong>Código APS</strong></th>
+                                                    <%}%>
+                                                    <%if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {%>
+                                                <th><strong>Código Huella</strong></th>
+                                                    <%}%>
+                                            </tr>
                                             </thead>
                                             <tbody> 
                                                 <%
                                                     int num_cod_aps = 0;
                                                     int num_cod_huella = 0;
-                                                 //   InterfaceDgpDAO dgp = new DgpDAO();
-                                                    if (t == 0) {
                                                 %>
-                                                <!-- <tr><td colspan="9" align="center"><h3>No hay ningún DGP por autorizar...</h3></td></tr>-->
-                                                <%}%>
+                                                <%%>
                                                 <%for (int f = 0; f < List_id_Autorizacion.size(); f++) {
-
                                                         V_Autorizar_Dgp a = new V_Autorizar_Dgp();
                                                         a = (V_Autorizar_Dgp) List_id_Autorizacion.get(f);
                                                 %>
                                                 <tr>
                                                     <td><%=f + 1%></td>
                                                     <td>
-
                                                         <div class="btn-group">
                                                             <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                                                 Accion <span class="caret"></span>
@@ -225,9 +240,7 @@
                                                                     <% if (Integer.parseInt(a.getElab_contrato()) > 0) {
                                                                     %>
                                                                 <li><a href="../../contrato?idtr=<%=a.getId_trabajador().trim()%>&opc=Detalle_Contractual">Ver Contrato</a></li>
-                                                                    <%
-                                                                        }
-                                                                    %>
+                                                                    <%}%>
                                                                 <li class="divider"></li>
                                                                 <li>
                                                                 <li>
@@ -250,7 +263,7 @@
                                                                                     out.println("Autorizar");
                                                                                 }
                                                                             }
-                                                                        %> </a></li>
+                                                                        %> </a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -347,8 +360,7 @@
                                                         num_cod_aps++;
                                                 %>
                                             <td>
-                                                <input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%>" style="width:50px"/>
-                                                <!--  <input type="text" id="cod_ap" name="cod_aps" maxlength="6" onblur="VAL_COD_APS()">-->
+                                                <input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%> inp_cod_aps" style="width:50px"/>
                                             </td>
                                             <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
                                             <%} else {%>
@@ -359,7 +371,7 @@
                                             <%if (a.getVal_cod_huella() == 0) {
                                                     num_cod_huella++;
                                             %>
-                                            <td><input type="text" name="cod_huella" maxlength="6" class="cod_huella<%=(f + 1)%>" style="width:50px"/></td>
+                                            <td><input type="text" name="cod_huella" maxlength="6" class="form-control cod_huella<%=(f + 1)%> inp_cod_huella" style="width:70px"/></td>
                                             <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
                                             <%} else {%>
                                             <td><strong><%=a.getCo_huella_digital()%></strong></td>
@@ -378,101 +390,101 @@
                                 </div>
                                 <!-- end widget div -->
                             </div>
-                                    </div>
-                            <!-- end widget -->
-                        </article>
-                        <!-- WIDGET END -->
                     </div>
-                    <!-- end row -->
-                    <div class="row">
-                        <!-- NEW WIDGET START -->
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div id="alerta_dgp">
-                            </div>
-                            <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-1"  data-widget-editbutton="false"  data-widget-deletebutton="false"                          data-widget-fullscreenbutton="false">
-                                <!-- widget options:
-                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-
-                                data-widget-colorbutton="false"
-                                data-widget-editbutton="false"
-                                data-widget-togglebutton="false"
-                                data-widget-deletebutton="false"
-                                data-widget-fullscreenbutton="false"
-                                data-widget-custombutton="false"
-                                data-widget-collapsed="true"
-                                data-widget-sortable="false"
-
-                                -->
-                                <header>
-                                    <span class="widget-icon"> <i class="glyphicon glyphicon-saved"></i> </span>
-                                      <h2 class="font-md"><strong>Requerimientos </strong> <i>Autorizados</i></h2>
-                                </header>
-                                <!-- widget div-->
-                                <div>
-
-                                    <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
-
-                                    </div>
-                                    <!-- end widget edit box -->
-
-                                    <!-- widget content -->
-                                    <div class="widget-body no-padding imprimir_tabla">
-
-                                    </div>
-                                    <!-- end widget content -->
-                                </div>
-                                <!-- end widget div -->
-
-                            </div>
-                            <!-- end widget -->
-                        </article>
-                        <!-- WIDGET END -->
-                    </div>
-                    <!-- end row -->
-                </section>
-                <!-- end widget grid -->
+                    <!-- end widget -->
+                    </article>
+                    <!-- WIDGET END -->
             </div>
-        </div>
-        <!-------------- Modal  ----------->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <div class="datos_trabajador text-left">
-                        </div>
-                        <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
+            <!-- end row -->
+            <div class="row">
+                <!-- NEW WIDGET START -->
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="alerta_dgp">
                     </div>
-                    <div class="modal-body">
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-color-red" id="wid-id-1"  data-widget-editbutton="false"  data-widget-deletebutton="false"                          data-widget-fullscreenbutton="false">
+                        <!-- widget options:
+                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
-                        <button class="add-coment btn btn-primary btn-block">Add Comentario</button>
-                        <div class="area-coment">
-                            <form class="comentari-form" method="post">
-                                <textarea class="txt_mensaje"></textarea>
-                                <p></p>
-                                <input name="idDgp" class="idDgp" type="hidden" value="">
-                                <div class="contador">
-                            </form>
-                        </div>
-                    </div>
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
 
-                    <div class="comentarios">
+                        -->
+                        <header>
+                            <span class="widget-icon"> <i class="glyphicon glyphicon-saved"></i> </span>
+                            <h2 class="font-md"><strong>Requerimientos </strong> <i>Autorizados</i></h2>
+                        </header>
+                        <!-- widget div-->
                         <div>
-                            <legend>Comentarios </legend>
-                            <div class="comentario-dgp"></div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+                            <!-- end widget edit box -->
+
+                            <!-- widget content -->
+                            <div class="widget-body no-padding imprimir_tabla">
+
+                            </div>
+                            <!-- end widget content -->
                         </div>
+                        <!-- end widget div -->
+
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" onclick="Registrar()" class="comet btn btn-success">Comentar</button>
-                    </div>
+                    <!-- end widget -->
+                </article>
+                <!-- WIDGET END -->
+            </div>
+            <!-- end row -->
+        </section>
+        <!-- end widget grid -->
+    </div>
+</div>
+<!-------------- Modal  ----------->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="datos_trabajador text-left">
                 </div>
+                <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
+            </div>
+            <div class="modal-body">
+
+                <button class="add-coment btn btn-primary btn-block">Add Comentario</button>
+                <div class="area-coment">
+                    <form class="comentari-form" method="post">
+                        <textarea class="txt_mensaje"></textarea>
+                        <p></p>
+                        <input name="idDgp" class="idDgp" type="hidden" value="">
+                        <div class="contador">
+                    </form>
+                </div>
+            </div>
+
+            <div class="comentarios">
+                <div>
+                    <legend>Comentarios </legend>
+                    <div class="comentario-dgp"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" onclick="Registrar()" class="comet btn btn-success">Comentar</button>
             </div>
         </div>
     </div>
+</div>
+</div>
 </body>
 <script src="../../js/coment/coment.js" type="text/javascript"></script>
 <!--================================================== -->
@@ -483,16 +495,16 @@
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script>
-                            if (!window.jQuery) {
-                                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                            }
+                    if (!window.jQuery) {
+                        document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                    }
 </script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script>
-                            if (!window.jQuery.ui) {
-                                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                            }
+                    if (!window.jQuery.ui) {
+                        document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                    }
 </script>
 
 <!-- IMPORTANT: APP CONFIG -->
@@ -560,22 +572,22 @@
 
 <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
 <script>
-                            $.datepicker.regional['es'] = {
-                                closeText: 'Mostrar',
-                                currentText: 'Hoy',
-                                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
-                                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-                                weekHeader: 'Sm',
-                                dateFormat: 'dd/mm/yy',
-                                firstDay: 1,
-                                isRTL: false,
-                                showMonthAfterYear: false,
-                                yearSuffix: ''
-                            };
-                            $.datepicker.setDefaults($.datepicker.regional['es']);
+                    $.datepicker.regional['es'] = {
+                        closeText: 'Mostrar',
+                        currentText: 'Hoy',
+                        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+                        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+                        weekHeader: 'Sm',
+                        dateFormat: 'dd/mm/yy',
+                        firstDay: 1,
+                        isRTL: false,
+                        showMonthAfterYear: false,
+                        yearSuffix: ''
+                    };
+                    $.datepicker.setDefaults($.datepicker.regional['es']);
 </script>
 <script>
     function nobackbutton() {
@@ -605,8 +617,9 @@
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
                     for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
-                            if ($(".env_rem" + i).prop('checked')) {
+                        if ($(".env_rem" + i).prop('checked')) {
                             $.ajax({
+                                async: false,
                                 url: "../../autorizacion",
                                 type: "POST",
                                 data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
@@ -631,12 +644,14 @@
                         $.each($(".firm_contr"), function () {
                             if ($(this).prop('checked')) {
                                 $.ajax({
+                                    async: false,
                                     url: "../../contrato",
                                     type: "POST",
                                     data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
                                 }).done(function () {
                                 });
                                 $.ajax({
+                                    async: false,
                                     url: "../../autorizacion",
                                     type: "POST",
                                     data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
@@ -648,7 +663,7 @@
                         // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
                     }
                     catch (err) {
-                     
+
                     } finally {
                     }
                 }
@@ -666,12 +681,14 @@
                     for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
                         if ($(".cod_aps" + r).val() != "") {
                             $.ajax({
+                                async: false,
                                 url: "../../trabajador",
                                 type: "POST",
                                 data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
                             }).done(function () {
                             });
                             $.ajax({
+                                async: false,
                                 url: "../../autorizacion",
                                 type: "POST",
                                 data: "opc=Aceptar" + $(".val_aut" + r).val()
@@ -684,38 +701,40 @@
                 }
                 if (ButtonPressed === "No") {
                 }
-
             });
         });
         $(".btn_cod_huella").click(function () {
             $.SmartMessageBox({
                 title: "¡Advertencia!",
-                content: "¿Esta seguro de procesar codigos de huella a estos requerimientos?",
+                content: "¿Esta seguro de procesar códigos de huella a estos requerimientos?",
                 buttons: '[No][Si]'
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
                     for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
                         if ($(".cod_huella" + r).val() != "") {
                             $.ajax({
+                                async: false,
                                 url: "../../trabajador",
                                 type: "POST",
                                 data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
                             }).done(function () {
                             });
                             $.ajax({
+                                async: false,
                                 url: "../../autorizacion",
                                 type: "POST",
                                 data: "opc=Aceptar" + $(".val_aut" + r).val()
                             }).done(function () {
 
                             });
-                            $.ajax({
+                       /*     $.ajax({
+                              //  async: false,
                                 url: "../../autorizacion",
                                 type: "POST",
                                 data: "opc=Enviar_Correo" + $(".correos_" + r).val()
                             }).done(function () {
 
-                            });
+                            });*/
                         }
                     }
                     window.location.href = "../../autorizacion?opc=mens_cod_huella";
@@ -724,7 +743,8 @@
                 }
             });
         });
-    });</script>
+    });
+</script>
 <script type="text/javascript">
     var año = '';
     var mes = '';
@@ -862,10 +882,14 @@
         $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
             $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
         });
-        $(".cod_aps").numeric();
 
+        $(".inp_cod_aps").keypress(function (event) {
+            return /\d/.test(String.fromCharCode(event.keyCode));
+        });
+        $(".inp_cod_huella").keypress(function (event) {
+            return /\d/.test(String.fromCharCode(event.keyCode));
+        });
         listar_autorizados(mes, año);
-
         /* BASIC ;*/
         var responsiveHelper_dt_basic = undefined;
         var breakpointDefinition = {
