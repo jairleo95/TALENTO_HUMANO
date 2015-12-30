@@ -1,11 +1,12 @@
-<%@page import="pe.edu.upeu.application.dao.DocumentoDAO"%>
-<%@page import="pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO"%>
-<%@page import="pe.edu.upeu.application.model.Usuario"%>
+
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
 %>
+<%@page import="pe.edu.upeu.application.dao.DocumentoDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO"%>
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%@page import="pe.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
 <%@page import="pe.edu.upeu.application.model.Padre_Madre_Conyugue"%>
 <%@page import="pe.edu.upeu.application.model.V_Reg_Dgp_Tra"%>
@@ -56,10 +57,7 @@
         <link rel="apple-touch-icon" sizes="76x76" href="../../../img/splash/touch-icon-ipad.png">
         <link rel="apple-touch-icon" sizes="120x120" href="../../../img/splash/touch-icon-iphone-retina.png">
         <link rel="apple-touch-icon" sizes="152x152" href="../../../img/splash/touch-icon-ipad-retina.png">
-        <script type="text/javascript" src="../../../js/shadowbox/demo.js"></script>
-        <link rel="stylesheet" type="text/css" href="../../../js/shadowbox/shadowbox.css"/>
-        <link rel="stylesheet" type="text/css" href="../../../js/shadowbox/style.css"/>
-        <script type="text/javascript" src="../../../js/shadowbox/shadowbox.js"></script>
+
         <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -67,13 +65,9 @@
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        <script type="text/javascript">
-            Shadowbox.init({
-                // a darker overlay looks better on this particular site
-                overlayOpacity: 0.8
-                        // setupDemos is defined in assets/demo.js
-            }, setupDemos);</script>
+
         <link href="../../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="../../../js/shadowbox/shadowbox.css"/>
     </head>
     <%  //String num = request.getParameter("num");
         // int num_doc = Integer.parseInt(num);
@@ -116,7 +110,7 @@
                         <article class="col-sm-12 col-md-12 col-lg-12">
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-purple" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                            <div class="jarviswidget jarviswidget-color-purple" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false"   data-widget-deletebutton="false">
                                 <!-- widget options:
                                         usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
                                         
@@ -131,7 +125,8 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Registrar Documentos</h2>				
+                                    <h2>Registrar Documentos</h2>
+
                                 </header>
 
 
@@ -869,21 +864,20 @@
         <!-- JARVIS WIDGETS -->
         <script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-        <!-- EASY PIE CHARTS -->
-        <script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+        <!-- EASY PIE CHARTS 
+        <script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
 
-        <!-- SPARKLINES -->
-        <script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+        <!-- SPARKLINES 
+        <script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>-->
 
         <!-- JQUERY VALIDATE -->
         <script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-        <!-- JQUERY MASKED INPUT -->
-        <script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+        <!-- JQUERY MASKED INPUT 
+        <script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
 
-        <!-- JQUERY SELECT2 INPUT -->
-        <script src="../../../js/plugin/select2/select2.min.js"></script>
-        <script src="../../../js/JQuery/jQuery.js"></script>
+        <!-- JQUERY SELECT2 INPUT 
+        <script src="../../../js/plugin/select2/select2.min.js"></script>-->
 
         <!-- JQUERY UI + Bootstrap Slider -->
         <script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
@@ -909,23 +903,33 @@
         <script src="../../../js/app.min.js"></script>
 
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-        <!-- Voice command : plugin -->
-        <script src="../../../js/speech/voicecommand.min.js"></script>
+        <!-- Voice command : plugin 
+        <script src="../../../js/speech/voicecommand.min.js"></script>-->
 
         <!-- PAGE RELATED PLUGIN(S) -->
 
         <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
-        <script src="../../../js/JQuery/jQuery.js"></script>
         <script src="../../../js/bootstrap/fileinput.js" type="text/javascript"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="../../../js/notification/SmartNotification.min.js"></script>
+
+        <script type="text/javascript" src="../../../js/shadowbox/demo.js"></script>
+
+        <script type="text/javascript" src="../../../js/shadowbox/shadowbox.js"></script>
+
+
         <script type="text/javascript">
+                                                    Shadowbox.init({
+                                                        // a darker overlay looks better on this particular site
+                                                        overlayOpacity: 0.8
+                                                                // setupDemos is defined in assets/demo.js
+                                                    }, setupDemos);
                                                     function nobackbutton() {
 
                                                         window.location.hash = "no-back-button";
                                                         window.location.hash = "Again-No-back-button" //chrome
 
-                                                        window.onhashchange = function() {
+                                                        window.onhashchange = function () {
                                                             window.location.hash = "";
                                                         }
                                                     }
@@ -947,27 +951,76 @@
                                                             timeout: 6000
                                                         });
                                                     }
-                                                    $(document).ready(function() {
+                                                    $(document).ready(function () {
+                                                        pageSetUp();
+                                                        $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                                                            $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                                                        });
+                                                        $("#file-0").fileinput({
+                                                            'allowedFileExtensions': ['jpg', 'png', 'gif'],
+                                                        });
+                                                        $(".file").fileinput({
+                                                            showUpload: false,
+                                                            layoutTemplates: {
+                                                                main1: "{preview}\n" +
+                                                                        "<div class=\'input-group {class}\'>\n" +
+                                                                        "   <div class=\'input-group-btn\' >\n" +
+                                                                        "       {browse}\n" +
+                                                                        "       {upload}\n" +
+                                                                        "       {remove}\n" +
+                                                                        "   </div>\n" +
+                                                                        "   {caption}\n" +
+                                                                        "</div>"},
+                                                            allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc'],
+                                                            overwriteInitial: false,
+                                                            maxFileSize: 500,
+                                                            maxFilesNum: 10,
+                                                            browseClass: "btn btn-primary btn-sm",
+                                                            removeClass: "btn btn-danger btn-sm",
+                                                            //allowedFileTypes: ['image', 'video', 'flash'],
+                                                            slugCallback: function (filename) {
+                                                                return filename.replace('(', '_').replace(']', '_');
+                                                            }
+                                                        });
+
+                                                        $("#file-3").fileinput({
+                                                            showUpload: false,
+                                                            showCaption: false,
+                                                            browseClass: "btn btn-primary btn-lg",
+                                                            fileType: "any"
+                                                        });
+                                                        $("#file-4").fileinput({
+                                                            uploadExtraData: [
+                                                                {kvId: '10'}
+                                                            ],
+                                                        });
+                                                        $(".btn-warning").on('click', function () {
+                                                            if ($('#file-4').attr('disabled')) {
+                                                                $('#file-4').fileinput('enable');
+                                                            } else {
+                                                                $('#file-4').fileinput('disable');
+                                                            }
+                                                        });
+                                                        $(".btn-info").on('click', function () {
+                                                            $('#file-4').fileinput('refresh', {previewClass: 'bg-info'});
+                                                        });
                                                         if ($(".file").length) {
                                                             $(".btn_reg_doc").show();
                                                         } else {
                                                             $(".btn_reg_doc").hide();
                                                             $(".btn_continuar_det").show();
                                                         }
-                                                        $(".form_dgp_doc").submit(function() {
+                                                        $(".form_dgp_doc").submit(function () {
                                                             $(".btn_reg_doc").attr("disabled", true);
                                                             $(".btn_atras").attr("disabled", true);
                                                         });
-                                                        pageSetUp();
-                                                        $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function() {
-                                                            $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-                                                        });
 
-                                                        $(".DD").change(function() {
+
+                                                        $(".DD").change(function () {
 
                                                             $(".div-holi").text($(".DD").val());
                                                         });
-                                                        $(".elimi").click(function() {
+                                                        $(".elimi").click(function () {
                                                             var msg = confirm('¿Está seguro de eliminar?');
                                                             if (msg == true) {
                                                                 return true;
@@ -975,91 +1028,15 @@
                                                                 return false;
                                                             }
                                                         });
+
+                                                        $("#test-upload").fileinput({
+                                                            'showPreview': false,
+                                                            'allowedFileExtensions': ['jpg', 'png', 'gif'],
+                                                            'elErrorContainer': '#errorBlock'
+                                                        });
                                                     })
 
         </script>
-        <script>
-
-            $("#file-0").fileinput({
-                'allowedFileExtensions': ['jpg', 'png', 'gif'],
-            });
-            $(".file").fileinput({
-                // initialPreview: ["<img src='Desert.jpg' class='file-preview-image'>", "<img src='Jellyfish.jpg' class='file-preview-image'>"],
-                /*   initialPreviewConfig: [
-                 {caption: 'Desert.jpg', width: '120px', url: '#'},
-                 {caption: 'Jellyfish.jpg', width: '120px', url: '#'},
-                 ],*/
-                //uploadUrl: '#',
-
-                showUpload: false,
-                layoutTemplates: {
-                    main1: "{preview}\n" +
-                            "<div class=\'input-group {class}\'>\n" +
-                            "   <div class=\'input-group-btn\' >\n" +
-                            "       {browse}\n" +
-                            "       {upload}\n" +
-                            "       {remove}\n" +
-                            "   </div>\n" +
-                            "   {caption}\n" +
-                            "</div>"},
-                allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc'],
-                overwriteInitial: false,
-                maxFileSize: 500,
-                maxFilesNum: 10,
-                browseClass: "btn btn-primary btn-sm",
-                removeClass: "btn btn-danger btn-sm",
-                //allowedFileTypes: ['image', 'video', 'flash'],
-                slugCallback: function(filename) {
-                    return filename.replace('(', '_').replace(']', '_');
-                }
-            });
-            /*
-             $(".file").on('fileselect', function(event, n, l) {
-             alert('File Selected. Name: ' + l + ', Num: ' + n);
-             });
-             */
-            $("#file-3").fileinput({
-                showUpload: false,
-                showCaption: false,
-                browseClass: "btn btn-primary btn-lg",
-                fileType: "any"
-            });
-            $("#file-4").fileinput({
-                uploadExtraData: [
-                    {kvId: '10'}
-                ],
-            });
-            $(".btn-warning").on('click', function() {
-                if ($('#file-4').attr('disabled')) {
-                    $('#file-4').fileinput('enable');
-                } else {
-                    $('#file-4').fileinput('disable');
-                }
-            });
-            $(".btn-info").on('click', function() {
-                $('#file-4').fileinput('refresh', {previewClass: 'bg-info'});
-            });
-            /*
-             $('#file-4').on('fileselectnone', function() {
-             alert('Huh! You selected no files.');
-             });
-             $('#file-4').on('filebrowse', function() {
-             alert('File browse clicked for #file-4');
-             });
-             */
-            $(document).ready(function() {
-                $("#test-upload").fileinput({
-                    'showPreview': false,
-                    'allowedFileExtensions': ['jpg', 'png', 'gif'],
-                    'elErrorContainer': '#errorBlock'
-                });
-                /*
-                 $("#test-upload").on('fileloaded', function(event, file, previewId, index) {
-                 alert('i = ' + index + ', id = ' + previewId + ', file = ' + file.name);
-                 });
-                 */
-            });</script>
-
     </body>
 </html>
 <%} else {

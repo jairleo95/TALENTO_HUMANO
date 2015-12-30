@@ -118,7 +118,7 @@
 
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-2" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-2" data-widget-editbutton="false"  data-widget-deletebutton="false"                          data-widget-fullscreenbutton="false" >
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -133,8 +133,8 @@
 
                                 -->
                                 <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Requerimientos por Autorizar</h2>
+                                    <span class="widget-icon"> <i class="glyphicon glyphicon-inbox"></i> </span>
+                                      <h2 class="font-md"><strong>Requerimientos por </strong> <i>Autorizar</i></h2>
                                 </header>
                                 <!-- widget div-->
                                 <div>
@@ -378,6 +378,7 @@
                                 </div>
                                 <!-- end widget div -->
                             </div>
+                                    </div>
                             <!-- end widget -->
                         </article>
                         <!-- WIDGET END -->
@@ -389,7 +390,7 @@
                             <div id="alerta_dgp">
                             </div>
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-1" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-1"  data-widget-editbutton="false"  data-widget-deletebutton="false"                          data-widget-fullscreenbutton="false">
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -404,8 +405,8 @@
 
                                 -->
                                 <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Requerimientos Autorizados</h2>
+                                    <span class="widget-icon"> <i class="glyphicon glyphicon-saved"></i> </span>
+                                      <h2 class="font-md"><strong>Requerimientos </strong> <i>Autorizados</i></h2>
                                 </header>
                                 <!-- widget div-->
                                 <div>
@@ -547,7 +548,6 @@
 
 <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT
 <!-- Voice command : plugin -->
-<script src="../../js/speech/voicecommand.min.js"></script> -->
 
 <!-- PAGE RELATED PLUGIN(S) 
 <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>-->
