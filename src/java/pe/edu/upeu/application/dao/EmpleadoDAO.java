@@ -52,7 +52,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
 
     @Override
     public void VALIDAR_EMPLEADO(String id_tra) {
-/*sirve para agregar usuarios al sistema cmo usuarios trbajadorres*/
+        /*sirve para agregar usuarios al sistema cmo usuarios trbajadorres*/
         CallableStatement cst;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -370,8 +370,9 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
         String idemp = null;
         try {
             ResultSet rs = this.conn.query(sql);
-            rs.next();
-            idemp = rs.getString("ID_EMPLEADO");
+            if (rs.next()) {
+                idemp = rs.getString("ID_EMPLEADO");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
@@ -393,8 +394,10 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
         String es_eva = null;
         try {
             ResultSet rs = this.conn.query(sql);
-            rs.next();
-            es_eva = rs.getString("ES_EVALUACION");
+            if (rs.next()) {
+                es_eva = rs.getString("ES_EVALUACION");
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {

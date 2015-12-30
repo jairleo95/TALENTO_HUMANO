@@ -697,7 +697,7 @@
             websocket.send("mensaje");
         }
         document.getElementById('myframe').onload = function () {
-            $(".iframe_principal").show(100);
+            $(".iframe_principal").show(250);
             $(".animacion_load").empty();
         };
         

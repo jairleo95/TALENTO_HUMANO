@@ -331,7 +331,7 @@
                     <%}
                         List_Auto_mostrar.clear();
                     } else {%>
-                    <iframe id="myframe2" name="myframe2" width="100%" height="800" scrolling="si" frameborder="0" src="Datos_Generales.jsp?edit=<%=edit%>"></iframe>
+                    <iframe id="myframe2" name="myframe2" width="100%" height="800" scrolling="si"  frameborder="0" src="Datos_Generales.jsp?edit=<%=edit%>"></iframe>
                     <%}%>
                 </div>
             </div>

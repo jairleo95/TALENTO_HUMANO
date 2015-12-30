@@ -24,14 +24,15 @@
             }
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+          <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+        <title>Lista Evaluación</title>
     </head>
     <body>
         <form align="center" action="../../empleado" >
         <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%" >
             <thead>
                 <tr>
-                    <th data-hide="phone">Evaluacion</th>
+                    <th data-hide="phone">Evaluación</th>
                     <th data-class="expand">Estado</th>
                     <th data-hide="phone,tablet" >Opciones</th>
                 </tr>
@@ -50,16 +51,16 @@
                                 out.println("No es Jefe");
                             }
                             if (e.getRe_evaluacion().trim().equals("1")) {
-                                out.println("Jefe de SecciÃ³n");
+                                out.println("Jefe de Sección");
                             }
                             if (e.getRe_evaluacion().trim().equals("2")) {
-                                out.println("Jefe de  Ãrea");
+                                out.println("Jefe de  Area");
                             }
                             if (e.getRe_evaluacion().trim().equals("3")) {
                                 out.println("Jefe de Departamento");
                             }
                             if (e.getRe_evaluacion().trim().equals("4")) {
-                                out.println("Jefe de  DirecciÃ³n");
+                                out.println("Jefe de  Direccón");
                             }
 
                         %>
