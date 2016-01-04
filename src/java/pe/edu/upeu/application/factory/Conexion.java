@@ -21,7 +21,7 @@ public class Conexion {
         String host = "localhost";
         String puerto = "1521";
 //        String sid = "xe";
-        String sid = "orcl";
+        String sid = "xe";
         String driver = "oracle.jdbc.driver.OracleDriver";
         String url = "jdbc:oracle:thin:" + usuario + "/" + password + "@" + host + ":" + puerto + ":" + sid;
 

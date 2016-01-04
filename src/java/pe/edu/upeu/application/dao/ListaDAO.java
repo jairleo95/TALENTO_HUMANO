@@ -17,6 +17,7 @@ import pe.edu.upeu.application.model.Carrera;
 import pe.edu.upeu.application.model.Nacionalidad;
 import pe.edu.upeu.application.model.Proceso;
 import pe.edu.upeu.application.model.Situacion_Educativa;
+import pe.edu.upeu.application.model.Tipo_Contrato;
 import pe.edu.upeu.application.model.Universidad;
 import pe.edu.upeu.application.model.Via;
 import pe.edu.upeu.application.model.Zona;
@@ -127,7 +128,7 @@ public class ListaDAO implements InterfaceListaDAO {
             while (rs.next()) {
                 Auto_Mostrar am = new Auto_Mostrar();
                 am.setDi_url(rs.getString("di_url"));
-               // am.setId_auto_mostrar(rs.getString("id_auto_mostrar"));
+                // am.setId_auto_mostrar(rs.getString("id_auto_mostrar"));
                 //    am.setId_rol(rs.getString("id_rol"));
                 list.add(am);
             }
@@ -210,7 +211,6 @@ public class ListaDAO implements InterfaceListaDAO {
         list.add("Superior Post Grado Completo");
         return list;
     }
-    
 
     @Override
     public List<String> List_Grado_Academico() {
@@ -241,13 +241,12 @@ public class ListaDAO implements InterfaceListaDAO {
             this.conn.close();
         }
         return list;
-        
+
     }
-    
-    
+
     @Override
     public List<String> List_Dom_D3_Id() {
-         List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("Numero");
         list.add("Lote");
         list.add("S/N");
@@ -258,7 +257,7 @@ public class ListaDAO implements InterfaceListaDAO {
         list.add("Interior");
         return list;
     }
-    
+
     @Override
     public List<Zona> List_Dom_D5_Id() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -278,7 +277,7 @@ public class ListaDAO implements InterfaceListaDAO {
             this.conn.close();
         }
         return list;
-        
+
     }
 
     @Override
@@ -307,20 +306,31 @@ public class ListaDAO implements InterfaceListaDAO {
     }
 
     @Override
-    public List<String> List_tipo_contrato() {
-        List<String> list = new ArrayList<String>();
-        list.add("Necesidad de Mercado");
-        list.add("Incremento de Actividad");
-        list.add("Servicio Específico");
-        list.add("Inicio de Actividad");
-        list.add("Tiempo Parcial");
-        list.add("Independiente");
-        list.add("Extranjero");
-        list.add("Suplencia");
-        list.add("Contrato Civil");
-        list.add("De Temporada");
-        list.add("Locaion de Servicios");
-        list.add("No Domiciliados");
+    public List<Tipo_Contrato> List_tipo_contrato() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from rhtx_tipo_contrato";
+        List<Tipo_Contrato> list = new ArrayList<Tipo_Contrato>();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Tipo_Contrato tc = new Tipo_Contrato();
+                tc.setId_tipo_contrato(rs.getString("id_tipo_contrato"));
+                tc.setCo_tipo_contrato(rs.getString("co_tipo_contrato"));
+                tc.setDe_ti_contrato(rs.getString("de_ti_contrato"));
+                tc.setDe_abrev(rs.getString("de_abrev"));
+                list.add(tc);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
         return list;
     }
 
@@ -400,7 +410,7 @@ public class ListaDAO implements InterfaceListaDAO {
                 ResultSet rs = this.conn.query(sql);
                 rs.next();
                 list.add(rs.getString(1).trim());
-}
+            }
         } catch (SQLException e) {
         } finally {
             this.conn.close();
@@ -408,6 +418,5 @@ public class ListaDAO implements InterfaceListaDAO {
         return list;
 
     }
-
 
 }

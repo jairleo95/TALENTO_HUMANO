@@ -12,6 +12,7 @@ import pe.edu.upeu.application.model.Carrera;
 import pe.edu.upeu.application.model.Nacionalidad;
 import pe.edu.upeu.application.model.Proceso;
 import pe.edu.upeu.application.model.Situacion_Educativa;
+import pe.edu.upeu.application.model.Tipo_Contrato;
 import pe.edu.upeu.application.model.Universidad;
 import pe.edu.upeu.application.model.Via;
 import pe.edu.upeu.application.model.Zona;
@@ -40,7 +41,7 @@ public interface InterfaceListaDAO {
     public List<Zona> List_Dom_D5_Id();
     public List<String> List_Jefe();
     public List<String> list_Condicion_contrato();
-    public List<String> List_tipo_contrato();
+    public List<Tipo_Contrato> List_tipo_contrato();
     public List<String> List_Situacion_Actual();
     
     public List<String> lista_años();

@@ -62,20 +62,14 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <style type="text/css">
-
             #titulo{
-
                 font-weight: bold;
                 color: #005cac;
             }
             #titu{
-
                 font-weight: bold;
                 color: #005cac;
             }
-
-
-
         </style>
     </head>
 
@@ -666,37 +660,12 @@
                                             </label>
                                         </section>
                                         <section class="col col-4">
-                                            <label class="select" id="titulo">Tipo Contrato::
-                                                <select name="TIPO_CONTRATO" class="input-group-sm" required="">
+                                            <label class="select" id="titulo">Tipo Contrato:
+                                                <select name="TIPO_CONTRATO" class="input-group-sm ti_contrato" required="">
                                                     <option value="">[SELECCIONE]</option>
-                                                    <%if (a.getTi_contrato() != null) {%>
-                                                    <option value="1" <%if (a.getTi_contrato().trim().equals("1")) {%> selected=""<%}%>>Necesidad de Mercado</option>
-                                                    <option value="2" <%if (a.getTi_contrato().trim().equals("2")) {%> selected=""<%}%>>Incremento de Actividad</option>
-                                                    <option value="3" <%if (a.getTi_contrato().trim().equals("3")) {%> selected=""<%}%>>Servicio Especifico</option>
-                                                    <option value="4" <%if (a.getTi_contrato().trim().equals("4")) {%> selected=""<%}%>>Inicio de Actividad</option>
-                                                    <option value="5" <%if (a.getTi_contrato().trim().equals("5")) {%> selected=""<%}%>>Tiempo Parcial</option>
-                                                    <option value="6" <%if (a.getTi_contrato().trim().equals("6")) {%> selected=""<%}%>>Indeterminado</option>
-                                                    <option value="7" <%if (a.getTi_contrato().trim().equals("7")) {%> selected=""<%}%>>Extranjero</option>
-                                                    <option value="8" <%if (a.getTi_contrato().trim().equals("8")) {%> selected=""<%}%>>Suplencia</option>
-                                                    <option value="9" <%if (a.getTi_contrato().trim().equals("9")) {%> selected=""<%}%>>Contrato Civil</option>
-                                                    <option value="10" <%if (a.getTi_contrato().trim().equals("10")) {%> selected=""<%}%>>De Temporada</option>
-                                                    <option value="11" <%if (a.getTi_contrato().trim().equals("11")) {%> selected=""<%}%>>Locacion de Servicios</option>
-                                                    <option value="12" <%if (a.getTi_contrato().trim().equals("12")) {%> selected=""<%}%>>No Domiciliados</option>
-                                                    <%} else {%>
-                                                    <option value="1">Necesidad de Mercado</option>
-                                                    <option value="2">Incremento de Actividad</option>
-                                                    <option value="3">Servicio Especifico</option>
-                                                    <option value="4">Inicio de Actividad</option>
-                                                    <option value="5">Tiempo Parcial</option>
-                                                    <option value="6">Indeterminado</option>
-                                                    <option value="7">Extranjero</option>
-                                                    <option value="8">Suplencia</option>
-                                                    <option value="9">Contrato Civil</option>
-                                                    <option value="10">De Temporada</option>
-                                                    <option value="11">Locacion de Servicios</option>
-                                                    <option value="12">No Domiciliados</option>
-                                                    <%}%>
+
                                                 </select>
+                                                <input type="hidden" class="id_ti_contrato" value="<%=a.getTi_contrato()%>" />
                                             </label>
                                         </section>
                                         <section class="col col-4">
@@ -907,6 +876,7 @@
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+        <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
         <script type="text/javascript">
 
                                         function showEsDiezmo() {
@@ -984,7 +954,7 @@
                                                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                             });
                                             showEsDiezmo();
-                                            var $checkoutForm = $('#checkout-form').validate({
+                                            $('#checkout-form').validate({
                                                 // Rules for form validation
                                                 rules: {
                                                     fname: {
@@ -1545,18 +1515,18 @@
             Listar_dep();
             Listar_sec();
             Listar_area();
-            //
+
             Listar_plantilla();
             listar_sub_mod();
             Listar_Direccion();
             Listar_centro_costo();
+            list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato", "id_tipo_contrato", "de_ti_contrato", "1", $(".id_ti_contrato").val());
             var a = $("#select-sub-mod");
             var c = $("#Selec_Area");
             var d = $("#select_sec");
             var b = $("#selec_dep");
             var e = $("#pu_id_se");
             $('#btn-agregar-cc').click(function () {
-
                 agregar_centro_costo();
             });
             $(".date").keyup(function () {

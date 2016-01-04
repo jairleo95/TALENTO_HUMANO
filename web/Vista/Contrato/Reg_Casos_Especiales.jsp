@@ -395,7 +395,7 @@
                                                     <script>
 
                                                         $(document).ready(
-                                                                function() {
+                                                                function () {
                                                                     Listar_Direccion();
                                                                     Listar_Departamento();
 
@@ -422,7 +422,7 @@
 
                                                         function Listar_Direccion() {
                                                             var cc_dir = $(".cc-dir");
-                                                            $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
+                                                            $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
                                                                 if (objJson.rpta == -1) {
                                                                     alert(objJson.mensaje);
                                                                     return;
@@ -433,14 +433,14 @@
                                                                 }
                                                             });
                                                         }
-                                                        $(".cc-dir").change(function() {
+                                                        $(".cc-dir").change(function () {
                                                             var id_dir = $(".cc-dir").val();
                                                             //alert(id_dir);
                                                             Listar_Departamento(id_dir);
                                                         });
                                                         function Listar_Departamento(id_dir) {
                                                             var cc_dep = $(".cc-dep");
-                                                            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + id_dir, function(objJson) {
+                                                            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + id_dir, function (objJson) {
                                                                 cc_dep.empty();
                                                                 cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
                                                                 if (objJson.rpta == -1) {
@@ -454,14 +454,14 @@
                                                                 }
                                                             });
                                                         }
-                                                        $(".cc-dep").change(function() {
+                                                        $(".cc-dep").change(function () {
                                                             var id_dep = $(".cc-dep").val();
                                                             //alert(id_dir);
                                                             Listar_Centro_Costo(id_dep);
                                                         });
                                                         function Listar_Centro_Costo(id_dep) {
                                                             var centro_costo = $(".centro_costo");
-                                                            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + id_dep, function(objJson) {
+                                                            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + id_dep, function (objJson) {
                                                                 centro_costo.empty();
                                                                 centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
                                                                 if (objJson.rpta == -1) {
@@ -575,7 +575,7 @@
                                                 </fieldset> 
                                                 <fieldset>
                                                     <h6><label id="titu">Horas:</label></h6><br>
-                                                    <div calss="row" >
+                                                    <div class="row" >
                                                         <section class="col col-2">
                                                             <label class="input" id="titu">Semanal:
                                                                 <input type="text" name="HORAS_SEMANA" value="48" class="input-group-sm" required="">
@@ -635,26 +635,13 @@
                                                         </section>
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">Tipo Contrato:
-                                                                <select name="TIPO_CONTRATO" class="input-group-sm" required="">
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                    <option value="1">Necesidad de Mercado</option>
-                                                                    <option value="2">Incremento de Actividad</option>
-                                                                    <option value="3">Servicio Especifico</option>
-                                                                    <option value="4">Inicio de Actividad</option>
-                                                                    <option value="5">Tiempo Parcial</option>
-                                                                    <option value="6">Indeterminado</option>
-                                                                    <option value="7">Extranjero</option>
-                                                                    <option value="8">Suplencia</option>
-                                                                    <option value="9">Contrato Civil</option>
-                                                                    <option value="10">De Temporada</option>
-                                                                    <option value="11">Locacion de Servicios</option>
-                                                                    <option value="12">No Domiciliados</option>
+                                                                <select name="TIPO_CONTRATO" class="input-group-sm ti_contrato" required="">
                                                                 </select>
                                                             </label>
                                                         </section>
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">Tipo Convenio:
-                                                                <select name="TIPO_CONVENIO" class="input-group-sm"x>
+                                                                <select name="TIPO_CONVENIO" class="input-group-sm">
                                                                     <option value="">[SELECCIONE]</option>
                                                                     <option value="1">CLJ</option>
                                                                     <option value="2">PPP</option>
@@ -936,7 +923,7 @@
     <script>
 
         $(document).ready(
-                function() {
+                function () {
                     document.getElementById("sueldo_total").readOnly = true;
                     document.getElementById("asig_fa").readOnly = true;
 
@@ -954,31 +941,31 @@
             $("#sueldo_total").val(x);
         }
         $(document).ready(
-                function() {
+                function () {
 
 
                     $("#remu").keyup(
-                            function() {
+                            function () {
                                 Sueldo_Total();
                             }
                     );
                     $("#bono_al").keyup(
-                            function() {
+                            function () {
                                 Sueldo_Total();
                             }
                     );
                     $("#bev").keyup(
-                            function() {
+                            function () {
                                 Sueldo_Total();
                             }
                     );
                     $("#bo_puesto").keyup(
-                            function() {
+                            function () {
                                 Sueldo_Total();
                             }
                     );
                     $("#rein").keyup(
-                            function() {
+                            function () {
                                 Sueldo_Total();
                             }
                     );
@@ -997,7 +984,7 @@
 
     </script>
     <script language="javascript" type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             $(".contenido").hide();
             /*TEMPORAL*/
@@ -1032,7 +1019,7 @@
                     $(".cont_sab").hide();
                     $(".cont_dom").hide();
                     $("#select_lun").change(
-                            function() {
+                            function () {
                                 if ($(this).val() == 1) {
                                     $("#show_lun").show();
                                 }
@@ -1043,7 +1030,7 @@
                             }
                     );
                     $("#select_mar").change(
-                            function() {
+                            function () {
                                 if ($(this).val() == 1) {
                                     $("#show_mar").show();
                                 }
@@ -1054,7 +1041,7 @@
                             }
                     );
                     $("#select_mie").change(
-                            function() {
+                            function () {
                                 if ($(this).val() == 1) {
                                     $("#show_mie").show();
                                 }
@@ -1065,7 +1052,7 @@
                             }
                     );
                     $("#select_jue").change(
-                            function() {
+                            function () {
                                 if ($(this).val() == 1) {
                                     $("#show_jue").show();
                                 }
@@ -1076,7 +1063,7 @@
                             }
                     );
                     $("#select_vie").change(
-                            function() {
+                            function () {
                                 if ($(this).val() == 1) {
                                     $("#show_vie").show();
                                 }
@@ -1087,7 +1074,7 @@
                             }
                     );
                     $("#select_sab").change(
-                            function() {
+                            function () {
                                 if ($(this).val() == 1) {
                                     $("#show_sab").show();
                                 }
@@ -1098,7 +1085,7 @@
                             }
                     );
                     $("#select_dom").change(
-                            function() {
+                            function () {
                                 if ($(this).val() == 1) {
                                     $("#show_dom").show();
                                 }
@@ -1151,7 +1138,7 @@
         function listar_dep_cc(x, opc, arr_cc) {
 
             var cc_dep = $(".cc-dep" + x);
-            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function(objJson) {
+            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function (objJson) {
 
                 cc_dep.empty();
                 cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
@@ -1178,7 +1165,7 @@
         function listar_centro_costo(x, opc, arr_cc) {
 
             var centro_costo = $(".centro_costo" + x);
-            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function(objJson) {
+            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function (objJson) {
                 centro_costo.empty();
                 centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
                 if (objJson.rpta == -1) {
@@ -1205,7 +1192,7 @@
 
         function listar_cc(num, opc, arr_cc) {
             var select_cc = $(".select-cc");
-            $.post("../../centro_costo?opc=Listar_cc", function(objJson) {
+            $.post("../../centro_costo?opc=Listar_cc", function (objJson) {
                 //  select_cc.empty();
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1218,7 +1205,7 @@
 
             });
             var cc_dir = $(".cc-dir" + num);
-            $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
+            $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
@@ -1237,15 +1224,15 @@
                     }
                 }
             });
-            $(".cc-dir" + num).change(function() {
+            $(".cc-dir" + num).change(function () {
 
                 listar_dep_cc(num, "0", arr_cc);
             });
-            $(".cc-dep" + num).change(function() {
+            $(".cc-dep" + num).change(function () {
 
                 listar_centro_costo(num, "0", arr_cc);
             });
-            $(".remover" + num).click(function() {
+            $(".remover" + num).click(function () {
                 $(".centro-costo_" + num).remove();
                 sumn_porcen_total();
             });
@@ -1253,7 +1240,7 @@
         function sumn_porcen_total() {
 
             var acum = 0;
-            $.each($(".porcentaje_cc"), function() {
+            $.each($(".porcentaje_cc"), function () {
                 acum = acum + parseFloat($(this).val());
             });
             $(".total_porcentaje").val(acum);
@@ -1282,7 +1269,7 @@
 
                 var dias_semana = new Array("lun", "mar", "mie", "jue", "vie", "sab", "dom");
                 $(".tr-dia").remove();
-                $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function(objJson) {
+                $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function (objJson) {
                     var lista = objJson.lista;
                     for (var f = 0; f < dias_semana.length; f++) {
 
@@ -1305,7 +1292,7 @@
                     }
                     calcularHoras();
                     $(".texto-h").keyup(
-                            function() {
+                            function () {
                                 calcularHoras();
                             }
                     );
@@ -1407,13 +1394,13 @@
             texto = "";
             $(".cant").val(ag);
             ag++;
-            $(".porcentaje_cc").keyup(function() {
+            $(".porcentaje_cc").keyup(function () {
                 sumn_porcen_total();
             });
         }
 
         function listar_tipo_horario() {
-            $.post("../../formato_horario", "opc=Listar_Tip_Horario", function(objJson) {
+            $.post("../../formato_horario", "opc=Listar_Tip_Horario", function (objJson) {
 
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1429,7 +1416,7 @@
 
             });
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             listar_tipo_horario();
             sumn_porcen_total();
@@ -1438,19 +1425,19 @@
             $("#generar").hide();
             $("#no_cuen_otros").hide();
             //  var r = "";
-            $('#btn-agregar-cc').click(function() {
+            $('#btn-agregar-cc').click(function () {
 
                 agregar_centro_costo();
                 //alert($(".cant").val());
 
 
             });
-            $("#banco").change(function() {
+            $("#banco").change(function () {
                 cuenta_bancaria($(this).val());
             });
             listar_cc();
             $("#horario").change(
-                    function() {
+                    function () {
                         list_horario($(this).val());
                     }
             );
@@ -1458,7 +1445,7 @@
         )
                 ;</script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             $("#sueldo").numeric();
             $("#bono_al").numeric();
@@ -1470,7 +1457,7 @@
             var scntDiv = $('#show_lun');
             var i = $('#show_lun .texto-h').size() + 1;
             var s = $('#show_lun .tr-count').size() + 1;
-            $('#addScnt').click(function() {
+            $('#addScnt').click(function () {
                 $('<tr><td>T' + s + ' :</td><td><input type="text"   name="HORA_DESDE_lun' + i
                         + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_lun' + i
                         + '" value="" placeholder=" " /><input type="hidden" name="DIA_lun' + i
@@ -1480,7 +1467,7 @@
                 s++;
                 return false;
             });
-            $('#remScnt').click(function() {
+            $('#remScnt').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1491,18 +1478,18 @@
             });
         });
         //MARTES
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_mar');
             var i = $('#show_mar .texto-h').size() + 1;
             var s = $('#show_mar .tr-count_2').size() + 1;
-            $('#add_2').click(function() {
+            $('#add_2').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="USER_CREACION_mar' + i + '"> <a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_2').click(function() {
+            $('.remove_2').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1513,18 +1500,18 @@
             });
         });
         //MIERCOLES
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_mie');
             var i = $('#show_mie .texto-h').size() + 1;
             var s = $('#show_mie .tr-count_3').size() + 1;
-            $('#add_3').click(function() {
+            $('#add_3').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mie' + i + '" value="mie" ><input type="hidden" name="USER_CREACION_mie' + i + '"> <a href="#" id="remove_3">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_3').click(function() {
+            $('.remove_3').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1535,18 +1522,18 @@
             });
         });
         //JUEVES
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_jue');
             var i = $('#show_jue .texto-h').size() + 1;
             var s = $('#show_jue .tr-count_4').size() + 1;
-            $('#add_4').click(function() {
+            $('#add_4').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_jue' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_jue' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_jue' + i + '" value="jue" ><input type="hidden" name="USER_CREACION_jue' + i + '"> <a href="#" id="remove_4">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_4').click(function() {
+            $('.remove_4').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1557,18 +1544,18 @@
             });
         });
         //VIERNES
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_vie');
             var i = $('#show_vie .texto-h').size() + 1;
             var s = $('#show_vie .tr-count_5').size() + 1;
-            $('#add_5').click(function() {
+            $('#add_5').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_vie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_vie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_vie' + i + '" value="vie" ><input type="hidden" name="USER_CREACION_vie' + i + '"> <a href="#" id="remove_5">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_5').click(function() {
+            $('.remove_5').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1579,18 +1566,18 @@
             });
         });
         //DOMINGO
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_sab');
             var i = $('#show_sab .texto-h').size() + 1;
             var s = $('#show_sab .tr-count_6').size() + 1;
-            $('#add_6').click(function() {
+            $('#add_6').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_dom' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_dom' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_dom' + i + '" value="dom" ><input type="hidden" name="USER_CREACION_dom' + i + '"> <a href="#" id="remove_6">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_6').click(function() {
+            $('.remove_6').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -1673,7 +1660,7 @@
     <script src="..."></script>-->
     <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-    <script src="../../js/JQuery/jquery.maskMoney.js" type="text/javascript"></script>
+    <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
 
     <script type="text/javascript">
 
@@ -1685,7 +1672,7 @@
                     url: "../../empleado",
                     type: "POST",
                     data: "opc=validar_aps&co_aps=" + co_aps.value
-                }).done(function(e) {
+                }).done(function (e) {
                     //alert(e);
                     var cant = ($("#cod_ap").val());
                     if (cant.length > 5) {
@@ -1699,7 +1686,7 @@
                             });
                         }
                     }
-                }).fail(function(e) {
+                }).fail(function (e) {
                     alert("Error: " + e);
                 });
             }
@@ -1712,7 +1699,7 @@
                     url: "../../empleado",
                     type: "POST",
                     data: "opc=validar_huella&co_hue=" + co_huel.value
-                }).done(function(e) {
+                }).done(function (e) {
                     // alert(e)
                     var cant = $("#cod_hu").val();
                     if (cant.length > 5) {
@@ -1729,10 +1716,11 @@
                 });
             }
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             pageSetUp();
-            var $checkoutForm = $('#checkout-form').validate({
+            list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato", "id_tipo_contrato", "de_ti_contrato");
+            $('#checkout-form').validate({
                 // Rules for form validation
                 rules: {
                     FEC_DESDE: {
@@ -1844,11 +1832,11 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
                 }
             });
-            jQuery.validator.addMethod("val_fecha", function(value, element) {
+            jQuery.validator.addMethod("val_fecha", function (value, element) {
                 var d = value.split("-");
                 return this.optional(element) || String(parseInt(d[0])).length == 4;
             }, "¡Fecha ingresada invalida!");
@@ -1916,7 +1904,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -1967,7 +1955,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -2005,15 +1993,15 @@
                     }
                 },
                 // Ajax form submition
-                submitHandler: function(form) {
+                submitHandler: function (form) {
                     $(form).ajaxSubmit({
-                        success: function() {
+                        success: function () {
                             $("#comment-form").addClass('submited');
                         }
                     });
                 },
                 // Do not change code below
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -2046,15 +2034,15 @@
                     }
                 },
                 // Ajax form submition
-                submitHandler: function(form) {
+                submitHandler: function (form) {
                     $(form).ajaxSubmit({
-                        success: function() {
+                        success: function () {
                             $("#contact-form").addClass('submited');
                         }
                     });
                 },
                 // Do not change code below
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -2082,7 +2070,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -2126,7 +2114,7 @@
                     }
                 },
                 // Do not change code below
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
                 }
             });
@@ -2135,7 +2123,7 @@
                 dateFormat: 'dd.mm.yy',
                 prevText: '<i class="fa fa-chevron-left"></i>',
                 nextText: '<i class="fa fa-chevron-right"></i>',
-                onSelect: function(selectedDate) {
+                onSelect: function (selectedDate) {
                     $('#finishdate').datepicker('option', 'minDate', selectedDate);
                 }
             });
@@ -2143,7 +2131,7 @@
                 dateFormat: 'dd.mm.yy',
                 prevText: '<i class="fa fa-chevron-left"></i>',
                 nextText: '<i class="fa fa-chevron-right"></i>',
-                onSelect: function(selectedDate) {
+                onSelect: function (selectedDate) {
                     $('#startdate').datepicker('option', 'maxDate', selectedDate);
                 }
             });
@@ -2156,7 +2144,7 @@
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             pageSetUp();
         })
@@ -2168,7 +2156,7 @@
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
         _gaq.push(['_trackPageview']);
-        (function() {
+        (function () {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;
@@ -2180,7 +2168,7 @@
         function Listar_plantilla2() {
             var s = $(".con_pl_pu");
 
-            $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function(objJson) {
+            $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function (objJson) {
                 s.empty();
                 var lista = objJson.lista;
                 s.append("<option value='' > [SELECCIONE] </option>");
@@ -2189,7 +2177,7 @@
                 }
             });
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             Listar_dep();
             Listar_centro_costo();
@@ -2203,11 +2191,11 @@
             // $.post("../../  ")
 
             $("#select_mod").change(
-                    function() {
+                    function () {
                         //  alert($(this).val());
 
 
-                        $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function(objJson) {
+                        $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
                             a.empty();
                             var list = objJson.lista;
                             a.append("<option value='' > [SELECCIONE] </option>");
@@ -2228,8 +2216,8 @@
                     });
 
             $("#selec_dep").change(
-                    function() {
-                        $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function(objJson) {
+                    function () {
+                        $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
                             c.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -2248,9 +2236,9 @@
                     });
 
             $(".select_dir").change(
-                    function() {
+                    function () {
 
-                        $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $(this).val(), function(objJson) {
+                        $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $(this).val(), function (objJson) {
                             b.empty();
 
                             if (objJson.rpta == -1) {
@@ -2271,8 +2259,8 @@
 
 
             $("#Selec_Area").change(
-                    function() {
-                        $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function(objJson) {
+                    function () {
+                        $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
                             d.empty();
                             var list = objJson.lista;
                             d.append("<option value='' > [SELECCIONE] </option>");
@@ -2287,8 +2275,8 @@
                     });
 
             $("#select_sec").change(
-                    function() {
-                        $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function(objJson) {
+                    function () {
+                        $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
                             e.empty();
                             if (objJson.rpta == -1) {
                                 alert(objJson.mensaje);
@@ -2307,9 +2295,9 @@
                         });
                     });
             $("#btn-registrar").click(
-                    function() {
+                    function () {
                         var pr = $("#select-proceso").val();
-                        $.post("../../paso", $("#form-paso").serialize(), function() {
+                        $.post("../../paso", $("#form-paso").serialize(), function () {
                             Listar_Paso(pr);
                         });
                         $("#btn-registrar").val("Registrar Paso");
@@ -2320,7 +2308,7 @@
             );
             function Listar_dep() {
                 var s = $("#selec_dep");
-                $.post("../../Direccion_Puesto", "opc=Listar", function(objJson) {
+                $.post("../../Direccion_Puesto", "opc=Listar", function (objJson) {
                     s.empty();
                     var lista = objJson.lista;
                     s.append("<option value='' > [SELECCIONE] </option>");
@@ -2331,7 +2319,7 @@
             }
             function Listar_centro_costo() {
                 var x = $("#fila-agregar");
-                $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function(objJson) {
+                $.post("../../centro_costo", "opc=Listar_centro_id&" + "id_dgp=" + $("#id_dgp").val(), function (objJson) {
                     var lista = objJson.lista;
                     var numero = 1;
                     x.append('<div  class="row centro-costo_' + numero + '" >');

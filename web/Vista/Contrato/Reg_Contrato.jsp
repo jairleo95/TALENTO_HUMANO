@@ -485,8 +485,8 @@
                                                         </label>
                                                     </section>
                                                     <section class="col col-4">
-                                                        <label class="select" id="titulo">Tipo Contrato::
-                                                            <select name="TIPO_CONTRATO" class="input-group-sm" required="">
+                                                        <label class="select" id="titulo">Tipo Contrato:
+                                                            <select name="TIPO_CONTRATO" class="input-group-sm ti_contrato" required="">
                                                                 <option value="">[SELECCIONE]</option>
                                                                 <option value="1">Necesidad de Mercado</option>
                                                                 <option value="2">Incremento de Actividad</option>
@@ -696,9 +696,10 @@
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+        <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
 
     </body>
-    <script>
+    <script  type="text/javascript">
             function Listar_dep() {
                 var s = $(".selec_dep");
                 $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function (objJson) {
@@ -764,6 +765,7 @@
                     }
                 });
             }
+
             $(document).ready(function () {
                 $("#ca_bono_pu").numeric();
                 $("#remu").numeric();
@@ -778,7 +780,9 @@
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
                 showEsDiezmo();
-                var $checkoutForm = $('#checkout-form').validate({
+                list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato","id_tipo_contrato","de_ti_contrato");
+                
+                $('#checkout-form').validate({
                     // Rules for form validation
                     rules: {
                         fname: {

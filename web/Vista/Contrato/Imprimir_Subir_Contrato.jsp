@@ -26,7 +26,6 @@
 <jsp:useBean id="List_Situacion_Actual" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Planilla" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="list_Condicion_contrato" scope="session" class="java.util.ArrayList"/>
-<jsp:useBean id="List_tipo_contrato" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="list_reg_labo" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Usuario" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="Lis_c_c_id_contr" scope="session" class="java.util.ArrayList"/>

@@ -3,6 +3,7 @@
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
 %>
+<%@page import="pe.edu.upeu.application.model.Tipo_Contrato"%>
 <%@page import="pe.edu.upeu.application.model.Funciones"%>
 <%@page import="pe.edu.upeu.application.model.Anno"%>
 <%@page import="pe.edu.upeu.application.model.Grupo_Ocupaciones"%>
@@ -68,15 +69,12 @@
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <style type="text/css">
             body{
-
                 margin-left: auto;
                 margin-right: auto  ;
                 width: 95%;
                 // margin: 0;
             }
             .titulo{
-
-
                 background-color: #474747;
                 padding: 0.5%;
 
@@ -84,7 +82,6 @@
                 font-size: 130%;
                 text-align: center;
                 color: white;
-
             }
             .autoHeight{
                 border-style:none;            
@@ -128,8 +125,6 @@
                 position: absolute;
 
             }
-
-
         </style>
         <title>Información Contractual</title>
         <style type="text/css">
@@ -157,7 +152,6 @@
     </head>
     <body>
     <center>
-
         <form action="../../contrato" method="get"class="smart-form">
             <%String idanno = request.getParameter("anno");
                 if (List_contra_x_idcto.size() == 0) {%>
@@ -198,11 +192,13 @@
                 </div>
             </div>
 
-            <script>$(document).ready(function () {
+            <script>
+                $(document).ready(function () {
                     $(".anno").change(function () {
                         $(".btn_act").click();
                     });
-                });</script>
+                });
+            </script>
         </form>
         <div>
             <form action="">
@@ -235,6 +231,7 @@
                 <%} else {%>
                 <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Subir_Contrato2&idc=<%=n.getId_contrato()%>" > <span class="btn-label"><i class="fa fa-cloud-upload"></i></span>Subir Contrato Firmado</a>
                         <%}%>
+                
                         <%}
                             if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0007") || /*idrol.trim().equals("ROL-0009") || */ idrol.trim().equals("ROL-0001")) {%>
                         <%if (idrol.trim().equals("ROL-0006")) {
@@ -316,7 +313,8 @@
                         } else {
                             out.print("0");
                         }%> </td></tr>
-                    <tr><td class="text-info table-bordered"><strong>Religion:</strong></td><td class="table-bordered" colspan="6"><strong class="text-danger"><%if (n.getLi_religion().equals("1")) {
+                    <tr>
+                        <td class="text-info table-bordered"><strong>Religion:</strong></td><td class="table-bordered" colspan="6"><strong class="text-danger"><%if (n.getLi_religion().equals("1")) {
                             out.print("Adventista");
                         } else if (n.getLi_religion().equals("2")) {
                             out.print("Católico");
@@ -324,7 +322,8 @@
                             out.print("Otro");
                         } else if (n.getLi_religion() == null) {
                             out.print("Ninguna");
-                        }%></strong></td></tr>
+                        }%></strong></td>
+                    </tr>
                     <tr><td class="text-info table-bordered"><strong>Tipo Pago Horas:</strong></td><td class="table-bordered"  colspan="6"><%
                         if (n.getTi_hora_pago() != null) {
                             out.print(n.getTi_hora_pago());
@@ -430,12 +429,14 @@
                     <tr><td class="text-info table-bordered"><strong>Tipo de Contrato:</strong></td><td class="table-bordered" colspan="6">
                             <%if (n.getTi_contrato() != null) {
                                     for (int k = 0; k < List_tipo_contrato.size(); k++) {
-                                        if (n.getTi_contrato().trim().equals(k + 1 + "")) {
-                                            out.print(List_tipo_contrato.get(k));
+                                        Tipo_Contrato tc = new Tipo_Contrato();
+                                        tc = (Tipo_Contrato) List_tipo_contrato.get(k);
+                                        if (n.getTi_contrato().trim().equals(tc.getId_tipo_contrato())) {
+                                            out.print(tc.getDe_ti_contrato());
                                         }
                                     }
                                 } else {
-                                    out.print("NO DEFINIDO");
+                                    out.print("No definido");
                                 }%> 
                         </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>Tipo de Convenio:</strong></td><td class="table-bordered" colspan="6"><%
@@ -574,7 +575,6 @@
                     <td><input type="hidden" name="idtraba" value="<%=n.getId_trabajador()%>"></td>
                     <td><input type="hidden" name="id_con" class="id_contrato" value="<%=n.getId_contrato()%>"></td>
                     <td><input type="hidden" name="puesto" class="id_pu" value="<%=n.getId_puesto()%>" ></td>
-
                     <tr>
                         <td class="text-info" colspan="8" style="text-align:center">
                             <input class="button blue"  type="hidden" value="Editar">

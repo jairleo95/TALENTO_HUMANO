@@ -229,7 +229,7 @@ public class CAutorizacion extends HttpServlet {
                             html_table += "<table id='table_autorizados' class='table table-striped table-bordered table-hover' width='100%'>";
                             html_table += "<thead>"
                                     + "  <tr data-hide='phone,tablet'> <th><strong>Nro</strong></th>"
-                                                 + "   <th><strong>Mes - Año </strong></th>"
+                                    + "   <th><strong>Mes - Año </strong></th>"
                                     + " <th data-class='expand' ><strong>Apellidos Y Nombres</strong></th>"
                                     + "  <th data-hide='phone,tablet'><strong>Puesto</strong></th>"
                                     + " <th data-hide='phone,tablet'><strong>Area</strong></th>"
@@ -246,14 +246,14 @@ public class CAutorizacion extends HttpServlet {
                             html_table += "<tbody class='tbody_procesar_req_aut'> </tbody> ";
                         }
                         html_table += "</table>";
-                        List<Map<String, ?>> lista = a.List_procesar_req(tipo_lista, permisoAsigFam,permisoEsSistema);
+                        List<Map<String, ?>> lista = a.List_procesar_req(tipo_lista, permisoAsigFam, permisoEsSistema);
                         String text_html = "";
                         for (int i = 0; i < lista.size(); i++) {
                             Map<String, ?> x = lista.get(i);
                             //x.get("idtr")  String idtr = cr.Encriptar(x.get("idtr") + "");
                             text_html += "<tr>";
                             text_html += "<td>" + (i + 1) + "</td>";
-                            text_html += "<td>" + x.get("mes")  + " - "+ x.get("anno")+"</td>";
+                            text_html += "<td>" + x.get("mes") + " - " + x.get("anno") + "</td>";
                             text_html += "<td><a href='../../trabajador?idtr=" + x.get("idtr") + "&opc=list&dgp=" + x.get("iddgp") + "'>" + x.get("ap_p") + " " + x.get("ap_m") + " " + x.get("nombre") + "</a></td>";
                             text_html += "<td>" + x.get("puesto") + "</td>";
                             text_html += "<td>" + x.get("area") + "</td>";
