@@ -178,12 +178,12 @@
 
                             <!-- Widget ID (each widget will need unique ID)-->
                             <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0"   data-widget-editbutton="false"
-                             
-                                data-widget-togglebutton="false"
-                                data-widget-deletebutton="false"
-                                data-widget-fullscreenbutton="false"
-                        
-                                data-widget-sortable="false"
+
+                                 data-widget-togglebutton="false"
+                                 data-widget-deletebutton="false"
+                                 data-widget-fullscreenbutton="false"
+
+                                 data-widget-sortable="false"
                                  >
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
@@ -200,7 +200,7 @@
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-user"></i> </span>
                                     <h2 class="font-md"><strong>Estado de </strong> <i>Requerimientos</i></h2>
-
+    
                                 </header>
 
                                 <!-- widget div-->
@@ -209,8 +209,7 @@
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
-
-                                    </div>
+                                     </div>
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
@@ -241,10 +240,7 @@
                                             %>
                                             <tr>
                                                 <td><strong><%=i + 1%></strong></td>
-                                                <%
-                                                    InterfaceAutorizacionDAO ad = new AutorizacionDAO();
-                                                %>
-                                                <td><%=ad.Mes_plazo(r.getId_dgp().trim())%></td>
+                                                <td><%=r.getMes_procesamiento()%></td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -258,7 +254,7 @@
                                                             <li><a href="../../solicitud_requerimiento?iddgp=<%=r.getId_dgp().trim()%>&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>
                                                             <li class="divider"></li><li>
                                                             <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Detalle">Ver Requerimiento</a> </li>
-                                                            </li>
+
 
                                                         </ul>
                                                     </div>
@@ -276,11 +272,15 @@
                                                 </td>
                                                 <%}%>
                                                 <td>
-                                                    <div class="new-progress prog_aut<%=(i + 1)%>"  >
-                                                        <%
-                                                            out.println(d.Imprimir_det_proceso(r.getId_dgp(), r.getId_detalle_req_proceso(), ID_DEP));
-                                                        %>
+                                                    <%
+                                                        String dgp = r.getId_dgp();
+                                                        String iddrp = r.getId_detalle_req_proceso();
+                                                        String iddep = r.getId_departamento();
+                                                    %>
+                                                    <div class="new-progress prog_aut"  data-value="&dgp=<%=dgp%>&idrp=<%=iddrp%>&iddep=<%=iddep%>" >
+
                                                     </div>
+
                                                 </td>
                                                 <%if (ID_DEP.equals("DPT-0019")) {%>
                                                 <td><%=r.getNo_dep()%></td>
@@ -491,7 +491,7 @@
                                                                     tablet: 1024,
                                                                     phone: 480
                                                                 };
-                                                                $('#dt_basic').dataTable({
+                                                                var table_req = $('#dt_basic').dataTable({
                                                                     "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
                                                                             "t" +
                                                                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
@@ -510,9 +510,18 @@
                                                                     }
                                                                 });
                                                                 /* END BASIC */
+                                                                var cells = [];
+                                                                var rows = table_req.fnGetNodes();
+                                                                for (var i = 0; i < rows.length; i++) {
+                                                                    // Get HTML of 3rd column (for example)
+                                                                    var obj = $(rows[i]).find(".prog_aut");
 
-
-                                                            })
+                                                                    Imprimir_det_proceso(obj);
+                                                                    /*  var obj2=  $(rows[i]).find(".new-circle");
+                                                                     obj2.remove();*/
+                                                                }
+                                                                console.log(cells);
+                                                            });
 
 </script>
 <script type="text/javascript">
@@ -536,12 +545,28 @@
             timeout: 6000
         });
     }
+    function Imprimir_det_proceso(objProg_aut) {
+
+        $.ajax({
+            url: "../../dgp", data: "opc=Imprimir_det_proceso" + objProg_aut.data("value"), type: 'POST', success: function (data, textStatus, jqXHR) {
+                if (data.rpta == "1") {
+                    objProg_aut.append(data.html);
+                     objProg_aut.find(".new-circle").popover({trigger : 'hover click'});
+                 //   $('[data-toggle="popover"]').popover();
+                }
+            }
+        });
+    }
     $(document).ready(function () {
 
         pageSetUp();
         $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
             $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
         });
+        /* $.each($(".prog_aut"),function (){
+         Imprimir_det_proceso( $(this));
+         });*/
+
 
     })
 

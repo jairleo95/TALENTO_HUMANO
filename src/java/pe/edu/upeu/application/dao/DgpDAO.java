@@ -352,6 +352,8 @@ public class DgpDAO implements InterfaceDgpDAO {
                 v.setMes_creacion(rs.getString("mes_creacion"));
                 v.setFe_creacion(rs.getString("fe_creacion"));
                 v.setNo_dep(rs.getString("no_dep"));
+                v.setAnno_procesamiento(rs.getString("anno_procesamiento"));
+                v.setMes_procesamiento(rs.getString("mes_procesamiento"));
                 Lista.add(v);
             }
         } catch (SQLException ex) {

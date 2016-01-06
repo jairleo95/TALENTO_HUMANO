@@ -33,6 +33,24 @@ public class V_Es_Requerimiento {
     private String mes_creacion;
     private String no_req;
     private String no_dep;
+    private String anno_procesamiento;
+    private String  mes_procesamiento;
+
+    public String getAnno_procesamiento() {
+        return anno_procesamiento;
+    }
+
+    public void setAnno_procesamiento(String anno_procesamiento) {
+        this.anno_procesamiento = anno_procesamiento;
+    }
+
+    public String getMes_procesamiento() {
+        return mes_procesamiento;
+    }
+
+    public void setMes_procesamiento(String mes_procesamiento) {
+        this.mes_procesamiento = mes_procesamiento;
+    }
 
     public String getNo_dep() {
         return no_dep;
@@ -76,7 +94,8 @@ public class V_Es_Requerimiento {
 
     public V_Es_Requerimiento(String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String id_dgp, 
             String id_departamento, String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, 
-            String es_porcent, String es_dgp, String es_proceso_aut,String id_detalle_req_proceso,String aut_actual,String fe_creacion,String mes_creacion,String no_req) {
+            String es_porcent, String es_dgp, String es_proceso_aut,String id_detalle_req_proceso,String aut_actual,String fe_creacion,String mes_creacion,String no_req,String no_dep,
+    String anno_procesamiento, String mes_procesamiento) {
         this.id_trabajador = id_trabajador;
         this.ap_paterno = ap_paterno;
         this.ap_materno = ap_materno;
@@ -97,6 +116,8 @@ public class V_Es_Requerimiento {
         this.mes_creacion = mes_creacion;
         this.no_req = no_req;
         this.no_dep = no_dep;
+        this.anno_procesamiento = anno_procesamiento;
+        this.mes_procesamiento = mes_procesamiento;
     }
 
     public V_Es_Requerimiento() {
@@ -120,6 +141,8 @@ public class V_Es_Requerimiento {
         this.mes_creacion = "";
         this.no_req = "";
         this.no_dep = "";
+        this.anno_procesamiento= "";
+        this.mes_procesamiento= "";
     }
     private String de_foto;
     private String id_foto;

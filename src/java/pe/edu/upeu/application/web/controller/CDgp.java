@@ -672,8 +672,8 @@ public class CDgp extends HttpServlet {
                     }
                 }
                 sesion.setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
-               /* int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
-                int num_ad = doc.List_Adventista(ID_TRABAJADOR);*/
+                /* int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
+                 int num_ad = doc.List_Adventista(ID_TRABAJADOR);*/
                 sesion.setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
                 sesion.setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
                 // sesion.setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(ID_DGP, idrp));
@@ -690,8 +690,15 @@ public class CDgp extends HttpServlet {
             }
             if (opc.equals("Incompleto")) {
 
-                sesion.setAttribute("List_Incomplet", dgp.List_Incomplet(iddep,permisoAdmin));
+                sesion.setAttribute("List_Incomplet", dgp.List_Incomplet(iddep, permisoAdmin));
                 response.sendRedirect("Vista/Dgp/List_req_incompl.jsp");
+            }
+            if (opc.equals("Imprimir_det_proceso")) {
+                String idrp = request.getParameter("idrp");
+                String iddgp = request.getParameter("dgp");
+                String dep = request.getParameter("dgp");
+                rpta.put("html", dgp.Imprimir_det_proceso(iddgp, idrp, dep));
+                rpta.put("rpta", "1");
             }
 
         } catch (Exception e) {
