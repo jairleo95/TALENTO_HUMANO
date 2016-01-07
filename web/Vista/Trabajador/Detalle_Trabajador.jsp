@@ -212,7 +212,6 @@
                     <div class='row row_cod_huella'>
                     </div>
                     <div class="row">
-
                         <%if (ID_ROL.equals("ROL-0001")) {%>
                         <div class="col-md-4"><strong>Descuento de Diezmo</strong></div>
                         <div class="col-md-8 div_input_diezmo"></div>
@@ -220,7 +219,6 @@
                         <div class="col-md-8"><strong>Descuento de Diezmo</strong></div>
                         <div class="col-md-4"><%=((trb.getEs_diezmo().equals("0"))?"No":"Si")%></div>
                         <%}%>
-
                     </div>
                     <%if (iddgp != null) {
                     %>
