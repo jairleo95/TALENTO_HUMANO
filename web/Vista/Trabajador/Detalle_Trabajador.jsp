@@ -1154,13 +1154,13 @@
                                     var idtra = $(window.parent.document.getElementById('id_trabajador')).val();
                                     if(idtra.trim() == $(".idtr").val().trim()){
                                     $('.foto-user').empty();
+                                    $(padre).attr("src", "Vista/Usuario/Fotos/" + objJson.archivo);
+                                    }
                                     Shadowbox.clearCache(); 
                                     validar_shadowbox();
                                      getAvatar("perfil",idtrl);
                                      getAvatar("todo",idtrl);
                                      repeat = 0;
-                                    $(padre).attr("src", "Vista/Usuario/Fotos/" + objJson.archivo);
-                                    }
                                     $(".borde").removeClass("ver_foto");
                                     $(".ver_foto").show(200);
                                     //$(".form-subir-foto").remove();
@@ -1171,7 +1171,7 @@
                                         iconSmall: "fa fa-cloud bounce animated",
                                         timeout: 6000
                                     });
-                                    $(this).dialog("close");
+                                   $('#dialog-message').dialog("close");
                                 }, 4000);
                             }
                         }
@@ -1198,6 +1198,7 @@
                   $.each(data,function(i , datos){
                       $.each(datos, function(i , obj){
                      if(tipo == 'todo'){
+                         console.log("foto todo");
                               var imgens ='<img class="img-thumbnail" title="foto '+i+'" src="../../Vista/Usuario/Fotos/'+
                                obj.ar_foto+'"style="width:100px; height:100px;" />';
                                $('.fotos').append(imgens);
@@ -1210,6 +1211,7 @@
                         }else{}
                        
                      }else if(tipo == 'perfil'){
+                        console.log("foto perfil ");
                      $('.borde').attr("src", "../../Vista/Usuario/Fotos/"+obj.ar_foto);
                      $(".avatar").attr("href", "../../Vista/Usuario/Fotos/"+obj.ar_foto);
                      $("#sb-player").attr("href", "../../Usuario/Fotos/" + obj.ar_foto);
