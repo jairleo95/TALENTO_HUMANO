@@ -138,6 +138,7 @@
                                                     BigDecimal bp = new BigDecimal(d.getCa_bonificacion_p()).setScale(2, RoundingMode.UP);
                                                     BigDecimal total = new BigDecimal((d.getCa_bonificacion_p() + d.getCa_asig_familiar() + d.getCa_bono_alimentario() + d.getDe_bev() + d.getCa_sueldo())).setScale(2, RoundingMode.UP);
                                         %>
+                                        
                                         <input type="hidden"  class="fe_desde_dgp" value="<%=FactoryConnectionDB.convertFecha3(d.getFe_desde())%>"/>
                                         <tr><td colspan="2" class="text-info table-bordered"><i class="fa fa-file"></i> REQUERIMIENTO : <%=d.getNo_req()%> </td></tr>
                                         <!--<label style="color: black; //font-family: cursive;"><h2><%=d.getNo_req()%></h2></label>

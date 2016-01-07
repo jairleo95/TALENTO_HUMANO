@@ -60,7 +60,7 @@ public class CTrabajador extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        
+
         PrintWriter out = response.getWriter();
         Map<String, Object> rpta = new HashMap<String, Object>();
         HttpSession sesion = request.getSession(true);
@@ -68,7 +68,7 @@ public class CTrabajador extends HttpServlet {
         String iduser = (String) sesion.getAttribute("IDUSER");
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         String user = (String) sesion.getAttribute("IDUSER");
-        
+
         if (user != null) {
             try {
                 InterfaceListaDAO l = new ListaDAO();
@@ -93,7 +93,7 @@ public class CTrabajador extends HttpServlet {
                         permisoShowAFP_SP = true;
                         break;
                 }
-                
+
                 if (opc.equals("Form_Reg")) {
                     sesion.setAttribute("List_Carrera", li.List_Carrera());
                     sesion.setAttribute("List_Nacionalidad", li.List_Nacionalidad());
@@ -167,7 +167,7 @@ public class CTrabajador extends HttpServlet {
                     String US_MODIF = request.getParameter("US_MODIF");
                     String FE_MODIF = request.getParameter("FE_MODIF");
                     String IP_USUARIO = request.getParameter("USUARIO_IP");
-                    
+
                     String AP_NOMBRES_PADRE = request.getParameter("APELLIDOS_NOMBRES_PADRE");
                     String AP_NOMBRES_MADRE = request.getParameter("APELLIDOS_NOMBRES_MADRE");
                     String ES_TRABAJA_UPEU_C = request.getParameter("TRABAJA_UPEU_CONYUGUE");
@@ -186,7 +186,7 @@ public class CTrabajador extends HttpServlet {
                     String NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
                     String ES_CUENTA_SUELDO = request.getParameter("ES_CUENTA_SUELDO");
                     String CO_UNIVERSITARIO = request.getParameter("COD_UNI");
-                    
+
                     String ES_DIEZMO = "0";
                     if (request.getParameter("diezmo") != null) {
                         ES_DIEZMO = "1";
@@ -200,11 +200,11 @@ public class CTrabajador extends HttpServlet {
                     } else {
                         ES_CUENTA_SUELDO = "1";
                     }
-                    
+
                     if (tr.val_nu_doc(NU_DOC)) {
                         out.print("Trabajador ya existe!");
                     } else {
-                        
+
                         tr.INSERT_TRABAJADOR(null, AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, ES_SEXO, LI_GRUPO_SANGUINEO, DE_REFERENCIA, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, CA_TIPO_HORA_PAGO_REFEERENCIAL, ES_FACTOR_RH, LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, CM_OBSERVACIONES, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, AP_NOMBRES_PADRE, AP_NOMBRES_MADRE,
                                 ES_TRABAJA_UPEU_C, AP_NOMBRES_C, FE_NAC_C, ID_TIPO_DOC_C, NU_DOC_C, LI_INSCRIPCION_VIG_ESSALUD_C,
                                 ID_CONYUGUE, CO_UNIVERSITARIO, ES_DIEZMO);
@@ -262,7 +262,7 @@ public class CTrabajador extends HttpServlet {
                         }
                     } else {
                         response.sendRedirect("Vista/Dgp/Generar_Dgp.jsp?text=" + Text);
-                        
+
                     }
                 }
                 if (opc.equals("Buscar_Trabajador")) {
@@ -336,7 +336,7 @@ public class CTrabajador extends HttpServlet {
                     sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
                     sesion.setAttribute("List_Auto_mostrar", li.List_Auto_mostrar(idrol));
                     sesion.setAttribute("List_", li.List_Auto_mostrar(idrol));
-                    
+
                     response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr.trim() + "&aut=1&dgp=" + iddgp + "&p=" + puesto_id + "&c=" + cod + "&pas=" + idpasos + "&drp=" + drp + "&np=" + np + "&vnc=" + num_c_dgp + "&val_aps=" + val_aps + "&val_huella=" + val_huella);
                 }
                 if (opc.equals("Mostrar_Cod_APS")) {
@@ -346,11 +346,11 @@ public class CTrabajador extends HttpServlet {
                         rpta.put("msg", "0");
                     } else {
                         for (int i = 0; i < e.size(); i++) {
-                            
+
                         }
                         rpta.put("msg", "1");
                     }
-                    
+
                 }
                 if ("reg_aps_masivo".equals(opc)) {
                     String idtr = request.getParameter("idtr");
@@ -447,7 +447,7 @@ public class CTrabajador extends HttpServlet {
                     sesion.setAttribute("List_Carrera", li.List_Carrera());
                     sesion.setAttribute("List_Situacion_Educativa", li.List_Situacion_Educativa());
                     response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Academico.jsp?idtr=" + idtr + "&edit=" + edit);
-                    
+
                 }
                 if (opc.equals("Modificar_Asp_Acad")) {
                     String idtr = request.getParameter("idtr");
@@ -494,7 +494,7 @@ public class CTrabajador extends HttpServlet {
                     }
                     sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
                     sesion.setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
-                    
+
                     if (editar.equals("ok")) {
                         response.sendRedirect("Vista/Trabajador/Aspecto_Academico.jsp?edit=" + editar + "&idtr=" + idtr);
                     } else {
@@ -514,10 +514,10 @@ public class CTrabajador extends HttpServlet {
                     sesion.setAttribute("List_Dom_D1_Id", l.List_Dom_D1_Id());
                     sesion.setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
                     sesion.setAttribute("List_Dom_D3_Id", l.List_Dom_D3_Id());
-                    
+
                     response.sendRedirect("Vista/Trabajador/Aspecto_Social.jsp?idtr=" + idtr);
                 }
-                
+
                 if (opc.equals("Editar_Asp_Soc")) {
                     String idtr = request.getParameter("idtr");
                     sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
@@ -531,7 +531,7 @@ public class CTrabajador extends HttpServlet {
                     sesion.setAttribute("List_Dom_D1_Id", l.List_Dom_D1_Id());
                     sesion.setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
                     sesion.setAttribute("List_Dom_D3_Id", l.List_Dom_D3_Id());
-                    
+
                     response.sendRedirect("Vista/Trabajador/Mod_Aspecto_Social.jsp?idtr=" + idtr);
                 }
                 if (opc.equals("Modificar_Asp_Soc")) {
@@ -632,7 +632,7 @@ public class CTrabajador extends HttpServlet {
                         html += "                                <input type='checkbox' name='diezmo' value='1'    class='onoffswitch-checkbox cbkDiezmo' id='st3'>";
                     }
                     html += "                                   <label class='onoffswitch-label' for='st3'> ";
-                    
+
                     html += "                                   <span class='onoffswitch-inner' data-swchon-text='SI' data-swchoff-text='NO'></span> ";
                     html += "                                     <span class='onoffswitch-switch'></span> ";
                     html += "                                      </label> ";
@@ -640,7 +640,7 @@ public class CTrabajador extends HttpServlet {
                     html += "                      </span>"
                             + "</div>"
                             + "</div>";
-                    
+
                     rpta.put("html", html);
                     rpta.put("rpta", "1");
                 }
@@ -658,7 +658,7 @@ public class CTrabajador extends HttpServlet {
                         html += "                                <input type='checkbox' name='diezmo' value='1'    class='onoffswitch-checkbox cbkDiezmo' id='st3'>";
                     }
                     html += "                                   <label class='onoffswitch-label' for='st3'> ";
-                    
+
                     html += "                                   <span class='onoffswitch-inner' data-swchon-text='SI' data-swchoff-text='NO'></span> ";
                     html += "                                     <span class='onoffswitch-switch'></span> ";
                     html += "                                      </label> ";
@@ -666,7 +666,7 @@ public class CTrabajador extends HttpServlet {
                     html += "                      </span>"
                             + "</div>"
                             + "</div>";
-                    
+
                     rpta.put("html", html);
                     rpta.put("rpta", "1");
                 }
@@ -675,7 +675,7 @@ public class CTrabajador extends HttpServlet {
                     String data[] = tr.ShowAFP_ONP(idtr);
                     String html = "";
                     if (permisoShowAFP_SP) {
-                        
+
                         html += " <div class='row'>";
                         html += " <div class='col-md-8'><strong>Nombre AFP:</strong>";
                         html += " </div>";
@@ -699,6 +699,21 @@ public class CTrabajador extends HttpServlet {
                         html += " </div>";
                         html += " </div>";
                     }
+                    rpta.put("html", html);
+                    rpta.put("rpta", "1");
+                }
+                if (opc.equals("ShowDialogFotoTrabajador")) {
+                 String idtr =request.getParameter("id");
+                    String html = "<div class='dialog-message' title='Dialog Simple Title'>"
+                            + "            <p>La imagen todavia no esta <b>Confirmada</b> aun confirme para poder guardar la imagen</p>"
+                            + "            <div class='hr hr-12 hr-double'></div>"
+                            + "            <div class='pre-avatar col-md-offset-1'>'"
+                            + "                <img class='pre_foto thumbnail' style='height: 300px; width: 500px;' />"
+                            + "            </div>"
+                            + "            <div style='display:none' class='progressbar'>"
+                            + "                <div class='progress-label progress-bar progress-primary'>Loading...</div> "
+                            + "            </div>"
+                            + "        </div>";
                     rpta.put("html", html);
                     rpta.put("rpta", "1");
                 }
