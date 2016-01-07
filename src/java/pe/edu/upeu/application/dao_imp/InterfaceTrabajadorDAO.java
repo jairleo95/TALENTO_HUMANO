@@ -92,4 +92,6 @@ public interface InterfaceTrabajadorDAO {
     public boolean UpdateEsDiezmo(String idtr, int estado);
 
     public int ShowEsDiezmoTrabajador(String idtr);
+
+    public String[] ShowAFP_ONP(String idtr);
 }

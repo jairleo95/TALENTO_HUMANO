@@ -15,8 +15,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../HTML_version/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <title>Datos generales</title>
     </head>
@@ -47,7 +47,7 @@
                                         out.print(td.getDe_tdoc_abreviada());
                                     }
                                 } else {
-                                    out.print("NO REGISTRADO");
+                                    out.print("No Registrado");
                                 }
                             }
                         %>
@@ -57,7 +57,7 @@
                     if (trb.getNu_doc() != null) {
                         out.print(trb.getNu_doc());
                     } else {
-                        out.print("NO REGISTRADO");
+                        out.print("No Registrado");
                     }%></td></tr>
                 <tr><td  class="text-info">Estado Civil:</td><td><%
                     for (int r = 0; r < list.List_Estado_Civil().size(); r++) {
@@ -66,7 +66,7 @@
                                 out.println(list.List_Estado_Civil().get(r));
                             }
                         } else {
-                            out.print("NO DEFINIDO");
+                            out.print("No Registrado");
                         }
                     }
                         %></td></tr>
@@ -82,7 +82,7 @@
 
                                 }
                             } else {
-                                out.print("NO DEFINIDO");
+                                out.print("No Registrado");
                             }
                         %>
                     </td>
@@ -96,13 +96,13 @@
                             out.println("Negativo");
                         }
                     } else {
-                        out.print("NO DEFINIDO");
+                        out.print("No Registrado");
                     }
                         %></td></tr>
 
                 <tr><td  class="text-info">Telefono:</td>
                     <%if (trb.getTe_trabajador() == null) {%>
-                    <td>NO REGISTRADO</td>
+                    <td>No Registrado</td>
                     <% } else {%>
                     <td><%=trb.getTe_trabajador()%></td>
                     <%}%>
@@ -111,18 +111,18 @@
                     if (trb.getCl_tra() != null) {
                         out.print(trb.getCl_tra());
                     } else {
-                        out.print("NO REGISTRADO");
+                        out.print("No Registrado");
                     }%></td></tr>
                 <tr><td  class="text-info">Correo Personal:</td><td><%
                     if (trb.getDi_correo_personal() != null) {
                         out.print(trb.getDi_correo_personal());
                     } else {
-                        out.print("NO REGISTRADO");
+                        out.print("No Registrado");
                     }%></td></tr>
                 <tr>
                     <td  class="text-info">Correo Institucional:</td>
                     <%if (trb.getDi_correo_inst() == null) {%>
-                    <td>NO REGISTRADO</td>
+                    <td>No Registrado</td>
                     <%} else {%>
                     <td><%=trb.getDi_correo_inst()%></td>
                     <%}%>
@@ -136,7 +136,7 @@
                             }
                         }
                     } else {
-                        out.print("NO REGISTRADO");
+                        out.print("No Registrado");
                     }%></td></tr>
                 <tr><td  class="text-info">Nombre AFP:</td><td><%
                     if (trb.getCo_sistema_pensionario() != null) {
@@ -146,7 +146,7 @@
                             }
                         }
                     } else {
-                        out.print("NO REGISTRADO");
+                        out.print("No Registrado");
                     }
 
                         %></td></tr>
@@ -160,7 +160,7 @@
 
                             }
                         } else {
-                            out.print("NO REGISTRADO");
+                            out.print("No Registrado");
                         }
                         %></td>
                 </tr>
@@ -172,7 +172,7 @@
                         out.println("Alumno");
                     }
                     if (trb.getLi_tipo_trabajador() == null) {
-                        out.print("NO REGISTRADO");
+                        out.print("No Registrado");
                     }
                         %></td></tr>
 

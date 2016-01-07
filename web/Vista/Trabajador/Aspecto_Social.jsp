@@ -25,7 +25,6 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
-        <script src=" ../../../../js1/jquery-1.11.1.min.js" type="text/javascript"></script>
 
         <title>Aspecto Social</title>
 

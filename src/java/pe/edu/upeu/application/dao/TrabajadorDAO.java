@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -1164,6 +1166,34 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             }
         }
         return estado;
+
+    }
+
+    @Override
+    public String[] ShowAFP_ONP(String idtr) {
+        String[] data = new String[2];
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT ID_NO_AFP,CO_SISTEMA_PENSIONARIO FROM rhtm_trabajador where id_trabajador ='" + idtr + "' ";
+            ResultSet rs = this.conn.query(sql);
+
+            Logger.getLogger(getClass().getName()).log(Level.INFO, sql);
+            if (rs.next()) {
+                data[0] = rs.getString("ID_NO_AFP");
+                data[1] = rs.getString("CO_SISTEMA_PENSIONARIO");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return data;
 
     }
 }

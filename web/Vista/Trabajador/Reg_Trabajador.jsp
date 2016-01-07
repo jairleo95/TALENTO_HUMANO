@@ -725,7 +725,7 @@
 
                                                         <div class="tab-pane" id="tab3">
                                                             <h3><strong>Paso 3 -</strong> Aspecto Social</h3>
-                                                                <h3>Domicilio Actual del Trabajador</h3>
+                                                            <h3>Domicilio Actual del Trabajador</h3>
                                                             <label>Direccion :</label>
                                                             <div class="row">
 
@@ -1099,7 +1099,7 @@
                                                                         </span>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <div class="input-group">
@@ -1858,37 +1858,7 @@
                                                         }
                                                         return x;
                                                     }
-                                                    $("#docs, .doc_c, #nu_cuen, #nu_cuen_ban").numeric();
-                                                    $("#doc, .doc_c").numeric(false, function () {
-                                                        alert("Solo Numeros Enteros");
-                                                        this.value = "";
-                                                        this.focus();
-                                                    });
-                                                    $(".positive").numeric({negative: false}, function () {
-                                                        alert("No negative values");
-                                                        this.value = "";
-                                                        this.focus();
-                                                    });
-                                                    $(".positive-integer").numeric({decimal: false, negative: false}, function () {
-                                                        alert("Positive integers only");
-                                                        this.value = "";
-                                                        this.focus();
-                                                    });
-                                                    $("#remove").click(function (e) {
-                                                        e.preventDefault();
-                                                        $(".numeric,.integer,.positive").removeNumeric();
-                                                    }
-                                                    );
 
-                                                    $("#reli").change(function () {
-                                                        if ($(this).val() === "1") {
-                                                            $(".div_diezmo").show(200);
-
-                                                        } else {
-                                                            $(".div_diezmo").hide(200);
-
-                                                        }
-                                                    });
                                                     function val_diezmo() {
                                                         var x = false;
                                                         if ($('.cbkDiezmo').is(':visible')) {
@@ -1903,116 +1873,7 @@
                                                         }
                                                         return x;
                                                     }
-                                                    //
-                                                    $('.cbkDiezmo').click(function () {
-                                                        val_diezmo();
-                                                    });
-                                                    //  }
 
-                                                    /*Ubigeo*/
-                                                    $("#dep_nac").change(function () {
-                                                        var ti = $("#pro_nac");
-                                                        ti.empty();
-                                                        var rg = $("#dep_nac").val();
-                                                        var data = "id_dep=" + rg + "&opc=dep_nac";
-                                                        ti.append('<option value="">Cargando...</option>').val('');
-                                                        $.post("../../ubigeo", data, function (objJson) {
-                                                            ti.empty();
-                                                            if (objJson.rpta == -1) {
-                                                                alert(objJson.mensaje);
-                                                                return;
-                                                            }
-                                                            var lista = objJson.lista;
-                                                            if (lista.length > 0) {
-                                                                ti.append("<option value=''>[Seleccione]</option>");
-                                                            } else {
-                                                                ti.append("<option value=''>[]</option>");
-                                                            }
-                                                            for (var i = 0; i < lista.length; i++) {
-                                                                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                                                                ti.append(item);
-                                                            }
-                                                        });
-                                                    });
-                                                    $("#pro_nac").change(function () {
-                                                        var ti = $("#dist_nac");
-                                                        ti.empty();
-                                                        var rg = $("#pro_nac").val();
-                                                        var data = "id_dist=" + rg + "&opc=pro_nac";
-                                                        ti.append('<option value="">Cargando...</option>').val('');
-                                                        $.post("../../ubigeo", data, function (objJson) {
-                                                            ti.empty();
-                                                            if (objJson.rpta == -1) {
-                                                                alert(objJson.mensaje);
-                                                                return;
-                                                            }
-                                                            var lista = objJson.lista;
-                                                            if (lista.length > 0) {
-                                                                ti.append("<option value=''>[Seleccione]</option>");
-                                                            } else {
-                                                                ti.append("<option value=''>[]</option>");
-                                                            }
-                                                            for (var i = 0; i < lista.length; i++) {
-                                                                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                                                                ti.append(item);
-                                                            }
-                                                        });
-                                                    });
-                                                    // ============ DIRECCION ===========
-                                                    $("#dep_dir_a").change(function () {
-                                                        var ti = $("#pro_dir_a");
-                                                        ti.empty();
-                                                        var rg = $("#dep_dir_a").val();
-                                                        var data = "id_dep=" + rg + "&opc=dep_nac";
-                                                        ti.append('<option value="">Cargando...</option>').val('');
-                                                        $.post("../../ubigeo", data, function (objJson) {
-                                                            ti.empty();
-                                                            if (objJson.rpta == -1) {
-                                                                alert(objJson.mensaje);
-                                                                return;
-                                                            }
-                                                            var lista = objJson.lista;
-                                                            if (lista.length > 0) {
-                                                                ti.append("<option value=''>[Seleccione]</option>");
-                                                            } else {
-                                                                ti.append("<option value=''>[]</option>");
-                                                            }
-                                                            for (var i = 0; i < lista.length; i++) {
-                                                                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                                                                ti.append(item);
-                                                            }
-                                                        });
-                                                    });
-                                                    $("#pro_dir_a").change(function () {
-                                                        var ti = $("#DOM_A_DISTRITO");
-                                                        ti.empty();
-                                                        var rg = $("#pro_dir_a").val();
-                                                        var data = "id_dist=" + rg + "&opc=pro_nac";
-                                                        ti.append('<option value="">Cargando...</option>').val('');
-                                                        $.post("../../ubigeo", data, function (objJson) {
-                                                            ti.empty();
-                                                            if (objJson.rpta === -1) {
-                                                                alert(objJson.mensaje);
-                                                                return;
-                                                            }
-                                                            var lista = objJson.lista;
-                                                            if (lista.length > 0) {
-                                                                ti.append("<option value=''>[Seleccione]</option>");
-                                                            } else {
-                                                                ti.append("<option value=''>[]</option>");
-                                                            }
-                                                            for (var i = 0; i < lista.length; i++) {
-                                                                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                                                                ti.append(item);
-                                                            }
-                                                        });
-                                                    });
-                                                    //PROVINCIA
-                                                    $("#dep_dir_l").change(function () {
-                                                        var ti = $("#pro_dir_l");
-                                                        var rg = $("#dep_dir_l").val();
-                                                        list_prov_id_dep(rg, ti, "0", "");
-                                                    });
                                                     function list_prov_id_dep(rg, ti, selected, id_select) {
                                                         var data = "id_dep=" + rg + "&opc=dep_nac";
                                                         ti.append('<option value="">Cargando...</option>').val('');
@@ -2049,11 +1910,6 @@
                                                         });
                                                     }
                                                     //DISTRITO
-                                                    $("#pro_dir_l").change(function () {
-                                                        var ti = $("#DOM_LEG_DISTRITO");
-                                                        var rg = $("#pro_dir_l").val();
-                                                        list_dist_id_prov(rg, ti, "0", "");
-                                                    });
                                                     function list_dist_id_prov(rg, ti, selected, id_select) {
                                                         var data = "id_dist=" + rg + "&opc=pro_nac";
                                                         ti.append('<option value="">Cargando...</option>').val('');
@@ -2089,80 +1945,16 @@
                                                             }
                                                         });
                                                     }
-                                                    /*Datos Academicos*/
-                                                    $("#rg").change(function () {
-                                                        var ti = $("#ti_inst");
-                                                        ti.empty();
-                                                        var rg = $("#rg").val();
-                                                        var data = "regimen=" + rg + "&opc=ti_inst";
-                                                        ti.append('<option value="">Cargando...</option>').val('');
-                                                        $.post("../../detalle_carrera", data, function (objJson) {
-                                                            ti.empty();
-                                                            if (objJson.rpta == -1) {
-                                                                alert(objJson.mensaje);
-                                                                return;
-                                                            }
-                                                            var lista = objJson.lista;
-                                                            if (lista.length > 0) {
-                                                                ti.append("<option value=''>[Seleccione]</option>");
-                                                            } else {
-                                                                ti.append("<option value=''>[]</option>");
-                                                            }
-                                                            for (var i = 0; i < lista.length; i++) {
-                                                                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                                                                ti.append(item);
-                                                            }
-                                                        });
+
+                                                    //PROVINCIA
+                                                    $("#dep_dir_l").change(function () {
+                                                        var ti = $("#pro_dir_l");
+                                                        var rg = $("#dep_dir_l").val();
+                                                        list_prov_id_dep(rg, ti, "0", "");
                                                     });
-                                                    $("#ti_inst").change(function () {
-                                                        var inst = $("#inst");
-                                                        inst.empty();
-                                                        var ti = $("#ti_inst").val();
-                                                        var data = "ti=" + ti + "&opc=institucion";
-                                                        inst.append('<option value="">Cargando...</option>').val('');
-                                                        $.post("../../detalle_carrera", data, function (objJson) {
-                                                            inst.empty();
-                                                            if (objJson.rpta == -1) {
-                                                                alert(objJson.mensaje);
-                                                                return;
-                                                            }
-                                                            var lista = objJson.lista;
-                                                            if (lista.length > 0) {
-                                                                inst.append("<option value='0'>[Seleccione]</option>");
-                                                            } else {
-                                                                inst.append("<option value='0'>[]</option>");
-                                                            }
-                                                            for (var i = 0; i < lista.length; i++) {
-                                                                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                                                                inst.append(item);
-                                                            }
-                                                        });
-                                                    });
-                                                    $("#inst").change(function () {
-                                                        var carr = $("#carrera");
-                                                        carr.empty();
-                                                        var insti = $("#inst").val();
-                                                        var data = "inst=" + insti + "&opc=carrera";
-                                                        carr.append('<option value="">Cargando...</option>').val('');
-                                                        $.post("../../detalle_carrera", data, function (objJson) {
-                                                            carr.empty();
-                                                            if (objJson.rpta == -1) {
-                                                                alert(objJson.mensaje);
-                                                                return;
-                                                            }
-                                                            var lista = objJson.lista;
-                                                            if (lista.length > 0) {
-                                                                carr.append("<option value='0'>[Seleccione]</option>");
-                                                            } else {
-                                                                carr.append("<option value='0'>[]</option>");
-                                                            }
-                                                            for (var i = 0; i < lista.length; i++) {
-                                                                var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
-                                                                carr.append(item);
-                                                            }
-                                                        });
-                                                    });
+
                                                     $(document).ready(function () {
+                                                        $("#wizard-1")[0].reset();
                                                         pageSetUp();
                                                         var $validator = $("#wizard-1").validate({
                                                             rules: {
@@ -2279,17 +2071,41 @@
                                                             }
                                                             return true;
                                                         }
+
                                                         $('#bootstrap-wizard-1').bootstrapWizard({
                                                             'tabClass': 'form-wizard',
                                                             onTabClick: function (tab, navigation, index) {
-                                                                //   return validateTab(index,tab)
-                                                                return true;
+                                                                return validateTab(index, tab)
+                                                                //return true;
                                                             },
                                                             'onNext': function (tab, navigation, index) {
                                                                 return validateTab(index);
                                                             }
                                                         });
-
+                                                        $("#inst").change(function () {
+                                                            var carr = $("#carrera");
+                                                            carr.empty();
+                                                            var insti = $("#inst").val();
+                                                            var data = "inst=" + insti + "&opc=carrera";
+                                                            carr.append('<option value="">Cargando...</option>').val('');
+                                                            $.post("../../detalle_carrera", data, function (objJson) {
+                                                                carr.empty();
+                                                                if (objJson.rpta == -1) {
+                                                                    alert(objJson.mensaje);
+                                                                    return;
+                                                                }
+                                                                var lista = objJson.lista;
+                                                                if (lista.length > 0) {
+                                                                    carr.append("<option value='0'>[Seleccione]</option>");
+                                                                } else {
+                                                                    carr.append("<option value='0'>[]</option>");
+                                                                }
+                                                                for (var i = 0; i < lista.length; i++) {
+                                                                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                                                                    carr.append(item);
+                                                                }
+                                                            });
+                                                        });
                                                         var tip = $("#pro_dir_l");
                                                         tip.empty();
                                                         var rg = $("#dep_dir_l").val();
@@ -2337,6 +2153,140 @@
                                                         $(".doc, .doc_c").attr("maxlength", "8");
                                                         $(".doc, .doc_c").attr("minlength", "8");
                                                         //  $(".doc, .doc_c").val("");
+                                                        $("#docs, .doc_c, #nu_cuen, #nu_cuen_ban").numeric();
+                                                        $("#doc, .doc_c").numeric(false, function () {
+                                                            alert("Solo Numeros Enteros");
+                                                            this.value = "";
+                                                            this.focus();
+                                                        });
+                                                        $(".positive").numeric({negative: false}, function () {
+                                                            alert("No negative values");
+                                                            this.value = "";
+                                                            this.focus();
+                                                        });
+                                                        $(".positive-integer").numeric({decimal: false, negative: false}, function () {
+                                                            alert("Positive integers only");
+                                                            this.value = "";
+                                                            this.focus();
+                                                        });
+                                                        $("#remove").click(function (e) {
+                                                            e.preventDefault();
+                                                            $(".numeric,.integer,.positive").removeNumeric();
+                                                        }
+                                                        );
+
+                                                        $("#reli").change(function () {
+                                                            if ($(this).val() === "1") {
+                                                                $(".div_diezmo").show(200);
+
+                                                            } else {
+                                                                $(".div_diezmo").hide(200);
+
+                                                            }
+                                                        });//
+                                                        $('.cbkDiezmo').click(function () {
+                                                            val_diezmo();
+                                                        });
+                                                        //  }
+
+                                                        /*Ubigeo*/
+                                                        $("#dep_nac").change(function () {
+                                                            var ti = $("#pro_nac");
+                                                            ti.empty();
+                                                            var rg = $("#dep_nac").val();
+                                                            var data = "id_dep=" + rg + "&opc=dep_nac";
+                                                            ti.append('<option value="">Cargando...</option>').val('');
+                                                            $.post("../../ubigeo", data, function (objJson) {
+                                                                ti.empty();
+                                                                if (objJson.rpta == -1) {
+                                                                    alert(objJson.mensaje);
+                                                                    return;
+                                                                }
+                                                                var lista = objJson.lista;
+                                                                if (lista.length > 0) {
+                                                                    ti.append("<option value=''>[Seleccione]</option>");
+                                                                } else {
+                                                                    ti.append("<option value=''>[]</option>");
+                                                                }
+                                                                for (var i = 0; i < lista.length; i++) {
+                                                                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                                                                    ti.append(item);
+                                                                }
+                                                            });
+                                                        });
+                                                        $("#pro_nac").change(function () {
+                                                            var ti = $("#dist_nac");
+                                                            ti.empty();
+                                                            var rg = $("#pro_nac").val();
+                                                            var data = "id_dist=" + rg + "&opc=pro_nac";
+                                                            ti.append('<option value="">Cargando...</option>').val('');
+                                                            $.post("../../ubigeo", data, function (objJson) {
+                                                                ti.empty();
+                                                                if (objJson.rpta == -1) {
+                                                                    alert(objJson.mensaje);
+                                                                    return;
+                                                                }
+                                                                var lista = objJson.lista;
+                                                                if (lista.length > 0) {
+                                                                    ti.append("<option value=''>[Seleccione]</option>");
+                                                                } else {
+                                                                    ti.append("<option value=''>[]</option>");
+                                                                }
+                                                                for (var i = 0; i < lista.length; i++) {
+                                                                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                                                                    ti.append(item);
+                                                                }
+                                                            });
+                                                        });
+                                                        // ============ DIRECCION ===========
+                                                        $("#dep_dir_a").change(function () {
+                                                            var ti = $("#pro_dir_a");
+                                                            ti.empty();
+                                                            var rg = $("#dep_dir_a").val();
+                                                            var data = "id_dep=" + rg + "&opc=dep_nac";
+                                                            ti.append('<option value="">Cargando...</option>').val('');
+                                                            $.post("../../ubigeo", data, function (objJson) {
+                                                                ti.empty();
+                                                                if (objJson.rpta == -1) {
+                                                                    alert(objJson.mensaje);
+                                                                    return;
+                                                                }
+                                                                var lista = objJson.lista;
+                                                                if (lista.length > 0) {
+                                                                    ti.append("<option value=''>[Seleccione]</option>");
+                                                                } else {
+                                                                    ti.append("<option value=''>[]</option>");
+                                                                }
+                                                                for (var i = 0; i < lista.length; i++) {
+                                                                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                                                                    ti.append(item);
+                                                                }
+                                                            });
+                                                        });
+                                                        $("#pro_dir_a").change(function () {
+                                                            var ti = $("#DOM_A_DISTRITO");
+                                                            ti.empty();
+                                                            var rg = $("#pro_dir_a").val();
+                                                            var data = "id_dist=" + rg + "&opc=pro_nac";
+                                                            ti.append('<option value="">Cargando...</option>').val('');
+                                                            $.post("../../ubigeo", data, function (objJson) {
+                                                                ti.empty();
+                                                                if (objJson.rpta === -1) {
+                                                                    alert(objJson.mensaje);
+                                                                    return;
+                                                                }
+                                                                var lista = objJson.lista;
+                                                                if (lista.length > 0) {
+                                                                    ti.append("<option value=''>[Seleccione]</option>");
+                                                                } else {
+                                                                    ti.append("<option value=''>[]</option>");
+                                                                }
+                                                                for (var i = 0; i < lista.length; i++) {
+                                                                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                                                                    ti.append(item);
+                                                                }
+                                                            });
+                                                        });
 
                                                         $("#nac").change(
                                                                 function () {
@@ -2349,6 +2299,60 @@
                                                                     }
                                                                 }
                                                         );
+                                                        /*Datos Academicos*/
+                                                        $("#rg").change(function () {
+                                                            var ti = $("#ti_inst");
+                                                            ti.empty();
+                                                            var rg = $("#rg").val();
+                                                            var data = "regimen=" + rg + "&opc=ti_inst";
+                                                            ti.append('<option value="">Cargando...</option>').val('');
+                                                            $.post("../../detalle_carrera", data, function (objJson) {
+                                                                ti.empty();
+                                                                if (objJson.rpta == -1) {
+                                                                    alert(objJson.mensaje);
+                                                                    return;
+                                                                }
+                                                                var lista = objJson.lista;
+                                                                if (lista.length > 0) {
+                                                                    ti.append("<option value=''>[Seleccione]</option>");
+                                                                } else {
+                                                                    ti.append("<option value=''>[]</option>");
+                                                                }
+                                                                for (var i = 0; i < lista.length; i++) {
+                                                                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                                                                    ti.append(item);
+                                                                }
+                                                            });
+                                                        });
+                                                        $("#ti_inst").change(function () {
+                                                            var inst = $("#inst");
+                                                            inst.empty();
+                                                            var ti = $("#ti_inst").val();
+                                                            var data = "ti=" + ti + "&opc=institucion";
+                                                            inst.append('<option value="">Cargando...</option>').val('');
+                                                            $.post("../../detalle_carrera", data, function (objJson) {
+                                                                inst.empty();
+                                                                if (objJson.rpta == -1) {
+                                                                    alert(objJson.mensaje);
+                                                                    return;
+                                                                }
+                                                                var lista = objJson.lista;
+                                                                if (lista.length > 0) {
+                                                                    inst.append("<option value='0'>[Seleccione]</option>");
+                                                                } else {
+                                                                    inst.append("<option value='0'>[]</option>");
+                                                                }
+                                                                for (var i = 0; i < lista.length; i++) {
+                                                                    var item = "<option value='" + lista[i].id + "'>" + lista[i].descripcion + "</option>";
+                                                                    inst.append(item);
+                                                                }
+                                                            });
+                                                        });
+                                                        $("#pro_dir_l").change(function () {
+                                                            var ti = $("#DOM_LEG_DISTRITO");
+                                                            var rg = $("#pro_dir_l").val();
+                                                            list_dist_id_prov(rg, ti, "0", "");
+                                                        });
                                                         $("#sit_edu").change(function () {
                                                             if ($("#sit_edu").val() === 'SED-0011' | $("#sit_edu").val() === 'SED-0013' | $("#sit_edu").val() === 'SED-0014'
                                                                     | $("#sit_edu").val() === 'SED-0015'

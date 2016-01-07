@@ -67,6 +67,10 @@ public class CAutorizacion extends HttpServlet {
                 case "ROL-0018":
                     permisoEsSistema = true;
                     break;
+                case "ROL-0001":
+                    permisoEsSistema = true;
+                    permisoAsigFam = true;
+                    break;
             }
 
             try {
@@ -291,24 +295,36 @@ public class CAutorizacion extends HttpServlet {
                         String iddgp = request.getParameter("iddgp");
 
                         List<Map<String, ?>> lista = a.ShowCkbEstado_procesarIndiviual(iddgp);
-                        Map<String, ?> x = lista.get(0);
-                        int es_sis = Integer.parseInt(x.get("es_sis_estado") + "");
-                        int es_asiFam = Integer.parseInt(x.get("es_asig_fam") + "");
-                        String html_ckbAsigFam = "";
-                        String html_ckbEs_Sis = "";
-                        if (es_asiFam == 0) {
-                            html_ckbAsigFam += (permisoAsigFam) ? "<label class='toggle'><input type='checkbox' name='checkbox-toggle' class='ckbAsigFam' value='" + iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label>" : "No";
-                        } else if (es_asiFam == 1) {
-                            html_ckbAsigFam += (permisoAsigFam) ? "<label class='toggle'><input type='checkbox' checked='' name='checkbox-toggle' class='ckbAsigFam' value='" + iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label>" : "Si";
+                        if (lista.size() > 0) {
+
+                            Map<String, ?> x = lista.get(0);
+                            int es_sis = Integer.parseInt(x.get("es_sis_estado") + "");
+                            int es_asiFam = Integer.parseInt(x.get("es_asig_fam") + "");
+                            String html_ckbAsigFam = "";
+                            String html_ckbEs_Sis = "";
+                            if (es_asiFam == 0) {
+                                html_ckbAsigFam += (permisoAsigFam) ? "  <div class='col-md-8'><strong>¿Asignación Familiar?</strong></div><div class='col-md-4'><label class='toggle'>"
+                                        + "<input type='checkbox' name='checkbox-toggle' class='ckbAsigFam' value='" + iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label>"
+                                        + "</div>"
+                                        : "<div class='col-md-8'><strong>¿Asignación Familiar?</strong></div><div class='col-md-4'><label class='toggle'>No</div>";
+                            } else if (es_asiFam == 1) {
+                                html_ckbAsigFam += (permisoAsigFam) ? "<div class='col-md-8'><strong>¿Asignación Familiar?</strong></div><div class='col-md-4'>"
+                                        + "<label class='toggle'><input type='checkbox' checked='' name='checkbox-toggle' class='ckbAsigFam' value='" + iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></div>"
+                                        : "<div class='col-md-8'><strong>¿Asignación Familiar?</strong></div><div class='col-md-4'><label class='toggle'>Si</div>";
+                            }
+                            if (es_sis == 0) {
+                                html_ckbEs_Sis += (permisoEsSistema) ? " <div class='col-md-8'><strong>¿T-REGISTRO?</strong></div><div class='col-md-4'><label class='toggle'>"
+                                        + "<input type='checkbox'  name='checkbox-toggle' class='ckbEstSistema' value='" + iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></div>"
+                                        : "<div class='col-md-8'><strong>¿T-REGISTRO?</strong></div><div class='col-md-4'><label class='toggle'>No</div>";
+                            } else if (es_sis == 1) {
+                                html_ckbEs_Sis += (permisoEsSistema) ? " <div class='col-md-8'><strong>¿T-REGISTRO?</strong></div><div class='col-md-4'><label class='toggle'>"
+                                        + "<input type='checkbox' checked='' name='checkbox-toggle' class='ckbEstSistema' value='" + iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></div>"
+                                        : "<div class='col-md-8'><strong>¿T-REGISTRO?</strong></div><div class='col-md-4'><label class='toggle'>Si</div>";
+                            }
+                            rpta.put("ckbAsigFam", html_ckbAsigFam);
+                            rpta.put("ckbEs_Sis", html_ckbEs_Sis);
+                            rpta.put("rpta", "1");
                         }
-                        if (es_sis == 0) {
-                            html_ckbEs_Sis += (permisoEsSistema) ? "<label class='toggle'><input type='checkbox'  name='checkbox-toggle' class='ckbEstSistema' value='" + iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label>" : "No";
-                        } else if (es_sis == 1) {
-                            html_ckbEs_Sis += (permisoEsSistema) ? "<label class='toggle'><input type='checkbox' checked='' name='checkbox-toggle' class='ckbEstSistema' value='" + iddgp + "'><i data-swchon-text='SI' data-swchoff-text='NO'></i></label>" : "Si";
-                        }
-                        rpta.put("ckbAsigFam", html_ckbAsigFam);
-                        rpta.put("ckbEs_Sis", html_ckbEs_Sis);
-                        rpta.put("rpta", "1");
                     }
                 } else {
                     Logger.getLogger(getClass().getName()).log(Level.INFO, ide);

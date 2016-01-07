@@ -148,13 +148,15 @@ public class CEmpleado extends HttpServlet {
                                 + "                        </div>";
                     } else {
                         html = "                        <div class='form-group'>"
-                                + "                            <label class='control-label col-md-12' for='prepend'> <strong>  Código de Huella Digital: </strong>" + ((!codigo.equals("null")) ? codigo : " No registrado") + "</label>"
-                                + "                        </div>";
+                                + "                           <div class='col-md-8'> <label class='control-label' for='prepend'> <strong>  Código de Huella Digital: </strong></label></div>"
+                                + "                       <div class='col-md-4'> " + ((!codigo.equals("null")) ? codigo : " No registrado") + "</div> "
+                                + "                 </div>";
                     }
                 } else {
                     html = "                        <div class='form-group'>"
-                            + "                            <label class='control-label col-md-12' for='prepend'> <strong>  Código de Huella Digital: </strong>" + (" No registrado") + "</label>"
-                            + "                        </div>";
+                            + "                            <div class='col-md-8'> <label class='control-label col-md-4' for='prepend'> <strong>  Código de Huella Digital: </strong></label></div>"
+                            + "                        <div class='col-md-4'>" + (" No registrado") + "</div>"
+                            + "                      </div>";
                 }
 
                 rpta.put("value", html);
@@ -188,13 +190,15 @@ public class CEmpleado extends HttpServlet {
                                 + "                        </div>";
                     } else {
                         html = "                        <div class='form-group'>"
-                                + "                            <label class='control-label col-md-12' for='prepend'> <strong>  Código APS: </strong>" + ((!codigo.equals("null")) ? codigo : " No registrado") + "</label>"
+                                + "                          <div class='col-md-8'><label class='control-label' for='prepend'> <strong>  Código APS: </strong></label> </div>"
+                                + "                     <div class='col-md-4' >" + ((!codigo.equals("null")) ? codigo : " No registrado") + "</div>"
                                 + "                        </div>";
                     }
                 } else {
-                    html = "                        <div class='form-group'>"
-                            + "                            <label class='control-label col-md-12' for='prepend'> <strong>  Código APS: </strong>" + (" No registrado") + "</label>"
-                            + "                        </div>";
+                            html = "                        <div class='form-group'>"
+                                    + "                          <div class='col-md-8'>  <label class='control-label' for='prepend'> <strong>  Código APS: </strong></label></div>"
+                                    + "                      <div class='col-md-4' >" + (" No registrado") + "</div>"
+                                    + " </div>";
                 }
 
                 rpta.put("value", html);
