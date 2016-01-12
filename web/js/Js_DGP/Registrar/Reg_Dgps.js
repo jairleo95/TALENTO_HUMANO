@@ -247,7 +247,8 @@ function agregar_centro_costo(opc, arr_cc) {
         texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
         texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
         texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-        texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" value="' + arr_cc[3] + '" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
+        texto += '<section class="col col-3"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" value="' + arr_cc[3] + '" class="porcentaje_cc"/></label></section>';
+         texto += '<section class="col col-3" ><button type="button" class="btn btn-danger btn-circle btn-lg remover' + ag + '"><i class="glyphicon glyphicon-remove"></i></button></section>';
         texto += '</div>';
         agregar.append(texto);
         listar_cc(ag, opc, arr_cc);
@@ -262,9 +263,12 @@ function agregar_centro_costo(opc, arr_cc) {
         texto += '<section class="col col-3"><label class="select" id="titu"> Seccion :<select required=""  class="cc-seccion' + ag + '"><option value="">[SECCION]</option></select></label></section>';
 
         texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-        texto += '<section class="col col-2"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/><button type="button" class="remover' + ag + '">Remover</button></label></section>';
+        texto += '<section class="col col-3"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/></label></section>';
+        texto += '<section class="col col-3" ><button type="button" class="btn btn-danger btn-circle btn-lg remover' + ag + '"><i class="glyphicon glyphicon-remove"></i></button></section>';
         texto += '</div>';
+        agregar.hide();
         agregar.append(texto);
+         agregar.show('blind');
         listar_cc(ag);
         var c_porcentaje = $(".porcentaje_cc").size();
         $(".porcentaje_cc").val(Math.round((100 / c_porcentaje) * 100) / 100);
@@ -286,7 +290,7 @@ function listar_tipo_horario() {
         var lista = objJson.lista;
         var horario = $("#horario");
         horario.empty();
-        horario.append('<option value="" >[SELECCIONE]</option>');
+        horario.append('<option value="" >[Seleccione]</option>');
         for (var i = 0; i < lista.length; i++) {
             horario.append('<option value="' + lista[i].id + '" >' + lista[i].nombre + '</option>');
         }
@@ -703,7 +707,7 @@ function list_cc_area(area, cc, dep) {
             //listarcc
         } else {
             cc.empty();
-            cc.append('<option value="">[SELECCIONE]</option>');
+            cc.append('<option value="">[Seleccione]</option>');
             for (var t = 0; t < lista.length; t++) {
                 cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
             }
@@ -724,7 +728,7 @@ function list_cc_seccion(seccion, cc) {
             // list_cc_area($(".select-area").val(), $(".centro_costo1"));
         } else {
             cc.empty();
-            cc.append('<option value="">[SELECCIONE]</option>');
+            cc.append('<option value="">[Seleccione]</option>');
             for (var t = 0; t < lista.length; t++) {
                 cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
             }

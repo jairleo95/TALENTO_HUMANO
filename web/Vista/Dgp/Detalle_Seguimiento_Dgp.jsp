@@ -172,7 +172,7 @@
                                                         //if () {
                                                         if (a.getEs_autorizacion() != null) {
 
-                                                            if (a.getEs_autorizacion().equals("2") & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005"))) {
+                                                            if (a.getEs_autorizacion().equals("2") & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005")| rol.trim().equals("ROL-0001"))) {
 
                                                     %>
 

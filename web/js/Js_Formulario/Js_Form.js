@@ -19,7 +19,7 @@ function list_select(objSelect, url, datos, opc, id) {
         }
         var lista = objJson.lista;
         if (lista.length > 0) {
-            objSelect.append("<option value=''>[SELECCIONE]</option>");
+            objSelect.append("<option value=''>[Seleccione]</option>");
             if (opc == "1" | opc == "4") {
                 for (var i = 0; i < lista.length; i++) {
                     if (id == lista[i].id) {
@@ -70,7 +70,7 @@ function list_selectJavaBeans(objSelect, url, datos,id_select,opcion_select, opc
         }
         var lista = objJson.lista;
         if (lista.length > 0) {
-            objSelect.append("<option value=''>[SELECCIONE]</option>");
+            objSelect.append("<option value=''>[Seleccione]</option>");
             if (opc == "1" | opc == "4") {
                 for (var i = 0; i < lista.length; i++) {
                     if (id == lista[i][id_select] ) {

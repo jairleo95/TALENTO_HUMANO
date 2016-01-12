@@ -54,6 +54,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSub_ModalidadDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
+import pe.edu.upeu.application.factory.FactoryConnectionDB;
 
 /**
  *
@@ -278,7 +279,7 @@ public class CContrato extends HttpServlet {
                             double porc_nuevo = Double.parseDouble(request.getParameter("PORCENTAJE_CC" + (1 + i)));
                             String centro_c_nuevo = request.getParameter("CENTRO_COSTOS_" + (1 + i));
                             String id_cont = request.getParameter("id_contrato");
-                            dcc.INSERT_DETALLE_CENTRO_COSTO("", centro_c_nuevo, "", porc_nuevo, "", iduser, "", "", "", id_cont, "1");
+                            dcc.INSERT_DETALLE_CENTRO_COSTO("",  "", porc_nuevo, "1", iduser, "", "", "", FactoryConnectionDB.detalle_ip(), id_cont,centro_c_nuevo);
                         }
                     } else {
                     }
@@ -701,14 +702,14 @@ public class CContrato extends HttpServlet {
                 }
 
                 //--------- CENTRO COSTOS --------------
-                String IP_USUARIO = request.getParameter("USUARIO_IP");
+              //  String IP_USUARIO = request.getParameter("USUARIO_IP");
                 int cant_cc = Integer.parseInt(request.getParameter("CANT"));
                 String idcto = con.MAX_ID_CONTRATO();
                 for (int g = 1; g <= cant_cc; g++) {
                     String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
                     double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
                     if (ID_CENTRO_COSTO != null && porcentaje != 0.0) {
-                        dcc.INSERT_DETALLE_CENTRO_COSTO(null, ID_CENTRO_COSTO, null, porcentaje, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, idcto, "1");
+                        dcc.INSERT_DETALLE_CENTRO_COSTO(null,  null, porcentaje, "1", iduser, null, null, null, FactoryConnectionDB.detalle_ip(),idcto,ID_CENTRO_COSTO);
                     }
                 }
                 //------------- HORARIO ------------

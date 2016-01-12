@@ -59,6 +59,7 @@ import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
+import pe.edu.upeu.application.factory.FactoryConnectionDB;
 
 /**
  *
@@ -257,7 +258,7 @@ public class CDgp extends HttpServlet {
                     String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
                     double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
                     if (ID_CENTRO_COSTO != null && porcentaje != 0.0) {
-                        dcc.INSERT_DETALLE_CENTRO_COSTO(null, ID_CENTRO_COSTO, iddgp, porcentaje, IP_USUARIO, iduser, FE_CREACION, US_MODIF, FE_MODIF, null, "1");
+                        dcc.INSERT_DETALLE_CENTRO_COSTO(null, iddgp, porcentaje, "1", iduser, null, null, null, FactoryConnectionDB.detalle_ip(), null,ID_CENTRO_COSTO);
                     }
                 }
                 List<String> list = a.Det_Autorizacion(idrp);
@@ -610,7 +611,7 @@ public class CDgp extends HttpServlet {
                         double porc_nuevo = Double.parseDouble(request.getParameter("PORCENTAJE_CC" + (1 + i)));
                         String centro_c_nuevo = request.getParameter("CENTRO_COSTOS_" + (1 + i));
                         String id_cont = request.getParameter("id_contrato");
-                        dcc.INSERT_DETALLE_CENTRO_COSTO("", centro_c_nuevo, ID_DGP, porc_nuevo, "", iduser, "", "", "", id_cont, "1");
+                        dcc.INSERT_DETALLE_CENTRO_COSTO("",  ID_DGP, porc_nuevo, "1", iduser, "", "", "", id_cont, "1",centro_c_nuevo);
                     }
                 } else {
                 }

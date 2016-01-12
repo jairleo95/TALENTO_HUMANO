@@ -34,11 +34,11 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select DISTINCT(id_centro_costo), CO_CENTRO_COSTO ||' -  '||DE_CENTRO_COSTO as DE_CENTRO_COSTO from RHVD_CENTRO_COSTO where  id_departamento='" + iddep.trim() + "' ";
+            String sql = "select ID_DEPART_CENTRO_COSTO,id_centro_costo, CO_CENTRO_COSTO ||' -  '||DE_CENTRO_COSTO as DE_CENTRO_COSTO from RHVD_CENTRO_COSTO where  id_departamento='" + iddep.trim() + "' ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                rec.put("id", rs.getString("id_centro_costo"));
+                rec.put("id", rs.getString("ID_DEPART_CENTRO_COSTO"));
                 rec.put("nombre", rs.getString("DE_CENTRO_COSTO"));
                 Lista.add(rec);
             }
@@ -142,17 +142,17 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         return Lista;
     }
 
-    @Override
+     @Override
     public List<Map<String, ?>> Centro_Costo_Dep(String iddep) {
 
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  cc.id_centro_costo,cc.CO_CENTRO_COSTO ||' -  '||cc.DE_CENTRO_COSTO as DE_CENTRO_COSTO  from RHVD_CENTRO_COSTO cc, rhtx_departamento dp , rhtx_direccion d where dp.id_departamento = cc.id_departamento and  dp.id_direccion = d.id_direccion and cc.id_departamento='" + iddep + "'  ORDER BY cc.DE_CENTRO_COSTO";
+            String sql = "select  cc.ID_DEPART_CENTRO_COSTO,cc.id_centro_costo,cc.CO_CENTRO_COSTO ||' -  '||cc.DE_CENTRO_COSTO as DE_CENTRO_COSTO  from RHVD_CENTRO_COSTO cc, rhtx_departamento dp , rhtx_direccion d where dp.id_departamento = cc.id_departamento and  dp.id_direccion = d.id_direccion and cc.id_departamento='" + iddep + "'  ORDER BY cc.DE_CENTRO_COSTO";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                rec.put("id", rs.getString("id_centro_costo"));
+                rec.put("id", rs.getString("ID_DEPART_CENTRO_COSTO"));
                 rec.put("nombre", rs.getString("de_centro_costo"));
                 Lista.add(rec);
             }
@@ -289,11 +289,11 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = " select distinct(ID_CENTRO_COSTO),CO_CENTRO_COSTO,DE_CENTRO_COSTO  from RHVD_CENTRO_COSTO where ID_AREA='"+id+"' ";
+            String sql = " select ID_DEPART_CENTRO_COSTO,id_centro_costo,CO_CENTRO_COSTO,DE_CENTRO_COSTO  from RHVD_CENTRO_COSTO where ID_AREA='"+id+"' ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                rec.put("id", rs.getString("id_centro_costo"));
+                rec.put("id", rs.getString("ID_DEPART_CENTRO_COSTO"));
                 rec.put("nombre", rs.getString("co_centro_costo")+" - "+rs.getString("de_centro_costo"));
                 Lista.add(rec);
             }
@@ -318,11 +318,11 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = " select ID_CENTRO_COSTO,CO_CENTRO_COSTO,DE_CENTRO_COSTO  from RHVD_CENTRO_COSTO where ID_SECCION='"+id+"' ";
+            String sql = "  select ID_DEPART_CENTRO_COSTO, ID_CENTRO_COSTO,CO_CENTRO_COSTO,DE_CENTRO_COSTO  from RHVD_CENTRO_COSTO where ID_SECCION='"+id+"' ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                rec.put("id", rs.getString("id_centro_costo"));
+                rec.put("id", rs.getString("ID_DEPART_CENTRO_COSTO"));
                 rec.put("nombre", rs.getString("co_centro_costo")+" - "+rs.getString("de_centro_costo"));
                 Lista.add(rec);
             }
@@ -374,7 +374,10 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
     @Override
     public List<Detalle_Centro_Costo> Cargar_dcc_dgp(String id) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select  distinct(c.CO_CENTRO_COSTO) ,  CC.ID_DGP, cc.ID_CENTRO_COSTO,d.ID_DIRECCION,c.ID_DEPARTAMENTO,c.ID_AREA,cc.CA_PORCENTAJE,c.DE_CENTRO_COSTO from RHTD_DETALLE_CENTRO_COSTO cc , RHVD_CENTRO_COSTO c , RHTX_DIRECCION d , RHTX_DEPARTAMENTO dp where cc.ID_CENTRO_COSTO = c.ID_CENTRO_COSTO  and dp.ID_DEPARTAMENTO = c.ID_DEPARTAMENTO  and cc.ES_DETALLE_CC='1'  and dp.ID_DIRECCION = d.ID_DIRECCION and cc.id_dgp='" + id + "'";
+        String sql = "select  distinct(c.CO_CENTRO_COSTO) ,  CC.ID_DGP, cc.ID_CENTRO_COSTO,d.ID_DIRECCION,c.ID_DEPARTAMENTO,c.ID_AREA,"
+                + "cc.CA_PORCENTAJE,c.DE_CENTRO_COSTO from RHTD_DETALLE_CENTRO_COSTO cc , RHVD_CENTRO_COSTO c ,"
+                + " RHTX_DIRECCION d , RHTX_DEPARTAMENTO dp where cc.ID_DEPART_CENTRO_COSTO = c.ID_DEPART_CENTRO_COSTO  "
+                + "and dp.ID_DEPARTAMENTO = c.ID_DEPARTAMENTO  and cc.ES_DETALLE_CC='1'  and dp.ID_DIRECCION = d.ID_DIRECCION and cc.id_dgp='" + id + "'";
         List<Detalle_Centro_Costo> Lista = new ArrayList<Detalle_Centro_Costo>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -427,7 +430,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT (c.ID_CENTRO_COSTO)as id_centro ,(c.CO_CENTRO_COSTO||' - '||c.DE_CENTRO_COSTO)as DE_CENTRO_COSTO,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO, d.CA_PORCENTAJE,pd.ID_DIRECCION,(d.ID_DETALLE_CENTRO_COSTO)as id_det_cen FROM RHVD_CENTRO_COSTO c,RHTD_DETALLE_CENTRO_COSTO d,RHVD_PUESTO_DIRECCION pd where pd.ID_DEPARTAMENTO=c.ID_DEPARTAMENTO and d.ID_CENTRO_COSTO=c.ID_CENTRO_COSTO and  d.ID_CONTRATO='" + id_con.trim() + "' GROUP by( c.ID_CENTRO_COSTO ,c.DE_CENTRO_COSTO ,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO,d.CA_PORCENTAJE,pd.ID_DIRECCION,d.ID_DETALLE_CENTRO_COSTO)";
+            String sql = "SELECT (c.ID_DEPART_CENTRO_COSTO)as id_centro ,(c.CO_CENTRO_COSTO||' - '||c.DE_CENTRO_COSTO)as DE_CENTRO_COSTO,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO, d.CA_PORCENTAJE,pd.ID_DIRECCION,(d.ID_DETALLE_CENTRO_COSTO)as id_det_cen FROM RHVD_CENTRO_COSTO c,RHTD_DETALLE_CENTRO_COSTO d,RHVD_PUESTO_DIRECCION pd where pd.ID_DEPARTAMENTO=c.ID_DEPARTAMENTO and d.ID_CENTRO_COSTO=c.ID_CENTRO_COSTO and  d.ID_CONTRATO='" + id_con.trim() + "' GROUP by( c.ID_CENTRO_COSTO ,c.DE_CENTRO_COSTO ,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO,d.CA_PORCENTAJE,pd.ID_DIRECCION,d.ID_DETALLE_CENTRO_COSTO)";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -503,7 +506,9 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT (c.ID_CENTRO_COSTO)as id_centro ,(c.CO_CENTRO_COSTO||' - '||c.DE_CENTRO_COSTO)as DE_CENTRO_COSTO,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO, d.CA_PORCENTAJE,pd.ID_DIRECCION,(d.ID_DETALLE_CENTRO_COSTO)as id_det_cen FROM RHVD_CENTRO_COSTO c,RHTD_DETALLE_CENTRO_COSTO d,RHVD_PUESTO_DIRECCION pd where pd.ID_DEPARTAMENTO=c.ID_DEPARTAMENTO and d.ID_CENTRO_COSTO=c.ID_CENTRO_COSTO and  d.ID_DGP='" + id_dgp.trim() + "' GROUP by( c.ID_CENTRO_COSTO ,c.DE_CENTRO_COSTO ,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO,d.CA_PORCENTAJE,pd.ID_DIRECCION,d.ID_DETALLE_CENTRO_COSTO)";
+            String sql = "SELECT (c.ID_DEPART_CENTRO_COSTO)AS id_centro , c.ID_DIRECCION,(c.CO_CENTRO_COSTO||' - ' ||c.DE_CENTRO_COSTO)AS DE_CENTRO_COSTO, "
+                    + "c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO,d.CA_PORCENTAJE, (d.ID_DETALLE_CENTRO_COSTO)AS id_det_cen FROM RHVD_CENTRO_COSTO c, "
+                    + " RHTD_DETALLE_CENTRO_COSTO d WHERE d.ID_DEPART_CENTRO_COSTO   =c.ID_DEPART_CENTRO_COSTO AND d.ID_DGP            ='"+id_dgp+"'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();

@@ -110,7 +110,8 @@
                                 <div class="alert_1">
                                 </div>
                                 <!-- Widget ID (each widget will need unique ID)-->
-                                <div class="jarviswidget" id="wid-id-2" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-custombutton="false">
+                                <div class="jarviswidget jarviswidget-color-white" id="wid-id-2"  data-widget-editbutton="false"
+                                     data-widget-deletebutton="false" data-widget-custombutton="false">
                                     <!-- widget options:
                                     usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
     
@@ -126,7 +127,7 @@
                                     -->
                                     <header>
                                         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                        <h2>Registrar Requerimiento</h2>
+                                        <h2 class="font-md"><strong>Registrar </strong> <i>Requerimientos</i></h2>
                                     </header>
 
                                     <!-- widget div-->
@@ -154,7 +155,7 @@
 
                                                 </header>
 
-                                                <fieldset id="fila-agregar">
+                                                <fieldset >
 
                                                     <%                                                        /*Temporal*/
                                                         String idreq = request.getParameter("idreq");
@@ -180,34 +181,36 @@
                                                         <section  class="col col-6" style="display: none;">
                                                             <label class="select" id="titu">CARGAR DATOS
                                                                 <select  class="btn-list-req" >
-                                                                    <option value="" selected=""  >[SELECCIONE]</option>
+                                                                    <option value="" selected=""  >[Seleccione]</option>
                                                                 </select>
                                                             </label>
                                                         </section>
                                                     </div>
                                                     <div class="row" >
-                                                        <section class="col col-6">
+                                                        <section class="col col-4">
                                                             <label class="select" id="titu">
                                                                 Motivo :<select name="MOTIVO" class="ant_policiales" required="" >
-                                                                    <option value="" >[SELECCIONE]</option>
+                                                                    <option value="" >[Seleccione]</option>
                                                                     <option value="1" selected="">Trabajador Nuevo</option>
                                                                     <option value="2">Renovación</option>
                                                                 </select>
                                                             </label>
                                                         </section>
-                                                        <section class="col col-2" id="titu">MFL:
+                                                        <section class="col col-4" id="titu">MFL:
                                                             <label class="toggle"  > 
                                                                 <input type="checkbox" value="1"   name="MFL" name="checkbox-toggle" >
                                                                 <i data-swchon-text="SI" data-swchoff-text="NO"></i>
                                                             </label>
                                                         </section>
+                                                        <div class="div_input_diezmo col col-4">
+                                                        </div>
                                                     </div>
 
                                                     <section style="display: none">
                                                         <label class="label" id="titu">Puesto | Seccion | Area:</label>
                                                         <label class="select">
                                                             <select name="IDPUESTO"   required="" class="chosen-select select-puesto1" >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <%
                                                                     for (int j = 0; j < List_Puesto.size(); j++) {
                                                                         V_Puesto_Direccion p = new V_Puesto_Direccion();
@@ -225,7 +228,7 @@
                                                             <label class="label" id="titu"> Area:</label>
                                                             <label class="select">
                                                                 <select data-placeholder="Seleccionar Area"  class="select-area"required="" >
-                                                                    <option value="">[SELECCIONE]</option>  
+                                                                    <option value="">[Seleccione]</option>  
                                                                 </select>
                                                             </label>
                                                         </section>
@@ -233,7 +236,7 @@
                                                             <label class="label" id="titu"> Sección:</label>
                                                             <label class="select">
                                                                 <select data-placeholder="Seleccionar Sección"  class="select-seccion"required="" >
-                                                                    <option value="">[SELECCIONE]</option>  
+                                                                    <option value="">[Seleccione]</option>  
                                                                 </select>
                                                             </label>
                                                         </section>
@@ -241,39 +244,41 @@
                                                             <label class="label" id="titu"> Puesto:</label>
                                                             <label class="select">
                                                                 <select data-placeholder="Seleccionar Puesto"  class="select-puesto" required="" >
-                                                                    <option value="">[SELECCIONE]</option>  
+                                                                    <option value="">[Seleccione]</option>  
                                                                 </select>
                                                             </label>
                                                         </section>
                                                     </div>
                                                     <%if (idreq.equals("REQ-0007") || idreq.equals("REQ-0008") || idreq.equals("REQ-0009") || idreq.equals("REQ-0001") || idreq.equals("REQ-0002") || idreq.equals("REQ-0003") || idreq.equals("REQ-0005")) {%>
-                                                    <div  class="row" id="centro-costo_1" >
-                                                        <section class="col col-4">
-                                                            <label class="select" id="titu">Centro de Costo Nº 1:
-                                                                <select name="CENTRO_COSTOS_1" class="select-cc centro_costo1" required="">
-                                                                    <option value="">[SELECCIONE]</option>
-                                                                </select>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2">
-                                                            <label class="input" id="titu">%
-                                                                <input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2">
-                                                            <label class="btn">
-                                                                <button type="button" class="btn btn-default btn-agregar-cc" id="btn-agregar-cc" >Agregar</button>
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-2">
-                                                            <label class="input" style="font-weight: bold;color:red;">% Total :
-                                                                <input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  />
-                                                            </label>
-                                                        </section>
+                                                    <div id="fila-agregar"> 
+                                                        <div  class="row" id="centro-costo_1" >
+                                                            <section class="col col-4">
+                                                                <label class="select" id="titu">Centro de Costo Nº 1:
+                                                                    <select name="CENTRO_COSTOS_1" class="select-cc centro_costo1" required="">
+                                                                        <option value="">[Seleccione]</option>
+                                                                    </select>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="input" id="titu">%
+                                                                    <input name="PORCENTAJE_1"  type="text" value="100"  class="porcentaje_cc"/>
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="input" style="font-weight: bold;color:red;">% Total :
+                                                                    <input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  />
+                                                                </label>
+                                                            </section>
+                                                            <section class="col col-2">
+                                                                <label class="btn">
+                                                                    <button type="button"  class="btn btn-primary btn-circle btn-lg btn-agregar-cc" id="btn-agregar-cc">
+                                                                        <i class="glyphicon glyphicon-plus"></i></button>
+                                                                </label>
+                                                            </section>
+
+                                                        </div>
+                                                        <input type="hidden" value="1" name="numero" class="cant-input" />
                                                     </div>
-                                                    <input type="hidden" value="1" name="numero" class="cant-input" />
-                                                    <div class="div_input_diezmo">
-                                                            </div>
                                                     <%}%>
                                                     <section>
                                                         <label class="label" id="titu">Requerimiento :</label>
@@ -320,7 +325,7 @@
                                                         <section class="col col-3" name="">
                                                             <label class="select" id="titu">Cta Sueldo - Banco:
                                                                 <select name="BANCO" id="banco" required="">
-                                                                    <option value="" selected="" disabled="" >[Selecione]</option>
+                                                                    <option value="" selected="" disabled="" >[Seleccione]</option>
                                                                     <option value="0" >Ninguno</option>
                                                                     <option value="1" >BBVA</option>
                                                                     <option value="2" >BCP</option>
@@ -447,6 +452,9 @@
                                                                 BEV :<input type="text" name="BEV" maxlength="13" value="0.0" id="bev">
                                                             </label>
                                                         </section>
+
+                                                    </div>
+                                                    <div  class="row" >
                                                         <%if (Integer.parseInt(request.getParameter("as_f")) > 0) {%>
                                                         <section class="col col-3">
                                                             <label class="input"  id="titu"> 
@@ -459,34 +467,28 @@
                                                                 Total Remunerativo :<div id="suel_total" style="color: red;">0.0</div>
                                                             </label>
                                                         </section>
-                                                    </div>
-                                                    <div  class="row" >
-                                                        <section class="col col-4">
+                                                        <section class="col col-3">
                                                             <label class="select" id="titu">
                                                                 Antecedentes Policiales :<select name="ANTECEDENTES_POLICIALES" class="ant_policiales" >
-                                                                    <option value="" >[SELECCIONE]</option>
+                                                                    <option value="" >[Seleccione]</option>
                                                                     <option value="1" selected="">No</option>
                                                                     <option value="2">Si</option>
                                                                 </select>
                                                             </label>
 
                                                         </section>
-                                                        <section class="col col-4">
+                                                        <section class="col col-3">
 
                                                             <label class="select" id="titu">
                                                                 Certificado de Salud: 
                                                                 <select name="CERTIFICADO_SALUD" required=""  class="essalud">
-                                                                    <option value="">[SELECCIONE]</option>
+                                                                    <option value="">[Seleccione]</option>
                                                                     <option value="1">Si</option>
                                                                     <option selected="" value="0">No</option>
                                                                 </select>
                                                             </label>
                                                         </section>
-                                                        <div class="col col-4">
-                                                            <div class="div_input_diezmo">
-                                                            </div>
 
-                                                        </div>
 
                                                     </div>
                                                     <%String es_cue_sue = request.getParameter("es_cs");%>
@@ -620,8 +622,7 @@
                                                                 <input type="text" name="DOMICILIO_FISCAL" id="" required="" >
                                                             </label>
                                                         </section>
-                                                        <div class="div_input_diezmo">
-                                                            </div>
+
                                                         <%}%>
                                                         <%if (idreq.equals("REQ-0010") || idreq.equals("REQ-0011")) {%>
                                                         <section class="col col-6" >
@@ -656,8 +657,7 @@
                                                         </section>
                                                         <input type="hidden" value="1" name="ES_PERIODO" />
                                                         <input type="hidden" value="1" name="CANT" class="cant" />
-                                                        <div class="div_input_diezmo">
-                                                            </div>
+
                                                     </div>
                                                     <%}%>
                                                     <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>">
@@ -667,15 +667,13 @@
                                                             <tr><td class="td">Horario de Capacitacion:</td><td><input type="text" name="HORARIO_CAPACITACION"  ></td></tr>   
                                                             <tr><td class="td">Horario de Refrigerio:</td><td><input type="text" name="HORARIO_REFRIGERIO"  ></td></tr>  
                                                             <tr><td class="td">Dias de Capacitacion:</td><td><input type="text" name="DIAS_CAPACITACION" ></td></tr>  
-                                                            <tr><div class="div_input_diezmo">
-                                                            </div></tr>  
+
                                                         </table>
                                                     </div >
                                                     <div id="div_3" class="contenido" style="display:none ">
                                                         <table class="table">
                                                             <tr><td class="td">Monto del Honorario:</td><td><input type="text" name="MONTO_HONORARIO" ></td></tr>   
-                                                            <tr><div class="div_input_diezmo">
-                                                            </div></tr>   
+
                                                         </table>
                                                     </div>
                                                 </fieldset>
@@ -696,7 +694,7 @@
                             <article class="col-sm-12 col-md-12 col-lg-6">
 
                                 <!-- Widget ID (each widget will need unique ID)-->
-                                <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-deletebutton="false">
+                                <div class="jarviswidget jarviswidget-color-white" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-deletebutton="false">
                                     <!-- widget options:
                                     usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
     
@@ -711,7 +709,7 @@
                                     -->
                                     <header>
                                         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                        <h2>Registrar Horario</h2>
+                                        <h2 class="font-md"><strong>Registrar </strong> <i>Horario</i></h2>
                                     </header>
                                     <!-- widget div-->
                                     <div>

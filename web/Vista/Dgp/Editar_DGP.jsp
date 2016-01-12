@@ -203,7 +203,7 @@
                                                         <label class="label" id="titu">Puesto | Seccion | Area:</label>
                                                         <label class="select">
                                                             <select name="IDPUESTO"  required="" class="chosen-select select-puesto1" >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <%for (int b = 0; b < List_Puesto.size(); b++) {
                                                                         V_Puesto_Direccion p = new V_Puesto_Direccion();
                                                                         p = (V_Puesto_Direccion) List_Puesto.get(b);
@@ -222,7 +222,7 @@
                                                             <label class="label" id="titu"> Area:</label>
                                                             <label class="select">
                                                                 <select data-placeholder="Seleccionar Area"  class="select-area"required="" >
-                                                                    <option value="">[SELECCIONE]</option>  
+                                                                    <option value="">[Seleccione]</option>  
                                                                 </select>
                                                             </label>
                                                         </section>
@@ -230,7 +230,7 @@
                                                             <label class="label" id="titu"> Sección:</label>
                                                             <label class="select">
                                                                 <select data-placeholder="Seleccionar Sección"  class="select-seccion"required="" >
-                                                                    <option value="">[SELECCIONE]</option>  
+                                                                    <option value="">[Seleccione]</option>  
                                                                 </select>
                                                             </label>
                                                         </section>
@@ -238,7 +238,7 @@
                                                             <label class="label" id="titu"> Puesto:</label>
                                                             <label class="select">
                                                                 <select data-placeholder="Seleccionar Puesto"  class="select-puesto" required="" >
-                                                                    <option value="">[SELECCIONE]</option>  
+                                                                    <option value="">[Seleccione]</option>  
                                                                 </select>
                                                             </label>
                                                         </section>
@@ -266,7 +266,7 @@
                                                         <section class="col col-6">
                                                             <label class="select" id="titu">
                                                                 Motivo :<select name="MOTIVO" class="ant_policiales" required="" >
-                                                                    <option value="" >[SELECCIONE]</option>
+                                                                    <option value="" >[Seleccione]</option>
                                                                     <%if (dg.getLi_motivo().equals("1")) {%>
                                                                     <option value="1" selected="">Trabajdor Nuevo</option>
                                                                     <option value="2">Renovación</option>
@@ -446,7 +446,7 @@
                                                         <section class="col col-4">
                                                             <label class="select" id="titu">
                                                                 Antecedentes Policiales :<select name="ANTECEDENTES_POLICIALES" class="ant_policiales" >
-                                                                    <option value="" >[SELECCIONE]</option>
+                                                                    <option value="" >[Seleccione]</option>
                                                                     <%if (dg.getDe_antecedentes_policiales() != null) {
                                                                             if (dg.getDe_antecedentes_policiales().equals("1")) {
                                                                     %>
@@ -470,7 +470,7 @@
                                                             <label class="select" id="titu">
                                                                 Certificado de Salud: 
                                                                 <select name="CERTIFICADO_SALUD" required=""  class="essalud">
-                                                                    <option value="">[SELECCIONE]</option>
+                                                                    <option value="">[Seleccione]</option>
                                                                     <%if (dg.getEs_certificado_salud() != null) {
                                                                             if (dg.getEs_certificado_salud().equals("1")) {
                                                                     %>
@@ -748,7 +748,7 @@
                                                         <label class="select">
 
                                                             <select id="horario" required="" name="HORARIO" >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="0">Editable</option>
 
                                                             </select>
@@ -933,12 +933,12 @@
         </div>
     </body>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             var b = $("#alerta_dgp");
             var info = $(".div_info");
             // $("#alerta_dgp").hide();
             function listar() {
-                $.post("../../plazo_dgp", "opc=Listar", function(objJson) {
+                $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
                     b.empty();
                     var lista = objJson.lista;
                     if (objJson.rpta == -1) {
@@ -956,20 +956,20 @@
             list_select($(".select-seccion"), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(".area_id").val(), "4", $(".seccion_id").val());
             list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".seccion_id").val(), "4", $(".puesto_id").val());
 
-            $(".select-area").change(function() {
+            $(".select-area").change(function () {
                 list_select($(".select-seccion"), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(".select-area").val(), "3");
                 $(".select-seccion,.select-puesto").val("");
                 $(".chosen-select").trigger("chosen:updated");
             });
-            $(".select-seccion").change(function() {
+            $(".select-seccion").change(function () {
                 list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".select-seccion").val(), "3");
                 $(".chosen-select").trigger("chosen:updated");
             });
-            $(".select-puesto").change(function() {
+            $(".select-puesto").change(function () {
                 $(".select-puesto1").val($(this).val());
                 $(".chosen-select").trigger("chosen:updated");
             });
-            $(".select-puesto1").change(function() {
+            $(".select-puesto1").change(function () {
                 $(".select-area,.select-seccion,.select-puesto").val("");
                 $(".chosen-select").trigger("chosen:updated");
             });
@@ -977,7 +977,7 @@
 
 
         var cantidad = 1;
-        $("#btn_add").click(function() {
+        $("#btn_add").click(function () {
             var agregar = $('#fila-agregar');
             var texto = "";
             cantidad++;
@@ -1001,7 +1001,7 @@
             periodo_pago(cantidad);
             $(".cant").val(cantidad);
             //alert($(".cant").val())
-            $(".eliminar" + cantidad).click(function() {
+            $(".eliminar" + cantidad).click(function () {
                 $(".pago_cuotas_" + cantidad).remove();
                 periodo_pago(cantidad);
                 cantidad--;
@@ -1012,9 +1012,9 @@
         });
 
         $(document).ready(
-                function() {
+                function () {
                     $("#sueldo").keyup(
-                            function() {
+                            function () {
                                 var sueldo = parseFloat($("#sueldo").val());
                                 $(".monto").val(Math.round(sueldo));
                             });
@@ -1023,7 +1023,7 @@
         function periodo_pago(cantidad) {
             var sueldo = parseFloat($("#sueldo").val());
             var p_p = sueldo / cantidad;
-            $.each($(".monto"), function() {
+            $.each($(".monto"), function () {
                 $(".monto").val(p_p);
             });
         }
@@ -1037,31 +1037,31 @@
             $("#suel_total").text(Math.round(v * 100) / 100);
         }
         $(document).ready(
-                function() {
+                function () {
                     $("#sueldo").keyup(
-                            function() {
+                            function () {
                                 calcular_sueldo_total();
                             }
                     );
                     $("#bono_al").keyup(
-                            function() {
+                            function () {
                                 calcular_sueldo_total();
                             }
                     );
                     $("#bev").keyup(
-                            function() {
+                            function () {
                                 calcular_sueldo_total();
                             }
                     );
                     $("#bono_pu").keyup(
-                            function() {
+                            function () {
                                 calcular_sueldo_total();
                             }
                     );
                 }
         );</script>
     <script language="javascript" type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".contenido").hide();
             /*TEMPORAL*/
             //Planilla
@@ -1096,7 +1096,7 @@
 
 
                     $("#select_lun").change(
-                            function() {
+                            function () {
                                 var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
                                 if (msg == true) {
                                     if ($(this).val() == 1) {
@@ -1114,7 +1114,7 @@
                             }
                     );
                     $("#select_mar").change(
-                            function() {
+                            function () {
                                 var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
                                 if (msg == true) {
                                     if ($(this).val() == 1) {
@@ -1132,7 +1132,7 @@
                             }
                     );
                     $("#select_mie").change(
-                            function() {
+                            function () {
                                 var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
                                 if (msg == true) {
                                     if ($(this).val() == 1) {
@@ -1150,7 +1150,7 @@
                             }
                     );
                     $("#select_jue").change(
-                            function() {
+                            function () {
                                 var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
                                 if (msg == true) {
                                     if ($(this).val() == 1) {
@@ -1168,7 +1168,7 @@
                             }
                     );
                     $("#select_vie").change(
-                            function() {
+                            function () {
                                 var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
                                 if (msg == true) {
                                     if ($(this).val() == 1) {
@@ -1186,7 +1186,7 @@
                             }
                     );
                     $("#select_sab").change(
-                            function() {
+                            function () {
                                 var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
                                 if (msg == true) {
                                     if ($(this).val() == 1) {
@@ -1204,7 +1204,7 @@
                             }
                     );
                     $("#select_dom").change(
-                            function() {
+                            function () {
                                 var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
                                 if (msg == true) {
                                     if ($(this).val() == 1) {
@@ -1262,12 +1262,9 @@
         }
         function Listar_centro_costo1() {
             var x = $("#list-cc");
-            $.post("../../centro_costo", "opc=Listar_centro_id_dgp&" + "id_dgp=" + $(".iddgp").val(), function(objJson) {
+            $.post("../../centro_costo", "opc=Listar_centro_id_dgp&" + "id_dgp=" + $(".iddgp").val(), function (objJson) {
                 if ($(".can_centro_cos").val() != 0) {                     //alert($(".iddgp").val());
-                    /*if (objJson.rpta == -1) {
-                     alert(objJson.mensaje);
-                     return;
-                     }*/                     var lista = objJson.lista;
+                    var lista = objJson.lista;
                     x.empty();
                     var CANT_T = 0;
                     var numero = 1;
@@ -1294,10 +1291,6 @@
                             cc = lista[i].id;
                             listar_cc2(ag, dir, dep, cc);
 
-                            /*texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" id="rem' + (i + 1) + '" onclick="Eliminar($(this).val());" disabled=""><i class="fa fa-minus fa-2x"></i></button></label></section>');
-                             texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
-                             texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                             texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';*/
                         } else {
                             texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
                             texto += '<div  class="row centro-costo_' + ag + '" >';
@@ -1312,18 +1305,14 @@
                             dep = lista[i].id_dep_cc;
                             cc = lista[i].id;
                             listar_cc2(ag, dir, dep, cc);
-                            // texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" onclick="Eliminar($(this).val());"><i class="fa fa-minus fa-2x"></i></button></label></section>');
                         }
-
-                        //listar_cc2(ag, lista[i].id_dir_cc, lista[i].id_dep_cc, lista[i].id);
-
                         numero = 1;
                         ag++;
                         CANT_T = (CANT_T + parseFloat(lista[i].ca_por_cc));
                     }
 
                     x.append(texto);
-                    $('#btn-agregar-cc2').click(function() {
+                    $('#btn-agregar-cc2').click(function () {
                         agregar_centro_costo();
                     });
                     $(".por_sum_to").val(CANT_T);
@@ -1335,7 +1324,7 @@
         function dar_valor(caracter, num) {
             $(".porc" + num).val(caracter);
             var acum = 0;
-            $.each($(".porcentaje_cc"), function() {
+            $.each($(".porcentaje_cc"), function () {
                 acum = acum + parseFloat($(this).val());
             });
             $(".por_sum_to").val(acum);
@@ -1346,7 +1335,7 @@
         var estable = 0;
         var can_eliminada = 0;
         function listar_cc2(num, dir, dep, cc) {
-            $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
+            $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
@@ -1362,19 +1351,16 @@
                     }
                 }
             });
-            $("#cc-dir" + num).change(function() {
+            $("#cc-dir" + num).change(function () {
 
                 listar_dep_cc2(num);
             });
-            $(".cc-dep" + num).change(function() {
+            $(".cc-dep" + num).change(function () {
 
                 listar_centro_costo2(num, "0", arr_cc);
             });
-            //  alert(num);
-            $(".por-cen-1").keyup(function() {
-                alert();
-            });
-            $(".remover" + num).click(function() {
+
+            $(".remover" + num).click(function () {
                 $(".remover" + (num - 1)).removeAttr("disabled");
                 remover(num);
                 sumn_porcen_total();
@@ -1386,37 +1372,36 @@
         }
         function sumn_porcen_total() {
             var acum = 0;
-            $.each($(".porcentaje_cc"), function() {
+            $.each($(".porcentaje_cc"), function () {
                 acum = acum + parseFloat($(this).val());
             });
             $(".por_sum_to").val(acum);
         }
         function listar_dep_cc2(x, dep, cc) {
             var cc_dep = $(".cc-dep" + x);
-            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function(objJson) {
-
+            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function (objJson) {
                 cc_dep.empty();
                 cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    if (dep == lista[i].id) {
-                        cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                        listar_centro_costo3(x, cc);
-                    } else {
-                        cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                } else {
+                    var lista = objJson.lista;
+                    for (var i = 0; i < lista.length; i++) {
+                        if (dep === lista[i].id) {
+                            cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
+                            listar_centro_costo3(x, cc);
+                        } else {
+                            cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                        }
                     }
-
                 }
             });
         }
         function listar_centro_costo3(x, cc) {
 
             var centro_costo = $(".centro_costo" + x);
-            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function(objJson) {
+            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function (objJson) {
                 centro_costo.empty();
                 centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
                 if (objJson.rpta == -1) {
@@ -1437,7 +1422,7 @@
         function listar_centro_costo2(x, opc, arr_cc) {
 
             var centro_costo = $(".centro_costo" + x);
-            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function(objJson) {
+            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function (objJson) {
                 centro_costo.empty();
                 centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
                 if (objJson.rpta == -1) {
@@ -1521,7 +1506,7 @@
             texto = "";
             $(".cant").val(ag);
             ag++;
-            $(".porcentaje_cc").keyup(function() {
+            $(".porcentaje_cc").keyup(function () {
                 sumn_porcen_total();
             });
         }
@@ -1545,7 +1530,7 @@
         }
         function listar_cc(num, opc, arr_cc) {
             var cc_dir = $(".cc-dir" + num);
-            $.post("../../centro_costo?opc=Listar_dir", function(objJson) {
+            $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
@@ -1564,23 +1549,23 @@
                     }
                 }
             });
-            $(".cc-dir" + num).change(function() {
+            $(".cc-dir" + num).change(function () {
 
                 listar_dep_cc(num, "0", arr_cc);
 
             });
-            $(".cc-dep" + num).change(function() {
+            $(".cc-dep" + num).change(function () {
                 listar_centro_costo2(num, "0", arr_cc);
             });
-            $(".porcenttaj" + num).keyup(function() {
+            $(".porcenttaj" + num).keyup(function () {
                 $(".cont_dif" + num).val($(this).val());
                 var acum = 0;
-                $.each($(".porcentaje_cc"), function() {
+                $.each($(".porcentaje_cc"), function () {
                     acum = acum + parseFloat($(this).val());
                 });
                 $(".por_sum_to").val(acum);
             });
-            $(".remover" + num).click(function() {
+            $(".remover" + num).click(function () {
                 remover(num);
                 ag--;
                 ingr--;
@@ -1603,7 +1588,7 @@
         function listar_dep_cc(x, opc, arr_cc) {
 
             var cc_dep = $(".cc-dep" + x);
-            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function(objJson) {
+            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function (objJson) {
                 cc_dep.empty();
                 cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
                 if (objJson.rpta == -1) {
@@ -1631,7 +1616,7 @@
             $(".procent").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
             $(".por-i").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
             var acum = 0;
-            $.each($(".porcentaje_cc"), function() {
+            $.each($(".porcentaje_cc"), function () {
                 acum = acum + parseFloat($(this).val());
             });
             $(".por_sum_to").val(acum);
@@ -1643,7 +1628,7 @@
 
             var msg = confirm('Si aceptas se eliminara la informacion totalmente ¿aceptas?');
             if (msg == true) {
-                $.post("../../centro_costo", "opc=Eliminar_det_cc&" + "id_dcc=" + $(".id_dcc" + i).val(), function() {
+                $.post("../../centro_costo", "opc=Eliminar_det_cc&" + "id_dcc=" + $(".id_dcc" + i).val(), function () {
                     ag--;
                     $(".remover" + i + 1).attr("disabled", "disabled");
                     remov(i);
@@ -1666,7 +1651,7 @@
         function sumn_porcen_total() {
 
             var acum = 0;
-            $.each($(".porcentaje_cc"), function() {
+            $.each($(".porcentaje_cc"), function () {
                 acum = acum + parseFloat($(this).val());
             });
             $(".total_porcentaje").val(acum);
@@ -1758,7 +1743,7 @@
         var ag = $('#fila-agregar .porcentaje_cc').size() + 1;
         var texto = "";
         function listar_tipo_horario() {
-            $.post("../../formato_horario", "opc=Listar_Tip_Horario", function(objJson) {
+            $.post("../../formato_horario", "opc=Listar_Tip_Horario", function (objJson) {
 
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1767,7 +1752,7 @@
                 var lista = objJson.lista;
                 var horario = $("#horario");
                 horario.empty();
-                horario.append('<option value="" >[SELECCIONE]</option>');
+                horario.append('<option value="" >[Seleccione]</option>');
                 for (var i = 0; i < lista.length; i++) {
                     if ($(".id_det_hor").val().trim() == lista[i].id) {
                         horario.append('<option value="' + lista[i].id + '" selected="">' + lista[i].nombre + '</option>');
@@ -1800,7 +1785,7 @@
 
                 var dias_semana = new Array("lun", "mar", "mie", "jue", "vie", "sab", "dom");
                 $(".tr-dia").remove();
-                $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function(objJson) {
+                $.post("../../formato_horario", "opc=Listar_Horario&id=" + valor, function (objJson) {
                     var lista = objJson.lista;
                     var text_html = '';
                     var primera_fila = 0;
@@ -1838,15 +1823,15 @@
                     calcularHoras();
                     //$(".texto-h").mask("99:99", {placeholder: "X"});
                     $(".texto-h").keypress(
-                            function() {
+                            function () {
                                 calcularHoras();
                             }
                     );
-                    $(".remover_turno").click(function() {
+                    $(".remover_turno").click(function () {
                         //alert($(this).val());                         $(".turno_" + $(this).val()).remove();
                         calcularHoras();
                     });
-                    $(".agregar_turno").click(function() {
+                    $(".agregar_turno").click(function () {
                         var turno = $('#show_' + $(".nombre_dia_" + $(this).val()).val() + ' .tr-dia').size() + 1;
                         var dia = $(".nombre_dia_" + $(this).val()).val();
                         var agregar_turno = $('#show_' + dia);
@@ -1858,13 +1843,13 @@
                         text_html += '<button type="button" class="btn btn-danger remover_turno" value="' + (i + 1) + '"><i class="fa  fa-minus-circle"></i></button></td></tr>';
                         agregar_turno.append(text_html);
                         //$(".texto-h").mask("99:99", {placeholder: "X"});
-                        $(".remover_turno").click(function() {
+                        $(".remover_turno").click(function () {
                             //alert($(this).val());
                             $(".turno_" + $(this).val()).remove();
                             calcularHoras();
                         });
                         $(".texto-h").keypress(
-                                function() {
+                                function () {
                                     calcularHoras();
                                 }
                         );
@@ -1877,7 +1862,7 @@
 
         }
         function listar_horas() {
-            $.post("../../formato_horario", "opc=Listar_Horas_horario&iddgp=" + $(".iddgp").val(), function(objJson) {
+            $.post("../../formato_horario", "opc=Listar_Horas_horario&iddgp=" + $(".iddgp").val(), function (objJson) {
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
                     return;
@@ -1962,7 +1947,7 @@
                     calcularHoras();
                     //$(".texto-h").mask("99:99", {placeholder: "X"});
                     $(".texto-h").keypress(
-                            function() {
+                            function () {
                                 calcularHoras();
                             }
                     );
@@ -1971,7 +1956,7 @@
                      //$(".turno_" + $(this).val()).remove();
                      Eliminar();
                      });*/
-                    $(".agregar_turno").click(function() {
+                    $(".agregar_turno").click(function () {
                         //var turno = $('#show_' + $(".nombre_dia_" + $(this).val()).val() + ' .tr-dia').size() + 1;
                         var dia = $(".nombre_dia_" + $(this).val()).val();
                         var agregar_turno = $('#show_' + dia);
@@ -1984,13 +1969,13 @@
                         text_html += '<button type="button" class="btn btn-danger remover_turno" value="' + (i + 1) + '"><i class="fa  fa-minus-circle"></i></button></td></tr>';
                         agregar_turno.append(text_html);
                         //$(".texto-h").mask("99:99", {placeholder: "X"});
-                        $(".remover_turno").click(function() {
+                        $(".remover_turno").click(function () {
                             //alert($(this).val());
                             $(".turno_" + $(this).val()).remove();
                             calcularHoras();
                         });
                         $(".texto-h").keypress(
-                                function() {
+                                function () {
                                     calcularHoras();
                                 }
                         );
@@ -2003,7 +1988,7 @@
             var dia_string = "";
             var msg = confirm('Si aceptas se eliminara la informacion totalmente ¿estas seguro de realizar esta operacion?');
             if (msg == true) {
-                $.post("../../formato_horario", "opc=Eliminar_turno&id_horario=" + id, function(objJson) {
+                $.post("../../formato_horario", "opc=Eliminar_turno&id_horario=" + id, function (objJson) {
                     if (dia == 1) {
                         dia_string = "lun";
                     }
@@ -2032,7 +2017,7 @@
                 return false;
             }
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
             Listar_centro_costo1();
             listar_tipo_horario();
             listar_horas();
@@ -2045,10 +2030,10 @@
 
 
             //  var r = "";
-            $('#btn-agregar-cc').click(function() {
+            $('#btn-agregar-cc').click(function () {
                 agregar_centro_costo();
             });
-            $("#banco").change(function() {
+            $("#banco").change(function () {
 
                 cuenta_bancaria($(this).val());
                 $("#nu_cuen").focus();
@@ -2057,7 +2042,7 @@
             });
             listar_cc();
 
-            $("#horario").change(function() {
+            $("#horario").change(function () {
                 var select_an = $("#horario").val();
                 var msg = confirm('Si aceptas se eliminara la informacion totalmente los horarios que se ven ahora ¿deseas continuar?');
                 if (msg == true) {
@@ -2070,7 +2055,7 @@
             });
         });</script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("#sueldo").numeric();
             $("#bono_al").numeric();
             $("#bev").numeric();
@@ -2083,7 +2068,7 @@
             var scntDiv = $('#show_lun');
             var i = $('#show_lun .texto-h').size() + 1;
             var s = $('#show_lun .tr-count').size() + 1;
-            $('#addScnt').click(function() {
+            $('#addScnt').click(function () {
                 $('<tr><td>T' + s + ' :</td><td><input type="text"   name="HORA_DESDE_lun' + i
                         + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_lun' + i
                         + '" value="" placeholder=" " /><input type="hidden" name="DIA_lun' + i
@@ -2093,7 +2078,7 @@
                 s++;
                 return false;
             });
-            $('#remScnt').click(function() {
+            $('#remScnt').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -2104,18 +2089,18 @@
             });
         });
         //MARTES
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_mar');
             var i = $('#show_mar .texto-h').size() + 1;
             var s = $('#show_mar .tr-count_2').size() + 1;
-            $('#add_2').click(function() {
+            $('#add_2').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mar' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mar' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mar' + i + '" value="mar" ><input type="hidden" name="USER_CREACION_mar' + i + '"> <a href="#" id="remove_2">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_2').click(function() {
+            $('.remove_2').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();                     //  $("#tr-d").remove();                                i--;
                     s--;
@@ -2124,18 +2109,18 @@
             });
         });
         //MIERCOLES
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_mie');
             var i = $('#show_mie .texto-h').size() + 1;
             var s = $('#show_mie .tr-count_3').size() + 1;
-            $('#add_3').click(function() {
+            $('#add_3').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_mie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_mie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_mie' + i + '" value="mie" ><input type="hidden" name="USER_CREACION_mie' + i + '"> <a href="#" id="remove_3">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_3').click(function() {
+            $('.remove_3').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();                     //  $("#tr-d").remove();                                i--;
                     s--;
@@ -2144,18 +2129,18 @@
             });
         });
         //JUEVES
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_jue');
             var i = $('#show_jue .texto-h').size() + 1;
             var s = $('#show_jue .tr-count_4').size() + 1;
-            $('#add_4').click(function() {
+            $('#add_4').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_jue' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_jue' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_jue' + i + '" value="jue" ><input type="hidden" name="USER_CREACION_jue' + i + '"> <a href="#" id="remove_4">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_4').click(function() {
+            $('.remove_4').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -2166,18 +2151,18 @@
             });
         });
         //VIERNES
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_vie');
             var i = $('#show_vie .texto-h').size() + 1;
             var s = $('#show_vie .tr-count_5').size() + 1;
-            $('#add_5').click(function() {
+            $('#add_5').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_vie' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_vie' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_vie' + i + '" value="vie" ><input type="hidden" name="USER_CREACION_vie' + i + '"> <a href="#" id="remove_5">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_5').click(function() {
+            $('.remove_5').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -2188,18 +2173,18 @@
             });
         });
         //DOMINGO
-        $(function() {
+        $(function () {
             var scntDiv = $('#show_sab');
             var i = $('#show_sab .texto-h').size() + 1;
             var s = $('#show_sab .tr-count_6').size() + 1;
-            $('#add_6').click(function() {
+            $('#add_6').click(function () {
 
                 $('<tr><td>T' + s + ' :</td><td><input type="text"  name="HORA_DESDE_dom' + i + '" value="" placeholder="" /></td><td><input type="text"  size="20" name="HORA_HASTA_dom' + i + '" value="" placeholder=" " /><input type="hidden" name="DIA_dom' + i + '" value="dom" ><input type="hidden" name="USER_CREACION_dom' + i + '"> <a href="#" id="remove_6">-</a></td></tr>').appendTo(scntDiv);
                 i++;
                 s++;
                 return false;
             });
-            $('.remove_6').click(function() {
+            $('.remove_6').click(function () {
                 if (i > 2) {
                     $(this).parents('tr').remove();
                     //  $("#tr-d").remove();           
@@ -2213,14 +2198,14 @@
     <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>         if (!window.jQuery) {
-    document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-}
+            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+        }
     </script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>         if (!window.jQuery.ui) {
-    document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-}
+            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+        }
     </script>
     <!-- IMPORTANT: APP CONFIG -->
     <script src="../../js/app.config.js"></script>
@@ -2284,8 +2269,8 @@
     <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
     <script type="text/javascript">
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
-        $(document).ready(function() {
-            $(".val_fe").change(function() {
+        $(document).ready(function () {
+            $(".val_fe").change(function () {
                 var fecha = $(this).val().split("-");
 
                 if (fecha[0].length > 4) {
@@ -2404,7 +2389,7 @@
         });
 
 
-        jQuery.validator.addMethod("val_fecha", function(value, element) {
+        jQuery.validator.addMethod("val_fecha", function (value, element) {
             var d = value.split("-");
             return this.optional(element) || String(parseInt(d[0])).length == 4;
         }, "¡Fecha ingresada invalida!");
@@ -2471,7 +2456,7 @@
                     required: 'You must agree with Terms and Conditions'
                 }},
             // Do not change code below
-            errorPlacement: function(error, element) {
+            errorPlacement: function (error, element) {
                 error.insertAfter(element.parent());
             }
         });
@@ -2520,7 +2505,7 @@
                 }
             },
             // Do not change code below
-            errorPlacement: function(error, element) {
+            errorPlacement: function (error, element) {
                 error.insertAfter(element.parent());
             }
         });
@@ -2558,14 +2543,14 @@
                 }
             },
             // Ajax form submition
-            submitHandler: function(form) {
+            submitHandler: function (form) {
                 $(form).ajaxSubmit({
-                    success: function() {
+                    success: function () {
                         $("#comment-form").addClass('submited');
                     }
                 });
             }, // Do not change code below
-            errorPlacement: function(error, element) {
+            errorPlacement: function (error, element) {
                 error.insertAfter(element.parent());
             }
         });
@@ -2597,15 +2582,15 @@
                 }
             },
             // Ajax form submition
-            submitHandler: function(form) {
+            submitHandler: function (form) {
                 $(form).ajaxSubmit({
-                    success: function() {
+                    success: function () {
                         $("#contact-form").addClass('submited');
                     }
                 });
             },
             // Do not change code below
-            errorPlacement: function(error, element) {
+            errorPlacement: function (error, element) {
                 error.insertAfter(element.parent());
             }
         });
@@ -2633,7 +2618,7 @@
                 }
             },
             // Do not change code below
-            errorPlacement: function(error, element) {
+            errorPlacement: function (error, element) {
                 error.insertAfter(element.parent());
             }
         });
@@ -2677,7 +2662,7 @@
                 }
             },
             // Do not change code below
-            errorPlacement: function(error, element) {
+            errorPlacement: function (error, element) {
                 error.insertAfter(element.parent());
             }
         });
@@ -2686,7 +2671,7 @@
             dateFormat: 'dd.mm.yy',
             prevText: '<i class="fa fa-chevron-left"></i>',
             nextText: '<i class="fa fa-chevron-right"></i>',
-            onSelect: function(selectedDate) {
+            onSelect: function (selectedDate) {
                 $('#finishdate').datepicker('option', 'minDate', selectedDate);
             }
         });
@@ -2694,7 +2679,7 @@
         dateFormat: 'dd.mm.yy',
                 prevText: '<i class="fa fa-chevron-left"></i>',
                 nextText: '<i class="fa fa-chevron-right"></i>',
-                onSelect: function(selectedDate) {
+                onSelect: function (selectedDate) {
                     $('#startdate').datepicker('option', 'maxDate', selectedDate);
                 }
         });
