@@ -1036,7 +1036,7 @@ public class DgpDAO implements InterfaceDgpDAO {
             cst.setString(16, DE_HORARIO_REFRIGERIO);
             cst.setString(17, DE_DIAS_CAPACITACION);
             cst.setString(18, ES_DGP);
-            cst.setString(19, US_CREACION);
+            cst.setString(19, null);
             cst.setString(20, null);
             cst.setString(21, US_MODIF);
             cst.setString(22, null);

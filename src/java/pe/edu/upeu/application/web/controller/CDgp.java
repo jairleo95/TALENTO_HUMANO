@@ -588,7 +588,10 @@ public class CDgp extends HttpServlet {
                     ES_MFL = "0";
                 }
 
-                dgp.MODIFICAR_DGP(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, LI_MOTIVO, ES_MFL, BONO_PUESTO);
+                dgp.MODIFICAR_DGP(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, 
+                        DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, 
+                        ES_DGP, null, FE_CREACION, iduser, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD,
+                        DE_MONTO_HONORARIO, LI_MOTIVO, ES_MFL, BONO_PUESTO);
                 String iddgp = dgp.MAX_ID_DGP();
                 String ESTADO = request.getParameter("ESTADO");
                 if (ESTADO != null) {
@@ -611,7 +614,7 @@ public class CDgp extends HttpServlet {
                         double porc_nuevo = Double.parseDouble(request.getParameter("PORCENTAJE_CC" + (1 + i)));
                         String centro_c_nuevo = request.getParameter("CENTRO_COSTOS_" + (1 + i));
                         String id_cont = request.getParameter("id_contrato");
-                        dcc.INSERT_DETALLE_CENTRO_COSTO("",  ID_DGP, porc_nuevo, "1", iduser, "", "", "", id_cont, "1",centro_c_nuevo);
+                        dcc.INSERT_DETALLE_CENTRO_COSTO("",  ID_DGP, porc_nuevo, "1", iduser, "", "", "", FactoryConnectionDB.detalle_ip(), id_cont,centro_c_nuevo);
                     }
                 } else {
                 }

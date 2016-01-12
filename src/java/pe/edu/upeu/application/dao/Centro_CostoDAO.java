@@ -506,7 +506,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT (c.ID_DEPART_CENTRO_COSTO)AS id_centro , c.ID_DIRECCION,(c.CO_CENTRO_COSTO||' - ' ||c.DE_CENTRO_COSTO)AS DE_CENTRO_COSTO, "
+            String sql = "SELECT (c.ID_DEPART_CENTRO_COSTO)AS id_centro , c.id_area,c.id_seccion,c.ID_DIRECCION,(c.CO_CENTRO_COSTO||' - ' ||c.DE_CENTRO_COSTO)AS DE_CENTRO_COSTO, "
                     + "c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO,d.CA_PORCENTAJE, (d.ID_DETALLE_CENTRO_COSTO)AS id_det_cen FROM RHVD_CENTRO_COSTO c, "
                     + " RHTD_DETALLE_CENTRO_COSTO d WHERE d.ID_DEPART_CENTRO_COSTO   =c.ID_DEPART_CENTRO_COSTO AND d.ID_DGP            ='"+id_dgp+"'";
             ResultSet rs = this.conn.query(sql);
@@ -519,6 +519,8 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
                 rec.put("id_dep_cc", rs.getString("ID_DEPARTAMENTO"));
                 rec.put("id_dir_cc", rs.getString("ID_DIRECCION"));
                 rec.put("ca_por_cc", rs.getString("CA_PORCENTAJE"));
+                rec.put("id_area_cc", rs.getString("id_area"));
+                rec.put("id_seccion_cc", rs.getString("id_seccion"));
                 Lista.add(rec);
             }
             rs.close();

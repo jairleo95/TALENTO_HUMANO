@@ -248,7 +248,7 @@ function agregar_centro_costo(opc, arr_cc) {
         texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
         texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
         texto += '<section class="col col-3"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" value="' + arr_cc[3] + '" class="porcentaje_cc"/></label></section>';
-         texto += '<section class="col col-3" ><button type="button" class="btn btn-danger btn-circle btn-lg remover' + ag + '"><i class="glyphicon glyphicon-remove"></i></button></section>';
+        texto += '<section class="col col-3" ><button type="button" class="btn btn-danger btn-circle btn-lg remover' + ag + '"><i class="glyphicon glyphicon-remove"></i></button></section>';
         texto += '</div>';
         agregar.append(texto);
         listar_cc(ag, opc, arr_cc);
@@ -268,7 +268,7 @@ function agregar_centro_costo(opc, arr_cc) {
         texto += '</div>';
         agregar.hide();
         agregar.append(texto);
-         agregar.show('blind');
+        agregar.show('blind');
         listar_cc(ag);
         var c_porcentaje = $(".porcentaje_cc").size();
         $(".porcentaje_cc").val(Math.round((100 / c_porcentaje) * 100) / 100);
@@ -368,29 +368,7 @@ function listar_dep_cc(x, opc, arr_cc) {
         }
     });
 }
-function listar_centro_costo(x, opc, arr_cc) {
-    var centro_costo = $(".centro_costo" + x);
-    $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function (objJson) {
-        centro_costo.empty();
-        centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
-        if (objJson.rpta == -1) {
-            alert(objJson.mensaje);
-            return;
-        }
-        var lista = objJson.lista;
-        for (var i = 0; i < lista.length; i++) {
-            if (opc == "1") {
-                if (arr_cc[4] == lista[i].id) {
-                    centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                } else {
-                    centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                }
-            } else {
-                centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-            }
-        }
-    });
-}
+
 function listar_cc(num, opc, arr_cc) {
     var select_cc = $(".select-cc");
     $.post("../../centro_costo?opc=Listar_cc", function (objJson) {
@@ -398,10 +376,11 @@ function listar_cc(num, opc, arr_cc) {
         if (objJson.rpta == -1) {
             alert(objJson.mensaje);
             return;
-        }
-        var lista = objJson.lista;
-        for (var i = 0; i < lista.length; i++) {
-            select_cc.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+        } else {
+            var lista = objJson.lista;
+            for (var i = 0; i < lista.length; i++) {
+                select_cc.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+            }
         }
     });
     var cc_dir = $(".cc-dir" + num);
@@ -434,12 +413,9 @@ function listar_cc(num, opc, arr_cc) {
     $(".cc-area" + num).change(function () {
         list_select($(".cc-seccion" + num), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(this).val());
         list_cc_area($(this).val(), $(".centro_costo" + num));
-
-        //listar_centro_costo(num, "0", arr_cc);
     });
     $(".cc-seccion" + num).change(function () {
         list_cc_seccion($(".cc-seccion" + num).val(), $(".centro_costo" + num));
-        //listar_centro_costo(num, "0", arr_cc);
     });
     $(".remover" + num).click(function () {
         $(".centro-costo_" + num).remove();
@@ -656,11 +632,6 @@ function Listar_centro_costo1() {
                     dep = lista[i].id_dep_cc;
                     cc = lista[i].id;
                     listar_cc2(ag, dir, dep, cc);
-
-                    /*texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" id="rem' + (i + 1) + '" onclick="Eliminar($(this).val());" disabled=""><i class="fa fa-minus fa-2x"></i></button></label></section>');
-                     texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
-                     texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                     texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';*/
                 } else {
                     texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
                     texto += '<div  class="row centro-costo_' + ag + '" >';
@@ -695,16 +666,13 @@ function Listar_centro_costo1() {
     });
 }
 function list_cc_area(area, cc, dep) {
-    // cc = $(".centro_costo1");
     $.post("../../centro_costo", "opc=Lista_cc_area&id=" + area, function (objJson) {
         if (objJson.rpta == -1) {
             alert(objJson.mensaje);
             return;
         }
-        // alert(lista.length)
         var lista = objJson.lista;
         if (lista.length == 0) {
-            //listarcc
         } else {
             cc.empty();
             cc.append('<option value="">[Seleccione]</option>');
@@ -716,7 +684,6 @@ function list_cc_area(area, cc, dep) {
 }
 
 function list_cc_seccion(seccion, cc) {
-    // cc = $(".centro_costo1");
     $.post("../../centro_costo", "opc=Lista_cc_seccion&id=" + seccion, function (objJson) {
         if (objJson.rpta == -1) {
             alert(objJson.mensaje);

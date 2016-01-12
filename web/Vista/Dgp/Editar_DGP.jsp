@@ -932,136 +932,160 @@
             </div>
         </div>
     </body>
+
+
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script>         if (!window.jQuery) {
+                                                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                        }
+    </script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>         if (!window.jQuery.ui) {
+                                                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                        }
+    </script>
+    <!-- IMPORTANT: APP CONFIG -->
+    <script src="../../js/app.config.js"></script>
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+    <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+
+    <!-- BOOTSTRAP JS -->
+    <script src="../../js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- CUSTOM NOTIFICATION -->
+    <script src="../../js/notification/SmartNotification.min.js"></script>
+
+    <!-- JARVIS WIDGETS 
+    <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>-->
+
+    <!-- EASY PIE CHARTS 
+    <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
+
+    <!-- SPARKLINES -
+    <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>->
+
+    <!-- JQUERY VALIDATE -->
+    <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
+
+    <!-- JQUERY MASKED INPUT -->
+    <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
+
+    <!-- JQUERY SELECT2 INPUT -->
+    <script src="../../js/plugin/select2/select2.min.js"></script>
+
+    <!-- JQUERY UI + Bootstrap Slider 
+    <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
+
+    <!-- browser msie issue fix
+    <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script> -->
+
+    <!-- FastClick: For mobile devices -->
+    <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
+
+    <!--[if IE 8]>
+    
+    <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+    
+    <![endif]-->
+
+    <!-- Demo purpose only -->
+    <script src="../../js/demo.min.js"></script>
+
+    <!-- MAIN APP JS FILE -->
+    <script src="../../js/app.min.js"></script>
+
+    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT
+    <!-- Voice command : plugin 
+    <script src="../../js/speech/voicecommand.min.js"></script> -->
+
+    <!-- PAGE RELATED PLUGIN(S) 
+    <script src="..."></script>-->
+    <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
+    <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+    <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
+    <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
+    <!--Funciones globales-->
+    <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
+
     <script>
-        $(document).ready(function () {
-            var b = $("#alerta_dgp");
-            var info = $(".div_info");
-            // $("#alerta_dgp").hide();
-            function listar() {
-                $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
-                    b.empty();
-                    var lista = objJson.lista;
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    for (var i = 0; i < lista.length; i++) {
-                        b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
 
-                        info.append('<div class="alert alert-info fade in"><button class="close" data-dismiss="alert">×</button><i class="fa-fw fa fa-info"></i><strong>¡Importante!</strong> Su requerimiento será procesado en el mes de <strong>' + lista[i].mes + '.</strong></div>');
-                    }
-                });
-            }
-            list_select($(".select-area"), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(".dep_id").val(), "4", $(".area_id").val());
-            list_select($(".select-seccion"), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(".area_id").val(), "4", $(".seccion_id").val());
-            list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".seccion_id").val(), "4", $(".puesto_id").val());
+                                                        var cantidad = 1;
+                                                        $("#btn_add").click(function () {
+                                                            var agregar = $('#fila-agregar');
+                                                            var texto = "";
+                                                            cantidad++;
+                                                            texto += '<div class="row pago_cuotas_' + cantidad + '">';
+                                                            texto += '<section class="col col-2"><label class="btn">';
+                                                            texto += '<button type="button" class="eliminar' + cantidad + '"  >Eliminar</button>';
+                                                            texto += '</label></section>';
+                                                            texto += '<section class="col col-2" ><label class="input" id="titu">';
+                                                            texto += '<input type="text" name="CUOTA_' + cantidad + '" id="cuota" required="" value="' + cantidad + '" >';
+                                                            texto += '</label></section>';
+                                                            texto += '<section class="col col-4" ><label class="input" id="titu">';
+                                                            texto += '<input type="date" name="FEC_PAGAR_' + cantidad + '" id="datepicker" required="" >';
+                                                            texto += '</label></section>';
+                                                            texto += '<section class="col col-4" ><label class="input" id="titu">';
+                                                            texto += '<input type="text" name="MONTO_' + cantidad + '" required="" class="monto" >';
+                                                            texto += '</label></section>';
+                                                            texto += '</div>';
+                                                            agregar.append(texto);
+                                                            periodo_pago(cantidad);
+                                                            $(".cant").val(cantidad);
+                                                            //alert($(".cant").val())
+                                                            $(".eliminar" + cantidad).click(function () {
+                                                                $(".pago_cuotas_" + cantidad).remove();
+                                                                periodo_pago(cantidad);
+                                                                cantidad--;
+                                                                periodo_pago(cantidad);
+                                                                //alert(cantidad)
+                                                            });
+                                                        });
+                                                        $(document).ready(
+                                                                function () {
+                                                                    $("#sueldo").keyup(function () {
+                                                                        var sueldo = parseFloat($("#sueldo").val());
+                                                                        $(".monto").val(Math.round(sueldo));
+                                                                    });
+                                                                }
+                                                        );
+                                                        function periodo_pago(cantidad) {
+                                                            var sueldo = parseFloat($("#sueldo").val());
+                                                            var p_p = sueldo / cantidad;
+                                                            $.each($(".monto"), function () {
+                                                                $(".monto").val(p_p);
+                                                            });
+                                                        }
 
-            $(".select-area").change(function () {
-                list_select($(".select-seccion"), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(".select-area").val(), "3");
-                $(".select-seccion,.select-puesto").val("");
-                $(".chosen-select").trigger("chosen:updated");
-            });
-            $(".select-seccion").change(function () {
-                list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".select-seccion").val(), "3");
-                $(".chosen-select").trigger("chosen:updated");
-            });
-            $(".select-puesto").change(function () {
-                $(".select-puesto1").val($(this).val());
-                $(".chosen-select").trigger("chosen:updated");
-            });
-            $(".select-puesto1").change(function () {
-                $(".select-area,.select-seccion,.select-puesto").val("");
-                $(".chosen-select").trigger("chosen:updated");
-            });
-        });
-
-
-        var cantidad = 1;
-        $("#btn_add").click(function () {
-            var agregar = $('#fila-agregar');
-            var texto = "";
-            cantidad++;
-            texto += '<div class="row pago_cuotas_' + cantidad + '">';
-            texto += '<section class="col col-2"><label class="btn">';
-            texto += '<button type="button" class="eliminar' + cantidad + '"  >Eliminar</button>';
-            texto += '</label></section>';
-            texto += '<section class="col col-2" ><label class="input" id="titu">';
-            texto += '<input type="text" name="CUOTA_' + cantidad + '" id="cuota" required="" value="' + cantidad + '" >';
-            texto += '</label></section>';
-            texto += '<section class="col col-4" ><label class="input" id="titu">';
-            texto += '<input type="date" name="FEC_PAGAR_' + cantidad + '" id="datepicker" required="" >';
-            texto += '</label></section>';
-            texto += '<section class="col col-4" ><label class="input" id="titu">';
-            texto += '<input type="text" name="MONTO_' + cantidad + '" required="" class="monto" >';
-            texto += '</label></section>';
-            texto += '</div>';
-
-
-            agregar.append(texto);
-            periodo_pago(cantidad);
-            $(".cant").val(cantidad);
-            //alert($(".cant").val())
-            $(".eliminar" + cantidad).click(function () {
-                $(".pago_cuotas_" + cantidad).remove();
-                periodo_pago(cantidad);
-                cantidad--;
-                periodo_pago(cantidad);
-
-                //alert(cantidad)
-            });
-        });
-
-        $(document).ready(
-                function () {
-                    $("#sueldo").keyup(
-                            function () {
-                                var sueldo = parseFloat($("#sueldo").val());
-                                $(".monto").val(Math.round(sueldo));
-                            });
-                }
-        );
-        function periodo_pago(cantidad) {
-            var sueldo = parseFloat($("#sueldo").val());
-            var p_p = sueldo / cantidad;
-            $.each($(".monto"), function () {
-                $(".monto").val(p_p);
-            });
-        }
-
-        function calcular_sueldo_total() {
-            var x = parseFloat($("#sueldo").val());
-            var y = parseFloat($("#bono_al").val());
-            var w = parseFloat($("#bono_pu").val());
-            var z = parseFloat($("#bev").val());
-            var v = x + y + z + w;
-            $("#suel_total").text(Math.round(v * 100) / 100);
-        }
-        $(document).ready(
-                function () {
-                    $("#sueldo").keyup(
-                            function () {
-                                calcular_sueldo_total();
-                            }
-                    );
-                    $("#bono_al").keyup(
-                            function () {
-                                calcular_sueldo_total();
-                            }
-                    );
-                    $("#bev").keyup(
-                            function () {
-                                calcular_sueldo_total();
-                            }
-                    );
-                    $("#bono_pu").keyup(
-                            function () {
-                                calcular_sueldo_total();
-                            }
-                    );
-                }
-        );</script>
+                                                        function calcular_sueldo_total() {
+                                                            var x = parseFloat($("#sueldo").val());
+                                                            var y = parseFloat($("#bono_al").val());
+                                                            var w = parseFloat($("#bono_pu").val());
+                                                            var z = parseFloat($("#bev").val());
+                                                            var v = x + y + z + w;
+                                                            $("#suel_total").text(Math.round(v * 100) / 100);
+                                                        }
+    </script>
     <script language="javascript" type="text/javascript">
         $(document).ready(function () {
+
+            $("#sueldo").keyup(function () {
+                calcular_sueldo_total();
+            }
+            );
+            $("#bono_al").keyup(function () {
+                calcular_sueldo_total();
+            }
+            );
+            $("#bev").keyup(function () {
+                calcular_sueldo_total();
+            }
+            );
+            $("#bono_pu").keyup(function () {
+                calcular_sueldo_total();
+            }
+            );
             $(".contenido").hide();
             /*TEMPORAL*/
             //Planilla
@@ -1093,8 +1117,6 @@
                     $(".cont_vie").hide();
                     $(".cont_sab").hide();
                     $(".cont_dom").hide();
-
-
                     $("#select_lun").change(
                             function () {
                                 var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
@@ -1263,7 +1285,7 @@
         function Listar_centro_costo1() {
             var x = $("#list-cc");
             $.post("../../centro_costo", "opc=Listar_centro_id_dgp&" + "id_dgp=" + $(".iddgp").val(), function (objJson) {
-                if ($(".can_centro_cos").val() != 0) {                     //alert($(".iddgp").val());
+                if ($(".can_centro_cos").val() !== 0) {                     //alert($(".iddgp").val());
                     var lista = objJson.lista;
                     x.empty();
                     var CANT_T = 0;
@@ -1271,12 +1293,11 @@
                     var texto = "";
                     cant_act = lista.length;
                     $(".cant-actualmente").val(cant_act);
-                    //alert(lista.length);
                     texto += '<div class="row" ><section class="col col-1"><br><label  id="titu">Agregar:</label><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="btn-agregar-cc2" class=" btn btn-default txt-color-green btn-agregar-cc"><i class="fa fa-plus fa-2x"></i></a></label></section><section class="col col-2"><label class="input" id="titulo">%:<input type="text" name="PORCENTAJE_TOTAL" max="100" min="100" maxlength="3"  class="input-group-sm por_sum_to" id="bo_a" readonly=""></label></section></div>';
                     for (var i = 0; i < lista.length; i++) {
 
                         numero = numero + i;
-                        if ($(".can_centro_cos").val() == "1") {
+                        if ($(".can_centro_cos").val() === "1") {
                             texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
                             texto += '<div  class="row centro-costo_' + ag + '" >';
                             texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
@@ -1290,21 +1311,28 @@
                             dep = lista[i].id_dep_cc;
                             cc = lista[i].id;
                             listar_cc2(ag, dir, dep, cc);
-
                         } else {
                             texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
                             texto += '<div  class="row centro-costo_' + ag + '" >';
                             texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
                             texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
+                            /* nuevo agregado : area y seccion*/
+                            texto += '<section class="col col-3"><label class="select" id="titu"> Area :<select  class="cc-area' + ag + '"><option value="">[AREA]</option></select></label></section>';
+                            texto += '<section class="col col-3"><label class="select" id="titu"> Seccion :<select   class="cc-seccion' + ag + '"><option value="">[SECCION]</option></select></label></section>';
+
                             texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled=""><option value="">[CENTRO COSTO]</option></select></label></section>';
                             texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '" value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label></section>';
                             texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar2($(this).val());" ><i class="fa fa-minus fa-2x"></i></button></label></section>';
                             texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
-                            var dir, dep, cc;
+                            var dir, dep, area, seccion, cc;
                             dir = lista[i].id_dir_cc;
                             dep = lista[i].id_dep_cc;
+                            area = lista[i].id_area_cc;
+                            seccion = lista[i].id_seccion_cc;
                             cc = lista[i].id;
-                            listar_cc2(ag, dir, dep, cc);
+                            listar_cc2(ag, dir, dep, cc, area, seccion);
+
+
                         }
                         numero = 1;
                         ag++;
@@ -1334,7 +1362,7 @@
         var cant_act = 0;
         var estable = 0;
         var can_eliminada = 0;
-        function listar_cc2(num, dir, dep, cc) {
+        function listar_cc2(num, dir, dep, cc, area, seccion) {
             $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
                 if (objJson.rpta == -1) {
                     alert(objJson.mensaje);
@@ -1345,7 +1373,7 @@
 
                     if (dir == lista[i].id) {
                         $("#cc-dir" + num).append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                        listar_dep_cc2(num, dep, cc);
+                        listar_dep_cc2(num, dep, cc, area, seccion);
                     } else {
                         $("#cc-dir" + num).append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
                     }
@@ -1355,9 +1383,19 @@
 
                 listar_dep_cc2(num);
             });
+            /*$(".cc-dep" + num).change(function () {
+             listar_centro_costo2(num, "0", arr_cc);
+             });*/
             $(".cc-dep" + num).change(function () {
-
-                listar_centro_costo2(num, "0", arr_cc);
+                list_select($(".cc-area" + num), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(this).val());
+                listar_centro_costo(num, "0", arr_cc);
+            });
+            $(".cc-area" + num).change(function () {
+                list_select($(".cc-seccion" + num), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(this).val());
+                list_cc_area($(this).val(), $(".centro_costo" + num));
+            });
+            $(".cc-seccion" + num).change(function () {
+                list_cc_seccion($(".cc-seccion" + num).val(), $(".centro_costo" + num));
             });
 
             $(".remover" + num).click(function () {
@@ -1377,7 +1415,7 @@
             });
             $(".por_sum_to").val(acum);
         }
-        function listar_dep_cc2(x, dep, cc) {
+        function listar_dep_cc2(x, dep, cc, area, seccion) {
             var cc_dep = $(".cc-dep" + x);
             $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function (objJson) {
                 cc_dep.empty();
@@ -1391,6 +1429,13 @@
                         if (dep === lista[i].id) {
                             cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
                             listar_centro_costo3(x, cc);
+                            /*new lines!*/
+                            list_cc_area(area, $(".centro_costo" + x), true, cc);
+                            list_cc_seccion(seccion, true, $(".centro_costo" + x), cc);
+                            list_select($(".cc-area" + x), "../../Direccion_Puesto", "opc=Listar_area2&id=" + dep, "1", area);
+                            list_select($(".cc-seccion" + x), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + area, "1", seccion);
+                            /*end new lines*/
+
                         } else {
                             cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
                         }
@@ -1417,6 +1462,7 @@
                     }
 
                 }
+
             });
         }
         function listar_centro_costo2(x, opc, arr_cc) {
@@ -1431,8 +1477,6 @@
                 }
                 var lista = objJson.lista;
                 for (var i = 0; i < lista.length; i++) {
-
-
                     if (opc == "1") {
                         if (arr_cc[4] == lista[i].id) {
                             centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
@@ -1465,30 +1509,27 @@
                 texto += '</div>';
                 agregar.append(texto);
                 remover_atrib(ag - 1);
-                //agrgar_atrib(ag - 1);
-                //agrgar_atrib_rem_t();
                 listar_cc(ag);
                 var c_porcentaje = $(".porcentaje_cc").size();
                 actualizar_porcentaje();
                 estable++;
-                //sumn_porcen_total();
                 cant_act++;
                 $(".cant-actualmente").val(cant_act);
                 $(".cant-ing").val(ingr);
-                //agrgar_atrib_rem_t();
             } else {
                 ingr++;
                 texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
                 texto += '<div  class="row centro-costo_' + ag + '" >';
                 texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
                 texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
+                /* nuevo agregado : area y seccion*/
+                texto += '<section class="col col-3"><label class="select" id="titu"> Area :<select required=""  class="cc-area' + ag + '"><option value="">[AREA]</option></select></label></section>';
+                texto += '<section class="col col-3"><label class="select" id="titu"> Seccion :<select required=""  class="cc-seccion' + ag + '"><option value="">[SECCION]</option></select></label></section>';
                 texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
                 texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0" value="' + (ingr + ag - 1) + '"  type="text" required="" class="porcentaje_cc porcenttaj' + ag + '"/><input name="PORCENTAJE_CC' + ingr + '"  type="hidden" class="procent cont_dif' + ag + '"/></label></section>';
                 texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + ' "><i class="fa fa-minus fa-2x"></i></a></label></section>';
                 texto += '</div>';
                 agregar.append(texto);
-                // remover_atrib(ag - 1);
-                //remover_atrib(ag-1);
                 agrgar_atrib(ag - 1);
                 agrgar_atrib_rem_t();
                 listar_cc(ag);
@@ -1498,11 +1539,7 @@
                 $(".cant-ing").val(ingr);
                 actualizar_porcentaje();
                 estable++;
-                //sumn_porcen_total();
-                //agrgar_atrib_rem_t();
-
             }
-            //$(".ver").text(texto); 
             texto = "";
             $(".cant").val(ag);
             ag++;
@@ -1552,10 +1589,17 @@
             $(".cc-dir" + num).change(function () {
 
                 listar_dep_cc(num, "0", arr_cc);
-
             });
             $(".cc-dep" + num).change(function () {
-                listar_centro_costo2(num, "0", arr_cc);
+                list_select($(".cc-area" + num), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(this).val());
+                listar_centro_costo(num, "0", arr_cc);
+            });
+            $(".cc-area" + num).change(function () {
+                list_select($(".cc-seccion" + num), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(this).val());
+                list_cc_area($(this).val(), $(".centro_costo" + num));
+            });
+            $(".cc-seccion" + num).change(function () {
+                list_cc_seccion($(".cc-seccion" + num).val(), $(".centro_costo" + num));
             });
             $(".porcenttaj" + num).keyup(function () {
                 $(".cont_dif" + num).val($(this).val());
@@ -1580,7 +1624,6 @@
                 actualizar_porcentaje();
                 sumn_porcen_total();
             });
-
         }
         function rem_atrib_rem_t() {
             $(".dis-total").removeAttr("disabled");
@@ -1620,12 +1663,9 @@
                 acum = acum + parseFloat($(this).val());
             });
             $(".por_sum_to").val(acum);
-
         }
         function Eliminar2(i) {
-            //alert();
             var x = $("#fila-agregar-cc");
-
             var msg = confirm('Si aceptas se eliminara la informacion totalmente ¿aceptas?');
             if (msg == true) {
                 $.post("../../centro_costo", "opc=Eliminar_det_cc&" + "id_dcc=" + $(".id_dcc" + i).val(), function () {
@@ -1636,7 +1676,6 @@
                     $(".cant-elimi").val(can_eliminada);
                     var can = $(".can_centro_cos ").val();
                     can--;
-                    //Listar_centro_costo();
                     $(".can_centro_cos ").val(can);
                     Actualizar_valores().after(Listar_centro_costo1());
                     ag = 1;
@@ -1649,7 +1688,6 @@
             $(".centro-costo_" + i).remove();
         }
         function sumn_porcen_total() {
-
             var acum = 0;
             $.each($(".porcentaje_cc"), function () {
                 acum = acum + parseFloat($(this).val());
@@ -1672,16 +1710,14 @@
                 $("#no_cuen_otros").show();
                 $("#nu_cuen_otros").val("BBVA Banco Continental");
                 $("#nu_cuen_otros").attr('readonly', 'readonly');
-                //document.getElementById("nu_cuen_otros").readOnly = true;
                 $("#texto").show();
                 $("#generar").show();
                 $("#subscription").attr("required", "required");
                 $("#nu_cuen_otros").attr("required", "required");
                 $("#nu_cuen_otros").removeAttr('maxlength');
                 $("#nu_cuen_otros").removeAttr('minlength');
-
             }
-            if (banco == '1') {
+            if (banco === '1') {
                 $("#generar").hide();
                 $("#no_cuen").show();
                 $("#nu_cuen").val("");
@@ -1691,12 +1727,11 @@
                 $("#subscription").attr('checked', false);
                 $("#nu_cuen").attr("maxlength", "21");
                 $("#nu_cuen").attr("minlength", "19");
-                //$("#nu_cuen").val("0011-")
                 $("#no_cuen_otros").hide();
                 $("#nu_cuen_otros").val("");
                 $("#texto").hide();
             }
-            if (banco == '2') {
+            if (banco === '2') {
 
                 $("#generar").hide();
                 $("#subscription").attr('checked', false);
@@ -1716,10 +1751,8 @@
                 $("#nu_cuen_otros").val("");
                 $("#texto").hide();
                 $("#nu_cuen").valid();
-
-
             }
-            if (banco == '3') {
+            if (banco === '3') {
                 $("#no_cuen").show();
                 $("#no_cuen").val("");
                 $("#nu_cuen").attr("required", "required");
@@ -1754,9 +1787,8 @@
                 horario.empty();
                 horario.append('<option value="" >[Seleccione]</option>');
                 for (var i = 0; i < lista.length; i++) {
-                    if ($(".id_det_hor").val().trim() == lista[i].id) {
+                    if ($(".id_det_hor").val().trim() === lista[i].id) {
                         horario.append('<option value="' + lista[i].id + '" selected="">' + lista[i].nombre + '</option>');
-
                     } else {
                         horario.append('<option value="' + lista[i].id + '" >' + lista[i].nombre + '</option>');
                     }
@@ -1835,7 +1867,6 @@
                         var turno = $('#show_' + $(".nombre_dia_" + $(this).val()).val() + ' .tr-dia').size() + 1;
                         var dia = $(".nombre_dia_" + $(this).val()).val();
                         var agregar_turno = $('#show_' + dia);
-
                         var i = $(".dias_semana .tr-dia").size();
                         text_html += '<tr class="tr-dia turno_' + (i + 1) + '" ><td>T' + turno;
                         text_html += ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dia + turno + '"   name="HORA_DESDE_' + dia + turno;
@@ -1853,11 +1884,8 @@
                                     calcularHoras();
                                 }
                         );
-
                     });
-
                 });
-
             }
 
         }
@@ -1960,7 +1988,6 @@
                         //var turno = $('#show_' + $(".nombre_dia_" + $(this).val()).val() + ' .tr-dia').size() + 1;
                         var dia = $(".nombre_dia_" + $(this).val()).val();
                         var agregar_turno = $('#show_' + dia);
-
                         var i = $(".dias_semana .tr-dia").size();
                         text_html += '<tr class="tr-dia turno_' + (i + 1) + '" ><td>T' + (turno + 1);
                         text_html += ' :</td><td><input type="text"   class="texto-h HORA_DESDE_' + dia + (turno + 1) + '"   name="HORA_DESDE_' + dia + (turno + 1);
@@ -1979,7 +2006,6 @@
                                     calcularHoras();
                                 }
                         );
-
                     });
                 }
             });
@@ -2017,43 +2043,61 @@
                 return false;
             }
         }
-        $(document).ready(function () {
-            Listar_centro_costo1();
-            listar_tipo_horario();
-            listar_horas();
-            sumn_porcen_total();
-            $("#no_cuen").hide();
-            $("#no_cuen_ban").hide();
-            $("#generar").hide();
-            $("#no_cuen_otros").hide();
-
-
-
-            //  var r = "";
-            $('#btn-agregar-cc').click(function () {
-                agregar_centro_costo();
-            });
-            $("#banco").change(function () {
-
-                cuenta_bancaria($(this).val());
-                $("#nu_cuen").focus();
-                $("#es_cuenta").val(1);
-                //  alert($("#es_cuenta").val());
-            });
-            listar_cc();
-
-            $("#horario").change(function () {
-                var select_an = $("#horario").val();
-                var msg = confirm('Si aceptas se eliminara la informacion totalmente los horarios que se ven ahora ¿deseas continuar?');
-                if (msg == true) {
-                    list_horario($(this).val());
-                    $(".modificacion-total").val("1");
+        function list_cc_area(area, cc, opc, id) {
+            $.post("../../centro_costo", "opc=Lista_cc_area&id=" + area, function (objJson) {
+                if (objJson.rpta === -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length === 0) {
+                    //listarcc
                 } else {
-                    listar_tipo_horario();
-                    return false;
+                    cc.empty();
+                    cc.append('<option value="">[Seleccione]</option>');
+                    for (var t = 0; t < lista.length; t++) {
+                        if (opc === true) {
+                            if (id === lista[t].id) {
+                                cc.append('<option value="' + lista[t].id + '" selected>' + lista[t].nombre + '</option>');
+                            } else {
+                                cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
+                            }
+                        } else {
+                            cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
+                        }
+                    }
                 }
             });
-        });</script>
+        }
+
+        function list_cc_seccion(seccion, opc, cc, id) {
+            $.post("../../centro_costo", "opc=Lista_cc_seccion&id=" + seccion, function (objJson) {
+                if (objJson.rpta === -1) {
+                    alert(objJson.mensaje);
+                    return;
+                }
+                var lista = objJson.lista;
+                if (lista.length === 0) {
+                    /* si no ha nada listar todas las secciones del area*/
+                    // list_cc_area($(".select-area").val(), $(".centro_costo1"));
+                } else {
+                    cc.empty();
+                    cc.append('<option value="">[Seleccione]</option>');
+                    for (var t = 0; t < lista.length; t++) {
+                        if (opc === true) {
+                            if (id === lista[t].id) {
+                                cc.append('<option value="' + lista[t].id + '" selected>' + lista[t].nombre + '</option>');
+                            } else {
+                                cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
+                            }
+                        } else {
+                            cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
+                        }
+                    }
+                }
+            });
+        }
+    </script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#sueldo").numeric();
@@ -2102,7 +2146,7 @@
             });
             $('.remove_2').click(function () {
                 if (i > 2) {
-                    $(this).parents('tr').remove();                     //  $("#tr-d").remove();                                i--;
+                    $(this).parents('tr').remove(); //  $("#tr-d").remove();                                i--;
                     s--;
                 }
                 return false;
@@ -2122,7 +2166,7 @@
             });
             $('.remove_3').click(function () {
                 if (i > 2) {
-                    $(this).parents('tr').remove();                     //  $("#tr-d").remove();                                i--;
+                    $(this).parents('tr').remove(); //  $("#tr-d").remove();                                i--;
                     s--;
                 }
                 return false;
@@ -2194,495 +2238,202 @@
                 return false;
             });
         });</script>
-
-    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-    <script>         if (!window.jQuery) {
-            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-        }
-    </script>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-    <script>         if (!window.jQuery.ui) {
-            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-        }
-    </script>
-    <!-- IMPORTANT: APP CONFIG -->
-    <script src="../../js/app.config.js"></script>
-    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-    <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
-
-    <!-- BOOTSTRAP JS -->
-    <script src="../../js/bootstrap/bootstrap.min.js"></script>
-
-    <!-- CUSTOM NOTIFICATION -->
-    <script src="../../js/notification/SmartNotification.min.js"></script>
-
-    <!-- JARVIS WIDGETS -->
-    <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
-
-    <!-- EASY PIE CHARTS -->
-    <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
-
-    <!-- SPARKLINES -->
-    <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
-
-    <!-- JQUERY VALIDATE -->
-    <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
-
-    <!-- JQUERY MASKED INPUT -->
-    <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
-
-    <!-- JQUERY SELECT2 INPUT -->
-    <script src="../../js/plugin/select2/select2.min.js"></script>
-
-    <!-- JQUERY UI + Bootstrap Slider -->
-    <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
-
-    <!-- browser msie issue fix -->
-    <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
-
-    <!-- FastClick: For mobile devices -->
-    <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
-
-    <!--[if IE 8]>
-    
-    <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-    
-    <![endif]-->
-
-    <!-- Demo purpose only -->
-    <script src="../../js/demo.min.js"></script>
-
-    <!-- MAIN APP JS FILE -->
-    <script src="../../js/app.min.js"></script>
-
-    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-    <!-- Voice command : plugin -->
-    <script src="../../js/speech/voicecommand.min.js"></script>
-
-    <!-- PAGE RELATED PLUGIN(S) 
-    <script src="..."></script>-->
-    <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
-    <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-    <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
-    <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
     <script type="text/javascript">
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
         $(document).ready(function () {
             $(".val_fe").change(function () {
                 var fecha = $(this).val().split("-");
-
                 if (fecha[0].length > 4) {
                     $(this).val("");
                 }
             });
             pageSetUp();
+
+
+
+            Listar_centro_costo1();
+            listar_tipo_horario();
+            listar_horas();
+            sumn_porcen_total();
+            $("#no_cuen").hide();
+            $("#no_cuen_ban").hide();
+            $("#generar").hide();
+            $("#no_cuen_otros").hide();
+            //  var r = "";
+            $('#btn-agregar-cc').click(function () {
+                agregar_centro_costo();
+            });
+            $("#banco").change(function () {
+
+                cuenta_bancaria($(this).val());
+                $("#nu_cuen").focus();
+                $("#es_cuenta").val(1);
+                //  alert($("#es_cuenta").val());
+            });
+            listar_cc();
+            $("#horario").change(function () {
+                var select_an = $("#horario").val();
+                var msg = confirm('Si aceptas se eliminara la informacion totalmente los horarios que se ven ahora ¿deseas continuar?');
+                if (msg == true) {
+                    list_horario($(this).val());
+                    $(".modificacion-total").val("1");
+                } else {
+                    listar_tipo_horario();
+                    return false;
+                }
+            });
+
+            var b = $("#alerta_dgp");
+            var info = $(".div_info");
+            // $("#alerta_dgp").hide();
+            function listar() {
+                $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
+                    b.empty();
+                    var lista = objJson.lista;
+                    if (objJson.rpta === -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    for (var i = 0; i < lista.length; i++) {
+                        b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
+                        info.append('<div class="alert alert-info fade in"><button class="close" data-dismiss="alert">×</button><i class="fa-fw fa fa-info"></i><strong>¡Importante!</strong> Su requerimiento será procesado en el mes de <strong>' + lista[i].mes + '.</strong></div>');
+                    }
+                });
+            }
+            list_select($(".select-area"), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(".dep_id").val(), "4", $(".area_id").val());
+            list_select($(".select-seccion"), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(".area_id").val(), "4", $(".seccion_id").val());
+            list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".seccion_id").val(), "4", $(".puesto_id").val());
+            $(".select-area").change(function () {
+                list_select($(".select-seccion"), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(".select-area").val(), "3");
+                $(".select-seccion,.select-puesto").val("");
+                $(".chosen-select").trigger("chosen:updated");
+            });
+            $(".select-seccion").change(function () {
+                list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".select-seccion").val(), "3");
+                $(".chosen-select").trigger("chosen:updated");
+            });
+            $(".select-puesto").change(function () {
+                $(".select-puesto1").val($(this).val());
+                $(".chosen-select").trigger("chosen:updated");
+            });
+            $(".select-puesto1").change(function () {
+                $(".select-area,.select-seccion,.select-puesto").val("");
+                $(".chosen-select").trigger("chosen:updated");
+            });
             var $checkoutForm = $('#checkout-form').validate({
-            // Rules for form validation
-            rules: {
-            fname: {
-            required: true
-            },
+                // Rules for form validation
+                rules: {
+                    fname: {
+                        required: true
+                    },
                     FEC_DESDE: {
-                    val_fecha: true
+                        val_fecha: true
                     },
                     FEC_HASTA: {
-                    val_fecha: true
+                        val_fecha: true
                     },
                     horas_totales: {
-                    required: true
+                        required: true
                     },
                     lname: {
-                    required: true
+                        required: true
                     },
                     email: {
-                    required: true,
-                            email: true
+                        required: true,
+                        email: true
                     },
                     phone: {
-                    required: true
+                        required: true
                     },
                     country: {
-                    required: true
+                        required: true
                     },
                     city: {
-                    required: true
+                        required: true
                     },
                     code: {
-                    required: true, digits: true
+                        required: true, digits: true
                     },
                     address: {
-                    required: true
+                        required: true
                     },
                     name: {
-                    required: true
+                        required: true
                     },
                     card: {
-                    required: true,
-                            creditcard: true
+                        required: true,
+                        creditcard: true
                     },
                     cvv: {
-                    required: true,
-                            digits: true
+                        required: true,
+                        digits: true
                     },
                     month: {
-                    required: true
+                        required: true
                     },
                     year: {
-                    required: true,
-                            digits: true
+                        required: true,
+                        digits: true
                     }
-            },
-                    // Messages for form validation                 messages: {
+                },
+                // Messages for form validation           
+                messages: {
                     fname: {
-                    required: 'Please enter your first name'
+                        required: 'Please enter your first name'
                     },
                     horas_totales: {
-                    max: 'Porfavor digite un horario que se menor a 48 Horas de Trabajo'
+                        max: 'Porfavor digite un horario que se menor a 48 Horas de Trabajo'
                     },
                     lname: {
-                    required: 'Please enter your last name'
+                        required: 'Please enter your last name'
                     },
                     email: {
-                    required: 'Please enter your email address',
-                            email: 'Please enter a VALID email address'
+                        required: 'Please enter your email address',
+                        email: 'Please enter a VALID email address'
                     },
                     phone: {
-                    required: 'Please enter your phone number'
+                        required: 'Please enter your phone number'
                     },
                     country: {
-                    required: 'Please select your country'
+                        required: 'Please select your country'
                     },
                     city: {
-                    required: 'Please enter your city'
+                        required: 'Please enter your city'
                     },
                     code: {
-                    required: 'Please enter code',
-                            digits: 'Digits only please'
+                        required: 'Please enter code',
+                        digits: 'Digits only please'
                     },
                     address: {
-                    required: 'Please enter your full address'
+                        required: 'Please enter your full address'
                     },
                     name: {
-                    required: 'Please enter name on your card'
+                        required: 'Please enter name on your card'
                     },
                     card: {
-                    required: 'Please enter your card number'
+                        required: 'Please enter your card number'
                     },
                     cvv: {
-                    required: 'Enter CVV2',
-                            digits: 'Digits only'
+                        required: 'Enter CVV2',
+                        digits: 'Digits only'
                     },
                     month: {
-                    required: 'Select month'
+                        required: 'Select month'
                     },
                     year: {
-                    required: 'Enter year',
-                            digits: 'Digits only please'
+                        required: 'Enter year',
+                        digits: 'Digits only please'
                     }
-            },
-                    // Do not change code below
-                    errorPlacement: function(error, element) {
+                },
+                // Do not change code below
+                errorPlacement: function (error, element) {
                     error.insertAfter(element.parent());
-                    }
-        });
-
-
-        jQuery.validator.addMethod("val_fecha", function (value, element) {
-            var d = value.split("-");
-            return this.optional(element) || String(parseInt(d[0])).length == 4;
-        }, "¡Fecha ingresada invalida!");
-
-        var $registerForm = $("#smart-form-register").validate({
-            // Rules for form validation
-            rules: {
-                username: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                password: {
-                    required: true,
-                    minlength: 3,
-                    maxlength: 20
-                },
-                passwordConfirm: {required: true,
-                    minlength: 3,
-                    maxlength: 20,
-                    equalTo: '#password'
-                },
-                firstname: {
-                    required: true
-                },
-                lastname: {
-                    required: true
-                },
-                gender: {
-                    required: true
-                },
-                terms: {
-                    required: true
                 }
-            },
-            // Messages for form validation
-            messages: {
-                login: {
-                    required: 'Please enter your login'
-                },
-                email: {
-                    required: 'Please enter your email address',
-                    email: 'Please enter a VALID email address'
-                },
-                password: {
-                    required: 'Please enter your password'
-                },
-                passwordConfirm: {
-                    required: 'Please enter your password one more time',
-                    equalTo: 'Please enter the same password as above'
-                },
-                firstname: {
-                    required: 'Please select your first name'
-                },
-                lastname: {
-                    required: 'Please select your last name'
-                },
-                gender: {
-                    required: 'Please select your gender'
-                },
-                terms: {
-                    required: 'You must agree with Terms and Conditions'
-                }},
-            // Do not change code below
-            errorPlacement: function (error, element) {
-                error.insertAfter(element.parent());
-            }
-        });
-        var $reviewForm = $("#review-form").validate({
-            // Rules for form validation
-            rules: {
-                name: {required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                review: {
-                    required: true,
-                    minlength: 20},
-                quality: {
-                    required: true
-                },
-                reliability: {
-                    required: true
-                },
-                overall: {
-                    required: true
-                }
-            },
-            // Messages for form validation
-            messages: {
-                name: {
-                    required: 'Please enter your name'
-                },
-                email: {
-                    required: 'Please enter your email address',
-                    email: '<i class="fa fa-warning"></i><strong>Please enter a VALID email addres</strong>'
-                },
-                review: {
-                    required: 'Please enter your review'
-                },
-                quality: {
-                    required: 'Please rate quality of the product'
-                },
-                reliability: {
-                    required: 'Please rate reliability of the product'
-                },
-                overall: {
-                    required: 'Please rate the product'
-                }
-            },
-            // Do not change code below
-            errorPlacement: function (error, element) {
-                error.insertAfter(element.parent());
-            }
-        });
-        var $commentForm = $("#comment-form").validate({
-            // Rules for form validation
-            rules: {
-                name: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                url: {
-                    url: true
-                },
-                comment: {
-                    required: true
-                }
-            },
-            // Messages for form validation
-            messages: {
-                name: {
-                    required: 'Enter your name',
-                },
-                email: {
-                    required: 'Enter your email address',
-                    email: 'Enter a VALID email'
-                },
-                url: {
-                    email: 'Enter a VALID url'
-                },
-                comment: {
-                    required: 'Please enter your comment'
-                }
-            },
-            // Ajax form submition
-            submitHandler: function (form) {
-                $(form).ajaxSubmit({
-                    success: function () {
-                        $("#comment-form").addClass('submited');
-                    }
-                });
-            }, // Do not change code below
-            errorPlacement: function (error, element) {
-                error.insertAfter(element.parent());
-            }
-        });
-        var $contactForm = $("#contact-form").validate({
-            // Rules for form validation
-            rules: {
-                name: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                }, message: {
-                    required: true,
-                    minlength: 10
-                }
-            },
-            // Messages for form validation
-            messages: {
-                name: {
-                    required: 'Please enter your name',
-                },
-                email: {
-                    required: 'Please enter your email address',
-                    email: 'Please enter a VALID email address'
-                },
-                message: {
-                    required: 'Please enter your message'
-                }
-            },
-            // Ajax form submition
-            submitHandler: function (form) {
-                $(form).ajaxSubmit({
-                    success: function () {
-                        $("#contact-form").addClass('submited');
-                    }
-                });
-            },
-            // Do not change code below
-            errorPlacement: function (error, element) {
-                error.insertAfter(element.parent());
-            }
-        });
-        var $loginForm = $("#login-form").validate({
-            // Rules for form validation
-            rules: {
-                email: {
-                    required: true,
-                    email: true
-                },
-                password: {
-                    required: true,
-                    minlength: 3,
-                    maxlength: 20
-                }
-            },
-            // Messages for form validation
-            messages: {
-                email: {
-                    required: 'Please enter your email address',
-                    email: 'Please enter a VALID email address'
-                },
-                password: {
-                    required: 'Please enter your password'
-                }
-            },
-            // Do not change code below
-            errorPlacement: function (error, element) {
-                error.insertAfter(element.parent());
-            }
-        });
-        var $orderForm = $("#order-form").validate({
-            // Rules for form validation
-            rules: {
-                name: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                phone: {
-                    required: true
-                },
-                interested: {
-                    required: true
-                },
-                budget: {
-                    required: true
-                }
-            },
-            // Messages for form validation
-            messages: {
-                name: {
-                    required: 'Please enter your name'
-                },
-                email: {
-                    required: 'Please enter your email address',
-                    email: 'Please enter a VALID email address'
-                },
-                phone: {
-                    required: 'Please enter your phone number'
-                },
-                interested: {
-                    required: 'Please select interested service'
-                },
-                budget: {
-                    required: 'Please select your budget'
-                }
-            },
-            // Do not change code below
-            errorPlacement: function (error, element) {
-                error.insertAfter(element.parent());
-            }
-        });
-        // START AND FINISH DATE
-        $('#startdate').datepicker({
-            dateFormat: 'dd.mm.yy',
-            prevText: '<i class="fa fa-chevron-left"></i>',
-            nextText: '<i class="fa fa-chevron-right"></i>',
-            onSelect: function (selectedDate) {
-                $('#finishdate').datepicker('option', 'minDate', selectedDate);
-            }
-        });
-        $('#finishdate').datepicker({
-        dateFormat: 'dd.mm.yy',
-                prevText: '<i class="fa fa-chevron-left"></i>',
-                nextText: '<i class="fa fa-chevron-right"></i>',
-                onSelect: function (selectedDate) {
-                    $('#startdate').datepicker('option', 'maxDate', selectedDate);
-                }
-        });
+            });
+            jQuery.validator.addMethod("val_fecha", function (value, element) {
+                var d = value.split("-");
+                return this.optional(element) || String(parseInt(d[0])).length == 4;
+            }, "¡Fecha ingresada invalida!");
         })
 
     </script>

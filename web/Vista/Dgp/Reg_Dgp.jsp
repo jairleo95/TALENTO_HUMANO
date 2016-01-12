@@ -866,6 +866,9 @@
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
     <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
+    <!--Funciones globales-->
+    <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
+    
     <script src="../../js/Js_DGP/Registrar/Reg_Dgps.js" type="text/javascript" ></script>
     <script src="../../js/Js_Horario/horario.js" type="text/javascript"></script>
     <script>
