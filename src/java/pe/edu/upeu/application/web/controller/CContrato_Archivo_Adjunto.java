@@ -21,6 +21,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import pe.edu.upeu.application.dao.ContratoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
+import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Renombrar;
 
 /**
@@ -51,7 +52,7 @@ public class CContrato_Archivo_Adjunto extends HttpServlet {
 //                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Contrato/Contratos_Adjuntos/";
 //            }
 
-             ubicacion = "/TALENTO_HUMANO/Vista/Contrato/Contratos_Adjuntos/";
+          ubicacion=   FactoryConnectionDB.url_archivos+"Contratos_Adjuntos/";
             // ubicacion = getServletConfig().getServletContext().getRealPath("/")+"Vista/Contrato/Contratos_Adjuntos/";
            // ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "/Vista/Contrato/Contratos_Adjuntos/";
             DiskFileItemFactory f = new DiskFileItemFactory();

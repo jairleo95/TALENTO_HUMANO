@@ -126,12 +126,7 @@
                             <article class="col-sm-12 col-md-12 col-lg-6">
 
                                 <div id="alerta_dgp">
-
                                 </div>
-                                <div class="div_info">
-
-                                </div>
-
                                 <!-- Widget ID (each widget will need unique ID)-->
                                 <div class="jarviswidget" id="wid-id-2" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-custombutton="false">
                                     <!-- widget options:
@@ -199,24 +194,37 @@
                                                             </label>
                                                         </section>
                                                     </div>
-                                                    <section>
-                                                        <label class="label" id="titu">Puesto | Seccion | Area:</label>
-                                                        <label class="select">
-                                                            <select name="IDPUESTO"  required="" class="chosen-select select-puesto1" >
-                                                                <option value="">[Seleccione]</option>
-                                                                <%for (int b = 0; b < List_Puesto.size(); b++) {
-                                                                        V_Puesto_Direccion p = new V_Puesto_Direccion();
-                                                                        p = (V_Puesto_Direccion) List_Puesto.get(b);
-                                                                        if (dg.getId_puesto().trim().equals(p.getId_puesto().trim())) {
-                                                                %>
-                                                                <option value="<%=p.getId_puesto()%>" selected=""><% out.println(p.getNo_puesto() + " | " + p.getNo_seccion() + " | " + p.getNo_area());%></option>
-                                                                <%} else {%>
-                                                                <option value="<%=p.getId_puesto()%>"><% out.println(p.getNo_puesto() + " | " + p.getNo_seccion() + " | " + p.getNo_area());%></option>
+                                                    <div class="row" >
+                                                        <section class="col col-4">
+                                                            <label class="select" id="titu">
+                                                                Motivo :<select name="MOTIVO" class="ant_policiales" required="" >
+                                                                    <option value="" >[Seleccione]</option>
+                                                                    <%if (dg.getLi_motivo().equals("1")) {%>
+                                                                    <option value="1" selected="">Trabajdor Nuevo</option>
+                                                                    <option value="2">Renovación</option>
+                                                                    <%}
+                                                                        if (dg.getLi_motivo().equals("2")) {%>
+                                                                    <option value="1">Trabajdor Nuevo</option>
+                                                                    <option value="2" selected="">Renovación</option>
+                                                                    <%}%>
+                                                                </select>
+                                                            </label>
+
+                                                        </section>
+                                                        <section class="col col-4" style=" margin-top:2%;">
+                                                            <label class="toggle" id="titu" > MFL:
+                                                                <%if (dg.getEs_mfl().trim().equals("0")) {%>
+                                                                <input type="checkbox" value="1"  name="MFL" name="checkbox-toggle" >
                                                                 <%}
-                                                                    }%>
-                                                            </select>
-                                                        </label>
-                                                    </section>
+                                                                    if (dg.getEs_mfl().trim().equals("1")) {%>
+                                                                <input type="checkbox" value="1"  name="MFL" name="checkbox-toggle" checked="">
+                                                                <%}%>
+                                                                <i data-swchon-text="SI" data-swchoff-text="NO"></i>
+                                                            </label>
+                                                        </section>
+                                                        <div class="div_input_diezmo col col-4">    
+                                                        </div>
+                                                    </div>
                                                     <div class="row">
                                                         <section class="col col-4" >
                                                             <label class="label" id="titu"> Area:</label>
@@ -262,34 +270,7 @@
                                                             </select> 
                                                         </label>
                                                     </section>
-                                                    <div class="row" >
-                                                        <section class="col col-6">
-                                                            <label class="select" id="titu">
-                                                                Motivo :<select name="MOTIVO" class="ant_policiales" required="" >
-                                                                    <option value="" >[Seleccione]</option>
-                                                                    <%if (dg.getLi_motivo().equals("1")) {%>
-                                                                    <option value="1" selected="">Trabajdor Nuevo</option>
-                                                                    <option value="2">Renovación</option>
-                                                                    <%}
-                                                                        if (dg.getLi_motivo().equals("2")) {%>
-                                                                    <option value="1">Trabajdor Nuevo</option>
-                                                                    <option value="2" selected="">Renovación</option>
-                                                                    <%}%>
-                                                                </select>
-                                                            </label>
-
-                                                        </section>
-                                                        <section class="col col-2" style=" margin-top:2%;">
-                                                            <label class="toggle" id="titu" > MFL:
-                                                                <%if (dg.getEs_mfl().trim().equals("0")) {%>
-                                                                <input type="checkbox" value="1"  name="MFL" name="checkbox-toggle" >
-                                                                <%}
-                                                                    if (dg.getEs_mfl().trim().equals("1")) {%>
-                                                                <input type="checkbox" value="1"  name="MFL" name="checkbox-toggle" checked="">
-                                                                <%}%>
-                                                                <i data-swchon-text="SI" data-swchoff-text="NO"></i>
-                                                            </label>
-                                                        </section>
+                                                    <div class="info_1">
                                                     </div>
 
                                                     <div class="row">
@@ -898,6 +879,9 @@
 
                                                 </fieldset>
                                                 <footer>
+                                                    <div class="div_info">
+
+                                                    </div>
                                                     <button type="submit" class="btn btn-primary btn-labeled">
                                                         Modificar  <i class="fa fa-pencil"></i>
                                                     </button>
@@ -1008,9 +992,70 @@
     <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
     <!--Funciones globales-->
     <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
+    <script src="../../js/Js_Plazo/Js_plazo_advertencia.js" type="text/javascript"></script>
 
     <script>
+                                                        function showEsDiezmo() {
+                                                            var obj = $(".div_input_diezmo");
+                                                            obj.hide(100);
+                                                            obj.empty();
+                                                            $.ajax({
+                                                                url: "../../trabajador", data: "opc=ShowEsDiezmoTrabajador&id=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
+                                                                    if (data.rpta) {
+                                                                        obj.append(data.html);
+                                                                        obj.show(100);
+                                                                        $(".cbkDiezmo").click(function () {
+                                                                            $.SmartMessageBox({
+                                                                                title: "&iexcl;Alerta!",
+                                                                                content: "Esta seguro de modificar la autorizaci&oacute;n de descuento diezmo?",
+                                                                                buttons: '[No][Si]'
+                                                                            }, function (ButtonPressed) {
+                                                                                if (ButtonPressed === "Si") {
+                                                                                    if ($(".cbkDiezmo").prop("checked")) {
+                                                                                        $.ajax({
+                                                                                            url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=0", type: 'POST', success: function (data, textStatus, jqXHR) {
+                                                                                                if (data.status) {
+                                                                                                    $(".cbkDiezmo").prop("checked", false);
+                                                                                                    $.smallBox({
+                                                                                                        title: "&iexcl;Atenci&oacute;n!",
+                                                                                                        content: "<i class='fa fa-clock-o'></i> <i>Se neg&oacute; el descuento de diezmo...</i>",
+                                                                                                        color: "#C46A69",
+                                                                                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                                                                        timeout: 6000
+                                                                                                    });
+                                                                                                }
 
+                                                                                            }
+                                                                                        });
+                                                                                    } else {
+                                                                                        $.ajax({
+                                                                                            url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=1", type: 'POST', success: function (data, textStatus, jqXHR) {
+                                                                                                if (data.status) {
+                                                                                                    $(".cbkDiezmo").prop("checked", true);
+                                                                                                    $.smallBox({
+                                                                                                        title: "&iexcl;Atenci&oacute;n!",
+                                                                                                        content: "<i class='fa fa-clock-o'></i> <i>Se autoriz&oacute; el descuento de diezmo...</i>",
+                                                                                                        color: "#659265",
+                                                                                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                                                                        timeout: 6000
+                                                                                                    });
+                                                                                                }
+                                                                                            }
+                                                                                        });
+                                                                                    }
+                                                                                    showEsDiezmo();
+
+
+                                                                                }
+                                                                            });
+                                                                            return false;
+
+
+                                                                        });
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
                                                         var cantidad = 1;
                                                         $("#btn_add").click(function () {
                                                             var agregar = $('#fila-agregar');
@@ -1070,22 +1115,27 @@
     <script language="javascript" type="text/javascript">
         $(document).ready(function () {
 
+            /*Advertencias de Plazo*/
+            var b = $("#alerta_dgp");
+            var info = $(".div_info");
+            listar_mensaje_plazo("2", b, info);
+            var s = $(".info_1");
+            var t = $(".alert_1");
+            listar_mensaje_plazo("1", t, s);
+
+
             $("#sueldo").keyup(function () {
                 calcular_sueldo_total();
-            }
-            );
+            });
             $("#bono_al").keyup(function () {
                 calcular_sueldo_total();
-            }
-            );
+            });
             $("#bev").keyup(function () {
                 calcular_sueldo_total();
-            }
-            );
+            });
             $("#bono_pu").keyup(function () {
                 calcular_sueldo_total();
-            }
-            );
+            });
             $(".contenido").hide();
             /*TEMPORAL*/
             //Planilla
@@ -1293,7 +1343,14 @@
                     var texto = "";
                     cant_act = lista.length;
                     $(".cant-actualmente").val(cant_act);
-                    texto += '<div class="row" ><section class="col col-1"><br><label  id="titu">Agregar:</label><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="btn-agregar-cc2" class=" btn btn-default txt-color-green btn-agregar-cc"><i class="fa fa-plus fa-2x"></i></a></label></section><section class="col col-2"><label class="input" id="titulo">%:<input type="text" name="PORCENTAJE_TOTAL" max="100" min="100" maxlength="3"  class="input-group-sm por_sum_to" id="bo_a" readonly=""></label></section></div>';
+                    texto += '<div class="row" >' +
+                            '<section class="col col-3">' +
+                            '<label class="btn">' +
+                            '<a type="button" id="btn-agregar-cc2" class="btn btn-primary btn-circle btn-lg btn-agregar-cc"><i class="glyphicon glyphicon-plus"></i></a>' +
+                            '</label></section>' +
+                            '<section class="col col-2">' +
+                            '<label class="input" id="titulo">%:<input type="text" name="PORCENTAJE_TOTAL" max="100" min="100" maxlength="3"  class="input-group-sm por_sum_to" id="bo_a" readonly=""></label>' +
+                            '</section></div>';
                     for (var i = 0; i < lista.length; i++) {
 
                         numero = numero + i;
@@ -1304,7 +1361,7 @@
                             texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
                             texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
                             texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '"  value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label> </section>';
-                            texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar2($(this).val());"  disabled><i class="fa fa-minus fa-2x"></i></button></label></section>';
+                            texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class="btn btn-danger btn-circle btn-lg remover' + ag + ' dis-total" onclick="Eliminar2($(this).val());"  disabled><i class="glyphicon glyphicon-remove"></i></button></label></section>';
                             texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
                             var dir, dep, cc;
                             dir = lista[i].id_dir_cc;
@@ -1322,7 +1379,7 @@
 
                             texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled=""><option value="">[CENTRO COSTO]</option></select></label></section>';
                             texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '" value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label></section>';
-                            texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar2($(this).val());" ><i class="fa fa-minus fa-2x"></i></button></label></section>';
+                            texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class="btn btn-danger btn-circle btn-lg remover' + ag + ' dis-total" onclick="Eliminar2($(this).val());" ><i class="glyphicon glyphicon-remove"></i></button></label></section>';
                             texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
                             var dir, dep, area, seccion, cc;
                             dir = lista[i].id_dir_cc;
@@ -1505,7 +1562,7 @@
                 texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
                 texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
                 texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  value="' + (ingr + ag - 1) + '"  type="text" required="" class="porcentaje_cc porcenttaj' + ag + '"/><input name="PORCENTAJE_CC' + ingr + '"  type="hidden" class="procent cont_dif' + ag + '"></label></section>';
-                texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + ' "><i class="fa fa-minus fa-2x"></i></a></label></section>';
+                texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class="btn btn-danger btn-circle btn-lg remover' + ag + ' "><i class="glyphicon glyphicon-remove"></i></a></label></section>';
                 texto += '</div>';
                 agregar.append(texto);
                 remover_atrib(ag - 1);
@@ -1527,7 +1584,7 @@
                 texto += '<section class="col col-3"><label class="select" id="titu"> Seccion :<select required=""  class="cc-seccion' + ag + '"><option value="">[SECCION]</option></select></label></section>';
                 texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
                 texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0" value="' + (ingr + ag - 1) + '"  type="text" required="" class="porcentaje_cc porcenttaj' + ag + '"/><input name="PORCENTAJE_CC' + ingr + '"  type="hidden" class="procent cont_dif' + ag + '"/></label></section>';
-                texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + ' "><i class="fa fa-minus fa-2x"></i></a></label></section>';
+                texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class="btn btn-danger btn-circle btn-lg remover' + ag + ' "><i class="glyphicon glyphicon-remove"></i></a></label></section>';
                 texto += '</div>';
                 agregar.append(texto);
                 agrgar_atrib(ag - 1);
@@ -2249,7 +2306,7 @@
             });
             pageSetUp();
 
-
+            showEsDiezmo();
 
             Listar_centro_costo1();
             listar_tipo_horario();

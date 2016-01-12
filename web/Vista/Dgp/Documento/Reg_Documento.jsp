@@ -66,8 +66,11 @@
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
-        <link href="../../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+
         <link rel="stylesheet" type="text/css" href="../../../js/shadowbox/shadowbox.css"/>
+
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
     </head>
     <%  //String num = request.getParameter("num");
         // int num_doc = Integer.parseInt(num);
@@ -155,9 +158,9 @@
                                                 <thead>
                                                 <center>
                                                     <tr>
-                                                        <th class="cajita" style="text-align:center;">ADJUNTAR</th>   
-                                                        <th class="cajita" style="text-align:center;">DETALLE</th>   
-                                                        <th class="cajita" style="text-align:center;">ACCION</th>   
+                                                        <th class="cajita" style="text-align:center;">Ajuntar</th>   
+                                                        <th class="cajita" style="text-align:center;">Detalle</th>   
+                                                        <th class="cajita" style="text-align:center;">Acción</th>   
                                                     </tr>
                                                 </center>
                                                 </thead>
@@ -908,27 +911,23 @@
 
         <!-- PAGE RELATED PLUGIN(S) -->
 
+
         <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="../../../js/bootstrap/fileinput.js" type="text/javascript"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="../../../js/notification/SmartNotification.min.js"></script>
-
         <script type="text/javascript" src="../../../js/shadowbox/demo.js"></script>
-
         <script type="text/javascript" src="../../../js/shadowbox/shadowbox.js"></script>
 
 
         <script type="text/javascript">
                                                     Shadowbox.init({
-                                                        // a darker overlay looks better on this particular site
                                                         overlayOpacity: 0.8
-                                                                // setupDemos is defined in assets/demo.js
                                                     }, setupDemos);
                                                     function nobackbutton() {
-
                                                         window.location.hash = "no-back-button";
                                                         window.location.hash = "Again-No-back-button" //chrome
-
                                                         window.onhashchange = function () {
                                                             window.location.hash = "";
                                                         }
@@ -1022,7 +1021,7 @@
                                                         });
                                                         $(".elimi").click(function () {
                                                             var msg = confirm('¿Está seguro de eliminar?');
-                                                            if (msg == true) {
+                                                            if (msg === true) {
                                                                 return true;
                                                             } else {
                                                                 return false;

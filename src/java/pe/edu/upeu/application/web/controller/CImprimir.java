@@ -24,6 +24,7 @@ import pe.edu.upeu.application.dao.ContratoDAO;
 import pe.edu.upeu.application.dao.PlantillaContractualDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaContractualDAO;
+import pe.edu.upeu.application.factory.FactoryConnectionDB;
 
 /**
  *
@@ -75,7 +76,10 @@ public class CImprimir extends HttpServlet {
                     alma = id_con[i].split("/");
                    // String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
                     //String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
-                    String ubicacion=getServletConfig().getServletContext().getRealPath("/")+"Vista/Contrato/Formato_Plantilla/Formato/";
+                    //String ubicacion=getServletConfig().getServletContext().getRealPath("/")+"Vista/Contrato/Formato_Plantilla/Formato/";
+                    String ubicacion=FactoryConnectionDB.url_archivos+"Formato/";
+                  
+                    
                     String no_arhivo_or = pl.List_pl_con_x_id(alma[1]);
                     FileReader lector = new FileReader(ubicacion + no_arhivo_or.trim());
                     BufferedReader contenido = new BufferedReader(lector);

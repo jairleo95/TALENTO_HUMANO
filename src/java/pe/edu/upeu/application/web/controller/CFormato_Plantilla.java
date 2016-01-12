@@ -21,6 +21,7 @@ import pe.edu.upeu.application.dao.PlantillaContractualDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaContractualDAO;
+import pe.edu.upeu.application.factory.FactoryConnectionDB;
 
 public class CFormato_Plantilla extends HttpServlet {
 
@@ -45,7 +46,8 @@ public class CFormato_Plantilla extends HttpServlet {
         InterfaceDireccionDAO dir = new DireccionDAO();
         String iduser = (String) sesion.getAttribute("IDUSER");
         String opc = request.getParameter("opc");
-        String ubicacion = getServletConfig().getServletContext().getRealPath("/") + "Vista/Contrato/Formato_Plantilla/Formato/";
+      //  String ubicacion = getServletConfig().getServletContext().getRealPath("/") + "Vista/Contrato/Formato_Plantilla/Formato/";
+        String ubicacion = FactoryConnectionDB.url_archivos+"Formato/";
         if (iduser != null) {
             try {
                 if (opc.equals("Asignar")) {

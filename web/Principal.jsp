@@ -332,10 +332,10 @@
         <aside id="left-panel">
 
             <!-- User info -->
-            <div class="logininfo">
+            <div class="logininfo slideInRight fast animated">
                 <div class="row">
                     <div class="avatar-user col-md-3">
-                            <input id="id_trabajador" type="hidden" value="<%out.println(sesion.getAttribute("IDTR"));%>" />
+                        <input id="id_trabajador" type="hidden" value="<%out.println(sesion.getAttribute("IDTR"));%>" />
                         <a href="javascript:void(0);" id="show-shortcut" >
                             <img id="foto_usuario" src="imagenes/avatar_default.jpg"  />
                         </a>  
@@ -352,7 +352,7 @@
                 </div>
 
             </div>
-            
+
 
             <!-- end user info -->
 
@@ -436,11 +436,11 @@
             <!-- RIBBON -->
             <div id="ribbon">
 
-              <!--  <span class="ribbon-button-alignment"> 
-                    <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> ¡Alerta! Esto actualizará la pagina." data-html="true">
-                        <i class="fa fa-refresh"></i>
-                    </span> 
-                </span>-->
+                <!--  <span class="ribbon-button-alignment"> 
+                      <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> ¡Alerta! Esto actualizará la pagina." data-html="true">
+                          <i class="fa fa-refresh"></i>
+                      </span> 
+                  </span>-->
 
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
@@ -662,7 +662,7 @@
         <script src="js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>-->
 
         <script>
-            var btnclose = 0;
+        var btnclose = 0;
         document.oncontextmenu = function () {
             return false;
         }
@@ -696,10 +696,10 @@
             $(".iframe_principal").show(250);
             $(".animacion_load").empty();
         };
-        
+
         $(document).ready(function () {
             var idtra = $('#id_trabajador').val()
-            getAvatar("perfil",idtra);
+            getAvatar("perfil", idtra);
             pageSetUp();
             // alert('<%="Maximum Inactive Interval of Session in Seconds is : " + sesion.getMaxInactiveInterval() / 60%>');
             $(".menu-item-parent").parent().click(function () {
@@ -721,39 +721,39 @@
                 $this.parents('.dropdown-menu').find('li').removeClass('active');
                 $this.parent().addClass('active');
             });
-            
-             function getAvatar(tipo,idtra){
-                 $.ajax({
-                     url : "./foto",
-                     type: "POST",
-                     data: "opc=getfoto&tipo="+tipo+"&idtra="+idtra,
-                     success : getImagen,
-                     error: errors
-                 });
-                 function getImagen(data){
-                  $.each(data,function(i , datos){
-                      $.each(datos, function(i , obj){
-                     $('#foto_usuario').attr("src", "Vista/Usuario/Fotos/"+obj.ar_foto);
-                      });
-                  });
-                 }
-                 function errors(data){
-                     console.log("error"+data)
-                 }
-                 
-             }
+
+            function getAvatar(tipo, idtra) {
+                $.ajax({
+                    url: "./foto",
+                    type: "POST",
+                    data: "opc=getfoto&tipo=" + tipo + "&idtra=" + idtra,
+                    success: getImagen,
+                    error: errors
+                });
+                function getImagen(data) {
+                    $.each(data, function (i, datos) {
+                        $.each(datos, function (i, obj) {
+                            $('#foto_usuario').attr("src", "Vista/Usuario/Fotos/" + obj.ar_foto);
+                        });
+                    });
+                }
+                function errors(data) {
+                    console.log("error" + data)
+                }
+
+            }
         });
 
-         $("#btn-ocultar").click(function (){
-             if(btnclose == 0){
-                 $(".logininfo").css({display : "none"});
-                 btnclose +=1;
-             }else{
-                 $(".logininfo").css({display : "block"});
-                 btnclose = 0;
-             }
-          
-         });
+        $("#btn-ocultar").click(function () {
+            if (btnclose == 0) {
+                $(".logininfo").css({display: "none"});
+                btnclose += 1;
+            } else {
+                $(".logininfo").css({display: "block"});
+                btnclose = 0;
+            }
+
+        });
         </script>
     </body>
 

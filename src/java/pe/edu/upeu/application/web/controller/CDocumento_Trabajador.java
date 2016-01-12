@@ -28,6 +28,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.servlet.ServletRequestContext;
 import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
+import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Renombrar;
 
 /**
@@ -123,7 +124,8 @@ public class CDocumento_Trabajador extends HttpServlet {
                 // String ubicacion = getServletContext().getRealPath("/")+"Vista\\Dgp\\Docuemnto\\Archivo";
                 // System.out.println(ubicacion+"--ubicacion");
                 //String ubicacion = "/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
-                String ubicacion = getServletConfig().getServletContext().getRealPath("/") + "Vista/Dgp/Documento/Archivo/";
+                //String ubicacion = getServletConfig().getServletContext().getRealPath("/") + "Vista/Dgp/Documento/Archivo/";
+                String ubicacion = FactoryConnectionDB.url_archivos + "Archivo/";
 //out.print(ubicacion);
                 DiskFileItemFactory f = new DiskFileItemFactory();
                 f.setSizeThreshold(1024);
@@ -295,7 +297,9 @@ public class CDocumento_Trabajador extends HttpServlet {
             out.close();
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *

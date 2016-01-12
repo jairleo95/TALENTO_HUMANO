@@ -25,6 +25,7 @@ import pe.edu.upeu.application.dao.Fotos_TrabajadorDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFotos_TrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
+import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Renombrar;
 
 /**
@@ -45,61 +46,62 @@ public class CFoto extends HttpServlet {
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
         String ubicacion = "";
         Map<String, Object> rpta = new HashMap<String, Object>();
-        
-        if(opc != null){
-            rpta.put("rpta", foto.Fotos_usuario(idtra.trim(), tipo)); 
-        }else{
-        
-        try {
-            ubicacion = getServletConfig().getServletContext().getRealPath("/") +"Vista/Usuario/Fotos/";
+
+        if (opc != null) {
+            rpta.put("rpta", foto.Fotos_usuario(idtra.trim(), tipo));
+        } else {
+
+            try {
+                //  ubicacion = getServletConfig().getServletContext().getRealPath("/") +"Vista/Usuario/Fotos/";
+                ubicacion = FactoryConnectionDB.url_archivos+"Fotos/";
             // ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Usuario\\Fotos";
             DiskFileItemFactory f = new DiskFileItemFactory();
-            f.setSizeThreshold(1024);
-            f.setRepository(new File(ubicacion));
-            ServletFileUpload upload = new ServletFileUpload(f);
+                f.setSizeThreshold(1024);
+                f.setRepository(new File(ubicacion));
+                ServletFileUpload upload = new ServletFileUpload(f);
 
-            List<FileItem> p = upload.parseRequest(request);
-            String idtr = null;
-            String nombre_archivo = null;
-            String no_original = null;
-            String tipo_archivo = null;
-            long sizeInBytes = 0;
-            Iterator it = p.iterator();
-            while (it.hasNext()) {
-                FileItem item = (FileItem) it.next();
-                if (item.isFormField()) {
-                    String nombre = item.getFieldName();
-                    String valor = item.getString();
-                    if (nombre.equals("idtr") & idtr == null) {
-                        idtr = valor;
-                    }
-                } else {
-                    String fieldName = item.getFieldName();
-                    sizeInBytes = item.getSize();
-                    tipo_archivo = item.getContentType();
-                    Calendar fecha = new GregorianCalendar();
-                    int hora = fecha.get(Calendar.HOUR_OF_DAY);
-                    int min = fecha.get(Calendar.MINUTE);
-                    int sec = fecha.get(Calendar.SECOND);
-                    if (fieldName.equals("archivo")) {
-                        nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + idtr + "_" + item.getName().toUpperCase();
-                        no_original = item.getName();
-                        Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
-                        thread.start();
+                List<FileItem> p = upload.parseRequest(request);
+                String idtr = null;
+                String nombre_archivo = null;
+                String no_original = null;
+                String tipo_archivo = null;
+                long sizeInBytes = 0;
+                Iterator it = p.iterator();
+                while (it.hasNext()) {
+                    FileItem item = (FileItem) it.next();
+                    if (item.isFormField()) {
+                        String nombre = item.getFieldName();
+                        String valor = item.getString();
+                        if (nombre.equals("idtr") & idtr == null) {
+                            idtr = valor;
+                        }
                     } else {
-                        no_original = no_original;
-                        nombre_archivo = nombre_archivo;
+                        String fieldName = item.getFieldName();
+                        sizeInBytes = item.getSize();
+                        tipo_archivo = item.getContentType();
+                        Calendar fecha = new GregorianCalendar();
+                        int hora = fecha.get(Calendar.HOUR_OF_DAY);
+                        int min = fecha.get(Calendar.MINUTE);
+                        int sec = fecha.get(Calendar.SECOND);
+                        if (fieldName.equals("archivo")) {
+                            nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + idtr + "_" + item.getName().toUpperCase();
+                            no_original = item.getName();
+                            Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
+                            thread.start();
+                        } else {
+                            no_original = no_original;
+                            nombre_archivo = nombre_archivo;
+                        }
                     }
                 }
-            }
-            foto.INSERT_FOTOS_TRABAJADOR(null, null, nombre_archivo, no_original, String.valueOf(sizeInBytes), tipo_archivo, idtr);
-            rpta.put("rpta", "1");
-            rpta.put("archivo", nombre_archivo);
+                foto.INSERT_FOTOS_TRABAJADOR(null, null, nombre_archivo, no_original, String.valueOf(sizeInBytes), tipo_archivo, idtr);
+                rpta.put("rpta", "1");
+                rpta.put("archivo", nombre_archivo);
 
-        } catch (Exception e) {
-            rpta.put("rpta", "-1");
-            rpta.put("mensaje", e.getMessage());
-         }
+            } catch (Exception e) {
+                rpta.put("rpta", "-1");
+                rpta.put("mensaje", e.getMessage());
+            }
         }
 
         Gson gson = new Gson();
@@ -107,10 +109,8 @@ public class CFoto extends HttpServlet {
         out.flush();
         out.close();
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *

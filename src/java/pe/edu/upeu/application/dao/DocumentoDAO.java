@@ -52,7 +52,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR" +e.getMessage());
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -76,12 +76,12 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 String tipo = rs.getString("NO_FILE").substring(rs.getString("NO_FILE").length() - 3, rs.getString("NO_FILE").length());
                 if (tipo.equals("PDF") || tipo.equals("OCX")) {
                     if (tipo.equals("OCX") || tipo.equals("DOC")) {
-                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"Archivo/" + rs.getString("NO_FILE") + "'><img src='Archivo/word.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"" + FactoryConnectionDB.url_archivos + "Archivo/" + rs.getString("NO_FILE") + "'><img src='Archivo/word.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
                     } else {
-                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"Archivo/" + rs.getString("NO_FILE") + "\"><img src='Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"" + FactoryConnectionDB.url_archivos + "Archivo/" + rs.getString("NO_FILE") + "\"><img src='Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
                     }
                 } else {
-                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"Archivo/" + rs.getString("NO_FILE") + "\"><img src=\"Archivo/" + rs.getString("NO_FILE") + "\" style='width:100px;height:100px' class='borde' /></a>";
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"" + FactoryConnectionDB.url_archivos + "Archivo/" + rs.getString("NO_FILE") + "\"><img src=\"Archivo/" + rs.getString("NO_FILE") + "\" style='width:100px;height:100px' class='borde' /></a>";
                 }
 
             }
@@ -138,13 +138,13 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 String tipo = rs.getString("NO_FILE").substring(rs.getString("NO_FILE").length() - 3, rs.getString("NO_FILE").length());
                 if (tipo.trim().equals("PDF") || tipo.equals("OCX") || tipo.equals("DOC")) {
                     if (tipo.equals("OCX") || tipo.equals("DOC")) {
-                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/word.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='"+FactoryConnectionDB.url_archivos+"Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/word.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
                     } else {
-                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='"+FactoryConnectionDB.url_archivos+"Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
                     }
                 } else {
 
-                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "' style='width:100px;height:100px;' class='borde'></a>";
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='"+FactoryConnectionDB.url_archivos+"Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "' style='width:100px;height:100px;' class='borde'></a>";
                 }
             }
             rs.close();
@@ -256,10 +256,10 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 d.setTi_documento(rs.getString("ti_documento"));
                 list.add(d);
             }
-       } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR" +e.getMessage());
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -303,7 +303,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR" +e.getMessage());
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -333,7 +333,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR" +e.getMessage());
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -353,10 +353,10 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             ResultSet rs = this.conn.query(sql);
             rs.next();
             religion = rs.getInt("num");
-       } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR" +e.getMessage());
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -380,7 +380,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR" +e.getMessage());
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -589,7 +589,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR" +e.getMessage());
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -697,7 +697,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR" +e.getMessage());
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -724,10 +724,10 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 d.setTi_documento(rs.getString("TI_DOCUMENTO"));
                 list.add(d);
             }
-       } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR" +e.getMessage());
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
@@ -778,7 +778,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     }
 
     @Override
-    public void INSERT_DGP_DOC_tra(String ID_DGP_DOC_ADJ, String ID_DGP, String ID_DOCUMENTO_ADJUNTO, String ES_DGP_DOC_ADJ, String idtr,String idh) {
+    public void INSERT_DGP_DOC_tra(String ID_DGP_DOC_ADJ, String ID_DGP, String ID_DOCUMENTO_ADJUNTO, String ES_DGP_DOC_ADJ, String idtr, String idh) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP_DOC_ADJ( ?, ?, ?, ? ,?,?)} ");
@@ -829,7 +829,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR" +e.getMessage());
+            throw new RuntimeException("ERROR" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
