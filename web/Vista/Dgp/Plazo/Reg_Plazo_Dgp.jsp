@@ -438,7 +438,7 @@ Author     : JAIR
 
                 }
                 listar();
-            });
+            }); 
             $(".planilla").change(function() {
                 $.post("../../../requerimiento", "opc=Listar_req_id&id=" + $(this).val(), function(objJson) {
                     var req = $(".req");

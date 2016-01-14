@@ -52,7 +52,7 @@ public class CContrato_Archivo_Adjunto extends HttpServlet {
 //                ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 1) + "/Vista/Contrato/Contratos_Adjuntos/";
 //            }
 
-          ubicacion=   FactoryConnectionDB.url_archivos+"Contratos_Adjuntos/";
+          ubicacion=   FactoryConnectionDB.url+"Contratos_Adjuntos/";
             // ubicacion = getServletConfig().getServletContext().getRealPath("/")+"Vista/Contrato/Contratos_Adjuntos/";
            // ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "/Vista/Contrato/Contratos_Adjuntos/";
             DiskFileItemFactory f = new DiskFileItemFactory();

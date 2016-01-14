@@ -485,7 +485,7 @@
     </div>
 </div>
 </div>
-</body>
+
 <script src="../../js/coment/coment.js" type="text/javascript"></script>
 <!--================================================== -->
 
@@ -920,6 +920,7 @@
     })
 
 </script>
+    </body>
 </html>
 <%
         List_id_Autorizacion.clear();

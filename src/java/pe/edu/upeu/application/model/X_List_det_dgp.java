@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.model;
 
 /**
@@ -11,6 +10,7 @@ package pe.edu.upeu.application.model;
  * @author Jose
  */
 public class X_List_det_dgp {
+
     private String id_dgp;
     private String id_trabajador;
     private String no_trabajador;
@@ -24,8 +24,65 @@ public class X_List_det_dgp {
     private String no_area;
     private String no_req;
     private String es_dgp;
+    private String li_motivo;
+    private double ca_bono_alimentario;
+    private double ca_bonificacion_p;
+    private double ca_asig_familiar;
+    private String anno_procesamiento;
+    private String mes_procesamiento;
 
-    public X_List_det_dgp(String id_dgp, String id_trabajador, String no_trabajador, String ap_paterno, String ap_materno, String id_puesto, String fe_desde, String fe_hasta, Double ca_sueldo, String no_puesto,String no_area, String no_req, String es_dgp) {
+    public String getLi_motivo() {
+        return li_motivo;
+    }
+
+    public void setLi_motivo(String li_motivo) {
+        this.li_motivo = li_motivo;
+    }
+
+    public double getCa_bono_alimentario() {
+        return ca_bono_alimentario;
+    }
+
+    public void setCa_bono_alimentario(double ca_bono_alimentario) {
+        this.ca_bono_alimentario = ca_bono_alimentario;
+    }
+
+    public double getCa_bonificacion_p() {
+        return ca_bonificacion_p;
+    }
+
+    public void setCa_bonificacion_p(double ca_bonificacion_p) {
+        this.ca_bonificacion_p = ca_bonificacion_p;
+    }
+
+    public double getCa_asig_familiar() {
+        return ca_asig_familiar;
+    }
+
+    public String getAnno_procesamiento() {
+        return anno_procesamiento;
+    }
+
+    public void setAnno_procesamiento(String anno_procesamiento) {
+        this.anno_procesamiento = anno_procesamiento;
+    }
+
+    public String getMes_procesamiento() {
+        return mes_procesamiento;
+    }
+
+    public void setMes_procesamiento(String mes_procesamiento) {
+        this.mes_procesamiento = mes_procesamiento;
+    }
+
+    public void setCa_asig_familiar(double ca_asig_familiar) {
+        this.ca_asig_familiar = ca_asig_familiar;
+    }
+
+    public X_List_det_dgp(String id_dgp, String id_trabajador, String no_trabajador, String ap_paterno, String ap_materno,
+            String id_puesto, String fe_desde, String fe_hasta, Double ca_sueldo, String no_puesto, String no_area,
+            String no_req, String es_dgp, String li_motivo, double ca_bono_alimentario, double ca_bonificacion_p,
+            double ca_asig_familiar, String anno_procesamiento, String mes_procesamiento) {
         this.id_dgp = id_dgp;
         this.id_trabajador = id_trabajador;
         this.no_trabajador = no_trabajador;
@@ -39,7 +96,14 @@ public class X_List_det_dgp {
         this.no_area = no_area;
         this.no_req = no_req;
         this.es_dgp = es_dgp;
+        this.li_motivo = li_motivo;
+        this.ca_bono_alimentario = ca_bono_alimentario;
+        this.ca_bonificacion_p = ca_bonificacion_p;
+        this.ca_asig_familiar = ca_asig_familiar;
+        this.anno_procesamiento = anno_procesamiento;
+        this.mes_procesamiento = mes_procesamiento;
     }
+
     public X_List_det_dgp() {
         this.id_dgp = "";
         this.id_trabajador = "";
@@ -54,7 +118,13 @@ public class X_List_det_dgp {
         this.no_area = "";
         this.no_req = "";
         this.es_dgp = "";
-    } 
+        this.li_motivo = "";
+        this.ca_bono_alimentario = 0.0;
+        this.ca_bonificacion_p = 0.0;
+        this.ca_asig_familiar = 0.0;
+        this.anno_procesamiento = "";
+        this.mes_procesamiento = "";
+    }
 
     public String getId_dgp() {
         return id_dgp;
@@ -159,5 +229,5 @@ public class X_List_det_dgp {
     public void setEs_dgp(String es_dgp) {
         this.es_dgp = es_dgp;
     }
-    
+
 }

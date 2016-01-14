@@ -64,6 +64,7 @@ public class Cindex extends HttpServlet {
                 sesion.setAttribute("NOMBRE_AP", user.getAp_paterno() + " " + user.getAp_materno() + " " + user.getNo_trabajador());
             }
             sesion.setAttribute("LIST_MODULO", Irol.LISTAR_MODULOS(user.getId_rol()));
+            
             /*FALTA VALIDAR ESTOS DOS PROCEDIMIENTOS*/
             //   pl.Validar_Cumplimiento_plazo_t2();
             // pl.Validar_Cumplimiento_plazo_t1();
@@ -82,6 +83,7 @@ public class Cindex extends HttpServlet {
 
             /*este procedmiento se puso en un job de cada un dia de intervalo*/
           //  cto.VALIDAR_FE_HASTA_CON();
+             
             response.sendRedirect("menu");
             out.print("EXITO!");
         } else {

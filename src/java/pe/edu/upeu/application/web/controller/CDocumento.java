@@ -107,7 +107,7 @@ public class CDocumento extends HttpServlet {
                 }
             } else {
               //  String ubicacion = getServletConfig().getServletContext().getRealPath("/") + "Vista/Dgp/Documento/Archivo/";
-                String ubicacion = FactoryConnectionDB.url_archivos+"Archivo/";
+                String ubicacion = FactoryConnectionDB.url+"Archivo/";
                 DiskFileItemFactory f = new DiskFileItemFactory();
                 f.setSizeThreshold(1024);
                 f.setRepository(new File(ubicacion));

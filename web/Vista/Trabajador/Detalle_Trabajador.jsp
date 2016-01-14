@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <%@page import="pe.edu.upeu.application.dao.TrabajadorDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO"%>
 <%
@@ -250,7 +251,7 @@
             <!-- widget div-->
 
 
-            <div class="row" style="padding-top: 0px;">
+            <div class="row" style="padding: 0px;">
 
                 <ul  class="nav nav-tabs bordered tab_detalle_trabajador">
                     <%
@@ -321,7 +322,7 @@
                     <%}%>
                 </ul>
 
-                <div id="myTabContent1" class="tab-content padding-10">
+                <div id="myTabContent1" class="tab-content">
                     <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
                             for (int r = 0; r < List_Auto_mostrar.size(); r++) {
                                 Auto_Mostrar a = new Auto_Mostrar();
@@ -506,6 +507,7 @@
         <%}%>
         <%}%> <%}%>
         <div class="div_dialog"></div>
+        <input  value="<%out.print(FactoryConnectionDB.url_archivos);%>" type="hidden" class="url_archivo"/> 
         <!-- #dialog-message -->
         <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
         <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
@@ -611,6 +613,7 @@
         <script src="../../js/shadowbox/shadowbox.js" type="text/javascript"></script>
         <script src="../../js/JQuery/jquery.session.js" type="text/javascript"></script>
         <script>
+            var url_archivos =$(".url_archivo").val()+"Fotos/";
         var idtrl = $(".idtr").val().trim();
         var repeat = 0;
         function procesar_req_individual(ckb, tipo, iddgp) {
@@ -1178,7 +1181,7 @@
                                                 var idtra = $(window.parent.document.getElementById('id_trabajador')).val();
                                                 if (idtra.trim() == $(".idtr").val().trim()) {
                                                     $('.foto-user').empty();
-                                                    $(padre).attr("src", "Vista/Usuario/Fotos/" + objJson.archivo);
+                                                    $(padre).attr("src", url_archivos + objJson.archivo);
                                                 }
                                                 Shadowbox.clearCache();
                                                 validar_shadowbox();
@@ -1229,12 +1232,12 @@
                     $.each(datos, function (i, obj) {
                         if (tipo == 'todo') {
                             console.log("foto todo");
-                            var imgens = '<img class="img-thumbnail" title="foto ' + i + '" src="../../Vista/Usuario/Fotos/' +
+                            var imgens = '<img class="img-thumbnail" title="foto ' + i + '" src="' +url_archivos+
                                     obj.ar_foto + '"style="width:100px; height:100px;" />';
                             $('.fotos').append(imgens);
                             if (repeat == 0) {
-                                var imgens = '<a class="mustang-gallery pull-left" href="../../Vista/Usuario/Fotos/' + obj.ar_foto + '" >' +
-                                        '<img class="img-thumbnail" title="foto ' + i + '" src="../../Vista/Usuario/Fotos/' +
+                                var imgens = '<a class="mustang-gallery pull-left" href="'+url_archivos + obj.ar_foto + '" >' +
+                                        '<img class="img-thumbnail" title="foto ' + i + '" src="' +url_archivos+
                                         obj.ar_foto + '"style="width:100px; height:100px;" /></a>';
                                 $('.foto-user').append(imgens);
                                 $('.fotos').append(imgens);
@@ -1243,9 +1246,9 @@
 
                         } else if (tipo == 'perfil') {
                             console.log("foto perfil ");
-                            $('.borde').attr("src", "../../Vista/Usuario/Fotos/" + obj.ar_foto);
-                            $(".avatar").attr("href", "../../Vista/Usuario/Fotos/" + obj.ar_foto);
-                            $("#sb-player").attr("href", "../../Usuario/Fotos/" + obj.ar_foto);
+                            $('.borde').attr("src", url_archivos + obj.ar_foto);
+                            $(".avatar").attr("href", url_archivos + obj.ar_foto);
+                            $("#sb-player").attr("href", url_archivos + obj.ar_foto);
                             console.log(obj.ar_foto);
                         }
                     });

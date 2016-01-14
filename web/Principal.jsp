@@ -479,7 +479,7 @@
                     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
                         <div class="animacion_load"></div>
                     </div>
-                    <iframe id="myframe" name="myframe"  style="display:none;"  class="iframe_principal" scrolling="si"  width="100%" height="800" frameborder="0" src="Vista/inicio.jsp"></iframe>
+                    <iframe id="myframe" name="myframe"  style="display:"  class="iframe_principal" scrolling="si"  width="100%" height="800" frameborder="0" src="Vista/inicio.jsp"></iframe>
                 </div>
                 <!-- end row -->
                 <!-- end widget grid -->
@@ -693,8 +693,8 @@
             websocket.send("mensaje");
         }
         document.getElementById('myframe').onload = function () {
-            $(".iframe_principal").show(250);
-            $(".animacion_load").empty();
+            /*$(".iframe_principal").show(250);
+            $(".animacion_load").empty();*/
         };
 
         $(document).ready(function () {
@@ -711,8 +711,8 @@
             $(".li-privilegio").click(function () {
                 $(".li-privilegio").removeClass("active");
                 $(this).addClass("active");
-                $(".iframe_principal").hide();
-                $(".animacion_load").append('<h1 class="ajax-loading-animation"><i class="fa fa-cog fa-spin"></i> Cargando...</h1>');
+                //$(".iframe_principal").hide();
+                //$(".animacion_load").append('<h1 class="ajax-loading-animation"><i class="fa fa-cog fa-spin"></i> Cargando...</h1>');
             });
             $(".js-status-update a").click(function () {
                 var selText = $(this).text();

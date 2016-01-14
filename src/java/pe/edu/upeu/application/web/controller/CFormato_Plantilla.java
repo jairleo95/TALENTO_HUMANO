@@ -47,7 +47,7 @@ public class CFormato_Plantilla extends HttpServlet {
         String iduser = (String) sesion.getAttribute("IDUSER");
         String opc = request.getParameter("opc");
       //  String ubicacion = getServletConfig().getServletContext().getRealPath("/") + "Vista/Contrato/Formato_Plantilla/Formato/";
-        String ubicacion = FactoryConnectionDB.url_archivos+"Formato/";
+        String ubicacion = FactoryConnectionDB.url+"Formato/";
         if (iduser != null) {
             try {
                 if (opc.equals("Asignar")) {

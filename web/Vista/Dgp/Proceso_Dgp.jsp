@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
@@ -267,7 +268,7 @@
                                                 </td>
                                                 <%} else {%>
                                                 <td>
-                                                    <img class="user_avatar_<%=r.getId_trabajador()%>" src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
+                                                    <img class="user_avatar_<%=r.getId_trabajador()%>" src="<%=FactoryConnectionDB.url_archivos+"Fotos/"+r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
                                                         <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> 
                                                 </td>
                                                 <%}%>

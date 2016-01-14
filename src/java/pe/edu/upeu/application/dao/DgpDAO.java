@@ -216,7 +216,11 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public List<X_List_det_dgp> LIST_DET_DGP(String id_dep) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select dgp.id_dgp , dgp.id_trabajador,tr.no_trabajador,tr.ap_paterno,tr.ap_materno, dgp.id_puesto,dgp.fe_desde,dgp.fe_hasta,dgp.ca_sueldo, pd.no_puesto, pd.no_area, r.no_req,dgp.ES_DGP from RHTR_REQUERIMIENTO r,RHTM_DGP dgp , RHTM_TRABAJADOR tr,RHVD_PUESTO_DIRECCION  pd where r.ID_REQUERIMIENTO = dgp.ID_REQUERIMIENTO and dgp.ES_DGP is not null and dgp.ID_PUESTO=pd.ID_PUESTO and tr.ID_TRABAJADOR = dgp.ID_TRABAJADOR";
+        String sql = "select trim(rhfu_anno_procesamiento_dgp(dgp.ID_DGP))   AS anno_procesamiento,"
+                + "    trim(rhfu_mes_procesamiento_dgp(dgp.ID_DGP))                 AS mes_procesamiento, dgp.id_dgp , dgp.id_trabajador,tr.no_trabajador,"
+                + "tr.ap_paterno,tr.ap_materno, dgp.id_puesto,to_char(dgp.fe_desde,'dd/mm/yyyy') as fe_desde,"
+                + "to_char(dgp.fe_hasta,'dd/mm/yyyy') as fe_hasta,dgp.ca_sueldo, pd.no_puesto, pd.no_area, r.no_req,dgp.ES_DGP ,dgp.LI_MOTIVO,dgp.CA_BONO_ALIMENTARIO,dgp.CA_BONIFICACION_P,dgp.CA_ASIG_FAMILIAR "
+                + " from RHTR_REQUERIMIENTO r,RHTM_DGP dgp , RHTM_TRABAJADOR tr,RHVD_PUESTO_DIRECCION  pd where r.ID_REQUERIMIENTO = dgp.ID_REQUERIMIENTO and dgp.ES_DGP is not null and dgp.ID_PUESTO=pd.ID_PUESTO and tr.ID_TRABAJADOR = dgp.ID_TRABAJADOR";
         sql += (!id_dep.equals("")) ? " and pd.ID_DEPARTAMENTO='" + id_dep.trim() + "'" : "";
         sql += " ORDER BY TO_NUMBER(SUBSTR(dgp.ID_DGP,5,LENGTH(dgp.ID_DGP))) DESC";
         List<X_List_det_dgp> Lista = new ArrayList<X_List_det_dgp>();
@@ -237,6 +241,12 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setNo_area(rs.getString("no_area"));
                 x.setNo_req(rs.getString("no_req"));
                 x.setEs_dgp(rs.getString("es_dgp"));
+                x.setLi_motivo(rs.getString("LI_MOTIVO"));
+                x.setCa_bono_alimentario(rs.getDouble("CA_BONO_ALIMENTARIO"));
+                x.setCa_bonificacion_p(rs.getDouble("CA_BONIFICACION_P"));
+                x.setCa_asig_familiar(rs.getDouble("CA_ASIG_FAMILIAR"));
+                x.setAnno_procesamiento(rs.getString("anno_procesamiento"));
+                x.setMes_procesamiento(rs.getString("mes_procesamiento"));
                 Lista.add(x);
             }
         } catch (SQLException ex) {
@@ -582,14 +592,14 @@ public class DgpDAO implements InterfaceDgpDAO {
     }
 
     @Override
-    public List<V_Es_Req_Incompleto> List_Incomplet(String iddep,boolean permisoAdmin) {
+    public List<V_Es_Req_Incompleto> List_Incomplet(String iddep, boolean permisoAdmin) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "SELECT * FROM RHVD_ES_REQ_INCOMPLETO ";
         if (!permisoAdmin) {
-              sql += (!"".equals(iddep)) ? " where ID_DEPARTAMENTO='" + iddep + "'" : "";
+            sql += (!"".equals(iddep)) ? " where ID_DEPARTAMENTO='" + iddep + "'" : "";
         }
-   
-  sql += "order by ID_DGP";
+
+        sql += "order by ID_DGP";
         List<V_Es_Req_Incompleto> Lista = new ArrayList<V_Es_Req_Incompleto>();
         try {
             ResultSet rs = this.conn.query(sql);

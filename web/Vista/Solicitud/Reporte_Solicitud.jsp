@@ -102,7 +102,7 @@
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
-                                    <div class="widget-body no-padding head_list_sol">
+                                    <div class="widget-body no-padding add_table_1">
 
                                         <table  class="table table-striped table-bordered table-hover table_list_sol" width="100%">
                                             <thead><tr><th><strong>Nro</strong></th><th>Acciones</th><th data-class="expand"><strong>Apellidos y Nombres</strong></th><th data-hide="phone,tablet" ><strong>Departamento</strong></th><th data-class="expand" ><strong>Area</strong></th><th data-hide="phone,tablet"><strong>Puesto</strong></th><th data-hide="phone,tablet"><strong>Fecha Inicio</strong></th><th data-hide="phone,tablet"><strong>Fecha Cese</strong></th><th  data-hide="phone,tablet">Fecha Solicitud</th><th  data-hide="phone,tablet">Estado</th></tr></thead>
@@ -153,7 +153,7 @@
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
-                                    <div class="widget-body no-padding">
+                                    <div class="widget-body no-padding add_table_2">
 
                                         <table  class="table table-striped table-bordered table-hover table_sol_aut" width="100%">
                                             <thead><tr><th><strong>Nro</strong></th><th>Acciones</th><th data-class="expand"><strong>Apellidos y Nombres</strong></th><th data-hide="phone,tablet" ><strong>Departamento</strong></th><th data-class="expand" ><strong>Area</strong></th><th data-hide="phone,tablet"><strong>Puesto</strong></th><th data-hide="phone,tablet"><strong>Fecha Inicio</strong></th><th data-hide="phone,tablet"><strong>Fecha Cese</strong></th><th  data-hide="phone,tablet">Fecha Solicitud</th><th  data-hide="phone,tablet">Estado</th></tr></thead>
@@ -238,26 +238,26 @@
     <!-- JARVIS WIDGETS -->
     <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-    <!-- EASY PIE CHARTS -->
-    <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+    <!-- EASY PIE CHARTS 
+    <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
 
-    <!-- SPARKLINES -->
-    <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+    <!-- SPARKLINES 
+    <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>-->
 
     <!-- JQUERY VALIDATE -->
     <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-    <!-- JQUERY MASKED INPUT -->
-    <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+    <!-- JQUERY MASKED INPUT 
+    <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
 
     <!-- JQUERY SELECT2 INPUT -->
     <script src="../../js/plugin/select2/select2.min.js"></script>
 
-    <!-- JQUERY UI + Bootstrap Slider -->
-    <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+    <!-- JQUERY UI + Bootstrap Slider 
+    <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
 
-    <!-- browser msie issue fix -->
-    <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+    <!-- browser msie issue fix 
+    <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>-->
 
     <!-- FastClick: For mobile devices -->
     <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
@@ -275,8 +275,8 @@
     <script src="../../js/app.min.js"></script>
 
     <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-    <!-- Voice command : plugin -->
-    <script src="../../js/speech/voicecommand.min.js"></script>
+    <!-- Voice command : plugin
+    <script src="../../js/speech/voicecommand.min.js"></script> -->
 
     <!-- PAGE RELATED PLUGIN(S) -->
     <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
@@ -287,22 +287,42 @@
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script type="text/javascript">
-        function listar_det_sol(valor, tipo) {
+        function add_tables(tipo) {
+            $(".add_table_1").empty();
+            $(".add_table_2").empty();
+            var text_html = '';
+            if (tipo === "2") {
+                text_html += '<table  class="table table-striped table-bordered table-hover table_sol_aut" width="100%"'
+                        + '  <thead><tr><th><strong>Nro</strong></th><th>Acciones</th><th data-class="expand"><strong>Apellidos y Nombres</strong></th><th data-hide="phone,tablet" ><strong>Departamento</strong></th><th data-class="expand" ><strong>Area</strong></th><th data-hide="phone,tablet"><strong>Puesto</strong></th><th data-hide="phone,tablet"><strong>Fecha Inicio</strong></th><th data-hide="phone,tablet"><strong>Fecha Cese</strong></th><th  data-hide="phone,tablet">Fecha Solicitud</th><th  data-hide="phone,tablet">Estado</th></tr></thead>'
+                        + '<tbody class="tbody_Sol_Aut">'
+                        + ' </tbody>'
+                        + ' </table>';
+                $(".add_table_2").append(text_html);
+            } else if (tipo === "1") {
+                text_html += ' <table  class="table table-striped table-bordered table-hover table_list_sol" width="100%">'
+                        + '<thead><tr><th><strong>Nro</strong></th><th>Acciones</th><th data-class="expand"><strong>Apellidos y Nombres</strong></th><th data-hide="phone,tablet" ><strong>Departamento</strong></th><th data-class="expand" ><strong>Area</strong></th><th data-hide="phone,tablet"><strong>Puesto</strong></th><th data-hide="phone,tablet"><strong>Fecha Inicio</strong></th><th data-hide="phone,tablet"><strong>Fecha Cese</strong></th><th  data-hide="phone,tablet">Fecha Solicitud</th><th  data-hide="phone,tablet">Estado</th></tr></thead>'
+                        + ' <tbody class="tbody_list_solicitud">'
+                        + '</tbody>'
+                        + '</table>';
+                $(".add_table_1").append(text_html);
+            }
 
+        }
+        function listar_det_sol(valor, tipo, tabla_solicitud) {
             var tb = $(".tabla_detalle_sol");
             tb.empty();
             var texto_html = '';
             $(".foot_sol").empty();
-            if (tipo == "2") {
+            if (tipo === "2") {
                 $(".comentario").hide();
             } else {
                 $(".comentario").show();
             }
-            $(".div_load").append('<img src="../../img/load.gif" class="img-responsive center-block"/>')
+            $(".div_load").append('<img src="../../img/load.gif" class="img-responsive center-block"/>');
             $.post("../../solicitud_requerimiento", "opc=Ver_Solicitud&id=" + valor, function (objJson) {
                 tb.empty();
                 $(".div_load").empty();
-                if (objJson.rpta == -1) {
+                if (objJson.rpta === -1) {
                     alert(objJson.mensaje);
                     return;
                 }
@@ -310,26 +330,26 @@
                 for (var i = 0; i < lista.length; i++) {
                     texto_html += '<tr><td colspan="2" class="text-info table-bordered"><i class="fa fa-file"></i> REQUERIMIENTO : ' + lista[i].req + '</td></tr>';
                     texto_html += '<tr><td>Apellidos y Nombres</td><td>' + lista[i].ap_p + ' ' + lista[i].ap_m + ' ' + lista[i].nombre + '</td></tr>';
-                    if (lista[i].ti_plazo == '1') {
+                    if (lista[i].ti_plazo === '1') {
                         texto_html += '<tr><td>Tipo de Plazo</td><td>Inicio de Contrato</td></tr>';
                     }
-                    if (lista[i].ti_plazo == '2') {
+                    if (lista[i].ti_plazo === '2') {
                         texto_html += '<tr><td>Tipo de Plazo</td><td>Ingreso a planilla</td></tr>';
                     }
                     texto_html += '<tr><td>Nombre de Plazo</td><td>' + lista[i].plazo + '</td></tr>';
                     texto_html += '<tr><td>Detalle de Plazo</td><td>' + lista[i].detalle_plazo + '</td></tr>';
-                    if (lista[i].ti_plazo == '2') {
+                    if (lista[i].ti_plazo === '2') {
                         texto_html += ' <tr class="success"><td>Mes de ingreso solicitado : </td><td>' + lista[i].mes + '</td></tr>';
                     }
                     else {
                         texto_html += ' <tr class="success"><td>Fecha de inicio de contrato solicitado : </td><td>' + lista[i].fecha_plazo + '</td></tr>';
                     }
                     texto_html += '<tr><td>Motivo de solicitud</td><td>' + lista[i].solicitud + '</td></tr>';
-                    if (lista[i].es_aut == '1') {
+                    if (lista[i].es_aut === '1') {
                         texto_html += '<tr><td>Estado de solicitud</td><td>Autorizado</td></tr>';
 
                     }
-                    if (lista[i].es_aut == '0') {
+                    if (lista[i].es_aut === '0') {
                         texto_html += '<tr><td>Estado de solicitud</td><td>Sin Autorizar</td></tr>';
                         $(".foot_sol").empty();
                         $(".foot_sol").append(objJson.permisos);
@@ -344,7 +364,11 @@
                 tb.append(texto_html);
                 texto_html = "";
                 $(".btn_procesar_sol").click(function () {
-                    if ($(".comentario").valid() == true) {
+
+                    listar_solicitudes("1");
+                    listar_solicitudes("2");
+
+                    if ($(".comentario").valid() === true) {
                         $.SmartMessageBox({
                             title: "¡Advertencia!",
                             content: "¿Esta seguro de procesar esta solicitud?",
@@ -366,6 +390,8 @@
                                         timeout: 4000
                                     });
                                     $(".comentario")[0].reset();
+                                    add_tables("1");
+                                    add_tables("2");
                                     listar_solicitudes("1");
                                     listar_solicitudes("2");
 
@@ -379,21 +405,23 @@
             });
         }
         function listar_solicitudes(tipo) {
-            var t_body = $(".tbody_list_solicitud");
+            var t_body;
             var text_html = '';
-            var table_sol = $(".table_list_sol");
-            t_body.empty();
-            var url = "";
+            var table_sol;
 
-            if (tipo == '1') {
+            var url = "";
+            if (tipo === "1") {
+                table_sol = $(".table_list_sol");
+                t_body = $(".tbody_list_solicitud");
                 url = "opc=Listar_Sol_Pendientes";
-            } else if (tipo == '2') {
+            } else if (tipo === "2") {
                 url = "opc=Listar_Sol_Aut";
                 t_body = $(".tbody_Sol_Aut");
                 table_sol = $(".table_sol_aut");
             }
+            t_body.empty();
             $.post("../../solicitud_requerimiento", url, function (objJson) {
-                if (objJson.rpta == -1) {
+                if (objJson.rpta === -1) {
                     alert(objJson.mensaje);
                     return;
                 } else {
@@ -405,7 +433,7 @@
                         text_html += '<td><div class="btn-group"> <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Accion <span class="caret"></span></button><ul class="dropdown-menu"><li><a href="../../dgp?iddgp=' + lista[g].id_dgp + '&idtr=' + lista[g].id_trabajador + '&opc=Detalle"> Ver Requerimiento</a></li>';
                         text_html += '<li><a href="../../documento?iddgp=' + lista[g].id_dgp + '&idtr=' + lista[g].id_trabajador + '&opc=Listar_doc">Continuar registro</a></li>  <li class="divider"></li>';
 
-                        if (tipo == "1") {
+                        if (tipo === "1") {
                             text_html += '<li><button class="btn btn-primary btn-labeled btn_sol" data-toggle="modal" type="button" data-target="#myModal" value="' + lista[g].id_solicitud_dgp + '"><span class="btn-label"><i class="fa fa-envelope"></i></span> Ver Solicitud</button></li></ul></div></td>';
 
                         } else {
@@ -418,7 +446,7 @@
                         text_html += '<td>' + lista[g].fe_desde + '</td>';
                         text_html += '<td>' + lista[g].fe_hasta + '</td>';
                         text_html += '<td>' + lista[g].fe_creacion + '</td>';
-                        if (lista[g].es_autorizar == '0') {
+                        if (lista[g].es_autorizar === '0') {
                             text_html += '<td>Sin Autorizar</td>';
                         } else {
                             text_html += '<td>Autorizado</td>';
@@ -426,179 +454,43 @@
                         text_html += '</tr>';
                     }
                     t_body.append(text_html);
-                    text_html = "";
-                    table_sol.DataTable();
-                }
-                if (tipo == "1") {
-                    $(".btn_sol").click(function () {
+                    text_html = '';
 
-                        listar_det_sol($(this).val(), tipo);
-                    });
 
-                } else {
-                    $(".btn_sol_aut").click(function () {
-                        listar_det_sol($(this).val(), "2");
-                    });
+                    if ($.fn.dataTable.isDataTable(table_sol)) {
+                        $.fn.dataTable.isDataTable(table_sol).destroy();
+                    } else {
+                        var tablas = table_sol.dataTable({searching: true, paging: true});
+                        var rows = tablas.fnGetNodes();
+                        for (var i = 0; i < rows.length; i++) {
+                            var obj = $(rows[i]).find(".btn_sol_aut");
+                            var obj2 = $(rows[i]).find(".btn_sol");
+                            if (tipo === "1") {
+                                obj2.click(function () {
+                                    listar_det_sol($(this).val(), tipo, tablas);
+                                });
+                            } else {
+                                obj.click(function () {
+                                    listar_det_sol($(this).val(), "2", tablas);
+                                });
+                            }
+                        }
+
+                    }
+
                 }
 
             });
         }
-
         $(document).ready(function () {
             pageSetUp();
             $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
-            $(".cod_aps").numeric();
+            //   $(".cod_aps").numeric();
             listar_solicitudes("1");
             listar_solicitudes("2");
-
-
-            /* // DOM Position key index //
-             l - Length changing (dropdown)
-             f - Filtering input (search)
-             t - The Table! (datatable)
-             i - Information (records)
-             p - Pagination (paging)
-             r - pRocessing 
-             < and > - div elements
-             <"#id" and > - div with an id
-             <"class" and > - div with a class
-             <"#id.class" and > - div with an id and class
-             
-             Also see: http://legacy.datatables.net/usage/features
-             */
-
-            /* BASIC ;*/
-            var responsiveHelper_dt_basic = undefined;
-            var responsiveHelper_datatable_fixed_column = undefined;
-            var responsiveHelper_datatable_col_reorder = undefined;
-            var responsiveHelper_datatable_tabletools = undefined;
-            var breakpointDefinition = {
-                tablet: 1024,
-                phone: 480
-            };
-            $('#dt_basic').dataTable({
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                        "t" +
-                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                "autoWidth": true,
-                "preDrawCallback": function () {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_dt_basic) {
-                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                    }
-                },
-                "rowCallback": function (nRow) {
-                    responsiveHelper_dt_basic.createExpandIcon(nRow);
-                },
-                "drawCallback": function (oSettings) {
-                    responsiveHelper_dt_basic.respond();
-                }
-            });
-            /* END BASIC */
-
-            /* COLUMN FILTER  */
-            var otable = $('#datatable_fixed_column').DataTable({
-                //"bFilter": false,
-                //"bInfo": false,
-                //"bLengthChange": false
-                //"bAutoWidth": false,
-                //"bPaginate": false,
-                //"bStateSave": true // saves sort state using localStorage
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
-                        "t" +
-                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                "autoWidth": true,
-                "preDrawCallback": function () {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_datatable_fixed_column) {
-                        responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-                    }
-                },
-                "rowCallback": function (nRow) {
-                    responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-                },
-                "drawCallback": function (oSettings) {
-                    responsiveHelper_datatable_fixed_column.respond();
-                }
-
-            });
-            // custom toolbar
-            $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
-            // Apply the filter
-            $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
-
-                otable
-                        .column($(this).parent().index() + ':visible')
-                        .search(this.value)
-                        .draw();
-            });
-            /* END COLUMN FILTER */
-
-            /* COLUMN SHOW - HIDE */
-            $('#datatable_col_reorder').dataTable({
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
-                        "t" +
-                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                "autoWidth": true,
-                "preDrawCallback": function () {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_datatable_col_reorder) {
-                        responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
-                    }
-                },
-                "rowCallback": function (nRow) {
-                    responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
-                },
-                "drawCallback": function (oSettings) {
-                    responsiveHelper_datatable_col_reorder.respond();
-                }
-            });
-            /* END COLUMN SHOW - HIDE */
-
-            /* TABLETOOLS */
-            $('#datatable_tabletools').dataTable({
-                // Tabletools options: 
-                //   https://datatables.net/extensions/tabletools/button_options
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
-                        "t" +
-                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                "oTableTools": {
-                    "aButtons": [
-                        "copy",
-                        "csv",
-                        "xls",
-                        {
-                            "sExtends": "pdf",
-                            "sTitle": "SmartAdmin_PDF",
-                            "sPdfMessage": "SmartAdmin PDF Export",
-                            "sPdfSize": "letter"
-                        },
-                        {
-                            "sExtends": "print",
-                            "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
-                        }
-                    ],
-                    "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
-                },
-                "autoWidth": true,
-                "preDrawCallback": function () {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_datatable_tabletools) {
-                        responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
-                    }
-                },
-                "rowCallback": function (nRow) {
-                    responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-                },
-                "drawCallback": function (oSettings) {
-                    responsiveHelper_datatable_tabletools.respond();
-                }
-            });
-            /* END TABLETOOLS */
-
-        })
+        });
 
     </script>
 </html>

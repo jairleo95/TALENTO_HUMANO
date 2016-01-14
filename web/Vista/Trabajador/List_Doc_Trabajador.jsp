@@ -169,7 +169,7 @@
                                                     <tr>
                                                         <td ><%=i + 1%></td>
                                                         <td><%=d.getNo_documento()%></td>
-                                                        <td ><%out.print(doc_.List_file_url2(d.getId_documento_adjunto().trim()));%></a></td>
+                                                        <td ><%out.print(doc_.List_file_url2(d.getId_documento_adjunto().trim()));%></td>
                                                             <%if (d.getDe_documento_adjunto() != null) {
                                                             %>
                                                         <td ><%=d.getDe_documento_adjunto()%></td>
@@ -329,10 +329,7 @@
     </center>
 </body>
 </html>
-<%}
-
-    
-        else {
+<%}else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
     }
 %>

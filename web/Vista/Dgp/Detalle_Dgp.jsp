@@ -317,7 +317,7 @@
                                 </form>
                                 <%} else if (x == false & val_btn == 0) {
                                 %>
-                                <div class="alert alert-success fade in div_dgp"><button class="close" data-dismiss="alert">×</button><i class="fa-fw fa fa-check"></i>Usted tiene una solicitud en proceso, una vez que se haya autorizado se podrá procesar el <strong>requerimiento</strong>.</div>
+                                <div class="alert alert-success fade in div_dgp"><button class="close" data-dismiss="alert">×</button><i class="fa-fw fa fa-check"></i>Usted tiene una solicitud en proceso, una vez que se haya autorizado se podrá enviar el <strong>requerimiento</strong>.</div>
                                 <%}%>
                                 <%    }
                                     }%>

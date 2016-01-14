@@ -77,7 +77,7 @@ public class CImprimir extends HttpServlet {
                    // String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Formato_Plantilla/Formato/";
                     //String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11)+"web\\Vista\\Contrato\\Formato_Plantilla\\Formato\\";
                     //String ubicacion=getServletConfig().getServletContext().getRealPath("/")+"Vista/Contrato/Formato_Plantilla/Formato/";
-                    String ubicacion=FactoryConnectionDB.url_archivos+"Formato/";
+                    String ubicacion=FactoryConnectionDB.url+"Formato/";
                   
                     
                     String no_arhivo_or = pl.List_pl_con_x_id(alma[1]);

@@ -106,8 +106,6 @@ function mostrar_horario_edit() {
     $(".cont_vie").hide();
     $(".cont_sab").hide();
     $(".cont_dom").hide();
-
-
     $("#select_lun").change(
             function () {
                 var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
@@ -261,7 +259,6 @@ function agregar_centro_costo(opc, arr_cc) {
         /* nuevo agregado : area y seccion*/
         texto += '<section class="col col-3"><label class="select" id="titu"> Area :<select required=""  class="cc-area' + ag + '"><option value="">[AREA]</option></select></label></section>';
         texto += '<section class="col col-3"><label class="select" id="titu"> Seccion :<select required=""  class="cc-seccion' + ag + '"><option value="">[SECCION]</option></select></label></section>';
-
         texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
         texto += '<section class="col col-3"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/></label></section>';
         texto += '<section class="col col-3" ><button type="button" class="btn btn-danger btn-circle btn-lg remover' + ag + '"><i class="glyphicon glyphicon-remove"></i></button></section>';
@@ -575,8 +572,6 @@ function cuenta_bancaria(banco) {
         $("#nu_cuen_otros").val("");
         $("#texto").hide();
         $("#nu_cuen").valid();
-
-
     }
     if (banco == '3') {
         $("#no_cuen").show();
@@ -692,7 +687,7 @@ function list_cc_seccion(seccion, cc) {
         var lista = objJson.lista;
         if (lista.length == 0) {
             /* si no ha nada listar todas las secciones del area*/
-            // list_cc_area($(".select-area").val(), $(".centro_costo1"));
+// list_cc_area($(".select-area").val(), $(".centro_costo1"));
         } else {
             cc.empty();
             cc.append('<option value="">[Seleccione]</option>');
@@ -759,13 +754,9 @@ function showEsDiezmo() {
                                 });
                             }
                             showEsDiezmo();
-
-
                         }
                     });
                     return false;
-
-
                 });
             }
         }
@@ -778,7 +769,6 @@ $(document).ready(function () {
     });
     showEsDiezmo();
     mostrar();
-
     var lista_dgp = $(".btn-list-req");
     $.post("../../dgp", "opc=Listar_Req&idtr=" + $(".id_tr").val(), function (objJson) {
         if (objJson.rpta === -1) {
@@ -887,7 +877,7 @@ $(document).ready(function () {
         });
     });
     $('#checkout-form').validate({
-        // Rules for form validation
+// Rules for form validation
         rules: {
             FEC_DESDE: {
                 val_fecha: true
@@ -918,7 +908,6 @@ $(document).ready(function () {
         var d = value.split("-");
         return this.optional(element) || String(parseInt(d[0])).length == 4;
     }, "¡Fecha ingresada invalida!");
-
     // $("#alerta_dgp").hide();
     var b = $("#alerta_dgp");
     var info = $(".div_info");
@@ -928,22 +917,23 @@ $(document).ready(function () {
     listar_mensaje_plazo("1", t, s);
     var cantidad = 1;
     $("#btn_add").click(function () {
-        var agregar = $('#fila-agregar');
+        var agregar = $('.agregar_cuota');
         var texto = "";
         cantidad++;
         texto += '<div class="row pago_cuotas_' + cantidad + '">';
-        texto += '<section class="col col-2"><label class="btn">';
-        texto += '<button type="button" class="eliminar' + cantidad + '"  >Eliminar</button>';
+        texto += '<section class="col col-3" ><label class="input" id="titu">';
+        texto += '<input type="number" name="CUOTA_' + cantidad + '" id="cuota" required="" value="' + cantidad + '" min="1" >';
         texto += '</label></section>';
-        texto += '<section class="col col-2" ><label class="input" id="titu">';
-        texto += '<input type="text" name="CUOTA_' + cantidad + '" id="cuota" required="" value="' + cantidad + '" >';
-        texto += '</label></section>';
-        texto += '<section class="col col-4" ><label class="input" id="titu">';
+        texto += '<section class="col col-3" ><label class="input" id="titu">';
         texto += '<input type="date" name="FEC_PAGAR_' + cantidad + '" id="datepicker" required="" >';
         texto += '</label></section>';
-        texto += '<section class="col col-4" ><label class="input" id="titu">';
+        texto += '<section class="col col-3" ><label class="input" id="titu">';
         texto += '<input type="text" name="MONTO_' + cantidad + '" required="" class="monto" >';
         texto += '</label></section>';
+        texto += '<section class="col col-3"><label>';
+        texto += '<button type="button" class="btn btn-danger btn-circle btn-lg eliminar' + cantidad + '" id="btn_add"><i class="glyphicon glyphicon-remove"></i></button>';
+        texto += '</label>';
+        texto += '</section>';
         texto += '</div>';
         agregar.append(texto);
         periodo_pago(cantidad);
@@ -981,12 +971,12 @@ $(document).ready(function () {
         $(".contenido").hide();
         $("#div_1").show();
     }
-    //Fuera PLanilla
+//Fuera PLanilla
     if ($("#combito").val() == 7 | $(this).val() == 8 | $(this).val() == 9) {
         $(".contenido").hide();
         $("#div_2").show();
     }
-    //Otros
+//Otros
     if ($("#combito").val() == 10 | $(this).val() == 11 | $(this).val() == 12) {
         $(".contenido").hide();
         $("#div_3").show();
@@ -1013,7 +1003,6 @@ $(document).ready(function () {
                 list_horario($(this).val());
             }
     );
-
     // $(".texto-h").mask("99:99", {placeholder: "0"});
     /* $("#sueldo").mask("99999.99", {placeholder: "0"});
      $("#bono_al").mask("99999.99", {placeholder: "0"});

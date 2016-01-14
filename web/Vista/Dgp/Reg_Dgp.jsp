@@ -608,91 +608,87 @@
                                                         }%>
                                                     <%}%>
                                                     <%if (idreq.equals("REQ-0010")) {%>  
-                                                    <div class="">
-                                                        <section class="col col-4" >
-                                                            <label class="input" id="titu"> RUC:
-                                                                <input type="text" name="RUC" id="" maxlength="20" required="" >
-                                                            </label>
 
-                                                        </section>
-                                                    </div>
-                                                    <div class="">
-                                                        <section class="col col-6" >
-                                                            <label class="input" id="titu"> Domicilio Fiscal:
-                                                                <input type="text" name="DOMICILIO_FISCAL" id="" required="" >
-                                                            </label>
-                                                        </section>
+                                                    <section class="col col-4" >
+                                                        <label class="input" id="titu"> RUC:
+                                                            <input type="text" name="RUC" id="" maxlength="20" required="" >
+                                                        </label>
 
-                                                        <%}%>
-                                                        <%if (idreq.equals("REQ-0010") || idreq.equals("REQ-0011")) {%>
-                                                        <section class="col col-6" >
-                                                            <label class="input" id="titu"> Lugar de Servicio:
-                                                                <input type="text" name="LUGAR_SERVICIO" id="" required="" >
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-lg-12" >
-                                                            <label class="textarea" id="titu" >Descripcion del Servicio 										
-                                                                <textarea rows=4 name="DESCRIPCION_SERVICIO"></textarea> 
-                                                            </label>
-                                                        </section>
-                                                    </div>
-                                                    <div class="pago_cuotas_1">
-                                                        <section class="col col-2">
-                                                            <a type="button" class="btn btn-default btn-lg" id="btn_add" >Agregar</a>
-                                                        </section>
-                                                        <section class="col col-2" >
-                                                            <label class="input" id="titu"> CUOTA:
-                                                                <input type="text" name="CUOTA_1" id="cuota" required="" value="1" >
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4" >
-                                                            <label class="input" id="titu">Fecha a Pagar :
-                                                                <input type="date" name="FEC_PAGAR_1" id="datepicker" required="" >
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-4" >
-                                                            <label class="input" id="titu">Monto :
-                                                                <input type="text" name="MONTO_1" required=""  value="0.0"  class="monto" >
-                                                            </label>
-                                                        </section>
-                                                        <input type="hidden" value="1" name="ES_PERIODO" />
-                                                        <input type="hidden" value="1" name="CANT" class="cant" />
+                                                    </section>
 
-                                                    </div>
+                                                    <section class="col col-4" >
+                                                        <label class="input" id="titu"> Domicilio Fiscal:
+                                                            <input type="text" name="DOMICILIO_FISCAL" id="" required="" >
+                                                        </label>
+                                                    </section>
+
                                                     <%}%>
-                                                    <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>">
-                                                    <div id="div_2" class="contenido" style="display: none">
-                                                        <table  class="table">
-                                                            <tr><td class="td">Subvencion:</td><td><input type="text" name="SUBVENCION"  ></td></tr>   
-                                                            <tr><td class="td">Horario de Capacitacion:</td><td><input type="text" name="HORARIO_CAPACITACION"  ></td></tr>   
-                                                            <tr><td class="td">Horario de Refrigerio:</td><td><input type="text" name="HORARIO_REFRIGERIO"  ></td></tr>  
-                                                            <tr><td class="td">Dias de Capacitacion:</td><td><input type="text" name="DIAS_CAPACITACION" ></td></tr>  
+                                                    <%if (idreq.equals("REQ-0010") || idreq.equals("REQ-0011")) {%>
+                                                    <section class="col col-4" >
+                                                        <label class="input" id="titu"> Lugar de Servicio:
+                                                            <input type="text" name="LUGAR_SERVICIO" id="" required="" maxlength="50" >
+                                                        </label>
+                                                    </section>
 
-                                                        </table>
-                                                    </div >
-                                                    <div id="div_3" class="contenido" style="display:none ">
-                                                        <table class="table">
-                                                            <tr><td class="td">Monto del Honorario:</td><td><input type="text" name="MONTO_HONORARIO" ></td></tr>   
-
-                                                        </table>
-                                                    </div>
-                                                </fieldset>
                                             </div>
+                                            <div class="row" >
+                                                <section class="col col-lg-12" >
+                                                    <label class="textarea" id="titu" >Descripcion del Servicio 										
+                                                        <textarea rows=4 name="DESCRIPCION_SERVICIO" maxlength="300"></textarea> 
+                                                    </label>
+                                                </section>
+                                            </div>
+                                            <div class="agregar_cuota">
+                                                <div class="row pago_cuotas_1">
+                                                    <section class="col col-3" >
+                                                        <label class="input" id="titu"> CUOTA:
+                                                            <input type="number" name="CUOTA_1" id="cuota" required="" value="1"  min="1"  >
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3" >
+                                                        <label class="input" id="titu">Fecha a Pagar :
+                                                            <input type="date" name="FEC_PAGAR_1" id="datepicker" required="" >
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-3" >
+                                                        <label class="input" id="titu">Monto :
+                                                            <input type="text" name="MONTO_1" required=""  value="0.0"  class="monto" >
+                                                        </label>
+                                                    </section>
+                                                    <input type="hidden" value="1" name="ES_PERIODO" />
+                                                    <input type="hidden" value="1" name="CANT" class="cant" />
+                                                    <section class="col col-3">
+                                                        <button type="button" class="btn btn-primary btn-circle btn-lg" id="btn_add"><i class="glyphicon glyphicon-plus"></i></button>
+                                                    </section>
 
+                                                </div>
+
+                                            </div>
+                                            <%}%>
+                                            <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>">
+                                            <div id="div_2" class="contenido" style="display: none">
+                                                <table  class="table">
+                                                    <tr><td class="td">Subvencion:</td><td><input type="text" name="SUBVENCION"  ></td></tr>   
+                                                    <tr><td class="td">Horario de Capacitacion:</td><td><input type="text" name="HORARIO_CAPACITACION"  ></td></tr>   
+                                                    <tr><td class="td">Horario de Refrigerio:</td><td><input type="text" name="HORARIO_REFRIGERIO"  ></td></tr>  
+                                                    <tr><td class="td">Dias de Capacitacion:</td><td><input type="text" name="DIAS_CAPACITACION" ></td></tr>  
+
+                                                </table>
+                                            </div >
+                                            <div id="div_3" class="contenido" style="display:none ">
+                                                <table class="table">
+                                                    <tr><td class="td">Monto del Honorario:</td><td><input type="text" name="MONTO_HONORARIO" ></td></tr>   
+                                                </table>
+                                            </div>
                                         </div>
-                                        <!-- end widget content -->
-
                                     </div>
-                                    <!-- end widget div -->
-
+                                    <!-- end widget content -->
+                                </div>
+                                <!-- end widget div -->
                                 </div>
                                 <!-- end widget -->
-
                             </article>
-
-
                             <article class="col-sm-12 col-md-12 col-lg-6">
-
                                 <!-- Widget ID (each widget will need unique ID)-->
                                 <div class="jarviswidget jarviswidget-color-white" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-deletebutton="false">
                                     <!-- widget options:

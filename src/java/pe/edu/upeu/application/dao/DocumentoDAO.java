@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -29,6 +28,7 @@ import pe.edu.upeu.application.model.V_Reg_Dgp_Tra;
 public class DocumentoDAO implements InterfaceDocumentoDAO {
 
     ConexionBD conn;
+    String Url_Archivo = FactoryConnectionDB.url_archivos;
 
     @Override
     public List<V_Documento_Trabajador> List_Id_Doc_Trab(String id_trabajador) {
@@ -76,12 +76,12 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 String tipo = rs.getString("NO_FILE").substring(rs.getString("NO_FILE").length() - 3, rs.getString("NO_FILE").length());
                 if (tipo.equals("PDF") || tipo.equals("OCX")) {
                     if (tipo.equals("OCX") || tipo.equals("DOC")) {
-                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"" + FactoryConnectionDB.url_archivos + "Archivo/" + rs.getString("NO_FILE") + "'><img src='Archivo/word.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"" + Url_Archivo + "Archivo/" + rs.getString("NO_FILE") + "'><img src='Archivo/word.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
                     } else {
-                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"" + FactoryConnectionDB.url_archivos + "Archivo/" + rs.getString("NO_FILE") + "\"><img src='Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"" + Url_Archivo + "Archivo/" + rs.getString("NO_FILE") + "\"><img src='Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
                     }
                 } else {
-                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"" + FactoryConnectionDB.url_archivos + "Archivo/" + rs.getString("NO_FILE") + "\"><img src=\"Archivo/" + rs.getString("NO_FILE") + "\" style='width:100px;height:100px' class='borde' /></a>";
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href=\"" + Url_Archivo + "Archivo/" + rs.getString("NO_FILE") + "\"><img src=\"" + Url_Archivo + "Archivo/" + rs.getString("NO_FILE") + "\" style='width:100px;height:100px' class='borde' /></a>";
                 }
 
             }
@@ -108,7 +108,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             String sql = "select a.NO_FILE,a.NO_ORIGINAL  from RHTV_ARCHIVO_DOCUMENTO a ,  RHTV_DOCUMENTO_ADJUNTO d where d.ID_DOCUMENTO_ADJUNTO = a.ID_DOCUMENTO_ADJUNTO  and  a.id_documento_adjunto='" + id + "' and a.ES_FILE='1'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
-                texto_html = texto_html + "<img src=\"../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "\" />";
+                texto_html = texto_html + "<img src=\"" + Url_Archivo + "Archivo/" + rs.getString("NO_FILE") + "\" />";
             }
             rs.close();
         } catch (SQLException e) {
@@ -138,13 +138,13 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 String tipo = rs.getString("NO_FILE").substring(rs.getString("NO_FILE").length() - 3, rs.getString("NO_FILE").length());
                 if (tipo.trim().equals("PDF") || tipo.equals("OCX") || tipo.equals("DOC")) {
                     if (tipo.equals("OCX") || tipo.equals("DOC")) {
-                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='"+FactoryConnectionDB.url_archivos+"Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/word.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='" + Url_Archivo + "Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/word.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
                     } else {
-                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='"+FactoryConnectionDB.url_archivos+"Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='" + Url_Archivo + "Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/pdf.png' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ORIGINAL") + "</a>";
                     }
                 } else {
 
-                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='"+FactoryConnectionDB.url_archivos+"Archivo/" + rs.getString("NO_FILE") + "'><img src='../../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "' style='width:100px;height:100px;' class='borde'></a>";
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='" + Url_Archivo + "Archivo/" + rs.getString("NO_FILE") + "'><img src='" + Url_Archivo + "Archivo/" + rs.getString("NO_FILE") + "' style='width:100px;height:100px;' class='borde'></a>";
                 }
             }
             rs.close();
@@ -182,7 +182,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             while (rs.next()) {
                 num2 = num2 + 1;
                 //String tipo = rs.getString("NO_FILE").substring(rs.getString("NO_FILE").length() - 3, rs.getString("NO_FILE").length());
-                texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='../Dgp/Documento/Archivo/" + rs.getString("NO_FILE") + "'>" + rs.getString("NO_ORIGINAL") + "</a>";
+                texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ORIGINAL") + "' href='" + Url_Archivo + "Archivo/" + rs.getString("NO_FILE") + "'>" + rs.getString("NO_ORIGINAL") + "</a>";
                 if (num2 != num) {
                     texto_html = texto_html + ",";
                 }
@@ -215,13 +215,13 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
                 String tipo = rs.getString("NO_ARCHIVO").substring(rs.getString("NO_ARCHIVO").length() - 3, rs.getString("NO_ARCHIVO").length());
                 if (tipo.trim().equals("PDF") || tipo.equals("OCX") || tipo.equals("DOC")) {
                     if (tipo.equals("OCX") || tipo.equals("DOC")) {
-                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ARCHIVO_ORIGINAL") + "' href='../Contratos_Adjuntos/" + rs.getString("NO_ARCHIVO") + "'><img src='../Contratos_Adjuntos/' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ARCHIVO_ORIGINAL") + "</a>";
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ARCHIVO_ORIGINAL") + "' href='" + Url_Archivo + "Contratos_Adjuntos/" + rs.getString("NO_ARCHIVO") + "'><img src='" + Url_Archivo + "Contratos_Adjuntos/' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ARCHIVO_ORIGINAL") + "</a>";
                     } else {
-                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ARCHIVO_ORIGINAL") + "' href='../Contratos_Adjuntos/" + rs.getString("NO_ARCHIVO") + "'><img src='../Contratos_Adjuntos/' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ARCHIVO_ORIGINAL") + "</a>";
+                        texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ARCHIVO_ORIGINAL") + "' href='" + Url_Archivo + "Contratos_Adjuntos/" + rs.getString("NO_ARCHIVO") + "'><img src='" + Url_Archivo + "Contratos_Adjuntos/' style='width:100px;height:100px;' class='borde'><br>" + rs.getString("NO_ARCHIVO_ORIGINAL") + "</a>";
                     }
                 } else {
 
-                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ARCHIVO_ORIGINAL") + "' href='../Contratos_Adjuntos/" + rs.getString("NO_ARCHIVO") + "'><img src='../Contratos_Adjuntos/" + rs.getString("NO_ARCHIVO") + "' style='width:100px;height:100px;' class='borde'></a>";
+                    texto_html = texto_html + "<a class='mustang-gallery' title='" + rs.getString("NO_ARCHIVO_ORIGINAL") + "' href='" + Url_Archivo + "Contratos_Adjuntos/" + rs.getString("NO_ARCHIVO") + "'><img src='" + Url_Archivo + "Contratos_Adjuntos/" + rs.getString("NO_ARCHIVO") + "' style='width:100px;height:100px;' class='borde'></a>";
                 }
             }
             rs.close();
