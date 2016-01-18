@@ -30,6 +30,24 @@ public class X_List_det_dgp {
     private double ca_asig_familiar;
     private String anno_procesamiento;
     private String mes_procesamiento;
+    private int cod_aps;
+
+    public int getCod_aps() {
+        return cod_aps;
+    }
+
+    public void setCod_aps(int cod_aps) {
+        this.cod_aps = cod_aps;
+    }
+
+    public String getNu_doc() {
+        return nu_doc;
+    }
+
+    public void setNu_doc(String nu_doc) {
+        this.nu_doc = nu_doc;
+    }
+    private String nu_doc;
 
     public String getLi_motivo() {
         return li_motivo;
@@ -82,7 +100,7 @@ public class X_List_det_dgp {
     public X_List_det_dgp(String id_dgp, String id_trabajador, String no_trabajador, String ap_paterno, String ap_materno,
             String id_puesto, String fe_desde, String fe_hasta, Double ca_sueldo, String no_puesto, String no_area,
             String no_req, String es_dgp, String li_motivo, double ca_bono_alimentario, double ca_bonificacion_p,
-            double ca_asig_familiar, String anno_procesamiento, String mes_procesamiento) {
+            double ca_asig_familiar, String anno_procesamiento, String mes_procesamiento, int cod_aps, String nu_doc) {
         this.id_dgp = id_dgp;
         this.id_trabajador = id_trabajador;
         this.no_trabajador = no_trabajador;
@@ -102,6 +120,8 @@ public class X_List_det_dgp {
         this.ca_asig_familiar = ca_asig_familiar;
         this.anno_procesamiento = anno_procesamiento;
         this.mes_procesamiento = mes_procesamiento;
+        this.cod_aps = cod_aps;
+        this.nu_doc = nu_doc;
     }
 
     public X_List_det_dgp() {
@@ -124,6 +144,8 @@ public class X_List_det_dgp {
         this.ca_asig_familiar = 0.0;
         this.anno_procesamiento = "";
         this.mes_procesamiento = "";
+        this.cod_aps = 0;
+        this.nu_doc = "";
     }
 
     public String getId_dgp() {
