@@ -106,6 +106,7 @@ public class CCentro_Costo extends HttpServlet {
             if (opc.equals("Eliminar_det_cc")) {
                 String id_dcc= request.getParameter("id_dcc");
                 cc.Eliminar_dcc(id_dcc);
+                  rpta.put("rpta", "1");
             }
 
         } catch (Exception e) {

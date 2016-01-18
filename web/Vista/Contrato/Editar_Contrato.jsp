@@ -1500,12 +1500,7 @@
                 return false;
             }
         }
-        function Actualizar_valores() {
-            $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-            $(".procent").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-            $(".por-i").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-            sumn_porcen_total();
-        }
+       
         function remov(i) {
             $(".centro-costo_" + i).remove();
         }

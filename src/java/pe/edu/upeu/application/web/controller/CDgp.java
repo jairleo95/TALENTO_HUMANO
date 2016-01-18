@@ -14,6 +14,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -76,6 +77,9 @@ public class CDgp extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private static final Logger fLogger
+            = Logger.getLogger(CDgp.class.getPackage().getName());
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
@@ -258,7 +262,7 @@ public class CDgp extends HttpServlet {
                     String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
                     double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
                     if (ID_CENTRO_COSTO != null && porcentaje != 0.0) {
-                        dcc.INSERT_DETALLE_CENTRO_COSTO(null, iddgp, porcentaje, "1", iduser, null, null, null, FactoryConnectionDB.detalle_ip(), null,ID_CENTRO_COSTO);
+                        dcc.INSERT_DETALLE_CENTRO_COSTO(null, iddgp, porcentaje, "1", iduser, null, null, null, FactoryConnectionDB.detalle_ip(), null, ID_CENTRO_COSTO);
                     }
                 }
                 List<String> list = a.Det_Autorizacion(idrp);
@@ -368,9 +372,7 @@ public class CDgp extends HttpServlet {
                 sesion.setAttribute("VALIDAR_DGP_CONTR", dgp.VALIDAR_DGP_CONTR(ID_DGP, idtr));
                 sesion.setAttribute("Cargar_dcc_dgp", cc.Cargar_dcc_dgp(ID_DGP));
                 int num = dgp.VALIDAR_DGP_CONTR(ID_DGP, ID_TRABAJADOR);
-                //boolean estado = s.Validar_Envio_Solicitud(ID_DGP.trim());
                 sesion.setAttribute("LIST_ID_USER", us.List_ID_User(iduser));
-                // response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc&est=" + estado);
                 response.sendRedirect("Vista/Dgp/Detalle_Dgp.jsp?idtr=" + ID_TRABAJADOR + "&num=" + num + "&iddgp=" + ID_DGP + "&opc=reg_doc");
             }
             if (opc.equals("filtrar")) {
@@ -557,6 +559,7 @@ public class CDgp extends HttpServlet {
                     CA_BONO_ALIMENTARIO = Double.parseDouble(request.getParameter("BONO_ALIMENTARIO"));
                     DE_BEV = Double.parseDouble(request.getParameter("BEV"));
                 }
+
                 String DE_ANTECEDENTES_POLICIALES = request.getParameter("ANTECEDENTES_POLICIALES");
                 String ES_CERTIFICADO_SALUD = request.getParameter("CERTIFICADO_SALUD");
                 String DE_MONTO_HONORARIO = request.getParameter("MONTO_HONORARIO");
@@ -571,6 +574,7 @@ public class CDgp extends HttpServlet {
                 String ES_CUENTA_SUELDO = request.getParameter("ES_CUENTA_SUELDO");
                 String ID_DGP = request.getParameter("ID_DGP");
                 //--
+
                 int NUMERO = 0;
                 int cantidad = 0;
                 if (ID_REQUERIMIENTO.equals("REQ-0010") || ID_REQUERIMIENTO.equals("REQ-0011")) {
@@ -580,16 +584,18 @@ public class CDgp extends HttpServlet {
                     NUMERO = Integer.parseInt(request.getParameter("numero"));
                     cantidad = 0;
                 }
+
                 String LI_MOTIVO = request.getParameter("MOTIVO");
-                String ES_MFL = request.getParameter("MFL");
-                if (ES_MFL != null) {
-                    ES_MFL = "1";
-                } else {
+                String ES_MFL = "0";
+
+                if (request.getParameter("MFL") == null) {
                     ES_MFL = "0";
+                } else {
+                    ES_MFL = "1";
                 }
 
-                dgp.MODIFICAR_DGP(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, 
-                        DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, 
+                dgp.MODIFICAR_DGP(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO,
+                        DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION,
                         ES_DGP, null, FE_CREACION, iduser, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD,
                         DE_MONTO_HONORARIO, LI_MOTIVO, ES_MFL, BONO_PUESTO);
                 String iddgp = dgp.MAX_ID_DGP();
@@ -599,25 +605,30 @@ public class CDgp extends HttpServlet {
                         tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, ID_TRABAJADOR, ES_CUENTA_SUELDO);
                     }
                 }
+
                 int cant_inicial = Integer.parseInt(request.getParameter("cant_actual_anti"));
                 int cant_ingresada = Integer.parseInt(request.getParameter("cant_ingresada"));
 
                 for (int j = 0; j < cant_inicial; j++) {
                     if (request.getParameter("id_d_cen_cos" + (j + 1)) != null) {
-                        Double porcen = Double.parseDouble(request.getParameter("porcent_ant_" + (j + 1)));
+                        Double porcen = Double.parseDouble(request.getParameter("PORCENTAJE_" + (j + 1)));
                         String id_dt_cen_c = request.getParameter("id_d_cen_cos" + (j + 1));
                         dcc.Modificar_Centro_Costo_porc(id_dt_cen_c, porcen, iduser);
                     }
                 }
                 if (cant_ingresada > 0) {
-                    for (int i = 0; i < cant_ingresada; i++) {
-                        double porc_nuevo = Double.parseDouble(request.getParameter("PORCENTAJE_CC" + (1 + i)));
-                        String centro_c_nuevo = request.getParameter("CENTRO_COSTOS_" + (1 + i));
-                        String id_cont = request.getParameter("id_contrato");
-                        dcc.INSERT_DETALLE_CENTRO_COSTO("",  ID_DGP, porc_nuevo, "1", iduser, "", "", "", FactoryConnectionDB.detalle_ip(), id_cont,centro_c_nuevo);
+                    for (int i = cant_inicial; i < cant_inicial + cant_ingresada; i++) {
+                        if (request.getParameter("CENTRO_COSTOS_" + (1 + i)) != null) {
+                            double porc_nuevo = Double.parseDouble(request.getParameter("PORCENTAJE_" + (1 + i)));
+                            String centro_c_nuevo = request.getParameter("CENTRO_COSTOS_" + (1 + i));
+                            String id_cont = request.getParameter("id_contrato");
+                            dcc.INSERT_DETALLE_CENTRO_COSTO("", ID_DGP, porc_nuevo, "1", iduser, "", "", "", FactoryConnectionDB.detalle_ip(), id_cont, centro_c_nuevo);
+
+                        }
                     }
                 } else {
                 }
+
                 //  List<String> list = a.Det_Autorizacion(idrp);
                 // a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "", "", list.get(1), idrp, list.get(0));
                 String es_mod = request.getParameter("estado_de_horario");
@@ -676,20 +687,18 @@ public class CDgp extends HttpServlet {
                     }
                 }
                 sesion.setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
-                /* int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
-                 int num_ad = doc.List_Adventista(ID_TRABAJADOR);*/
                 sesion.setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
                 sesion.setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
-                // sesion.setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(ID_DGP, idrp));
 
                 String redireccionar = request.getParameter("redirect");
                 if (redireccionar != null) {
                     if (redireccionar.equals("proceso_dgp")) {
                         response.sendRedirect("dgp?iddgp=" + ID_DGP + "&idtr=" + ID_TRABAJADOR + "&opc=rd");
-
+                    } else {
+                        response.sendRedirect("dgp?iddgp=" + ID_DGP + "&idtr=" + ID_TRABAJADOR + "&opc=Detalle");
                     }
                 } else {
-                    response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
+                    response.sendRedirect("dgp?iddgp=" + ID_DGP + "&idtr=" + ID_TRABAJADOR + "&opc=Detalle");
                 }
             }
             if (opc.equals("Incompleto")) {
@@ -708,7 +717,6 @@ public class CDgp extends HttpServlet {
         } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
-
         }
         Gson gson = new Gson();
         out.print(gson.toJson(rpta));
