@@ -109,6 +109,7 @@
                                 </div>
                                 <div class="alert_1">
                                 </div>
+                                
                                 <!-- Widget ID (each widget will need unique ID)-->
                                 <div class="jarviswidget jarviswidget-color-white" id="wid-id-2"  data-widget-editbutton="false"
                                      data-widget-deletebutton="false" data-widget-custombutton="false">
@@ -167,6 +168,7 @@
                                                     %>
                                                     <input  type="hidden" class="idtr" value="<%=id%>"/>
                                                     <div class="row">
+                                                        
                                                         <input value= "<%=tr.getId_trabajador()%>"  type="hidden" id="" />
                                                         <section class="col col-6">
                                                             <label class="label" id="titu">Trabajador :</label>
@@ -266,7 +268,7 @@
                                                             </section>
                                                             <section class="col col-2">
                                                                 <label class="input" style="font-weight: bold;color:red;">% Total :
-                                                                    <input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" type="text" class="total_porcentaje"  />
+                                                                    <input  readonly="" name="TOTAL_PORCENTAJE" max="100" min="100" maxlength="3" value="100" type="text" class="total_porcentaje"  />
                                                                 </label>
                                                             </section>
                                                             <section class="col col-2">
@@ -864,11 +866,12 @@
     <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
     <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
     <!--Funciones globales-->
-    <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
-
+   
     <script src="../../js/Js_DGP/Registrar/Reg_Dgps.js" type="text/javascript" ></script>
     <script src="../../js/Js_Horario/horario.js" type="text/javascript"></script>
     <script src="../../js/Js_Plazo/Js_plazo_advertencia.js" type="text/javascript"></script>
+    
+     <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
     <script>
 
     </script>

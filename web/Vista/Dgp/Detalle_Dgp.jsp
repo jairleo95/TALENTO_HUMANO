@@ -73,37 +73,11 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        <link type="text/css" rel="stylesheet" href="../../css/Css_Detalle/CSS_DETALLE.css">  
       
         <style type="text/css">
-            table{
-                //font-weight:bold ;
-                width: 50px;
-                font-size: 130%;
-                font-color: black;
-            }
             .text-info{
                 text-align: left;
             }
-            body{
-                margin-left: auto;
-                margin-right: auto  ;
-                // width: 45%;
-                // margin: 0;
-            }
-            .ct{
-                text-align: center;   
-            }
-
-            #header{
-                padding: 0%;
-                font-family: verdana;
-                font-size: 130%;
-                text-align: center;
-                color:#474747;
-
-            }
-
             @media screen and (max-width: 3500px) {
                 .div_dgp {
                     width: 65%;
@@ -122,7 +96,7 @@
                         <section id="widget-grid" class="">
                             <div class="row div_dgp">
                                 <form action="../../dgp">
-                                    <table class="table table-hover table-striped  table-responsive">
+                                    <table class="table table-bordered table-hover table-striped  table-responsive">
                                         <%
                                             String iddgp = "";
                                             HttpSession sesion = request.getSession(true);
@@ -140,55 +114,55 @@
                                         %>
 
                                         <input type="hidden"  class="fe_desde_dgp" value="<%=FactoryConnectionDB.convertFecha3(d.getFe_desde())%>"/>
-                                        <tr><td colspan="2" class="text-info table-bordered"><i class="fa fa-file"></i> REQUERIMIENTO : <%=d.getNo_req()%> </td></tr>
+                                        <tr><td colspan="2" class="txt-color-blueDark"><h6><i class="fa fa-file"></i> REQUERIMIENTO : <%=d.getNo_req()%> </h6></td></tr>
                                         <!--<label style="color: black; //font-family: cursive;"><h2><%=d.getNo_req()%></h2></label>
                                         -->
                                         <%if (d.getLi_motivo() != null) {%>
 
-                                        <tr><td class="text-info table-bordered">Motivo :</td>
+                                        <tr><td class="text-info ">Motivo :</td>
                                             <% if (d.getLi_motivo().equals("1")) {%>
-                                            <td colspan="2" class="text-info table-bordered">Trabajador Nuevo</td></tr>
+                                            <td colspan="2" class="text-info ">Trabajador Nuevo</td></tr>
                                             <%}
                                                 if (d.getLi_motivo().equals("2")) {%>
-                                        <td colspan="2" class="text-info table-bordered">Renovación</td></tr>
+                                        <td colspan="2" class="text-info ">Renovación</td></tr>
                                         <%}
                                             }%>
-                                        <tr><td  class="text-info table-bordered" style="text-align:align;">Trabajador :</td><td class="text-info table-bordered"><%=d.getNombre_trabajador()%></td></tr>
-                                        <tr><td  class="text-info table-bordered" style="text-align:align;">Fecha Desde :</td><td class="text-info table-bordered"><%=d.getFe_desde()%></td></tr>
-                                        <tr ><td class="text-info table-bordered">Fecha Hasta:</td><td class="text-info table-bordered"><%=d.getFe_hasta()%></td></tr>
-                                        <tr><td class="text-info table-bordered">Sueldo Basico : S/.</td><td class="text-info table-bordered"><%=cs.toPlainString()%></td></tr>
-                                        <tr><td class="text-info table-bordered">BEV: </td><td class="text-info table-bordered"><%=bev.toPlainString()%></td></tr>
-                                        <tr><td class="text-info table-bordered">Bono Alimentario : S/.</td><td  class="text-info table-bordered"><%=bal.toPlainString()%></td></tr>
-                                        <tr><td class="text-info table-bordered">Asignación Familiar : S/.</td><td  class="text-info table-bordered"><%=d.getCa_asig_familiar()%></td></tr>
-                                        <tr><td class="text-info table-bordered">Bono por Funcion : S/.</td><td  class="text-info table-bordered"><%=bp.toPlainString()%></td></tr>
-                                        <tr style="color: red;"><td class="text-info table-bordered" >Total Remunerativo : S/.</td><td class=" table-bordered" style="color-text:red; "><%=total.toPlainString()%></td></tr>
-                                        <tr><td  Class="text-info table-bordered">Departamento:</td><td class="text-info table-bordered"><%=d.getNo_dep()%></td></tr>
-                                        <tr><td  Class="text-info table-bordered">Area :</td><td class="text-info table-bordered"><%=d.getNo_area()%></td></tr>
-                                        <tr><td  Class="text-info table-bordered">Sección :</td><td class="text-info table-bordered"><%=d.getNo_seccion()%></td></tr>
-                                        <tr><td  Class="text-info table-bordered">Puesto :</td><td class="text-info table-bordered"><%=d.getNo_puesto()%></td></tr>
+                                        <tr><td  class="text-info " >Trabajador :</td><td class=""><%=d.getNombre_trabajador()%></td></tr>
+                                        <tr><td  class="text-info " >Fecha Desde :</td><td class="text-info "><%=d.getFe_desde()%></td></tr>
+                                        <tr ><td class="text-info ">Fecha Hasta:</td><td class="text-info "><%=d.getFe_hasta()%></td></tr>
+                                        <tr><td class="text-info ">Sueldo Basico : S/.</td><td class="text-info "><%=cs.toPlainString()%></td></tr>
+                                        <tr><td class="text-info ">BEV: </td><td class="text-info "><%=bev.toPlainString()%></td></tr>
+                                        <tr><td class="text-info ">Bono Alimentario : S/.</td><td  class="text-info "><%=bal.toPlainString()%></td></tr>
+                                        <tr><td class="text-info ">Asignación Familiar : S/.</td><td  class="text-info "><%=d.getCa_asig_familiar()%></td></tr>
+                                        <tr><td class="text-info ">Bono por Funcion : S/.</td><td  class="text-info "><%=bp.toPlainString()%></td></tr>
+                                        <tr><td class="text-info " >Total Remunerativo : S/.</td><td class="text-danger" ><%=total.toPlainString()%></td></tr>
+                                        <tr><td  Class="text-info ">Departamento:</td><td class="text-info "><%=d.getNo_dep()%></td></tr>
+                                        <tr><td  Class="text-info ">Area :</td><td class="text-info "><%=d.getNo_area()%></td></tr>
+                                        <tr><td  Class="text-info ">Sección :</td><td class="text-info "><%=d.getNo_seccion()%></td></tr>
+                                        <tr><td  Class="text-info ">Puesto :</td><td class="text-info "><%=d.getNo_puesto()%></td></tr>
                                             <%if (Cargar_dcc_dgp.size() > 0) {
                                                     for (int p = 0; p < Cargar_dcc_dgp.size(); p++) {
                                                         Detalle_Centro_Costo dcc = new Detalle_Centro_Costo();
                                                         dcc = (Detalle_Centro_Costo) Cargar_dcc_dgp.get(p);
                                             %>
-                                        <tr><td class="text-info table-bordered">Centro de Costo N° <%=p + 1%></td><td class="text-info table-bordered"><%=dcc.getDe_centro_costo()%>&nbsp;&nbsp;&nbsp;<span class="text-success">  Codigo : <%=dcc.getCo_centro_costo()%></span></td></tr>
+                                        <tr><td class="text-info ">Centro de Costo N° <%=p + 1%></td><td class="text-info "><label class="text-danger"> <%=dcc.getCa_porcentaje()+"%"%> &nbsp;</label><%=dcc.getDe_centro_costo()%>&nbsp;&nbsp;&nbsp;<span class="text-success">  Codigo : <%=dcc.getCo_centro_costo()%></span></td></tr>
                                         <%}
                                         } else {%>
-                                        <tr><td class="text-info table-bordered">Centro de Costo </td><td class="text-info table-bordered">No tiene Centro de costo </td></tr>
+                                        <tr><td class="text-info ">Centro de Costo </td><td class="text-info ">No tiene Centro de costo </td></tr>
                                         <%}%>
 
                                         <input type="hidden" name="iddgp" value="<%=d.getId_dgp().trim()%>">
                                         <input type="hidden" name="idreq" value="<%=d.getId_requerimiento().trim()%>">
                                         <%if (d.getDe_antecedentes_policiales() != null) {%>
                                         <%if (d.getDe_antecedentes_policiales().equals("1")) {%>
-                                        <tr><td class="text-info table-bordered">Antecedentes Policiales: </td><td class="text-info table-bordered">No</td></tr>
+                                        <tr><td class="text-info ">Antecedentes Policiales: </td><td class="text-info ">No</td></tr>
                                         <%} else {%>
-                                        <tr><td class="text-info table-bordered">Antecedentes Policiales: </td><td class="text-info table-bordered">Si</td></tr>
+                                        <tr><td class="text-info ">Antecedentes Policiales: </td><td class="text-info ">Si</td></tr>
                                         <%}%>
                                         <%} else {%>
-                                        <tr><td class="text-info table-bordered">Antecedentes Policiales: </td><td class="text-info table-bordered">No registrado</td></tr>
+                                        <tr><td class="text-info ">Antecedentes Policiales: </td><td class="text-info ">No registrado</td></tr>
                                         <%}%>
-                                        <tr><td class="text-info table-bordered">Certificado de Salud: </td><td class="text-info table-bordered" ><%if (d.getEs_certificado_salud() != null) {
+                                        <tr><td class="text-info ">Certificado de Salud: </td><td class="text-info " ><%if (d.getEs_certificado_salud() != null) {
                                                 if (d.getEs_certificado_salud().trim().equals("1")) {
                                                     out.print("Si");
                                                 }
@@ -205,42 +179,41 @@
                                                         if (num.equals("0") & d.getEs_dgp().equals("0") & idrol.trim().equals("ROL-0006")) {
 
                                                 %>
-                                        <!--<tr> <td  colspan="3" class="ct"><a href="../../contrato?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=enviar">Hacer Contrato</a></td></tr>
-                                        --><%}
+                                        <%}
                                             if (d.getEs_dgp().equals("1") & num.equals("0") & !"ROL-0006".equals(idrol.trim())) {%>
                                         <tr><td colspan="3" class="ct"><a href="">Ver Contrato</a></td></tr>
                                         <%}
                                             }%>
 
                                         <% if (d.getUs_creacion() != null) {%>
-                                        <tr style="color: red;"><td class="text-info table-bordered">Creado por:</td><td colspan="2" class="text-info table-bordered"><%=d.getNo_trab_us_cr() + " - " + d.getNo_usuario_crea()%></td></tr>
+                                        <tr ><td class="text-info ">Creado por:</td><td colspan="2" class="text-info "><%=d.getNo_trab_us_cr() + " - " + d.getNo_usuario_crea()%></td></tr>
                                             <%} else {%>
-                                        <tr style="color: red;"><td class="text-info table-bordered">Creado por:</td><td colspan="2" class="text-info table-bordered">No Registrado</td></tr>
+                                        <tr ><td class="text-info ">Creado por:</td><td colspan="2" class="text-info ">No Registrado</td></tr>
                                         <%}%>
                                         <%if (d.getUs_modif() != null) {%>
-                                        <tr style="color: red;"><td class="text-info table-bordered">Ultima Modificacion por:</td><td class="table-bordered" colspan="2"><%=d.getNo_trab_us_mod() + " - " + d.getNo_usuario_mod()%></td></tr>
+                                        <tr><td class="text-info ">Ultima Modificacion por:</td><td class="text-danger" colspan="2"><%=d.getNo_trab_us_mod() + " - " + d.getNo_usuario_mod()%></td></tr>
                                             <%} else {%>
-                                        <tr style="color: red;"><td class="text-info table-bordered">Ultima Modificacion por:</td><td class=" table-bordered">Sin Modificaciones</td></tr>
+                                        <tr><td class="text-info ">Ultima Modificacion por:</td><td class=" ">Sin Modificaciones</td></tr>
                                         <%}%>
 
 
                                         <%if (d.getFe_modif() == null) {%>
-                                        <tr><td class="text-info table-bordered">Fecha Modificacion</td><td colspan="2" class="text-info table-bordered">Sin Modificaciones</td></tr>
+                                        <tr><td class="text-info ">Fecha Modificacion</td><td colspan="2" class="text-info ">Sin Modificaciones</td></tr>
                                         <%} else {%>
-                                        <tr><td class="text-info table-bordered">Fecha de Modificacion:</td><td colspan="2" class="text-info table-bordered"><%=d.getFe_modif()%></td></tr>
+                                        <tr><td class="text-info ">Fecha de Modificacion:</td><td colspan="2" class="text-info "><%=d.getFe_modif()%></td></tr>
                                             <%}%>
                                             <%if (d.getFe_creacion() == null) {%>
-                                        <tr><td class="text-info table-bordered">fecha Creacion:</td><td colspan="2" class="text-info table-bordered">Sin Modificaciones</td></tr>
+                                        <tr><td class="text-info ">fecha Creacion:</td><td colspan="2" class="text-info ">Sin Modificaciones</td></tr>
                                         <%} else {%>
-                                        <tr><td class="text-info table-bordered">Fecha de Creacion:</td><td colspan="2" class="text-info table-bordered"><%=d.getFe_creacion()%></td></tr>
+                                        <tr><td class="text-info ">Fecha de Creacion:</td><td colspan="2" class="text-info "><%=d.getFe_creacion()%></td></tr>
                                             <%}%>
 
 
                                         <%                                            if (d.getEs_mfl().equals("1")) {%>
-                                        <tr><td class="text-info table-bordered">MFL:</td><td colspan="2" class="text-info table-bordered">Si</td></tr>
+                                        <tr><td class="text-info ">MFL:</td><td colspan="2" class="text-info ">Si</td></tr>
                                         <%}
                                             if (d.getEs_mfl().equals("0")) {%>
-                                        <tr><td class="text-info table-bordered">MFL:</td><td colspan="2" class="text-info table-bordered">No</td></tr>
+                                        <tr><td class="text-info ">MFL:</td><td colspan="2" class="text-info ">No</td></tr>
                                         <%}%>
 
                                         <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
@@ -294,11 +267,11 @@
                                 <br>
                                 <button class="btn btn-primary btn-labeled btn_solicitud" data-toggle="modal" type="button" data-target="#myModal">
                                     <span class="btn-label"><i class="fa fa-envelope"></i></span>
-                                    SOLICITUD DE PLAZO
+                                    Solicitud de Plazo
                                 </button>
                                 <button type="button" class="btn btn-success btn-labeled" disabled="true">
                                     <span class="btn-label"><i class="fa fa-arrow-circle-right"></i></span>
-                                    TERMINAR
+                                    Terminar
                                 </button>
                                 <%}%>
                                 <%}%>

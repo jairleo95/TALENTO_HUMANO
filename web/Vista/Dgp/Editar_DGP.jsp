@@ -8,6 +8,7 @@
     if (id_user_1 != null) {
 
 %>
+
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.When"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
@@ -176,7 +177,7 @@
                                                         V_Det_DGP dg = new V_Det_DGP();
                                                         dg = (V_Det_DGP) LIST_ID_DGP.get(a);
                                                 %>
-                                                <fieldset id="fila-agregar">
+                                                <fieldset>
                                                     <%                                                        /*Temporal*/
 
                                                         for (int i = 0; i < Listar_Trabajador_id.size(); i++) {
@@ -211,7 +212,7 @@
                                                             </label>
 
                                                         </section>
-                                                        <section class="col col-4" style=" margin-top:2%;">
+                                                        <section class="col col-4" >
                                                             <label class="toggle" id="titu" > MFL:
                                                                 <%if (dg.getEs_mfl().trim().equals("0")) {%>
                                                                 <input type="checkbox" value="1"  name="MFL" name="checkbox-toggle" >
@@ -245,7 +246,7 @@
                                                         <section class="col col-4">
                                                             <label class="label" id="titu"> Puesto:</label>
                                                             <label class="select">
-                                                                <select data-placeholder="Seleccionar Puesto"  class="select-puesto" required="" >
+                                                                <select data-placeholder="Seleccionar Puesto"  class="select-puesto" required="" name="IDPUESTO" >
                                                                     <option value="">[Seleccione]</option>  
                                                                 </select>
                                                             </label>
@@ -627,7 +628,7 @@
                                                             </label>
                                                         </section>
                                                         <input type="hidden" value="1" name="ES_PERIODO" />
-                                                        <input type="hidden" value="1" name="CANT" class="cant" />
+                                                        <input type="text" value="1" name="CANT" class="cant" />
                                                     </div>
                                                     <%}%>
 
@@ -650,18 +651,15 @@
                                                     </div>
                                                     <input type="hidden" name="ID_DGP" value="<%=dg.getId_dgp()%>" class="iddgp">
                                                     <input type="hidden" name="cant_actual_anti" class="can_centro_cos" value="<%=request.getParameter("can_cc")%>">
-                                                    <input type="hidden" name="cant_inicial" class="conteo" value="<%=request.getParameter("num_cc")%>">
-                                                    <input type="hidden" name="cant_eliminada" class="cant-elimi" value="0">
-                                                    <input type="hidden" name="CANT_actu" class="cant-actualmente" value="<%=request.getParameter("can_cc")%>">
                                                     <input type="hidden" name="cant_ingresada" class="cant-ing" value="0">
                                                 </fieldset>
-                                                <fieldset id="list-cc">
+                                                <fieldset id="fila-agregar">
                                                 </fieldset>    
                                                 <input type="hidden" class="dep_id" value="<%=dg.getId_departamento().trim()%>" />
                                                 <input type="hidden" class="area_id" value="<%=dg.getId_area().trim()%>" />
                                                 <input type="hidden" class="seccion_id" value="<%=dg.getId_seccion().trim()%>" />
                                                 <input type="hidden" class="puesto_id" value="<%=dg.getId_puesto().trim()%>" />
-                                                <input type="text" name="redirect" value="<%=request.getParameter("redirect")%>" />
+                                                <input type="hidden" name="redirect" value="<%=request.getParameter("redirect")%>" />
                                                 <%}%>
                                             </div>
 
@@ -885,8 +883,7 @@
                                                     <button type="submit" class="btn btn-primary btn-labeled">
                                                         Modificar  <i class="fa fa-pencil"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-default" onclick="window.hist
-                                                            ory.back();">
+                                                    <button type="button" class="btn btn-default" onclick="window.history.back();">
                                                         <i class="fa fa-arrow-circle-left"></i>  Regresar
                                                     </button>
                                                 </footer>
@@ -995,6 +992,21 @@
     <script src="../../js/Js_Plazo/Js_plazo_advertencia.js" type="text/javascript"></script>
 
     <script>
+                                                        function periodo_pago(cantidad) {
+                                                            var sueldo = parseFloat($("#sueldo").val());
+                                                            var p_p = sueldo / cantidad;
+                                                            $.each($(".monto"), function () {
+                                                                $(".monto").val(p_p);
+                                                            });
+                                                        }
+                                                        function calcular_sueldo_total() {
+                                                            var x = parseFloat($("#sueldo").val());
+                                                            var y = parseFloat($("#bono_al").val());
+                                                            var w = parseFloat($("#bono_pu").val());
+                                                            var z = parseFloat($("#bev").val());
+                                                            var v = x + y + z + w;
+                                                            $("#suel_total").text(Math.round(v * 100) / 100);
+                                                        }
                                                         function showEsDiezmo() {
                                                             var obj = $(".div_input_diezmo");
                                                             obj.hide(100);
@@ -1087,34 +1099,18 @@
                                                                 //alert(cantidad)
                                                             });
                                                         });
-                                                        $(document).ready(
-                                                                function () {
-                                                                    $("#sueldo").keyup(function () {
-                                                                        var sueldo = parseFloat($("#sueldo").val());
-                                                                        $(".monto").val(Math.round(sueldo));
-                                                                    });
-                                                                }
-                                                        );
-                                                        function periodo_pago(cantidad) {
-                                                            var sueldo = parseFloat($("#sueldo").val());
-                                                            var p_p = sueldo / cantidad;
-                                                            $.each($(".monto"), function () {
-                                                                $(".monto").val(p_p);
-                                                            });
-                                                        }
 
-                                                        function calcular_sueldo_total() {
-                                                            var x = parseFloat($("#sueldo").val());
-                                                            var y = parseFloat($("#bono_al").val());
-                                                            var w = parseFloat($("#bono_pu").val());
-                                                            var z = parseFloat($("#bev").val());
-                                                            var v = x + y + z + w;
-                                                            $("#suel_total").text(Math.round(v * 100) / 100);
-                                                        }
+
+
     </script>
     <script language="javascript" type="text/javascript">
         $(document).ready(function () {
 
+
+            $("#sueldo").keyup(function () {
+                var sueldo = parseFloat($("#sueldo").val());
+                $(".monto").val(Math.round(sueldo));
+            });
             /*Advertencias de Plazo*/
             var b = $("#alerta_dgp");
             var info = $(".div_info");
@@ -1137,8 +1133,7 @@
                 calcular_sueldo_total();
             });
             $(".contenido").hide();
-            /*TEMPORAL*/
-            //Planilla
+            /*TEMPORAL*/             //Planilla
             //if ($("#combito").val()=="REQ-0001" | $("#combito").val() == "REQ-0002" | $("#combito").val() == "REQ-0003" | $(this).val() == "REQ-0004" | $(this).val() == "REQ-0005" | $(this).val() == "REQ-0006") {
             if (true) {
                 $(".contenido").hide();
@@ -1157,143 +1152,141 @@
 
         });</script>
     <script language="javascript" type="text/javascript">
-        $(document).ready(
-                function mostrar() {
+        $(document).ready(function mostrar() {
 
-                    $(".cont_lun").hide();
-                    $(".cont_mar").hide();
-                    $(".cont_mie").hide();
-                    $(".cont_jue").hide();
-                    $(".cont_vie").hide();
-                    $(".cont_sab").hide();
-                    $(".cont_dom").hide();
-                    $("#select_lun").change(
-                            function () {
-                                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
-                                if (msg == true) {
-                                    if ($(this).val() == 1) {
-                                        $("#show_lun").show();
-                                    }
-                                    if ($(this).val() == 2) {
-                                        $(".cont_lun").hide();
-                                        $("#show_lun input").val("00:00");
-                                    }
-                                    calcularHoras();
-                                } else {
-                                    $("#select_lun").val("1");
-                                    return false;
-                                }
+            $(".cont_lun").hide();
+            $(".cont_mar").hide();
+            $(".cont_mie").hide();
+            $(".cont_jue").hide();
+            $(".cont_vie").hide();
+            $(".cont_sab").hide();
+            $(".cont_dom").hide();
+            $("#select_lun").change(
+                    function () {
+                        var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
+                        if (msg == true) {
+                            if ($(this).val() == 1) {
+                                $("#show_lun").show();
                             }
-                    );
-                    $("#select_mar").change(
-                            function () {
-                                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
-                                if (msg == true) {
-                                    if ($(this).val() == 1) {
-                                        $("#show_mar").show();
-                                    }
-                                    if ($(this).val() == 2) {
-                                        $(".cont_mar").hide();
-                                        $("#show_mar input").val("00:00");
-                                    }
-                                    calcularHoras();
-                                } else {
-                                    $("#select_mar").val("1")
-                                    return false;
-                                }
+                            if ($(this).val() == 2) {
+                                $(".cont_lun").hide();
+                                $("#show_lun input").val("00:00");
                             }
-                    );
-                    $("#select_mie").change(
-                            function () {
-                                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
-                                if (msg == true) {
-                                    if ($(this).val() == 1) {
-                                        $("#show_mie").show();
-                                    }
-                                    if ($(this).val() == 2) {
-                                        $(".cont_mie").hide();
-                                        $("#show_mie input").val("00:00");
-                                    }
-                                    calcularHoras();
-                                } else {
-                                    $("#select_mie").val("1")
-                                    return false;
-                                }
+                            calcularHoras();
+                        } else {
+                            $("#select_lun").val("1");
+                            return false;
+                        }
+                    }
+            );
+            $("#select_mar").change(
+                    function () {
+                        var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
+                        if (msg == true) {
+                            if ($(this).val() == 1) {
+                                $("#show_mar").show();
                             }
-                    );
-                    $("#select_jue").change(
-                            function () {
-                                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
-                                if (msg == true) {
-                                    if ($(this).val() == 1) {
-                                        $("#show_jue").show();
-                                    }
-                                    if ($(this).val() == 2) {
-                                        $(".cont_jue").hide();
-                                        $("#show_jue input").val("00:00");
-                                    }
-                                    calcularHoras();
-                                } else {
-                                    $("#select_jue").val("1")
-                                    return false;
-                                }
+                            if ($(this).val() == 2) {
+                                $(".cont_mar").hide();
+                                $("#show_mar input").val("00:00");
                             }
-                    );
-                    $("#select_vie").change(
-                            function () {
-                                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
-                                if (msg == true) {
-                                    if ($(this).val() == 1) {
-                                        $("#show_vie").show();
-                                    }
-                                    if ($(this).val() == 2) {
-                                        $(".cont_vie").hide();
-                                        $("#show_vie input").val("00:00");
-                                    }
-                                    calcularHoras();
-                                } else {
-                                    $("#select_vie").val("1")
-                                    return false;
-                                }
+                            calcularHoras();
+                        } else {
+                            $("#select_mar").val("1")
+                            return false;
+                        }
+                    }
+            );
+            $("#select_mie").change(
+                    function () {
+                        var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
+                        if (msg == true) {
+                            if ($(this).val() == 1) {
+                                $("#show_mie").show();
                             }
-                    );
-                    $("#select_sab").change(
-                            function () {
-                                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
-                                if (msg == true) {
-                                    if ($(this).val() == 1) {
-                                        $("#show_sab").show();
-                                    }
-                                    if ($(this).val() == 2) {
-                                        $(".cont_sab").hide();
-                                        $("#show_sab input").val("00:00");
-                                    }
-                                    calcularHoras();
-                                } else {
-                                    $("#select_sab").val("1")
-                                    return false;
-                                }
+                            if ($(this).val() == 2) {
+                                $(".cont_mie").hide();
+                                $("#show_mie input").val("00:00");
                             }
-                    );
-                    $("#select_dom").change(
-                            function () {
-                                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
-                                if (msg == true) {
-                                    if ($(this).val() == 1) {
-                                        $("#show_dom").show();
-                                    }
-                                    if ($(this).val() == 2) {
-                                        $(".cont_dom").hide();
-                                        $("#show_dom input").val("00:00");
-                                    }
-                                    calcularHoras();
-                                } else {
-                                    $("#select_dom").val("1")
-                                    return false;
-                                }
+                            calcularHoras();
+                        } else {
+                            $("#select_mie").val("1")
+                            return false;
+                        }
+                    }
+            );
+            $("#select_jue").change(
+                    function () {
+                        var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
+                        if (msg == true) {
+                            if ($(this).val() == 1) {
+                                $("#show_jue").show();
                             }
-                    );
+                            if ($(this).val() == 2) {
+                                $(".cont_jue").hide();
+                                $("#show_jue input").val("00:00");
+                            }
+                            calcularHoras();
+                        } else {
+                            $("#select_jue").val("1")
+                            return false;
+                        }
+                    }
+            );
+            $("#select_vie").change(
+                    function () {
+                        var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
+                        if (msg == true) {
+                            if ($(this).val() == 1) {
+                                $("#show_vie").show();
+                            }
+                            if ($(this).val() == 2) {
+                                $(".cont_vie").hide();
+                                $("#show_vie input").val("00:00");
+                            }
+                            calcularHoras();
+                        } else {
+                            $("#select_vie").val("1")
+                            return false;
+                        }
+                    }
+            );
+            $("#select_sab").change(
+                    function () {
+                        var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
+                        if (msg == true) {
+                            if ($(this).val() == 1) {
+                                $("#show_sab").show();
+                            }
+                            if ($(this).val() == 2) {
+                                $(".cont_sab").hide();
+                                $("#show_sab input").val("00:00");
+                            }
+                            calcularHoras();
+                        } else {
+                            $("#select_sab").val("1")
+                            return false;
+                        }
+                    }
+            );
+            $("#select_dom").change(function () {
+                var msg = confirm("Si acepta esta operacion eliminara la informacion de turno de este dia ¿Desea continuar?")
+                if (msg == true) {
+                    if ($(this).val() == 1) {
+                        $("#show_dom").show();
+                    }
+                    if ($(this).val() == 2) {
+                        $(".cont_dom").hide();
+                        $("#show_dom input").val("00:00");
+                    }
+                    calcularHoras();
+                } else {
+                    $("#select_dom").val("1")
+                    return false;
                 }
+            }
+            );
+        }
 
         );</script>
     <script  language="javascript" type="text/javascript">
@@ -1305,7 +1298,6 @@
                 for (var j = 0, max = 5; j < max; j++) {
                     var horaTurno = 0;
                     //var str = $("#HORA_DESDE_" + dias_semana[i] + j).val();
-
                     var Desde = $(".HORA_DESDE_" + dias_semana[i] + (j + 1)).val();
                     var Hasta = $(".HORA_HASTA_" + dias_semana[i] + (j + 1)).val();
                     if ($(".HORA_DESDE_" + dias_semana[i] + (j + 1)).val() == null) {
@@ -1329,82 +1321,7 @@
             $(".h_total").text("Hora Semanal Total : " + parseInt(acum) + ":" + min + " Horas.");
             $(".h_total").val(acum);
             if (minutos_totales > 2880) {
-
             }
-        }
-        function Listar_centro_costo1() {
-            var x = $("#list-cc");
-            $.post("../../centro_costo", "opc=Listar_centro_id_dgp&" + "id_dgp=" + $(".iddgp").val(), function (objJson) {
-                if ($(".can_centro_cos").val() !== 0) {                     //alert($(".iddgp").val());
-                    var lista = objJson.lista;
-                    x.empty();
-                    var CANT_T = 0;
-                    var numero = 1;
-                    var texto = "";
-                    cant_act = lista.length;
-                    $(".cant-actualmente").val(cant_act);
-                    texto += '<div class="row" >' +
-                            '<section class="col col-3">' +
-                            '<label class="btn">' +
-                            '<a type="button" id="btn-agregar-cc2" class="btn btn-primary btn-circle btn-lg btn-agregar-cc"><i class="glyphicon glyphicon-plus"></i></a>' +
-                            '</label></section>' +
-                            '<section class="col col-2">' +
-                            '<label class="input" id="titulo">%:<input type="text" name="PORCENTAJE_TOTAL" max="100" min="100" maxlength="3"  class="input-group-sm por_sum_to" id="bo_a" readonly=""></label>' +
-                            '</section></div>';
-                    for (var i = 0; i < lista.length; i++) {
-
-                        numero = numero + i;
-                        if ($(".can_centro_cos").val() === "1") {
-                            texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
-                            texto += '<div  class="row centro-costo_' + ag + '" >';
-                            texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
-                            texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                            texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
-                            texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '"  value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label> </section>';
-                            texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class="btn btn-danger btn-circle btn-lg remover' + ag + ' dis-total" onclick="Eliminar2($(this).val());"  disabled><i class="glyphicon glyphicon-remove"></i></button></label></section>';
-                            texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
-                            var dir, dep, cc;
-                            dir = lista[i].id_dir_cc;
-                            dep = lista[i].id_dep_cc;
-                            cc = lista[i].id;
-                            listar_cc2(ag, dir, dep, cc);
-                        } else {
-                            texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
-                            texto += '<div  class="row centro-costo_' + ag + '" >';
-                            texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
-                            texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                            /* nuevo agregado : area y seccion*/
-                            texto += '<section class="col col-3"><label class="select" id="titu"> Area :<select  class="cc-area' + ag + '"><option value="">[AREA]</option></select></label></section>';
-                            texto += '<section class="col col-3"><label class="select" id="titu"> Seccion :<select   class="cc-seccion' + ag + '"><option value="">[SECCION]</option></select></label></section>';
-
-                            texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                            texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '" value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label></section>';
-                            texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class="btn btn-danger btn-circle btn-lg remover' + ag + ' dis-total" onclick="Eliminar2($(this).val());" ><i class="glyphicon glyphicon-remove"></i></button></label></section>';
-                            texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
-                            var dir, dep, area, seccion, cc;
-                            dir = lista[i].id_dir_cc;
-                            dep = lista[i].id_dep_cc;
-                            area = lista[i].id_area_cc;
-                            seccion = lista[i].id_seccion_cc;
-                            cc = lista[i].id;
-                            listar_cc2(ag, dir, dep, cc, area, seccion);
-
-
-                        }
-                        numero = 1;
-                        ag++;
-                        CANT_T = (CANT_T + parseFloat(lista[i].ca_por_cc));
-                    }
-
-                    x.append(texto);
-                    $('#btn-agregar-cc2').click(function () {
-                        agregar_centro_costo();
-                    });
-                    $(".por_sum_to").val(CANT_T);
-                } else {
-                    remover_fil();
-                }
-            });
         }
         function dar_valor(caracter, num) {
             $(".porc" + num).val(caracter);
@@ -1414,21 +1331,17 @@
             });
             $(".por_sum_to").val(acum);
         }
-        var ag = 1;
-        var ingr = 0;
-        var cant_act = 0;
-        var estable = 0;
-        var can_eliminada = 0;
+
         function listar_cc2(num, dir, dep, cc, area, seccion) {
             $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
-                if (objJson.rpta == -1) {
+                if (objJson.rpta === -1) {
                     alert(objJson.mensaje);
                     return;
                 }
                 var lista = objJson.lista;
                 for (var i = 0; i < lista.length; i++) {
 
-                    if (dir == lista[i].id) {
+                    if (dir === lista[i].id) {
                         $("#cc-dir" + num).append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
                         listar_dep_cc2(num, dep, cc, area, seccion);
                     } else {
@@ -1445,7 +1358,7 @@
              });*/
             $(".cc-dep" + num).change(function () {
                 list_select($(".cc-area" + num), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(this).val());
-                listar_centro_costo(num, "0", arr_cc);
+               // listar_centro_costo(num, "0", arr_cc);
             });
             $(".cc-area" + num).change(function () {
                 list_select($(".cc-seccion" + num), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(this).val());
@@ -1454,30 +1367,14 @@
             $(".cc-seccion" + num).change(function () {
                 list_cc_seccion($(".cc-seccion" + num).val(), $(".centro_costo" + num));
             });
+        }
 
-            $(".remover" + num).click(function () {
-                $(".remover" + (num - 1)).removeAttr("disabled");
-                remover(num);
-                sumn_porcen_total();
-                ag--;
-            });
-        }
-        function remover(rem) {
-            $(".centro-costo_" + rem).remove();
-        }
-        function sumn_porcen_total() {
-            var acum = 0;
-            $.each($(".porcentaje_cc"), function () {
-                acum = acum + parseFloat($(this).val());
-            });
-            $(".por_sum_to").val(acum);
-        }
         function listar_dep_cc2(x, dep, cc, area, seccion) {
             var cc_dep = $(".cc-dep" + x);
             $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function (objJson) {
                 cc_dep.empty();
                 cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
-                if (objJson.rpta == -1) {
+                if (objJson.rpta === -1) {
                     alert(objJson.mensaje);
                     return;
                 } else {
@@ -1506,13 +1403,13 @@
             $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function (objJson) {
                 centro_costo.empty();
                 centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
-                if (objJson.rpta == -1) {
+                if (objJson.rpta === -1) {
                     alert(objJson.mensaje);
                     return;
                 }
                 var lista = objJson.lista;
                 for (var i = 0; i < lista.length; i++) {
-                    if (cc == lista[i].id) {
+                    if (cc === lista[i].id) {
                         centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
                     } else {
                         centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
@@ -1528,14 +1425,14 @@
             $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function (objJson) {
                 centro_costo.empty();
                 centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
-                if (objJson.rpta == -1) {
+                if (objJson.rpta === -1) {
                     alert(objJson.mensaje);
                     return;
                 }
                 var lista = objJson.lista;
                 for (var i = 0; i < lista.length; i++) {
                     if (opc == "1") {
-                        if (arr_cc[4] == lista[i].id) {
+                        if (arr_cc[4] === lista[i].id) {
                             centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
                         } else {
                             centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
@@ -1547,144 +1444,9 @@
                 }
             });
         }
-        function Actualizar_valores() {
-            $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-            $(".procent").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-            $(".por-i").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-            sumn_porcen_total();
-        }
-        function agregar_centro_costo(opc, arr_cc) {
-            if ($(".cant-actualmente").val() == "1") {
-                ingr++;
-                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
-                texto += '<div  class="row centro-costo_' + ag + '" >';
-                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" ><option value="">[DIRECCION]</option></select></label></section>';
-                texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  value="' + (ingr + ag - 1) + '"  type="text" required="" class="porcentaje_cc porcenttaj' + ag + '"/><input name="PORCENTAJE_CC' + ingr + '"  type="hidden" class="procent cont_dif' + ag + '"></label></section>';
-                texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class="btn btn-danger btn-circle btn-lg remover' + ag + ' "><i class="glyphicon glyphicon-remove"></i></a></label></section>';
-                texto += '</div>';
-                agregar.append(texto);
-                remover_atrib(ag - 1);
-                listar_cc(ag);
-                var c_porcentaje = $(".porcentaje_cc").size();
-                actualizar_porcentaje();
-                estable++;
-                cant_act++;
-                $(".cant-actualmente").val(cant_act);
-                $(".cant-ing").val(ingr);
-            } else {
-                ingr++;
-                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
-                texto += '<div  class="row centro-costo_' + ag + '" >';
-                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
-                texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                /* nuevo agregado : area y seccion*/
-                texto += '<section class="col col-3"><label class="select" id="titu"> Area :<select required=""  class="cc-area' + ag + '"><option value="">[AREA]</option></select></label></section>';
-                texto += '<section class="col col-3"><label class="select" id="titu"> Seccion :<select required=""  class="cc-seccion' + ag + '"><option value="">[SECCION]</option></select></label></section>';
-                texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0" value="' + (ingr + ag - 1) + '"  type="text" required="" class="porcentaje_cc porcenttaj' + ag + '"/><input name="PORCENTAJE_CC' + ingr + '"  type="hidden" class="procent cont_dif' + ag + '"/></label></section>';
-                texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class="btn btn-danger btn-circle btn-lg remover' + ag + ' "><i class="glyphicon glyphicon-remove"></i></a></label></section>';
-                texto += '</div>';
-                agregar.append(texto);
-                agrgar_atrib(ag - 1);
-                agrgar_atrib_rem_t();
-                listar_cc(ag);
-                var c_porcentaje = $(".porcentaje_cc").size();
-                cant_act++;
-                $(".cant-actualmente").val(cant_act);
-                $(".cant-ing").val(ingr);
-                actualizar_porcentaje();
-                estable++;
-            }
-            texto = "";
-            $(".cant").val(ag);
-            ag++;
-            $(".porcentaje_cc").keyup(function () {
-                sumn_porcen_total();
-            });
-        }
-        function agrgar_atrib_rem_t() {
-            $(".dis-total").attr("disabled", "disabled");
-        }
-        function agrgar_atrib(num) {
-            if ((num) == $(".can_centro_cos").val()) {
-            } else {
-                $(".remover" + num).attr("disabled", "disabled");
-            }
-        }
-        function agrgar_atrib_sol(num) {
-            if ($(".cant-actualmente").val() == "1") {
-                $(".remover" + num).attr("disabled", "disabled");
-            }
 
-        }
-        function remover_atrib(num) {
-            $(".remover" + num).removeAttr("disabled");
-        }
-        function listar_cc(num, opc, arr_cc) {
-            var cc_dir = $(".cc-dir" + num);
-            $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    if (opc == "1") {
-                        if (arr_cc[0] == lista[i].id) {
-                            cc_dir.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                            listar_dep_cc(num, opc, arr_cc);
-                        } else {
-                            cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                        }
-                    } else {
-                        cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                    }
-                }
-            });
-            $(".cc-dir" + num).change(function () {
 
-                listar_dep_cc(num, "0", arr_cc);
-            });
-            $(".cc-dep" + num).change(function () {
-                list_select($(".cc-area" + num), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(this).val());
-                listar_centro_costo(num, "0", arr_cc);
-            });
-            $(".cc-area" + num).change(function () {
-                list_select($(".cc-seccion" + num), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(this).val());
-                list_cc_area($(this).val(), $(".centro_costo" + num));
-            });
-            $(".cc-seccion" + num).change(function () {
-                list_cc_seccion($(".cc-seccion" + num).val(), $(".centro_costo" + num));
-            });
-            $(".porcenttaj" + num).keyup(function () {
-                $(".cont_dif" + num).val($(this).val());
-                var acum = 0;
-                $.each($(".porcentaje_cc"), function () {
-                    acum = acum + parseFloat($(this).val());
-                });
-                $(".por_sum_to").val(acum);
-            });
-            $(".remover" + num).click(function () {
-                remover(num);
-                ag--;
-                ingr--;
-                estable--;
-                cant_act--;
-                $(".cant-actualmente").val(cant_act);
-                $(".remover" + (num - 1)).removeAttr("disabled");
-                if (ingr == 0) {
-                    rem_atrib_rem_t();
-                }
-                $(".cant-ing").val(ingr);
-                actualizar_porcentaje();
-                sumn_porcen_total();
-            });
-        }
-        function rem_atrib_rem_t() {
-            $(".dis-total").removeAttr("disabled");
-        }
+
         function listar_dep_cc(x, opc, arr_cc) {
 
             var cc_dep = $(".cc-dep" + x);
@@ -1711,39 +1473,8 @@
                 }
             });
         }
-        function actualizar_porcentaje() {
-            $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-            $(".procent").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-            $(".por-i").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-            var acum = 0;
-            $.each($(".porcentaje_cc"), function () {
-                acum = acum + parseFloat($(this).val());
-            });
-            $(".por_sum_to").val(acum);
-        }
-        function Eliminar2(i) {
-            var x = $("#fila-agregar-cc");
-            var msg = confirm('Si aceptas se eliminara la informacion totalmente ¿aceptas?');
-            if (msg == true) {
-                $.post("../../centro_costo", "opc=Eliminar_det_cc&" + "id_dcc=" + $(".id_dcc" + i).val(), function () {
-                    ag--;
-                    $(".remover" + i + 1).attr("disabled", "disabled");
-                    remov(i);
-                    can_eliminada++;
-                    $(".cant-elimi").val(can_eliminada);
-                    var can = $(".can_centro_cos ").val();
-                    can--;
-                    $(".can_centro_cos ").val(can);
-                    Actualizar_valores().after(Listar_centro_costo1());
-                    ag = 1;
-                });
-            } else if (msg == false) {
-                return false;
-            }
-        }
-        function remov(i) {
-            $(".centro-costo_" + i).remove();
-        }
+
+
         function sumn_porcen_total() {
             var acum = 0;
             $.each($(".porcentaje_cc"), function () {
@@ -1829,9 +1560,7 @@
 
 
         }
-        var agregar = $('#list-cc');
-        var ag = $('#fila-agregar .porcentaje_cc').size() + 1;
-        var texto = "";
+
         function listar_tipo_horario() {
             $.post("../../formato_horario", "opc=Listar_Tip_Horario", function (objJson) {
 
@@ -2162,10 +1891,6 @@
             $("#bev").numeric();
             $("#nu_cuen").numeric();
             $("#nu_cuen_ban").numeric();
-            // $(".texto-h").mask("99:99", {placeholder: "0"});
-            /* $("#sueldo").mask("99999.99", {placeholder: "0"});
-             $("#bono_al").mask("99999.99", {placeholder: "0"});
-             $("#bev").mask("99999.99", {placeholder: "0"});*/
             var scntDiv = $('#show_lun');
             var i = $('#show_lun .texto-h').size() + 1;
             var s = $('#show_lun .tr-count').size() + 1;
@@ -2203,8 +1928,7 @@
             });
             $('.remove_2').click(function () {
                 if (i > 2) {
-                    $(this).parents('tr').remove(); //  $("#tr-d").remove();                                i--;
-                    s--;
+                    $(this).parents('tr').remove(); //  $("#tr-d").remove();                                i--;                     s--;
                 }
                 return false;
             });
@@ -2223,8 +1947,7 @@
             });
             $('.remove_3').click(function () {
                 if (i > 2) {
-                    $(this).parents('tr').remove(); //  $("#tr-d").remove();                                i--;
-                    s--;
+                    $(this).parents('tr').remove(); //  $("#tr-d").remove();                                i--;                     s--;
                 }
                 return false;
             });
@@ -2305,23 +2028,30 @@
                 }
             });
             pageSetUp();
-
             showEsDiezmo();
+            var ag = 1;
+            var ingr = 0;
+            var cant_act = 0;
+            var estable = 0;
+            var can_eliminada = 0;
 
-            Listar_centro_costo1();
+
+            //var ag = $('#fila-agregar .porcentaje_cc').size() + 1;
+            // var texto = "";
+            Listar_centro_costo1($(".iddgp").val(), ag, cant_act, ingr, estable, can_eliminada);
+            sumn_porcen_total();
+            $('#btn-agregar-cc').click(function () {
+                var agregar = $('#fila-agregar');
+                agregar_centro_costo(ingr, agregar, ag, estable, cant_act, can_eliminada);
+            });
+
             listar_tipo_horario();
             listar_horas();
-            sumn_porcen_total();
-            $("#no_cuen").hide();
-            $("#no_cuen_ban").hide();
-            $("#generar").hide();
-            $("#no_cuen_otros").hide();
-            //  var r = "";
-            $('#btn-agregar-cc').click(function () {
-                agregar_centro_costo();
-            });
             $("#banco").change(function () {
-
+                $("#no_cuen").hide();
+                $("#no_cuen_ban").hide();
+                $("#generar").hide();
+                $("#no_cuen_otros").hide();
                 cuenta_bancaria($(this).val());
                 $("#nu_cuen").focus();
                 $("#es_cuenta").val(1);
@@ -2339,7 +2069,6 @@
                     return false;
                 }
             });
-
             var b = $("#alerta_dgp");
             var info = $(".div_info");
             // $("#alerta_dgp").hide();
@@ -2432,8 +2161,7 @@
                         required: true,
                         digits: true
                     }
-                },
-                // Messages for form validation           
+                }, // Messages for form validation           
                 messages: {
                     fname: {
                         required: 'Please enter your first name'
@@ -2464,11 +2192,9 @@
                     address: {
                         required: 'Please enter your full address'
                     },
-                    name: {
-                        required: 'Please enter name on your card'
+                    name: {required: 'Please enter name on your card'
                     },
-                    card: {
-                        required: 'Please enter your card number'
+                    card: {required: 'Please enter your card number'
                     },
                     cvv: {
                         required: 'Enter CVV2',
