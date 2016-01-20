@@ -216,7 +216,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     @Override
     public List<X_List_det_dgp> LIST_DET_DGP(String id_dep) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select trim(rhfu_anno_procesamiento_dgp(dgp.ID_DGP))   AS anno_procesamiento,"
+        String sql = "select  rhfu_get_cd_aps_trabajador(tr.id_trabajador) as cod_aps,tr.NU_DOC, trim(rhfu_anno_procesamiento_dgp(dgp.ID_DGP))   AS anno_procesamiento,"
                 + "    trim(rhfu_mes_procesamiento_dgp(dgp.ID_DGP))                 AS mes_procesamiento, dgp.id_dgp , dgp.id_trabajador,tr.no_trabajador,"
                 + "tr.ap_paterno,tr.ap_materno, dgp.id_puesto,to_char(dgp.fe_desde,'dd/mm/yyyy') as fe_desde,"
                 + "to_char(dgp.fe_hasta,'dd/mm/yyyy') as fe_hasta,dgp.ca_sueldo, pd.no_puesto, pd.no_area, r.no_req,dgp.ES_DGP ,dgp.LI_MOTIVO,dgp.CA_BONO_ALIMENTARIO,dgp.CA_BONIFICACION_P,dgp.CA_ASIG_FAMILIAR "
@@ -247,6 +247,8 @@ public class DgpDAO implements InterfaceDgpDAO {
                 x.setCa_asig_familiar(rs.getDouble("CA_ASIG_FAMILIAR"));
                 x.setAnno_procesamiento(rs.getString("anno_procesamiento"));
                 x.setMes_procesamiento(rs.getString("mes_procesamiento"));
+                x.setCod_aps(rs.getInt("cod_aps"));
+                x.setNu_doc(rs.getString("nu_doc"));
                 Lista.add(x);
             }
         } catch (SQLException ex) {

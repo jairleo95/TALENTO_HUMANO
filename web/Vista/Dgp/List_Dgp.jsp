@@ -14,7 +14,7 @@
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
         <title> Reportes </title>
-         <meta name="description" content="">
+        <meta name="description" content="">
         <meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <!-- Basic Styles -->
@@ -57,7 +57,7 @@
     </head>
     <body class="">
         <!-- MAIN PANEL -->
-       <div id="main" role="main" style="margin-left: 0px;">
+        <div id="main" role="main" style="margin-left: 0px;">
             <!-- MAIN CONTENT -->
             <div id="content">
                 <!-- widget grid -->
@@ -104,7 +104,9 @@
                                                     <th data-hide="phone">ID</th>
                                                     <th data-hide="phone">Mes</th>
                                                     <th data-hide="phone">Año</th>
-                                                    <th data-class="expand">Nombres y Apellidos</th>
+                                                    <th data-class="expand">Apellidos y Nmbres</th>
+                                                    <th data-class="expand">Nro. Documento</th>
+                                                    <th data-class="expand">Código APS</th>
                                                     <th>Motivo</th>
                                                     <th>Fecha Inicio</th>
                                                     <th data-hide="phone">Fecha Fin</th>
@@ -128,14 +130,24 @@
                                                     <td><%out.print(i + 1);%></td>
                                                     <td><%=x.getMes_procesamiento()%></td>
                                                     <td><%=x.getAnno_procesamiento()%></td>
-                                                    <td ><a href="../../trabajador?idtr=<%=x.getId_trabajador()%>&opc=list"><%=x.getNo_trabajador().toUpperCase() + " " + x.getAp_paterno().toUpperCase() + " " + x.getAp_materno().toUpperCase()%></a></td>
+                                                    <td ><a href="../../trabajador?idtr=<%=x.getId_trabajador()%>&opc=list"><%=x.getAp_paterno().toUpperCase() + " " + x.getAp_materno().toUpperCase() + " " + x.getNo_trabajador().toUpperCase()%></a></td>
+                                                   
+                                                    <td><%=x.getNu_doc()%></td>
+                                                    <td> <%
+                                                        if (x.getCod_aps() == 0) {
+                                                            out.print("");
+                                                        } else {
+                                                            out.print(x.getCod_aps());
+                                                        }
+                                                    %>
+                                                   </td>
                                                     <td>  <%if (x.getLi_motivo().equals("2")) {
                                                             out.print("Renovación");
                                                         } else if (x.getLi_motivo().equals("1")) {
                                                             out.print("Trabajador Nuevo");
                                                         }
                                                         %>
-                                                    </td>
+                                                    </td>   
                                                     <td><%=x.getFe_desde()%></td>
                                                     <td><%=x.getFe_hasta()%></td>
                                                     <td><%=x.getCa_sueldo()%></td>
@@ -274,213 +286,213 @@
         <!-- END MAIN PANEL -->
 
 
-       
-<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
-<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-<script>
-                    if (!window.jQuery) {
-                        document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                    }
-</script>
+        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script>
-                    if (!window.jQuery.ui) {
-                        document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                    }
-</script>
+        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script>
+            if (!window.jQuery) {
+                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+            }
+        </script>
 
-<!-- IMPORTANT: APP CONFIG -->
-<script src="../../js/app.config.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script>
+            if (!window.jQuery.ui) {
+                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+            }
+        </script>
 
-<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-<script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+        <!-- IMPORTANT: APP CONFIG -->
+        <script src="../../js/app.config.js"></script>
 
-<!-- BOOTSTRAP JS -->
-<script src="../../js/bootstrap/bootstrap.min.js"></script>
+        <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+        <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
 
-<!-- CUSTOM NOTIFICATION -->
-<script src="../../js/notification/SmartNotification.min.js"></script>
+        <!-- BOOTSTRAP JS -->
+        <script src="../../js/bootstrap/bootstrap.min.js"></script>
 
-<!-- JARVIS WIDGETS -->
-<script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
+        <!-- CUSTOM NOTIFICATION -->
+        <script src="../../js/notification/SmartNotification.min.js"></script>
 
-<!-- EASY PIE CHARTS 
-<script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
+        <!-- JARVIS WIDGETS -->
+        <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-<!-- SPARKLINES 
-<script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>-->
+        <!-- EASY PIE CHARTS 
+        <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
 
-<!-- JQUERY VALIDATE 
-<script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>-->
+        <!-- SPARKLINES 
+        <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>-->
 
-<!-- JQUERY MASKED INPUT 
-<script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
+        <!-- JQUERY VALIDATE 
+        <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>-->
 
-<!-- JQUERY SELECT2 INPUT 
-<script src="../../js/plugin/select2/select2.min.js"></script>-->
+        <!-- JQUERY MASKED INPUT 
+        <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
 
-<!-- JQUERY UI + Bootstrap Slider 
-<script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
+        <!-- JQUERY SELECT2 INPUT 
+        <script src="../../js/plugin/select2/select2.min.js"></script>-->
 
-<!-- browser msie issue fix -->
-<script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+        <!-- JQUERY UI + Bootstrap Slider 
+        <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
 
-<!-- FastClick: For mobile devices -->
-<script src="../../js/plugin/fastclick/fastclick.min.js"></script>
+        <!-- browser msie issue fix -->
+        <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 
-<!--[if IE 8]>
+        <!-- FastClick: For mobile devices -->
+        <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
 
-<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+        <!--[if IE 8]>
+        
+        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+        
+        <![endif]-->
 
-<![endif]-->
+        <!-- Demo purpose only -->
+        <script src="../../js/demo.min.js"></script>
 
-<!-- Demo purpose only -->
-<script src="../../js/demo.min.js"></script>
+        <!-- MAIN APP JS FILE -->
+        <script src="../../js/app.min.js"></script>
 
-<!-- MAIN APP JS FILE -->
-<script src="../../js/app.min.js"></script>
+        <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT
+        <!-- Voice command : plugin -->
 
-<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT
-<!-- Voice command : plugin -->
+        <!-- PAGE RELATED PLUGIN(S) 
+        <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>-->
 
-<!-- PAGE RELATED PLUGIN(S) 
-<script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>-->
-
-<script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-<script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
-<script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
-<script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-<script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+        <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
+        <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
+        <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+        <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
 
         <script type="text/javascript">
 
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+    // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function () {
+    $(document).ready(function () {
 
-                pageSetUp();
+        pageSetUp();
 
-                /* // DOM Position key index //
-                 
-                 l - Length changing (dropdown)
-                 f - Filtering input (search)
-                 t - The Table! (datatable)
-                 i - Information (records)
-                 p - Pagination (paging)
-                 r - pRocessing 
-                 < and > - div elements
-                 <"#id" and > - div with an id
-                 <"class" and > - div with a class
-                 <"#id.class" and > - div with an id and class
-                 
-                 Also see: http://legacy.datatables.net/usage/features
-                 */
+        /* // DOM Position key index //
+         
+         l - Length changing (dropdown)
+         f - Filtering input (search)
+         t - The Table! (datatable)
+         i - Information (records)
+         p - Pagination (paging)
+         r - pRocessing 
+         < and > - div elements
+         <"#id" and > - div with an id
+         <"class" and > - div with a class
+         <"#id.class" and > - div with an id and class
+         
+         Also see: http://legacy.datatables.net/usage/features
+         */
 
-                /* BASIC ;*/
-                var responsiveHelper_dt_basic = undefined;
-                var responsiveHelper_datatable_fixed_column = undefined;
-                var responsiveHelper_datatable_col_reorder = undefined;
-                var responsiveHelper_datatable_tabletools = undefined;
+        /* BASIC ;*/
+        var responsiveHelper_dt_basic = undefined;
+        var responsiveHelper_datatable_fixed_column = undefined;
+        var responsiveHelper_datatable_col_reorder = undefined;
+        var responsiveHelper_datatable_tabletools = undefined;
 
-                var breakpointDefinition = {
-                    /*tablet: 1024,
-                     phone: 480*/
-                };
+        var breakpointDefinition = {
+            /*tablet: 1024,
+             phone: 480*/
+        };
 
-                $('#dt_basic').dataTable({
-                    // Tabletools options: 
-                    //   https://datatables.net/extensions/tabletools/button_options
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                    "oTableTools": {
-                        "aButtons": [
-                            "copy",
-                            "csv",
-                            "xls",
-                            {
-                                "sExtends": "pdf",
-                                "sTitle": "Lista_Requerimientos_PDF",
-                                "sPdfMessage": "Empleados PDF Export",
-                                "sPdfSize": "letter"
-                            },
-                            {
-                                "sExtends": "print",
-                                "sMessage": "Generado por AlfaTeam <i>(presiona Esc para cerrar)</i>"
-                            }
-                        ],
-                        "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
+        $('#dt_basic').dataTable({
+            // Tabletools options: 
+            //   https://datatables.net/extensions/tabletools/button_options
+            "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
+                    "t" +
+                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+            "oTableTools": {
+                "aButtons": [
+                    "copy",
+                    "csv",
+                    "xls",
+                    {
+                        "sExtends": "pdf",
+                        "sTitle": "Lista_Requerimientos_PDF",
+                        "sPdfMessage": "Empleados PDF Export",
+                        "sPdfSize": "letter"
                     },
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_tabletools) {
-                            responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_tabletools.respond();
+                    {
+                        "sExtends": "print",
+                        "sMessage": "Generado por AlfaTeam <i>(presiona Esc para cerrar)</i>"
                     }
-                });
+                ],
+                "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
+            },
+            "autoWidth": true,
+            "preDrawCallback": function () {
+                // Initialize the responsive datatables helper once.
+                if (!responsiveHelper_datatable_tabletools) {
+                    responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                }
+            },
+            "rowCallback": function (nRow) {
+                responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+            },
+            "drawCallback": function (oSettings) {
+                responsiveHelper_datatable_tabletools.respond();
+            }
+        });
 
-                /* END BASIC */
-                /* TABLETOOLS */
+        /* END BASIC */
+        /* TABLETOOLS */
 
 
 
-                /* END COLUMN SHOW - HIDE */
+        /* END COLUMN SHOW - HIDE */
 
-                /* TABLETOOLS */
-                $('#datatable_tabletools2').dataTable({
-                    // Tabletools options: 
-                    //   https://datatables.net/extensions/tabletools/button_options
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                    "oTableTools": {
-                        "aButtons": [
-                            "copy",
-                            "csv",
-                            "xls",
-                            {
-                                "sExtends": "pdf",
-                                "sTitle": "Requerimientos_PDF",
-                                "sPdfMessage": "Requeriemintos PDF Export",
-                                "sPdfSize": "letter"
-                            },
-                            {
-                                "sExtends": "print",
-                                "sMessage": "Generado por AlfaTeam <i>(presiona Esc para cerrar)</i>"
-                            }
-                        ],
-                        "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
+        /* TABLETOOLS */
+        $('#datatable_tabletools2').dataTable({
+            // Tabletools options: 
+            //   https://datatables.net/extensions/tabletools/button_options
+            "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
+                    "t" +
+                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+            "oTableTools": {
+                "aButtons": [
+                    "copy",
+                    "csv",
+                    "xls",
+                    {
+                        "sExtends": "pdf",
+                        "sTitle": "Requerimientos_PDF",
+                        "sPdfMessage": "Requeriemintos PDF Export",
+                        "sPdfSize": "letter"
                     },
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_tabletools) {
-                            responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools2'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_tabletools.respond();
+                    {
+                        "sExtends": "print",
+                        "sMessage": "Generado por AlfaTeam <i>(presiona Esc para cerrar)</i>"
                     }
-                });
+                ],
+                "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
+            },
+            "autoWidth": true,
+            "preDrawCallback": function () {
+                // Initialize the responsive datatables helper once.
+                if (!responsiveHelper_datatable_tabletools) {
+                    responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools2'), breakpointDefinition);
+                }
+            },
+            "rowCallback": function (nRow) {
+                responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+            },
+            "drawCallback": function (oSettings) {
+                responsiveHelper_datatable_tabletools.respond();
+            }
+        });
 
-                /* END TABLETOOLS */
+        /* END TABLETOOLS */
 
 
-            })
+    })
 
         </script>
     </body>
