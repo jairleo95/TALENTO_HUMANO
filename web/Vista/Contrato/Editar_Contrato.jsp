@@ -121,7 +121,7 @@
                             %>
 
                             <form action="../../contrato" id="checkout-form" class="smart-form"  method="POST" >
-                                <fieldset id="fila-agregar">
+                                <fieldset >
                                     <%if (a.getId_dgp() != null) {%>
                                     <div class="row">
                                         <section class="col col-3">
@@ -419,7 +419,7 @@
                                     </div>-->
 
                                 </fieldset>
-                                <fieldset id="fila-agregar-cc">
+                                <fieldset >
                                     <%if (Integer.parseInt(request.getParameter("num_cc")) == 0) {%>
                                     <div class="row" >
                                         <section class="col col-1">
@@ -577,7 +577,8 @@
 
                                     </div>
                                 </fieldset>
-
+                                                <fieldset id="fila-agregar">
+                                                </fieldset>
                                 <fieldset>
                                     <h6><label id="titulo">Horas:</label></h6>
                                     <div class="row" >
@@ -874,9 +875,11 @@
         <!-- Voice command : plugin -->
 
         <!-- PAGE RELATED PLUGIN(S) -->
+            <script src="../../js/plugin/knob/jquery.knob.min.js"></script>
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
+           <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
         <script type="text/javascript">
 
                                         function showEsDiezmo() {
@@ -1071,7 +1074,6 @@
         }
         function listar_sub_mod() {
             var s = $("#select-sub-mod");
-
             $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&" + "id=" + $(".id_mod_con").val(), function (objJson) {
                 s.empty();
                 var lista = objJson.lista;
@@ -1106,534 +1108,114 @@
                 }
             });
         }
-        function Listar_centro_costo() {
-            var x = $("#centros-costos-relleno");
-            $.post("../../centro_costo", "opc=Listar_centro_id_con&" + "id_con=" + $(".id_contrato").val(), function (objJson) {
-                if ($(".can_centro_cos").val() != 0) {
-                    var lista = objJson.lista;
-                    x.empty();
-                    var CANT_T = 0;
-                    var numero = 1;
-                    var texto = "";
-                    if ($("#id_dgp").val() == null) {
-                        texto += '<div class="row" ><section class="col col-1"><br><label  id="titu">Agregar:</label><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;" id="btn-agregar-cc2" class=" btn btn-default txt-color-green btn-agregar-cc"><i class="fa fa-plus fa-2x"></i></a></label></section><section class="col col-2"><label class="input" id="titulo">%:<input type="text" name="PORCENTAJE_TOTAL" max="100" min="100" maxlength="3"  class="input-group-sm por_sum_to" id="bo_a" readonly=""></label></section></div>';
-                    }
-                    for (var i = 0; i < lista.length; i++) {
-                        numero = numero + i;
-                        if ($("#id_dgp").val() != null) {
-                            texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
-                            texto += '<div  class="row centro-costo_' + ag + '" >';
-                            texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly=""  disabled><option value="">[DIRECCION]</option></select></label></section>';
-                            texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" disabled readonly="readonly" disabled><option value=""  >[DEPARTAMENTO]</option></select></label></section>';
-                            texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly" disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
-                            texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc" readonly="readonly" disabled/></label></section>';
-                            texto += '</div>';
-                            var dir, dep, cc;
-                            dir = lista[i].id_dir_cc;
-                            dep = lista[i].id_dep_cc;
-                            cc = lista[i].id;
-                            listar_cc2(ag, dir, dep, cc);
-                        } else {
-                            if ($(".can_centro_cos").val() == "1") {
-                                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
-                                texto += '<div  class="row centro-costo_' + ag + '" >';
-                                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
-                                texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                                texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
-                                texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '"  value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label> </section>';
-                                texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar(alert());"  ><i class="fa fa-minus fa-2x"></i></button></label></section>';
-                                texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
-                                var dir, dep, cc;
-                                dir = lista[i].id_dir_cc;
-                                dep = lista[i].id_dep_cc;
-                                cc = lista[i].id;
-                                listar_cc2(ag, dir, dep, cc);
-                                /*texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" id="rem' + (i + 1) + '" onclick="Eliminar($(this).val());" disabled=""><i class="fa fa-minus fa-2x"></i></button></label></section>');
-                                 texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
-                                 texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                                 texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';*/
-                            } else {
-                                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
-                                texto += '<div  class="row centro-costo_' + ag + '" >';
-                                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
-                                texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                                texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled><option value="">[CENTRO COSTO]</option></select></label></section>';
-                                texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc por-cen-' + ag + '" onkeyup="dar_valor($(this).val(),' + ag + ');"/><input type="hidden" name="porcent_ant_' + (i + 1) + '" value="' + lista[i].ca_por_cc + '" class="porc' + ag + ' por-i" /></label></section>';
-                                texto += '<section class="col col-1" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;" value="' + ag + '" class=" btn btn-default txt-color-red remover' + ag + ' dis-total" onclick="Eliminar($(this).val());" ><i class="fa fa-minus fa-2x"></i></button></label></section>';
-                                texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
-                                var dir, dep, cc;
-                                dir = lista[i].id_dir_cc;
-                                dep = lista[i].id_dep_cc;
-                                cc = lista[i].id;
-                                listar_cc2(ag, dir, dep, cc);
-                                // texto += ('<section class="col col-4 cen-co-im' + i + '"><br><label class="select" id="titulo"> Centro costo Nº ' + numero + '<select name="select_cent_c_' + i + '" required="" class="input-group-sm selec' + i + '"><option value="' + lista[i].id_det_ce + '">' + lista[i].nombre + '</option></select></section><section class="col col-1 cen-co-im' + i + '" ><br><label class="btn"><button type="button" style="padding:9%; padding-right:20%; padding-left:20%;"value="' + i + '" class=" btn btn-default txt-color-red rem' + i + '" onclick="Eliminar($(this).val());"><i class="fa fa-minus fa-2x"></i></button></label></section>');
-                            }
-                            //listar_cc2(ag, lista[i].id_dir_cc, lista[i].id_dep_cc, lista[i].id);
-                        }
-                        numero = 1;
-                        ag++;
-                        CANT_T = (CANT_T + parseInt(lista[i].ca_por_cc)
-
-                                );
-                    }
-                    x.append(texto);
-                    $('#btn-agregar-cc2').click(function () {
-                        agregar_centro_costo();
-                    });
-                    $(".por_sum_to").val(CANT_T);
-                } else {
-                    remover_fil();
-                }
-            });
-        }
-        function remover_fil() {
-            $(".fila-agregar-cc").remove();
-        }
-        var agregar = $('#fila-agregar-cc');
-        var ag = 1;
-        var ingr = 0;
-        var texto = ""
-        var estable = 0;
-        var can_eliminada = 0;
-        function agregar_centro_costo(opc, arr_cc) {
-            if ($(".can_centro_cos").val() == "1") {
-                ingr++;
-                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
-                texto += '<div  class="row centro-costo_' + ag + '" >';
-                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" ><option value="">[DIRECCION]</option></select></label></section>';
-                texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  value="' + (ingr + ag - 1) + '"  type="text" required="" class="porcentaje_cc porcenttaj' + ag + '"/><input name="PORCENTAJE_CC' + ingr + '"  type="hidden" class="procent cont_dif' + ag + '"></label></section>';
-                texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + ' "><i class="fa fa-minus fa-2x"></i></a></label></section>';
-                texto += '</div>';
-                agregar.append(texto);
-                remover_atrib(ag - 1);
-                listar_cc(ag);
-                var c_porcentaje = $(".porcentaje_cc").size();
-                $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-                $(".procent").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-                $(".por-i").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-                estable++;
-                sumn_porcen_total();
-                $(".can_centro_cos").val("a");
-                $(".cant-ing").val(ingr);
-                //agrgar_atrib_rem_t();
-            } else {
-                ingr++;
-                texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + ag + ':</label>';
-                texto += '<div  class="row centro-costo_' + ag + '" >';
-                texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
-                texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-                texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ingr + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
-                texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ingr + '"  min="0" value="' + (ingr + ag - 1) + '"  type="text" required="" class="porcentaje_cc porcenttaj' + ag + '"/><input name="PORCENTAJE_CC' + ingr + '"  type="hidden" class="procent cont_dif' + ag + '"/></label></section>';
-                texto += '<section class="col col-1" ><br><label class="btn"><a type="button" style="padding:9%; padding-right:20%; padding-left:20%;"  class=" btn btn-default txt-color-red remover' + ag + ' "><i class="fa fa-minus fa-2x"></i></a></label></section>';
-                texto += '</div>';
-                agregar.append(texto);
-                // remover_atrib(ag - 1);
-                //remover_atrib(ag-1);
-                agrgar_atrib(ag - 1);
-                agrgar_atrib_rem_t();
-                listar_cc(ag);
-                var c_porcentaje = $(".porcentaje_cc").size();
-                $(".cant-ing").val(ingr);
-                $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-                $(".procent").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-                $(".por-i").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-                estable++;
-                sumn_porcen_total();
-                //agrgar_atrib_rem_t();
-
-            }
-            //$(".ver").text(texto); 
-            texto = "";
-            $(".cant").val(ag);
-            ag++;
-            $(".porcentaje_cc").keyup(function () {
-                sumn_porcen_total();
-            });
-        }
-
-        function remover_atrib(num) {
-            $(".remover" + num).removeAttr("disabled");
-        }
-        function agrgar_atrib(num) {
-            if ((num) == $(".can_centro_cos").val()) {
-            } else {
-                $(".remover" + num).attr("disabled", "disabled");
-            }
-        }
-        function agrgar_atrib_rem_t() {
-            $(".dis-total").attr("disabled", "disabled");
-        }
-        function rem_atrib_rem_t() {
-            $(".dis-total").removeAttr("disabled");
-        }
-        function sumn_porcen_total() {
-
-            var acum = 0;
-            $.each($(".porcentaje_cc"), function () {
-                acum = acum + parseFloat($(this).val());
-            });
-            $(".por_sum_to").val(acum);
-        }
-        function listar_cc(num, opc, arr_cc) {
-            var cc_dir = $(".cc-dir" + num);
-            $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    if (opc == "1") {
-                        if (arr_cc[0] == lista[i].id) {
-                            cc_dir.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                            listar_dep_cc(num, opc, arr_cc);
-                        } else {
-                            cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                        }
-                    } else {
-                        cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                    }
-                }
-            });
-            $(".cc-dir" + num).change(function () {
-
-                listar_dep_cc(num, "0", arr_cc);
-
-            });
-            $(".cc-dep" + num).change(function () {
-                listar_centro_costo2(num, "0", arr_cc);
-            });
-            $(".porcenttaj" + num).keyup(function () {
-                $(".cont_dif" + num).val($(this).val());
-                // act_va_an();
-            });
-            $(".remover" + num).click(function () {
-                $(".remover" + (num - 1)).removeAttr("disabled");
-                remover(num);
-                sumn_porcen_total();
-                ag--;
-                ingr--;
-                estable--;
-                if (ingr == 0) {
-                    rem_atrib_rem_t();
-                }
-                $(".cant-ing").val(ingr);
-                actualizar_porcentaje();
-                sumn_porcen_total();
-            });
-
-        }
-        function act_va_an() {
-            // var num = $(".conteo").val() + 0;
-            $(".por_i").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-        }
-        function actualizar_porcentaje() {
-            $(".porcentaje_cc").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-            $(".procent").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-            $(".por-i").val(Math.round((100 / (ingr + ag - 1 - estable)) * 100) / 100);
-        }
-        function remover(rem) {
-            $(".centro-costo_" + rem).remove();
-        }
-        function listar_dep_cc(x, opc, arr_cc) {
-
-            var cc_dep = $(".cc-dep" + x);
-            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function (objJson) {
-
-                cc_dep.empty();
-                cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    if (opc == "1") {
-                        if (arr_cc[1] == lista[i].id) {
-                            cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                            (x, opc, arr_cc);
-                        } else {
-                            cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                        }
-                    } else {
-                        cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                    }
-
-                }
-            });
-        }
-        function listar_centro_costo2(x, opc, arr_cc) {
-
-            var centro_costo = $(".centro_costo" + x);
-            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function (objJson) {
-                centro_costo.empty();
-                centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-
-
-                    if (opc == "1") {
-                        if (arr_cc[4] == lista[i].id) {
-                            centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                        } else {
-                            centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                        }
-                    } else {
-                        centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                    }
-
-                }
-            });
-        }
-        function listar_cc2(num, dir, dep, cc) {
-            $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-
-                    if (dir == lista[i].id) {
-                        $("#cc-dir" + num).append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                        listar_dep_cc2(num, dep, cc);
-                    } else {
-                        $("#cc-dir" + num).append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                    }
-                }
-            });
-            $("#cc-dir" + num).change(function () {
-
-                listar_dep_cc2(num);
-            });
-            $(".cc-dep" + num).change(function () {
-
-                listar_centro_costo2(num, "0", arr_cc);
-            });
-            //  alert(num);
-            $(".por-cen-" + num).keyup(function () {
-                sumn_porcen_total();
-            });
-            $(".remover" + num).click(function () {
-                $(".remover" + (num - 1)).removeAttr("disabled");
-                remover(num);
-                sumn_porcen_total();
-                ag--;
-            });
-        }
-        function dar_valor(caracter, num) {
-            $(".porc" + num).val(caracter);
-        }
-        function remover2(rem) {
-
-            $(".centro-costo_" + rem).remove();
-        }
-        function listar_dep_cc2(x, dep, cc) {
-            var cc_dep = $(".cc-dep" + x);
-            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function (objJson) {
-
-                cc_dep.empty();
-                cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    if (dep == lista[i].id) {
-                        cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                        listar_centro_costo3(x, cc);
-                    } else {
-                        cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                    }
-
-                }
-            });
-        }
-        function listar_centro_costo3(x, cc) {
-
-            var centro_costo = $(".centro_costo" + x);
-            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function (objJson) {
-                centro_costo.empty();
-                centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    if (cc == lista[i].id) {
-                        centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                    } else {
-                        centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                    }
-
-                }
-            });
-        }
-        function Eliminar(i) {
-            //alert();
-            var x = $("#fila-agregar-cc");
-
-            var msg = confirm('Si aceptas se eliminara la informacion totalmente ¿aceptas?');
-            if (msg == true) {
-                $.post("../../centro_costo", "opc=Eliminar_det_cc&" + "id_dcc=" + $(".id_dcc" + i).val(), function () {
-                    ag--;
-                    $(".remover" + i + 1).attr("disabled", "disabled");
-                    remov(i);
-                    can_eliminada++;
-                    $(".cant-elimi").val(can_eliminada);
-                    var can = $(".can_centro_cos ").val();
-                    can--;
-                    //Listar_centro_costo();
-                    $(".can_centro_cos ").val(can);
-                    Actualizar_valores().after(Listar_centro_costo());
-                    ag = 1;
-                });
-            } else if (msg == false) {
-                return false;
-            }
-        }
-       
-        function remov(i) {
-            $(".centro-costo_" + i).remove();
-        }
         $(document).ready(function () {
-
             Listar_pue();
             Listar_dep();
             Listar_sec();
             Listar_area();
-
             Listar_plantilla();
             listar_sub_mod();
             Listar_Direccion();
-            Listar_centro_costo();
+          ListCentroCostoDGP($("#id_dgp").val());
             list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato", "id_tipo_contrato", "de_ti_contrato", "1", $(".id_ti_contrato").val());
             var a = $("#select-sub-mod");
             var c = $("#Selec_Area");
             var d = $("#select_sec");
             var b = $("#selec_dep");
             var e = $("#pu_id_se");
-            $('#btn-agregar-cc').click(function () {
-                agregar_centro_costo();
-            });
             $(".date").keyup(function () {
                 $(".conteni").val($(".date").val());
             });
             // $.post("../../  ")
-            $(".select_mod").change(
-                    function () {
-                        // alert("?MODALIDAD="+$("#select_mod").val());
-                        $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&id=" + $(".select_mod").val(), function (objJson) {
-                            a.empty();
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            }
-                            var list = objJson.lista;
-                            a.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    a.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                                }
-                            } else {
-                                a.append("<option value='' > [no hay] </option>");
-                            }
-                        });
-                    });
-            $("#selec_dep").change(
-                    function () {
-                        $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
-                            c.empty();
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            }
-                            var list = objJson.lista;
-                            c.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                                }
-                            } else {
-                                c.append("<option value='' > [no hay] </option>");
-                            }
-                        });
-                    });
-            $("#select_dir").change(
-                    function () {
-                        $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
-                            b.empty();
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            }
-                            var list = objJson.lista;
-                            b.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                                }
-                            } else {
-                                b.append("<option value='' > [] </option>");
-                            }
-                        });
-                    });
-            $("#Selec_Area").change(
-                    function () {
-                        $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
-                            d.empty();
-                            var list = objJson.lista;
-                            d.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                                }
-                            } else {
-                                d.append("<option value='' > [no hay] </option>");
-                            }
-                        });
-                    });
-            $("#select_sec").change(
-                    function () {
-                        $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
-                            e.empty();
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            }
-                            var list = objJson.lista;
-                            e.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                                }
-                            } else {
-                                e.empty();
-                                e.append("<option value='' > [] </option>");
-                            }
-                        });
-                    });
-            $("#btn-registrar").click(
-                    function () {
-                        var pr = $("#select-proceso").val();
-                        $.post("../../paso", $("#form-paso").serialize(), function () {
-                            Listar_Paso(pr);
-                        });
-                        $("#btn-registrar").val("Registrar Paso");
-                        $(".opc").val("Registrar");
-                        $("#form-paso")[0].reset();
-                        return false;
+            $(".select_mod").change(function () {
+                // alert("?MODALIDAD="+$("#select_mod").val());
+                $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&id=" + $(".select_mod").val(), function (objJson) {
+                    a.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
                     }
-            );
-        }
-        );
+                    var list = objJson.lista;
+                    a.append("<option value='' > [SELECCIONE] </option>");
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            a.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                        }
+                    } else {
+                        a.append("<option value='' > [no hay] </option>");
+                    }
+                });
+            });
+            $("#selec_dep").change(function () {
+                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
+                    c.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var list = objJson.lista;
+                    c.append("<option value='' > [SELECCIONE] </option>");
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                        }
+                    } else {
+                        c.append("<option value='' > [no hay] </option>");
+                    }
+                });
+            });
+            $("#select_dir").change(function () {
+                $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
+                    b.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var list = objJson.lista;
+                    b.append("<option value='' > [SELECCIONE] </option>");
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                        }
+                    } else {
+                        b.append("<option value='' > [] </option>");
+                    }
+                });
+            });
+            $("#Selec_Area").change(function () {
+                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
+                    d.empty();
+                    var list = objJson.lista;
+                    d.append("<option value='' > [SELECCIONE] </option>");
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                        }
+                    } else {
+                        d.append("<option value='' > [no hay] </option>");
+                    }
+                });
+            });
+            $("#select_sec").change(function () {
+                $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
+                    e.empty();
+                    if (objJson.rpta == -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    var list = objJson.lista;
+                    e.append("<option value='' > [SELECCIONE] </option>");
+                    if (list.length !== 0) {
+                        for (var i = 0; i < list.length; i++) {
+                            e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                        }
+                    } else {
+                        e.empty();
+                        e.append("<option value='' > [] </option>");
+                    }
+                });
+            });
+
+        });
     </script>
 </html>

@@ -653,6 +653,7 @@
                                                     <input type="hidden" name="cant_actual_anti" class="can_centro_cos" value="<%=request.getParameter("can_cc")%>">
                                                     <input type="hidden" name="cant_ingresada" class="cant-ing" value="0">
                                                 </fieldset>
+
                                                 <fieldset id="fila-agregar">
                                                 </fieldset>    
                                                 <input type="hidden" class="dep_id" value="<%=dg.getId_departamento().trim()%>" />
@@ -983,6 +984,7 @@
 
     <!-- PAGE RELATED PLUGIN(S) 
     <script src="..."></script>-->
+    <script src="../../js/plugin/knob/jquery.knob.min.js"></script>
     <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
@@ -1103,54 +1105,7 @@
 
 
     </script>
-    <script language="javascript" type="text/javascript">
-        $(document).ready(function () {
 
-
-            $("#sueldo").keyup(function () {
-                var sueldo = parseFloat($("#sueldo").val());
-                $(".monto").val(Math.round(sueldo));
-            });
-            /*Advertencias de Plazo*/
-            var b = $("#alerta_dgp");
-            var info = $(".div_info");
-            listar_mensaje_plazo("2", b, info);
-            var s = $(".info_1");
-            var t = $(".alert_1");
-            listar_mensaje_plazo("1", t, s);
-
-
-            $("#sueldo").keyup(function () {
-                calcular_sueldo_total();
-            });
-            $("#bono_al").keyup(function () {
-                calcular_sueldo_total();
-            });
-            $("#bev").keyup(function () {
-                calcular_sueldo_total();
-            });
-            $("#bono_pu").keyup(function () {
-                calcular_sueldo_total();
-            });
-            $(".contenido").hide();
-            /*TEMPORAL*/             //Planilla
-            //if ($("#combito").val()=="REQ-0001" | $("#combito").val() == "REQ-0002" | $("#combito").val() == "REQ-0003" | $(this).val() == "REQ-0004" | $(this).val() == "REQ-0005" | $(this).val() == "REQ-0006") {
-            if (true) {
-                $(".contenido").hide();
-                $("#div_1").show();
-            }
-            //Fuera PLanilla
-            if ($("#combito").val() == 7 | $(this).val() == 8 | $(this).val() == 9) {
-                $(".contenido").hide();
-                $("#div_2").show();
-            }
-            //Otros
-            if ($("#combito").val() == 10 | $(this).val() == 11 | $(this).val() == 12) {
-                $(".contenido").hide();
-                $("#div_3").show();
-            }
-
-        });</script>
     <script language="javascript" type="text/javascript">
         $(document).ready(function mostrar() {
 
@@ -1331,157 +1286,40 @@
             });
             $(".por_sum_to").val(acum);
         }
-
-        function listar_cc2(num, dir, dep, cc, area, seccion) {
-            $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
-                if (objJson.rpta === -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-
-                    if (dir === lista[i].id) {
-                        $("#cc-dir" + num).append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                        listar_dep_cc2(num, dep, cc, area, seccion);
-                    } else {
-                        $("#cc-dir" + num).append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+        function Eliminar(id, num, dia) {
+            var dia_string = "";
+            var msg = confirm('Si aceptas se eliminara la informacion totalmente ¿estas seguro de realizar esta operacion?');
+            if (msg == true) {
+                $.post("../../formato_horario", "opc=Eliminar_turno&id_horario=" + id, function (objJson) {
+                    if (dia == 1) {
+                        dia_string = "lun";
                     }
-                }
-            });
-            $("#cc-dir" + num).change(function () {
-
-                listar_dep_cc2(num);
-            });
-            /*$(".cc-dep" + num).change(function () {
-             listar_centro_costo2(num, "0", arr_cc);
-             });*/
-            $(".cc-dep" + num).change(function () {
-                list_select($(".cc-area" + num), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(this).val());
-               // listar_centro_costo(num, "0", arr_cc);
-            });
-            $(".cc-area" + num).change(function () {
-                list_select($(".cc-seccion" + num), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(this).val());
-                list_cc_area($(this).val(), $(".centro_costo" + num));
-            });
-            $(".cc-seccion" + num).change(function () {
-                list_cc_seccion($(".cc-seccion" + num).val(), $(".centro_costo" + num));
-            });
-        }
-
-        function listar_dep_cc2(x, dep, cc, area, seccion) {
-            var cc_dep = $(".cc-dep" + x);
-            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function (objJson) {
-                cc_dep.empty();
-                cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
-                if (objJson.rpta === -1) {
-                    alert(objJson.mensaje);
-                    return;
-                } else {
-                    var lista = objJson.lista;
-                    for (var i = 0; i < lista.length; i++) {
-                        if (dep === lista[i].id) {
-                            cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                            listar_centro_costo3(x, cc);
-                            /*new lines!*/
-                            list_cc_area(area, $(".centro_costo" + x), true, cc);
-                            list_cc_seccion(seccion, true, $(".centro_costo" + x), cc);
-                            list_select($(".cc-area" + x), "../../Direccion_Puesto", "opc=Listar_area2&id=" + dep, "1", area);
-                            list_select($(".cc-seccion" + x), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + area, "1", seccion);
-                            /*end new lines*/
-
-                        } else {
-                            cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                        }
+                    if (dia == 2) {
+                        dia_string = "mar";
                     }
-                }
-            });
-        }
-        function listar_centro_costo3(x, cc) {
-
-            var centro_costo = $(".centro_costo" + x);
-            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function (objJson) {
-                centro_costo.empty();
-                centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
-                if (objJson.rpta === -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    if (cc === lista[i].id) {
-                        centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                    } else {
-                        centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                    if (dia == 3) {
+                        dia_string = "mie";
                     }
-
-                }
-
-            });
-        }
-        function listar_centro_costo2(x, opc, arr_cc) {
-
-            var centro_costo = $(".centro_costo" + x);
-            $.post("../../centro_costo?opc=Listar_CC", "&id_dep=" + $(".cc-dep" + x).val(), function (objJson) {
-                centro_costo.empty();
-                centro_costo.append("<option value=''>[CENTRO COSTO]</option>");
-                if (objJson.rpta === -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    if (opc == "1") {
-                        if (arr_cc[4] === lista[i].id) {
-                            centro_costo.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                        } else {
-                            centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                        }
-                    } else {
-                        centro_costo.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                    if (dia == 4) {
+                        dia_string = "jue";
                     }
-
-                }
-            });
-        }
-
-
-
-        function listar_dep_cc(x, opc, arr_cc) {
-
-            var cc_dep = $(".cc-dep" + x);
-            $.post("../../centro_costo?opc=Listar_dep", "&id_dir=" + $(".cc-dir" + x).val(), function (objJson) {
-                cc_dep.empty();
-                cc_dep.append("<option value=''>[DEPARTAMENTO]</option>");
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    if (opc == "1") {
-                        if (arr_cc[1] == lista[i].id) {
-                            cc_dep.append("<option value='" + lista[i].id + "' selected='selected'>" + lista[i].nombre + "</option>");
-                            (x, opc, arr_cc);
-                        } else {
-                            cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                        }
-                    } else {
-                        cc_dep.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                    if (dia == 5) {
+                        dia_string = "vie";
                     }
-
-                }
-            });
+                    if (dia == 6) {
+                        dia_string = "sab";
+                    }
+                    if (dia == 7) {
+                        dia_string = "dom";
+                    }
+                    $(".turno_" + num + dia_string).remove();
+                    calcularHoras();
+                });
+            } else {
+                return false;
+            }
         }
 
-
-        function sumn_porcen_total() {
-            var acum = 0;
-            $.each($(".porcentaje_cc"), function () {
-                acum = acum + parseFloat($(this).val());
-            });
-            $(".total_porcentaje").val(acum);
-        }
         function cuenta_bancaria(banco) {
             if (banco == '') {
                 $("#no_cuen").hide();
@@ -1796,101 +1634,10 @@
                 }
             });
         }
-        function Eliminar(id, num, dia) {
-            var dia_string = "";
-            var msg = confirm('Si aceptas se eliminara la informacion totalmente ¿estas seguro de realizar esta operacion?');
-            if (msg == true) {
-                $.post("../../formato_horario", "opc=Eliminar_turno&id_horario=" + id, function (objJson) {
-                    if (dia == 1) {
-                        dia_string = "lun";
-                    }
-                    if (dia == 2) {
-                        dia_string = "mar";
-                    }
-                    if (dia == 3) {
-                        dia_string = "mie";
-                    }
-                    if (dia == 4) {
-                        dia_string = "jue";
-                    }
-                    if (dia == 5) {
-                        dia_string = "vie";
-                    }
-                    if (dia == 6) {
-                        dia_string = "sab";
-                    }
-                    if (dia == 7) {
-                        dia_string = "dom";
-                    }
-                    $(".turno_" + num + dia_string).remove();
-                    calcularHoras();
-                });
-            } else {
-                return false;
-            }
-        }
-        function list_cc_area(area, cc, opc, id) {
-            $.post("../../centro_costo", "opc=Lista_cc_area&id=" + area, function (objJson) {
-                if (objJson.rpta === -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                if (lista.length === 0) {
-                    //listarcc
-                } else {
-                    cc.empty();
-                    cc.append('<option value="">[Seleccione]</option>');
-                    for (var t = 0; t < lista.length; t++) {
-                        if (opc === true) {
-                            if (id === lista[t].id) {
-                                cc.append('<option value="' + lista[t].id + '" selected>' + lista[t].nombre + '</option>');
-                            } else {
-                                cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
-                            }
-                        } else {
-                            cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
-                        }
-                    }
-                }
-            });
-        }
 
-        function list_cc_seccion(seccion, opc, cc, id) {
-            $.post("../../centro_costo", "opc=Lista_cc_seccion&id=" + seccion, function (objJson) {
-                if (objJson.rpta === -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                if (lista.length === 0) {
-                    /* si no ha nada listar todas las secciones del area*/
-                    // list_cc_area($(".select-area").val(), $(".centro_costo1"));
-                } else {
-                    cc.empty();
-                    cc.append('<option value="">[Seleccione]</option>');
-                    for (var t = 0; t < lista.length; t++) {
-                        if (opc === true) {
-                            if (id === lista[t].id) {
-                                cc.append('<option value="' + lista[t].id + '" selected>' + lista[t].nombre + '</option>');
-                            } else {
-                                cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
-                            }
-                        } else {
-                            cc.append('<option value="' + lista[t].id + '">' + lista[t].nombre + '</option>');
-                        }
-                    }
-                }
-            });
-        }
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#sueldo").numeric();
-            $("#bono_al").numeric();
-            $("#bev").numeric();
-            $("#nu_cuen").numeric();
-            $("#nu_cuen_ban").numeric();
             var scntDiv = $('#show_lun');
             var i = $('#show_lun .texto-h').size() + 1;
             var s = $('#show_lun .tr-count').size() + 1;
@@ -2021,30 +1768,20 @@
     <script type="text/javascript">
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
         $(document).ready(function () {
+            pageSetUp();
             $(".val_fe").change(function () {
                 var fecha = $(this).val().split("-");
                 if (fecha[0].length > 4) {
                     $(this).val("");
                 }
             });
-            pageSetUp();
+            $("#sueldo").numeric();
+            $("#bono_al").numeric();
+            $("#bev").numeric();
+            $("#nu_cuen").numeric();
+            $("#nu_cuen_ban").numeric();
             showEsDiezmo();
-            var ag = 1;
-            var ingr = 0;
-            var cant_act = 0;
-            var estable = 0;
-            var can_eliminada = 0;
-
-
-            //var ag = $('#fila-agregar .porcentaje_cc').size() + 1;
-            // var texto = "";
-            Listar_centro_costo1($(".iddgp").val(), ag, cant_act, ingr, estable, can_eliminada);
-            sumn_porcen_total();
-            $('#btn-agregar-cc').click(function () {
-                var agregar = $('#fila-agregar');
-                agregar_centro_costo(ingr, agregar, ag, estable, cant_act, can_eliminada);
-            });
-
+            ListCentroCostoDGP($(".iddgp").val());
             listar_tipo_horario();
             listar_horas();
             $("#banco").change(function () {
@@ -2055,7 +1792,6 @@
                 cuenta_bancaria($(this).val());
                 $("#nu_cuen").focus();
                 $("#es_cuenta").val(1);
-                //  alert($("#es_cuenta").val());
             });
             listar_cc();
             $("#horario").change(function () {
@@ -2069,23 +1805,7 @@
                     return false;
                 }
             });
-            var b = $("#alerta_dgp");
-            var info = $(".div_info");
-            // $("#alerta_dgp").hide();
-            function listar() {
-                $.post("../../plazo_dgp", "opc=Listar", function (objJson) {
-                    b.empty();
-                    var lista = objJson.lista;
-                    if (objJson.rpta === -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    for (var i = 0; i < lista.length; i++) {
-                        b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
-                        info.append('<div class="alert alert-info fade in"><button class="close" data-dismiss="alert">×</button><i class="fa-fw fa fa-info"></i><strong>¡Importante!</strong> Su requerimiento será procesado en el mes de <strong>' + lista[i].mes + '.</strong></div>');
-                    }
-                });
-            }
+
             list_select($(".select-area"), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(".dep_id").val(), "4", $(".area_id").val());
             list_select($(".select-seccion"), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(".area_id").val(), "4", $(".seccion_id").val());
             list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".seccion_id").val(), "4", $(".puesto_id").val());
@@ -2098,15 +1818,51 @@
                 list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".select-seccion").val(), "3");
                 $(".chosen-select").trigger("chosen:updated");
             });
-            $(".select-puesto").change(function () {
-                $(".select-puesto1").val($(this).val());
-                $(".chosen-select").trigger("chosen:updated");
+
+
+            $("#sueldo").keyup(function () {
+                var sueldo = parseFloat($("#sueldo").val());
+                $(".monto").val(Math.round(sueldo));
             });
-            $(".select-puesto1").change(function () {
-                $(".select-area,.select-seccion,.select-puesto").val("");
-                $(".chosen-select").trigger("chosen:updated");
+            /*Advertencias de Plazo*/
+            var b = $("#alerta_dgp");
+            var info = $(".div_info");
+            listar_mensaje_plazo("2", b, info);
+            var s = $(".info_1");
+            var t = $(".alert_1");
+            listar_mensaje_plazo("1", t, s);
+
+
+            $("#sueldo").keyup(function () {
+                calcular_sueldo_total();
             });
-            var $checkoutForm = $('#checkout-form').validate({
+            $("#bono_al").keyup(function () {
+                calcular_sueldo_total();
+            });
+            $("#bev").keyup(function () {
+                calcular_sueldo_total();
+            });
+            $("#bono_pu").keyup(function () {
+                calcular_sueldo_total();
+            });
+            $(".contenido").hide();
+            /*TEMPORAL*/             //Planilla
+            //if ($("#combito").val()=="REQ-0001" | $("#combito").val() == "REQ-0002" | $("#combito").val() == "REQ-0003" | $(this).val() == "REQ-0004" | $(this).val() == "REQ-0005" | $(this).val() == "REQ-0006") {
+            if (true) {
+                $(".contenido").hide();
+                $("#div_1").show();
+            }
+            //Fuera PLanilla
+            if ($("#combito").val() == 7 | $(this).val() == 8 | $(this).val() == 9) {
+                $(".contenido").hide();
+                $("#div_2").show();
+            }
+            //Otros
+            if ($("#combito").val() == 10 | $(this).val() == 11 | $(this).val() == 12) {
+                $(".contenido").hide();
+                $("#div_3").show();
+            }
+            $('#checkout-form').validate({
                 // Rules for form validation
                 rules: {
                     fname: {
