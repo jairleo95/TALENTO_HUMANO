@@ -74,6 +74,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <link rel="stylesheet" type="text/css" href="../../js/shadowbox/shadowbox.css"/>
         <link rel="stylesheet" type="text/css" href=".../../js/shadowbox/style.css"/>
+        <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
         <style type="text/css">
             body{
 
@@ -506,6 +507,20 @@
 
         <%}%>
         <%}%> <%}%>
+                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+                                <div class="text-center">
+                                <H2>Tu Imagen fue rechazada por el Administrador !</H2>
+                                <h4>Vuelve a subir tu imagen  nuevamente.</h4><br/>
+                                <span style="font-size: 80px;" class="glyphicon glyphicon-remove"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         <div class="div_dialog"></div>
         <input  value="<%out.print(FactoryConnectionDB.url_archivos);%>" type="hidden" class="url_archivo"/> 
         <!-- #dialog-message -->
@@ -985,6 +1000,7 @@
             $(".fe_desde_p, .fe_hasta_p").change(function () {
                 var cuotas = $(".cuota_docente");
                 cuotas.empty();
+
                 $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
                     var lista = objJson.lista;
                     if (objJson.rpta == -1) {
@@ -993,9 +1009,7 @@
                     }
                     for (var i = 0; i < lista.length; i++) {
                         cuotas.append(lista[i].html);
-                      
                     }
-                      cuotas.append('<input type="text" value="'+lista.length+'" name="num_itera">')
                 });
             });
 
@@ -1191,8 +1205,8 @@
                                                 getAvatar("todo", idtrl);
                                                 repeat = 0;
                                                 $(".borde").removeClass("ver_foto");
-                                                $(".ver_foto").show(200);
-                                                //$(".form-subir-foto").remove();
+                                               // $(".ver_foto").show(200);
+                                               // $(".form-subir-foto").remove();
                                                 $.smallBox({
                                                     title: "¡Felicitaciones!",
                                                     content: "<i class='fa fa-clock-o'></i> <i>Su imagen se ha subido con éxito...</i>",
@@ -1233,17 +1247,19 @@
                 $.each(data, function (i, datos) {
                     $.each(datos, function (i, obj) {
                         if (tipo == 'todo') {
+                            if(obj.EFOTO != 2){
                             console.log("foto todo");
                             var imgens = '<img class="img-thumbnail" title="foto ' + i + '" src="' +url_archivos+
                                     obj.ar_foto + '"style="width:100px; height:100px;" />';
                             $('.fotos').append(imgens);
+                              
                             if (repeat == 0) {
                                 var imgens = '<a class="mustang-gallery pull-left" href="'+url_archivos + obj.ar_foto + '" >' +
                                         '<img class="img-thumbnail" title="foto ' + i + '" src="' +url_archivos+
                                         obj.ar_foto + '"style="width:100px; height:100px;" /></a>';
                                 $('.foto-user').append(imgens);
                                 $('.fotos').append(imgens);
-                            } else {
+                              } 
                             }
 
                         } else if (tipo == 'perfil') {
@@ -1251,7 +1267,27 @@
                             $('.borde').attr("src", url_archivos + obj.ar_foto);
                             $(".avatar").attr("href", url_archivos + obj.ar_foto);
                             $("#sb-player").attr("href", url_archivos + obj.ar_foto);
+                            
+                            if(obj.EFOTO === "1"){/* your photo success */}
+                            if(obj.EFOTO === "0"){$(".ver_foto").hide(200);}
+                            if(obj.EFOTO === "2"){
+                                /* your photo rechazada*/
+                                 $('.modal').modal('show');
+                                $('.borde').attr('src', '../../imagenes/Desaprobado.png');
+                               
+                                var padre = $(window.parent.document.getElementById('foto_usuario'));
+                                var idtra = $(window.parent.document.getElementById('id_trabajador')).val();
+                                if (idtra.trim() == $(".idtr").val().trim()) {
+                                    $(padre).attr("src", "imagenes/Desaprobado.png");
+                                }
+                            }else{
+                                if(obj.EFOTO != 2){
+                            $('.borde').attr("src", "../../Vista/Usuario/Fotos/" + obj.ar_foto);
+                            $(".avatar").attr("href", "../../Vista/Usuario/Fotos/" + obj.ar_foto);
+                            $("#sb-player").attr("href", "../../Usuario/Fotos/" + obj.ar_foto);
                             console.log(obj.ar_foto);
+                            }
+                            }
                         }
                     });
                 });
