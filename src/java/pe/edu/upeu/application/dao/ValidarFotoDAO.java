@@ -28,8 +28,13 @@ public class ValidarFotoDAO implements InterfaceValidarFoto{
         this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select * " +
          "from  RHTR_FOTOS_TRABAJADOR a , RHTM_TRABAJADOR b " +
-         "where a.ID_TRABAJADOR = b.ID_TRABAJADOR" +
-         "  and a.EFOTO ="+tipo;
+         "where a.ID_TRABAJADOR = b.ID_TRABAJADOR" ;
+         
+        if(tipo.equals("2")){
+          sql += " and a.EFOTO BETWEEN 1 and 2";
+        }else{
+         sql += " and a.EFOTO =0";
+        }
         try {
             ResultSet rs = this.cnn.query(sql);
             
@@ -40,6 +45,9 @@ public class ValidarFotoDAO implements InterfaceValidarFoto{
                 cd.put("AP_PATERNO",rs.getString("AP_PATERNO"));
                 cd.put("AP_MATERNO",rs.getString("AP_MATERNO"));
                 cd.put("NO_TRABAJADOR",rs.getString("NO_TRABAJADOR"));
+                cd.put("EFOTO",rs.getString("EFOTO"));
+                cd.put("NU_DOC",rs.getString("NU_DOC"));
+                
               lista.add(cd);
             }
       } catch (SQLException ex) {
@@ -77,6 +85,8 @@ public class ValidarFotoDAO implements InterfaceValidarFoto{
             }
         }
     }
+
+   
     }
     
 

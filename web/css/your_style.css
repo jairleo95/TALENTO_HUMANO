@@ -71,18 +71,5 @@
                               
         
    
-    .modal-dialog {
-            top: 20%;
-                width: 100%;
-    position: absolute;
-        }
-        .modal-content {
-                border-radius: 0px;
-                border: none;
-    top: 40%;
-            }
-            .modal-body {
-                    background-color: #ea6153;
-    color: white;
-                }
+   
      
