@@ -613,7 +613,8 @@
         <script src="../../js/shadowbox/shadowbox.js" type="text/javascript"></script>
         <script src="../../js/JQuery/jquery.session.js" type="text/javascript"></script>
         <script>
-            var url_archivos =$(".url_archivo").val()+"Fotos/";
+            //var url_archivos =$(".url_archivo").val()+"Fotos/";
+            var url_archivos = '../../Vista/Usuario/Fotos/';
         var idtrl = $(".idtr").val().trim();
         var repeat = 0;
         function procesar_req_individual(ckb, tipo, iddgp) {
