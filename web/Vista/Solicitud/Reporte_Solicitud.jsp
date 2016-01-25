@@ -287,27 +287,6 @@
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script type="text/javascript">
-        function add_tables(tipo) {
-            $(".add_table_1").empty();
-            $(".add_table_2").empty();
-            var text_html = '';
-            if (tipo === "2") {
-                text_html += '<table  class="table table-striped table-bordered table-hover table_sol_aut" width="100%"'
-                        + '  <thead><tr><th><strong>Nro</strong></th><th>Acciones</th><th data-class="expand"><strong>Apellidos y Nombres</strong></th><th data-hide="phone,tablet" ><strong>Departamento</strong></th><th data-class="expand" ><strong>Area</strong></th><th data-hide="phone,tablet"><strong>Puesto</strong></th><th data-hide="phone,tablet"><strong>Fecha Inicio</strong></th><th data-hide="phone,tablet"><strong>Fecha Cese</strong></th><th  data-hide="phone,tablet">Fecha Solicitud</th><th  data-hide="phone,tablet">Estado</th></tr></thead>'
-                        + '<tbody class="tbody_Sol_Aut">'
-                        + ' </tbody>'
-                        + ' </table>';
-                $(".add_table_2").append(text_html);
-            } else if (tipo === "1") {
-                text_html += ' <table  class="table table-striped table-bordered table-hover table_list_sol" width="100%">'
-                        + '<thead><tr><th><strong>Nro</strong></th><th>Acciones</th><th data-class="expand"><strong>Apellidos y Nombres</strong></th><th data-hide="phone,tablet" ><strong>Departamento</strong></th><th data-class="expand" ><strong>Area</strong></th><th data-hide="phone,tablet"><strong>Puesto</strong></th><th data-hide="phone,tablet"><strong>Fecha Inicio</strong></th><th data-hide="phone,tablet"><strong>Fecha Cese</strong></th><th  data-hide="phone,tablet">Fecha Solicitud</th><th  data-hide="phone,tablet">Estado</th></tr></thead>'
-                        + ' <tbody class="tbody_list_solicitud">'
-                        + '</tbody>'
-                        + '</table>';
-                $(".add_table_1").append(text_html);
-            }
-
-        }
         function listar_det_sol(valor, tipo, tabla_solicitud) {
             var tb = $(".tabla_detalle_sol");
             tb.empty();
@@ -364,10 +343,6 @@
                 tb.append(texto_html);
                 texto_html = "";
                 $(".btn_procesar_sol").click(function () {
-
-                    listar_solicitudes("1");
-                    listar_solicitudes("2");
-
                     if ($(".comentario").valid() === true) {
                         $.SmartMessageBox({
                             title: "¡Advertencia!",
@@ -375,13 +350,17 @@
                             buttons: '[No][Si]'
                         }, function (ButtonPressed) {
                             if (ButtonPressed === "Si") {
-
                                 $.ajax({
                                     url: "../../solicitud_requerimiento",
                                     data: "opc=Procesar_Solicitud" + $(".data_procesar").val() + "&" + $(".comentario").serialize(),
                                     type: "post"
                                 }).done(function () {
                                     $(".btn_cancel_form").click();
+                                    $(".comentario")[0].reset();
+                                    //add_tables("1");
+                                   // add_tables("2");
+                                    listar_solicitudes("1");
+                                    listar_solicitudes("2");
                                     $.smallBox({
                                         title: "¡Procesado con exito!",
                                         content: "<i class='fa fa-clock-o'></i> <i>Se ha procesado la solicituid correctamente...</i>",
@@ -389,11 +368,6 @@
                                         iconSmall: "fa fa-check fa-2x fadeInRight animated",
                                         timeout: 4000
                                     });
-                                    $(".comentario")[0].reset();
-                                    add_tables("1");
-                                    add_tables("2");
-                                    listar_solicitudes("1");
-                                    listar_solicitudes("2");
 
                                 });
                             }
@@ -456,8 +430,7 @@
                     t_body.append(text_html);
                     text_html = '';
 
-
-                    if ($.fn.dataTable.isDataTable(table_sol)) {
+                     if ($.fn.dataTable.isDataTable(table_sol)) {
                         $.fn.dataTable.isDataTable(table_sol).destroy();
                     } else {
                         var tablas = table_sol.dataTable({searching: true, paging: true});
