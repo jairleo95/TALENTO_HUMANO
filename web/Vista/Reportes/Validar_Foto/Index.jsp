@@ -77,8 +77,28 @@
             position:fixed;
             z-index: 5;
                }
+               .pre-img{
+            width:50px;
+            height: 50px;
+            border-radius: 50%;
+               }
+                .modal-dialog {
+         top: 20%;
+                width: 100%;
+        position: absolute;
+           }
+         .modal-content {
+                border-radius: 0px;
+                border: none;
+         top: 40%;
+            }
+            .modal-body {
+                    background-color: #fff;
+                   
+        color: black;
+                }
         </style>
-    </head>
+     </head>
     <body class="body"  >
         <div class="col-lg-offset-1 col-md-offset-1">
         <!-- widget grid -->
@@ -101,7 +121,7 @@
                                 </li>
 
                                 <li>
-                                    <a data-toggle="tab" href="#s2"><i class="fa fa-facebook"></i> <span class="hidden-mobile hidden-tablet">Fotos Validadas</span></a>
+                                    <a data-toggle="tab" href="#s2"><i class="fa fa-check"></i> <span class="hidden-mobile hidden-tablet">Fotos Validadas</span></a>
                                 </li>
                             </ul>
 
@@ -115,60 +135,36 @@
                                 <!-- content -->
                                 <div id="myTabContent" class="tab-content">
                                     <div class="tab-pane fade active in padding-10 no-padding-bottom" id="s1">
-                                        
-                                                <div class="contenido-1"> 
-                                                    
-                                                    <div style="border-radius: 13px; padding: 10px;" class="ContFoto  text-center bg-info">
-                                                        <h1 class="namet"></h1>
-                                                         <span class="badge noti"></span>
-                                                        <div class="foto-tr"></div>
-                                                        <small>Validar la Foto  ? </small>
-                                                        <div class="Validar">
-                                                            <form>
-                                                                <input class="id-tr" type="hidden" >
-                                                                <input name=""type="hidden" value="">
 
-                                                                <button class="acep btn btn-success btn-md"><samp class="fa fa-check"></samp> Aceptar</button>
-                                                                <button class="recha btn btn-danger btn-md"><samp class="fa fa-ban"></samp> Rechazar</button>
-                                                                
-                                                            </form>   
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div style="border-radius: 13px; margin:2%; padding: 40px; display:none" class="n_img bg-info">
-                                                    <div class="text-center">
-                                                    <h1>No hay más Fotos para Validar </h1>
-                                                    <span style="font-size: 100px" class="glyphicon glyphicon-check"></span>
-                                                    </div>
-                                                </div>
-                                          
-                                       <div class="padding-10">
-                                       </div>
+                                      
+                                            <table id="example-table" class="table table-striped" >
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Apellido Paterno</th>
+                                                        <th>Apellido Materno</th>
+                                                        <th>Nombre</th>
+                                                        <th>Foto</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                       
                                     </div>
                                     <!-- end s1 tab pane -->
 
                                     <div class="tab-pane fade" id="s2">
-                                        <div class="widget-body-toolbar bg-color-white">
-                                            <div class="row">
-                                                <div class="acep2 col-lg-6" >
-                                                    
-                                                </div>
-                                                <div class="recha2 col-lg-6" >
-                                                    
-                                                </div>
-                                            </div>
-
-                                                <div style="border-radius: 13px; margin: 2%;display: none; padding: 40px;" class="imagen-val bg-info">
-                                                    <div class="text-center">
-                                                    <h1>No hay más imágenes Validadas  </h1>
-                                                    <span style="font-size: 100px" class="glyphicon glyphicon-ban-circle"></span>
-                                                    </div>
-                                                </div>
-
-                                        </div>
-                                        <div class="padding-10">
-                                        </div>
+                                          <table id="example-table2" class="table table-condensed" >
+                                                <thead>
+                                                    <tr>
+                                                        <th>DNI</th>
+                                                        <th>Apellido Paterno</th>
+                                                        <th>Apellido Materno</th>
+                                                        <th>Nombre</th>
+                                                        <th>Foto</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
 
                                     </div>
 
@@ -190,6 +186,36 @@
         </section>
         <!-- end widget grid -->
     </div>
+        
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-body text-center">
+                      
+                            <h1 class="namet"></h1>
+                            <span class="badge noti"></span>
+                            <div class="foto-tr">
+                                <img style= "width: 400px; height:  300px;" class="imagental img-thumbnail"/>
+                            </div>
+                            <small>Validar la Foto  ? </small>
+                            <div class="Validar">
+                                <form>
+                                    <input class="id-tr" type="hidden" >
+                                    <input name=""type="hidden" value="">
+
+                                    <button class="acep btn btn-success btn-md"><samp class="fa fa-check"></samp> Aceptar</button>
+                                    <button class="recha btn btn-danger btn-md"><samp class="fa fa-ban"></samp> Rechazar</button>
+
+                                </form>   
+                            </div>
+                        
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 
 
@@ -281,96 +307,55 @@
         var term;
         
 
-        $(document).ready(function () {
-         cargar_f("0");
-         cargar_NV("1");
-         cargar_NV("2");
-
+     $(document).ready(function () {
+       DataT("0","#example-table");
+       DataT("2","#example-table2");
+               
         });
         
-        function cargar_f(estado){
-             console.log("val fotos ============0");
-           $.ajax({
-               url : "../../../validar_foto",
-               type: "POST",
-               data: "opc=getFotos&estado="+estado,
-               success: getImg,
-               error: error
-           });
-          function getImg(data){
-              
-              var total;
-              $.each( data, function( i, obj){
-                  if(obj.length === 0){
-                   $('.ContFoto').hide(300);
-                   $('.n_img').show(200);
-               }
-                  $.each(obj, function(p,objt){
-                     total = p;
-                     $('.noti').text(total+1);
-                      });
-                  $.each(obj, function(j,objt){
-                      if(j === total){ 
-                         total =+1; term=+1; }
-                     if(j == total-1){
-                       $('.foto-tr').append('<img class="img-tr" style="width:230px; height:230px; border-radius:50%;" src="../../Usuario/Fotos/'+objt.AR_FOTO+'" />');   
-                       $('.namet').text(objt.NO_TRABAJADOR+' '+objt.AP_PATERNO+' '+objt.AP_MATERNO);
-                       $('.id-tr').val(objt.ID_TRABAJADOR);
-                       ;
-                     } 
-                  });
-              });
+        function DataT(p,tab){
+           
+        $(tab).DataTable( {
+        "autoWidth": true,
+         "ajax": {
+            "url": "../../../validar_foto?opc=getFotos&estado="+p,
+            "type": "POST",
+            "dataSrc": "Fotos_NoVal"
+        },
+        "columns": [ 
+            { "data": "NU_DOC" },
+            { "data": "AP_PATERNO" },
+            { "data": "AP_MATERNO" },
+            { "data": "NO_TRABAJADOR" }
+        ],  
+             
+         "createdRow": function ( row, data, index ) {
+          $(row).append('<td><img class="pre-img" src="../../Usuario/Fotos/'+data.AR_FOTO+'" /></td>');
+          if(data.EFOTO == "1"){
+               $(row).addClass("success");
+          }else if(data.EFOTO == "2"){
+               $(row).addClass("danger"); 
+            }
+          $(row).click(function(){
+              if(data.EFOTO == "0"){
+              $('.modal').modal('show');
+              $('.imagental').attr("src","../../Usuario/Fotos/"+data.AR_FOTO);
+              $('.namet').text(data.NO_TRABAJADOR+' '+data.AP_PATERNO+' '+data.AP_MATERNO);
+              $('.id-tr').val(data.ID_TRABAJADOR);
            }
-          function error(data){
-             console.log(data.responseText);
-          } 
-         }
+          });
+
+          }
         
-        function cargar_NV(estado){
-             console.log("val fotos ============0");
-           $.ajax({
-               url : "../../../validar_foto",
-               type: "POST",
-               data: "opc=getFotos&estado="+estado,
-               success: getImgn
-           });
-          function getImgn(data){
-             $.each( data, function( i, obj){
-                  if(obj.length === 0){
-                     
-                 //  $('.imagen-val').show(300);
-               }
-                  
-                  $.each(obj, function(j,objt){
-                     if(estado === "2"){
-                       var htms = '<div class="col-md-5"> '+
-                                '<div style="border-radius: 13px; padding: 5px;height:280px;" class="text-center bg-danger">'+
-                                '<small> ¡ Foto Rechazada ! </small>'+
-                                '<h3>'+objt.NO_TRABAJADOR+' '+objt.AP_PATERNO+' '+objt.AP_MATERNO+'</h3>'+
-                                '<img class="img-thumbnail" style="width:230px; height:170px;" src="../../Usuario/Fotos/'+objt.AR_FOTO+'" />'+
-                                '</div><br/>'+
-                                '</div>';
-                         $('.recha2').append(htms);
-                     }else if(estado === "1"){
-                      var htm = '<div class="col-md-5"> '+
-                                 '<div style="border-radius: 13px; padding:5px;height:280px;" class="text-center bg-success">'+
-                                 '<small> ¡ Foto Aceptada ! </small>'+
-                                 '<h3>'+objt.NO_TRABAJADOR+' '+objt.AP_PATERNO+' '+objt.AP_MATERNO+'</h3>'+
-                                 '<img class="img-thumbnail" style="width:230px; height:170px; " src="../../Usuario/Fotos/'+objt.AR_FOTO+'" />'+
-                                 '</div><br/>'+
-                                 '</div>';
-                        $('.acep2').append(htm);
-                     } 
-                  });
-              });
-           }
-         }
+        } );  
+       
+        }
+       
         
+      
         
         $('.acep').click(function(){
             var idtr = $('.id-tr').val();
-            //$.post( "../../../validar_foto", { opc: "aceptar", idtr: idtr, estado : "1" },function(dat){
-           // });
             $.ajax({
                 type: 'POST',
                 url: '../../../validar_foto',
