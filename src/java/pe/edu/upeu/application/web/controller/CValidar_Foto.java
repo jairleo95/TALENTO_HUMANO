@@ -40,6 +40,8 @@ public class CValidar_Foto extends HttpServlet {
         String opc; opc = request.getParameter("opc");
         String idtr; idtr = request.getParameter("idtr");
         String estado; estado = request.getParameter("estado");
+        String bus; bus = request.getParameter("bus");
+        String btipo; btipo = request.getParameter("btipo");
         PrintWriter out = response.getWriter();
         Map<String, Object> rpta = new HashMap<String, Object>();
         InterfaceValidarFoto x = new ValidarFotoDAO();
@@ -52,7 +54,8 @@ public class CValidar_Foto extends HttpServlet {
             Gson gson = new Gson();
             out.print(gson.toJson(rpta));
             out.flush();
-            out.close();
+            out.close(); 
+            
         }
         if(opc.equals("validar")){
           x.validar(idtr.trim(),estado.trim());
@@ -62,7 +65,7 @@ public class CValidar_Foto extends HttpServlet {
             out.flush();
             out.close();
         }
-        
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
