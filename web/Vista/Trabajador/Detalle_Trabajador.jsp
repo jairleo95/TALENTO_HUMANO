@@ -612,44 +612,14 @@
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script src="../../js/shadowbox/shadowbox.js" type="text/javascript"></script>
         <script src="../../js/JQuery/jquery.session.js" type="text/javascript"></script>
-        <script>
-            var url_archivos =$(".url_archivo").val()+"Fotos/";
+        <script type="text/javascript" src="../../js/Js_Trabajador/Js_Trabajador.js"></script>
+        <script type="text/javascript" src="../../js/Js_Autorizacion/Js_Autorizacion.js"></script>
+        <script type="text/javascript" src="../../js/Js_Academico/Js_Carga_Academica.js"></script>
+        <script type="text/javascript">
+        var url_archivos = $(".url_archivo").val() + "Fotos/";
         var idtrl = $(".idtr").val().trim();
         var repeat = 0;
-        function procesar_req_individual(ckb, tipo, iddgp) {
-            var array_id_dgp = [];
-            var estado = false;
-            array_id_dgp[0] = ckb.val();
-            if (ckb.prop('checked')) {
-                estado = true;
-            } else {
-                estado = false;
-            }
-            var url = (tipo === 1) ? "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo=1&estado=" + estado : "../../autorizacion?opc=UpdateStatusDgp_Procesar&tipo=2&estado=" + estado;
-            $.ajax({
-                url: url, data: {json: array_id_dgp}, type: 'POST', dataType: 'json', success: function (data, textStatus, jqXHR) {
-                    if (data.rpta === "1") {
-                        //  ShowCbk_Procesar_Ind(iddgp);
-                        $.smallBox({
-                            title: "Se ha procesado correctamente el requerimiento...",
-                            content: "<i class='fa fa-clock-o'></i> <i>2 segundos atras...</i>",
-                            color: "#296191",
-                            iconSmall: "fa fa-thumbs-up bounce animated",
-                            timeout: 4000
-                        });
-                    } else if (data.rpta === "-1") {
-                        $.smallBox({
-                            title: "¡Atención!",
-                            content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar el requerimiento...</i>",
-                            color: "#C46A69",
-                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                            timeout: 4000
-                        });
-                    }
 
-                }
-            });
-        }
         function closedthis() {
             $.smallBox({
                 title: "¡Ficha de trabajador registrada correctamente!",
@@ -668,129 +638,6 @@
                 timeout: 6000
             });
         }
-        function Listar_Cod_Huella() {
-            var row_cod_huella = $(".row_cod_huella");
-            row_cod_huella.empty();
-            $.ajax({
-                url: "../../empleado", data: "opc=ShowHuella&idtr=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
-                    row_cod_huella.append(data.value);
-                    $(".textCodHuella").keypress(function (event) {
-                        return /\d/.test(String.fromCharCode(event.keyCode));
-                    });
-                    $(".btnHuellaDigital").click(function () {
-                        Actualizar_Cod_Huella();
-                    });
-                    $(".btnHuellaDigital").attr("rel", "tooltip");
-                    $(".btnHuellaDigital").attr("title", "Actualizar");
-                    $(".btnHuellaDigital").tooltip();
-                    $(".btnHuellaDigital").tooltip();
-                }
-            });
-        }
-        function Listar_Cod_APS() {
-            var row_cod_aps = $(".row_cod_aps");
-            row_cod_aps.empty();
-            $.ajax({
-                url: "../../empleado", data: "opc=ShowAPS&idtr=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
-                    row_cod_aps.append(data.value);
-                    $(".txtCodigoAPS").keypress(function (event) {
-                        return /\d/.test(String.fromCharCode(event.keyCode));
-                    });
-                    $(".btnCodigoAPS").tooltip();
-                    $(".btnCodigoAPS").click(function () {
-                        Actualizar_Cod_APS();
-                        ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
-                    });
-                }
-            });
-        }
-        function Actualizar_Cod_Huella() {
-            var co_huella = $(".textCodHuella").val();
-            if (co_huella !== "") {
-                $.ajax({
-                    url: "../../empleado",
-                    type: "POST",
-                    data: "opc=validar_huella&co_hue=" + co_huella
-                }).done(function (e) {
-                    if (e.huella == 0) {
-                        $.ajax({
-                            url: "../../empleado", data: "opc=reg_huella&idtr=" + $(".idtr").val() + "&cod=" + co_huella, type: 'POST', success: function (data, textStatus, jqXHR) {
-                                if (data.rpta === "1") {
-                                    // Listar_Cod_Huella();
-                                    /*validar los botones de autorizar req*/                                     ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
-                                    $.smallBox({
-                                        title: "Se ha actualizado exitosamente el codigo de huella...",
-                                        content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-                                        color: "#296191", iconSmall: "fa fa-thumbs-up bounce animated", timeout: 4000
-                                    });
-
-                                } else {
-                                    $.smallBox({
-                                        title: "¡Alerta!",
-                                        content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar los datos...</i>",
-                                        color: "#C46A69",
-                                        iconSmall: "fa fa-cloud bounce animated",
-                                        timeout: 7000
-                                    });
-                                }
-                            }
-                        });
-                    }
-                    else {
-                        $.SmartMessageBox({
-                            title: "¡Este Código de Huella ya fue registrado!",
-                            content: "Por favor Ingrese un Código de Huella distinto"
-                        });
-                    }
-
-                });
-            }
-        }
-        function Actualizar_Cod_APS() {
-            var co_aps = $(".txtCodigoAPS").val();
-            if (co_aps !== "") {
-                $.ajax({
-                    url: "../../empleado",
-                    type: "POST",
-                    data: "opc=validar_aps&co_aps=" + co_aps
-                }).done(function (e) {
-                    if (e.aps == 0) {
-                        $.ajax({
-                            url: "../../empleado", data: "opc=reg_aps&idtr=" + $(".idtr").val() + "&cod=" + co_aps, type: 'POST', success: function (data, textStatus, jqXHR) {
-                                if (data.rpta === "1") {
-                                    // Listar_Cod_Huella();
-                                    /*validar los botones de autorizar req*/
-                                    ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
-                                    $.smallBox({
-                                        title: "Se ha actualizado exitosamente el codigo APS...",
-                                        content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-                                        color: "#296191",
-                                        iconSmall: "fa fa-thumbs-up bounce animated",
-                                        timeout: 4000
-                                    });
-
-                                } else {
-                                    $.smallBox({
-                                        title: "¡Alerta!",
-                                        content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar los datos...</i>",
-                                        color: "#C46A69",
-                                        iconSmall: "fa fa-cloud bounce animated",
-                                        timeout: 7000
-                                    });
-                                }
-                            }
-                        });
-                    }
-                    else {
-                        $.SmartMessageBox({
-                            title: "¡Este Código APS ya fue registrado!",
-                            content: "Por favor Ingrese un Código APS distinto"});
-                    }
-
-                });
-            }
-        }
-
         function validar_shadowbox() {
 
             Shadowbox.init({
@@ -802,138 +649,6 @@
                 counterType: "skip"
             });
         }
-        function ValBtnAutorizarDgp(trabajador, divBotones) {
-            divBotones.empty();
-            $.ajax({
-                url: "../../autorizacion", data: "opc=ValBtnAutorizacion&trabajador=" + trabajador, type: 'POST', success: function (data, textStatus, jqXHR) {
-                    if (data.rpta === "1") {
-                        divBotones.append(data.data);
-                        $(".btn-autor").click(function (e) {
-                            $.SmartMessageBox({
-                                title: "¡Alerta de Confirmación!",
-                                content: "¿Está totalmente seguro de autorizar este requerimiento?",
-                                buttons: '[No][Si]'
-                            }, function (ButtonPressed) {
-                                if (ButtonPressed === "Si") {
-                                    $(".form-aut").submit();
-                                    window.parent.sendMessage();
-                                }
-                                if (ButtonPressed === "No") {
-                                    return false;
-                                }
-                            });
-                            e.preventDefault();
-                        });
-                    } else {
-                        /*error*/
-                    }
-                }
-            });
-        }
-        function porcentaje_datos(trabajador) {
-            $.ajax({
-                url: "../../trabajador", data: "opc=ShowPorcentageTrabajador&id=" + trabajador, type: 'POST', success: function (data, textStatus, jqXHR) {
-                    $('.pcDatosCompTrabajador').data('easyPieChart').update(data.porcentaje);
-                }});
-        }
-        function ShowCbk_Procesar_Ind(iddgp) {
-            var div = $(".col_procesar_asigFam");
-            var div2 = $(".col_procesar_sis");
-            div.empty();
-            div2.empty();
-            $.ajax({
-                url: "../../autorizacion", data: "opc=ShowCkbEstado_procesarIndiviual&iddgp=" + iddgp, type: 'POST', success: function (data, textStatus, jqXHR) {
-                    if (data.rpta === "1") {
-                        div.append(data.ckbAsigFam);
-                        div2.append(data.ckbEs_Sis);
-                        $(".ckbAsigFam").click(function () {
-                            var tipo = 1;
-                            var ckbAsigFam = $(".ckbAsigFam");
-                            procesar_req_individual(ckbAsigFam, tipo, iddgp);
-                        });
-                        $(".ckbEstSistema").click(function () {
-                            var tipo = 2;
-                            var ckb = $(".ckbEstSistema");
-                            procesar_req_individual(ckb, tipo, iddgp);
-                        });
-                    }
-                }
-            });
-
-        }
-        function showEsDiezmo() {
-            var obj = $(".div_input_diezmo");
-            obj.hide(100);
-            obj.empty();
-            $.ajax({
-                url: "../../trabajador", data: "opc=ModDiezmoDetalleTrabajador&id=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
-                    if (data.rpta) {
-                        obj.append(data.html);
-                        obj.show(100);
-                        $(".cbkDiezmo").click(function () {
-                            $.SmartMessageBox({
-                                title: "&iexcl;Alerta!",
-                                content: "Esta seguro de modificar la autorizaci&oacute;n de descuento diezmo?",
-                                buttons: '[No][Si]'
-                            }, function (ButtonPressed) {
-                                if (ButtonPressed === "Si") {
-                                    if ($(".cbkDiezmo").prop("checked")) {
-                                        $.ajax({
-                                            url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=0", type: 'POST', success: function (data, textStatus, jqXHR) {
-                                                if (data.status) {
-                                                    $(".cbkDiezmo").prop("checked", false);
-                                                    $.smallBox({
-                                                        title: "&iexcl;Atenci&oacute;n!",
-                                                        content: "<i class='fa fa-clock-o'></i> <i>Se neg&oacute; el descuento de diezmo...</i>",
-                                                        color: "#C46A69",
-                                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                        timeout: 6000
-                                                    });
-                                                }
-
-                                            }
-                                        });
-                                    } else {
-                                        $.ajax({
-                                            url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=1", type: 'POST', success: function (data, textStatus, jqXHR) {
-                                                if (data.status) {
-                                                    $(".cbkDiezmo").prop("checked", true);
-                                                    $.smallBox({
-                                                        title: "&iexcl;Atenci&oacute;n!",
-                                                        content: "<i class='fa fa-clock-o'></i> <i>Se autoriz&oacute; el descuento de diezmo...</i>",
-                                                        color: "#659265",
-                                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                        timeout: 6000
-                                                    });
-                                                }
-                                            }
-                                        });
-                                    }
-                                    showEsDiezmo();
-
-
-                                }
-                            });
-                            return false;
-
-
-                        });
-                    }
-                }
-            });
-        }
-        function  ShowAFP_SP() {
-            /*show  afp y sp*/
-            $(".row_afp_sp").empty()
-            $.ajax({url: "../../trabajador", data: "opc=ShowAFP_SP&id=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
-                    if (data.rpta === "1") {
-                        $(".row_afp_sp").append(data.html);
-                    }
-                }});
-
-            /*end show afp y sp*/
-        }
-
         $(document).ready(function () {
             getAvatar("perfil", idtrl);
             getAvatar("todo", idtrl);
@@ -963,6 +678,7 @@
             $(".btnCodigoAPS").click(function () {
                 Actualizar_Cod_APS();
             });
+
             $(".btn-conti").click(function (e) {
                 $.SmartMessageBox({
                     title: "Alerta de Confirmación",
@@ -981,47 +697,32 @@
 
             });
 
-            $(".fe_desde_p, .fe_hasta_p").change(function () {
-                var cuotas = $(".cuota_docente");
-                cuotas.empty();
-                $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + $(".fe_desde_p").val() + "&fe_hasta=" + $(".fe_hasta_p").val() + "&pago_semanal=" + (parseFloat($(".hl_docente").val()) * parseFloat($(".ti_hp_docente").val())), function (objJson) {
-                    var lista = objJson.lista;
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    for (var i = 0; i < lista.length; i++) {
-                        cuotas.append(lista[i].html);
-                      
-                    }
-                      cuotas.append('<input type="text" value="'+lista.length+'" name="num_itera">')
-                });
+            /*carga academica*/
+            $(".fe_desde_p, .fe_hasta_p, .hl_docente, .ti_hp_docente").change(function () {
+                calcularCuotasDocente($(".fe_desde_p").val(), $(".fe_hasta_p").val(), $(".hl_docente").val(), $(".ti_hp_docente").val());
             });
-
+         
             $(".btn_guardar_ca").click(function () {
                 $.ajax({
                     url: "../../carga_academica",
                     type: "POST",
                     data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                }).done(function (ids) {
-                    var arr_id = ids.split(":");
+                }).done(function (data) {
+                  //  var arr_id = ids.split(":");
                     alert("Registrado con exito!...");
-                    $(".proceso").val(arr_id[0]);
-                    $(".dgp").val(arr_id[1]);
+                    $(".proceso").val(data.proceso);
+                    $(".dgp").val(data.dgp);
                     $(".btn_procesar").show();
                 }).fail(function (e) {
                     alert("Error: " + e);
                 });
             });
-
             $(".btn_procesar").click(function () {
-                $.ajax({
-                    url: "../../carga_academica", data: "opc=Procesar&dgp=" + $(".dgp").val() + "&proceso=" + $(".proceso").val()
-                }).done(function () {
-                    window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
-                });
+                ProcesarCargaAcademica($(".dgp").val(), $(".proceso").val());
             });
+            /*FIN carga academica*/
 
+            /*AUTORIZACIONES*/
             $(".btn-autor").click(function (e) {
                 $.SmartMessageBox({
                     title: "¡Alerta de Confirmación!",
@@ -1054,6 +755,7 @@
                 });
                 e.preventDefault();
             });
+            /* FIN AUTORIZACIONES*/
         });
 
 
@@ -1233,12 +935,12 @@
                     $.each(datos, function (i, obj) {
                         if (tipo == 'todo') {
                             console.log("foto todo");
-                            var imgens = '<img class="img-thumbnail" title="foto ' + i + '" src="' +url_archivos+
+                            var imgens = '<img class="img-thumbnail" title="foto ' + i + '" src="' + url_archivos +
                                     obj.ar_foto + '"style="width:100px; height:100px;" />';
                             $('.fotos').append(imgens);
                             if (repeat == 0) {
-                                var imgens = '<a class="mustang-gallery pull-left" href="'+url_archivos + obj.ar_foto + '" >' +
-                                        '<img class="img-thumbnail" title="foto ' + i + '" src="' +url_archivos+
+                                var imgens = '<a class="mustang-gallery pull-left" href="' + url_archivos + obj.ar_foto + '" >' +
+                                        '<img class="img-thumbnail" title="foto ' + i + '" src="' + url_archivos +
                                         obj.ar_foto + '"style="width:100px; height:100px;" /></a>';
                                 $('.foto-user').append(imgens);
                                 $('.fotos').append(imgens);
@@ -1256,7 +958,7 @@
                 });
             }
             function errors(data) {
-                console.log("error" + data)
+                console.log("error" + data);
             }
         }
 

@@ -153,7 +153,7 @@
     <body>
     <center>
         <form action="../../contrato" method="get"class="smart-form">
-            <%String idanno = request.getParameter("anno");
+            <%
                 if (List_contra_x_idcto.size() == 0) {%>
             <h3>Aun no se ha hecho Contrato.</h3>
             <%
@@ -231,13 +231,13 @@
                 <%} else {%>
                 <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Subir_Contrato2&idc=<%=n.getId_contrato()%>" > <span class="btn-label"><i class="fa fa-cloud-upload"></i></span>Subir Contrato Firmado</a>
                         <%}%>
-                
-                        <%}
+
+                <%}
                             if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0007") || /*idrol.trim().equals("ROL-0009") || */ idrol.trim().equals("ROL-0001")) {%>
-                        <%if (idrol.trim().equals("ROL-0006")) {
-                                //validar si puede editar contrato
-                                if (oContrato.validar_editar_contrato(id_user, ID_CTO)) {
-                        %>
+                <%if (idrol.trim().equals("ROL-0006")) {
+                        //validar si puede editar contrato
+                        if (oContrato.validar_editar_contrato(id_user, ID_CTO)) {
+                %>
                 <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Editar&idc=<%=n.getId_contrato()%>&idtr=<%=request.getParameter("idtr")%>&id_dg=<%=request.getParameter("id_dg")%>" > <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Editar Contrato</a>
                 <br>   
                 <br>   
@@ -315,14 +315,14 @@
                         }%> </td></tr>
                     <tr>
                         <td class="text-info table-bordered"><strong>Religion:</strong></td><td class="table-bordered" colspan="6"><strong class="text-danger"><%if (n.getLi_religion().equals("1")) {
-                            out.print("Adventista");
-                        } else if (n.getLi_religion().equals("2")) {
-                            out.print("Católico");
-                        } else if (n.getLi_religion().equals("3")) {
-                            out.print("Otro");
-                        } else if (n.getLi_religion() == null) {
-                            out.print("Ninguna");
-                        }%></strong></td>
+                                out.print("Adventista");
+                            } else if (n.getLi_religion().equals("2")) {
+                                out.print("Católico");
+                            } else if (n.getLi_religion().equals("3")) {
+                                out.print("Otro");
+                            } else if (n.getLi_religion() == null) {
+                                out.print("Ninguna");
+                            }%></strong></td>
                     </tr>
                     <tr><td class="text-info table-bordered"><strong>Tipo Pago Horas:</strong></td><td class="table-bordered"  colspan="6"><%
                         if (n.getTi_hora_pago() != null) {
