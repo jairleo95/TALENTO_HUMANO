@@ -369,9 +369,7 @@
                 -->
 
                 <ul >
-                    <li>
-                        <a href="Vista/Reportes/Validar_Foto/Index.jsp?opc=Index" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i> Validar Fotos</a>
-                    </li>
+                    
 
                     <%
                         for (int i = 0; i < listarURL.size(); i++) {

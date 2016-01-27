@@ -187,7 +187,7 @@
         <!-- end widget grid -->
     </div>
         
-        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-foto modal fade  bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
 
@@ -198,8 +198,9 @@
                             <div class="foto-tr">
                                 <img style= "width: 400px; height:  300px;" class="imagental img-thumbnail"/>
                             </div>
-                            <small>Validar la Foto  ? </small>
+                           
                             <div class="Validar">
+                            <small>Validar la Foto  ? </small>
                                 <form>
                                     <input class="id-tr" type="hidden" >
                                     <input name=""type="hidden" value="">
@@ -338,11 +339,19 @@
             }
           $(row).click(function(){
               if(data.EFOTO == "0"){
-              $('.modal').modal('show');
+                  $('.Validar').show(200);
+              $('.modal-foto').modal('show');
               $('.imagental').attr("src","../../Usuario/Fotos/"+data.AR_FOTO);
               $('.namet').text(data.NO_TRABAJADOR+' '+data.AP_PATERNO+' '+data.AP_MATERNO);
               $('.id-tr').val(data.ID_TRABAJADOR);
+             }else{
+              $('.Validar').hide();
+              $('.modal-foto').modal('show');
+              $('.imagental').attr("src","../../Usuario/Fotos/"+data.AR_FOTO);
+              $('.namet').text(data.NO_TRABAJADOR+' '+data.AP_PATERNO+' '+data.AP_MATERNO);
+             
            }
+             
           });
 
           }
