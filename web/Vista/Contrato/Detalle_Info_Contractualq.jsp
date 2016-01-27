@@ -154,6 +154,7 @@
     <center>
         <form action="../../contrato" method="get"class="smart-form">
             <%
+                String ID_CTO = request.getParameter("id_cto");
                 if (List_contra_x_idcto.size() == 0) {%>
             <h3>Aun no se ha hecho Contrato.</h3>
             <%
@@ -163,42 +164,12 @@
                 <div class="row" align="center">
                     <section class="col col-lg-12 ">
                         <label><strong>Contratos:</strong></label>
-                        <label class="select ">
-                            <select name="ida" class="select anno " >
-                                <%
-                                    String ID_CTO = request.getParameter("id_cto");
-                                    for (int cv = 0; cv < List_Anno_trabajador.size(); cv++) {
-                                        Anno an = new Anno();
-                                        an = (Anno) List_Anno_trabajador.get(cv);
-                                        if (an.getId_contrato().equals(ID_CTO.trim())) {
-                                %><option value="<%=an.getId_contrato()%>" selected=""><%= (cv + 1) + ") De " + an.getFe_desde()%><%if (an.getFe_hasta() != null) {
-                                        out.print(" Al " + an.getFe_hasta());
-                                    } else {
-                                        out.print(" hasta indefinidamente");
-                                    }%></option><%
-                                    } else {
-                                    %><option value="<%=an.getId_contrato()%>"><%= (cv + 1) + ") De " + an.getFe_desde()%><%if (an.getFe_hasta() != null) {
-                                            out.print(" Al " + an.getFe_hasta());
-                                        } else {
-                                            out.print(" hasta indefinidamente");
-                                        }%></option><%
-                                                }
-                                            }%>
-                            </select> 
+                        <label class="select SelectorListaContrato">
                         </label>
                     </section>
-                    <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
-                    <input type="hidden" name="opc" value="actualizar" ><button type="submit"  style="display:none" class="btn_act"   >Actualizar</button>
+                    <input type="hidden" name="idtr" class="idtr"  value="<%=request.getParameter("idtr")%>">
                 </div>
             </div>
-
-            <script>
-                $(document).ready(function () {
-                    $(".anno").change(function () {
-                        $(".btn_act").click();
-                    });
-                });
-            </script>
         </form>
         <div>
             <form action="">
@@ -214,6 +185,7 @@
                         X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
                         n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(b);
                 %>
+                <input type="hidden"  class="idc" value="<%=n.getId_contrato()%>"></td>
 
                 <%if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0001")) {
                 %>
@@ -233,7 +205,7 @@
                         <%}%>
 
                 <%}
-                            if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0007") || /*idrol.trim().equals("ROL-0009") || */ idrol.trim().equals("ROL-0001")) {%>
+                    if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0007") || /*idrol.trim().equals("ROL-0009") || */ idrol.trim().equals("ROL-0001")) {%>
                 <%if (idrol.trim().equals("ROL-0006")) {
                         //validar si puede editar contrato
                         if (oContrato.validar_editar_contrato(id_user, ID_CTO)) {
@@ -601,75 +573,90 @@
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script>
-                if (!window.jQuery) {
-                    document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                }
+    if (!window.jQuery) {
+        document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+    }
 </script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script>
-                if (!window.jQuery.ui) {
-                    document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                }
+    if (!window.jQuery.ui) {
+        document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+    }
 </script>
 <!-- CUSTOM NOTIFICATION -->
 <script src="../../js/notification/SmartNotification.min.js"></script>
 <script>
-                $(document).ready(function () {
-                    $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-                        $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+    function SelectorListaContrato(objSelector, idtr, idc) {
+        $.ajax({
+            url: "../../contrato", type: 'POST', data: "opc=SelectorListaContrato&idtr=" + idtr + "&idc=" + idc,
+            success: function (data, textStatus, jqXHR) {
+                if (data.rpta) {
+                    objSelector.append(data.html);
+                    $(".anno").change(function () {
+                        window.location.href = '../../contrato?opc=actualizar&idtr=' + $(".idtr").val() + '&idc=' + $(this).val();
                     });
-                    $(".ck_habilitar_is").click(function () {
-                        if ($(".ck_habilitar_is").prop('checked')) {
-                            $.ajax({
-                                url: "../../contrato",
-                                data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=1"
-                            }).done(function () {
-                                $.smallBox({
-                                    title: "¡Alerta!",
-                                    content: "Se ha autortizado que la secretaria pueda subir e imprimir el contrato.",
-                                    color: "#296191",
-                                    iconSmall: "fa fa-cloud",
-                                    timeout: 4000
-                                });
+                }
+            }
+        });
+    }
+    $(document).ready(function () {
+        $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+            $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+        });
+        SelectorListaContrato($(".SelectorListaContrato"), $(".idtr").val(), $(".idc").val());
 
-                            }).fail(function (jqXHR, textStatus, errorThrown) {
-                                $.smallBox({
-                                    title: "¡Error!",
-                                    // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
-                                    content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
-                                    color: "#C46A69",
-                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                    timeout: 6000
-                                });
-                            });
-                        } else {
-                            $.ajax({
-                                url: "../../contrato",
-                                data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=2"
-                            }).done(function () {
-                                $.smallBox({
-                                    title: "¡Alerta!",
-                                    content: "Se ha autortizado que la secretaria <strong>NO</strong> pueda subir e imprimir el contrato.",
-                                    color: "#C79121",
-                                    iconSmall: "fa fa-cloud",
-                                    timeout: 4000
-                                });
-                            }).fail(function (jqXHR, textStatus, errorThrown) {
-                                $.smallBox({
-                                    title: "¡Error!",
-                                    // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
-                                    content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
-                                    color: "#C46A69",
-                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                    timeout: 6000
-                                });
-                            });
-                        }
+        $(".ck_habilitar_is").click(function () {
+            if ($(".ck_habilitar_is").prop('checked')) {
+                $.ajax({
+                    url: "../../contrato",
+                    data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=1"
+                }).done(function () {
+                    $.smallBox({
+                        title: "¡Alerta!",
+                        content: "Se ha autortizado que la secretaria pueda subir e imprimir el contrato.",
+                        color: "#296191",
+                        iconSmall: "fa fa-cloud",
+                        timeout: 4000
                     });
 
-
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    $.smallBox({
+                        title: "¡Error!",
+                        // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
+                        content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
+                        color: "#C46A69",
+                        iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                        timeout: 6000
+                    });
                 });
+            } else {
+                $.ajax({
+                    url: "../../contrato",
+                    data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=2"
+                }).done(function () {
+                    $.smallBox({
+                        title: "¡Alerta!",
+                        content: "Se ha autortizado que la secretaria <strong>NO</strong> pueda subir e imprimir el contrato.",
+                        color: "#C79121",
+                        iconSmall: "fa fa-cloud",
+                        timeout: 4000
+                    });
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    $.smallBox({
+                        title: "¡Error!",
+                        // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
+                        content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
+                        color: "#C46A69",
+                        iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                        timeout: 6000
+                    });
+                });
+            }
+        });
+
+
+    });
 </script>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");

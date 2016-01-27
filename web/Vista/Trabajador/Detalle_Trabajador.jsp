@@ -507,20 +507,20 @@
 
         <%}%>
         <%}%> <%}%>
-                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
 
-                            <div class="modal-body">
-                                <div class="text-center">
-                                <H2>Tu Imagen fue rechazada por el Administrador !</H2>
-                                <h4>Vuelve a subir tu imagen  nuevamente.</h4><br/>
-                                <span style="font-size: 80px;" class="glyphicon glyphicon-remove"></span>
-                                </div>
-                            </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <H2>Tu Imagen fue rechazada por el Administrador !</H2>
+                            <h4>Vuelve a subir tu imagen  nuevamente.</h4><br/>
+                            <span style="font-size: 80px;" class="glyphicon glyphicon-remove"></span>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
         <div class="div_dialog"></div>
         <input  value="<%out.print(FactoryConnectionDB.url_archivos);%>" type="hidden" class="url_archivo"/> 
         <!-- #dialog-message -->
@@ -716,14 +716,14 @@
             $(".fe_desde_p, .fe_hasta_p, .hl_docente, .ti_hp_docente").change(function () {
                 calcularCuotasDocente($(".fe_desde_p").val(), $(".fe_hasta_p").val(), $(".hl_docente").val(), $(".ti_hp_docente").val());
             });
-         
+
             $(".btn_guardar_ca").click(function () {
                 $.ajax({
                     url: "../../carga_academica",
                     type: "POST",
                     data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
                 }).done(function (data) {
-                  //  var arr_id = ids.split(":");
+                    //  var arr_id = ids.split(":");
                     alert("Registrado con exito!...");
                     $(".proceso").val(data.proceso);
                     $(".dgp").val(data.dgp);
@@ -907,8 +907,8 @@
                                                 getAvatar("todo", idtrl);
                                                 repeat = 0;
                                                 $(".borde").removeClass("ver_foto");
-                                               // $(".ver_foto").show(200);
-                                               // $(".form-subir-foto").remove();
+                                                // $(".ver_foto").show(200);
+                                                // $(".form-subir-foto").remove();
                                                 $.smallBox({
                                                     title: "¡Felicitaciones!",
                                                     content: "<i class='fa fa-clock-o'></i> <i>Su imagen se ha subido con éxito...</i>",
@@ -949,19 +949,19 @@
                 $.each(data, function (i, datos) {
                     $.each(datos, function (i, obj) {
                         if (tipo == 'todo') {
-                            if(obj.EFOTO != 2){
-                            console.log("foto todo");
-                            var imgens = '<img class="img-thumbnail" title="foto ' + i + '" src="' + url_archivos +
-                                    obj.ar_foto + '"style="width:100px; height:100px;" />';
-                            $('.fotos').append(imgens);
-                              
-                            if (repeat == 0) {
-                                var imgens = '<a class="mustang-gallery pull-left" href="' + url_archivos + obj.ar_foto + '" >' +
-                                        '<img class="img-thumbnail" title="foto ' + i + '" src="' + url_archivos +
-                                        obj.ar_foto + '"style="width:100px; height:100px;" /></a>';
-                                $('.foto-user').append(imgens);
+                            if (obj.EFOTO != 2) {
+                                console.log("foto todo");
+                                var imgens = '<img class="img-thumbnail" title="foto ' + i + '" src="' + url_archivos +
+                                        obj.ar_foto + '"style="width:100px; height:100px;" />';
                                 $('.fotos').append(imgens);
-                              } 
+
+                                if (repeat == 0) {
+                                    var imgens = '<a class="mustang-gallery pull-left" href="' + url_archivos + obj.ar_foto + '" >' +
+                                            '<img class="img-thumbnail" title="foto ' + i + '" src="' + url_archivos +
+                                            obj.ar_foto + '"style="width:100px; height:100px;" /></a>';
+                                    $('.foto-user').append(imgens);
+                                    $('.fotos').append(imgens);
+                                }
                             }
 
                         } else if (tipo == 'perfil') {
@@ -969,26 +969,29 @@
                             $('.borde').attr("src", url_archivos + obj.ar_foto);
                             $(".avatar").attr("href", url_archivos + obj.ar_foto);
                             $("#sb-player").attr("href", url_archivos + obj.ar_foto);
-                            
-                            if(obj.EFOTO === "1"){/* your photo success */}
-                            if(obj.EFOTO === "0"){$(".ver_foto").hide(200);}
-                            if(obj.EFOTO === "2"){
+
+                            if (obj.EFOTO === "1") {/* your photo success */
+                            }
+                            if (obj.EFOTO === "0") {
+                                $(".ver_foto").hide(200);
+                            }
+                            if (obj.EFOTO === "2") {
                                 /* your photo rechazada*/
-                                 $('.modal').modal('show');
+                                $('.modal').modal('show');
                                 $('.borde').attr('src', '../../imagenes/Desaprobado.png');
-                               
+
                                 var padre = $(window.parent.document.getElementById('foto_usuario'));
                                 var idtra = $(window.parent.document.getElementById('id_trabajador')).val();
                                 if (idtra.trim() == $(".idtr").val().trim()) {
                                     $(padre).attr("src", "imagenes/Desaprobado.png");
                                 }
-                            }else{
-                                if(obj.EFOTO != 2){
-                            $('.borde').attr("src", "../../Vista/Usuario/Fotos/" + obj.ar_foto);
-                            $(".avatar").attr("href", "../../Vista/Usuario/Fotos/" + obj.ar_foto);
-                            $("#sb-player").attr("href", "../../Usuario/Fotos/" + obj.ar_foto);
-                            console.log(obj.ar_foto);
-                            }
+                            } else {
+                                if (obj.EFOTO != 2) {
+                                    $('.borde').attr("src", "../../Vista/Usuario/Fotos/" + obj.ar_foto);
+                                    $(".avatar").attr("href", "../../Vista/Usuario/Fotos/" + obj.ar_foto);
+                                    $("#sb-player").attr("href", "../../Usuario/Fotos/" + obj.ar_foto);
+                                    console.log(obj.ar_foto);
+                                }
                             }
                         }
                     });

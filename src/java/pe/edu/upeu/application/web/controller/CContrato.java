@@ -55,6 +55,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceSub_ModalidadDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.Contrato;
 
 /**
  *
@@ -154,7 +155,7 @@ public class CContrato extends HttpServlet {
                 sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idcon));
                 sesion.setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(idcon));
                 sesion.setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
-                
+
                 sesion.setAttribute("List_Usuario", usu.List_Usuario());
                 sesion.setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
                 sesion.setAttribute("List_tipo_contrato", l.List_tipo_contrato());
@@ -166,7 +167,7 @@ public class CContrato extends HttpServlet {
                 String id_modalidad = sub.id_mod_x_id_con(idcon);
                 int num_cc = cc.count_cc_x_id_cont(idcon);
                 int num = dht.ASIGNACION_F(idtr);
-                
+
                 if (id_dg != null) {
                     sesion.setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(id_dg));
                 }
@@ -210,8 +211,7 @@ public class CContrato extends HttpServlet {
                 Double HO_SEMANA = Double.parseDouble(request.getParameter("HORAS_SEMANA"));
                 Double NU_HORAS_LAB = Double.parseDouble(request.getParameter("NRO_HORAS_LAB"));
                 Double DIA_CONTRATO = Double.parseDouble(request.getParameter("DIAS"));
-          
-                
+
                 String TI_TRABAJADOR = request.getParameter("TIPO_TRABAJADOR");
                 String LI_REGIMEN_LABORAL = request.getParameter("REGIMEN_LABORAL");
                 String ES_DISCAPACIDAD = request.getParameter("DISCAPACIDAD");
@@ -279,7 +279,7 @@ public class CContrato extends HttpServlet {
                             double porc_nuevo = Double.parseDouble(request.getParameter("PORCENTAJE_CC" + (1 + i)));
                             String centro_c_nuevo = request.getParameter("CENTRO_COSTOS_" + (1 + i));
                             String id_cont = request.getParameter("id_contrato");
-                            dcc.INSERT_DETALLE_CENTRO_COSTO("",  "", porc_nuevo, "1", iduser, "", "", "", FactoryConnectionDB.detalle_ip(), id_cont,centro_c_nuevo);
+                            dcc.INSERT_DETALLE_CENTRO_COSTO("", "", porc_nuevo, "1", iduser, "", "", "", FactoryConnectionDB.detalle_ip(), id_cont, centro_c_nuevo);
                         }
                     } else {
                     }
@@ -304,7 +304,6 @@ public class CContrato extends HttpServlet {
 
             if (opc.equals("Detalle_Contractual")) {
                 String idtr = request.getParameter("idtr");
-                String ida1 = a.List_Anno_Max_Cont(idtr);
                 String id_dgp = "";
                 String id_cto = con.Contrato_max(idtr);
                 if (id_cto != null) {
@@ -313,7 +312,6 @@ public class CContrato extends HttpServlet {
                     id_dgp = con.obt_dgp_x_dgp(id_cto);
                     sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_cto));
                     sesion.setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
-                    sesion.setAttribute("List_Anno_trabajador", a.List_Anno_trabajador_contrato(idtr));
                     sesion.setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
                     sesion.setAttribute("List_Usuario", usu.List_Usuario());
                     sesion.setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
@@ -330,7 +328,25 @@ public class CContrato extends HttpServlet {
                     sesion.removeAttribute("List_tipo_contrato");
                     sesion.removeAttribute("list_reg_labo");
                 }
-                response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto + "&id_dg=" + id_dgp);
+                response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?idtr=" + idtr + "&id_cto=" + id_cto + "&id_dg=" + id_dgp);
+            }
+            if (opc.equals("SelectorListaContrato")) {
+                String id_Trabajador = request.getParameter("idtr");
+                String idc = request.getParameter("idc");
+                String html = "";
+                List<Contrato> lista = con.ListaSelectorContrato(id_Trabajador);
+                html += "<select name='ida' class='select anno'>";
+                for (Contrato lista1 : lista) {
+                    lista1.getCa_asig_familiar();
+                    if (idc.equals(lista1.getId_contrato())) {
+                        html += "<option selected='' value='" + lista1.getId_contrato()+ "'>De " + lista1.getFe_desde() + " Hasta " + ((lista1.getFe_hasta() != null) ? lista1.getFe_hasta() : " Indefinido") + "</option>";
+                    } else {
+                        html += "<option  value='" + lista1.getId_contrato() + "'>De " + lista1.getFe_desde() + " Hasta " + ((lista1.getFe_hasta() != null) ? lista1.getFe_hasta() : " Indefinido") + "</option>";
+                    }
+                }
+                html += "</select>";
+                rpta.put("html", html);
+                rpta.put("rpta",true);
             }
             if (opc.equals("SI_CONNTRATO")) {
 
@@ -375,10 +391,8 @@ public class CContrato extends HttpServlet {
 
             if (opc.equals("actualizar")) {
                 String idtr = request.getParameter("idtr");
-                String id_cto = request.getParameter("ida");
+                String id_cto = request.getParameter("idc");
                 String id_pu = puesto.puesto(id_cto);
-                String ida1 = a.Listar_año_contrato(id_cto);
-                sesion.setAttribute("List_Anno_trabajador", a.List_Anno_trabajador_contrato(idtr));
                 sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(id_cto));
                 sesion.setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
                 sesion.setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
@@ -387,7 +401,7 @@ public class CContrato extends HttpServlet {
                 sesion.setAttribute("List_tipo_contrato", l.List_tipo_contrato());
                 sesion.setAttribute("list_reg_labo", con.list_reg_labo());
                 sesion.setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
-                response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1.trim() + "&idtr=" + idtr.trim() + "&id_cto=" + id_cto);
+                response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?idtr=" + idtr.trim() + "&id_cto=" + id_cto);
             }
 
             if (opc.equals("REGISTRAR CONTRATO")) {
@@ -519,7 +533,7 @@ public class CContrato extends HttpServlet {
                 }
             }
             if (opc.equals("List_ti_contrato")) {
-                 rpta.put("lista", l.List_tipo_contrato());
+                rpta.put("lista", l.List_tipo_contrato());
                 rpta.put("rpta", 1);
             }
 
@@ -702,14 +716,14 @@ public class CContrato extends HttpServlet {
                 }
 
                 //--------- CENTRO COSTOS --------------
-              //  String IP_USUARIO = request.getParameter("USUARIO_IP");
+                //  String IP_USUARIO = request.getParameter("USUARIO_IP");
                 int cant_cc = Integer.parseInt(request.getParameter("CANT"));
                 String idcto = con.MAX_ID_CONTRATO();
                 for (int g = 1; g <= cant_cc; g++) {
                     String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
                     double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
                     if (ID_CENTRO_COSTO != null && porcentaje != 0.0) {
-                        dcc.INSERT_DETALLE_CENTRO_COSTO(null,  null, porcentaje, "1", iduser, null, null, null, FactoryConnectionDB.detalle_ip(),idcto,ID_CENTRO_COSTO);
+                        dcc.INSERT_DETALLE_CENTRO_COSTO(null, null, porcentaje, "1", iduser, null, null, null, FactoryConnectionDB.detalle_ip(), idcto, ID_CENTRO_COSTO);
                     }
                 }
                 //------------- HORARIO ------------

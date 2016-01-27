@@ -8,6 +8,7 @@ package pe.edu.upeu.application.dao_imp;
 import java.util.List;
 import java.util.Map;
 import pe.edu.upeu.application.model.Anno;
+import pe.edu.upeu.application.model.Contrato;
 import pe.edu.upeu.application.model.Contrato_Adjunto;
 import pe.edu.upeu.application.model.List_Rh_Contrato_Fec;
 import pe.edu.upeu.application.model.Modalidad;
@@ -66,7 +67,7 @@ public interface InterfaceContratoDAO {
 
     public List<V_List_Empleado> LIST_CASOS_ESPECIALES();
 
-    public List<Map<String, ?>> Listar_Contratos(String de, String al, String direccion, String dep, String area, String sec, String puesto, String sueldo_total, String nombre, String fe_i, String fe_fin, String fe_sus,String id_dep_ses);
+    public List<Map<String, ?>> Listar_Contratos(String de, String al, String direccion, String dep, String area, String sec, String puesto, String sueldo_total, String nombre, String fe_i, String fe_fin, String fe_sus, String id_dep_ses);
 
     public List<Map<String, ?>> List_contra_x_idcto_json(String id_ctos);
 
@@ -83,12 +84,12 @@ public interface InterfaceContratoDAO {
     public void VALIDAR_FE_CESE_CON();
 
     public void HABILITAR_SI(String idc, String estado);
-    
+
     public void VALIDAR_FE_HASTA_CON();
-    
+
     public void validar_contrato(String id_cto);
-    
-    public boolean validar_editar_contrato(String iduser,String idcontrato);
-    
-   
+
+    public boolean validar_editar_contrato(String iduser, String idcontrato);
+
+    public List<Contrato> ListaSelectorContrato(String id_trabajador);
 }

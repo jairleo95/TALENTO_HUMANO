@@ -146,7 +146,7 @@
             }
             .new-progress .new-circle.done .new-label:hover, .new-circle:hover{
 
-                //  background-color:blue; 
+                //background-color:#739e73; 
             }
 
         </style>
@@ -201,7 +201,7 @@
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-user"></i> </span>
                                     <h2 class="font-md"><strong>Estado de </strong> <i>Requerimientos</i></h2>
-    
+
                                 </header>
 
                                 <!-- widget div-->
@@ -210,7 +210,7 @@
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
-                                     </div>
+                                    </div>
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
@@ -268,7 +268,7 @@
                                                 </td>
                                                 <%} else {%>
                                                 <td>
-                                                    <img class="user_avatar_<%=r.getId_trabajador()%>" src="<%=FactoryConnectionDB.url_archivos+"Fotos/"+r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
+                                                    <img class="user_avatar_<%=r.getId_trabajador()%>" src="<%=FactoryConnectionDB.url_archivos + "Fotos/" + r.getAr_foto()%>"  width="30"  height="30"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
                                                         <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a> 
                                                 </td>
                                                 <%}%>
@@ -279,7 +279,7 @@
                                                         String iddep = r.getId_departamento();
                                                     %>
                                                     <div class="new-progress prog_aut"  data-value="&dgp=<%=dgp%>&idrp=<%=iddrp%>&iddep=<%=iddep%>" >
-
+                                                        <img src="../../img/ajax-loader/horizontal_fountain.gif" />
                                                     </div>
 
                                                 </td>
@@ -458,36 +458,67 @@
 <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
 <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-
-
-
+<script src="../../js/coment/coment.js" type="text/javascript"></script>
 <script type="text/javascript">
 
-// DO NOT REMOVE : GLOBAL FUNCTIONS!
+                                                            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                                                            function closedthis() {
+                                                                $.smallBox({
+                                                                    title: "¡DGP registrada correctamente!",
+                                                                    content: "Ya puede visualizar la informacion del DGP",
+                                                                    color: "#739E73",
+                                                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                                    timeout: 6000
+                                                                });
+                                                            }
+                                                            function closedthis2() {
+                                                                $.smallBox({
+                                                                    title: "¡Documentos del trabajador registrados correctamente!",
+                                                                    content: "ya puede visualizar toda los documentos del trabajador...",
+                                                                    color: "#739E73",
+                                                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                                    timeout: 6000
+                                                                });
+                                                            }
+                                                            function Imprimir_det_proceso(objProg_aut) {
+                                                                objProg_aut.empty();
+                                                                objProg_aut.append('<img src="../../img/ajax-loader/horizontal_fountain.gif" />');
+                                                                $.ajax({
+                                                                    url: "../../dgp", data: "opc=Imprimir_det_proceso" + objProg_aut.data("value"), type: 'POST', success: function (data, textStatus, jqXHR) {
+                                                                        if (data.rpta === "1") {
+                                                                            objProg_aut.empty();
+                                                                            objProg_aut.append(data.html);
+                                                                            objProg_aut.find(".new-circle").popover({trigger: 'hover click'});
+                                                                        }
+                                                                    }
+                                                                });
+                                                            }
+                                                            function nobackbutton() {
+                                                                window.location.hash = "no-back-button";
+                                                                window.location.hash = "Again-No-back-button" //chrome
+
+                                                                window.onhashchange = function () {
+                                                                    window.location.hash = "";
+                                                                };
+                                                            }
 
                                                             $(document).ready(function () {
-
                                                                 pageSetUp();
-                                                                /* // DOM Position key index //
-                                                                 
-                                                                 l - Length changing (dropdown)
-                                                                 f - Filtering input (search)
-                                                                 t - The Table! (datatable)
-                                                                 i - Information (records)
-                                                                 p - Pagination (paging)
-                                                                 r - pRocessing 
-                                                                 < and > - div elements
-                                                                 <"#id" and > - div with an id
-                                                                 <"class" and > - div with a class
-                                                                 <"#id.class" and > - div with an id and class
-                                                                 
-                                                                 Also see: http://legacy.datatables.net/usage/features
-                                                                 */
-                                                                /* BASIC ;*/
+                                                                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                                                                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                                                                });
+                                                                $('#coment-1').click(function () {
+                                                                    console.log("jalar comentario");
+                                                                    $.get('../../comentario?iddgp=DGP-000119&opc=Comentar_Dgp', function (responseJson) {
+                                                                        var $select = $('.comentarios');
+                                                                        $select.find('h2').remove();
+                                                                        $.each(responseJson, function (value) {
+                                                                            $('<p>').text(value).appendTo($select);
+                                                                        });
+                                                                    });
+                                                                });
+
                                                                 var responsiveHelper_dt_basic = undefined;
-                                                                var responsiveHelper_datatable_fixed_column = undefined;
-                                                                var responsiveHelper_datatable_col_reorder = undefined;
-                                                                var responsiveHelper_datatable_tabletools = undefined;
                                                                 var breakpointDefinition = {
                                                                     tablet: 1024,
                                                                     phone: 480
@@ -510,118 +541,18 @@
                                                                         responsiveHelper_dt_basic.respond();
                                                                     }
                                                                 });
+
                                                                 /* END BASIC */
-                                                                var cells = [];
                                                                 var rows = table_req.fnGetNodes();
                                                                 for (var i = 0; i < rows.length; i++) {
-                                                                    // Get HTML of 3rd column (for example)
                                                                     var obj = $(rows[i]).find(".prog_aut");
-
                                                                     Imprimir_det_proceso(obj);
-                                                                    /*  var obj2=  $(rows[i]).find(".new-circle");
-                                                                     obj2.remove();*/
                                                                 }
-                                                                console.log(cells);
+
                                                             });
 
 </script>
-<script type="text/javascript">
 
-    // DO NOT REMOVE : GLOBAL FUNCTIONS!
-    function closedthis() {
-        $.smallBox({
-            title: "¡DGP registrada correctamente!",
-            content: "Ya puede visualizar la informacion del DGP",
-            color: "#739E73",
-            iconSmall: "fa fa-check fa-2x fadeInRight animated",
-            timeout: 6000
-        });
-    }
-    function closedthis2() {
-        $.smallBox({
-            title: "¡Documentos del trabajador registrados correctamente!",
-            content: "ya puede visualizar toda los documentos del trabajador...",
-            color: "#739E73",
-            iconSmall: "fa fa-check fa-2x fadeInRight animated",
-            timeout: 6000
-        });
-    }
-    function Imprimir_det_proceso(objProg_aut) {
-
-        $.ajax({
-            url: "../../dgp", data: "opc=Imprimir_det_proceso" + objProg_aut.data("value"), type: 'POST', success: function (data, textStatus, jqXHR) {
-                if (data.rpta == "1") {
-                    objProg_aut.append(data.html);
-                     objProg_aut.find(".new-circle").popover({trigger : 'hover click'});
-                 //   $('[data-toggle="popover"]').popover();
-                }
-            }
-        });
-    }
-    $(document).ready(function () {
-
-        pageSetUp();
-        $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-            $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-        });
-        /* $.each($(".prog_aut"),function (){
-         Imprimir_det_proceso( $(this));
-         });*/
-
-
-    })
-
-</script>
-<script type="text/javascript">
-    function nobackbutton() {
-        window.location.hash = "no-back-button";
-        window.location.hash = "Again-No-back-button" //chrome
-
-        window.onhashchange = function () {
-            window.location.hash = "no-back-button";
-        }
-    }
-    function iterar_aut(s, t) {
-        var i = 1;
-        $('.prog_aut' + s + ' .new-circle').removeClass().addClass('new-circle');
-        $('.prog_aut' + s + ' .new-bar').removeClass().addClass('new-bar');
-        setInterval(function () {
-            if (i < t) {
-                $('.prog_aut' + s + ' .new-circle:nth-of-type(' + i + ')').addClass('active');
-                $('.prog_aut' + s + ' .new-circle:nth-of-type(' + (i - 1) + ')').removeClass('active').addClass('done');
-                $('.prog_aut' + s + ' .new-circle:nth-of-type(' + (i - 1) + ') .new-label').html('&#10003;');
-                $('.prog_aut' + s + ' .new-bar:nth-of-type(' + (i - 1) + ')').addClass('active');
-                $('.prog_aut' + s + ' .new-bar:nth-of-type(' + (i - 2) + ')').removeClass('active').addClass('done');
-                i++;
-                if (i == 0) {
-                    $('.prog_aut' + s + ' .new-bar').removeClass().addClass('new-bar');
-                    $('.prog_aut' + s + '  div.new-circle').removeClass().addClass('new-circle');
-                    i = 1;
-                }
-            }
-        }, 50);
-    }
-    $(document).ready(function () {
-        /* for (var u = 0; u < $(".tamaño").val() + 1; u++) {
-         iterar_aut(u, parseInt($(".num_aut" + u).val()) + 2);
-         }*/
-        //$('.new-progress .new-bar').removeClass().addClass('new-bar');
-        $('#coment-1').click(function () {
-            console.log("jalar comentario");
-            $.get('../../comentario?iddgp=DGP-000119&opc=Comentar_Dgp', function (responseJson) {
-                var $select = $('.comentarios');
-                $select.find('h2').remove();
-                $.each(responseJson, function (value) {
-                    $('<p>').text(value).appendTo($select);
-                });
-            });
-        });
-
-    });
-
-</script>
-
-<script src="../../js/coment/coment.js" type="text/javascript"></script>
 </body>
 
 </html>
