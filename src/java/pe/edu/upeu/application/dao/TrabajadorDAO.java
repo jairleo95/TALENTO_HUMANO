@@ -962,7 +962,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
     @Override
     public String ID_TRB(String user) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select ID_TRABAJADOR from RHVD_USUARIO_TEMP where ID_USUARIO = '" + user + "'";
+        String sql = "select ID_TRABAJADOR from RHVD_USUARIO where ID_USUARIO = '" + user + "'";
         String id = null;
         try {
             ResultSet rs = this.conn.query(sql);

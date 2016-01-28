@@ -166,7 +166,7 @@ function ListCentroCostoDGP(iddgp) {
         for (var i = 0; i < lista.length; i++) {
             numero = numero + i;
 
-            texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº ' + (i + 1) + ':</label>';
+            texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº' + (i + 1) + ':</label>';
             texto += '<div  class="row centro-costo_' + ag + ' cc_registrado" >';
             texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
             texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
@@ -178,7 +178,7 @@ function ListCentroCostoDGP(iddgp) {
             texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc"/></label></section>';
             texto += '<section class="col col-1" ><br><label class="btn"><button type="button" value="' + ag +
                     '" class="btn btn-danger btn-circle btn-lg remover_registro dis-total" value="' + ag + '" ><i class="glyphicon glyphicon-remove"></i></button></label></section>';
-            texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" class="id_dcc' + ag + '" ><input type="hidden" name="id_d_cen_cos' + (i + 1) + '" value="' + lista[i].id_det_ce + '" ></div>';
+            texto += '<input type="hidden" value="' + lista[i].id_det_ce + '" name="id_dcc' + ag + '" class="id_dcc' + ag + '" ></div>';
             var dir, dep, area, seccion, cc;
             dir = lista[i].id_dir_cc;
             dep = lista[i].id_dep_cc;

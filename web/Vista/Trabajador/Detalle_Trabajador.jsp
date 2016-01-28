@@ -180,7 +180,6 @@
                             <strong>Fecha de Nacimiento :</strong><%=c.convertFecha5(trb.getFe_nac())%><br>
                             <%if (idrol.trim().equals("ROL-0009")) {%>
 
-                            <strong>Tipo de documento:</strong> <%=c.convertFecha5(trb.getFe_nac())%><br>
                             <strong>Tipo Documento: </strong>
                             <%InterfaceTipo_DocumentoDAO itd = new Tipo_DocumentoDAO();
                                 for (int k = 0; k < itd.Listar_tipo_doc().size(); k++) {
