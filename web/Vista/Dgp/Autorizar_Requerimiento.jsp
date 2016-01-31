@@ -486,7 +486,7 @@
 </div>
 </div>
 
-<script src="../../js/coment/coment.js" type="text/javascript"></script>
+
 <!--================================================== -->
 
 <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
@@ -563,7 +563,7 @@
 
 <!-- PAGE RELATED PLUGIN(S) 
 <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>-->
-
+<script src="../../js/coment/coment.js" type="text/javascript"></script>
 <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
 <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
 <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
