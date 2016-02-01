@@ -4,7 +4,6 @@
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
 %>
-<%@page import="pe.edu.upeu.application.model.Anno"%>
 <%@page import="pe.edu.upeu.application.model.Grupo_Ocupaciones"%>
 <%@page import="pe.edu.upeu.application.model.Sub_Modalidad"%>
 <%@page import="pe.edu.upeu.application.model.Modalidad"%>
@@ -20,7 +19,6 @@
 <%@page import="pe.edu.upeu.application.dao_imp.InterfacePlantillaDAO"%>
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
-<%@page import="pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP"%>
 
 <jsp:useBean id="List_contra_x_idcto" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Situacion_Actual" scope="session" class="java.util.ArrayList"/>
@@ -134,7 +132,7 @@
     <center>
         <BR>
 
-        
+
 
         <form action="../../contrato" method="get">
             <%String idanno = request.getParameter("anno");
@@ -142,39 +140,28 @@
             <h3>Aun no se ha hecho Contrato.</h3>
             <%
             } else {%>
-            
-            <%
-            HttpSession Sesion = request.getSession(true);
-            String idrol = (String) Sesion.getAttribute("IDROL");
-            X_List_Id_Contrato_DGP n1 = new X_List_Id_Contrato_DGP();
-            n1 = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(0);
-            if (Integer.parseInt(n1.getEs_secre_is()) == 2 && idrol.trim().equals("ROL-0002")) {
-        %>
 
-        <div class="alert alert-warning fade in">
-            <button class="close" data-dismiss="alert">
-                ×
-            </button>
-            <i class="fa-fw fa fa-warning"></i>
-            <strong>¡Advertencia!</strong> Usted no tiene acceso a imprimir ni subir el contrato...
-        </div>
-        <%}%>
+            <%
+                HttpSession Sesion = request.getSession(true);
+                String idrol = (String) Sesion.getAttribute("IDROL");
+                X_List_Id_Contrato_DGP n1 = new X_List_Id_Contrato_DGP();
+                n1 = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(0);
+                if (Integer.parseInt(n1.getEs_secre_is()) == 2 && idrol.trim().equals("ROL-0002")) {
+            %>
+
+            <div class="alert alert-warning fade in">
+                <button class="close" data-dismiss="alert">
+                    ×
+                </button>
+                <i class="fa-fw fa fa-warning"></i>
+                <strong>¡Advertencia!</strong> Usted no tiene acceso a imprimir ni subir el contrato...
+            </div>
+            <%}%>
 
             <div>
                 <table class="table table-hover table-striped  table-responsive" style="border-radius: 30px ">
-                    <tr><td align="right"><select name="ida" class="anno " >
-                                <%
-                                    String ID_CTO = request.getParameter("id_cto");
-                                    for (int cv = 0; cv < List_Anno_trabajador.size(); cv++) {
-                                        Anno an = new Anno();
-                                        an = (Anno) List_Anno_trabajador.get(cv);
-                                        if (an.getId_contrato().equals(ID_CTO.trim())) {
-                                %><option value="<%=an.getId_contrato()%>" selected=""><%=an.getNo_anno() + " " + (cv + 1)%></option><%
-                                } else {
-                                %><option value="<%=an.getId_contrato()%>"><%=an.getNo_anno() + " " + (cv + 1)%></option><%
-                                        }
-                                    }%>
-                            </select> 
+                    <tr><td align="right">
+
                         </td>
                         <td><input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>"></td>
                         <td><input type="hidden" name="opc" value="actualizar" ></td><button type="submit"  style="display:none" class="btn_act"   >Actualizar</button></tr>
@@ -214,7 +201,6 @@
                         <td><input type="hidden" name="idtraba" value="<%=n.getId_trabajador()%>"></td>
                         <td><input type="hidden" name="id_con" class="id_contrato" value="<%=n.getId_contrato()%>"></td>
                         <td><input type="hidden" name="puesto" class="id_pu" value="<%=n.getId_puesto()%>" ></td>
-
                         <tr><td class="text-info" colspan="8" style="text-align:center"><input class="button blue"  type="hidden" value="Editar"><button name="opc" value="Imprimir" class="PLANTI btn btn-labeled btn-primary"><span class="btn-label"><i class="fa fa-print"></i></span>Imprimir</button></td></tr>
                     </table>
                 </div>
@@ -273,28 +259,7 @@
     <%}%>
     <%}%>
 </body>
-<script>
-    $(document).ready(function () {
-        $(".ck_habilitar_is").click(function () {
-            if ($(".ck_habilitar_is").prop('checked')) {
-                $.ajax({
-                    url: "../../contrato",
-                    data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=1"
-                }).done(function () {
-                    alert()
-                });
-            } else {
-                $.ajax({
-                    url: "../../contrato",
-                    data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=2"
-                }).done(function () {
-                    alert()
-                });
-            }
-        });
 
-    });
-</script>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
     }

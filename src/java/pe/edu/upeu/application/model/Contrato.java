@@ -53,13 +53,12 @@ public class Contrato {
     private String es_apoyo;
     private String ti_hora_pago;
     private String nu_documento;
-    private String id_anno;
     private String es_entregar_doc_reglamentos;
     private String es_registro_huella;
     private String de_registro_sistem_remu;
     private String id_trabajador;
 
-    public Contrato(String id_contrato, String id_dgp, String fe_desde, String fe_hasta, String fe_cese, String id_func, String li_condicion, Double ca_sueldo, Double ca_reintegro, Double ca_asig_familiar, Double ho_semana, Double nu_horas_lab, Double dia_contrato, String ti_trabajador, String li_regimen_laboral, String es_discapacidad, String ti_contrato, String li_regimen_pensionario, String es_contrato_trabajador, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String us_ip, String fe_vacacio_ini, String fe_vacacio_fin, String es_contrato, String id_filial, String id_direccion, String id_departamento, String id_area, String id_seccion, String id_puesto, Double ca_bono_alimento, String es_jefe, String li_tipo_convenio, String es_firmo_contrato, Double nu_contrato, String de_observacion, String es_apoyo, String ti_hora_pago, String nu_documento, String id_anno, String es_entregar_doc_reglamentos, String es_registro_huella, String de_registro_sistem_remu, String id_trabajador) {
+    public Contrato(String id_contrato, String id_dgp, String fe_desde, String fe_hasta, String fe_cese, String id_func, String li_condicion, Double ca_sueldo, Double ca_reintegro, Double ca_asig_familiar, Double ho_semana, Double nu_horas_lab, Double dia_contrato, String ti_trabajador, String li_regimen_laboral, String es_discapacidad, String ti_contrato, String li_regimen_pensionario, String es_contrato_trabajador, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String us_ip, String fe_vacacio_ini, String fe_vacacio_fin, String es_contrato, String id_filial, String id_direccion, String id_departamento, String id_area, String id_seccion, String id_puesto, Double ca_bono_alimento, String es_jefe, String li_tipo_convenio, String es_firmo_contrato, Double nu_contrato, String de_observacion, String es_apoyo, String ti_hora_pago, String nu_documento, String es_entregar_doc_reglamentos, String es_registro_huella, String de_registro_sistem_remu, String id_trabajador) {
         this.id_contrato = id_contrato;
         this.id_dgp = id_dgp;
         this.fe_desde = fe_desde;
@@ -102,7 +101,6 @@ public class Contrato {
         this.es_apoyo = es_apoyo;
         this.ti_hora_pago = ti_hora_pago;
         this.nu_documento = nu_documento;
-        this.id_anno = id_anno;
         this.es_entregar_doc_reglamentos = es_entregar_doc_reglamentos;
         this.es_registro_huella = es_registro_huella;
         this.de_registro_sistem_remu = de_registro_sistem_remu;
@@ -152,7 +150,6 @@ public class Contrato {
         this.es_apoyo = "";
         this.ti_hora_pago = "";
         this.nu_documento = "";
-        this.id_anno = "";
         this.es_entregar_doc_reglamentos = "";
         this.es_registro_huella = "";
         this.de_registro_sistem_remu = "";
@@ -495,13 +492,7 @@ public class Contrato {
         this.nu_documento = nu_documento;
     }
 
-    public String getId_anno() {
-        return id_anno;
-    }
 
-    public void setId_anno(String id_anno) {
-        this.id_anno = id_anno;
-    }
 
     public String getEs_entregar_doc_reglamentos() {
         return es_entregar_doc_reglamentos;

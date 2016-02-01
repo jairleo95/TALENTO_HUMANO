@@ -4,12 +4,10 @@
 <%@page import="pe.edu.upeu.application.model.Modalidad"%>
 <%@page import="pe.edu.upeu.application.model.Regimen_Laboral"%>
 <%@page import="pe.edu.upeu.application.model.Direccion"%>
-<%@page import="pe.edu.upeu.application.model.Anno"%>
 <%@page import="pe.edu.upeu.application.model.V_Contrato_dgp"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
 <jsp:useBean id="List_contrato" scope="session" class="java.util.ArrayList"/>
-<jsp:useBean id="List_Anno" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Direccion" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="list_reg_labo" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_modalidad" scope="session" class="java.util.ArrayList"/>
@@ -170,26 +168,7 @@
                                         <input type="hidden" name="id_rol_ses" id="id_rol_s" value="<%=idrol%>">
                                         <input type="hidden" name="TIPO_PLANILLA"  value="<%%>">
                                         <input type="hidden" name="HORARIO"  value="">
-                                        <section class="col col-2">
-                                            <label class="select" id="titulo">Año:
-                                                <select name="AÑO_ID" required="" class="input-group-sm">
-                                                    <%for (int b = 0; b < List_Anno.size(); b++) {
-                                                            Anno an = new Anno();
-                                                            an = (Anno) List_Anno.get(b);
-                                                            if (a.getId_anno() != null) {
-                                                                if (a.getId_anno().trim().equals(an.getId_anno().trim())) {
-                                                    %>
-                                                    <option value="<%=an.getId_anno()%>" selected=""><%=an.getNo_anno()%></option>
-                                                    <%} else {%>
-                                                    <option value="<%=an.getId_anno()%>"><%=an.getNo_anno()%></option>
-                                                    <%}
-                                                    } else {%>
-                                                    <option value="<%=an.getId_anno()%>"><%=an.getNo_anno()%></option>
-                                                    <%}
-                                                        }%>
-                                                </select>  
-                                            </label>
-                                        </section>
+                                
                                         <input type="hidden" name="IDDETALLE_DGP" value="<%=a.getId_dgp()%>" class="text-box id_dg" id="id_dg" >                              
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Desde:

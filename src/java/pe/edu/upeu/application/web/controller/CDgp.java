@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import pe.edu.upeu.application.dao.AnnoDAO;
 import pe.edu.upeu.application.dao.AreaDAO;
 import pe.edu.upeu.application.dao.AutorizacionDAO;
 import pe.edu.upeu.application.dao.Centro_CostoDAO;
@@ -40,7 +39,6 @@ import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UsuarioDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceAnnoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCentro_CostosDAO;
@@ -106,7 +104,6 @@ public class CDgp extends HttpServlet {
         InterfaceDocumentoDAO doc = new DocumentoDAO();
         InterfaceDetalle_Centro_Costo dcc = new Detalle_Centro_Costo_DAO();
         Map<String, Object> rpta = new HashMap<String, Object>();
-        InterfaceAnnoDAO anno = new AnnoDAO();
         InterfacePuestoDAO puesto = new PuestoDAO();
         InterfaceContratoDAO con = new ContratoDAO();
         InterfaceCentro_CostosDAO cc = new Centro_CostoDAO();
@@ -397,11 +394,9 @@ public class CDgp extends HttpServlet {
                     if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("0")) {
                         String iddgp = request.getParameter("iddgp");
                         String id_dir = puesto.List_Puesto_x_iddgp(iddgp);
-                        sesion.setAttribute("List_Anno", anno.List_Anno());
                         sesion.setAttribute("LIST_ID_DGP", dgp.LIST_ID_DGP(iddgp));
                         sesion.setAttribute("List_Puesto", puesto.List_Puesto());
                         sesion.setAttribute("Listar_Direccion", dir.Listar_Direccion());
-                        sesion.setAttribute("List_anno_max", anno.List_anno_max());
                         sesion.setAttribute("List_modalidad", con.List_modalidad());
                         sesion.setAttribute("list_reg_labo", con.list_reg_labo());
                         sesion.setAttribute("List_grup_ocu", gr.List_grup_ocu());
@@ -429,11 +424,9 @@ public class CDgp extends HttpServlet {
                         response.sendRedirect("Vista/Contrato/Reg_Contrato.jsp?num=" + asig + "&id_direc=" + id_dir + "&fe_subs=" + fe_subs);
 
                     } else if (num == 0 & idrol.trim().equals("ROL-0006") & dgp.LIST_ID_DGP(ID_DGP).get(0).getEs_dgp().equals("1")) {
-                        String ida1 = anno.List_Anno_Max_Cont(idtr);
 
                         String id_cto = con.Contrato_max(idtr);
                         String id_pu = puesto.puesto(id_cto);
-                        sesion.setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador_contrato(idtr));
                         sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
                         sesion.setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
                         sesion.setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
@@ -442,12 +435,10 @@ public class CDgp extends HttpServlet {
                         sesion.setAttribute("List_tipo_contrato", l.List_tipo_contrato());
                         sesion.setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
                         sesion.setAttribute("list_reg_labo", con.list_reg_labo());
-                        response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
+                        response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?idtr=" + idtr + "&id_cto=" + id_cto);
                     } else {
-                        String ida1 = anno.List_Anno_Max_Cont(idtr);
                         String id_cto = con.Contrato_max(idtr);
                         String id_pu = puesto.puesto(id_cto);
-                        sesion.setAttribute("List_Anno_trabajador", anno.List_Anno_trabajador_contrato(idtr));
                         sesion.setAttribute("Lis_c_c_id_contr", cc.Lis_c_c_id_contr(idtr));
                         sesion.setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_cto));
                         sesion.setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());
@@ -456,7 +447,7 @@ public class CDgp extends HttpServlet {
                         sesion.setAttribute("List_x_fun_x_idpu", fu.List_x_fun_x_idpu(id_pu));
                         sesion.setAttribute("List_tipo_contrato", l.List_tipo_contrato());
                         sesion.setAttribute("list_reg_labo", con.list_reg_labo());
-                        response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?anno=" + ida1 + "&idtr=" + idtr + "&id_cto=" + id_cto);
+                        response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?idtr=" + idtr + "&id_cto=" + id_cto);
                     }
                 } else {
 
