@@ -282,7 +282,7 @@
                                             <input type="hidden" class="val_aut<%=(f + 1)%>" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                             <input type="hidden" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                             <input type="hidden" class="correos_<%=(f + 1)%>" value="&IDTR=<%=a.getId_trabajador()%>&co_inst=<%=a.getDi_correo_inst()%>&co_pers=<%=a.getDi_correo_personal()%>"/>
-                                            <td style="color: red; font-weight: bold;"><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>"><%=a.getDe_pasos()%></a></td>
+                                            <td class="text-info"><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>"><strong><%=a.getDe_pasos()%></strong></a></td>
                                             <td ><%=a.getFe_creacion()%></td>
                                             <td><%if (a.getLi_motivo() != null) {
                                                     if (a.getLi_motivo().trim().equals("1")) {
@@ -727,14 +727,14 @@
                             }).done(function () {
 
                             });
-                       /*     $.ajax({
-                              //  async: false,
-                                url: "../../autorizacion",
-                                type: "POST",
-                                data: "opc=Enviar_Correo" + $(".correos_" + r).val()
-                            }).done(function () {
-
-                            });*/
+                            /*     $.ajax({
+                             //  async: false,
+                             url: "../../autorizacion",
+                             type: "POST",
+                             data: "opc=Enviar_Correo" + $(".correos_" + r).val()
+                             }).done(function () {
+                             
+                             });*/
                         }
                     }
                     window.location.href = "../../autorizacion?opc=mens_cod_huella";
@@ -754,11 +754,11 @@
                 + '<thead><tr><th class="hasinput"></th>'
                 + '<th class="hasinput icon-addon" style="width:100px"><input   placeholder="Fecha" class="form-control filtrar_fecha">'
                 + ' <label for="dateselect_filter" class="glyphicon glyphicon-calendar no-margin padding-top-15" rel="tooltip" title="" data-original-title="Filter Date"></label>'
-                + '  </th> <th class="hasinput" style="width:16%"><input type="text" class="form-control" placeholder="Filtrar por nombre" /></th>'
-                + '<th class="hasinput" style="width:18%"><input type="text" class="form-control" placeholder="Filtrar por puesto" /> </th>'
-                + '<th class="hasinput" style="width:18%"><input type="text" class="form-control" placeholder="Filtrar por area" /> </th>'
-                + '<th class="hasinput" style="width:16%"><input type="text" class="form-control" placeholder="Filtrar por departamento" /></th>'
-                + '<th class="hasinput" style="width:20%" > </th>'
+                + '  </th> <th class="hasinput" ><input type="text" class="form-control" placeholder="Filtrar por nombre" /></th>'
+                + '<th class="hasinput" ><input type="text" class="form-control" placeholder="Filtrar por puesto" /> </th>'
+                + '<th class="hasinput" ><input type="text" class="form-control" placeholder="Filtrar por area" /> </th>'
+                + '<th class="hasinput" ><input type="text" class="form-control" placeholder="Filtrar por departamento" /></th>'
+                + '<th class="hasinput"  > </th>'
                 + ' <th class="hasinput" ></th>'
                 + '  <th class="hasinput"></th>'
                 + ' <th class="hasinput" > </th>'
@@ -769,7 +769,8 @@
                 + '  <th data-hide="phone,tablet"><strong>Puesto</strong></th>'
                 + '  <th data-hide="phone,tablet"><strong>Area</strong></th>'
                 + '  <th data-hide="phone,tablet"><strong>Departamento</strong></th>'
-                + '  <th data-hide="phone,tablet"><strong>Requerimiento</strong></th>'
+                + '  <th data-hide="phone,tablet" style="width:18%"><strong>Requerimiento</strong></th>'
+                + '  <th ><strong>Descripcion</strong></th>'
                 + ' <th  data-hide="phone,tablet">Fecha de Creación</th> '
                 + '<th  data-hide="phone,tablet">Fecha de Autorización</th>'
                 + ' <th  data-hide="phone,tablet">Motivo</th>'
@@ -785,7 +786,7 @@
             prevText: '<i class="fa fa-chevron-left"></i>',
             nextText: '<i class="fa fa-chevron-right"></i>',
             onClose: function (dateText, inst) {
-                filtrar_mes_año()
+                filtrar_mes_año();
             }
         });
         $('.filtrar_fecha').datepicker('setDate', new Date());
@@ -833,17 +834,17 @@
         var text_html = "";
         $.post("../../autorizacion", "opc=List_Dgp_Aut&mes=" + mes + "&año=" + año, function (objJson) {
             var lista = objJson.lista;
-            if (objJson.rpta == -1) {
+            if (objJson.rpta === -1) {
                 alert(objJson.mensaje);
                 return;
             }
             var count = 0;
             for (var i = 0; i < lista.length; i++) {
-                if ((i + 1) < lista.length) {
-                    if (lista[i].id_dgp == lista[i + 1].id_dgp) {
-                        i++;
-                    }
-                }
+                /* if ((i + 1) < lista.length) {
+                 if (lista[i].id_dgp == lista[i + 1].id_dgp) {
+                 i++;
+                 }
+                 }*/
                 count++;
                 //alert(lista[i + 1].id_dgp)
                 text_html += "<tr>";
@@ -854,16 +855,17 @@
                 text_html += "<td>" + lista[i].area + "</td>";
                 text_html += "<td>" + lista[i].dep + "</td>";
                 text_html += "<td>" + lista[i].req + "</td>";
+                text_html += "<td class='text-success'><strong>" + lista[i].paso + "</strong></td>";
                 text_html += "<td>" + lista[i].fecha_c + "</td>";
                 text_html += "<td>" + lista[i].fecha_aut + "</td>";
-                if (lista[i].motivo == '1') {
+                if (lista[i].motivo === '1') {
                     text_html += "<td>Trabajador Nuevo</td>";
-                } else if (lista[i].motivo == '2') {
+                } else if (lista[i].motivo === '2') {
                     text_html += "<td>Renovación</td>";
                 }
-                if (lista[i].mfl == '0') {
+                if (lista[i].mfl === '0') {
                     text_html += "<td>No</td>";
-                } else if (lista[i].mfl == '1') {
+                } else if (lista[i].mfl === '1') {
                     text_html += "<td>Si</td>";
                 }
                 text_html += "</tr>";
@@ -920,7 +922,7 @@
     })
 
 </script>
-    </body>
+</body>
 </html>
 <%
         List_id_Autorizacion.clear();
