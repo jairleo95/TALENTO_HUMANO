@@ -232,7 +232,7 @@
                     <tr><td class="text-info table-bordered"><strong>Puesto:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_puesto()%></p><input type="hidden" class="id_pu" value="<%=n.getId_puesto()%>" name="puesto"></td> </tr>
                                 <%
                                     if (Lis_c_c_id_contr.size() > 0) {
-                                        Double cantidad = 0.0;
+                                        double cantidad = 0.0;
                                         for (int q = 0; q < Lis_c_c_id_contr.size(); q++) {
                                             Centro_Costos cc = new Centro_Costos();
                                             cc = (Centro_Costos) Lis_c_c_id_contr.get(q);
@@ -422,7 +422,7 @@
                         }
                             %> </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>¿Firmo contrato?:</strong></td><td class="table-bordered" colspan="6"><%
-                        if (idrol.trim().equals("ROL-0006") && n.getEs_firmo_contrato() == null) {%>
+                        if (idrol.trim().equals("ROL-0006") & n.getEs_firmo_contrato() == null) {%>
                             <a href="../../contrato?fc=s&idc=<%=n.getId_trabajador()%>"  class="boton">SI</a>o<a href="" class="boton">NO</a>
                             <%} else {
                                     if (n.getEs_firmo_contrato() != null) {
@@ -431,9 +431,11 @@
                                         }
                                         if (n.getEs_firmo_contrato().equals("2")) {
                                             out.println("No");
+                                        } else if (n.getEs_firmo_contrato().equals("0")) {
+                                            out.println("Por confirmar");
                                         }
                                     } else {
-                                        out.println("aun no se firma");
+                                        out.println("Por confirmar");
                                     }
 
                                 }%></td></tr>
@@ -489,7 +491,7 @@
                                     out.print("NO DEFINIDO");
                                 }%> </td></tr> 
                             <%}%>
-                    <%if (List_x_fun_x_idpu.size() > 0) {%>
+                            <%if (List_x_fun_x_idpu.size() > 0) {%>
                     <tr><td class="text-info table-bordered" colspan="8" style="text-align:center;">FUNCIONES</td></tr>
                     <%for (int fu = 0; fu < List_x_fun_x_idpu.size(); fu++) {
                             Funciones fun = new Funciones();

@@ -614,6 +614,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 rec.put("motivo", rs.getString("LI_MOTIVO"));
                 rec.put("mfl", rs.getString("ES_MFL"));
                 rec.put("id_dgp", rs.getString("id_dgp"));
+                rec.put("paso", rs.getString("DE_PASOS"));
                 lista.add(rec);
             }
             rs.close();
