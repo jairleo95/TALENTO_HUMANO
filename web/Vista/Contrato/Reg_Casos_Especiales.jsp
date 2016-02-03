@@ -16,7 +16,6 @@
 <%@page import="pe.edu.upeu.application.model.Modalidad"%>
 <%@page import="pe.edu.upeu.application.model.Regimen_Laboral"%>
 <%@page import="pe.edu.upeu.application.model.Direccion"%>
-<%@page import="pe.edu.upeu.application.model.Anno"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.When"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%@page import="pe.edu.upeu.application.model.Requerimiento"%>
@@ -178,24 +177,6 @@
                                                 <fieldset id="fila-agregar">
 
                                                     <div class="row" >
-
-                                                        <section class="col col-1">
-                                                            <label class="select" id="titu">Año:
-                                                                <select name="AÑO_ID" required="" class="input-group-sm">
-                                                                    <%  String MAX = request.getParameter("MAX_ID");
-                                                                        for (int i = 0; i < LISTAR_ANNO.size(); i++) {
-                                                                            Anno a = new Anno();
-                                                                            a = (Anno) LISTAR_ANNO.get(i);
-                                                                            if (a.getId_anno().trim().equals(MAX)) {
-                                                                    %>
-                                                                    <option value="<%=a.getId_anno()%>" selected="selected"  ><%=a.getNo_anno()%></option> 
-                                                                    <%}%>
-                                                                    <option value="<%=a.getId_anno()%>" ><%=a.getNo_anno()%></option>            
-                                                                    <%}%>
-
-                                                                </select> 
-                                                            </label>
-                                                        </section>
                                                         <section class="col col-2 ">
                                                             <label class="input" id="titu">Desde: 
                                                                 <input type="date" name="FEC_DESDE"  class="input-group-sm" required="">

@@ -84,6 +84,7 @@ public class Fotos_TrabajadorDAO implements InterfaceFotos_TrabajadorDAO {
             while (rs.next()) {
                 Map<String, Object> cd = new HashMap<String, Object>();
                 cd.put("ar_foto",rs.getString("ar_foto"));
+                cd.put("EFOTO",rs.getString("EFOTO"));
               lista.add(cd);
             }
       } catch (SQLException ex) {

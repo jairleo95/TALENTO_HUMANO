@@ -5,7 +5,6 @@
 %>
 <%@page import="pe.edu.upeu.application.model.Tipo_Contrato"%>
 <%@page import="pe.edu.upeu.application.model.Funciones"%>
-<%@page import="pe.edu.upeu.application.model.Anno"%>
 <%@page import="pe.edu.upeu.application.model.Grupo_Ocupaciones"%>
 <%@page import="pe.edu.upeu.application.model.Sub_Modalidad"%>
 <%@page import="pe.edu.upeu.application.model.Modalidad"%>
@@ -21,7 +20,6 @@
 <%@page import="pe.edu.upeu.application.dao_imp.InterfacePlantillaDAO"%>
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
-<%@page import="pe.edu.upeu.application.model.X_List_Anno_Id_Tr_DGP"%>
 
 <jsp:useBean id="List_contra_x_idcto" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Situacion_Actual" scope="session" class="java.util.ArrayList"/>
@@ -153,7 +151,8 @@
     <body>
     <center>
         <form action="../../contrato" method="get"class="smart-form">
-            <%String idanno = request.getParameter("anno");
+            <%
+                String ID_CTO = request.getParameter("id_cto");
                 if (List_contra_x_idcto.size() == 0) {%>
             <h3>Aun no se ha hecho Contrato.</h3>
             <%
@@ -163,42 +162,12 @@
                 <div class="row" align="center">
                     <section class="col col-lg-12 ">
                         <label><strong>Contratos:</strong></label>
-                        <label class="select ">
-                            <select name="ida" class="select anno " >
-                                <%
-                                    String ID_CTO = request.getParameter("id_cto");
-                                    for (int cv = 0; cv < List_Anno_trabajador.size(); cv++) {
-                                        Anno an = new Anno();
-                                        an = (Anno) List_Anno_trabajador.get(cv);
-                                        if (an.getId_contrato().equals(ID_CTO.trim())) {
-                                %><option value="<%=an.getId_contrato()%>" selected=""><%= (cv + 1) + ") De " + an.getFe_desde()%><%if (an.getFe_hasta() != null) {
-                                        out.print(" Al " + an.getFe_hasta());
-                                    } else {
-                                        out.print(" hasta indefinidamente");
-                                    }%></option><%
-                                    } else {
-                                    %><option value="<%=an.getId_contrato()%>"><%= (cv + 1) + ") De " + an.getFe_desde()%><%if (an.getFe_hasta() != null) {
-                                            out.print(" Al " + an.getFe_hasta());
-                                        } else {
-                                            out.print(" hasta indefinidamente");
-                                        }%></option><%
-                                                }
-                                            }%>
-                            </select> 
+                        <label class="select SelectorListaContrato">
                         </label>
                     </section>
-                    <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
-                    <input type="hidden" name="opc" value="actualizar" ><button type="submit"  style="display:none" class="btn_act"   >Actualizar</button>
+                    <input type="hidden" name="idtr" class="idtr"  value="<%=request.getParameter("idtr")%>">
                 </div>
             </div>
-
-            <script>
-                $(document).ready(function () {
-                    $(".anno").change(function () {
-                        $(".btn_act").click();
-                    });
-                });
-            </script>
         </form>
         <div>
             <form action="">
@@ -214,6 +183,7 @@
                         X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
                         n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(b);
                 %>
+                <input type="hidden"  class="idc" value="<%=n.getId_contrato()%>"></td>
 
                 <%if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0001")) {
                 %>
@@ -231,21 +201,21 @@
                 <%} else {%>
                 <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Subir_Contrato2&idc=<%=n.getId_contrato()%>" > <span class="btn-label"><i class="fa fa-cloud-upload"></i></span>Subir Contrato Firmado</a>
                         <%}%>
-                
-                        <%}
-                            if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0007") || /*idrol.trim().equals("ROL-0009") || */ idrol.trim().equals("ROL-0001")) {%>
-                        <%if (idrol.trim().equals("ROL-0006")) {
-                                //validar si puede editar contrato
-                                if (oContrato.validar_editar_contrato(id_user, ID_CTO)) {
-                        %>
-                <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Editar&idc=<%=n.getId_contrato()%>&idtr=<%=request.getParameter("idtr")%>&id_dg=<%=request.getParameter("id_dg")%>" > <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Editar Contrato</a>
+
+                <%}
+                    if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0007") || /*idrol.trim().equals("ROL-0009") || */ idrol.trim().equals("ROL-0001")) {%>
+                <%if (idrol.trim().equals("ROL-0006")) {
+                        //validar si puede editar contrato
+                        if (oContrato.validar_editar_contrato(id_user, ID_CTO)) {
+                %>
+                <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Editar&idc=<%=n.getId_contrato()%>&idtr=<%=request.getParameter("idtr")%>&id_dg=<%=n.getId_dgp()%>" > <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Editar Contrato</a>
                 <br>   
                 <br>   
                 <p class="alert alert-info"><i class="fa fa-info"></i> ¡Una vez procesado la informacion usted ya no podra <strong>editar</strong> este contrato!</p>
                 <%
                     }
                 } else {%>
-                <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Editar&idc=<%=n.getId_contrato()%>&idtr=<%=request.getParameter("idtr")%>&id_dg=<%=request.getParameter("id_dg")%>" > <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Editar Contrato</a>
+                <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Editar&idc=<%=n.getId_contrato()%>&idtr=<%=request.getParameter("idtr")%>&id_dg=<%=n.getId_dgp()%>" > <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Editar Contrato</a>
                         <%}
                             }%>
                         <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
@@ -277,7 +247,8 @@
                     <tr><td class="text-info table-bordered"><strong>Total Porcentaje:</strong></td>
                         <td colspan="6" class="table-bordered" ><p><%=cantidad%> %</p></td>
                     </tr><%} else {%>
-                    <tr><td class="text-info table-bordered"><strong>Centro costo </strong></td><td colspan="6" class="table-bordered" ><p>No tiene</p></td></tr><%}%>
+                    <tr><td class="text-info table-bordered"><strong>Centro costo </strong></td><td colspan="6" class="table-bordered" ><p>No tiene</p></td>
+                    </tr><%}%>
 
                     <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6" class="table-bordered" ><p><%
                         if (n.getLi_condicion() != null) {
@@ -290,7 +261,6 @@
                         } else {
                             out.print("No tiene");
                         }%> </p></td></tr>
-                    <!--<tr><td>Funcion:</td><td><? /*echo $list_rhc[$index][5];*/?> </td></tr>-->
                     <tr><td class="text-info table-bordered"><strong>Sueldo:</strong></td><td>S/.<%=n.getCa_sueldo()%></td><td class="text-info table-bordered" colspan="1"><strong>Reintegro:</strong></td><td colspan="1">S/.<%=n.getCa_reintegro()%></td><td class="text-info table-bordered" colspan="2"><strong>Bono Alimentario:</strong></td><td class="table-bordered" >S/.<%=n.getCa_bono_alimento()%> </td></tr>
                     <tr><td class="text-info table-bordered"><strong>Bev:</strong></td><td class="table-bordered"  colspan="6">S/.<%if (n.getCa_bev() != null) {
                             out.print(n.getCa_bev());
@@ -303,11 +273,7 @@
                             out.print("--");
                         }%> </td></tr>
                     <tr><td class="text-info table-bordered"><strong>Asignación Familiar:</strong></td><td class="table-bordered"  class="table-bordered" colspan="6"><%= "S/." + n.getCa_asig_familiar()%> </td></tr>
-                    <!-- <tr><td class="text-info table-bordered"><strong>Bonificacion Puesto:</strong></td><td class="table-bordered"  colspan="6">S/.<%/*if (n.getCa_bonificacion_p()!= null) {
-                         out.print(n.getCa_bonificacion_p());
-                         } else {
-                         out.print("0");
-                         }*/%> </td></tr>-->
+
                     <tr><td class="text-info table-bordered"><strong>Sueldo Total:</strong></td><td class="table-bordered" colspan="6">S/.<%if (n.getCa_sueldo_total() != null) {
                             out.print(n.getCa_sueldo_total());
                         } else {
@@ -315,14 +281,14 @@
                         }%> </td></tr>
                     <tr>
                         <td class="text-info table-bordered"><strong>Religion:</strong></td><td class="table-bordered" colspan="6"><strong class="text-danger"><%if (n.getLi_religion().equals("1")) {
-                            out.print("Adventista");
-                        } else if (n.getLi_religion().equals("2")) {
-                            out.print("Católico");
-                        } else if (n.getLi_religion().equals("3")) {
-                            out.print("Otro");
-                        } else if (n.getLi_religion() == null) {
-                            out.print("Ninguna");
-                        }%></strong></td>
+                                out.print("Adventista");
+                            } else if (n.getLi_religion().equals("2")) {
+                                out.print("Católico");
+                            } else if (n.getLi_religion().equals("3")) {
+                                out.print("Otro");
+                            } else if (n.getLi_religion() == null) {
+                                out.print("Ninguna");
+                            }%></strong></td>
                     </tr>
                     <tr><td class="text-info table-bordered"><strong>Tipo Pago Horas:</strong></td><td class="table-bordered"  colspan="6"><%
                         if (n.getTi_hora_pago() != null) {
@@ -523,9 +489,6 @@
                                     out.print("NO DEFINIDO");
                                 }%> </td></tr> 
                             <%}%>
-                    <!--   <tr><td>Nro. Documento:</td><td><? /*echo $list_rhc[$index][43];?> </td></tr>   
-                   <tr><td>Pares:</td><td><? echo $list_rhc[$index][36];?> </td></tr>   
-                     <tr><td>Apoyo:</td><td><? echo $list_rhc[$index][41];*/?> </td></tr>   -->
                     <%if (List_x_fun_x_idpu.size() > 0) {%>
                     <tr><td class="text-info table-bordered" colspan="8" style="text-align:center;">FUNCIONES</td></tr>
                     <%for (int fu = 0; fu < List_x_fun_x_idpu.size(); fu++) {
@@ -601,75 +564,90 @@
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script>
-                if (!window.jQuery) {
-                    document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                }
+    if (!window.jQuery) {
+        document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+    }
 </script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script>
-                if (!window.jQuery.ui) {
-                    document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                }
+    if (!window.jQuery.ui) {
+        document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+    }
 </script>
 <!-- CUSTOM NOTIFICATION -->
 <script src="../../js/notification/SmartNotification.min.js"></script>
 <script>
-                $(document).ready(function () {
-                    $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-                        $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+    function SelectorListaContrato(objSelector, idtr, idc) {
+        $.ajax({
+            url: "../../contrato", type: 'POST', data: "opc=SelectorListaContrato&idtr=" + idtr + "&idc=" + idc,
+            success: function (data, textStatus, jqXHR) {
+                if (data.rpta) {
+                    objSelector.append(data.html);
+                    $(".anno").change(function () {
+                        window.location.href = '../../contrato?opc=actualizar&idtr=' + $(".idtr").val() + '&idc=' + $(this).val();
                     });
-                    $(".ck_habilitar_is").click(function () {
-                        if ($(".ck_habilitar_is").prop('checked')) {
-                            $.ajax({
-                                url: "../../contrato",
-                                data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=1"
-                            }).done(function () {
-                                $.smallBox({
-                                    title: "¡Alerta!",
-                                    content: "Se ha autortizado que la secretaria pueda subir e imprimir el contrato.",
-                                    color: "#296191",
-                                    iconSmall: "fa fa-cloud",
-                                    timeout: 4000
-                                });
+                }
+            }
+        });
+    }
+    $(document).ready(function () {
+        $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+            $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+        });
+        SelectorListaContrato($(".SelectorListaContrato"), $(".idtr").val(), $(".idc").val());
 
-                            }).fail(function (jqXHR, textStatus, errorThrown) {
-                                $.smallBox({
-                                    title: "¡Error!",
-                                    // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
-                                    content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
-                                    color: "#C46A69",
-                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                    timeout: 6000
-                                });
-                            });
-                        } else {
-                            $.ajax({
-                                url: "../../contrato",
-                                data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=2"
-                            }).done(function () {
-                                $.smallBox({
-                                    title: "¡Alerta!",
-                                    content: "Se ha autortizado que la secretaria <strong>NO</strong> pueda subir e imprimir el contrato.",
-                                    color: "#C79121",
-                                    iconSmall: "fa fa-cloud",
-                                    timeout: 4000
-                                });
-                            }).fail(function (jqXHR, textStatus, errorThrown) {
-                                $.smallBox({
-                                    title: "¡Error!",
-                                    // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
-                                    content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
-                                    color: "#C46A69",
-                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                    timeout: 6000
-                                });
-                            });
-                        }
+        $(".ck_habilitar_is").click(function () {
+            if ($(".ck_habilitar_is").prop('checked')) {
+                $.ajax({
+                    url: "../../contrato",
+                    data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=1"
+                }).done(function () {
+                    $.smallBox({
+                        title: "¡Alerta!",
+                        content: "Se ha autortizado que la secretaria pueda subir e imprimir el contrato.",
+                        color: "#296191",
+                        iconSmall: "fa fa-cloud",
+                        timeout: 4000
                     });
 
-
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    $.smallBox({
+                        title: "¡Error!",
+                        // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
+                        content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
+                        color: "#C46A69",
+                        iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                        timeout: 6000
+                    });
                 });
+            } else {
+                $.ajax({
+                    url: "../../contrato",
+                    data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=2"
+                }).done(function () {
+                    $.smallBox({
+                        title: "¡Alerta!",
+                        content: "Se ha autortizado que la secretaria <strong>NO</strong> pueda subir e imprimir el contrato.",
+                        color: "#C79121",
+                        iconSmall: "fa fa-cloud",
+                        timeout: 4000
+                    });
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    $.smallBox({
+                        title: "¡Error!",
+                        // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
+                        content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
+                        color: "#C46A69",
+                        iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                        timeout: 6000
+                    });
+                });
+            }
+        });
+
+
+    });
 </script>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
