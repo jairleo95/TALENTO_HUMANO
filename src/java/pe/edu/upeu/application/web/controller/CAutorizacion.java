@@ -50,12 +50,15 @@ public class CAutorizacion extends HttpServlet {
             String ide = (String) sesion.getAttribute("IDPER");
             String idp = (String) sesion.getAttribute("PUESTO_ID");
             String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+            String iddir = (String) sesion.getAttribute("IDDIR");
             String idrol = (String) sesion.getAttribute("IDROL");
             Map<String, Object> rpta = new HashMap<String, Object>();
             String opc = request.getParameter("opc");
             /*permisos*/
             boolean permisoAsigFam = false;
             boolean permisoEsSistema = false;
+            boolean permissionDireccionFilter = false;
+            boolean permissionDepartFilter = false;
             switch (idrol) {
                 case "ROL-0009":
                     permisoAsigFam = true;
@@ -70,7 +73,14 @@ public class CAutorizacion extends HttpServlet {
                 case "ROL-0001":
                     permisoEsSistema = true;
                     permisoAsigFam = true;
+               permissionDepartFilter = true;
                     break;
+                case "ROL-0008":
+                    permissionDireccionFilter = true;
+                    break;
+
+                default:
+                    permissionDepartFilter = true;
             }
 
             try {
@@ -93,10 +103,19 @@ public class CAutorizacion extends HttpServlet {
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
                     }
                     if (opc.equals("HDGP")) {
+
                         String iddgp = request.getParameter("iddgp");
                         out.print(iddgp);
                         dgp.HABILITAR_DGP(iddgp);
-                        sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
+                        if (permissionDepartFilter) {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
+                        }
+                        if (permissionDireccionFilter) {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir));
+                        } else {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
+                        }
+                        // sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
                         response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
 
                     }

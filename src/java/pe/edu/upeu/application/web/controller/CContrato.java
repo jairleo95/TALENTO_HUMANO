@@ -180,7 +180,10 @@ public class CContrato extends HttpServlet {
                 }
                 if (mes >= 9 && dia > 9) {
                     fe_subs = año + "-" + (mes + 1) + "-" + dia;
+                    
                 }
+                
+                
                 response.sendRedirect("Vista/Contrato/Editar_Contrato.jsp?num=" + num + "&id_direc=" + id_dir + "&fe_subs=" + fe_subs + "&id_mod=" + id_modalidad + "&num_cc=" + num_cc);
             }
             if (opc.equals("MODIFICAR CONTRATO")) {
@@ -288,7 +291,8 @@ public class CContrato extends HttpServlet {
                 sesion.setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
                 sesion.setAttribute("List_tipo_contrato", l.List_tipo_contrato());
                 sesion.setAttribute("list_reg_labo", con.list_reg_labo());
-                response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp&idtr=" + ID_TRABAJADOR + "&id_cto=" + ID_CONTRATO);
+               // con.VALIDAR_FE_HASTA_CON();
+                response.sendRedirect("Vista/Contrato/Detalle_Info_Contractualq.jsp?idtr=" + ID_TRABAJADOR + "&id_cto=" + ID_CONTRATO);
             }
 
             if (opc.equals("Detalle_Contractual")) {
