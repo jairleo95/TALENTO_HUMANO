@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSessionListener;
  *
  * @author JAIR
  */
-public class Session_System implements HttpSessionListener {
+public class SessionSystem implements HttpSessionListener {
 
     public static String num = "";
 

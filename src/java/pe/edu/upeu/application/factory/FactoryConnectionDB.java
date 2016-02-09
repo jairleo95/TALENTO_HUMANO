@@ -30,6 +30,7 @@ public class FactoryConnectionDB {
     //public static final String url = "C:\\Users\\Erick Alexander\\Documents\\NetBeansProjects\\sofware\\TALENTO_HUMANO\\web\\Archivo\\";
    // public static final String url_archivos="http://localhost:8092/TALENTO_HUMANO/Archivo/" ;
     public static final String url_archivos="http://procesosrh-app.upeu/TALENTO_HUMANO/Archivo/" ;
+   
     public static ConexionBD open(int typeDB) {
         switch (typeDB) {
             case FactoryConnectionDB.MYSQL:
