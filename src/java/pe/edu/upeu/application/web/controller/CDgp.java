@@ -86,6 +86,7 @@ public class CDgp extends HttpServlet {
 
         /*Declaramos*/
         HttpSession sesion = request.getSession(true);
+        String iddir = (String) sesion.getAttribute("IDDIR");
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         String idpuesto = (String) sesion.getAttribute("PUESTO_ID");
         String iduser = (String) sesion.getAttribute("IDUSER");
@@ -117,14 +118,20 @@ public class CDgp extends HttpServlet {
         InterfacePeriodo_PagoDAO pp = new Periodo_PagoDAO();
         /*Permisoss*/
         boolean permisoAdmin = false;
+        boolean permissionDireccionFilter = false;
+        boolean permissionDepartFilter = false;
         switch (idrol) {
             case "ROL-0001":
+               // permissionDireccionFilter = true;
+                 permissionDepartFilter = true;
                 permisoAdmin = true;
                 break;
-            case "":
+            case "ROL-0008":
                 permisoAdmin = false;
+                permissionDireccionFilter = true;
                 break;
             default:
+                permissionDepartFilter = true;
                 permisoAdmin = false;
         }
         try {
@@ -463,7 +470,15 @@ public class CDgp extends HttpServlet {
                 response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
             }
             if (opc.equals("Proceso")) {
-                sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
+                if (permissionDepartFilter) {
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
+                }
+                if (permissionDireccionFilter) {
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir));
+                }else{
+                        sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
+                }
+
                 response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
             }
             if (opc.equals("User_Aut")) {
@@ -481,7 +496,14 @@ public class CDgp extends HttpServlet {
                 String iddgp = request.getParameter("iddgp");
                 out.print(iddgp);
                 dgp.REG_DGP_FINAL(iddgp);
-                sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
+                if (permissionDepartFilter) {
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
+                }
+                if (permissionDireccionFilter) {
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir));
+                }else{
+                        sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
+                }
                 response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp?a=t");
             }
 

@@ -378,9 +378,19 @@
                                                                     <label>Banco:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <select name="BANCO" id="banco" class="form-control input-group-sm" <% if (rol.equals("ROL-0002") || rol.equals("ROL-0005") || rol.equals("ROL-0016")) {
-                                                                                out.print("disabled");
-                                                                            } %>>
+                                                                        <%
+                                                                            boolean permissionEdit = false;
+                                                                            String disabled ="";
+                                                                            if (!rol.equals("ROL-0002") || !rol.equals("ROL-0005") || !rol.equals("ROL-0016")) {
+                                                                                permissionEdit=true;
+                                                                            }if (iduser.equals("USR-001874")) {
+                                                                                     permissionEdit=true; 
+                                                                                }
+                                                                            if (!permissionEdit) {
+                                                                                disabled="disabled";
+                                                                            }
+                                                                        %>
+                                                                        <select name="BANCO" id="banco" class="form-control input-group-sm" <%=disabled%>>
                                                                             <option value=""   selected="" >[SELECCIONE]</option>
                                                                             <%
                                                                                 for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
@@ -432,9 +442,9 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                             <%if (cs.getNo_banco_otros() != null) {%>
-                                                                        <input class="form-control input-group-sm" value="<%=cs.getNo_banco_otros()%>"   type="text" name="BANCO_OTROS" id="nu_cuen_otros" maxlength="30">
+                                                                        <input class="form-control input-group-sm" value="<%=cs.getNo_banco_otros()%>"   type="text" name="BANCO_OTROS" id="nu_cuen_otros" <%=disabled%> maxlength="30">
                                                                         <%} else {%>
-                                                                        <input class="form-control input-group-sm" value=""   type="text" name="BANCO_OTROS" id="nu_cuen_otros" maxlength="30">
+                                                                        <input class="form-control input-group-sm" value=""   type="text" name="BANCO_OTROS" id="nu_cuen_otros" maxlength="30" <%=disabled%>>
                                                                         <%}%>
                                                                     </div>
                                                                 </div>
@@ -445,9 +455,9 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                             <%if (cs.getNu_cuenta() != null) {%>
-                                                                        <input class="form-control input-group-sm" value="<%=cs.getNu_cuenta().trim()%>"   type="text" name="CUENTA" id="nu_cuen" maxlength="30">
+                                                                        <input class="form-control input-group-sm" value="<%=cs.getNu_cuenta().trim()%>"   type="text" name="CUENTA" id="nu_cuen" maxlength="30" <%=disabled%>>
                                                                         <%} else {%>
-                                                                        <input class="form-control input-group-sm" value=""   type="text" name="CUENTA" id="nu_cuen" maxlength="30">
+                                                                        <input class="form-control input-group-sm" value=""   type="text" name="CUENTA" id="nu_cuen" maxlength="30" <%=disabled%>>
                                                                         <%}%>
                                                                     </div>
                                                                 </div>
@@ -458,9 +468,9 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                             <%if (cs.getNu_cuenta_banc() != null) {%>
-                                                                        <input class="form-control input-group-sm" value="<%=cs.getNu_cuenta_banc()%>"   type="text" name="CUENTA_BANC" id="nu_cuen_ban" maxlength="30">
+                                                                        <input class="form-control input-group-sm" value="<%=cs.getNu_cuenta_banc()%>"   type="text" name="CUENTA_BANC" id="nu_cuen_ban" maxlength="30" <%=disabled%>>
                                                                         <%} else {%>
-                                                                        <input class="form-control input-group-sm" value=""   type="text" name="CUENTA_BANC" id="nu_cuen_ban" maxlength="30">
+                                                                        <input class="form-control input-group-sm" value=""   type="text" name="CUENTA_BANC" id="nu_cuen_ban" maxlength="30" <%=disabled%>>
                                                                         <%}%>
                                                                     </div>
                                                                 </div>
@@ -476,9 +486,9 @@
                                                                 <div class="form-group">
                                                                     <div class="input-g">
                                                                         <%if (cs.getEs_gem_nu_cuenta().trim().equals("1")) {%>
-                                                                        <input type="checkbox" checked="" name="GEN_NU_CUEN" id="subscription"  value="1">
+                                                                        <input type="checkbox" checked="" name="GEN_NU_CUEN" id="subscription"  value="1" <%=disabled%>>
                                                                         <%} else {%>
-                                                                        <input type="checkbox"  name="GEN_NU_CUEN" id="subscription"  value="0">
+                                                                        <input type="checkbox"  name="GEN_NU_CUEN" id="subscription"  value="0" <%=disabled%>>
                                                                         <%}%>
                                                                         <i></i>Generar Nro de Cuenta Bancaria
                                                                     </div>
@@ -672,15 +682,15 @@
                 if ($("#banco").val() == "0") {
                     $("#generar").show();
                     $("#no_cuen_otros").show();
-                    document.getElementById("nu_cuen_otros").readOnly = true;
+                   // document.getElementById("nu_cuen_otros").readOnly = true;
                     $("#texto").show();
                 }
                 if (rol !== 'ROL-0001') {
-                    document.getElementById("banco").disabled = true;
+                  /*  document.getElementById("banco").disabled = true;
                     document.getElementById("nu_cuen_otros").disabled = true;
                     document.getElementById("nu_cuen").disabled = true;
                     document.getElementById("nu_cuen_ban").disabled = true;
-                    document.getElementById("subscription").disabled = true;
+                    document.getElementById("subscription").disabled = true;*/
                 }
                 $("#banco").change(function () {
                     cuenta_bancaria($(this).val());

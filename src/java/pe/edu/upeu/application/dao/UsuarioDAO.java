@@ -120,6 +120,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 us.setAp_paterno(rs.getString("ap_paterno"));
                 us.setAp_materno(rs.getString("ap_materno"));
                 us.setAr_foto(rs.getString("ar_foto"));
+                us.setId_direccion(rs.getString("id_direccion"));
                 
                 list.add(us);
             }

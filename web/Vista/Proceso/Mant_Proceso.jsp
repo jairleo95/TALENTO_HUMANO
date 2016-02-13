@@ -101,7 +101,7 @@
                                 </header>
                                 <div>
                                     <div class="widget-body no-padding">
-                                        <form class="smart-form">
+                                        <form class="smart-form form-paso">
                                             <fieldset>
                                                 <section class="col col-lg-4">
                                                     <div class="row">
@@ -134,8 +134,10 @@
                                                 </section>
                                             </fieldset>
                                             <footer>
-                                                <button class="btn btn-primary"type="submit" id="btn-registrar" name="Enviar" value="Registrar Paso" /> Registrar Paso</button>
-                                                <button class="btn btn-default" type="button" class="btn_cancel_edit">Cancelar</button>
+                                                <input type="hidden" name="opc" class="opc" value="Registrar"/>
+                                                <input type="hidden" name="id" class="id_p" value=""/>
+                                                <button class="btn btn-primary btn-registrar" type="button" id="btn-registrar" name="Enviar" value="Registrar Paso" > Registrar Paso</button>
+                                                <button class="btn btn-default btn_cancel_edit" type="button" style="display: none"  >Cancelar</button>
                                             </footer>
                                         </form>
                                     </div>
@@ -183,7 +185,7 @@
                                             <fieldset>
                                                 <div class="row">
                                                     <section class="col col-4">
-                                                        <label>DirecciÃ³n</label>
+                                                        <label>Dirección</label>
                                                         <label class="select">
                                                             <select class=" input-sm sl_dir" required="" ></select> 
                                                             <i></i></label>      
@@ -203,7 +205,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <section class="col col-3">
-                                                        <label>SecciÃ³n:</label>
+                                                        <label>Sección:</label>
                                                         <label class="select">
                                                             <select class="input-sm sl_sec" required=""></select> 
                                                             <i></i></label>
@@ -218,7 +220,7 @@
                                                     <input type="hidden" value="" name="idpasos" class="id_pasos"  />
                                                     <input type="hidden" value="" name="nun" class="num_p"  />
                                                     <section class="col col-3" >
-                                                        <label>CÃ³digo Puesto</label>
+                                                        <label>Código Puesto</label>
                                                         <label class="select">
                                                             <select class="input-sm co_puesto" name="co_pasos">
                                                                 <option value=""></option>
@@ -573,9 +575,9 @@
             }
             $(document).ready(function () {
                 $(".btn_cancel_edit").click(function () {
-                    $("#btn-registrar").val("Registrar Paso");
+                    $("#btn-registrar").text("Registrar Paso");
                     $(".opc").val("Registrar");
-                    $(".form_paso")[0].reset();
+                    $(".form-paso")[0].reset();
                     $(this).hide();
                 });
                 $(".form_puesto").hide();
@@ -595,21 +597,21 @@
                 var num = 1;
                 listar_Proceso();
                 Listar_Paso($("#select-proceso").val());
-                $("#btn-registrar").click(
-                        function () {
-                            var pr = $("#select-proceso").val();
-                            $.post("../../paso", $("#form-paso").serialize(), function (objJson) {
-                                if (objJson.rpta == -1) {
-                                    alert(objJson.mensaje);
-                                    return;
-                                }
-                                Listar_Paso(pr);
-                            });
-                            $("#btn-registrar").val("Registrar Paso");
-                            $(".opc").val("Registrar");
-                            $("#form-paso")[0].reset();
-                            return false;
+                $("#btn-registrar").click(function () {
+                    var pr = $("#select-proceso").val();
+                    $.post("../../paso", $(".form-paso").serialize(), function (objJson) {
+                        if (objJson.rpta === "-1") {
+                            alert(objJson.mensaje);
+                            return;
+                        } else {
+                            Listar_Paso(pr);
                         }
+                    });
+                    $("#btn-registrar").text("Registrar Paso");
+                    $(".opc").val("Registrar");
+                    $(".form-paso")[0].reset();
+                    return false;
+                }
                 );
                 function listar_Proceso() {
                     var s = $("#select-proceso");
@@ -637,7 +639,7 @@
                             data: $(".form_puesto").serialize() + "&opc=Reg_puesto_paso"
                         }).done(function () {
                             list_puesto($(".num_p").val());
-                            alert("Â¡Registrado Exitosamente!");
+                            alert("¡Registrado Exitosamente!");
                         }).fail(function (objJson) {
                             alert(objJson.mensaje);
                         });
@@ -678,7 +680,7 @@
                                 txt_append += '<div class="pull-right"><label ></label></div>';
                             } else {
 
-                                txt_append += '<div class="pull-right"><label style="font-size: 12px;">' + lista[i].det +'&nbsp;&nbsp;</label></div>';
+                                txt_append += '<div class="pull-right"><label style="font-size: 12px;">' + lista[i].det + '&nbsp;&nbsp;</label></div>';
                             }
 
                             // '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
@@ -704,13 +706,13 @@
                             $(".co_paso").val($(".td_co" + $(this).val()).text());
                             $("#select-proceso").val($(".td_id_pro" + $(this).val()).text());
                             $(".id_p").val($(".id_paso" + $(this).val()).val());
-                            $("#btn-registrar").val("Modificar");
+                            $(".btn-registrar").text("Modificar");
                             $(".opc").val("Modificar");
                         });
                         $(".btn-eliminar").click(
                                 function () {
                                     var pr_e = $("#select-proceso").val();
-                                    if (confirm("Â¿Esta Seguro de Eliminar?")) {
+                                    if (confirm("¿Esta Seguro de Eliminar?")) {
                                         $.post("../../paso", "opc=Eliminar&paso=" + $(".id_paso" + $(this).val()).val(), function () {
                                             Listar_Paso(pr_e);
                                         });

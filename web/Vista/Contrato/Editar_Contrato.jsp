@@ -168,7 +168,7 @@
                                         <input type="hidden" name="id_rol_ses" id="id_rol_s" value="<%=idrol%>">
                                         <input type="hidden" name="TIPO_PLANILLA"  value="<%%>">
                                         <input type="hidden" name="HORARIO"  value="">
-                                
+
                                         <input type="hidden" name="IDDETALLE_DGP" value="<%=a.getId_dgp()%>" class="text-box id_dg" id="id_dg" >                              
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Desde:
@@ -196,9 +196,17 @@
                                                     }%>
                                             </label>
                                         </section>
+                                        <%
+                                            boolean permissionEditContract = false;
+                                            String disabledEdit = "";
+                                            if (idrol.equals("ROL-0001")) {
+                                                permissionEditContract = true;
+                                            }
+                                            disabledEdit = (permissionEditContract) ? "" : "disabled";
+                                        %>
                                         <section class="col col-3" id="titulo">
                                             <label class="select" id="titulo">Dirección:
-                                                <select name="DIRECCION" disabled="" class="select_dir input-group-sm" id="select_dir">
+                                                <select name="DIRECCION" <%=disabledEdit%> class="select_dir input-group-sm" id="select_dir">
                                                     <%
                                                         for (int c = 0; c < Listar_Direccion.size(); c++) {
                                                             Direccion dir = new Direccion();
@@ -208,36 +216,35 @@
                                                     %>
                                                     <option value="<%=dir.getId_direccion()%>" selected=""><%=dir.getNo_direccion()%></option>
                                                     <%} else {%>
-
+                                                    <option value="<%=dir.getId_direccion()%>"><%=dir.getNo_direccion()%></option> 
                                                     <%}
                                                     } else {%>
-                                                    <option value="<%=dir.getId_direccion()%>"><%=dir.getNo_direccion()%></option> 
                                                     <%}
                                                         }%>
                                                 </select>  </label>
                                         </section>
                                         <section class="sec_dep col col-3" id="titulo">
                                             <label class="select" id="titulo">Departamento:
-                                                <select name="DEPARTAMENTO_ID" disabled="" class="selec_dep input-group-sm"  id="selec_dep">
+                                                <select name="DEPARTAMENTO_ID" <%=disabledEdit%> class="selec_dep input-group-sm"  id="selec_dep">
                                                     <option value="">[SELECCIONE]</option>
                                                 </select>  </label>
                                         </section>
                                         <section class="sec_are col col-3" id="titulo">
                                             <label class="select" id="titulo">Area:
-                                                <select name="AREA_ID" disabled="" class="Selec_Area input-group-sm" id="Selec_Area">
+                                                <select name="AREA_ID" <%=disabledEdit%> class="Selec_Area input-group-sm" id="Selec_Area">
                                                     <option value="">[SELECCIONE]</option>
                                                 </select>  
                                             </label>
                                         </section>
                                         <section class="sec_sec col col-3" id="titulo">
                                             <label class="select" id="titulo">Sección:
-                                                <select name="SECCION_ID" disabled="" class="select_sec input-group-sm" id="select_sec">
+                                                <select name="SECCION_ID" <%=disabledEdit%> class="select_sec input-group-sm" id="select_sec">
                                                     <option value="">[SELECCIONE]</option>
                                                 </select>  </label>
                                         </section>
                                         <section class="col col-3" id="titulo">
                                             <label class="select" id="titulo">Puesto:
-                                                <select name="PUESTO_ID" required="" disabled="" class="pu_id_se input-group-sm" id="pu_id_se">
+                                                <select name="PUESTO_ID" required="" <%=disabledEdit%> class="pu_id_se input-group-sm" id="pu_id_se">
                                                     <option value="" selected="selected"></option>
                                                     <option value=""></option>
                                                 </select>  </label>
@@ -556,8 +563,8 @@
 
                                     </div>
                                 </fieldset>
-                                                <fieldset id="fila-agregar">
-                                                </fieldset>
+                                <fieldset id="fila-agregar">
+                                </fieldset>
                                 <fieldset>
                                     <h6><label id="titulo">Horas:</label></h6>
                                     <div class="row" >
@@ -854,11 +861,11 @@
         <!-- Voice command : plugin -->
 
         <!-- PAGE RELATED PLUGIN(S) -->
-            <script src="../../js/plugin/knob/jquery.knob.min.js"></script>
+        <script src="../../js/plugin/knob/jquery.knob.min.js"></script>
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
-           <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
+        <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
         <script type="text/javascript">
 
                                         function showEsDiezmo() {
@@ -1095,7 +1102,7 @@
             Listar_plantilla();
             listar_sub_mod();
             Listar_Direccion();
-          ListCentroCostoDGP($("#id_dgp").val());
+            ListCentroCostoDGP($("#id_dgp").val());
             list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato", "id_tipo_contrato", "de_ti_contrato", "1", $(".id_ti_contrato").val());
             var a = $("#select-sub-mod");
             var c = $("#Selec_Area");

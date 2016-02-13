@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -334,12 +336,18 @@ public class DgpDAO implements InterfaceDgpDAO {
     }
 
     @Override
-    public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep) {
+    public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep,String id_dir) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHVD_ES_REQUERIMIENTO where ID_DEPARTAMENTO='" + id_dep + "' AND ES_PORCENT IS NOT NULL  ORDER BY TO_NUMBER(SUBSTR(ID_DGP,5,LENGTH(ID_DGP))) DESC";
+        String sql = "select * from RHVD_ES_REQUERIMIENTO where  ES_PORCENT IS NOT NULL  ";
+        sql +=(id_dep.trim().equals(""))?"":" and ID_DEPARTAMENTO='" + id_dep.trim() + "' ";
+        sql +=(id_dir.trim().equals(""))?"":" and ID_DIRECCION='" + id_dir.trim() + "' ";
+    
         if (id_dep.equals("DPT-0019")) {
-            sql = "select * from RHVD_ES_REQUERIMIENTO where ES_PORCENT IS NOT NULL  ORDER BY TO_NUMBER(SUBSTR(ID_DGP,5,LENGTH(ID_DGP))) DESC";
+            sql = "select * from RHVD_ES_REQUERIMIENTO where ES_PORCENT IS NOT NULL  ";
         }
+        sql +=" ORDER BY TO_NUMBER(SUBSTR(ID_DGP,5,LENGTH(ID_DGP))) DESC";
+        
+               Logger.getLogger(getClass().getName()).log(Level.INFO, id_dir);
         List<V_Es_Requerimiento> Lista = new ArrayList<V_Es_Requerimiento>();
         try {
             ResultSet rs = this.conn.query(sql);

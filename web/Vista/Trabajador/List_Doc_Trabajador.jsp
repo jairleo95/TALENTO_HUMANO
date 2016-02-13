@@ -135,7 +135,8 @@
                                                 <div class="col-xs-3 col-sm-7 col-md-7 col-lg-7 text-right">
                                                     <%if (!rol.trim().equals("ROL-0013")) {%>
 
-                                                    <a href="../../documento_trabajador?idtr=<%=request.getParameter("idtr")%>&opc=Listar_doc" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><%if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001")) {
+                                                    <a href="../../documento_trabajador?idtr=<%=request.getParameter("idtr")%>&opc=Listar_doc" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><%
+                                                    if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001")| rol.trim().equals("ROL-0012")) {
                                                             out.print("Registrar Documentos");
                                                         } else {
                                                             out.print(" Visualizar Documentos");
@@ -143,12 +144,7 @@
                                                 </div>
 
                                             </div>
-
-
-
                                         </div>
-
-
                                             <table id="dt_basic" class="table table-striped table-bordered table-hover"  width="100%">
                                                 <thead>
                                                     <tr>
