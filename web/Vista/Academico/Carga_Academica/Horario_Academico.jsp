@@ -43,7 +43,7 @@
                     <tr>
                     <form name="datos">
                         <td colspan="3" align="center" valign="top">
-                            <strong>CURSOS MATRICULADOS</strong> 
+                            <strong>Cursos Matriculados</strong> 
                             
                         </td>
                     </form>
@@ -92,10 +92,10 @@
 
                         for (var i = 0; i < myArray.length; i++) {
                             columna++;
-                            if (myArray[i] == "1") {
+                            if (myArray[i] === "1") {
                                 $(".fila-" + fila + " .columna-" + columna).css("background", "blue");
                             }
-                            if (columna == 7) {
+                            if (columna === 7) {
                                 columna = 0;
                                 fila++;
                             }

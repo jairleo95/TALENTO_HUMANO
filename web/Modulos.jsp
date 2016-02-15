@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <title>Menu - Talent Humano</title>
+        <title>Menu - Talento Humano</title>
         <meta name="description" content="Responsive Retina-Friendly Menu with different, size-dependent layouts" />
         <meta name="keywords" content="responsive menu, retina-ready, icon font, media queries, css3, transition, mobile" />
         <link rel="stylesheet" type="text/css" href="css/Css_Modulos/component.css" />
@@ -24,7 +24,7 @@
             .center {
                 margin: auto;
                 width: 60%;
-                //border: 3px solid #73AD21;
+            
                 padding: 10px;
             }
         </style>

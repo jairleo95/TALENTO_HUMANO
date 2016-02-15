@@ -1,5 +1,5 @@
 
-<%@page import="pe.edu.upeu.application.factory.Session_System"%>
+<%@page import="pe.edu.upeu.application.factory.SessionSystem"%>
 <%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <%
     HttpSession sesion = request.getSession();

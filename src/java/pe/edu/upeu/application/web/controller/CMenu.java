@@ -76,9 +76,11 @@ public class CMenu extends HttpServlet {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/");
                 dispatcher.forward(request, response);
             }
+          
         } finally {
             out.close();
         }
+         
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
