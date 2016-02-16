@@ -52,8 +52,8 @@ public class CFoto extends HttpServlet {
         } else {
 
             try {
-                 ubicacion = getServletConfig().getServletContext().getRealPath("/") +"Vista/Usuario/Fotos/";
-                //ubicacion = FactoryConnectionDB.url_archivos+"Fotos/";
+                // ubicacion = getServletConfig().getServletContext().getRealPath("/") +"Vista/Usuario/Fotos/";
+                ubicacion = FactoryConnectionDB.url_archivos+"Fotos/";
             // ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Usuario\\Fotos";
             DiskFileItemFactory f = new DiskFileItemFactory();
                 f.setSizeThreshold(1024);
