@@ -1,49 +1,61 @@
 package pe.edu.upeu.application.factory;
 
-import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.sql.CallableStatement;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.swing.text.Document;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.soap.*;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
 import oracle.sql.ARRAY;
 import oracle.sql.ArrayDescriptor;
-import org.w3c.dom.NodeList;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.XML;
 
 public class WSClienteAcademico {
 
-    public static final String keyApp = "4a7c88ee0791cad24a15d43a525982f8";
-    public static final String keyID = "d57d9c1cd0cfdec68805a5055388177b";
-    public static final String serverURI = "https://webapp.upeu.edu.pe/";
-    public static final String service = "https://webapp.upeu.edu.pe/webservices/wsdl4rrhh/";
-
     public static void main(String args[]) throws Exception {
-        WSClienteAcademico.getRequest("2015-2");
-        
+        JSONArray arr = WSClienteAcademico.getRequest("2016-1");
+        int tamaño = arr.length();
+        String[] campus = new String[tamaño];
+        String[] tipo_doc = new String[tamaño];
+        String[] nu_doc = new String[tamaño];
+        String[] app = new String[tamaño];
+        String[] apm = new String[tamaño];
+        String[] nombre = new String[tamaño];
+        String[] facu = new String[tamaño];
+        String[] eap = new String[tamaño];
+        String[] de_carga = new String[tamaño];
+        String[] curso = new String[tamaño];
+        String[] grupo = new String[tamaño];
+        String[] horario = new String[tamaño];
+        double[] hb_lab = new double[tamaño];
+        String[] hb_de_condicion = new String[tamaño];
+        String[] hb_ti_curso = new String[tamaño];
 
-        String[] campus = {"lima"};
-        String[] tipo_doc = {"dni"};
-        String[] nu_doc = {"123"};
-        String[] app = {"123"};
-        String[] apm = {"123"};
-        String[] nombre = {"123"};
-        String[] facu = {"123"};
-        String[] eap = {"123"};
-        String[] de_carga = {"123"};
-        String[] curso = {"123"};
-        String[] grupo = {"1"};
-        String[] horario = {"123"};
-        double [] hb_lab = {5.54};
-        String[] hb_de_condicion = {"123"};
-        String[] hb_ti_curso = {"123"};
+        for (int i = 0; i < arr.length(); i++) {
+            // System.out.println(i);
+            hb_ti_curso[i] = (arr.getJSONObject(i).getJSONObject("tipocurso").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("tipocurso").get("content")) : "";
+            // System.out.println(hb_ti_curso[i]);
+            horario[i] = (arr.getJSONObject(i).getJSONObject("horario").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("horario").get("content")) : "";
+            // System.out.println(horario[i]);
+            campus[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("campus").get("content"));
+            // System.out.println(campus[i]);
+            grupo[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("grupo").get("content"));
+            // System.out.println(grupo[i]);
+            nu_doc[i] = (arr.getJSONObject(i).getJSONObject("numerodocumento").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("numerodocumento").get("content")) : "";
+            // System.out.println(nu_doc[i]);
+            nombre[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("nombre").get("content"));
+            // System.out.println(nombre[i]);
+            hb_de_condicion[i] = (arr.getJSONObject(i).getJSONObject("condicion").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("condicion").get("content")) : "";
+            de_carga[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("carga").get("content"));
+            curso[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("nombrecurso").get("content"));
+            app[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("apepat").get("content"));
+            apm[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("apemat").get("content"));
+            eap[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("eap").get("content"));
+            hb_lab[i] = (arr.getJSONObject(i).getJSONObject("hlab").has("content")) ? Double.parseDouble(String.valueOf(arr.getJSONObject(i).getJSONObject("hlab").get("content"))) : 0.0;
+            tipo_doc[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("tipodocumento").get("content"));
+            facu[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("facultad").get("content"));
+        }
 
         ConexionBD conn;
         conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -94,54 +106,49 @@ public class WSClienteAcademico {
         st.setArray(13, array_to_pass13);
         st.setArray(14, array_to_pass14);
         st.setArray(15, array_to_pass15);
-        //st.execute();
-        
-        
-          final String pXML = "<root><x>1</x><x>2</x><x>3</x><x>4</x></root>";
-    final org.w3c.dom.Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(pXML.getBytes()));
-    final XPathExpression xPathExpression = XPathFactory.newInstance().newXPath().compile("//x/text()");
-    final NodeList nodeList = (NodeList) xPathExpression.evaluate(document, XPathConstants.NODESET);
-    final List<String> values = new ArrayList<String>();
-    for (int i = 0; i < nodeList.getLength(); ++i) {
-        values.add(nodeList.item(i).getNodeValue());
-    }
-    System.out.println(values);
-        
+        st.execute();
+
     }
 
-    public static void getRequest(String semestre) throws SOAPException, Exception {
+    public static JSONArray getRequest(String semestre) throws SOAPException, Exception {
         Calendar calendario = new GregorianCalendar();
         int hour = calendario.get(Calendar.HOUR_OF_DAY);
         // Create SOAP Connection
         SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
         SOAPConnection soapConnection = soapConnectionFactory.createConnection();
         // Send SOAP Message to SOAP Server
-        String keyPub = StringMD.getStringMessageDigest(keyApp + hour, StringMD.MD5);
-        System.out.println(service + keyPub);
-        System.out.println(keyApp + hour);
-        SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(semestre), service + keyPub);
+        String keyPub = StringMD.getStringMessageDigest(FactoryConnectionDB.keyApp + hour, StringMD.MD5);
+        System.out.println(FactoryConnectionDB.service + keyPub);
+        System.out.println(FactoryConnectionDB.keyApp + hour);
+        SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(semestre), FactoryConnectionDB.service + keyPub);
 
         // print SOAP Response
-        System.out.print("Response SOAP Message:");
-        soapResponse.writeTo(System.out);
+      //  System.out.println("Response SOAP Message:");
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        soapResponse.writeTo(out);
+        String strMsg = new String(out.toByteArray());
+        JSONObject jsonObject = XML.toJSONObject(strMsg);
+        // System.out.println(jsonObject);
+        JSONArray arr = jsonObject.getJSONObject("SOAP-ENV:Envelope").
+                getJSONObject("SOAP-ENV:Body").getJSONObject("ns1:DocenteXCursoResponse").
+                getJSONObject("return").
+                getJSONArray("item");
         soapConnection.close();
+        return arr;
     }
 
     public static SOAPMessage createSOAPRequest(String semestre) throws Exception {
         MessageFactory messageFactory = MessageFactory.newInstance();
         SOAPMessage soapMessage = messageFactory.createMessage();
         SOAPPart soapPart = soapMessage.getSOAPPart();
-
         // SOAP Envelope
         SOAPEnvelope envelope = soapPart.getEnvelope();
-        envelope.addNamespaceDeclaration("ns1", serverURI);
-
+        envelope.addNamespaceDeclaration("ns1", FactoryConnectionDB.serverURI);
         // SOAP Body
         SOAPBody soapBody = envelope.getBody();
         SOAPElement soapBodyElem = soapBody.addChildElement("DocenteXCurso", "ns1");
         SOAPElement soapBodyElem1 = soapBodyElem.addChildElement("key", "ns1");
-        soapBodyElem1.addTextNode(keyID);
-
+        soapBodyElem1.addTextNode(FactoryConnectionDB.keyID);
         SOAPElement soapBodyElem2 = soapBodyElem.addChildElement("semestre", "ns1");
         soapBodyElem2.addTextNode(semestre);
         /*MimeHeaders headers = soapMessage.getMimeHeaders();
@@ -150,9 +157,9 @@ public class WSClienteAcademico {
         soapMessage.saveChanges();
 
         /* Print the request message */
-        System.out.print("Request SOAP Message:");
-        soapMessage.writeTo(System.out);
-        System.out.println();
+        //System.out.println("Request SOAP Message:");
+        // soapMessage.writeTo(System.out);
+        //System.out.println();
         return soapMessage;
     }
 

@@ -79,7 +79,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Standard Data Tables </h2>
+                                    <h2>Carga Académica </h2>
 
                                 </header>
 
@@ -165,50 +165,8 @@
             </div>
         </div>
 
-        <h1 align="center" style="font-weight: bold;">CARGA ACADÉMICA</h1>
-    <center>
-        <label>Semestre :</label><select class="semestre">
-            <option value="">[seleccione]</option>
-            <option value="2015-1">2015-1</option>
-            <option value="2015-0">2015-0</option>
-            <option value="2014-2">2014-2</option>
-            <option value="2014-1">2014-1</option>
-            <option value="2014-0">2014-0</option>
-        </select>
-    </center>
-    <!--body id="dt_example"-->
     <!--DATATABLE FILTRO DEMO-->
-
-
-
-
     <!--<div class="spacer" style="border: 3px solid black;"></div>-->
-
-
-    <!--CARGA ACADEMICA-->
-    <center>
-        <h1>Carga Académica</h1>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Tipo Doc</th>
-                    <th>Num. Doc</th>
-                    <th>Apellidos Y Nombres</th>
-                    <th>Escuela</th>
-                    <th>Facultad</th>
-                    <th>Ciclo</th>
-                    <th>Fecha Inicio</th>
-                    <th>Fecha Cese</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody class="tbody-carga">
-            </tbody>
-        </table>
-
-    </center>
-
-
 </body>
 <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
 <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
@@ -231,6 +189,12 @@
 <script src="../../../js/DataTables-1.10.4/media/js/jquery-ui.js" type="text/javascript"></script>
 <script src="../../../js/DataTables-1.10.4/media/js/jquery.dataTables.columnFilter.js" type="text/javascript"></script>
 
+<script src="../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script src="../../../js/plugin/datatables/dataTables.colVis.min.js"></script>
+<script src="../../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
+<script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+
 <script>
     (function ($) {
         $(document).ready(function () {
@@ -244,7 +208,7 @@
                     {type: "select", sSelector: "#sescuela"},
                     {type: "select", sSelector: "#ssitedu"},
                     {type: "select", sSelector: "#sprofdoc"},
-                    {type: "select", sSelector: "#scondi"},
+                    {type: "select", sSelector: "#scondi"}
                     //---- OTROS TIPOS DE FILTROS -----
                     /*{type: "select", sSelector: "#renderingEngineFilter"},
                      {sSelector: "#browserFilter"},
@@ -253,37 +217,6 @@
                      {type: "select", values: ["1", "2", "C"], sSelector: "#cssGradeFilter1"}*/
                 ]}
             );
-
-
-
-            var url = 'http://192.168.13.52/demo/data.php';
-
-            $(".semestre").change(function () {
-
-                $('.tbody-carga').empty();
-                $('.tbody-carga').append("<tr><td colspan='9' >Cargando... </td></tr>");
-                $.post(url, "semestre=" + $(".semestre").val(), function (data) {
-                    $('.tbody-carga').empty();
-                    $.each(data, function (i, campo) {
-
-                        //$.post("../../../dgp",function(){alert()});
-                        $('.tbody-carga').append('<tr>');
-                        $('.tbody-carga').append('<td>' + campo.tipodocumento + '</td>');
-                        $('.tbody-carga').append('<td>' + campo.numerodocumento + '</td>');
-                        $('.tbody-carga').append('<td>' + campo.apepat + ' ' + campo.apemat + ' ' + campo.nombre + '</td>');
-                        $('.tbody-carga').append('<td>' + campo.eap + '</td>');
-                        $('.tbody-carga').append('<td>' + campo.facultad + '</td>');
-                        $('.tbody-carga').append('<td>' + campo.carga + '</td>');
-                        $('.tbody-carga').append('<td></td>');
-                        $('.tbody-carga').append('<td></td>');
-                        $('.tbody-carga').append('<td><a href="../../../carga_academica?opc=Completar_Datos&nro_doc=' + campo.numerodocumento + '&ap_p=' + campo.apepat + '&ap_m=' + campo.apemat + '&no_tr=' + campo.nombre + '&ti_doc=' + campo.tipodocumento + '&hl=' + campo.hlab + '">Completar datos</a><a href="Horario_Academico.jsp?dni=' + campo.numerodocumento + '&semestre=' + $(".semestre").val() + '">Ver Cursos</a></td>');
-                        $('.tbody-carga').append('</tr>');
-                    });
-                });
-            });
-
-
-
         });
     })(jQuery);
 

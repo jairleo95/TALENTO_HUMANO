@@ -397,7 +397,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL PROCESAR_CARGA_ACADEMICA( ?, ? )} ");
             cst.setString(1, id_proceso);
-            cst.setString(2, iddgp);
+            cst.setString(2, iddgp.trim());
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());

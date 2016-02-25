@@ -2,8 +2,10 @@ function ProcesarCargaAcademica(valorDgp, valorProceso) {
 
     $.ajax({
         url: "../../carga_academica", data: "opc=Procesar&dgp=" + valorDgp + "&proceso=" + valorProceso, type: "POST"
-    }).done(function () {
-        window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
+    }).done(function (data) {
+        if (data.rpta) {
+            window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
+        }
     });
 }
 function calcularCuotasDocente(valorFeDesde, valorFeHasta, valorHorasLaborales, valorTipoHoraPago) {

@@ -81,7 +81,7 @@
                 margin-left: auto;
                 margin-right: auto  ;
                 width: 95%;
-                // margin: 0;
+                /* margin: 0;*/
             }
             .autoHeight{
                 border-style:none;            
@@ -329,11 +329,11 @@
                                 a = (Auto_Mostrar) List_Auto_mostrar.get(r);
                     %>
                     <iframe id="myframe2" name="myframe2" class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" width="100%" height="100%" ></iframe>
-                    <%}
-                        List_Auto_mostrar.clear();
-                    } else {%>
+                        <%}
+                            List_Auto_mostrar.clear();
+                        } else {%>
                     <iframe id="myframe2" name="myframe2" width="100%" height="800" scrolling="si"  frameborder="0" src="Datos_Generales.jsp?edit=<%=edit%>"></iframe>
-                    <%}%>
+                        <%}%>
                 </div>
             </div>
 
@@ -722,11 +722,12 @@
                     type: "POST",
                     data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
                 }).done(function (data) {
-                    //  var arr_id = ids.split(":");
-                    alert("Registrado con exito!...");
-                    $(".proceso").val(data.proceso);
-                    $(".dgp").val(data.dgp);
-                    $(".btn_procesar").show();
+                    if (data.rpta === true) {
+                        alert("Registrado con exito!...");
+                        $(".proceso").val(data.proceso);
+                        $(".dgp").val(data.dgp);
+                        $(".btn_procesar").show();
+                    }
                 }).fail(function (e) {
                     alert("Error: " + e);
                 });
