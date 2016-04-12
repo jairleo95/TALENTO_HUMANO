@@ -110,7 +110,7 @@ public class CCarga_Academica extends HttpServlet {
             if (opc.equals("Reporte_Carga_Academica")) {
                 sesion.setAttribute("ListCarAca", carga.ListCarAca());
                 response.sendRedirect("Vista/Academico/Carga_Academica/Rep_Carga_Academica.jsp");
-                
+
             }
             if (opc.equals("Registrar_CA")) {
                 /*Registrar proceso de carga academica*/
@@ -176,31 +176,30 @@ public class CCarga_Academica extends HttpServlet {
                 /* REGISTRAR PRIMERA AUTORIZACION*/
                 List<String> list = a.Det_Autorizacion(idrp);
                 a.Insert_Autorizacion("", iddgp.trim(), "1", "P1", "", iduser, "", "", "", list.get(1).trim(), idrp.trim(), list.get(0));
-                
+
                 rpta.put("dgp", iddgp);
                 rpta.put("proceso", idrp);
                 rpta.put("rpta", true);
             }
-            
-             if(opc.equals("List_ws")){
-                 
-                 rpta.put("List_ws",carga.List_Carga_Academica_WS(semestre));
-              
-            }
-             if (opc.equals("actualizar_ws")) {
-                 WSClienteAcademico ws = new WSClienteAcademico();
-                  
-              
-                 try {
-                     ws.start_ws_academico(semestre);
-                     rpta.put("rpta", true);
-                 } catch (Exception e) {
-                 rpta.put("rpta", false);
-                 rpta.put("mensaje", e.getMessage());
-                 }
-                
+
+            if (opc.equals("List_ws")) {
+                rpta.put("List_ws", carga.List_Carga_Academica_WS(semestre));
             }
             
+
+            if (opc.equals("actualizar_ws")) {
+                WSClienteAcademico ws = new WSClienteAcademico();
+                try {
+                    ws.start_ws_academico(semestre);
+                    rpta.put("lista", carga.actualizar_Carga_Academica(semestre));
+                    rpta.put("rpta", true);
+                } catch (Exception e) {
+                    rpta.put("rpta", false);
+                    rpta.put("mensaje", e.getMessage());
+                }
+
+            }
+
         } catch (Exception e) {
             rpta.put("rpta", false);
             rpta.put("mensaje", e.getMessage());
@@ -210,7 +209,7 @@ public class CCarga_Academica extends HttpServlet {
             out.flush();
             out.close();
         }
-       
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

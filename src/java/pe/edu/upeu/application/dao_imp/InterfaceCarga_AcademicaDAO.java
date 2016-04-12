@@ -40,6 +40,10 @@ public interface InterfaceCarga_AcademicaDAO {
     
     public List<Map<String, ?>> List_Carga_Academica_WS (String semestre);
     
+    public List<Map<String, ?>> actualizar_Carga_Academica (String semestre);
+    
+    
+    
    
     
 }
