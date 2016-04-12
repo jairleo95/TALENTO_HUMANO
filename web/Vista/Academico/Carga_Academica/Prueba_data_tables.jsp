@@ -650,7 +650,7 @@
     (function($) {
         $(document).ready(function() {
 
-            var url = 'http://localhost/demo/data.php';
+            var url = 'http://localhost/SOAP/index.php';
 
             $(".semestre").change(function() {
 

@@ -17,6 +17,7 @@ package pe.edu.upeu.application.factory;
  */
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 public class StringMD {
 
     //algoritmos
@@ -43,6 +44,7 @@ public class StringMD {
             }
             hash += Integer.toHexString(b);
         }
+        //System.out.println(hash);
         return hash;
     }
 
@@ -63,6 +65,7 @@ public class StringMD {
             messageDigest.reset();
             messageDigest.update(buffer);
             digest = messageDigest.digest();
+            
         } catch (NoSuchAlgorithmException ex) {
             System.out.println("Error creando Digest");
         }

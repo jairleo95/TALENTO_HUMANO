@@ -52,51 +52,30 @@
 
     </head>
 
-    <body id="" >
-        <!-- RIBBON -->
-        <div id="main" role="main" style="margin: 0px;">
-
-
-            <div id="content">
-                <section id="widget-grid" class="">
-                    <div class="row">
-
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
-                                <!-- widget options:
-                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-
-                                data-widget-colorbutton="false"
-                                data-widget-editbutton="false"
-                                data-widget-togglebutton="false"
-                                data-widget-deletebutton="false"
-                                data-widget-fullscreenbutton="false"
-                                data-widget-custombutton="false"
-                                data-widget-collapsed="true"
-                                data-widget-sortable="false"
-
-                                -->
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Carga Académica </h2>
-
-                                </header>
-
-                                <!-- widget div-->
-                                <div>
-
-                                    <!-- widget edit box -->
-                                    <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->
-
-                                    </div>
-                                    <!-- end widget edit box -->
-
-                                    <!-- widget content -->
-                                    <div class="widget-body no-padding">
-
-                                        <table  id="example" class="table table-striped table-bordered table-hover" width="100%">
+                                           
+<body class="main"  >
+        <div class="content">
+        <section id="widget-grid" style="margin-left: 50px; margin-right: 50px;">
+            <div class="row">
+                <article >
+                    <div class="jarviswidget" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
+                            <h2>Carga Académica</h2>
+                            <ul class="nav nav-tabs pull-right in" id="myTab"> 
+                                <li class="active">
+                                    <a data-toggle="tab" href="#s1"><i class="fa fa-user"></i> <span class="hidden-mobile hidden-tablet">Usuarios RRHH</span></a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#s2"><i class="fa fa-users"></i> <span class="hidden-mobile hidden-tablet">Usuarios Académico</span></a>
+                                </li>
+                            </ul>
+                        </header>
+                        <div class="no-padding">
+                            <div class="widget-body">
+                                <div id="myTabContent" class="tab-content">
+                                    <div class="tab-pane fade active in padding-10 no-padding-bottom" id="s1">
+                                            <table  id="example" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th>Tipo Documento</th>
@@ -153,17 +132,141 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <!-- end widget content -->
-
+                                    <div class="tab-pane fade" id="s2">
+                                        <table id="example-table2" class="table table-condensed" >
+                                            <thead>
+                                                <tr>
+                                                    <th>AP_PATERNO</th>
+                                                    <th>AP_MATERNO</th>
+                                                    <th>NO_FACULTAD</th>
+                                                    <th>DE_CARGA</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
                                 </div>
-                                <!-- end widget div -->
-
                             </div>
-                        </article>
+                        </div>
                     </div>
-                </section>
+                </article>
             </div>
-        </div>
+        </section>
+    </div>
+   
+
+
+
+    <!--================================================== -->
+
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
+
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script>
+        if (!window.jQuery) {
+            document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
+        }
+    </script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>
+        if (!window.jQuery.ui) {
+            document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+        }
+    </script>
+
+    <!-- IMPORTANT: APP CONFIG -->
+    <script src="../../../js/app.config.js"></script>
+
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+    <script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+
+    <!-- BOOTSTRAP JS -->
+    <script src="../../../js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- CUSTOM NOTIFICATION -->
+    <script src="../../../js/notification/SmartNotification.min.js"></script>
+
+    <!-- JARVIS WIDGETS -->
+    <script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
+
+    <!-- EASY PIE CHARTS -->
+    <script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+
+    <!-- SPARKLINES -->
+    <script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- JQUERY VALIDATE -->
+    <script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
+
+    <!-- JQUERY MASKED INPUT -->
+    <script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+
+    <!-- JQUERY SELECT2 INPUT -->
+    <script src="../../../js/plugin/select2/select2.min.js"></script>
+
+    <!-- JQUERY UI + Bootstrap Slider -->
+    <script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+
+    <!-- browser msie issue fix -->
+    <script src="../../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+
+    <!-- FastClick: For mobile devices -->
+    <script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
+
+    <!--[if IE 8]>
+    
+    <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+    
+    <![endif]-->
+
+    <!-- Demo purpose only -->
+    <script src="../../../js/demo.min.js"></script>
+
+    <!-- MAIN APP JS FILE -->
+    <script src="../../../js/app.min.js"></script>
+
+    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+    <!-- Voice command : plugin -->
+    <script src="../../../js/speech/voicecommand.min.js"></script>
+
+    <!-- PAGE RELATED PLUGIN(S) -->
+    <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
+    <script src="../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../../js/plugin/datatables/dataTables.colVis.min.js"></script>
+    <script src="../../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
+    <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+    <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
+    <script type="text/javascript">
+        var term;
+        
+
+     $(document).ready(function () {
+      
+          
+        $("#example-table2").DataTable( {
+        "autoWidth": true,
+         "ajax": {
+            "url": "../../../carga_academica?opc=actualizar_ws&semestre=2016-1",
+            "type": "POST",
+            "dataSrc": "Fotos_NoVal"
+        },
+        "columns": [ 
+           
+        ]
+        
+        });  
+       
+       
+       
+        
+    
+        });
+
+    </script>
 
     <!--DATATABLE FILTRO DEMO-->
     <!--<div class="spacer" style="border: 3px solid black;"></div>-->
@@ -196,29 +299,33 @@
 <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
 
 <script>
-    (function ($) {
-        $(document).ready(function () {
-            $('#example').dataTable().columnFilter({
-                aoColumns: [
-                    {type: "select", sSelector: "#stipodoc"},
-                    //{type: "select", values: ["N/A"], sSelector: "#sarose"},
-                    {sSelector: "#bndoc"},
-                    {sSelector: "#bapenom"},
-                    {type: "select", sSelector: "#sfacultad"},
-                    {type: "select", sSelector: "#sescuela"},
-                    {type: "select", sSelector: "#ssitedu"},
-                    {type: "select", sSelector: "#sprofdoc"},
-                    {type: "select", sSelector: "#scondi"}
-                    //---- OTROS TIPOS DE FILTROS -----
-                    /*{type: "select", sSelector: "#renderingEngineFilter"},
-                     {sSelector: "#browserFilter"},
-                     {type: "date-range", sSelector: "#platformsFilter"},
-                     {type: "number-range", sSelector: "#engineVersionFilter"},
-                     {type: "select", values: ["1", "2", "C"], sSelector: "#cssGradeFilter1"}*/
-                ]}
-            );
+ $(document).ready(function () {
+       DataT("0","#example-table");
+       DataT("2","#example-table2");
+               
         });
-    })(jQuery);
+        
+        function DataT(p,tab){
+           
+        $(tab).DataTable( {
+        "autoWidth": true,
+         "ajax": {
+            "url": "../../../carga_academica?opc=actualizar_ws&semestre=2016-1",
+            "type": "POST"
+        },
+        "columns": [ 
+            { "data": "NU_DOC" },
+            { "data": "AP_PATERNO" },
+            { "data": "AP_MATERNO" },
+            { "data": "NO_TRABAJADOR" },
+            { "data": "NO_FACULTAD" },
+            { "data": "DE_CARGA" }
+        ]
+        
+        } );  
+       
+        }
+
 
 </script>
 </html>
