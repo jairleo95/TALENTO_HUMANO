@@ -145,6 +145,25 @@ public class WSClienteAcademico {
         return arr;
     }
 
+    public static SOAPMessage createSOAPRequest(String semestre) {
+        try {
+            MessageFactory messageFactory = MessageFactory.newInstance();
+            SOAPMessage soapMessage = messageFactory.createMessage();
+            SOAPPart soapPart = soapMessage.getSOAPPart();
+            // SOAP Envelope
+            SOAPEnvelope envelope = soapPart.getEnvelope();
+            envelope.addNamespaceDeclaration("ns1", FactoryConnectionDB.serverURI);
+            // SOAP Body
+            SOAPBody soapBody = envelope.getBody();
+            SOAPElement soapBodyElem = soapBody.addChildElement("DocenteXCurso", "ns1");
+            SOAPElement soapBodyElem1 = soapBodyElem.addChildElement("key", "ns1");
+            soapBodyElem1.addTextNode(FactoryConnectionDB.keyID);
+            SOAPElement soapBodyElem2 = soapBodyElem.addChildElement("semestre", "ns1");
+            soapBodyElem2.addTextNode(semestre);
+            /*MimeHeaders headers = soapMessage.getMimeHeaders();
+             headers.addHeader("SOAPAction", serverURI  + "VerifyEmail");
+             */
+            soapMessage.saveChanges();
 
             /* Print the request message */
             //System.out.println("Request SOAP Message:");
@@ -154,9 +173,8 @@ public class WSClienteAcademico {
         } catch (Exception e) {
             System.out.println("------------------------------MESSAGE");
             e.printStackTrace();
-
+            return null;
         }
-        return null;
     }
 
 }
