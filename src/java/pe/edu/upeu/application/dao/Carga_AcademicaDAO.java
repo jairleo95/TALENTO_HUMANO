@@ -446,11 +446,11 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT cat.ID_CARGA_ACADEMICA,cat.NU_DOC, cat.AP_PATERNO , cat.AP_MATERNO , cat.NO_TRABAJADOR, cat.NO_FACULTAD,cat.DE_CARGA " +
+            String sql = "SELECT cat.NU_DOC, cat.AP_PATERNO , cat.AP_MATERNO , cat.NO_TRABAJADOR, cat.NO_FACULTAD,cat.DE_CARGA " +
                          "FROM RHTM_CARGA_ACADEMICA_TEMP cat " +
                          "WHERE cat.DE_CARGA = '"+semestre+"'"+
-                         "GROUP BY cat.ID_CARGA_ACADEMICA,cat.NU_DOC, cat.AP_PATERNO , cat.AP_MATERNO , cat.NO_TRABAJADOR, cat.NO_FACULTAD,cat.DE_CARGA " +
-                         "ORDER BY cat.ID_CARGA_ACADEMICA,cat.NU_DOC, cat.AP_PATERNO , cat.AP_MATERNO , cat.NO_TRABAJADOR, cat.NO_FACULTAD,cat.DE_CARGA ASC";
+                         "GROUP BY cat.NU_DOC, cat.AP_PATERNO , cat.AP_MATERNO , cat.NO_TRABAJADOR, cat.NO_FACULTAD,cat.DE_CARGA " +
+                         "ORDER BY cat.NU_DOC, cat.AP_PATERNO , cat.AP_MATERNO , cat.NO_TRABAJADOR, cat.NO_FACULTAD,cat.DE_CARGA ASC";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> cd = new HashMap<String, Object>();
