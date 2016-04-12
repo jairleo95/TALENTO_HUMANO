@@ -1,13 +1,5 @@
-var insert = true;
-//----------------- Script comentario --------------------------
-
-             $( ".add-coment" ).click(function() {
-              $( ".add-coment" ).addClass( "disabled" );
-              $( ".area-coment" ).css({ display: "block" });
-              $( ".add-coment" ).css({ display: "none" });
-              });
-              
-              var valor, contador, parrafo;
+ var insert = true;
+ var valor, contador, parrafo;
                 $('<p class="indicador">Tienes 500 caracteres restantes</p>').appendTo('.contador');
               $('.mensaje').keydown(function(){
                 contador = 500;
@@ -53,13 +45,14 @@ var insert = true;
 
 //--------------------- jalar comentarios --------------
         function sendAjax(parm) {
-        var idDgp = $('.idDgp').val();
+        var idDgp = $('.idDgporttp').val();
         var url1 = '../../comentario?iddgp=';
 	var url = url1.trim()+idDgp+'&opc=list';
         var tipo = parm;
         var ln = 0;
         var cant_coment = 0;
         var img ="";
+        var x=0;
 	$.ajax({
 		url: url,
 		type: 'POST',
@@ -67,25 +60,33 @@ var insert = true;
 		contentType: 'application/json',
 		mimeType: 'application/json',
 		success: function (data) {
-                    
+                    $( ".area-coment" ).css({ display: "block" });
+                   
                  $.each(data, function(i, obj) {
+                     
                         $.each(obj, function(i, objt) {
                          cant_coment +=1;
+                         
                         });
                      $.each(obj, function(idx, objt) {
                          console.log("objetosde la base de datos ...");
                          console.log(objt);
+                         console.log(tipo+"tipo de tipo");
+                         console.log("XDcantidad coment "+cant_coment+" ln: "+ln+""+"idx"+idx);
+                         
                          if(objt.ar_foto == null || objt.ar_foto == "" ){
                                 img+="../../imagenes/avatar_default.jpg"; 
                               }else{
                                 img+="../../Vista/Usuario/Fotos/"+objt.ar_foto; 
                               }
-                         
+                    //     console.log("papu :D"+cant_coment+"idx"+idx);
                         if(cant_coment == 1){
+                         //   console.log("buyabucayacat "+cant_coment+" ln: "+ln+"");
                              tipo +='todo';
                         }
-
-                        if(tipo == "todo" || tipo =="eight"){
+                      
+//console.log("tipo vasty"+tipo);
+                        if(tipo == "todo"||tipo=="ec"){
                               var contenido= '<div class="row">'+
                             '<div class="cont_avatar col-sm-2 col-xs-1">'+
                             '<img style="border-radius:100%;height:60px;width:60px; class="img-responsive user-photo" src="'+img+'" >'+
@@ -107,13 +108,15 @@ var insert = true;
                             '</div>';
                             $(".comentario-dgp").append(contenido);
                             img="";
+                            console.log("cantidad coment "+cant_coment+" ln: "+ln+"");
                             if(ln == 1){
                             $('<button class="todoc btn btn-default btn-block" onclick="listodo()"> + <span class="glyphicon glyphicon-comment"> </span> '+
-                            cant_coment+' comentarios </button> ').appendTo('.mas-coment');
+                            idx+' comentarios </button> ').appendTo('.mas-coment');
 
                             }
                             }else{
                            if(cant_coment-2==idx){
+                               console.log("me siento solo 4.y");
                                ln +=1;
                                tipo +='todo';
                            }
@@ -144,20 +147,22 @@ var insert = true;
 		contentType: 'application/json',
 		mimeType: 'application/json',
 		success: function (data) {
+                  
+                    
+                    
                },
 
 	     });
 
                jQuery.fn.reset = function () {
                $(this).each (function() { this.reset(); });
-               
                    }
-                   var eight='eight';
-                  
+                   console.log("yo me amo");
                $(".comentari-form").reset();
                $(".comentario-dgp").empty();
                $(".contador").empty();
-               sendAjax('eight') ;
+               var ec='ec';
+               sendAjax('ec') ;
 
   }
 function listodo(){

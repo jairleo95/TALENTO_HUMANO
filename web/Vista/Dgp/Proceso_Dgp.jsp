@@ -312,7 +312,7 @@
                                                     </div>
                                                     <div class="modal-body">
 
-                                                        <button class="add-coment btn btn-primary btn-block">Add Comentario</button>
+                                                        <!--<button class="add-coment btn btn-primary btn-block">Add Comentario</button> -->
                                                         <div class="area-coment">
                                                             <form class="comentari-form" method="post">
                                                                 <textarea class="mensaje"></textarea>
@@ -337,6 +337,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                        <!-----Modal------------------------------------------->
                                 </div>
                                 <!-- end widget content -->
 
@@ -344,6 +345,7 @@
                             <!-- end widget div -->
 
                     </div>
+                                            
                     <!-- end widget -->
 
 
@@ -352,6 +354,7 @@
                     <!-- WIDGET END -->
 
             </div>
+                                            <div class="row"></div>
 
             <!-- end row -->
 
@@ -458,7 +461,7 @@
 <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
 <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-<script src="../../js/coment/coment.js" type="text/javascript"></script>
+<script src="../../js/coment/comenth.js" type="text/javascript"></script>
 <script type="text/javascript">
 
                                                             // DO NOT REMOVE : GLOBAL FUNCTIONS!

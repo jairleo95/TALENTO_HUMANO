@@ -1,6 +1,7 @@
 package pe.edu.upeu.application.factory;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.sql.CallableStatement;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -8,6 +9,7 @@ import javax.xml.soap.*;
 import oracle.sql.ARRAY;
 import oracle.sql.ArrayDescriptor;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
@@ -35,7 +37,7 @@ public class WSClienteAcademico {
         for (int i = 0; i < arr.length(); i++) {
             // System.out.println(i);
             hb_ti_curso[i] = (arr.getJSONObject(i).getJSONObject("tipocurso").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("tipocurso").get("content")) : "";
-            // System.out.println(hb_ti_curso[i]);
+// System.out.println(hb_ti_curso[i]);
             horario[i] = (arr.getJSONObject(i).getJSONObject("horario").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("horario").get("content")) : "";
             // System.out.println(horario[i]);
             campus[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("campus").get("content"));
@@ -43,7 +45,7 @@ public class WSClienteAcademico {
             grupo[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("grupo").get("content"));
             // System.out.println(grupo[i]);
             nu_doc[i] = (arr.getJSONObject(i).getJSONObject("numerodocumento").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("numerodocumento").get("content")) : "";
-            // System.out.println(nu_doc[i]);
+// System.out.println(nu_doc[i]);
             nombre[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("nombre").get("content"));
             // System.out.println(nombre[i]);
             hb_de_condicion[i] = (arr.getJSONObject(i).getJSONObject("condicion").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("condicion").get("content")) : "";
@@ -56,6 +58,7 @@ public class WSClienteAcademico {
             tipo_doc[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("tipodocumento").get("content"));
             facu[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("facultad").get("content"));
         }
+        System.out.println(arr.length()+" Elementos obtenidos");
 
         ConexionBD conn;
         conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -107,60 +110,71 @@ public class WSClienteAcademico {
         st.setArray(14, array_to_pass14);
         st.setArray(15, array_to_pass15);
         st.execute();
-
     }
 
-    public static JSONArray getRequest(String semestre) throws SOAPException, Exception {
-        Calendar calendario = new GregorianCalendar();
-        int hour = calendario.get(Calendar.HOUR_OF_DAY);
-        // Create SOAP Connection
-        SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
-        SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-        // Send SOAP Message to SOAP Server
-        String keyPub = StringMD.getStringMessageDigest(FactoryConnectionDB.keyApp + hour, StringMD.MD5);
-        System.out.println(FactoryConnectionDB.service + keyPub);
-        System.out.println(FactoryConnectionDB.keyApp + hour);
-        SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(semestre), FactoryConnectionDB.service + keyPub);
+    public static JSONArray getRequest(String semestre) {
+        try {
+            Calendar calendario = new GregorianCalendar();
+            int hour = calendario.get(Calendar.HOUR_OF_DAY);
+            // Create SOAP Connection
+            SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+            SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+            // Send SOAP Message to SOAP Server
+            String keyPub = StringMD.getStringMessageDigest(FactoryConnectionDB.keyApp + hour, StringMD.MD5);
+            System.out.println(FactoryConnectionDB.service + keyPub);
+            System.out.println(FactoryConnectionDB.keyApp + hour);
+            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(semestre), FactoryConnectionDB.service + keyPub);
 
-        // print SOAP Response
-      //  System.out.println("Response SOAP Message:");
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        soapResponse.writeTo(out);
-        String strMsg = new String(out.toByteArray());
-        JSONObject jsonObject = XML.toJSONObject(strMsg);
-        // System.out.println(jsonObject);
-        JSONArray arr = jsonObject.getJSONObject("SOAP-ENV:Envelope").
-                getJSONObject("SOAP-ENV:Body").getJSONObject("ns1:DocenteXCursoResponse").
-                getJSONObject("return").
-                getJSONArray("item");
-        soapConnection.close();
-        return arr;
+            // print SOAP Response
+            //  System.out.println("Response SOAP Message:");
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            soapResponse.writeTo(out);
+            String strMsg = new String(out.toByteArray());
+            JSONObject jsonObject = XML.toJSONObject(strMsg);
+            // System.out.println(jsonObject);
+            JSONArray arr = jsonObject.getJSONObject("SOAP-ENV:Envelope").
+                    getJSONObject("SOAP-ENV:Body").getJSONObject("ns1:DocenteXCursoResponse").
+                    getJSONObject("return").
+                    getJSONArray("item");
+            soapConnection.close();
+            return arr;
+        } catch (SOAPException | UnsupportedOperationException | IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public static SOAPMessage createSOAPRequest(String semestre) throws Exception {
-        MessageFactory messageFactory = MessageFactory.newInstance();
-        SOAPMessage soapMessage = messageFactory.createMessage();
-        SOAPPart soapPart = soapMessage.getSOAPPart();
-        // SOAP Envelope
-        SOAPEnvelope envelope = soapPart.getEnvelope();
-        envelope.addNamespaceDeclaration("ns1", FactoryConnectionDB.serverURI);
-        // SOAP Body
-        SOAPBody soapBody = envelope.getBody();
-        SOAPElement soapBodyElem = soapBody.addChildElement("DocenteXCurso", "ns1");
-        SOAPElement soapBodyElem1 = soapBodyElem.addChildElement("key", "ns1");
-        soapBodyElem1.addTextNode(FactoryConnectionDB.keyID);
-        SOAPElement soapBodyElem2 = soapBodyElem.addChildElement("semestre", "ns1");
-        soapBodyElem2.addTextNode(semestre);
-        /*MimeHeaders headers = soapMessage.getMimeHeaders();
-         headers.addHeader("SOAPAction", serverURI  + "VerifyEmail");
-         */
-        soapMessage.saveChanges();
+    public static SOAPMessage createSOAPRequest(String semestre) {
+        try {
+            MessageFactory messageFactory = MessageFactory.newInstance();
+            SOAPMessage soapMessage = messageFactory.createMessage();
+            SOAPPart soapPart = soapMessage.getSOAPPart();
+            // SOAP Envelope
+            SOAPEnvelope envelope = soapPart.getEnvelope();
+            envelope.addNamespaceDeclaration("ns1", FactoryConnectionDB.serverURI);
+            // SOAP Body
+            SOAPBody soapBody = envelope.getBody();
+            SOAPElement soapBodyElem = soapBody.addChildElement("DocenteXCurso", "ns1");
+            SOAPElement soapBodyElem1 = soapBodyElem.addChildElement("key", "ns1");
+            soapBodyElem1.addTextNode(FactoryConnectionDB.keyID);
+            SOAPElement soapBodyElem2 = soapBodyElem.addChildElement("semestre", "ns1");
+            soapBodyElem2.addTextNode(semestre);
+            /*MimeHeaders headers = soapMessage.getMimeHeaders();
+             headers.addHeader("SOAPAction", serverURI  + "VerifyEmail");
+             */
+            soapMessage.saveChanges();
 
-        /* Print the request message */
-        //System.out.println("Request SOAP Message:");
-        // soapMessage.writeTo(System.out);
-        //System.out.println();
-        return soapMessage;
+            /* Print the request message */
+            //System.out.println("Request SOAP Message:");
+            // soapMessage.writeTo(System.out);
+            //System.out.println();
+            return soapMessage;
+        } catch (Exception e) {
+            System.out.println("------------------------------MESSAGE");
+            e.printStackTrace();
+
+        }
+        return null;
     }
 
 }

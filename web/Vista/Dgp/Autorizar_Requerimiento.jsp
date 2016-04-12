@@ -34,6 +34,7 @@
              specific styles this will also ensure you retrain your customization with each SmartAdmin update.
         <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
         <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+        <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/demo.min.css">
         <!-- FAVICONS -->
         <link rel="shortcut icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
@@ -95,7 +96,7 @@
             }
         } else {
         %>
-    <body class="body" onload="nobackbutton();"  >
+    <body class="" onload="nobackbutton();">
         <%}%> 
 
         <!-- MAIN PANEL -->
@@ -117,7 +118,7 @@
                             </div>
 
 
-                            <!-- Widget ID (each widget will need unique ID)-->
+                            <!-- Widget ID (each widget will need unique ID)->
                             <div class="jarviswidget jarviswidget-color-red" id="wid-id-2" data-widget-editbutton="false"  data-widget-deletebutton="false"                          data-widget-fullscreenbutton="false" >
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
@@ -132,6 +133,10 @@
                                 data-widget-sortable="false"
 
                                 -->
+                                <div class="jarviswidget jarviswidget-color-red" id="wid-id-2"   data-widget-editbutton="false"  data-widget-deletebutton="false"
+
+                             
+                                 >
                                 <header>
                                     <span class="widget-icon"> <i class="glyphicon glyphicon-inbox"></i> </span>
                                     <h2 class="font-md"><strong>Requerimientos por </strong> <i>Autorizar</i></h2>
@@ -387,6 +392,53 @@
                                         <input class="num_huella" type="hidden" value="<%=num_cod_huella%>" 
                                     </div>
                                     <!-- end widget content -->
+                                    <!---Modal---------------->
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <div class="datos_trabajador text-left">
+                                                        </div>
+                                                        <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                       <!-- <button class="add-coment btn btn-primary btn-block">Add Comentario</button> -->
+                                                        <div class="area-coment">
+                                                            <form class="comentari-form" method="post">
+                                                                <textarea class="mensaje"></textarea>
+                                                                <p></p>
+                                                                <input name="idDgp" class="idDgp" type="hidden" value="">
+                                                                <div class="contador">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="comentarios">
+                                                        <div>
+                                                            <legend>Comentarios </legend>
+                                                            <div class="comentario-dgp"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="button" onclick="Registrar()" class="comet btn btn-success">Comentar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                 </div>
                                 <!-- end widget div -->
                             </div>
@@ -402,7 +454,7 @@
                     <div id="alerta_dgp">
                     </div>
                     <!-- Widget ID (each widget will need unique ID)-->
-                    <div class="jarviswidget jarviswidget-color-red" id="wid-id-1"  data-widget-editbutton="false"  data-widget-deletebutton="false"                          data-widget-fullscreenbutton="false">
+                    <div class="jarviswidget jarviswidget-color-red" id="wid-id-1"  data-widget-editbutton="false"  data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
                         <!-- widget options:
                         usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -449,45 +501,9 @@
     </div>
 </div>
 <!-------------- Modal  ----------->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <div class="datos_trabajador text-left">
-                </div>
-                <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
-            </div>
-            <div class="modal-body">
+   
 
-                <button class="add-coment btn btn-primary btn-block">Add Comentario</button>
-                <div class="area-coment">
-                    <form class="comentari-form" method="post">
-                        <textarea class="txt_mensaje"></textarea>
-                        <p></p>
-                        <input name="idDgp" class="idDgp" type="hidden" value="">
-                        <div class="contador">
-                    </form>
-                </div>
-            </div>
-
-            <div class="comentarios">
-                <div>
-                    <legend>Comentarios </legend>
-                    <div class="comentario-dgp"></div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" onclick="Registrar()" class="comet btn btn-success">Comentar</button>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-
-
-<!--================================================== -->
+<!--===========================Modal======================= -->
 
 <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
 <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
@@ -563,13 +579,13 @@
 
 <!-- PAGE RELATED PLUGIN(S) 
 <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>-->
-<script src="../../js/coment/coment.js" type="text/javascript"></script>
+
 <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
 <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
 <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
 <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-
+<script src="../../js/coment/comenth.js" type="text/javascript"></script>
 <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
 <script>
                     $.datepicker.regional['es'] = {
