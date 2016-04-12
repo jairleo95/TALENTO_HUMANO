@@ -37,4 +37,9 @@ public interface InterfaceCarga_AcademicaDAO {
     public void PROCESAR_CARGA_ACADEMICA(String id_proceso, String iddgp);
 
     public List<Map<String, ?>> Cuotas_Pago_Docente(String fe_desde, String fe_hasta, double pago_semanal);
+    
+    public List<Map<String, ?>> List_Carga_Academica_WS (String semestre);
+    
+   
+    
 }
