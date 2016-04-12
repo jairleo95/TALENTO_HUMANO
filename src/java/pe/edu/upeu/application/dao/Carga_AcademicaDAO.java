@@ -529,6 +529,10 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             rs1.close();
             //CONPARAR
             if (!temp1.isEmpty()) {
+                List<Integer> l= new ArrayList<>();
+                for (int i = 0; i < temp1.size(); i++) {
+                    l.add(i);
+                }
                 for (int i = 0; i < temp1.size(); i++) {
                     String arr1[] = new String[15];
                     String arr2[] = new String[15];
@@ -576,17 +580,19 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                                 Map<String, Object> cd1 = new HashMap<>();
                                 cd = (Map<String, Object>) temp.get(i);
                                 cd1 = (Map<String, Object>) temp1.get(i);
+                                cd.put("ID", i);
+                                cd1.put("ID", i);
                                 cd1.put("NIVEL_S", nivel_s);
                                 lista.add(cd);
                                 lista.add(cd1);
-                                temp1.remove(i);
+                                l.remove(i);
                             }
                         }
                     }
                 }
-                if (!temp1.isEmpty()) {
-                    for (int i = 0; i < temp1.size(); i++) {
-                        lista.add(temp1.get(i));
+                if (!l.isEmpty()) {
+                    for (int i = 0; i < l.size(); i++) {
+                        lista.add(temp1.get(l.get(i)));
                     }
                 }
             }
