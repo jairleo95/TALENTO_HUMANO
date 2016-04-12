@@ -144,13 +144,100 @@
                     </ul>
 
                 </div>
-                <!-- end widget content -->
-            </div>
-            <!-- end widget div -->
+                <!-- new widget -->
+                <div class="jarviswidget jarviswidget-color-blue" id="wid-id-4" data-widget-editbutton="false" data-widget-colorbutton="false">
 
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-check txt-color-white"></i> </span>
+                        <h2> Cambios !! </h2>
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+
+                        <!-- end widget edit box -->
+
+                        <div class="widget-body no-padding smart-form">
+                            <!-- content goes here -->
+                            <h5 class="todo-group-title"><i class="fa fa-warning"></i> Registros Afectados (<small class="num-of-tasks">1</small>)</h5>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <ul id="sortable1" class="todo">
+                                        <li>
+                                            <span class="handle"> <label class="checkbox">
+                                                    <input type="checkbox" name="checkbox-inline">
+                                                    <i></i> </label> </span>
+                                            <p>
+                                                <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <span class="handle"> <label class="checkbox">
+                                                    <input type="checkbox" name="checkbox-inline">
+                                                    <i></i> </label> </span>
+                                            <p>
+                                                <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <span class="handle"> <label class="checkbox">
+                                                    <input type="checkbox" name="checkbox-inline">
+                                                    <i></i> </label> </span>
+                                            <p>
+                                                <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div >
+                                <div class="col-lg-6">
+                                    <ul id="sortable2 validar-datos" class="todo">
+                                        <li>
+                                            <span class="handle"> <label class="checkbox">
+                                                    <input type="checkbox" name="checkbox-inline">
+                                                    <i></i> </label> </span>
+                                            <p>
+                                                <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <span class="handle"> <label class="checkbox">
+                                                    <input type="checkbox" name="checkbox-inline">
+                                                    <i></i> </label> </span>
+                                            <p>
+                                                <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <span class="handle"> <label class="checkbox">
+                                                    <input type="checkbox" name="checkbox-inline">
+                                                    <i></i> </label> </span>
+                                            <p>
+                                                <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h5 class="todo-group-title"><i class="fa fa-check"></i> Completed Tasks (<small class="num-of-tasks">1</small>)</h5>
+                            <ul id="sortable1" class="todo">
+                                <li>
+                                    <p>
+                                        <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
+                                    </p>
+                                </li>
+                            </ul>
+
+                            <!-- end content -->
+                        </div>
+
+                    </div>
+                    <!-- end widget div -->
+                </div>
+            </div>
         </div>
-        </div>
-      
+
         <div class="mload">
         <img class="loading modal"  src="../../../img/ajax-loader.gif" alt=""/>
         </div>    
@@ -245,16 +332,7 @@
                 
                 //--- comvert title html JqueryUI
                 $('.progress').hide();
-                $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-				_title : function(title) {
-					if (!this.options.title) {
-						title.html("&#160;");
-					} else {
-						title.html(this.options.title);
-					}
-				}
-			}));
-                        
+                      
                 $('.updatebtn').click(function(){
                    
                     $('.mload').show();
@@ -315,7 +393,53 @@
                             }
                         });
                     }
-            });
+                    
+                    		/*
+				* TODO: add a way to add more todo's to list
+				*/
+
+				// initialize sortable
+				$(function() {
+					$("#sortable1,#sortable2").sortable({
+						
+						connectWith : ".todo",
+						update : countTasks
+					}).disableSelection();
+				});
+
+				// check and uncheck
+				$('.todo .checkbox > input[type="checkbox"]').click(function() {
+					var $this = $(this).parent().parent().parent();
+                              
+					if ($(this).prop('checked')) {
+						$this.addClass("complete");
+
+						// remove this if you want to undo a check list once checked
+						//$(this).attr("disabled", true);
+						$(this).parent().hide();
+
+						// once clicked - add class, copy to memory then remove and add to sortable3
+						$this.slideUp(500, function() {
+							$this.clone().prependTo("#validar-datos").effect("highlight", {}, 800);
+							$this.remove();
+							countTasks();
+						});
+					} else {
+						// insert undo code here...
+					}
+
+				})
+				// count tasks
+				function countTasks() {
+
+					$('.todo-group-title').each(function() {
+						var $this = $(this);
+						$this.find(".num-of-tasks").text($this.next().find("li").size());
+					});
+
+				}
+                    
+            });//-- end INI jQyery --
         </script>
     </body>
    
