@@ -188,9 +188,9 @@ public class CCarga_Academica extends HttpServlet {
             
 
             if (opc.equals("actualizar_ws")) {
-                WSClienteAcademico ws = new WSClienteAcademico();
+                //WSClienteAcademico ws = new WSClienteAcademico();
                 try {
-                    ws.start_ws_academico(semestre);
+                    //ws.start_ws_academico(semestre);
                     rpta.put("lista", carga.actualizar_Carga_Academica(semestre));
                     rpta.put("rpta", true);
                 } catch (Exception e) {

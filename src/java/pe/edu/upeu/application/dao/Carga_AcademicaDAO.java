@@ -528,11 +528,14 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             rs.close();
             rs1.close();
             //CONPARAR
+            System.out.println(temp.size());
+            System.out.println(temp1.size());
             if (!temp1.isEmpty()) {
-                List<Integer> l= new ArrayList<>();
+                List<Integer> l = new ArrayList<>();
                 for (int i = 0; i < temp1.size(); i++) {
                     l.add(i);
                 }
+                System.out.println(l.size());
                 for (int i = 0; i < temp1.size(); i++) {
                     String arr1[] = new String[15];
                     String arr2[] = new String[15];
@@ -553,8 +556,9 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                     arr1[14] = temp1.get(i).get("DE_TIPO_CURSO").toString();
 
                     if (!temp.isEmpty()) {
-                        int nivel_s = 0;
+                        int found = -1;
                         for (int j = 0; j < temp.size(); j++) {
+                            int nivel_s = 0;
                             arr2[0] = temp.get(j).get("CAMPUS").toString();
                             arr2[1] = temp.get(j).get("ES_TIPO_DOC").toString();
                             arr2[2] = temp.get(j).get("NU_DOC").toString();
@@ -575,24 +579,33 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                                     nivel_s = nivel_s + 1;
                                 }
                             }
-                            if (nivel_s < arr1.length) {
-                                Map<String, Object> cd = new HashMap<>();
-                                Map<String, Object> cd1 = new HashMap<>();
-                                cd = (Map<String, Object>) temp.get(i);
-                                cd1 = (Map<String, Object>) temp1.get(i);
-                                cd.put("ID", i);
-                                cd1.put("ID", i);
-                                cd1.put("NIVEL_S", nivel_s);
-                                lista.add(cd);
-                                lista.add(cd1);
-                                l.remove(i);
+                            if (nivel_s == arr1.length) {
+                                found = j;
                             }
+
+                        }
+                        if (found > -1) {
+                            l.set(i, -1);
                         }
                     }
                 }
                 if (!l.isEmpty()) {
                     for (int i = 0; i < l.size(); i++) {
-                        lista.add(temp1.get(l.get(i)));
+                        if (l.get(i) != -1) {
+                            Map<String, Object> cd = (Map<String, Object>) temp1.get(l.get(i));
+                            cd.put("ID", i);
+                            cd.put("TDATO", 1);
+                            lista.add(cd);
+                            List<Map<String, ?>> p = buscarCargaAcademica(cd, temp);
+                            for (int j = 0; j < p.size(); j++) {
+                                Map<String, Object> cd1 = (Map<String, Object>) p.get(j);
+                                cd1.put("ID", i);
+                                cd1.put("TDATO", 0);
+                                lista.add(cd1);
+                            }
+
+                        }
+
                     }
                 }
             }
@@ -602,6 +615,32 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             return null;
         }
         return lista;
+    }
+
+    public List<Map<String, ?>> buscarCargaAcademica(Map<String, Object> r, List<Map<String, ?>> x) {
+        List<Map<String, ?>> tmp = new ArrayList<>();
+        String arr1[] = new String[3];
+        arr1[0] = r.get("AP_PATERNO").toString();
+        arr1[1] = r.get("AP_MATERNO").toString();
+        arr1[2] = r.get("NO_TRABAJADOR").toString();
+        for (int i = 0; i < x.size(); i++) {
+            int nivel_s = 0;
+
+            String arr2[] = new String[15];
+            arr2[0] = x.get(i).get("AP_PATERNO").toString();
+            arr2[1] = x.get(i).get("AP_MATERNO").toString();
+            arr2[2] = x.get(i).get("NO_TRABAJADOR").toString();
+            for (int k = 0; k < arr1.length; k++) {
+                if (arr1[k].equals(arr2[k])) {
+                    nivel_s = nivel_s + 1;
+                }
+            }
+            if (nivel_s == arr1.length) {
+                tmp.add(x.get(i));
+            }
+        }
+        System.out.println("Buscando " + arr1[0]+" "+arr1[1]+" "+arr1[2]+" encontrado:"+tmp.size());
+        return tmp;
     }
 
 }
