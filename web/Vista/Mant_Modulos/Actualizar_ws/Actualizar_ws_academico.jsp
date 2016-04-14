@@ -150,416 +150,353 @@
 
                 <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
 
-            <!-- widget div-->
-            <div role="content">
+                <!-- widget div-->
+                <div role="content">
 
-                <!-- widget edit box -->
-                <div class="jarviswidget-editbox">
-                    <!-- This area used as dropdown edit box -->
-                </div>
-                <!-- end widget edit box -->
-                <!-- widget content -->
-                <div class="widget-body col-lg-offset-2">
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body col-lg-offset-2">
 
-                    <ul id="external-events" class="list-inline">
-                    <li  >
-                        <span class="bg-color-darken txt-color-white" 
-                              data-description="(2016-1) presente Ciclo" data-icon="fa-time"><span style="font-size: 50px;height: 70px;" class="fa fa-calendar"></span> Ciclo :<h1 class="semest"></h1></span>
-                    </li>
-                    <li >
-                        <span class="bg-color-blue txt-color-white" 
-                              data-description="Personas en la BD RRHH" data-icon="fa-pie"><span style="font-size: 50px;height: 70px;" class="fa fa-user"></span> Personas : <h1 class="personas"></h1></span>
-                    </li>
-                    <li >
-                        <span class="bg-color-greenLight txt-color-white" 
-                              data-description="Personas actualizadas" data-icon="fa-alert"><span style="font-size: 50px;height: 70px;" class="fa fa-check"></span> New : <h1 class="personas"></h1></span>
-                    </li>
-                    <li >
-                        <span class="bg-color-red txt-color-white" 
-                              data-description="Actualizar BD academico" data-icon="fa-alert"><span style="font-size: 50px; height: 85px;" class="fa fa-refresh"></span> Actualizar :<br/><button class="updatebtn btn btn-block btn-warning">Actualizar</button></span>
-                    </li>
-                    
-                    </ul>
+                        <ul id="external-events" class="list-inline">
+                            <li  >
+                                <span class="bg-color-darken txt-color-white" 
+                                      data-description="(2016-1) presente Ciclo" data-icon="fa-time"><span style="font-size: 50px;height: 70px;" class="fa fa-calendar"></span> Ciclo :<h1 class="semest"></h1></span>
+                            </li>
+                            <li >
+                                <span class="bg-color-blue txt-color-white" 
+                                      data-description="Personas en la BD RRHH" data-icon="fa-pie"><span style="font-size: 50px;height: 70px;" class="fa fa-user"></span> Personas : <h1 class="personas"></h1></span>
+                            </li>
+                            <li >
+                                <span class="bg-color-greenLight txt-color-white" 
+                                      data-description="Personas actualizadas" data-icon="fa-alert"><span style="font-size: 50px;height: 70px;" class="fa fa-check"></span> New : <h1 class="personas"></h1></span>
+                            </li>
+                            <li >
+                                <span class="bg-color-red txt-color-white" 
+                                      data-description="Actualizar BD academico" data-icon="fa-alert"><span style="font-size: 50px; height: 85px;" class="fa fa-refresh"></span> Actualizar :<br/><button class="updatebtn btn btn-block btn-warning">Actualizar</button></span>
+                            </li>
 
-                </div>
-                <!-- new widget -->
-                <div class="jarviswidget jarviswidget-color-blue" id="wid-id-4" data-widget-editbutton="false" data-widget-colorbutton="false">
-
-                    <header>
-                        <span class="widget-icon"> <i class="fa fa-check txt-color-white"></i> </span>
-                        <h2> Cambios !! </h2>
-                    </header>
-
-                    <!-- widget div-->
-                    <div>
-                        <!-- widget edit box -->
-
-                        <!-- end widget edit box -->
-
-                        <div class="widget-body no-padding smart-form">
-                            <!-- content goes here -->
-                            <h5 class="todo-group-title"><i class="fa fa-warning"></i> Registros Afectados (<small class="num-of-tasks">1</small>)</h5>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <ul id="sortable1" class="todo">
-                                        <li>
-                                            <span class="handle"> <label class="checkbox">
-                                                    <input type="checkbox" name="checkbox-inline">
-                                                    <i></i> </label> </span>
-                                            <p>
-                                                <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <span class="handle"> <label class="checkbox">
-                                                    <input type="checkbox" name="checkbox-inline">
-                                                    <i></i> </label> </span>
-                                            <p>
-                                                <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <span class="handle"> <label class="checkbox">
-                                                    <input type="checkbox" name="checkbox-inline">
-                                                    <i></i> </label> </span>
-                                            <p>
-                                                <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div >
-                                <div class="col-lg-6">
-                                    <ul id="sortable2 validar-datos" class="todo">
-                                        <li>
-                                            <span class="handle"> <label class="checkbox">
-                                                    <input type="checkbox" name="checkbox-inline">
-                                                    <i></i> </label> </span>
-                                            <p>
-                                                <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <span class="handle"> <label class="checkbox">
-                                                    <input type="checkbox" name="checkbox-inline">
-                                                    <i></i> </label> </span>
-                                            <p>
-                                                <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <span class="handle"> <label class="checkbox">
-                                                    <input type="checkbox" name="checkbox-inline">
-                                                    <i></i> </label> </span>
-                                            <p>
-                                                <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <h5 class="todo-group-title"><i class="fa fa-check"></i> Completed Tasks (<small class="num-of-tasks">1</small>)</h5>
-                            <ul id="sortable1" class="todo">
-                                <li>
-                                    <p>
-                                        <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
-                                    </p>
-                                </li>
-                            </ul>
-
-                            <!-- end content -->
-                        </div>
+                        </ul>
 
                     </div>
-                    <!-- end widget div -->
+                    <!-- new widget -->
+                    <div class="jarviswidget jarviswidget-color-blue" id="wid-id-4" data-widget-editbutton="false" data-widget-colorbutton="false">
+
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-check txt-color-white"></i> </span>
+                            <h2> Cambios !! </h2>
+                        </header>
+
+                        <!-- widget div-->
+                        <div>
+                            <!-- widget edit box -->
+
+                            <!-- end widget edit box -->
+
+                            <div class="widget-body no-padding smart-form">
+                                <!-- content goes here -->
+                                <h5 class="todo-group-title"><i class="fa fa-warning"></i> Registros Afectados (<small class="num-of-tasks">1</small>)</h5>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <ul id="sortable1" class="todo">
+                                            <li>
+                                                <span class="handle"> <label class="checkbox">
+                                                        <input type="checkbox" name="checkbox-inline">
+                                                        <i></i> </label> </span>
+                                                <p>
+                                                    <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <span class="handle"> <label class="checkbox">
+                                                        <input type="checkbox" name="checkbox-inline">
+                                                        <i></i> </label> </span>
+                                                <p>
+                                                    <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <span class="handle"> <label class="checkbox">
+                                                        <input type="checkbox" name="checkbox-inline">
+                                                        <i></i> </label> </span>
+                                                <p>
+                                                    <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div >
+                                    <div class="col-lg-6">
+                                        <ul id="sortable2 validar-datos" class="todo">
+                                            <li>
+                                                <span class="handle"> <label class="checkbox">
+                                                        <input type="checkbox" name="checkbox-inline">
+                                                        <i></i> </label> </span>
+                                                <p>
+                                                    <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <span class="handle"> <label class="checkbox">
+                                                        <input type="checkbox" name="checkbox-inline">
+                                                        <i></i> </label> </span>
+                                                <p>
+                                                    <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <span class="handle"> <label class="checkbox">
+                                                        <input type="checkbox" name="checkbox-inline">
+                                                        <i></i> </label> </span>
+                                                <p>
+                                                    <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <h5 class="todo-group-title"><i class="fa fa-check"></i> Completed Tasks (<small class="num-of-tasks">1</small>)</h5>
+                                <ul id="sortable1" class="todo">
+                                    <li>
+                                        <p>
+                                            <strong>ID</strong>cambios [<a>Mas detalle</a>] <span class="text-muted">descripcion del cambio realizado</span>
+                                        </p>
+                                    </li>
+                                </ul>
+
+                                <!-- end content -->
+                            </div>
+
+                        </div>
+                        <!-- end widget div -->
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="panel panel-default tablaL col col-lg-12">
+            <div class="panel panel-default tablaL col col-lg-12">
 
-        </div>
-        <div class="panel panel-default tablaR col col-lg-12">
+            </div>
+            <div class="panel panel-default tablaR col col-lg-12">
 
-        </div>
-        <div class="mload">
-            <img class="loading modal"  src="../../../img/ajax-loader.gif" alt=""/>
-        </div>    
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
+            </div>
+            <div class="mload">
+                <img class="loading modal"  src="../../../img/ajax-loader.gif" alt=""/>
+            </div>    
+            <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+            <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
 
-        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <script>
-            if (!window.jQuery) {
-                document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
-            }
-        </script>
+            <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+            <script>
+                if (!window.jQuery) {
+                    document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                }
+            </script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-        <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }
-        </script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+            <script>
+                if (!window.jQuery.ui) {
+                    document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                }
+            </script>
 
-        <!-- IMPORTANT: APP CONFIG -->
-        <script src="../../../js/app.config.js"></script>
+            <!-- IMPORTANT: APP CONFIG -->
+            <script src="../../../js/app.config.js"></script>
 
-        <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-        <script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+            <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+            <script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
 
-        <!-- BOOTSTRAP JS -->
-        <script src="../../../js/bootstrap/bootstrap.min.js"></script>
+            <!-- BOOTSTRAP JS -->
+            <script src="../../../js/bootstrap/bootstrap.min.js"></script>
 
-        <!-- CUSTOM NOTIFICATION -->
-        <script src="../../../js/notification/SmartNotification.min.js"></script>
+            <!-- CUSTOM NOTIFICATION -->
+            <script src="../../../js/notification/SmartNotification.min.js"></script>
 
-        <!-- JARVIS WIDGETS -->
-        <script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
+            <!-- JARVIS WIDGETS -->
+            <script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-        <!-- EASY PIE CHARTS -->
-        <script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+            <!-- EASY PIE CHARTS -->
+            <script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
 
-        <!-- SPARKLINES -->
-        <script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+            <!-- SPARKLINES -->
+            <script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
 
-        <!-- JQUERY VALIDATE -->
-        <script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
+            <!-- JQUERY VALIDATE -->
+            <script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-        <!-- JQUERY MASKED INPUT -->
-        <script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+            <!-- JQUERY MASKED INPUT -->
+            <script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
-        <!-- JQUERY SELECT2 INPUT -->
-        <script src="../../../js/plugin/select2/select2.min.js"></script>
+            <!-- JQUERY SELECT2 INPUT -->
+            <script src="../../../js/plugin/select2/select2.min.js"></script>
 
-        <!-- JQUERY UI + Bootstrap Slider -->
-        <script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+            <!-- JQUERY UI + Bootstrap Slider -->
+            <script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
 
-        <!-- browser msie issue fix -->
-        <script src="../../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+            <!-- browser msie issue fix -->
+            <script src="../../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 
-        <!-- FastClick: For mobile devices -->
-        <script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
+            <!-- FastClick: For mobile devices -->
+            <script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
 
-        <!--[if IE 8]>
-        
-        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-        
-        <![endif]-->
+            <!--[if IE 8]>
+            
+            <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+            
+            <![endif]-->
 
-        <!-- Demo purpose only -->
-        <script src="../../../js/demo.min.js"></script>
+            <!-- Demo purpose only -->
+            <script src="../../../js/demo.min.js"></script>
 
-        <!-- MAIN APP JS FILE -->
-        <script src="../../../js/app.min.js"></script>
+            <!-- MAIN APP JS FILE -->
+            <script src="../../../js/app.min.js"></script>
 
-        <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-        <!-- Voice command : plugin -->
-        <script src="../../../js/speech/voicecommand.min.js"></script>
+            <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+            <!-- Voice command : plugin -->
+            <script src="../../../js/speech/voicecommand.min.js"></script>
 
-        <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
-        <script src="../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-        <script src="../../../js/plugin/datatables/dataTables.colVis.min.js"></script>
-        <script src="../../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
-        <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-        <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-        <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
-        <script>
-            $(document).ready(function () {
+            <!-- PAGE RELATED PLUGIN(S) -->
+            <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
+            <script src="../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+            <script src="../../../js/plugin/datatables/dataTables.colVis.min.js"></script>
+            <script src="../../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
+            <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+            <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+            <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
+            <script>
+ $(document).ready(function () {
 
                 var per = 0;
                 var semest = "2016-1";
                 var semest1, personas;
-                update_ws(semest);
+                        update_ws(semest);
+                        
+                     
+                        $('.mload').show();
+                        $('.loading').show();
+                        
+         $.post('../../../carga_academica', 'opc=actualizar_ws&semestre=' + semest, function (Data) {
+                               update_ws(semest);
+                                $('.mload').hide();
+                     if (Data.rpta === true) {
+                                var lista = Data.lista;
+                                var t = "<table class='table table-bordered'>";
+                                var t1 = "<table class='table table-bordered'>";
+                                
+                                for (var i = 0; i < lista.length; i++) {
+                                    if (lista[i].TDATO == 0) {
+                                                t += "<tr>";
+                                                t += "<td>" + lista[i].ID + "</td>";
+                                                t += "<td>" + lista[i].CAMPUS + "</td>";
+                                                t += "<td>" + lista[i].AP_PATERNO + "</td>";
+                                                t += "<td>" + lista[i].AP_MATERNO + "</td>";
+                                                t += "<td>" + lista[i].NO_TRABAJADOR + "</td>";
+                                                t += "<td>" + lista[i].ES_TIPO_DOC + "</td>";
+                                                t += "<td>" + lista[i].NU_DOC + "</td>";
+                                                t += "<td>" + lista[i].NO_FACULTAD + "</td>";
+                                                t += "<td>" + lista[i].NO_CURSO + "</td>";
+                                                t += "<td>" + lista[i].NU_GRUPO + "</td>";
+                                                t += "<td>" + lista[i].CA_HLAB + "</td>";
+                                                t += "<td>" + lista[i].DE_CONDICION + "</td>";
+                                                t += "<td>" + lista[i].DE_TIPO_CURSO + "</td>";
+                                                t += "<td>" + lista[i].DE_HORARIO + "</td>";
+                                                t += "</tr>";
+                                    } else {
+                                                t1 += "<tr>";
+                                                t1 += "<td>" + lista[i].ID + "</td>";
+                                                t1 += "<td>" + lista[i].CAMPUS + "</td>";
+                                                t1 += "<td>" + lista[i].AP_PATERNO + "</td>";
+                                                t1 += "<td>" + lista[i].AP_MATERNO + "</td>";
+                                                t1 += "<td>" + lista[i].NO_TRABAJADOR + "</td>";
+                                                t1 += "<td>" + lista[i].ES_TIPO_DOC + "</td>";
+                                                t1 += "<td>" + lista[i].NU_DOC + "</td>";
+                                                t1 += "<td>" + lista[i].NO_FACULTAD + "</td>";
+                                                t1 += "<td>" + lista[i].NO_CURSO + "</td>";
+                                                t1 += "<td>" + lista[i].NU_GRUPO + "</td>";
+                                                t1 += "<td>" + lista[i].CA_HLAB + "</td>";
+                                                t1 += "<td>" + lista[i].DE_CONDICION + "</td>";
+                                                t1 += "<td>" + lista[i].DE_TIPO_CURSO + "</td>";
+                                                t1 += "<td>" + lista[i].DE_HORARIO + "</td>";
+                                                t1 += "</tr>";
+                                    }
+                                }
+                                        t += "</table>";
+                                        t1 += "</table>";
+                                        $('.tablaR').empty();
+                                        $('.tablaR').append(t1);
+                                        $('.tablaL').empty();
+                                        $('.tablaL').append(t);
+                                        $('.table').DataTable();
 
-                //--- comvert title html JqueryUI
-                $('.progress').hide();
-                      
-                $('.updatebtn').click(function(){
-                   
-                    $('.mload').show();
-                     $('.loading').show();
-                   $.post('../../../carga_academica','opc=actualizar_ws&semestre='+semest,function(Data){ 
-                       update_ws(semest);
-                       $('.mload').hide();
-                        if(Data.rpta === true){
-                             $.smallBox({
-                                                   title: "¡Felicitaciones!",
-                                                    content: "<i class='fa fa-clock-o'></i> <i>Base de Datos Actualizado Correctamente !!!</i>",
-                                                    color: "#296191",
-                                                    iconSmall: "fa fa-cloud bounce animated",
-                                                    timeout: 6000
-                                                });
+                                        $.smallBox({
+                                        title: "¡Felicitaciones!",
+                                                content: "<i class='fa fa-clock-o'></i> <i>Base de Datos Actualizado Correctamente !!!</i>",
+                                                color: "#296191",
+                                                iconSmall: "fa fa-cloud bounce animated",
+                                                timeout: 6000
+                                        });
                         }else{
-                             $.smallBox({
-                                                title: "¡Alerta!",
+                                        $.smallBox({
+                                        title: "¡Alerta!",
                                                 content: "<i class='fa fa-clock-o'></i> <i>Error en el servidos WebService Caido !!! </i>",
                                                 color: "#C46A69",
                                                 iconSmall: "fa fa-cloud bounce animated",
                                                 timeout: 7000
-                                            });
+                                        });
                         }
-                    }
-                }));
 
-                $('.updatebtn').click(function () {
-
-                    $('.mload').show();
-                    $('.loading').show();
-                    $.post('../../../carga_academica', 'opc=actualizar_ws&semestre=' + semest, function (Data) {
-                        update_ws(semest);
-                        $('.mload').hide();
-                        if (Data.rpta === true) {
-                            var lista = Data.lista;
-                            var t = "<table class='table table-bordered'>";
-                            var t1 = "<table class='table table-bordered'>";
-                            for (var i = 0; i < lista.length; i++) {
-                                if (lista[i].TDATO == 0) {
-                                    t += "<tr>";
-                                    t += "<td>" + lista[i].ID + "</td>";
-                                    t += "<td>" + lista[i].CAMPUS + "</td>";
-                                    t += "<td>" + lista[i].AP_PATERNO + "</td>";
-                                    t += "<td>" + lista[i].AP_MATERNO + "</td>";
-                                    t += "<td>" + lista[i].NO_TRABAJADOR + "</td>";
-                                    t += "<td>" + lista[i].ES_TIPO_DOC + "</td>";
-                                    t += "<td>" + lista[i].NU_DOC + "</td>";
-                                    t += "<td>" + lista[i].NO_FACULTAD + "</td>";
-                                    t += "<td>" + lista[i].NO_CURSO + "</td>";
-                                    t += "<td>" + lista[i].NU_GRUPO + "</td>";
-                                    t += "<td>" + lista[i].CA_HLAB + "</td>";
-                                    t += "<td>" + lista[i].DE_CONDICION + "</td>";
-                                    t += "<td>" + lista[i].DE_TIPO_CURSO + "</td>";
-                                    t += "<td>" + lista[i].DE_HORARIO + "</td>";
-                                    t += "</tr>";
-                                } else {
-                                    t1 += "<tr>";
-                                    t1 += "<td>" + lista[i].ID + "</td>";
-                                    t1 += "<td>" + lista[i].CAMPUS + "</td>";
-                                    t1 += "<td>" + lista[i].AP_PATERNO + "</td>";
-                                    t1 += "<td>" + lista[i].AP_MATERNO + "</td>";
-                                    t1 += "<td>" + lista[i].NO_TRABAJADOR + "</td>";
-                                    t1 += "<td>" + lista[i].ES_TIPO_DOC + "</td>";
-                                    t1 += "<td>" + lista[i].NU_DOC + "</td>";
-                                    t1 += "<td>" + lista[i].NO_FACULTAD + "</td>";
-                                    t1 += "<td>" + lista[i].NO_CURSO + "</td>";
-                                    t1 += "<td>" + lista[i].NU_GRUPO + "</td>";
-                                    t1 += "<td>" + lista[i].CA_HLAB + "</td>";
-                                    t1 += "<td>" + lista[i].DE_CONDICION + "</td>";
-                                    t1 += "<td>" + lista[i].DE_TIPO_CURSO + "</td>";
-                                    t1 += "<td>" + lista[i].DE_HORARIO + "</td>";
-                                    t1 += "</tr>";
+          });
+                        
+                        $('.semestre').change(function () {
+                        $('.semestre option:selected').each(function () {
+                                semest = $(this).val();
+                                $('#dialog-message').dialog('open');
+                                update_ws(semest);
+                            });
+                         });
+                                function update_ws(s) {
+                                console.log(s);
+                                        if (semest1 != s) {
+                                per = 0;
                                 }
+                                $.ajax({
+                                        type: 'POST',
+                                        url: '../../../carga_academica',
+                                        data: 'opc=List_ws&semestre=' + s,
+                                        success: function (Data) {
+                                               console.log(Data);
+                                               $.each(Data, function (i, obj) {
+                                                   $.each(obj, function (j, json) {
+                                                    per++;
+                                                    });
+                                                });   
+                                                
+                                                    personas = per;
+                                                     $('.personas').text(per);
+                                                      $('.semest').text(s);
+                                                   }   
+                                                
+                                        });
+                                    }
 
-                            }
-                            t += "</table>";
-                            t1 += "</table>";
-                            $('.tablaR').empty();
-                            $('.tablaR').append(t1);
-                            $('.tablaL').empty();
-                            $('.tablaL').append(t);
-                            $('.table').DataTable();
-
-
-                            $.smallBox({
-                                title: "¡Felicitaciones!",
-                                content: "<i class='fa fa-clock-o'></i> <i>Base de Datos Actualizado Correctamente !!!</i>",
-                                color: "#296191",
-                                iconSmall: "fa fa-cloud bounce animated",
-                                timeout: 6000
-                            });
-                        } else {
-                            $.smallBox({
-                                title: "¡Alerta!",
-                                content: "<i class='fa fa-clock-o'></i> <i>Error en el servidos WebService Caido !!! </i>",
-                                color: "#C46A69",
-                                iconSmall: "fa fa-cloud bounce animated",
-                                timeout: 7000
-                            });
-                        }
-                    }, 'json');
-                });
-                $('.semestre').change(function () {
-                    $('.semestre option:selected').each(function () {
-                        semest = $(this).val();
-
-                        $('#dialog-message').dialog('open');
-
-                        update_ws(semest);
-                    });
-
-                });
-                function update_ws(s) {
-                    console.log(s);
-                    if (semest1 != s) {
-                        per = 0;
-                    }
-                    $.ajax({
-                        type: 'POST',
-                        url: '../../../carga_academica',
-                        data: 'opc=List_ws&semestre=' + s,
-                        success: function (Data) {
-                            console.log(Data);
-                            $.each(Data, function (i, obj) {
-                                $.each(obj, function (j, json) {
-                                    console.log(i);
-                                    per++;
-                                });
-                                personas = per;
-                                $('.personas').text(per);
-                                $('.semest').text(s);
+                                /*
+                                 * TODO: add a way to add more todo's to list
+                                 */
                                 
-                            }
-                        });
-                    }
-                    
-                    		/*
-				* TODO: add a way to add more todo's to list
-				*/
+                                // initialize sortable
+                                $(function() {
+                                $("#sortable1,#sortable2").sortable({
 
-				// initialize sortable
-				$(function() {
-					$("#sortable1,#sortable2").sortable({
-						
-						connectWith : ".todo",
-						update : countTasks
-					}).disableSelection();
-				});
-
-				// check and uncheck
-				$('.todo .checkbox > input[type="checkbox"]').click(function() {
-					var $this = $(this).parent().parent().parent();
-                              
-					if ($(this).prop('checked')) {
-						$this.addClass("complete");
-
-						// remove this if you want to undo a check list once checked
-						//$(this).attr("disabled", true);
-						$(this).parent().hide();
-
-						// once clicked - add class, copy to memory then remove and add to sortable3
-						$this.slideUp(500, function() {
-							$this.clone().prependTo("#validar-datos").effect("highlight", {}, 800);
-							$this.remove();
-							countTasks();
-						});
-					} else {
-						// insert undo code here...
-					}
-
-				})
-				// count tasks
-				function countTasks() {
-
-					$('.todo-group-title').each(function() {
-						var $this = $(this);
-						$this.find(".num-of-tasks").text($this.next().find("li").size());
-					});
-
-				}
-                    
-            });//-- end INI jQyery --
-        </script>
+                                connectWith : ".todo",
+                                        update : countTasks
+                                }).disableSelection();
+                                });
+                                        
+                                      
+     }); //-- end INI jQyery --
+            </script>
     </body>
 
 
