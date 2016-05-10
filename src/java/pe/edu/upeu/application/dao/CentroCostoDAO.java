@@ -132,7 +132,9 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
         boolean x = true;
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            System.out.println(ID_CENTRO_COSTO+" "+CO_CENTRO_COSTO+" "+DE_CENTRO_COSTO+" "+ID_DEPARTAMENTO+" "+ID_AREA+" "+ID_SECCION+" "+id_det_cc);
             CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_MOD_CENTRO_COSTO( ?, ?, ?, ?, ?, ?,?)}");
+            
             cst.setString(1, ID_CENTRO_COSTO);
             cst.setString(2, CO_CENTRO_COSTO);
             cst.setString(3, DE_CENTRO_COSTO);
@@ -142,9 +144,9 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
             cst.setString(7, id_det_cc);
             cst.execute();
         } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            System.out.println(e);
         } catch (Exception e) {
-            throw new RuntimeException("Error al cargar la lista de direcciones...");
+            System.out.println(e);
         } finally {
             try {
                 this.cnn.close();

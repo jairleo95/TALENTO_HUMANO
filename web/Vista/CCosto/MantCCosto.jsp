@@ -40,7 +40,7 @@
                                 <label class="label">Direccion</label>
                                 <label class="select">
                                     <select class="indir" name=dir"">
-                                        <option>[Seleccione]</option>
+                                        <option value="">[Seleccione]</option>
                                     </select>
                                 </label>
                             </section>
@@ -48,7 +48,7 @@
                                 <label class="label">Departmento</label>
                                 <label class="select">
                                     <select class="indep" name="dep">
-                                        <option>[Seleccione]</option>
+                                        <option value="">[Seleccione]</option>
                                     </select>
                                 </label>
                             </section>
@@ -56,7 +56,7 @@
                                 <label class="label">Area</label>
                                 <label class="select">
                                     <select class="inarea" name="area">
-                                        <option>[Seleccione]</option>
+                                        <option value="">[Seleccione]</option>
                                     </select>
                                 </label>
                             </section>
@@ -64,7 +64,7 @@
                                 <label class="label">Seccion</label>
                                 <label class="select">
                                     <select class="inseccion" name="seccion">
-                                        <option>[Seleccione]</option>
+                                        <option value="">[Seleccione]</option>
                                     </select>
                                     <input type="hidden" name="id_cc" class="id_cc" />
                                 </label>
@@ -153,23 +153,23 @@
                         var lista = objJson.lista;
                         if (lista.length > 0) {
                             $('.indir').empty();
-                            $('.indir').append("<option>[Seleccione]</option>");
+                            $('.indir').append("<option value=''>[Seleccione]</option>");
                             for (var i = 0; i < lista.length; i++) {
                                 $('.indir').append("<option value=" + lista[i].id + ">" + lista[i].nombre + "</option>");
                             }
                         }
                         $('.indep').empty();
-                        $('.indep').append("<option>[Seleccionar Direccion]</option>");
+                        $('.indep').append("<option value=''>[Seleccionar Direccion]</option>");
                         $('.inarea').empty();
-                        $('.inarea').append("<option>[Seleccionar Departamento]</option>");
+                        $('.inarea').append("<option value=''>[Seleccionar Departamento]</option>");
                         $('.inseccion').empty();
-                        $('.inseccion').append("<option>[Seleccionar Area]</option>");
+                        $('.inseccion').append("<option value=''>[Seleccionar Area]</option>");
                         $('.indir').change(function () {
                             var id = $(this).val();
                             $('.indep').empty();
-                            $('.indep').append("<option>[Espere..]</option>");
+                            $('.indep').append("<option value=''>[Espere..]</option>");
                             $('.inarea').empty();
-                            $('.inarea').append("<option>[Seleccionar Departamento]</option>");
+                            $('.inarea').append("<option value=''>[Seleccionar Departamento]</option>");
                             cargar_dep(id);
                         });
 
@@ -184,7 +184,7 @@
                         var lista = objJson.lista;
                         if (lista.length > 0) {
                             $('.indep').empty();
-                            $('.indep').append("<option>[Seleccione]</option>");
+                            $('.indep').append("<option value=''>[Seleccione]</option>");
                             for (var i = 0; i < lista.length; i++) {
                                 $('.indep').append("<option value=" + lista[i].id + ">" + lista[i].nombre + "</option>");
                             }
@@ -192,7 +192,7 @@
                         $('.indep').change(function () {
                             var idep = $(this).val();
                             $('.inarea').empty();
-                            $('.inarea').append("<option>[Espere..]</option>");
+                            $('.inarea').append("<option value=''>[Espere..]</option>");
                             cargar_ar(idep);
                         });
                         $('.indep > option[value="' + sel + '"]').attr("selected", "selected");
@@ -207,7 +207,7 @@
                         var lista = objJson.lista;
                         if (lista.length > 0) {
                             $('.inarea').empty();
-                            $('.inarea').append("<option>[Seleccione]</option>");
+                            $('.inarea').append("<option value=''>[Seleccione]</option>");
                             for (var i = 0; i < lista.length; i++) {
                                 $('.inarea').append("<option value=" + lista[i].id + ">" + lista[i].nombre + "</option>");
                             }
@@ -215,7 +215,7 @@
                         $('.inarea').change(function () {
                             var iar = $(this).val();
                             $('.inseccion').empty();
-                            $('.inseccion').append("<option>[Espere..]</option>");
+                            $('.inseccion').append("<option value=''>[Espere..]</option>");
                             cargar_sec(iar);
                         });
                         $('.inarea > option[value="' + sel + '"]').attr("selected", "selected");
@@ -232,7 +232,7 @@
                             var lista = objJson.lista;
                             if (lista.length > 0) {
                                 $('.inseccion').empty();
-                                $('.inseccion').append("<option>[Seleccione]</option>");
+                                $('.inseccion').append("<option value=''>[Seleccione]</option>");
                                 for (var i = 0; i < lista.length; i++) {
                                     $('.inseccion').append("<option value=" + lista[i].id + ">" + lista[i].nombre + "</option>");
                                 }
@@ -241,7 +241,7 @@
                         });
                     } else {
                         $('.inseccion').empty();
-                        $('.inseccion').append("<option>[Seleccione]</option>");
+                        $('.inseccion').append("<option value=''>[Seleccione]</option>");
                     }
 
                 }
@@ -433,6 +433,7 @@
                                 data += "&ID_DEPARTAMENTO=" + ID_DEPARTAMENTO;
                                 data += "&ID_AREA=" + ID_AREA;
                                 data += "&ID_SECCION=" + ID_SECCION;
+                                alert(ID_CENTRO_COSTO);
                                 $.post("../../MCCosto?opc=edit_cc", data, function () {
                                     cargar_T();
                                     $('.inccc').val("");

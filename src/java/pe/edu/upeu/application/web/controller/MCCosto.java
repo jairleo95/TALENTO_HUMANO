@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.CentroCostoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCentroCosto;
+import pe.edu.upeu.application.factory.StringTools;
 
 /**
  *
@@ -92,13 +93,14 @@ public class MCCosto extends HttpServlet {
             }
             if (opc.equals("edit_cc")) {
                 String ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA, ID_SECCION;
-                ID_CENTRO_COSTO = request.getParameter("ID_CENTRO_COSTO");
-                CO_CENTRO_COSTO = request.getParameter("CO_CENTRO_COSTO");
-                DE_CENTRO_COSTO = request.getParameter("DE_CENTRO_COSTO");
-                ID_DEPARTAMENTO = request.getParameter("ID_DEPARTAMENTO");
-                ID_AREA = request.getParameter("ID_AREA");
-                ID_SECCION = request.getParameter("ID_SECCION");
-                String ID_DET_CC = request.getParameter("ID_DET_CC");
+                ID_CENTRO_COSTO = StringTools.getString(request.getParameter("ID_CENTRO_COSTO"));
+                CO_CENTRO_COSTO = StringTools.getString(request.getParameter("CO_CENTRO_COSTO"));
+                DE_CENTRO_COSTO = StringTools.getString(request.getParameter("DE_CENTRO_COSTO"));
+                ID_DEPARTAMENTO = StringTools.getString(request.getParameter("ID_DEPARTAMENTO"));
+                ID_AREA = StringTools.getString(request.getParameter("ID_AREA"));
+                ID_SECCION = StringTools.getString(request.getParameter("ID_SECCION"));
+                String ID_DET_CC = StringTools.getString(request.getParameter("ID_DET_CC"));
+                
                 cc.editarCCosto(ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA, ID_SECCION, ID_DET_CC);
                 rpta.put("rpta", "1");
             }
