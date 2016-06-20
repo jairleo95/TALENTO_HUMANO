@@ -23,8 +23,8 @@ public class FactoryConnectionDB {
     public static final int ORACLE = 2;
 
     public static String[] configMYSQL = {"bd_almacen", "root", "root"};
-    //public static String[] configORACLE = {"procesosrh", "gestionrrhh", "procesrh-db.upeu", "1521", "upeu"};
-    public static String[] configORACLE = {"procesosrh", "gestionrrhh", "localhost", "1521", "xe"};
+    public static String[] configORACLE = {"procesosrh", "gestionrrhh", "procesrh-db.upeu", "1521", "upeu"};
+    //public static String[] configORACLE = {"procesosrh", "gestionrrhh", "localhost", "1521", "xe"};
 
     //public static String[] configORACLE = {"PROCESOSRH", "PROCESOSRH", "192.168.217.2", "1521", "xe"};
     public static final String url = "/usr/share/tomcat7/webapps/TALENTO_HUMANO/Archivo/";

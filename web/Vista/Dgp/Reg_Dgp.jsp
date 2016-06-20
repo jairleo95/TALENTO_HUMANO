@@ -460,7 +460,7 @@
                                                         <%if (Integer.parseInt(request.getParameter("as_f")) > 0) {%>
                                                         <section class="col col-3">
                                                             <label class="input"  id="titu"> 
-                                                                Asig Familiar :<input readonly="readonly" type="text" name="ASIGNACION_FAMILIAR" maxlength="13" value="75.0" id="asigf">
+                                                                Asig Familiar :<input readonly="readonly" type="text" name="ASIGNACION_FAMILIAR" maxlength="13" value="85.0" id="asigf">
                                                             </label>
                                                         </section>
                                                         <%}%>
