@@ -21,18 +21,14 @@ public class FactoryConnectionDB {
 
     public static final int MYSQL = 1;
     public static final int ORACLE = 2;
-
-    public static String[] configMYSQL = {"bd_almacen", "root", "root"};
-    public static String[] configORACLE = {"procesosrh", "gestionrrhh", "procesrh-db.upeu", "1521", "upeu"};
-    //public static String[] configORACLE = {"procesosrh", "gestionrrhh", "localhost", "1521", "xe"};
-
-    //public static String[] configORACLE = {"PROCESOSRH", "PROCESOSRH", "192.168.217.2", "1521", "xe"};
+    public static String[] configMYSQL = {"bd", "root", "root"};
+    // public static String[] configORACLE = {"procesosrh", "gestionrrhh", "procesrh-db.upeu", "1521", "upeu"};
+    public static String[] configORACLE = {"procesosrh", "gestionrrhh", "192.168.1.38", "1521", "xe"};
     public static final String url = "/usr/share/tomcat7/webapps/TALENTO_HUMANO/Archivo/";
-    //public static final String url = "C:\\Users\\Erick Alexander\\Documents\\NetBeansProjects\\sofware\\TALENTO_HUMANO\\web\\Archivo\\";
     // public static final String url_archivos="http://localhost:8092/TALENTO_HUMANO/Archivo/" ;
     public static final String url_archivos = "http://procesosrh-app.upeu/TALENTO_HUMANO/Archivo/";
 
-    /*CARGA ACADEMICA*/
+    /* WebService Carga Academica*/
     public static final String keyApp = "4a7c88ee0791cad24a15d43a525982f8";
     public static final String keyID = "d57d9c1cd0cfdec68805a5055388177b";
     public static final String serverURI = "https://webapp.upeu.edu.pe/";

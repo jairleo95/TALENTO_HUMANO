@@ -1,6 +1,5 @@
 
-<%@page import="pe.edu.upeu.application.factory.SessionSystem"%>
-<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
+
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
@@ -8,6 +7,8 @@
         Usuario us = new Usuario();
         String id_rol = (String) sesion.getAttribute("IDROL");
 %>
+<%@page import="pe.edu.upeu.application.factory.SessionSystem"%>
+<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <%@page import="pe.edu.upeu.application.model.V_Privilegio"%>
 <%@page import="pe.edu.upeu.application.model.V_Usuario"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>

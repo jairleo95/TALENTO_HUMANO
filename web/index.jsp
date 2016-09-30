@@ -51,14 +51,6 @@
         <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
-        <script src="js/JQuery/jQuery.js" type="text/javascript"></script>
-        <script src="js/Js_Index/index.js" type="text/javascript"></script>
-
-        <script language="Javascript" type="text/javascript">
-            document.oncontextmenu = function () {
-                // return false;
-            }
-        </script>
 
         <style>
             div.about{
@@ -121,7 +113,6 @@
                                 </header>
 
                                 <fieldset>
-
                                     <section>
                                         <label class="label">Usuario</label>
                                         <label class="input"> <i class="icon-append fa fa-user"></i>
@@ -135,12 +126,6 @@
                                             <input type="password" name="clave" required="" />
                                             <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Ingrese la contraseña</b> </label>
 
-                                    </section>
-
-                                    <section>
-                                        <label class="checkbox">
-                                            <input type="checkbox" name="remember" checked="">
-                                            <i></i>Permanecer Conectado</label>
                                     </section>
                                 </fieldset>
                                 <footer>
@@ -175,6 +160,8 @@
         <script> if (!window.jQuery.ui) {
             document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
         }</script>
+        <!-- IMPORTANT: APP CONFIG -->
+        <script src="js/app.config.js"></script>
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events 		
         <script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
@@ -184,63 +171,12 @@
 
         <!-- JQUERY VALIDATE -->
         <script src="js/plugin/jquery-validate/jquery.validate.min.js"></script>
-
-        <!-- JQUERY MASKED INPUT -->
-        <script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>
-
         <!--[if IE 8]>
                 
                 <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-                
         <![endif]-->
-
         <!-- MAIN APP JS FILE -->
         <script src="js/app.min.js"></script>
-        <script type="text/javascript">
-        document.oncontextmenu = function () {
-            return false;
-        }
-        runAllForms();
-        function nobackbutton() {
-            window.location.hash = "no-back-button";
-            window.location.hash = "Again-No-back-button" //chrome
-            window.onhashchange = function () {
-                window.location.hash = "";
-            }
-        }
-
-        $(function () {
-            // Validation
-            $("#login-form").validate({
-                // Rules for form validation
-                rules: {
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    password: {
-                        required: true,
-                        minlength: 3,
-                        maxlength: 20
-                    }
-                },
-                // Messages for form validation
-                messages: {
-                    email: {
-                        required: 'Please enter your email address',
-                        email: 'Please enter a VALID email address'
-                    },
-                    password: {
-                        required: 'Please enter your password'
-                    }
-                },
-                // Do not change code below
-                errorPlacement: function (error, element) {
-                    error.insertAfter(element.parent());
-                }
-            });
-        });
-        </script>
-
+        <script src="js/Js_Index/index.js" type="text/javascript"></script>
     </body>
 </html>
