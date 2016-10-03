@@ -74,7 +74,7 @@
             #titu{
                 font-weight: bold;
                 color: #005cac;
-                // color: blue;
+                /* color: blue;*/
             }
             .cont{
                 margin: 0 auto;
@@ -308,12 +308,12 @@
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
-                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe fe_inicio_dgp">
+                                                                <input type="date" name="FEC_DESDE"   required="" class="val_fe fe_inicio_dgp">
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
-                                                                <input type="date" name="FEC_HASTA"  required="" id="datepicker" class="val_fe" >
+                                                                <input type="date" name="FEC_HASTA"  required="" class="val_fe" >
                                                             </label>
                                                         </section>
                                                     </div>

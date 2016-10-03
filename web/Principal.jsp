@@ -284,37 +284,37 @@
                 <!-- Lenguaje -->
                 <!--<ul class="header-dropdown-list hidden-xs">
                     <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="HTML_version/img/blank.gif" class="flag flag-us" alt="United States"> <span> English (US) </span> <i class="fa fa-angle-down"></i> </a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="img/blank.gif" class="flag flag-us" alt="United States"> <span> English (US) </span> <i class="fa fa-angle-down"></i> </a>
                         <ul class="dropdown-menu pull-right">
                             <li class="active">
-                                <a href="javascript:void(0);"><img src="HTML_version/img/blank.gif" class="flag flag-us" alt="United States"> English (US)</a>
+                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-us" alt="United States"> English (US)</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"><img src="HTML_version/img/blank.gif" class="flag flag-fr" alt="France"> Fran√ßais</a>
+                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-fr" alt="France"> Fran√ßais</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"><img src="HTML_version/img/blank.gif" class="flag flag-es" alt="Spanish"> Espa√±ol</a>
+                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-es" alt="Spanish"> Espa√±ol</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"><img src="HTML_version/img/blank.gif" class="flag flag-de" alt="German"> Deutsch</a>
+                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-de" alt="German"> Deutsch</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"><img src="HTML_version/img/blank.gif" class="flag flag-jp" alt="Japan"> Ê?•Ê?¨Ë™?</a>
+                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-jp" alt="Japan"> Ê?•Ê?¨Ë™?</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"><img src="HTML_version/img/blank.gif" class="flag flag-cn" alt="China"> ‰∏≠Ê??</a>
+                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-cn" alt="China"> ‰∏≠Ê??</a>
                             </li>	
                             <li>
-                                <a href="javascript:void(0);"><img src="HTML_version/img/blank.gif" class="flag flag-it" alt="Italy"> Italiano</a>
+                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-it" alt="Italy"> Italiano</a>
                             </li>	
                             <li>
-                                <a href="javascript:void(0);"><img src="HTML_version/img/blank.gif" class="flag flag-pt" alt="Portugal"> Portugal</a>
+                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-pt" alt="Portugal"> Portugal</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"><img src="HTML_version/img/blank.gif" class="flag flag-ru" alt="Russia"> –†—?—Å—Å–∫–∏–π —è–∑—?–∫</a>
+                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-ru" alt="Russia"> –†—?—Å—Å–∫–∏–π —è–∑—?–∫</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"><img src="HTML_version/img/blank.gif" class="flag flag-kp" alt="Korea"> Ì??Íµ≠Ï?¥</a>
+                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-kp" alt="Korea"> Ì??Íµ≠Ï?¥</a>
                             </li>						
 
                         </ul>
@@ -622,7 +622,7 @@
         <script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
         <!-- JQUERY SELECT2 INPUT 
-        <script src="HTML_version/js/plugin/select2/select2.min.js"></script>-->
+        <script src="js/plugin/select2/select2.min.js"></script>-->
 
         <!-- JQUERY UI + Bootstrap Slider -->
         <script src="js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>

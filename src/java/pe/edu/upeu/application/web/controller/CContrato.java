@@ -325,7 +325,7 @@ public class CContrato extends HttpServlet {
                 String idc = request.getParameter("idc");
                 String html = "";
                 List<Contrato> lista = con.ListaSelectorContrato(id_Trabajador);
-                html += "<select name='ida' class='select anno'>";
+                html += "<select name='ida' class='select anno form-control'>";
                 for (Contrato lista1 : lista) {
                     lista1.getCa_asig_familiar();
                     if (idc.equals(lista1.getId_contrato())) {
