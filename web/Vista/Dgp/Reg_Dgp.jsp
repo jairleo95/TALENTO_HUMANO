@@ -198,9 +198,15 @@
                                                                 </select>
                                                             </label>
                                                         </section>
-                                                        <section class="col col-4" id="titu">MFL:
+                                                        <section class="col col-2" id="titu">MFL:
                                                             <label class="toggle"  > 
                                                                 <input type="checkbox" value="1"   name="MFL" name="checkbox-toggle" >
+                                                                <i data-swchon-text="SI" data-swchoff-text="NO"></i>
+                                                            </label>
+                                                        </section>
+                                                        <section class="col col-2" id="titu">Presupuestado:
+                                                            <label class="toggle"  > 
+                                                                <input type="checkbox" value="1"   name="ES_PRESUPUESTADO" name="checkbox-toggle" >
                                                                 <i data-swchon-text="SI" data-swchoff-text="NO"></i>
                                                             </label>
                                                         </section>
@@ -869,8 +875,7 @@
    
     <script src="../../js/Js_DGP/Registrar/Reg_Dgps.js" type="text/javascript" ></script>
     <script src="../../js/Js_Horario/horario.js" type="text/javascript"></script>
-    <script src="../../js/Js_Plazo/Js_plazo_advertencia.js" type="text/javascript"></script>
-    
+    <script src="../../js/Js_Plazo/Js_plazo_advertencia.js" type="text/javascript"></script>    
      <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
     <script>
 

@@ -122,8 +122,8 @@ public class CDgp extends HttpServlet {
         boolean permissionDepartFilter = false;
         switch (idrol) {
             case "ROL-0001":
-               // permissionDireccionFilter = true;
-                 permissionDepartFilter = true;
+                // permissionDireccionFilter = true;
+                permissionDepartFilter = true;
                 permisoAdmin = true;
                 break;
             case "ROL-0008":
@@ -240,10 +240,17 @@ public class CDgp extends HttpServlet {
                 } else {
                     ES_MFL = "0";
                 }
+                //campo nuevo - Presupuestado
+                String ES_PRESUPUESTADO = request.getParameter("ES_PRESUPUESTADO");
+                if (ES_PRESUPUESTADO != null) {
+                    ES_PRESUPUESTADO = "1";
+                } else {
+                    ES_PRESUPUESTADO = "0";
+                }
                 dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO,
                         DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION,
                         ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD,
-                        DE_MONTO_HONORARIO, LI_MOTIVO, ES_MFL, BONO_PUESTO, ASIGNACION_FAMILIAR);
+                        DE_MONTO_HONORARIO, LI_MOTIVO, ES_MFL, BONO_PUESTO, ASIGNACION_FAMILIAR, ES_PRESUPUESTADO);
                 String iddgp = dgp.MAX_ID_DGP();
                 String ESTADO = request.getParameter("ESTADO");
                 if (ESTADO != null) {
@@ -475,8 +482,8 @@ public class CDgp extends HttpServlet {
                 }
                 if (permissionDireccionFilter) {
                     sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir));
-                }else{
-                        sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
+                } else {
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
                 }
 
                 response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
@@ -501,8 +508,8 @@ public class CDgp extends HttpServlet {
                 }
                 if (permissionDireccionFilter) {
                     sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir));
-                }else{
-                        sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
+                } else {
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
                 }
                 response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp?a=t");
             }
@@ -606,11 +613,16 @@ public class CDgp extends HttpServlet {
                 } else {
                     ES_MFL = "1";
                 }
-
+                String ES_PRESUPUESTADO = request.getParameter("ES_PRESUPUESTADO");
+                if (request.getParameter("ES_PRESUPUESTADO") == null) {
+                    ES_PRESUPUESTADO = "0";
+                } else {
+                    ES_PRESUPUESTADO = "1";
+                }
                 dgp.MODIFICAR_DGP(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO,
                         DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION,
                         ES_DGP, null, FE_CREACION, iduser, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD,
-                        DE_MONTO_HONORARIO, LI_MOTIVO, ES_MFL, BONO_PUESTO);
+                        DE_MONTO_HONORARIO, LI_MOTIVO, ES_MFL, BONO_PUESTO, ES_PRESUPUESTADO);
                 String iddgp = dgp.MAX_ID_DGP();
                 String ESTADO = request.getParameter("ESTADO");
                 if (ESTADO != null) {
