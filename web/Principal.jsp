@@ -72,7 +72,7 @@
         <script type="text/javascript" src="js/JQuery/jquery.autoheight.js"></script>
 
     </head>
-    <body class=""  onload="nobackbutton();
+    <body class="smart-style-1"  onload="nobackbutton();
             document.getElementById('link').click()">
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
