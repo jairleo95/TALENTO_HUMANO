@@ -86,49 +86,40 @@
 
                 <!-- Note: The activity badge color changes when clicked and resets the number to 0
                 Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
-                <%if (false) {
-                %>
-                <span id="activity" class="activity-dropdown"> <i class="fa fa-user"></i> <b class="badge"> 21 </b> </span>
+                <span id="activity" class="activity-dropdown hola2"> <i class="fa fa-user"></i> <b class="badge"> 21 </b> </span>
 
                 <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
-                <div class="ajax-dropdown">
+                <div class="ajax-dropdown hola">
 
                     <!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
-                    <div class="btn-group btn-group-justified" data-toggle="buttons">
-                        <label class="btn btn-default">
-                            <input type="radio" name="activity" id="ajax/notify/mail.html">
-                            SMS (14) </label>
-                        <label class="btn btn-default">
-                            <input type="radio" name="activity" id="ajax/notify/notifications.html">
-                            Eventos (3) </label>
-                        <label class="btn btn-default">
-                            <input type="radio" name="activity" id="ajax/notify/tasks.html">
-                            Tareas (4) </label>
+                    <div class="btn-group btn-group-justified"  data-toggle="buttons">
+                        <label class="btn btn-default autorizacionList">
+                            <input type="radio" name="activity" 
+                                   >
+                            Autori... </label>
+                        <label class="btn btn-default ">
+                            <input type="radio" name="activity">
+                            Rechazados (3) </label>
+                        <label class="btn btn-default ">
+                            <input type="radio" name="activity">
+                            Por autor... (4) </label>
                     </div>
 
                     <!-- notification content -->
-                    <div class="ajax-notifications custom-scroll">
+                    <div class="ajax-notificationss custom-scroll" style="overflow: scroll;">
+                        <ul class="notification-body autnot" >
+                            <div class="alert alert-transparent">
+                                <h4>Click en el boton para mostrar el mensaje</h4>
 
-                        <div class="alert alert-transparent">
-                            <h4>Click en el boton para mostrar el mensaje</h4>
+                            </div>
 
-                        </div>
+                            <i class="fa fa-lock fa-4x fa-border"></i>
 
-                        <i class="fa fa-lock fa-4x fa-border"></i>
-
+                        </ul>
                     </div>
                     <!-- end notification content -->
 
-                    <!-- footer: refresh area -->
-                    <span> ultima actualización: 29/09/2014 
-                        <button type="button" data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading..." class="btn btn-xs btn-default pull-right">
-                            <i class="fa fa-refresh"></i>
-                        </button> 
-                    </span>
-                    <!-- end footer -->
-
                 </div>
-                <%}%>
                 <!-- END AJAX-DROPDOWN -->
             </div>
             <%if (false) {
@@ -665,6 +656,7 @@
 
         <script>
         var btnclose = 0;
+        var listid = [];
         document.oncontextmenu = function () {
             return false;
         }
@@ -698,7 +690,100 @@
             /*$(".iframe_principal").show(250);
             $(".animacion_load").empty();*/
         };
+        function readNotification(idnoti) {
+            var page = "cnot";
+            $.post(page, {
+                data: idnoti,
+                op: 2
+            }, function () {
+                alert("Excelente");
+            });
+        }
+        var ii = 0;
+        function listAjaxNotification() {
+            var url = "cnot";
+            $.post(url, {
+                'listid[]': listid,
+                op: 1
+            }, function (objson) {
+                var rpta = 0;
+                rpta = objson.rpta;
+                if (rpta === "1") {
+                    var lista = objson.lista;
+                    var info = "";
+                    var fcn = "";
+                    var count = 0;
+                    listid = [];
+                    for (var i = 0; i < lista.length; i++) {
+                        info += '<li>';
+                        if (lista[i].es_visualizado == 0) {
+                            info += '<span class="unread">';
+                            listid.push(lista[i].id_notification);
+                            count++;
+                        }
+                        if (lista[i].es_visualizado == 1) {
+                            info += '<span>';
+                        }
+                        fcn = "readNotification('" + lista[i].id_notification + "')"
+                        info += '<a onclick="' + fcn + '" target="myframe" href="' + lista[i].di_notification + '" class="msg">';
+                        info += '<img src="img/avatars/4.png" alt="" class="air air-top-left margin-top-5" width="40" height="40" />';
+                        info += '<span class="from">' + lista[i].titulo + ' <i class="icon-paperclip"></i></span>';
+                        var d = new Date(); //establecemos la fecha de hoy
+                        //Establecemos la fecha final con los parametros anteriores
+                        var fechaFinal = new Date(d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
 
+                        //Establecemos la fecha inicio
+                        var fechaInicio = new Date(lista[i].fecha);
+
+                        //Restamos la fechaFinal menos fechaInicio,
+                        //esto establece la diferencia entre las fechas
+                        var fechaResta = fechaFinal - fechaInicio;
+
+                        //imprimir
+                        if ((((fechaResta / 1000) / 60) / 60) / 24 < 2) {     //dias
+                            if ((((fechaResta / 1000) / 60) / 60) / 24 < 1) {
+                                if (((fechaResta / 1000) / 60) / 60 >= 1) {
+                                    info += '<time>Hace ' + parseInt(((fechaResta / 1000) / 60) / 60) + ' horas</time>';
+                                } else {
+                                    if (parseInt((fechaResta / 1000) / 60) >= 1) {
+                                        info += '<time>Hace ' + parseInt((fechaResta / 1000) / 60) + ' minutos</time>';
+                                    } else {
+                                        info += '<time>Recientemente</time>';
+                                    }
+                                }
+                            } else {
+                                if ((((fechaResta / 1000) / 60) / 60) / 24 == 1) {
+                                    info += '<time>Hace 1 día</time>';
+                                } else {
+                                    info += '<time>Hace 2 días</time>';
+                                }
+                            }
+                        } else {
+                            info += '<time>' + fechaInicio.getDay() + "/" + fechaInicio.getMonth() + '/' + fechaInicio.getFullYear() + '</time>';
+                        }
+                        info += '<span class="subject">' + lista[i].de_notification + '</span>';
+                        info += '<span class="msg-body">Nada importante</span>';
+                        info += '</a>';
+                        info += '</span>';
+                        info += '</li>';
+                    }
+                    if (ii!=0){
+                        $(".autnot").empty();
+                        $(".autnot").append(info);
+                    }
+                    if (count != 0) {
+                        $(".autorizacionList").empty();
+                        $(".autorizacionList").append("Autori... (" + count + ") ");
+                    }
+                    if(count==0){
+                        $(".autorizacionList").empty();
+                        $(".autorizacionList").append("Autori... ");
+                        
+                    }
+                }
+            });
+        }
+        
         $(document).ready(function () {
             var idtra = $('#id_trabajador').val()
             getAvatar("perfil", idtra);
@@ -744,6 +829,13 @@
                 }
 
             }
+            $(".autorizacionList").click(function () {
+                listAjaxNotification();
+            });
+            $(".hola2").click(function () {
+                listAjaxNotification();
+                ii=1;
+            });
         });
 
         $("#btn-ocultar").click(function () {
