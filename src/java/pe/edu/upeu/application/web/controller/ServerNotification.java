@@ -43,6 +43,8 @@ public class ServerNotification {
     @OnMessage
     public void handleMessage(String message, Session userSession) throws IOException {
         String userName = (String) userSession.getUserProperties().get("username");
+        String mensaje = (String) userSession.getUserProperties().get("mensaje");
+        System.out.println(mensaje);
         if (userName == null) {
             userSession.getUserProperties().put("username", message);
             userSession.getBasicRemote().sendText(buildJsonData("system", "estas conectado a :" + message));
@@ -57,10 +59,11 @@ public class ServerNotification {
     private String buildJsonData(String username, String message) {
         Map<String, Object> rpta = new HashMap<String, Object>();
         //rpta.put("message", username + ": " + message);
-        rpta.put("message", "sdlñjsdfgñfg");
+        
+        rpta.put("message", true);
         Gson gson = new Gson();
         // return gson.toJson(rpta);
-        return "{\"message\":\"Hola\"}";
+        return gson.toJson(rpta);
     }
 
     @OnClose

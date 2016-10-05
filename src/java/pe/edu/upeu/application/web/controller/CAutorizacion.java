@@ -22,10 +22,15 @@ import pe.edu.upeu.application.dao.AutorizacionDAO;
 import pe.edu.upeu.application.dao.CorreoDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
+import pe.edu.upeu.application.dao.NotificationDAO;
+import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCorreoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceNotificationDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
+import pe.edu.upeu.application.model.Notification;
 
 /**
  *
@@ -93,11 +98,24 @@ public class CAutorizacion extends HttpServlet {
                         String cod = request.getParameter("COD");
                         String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
                         String idpasos = request.getParameter("IDPASOS");
+                        String nombres = request.getParameter("NOMBRES");
+                        String idtrab = request.getParameter("IDTRAB");
                         /*Cambiar con un trigger al momento de insertar*/
                         dgp.VAL_DGP_PASOS();
 
-                        a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
+                        //a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
                         String idpu = e.Id_Puesto_Personal(ide);
+                        InterfaceNotificationDAO notdao=new NotificationDAO();
+                        Notification not=new Notification();
+                        InterfaceUsuarioDAO udao=new UsuarioDAO();
+                        String username=udao.List_ID_User(iduser).get(0).getNo_usuario();
+                        not.setId_rol(idrol);
+                        not.setEs_visualizado("0");
+                        not.setEs_leido("0");
+                        not.setDe_notification("Empleado autorizado por "+username);
+                        not.setDi_notification("trabajador?idtr="+idtrab+"&opc=list");
+                        not.setTitulo(nombres);
+                        notdao.Registrar(not);
                         sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
