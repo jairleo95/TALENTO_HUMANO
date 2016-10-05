@@ -41,7 +41,7 @@ body {
 }
 
 a {
-	//color: #ccc;
+	/*//color: #ccc;*/
 	text-decoration: none;
 }
 
@@ -54,7 +54,7 @@ a:hover {
 .container > header {
 	width: 100%;
 	margin: 0 auto;
-	//padding: 0 1.875em 3.125em 1.875em;
+	/*//padding: 0 1.875em 3.125em 1.875em;*/
 }
 
 .main {
@@ -64,17 +64,17 @@ a:hover {
 
 .column {
         
-	//float: right;
+	/*//float: right;
 	//width: 50%;
-	//padding: 0 2em;
+	//padding: 0 2em;*/
 	/*min-height: 300px;
 	min-width: 320px;*/
-	//position: absolute;
+	/*//position: absolute;*/
     position:absolute;
-    //margin-right: 5%;
-       //top: 5%;
+   /* //margin-right: 5%;*/
+     /*  //top: 5%;*/
      left: 7%;
-    // top: 0%;
+  /*  // top: 0%;*/
 }
 
 .column:nth-child(2) {

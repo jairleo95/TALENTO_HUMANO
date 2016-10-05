@@ -9,25 +9,25 @@ a{
 
 
 body { 
-    //  font: 14px/1.4 Georgia, Serif; 
+  /*  //  font: 14px/1.4 Georgia, Serif; */
 }
 #page-wrap {
-    //margin: 10px;
+  /*  //margin: 10px;*/
     border-radius: 10px;
 }
 /* 
 Generic Styling, for Desktops/Laptops 
 */
 table { 
-    //width: 100%; 
+    /*//width: 100%; */
     border-collapse: collapse; 
-    //box-shadow: 10px 10px 20px #888888;   
+   /* //box-shadow: 10px 10px 20px #888888;   */
     margin: 0.5%;
     text-align: center;
-    // font-family: monospace;
+   /** // font-family: monospace;*/
     width: 95%;
-    //max-width: 100%;
-
+   /* //max-width: 100%;
+*/
 }
 /* Zebra striping */
 

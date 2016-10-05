@@ -74,7 +74,7 @@
             #titu{
                 font-weight: bold;
                 color: #005cac;
-                // color: blue;
+              /*  // color: blue;*/
             }
             p{
                 font-weight: bold; 

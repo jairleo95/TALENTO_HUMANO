@@ -87,7 +87,7 @@
             #titu{
                 font-weight: bold;
                 color: #005cac;
-                // color: blue;
+              /*  // color: blue;*/
             }
             .cont{
                 margin: 0 auto;

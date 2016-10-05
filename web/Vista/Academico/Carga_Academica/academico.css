@@ -6,7 +6,7 @@ TD  {
 }
 
 TH  {
-	//background : #fbe6ca; 
+	/*//background : #fbe6ca; */
 	color : #822c56;
 	text-align : center;
 	border : 1px solid #822c56;
@@ -42,7 +42,7 @@ hr {
 }
 
 .head {
-	//font-size: 08pt;
+	/*//font-size: 08pt;*/
 	background:#1881F2;
 	color: white;
 	text-align : center;

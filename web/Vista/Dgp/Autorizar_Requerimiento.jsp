@@ -736,25 +736,38 @@
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
                     for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
-                        if ($(".cod_aps" + r).val() != "") {
+                        if ($(".cod_aps" + r).val() !== "" & typeof $(".cod_aps" + r).val() !== 'undefined') {
+                            console.log(r + "codigo aps: " + $(".cod_aps" + r).val());
                             $.ajax({
                                 async: false,
-                                url: "../../trabajador",
-                                type: "POST",
-                                data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                            }).done(function () {
-                            });
-                            $.ajax({
-                                async: false,
-                                url: "../../autorizacion",
-                                type: "POST",
-                                data: "opc=Aceptar" + $(".val_aut" + r).val()
-                            }).done(function () {
+                                url: "../../trabajador", data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val(),
+                                type: "POST", success: function (objJson, textStatus, jqXHR) {
+                                    if (objJson.rpta) {
+                                        $.ajax({
+                                            async: false,
+                                            url: "../../autorizacion",
+                                            type: "POST", success: function (objJson, textStatus, jqXHR) {
+                                                if (objJson.rpta) {
+                                                    var table = new $.fn.dataTable.Api('#dt_basic1');
+                                                    table.row($(".cod_aps" + r).parents('tr')).remove().draw();
+                                                    exito("Procesado con exito!", "Codigo APS ingresado correctamente");
+                                                    console.log("autorizado!");
+                                                }
+                                            },
+                                            data: "opc=AceptarMasivo" + $(".val_aut" + r).val()
+                                        }).done(function () {
 
+                                        });
+                                    }
+
+                                }
+
+                            }).done(function () {
                             });
+
                         }
                     }
-                    window.location.href = "../../autorizacion?opc=mens_cod_aps";
+                    //  window.location.href = "../../autorizacion?opc=mens_cod_aps";
                 }
                 if (ButtonPressed === "No") {
                 }
@@ -767,34 +780,68 @@
                 buttons: '[No][Si]'
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
+
+                    var numCorreos = [];
+
+                    var dirCorreo = "";
                     for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
-                        if ($(".cod_huella" + r).val() != "") {
+                        if ($(".cod_huella" + r).val() !== "" & typeof $(".cod_huella" + r).val() !== "undefined") {
+                            console.log(r + "codigo huella" + $(".cod_huella" + r).val())
+                            numCorreos.push($(".cod_huella" + r).val());
                             $.ajax({
                                 async: false,
-                                url: "../../trabajador",
-                                type: "POST",
-                                data: "opc=reg_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val()
-                            }).done(function () {
-                            });
-                            $.ajax({
-                                async: false,
-                                url: "../../autorizacion",
-                                type: "POST",
-                                data: "opc=Aceptar" + $(".val_aut" + r).val()
-                            }).done(function () {
+                                url: "../../trabajador", data: "opc=registrar_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val(),
+                                type: "POST", success: function (data, textStatus, jqXHR) {
+                                    if (data.rpta) {
+                                        console.log("huella registrada!");
+                                        $.ajax({
+                                            async: false,
+                                            url: "../../autorizacion",
+                                            data: "opc=AceptarMasivo" + $(".val_aut" + r).val(),
+                                            type: "POST", success: function (data, textStatus, jqXHR) {
+                                                if (data.rpta) {
+                                                    console.log("autorizacion registrada");
+                                                    $.ajax({
+                                                        //  async: false,
+                                                        url: "../../autorizacion",
+                                                        type: "POST", success: function (data, textStatus, jqXHR) {
+                                                            if (data.rpta) {
+                                                                // dirCorreo += data.sendto + ",";
+                                                                console.log("senedto" + data.sendto);
+                                                                console.log("correos enviados!")
+                                                                var table = new $.fn.dataTable.Api('#dt_basic1');
+                                                                table.row($(".cod_huella" + r).parents('tr')).remove().draw();
+                                                                $.bigBox({
+                                                                    title: "Registro terminado!",
+                                                                    content: "<i class='fa fa-clock-o'></i> <i>Se enviaron a los correos del trabajador: " + data.sendto + "...</i>",
+                                                                    color: "#296191",
+                                                                    //timeout: 6000,
+                                                                    icon: "fa fa-check shake animated",
+                                                                    number: "1",
+                                                                    timeout: 6000
+                                                                });
+                                                            }
+                                                        },
+                                                        data: "opc=Enviar_Correo" + $(".correos_" + r).val()
+                                                    })
+                                                }
+
+
+                                            }
+                                        });
+                                    }
+
+                                }
 
                             });
-                            $.ajax({
-                                //  async: false,
-                                url: "../../autorizacion",
-                                type: "POST",
-                                data: "opc=Enviar_Correo" + $(".correos_" + r).val()
-                            }).done(function () {
 
-                            });
+
                         }
                     }
-                    window.location.href = "../../autorizacion?opc=mens_cod_huella";
+
+                    console.log("correos" + numCorreos)
+
+                    //   window.location.href = "../../autorizacion?opc=mens_cod_huella";
                 }
                 if (ButtonPressed === "No") {
                 }
@@ -939,7 +986,7 @@
     $(document).ready(function () {
         pageSetUp();
         $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-            $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+            $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
         });
 
         $(".inp_cod_aps").keypress(function (event) {

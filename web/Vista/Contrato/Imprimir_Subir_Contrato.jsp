@@ -45,7 +45,7 @@
                 margin-left: auto;
                 margin-right: auto  ;
                 width: 95%;
-                // margin: 0;
+                /*// margin: 0;*/
             }
             .titulo{
 
@@ -82,7 +82,7 @@
                 width: 100%;
             }
             .submit{
-                //position: relative;
+               /* //position: relative;*/
 
                 background-color: #0575f4;
                 color: white;
@@ -107,10 +107,10 @@
         <title>Información Contractual</title>
         <style type="text/css">
             .tables{
-                // margin-top: 0px;
+              /*  // margin-top: 0px;
                 // margin-left: 40px;
                 //  font-family: cursive;
-                //  font-size:18px;
+                //  font-size:18px;*/
                 border-radius: 3%;
                 padding: 0.5%;
                 background-color: white;

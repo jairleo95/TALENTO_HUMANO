@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <title>JSP Page</title>
-    </head>
+
     <style>
         .btnAgregar{
             -webkit-box-shadow: 2px 3px 6px 0px rgba(50, 50, 50, 0.5);
@@ -48,7 +48,7 @@
 
 
     </style>
-
+    </head>
     <body>
         <div class="well">
             <div class="row">
@@ -241,17 +241,16 @@
             </div>
 
         </div>-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
             if (!window.jQuery) {
-                document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
             }
         </script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
             if (!window.jQuery.ui) {
-                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
             }
         </script>
         <!--<script src="../../js/app.config.js"></script>

@@ -82,7 +82,7 @@
                 margin-left: auto;
                 margin-right: auto  ;
                 width: 95%;
-                // margin: 0;
+             /*   // margin: 0;*/
             }
             .titulo{
 
@@ -119,7 +119,7 @@
                 width: 100%;
             }
             .submit{
-                //position: relative;
+           /*     //position: relative;*/
 
                 background-color: #0575f4;
                 color: white;
@@ -165,7 +165,7 @@
             }
         } else {
         %>
-    <body >
+    <body>
         <%}%>
         <%
 

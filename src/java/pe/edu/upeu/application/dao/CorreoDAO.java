@@ -43,7 +43,7 @@ public class CorreoDAO implements InterfaceCorreoDAO {
         });
         try {
             // String ubicacion = FactoryConnectionDB.url + "Vista/Contrato/Reglamentos/";
-            String ubicacion = "c:\\NetBeansProjects\\TALENTO_HUMANO\\web\\Archivo\\Reglamentos\\";
+            String ubicacion = "C:\\Users\\ALPHA\\Documents\\NetBeansProjects\\TALENTO_HUMANO\\web\\Archivo\\Reglamentos\\";
             //   String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Reglamentos/";
 
             List<String> lista_archivos = new ArrayList<String>();
@@ -84,7 +84,7 @@ public class CorreoDAO implements InterfaceCorreoDAO {
             // addAttachment(multipart, filename2);
             // Send message
             Transport.send(message);
-            //     System.out.println("Sent message successfully....");
+            System.out.println("Sent message successfully....");
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
