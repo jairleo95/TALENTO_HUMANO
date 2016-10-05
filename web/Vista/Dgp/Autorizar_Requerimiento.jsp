@@ -187,9 +187,12 @@
                                             %>
                                             <tr>
                                                 <th class='hasinput' colspan='15' style='width:95%' ></th>
-                                                <th class='hasinput'  style='' ><center><button   rel="tooltip" data-placement="top" data-original-title="Procesar Firmas"  class='btn btn-primary btn-circle btn-lg btn_pro_firma'><i class='glyphicon glyphicon-ok'></i></button></center></th>
-                                            <th class='hasinput'  style='' ><center><button  rel="tooltip" data-placement="top" data-original-title="Procesar a remuneraciones"  class='btn btn-default btn-circle btn-lg btn_pro_remuneracion'><i class='glyphicon glyphicon-ok'></i></button></center></th>
-                                            <th class='hasinput'  style='' ><center><button  rel="tooltip" data-placement="top" data-original-title="Procesar a Firmas y Envio a Remuneraciones"  class='btn btn-warning btn-circle btn-lg btnProcesarFirmaAndRem'><i class='glyphicon glyphicon-ok'></i></button></center></th>
+                                                <th class='hasinput'  style='' ><center>
+                                                <button   disabled="" rel="tooltip" data-placement="top" data-original-title="Procesar Firmas"  class='btn btn-primary btn-circle btn-lg btn_pro_firma'><i class='glyphicon glyphicon-ok'></i></button></center></th>
+                                            <th class='hasinput'  style='' ><center>
+                                                <button  disabled="" rel="tooltip" data-placement="top" data-original-title="Procesar a remuneraciones"  class='btn btn-default btn-circle btn-lg btn_pro_remuneracion'><i class='glyphicon glyphicon-ok'></i></button></center></th>
+                                            <th class='hasinput'  style='' ><center>
+                                                <button  disabled=""  rel="tooltip" data-placement="top" data-original-title="Procesar a Firmas y Envio a Remuneraciones"  class='btn btn-warning btn-circle btn-lg btnProcesarFirmaAndRem'><i class='glyphicon glyphicon-ok'></i></button></center></th>
                                             </tr>
                                             <%}%>
                                             <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
@@ -350,7 +353,7 @@
                                                 if (Integer.parseInt(a.getVal_firm_contrato()) != 0 & Integer.parseInt(a.getElab_contrato()) != 0) {
                                                 %>
                                                 <div class="smart-form">
-                                                    <label class="toggle"><input type="checkbox" value="<%=(f + 1)%>"  class="env_rem<%=(f + 1)%>"  name="estado" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
+                                                    <label class="toggle"><input type="checkbox" value="<%=(f + 1)%>"  class="env_rem<%=(f + 1)%> envioRem"  name="estado" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                 </div>
                                                 <%
                                                     } else {
@@ -510,7 +513,6 @@
 <!--===========================Modal======================= -->
 
 <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -610,6 +612,32 @@
                                                         $.datepicker.setDefaults($.datepicker.regional['es']);
 </script>
 <script>
+    function statusBtnSendToRem() {
+        if ($(".envioRem").length == 0) {
+            $(".btn_pro_remuneracion").attr("disabled", "disabled");
+            return false;
+        } else {
+            $(".btn_pro_remuneracion").removeAttr("disabled");
+            return true;
+        }
+    }
+    function statusBtnSendFirma() {
+        if ($(".firm_contr").length == 0) {
+            $(".btn_pro_firma").attr("disabled", "disabled");
+            return true;
+        } else {
+            $(".btn_pro_firma").removeAttr("disabled");
+            return false;
+        }
+    }
+    function statusFirmaAndRem() {
+        if (!statusBtnSendToRem()==true & statusBtnSendFirma()==true) {
+            $(".btnProcesarFirmaAndRem").attr("disabled", "disabled");
+        } else {
+            $(".btnProcesarFirmaAndRem").removeAttr("disabled");
+        }
+    }
+
     function nobackbutton() {
         window.location.hash = "no-back-button";
         window.location.hash = "Again-No-back-button" //chrome
@@ -629,32 +657,42 @@
     }
     function procesarFirmas(callback) {
         $.each($(".firm_contr"), function () {
-            if ($(this).prop('checked')) {
-                console.log("procesando firnas");
+            var currentInputFirma = $(this);
+            if (currentInputFirma.prop('checked')) {
                 $.ajax({
                     async: false,
                     url: "../../contrato",
-                    type: "POST",
-                    data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
-                }).done(function () {
-                });
-                $.ajax({
-                    async: false,
-                    url: "../../autorizacion",
                     type: "POST", success: function (data, textStatus, jqXHR) {
-
+                        if (data.rpta) {
+                            console.log("status firma updated:" + data.rpta)
+                            $.ajax({
+                                async: false,
+                                url: "../../autorizacion",
+                                type: "POST", success: function (data, textStatus, jqXHR) {
+                                    if (data.rpta) {
+                                        console.log("procesando firnas");
+                                        var table = new $.fn.dataTable.Api('#dt_basic1');
+                                        table.row(currentInputFirma.parents('tr')).remove().draw();
+                                        exito("Procesado con exito!", "Se ha actualizado el contrato");
+                                        statusBtnSendToRem()
+                                        statusBtnSendFirma()
+                                        statusFirmaAndRem()
+                                    }
+                                },
+                                data: "opc=AceptarMasivo" + $(".val_aut" + currentInputFirma.val()).val()
+                            })
+                        }
 
                     },
-                    data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
-                }).done(function () {
-
+                    data: "opc=Actualizar_Firma" + $(".val_firm" + currentInputFirma.val()).val()
                 });
+
             }
         });
         if (typeof callback !== 'undefined') {
             callback();
         } else {
-            window.location.href = "../../autorizacion";
+            //  window.location.href = "../../autorizacion";
         }
 
     }
@@ -663,27 +701,39 @@
         window.location.href = "../../autorizacion";
     }
     function procesarSendToRemu(callback) {
-        for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
+        $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+        var lenghtDatatable = $('#dt_basic1 tr').length;
+        for (var i = 1; i <= lenghtDatatable; i++) {
             if ($(".env_rem" + i).prop('checked')) {
                 $.ajax({
                     async: false,
                     url: "../../autorizacion",
                     type: "POST", success: function (data, textStatus, jqXHR) {
-
+                        if (data.rpta) {
+                            $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                            var table = new $.fn.dataTable.Api('#dt_basic1');
+                            table.row($(".env_rem" + i).parents('tr')).remove().draw();
+                            exito("Procesado con exito!", "Envió el requerimiento correctamente");
+                            statusBtnSendToRem()
+                            statusBtnSendFirma()
+                            statusFirmaAndRem()
+                        }
+                        console.log("Autorizacion :" + data.rpta)
                     },
-                    data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
-                }).done(function () {
-
+                    data: "opc=AceptarMasivo" + $(".val_aut" + $(".env_rem" + i).val()).val()
                 });
             }
         }
         if (typeof callback !== 'undefined') {
             callback();
         } else {
-            window.location.href = "../../autorizacion";
+            // window.location.href = "../../autorizacion";
         }
     }
     $(document).ready(function () {
+        statusBtnSendToRem()
+        statusBtnSendFirma()
+        statusFirmaAndRem()
         $(".btnProcesarFirmaAndRem").click(function () {
             $.SmartMessageBox({
                 title: "¡Advertencia!",
@@ -704,8 +754,7 @@
                 buttons: '[No][Si]'
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
-
-                    procesarSendToRemu(refreshCurrentPage);
+                    procesarSendToRemu();
                 }
                 if (ButtonPressed === "No") {
                 }
@@ -720,7 +769,7 @@
                 if (ButtonPressed === "Si") {
                     try {
 
-                        procesarFirmas(refreshCurrentPage);
+                        procesarFirmas();
                         // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
                     } catch (err) {
 
