@@ -159,7 +159,7 @@
                                     <div class="widget-body no-padding">
 
 
-                                        <form action="../../../documento_trabajador" method="post" enctype="multipart/form-data" class="smart-form" >
+                                        <form action="../../../documento_trabajador" method="post" enctype="multipart/form-data" class="smart-form"  >
 
 
 
@@ -194,7 +194,7 @@
                                                                 <tr>
                                                                     <td class="caji<%=(i + 1)%>" align="center"><% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                         <div class="form-group">
-                                                                            <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" >
+                                                                            <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" size="500" >
                                                                         </div>
                                                                         <% } else { %>
                                                                         <% if (d.getId_documento_adjunto() == null) { %>
@@ -252,7 +252,7 @@
                                                                 <td class="caji<%=(i + 1)%>" align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" size="500000" >
                                                                     </div>
                                                                     <% } else { %>
                                                                     <% if (d.getId_documento_adjunto() == null) { %>
@@ -349,7 +349,7 @@
                                                                 <td class="caji<%=(i + 1)%>" align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
                                                                     </div>
                                                                     <% } else { %>
                                                                     <% if (d.getId_documento_adjunto() == null) { %>
@@ -433,7 +433,7 @@
                                                             <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" size="500"  name="archivos<%=(i + 1)%>" >
                                                                         <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
                                                                     </div>
                                                                     <% } else { %>
@@ -514,7 +514,7 @@
                                                             <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
                                                                         <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
                                                                     </div>
                                                                     <% } else { %>
@@ -586,13 +586,13 @@
                                                     // out.print(kk);
 %>
                                                 <tr>
-                                                    <td  style="width:50%;" align="center">
+                                                    <td  style="width:50%;" align="center"> 
                                                         <table class="table table-striped ">
                                                             <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
                                                             <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                     <% if ((permissionEditDocument)) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
                                                                         <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
                                                                     </div>
                                                                     <% } else { %>
@@ -643,7 +643,7 @@
                                                         <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong><%=d.getNo_documento()%></strong></td></tr>
                                                         <tr><td class="caji<%=(i + 1)%>" align="center"> <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                 <div class="form-group">
-                                                                    <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" >
+                                                                    <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" size="500" name="archivos<%=(i + 1)%>" >
                                                                 </div>
 
                                                                 <% } else { %>
@@ -733,7 +733,7 @@
                                                 <% if (permissionEditDocument) { %>
                                                 <%if (request.getParameter("P2") != null) {%>
                                                 <%} else {%>
-                                                <tr><td><input type="hidden" value="Registrar" name="opc"></td></tr>
+                                                <tr><td><input type="hidden" value="Registrar" name="opc" ></td></tr>
                                                         <%}%>
                                                         <%}%>
                                                 </tbody>
@@ -907,8 +907,10 @@
                                                         // a darker overlay looks better on this particular site
                                                         overlayOpacity: 0.8
                                                                 // setupDemos is defined in assets/demo.js
-                                                    }, setupDemos);
-        </script>
+                                                    }, setupDemos);</script>
+
+
+
         <script type="text/javascript">
             function nobackbutton() {
                 window.location.hash = "no-back-button";
@@ -917,6 +919,10 @@
                     window.location.hash = "";
                 }
             }
+
+
+
+
 
             $(document).ready(function () {
                 pageSetUp();
@@ -931,6 +937,84 @@
                 $("#file-0").fileinput({
                     'allowedFileExtensions': ['jpg', 'png', 'gif'],
                 });
+
+                function validSize(objFile) {
+                    var tamFiles = objFile.files.length;
+                    console.log("dfd:" + tamFiles);
+                    var x = true;
+                    for (var i = 0; i < tamFiles; i++) {
+                        console.log("(" + i + ") iteracion")
+                        var sizeByte = objFile.files[i].size;
+                        console.log("amama:" + sizeByte);
+//                         var s  = parseInt(sizeByte / 1024);
+                        if (sizeByte > 512000) {
+                            console.log("tamaño superado")
+                            //alert('El tamaño supera el limite permitido');
+                            // $(objFile).val('');
+
+                            x = false;
+                        }
+                        else {
+                            console.log("hola")
+                            x = true;
+                        }
+
+//                    if (siezekiloByte >$(objFile).attr('size')) {
+//                            console.log( "amama:" + siezekiloByte);
+//                        
+//                        //alert('El tamaño supera el limite permitido');
+//                        $(objFile).val('');
+//                        console.log("tamaño superado")
+//                        return false;
+//                    }
+
+                    }
+
+                    return x;
+
+                }
+
+//var sizeByte = objFile.files[0].size;
+//                    var siezekiloByte = parseInt(sizeByte / 1024);
+//                    if (siezekiloByte > $(objFile).attr('size')) {
+//                        //alert('El tamaño supera el limite permitido');
+//                        $(objFile).val('');
+//                        console.log("tamaño superado")
+//                        return false;
+//                    }
+//                    return true;
+
+                $(".file").change(function (e) {
+
+//   console.log ("dfd:"+e.target.files.length);
+
+                    if (!validSize(e.target)) {
+                        // $('.file').fileinput('reset');
+
+// method chaining
+                   $('.file').fileinput('destroy').fileinput('disable');
+
+                    } else {
+
+                        return true;
+                    }
+
+
+                });
+
+//                $(".file").change(function (e) {
+//                 
+//                    if (!validSize(e.target)) {
+//                     e.preventDefault();
+//        }else{
+//                    
+//        return true;    
+//                    }
+//                    
+//                   
+//                        
+//                  
+//                });
                 $(".file").fileinput({
                     // initialPreview: ["<img src='Desert.jpg' class='file-preview-image'>", "<img src='Jellyfish.jpg' class='file-preview-image'>"],
                     /*   initialPreviewConfig: [
@@ -950,16 +1034,19 @@
                                 "   </div>\n" +
                                 "   {caption}\n" +
                                 "</div>"},
-                    allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc'],
+                    'allowedFileExtensions': ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc'],
                     overwriteInitial: false,
-                    maxFileSize: 500,
+                    maxTotalFileSize: 5000000,
                     maxFilesNum: 10,
                     //allowedFileTypes: ['image', 'video', 'flash'],
-                    slugCallback: function (filename) {
-                        return filename.replace('(', '_').replace(']', '_');
-                    }
-                });
+                    slugCallback:
+                            function (filename) {
+                                return filename.replace('(', '_').replace(']', '_');
+                            }
 
+
+
+                });
                 $("#file-3").fileinput({
                     showUpload: false,
                     showCaption: false,
@@ -991,10 +1078,8 @@
                     }
 
                 });
-
                 $(".DD").change(function () {
                     $(".div-holi").text($(".DD").val());
-
                 });
                 $(".elimi").click(function () {
                     var msg = confirm('¿estas seguro de eliminar?');
@@ -1004,8 +1089,8 @@
                         return false;
                     }
                 });
-
             });
+
 
         </script>
 

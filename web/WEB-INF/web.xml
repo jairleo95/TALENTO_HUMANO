@@ -286,6 +286,11 @@
     <servlet-mapping>
         <servlet-name>CDocumento_Trabajador</servlet-name>
         <url-pattern>/documento_trabajador</url-pattern>
+        
+ <controller>
+<set-property property="maxFileSize" value="500K" />
+
+</controller>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CImpresion_Masiva</servlet-name>
