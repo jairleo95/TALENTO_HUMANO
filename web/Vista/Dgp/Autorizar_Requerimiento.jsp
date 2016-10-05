@@ -137,9 +137,12 @@
 
 
                                  >
-                                <header>
+                                <header class="headerReqAutorizado">
                                     <span class="widget-icon"> <i class="glyphicon glyphicon-inbox"></i> </span>
                                     <h2 class="font-md"><strong>Requerimientos por </strong> <i>Autorizar</i></h2>
+                                    <div class="widget-toolbar">
+                                        <span class="jarviswidget" ><i class="fa fa-refresh fa-spin"></i></span>
+                                    </div> 
                                 </header>
                                 <!-- widget div-->
                                 <div>
@@ -735,7 +738,10 @@
                 buttons: '[No][Si]'
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
-                    for (var r = 1; r <= parseInt($(".num_aps").val()); r++) {
+                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+                    var lenghtDatatable = $('#dt_basic1 tr').length;
+                    for (var r = 1; r <= lenghtDatatable; r++) {
+                        console.log("(" + r + ")Iterate items cod aps:" + $(".cod_aps" + r).val());
                         if ($(".cod_aps" + r).val() !== "" & typeof $(".cod_aps" + r).val() !== 'undefined') {
                             console.log(r + "codigo aps: " + $(".cod_aps" + r).val());
                             $.ajax({
@@ -748,10 +754,12 @@
                                             url: "../../autorizacion",
                                             type: "POST", success: function (objJson, textStatus, jqXHR) {
                                                 if (objJson.rpta) {
+                                                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                                                     var table = new $.fn.dataTable.Api('#dt_basic1');
                                                     table.row($(".cod_aps" + r).parents('tr')).remove().draw();
                                                     exito("Procesado con exito!", "Codigo APS ingresado correctamente");
                                                     console.log("autorizado!");
+
                                                 }
                                             },
                                             data: "opc=AceptarMasivo" + $(".val_aut" + r).val()
@@ -767,6 +775,8 @@
 
                         }
                     }
+
+
                     //  window.location.href = "../../autorizacion?opc=mens_cod_aps";
                 }
                 if (ButtonPressed === "No") {
@@ -783,7 +793,6 @@
 
                     var numCorreos = [];
 
-                    var dirCorreo = "";
                     for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
                         if ($(".cod_huella" + r).val() !== "" & typeof $(".cod_huella" + r).val() !== "undefined") {
                             console.log(r + "codigo huella" + $(".cod_huella" + r).val())
@@ -806,16 +815,15 @@
                                                         url: "../../autorizacion",
                                                         type: "POST", success: function (data, textStatus, jqXHR) {
                                                             if (data.rpta) {
-                                                                // dirCorreo += data.sendto + ",";
                                                                 console.log("senedto" + data.sendto);
-                                                                console.log("correos enviados!")
+                                                                console.log("correos enviados!");
                                                                 var table = new $.fn.dataTable.Api('#dt_basic1');
-                                                                table.row($(".cod_huella" + r).parents('tr')).remove().draw();
+                                                                //    table.row($(".cod_huella" + r).parent('tr')).remove().draw();
+                                                                console.log(table.row($(".cod_huella" + r)).data());
                                                                 $.bigBox({
                                                                     title: "Registro terminado!",
                                                                     content: "<i class='fa fa-clock-o'></i> <i>Se enviaron a los correos del trabajador: " + data.sendto + "...</i>",
                                                                     color: "#296191",
-                                                                    //timeout: 6000,
                                                                     icon: "fa fa-check shake animated",
                                                                     number: "1",
                                                                     timeout: 6000
