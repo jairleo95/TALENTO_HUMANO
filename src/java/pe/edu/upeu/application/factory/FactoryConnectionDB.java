@@ -24,11 +24,11 @@ public class FactoryConnectionDB {
 
     public static String[] configMYSQL = {"bd_almacen", "root", "root"};
   //  public static String[] configORACLE = {"procesosrh", "rrhh", "procesrh-db.upeu", "1521", "upeu"};
-    public static String[] configORACLE = {"procesosrh", "rrhh", "192.168.14.44", "1521", "xe"};
+    public static String[] configORACLE = {"procesosrh", "rrhh", "192.168.21.4", "1521", "xe"};
 
     public static final String url = "/usr/share/tomcat7/webapps/TALENTO_HUMANO/Archivo/";
-    // public static final String url_archivos="http://localhost:8092/TALENTO_HUMANO/Archivo/" ;
-    public static final String url_archivos = "http://procesosrh-app.upeu/TALENTO_HUMANO/Archivo/";
+     public static final String url_archivos="http://localhost:8089/TALENTO_HUMANO/Archivo/" ;
+   // public static final String url_archivos = "http://procesosrh-app.upeu/TALENTO_HUMANO/Archivo/";
 
     /* WebService Carga Academica*/
     public static final String keyApp = "4a7c88ee0791cad24a15d43a525982f8";
