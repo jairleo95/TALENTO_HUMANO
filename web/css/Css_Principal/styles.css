@@ -71,7 +71,7 @@ section, footer, nav{
         float: right;
         margin-right: 100px;
         padding: 2px 0px 2px 0px;
-        //border: 1px solid #097cac;
+      /*  //border: 1px solid #097cac;*/
 }
 
 #colorNav > ul > li{ /* will style only the top level li */
@@ -119,13 +119,13 @@ section, footer, nav{
 
 
 #colorNav li ul li{
-   // background-color:#ebebeb;/*dfd*/
+  /* // background-color:#ebebeb;/*dfd*/
     background-color: #54a6de;                
 }
 
 #colorNav li ul li a{
 	padding:12px;
-       // color:#CCC !important;
+     /*  // color:#CCC !important;*/
 	color: white;
        text-decoration:none !important;
 	display:block;
@@ -133,7 +133,7 @@ section, footer, nav{
 }
 
 #colorNav li ul li:nth-child(odd){ /* zebra stripes */
-	//background-color:#ebebeb;/*sasa*/
+	/*//background-color:#ebebeb;/*sasa*/
           background-color: #54a6de;  
 }
 
@@ -173,7 +173,7 @@ section, footer, nav{
     
 	max-height:600px; /* Increase when adding more dropdown items */
         display: block;
-         // overflow:hidden;
+      /*   // overflow:hidden;*/
           
 	-webkit-transition:max-height 0.3s linear;
 	-moz-transition:max-height 0.3s linear;

@@ -141,7 +141,7 @@ a, button {
 @media (min-width: 50em) {
 
     /* Transforms the list into a horizontal navigation */
-    .nav li {//
+    .nav li {
              float: left;
              display: inline-table;
              width: 18%;

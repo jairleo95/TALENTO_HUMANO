@@ -30,12 +30,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <head>
         <meta charset="utf-8">
         <title>Crear Formatos</title>
-        <script src="../../../HTML_version/js/plugin/ckeditor/ckeditor.js"></script>
+        <script src="../../../js/plugin/ckeditor/ckeditor.js"></script>
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
-        <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
+        <link href="../../../js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
 
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
         <%
@@ -57,12 +57,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                 }
                             }
                         }
+                    } else if (n.getDi_dom_a_d2() != null) {
+                        Direccion += "-" + n.getDi_dom_a_d2().trim();
                     } else {
-                        if (n.getDi_dom_a_d2() != null) {
-                            Direccion += "-" + n.getDi_dom_a_d2().trim();
-                        } else {
-                            Direccion += "-";
-                        }
+                        Direccion += "-";
                     }
                     if (n.getLi_di_dom_a_d3() != null) {
                         if (n.getLi_di_dom_a_d3().trim().equals("1")) {
@@ -105,12 +103,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                                 }
                             }
                         }
+                    } else if (n.getDi_dom_a_d4() != null) {
+                        Direccion += " - " + n.getDi_dom_a_d4().trim();
                     } else {
-                        if (n.getDi_dom_a_d4() != null) {
-                            Direccion += " - " + n.getDi_dom_a_d4().trim();
-                        } else {
-                            Direccion += " - ";
-                        }
+                        Direccion += " - ";
                     }
                     if (n.getDi_dom_a_d6() != null) {
                         Direccion += " " + n.getDi_dom_a_d6().trim();
@@ -179,7 +175,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
 // its initialization.
-            CKEDITOR.on('instanceReady', function(ev) {
+            CKEDITOR.on('instanceReady', function (ev) {
                 // Show the editor name and description in the browser status bar.
                 document.getElementById('eMessage').innerHTML = 'Instance <code>' + ev.editor.name + '<\/code> loaded.';
                 // Show this sample buttons.
@@ -195,8 +191,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     // Insert HTML code.
                     // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-insertHtml
                     editor.insertHtml(value);
-                }
-                else
+                } else
                     alert('You must be in WYSIWYG mode!');
             }
 
@@ -210,8 +205,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     // Insert as plain text.
                     // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-insertText
                     editor.insertText(value);
-                }
-                else
+                } else
                     alert('You must be in WYSIWYG mode!');
             }
 
@@ -242,8 +236,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     // Execute the command.
                     // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-execCommand
                     editor.execCommand(commandName);
-                }
-                else
+                } else
                     alert('You must be in WYSIWYG mode!');
             }
 
@@ -320,73 +313,76 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             }
             function mostrar_plantilla(valor) {
                 var editor = CKEDITOR.instances.editor1;
-                $.post("../../../formato_plantilla", "opc=Listar&id=" + valor, function(objJson) {
-                    var imprimir = objJson.imprimir;
-                    editor.setData(imprimir);
-                    procesar_texto();
+                $.ajax({
+                    url: "../../../formato_plantilla", data: "opc=Listar&id=" + valor, type: 'POST',
+                    success: function (objJson, textStatus, jqXHR) {
+                        var imprimir = objJson.imprimir;
+                        console.log("post content template")
+                        editor.setData(imprimir);
+                        procesar_texto();
+                    }
                 });
+
             }
-            function mostrars() {
-                //var no_ar=$("#no_arch");
-                //alert($(".no_arc").val());
-                mostrar_plantilla($(".no_arc").val());
-                // $(".id_pl").val($(".plantilla" + $(this).val()).val());
-            }
-            $(document).ready(function() {
+
+            $(document).ready(function () {
+                $(".procesar").click();
                 $("#actu").hide();
-                mostrars();
-                setTimeout(function() {
+                mostrar_plantilla($(".no_arc").val());
+                setTimeout(function () {
                     ExecuteCommand('print');
-                }, 1000)
+                }, 1000);
             });</script>
 
     </head>
 
-    <body style="height:100%;width:100%;" align="center" width="100%">
+    <body style="height:1024px;width:80%;"  >
         <%String no_ar = request.getParameter("no_arc");%>
-        <input type="hidden" id="no_arch" class="no_arc" value="<%=no_ar%>">
-        <h1>EDITAR PLANTILLAS</h1>
-    <CENTER>
-        <button class="btn btn-lg btn-primary" onclick="ExecuteCommand('print');" style="height:50%;weith:20px;"><span class="btn-"><i class="fa fa-print"></i></span>IMPRIMIR</button>
+        <input type="hidden"  class="no_arc" value="<%=no_ar%>">
+        <div class="row"> 
+            <div class="col col-md-8"> <h1 class="txt-color-red">Personalizar Contrato</h1></div> 
+            <div class="col col-md-4"><button type="button" onclick="ExecuteCommand('print');" class="btn btn-default btn-circle btn-lg pull-right"><i class="glyphicon glyphicon-print"></i></button></div> 
 
-        <form class="ckeditor_form" action="../../../formato_plantilla" method="post" align="center" width="100%">
-            <textarea cols="100" id="editor1" name="editor1" rows="10" >
-            </textarea>
-            <script>
-                // Replace the <textarea id="editor1"> with an CKEditor instance.
-                CKEDITOR.replace('editor1', {
-                    on: {
-                        focus: onFocus,
-                        blur: onBlur,
-                        // Check for availability of corresponding plugins.
-                        pluginsLoaded: function(evt) {
-                            var doc = CKEDITOR.document, ed = evt.editor;
-                            if (!ed.getCommand('bold'))
-                                doc.getById('exec-bold').hide();
-                            if (!ed.getCommand('link'))
-                                doc.getById('exec-link').hide();
+        </div>
+
+        <div class="row">
+            <form class="ckeditor_form" action="../../../formato_plantilla" method="post" align="center" width="100%">
+                <textarea cols="100" id="editor1" name="editor1" rows="10" >
+                </textarea>
+                <script>
+                    // Replace the <textarea id="editor1"> with an CKEditor instance.
+                    CKEDITOR.replace('editor1', {
+                        on: {
+                            focus: onFocus,
+                            blur: onBlur,
+                            // Check for availability of corresponding plugins.
+                            pluginsLoaded: function (evt) {
+                                var doc = CKEDITOR.document, ed = evt.editor;
+                                if (!ed.getCommand('bold'))
+                                    doc.getById('exec-bold').hide();
+                                if (!ed.getCommand('link'))
+                                    doc.getById('exec-link').hide();
+                            }
                         }
-                    }
-                    , height: '800px', width: '100%'});</script>
-            <script>
-                $(document).ready(function() {
-                    $(".procesar").click();
-                }
-                );</script>
-            <div id="eButtons" >
-                <input  type="hidden" name="opc" value="Actualizar"/>
-                <input  type="hidden" name="id" value="" class="id_pl"/>
-                <input type="submit" value="Actualizar Formato" id="actu" onclick="leer();">
-            </div>
-        </form>
+                        , height: '800px', width: '100%'});
+                </script>
+
+                <div id="eButtons" >
+                    <input  type="hidden" name="opc" value="Actualizar"/>
+                    <input  type="hidden" name="id" value="" class="id_pl"/>
+                    <input type="submit" value="Actualizar Formato" id="actu" onclick="leer();">
+                </div>
+            </form>
+
+        </div>
+
         <%}
         } else {%>
-        <table>
-            <td><h1>Plantilla_no_registrada</h1></td>
-        </table>
-    </CENTER>
-    <%}%>
-</body>
+        <h1 class="txt-color-red">Contrato No Registrado</h1>
+
+
+        <%}%>
+    </body>
 
 </html>
 

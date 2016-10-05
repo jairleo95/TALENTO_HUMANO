@@ -22,10 +22,15 @@ import pe.edu.upeu.application.dao.AutorizacionDAO;
 import pe.edu.upeu.application.dao.CorreoDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
+import pe.edu.upeu.application.dao.NotificationDAO;
+import pe.edu.upeu.application.dao.UsuarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCorreoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceNotificationDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
+import pe.edu.upeu.application.model.Notification;
 
 /**
  *
@@ -73,7 +78,7 @@ public class CAutorizacion extends HttpServlet {
                 case "ROL-0001":
                     permisoEsSistema = true;
                     permisoAsigFam = true;
-               permissionDepartFilter = true;
+                    permissionDepartFilter = true;
                     break;
                 case "ROL-0008":
                     permissionDireccionFilter = true;
@@ -93,14 +98,40 @@ public class CAutorizacion extends HttpServlet {
                         String cod = request.getParameter("COD");
                         String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
                         String idpasos = request.getParameter("IDPASOS");
+                        String nombres = request.getParameter("NOMBRES");
+                        String idtrab = request.getParameter("IDTRAB");
                         /*Cambiar con un trigger al momento de insertar*/
                         dgp.VAL_DGP_PASOS();
 
-                        a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
+                        //a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
                         String idpu = e.Id_Puesto_Personal(ide);
+                        InterfaceNotificationDAO notdao=new NotificationDAO();
+                        Notification not=new Notification();
+                        InterfaceUsuarioDAO udao=new UsuarioDAO();
+                        String username=udao.List_ID_User(iduser).get(0).getNo_usuario();
+                        not.setId_rol(idrol);
+                        not.setEs_visualizado("0");
+                        not.setEs_leido("0");
+                        not.setDe_notification("Empleado autorizado por "+username);
+                        not.setDi_notification("trabajador?idtr="+idtrab+"&opc=list");
+                        not.setTitulo(nombres);
+                        notdao.Registrar(not);
                         sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
+                    }
+                    if (opc.equals("AceptarMasivo")) {
+                        String iddgp = request.getParameter("IDDETALLE_DGP");
+                        String estado = "1";
+                        String nropaso = request.getParameter("NROPASO");
+                        //String usuario_ip = "";
+                        String cod = request.getParameter("COD");
+                        String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
+                        String idpasos = request.getParameter("IDPASOS");
+                        /*Cambiar con un trigger al momento de insertar*/
+                        dgp.VAL_DGP_PASOS();
+                        a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
+                        rpta.put("rpta", true);
                     }
                     if (opc.equals("HDGP")) {
 
@@ -167,6 +198,7 @@ public class CAutorizacion extends HttpServlet {
                         String correo_inst = request.getParameter("co_inst");
                         String correo_personal = request.getParameter("co_pers");
                         //correo.Enviar(to, from, asunto, cuerpo);
+                        System.out.print("Ejecutando envio de correos");
                         correo.Enviar("jairleo95@gmail.com", "jairleo95@gmail.com", "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"
                                 + "Compartimos la siguiente información\n \n"
                                 + "- Bienestar para el trabajador\n"
@@ -181,7 +213,9 @@ public class CAutorizacion extends HttpServlet {
                                 + "- Reglamento de trabajo\n"
                                 + "- Boletín Informativo - sistema pensionario\n \n"
                                 + "Saludos Cordiales");
-                        //  response.sendRedirect("Prueba_Mail.jsp");
+                        rpta.put("sendto", correo_inst + ", " + correo_personal);
+                        rpta.put("rpta", true);
+
                     }
                     if (opc.equals("List_Dgp_Aut")) {
                         String año = request.getParameter("año");
@@ -207,22 +241,20 @@ public class CAutorizacion extends HttpServlet {
                             } else {
                                 html = "<div class='alert alert-warning fade in'><i class='fa-fw fa fa-warning'></i><strong>Atención!</strong> Usted no puede <strong>AUTORIZAR</strong> el requerimiento, debe primero registrar el <strong>Código APS</strong>.</div>";
                             }
-                        } else {
-                            if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {
-                                int val_huella = e.val_cod_huella(idtr);
-                                if (val_huella > 0) {
-                                    html = "<button class='btn btn-labeled btn-success btn-autor' type='submit'>"
-                                            + "                            <span class='btn-label'><i class='glyphicon glyphicon-ok'></i></span>AUTORIZAR REQUERIMIENTO "
-                                            + "                        </button>";
-
-                                } else {
-                                    html = "<div class='alert alert-warning fade in'><i class='fa-fw fa fa-warning'></i><strong>Atención!</strong> Usted no puede <strong>AUTORIZAR</strong> el requerimiento, debe primero registrar el <strong>Código de Huella Digital</strong>.</div>";
-                                }
-                            } else {
+                        } else if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {
+                            int val_huella = e.val_cod_huella(idtr);
+                            if (val_huella > 0) {
                                 html = "<button class='btn btn-labeled btn-success btn-autor' type='submit'>"
                                         + "                            <span class='btn-label'><i class='glyphicon glyphicon-ok'></i></span>AUTORIZAR REQUERIMIENTO "
                                         + "                        </button>";
+
+                            } else {
+                                html = "<div class='alert alert-warning fade in'><i class='fa-fw fa fa-warning'></i><strong>Atención!</strong> Usted no puede <strong>AUTORIZAR</strong> el requerimiento, debe primero registrar el <strong>Código de Huella Digital</strong>.</div>";
                             }
+                        } else {
+                            html = "<button class='btn btn-labeled btn-success btn-autor' type='submit'>"
+                                    + "                            <span class='btn-label'><i class='glyphicon glyphicon-ok'></i></span>AUTORIZAR REQUERIMIENTO "
+                                    + "                        </button>";
                         }
                         rpta.put("rpta", "1");
                         rpta.put("data", html);

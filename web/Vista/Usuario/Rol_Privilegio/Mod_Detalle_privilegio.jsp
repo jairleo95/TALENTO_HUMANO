@@ -34,8 +34,8 @@
             }   
             .lab-mant{
                 color:#0575f4;  
-                //font-size:34px; 
-               // margin: 5px;
+               /* //font-size:34px; 
+               // margin: 5px;*/
             }
             .body{
                 background-color: #EEE;

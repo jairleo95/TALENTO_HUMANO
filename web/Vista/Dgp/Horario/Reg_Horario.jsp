@@ -11,7 +11,7 @@
         <title>Registro de Horario</title>
         <style>
             table{
-                // display:block;
+              /*  // display:block;*/
                 position: static;
                 float: left;
                 border-style: solid;
@@ -21,7 +21,7 @@
             .input-desp{ 
                 margin-top: 5%;
                 width:100%;
-                //height: 200px;
+             /*   //height: 200px;*/
                 position: static;
                 float: left;
                 border-color: #F2F2F2;
@@ -32,7 +32,7 @@
                 margin: 0;
                  position: static;
                 float: left;
-                //  float: start;
+               /* //  float: start;*/
             }
             input{
                 position: static;
@@ -56,7 +56,7 @@
             p { padding:0 0 5px 0; }
             input { padding:5px; border:1px solid #999; border-radius:4px; -moz-border-radius:4px; -web-kit-border-radius:4px; -khtml-border-radius:4px; }
             body{
-                //  height: 500px;
+              /*  //  height: 500px;*/
             }
 
         </style>

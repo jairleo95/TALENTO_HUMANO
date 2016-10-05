@@ -70,8 +70,9 @@ public class Cdocumento_adjunto extends HttpServlet {
         } else {
 
             //String ubicacion = "/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
-              String ubicacion = getServletConfig().getServletContext().getRealPath("/")+"Vista/Contrato/Contratos_Adjuntos/";
+            String ubicacion = getServletConfig().getServletContext().getRealPath("/") + "Vista/Contrato/Contratos_Adjuntos/";
             //String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Contrato\\Contratos_Adjuntos";
+            System.out.println("Enter to Save Contrato");
 
             DiskFileItemFactory f = new DiskFileItemFactory();
             f.setSizeThreshold(1024);

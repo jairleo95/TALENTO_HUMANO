@@ -38,6 +38,7 @@ public class V_Det_DGP {
     private String no_usuario_mod;
     private String li_motivo;
     private String es_mfl;
+    private String es_presupuestado;
 
     private String ip_usuario;
     private String no_req;
@@ -126,7 +127,7 @@ public class V_Det_DGP {
             String no_banco, String nu_cuenta, String nu_cuenta_banc, String es_gen_nu_cuenta, String no_banco_otros, String id_departamento, String id_direccion,
             String id_seccion, String id_area, String id_tipo_planilla, String ti_planilla, String id_detalle_horario, String no_dep,
             String no_usuario_crea, String no_usuario_mod, String li_motivo, String es_mfl, Double ca_bonificacion_p,
-            String no_area, String no_seccion, String no_trab_us_cr, String no_trab_us_mod, double ca_asig_familiar, String nombre_trabajador,double ca_horas_horario) {
+            String no_area, String no_seccion, String no_trab_us_cr, String no_trab_us_mod, double ca_asig_familiar, String nombre_trabajador, double ca_horas_horario, String es_presupuestado) {
         this.id_dgp = id_dgp;
         this.fe_desde = fe_desde;
         this.fe_hasta = fe_hasta;
@@ -176,6 +177,7 @@ public class V_Det_DGP {
         this.ca_asig_familiar = ca_asig_familiar;
         this.nombre_trabajador = nombre_trabajador;
         this.ca_horas_horario = ca_horas_horario;
+        this.es_presupuestado = es_presupuestado;
     }
 
     public V_Det_DGP() {
@@ -228,6 +230,7 @@ public class V_Det_DGP {
         this.ca_asig_familiar = 0.0;
         this.nombre_trabajador = "";
         this.ca_horas_horario = 0.0;
+        this.es_presupuestado = "";
     }
 
     public Double getCa_bonificacion_p() {
@@ -566,4 +569,11 @@ public class V_Det_DGP {
         this.es_mfl = es_mfl;
     }
 
+    public String getEs_presupuestado() {
+        return es_presupuestado;
+    }
+
+    public void setEs_presupuestado(String es_presupuestado) {
+        this.es_presupuestado = es_presupuestado;
+    }
 }

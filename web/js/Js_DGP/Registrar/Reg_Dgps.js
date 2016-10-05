@@ -639,10 +639,6 @@ $(document).ready(function () {
         messages: {
             horas_totales: {
                 max: 'Porfavor digite un horario que se menor a 48 Horas de Trabajo'
-            },
-            email: {
-                required: 'Please enter your email address',
-                email: 'Please enter a VALID email address'
             }
         },
         // Do not change code below

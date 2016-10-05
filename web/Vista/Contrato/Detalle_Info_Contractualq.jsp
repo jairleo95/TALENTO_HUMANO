@@ -70,7 +70,7 @@
                 margin-left: auto;
                 margin-right: auto  ;
                 width: 95%;
-                // margin: 0;
+                /*// margin: 0;*/
             }
             .titulo{
                 background-color: #474747;
@@ -104,7 +104,7 @@
                 width: 100%;
             }
             .submit{
-                //position: relative;
+             /*  //position: relative;*/
 
                 background-color: #0575f4;
                 color: white;
@@ -127,10 +127,10 @@
         <title>Información Contractual</title>
         <style type="text/css">
             .tables{
-                // margin-top: 0px;
+              /*  // margin-top: 0px;
                 // margin-left: 40px;
                 //  font-family: cursive;
-                //  font-size:18px;
+                //  font-size:18px;*/
                 border-radius: 3%;
                 padding: 0.5%;
                 background-color: white;
@@ -149,8 +149,7 @@
         </style>
     </head>
     <body>
-    <center>
-        <form action="../../contrato" method="get"class="smart-form">
+ 
             <%
                 String ID_CTO = request.getParameter("id_cto");
                 if (List_contra_x_idcto.size() == 0) {%>
@@ -158,66 +157,82 @@
             <%
             } else {%>
 
-            <div>
-                <div class="row" align="center">
-                    <section class="col col-lg-12 ">
-                        <label><strong>Contratos:</strong></label>
-                        <label class="select SelectorListaContrato">
-                        </label>
-                    </section>
-                    <input type="hidden" name="idtr" class="idtr"  value="<%=request.getParameter("idtr")%>">
-                </div>
-            </div>
-        </form>
         <div>
-            <form action="">
                 <%
-
-                    CConversion c = new CConversion();
                     HttpSession Sesion = request.getSession(true);
                     String idrol = (String) Sesion.getAttribute("IDROL");
                     InterfaceContratoDAO oContrato = new ContratoDAO();
-
                 %>
                 <%for (int b = 0; b < List_contra_x_idcto.size(); b++) {
                         X_List_Id_Contrato_DGP n = new X_List_Id_Contrato_DGP();
                         n = (X_List_Id_Contrato_DGP) List_contra_x_idcto.get(b);
                 %>
-                <input type="hidden"  class="idc" value="<%=n.getId_contrato()%>"></td>
+                <input type="hidden"  class="idc" value="<%=n.getId_contrato()%>">
 
                 <%if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0001")) {
                 %>
-                <div class="smart-form">¿Decidir la secretaria de departamento o area lo suba e imprima el contrato?<label class='toggle'><input type='checkbox' value='1'  class='ck_habilitar_is'  name='estado' name='checkbox-toggle' <%
+                <div class="well">
+                <div class="row">
+                    <div class="col col-md-4">
+                        <div class="col col-md-4"> <label class="txt-color-darken">Contratos:</label></div>
+                        <div class="col col-md-8"> <div class="SelectorListaContrato">
+                        </div></div>
+                    <input type="hidden" name="idtr" class="idtr"  value="<%=request.getParameter("idtr")%>">
+                </div>
+                <div class="col col-md-4">
+                    <div class="col col-md-8"><div class="smart-form txt-color-darken">¿Decidir la secretaria de departamento o area lo suba e imprima el contrato?</div></div>
+                    <div class="col col-md-4 smart-form"><label class='toggle'><input type='checkbox' value='1'  class='ck_habilitar_is'  name='estado' name='checkbox-toggle' <%
                     if (Integer.parseInt(n.getEs_secre_is()) == 1) {
                         out.print("checked");
-                    }
-                                                                                                                                                 %> ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></div><br><br>
-                        <%}%>
+                    } %> ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></div>
+              
+                
+                    
+                        <%}%> 
+                </div>
+              
+                <div class="col col-md-4">
+                    
+               <div class="pull-right">
+                    <%if (Integer.parseInt(n.getEs_secre_is()) == 2 && idrol.trim().equals("ROL-0002")) {%>
+        
+        <%} else if (!idrol.trim().equals("ROL-0009")) {%>
+        <a class="btn btn-labeled btn-primary" href="../../plantilla_contractual?opc=Imprimir&id_plan_contr=<%=n.getId_plantilla_contractual()%>&idtraba=<%=n.getId_trabajador()%>&id_con=<%=n.getId_contrato()%>&puesto=<%=n.getId_puesto()%>"><span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Imprimir</a>
+       
+        <%}%>
+                        
                         <%if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0002") || idrol.trim().equals("ROL-0001")) {
                         %> 
 
                 <%if (Integer.parseInt(n.getEs_secre_is()) == 2 && idrol.trim().equals("ROL-0002")) {
                 %>
                 <%} else {%>
-                <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Subir_Contrato2&idc=<%=n.getId_contrato()%>" > <span class="btn-label"><i class="fa fa-cloud-upload"></i></span>Subir Contrato Firmado</a>
+                <a class="btn btn-labeled btn-primary " href="../../contrato?opc=Subir_Contrato2&idc=<%=n.getId_contrato()%>" > <span class="btn-label"><i class="fa fa-cloud-upload"></i></span>Subir</a>
                         <%}%>
 
                 <%}
-                    if (idrol.trim().equals("ROL-0006") || idrol.trim().equals("ROL-0007") || /*idrol.trim().equals("ROL-0009") || */ idrol.trim().equals("ROL-0001")) {%>
+                    if (/*idrol.trim().equals("ROL-0006") || */idrol.trim().equals("ROL-0007") || /*idrol.trim().equals("ROL-0009") || */ idrol.trim().equals("ROL-0001")) {%>
                 <%if (idrol.trim().equals("ROL-0006")) {
                         //validar si puede editar contrato
                         if (oContrato.validar_editar_contrato(id_user, ID_CTO)) {
                 %>
-                <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Editar&idc=<%=n.getId_contrato()%>&idtr=<%=request.getParameter("idtr")%>&id_dg=<%=n.getId_dgp()%>" > <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Editar Contrato</a>
-                <br>   
-                <br>   
-                <p class="alert alert-info"><i class="fa fa-info"></i> ¡Una vez procesado la informacion usted ya no podra <strong>editar</strong> este contrato!</p>
+                <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Editar&idc=<%=n.getId_contrato()%>&idtr=<%=request.getParameter("idtr")%>&id_dg=<%=n.getId_dgp()%>" > <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Editar</a>
+                
                 <%
                     }
                 } else {%>
-                <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Editar&idc=<%=n.getId_contrato()%>&idtr=<%=request.getParameter("idtr")%>&id_dg=<%=n.getId_dgp()%>" > <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Editar Contrato</a>
+                <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Editar&idc=<%=n.getId_contrato()%>&idtr=<%=request.getParameter("idtr")%>&id_dg=<%=n.getId_dgp()%>" > <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Editar</a>
                         <%}
                             }%>
+                
+               
+                  </div>
+                  </div>
+                 
+                   </div>
+                  <br>
+                   <p class="alert alert-info"><i class="fa fa-info"></i> ¡Una vez procesado la informacion usted ya no podra <strong>editar</strong> este contrato!</p>
+                  </div>
                         <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
                 <table class="table table-hover table-striped  table-responsive">
                     <tr><td class="text-info table-bordered"><strong>Fecha de Inicio: </strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info table-bordered" colspan="2"><strong>Fecha de Cese:</strong></td><td class="table-bordered" colspan="2"><%if (n.getFe_hasta() != null) {
@@ -227,7 +242,7 @@
                         }%></td></tr>
                     <tr><td class="text-info table-bordered"><strong>Dirección:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_direccion()%> </p></td></tr>
                     <tr><td class="text-info table-bordered"><strong>Departamento:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_dep()%> </p></td></tr>
-                    <tr><td class="text-info table-bordered"><strong>Area:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_area()%> </td></p></tr>
+                    <tr><td class="text-info table-bordered"><strong>Area:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_area()%> </td></tr>
                     <tr><td class="text-info table-bordered"><strong>Sección:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_seccion()%> </p></td></tr>
                     <tr><td class="text-info table-bordered"><strong>Puesto:</strong></td><td colspan="6" class="table-bordered" ><p><%=n.getNo_puesto()%></p><input type="hidden" class="id_pu" value="<%=n.getId_puesto()%>" name="puesto"></td> </tr>
                                 <%
@@ -379,7 +394,6 @@
                                 } else {
                                     out.print("NO DEFINIDO");
                                 }%> </td></tr>   
-                    <!--<tr><td class="text-info table-bordered"><strong>Vacaciones:</strong></td><td class="text-info" colspan="2"><strong>Desde:</strong></td><td colspan="2"> <%=n.getFe_vacacio_ini()%> </td><td class="text-info" ><strong >Hasta:</strong></td><td colspan="2"> <%=n.getFe_vacacio_fin()%> </td></tr>   -->
                     <tr><td class="text-info table-bordered"><strong>Discapacidad:</strong></td><td class="table-bordered" colspan="6"><%
                         if (n.getEs_discapacidad() != null) {
                             if (n.getEs_discapacidad().equals("1")) {
@@ -389,7 +403,7 @@
                                 out.println("Si");
                             }
                         } else {
-                            out.println("DATO NO INGRESADO ");
+                            out.println("DATO No Ingresado ");
                         }%> 
                         </td></tr>   
                     <tr><td class="text-info table-bordered"><strong>Tipo de Contrato:</strong></td><td class="table-bordered" colspan="6">
@@ -511,8 +525,8 @@
                             <%}%>
                         </td>
                         <%}
-                        } else {%>
-                        <% if (n.getUs_creacion() != null && n.getFe_creacion() != null) {%>
+                        } else {
+                       if (n.getUs_creacion() != null && n.getFe_creacion() != null) {%>
                         <td class="text-danger text-info text-center "><strong>Creado por:</strong></td>
                         <%if (n.getUs_creacion() != null) {
                                 for (int f = 0; f < List_Usuario.size(); f++) {
@@ -523,45 +537,26 @@
                         <%}
                             }
                         } else {%>
-                        <td>NO INGRESADO</td>
+                        <td>No Ingresado</td>
                         <%}%>
                         <%}%>
-                    </tr>
+                   
                     <%}%>
+                     </tr>
                 </table>
-            </form>
+       <input type="hidden" name="id_con" class="id_contrato" value="<%=n.getId_contrato()%>"> 
         </div>
-        <%if (Integer.parseInt(n.getEs_secre_is()) == 2 && idrol.trim().equals("ROL-0002")) {%>
-        <%} else if (!idrol.trim().equals("ROL-0009")) {%>
-        <form action="../../plantilla_contractual" method="post" class="formu">
-            <div class="Contenido">
-                <table>
-                    <td><input type="hidden" name="id_plan_contr" value="<%=n.getId_plantilla_contractual()%>"></td>
-                    <td><input type="hidden" name="idtraba" value="<%=n.getId_trabajador()%>"></td>
-                    <td><input type="hidden" name="id_con" class="id_contrato" value="<%=n.getId_contrato()%>"></td>
-                    <td><input type="hidden" name="puesto" class="id_pu" value="<%=n.getId_puesto()%>" ></td>
-                    <tr>
-                        <td class="text-info" colspan="8" style="text-align:center">
-                            <input class="button blue"  type="hidden" value="Editar">
-                            <button name="opc" value="Imprimir" class="PLANTI btn btn-labeled btn-primary">
-                                <span class="btn-label">
-                                    <i class="fa fa-print"></i>
-                                </span>Imprimir
-                            </button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </form>
-        <%}%>
+      
+        
+        
         <%}
             }
         %>
-    </center>
+ 
 
     <%}%>
 </body>
-<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+ 
 
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>

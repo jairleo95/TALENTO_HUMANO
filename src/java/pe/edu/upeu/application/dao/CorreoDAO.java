@@ -18,7 +18,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import pe.edu.upeu.application.dao_imp.InterfaceCorreoDAO;
-import pe.edu.upeu.application.factory.FactoryConnectionDB;
 
 public class CorreoDAO implements InterfaceCorreoDAO {
 
@@ -38,13 +37,13 @@ public class CorreoDAO implements InterfaceCorreoDAO {
         // Get the Session object.
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                });
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
         try {
             // String ubicacion = FactoryConnectionDB.url + "Vista/Contrato/Reglamentos/";
-            String ubicacion = "D:\\NetBeansProjects\\TALENTO_HUMANO\\web\\Vista\\Contrato\\Reglamentos\\";
+            String ubicacion = "C:\\Users\\ALPHA\\Documents\\NetBeansProjects\\TALENTO_HUMANO\\web\\Archivo\\Reglamentos\\";
             //   String ubicacion = "/var/lib/tomcat7/webapps/TALENTO_HUMANO/Vista/Contrato/Reglamentos/";
 
             List<String> lista_archivos = new ArrayList<String>();
@@ -73,7 +72,7 @@ public class CorreoDAO implements InterfaceCorreoDAO {
             lista_archivos.add("Reglamento de Control de Asistencia.pdf");
             lista_archivos.add("Reglamento de trabajo.pdf");
             //   String filename2 = "C:\\Users\\ALFA 3\\Documents\\ACTIVIDAD 1.docx";
-           /* DataSource source = new FileDataSource(nombre_archivo);
+            /* DataSource source = new FileDataSource(nombre_archivo);
              messageBodyPart.setDataHandler(new DataHandler(source));
              messageBodyPart.setFileName(nombre_archivo);
              multipart.addBodyPart(messageBodyPart);*/
@@ -85,7 +84,7 @@ public class CorreoDAO implements InterfaceCorreoDAO {
             // addAttachment(multipart, filename2);
             // Send message
             Transport.send(message);
-            //     System.out.println("Sent message successfully....");
+            System.out.println("Sent message successfully....");
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }

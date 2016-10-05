@@ -34,8 +34,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <meta charset="utf-8">
         <title>Crear Formatos</title>
         <link rel="stylesheet" href="../../../css/bootstrap.min.css">
-        <script src="../../../HTML_version/js/plugin/ckeditor/ckeditor.js"></script>
-        <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
+        <script src="../../../js/plugin/ckeditor/ckeditor.js"></script>
+        <link href="../../../js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
         <script src="../../../ajax/ajax.google.min.js"></script>
         <style>

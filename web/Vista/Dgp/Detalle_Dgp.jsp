@@ -215,6 +215,13 @@
                                             if (d.getEs_mfl().equals("0")) {%>
                                         <tr><td class="text-info ">MFL:</td><td colspan="2" class="text-info ">No</td></tr>
                                         <%}%>
+                                        
+                                        <%                                            if (d.getEs_presupuestado().equals("1")) {%>
+                                        <tr><td class="text-info ">Presupuestado:</td><td colspan="2" class="text-info ">Si</td></tr>
+                                        <%}
+                                            if (d.getEs_presupuestado().equals("0")) {%>
+                                        <tr><td class="text-info ">Presupuestado:</td><td colspan="2" class="text-info ">No</td></tr>
+                                        <%}%>
 
                                         <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
                                         <input type="hidden" name="opc" value="MODIFICAR REQUERIMIENTO">   

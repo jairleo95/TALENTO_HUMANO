@@ -85,7 +85,7 @@ body { margin:2%; background-color:#e6edf2; }
 	margin: 0 2px;
 	outline: none;
 	cursor: pointer;
-	//text-align: center;
+	/*//text-align: center;*/
 	text-decoration: none;
 	font: 14px/100% Arial, Helvetica, sans-serif;
 	padding: .2em 1em .35em;
@@ -145,6 +145,6 @@ body { margin:2%; background-color:#e6edf2; }
 
 
   td  {
-            //text-align:center; 
+         /*   //text-align:center; */
         }
 

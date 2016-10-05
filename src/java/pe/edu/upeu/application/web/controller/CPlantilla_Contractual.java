@@ -87,7 +87,7 @@ public class CPlantilla_Contractual extends HttpServlet {
                 sesion.setAttribute("List_contra_x_idcto", con.List_contra_x_idcto(id_con));
                 sesion.setAttribute("List_Dom_D1_Id", l.List_Dom_D1_Id());
                 sesion.setAttribute("List_Dom_D5_Id", l.List_Dom_D5_Id());
-                response.sendRedirect("Vista/Contrato/Formato_Plantilla/reg_formato.jsp?&no_arc=" + no_arch);
+                response.sendRedirect("Vista/Contrato/Formato_Plantilla/reg_formato.jsp?no_arc=" + no_arch);
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");

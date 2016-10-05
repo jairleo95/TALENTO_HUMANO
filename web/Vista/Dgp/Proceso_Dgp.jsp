@@ -75,7 +75,7 @@
 
             /* Form Progress */
             .new-progress {
-                //width: 100%;
+             /*   //width: 100%;*/
                 margin:0px;
                 text-align: center;
             }
@@ -92,7 +92,7 @@
                 display: inline-block;
                 width: 30px;
                 height: 6px;
-                //margin: 0 -0.01% 3% -5px;
+             /*   //margin: 0 -0.01% 3% -5px;*/
                 border-left: none;
                 border-right: none;
                 border-radius: 0;
@@ -102,17 +102,17 @@
                 display: inline-block;
                 width: 25px;
                 height: 25px;
-                // line-height: 32px;
+               /*// line-height: 32px;*/
                 border-radius: 32px;
                 margin-top: 3px;
                 color: #b5b5ba;
-                // font-size: 17px;
+              /*  // font-size: 17px;*/
             }
             .new-progress .new-circle .new-title {
                 color: #b5b5ba;
                 font-size: 100%;
-                //line-height: 30px;
-                //margin-left: -5px;
+               /* //line-height: 30px;
+                //margin-left: -5px;*/
             }
 
             /* Done / Active */
@@ -146,7 +146,7 @@
             }
             .new-progress .new-circle.done .new-label:hover, .new-circle:hover{
 
-                //background-color:#739e73; 
+                /*//background-color:#739e73; */
             }
 
         </style>

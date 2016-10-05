@@ -250,8 +250,7 @@
     <!-- JQUERY MASKED INPUT 
     <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
 
-    <!-- JQUERY SELECT2 INPUT -->
-    <script src="../../js/plugin/select2/select2.min.js"></script>
+ 
 
     <!-- JQUERY UI + Bootstrap Slider 
     <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->

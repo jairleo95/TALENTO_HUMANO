@@ -34,8 +34,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <head>
         <meta charset="utf-8">
         <title>Crear Formatos</title>
-        <script src="../../../HTML_version/js/plugin/ckeditor/ckeditor.js"></script>
-        <link href="../../../HTML_version/js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
+        <script src="../../../js/plugin/ckeditor/ckeditor.js"></script>
+        <link href="../../../js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
         <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
     <input type="hidden" id="cant_con" class="cant_con" value="<%=lista.size()%>">
     <%

@@ -87,7 +87,7 @@
             #titu{
                 font-weight: bold;
                 color: #005cac;
-                // color: blue;
+              /*  // color: blue;*/
             }
             .cont{
                 margin: 0 auto;
@@ -212,13 +212,25 @@
                                                             </label>
 
                                                         </section>
-                                                        <section class="col col-4" >
-                                                            <label class="toggle" id="titu" > MFL:
+                                                        <section class="col col-2" id="titu">MFL:
+                                                            <label class="toggle" >
                                                                 <%if (dg.getEs_mfl().trim().equals("0")) {%>
                                                                 <input type="checkbox" value="1"  name="MFL" name="checkbox-toggle" >
                                                                 <%}
                                                                     if (dg.getEs_mfl().trim().equals("1")) {%>
                                                                 <input type="checkbox" value="1"  name="MFL" name="checkbox-toggle" checked="">
+                                                                <%}%>
+                                                                <i data-swchon-text="SI" data-swchoff-text="NO"></i>
+                                                            </label>
+                                                        </section>
+
+                                                        <section class="col col-2" id="titu">Presupuestado:
+                                                            <label class="toggle"  > 
+                                                                <%if (dg.getEs_presupuestado().trim().equals("0")) {%>
+                                                                <input type="checkbox" value="1"  name="ES_PRESUPUESTADO" name="checkbox-toggle" >
+                                                                <%}
+                                                                    if (dg.getEs_presupuestado().trim().equals("1")) {%>
+                                                                <input type="checkbox" value="1"  name="ES_PRESUPUESTADO" name="checkbox-toggle" checked="">
                                                                 <%}%>
                                                                 <i data-swchon-text="SI" data-swchoff-text="NO"></i>
                                                             </label>

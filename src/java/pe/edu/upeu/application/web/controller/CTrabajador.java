@@ -357,13 +357,14 @@ public class CTrabajador extends HttpServlet {
                     int co_aps = Integer.parseInt(request.getParameter("cod"));
                     em.Reg_aps(idtr, co_aps);
                     sesion.setAttribute("id_empleadox_ide", em.id_empleadox_ide(idtr));
-                    response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "");
+                    rpta.put("rpta", true);
+                   // response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?idtr=" + idtr + "");
                 }
                 if ("registrar_huella".equals(opc)) {
                     String idtr = request.getParameter("idtr");
                     int co_huella = Integer.parseInt(request.getParameter("cod"));
                     em.Reg_cod_huella(idtr, co_huella);
-                    rpta.put("rpta", "1");
+                    rpta.put("rpta", true);
                 }
                 if (opc.equals("Editar_Dat_Gen")) {
                     String idtr = request.getParameter("idtr");
