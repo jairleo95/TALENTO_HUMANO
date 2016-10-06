@@ -51,17 +51,6 @@ public class CNotification extends HttpServlet {
                 try {
                     rpta.put("rpta", "1");
                     rpta.put("lista", notdao.List_Notifications_json());
-                    try {
-                        String[] listid = request.getParameterValues("listid[]");
-                        System.out.println(listid.length);
-                        if (listid != null) {
-                            for (int i = 0; i < listid.length; i++) {
-                                notdao.visualizado(listid[i]);
-                            }
-                        }
-                    } catch (Exception ex) {
-                        System.out.println("Error por aca " + ex);
-                    }
                 } catch (Exception e) {
                     rpta.put("rpta", "-1");
                     rpta.put("mensaje", e.getMessage());
@@ -74,6 +63,33 @@ public class CNotification extends HttpServlet {
             case 2:
                 String id = request.getParameter("data");
                 notdao.leido(id);
+                break;
+            case 3:
+                try {
+                    rpta.put("rpta", "1");
+                    rpta.put("lista", notdao.List_Notifications_json());
+
+                } catch (Exception e) {
+                    rpta.put("rpta", "-1");
+                    rpta.put("mensaje", e.getMessage());
+                }
+                gson = new Gson();
+                out.print(gson.toJson(rpta));
+                out.flush();
+                out.close();
+                break;
+            case 4:
+                try {
+                    String[] listid = request.getParameterValues("listid[]");
+                    System.out.println(listid.length);
+                    if (listid != null) {
+                        for (int i = 0; i < listid.length; i++) {
+                            notdao.visualizado(listid[i]);
+                        }
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Error por aca " + ex);
+                }
                 break;
         }
     }

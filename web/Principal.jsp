@@ -95,25 +95,21 @@
                 <span id="activity" class="activity-dropdown hola2"> <i class="fa fa-user"></i> <b class="badge"> 21 </b> </span>
 
                 <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
-                <div class="ajax-dropdown hola">
+                <div class="ajax-dropdown">
 
                     <!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
                     <div class="btn-group btn-group-justified"  data-toggle="buttons">
                         <label class="btn btn-default autorizacionList">
-                            <input type="radio" name="activity" 
-                                   >
+                            <input type="radio" name="activity">
                             Autori... </label>
-                        <label class="btn btn-default ">
-                            <input type="radio" name="activity">
-                            Rechazados (3) </label>
-                        <label class="btn btn-default ">
-                            <input type="radio" name="activity">
-                            Por autor... (4) </label>
+                        <label class="btn btn-default rechazarList">
+                            <input type="radio" name="activity" >
+                            Rechazados </label>
                     </div>
 
                     <!-- notification content -->
-                    <div class="ajax-notificationss custom-scroll" style="overflow: scroll;">
-                        <ul class="notification-body autnot" >
+                    <div class="ajax-notifications custom-scroll">
+                        <ul class="notification-body autnot recnot poraut" >
                             <div class="alert alert-transparent">
                                 <h4>Click en el boton para mostrar el mensaje</h4>
 
@@ -127,6 +123,7 @@
 
                 </div>
                 <!-- END AJAX-DROPDOWN -->
+
             </div>
             <%if (false) {
             %>
@@ -662,7 +659,6 @@
 
         <script>
         var btnclose = 0;
-        var listid = [];
         document.oncontextmenu = function () {
             return false;
         }
@@ -701,95 +697,195 @@
             $.post(page, {
                 data: idnoti,
                 op: 2
-            }, function () {
-                alert("Excelente");
             });
         }
         var ii = 0;
         function listAjaxNotification() {
+            var listid = [];
             var url = "cnot";
-            $.post(url, {
-                'listid[]': listid,
-                op: 1
-            }, function (objson) {
-                var rpta = 0;
-                rpta = objson.rpta;
-                if (rpta === "1") {
-                    var lista = objson.lista;
-                    var info = "";
-                    var fcn = "";
-                    var count = 0;
-                    listid = [];
-                    for (var i = 0; i < lista.length; i++) {
-                        info += '<li>';
-                        if (lista[i].es_visualizado == 0) {
-                            info += '<span class="unread">';
-                            listid.push(lista[i].id_notification);
-                            count++;
-                        }
-                        if (lista[i].es_visualizado == 1) {
-                            info += '<span>';
-                        }
-                        fcn = "readNotification('" + lista[i].id_notification + "')"
-                        info += '<a onclick="' + fcn + '" target="myframe" href="' + lista[i].di_notification + '" class="msg">';
-                        info += '<img src="img/avatars/4.png" alt="" class="air air-top-left margin-top-5" width="40" height="40" />';
-                        info += '<span class="from">' + lista[i].titulo + ' <i class="icon-paperclip"></i></span>';
-                        var d = new Date(); //establecemos la fecha de hoy
-                        //Establecemos la fecha final con los parametros anteriores
-                        var fechaFinal = new Date(d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
+            $.ajax({
+                url: url,
+                data: 'op=1', async: false,
+                type: 'POST', success: function (objson, textStatus, jqXHR) {
+                    var rpta = 0;
+                    rpta = objson.rpta;
+                    if (rpta === "1") {
+                        var lista = objson.lista;
+                        var infoaut = "";
+                        var fcn = "";
+                        var count = 0;
+                        listid = [];
+                        for (var i = 0; i < lista.length; i++) {
+                            if (lista[i].tipo_notification == 1) {
+                                infoaut += '<li>';
+                                if (lista[i].es_visualizado == 0) {
+                                    infoaut += '<span class="unread">';
+                                    listid.push(lista[i].id_notification);
+                                    count++;
+                                }
+                                if (lista[i].es_visualizado == 1) {
+                                    infoaut += '<span>';
+                                }
+                                fcn = "readNotification('" + lista[i].id_notification + "')"
+                                infoaut += '<a onclick="' + fcn + '" target="myframe" href="' + lista[i].di_notification + '" class="msg">';
+                                infoaut += '<img src="img/avatars/4.png" alt="" class="air air-top-left margin-top-5" width="40" height="40" />';
+                                infoaut += '<span class="from">' + lista[i].titulo + ' <i class="icon-paperclip"></i></span>';
+                                var d = new Date(); //establecemos la fecha de hoy
+                                //Establecemos la fecha final con los parametros anteriores
+                                var fechaFinal = new Date(d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
 
-                        //Establecemos la fecha inicio
-                        var fechaInicio = new Date(lista[i].fecha);
+                                //Establecemos la fecha inicio
+                                var fechaInicio = new Date(lista[i].fecha);
 
-                        //Restamos la fechaFinal menos fechaInicio,
-                        //esto establece la diferencia entre las fechas
-                        var fechaResta = fechaFinal - fechaInicio;
+                                //Restamos la fechaFinal menos fechaInicio,
+                                //esto establece la diferencia entre las fechas
+                                var fechaResta = fechaFinal - fechaInicio;
 
-                        //imprimir
-                        if ((((fechaResta / 1000) / 60) / 60) / 24 < 2) {     //dias
-                            if ((((fechaResta / 1000) / 60) / 60) / 24 < 1) {
-                                if (((fechaResta / 1000) / 60) / 60 >= 1) {
-                                    info += '<time>Hace ' + parseInt(((fechaResta / 1000) / 60) / 60) + ' horas</time>';
-                                } else {
-                                    if (parseInt((fechaResta / 1000) / 60) >= 1) {
-                                        info += '<time>Hace ' + parseInt((fechaResta / 1000) / 60) + ' minutos</time>';
+                                //imprimir
+                                if ((((fechaResta / 1000) / 60) / 60) / 24 < 2) {     //dias
+                                    if ((((fechaResta / 1000) / 60) / 60) / 24 < 1) {
+                                        if (((fechaResta / 1000) / 60) / 60 >= 1) {
+                                            infoaut += '<time>Hace ' + parseInt(((fechaResta / 1000) / 60) / 60) + ' horas</time>';
+                                        } else {
+                                            if (parseInt((fechaResta / 1000) / 60) >= 1) {
+                                                infoaut += '<time>Hace ' + parseInt((fechaResta / 1000) / 60) + ' minutos</time>';
+                                            } else {
+                                                infoaut += '<time>Recientemente</time>';
+                                            }
+                                        }
                                     } else {
-                                        info += '<time>Recientemente</time>';
+                                        if ((((fechaResta / 1000) / 60) / 60) / 24 == 1) {
+                                            infoaut += '<time>Hace 1 día</time>';
+                                        } else {
+                                            infoaut += '<time>Hace 2 días</time>';
+                                        }
                                     }
-                                }
-                            } else {
-                                if ((((fechaResta / 1000) / 60) / 60) / 24 == 1) {
-                                    info += '<time>Hace 1 día</time>';
                                 } else {
-                                    info += '<time>Hace 2 días</time>';
+                                    infoaut += '<time>' + fechaInicio.getDay() + "/" + fechaInicio.getMonth() + '/' + fechaInicio.getFullYear() + '</time>';
                                 }
+                                infoaut += '<span class="subject">' + lista[i].de_notification + '</span>';
+                                infoaut += '<span class="msg-body">Nada importante</span>';
+                                infoaut += '</a>';
+                                infoaut += '</span>';
+                                infoaut += '</li>';
                             }
-                        } else {
-                            info += '<time>' + fechaInicio.getDay() + "/" + fechaInicio.getMonth() + '/' + fechaInicio.getFullYear() + '</time>';
+                            $(".autnot").empty();
+                            $(".autnot").append(infoaut);
                         }
-                        info += '<span class="subject">' + lista[i].de_notification + '</span>';
-                        info += '<span class="msg-body">Nada importante</span>';
-                        info += '</a>';
-                        info += '</span>';
-                        info += '</li>';
+                        if (count > 0) {
+                            $(".autorizacionList").empty();
+                            $(".autorizacionList").append("Autori... (" + count + ") ");
+                        }
+                        if (count == 0) {
+                            $(".autorizacionList").empty();
+                            $(".autorizacionList").append("Autori... ");
+                        }
+                        if (listid.length > 0) {
+                            $.post(url, {
+                                op: 4,
+                                'listid[]': listid
+                            });
+                        }
                     }
-                    if (ii != 0) {
-                        $(".autnot").empty();
-                        $(".autnot").append(info);
-                    }
-                    if (count != 0) {
-                        $(".autorizacionList").empty();
-                        $(".autorizacionList").append("Autori... (" + count + ") ");
-                    }
-                    if (count == 0) {
-                        $(".autorizacionList").empty();
-                        $(".autorizacionList").append("Autori... ");
 
+
+                }});
+        }
+        function listAjaxNotificationRec() {
+            var listid2 = [];
+            var url = "cnot";
+            $.ajax({
+                url: url,
+                data: 'op=3', async: false,
+                type: 'POST',
+                success: function (objson, textStatus, jqXHR) {
+                    var rpta = 0;
+                    rpta = objson.rpta;
+                    if (rpta === "1") {
+                        var lista = objson.lista;
+                        var inforec = "";
+                        var fcn = "";
+                        var count2 = 0;
+                        listid2 = [];
+                        for (var i = 0; i < lista.length; i++) {
+                            if (lista[i].tipo_notification == 0) {
+                                inforec += '<li>';
+                                if (lista[i].es_visualizado == 0) {
+                                    inforec += '<span class="unread">';
+                                    listid2.push(lista[i].id_notification);
+                                    count2++;
+                                }
+                                if (lista[i].es_visualizado == 1) {
+                                    inforec += '<span>';
+                                }
+                                fcn = "readNotification('" + lista[i].id_notification + "')"
+                                inforec += '<a onclick="' + fcn + '" target="myframe" href="' + lista[i].di_notification + '" class="msg">';
+                                inforec += '<img src="img/avatars/4.png" alt="" class="air air-top-left margin-top-5" width="40" height="40" />';
+                                inforec += '<span class="from">' + lista[i].titulo + ' <i class="icon-paperclip"></i></span>';
+                                var d = new Date(); //establecemos la fecha de hoy
+                                //Establecemos la fecha final con los parametros anteriores
+                                var fechaFinal = new Date(d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
+
+                                //Establecemos la fecha inicio
+                                var fechaInicio = new Date(lista[i].fecha);
+
+                                //Restamos la fechaFinal menos fechaInicio,
+                                //esto establece la diferencia entre las fechas
+                                var fechaResta = fechaFinal - fechaInicio;
+
+                                //imprimir
+                                if ((((fechaResta / 1000) / 60) / 60) / 24 < 2) {     //dias
+                                    if ((((fechaResta / 1000) / 60) / 60) / 24 < 1) {
+                                        if (((fechaResta / 1000) / 60) / 60 >= 1) {
+                                            inforec += '<time>Hace ' + parseInt(((fechaResta / 1000) / 60) / 60) + ' horas</time>';
+                                        } else {
+                                            if (parseInt((fechaResta / 1000) / 60) >= 1) {
+                                                inforec += '<time>Hace ' + parseInt((fechaResta / 1000) / 60) + ' minutos</time>';
+                                            } else {
+                                                inforec += '<time>Recientemente</time>';
+                                            }
+                                        }
+                                    } else {
+                                        if ((((fechaResta / 1000) / 60) / 60) / 24 == 1) {
+                                            inforec += '<time>Hace 1 día</time>';
+                                        } else {
+                                            inforec += '<time>Hace 2 días</time>';
+                                        }
+                                    }
+                                } else {
+                                    inforec += '<time>' + fechaInicio.getDay() + "/" + fechaInicio.getMonth() + '/' + fechaInicio.getFullYear() + '</time>';
+                                }
+                                inforec += '<span class="subject">' + lista[i].de_notification + '</span>';
+                                inforec += '<span class="msg-body">Nada importante</span>';
+                                inforec += '</a>';
+                                inforec += '</span>';
+                                inforec += '</li>';
+                            }
+                            $(".recnot").empty();
+                            $(".recnot").append(inforec);
+                        }
+                        if (count2 > 0) {
+                            $(".rechazarList").empty();
+                            $(".rechazarList").append("Rechazados (" + count2 + ") ");
+                        }
+                        if (count2 == 0) {
+                            $(".rechazarList").empty();
+                            $(".rechazarList").append("Rechazados ");
+                        }
+                        if (listid2.length > 0) {
+                            $.post(url, {
+                                op: 4,
+                                'listid[]': listid2
+                            });
+                        }
                     }
-                }
-            });
+                }});
+        }
+        function listAjaxNotificationPoraut(){
+            $(".poraut").empty();
         }
 
+        
         $(document).ready(function () {
             var idtra = $('#id_trabajador').val()
             getAvatar("perfil", idtra);
@@ -837,11 +933,27 @@
             }
             $(".autorizacionList").click(function () {
                 listAjaxNotification();
+                $(".rechazarList").removeClass("active");
+                $(".porautList").removeClass("active");
             });
-            $(".hola2").click(function () {
+            $(".rechazarList").click(function () {
+                listAjaxNotificationRec();
+                $(".porautList").removeClass("active");
+                $(".autorizacionList").removeClass("active");
+            });
+            $(".porautList").click(function () {
                 listAjaxNotification();
-                ii = 1;
+                $(".rechazarList").removeClass("active");
+                $(".autorizacionList").removeClass("active");
             });
+            /*$(".hola2").click(function () {
+             if (ii == 0) {
+             ii = 1;
+             } else {
+             listAjaxNotification();
+             listAjaxNotificationRec()();
+             }
+             });*/
         });
 
         $("#btn-ocultar").click(function () {
