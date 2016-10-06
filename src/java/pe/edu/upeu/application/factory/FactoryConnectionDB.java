@@ -77,13 +77,8 @@ public class FactoryConnectionDB {
         String nueva_fecha = null;
         if (fecha != null) {
             if (!fecha.equals("")) {
-                String f[] = fecha.split("-");
-                /*   if (System.getProperty("sun.desktop").trim().equals("windows")) {
-                 return f[2] + "/" + f[1] + "/" + f[0];
-                 } else {*/
                 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
                 nueva_fecha = new SimpleDateFormat("dd-MMM-yy").format(date).toUpperCase();
-                // }
             } else {
                 nueva_fecha = null;
             }
