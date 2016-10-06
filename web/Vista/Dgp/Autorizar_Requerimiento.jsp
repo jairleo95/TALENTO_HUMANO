@@ -104,7 +104,7 @@
             <!-- MAIN CONTENT -->
             <div id="content">
                 <!-- widget grid -->
-                <section id="widget-grid" class="">
+                <section id="widget-grid" class="slideInDown fast animated" >
 
                     <!-- row -->
                     <div class="row">
@@ -671,8 +671,9 @@
                                 type: "POST", success: function (data, textStatus, jqXHR) {
                                     if (data.rpta) {
                                         console.log("procesando firnas");
-                                        var table = new $.fn.dataTable.Api('#dt_basic1');
-                                        table.row(currentInputFirma.parents('tr')).remove().draw();
+                                        /* var table = new $.fn.dataTable.Api('#dt_basic1');
+                                         table.row(currentInputFirma.parents('tr')).remove().draw();*/
+                                        /*Agregar Boton*/
                                         exito("Procesado con exito!", "Se ha actualizado el contrato");
                                         statusBtnSendToRem()
                                         statusBtnSendFirma()

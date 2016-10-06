@@ -70,6 +70,12 @@
         <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <script type="text/javascript" src="js/JQuery/jquery.autoheight.js"></script>
+        <style>
+            .smart-style-1 nav ul li a {
+                /*  padding: 12px 17px 12px 16px;*/
+                padding:  10px 10px 10px 10px;
+            }
+        </style>
 
     </head>
     <body class="smart-style-1 fixed-header fixed-footer"  onload="nobackbutton();
@@ -361,7 +367,7 @@
                 -->
 
                 <ul >
-                    
+
 
                     <%
                         for (int i = 0; i < listarURL.size(); i++) {
@@ -688,7 +694,7 @@
         }
         document.getElementById('myframe').onload = function () {
             /*$(".iframe_principal").show(250);
-            $(".animacion_load").empty();*/
+             $(".animacion_load").empty();*/
         };
         function readNotification(idnoti) {
             var page = "cnot";
@@ -767,7 +773,7 @@
                         info += '</span>';
                         info += '</li>';
                     }
-                    if (ii!=0){
+                    if (ii != 0) {
                         $(".autnot").empty();
                         $(".autnot").append(info);
                     }
@@ -775,15 +781,15 @@
                         $(".autorizacionList").empty();
                         $(".autorizacionList").append("Autori... (" + count + ") ");
                     }
-                    if(count==0){
+                    if (count == 0) {
                         $(".autorizacionList").empty();
                         $(".autorizacionList").append("Autori... ");
-                        
+
                     }
                 }
             });
         }
-        
+
         $(document).ready(function () {
             var idtra = $('#id_trabajador').val()
             getAvatar("perfil", idtra);
@@ -834,7 +840,7 @@
             });
             $(".hola2").click(function () {
                 listAjaxNotification();
-                ii=1;
+                ii = 1;
             });
         });
 

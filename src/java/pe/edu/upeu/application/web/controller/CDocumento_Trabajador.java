@@ -124,20 +124,15 @@ public class CDocumento_Trabajador extends HttpServlet {
 ////                 String ubicacion = getServletContext().getRealPath("/")+"Archivo\\Archivo";
 ////                 System.out.println(ubicacion+"--ubicacion");
 //                //String ubicacion = "/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
-                String ubicacion = getServletConfig().getServletContext().getRealPath("/")+"Archivo/Archivo";
-                  
-              
-                
-
+                // String ubicacion = getServletConfig().getServletContext().getRealPath("/") + "Archivo/Archivo";
 //                //
-                        
-                  //  String ubicacion = FactoryConnectionDB.url + "Archivo/";
+                String ubicacion = FactoryConnectionDB.url + "Archivo/";
 //out.print(ubicacion);
                 DiskFileItemFactory f = new DiskFileItemFactory();
                 f.setSizeThreshold(1024);
                 f.setRepository(new File(ubicacion));
 //      f.setRepository( new File(ubicacion + ""));
-                             
+
                 ServletFileUpload upload = new ServletFileUpload(f);
                 ServletRequestContext src = new ServletRequestContext(request);
                 List<FileItem> p = upload.parseRequest(src);
@@ -203,7 +198,7 @@ public class CDocumento_Trabajador extends HttpServlet {
                         if (item.isFormField()) {
                             String nombre = item.getFieldName();
                             String valor = item.getString();
-                            iddoc = (nombre.equals("iddoc" + i))? valor : iddoc;
+                            iddoc = (nombre.equals("iddoc" + i)) ? valor : iddoc;
                             idh = (nombre.equals("idh" + i)) ? valor : idh;
                             desc = (nombre.equals("lob_description" + i)) ? valor : desc;
                             estado = (nombre.equals("estado" + i)) ? valor : estado;
