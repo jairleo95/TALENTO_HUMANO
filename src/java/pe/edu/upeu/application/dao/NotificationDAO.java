@@ -29,7 +29,7 @@ public class NotificationDAO implements InterfaceNotificationDAO {
 
     @Override
     public void Registrar(Notification x) {
-        sql = "{CALL RHSP_INSERT_NOTIFICATION( ?, ?, ?, ?, ?, ?)}";
+        sql = "{CALL RHSP_INSERT_NOTIFICATION( ?, ?, ?, ?, ?, ?, ?)}";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall(sql);
@@ -39,6 +39,7 @@ public class NotificationDAO implements InterfaceNotificationDAO {
             cst.setString(4, x.getDe_notification());
             cst.setString(5, x.getDi_notification());
             cst.setString(6, x.getTitulo());
+            cst.setString(7, x.getTipo_notification());
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -56,7 +57,7 @@ public class NotificationDAO implements InterfaceNotificationDAO {
     @Override
     public List<Notification> List_Notifications() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        sql = "select * from RHTV_NOTIFICATION";
+        sql = "select * from RHTV_NOTIFICATION order by FECHA_REG desc";
         List<Notification> list = new ArrayList<Notification>();
         try {
             rs = this.conn.query(sql);
@@ -71,6 +72,7 @@ public class NotificationDAO implements InterfaceNotificationDAO {
                 n.setDi_notification(rs.getString("di_notification"));
                 n.setTitulo(rs.getString("titulo"));
                 n.setFecha(rs.getString("fecha_reg"));
+                n.setTipo_notification(rs.getString("tipo_notification"));
                 list.add(n);
             }
         } catch (SQLException e) {
@@ -100,6 +102,7 @@ public class NotificationDAO implements InterfaceNotificationDAO {
                 rec.put("di_notification", rs.getString("di_notification"));
                 rec.put("titulo", rs.getString("titulo"));
                 rec.put("fecha", rs.getString("fecha_reg"));
+                rec.put("tipo_notification", rs.getString("tipo_notification"));
                 list.add(rec);
             }
         } catch (SQLException e) {

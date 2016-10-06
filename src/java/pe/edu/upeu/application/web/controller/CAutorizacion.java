@@ -103,7 +103,7 @@ public class CAutorizacion extends HttpServlet {
                         /*Cambiar con un trigger al momento de insertar*/
                         dgp.VAL_DGP_PASOS();
 
-                        //a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
+                        a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
                         String idpu = e.Id_Puesto_Personal(ide);
                         InterfaceNotificationDAO notdao=new NotificationDAO();
                         Notification not=new Notification();
@@ -112,6 +112,7 @@ public class CAutorizacion extends HttpServlet {
                         not.setId_rol(idrol);
                         not.setEs_visualizado("0");
                         not.setEs_leido("0");
+                        not.setTipo_notification("1");
                         not.setDe_notification("Empleado autorizado por "+username);
                         not.setDi_notification("trabajador?idtr="+idtrab+"&opc=list");
                         not.setTitulo(nombres);
@@ -119,19 +120,6 @@ public class CAutorizacion extends HttpServlet {
                         sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
-                    }
-                    if (opc.equals("AceptarMasivo")) {
-                        String iddgp = request.getParameter("IDDETALLE_DGP");
-                        String estado = "1";
-                        String nropaso = request.getParameter("NROPASO");
-                        //String usuario_ip = "";
-                        String cod = request.getParameter("COD");
-                        String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
-                        String idpasos = request.getParameter("IDPASOS");
-                        /*Cambiar con un trigger al momento de insertar*/
-                        dgp.VAL_DGP_PASOS();
-                        a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
-                        rpta.put("rpta", true);
                     }
                     if (opc.equals("HDGP")) {
 
@@ -159,18 +147,36 @@ public class CAutorizacion extends HttpServlet {
                         String cod = request.getParameter("COD");
                         String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
                         String idpasos = request.getParameter("IDPASOS");
+                        String nombres = request.getParameter("NOMBRES");
+                        String idtrab = request.getParameter("IDTRAB");
                         /*Cambiar con un trigger al momento de insertar*/
                         dgp.VAL_DGP_PASOS();
                         dgp.RECHAZAR_DGP(iddgp);
                         String id_autorizacion = a.Insert_Autorizacion_dev("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
                         a.Insert_comentario_Aut("", id_autorizacion, iddgp, iduser, "1", id_autorizacion, comentario);
                         String idpu = e.Id_Puesto_Personal(ide);
+                        InterfaceNotificationDAO notdao=new NotificationDAO();
+                        Notification not=new Notification();
+                        InterfaceUsuarioDAO udao=new UsuarioDAO();
+                        String username=udao.List_ID_User(iduser).get(0).getNo_usuario();
+                        not.setId_rol(idrol);
+                        not.setEs_visualizado("0");
+                        not.setEs_leido("0");
+                        not.setTipo_notification("0");
+                        not.setDe_notification("Empleado rechazado por "+username);
+                        not.setDi_notification("trabajador?idtr="+idtrab+"&opc=list");
+                        not.setTitulo(nombres);
+                        notdao.Registrar(not);
+                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
+                        sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
+                        response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
                         sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                         //out.print(id_autorizacion);
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
                         out.print("correcto ");
                     }
+
                     //AUTORIZACION CARGA ACADEMICA POR DOCENTE
                     if (opc.equals("Autorizacion_CD")) {
                         String idpu = e.Id_Puesto_Personal(ide);

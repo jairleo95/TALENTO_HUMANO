@@ -129,8 +129,8 @@
             String id_pasos = request.getParameter("pas");
             String nropaso = request.getParameter("np");
             String edit = request.getParameter("edit");
-          
-           
+
+
         %>
         <!--Begin Detalle Trabajador-->
 
@@ -174,7 +174,7 @@
                                 for (int index = 0; index < ListaridTrabajador.size(); index++) {
                                     V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                                     trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
-                                    String nombres = trb.getNo_trabajador().toUpperCase()+" "+trb.getAp_paterno().toUpperCase();
+                                    String nombres = trb.getNo_trabajador().toUpperCase() + " " + trb.getAp_paterno().toUpperCase();
                                     String idtrab = trb.getId_trabajador();
                             %>
                             <button data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">asas</button>
@@ -395,8 +395,10 @@
                         <input type="hidden" name="COD" value="<%=cod%>"  >               
                         <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
-                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>" 
-                               <tr><td><input type="hidden" name="opc"  class="submit" value="Rechazar"/></td></tr>
+                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>">
+                        <input type="hidden" name="NOMBRES" value="<%=nombres%>"> 
+                        <input type="hidden" name="IDTRAB" value="<%=idtrab%>">
+                        <tr><td><input type="hidden" name="opc"  class="submit" value="Rechazar"/></td></tr>
                         <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
