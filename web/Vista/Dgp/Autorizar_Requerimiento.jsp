@@ -631,7 +631,7 @@
         }
     }
     function statusFirmaAndRem() {
-        if (!statusBtnSendToRem()==true & statusBtnSendFirma()==true) {
+        if (!statusBtnSendToRem() == true & statusBtnSendFirma() == true) {
             $(".btnProcesarFirmaAndRem").attr("disabled", "disabled");
         } else {
             $(".btnProcesarFirmaAndRem").removeAttr("disabled");
@@ -787,12 +787,13 @@
                 buttons: '[No][Si]'
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
-                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+
                     var lenghtDatatable = $('#dt_basic1 tr').length;
                     for (var r = 1; r <= lenghtDatatable; r++) {
                         console.log("(" + r + ")Iterate items cod aps:" + $(".cod_aps" + r).val());
                         if ($(".cod_aps" + r).val() !== "" & typeof $(".cod_aps" + r).val() !== 'undefined') {
                             console.log(r + "codigo aps: " + $(".cod_aps" + r).val());
+                            $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
                             $.ajax({
                                 async: false,
                                 url: "../../trabajador", data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val(),
@@ -803,17 +804,15 @@
                                             url: "../../autorizacion",
                                             type: "POST", success: function (objJson, textStatus, jqXHR) {
                                                 if (objJson.rpta) {
-                                                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+
                                                     var table = new $.fn.dataTable.Api('#dt_basic1');
                                                     table.row($(".cod_aps" + r).parents('tr')).remove().draw();
                                                     exito("Procesado con exito!", "Codigo APS ingresado correctamente");
                                                     console.log("autorizado!");
-
+                                                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                                                 }
                                             },
                                             data: "opc=AceptarMasivo" + $(".val_aut" + r).val()
-                                        }).done(function () {
-
                                         });
                                     }
 
@@ -841,7 +840,7 @@
                 if (ButtonPressed === "Si") {
 
                     var numCorreos = [];
-
+                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
                     for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
                         if ($(".cod_huella" + r).val() !== "" & typeof $(".cod_huella" + r).val() !== "undefined") {
                             console.log(r + "codigo huella" + $(".cod_huella" + r).val())
@@ -868,7 +867,7 @@
                                                                 console.log("correos enviados!");
                                                                 var table = new $.fn.dataTable.Api('#dt_basic1');
                                                                 //    table.row($(".cod_huella" + r).parent('tr')).remove().draw();
-                                                                console.log(table.row($(".cod_huella" + r)).data());
+                                                                console.log(table.row($(".cod_huella" + r).parent('tr')).data());
                                                                 $.bigBox({
                                                                     title: "Registro terminado!",
                                                                     content: "<i class='fa fa-clock-o'></i> <i>Se enviaron a los correos del trabajador: " + data.sendto + "...</i>",
@@ -895,7 +894,7 @@
 
                         }
                     }
-
+                    //   $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                     console.log("correos" + numCorreos)
 
                     //   window.location.href = "../../autorizacion?opc=mens_cod_huella";
