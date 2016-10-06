@@ -109,13 +109,22 @@ public class CAutorizacion extends HttpServlet {
                         Notification not=new Notification();
                         InterfaceUsuarioDAO udao=new UsuarioDAO();
                         String username=udao.List_ID_User(iduser).get(0).getNo_usuario();
-                        not.setId_rol(idrol);
+                        not.setId_rol("ROL-0001");
                         not.setEs_visualizado("0");
                         not.setEs_leido("0");
                         not.setTipo_notification("1");
                         not.setDe_notification("Empleado autorizado por "+username);
                         not.setDi_notification("trabajador?idtr="+idtrab+"&opc=list");
                         not.setTitulo(nombres);
+                        /*
+                        SELECT  * FROM RHTV_AUTORIZACION WHERE ID_DGP='DGP-000146';
+                        HACER UNA LISTA CON LA CONSULTA DE LOS AUTORIZACIONES
+                        RECORRER LA LISTA (FOR)
+                        AGREGAR UN CAMPO MAS ID_USUARIO
+                        
+                        LUEGO INSERTAR EL METODO notdaoregistrar(not);
+                        */
+                        
                         notdao.Registrar(not);
                         sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));

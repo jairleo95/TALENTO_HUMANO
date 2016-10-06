@@ -687,6 +687,7 @@
         }
         function sendMessage() {
             websocket.send("mensaje");
+
         }
         document.getElementById('myframe').onload = function () {
             /*$(".iframe_principal").show(250);
@@ -700,7 +701,11 @@
             });
         }
         var ii = 0;
-        function listAjaxNotification() {
+        function listAjaxNotification(objOption) {
+            console.log("enter to listAjax")
+            if (typeof objOption !== 'undefined') {
+                objOption.parent().find("label").removeClass("active");
+            }
             var listid = [];
             var url = "cnot";
             $.ajax({
@@ -790,8 +795,14 @@
 
 
                 }});
+
         }
-        function listAjaxNotificationRec() {
+        function listAjaxNotificationRec(objOption) {
+            if (typeof objOption !== 'undefined') {
+                objOption.parent().find("label").removeClass("active");
+            }
+
+
             var listid2 = [];
             var url = "cnot";
             $.ajax({
@@ -880,12 +891,13 @@
                         }
                     }
                 }});
+
         }
-        function listAjaxNotificationPoraut(){
+        function listAjaxNotificationPoraut() {
             $(".poraut").empty();
         }
 
-        
+
         $(document).ready(function () {
             var idtra = $('#id_trabajador').val()
             getAvatar("perfil", idtra);
@@ -911,6 +923,9 @@
                 $this.parent().addClass('active');
             });
 
+            $(".hola2 ").click(function () {
+                $(".autorizacionList").click();
+            });
             function getAvatar(tipo, idtra) {
                 $.ajax({
                     url: "./foto",
@@ -932,19 +947,16 @@
 
             }
             $(".autorizacionList").click(function () {
-                listAjaxNotification();
-                $(".rechazarList").removeClass("active");
-                $(".porautList").removeClass("active");
+                listAjaxNotification($(this));
+
             });
             $(".rechazarList").click(function () {
-                listAjaxNotificationRec();
-                $(".porautList").removeClass("active");
-                $(".autorizacionList").removeClass("active");
+                listAjaxNotificationRec($(this));
+
             });
             $(".porautList").click(function () {
-                listAjaxNotification();
-                $(".rechazarList").removeClass("active");
-                $(".autorizacionList").removeClass("active");
+                listAjaxNotification($(this));
+
             });
             /*$(".hola2").click(function () {
              if (ii == 0) {
