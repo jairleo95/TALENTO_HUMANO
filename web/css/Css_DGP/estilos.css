@@ -5,7 +5,7 @@
     height: 270px;
     top: 200px;
     margin-left: -240px;
-    background-image: url(../Imagenes/Login-Panel.png);   
+    background-image: url(../img/Login-Panel.png);   
 }
 #user{
     margin-left: 173px;
@@ -22,7 +22,7 @@
     background: transparent;
 }
 #botoncito{
-    background-image: url(../Imagenes/botoncito.png);
+    background-image: url(../img/botoncito.png);
     width: 125px;
     height: 35px;
     margin-left: 300px;

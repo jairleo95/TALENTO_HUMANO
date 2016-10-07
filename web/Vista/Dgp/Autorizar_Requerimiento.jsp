@@ -58,10 +58,12 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
         <style>
             .ui-datepicker-calendar {
                 display: none;
+            }
+            .form-inline .checkbox input[type=checkbox].checkbox+span, .form-inline .radiobox input[type=radio].radiobox+span {
+                margin-left: -20px;
             }
         </style>
     </head>
@@ -242,7 +244,8 @@
                                                     <td>
                                                         <div class="btn-group">
                                                             <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                                Accion <span class="caret"></span>
+                                                                <i class="fa fa-gear fa-lg"></i>
+                                                                <i class="fa fa-caret-down"></i>
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li><a href="../../dgp?iddgp=<%=a.getId_dgp().trim()%>&opc=Seguimiento">Ver Proceso</a></li>
@@ -281,7 +284,7 @@
                                                     </td>
                                                     <td ><%out.print(aupl.Mes_plazo(a.getId_dgp()));%></td>   
                                                     <% if (a.getAr_foto() == null) {%>
-                                                    <td><img class="user_avatar_<%=a.getId_trabajador()%>" src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
+                                                    <td><img class="user_avatar_<%=a.getId_trabajador()%>" src="../../img/avatar_default.jpg"  width="30"  height="30"></td>
                                                         <% } else {%>
                                                     <td><img class="user_avatar_<%=a.getId_trabajador()%>" src="../Usuario/Fotos/<%=a.getAr_foto()%>"  width="30"  height="30"></td>
                                                         <% }%>
@@ -386,7 +389,21 @@
                                             <td><input type="text" name="cod_huella" maxlength="6" class="form-control cod_huella<%=(f + 1)%> inp_cod_huella" style="width:70px"/></td>
                                             <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
                                             <%} else {%>
-                                            <td><strong><%=a.getCo_huella_digital()%></strong></td>
+                                            <td class="" >
+                                                <div class="input-group" >
+
+                                                    <input class="form-control" placeholder=""  style="width: 70px;" type="text" value="<%=a.getCo_huella_digital()%>">
+                                                    <span class="input-group-addon"  >
+                                                        <span class="checkbox">
+                                                            <label >
+                                                                <input type="checkbox" class="checkbox style-0 cbHuellaItem" >
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </span>
+
+                                                </div>
+                                            </td>
                                             <%}
                                                 }%>   
                                             </tr>
@@ -702,10 +719,12 @@
         window.location.href = "../../autorizacion";
     }
     function procesarSendToRemu(callback) {
+        console.log("enter to procesarSendToRemu function");
         $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
         var lenghtDatatable = $('#dt_basic1 tr').length;
         for (var i = 1; i <= lenghtDatatable; i++) {
             if ($(".env_rem" + i).prop('checked')) {
+                console.log("checked condition");
                 $.ajax({
                     async: false,
                     url: "../../autorizacion",
@@ -833,6 +852,10 @@
             });
         });
         $(".btn_cod_huella").click(function () {
+            /*  testFunction1(function () {
+             testFunction2("gg")
+             });*/
+            var lenghtDatatable = $('#dt_basic1 tr').length;
             $.SmartMessageBox({
                 title: "¡Advertencia!",
                 content: "¿Esta seguro de procesar códigos de huella a estos requerimientos?",
@@ -840,71 +863,180 @@
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
 
-                    var numCorreos = [];
-                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-                    for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
-                        if ($(".cod_huella" + r).val() !== "" & typeof $(".cod_huella" + r).val() !== "undefined") {
-                            console.log(r + "codigo huella" + $(".cod_huella" + r).val())
-                            numCorreos.push($(".cod_huella" + r).val());
-                            $.ajax({
-                                async: false,
-                                url: "../../trabajador", data: "opc=registrar_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val(),
-                                type: "POST", success: function (data, textStatus, jqXHR) {
-                                    if (data.rpta) {
-                                        console.log("huella registrada!");
-                                        $.ajax({
-                                            async: false,
-                                            url: "../../autorizacion",
-                                            data: "opc=AceptarMasivo" + $(".val_aut" + r).val(),
-                                            type: "POST", success: function (data, textStatus, jqXHR) {
-                                                if (data.rpta) {
-                                                    console.log("autorizacion registrada");
-                                                    $.ajax({
-                                                        //  async: false,
-                                                        url: "../../autorizacion",
-                                                        type: "POST", success: function (data, textStatus, jqXHR) {
-                                                            if (data.rpta) {
-                                                                console.log("senedto" + data.sendto);
-                                                                console.log("correos enviados!");
-                                                                var table = new $.fn.dataTable.Api('#dt_basic1');
-                                                                //    table.row($(".cod_huella" + r).parent('tr')).remove().draw();
-                                                                console.log(table.row($(".cod_huella" + r).parent('tr')).data());
-                                                                $.bigBox({
-                                                                    title: "Registro terminado!",
-                                                                    content: "<i class='fa fa-clock-o'></i> <i>Se enviaron a los correos del trabajador: " + data.sendto + "...</i>",
-                                                                    color: "#296191",
-                                                                    icon: "fa fa-check shake animated",
-                                                                    number: "1",
-                                                                    timeout: 6000
-                                                                });
-                                                            }
-                                                        },
-                                                        data: "opc=Enviar_Correo" + $(".correos_" + r).val()
-                                                    })
-                                                }
 
-
-                                            }
-                                        });
-                                    }
-
-                                }
-
-                            });
-
-
-                        }
+                    for (var r = 1; r <= lenghtDatatable; r++) {
+                        var objInputHuella = $(".cod_huella" + r);
+                        registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + $(".correos_" + r).val(), $(".val_aut" + r).val());
                     }
-                    //   $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-                    console.log("correos" + numCorreos)
+                    $.each($(".cbHuellaItem"), function (index) {
 
-                    //   window.location.href = "../../autorizacion?opc=mens_cod_huella";
+                        var itemRegistered = $(this);
+                        if (itemRegistered.prop('checked')) {
+                            console.log(index + 1)
+                            if (itemRegistered.val() !== "" & typeof itemRegistered.val() !== "undefined") {
+                                processAutorizacionMasive($(".val_aut" + (index + 1)).val(), function () {
+                                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+                                    sendEmail("opc=Enviar_Correo" + $(".correos_" + (index + 1)).val(), function () {
+                                         $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                                        var table = new $.fn.dataTable.Api('#dt_basic1');
+                                        table.row(itemRegistered.parent('tr')).remove().draw();
+                                       
+                                    });
+                                });
+                            }
+                        }
+
+                    });
+
+                    //  registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + $(".correos_" + t).val(), $(".val_aut" + t).val());
+
+                    // $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                 }
                 if (ButtonPressed === "No") {
                 }
             });
         });
     });
+
+    /* function testFunction2(param) {
+     console.log("testParam:" + param);
+     }
+     function testFunction1(callback1) {
+     // return function () {
+     
+     console.log("executed function1");
+     callback1();
+     //  };
+     
+     }*/
+    function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
+
+        console.log("::enter to registerAndProcessCodHuella function");
+        if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
+            registerCOdHuella(inputItem, function () {
+                processAutorizacionMasive(dataProcess, function () {
+                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+                    sendEmail(dataEmail, function () {
+                        var table = new $.fn.dataTable.Api('#dt_basic1');
+                        table.row(inputItem.parent('tr')).remove().draw();
+                        $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                    });
+                });
+            });
+
+
+            /* $.ajax({
+             async: false,
+             url: "../../trabajador", data: "opc=registrar_huella&cod=" + inputItem.val() + "&idtr=" + $(".idtr" + r).val(),
+             type: "POST", success: function (data, textStatus, jqXHR) {
+             if (data.rpta) {
+             console.log("huella registrada!");
+             $.ajax({
+             async: false,
+             url: "../../autorizacion",
+             data: "opc=AceptarMasivo" + $(".val_aut" + r).val(),
+             type: "POST", success: function (data, textStatus, jqXHR) {
+             if (data.rpta) {
+             console.log("autorizacion registrada");
+             $.ajax({
+             //  async: false,
+             url: "../../autorizacion",
+             type: "POST", success: function (data, textStatus, jqXHR) {
+             if (data.rpta) {
+             console.log("senedto" + data.sendto);
+             console.log("correos enviados!");
+             var table = new $.fn.dataTable.Api('#dt_basic1');
+             //    table.row(objInputHuella.parent('tr')).remove().draw();
+             console.log(table.row(inputItem.parent('tr')).data());
+             $.bigBox({
+             title: "Registro terminado!",
+             content: "<i class='fa fa-clock-o'></i> <i>Se enviaron a los correos del trabajador: " + data.sendto + "...</i>",
+             color: "#296191",
+             icon: "fa fa-check shake animated",
+             number: "1",
+             timeout: 6000
+             });
+             }
+             },
+             data: dataEmail
+             })
+             }
+             }
+             });
+             }
+             
+             }
+             
+             });
+             */
+
+        }
+    }
+    function registerCOdHuella(inputItem, callback) {
+        console.log("::enter to registerCOdHuella function");
+        if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
+            $.ajax({
+                async: false,
+                url: "../../trabajador", data: "opc=registrar_huella&cod=" + inputItem.val() + "&idtr=" + $(".idtr" + r).val(),
+                type: "POST", success: function (data, textStatus, jqXHR) {
+                    if (data.rpta) {
+                        console.log("huella registrada!");
+                        if (typeof callback !== 'undefined') {
+                            callback(data);
+                        }
+                    }
+
+                }
+
+            });
+        }
+
+    }
+    function processAutorizacionMasive(values, callback) {
+        console.log("::enter to processAutorizacionMasive function");
+        $.ajax({
+            async: false,
+            url: "../../autorizacion",
+            data: "opc=AceptarMasivo" + values,
+            type: "POST", success: function (data, textStatus, jqXHR) {
+                if (data.rpta) {
+                    console.log("autorizacion registrada");
+                    if (typeof callback !== 'undefined') {
+                        callback();
+                    }
+                }
+            }
+        });
+    }
+
+    function sendEmail(dataRequest, callback) {
+        console.log("::enter to sendEmail function");
+        console.log("sending emails...");
+        $.ajax({
+            //  async: false,
+            url: "../../autorizacion",
+            type: "POST", success: function (data, textStatus, jqXHR) {
+                if (data.rpta) {
+                    console.log("senedto" + data.sendto);
+                    console.log("correos enviados!");
+
+                    //  console.log(table.row(inputItem.parent('tr')).data());
+                    $.bigBox({
+                        title: "Registro terminado!",
+                        content: "<i class='fa fa-clock-o'></i> <i>Se enviaron a los correos del trabajador: " + data.sendto + "...</i>",
+                        color: "#296191",
+                        icon: "fa fa-check shake animated",
+                        number: "1",
+                        timeout: 6000
+                    });
+                    if (typeof callback !== 'undefined') {
+                        callback(data);
+                    }
+                }
+            },
+            data: dataRequest
+        })
+    }
 </script>
 <script type="text/javascript">
     var año = '';

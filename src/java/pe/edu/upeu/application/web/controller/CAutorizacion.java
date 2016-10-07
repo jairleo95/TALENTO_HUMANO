@@ -130,6 +130,19 @@ public class CAutorizacion extends HttpServlet {
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
                     }
+                    if (opc.equals("AceptarMasivo")) {
+                        String iddgp = request.getParameter("IDDETALLE_DGP");
+                        String estado = "1";
+                        String nropaso = request.getParameter("NROPASO");
+                        //String usuario_ip = "";
+                        String cod = request.getParameter("COD");
+                        String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
+                        String idpasos = request.getParameter("IDPASOS");
+                        /*Cambiar con un trigger al momento de insertar*/
+                        dgp.VAL_DGP_PASOS();
+                        a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
+                        rpta.put("rpta", true);
+                    }
                     if (opc.equals("HDGP")) {
 
                         String iddgp = request.getParameter("iddgp");

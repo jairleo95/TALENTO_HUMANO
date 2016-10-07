@@ -87,7 +87,7 @@
 
             <div id="logo-group" >
                 <!-- PLACE YOUR LOGO HERE -->
-                <span id="logo"> <img src="img/logo_rrhh.jpg" style=" position: absolute;top: 6px; width:130px; height:36px " alt="Talento Humano"> </span>
+                <span id="logo"> <img src="img/logoRRHH.png" style=" position: absolute;top: 8px; width:100px; height:36px " alt="Talento Humano"> </span>
                 <!-- END LOGO PLACEHOLDER -->
 
                 <!-- Note: The activity badge color changes when clicked and resets the number to 0
@@ -169,7 +169,7 @@
                 <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
                     <li class="">
                         <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown"> 
-                            <img src="imagenes/avatar_default.jpg" alt="<%out.println((String) sesion.getAttribute("USER")); %>" class="online" />  
+                            <img src="img/avatar_default.jpg" alt="<%out.println((String) sesion.getAttribute("USER")); %>" class="online" />  
                         </a>
                         <ul class="dropdown-menu pull-right">
                             <li>
@@ -190,7 +190,7 @@
                             <li class="divider"></li>
                             <li>
                                 <a href="login.html" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout"><i class="fa fa-sign-out fa-lg"></i> <strong><u>L</u>ogout</strong></a>
-                            </li>.
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -332,7 +332,7 @@
                     <div class="avatar-user col-md-3">
                         <input id="id_trabajador" type="hidden" value="<%out.println(sesion.getAttribute("IDTR"));%>" />
                         <a href="javascript:void(0);" id="show-shortcut" >
-                            <img id="foto_usuario" src="imagenes/avatar_default.jpg"  />
+                            <img id="foto_usuario" src="img/avatar_default.jpg"  />
                         </a>  
                     </div>
                     <div class="col-md-9">

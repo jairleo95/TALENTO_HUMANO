@@ -40,7 +40,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <script src="../../../ajax/ajax.google.min.js"></script>
         <style>
             .caja{
-                background:transparent url(../../../imagenes/Gifloader.GIF) center no-repeat;
+                background:transparent url(../../../img/Gifloader.GIF) center no-repeat;
             }
         </style>
     <input type="hidden" id="cant_con" class="cant_con" value="<%=lista.size()%>">
@@ -454,7 +454,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <button type="button" id="btn2" class="btn2 btn btn-primary" onclick="imp();" >Imprimir</button>
     <h3>EDITAR PLANTILLAS</h3>
     <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
-        <div id="wait"  align="center"><img src='../../../imagenes/por-favor-espere.gif' width="100" height="100" /><br>Cargando..</div>
+        <div id="wait"  align="center"><img src='../../../img/por-favor-espere.gif' width="100" height="100" /><br>Cargando..</div>
         <textarea cols="100" id="editor1" name="editor1" rows="10">
         </textarea>
         <script>

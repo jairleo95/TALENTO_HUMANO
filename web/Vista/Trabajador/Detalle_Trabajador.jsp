@@ -164,7 +164,7 @@
                             <input type="hidden" name="idtr" class="idtr" id="input-file" value="<%=t.getId_trabajador()%>">
                             <input style="display:none" class="file-foto" type="file" name="archivo" required="">
                         </form>
-                        <a class="avatar mustang-gallery pull-left" href="../../imagenes/avatar_default.jpg" ><img src="../../imagenes/avatar_default.jpg" class="borde" width="100" height="100" ></a>
+                        <a class="avatar mustang-gallery pull-left" href="../../img/avatar_default.jpg" ><img src="../../img/avatar_default.jpg" class="borde" width="100" height="100" ></a>
                         <div class="foto-user" style="display: none;">
                         </div>
                         <a class="ver_foto btn bg-color-purple txt-color-white btn-xs">Cambiar Imagen</a>           
@@ -987,12 +987,12 @@
                             if (obj.EFOTO === "2") {
                                 /* your photo rechazada*/
                                 $('.modal').modal('show');
-                                $('.borde').attr('src', '../../imagenes/Desaprobado.png');
+                                $('.borde').attr('src', '../../img/Desaprobado.png');
 
                                 var padre = $(window.parent.document.getElementById('foto_usuario'));
                                 var idtra = $(window.parent.document.getElementById('id_trabajador')).val();
                                 if (idtra.trim() == $(".idtr").val().trim()) {
-                                    $(padre).attr("src", "imagenes/Desaprobado.png");
+                                    $(padre).attr("src", "img/Desaprobado.png");
                                 }
                             } else {
                                 if (obj.EFOTO != 2) {

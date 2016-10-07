@@ -22,8 +22,7 @@
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
         <title>Mantenimiento de Roles y Privilegios</title>
         <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
+   
         <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
 
         <link rel="stylesheet" type="text/css" href="../../css/Css_Menu_Desplegable/default.css" />
@@ -196,7 +195,7 @@
 
                     if (t.getNo_ar_foto() == null) {
                 %>
-                <tr><td class="td2" ><img style="border: 3px solid grey ; position:absolute; left:0.5%; top: 6% " src="../../imagenes/avatar_default.jpg"  width="100"  height="100"></td>
+                <tr><td class="td2" ><img style="border: 3px solid grey ; position:absolute; left:0.5%; top: 6% " src="../../img/avatar_default.jpg"  width="100"  height="100"></td>
                     <td><a href="../Usuario/Subir_Foto.jsp?idtr=<%=idtr%>">Subir imagen</a></td>
                 <%
             } else {%>

@@ -33,7 +33,7 @@
             }
 
             .imprimirTexto{
-                background-image:url(../Imagenes/print.png);
+                background-image:url(../img/print.png);
                 width: 222px;
                 height: 100px;
 

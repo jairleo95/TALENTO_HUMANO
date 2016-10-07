@@ -144,11 +144,11 @@
 
                                                                 if (a.getEs_autorizacion().equals("1")) { %>
 
-                                                        <img src="../../imagenes/Aprobado.png" width="20" height="20">
+                                                        <img src="../../img/Aprobado.png" width="20" height="20">
                                                         <% }
                                                             if (a.getEs_autorizacion().equals("2")) {
                                                         %>
-                                                        <img src="../../imagenes/Desaprobado.png" width="20" height="20">
+                                                        <img src="../../img/Desaprobado.png" width="20" height="20">
                                                         <% }
                                                         } else {%>
                                                         No registrado

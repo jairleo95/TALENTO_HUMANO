@@ -166,7 +166,7 @@
 
                                                                                                                                             <td>
                                                                                                                                                 <% if (e.getAr_foto() == null) {%>
-                                                                                                                                                <img src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
+                                                                                                                                                <img src="../../img/avatar_default.jpg"  width="30"  height="30">
                                                                                                                                                     <% } else {%>
                                                                                                                                                     <img src="../Usuario/Fotos/<%=e.getAr_foto()%>"  width="30"  height="30">
                                                                                                                                                         <% }%>

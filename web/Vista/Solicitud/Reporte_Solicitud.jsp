@@ -57,10 +57,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
         <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
-        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
-        <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
+    
     </head>
     <body class="body"  >
         <!-- MAIN PANEL -->
