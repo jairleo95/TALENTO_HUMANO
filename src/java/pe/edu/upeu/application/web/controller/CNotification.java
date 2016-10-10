@@ -81,7 +81,6 @@ public class CNotification extends HttpServlet {
             case 4:
                 try {
                     String[] listid = request.getParameterValues("listid[]");
-                    System.out.println(listid.length);
                     if (listid != null) {
                         for (int i = 0; i < listid.length; i++) {
                             notdao.visualizado(listid[i]);

@@ -39,12 +39,12 @@ function ValBtnAutorizarDgp(trabajador, divBotones) {
                 $(".btn-autor").click(function (e) {
                     $.SmartMessageBox({
                         title: "¡Alerta de Confirmación!",
-                        content: "¿Está totalmente seguro de autorizar este requerimiento?",
+                        content: "¿Está totalmente seguro de autorizar este requerimiento123?",
                         buttons: '[No][Si]'
                     }, function (ButtonPressed) {
                         if (ButtonPressed === "Si") {
                             $(".form-aut").submit();
-                            window.parent.sendMessage();
+                            window.parent.sendOk();
                         }
                         if (ButtonPressed === "No") {
                             return false;
