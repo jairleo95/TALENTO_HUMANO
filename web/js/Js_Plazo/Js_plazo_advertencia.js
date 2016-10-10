@@ -26,7 +26,8 @@ function listar_mensaje_plazo(tipo, warning, info, req) {
 
 function AlertCumplimientoPlazo_Fecha(fecha) {
     $.post("../../dgp", "opc=Val_Fe_Inicio&fecha=" + fecha, function (objJson) {
-        if (objJson.estado) {
+        if (objJson.rpta==="1") {
+            if (objJson.estado) {
             $.bigBox({
                 title: "&iexcl;Alerta de plazo no cumplido!",
                 content: "Si registra con esta fecha de inicio : " + fecha + ",  el requerimiento estara en fuera de plazo. &iexcl;NECESITA HACER SOLICITUD AL TERMINAR REGISTRO!",
@@ -47,6 +48,10 @@ function AlertCumplimientoPlazo_Fecha(fecha) {
                         //timeout: 15000
             });
         }
+        }else {
+           alert(objJson.mensaje);
+        }
+        
     });
 }
 

@@ -315,15 +315,15 @@
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
-                                                               
-                                                          <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask val_fe fe_inicio_dgp" data-mask="00/00/0000" autocomplete="off" id="abr" placeholder="mm/dd/yyyy">
-                                                               
-                                                               
+
+                                                                <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask val_fe fe_inicio_dgp" data-mask="00/00/0000" autocomplete="off" id="abr" placeholder="mm/dd/yyyy">
+
+
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
-                                                                <input type="date" name="FEC_HASTA"  required="" class="val_fe" >
+                                                                <input type="date" name="FEC_HASTA"  required=""  value="" class="val_fe fe_hasta" >
                                                             </label>
                                                         </section>
                                                     </div>
@@ -845,7 +845,7 @@
     <script src="../../js/jquery.mask.js" type="text/javascript"></script>
     <!-- JQUERY SELECT2 INPUT -->
     <script src="../../js/plugin/select2/select2.min.js"></script>
- 
+
     <!-- JQUERY UI -->
     <script src="../../js/jquery-ui.js" type="text/javascript"></script>
     <!-- JQUERY UI + Bootstrap Slider 
@@ -885,13 +885,18 @@
     <script src="../../js/Js_Horario/horario.js" type="text/javascript"></script>
     <script src="../../js/Js_Plazo/Js_plazo_advertencia.js" type="text/javascript"></script>    
     <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
-     <script type="text/javascript">
-                                                                $(function () {
-                                                                    $("#abr").datepicker();
+    <script type="text/javascript">
+                                                        $(function () {
+                                                            $("#abr").datepicker(
+                                                                    {dateFormat: 'dd/mm/yy'}
+                                                            );
+                                                    $(".fe_hasta").change(function (){
+                                                        console.log(" f: "+ $(this).val());
+                                                    })
 
-                                                                });
+                                                        });
 
-                                                                </script>
+    </script>
 </html>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");

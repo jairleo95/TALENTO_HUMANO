@@ -150,7 +150,9 @@ public class CDgp extends HttpServlet {
             }
             if (opc.equals("Val_Fe_Inicio")) {
                 String fecha = request.getParameter("fecha");
-                boolean respuesta = dgp.val_fe_inicio_dgp(fecha);
+                String newFormat=FactoryConnectionDB.convertFecha3(fecha);
+                System.out.println("new format :"+newFormat);
+                boolean respuesta = dgp.val_fe_inicio_dgp(newFormat);
                 rpta.put("rpta", "1");
                 rpta.put("estado", respuesta);
             }
