@@ -67,6 +67,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <link rel="stylesheet" href="../../css/chosen.css"  type="text/css" > 
+        <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <style>
             .td{
                 font-weight: bold;
@@ -109,7 +110,7 @@
                                 </div>
                                 <div class="alert_1">
                                 </div>
-                                
+
                                 <!-- Widget ID (each widget will need unique ID)-->
                                 <div class="jarviswidget jarviswidget-color-white" id="wid-id-2"  data-widget-editbutton="false"
                                      data-widget-deletebutton="false" data-widget-custombutton="false">
@@ -168,7 +169,7 @@
                                                     %>
                                                     <input  type="hidden" class="idtr" value="<%=id%>"/>
                                                     <div class="row">
-                                                        
+
                                                         <input value= "<%=tr.getId_trabajador()%>"  type="hidden" id="" />
                                                         <section class="col col-6">
                                                             <label class="label" id="titu">Trabajador :</label>
@@ -314,7 +315,10 @@
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
-                                                                <input type="date" name="FEC_DESDE"   required="" class="val_fe fe_inicio_dgp">
+                                                               
+                                                          <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask val_fe fe_inicio_dgp" data-mask="00/00/0000" autocomplete="off" id="abr" placeholder="mm/dd/yyyy">
+                                                               
+                                                               
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
@@ -837,11 +841,15 @@
 
     <!-- JQUERY MASKED INPUT -->
     <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
-
+    <!-- JQUERY MASKED DATE -->
+    <script src="../../js/jquery.mask.js" type="text/javascript"></script>
     <!-- JQUERY SELECT2 INPUT -->
     <script src="../../js/plugin/select2/select2.min.js"></script>
-
+ 
+    <!-- JQUERY UI -->
+    <script src="../../js/jquery-ui.js" type="text/javascript"></script>
     <!-- JQUERY UI + Bootstrap Slider 
+    
     <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
 
     <!-- browser msie issue fix -->
@@ -872,14 +880,18 @@
     <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
     <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
     <!--Funciones globales-->
-   
+
     <script src="../../js/Js_DGP/Registrar/Reg_Dgps.js" type="text/javascript" ></script>
     <script src="../../js/Js_Horario/horario.js" type="text/javascript"></script>
     <script src="../../js/Js_Plazo/Js_plazo_advertencia.js" type="text/javascript"></script>    
-     <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
-    <script>
+    <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
+     <script type="text/javascript">
+                                                                $(function () {
+                                                                    $("#abr").datepicker();
 
-    </script>
+                                                                });
+
+                                                                </script>
 </html>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
