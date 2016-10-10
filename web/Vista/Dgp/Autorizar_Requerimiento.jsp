@@ -68,7 +68,6 @@
         </style>
     </head>
     <%
-        CConversion c = new CConversion();
         int t = List_id_Autorizacion.size();
     %>
     <%if (request.getParameter("r") != null) {
@@ -143,7 +142,8 @@
                                     <span class="widget-icon"> <i class="glyphicon glyphicon-inbox"></i> </span>
                                     <h2 class="font-md"><strong>Requerimientos por </strong> <i>Autorizar</i></h2>
                                     <div class="widget-toolbar">
-                                        <span class="jarviswidget" ><i class="fa fa-refresh fa-spin"></i></span>
+                                        <span class="statusBarAut"></span>
+                                        <span class="jarviswidget" ><i class="fa fa-refreshs fa-spin"></i></span>
                                     </div> 
                                 </header>
                                 <!-- widget div-->
@@ -561,35 +561,13 @@
 <!-- JARVIS WIDGETS -->
 <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-<!-- EASY PIE CHARTS 
-<script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
 
-<!-- SPARKLINES 
-<script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>-->
-
-<!-- JQUERY VALIDATE 
-<script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>-->
-
-<!-- JQUERY MASKED INPUT 
-<script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
-
-<!-- JQUERY SELECT2 INPUT 
-<script src="../../js/plugin/select2/select2.min.js"></script>-->
-
-<!-- JQUERY UI + Bootstrap Slider 
-<script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
-
-<!-- browser msie issue fix -->
 <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 
 <!-- FastClick: For mobile devices -->
 <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
 
-<!--[if IE 8]>
 
-<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-
-<![endif]-->
 
 <!-- Demo purpose only -->
 <script src="../../js/demo.min.js"></script>
@@ -597,15 +575,9 @@
 <!-- MAIN APP JS FILE -->
 <script src="../../js/app.min.js"></script>
 
-<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT
-<!-- Voice command : plugin -->
-
-<!-- PAGE RELATED PLUGIN(S) 
-<script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>-->
 
 <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
 <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
-<script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
 <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
 <script src="../../js/coment/comenth.js" type="text/javascript"></script>
@@ -629,6 +601,7 @@
                                                         $.datepicker.setDefaults($.datepicker.regional['es']);
 </script>
 <script>
+    var statusBarAut = $(".statusBarAut");
     function statusBtnSendToRem() {
         if ($(".envioRem").length == 0) {
             $(".btn_pro_remuneracion").attr("disabled", "disabled");
@@ -715,7 +688,7 @@
 
     }
     function refreshCurrentPage() {
-        console.log("redirecto to autorizacion")
+        console.log("redirecto to autorizacion");
         window.location.href = "../../autorizacion";
     }
     function procesarSendToRemu(callback) {
@@ -734,9 +707,9 @@
                             var table = new $.fn.dataTable.Api('#dt_basic1');
                             table.row($(".env_rem" + i).parents('tr')).remove().draw();
                             exito("Procesado con exito!", "Envió el requerimiento correctamente");
-                            statusBtnSendToRem()
-                            statusBtnSendFirma()
-                            statusFirmaAndRem()
+                            statusBtnSendToRem();
+                            statusBtnSendFirma();
+                            statusFirmaAndRem();
                         }
                         console.log("Autorizacion :" + data.rpta)
                     },
@@ -750,10 +723,94 @@
             // window.location.href = "../../autorizacion";
         }
     }
+    function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
+
+        console.log("::enter to registerAndProcessCodHuella function");
+        if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
+            registerCOdHuella(inputItem, function () {
+                processAutorizacionMasive(dataProcess, function () {
+                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+                    sendEmail(dataEmail, function () {
+                        var table = new $.fn.dataTable.Api('#dt_basic1');
+                        table.row(inputItem.parent('tr')).remove().draw();
+                        $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                    });
+                });
+            });
+
+
+         
+        }
+    }
+    function registerCOdHuella(inputItem, callback) {
+        console.log("::enter to registerCOdHuella function");
+        if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
+            $.ajax({
+                async: false,
+                url: "../../trabajador", data: "opc=registrar_huella&cod=" + inputItem.val() + "&idtr=" + $(".idtr" + r).val(),
+                type: "POST", success: function (data, textStatus, jqXHR) {
+                    if (data.rpta) {
+                        console.log("huella registrada!");
+                        if (typeof callback !== 'undefined') {
+                            callback(data);
+                        }
+                    }
+                }
+
+            });
+        }
+
+    }
+    function processAutorizacionMasive(values, callback) {
+        console.log("::enter to processAutorizacionMasive function");
+        $.ajax({
+            async: false,
+            url: "../../autorizacion",
+            data: "opc=AceptarMasivo" + values,
+            type: "POST", success: function (data, textStatus, jqXHR) {
+                if (data.rpta) {
+                    console.log("autorizacion registrada");
+                    if (typeof callback !== 'undefined') {
+                        callback();
+                    }
+                }
+            }
+        });
+    }
+
+    function sendEmail(dataRequest, callback) {
+        console.log("::enter to sendEmail function");
+        statusBarAut.text("Enviando correos...");
+        $.ajax({
+            //  async: false,
+            url: "../../autorizacion",
+            type: "POST", success: function (data, textStatus, jqXHR) {
+                if (data.rpta) {
+                    console.log("senedto" + data.sendto);
+                    console.log("correos enviados!");
+                    statusBarAut.text("Correos enviados!").fadeOut('slow');
+                    //  console.log(table.row(inputItem.parent('tr')).data());
+                    $.bigBox({
+                        title: "Registro terminado!",
+                        content: "<i class='fa fa-clock-o'></i> <i>Se enviaron a los correos del trabajador: " + data.sendto + "...</i>",
+                        color: "#296191",
+                        icon: "fa fa-check shake animated",
+                        number: "1",
+                        timeout: 6000
+                    });
+                    if (typeof callback !== 'undefined') {
+                        callback(data);
+                    }
+                }
+            },
+            data: dataRequest
+        });
+    }
     $(document).ready(function () {
-        statusBtnSendToRem()
-        statusBtnSendFirma()
-        statusFirmaAndRem()
+        statusBtnSendToRem();
+        statusBtnSendFirma();
+        statusFirmaAndRem();
+
         $(".btnProcesarFirmaAndRem").click(function () {
             $.SmartMessageBox({
                 title: "¡Advertencia!",
@@ -788,7 +845,6 @@
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
                     try {
-
                         procesarFirmas();
                         // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
                     } catch (err) {
@@ -824,7 +880,6 @@
                                             url: "../../autorizacion",
                                             type: "POST", success: function (objJson, textStatus, jqXHR) {
                                                 if (objJson.rpta) {
-
                                                     var table = new $.fn.dataTable.Api('#dt_basic1');
                                                     table.row($(".cod_aps" + r).parents('tr')).remove().draw();
                                                     exito("Procesado con exito!", "Codigo APS ingresado correctamente");
@@ -838,8 +893,7 @@
 
                                 }
 
-                            }).done(function () {
-                            });
+                            })
 
                         }
                     }
@@ -862,14 +916,11 @@
                 buttons: '[No][Si]'
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
-
-
                     for (var r = 1; r <= lenghtDatatable; r++) {
                         var objInputHuella = $(".cod_huella" + r);
                         registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + $(".correos_" + r).val(), $(".val_aut" + r).val());
                     }
                     $.each($(".cbHuellaItem"), function (index) {
-
                         var itemRegistered = $(this);
                         if (itemRegistered.prop('checked')) {
                             console.log(index + 1)
@@ -877,10 +928,10 @@
                                 processAutorizacionMasive($(".val_aut" + (index + 1)).val(), function () {
                                     $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
                                     sendEmail("opc=Enviar_Correo" + $(".correos_" + (index + 1)).val(), function () {
-                                         $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                                        $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                                         var table = new $.fn.dataTable.Api('#dt_basic1');
                                         table.row(itemRegistered.parent('tr')).remove().draw();
-                                       
+
                                     });
                                 });
                             }
@@ -898,145 +949,6 @@
         });
     });
 
-    /* function testFunction2(param) {
-     console.log("testParam:" + param);
-     }
-     function testFunction1(callback1) {
-     // return function () {
-     
-     console.log("executed function1");
-     callback1();
-     //  };
-     
-     }*/
-    function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
-
-        console.log("::enter to registerAndProcessCodHuella function");
-        if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
-            registerCOdHuella(inputItem, function () {
-                processAutorizacionMasive(dataProcess, function () {
-                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-                    sendEmail(dataEmail, function () {
-                        var table = new $.fn.dataTable.Api('#dt_basic1');
-                        table.row(inputItem.parent('tr')).remove().draw();
-                        $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-                    });
-                });
-            });
-
-
-            /* $.ajax({
-             async: false,
-             url: "../../trabajador", data: "opc=registrar_huella&cod=" + inputItem.val() + "&idtr=" + $(".idtr" + r).val(),
-             type: "POST", success: function (data, textStatus, jqXHR) {
-             if (data.rpta) {
-             console.log("huella registrada!");
-             $.ajax({
-             async: false,
-             url: "../../autorizacion",
-             data: "opc=AceptarMasivo" + $(".val_aut" + r).val(),
-             type: "POST", success: function (data, textStatus, jqXHR) {
-             if (data.rpta) {
-             console.log("autorizacion registrada");
-             $.ajax({
-             //  async: false,
-             url: "../../autorizacion",
-             type: "POST", success: function (data, textStatus, jqXHR) {
-             if (data.rpta) {
-             console.log("senedto" + data.sendto);
-             console.log("correos enviados!");
-             var table = new $.fn.dataTable.Api('#dt_basic1');
-             //    table.row(objInputHuella.parent('tr')).remove().draw();
-             console.log(table.row(inputItem.parent('tr')).data());
-             $.bigBox({
-             title: "Registro terminado!",
-             content: "<i class='fa fa-clock-o'></i> <i>Se enviaron a los correos del trabajador: " + data.sendto + "...</i>",
-             color: "#296191",
-             icon: "fa fa-check shake animated",
-             number: "1",
-             timeout: 6000
-             });
-             }
-             },
-             data: dataEmail
-             })
-             }
-             }
-             });
-             }
-             
-             }
-             
-             });
-             */
-
-        }
-    }
-    function registerCOdHuella(inputItem, callback) {
-        console.log("::enter to registerCOdHuella function");
-        if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
-            $.ajax({
-                async: false,
-                url: "../../trabajador", data: "opc=registrar_huella&cod=" + inputItem.val() + "&idtr=" + $(".idtr" + r).val(),
-                type: "POST", success: function (data, textStatus, jqXHR) {
-                    if (data.rpta) {
-                        console.log("huella registrada!");
-                        if (typeof callback !== 'undefined') {
-                            callback(data);
-                        }
-                    }
-
-                }
-
-            });
-        }
-
-    }
-    function processAutorizacionMasive(values, callback) {
-        console.log("::enter to processAutorizacionMasive function");
-        $.ajax({
-            async: false,
-            url: "../../autorizacion",
-            data: "opc=AceptarMasivo" + values,
-            type: "POST", success: function (data, textStatus, jqXHR) {
-                if (data.rpta) {
-                    console.log("autorizacion registrada");
-                    if (typeof callback !== 'undefined') {
-                        callback();
-                    }
-                }
-            }
-        });
-    }
-
-    function sendEmail(dataRequest, callback) {
-        console.log("::enter to sendEmail function");
-        console.log("sending emails...");
-        $.ajax({
-            //  async: false,
-            url: "../../autorizacion",
-            type: "POST", success: function (data, textStatus, jqXHR) {
-                if (data.rpta) {
-                    console.log("senedto" + data.sendto);
-                    console.log("correos enviados!");
-
-                    //  console.log(table.row(inputItem.parent('tr')).data());
-                    $.bigBox({
-                        title: "Registro terminado!",
-                        content: "<i class='fa fa-clock-o'></i> <i>Se enviaron a los correos del trabajador: " + data.sendto + "...</i>",
-                        color: "#296191",
-                        icon: "fa fa-check shake animated",
-                        number: "1",
-                        timeout: 6000
-                    });
-                    if (typeof callback !== 'undefined') {
-                        callback(data);
-                    }
-                }
-            },
-            data: dataRequest
-        })
-    }
 </script>
 <script type="text/javascript">
     var año = '';
