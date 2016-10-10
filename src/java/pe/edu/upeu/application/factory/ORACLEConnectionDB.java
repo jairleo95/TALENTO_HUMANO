@@ -22,7 +22,8 @@ public final class ORACLEConnectionDB extends ConexionBD {
         try {
             Class.forName(driver).newInstance();
             this.conex = DriverManager.getConnection(url);
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e) {
+            System.out.println("Error al conectar : "+e);
             e.printStackTrace();
         }
         return this.conex;

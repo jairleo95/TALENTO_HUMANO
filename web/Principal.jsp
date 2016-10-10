@@ -673,14 +673,19 @@
         var websocket = new WebSocket("ws://" + document.location.host + "/TALENTO_HUMANO/serverGth");
         websocket.onmessage = function processMessage(message) {
             var jsonData = JSON.parse(message.data);
-            if (jsonData.message != null) {
-                $.smallBox({
-                    title: "Se ha autorizado un requerimiento...",
-                    content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-                    color: "#296191",
-                    iconSmall: "fa fa-thumbs-up bounce animated",
-                    timeout: 4000
-                });
+            if (jsonData.message !== null) {
+                if (jsonData.message == "ok") {
+                    listAjaxNotification();
+                    alert("hola");
+                } else {
+                    $.smallBox({
+                        title: "Se ha autorizado un requerimiento...",
+                        content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+                        color: "#296191",
+                        iconSmall: "fa fa-thumbs-up bounce animated",
+                        timeout: 4000
+                    });
+                }
 
                 // messagesTextArea.value += jsonData.message + "\n";
             }
@@ -688,6 +693,9 @@
         function sendMessage() {
             websocket.send("mensaje");
 
+        }
+        function sendOk() {
+            websocket.send("ok");
         }
         document.getElementById('myframe').onload = function () {
             /*$(".iframe_principal").show(250);

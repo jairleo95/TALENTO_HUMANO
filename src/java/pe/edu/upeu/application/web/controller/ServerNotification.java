@@ -43,13 +43,13 @@ public class ServerNotification {
     @OnMessage
     public void handleMessage(String message, Session userSession) throws IOException {
         String userName = (String) userSession.getUserProperties().get("username");
-        String mensaje = (String) userSession.getUserProperties().get("mensaje");
-        System.out.println(mensaje);
+        System.out.println("aqui llegamos "+message);
         if (userName == null) {
             userSession.getUserProperties().put("username", message);
             userSession.getBasicRemote().sendText(buildJsonData("system", "estas conectado a :" + message));
         } else {
             Iterator<Session> iterator = chatRoomUser.iterator();
+            System.out.println("hola "+userName);
             while (iterator.hasNext()) {
                 iterator.next().getBasicRemote().sendText(buildJsonData(userName, message));
             }

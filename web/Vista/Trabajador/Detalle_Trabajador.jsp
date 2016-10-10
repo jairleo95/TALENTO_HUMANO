@@ -705,7 +705,7 @@
             $(".btn-conti").click(function (e) {
                 $.SmartMessageBox({
                     title: "Alerta de Confirmación",
-                    content: "¿Está totalmente seguro de rechazar este requerimiento?",
+                    content: "¿Está totalmente seguro de rechazar este requerimiento999?",
                     buttons: '[No][Si]'
                 }, function (ButtonPressed) {
                     if (ButtonPressed === "Si") {
@@ -747,15 +747,18 @@
             /*FIN carga academica*/
 
             /*AUTORIZACIONES*/
-            $(".btn-autor").click(function (e) {
+            $(".btn-autor1").click(function (e) {   //---------->fue modificado
                 $.SmartMessageBox({
                     title: "¡Alerta de Confirmación!",
-                    content: "¿Está totalmente seguro de autorizar este requerimiento?",
+                    content: "¿Está totalmente seguro de autorizar este requerimientoklñklñ?",
                     buttons: '[No][Si]'
                 }, function (ButtonPressed) {
                     if (ButtonPressed === "Si") {
+                        window.parent.sendOk();
+                        parent.sendOk();
                         $(".form-aut").submit();
-                        window.parent.sendMessage();
+                        //window.sendMessage();
+                       //window.parent.websocket.send("texto");
                     }
                     if (ButtonPressed === "No") {
                         return false;

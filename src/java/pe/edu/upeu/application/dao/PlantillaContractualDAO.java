@@ -131,7 +131,7 @@ public class PlantillaContractualDAO implements InterfacePlantillaContractualDAO
                 no_archivo = rs.getString(1);
             }
         } catch (SQLException e) {
-
+            System.out.println("Error en List_pl_con_x_id : " + e);
         } finally {
             this.cnn.close();
         }
@@ -152,7 +152,7 @@ public class PlantillaContractualDAO implements InterfacePlantillaContractualDAO
                 rec.put("nom_ar", rs.getString("NO_ARCHIVO"));
                 rec.put("es_pl", rs.getString("ES_PLANTILLA_PUESTO"));
                 rec.put("id_pp", rs.getString("ID_PLANTILLA_PUESTO"));
-                rec.put("direccion", "<strong> Dirección: </strong> "+rs.getString("no_direccion") + " <strong>Area: </strong>" + rs.getString("no_dep") + "<strong> Departamento:</strong> " + rs.getString("no_area") +" <strong>Sección: </strong>"+ rs.getString("no_seccion") + " <strong>Puesto: </strong>" + rs.getString("no_puesto"));
+                rec.put("direccion", "<strong> Dirección: </strong> " + rs.getString("no_direccion") + " <strong>Area: </strong>" + rs.getString("no_dep") + "<strong> Departamento:</strong> " + rs.getString("no_area") + " <strong>Sección: </strong>" + rs.getString("no_seccion") + " <strong>Puesto: </strong>" + rs.getString("no_puesto"));
                 Lista.add(rec);
             }
             rs.close();
