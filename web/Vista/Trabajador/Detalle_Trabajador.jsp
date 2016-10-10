@@ -374,7 +374,7 @@
                                         int vnc = Integer.parseInt(request.getParameter("vnc"));
                                         if (vnc > 0) {
                                 %>
-                        <button class="btn btn-labeled btn-success btn-autor" type="submit">
+                        <button class="btn btn-labeled btn-success btn-autor" type="button">
                             <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>PROCESAR  </button>
                                 <%
                                     }
@@ -615,22 +615,6 @@
         -->
 
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
-
-
-        <!-- PAGE RELATED PLUGIN(S)
-         <script src="../../js/plugin/maxlength/bootstrap-maxlength.min.js"></script>
-         <script src="../../js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
-         <script src="../../js/plugin/clockpicker/clockpicker.min.js"></script>
-         <script src="../../js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js"></script>
-         <script src="../../js/plugin/noUiSlider/jquery.nouislider.min.js"></script>
-         <script src="../../js/plugin/ion-slider/ion.rangeSlider.min.js"></script>
-         <script src="../../js/plugin/colorpicker/bootstrap-colorpicker.min.js"></script>
-         <script src="../../js/plugin/knob/jquery.knob.min.js"></script>
-         <script src="../../js/plugin/x-editable/moment.min.js"></script>
-         <script src="../../js/plugin/x-editable/jquery.mockjax.min.js"></script>
-         <script src="../../js/plugin/x-editable/x-editable.min.js"></script>
-         <script src="../../js/plugin/typeahead/typeahead.min.js"></script>
-         <script src="../../js/plugin/typeahead/typeaheadjs.min.js"></script> -->
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script src="../../js/shadowbox/shadowbox.js" type="text/javascript"></script>
@@ -682,12 +666,21 @@
                         $(".btn-autor").click(function (e) {
                             $.SmartMessageBox({
                                 title: "¡Alerta de Confirmación!",
-                                content: "¿Está totalmente seguro de autorizar este requerimiento123?",
+                                content: "¿Está totalmente seguro de autorizar este requerimiento?",
                                 buttons: '[No][Si]'
                             }, function (ButtonPressed) {
                                 if (ButtonPressed === "Si") {
-                                    $(".form-aut").submit();
-                                    window.parent.sendOk();
+                                    //$(".form-aut").submit();
+                                    $.ajax({url: "../../autorizacion",
+                                        data: $(".form-aut").serialize(),
+                                        type: 'POST',
+                                        success: function (data, textStatus, jqXHR) {
+                                            if (data.rpta) {
+                                                window.parent.UpdateNotifications();
+                                                window.parent.sendMessage();
+                                                window.location.href="../Dgp/Autorizar_Requerimiento.jsp?r=ok";
+                                            }
+                                        }});
                                 }
                                 if (ButtonPressed === "No") {
                                     return false;
@@ -783,8 +776,8 @@
                     buttons: '[No][Si]'
                 }, function (ButtonPressed) {
                     if (ButtonPressed === "Si") {
-                        window.parent.sendOk();
-                        parent.sendOk();
+                        //   window.parent.sendOk();
+                        // parent.sendOk();
                         $(".form-aut").submit();
                         //window.sendMessage();
                         //window.parent.websocket.send("texto");

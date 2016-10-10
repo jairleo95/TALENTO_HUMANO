@@ -671,12 +671,16 @@
         }
         /*WEBSOCKET*/
         var websocket = new WebSocket("ws://" + document.location.host + "/TALENTO_HUMANO/serverGth");
-        websocket.onmessage = function processMessage(message) {
-            console.log(message.data)
-            if (message.data !== null) {
-                if (message.data) {
+
+        websocket.onopen = function openConnection() {
+            websocket.send("Hi");
+        }
+        websocket.onmessage = function processMessage(request) {
+            var data = JSON.parse(request.data);
+            console.log(data);
+            if (data.data !== null) {
+                if (data.message === "Autorizacion") {
                     UpdateNotifications();
-                } else {
                     $.smallBox({
                         title: "Se ha autorizado un requerimiento...",
                         content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
@@ -684,18 +688,18 @@
                         iconSmall: "fa fa-thumbs-up bounce animated",
                         timeout: 4000
                     });
+                } else {
+
                 }
 
                 // messagesTextArea.value += jsonData.message + "\n";
             }
         }
         function sendMessage() {
-            websocket.send("mensaje");
+            websocket.send("Autorizacion");
 
         }
-        function sendOk() {
-            websocket.send("ok");
-        }
+
         document.getElementById('myframe').onload = function () {
             /*$(".iframe_principal").show(250);
              $(".animacion_load").empty();*/
@@ -708,7 +712,7 @@
             });
         }
         function UpdateNotifications() {
-            console.log("aqui");
+            //console.log("aqui");
             var page = "cnot";
             $.post(page, {
                 op: 5

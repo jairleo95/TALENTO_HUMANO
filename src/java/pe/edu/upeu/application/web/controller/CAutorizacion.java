@@ -128,7 +128,8 @@ public class CAutorizacion extends HttpServlet {
                         notdao.Registrar(not);
                         sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
-                        response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
+                       /* response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");*/
+                        rpta.put("rpta", true);
                     }
                     if (opc.equals("AceptarMasivo")) {
                         String iddgp = request.getParameter("IDDETALLE_DGP");
@@ -263,7 +264,7 @@ public class CAutorizacion extends HttpServlet {
                         if (idrol.trim().equals("ROL-0009")) {
                             int val_aps = val_aps = e.val_cod_aps_empleado(idtr);
                             if (val_aps > 0) {
-                                html = "<button class='btn btn-labeled btn-success btn-autor' type='submit'>"
+                                html = "<button class='btn btn-labeled btn-success btn-autor' type='button'>"
                                         + "                            <span class='btn-label'><i class='glyphicon glyphicon-ok'></i></span>PROCESAR REQUERIMIENTO "
                                         + "                        </button>";
                             } else {
@@ -272,7 +273,7 @@ public class CAutorizacion extends HttpServlet {
                         } else if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {
                             int val_huella = e.val_cod_huella(idtr);
                             if (val_huella > 0) {
-                                html = "<button class='btn btn-labeled btn-success btn-autor' type='submit'>"
+                                html = "<button class='btn btn-labeled btn-success btn-autor' type='button'>"
                                         + "                            <span class='btn-label'><i class='glyphicon glyphicon-ok'></i></span>AUTORIZAR REQUERIMIENTO "
                                         + "                        </button>";
 
@@ -280,7 +281,7 @@ public class CAutorizacion extends HttpServlet {
                                 html = "<div class='alert alert-warning fade in'><i class='fa-fw fa fa-warning'></i><strong>Atención!</strong> Usted no puede <strong>AUTORIZAR</strong> el requerimiento, debe primero registrar el <strong>Código de Huella Digital</strong>.</div>";
                             }
                         } else {
-                            html = "<button class='btn btn-labeled btn-success btn-autor' type='submit'>"
+                            html = "<button class='btn btn-labeled btn-success btn-autor' type='button'>"
                                     + "                            <span class='btn-label'><i class='glyphicon glyphicon-ok'></i></span>AUTORIZAR REQUERIMIENTO "
                                     + "                        </button>";
                         }
