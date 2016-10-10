@@ -27,6 +27,7 @@ public class FactoryConnectionDB {
     public static String[] configORACLE = {"procesosrh", "rrhh", "192.168.21.4", "1521", "xe"};
 
     public static final String url = "http://localhost:8082/TALENTO_HUMANO/Archivo/";
+    //public static final String url = "E:\\Projects\\TH\\th 1\\TALENTO_HUMANO\\web\\Archivo";  ESTE URL CAMBIA DE ACUERDO A LA MAQUINA
     public static final String url_archivos = "http://localhost:8082/TALENTO_HUMANO/Archivo/";
 
     //  public static String[] configORACLE = {"procesosrh", "rrhh", "procesrh-db.upeu", "1521", "upeu"};
