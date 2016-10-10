@@ -19,4 +19,6 @@ public interface InterfaceNotificationDAO {
     public List<Notification> List_Notifications();
     public void visualizado(String id);
     public void leido(String id);
+    public int CountUnreadAuthorized();
+    public int CountUnreadUnAuthorized();
 }

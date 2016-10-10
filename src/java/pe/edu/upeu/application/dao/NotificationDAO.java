@@ -61,7 +61,7 @@ public class NotificationDAO implements InterfaceNotificationDAO {
         List<Notification> list = new ArrayList<Notification>();
         try {
             rs = this.conn.query(sql);
-            
+
             while (rs.next()) {
                 Notification n = new Notification();
                 n.setId_notification(rs.getString("id_notification"));
@@ -85,6 +85,46 @@ public class NotificationDAO implements InterfaceNotificationDAO {
         return list;
     }
 
+    @Override
+    public int CountUnreadAuthorized() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        sql = "select count(*) as nuevas from RHTV_NOTIFICATION where ES_VISUALIZADO=0 and TIPO_NOTIFICATION=1 order by FECHA_REG desc";
+        int n=0;
+        try {
+            rs = this.conn.query(sql);
+            while (rs.next()) {
+                n = Integer.parseInt(rs.getString("nuevas"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
+        } finally {
+            this.conn.close();
+        }
+        return n;
+    }
+
+    @Override
+    public int CountUnreadUnAuthorized() {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        sql = "select count(*) as nuevas from RHTV_NOTIFICATION where ES_VISUALIZADO=0 and TIPO_NOTIFICATION=0 order by FECHA_REG desc";
+        int n=0;
+        try {
+            rs = this.conn.query(sql);
+            while (rs.next()) {
+                n = Integer.parseInt(rs.getString("nuevas"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
+        } finally {
+            this.conn.close();
+        }
+        return n;
+    }
+    
     @Override
     public List<Map<String, ?>> List_Notifications_json() {
         List<Map<String, ?>> list = new ArrayList<Map<String, ?>>();
@@ -122,7 +162,7 @@ public class NotificationDAO implements InterfaceNotificationDAO {
 
     @Override
     public void visualizado(String id) {
-        
+
         sql = "{CALL RHSP_UPDATE_VIS_NOTIFICATION (?)}";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);

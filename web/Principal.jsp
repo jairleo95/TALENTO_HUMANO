@@ -92,7 +92,7 @@
 
                 <!-- Note: The activity badge color changes when clicked and resets the number to 0
                 Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
-                <span id="activity" class="activity-dropdown hola2"> <i class="fa fa-user"></i> <b class="badge"> 21 </b> </span>
+                <span id="activity" class="activity-dropdown hola2"> <i class="fa fa-user"></i> <b class="badge total"> 0 </b> </span>
 
                 <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
                 <div class="ajax-dropdown">
@@ -672,11 +672,10 @@
         /*WEBSOCKET*/
         var websocket = new WebSocket("ws://" + document.location.host + "/TALENTO_HUMANO/serverGth");
         websocket.onmessage = function processMessage(message) {
-            var jsonData = JSON.parse(message.data);
-            if (jsonData.message !== null) {
-                if (jsonData.message == "ok") {
-                    listAjaxNotification();
-                    alert("hola");
+            console.log(message.data)
+            if (message.data !== null) {
+                if (message.data) {
+                    UpdateNotifications();
                 } else {
                     $.smallBox({
                         title: "Se ha autorizado un requerimiento...",
@@ -708,9 +707,32 @@
                 op: 2
             });
         }
+        function UpdateNotifications() {
+            console.log("aqui");
+            var page = "cnot";
+            $.post(page, {
+                op: 5
+            }, function (objson) {
+                var rpta = objson.rpta;
+                if (rpta === "1") {
+                    var si = parseInt(objson.si);
+                    var no = parseInt(objson.no);
+                    var total = si + no;
+                    if (total !== 0) {
+                        $(".autorizacionList").empty();
+                        $(".autorizacionList").append("Autori... (" + si + ") ");
+                        $(".rechazarList").empty();
+                        $(".rechazarList").append("Rechazados (" + no + ") ");
+                        $(".total").empty();
+                        $(".total").append(total);
+                        $(".total").addClass("bg-color-red");
+                    }
+                }
+            });
+        }
         var ii = 0;
         function listAjaxNotification(objOption) {
-            console.log("enter to listAjax")
+            console.log("enter to listAjax");
             if (typeof objOption !== 'undefined') {
                 objOption.parent().find("label").removeClass("active");
             }
@@ -901,15 +923,13 @@
                 }});
 
         }
-        function listAjaxNotificationPoraut() {
-            $(".poraut").empty();
-        }
 
 
         $(document).ready(function () {
-            var idtra = $('#id_trabajador').val()
+            var idtra = $('#id_trabajador').val();
             getAvatar("perfil", idtra);
             pageSetUp();
+            UpdateNotifications();
             // alert('<%="Maximum Inactive Interval of Session in Seconds is : " + sesion.getMaxInactiveInterval() / 60%>');
             $(".menu-item-parent").parent().click(function () {
                 $(".titulo_menu").text(" " + $(this).text());

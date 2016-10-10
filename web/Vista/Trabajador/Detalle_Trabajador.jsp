@@ -672,6 +672,35 @@
                 counterType: "skip"
             });
         }
+        function ValBtnAutorizarDgp(trabajador, divBotones) {
+            divBotones.empty();
+            alert("hcsrgrt");
+            $.ajax({
+                url: "../../autorizacion", data: "opc=ValBtnAutorizacion&trabajador=" + trabajador, type: 'POST', success: function (data, textStatus, jqXHR) {
+                    if (data.rpta === "1") {
+                        divBotones.append(data.data);
+                        $(".btn-autor").click(function (e) {
+                            $.SmartMessageBox({
+                                title: "¡Alerta de Confirmación!",
+                                content: "¿Está totalmente seguro de autorizar este requerimiento123?",
+                                buttons: '[No][Si]'
+                            }, function (ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+                                    $(".form-aut").submit();
+                                    window.parent.sendOk();
+                                }
+                                if (ButtonPressed === "No") {
+                                    return false;
+                                }
+                            });
+                            e.preventDefault();
+                        });
+                    } else {
+                        /*error*/
+                    }
+                }
+            });
+        }
         $(document).ready(function () {
             getAvatar("perfil", idtrl);
             getAvatar("todo", idtrl);
@@ -758,7 +787,7 @@
                         parent.sendOk();
                         $(".form-aut").submit();
                         //window.sendMessage();
-                       //window.parent.websocket.send("texto");
+                        //window.parent.websocket.send("texto");
                     }
                     if (ButtonPressed === "No") {
                         return false;

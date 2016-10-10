@@ -90,6 +90,22 @@ public class CNotification extends HttpServlet {
                     System.out.println("Error por aca " + ex);
                 }
                 break;
+            case 5:
+                try{
+                    int n=notdao.CountUnreadAuthorized();
+                    int no=notdao.CountUnreadUnAuthorized();
+                    rpta.put("rpta", "1");
+                    rpta.put("si", n);
+                    rpta.put("no", no);
+                }catch(Exception ex){
+                    rpta.put("rpta", "-1");
+                    rpta.put("mensaje", ex.getMessage());
+                }
+                gson = new Gson();
+                out.print(gson.toJson(rpta));
+                out.flush();
+                out.close();
+                break;
         }
     }
 
