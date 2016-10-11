@@ -167,14 +167,17 @@
 
                                                 <thead>
                                                 <center>
-                                                    <tr>
-
-                                                        <th class="cajita"  style="text-align:center;" align="center">ADJUNTAR</th>   
-                                                        <th class="cajita"  style="text-align:center;" align="center">DESCRIPCION</th>   
-                                                        <th class="cajita"  style="text-align:center;" align="center">ACCION</th>   
-                                                    </tr>
+                                                    <div class=" container-fluid cajita" style=" font: oblique bold 100%  sans-serif ; margin-top: 8px;margin-bottom: -5px;">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cajita">
+                                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita"  style="text-align:center;" align="center">ADJUNTAR, DESCRIPCION Y ACCION </div>   
+                                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita"   style="text-align:center;" align="center">ADJUNTAR, DESCRIPCION Y ACCION</div>   
+                                                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita"   style="text-align:center;" align="center">ADJUNTAR, DESCRIPCION Y ACCION</div>   
+                                                    </div>
+                                                    </div>
                                                 </center>
                                                 </thead>
+                                                
+                                               <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 "> 
                                                 <tbody>
                                                     <% int i = 0;
                                                         for (int z = 0; z < Lis_doc_trabajador.size(); z++) {
@@ -184,13 +187,11 @@
 
                                                     <%  if (d.getTi_documento().trim().equals("DOCA")) {%>
                                                     <%  if (n_nac != 0) {%>
-                                                    <tr>
-
-
-
-                                                        <td  style="width:50%;" align="center">
+                                                                                                       
+                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                                        <td    style="width: 40%;" align="center">
                                                             <table class="table table-striped ">
-                                                                <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong><%=d.getNo_documento()%></strong></td></tr>
+                                                                <tr><td align="center" style="border:1px solid;border-color: purple; height:50px;"><strong><%=d.getNo_documento()%></strong></td></tr>
                                                                 <tr>
                                                                     <td class="caji<%=(i + 1)%>" align="center"><% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                         <div class="form-group">
@@ -208,10 +209,11 @@
                                                                     </td>
                                                                 </tr>
                                                             </table>
-                                                        </td>
+                                                      <!--  </td>
 
-                                                        <td  style="text-align:center;" align="center">
-
+                                                        <td  style="text-align:center;" align="center">-->
+                                                          <div style="margin-top:-15px;">
+                                                      <section  class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
                                                             <label>DESCRIPCION:</label><BR>
                                                             <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                             <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -222,37 +224,37 @@
                                                             <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
 
                                                             <% }
-                                                                } %>
+                                                                } %> 
                                                             <%if (d.getEs_documento_adjunto() == null) {%>
-                                                            <section class="col col-10" style="text-align:center;" align="center">
+                                                           
+                                                            </section></div>
                                                                 <%}%>
+                                                                <div>
                                                                 <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                 <a type="button"  class="btn btn-danger btn-sm btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                                 <%} else {
                                                                         out.print("");
                                                                     }%>
-                                                        </td>
+                                                                    </div</td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
                                                 </tr>  
-
-
 
 
                                                 <%}
                                                     }%>
                                                 <%  if (d.getTi_documento().trim().equals("COFE")) {%>
                                                 <%  if (num_ad != 0) {%>
-                                                <tr >
+                                                
+                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
 
-
-                                                    <td style="width:50%;" align="center">
+                                                    <td  style="width: 40%;" align="center">
                                                         <table class="table table-striped ">
-                                                            <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong><%=d.getNo_documento()%></strong></td></tr>
+                                                            <tr><td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107);height:50px;"><strong><%=d.getNo_documento()%></strong></td></tr>
                                                             <tr>
                                                                 <td class="caji<%=(i + 1)%>" align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" size="500000" >
+                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" size="00" >
                                                                     </div>
                                                                     <% } else { %>
                                                                     <% if (d.getId_documento_adjunto() == null) { %>
@@ -267,9 +269,11 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                    </td>
+                                                   <!-- </td>
 
-                                                    <td  style="text-align:center;" align="center">
+                                                    <td  style="text-align:center;" align="center">-->
+                                                   
+                                                        <div style="margin-top:-15px;" >
                                                         <label>DESCRIPCION:</label><BR>
                                                         <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -282,10 +286,10 @@
                                                         <% } %>
                                                         <% } %> 
                                                         <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        <section class="col col-10" style="text-align:center;" align="center">
+                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
                                                             <%}%>
                                                             <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i>¿RECIBIDO EN FISICO?:</label>
+                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px; margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i>¿RECIBIDO EN FISICO?:</label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
 
@@ -305,16 +309,17 @@
                                                                     }
                                                                 }%>
                                                             <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        </section >
+                                                        </section></div>
                                                         <%}%>
-                                                    </td>
-                                                    <td  style="text-align:center;" align="center">
+                                                   <!-- </td>
+                                                    <td  style="text-align:center;" align="center">-->
+                                                   <div style="text-align:center;" align="center"> 
                                                         <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
                                                         <a type="button"  class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
                                                             }%>
-                                                    </td>
+                                                   </div> </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
                                                 </tr>  
 
@@ -331,11 +336,11 @@
                                                 %>             
 
 
-                                                <tr>
-                                                    <td  style="width:50%;" align="center">
-                                                        <table class="table table-striped">
-                                                            <tr>
-                                                                <td align="center" style="border:1px solid;border-color: #D2691E;">
+                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 "  >
+                                                    <td  style="width: 40%;" align="center" >
+                                                        <table class="table table-striped" style="margin-top: -39px;" >
+                                                            <tr style="padding: 0px;">
+                                                                <td align="center" style="border:1px solid;border-color:  purple rgb(101, 89, 107);">
                                                                     <strong><%  if (d.getTi_documento().trim().equals("ACMA")) {
                                                                             out.println("ACTA DE MATRIMONIO CON: <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
                                                                         }
@@ -363,9 +368,10 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                    </td>
+                                                 <!--   </td>
 
-                                                    <td  style="text-align:center;" align="center">
+                                                    <td  style="text-align:center;" align="center">-->
+                                                        <div style="margin-top:-15px;">
                                                         <label>DESCRIPCION:</label><BR>
                                                         <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -378,17 +384,17 @@
                                                         <% } %>
                                                         <% } %>   
                                                         <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        <section class="col col-10" style="text-align:center;" align="center">
+                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px;margin-top:-4px; " align="center">
                                                             <%}%>
                                                             <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i>¿RECIBIDO EN FISICO?:</label>
+                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:40px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i>¿RECIBIDO EN FISICO?:</label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
 
-                                                            <label class="null">¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
+                                                            <div> <label class="null">¿RECIBIDO EN FISICO?:<BR>No Registrado</label></div></section>
                                                                 <% } else { %>
                                                             <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
-                                                                ¿RECIBIDO EN FISICO?:<BR> <img src="Aprobado.png" width="20" height="20">
+                                                                ¿RECIBIDO EN FISICO?:<BR> <img  src="Aprobado.png" width="20" height="20">
                                                                 <%
                                                                 } else {
 
@@ -399,16 +405,17 @@
                                                                     }
                                                                 }%>
                                                             <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        </section >
+                                                        
                                                         <%}%>
-                                                    </td>
-                                                    <td  style="text-align:center;" align="center">
-                                                        <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
+                                                  <!--  </td>
+                                                    <td  style="text-align:center;" align="center">-->
+                                                    <div style="text-align:center;" align="center">  
+                                                      <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
                                                         <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
-                                                            }%>
-                                                    </td>
+                                                        }%></div>
+                                                             </div> </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
                                                 </tr>  
 
@@ -426,10 +433,10 @@
                                                             if (d.getId_datos_hijo() == null) {
                                                 %>
 
-                                                <tr>
-                                                    <td  style="width:50%;" align="center">
+                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
+                                                    <td   style="width: 40%;" align="center">
                                                         <table class="table table-striped ">
-                                                            <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
+                                                            <tr><td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107);height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
                                                             <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                     <div class="form-group">
@@ -449,9 +456,10 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                    </td>
+                                                 <!--   </td>
 
-                                                    <td  style="text-align:center;" align="center">
+                                                    <td  style="text-align:center;" align="center">-->
+                                                      <div style="margin-top:-15px;" >
                                                         <label>DESCRIPCION:</label><BR>
                                                         <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -464,10 +472,10 @@
                                                         <% } %>
                                                         <% } %>    
                                                         <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        <section class="col col-10" style="text-align:center;" align="center">
+                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
                                                             <%}%>
                                                             <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
 
@@ -486,16 +494,17 @@
                                                                     }
                                                                 }%>
                                                             <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        </section>
+                                                        </section></div>
                                                         <%}%>
-                                                    </td>
-                                                    <td  style="text-align:center;" align="center">
+                                                  <!--  </td>
+                                                    <td  style="text-align:center;" align="center">-->
+                                                  <div style="text-align:center;" align="center"> 
                                                         <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
-                                                        <a type="button"  class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                        <a type="button" style="float: right" class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
                                                             }%>
-                                                    </td>
+                                                  </div> </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
                                                 </tr>  
 
@@ -507,10 +516,10 @@
                                                     if (h.getVal_doc() > 0 & d.getId_datos_hijo().equals(h.getId_datos_hijos_trabajador().trim())) {
                                                         //   i++;
 %>
-                                                <tr>
-                                                    <td  style="width:50%;" align="center">
+                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
+                                                    <td  style="width:40%;" align="center">
                                                         <table class="table table-striped ">
-                                                            <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
+                                                            <tr><td align="center" style="border:1px solid;border-color:  purple rgb(101, 89, 107); height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
                                                             <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                     <div class="form-group">
@@ -530,9 +539,10 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                    </td>
+                                                <!--    </td>
 
-                                                    <td  style="text-align:center;" align="center">
+                                                    <td  style="text-align:center;" align="center">-->
+                                                    <div style="margin-top:-15px;">
                                                         <label>DESCRIPCION:</label><BR>
                                                         <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -545,10 +555,10 @@
                                                         <% } %>
                                                         <% } %>    
                                                         <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        <section class="col col-10" style="text-align:center;" align="center">
+                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
                                                             <%}%>
                                                             <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
 
@@ -567,16 +577,17 @@
                                                                     }
                                                                 }%>
                                                             <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        </section>
+                                                        </section></div>
                                                         <%}%>
-                                                    </td>
-                                                    <td  style="text-align:center;" align="center">
+                                                  <!--  </td>
+                                                    <td  style="text-align:center;" align="center">-->
+                                                  <div style="text-align:center;" align="center"> 
                                                         <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
-                                                        <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                        <a type="button"   class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
                                                             }%>
-                                                    </td>
+                                                  </div> </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
                                                 </tr>  
 
@@ -585,10 +596,10 @@
                                                 } else if (h.getVal_doc() == 0 & !id_hijo_faltante.equals(h.getId_datos_hijos_trabajador())) {
                                                     // out.print(kk);
 %>
-                                                <tr>
-                                                    <td  style="width:50%;" align="center"> 
+                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
+                                                    <td style="width: 40%;" align="center"> 
                                                         <table class="table table-striped ">
-                                                            <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
+                                                            <tr><td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107); height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
                                                             <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                     <% if ((permissionEditDocument)) {%>
                                                                     <div class="form-group">
@@ -601,9 +612,10 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                    </td>
+                                                  <!-- </td>
 
-                                                    <td  style="text-align:center;" align="center">
+                                                    <td  style="text-align:center;" align="center">-->
+                                                      <div style="margin-top:-15px;">
                                                         <label>DESCRIPCION:</label><BR>
                                                         <% if ((permissionEditDocument)) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -612,13 +624,14 @@
                                                         <% } %> 
 
 
-                                                        <section class="col col-10" style="text-align:center;" align="center">
+                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px;" align="center">
                                                             <% if ((permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
                                                                 <% } else {%>
                                                             <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
                                                                 <% }%>
                                                         </section>
+                                                     </div>
                                                     </td>
                                                     <td  style="text-align:center;" align="center">
                                                     </td>
@@ -636,11 +649,11 @@
 
                                                 <%} else if (!d.getTi_documento().trim().equals("DNIH") & !d.getTi_documento().trim().equals("DNIC") & !d.getTi_documento().trim().equals("ACMA") & !d.getTi_documento().trim().equals("COFE") & !d.getTi_documento().trim().equals("DOCA")) {
                                                 %>
-                                                <tr>
+                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6" >
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
-                                                <td  style="width:50%;" align="center">
+                                                <td style="width: 36%;" align="center">
                                                     <table class="table table-striped ">
-                                                        <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong><%=d.getNo_documento()%></strong></td></tr>
+                                                        <tr><td align="center" style="border:1px solid;border-color:  purple rgb(101, 89, 107); height:50px;"><strong><%=d.getNo_documento()%></strong></td></tr>
                                                         <tr><td class="caji<%=(i + 1)%>" align="center"> <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                 <div class="form-group">
                                                                     <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" size="500" name="archivos<%=(i + 1)%>" >
@@ -657,11 +670,12 @@
                                                                 <% }
                                                                     } %></td></tr>
                                                     </table>
-                                                </td>
+                                               <!-- </td>
 
 
 
-                                                <td  style="text-align:center;" align="center">
+                                                <td  style="text-align:center;" align="center">-->
+                                               <div style="margin-top:-15px;" >
                                                     <label>DESCRIPCION:</label><BR>
                                                     <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                     <input type="text"   name="lob_description<%=i + 1%>"><BR><BR>
@@ -676,10 +690,10 @@
                                                     <% } %>
                                                     <% } %>  
                                                     <%if (d.getEs_documento_adjunto() == null) {%>
-                                                    <section class="col col-10" style="text-align:center;" align="center">
+                                                    <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
                                                         <%}%>
                                                         <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                        <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                        <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
                                                             <% } else { %>
                                                             <% if (d.getEs_documento_adjunto() == null) { %>
 
@@ -697,10 +711,11 @@
                                                                 }
                                                             }%>
                                                         <%if (d.getEs_documento_adjunto() == null) {%>
-                                                    </section>
+                                                    </section></div>
                                                     <%}%>
-                                                </td>
-                                                <td  style="text-align:center;" align="center">
+                                             <!--   </td>
+                                                <td  style="text-align:center;" align="center">-->
+                                             <div style="text-align:center;" align="center"> 
                                                     <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
                                                     <%if (request.getParameter("P2") == null & request.getParameter("pro") == null) {
                                                     %>
@@ -713,7 +728,8 @@
                                                     <%} else {
                                                             out.print("");
                                                         }%>
-                                                </td>
+                                             </div>
+                                             </td>
                                                 </tr>  
                                                 <input type="hidden" name="iddgp" value="<%=d.getId_dgp()%>">
                                                 <input type="hidden" name="idctr" value="<%=request.getParameter("idctr")%>">
@@ -737,7 +753,7 @@
                                                         <%}%>
                                                         <%}%>
                                                 </tbody>
-
+                                               </section>
                                             </table>
                                             <footer>
                                                 <%
