@@ -61,6 +61,7 @@
         <link rel="apple-touch-icon" sizes="120x120" href="../../../img/splash/touch-icon-iphone-retina.png">
         <link rel="apple-touch-icon" sizes="152x152" href="../../../img/splash/touch-icon-ipad-retina.png">
 
+
         <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -69,7 +70,7 @@
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        <link rel="stylesheet" type="text/css" href="../../../js/shadowbox/shadowbox.css"/>
+        <!--        <link rel="stylesheet" type="text/css" href="../../../js/shadowbox/shadowbox.css"/>-->
 
     </head>
 
@@ -159,7 +160,7 @@
                                     <div class="widget-body no-padding">
 
 
-                                        <form action="../../../documento_trabajador" method="post" enctype="multipart/form-data" class="smart-form"  >
+                                        <form action="../../../documento_trabajador" method="post" enctype="multipart/form-data" class="smart-form formDocument"  >
 
 
 
@@ -167,14 +168,17 @@
 
                                                 <thead>
                                                 <center>
-                                                    <tr>
-
-                                                        <th class="cajita"  style="text-align:center;" align="center">ADJUNTAR</th>   
-                                                        <th class="cajita"  style="text-align:center;" align="center">DESCRIPCION</th>   
-                                                        <th class="cajita"  style="text-align:center;" align="center">ACCION</th>   
-                                                    </tr>
+                                                    <div class=" container-fluid cajita" style=" font: oblique bold 100%  sans-serif ; margin-top: 8px;margin-bottom: -5px;">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cajita">
+                                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita"  style="text-align:center;" align="center">ADJUNTAR, DESCRIPCION Y ACCION </div>   
+                                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita"   style="text-align:center;" align="center">ADJUNTAR, DESCRIPCION Y ACCION</div>   
+                                                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita"   style="text-align:center;" align="center">ADJUNTAR, DESCRIPCION Y ACCION</div>   
+                                                    </div>
+                                                    </div>
                                                 </center>
                                                 </thead>
+                                                
+                                               <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 "> 
                                                 <tbody>
                                                     <% int i = 0;
                                                         for (int z = 0; z < Lis_doc_trabajador.size(); z++) {
@@ -184,17 +188,15 @@
 
                                                     <%  if (d.getTi_documento().trim().equals("DOCA")) {%>
                                                     <%  if (n_nac != 0) {%>
-                                                    <tr>
-
-
-
-                                                        <td  style="width:50%;" align="center">
+                                                                                                       
+                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                                        <td    style="width: 40%;" align="center">
                                                             <table class="table table-striped ">
-                                                                <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong><%=d.getNo_documento()%></strong></td></tr>
+                                                                <tr><td align="center" style="border:1px solid;border-color: purple; height:50px;"><strong><%=d.getNo_documento()%></strong></td></tr>
                                                                 <tr>
                                                                     <td class="caji<%=(i + 1)%>" align="center"><% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                         <div class="form-group">
-                                                                            <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" size="500" >
+                                                                            <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" size="500" >
                                                                         </div>
                                                                         <% } else { %>
                                                                         <% if (d.getId_documento_adjunto() == null) { %>
@@ -208,10 +210,11 @@
                                                                     </td>
                                                                 </tr>
                                                             </table>
-                                                        </td>
+                                                      <!--  </td>
 
-                                                        <td  style="text-align:center;" align="center">
-
+                                                        <td  style="text-align:center;" align="center">-->
+                                                          <div style="margin-top:-15px;">
+                                                      <section  class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
                                                             <label>DESCRIPCION:</label><BR>
                                                             <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                             <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -222,37 +225,37 @@
                                                             <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
 
                                                             <% }
-                                                                } %>
+                                                                } %> 
                                                             <%if (d.getEs_documento_adjunto() == null) {%>
-                                                            <section class="col col-10" style="text-align:center;" align="center">
+                                                           
+                                                            </section></div>
                                                                 <%}%>
+                                                                <div>
                                                                 <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                 <a type="button"  class="btn btn-danger btn-sm btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                                 <%} else {
                                                                         out.print("");
                                                                     }%>
-                                                        </td>
+                                                                    </div</td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
                                                 </tr>  
-
-
 
 
                                                 <%}
                                                     }%>
                                                 <%  if (d.getTi_documento().trim().equals("COFE")) {%>
                                                 <%  if (num_ad != 0) {%>
-                                                <tr >
+                                                
+                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
 
-
-                                                    <td style="width:50%;" align="center">
+                                                    <td  style="width: 40%;" align="center">
                                                         <table class="table table-striped ">
-                                                            <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong><%=d.getNo_documento()%></strong></td></tr>
+                                                            <tr><td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107);height:50px;"><strong><%=d.getNo_documento()%></strong></td></tr>
                                                             <tr>
                                                                 <td class="caji<%=(i + 1)%>" align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" size="500000" >
+                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" size="500000" >
                                                                     </div>
                                                                     <% } else { %>
                                                                     <% if (d.getId_documento_adjunto() == null) { %>
@@ -267,9 +270,11 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                    </td>
+                                                   <!-- </td>
 
-                                                    <td  style="text-align:center;" align="center">
+                                                    <td  style="text-align:center;" align="center">-->
+                                                   
+                                                        <div style="margin-top:-15px;" >
                                                         <label>DESCRIPCION:</label><BR>
                                                         <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -282,10 +287,10 @@
                                                         <% } %>
                                                         <% } %> 
                                                         <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        <section class="col col-10" style="text-align:center;" align="center">
+                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
                                                             <%}%>
                                                             <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i>¿RECIBIDO EN FISICO?:</label>
+                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px; margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i>¿RECIBIDO EN FISICO?:</label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
 
@@ -305,16 +310,17 @@
                                                                     }
                                                                 }%>
                                                             <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        </section >
+                                                        </section></div>
                                                         <%}%>
-                                                    </td>
-                                                    <td  style="text-align:center;" align="center">
+                                                   <!-- </td>
+                                                    <td  style="text-align:center;" align="center">-->
+                                                   <div style="text-align:center;" align="center"> 
                                                         <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
                                                         <a type="button"  class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
                                                             }%>
-                                                    </td>
+                                                   </div> </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
                                                 </tr>  
 
@@ -331,11 +337,11 @@
                                                 %>             
 
 
-                                                <tr>
-                                                    <td  style="width:50%;" align="center">
-                                                        <table class="table table-striped">
-                                                            <tr>
-                                                                <td align="center" style="border:1px solid;border-color: #D2691E;">
+                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 "  >
+                                                    <td  style="width: 40%;" align="center" >
+                                                        <table class="table table-striped" style="margin-top: -39px;" >
+                                                            <tr style="padding: 0px;">
+                                                                <td align="center" style="border:1px solid;border-color:  purple rgb(101, 89, 107);">
                                                                     <strong><%  if (d.getTi_documento().trim().equals("ACMA")) {
                                                                             out.println("ACTA DE MATRIMONIO CON: <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
                                                                         }
@@ -349,7 +355,7 @@
                                                                 <td class="caji<%=(i + 1)%>" align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
                                                                     </div>
                                                                     <% } else { %>
                                                                     <% if (d.getId_documento_adjunto() == null) { %>
@@ -363,9 +369,10 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                    </td>
+                                                 <!--   </td>
 
-                                                    <td  style="text-align:center;" align="center">
+                                                    <td  style="text-align:center;" align="center">-->
+                                                        <div style="margin-top:-15px;">
                                                         <label>DESCRIPCION:</label><BR>
                                                         <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -378,17 +385,17 @@
                                                         <% } %>
                                                         <% } %>   
                                                         <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        <section class="col col-10" style="text-align:center;" align="center">
+                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px;margin-top:-4px; " align="center">
                                                             <%}%>
                                                             <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i>¿RECIBIDO EN FISICO?:</label>
+                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:40px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i>¿RECIBIDO EN FISICO?:</label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
 
-                                                            <label class="null">¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
+                                                            <div> <label class="null">¿RECIBIDO EN FISICO?:<BR>No Registrado</label></div></section>
                                                                 <% } else { %>
                                                             <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
-                                                                ¿RECIBIDO EN FISICO?:<BR> <img src="Aprobado.png" width="20" height="20">
+                                                                ¿RECIBIDO EN FISICO?:<BR> <img  src="Aprobado.png" width="20" height="20">
                                                                 <%
                                                                 } else {
 
@@ -399,16 +406,17 @@
                                                                     }
                                                                 }%>
                                                             <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        </section >
+                                                        
                                                         <%}%>
-                                                    </td>
-                                                    <td  style="text-align:center;" align="center">
-                                                        <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
+                                                  <!--  </td>
+                                                    <td  style="text-align:center;" align="center">-->
+                                                    <div style="text-align:center;" align="center">  
+                                                      <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
                                                         <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
-                                                            }%>
-                                                    </td>
+                                                        }%></div>
+                                                             </div> </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
                                                 </tr>  
 
@@ -426,14 +434,14 @@
                                                             if (d.getId_datos_hijo() == null) {
                                                 %>
 
-                                                <tr>
-                                                    <td  style="width:50%;" align="center">
+                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
+                                                    <td   style="width: 40%;" align="center">
                                                         <table class="table table-striped ">
-                                                            <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
+                                                            <tr><td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107);height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
                                                             <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" size="500"  name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" size="500"  name="archivos<%=(i + 1)%>" >
                                                                         <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
                                                                     </div>
                                                                     <% } else { %>
@@ -449,9 +457,10 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                    </td>
+                                                 <!--   </td>
 
-                                                    <td  style="text-align:center;" align="center">
+                                                    <td  style="text-align:center;" align="center">-->
+                                                      <div style="margin-top:-15px;" >
                                                         <label>DESCRIPCION:</label><BR>
                                                         <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -464,10 +473,10 @@
                                                         <% } %>
                                                         <% } %>    
                                                         <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        <section class="col col-10" style="text-align:center;" align="center">
+                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
                                                             <%}%>
                                                             <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
 
@@ -486,16 +495,17 @@
                                                                     }
                                                                 }%>
                                                             <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        </section>
+                                                        </section></div>
                                                         <%}%>
-                                                    </td>
-                                                    <td  style="text-align:center;" align="center">
+                                                  <!--  </td>
+                                                    <td  style="text-align:center;" align="center">-->
+                                                  <div style="text-align:center;" align="center"> 
                                                         <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
-                                                        <a type="button"  class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                        <a type="button" style="float: right" class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
                                                             }%>
-                                                    </td>
+                                                  </div> </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
                                                 </tr>  
 
@@ -507,14 +517,14 @@
                                                     if (h.getVal_doc() > 0 & d.getId_datos_hijo().equals(h.getId_datos_hijos_trabajador().trim())) {
                                                         //   i++;
 %>
-                                                <tr>
-                                                    <td  style="width:50%;" align="center">
+                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
+                                                    <td  style="width:40%;" align="center">
                                                         <table class="table table-striped ">
-                                                            <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
+                                                            <tr><td align="center" style="border:1px solid;border-color:  purple rgb(101, 89, 107); height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
                                                             <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
                                                                         <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
                                                                     </div>
                                                                     <% } else { %>
@@ -530,9 +540,10 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                    </td>
+                                                <!--    </td>
 
-                                                    <td  style="text-align:center;" align="center">
+                                                    <td  style="text-align:center;" align="center">-->
+                                                    <div style="margin-top:-15px;">
                                                         <label>DESCRIPCION:</label><BR>
                                                         <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -545,10 +556,10 @@
                                                         <% } %>
                                                         <% } %>    
                                                         <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        <section class="col col-10" style="text-align:center;" align="center">
+                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
                                                             <%}%>
                                                             <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
                                                                 <% } else { %>
                                                                 <% if (d.getEs_documento_adjunto() == null) { %>
 
@@ -567,16 +578,17 @@
                                                                     }
                                                                 }%>
                                                             <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        </section>
+                                                        </section></div>
                                                         <%}%>
-                                                    </td>
-                                                    <td  style="text-align:center;" align="center">
+                                                  <!--  </td>
+                                                    <td  style="text-align:center;" align="center">-->
+                                                  <div style="text-align:center;" align="center"> 
                                                         <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
-                                                        <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                        <a type="button"   class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                         <%} else {
                                                                 out.print("");
                                                             }%>
-                                                    </td>
+                                                  </div> </td>
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
                                                 </tr>  
 
@@ -585,14 +597,14 @@
                                                 } else if (h.getVal_doc() == 0 & !id_hijo_faltante.equals(h.getId_datos_hijos_trabajador())) {
                                                     // out.print(kk);
 %>
-                                                <tr>
-                                                    <td  style="width:50%;" align="center"> 
+                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
+                                                    <td style="width: 40%;" align="center"> 
                                                         <table class="table table-striped ">
-                                                            <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
+                                                            <tr><td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107); height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
                                                             <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                     <% if ((permissionEditDocument)) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
                                                                         <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
                                                                     </div>
                                                                     <% } else { %>
@@ -601,9 +613,10 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                    </td>
+                                                  <!-- </td>
 
-                                                    <td  style="text-align:center;" align="center">
+                                                    <td  style="text-align:center;" align="center">-->
+                                                      <div style="margin-top:-15px;">
                                                         <label>DESCRIPCION:</label><BR>
                                                         <% if ((permissionEditDocument)) {%>
                                                         <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -612,13 +625,14 @@
                                                         <% } %> 
 
 
-                                                        <section class="col col-10" style="text-align:center;" align="center">
+                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px;" align="center">
                                                             <% if ((permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
                                                                 <% } else {%>
                                                             <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
                                                                 <% }%>
                                                         </section>
+                                                     </div>
                                                     </td>
                                                     <td  style="text-align:center;" align="center">
                                                     </td>
@@ -636,14 +650,14 @@
 
                                                 <%} else if (!d.getTi_documento().trim().equals("DNIH") & !d.getTi_documento().trim().equals("DNIC") & !d.getTi_documento().trim().equals("ACMA") & !d.getTi_documento().trim().equals("COFE") & !d.getTi_documento().trim().equals("DOCA")) {
                                                 %>
-                                                <tr>
+                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6" >
                                                 <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
-                                                <td  style="width:50%;" align="center">
+                                                <td style="width: 36%;" align="center">
                                                     <table class="table table-striped ">
-                                                        <tr><td align="center" style="border:1px solid;border-color: #D2691E;"><strong><%=d.getNo_documento()%></strong></td></tr>
+                                                        <tr><td align="center" style="border:1px solid;border-color:  purple rgb(101, 89, 107); height:50px;"><strong><%=d.getNo_documento()%></strong></td></tr>
                                                         <tr><td class="caji<%=(i + 1)%>" align="center"> <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                 <div class="form-group">
-                                                                    <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" size="500" name="archivos<%=(i + 1)%>" >
+                                                                    <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" size="500" name="archivos<%=(i + 1)%>">
                                                                 </div>
 
                                                                 <% } else { %>
@@ -657,11 +671,12 @@
                                                                 <% }
                                                                     } %></td></tr>
                                                     </table>
-                                                </td>
+                                               <!-- </td>
 
 
 
-                                                <td  style="text-align:center;" align="center">
+                                                <td  style="text-align:center;" align="center">-->
+                                               <div style="margin-top:-15px;" >
                                                     <label>DESCRIPCION:</label><BR>
                                                     <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                     <input type="text"   name="lob_description<%=i + 1%>"><BR><BR>
@@ -676,10 +691,10 @@
                                                     <% } %>
                                                     <% } %>  
                                                     <%if (d.getEs_documento_adjunto() == null) {%>
-                                                    <section class="col col-10" style="text-align:center;" align="center">
+                                                    <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
                                                         <%}%>
                                                         <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                        <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                        <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
                                                             <% } else { %>
                                                             <% if (d.getEs_documento_adjunto() == null) { %>
 
@@ -697,10 +712,11 @@
                                                                 }
                                                             }%>
                                                         <%if (d.getEs_documento_adjunto() == null) {%>
-                                                    </section>
+                                                    </section></div>
                                                     <%}%>
-                                                </td>
-                                                <td  style="text-align:center;" align="center">
+                                             <!--   </td>
+                                                <td  style="text-align:center;" align="center">-->
+                                             <div style="text-align:center;" align="center"> 
                                                     <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
                                                     <%if (request.getParameter("P2") == null & request.getParameter("pro") == null) {
                                                     %>
@@ -713,7 +729,8 @@
                                                     <%} else {
                                                             out.print("");
                                                         }%>
-                                                </td>
+                                             </div>
+                                             </td>
                                                 </tr>  
                                                 <input type="hidden" name="iddgp" value="<%=d.getId_dgp()%>">
                                                 <input type="hidden" name="idctr" value="<%=request.getParameter("idctr")%>">
@@ -733,11 +750,11 @@
                                                 <% if (permissionEditDocument) { %>
                                                 <%if (request.getParameter("P2") != null) {%>
                                                 <%} else {%>
-                                                <tr><td><input type="hidden" value="Registrar" name="opc" ></td></tr>
+                                                <tr><td><input  type="hidden" value="Registrar" name="opc" ></td></tr>
                                                         <%}%>
                                                         <%}%>
                                                 </tbody>
-
+                                               </section>
                                             </table>
                                             <footer>
                                                 <%
@@ -753,22 +770,22 @@
 
                                                 <a class="btn btn-success" href="../../../trabajador?idtr=<%=request.getParameter("idtr")%>&aa=<%=request.getParameter("ms")%>&opc=list_reg_tra&a=<%=request.getParameter("dt")%>"><i class="fa fa-check"></i> CONTINUAR</a>
 
-                                                <button type="submit" class="btn btn-primary btn_reg_doc" style="display:none"> <i class="fa fa-plus-square"></i>
+                                                <button  type="button" class="btn btn-primary btn_reg_doc" style="display:none"> <i class="fa fa-plus-square"></i>
                                                     Registrar
                                                 </button>
 
                                                 <% } else {%>
                                                 <a class="btn btn-primary" href="../../../trabajador?idtr=<%=request.getParameter("idtr")%>&opc=Documento_Trabajador"><i class="fa  fa-chevron-circle-left"></i> Regresar</a>
 
-                                                <button type="submit" class="btn btn-primary btn_reg_doc" style="display:none"> <i class="fa fa-plus-square"></i>
+                                                <button  type="button" class="btn btn-primary btn_reg_doc" style="display:none"> <i class="fa fa-plus-square"></i>
                                                     Registrar
                                                 </button>
                                                 <%}%>
                                                 <%} else {%>
-                                                <button type="submit" class="btn btn-primary btn_reg_doc"style="display:none" >
+                                                <button    type="button" class="btn btn-primary btn_reg_doc"style="display:none" >
                                                     Registrar
                                                 </button>
-                                                <button type="button" onclick="history.back()"  class="btn btn-default">
+                                                <button   type="button" onclick="history.back()"  class="btn btn-default">
                                                     Atrás
                                                 </button>
 
@@ -797,6 +814,7 @@
 
                         </article>
                         <!-- END COL -->
+
                     </div>
                     <!-- END ROW -->
                 </section>
@@ -819,8 +837,6 @@
 
         <!--================================================== -->
 
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -830,7 +846,7 @@
                                                     }
         </script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
                                                     if (!window.jQuery.ui) {
                                                         document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
@@ -840,68 +856,62 @@
         <!-- IMPORTANT: APP CONFIG -->
         <script src="../../../js/app.config.js"></script>
 
-        <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-        <script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
-
-        <!-- BOOTSTRAP JS -->
+        <!--         JS TOUCH : include this plugin for mobile drag / drop touch events-->
+        <!--
+                 BOOTSTRAP JS -->
         <script src="../../../js/bootstrap/bootstrap.min.js"></script>
 
-        <!-- CUSTOM NOTIFICATION -->
+        <!--         CUSTOM NOTIFICATION -->
         <script src="../../../js/notification/SmartNotification.min.js"></script>
 
-        <!-- JARVIS WIDGETS -->
-        <script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-        <!-- EASY PIE CHARTS 
-        <script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
 
-        <!-- SPARKLINES
-        <script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script> -->
+        <script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
 
-        <!-- JQUERY VALIDATE -->
+        <!--         SPARKLINES-->
+        <script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script> 
+
+        <!--         JQUERY VALIDATE -->
         <script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-        <!-- JQUERY MASKED INPUT 
-        <script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
+        <!--         JQUERY MASKED INPUT -->
+        <script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
-        <!-- JQUERY SELECT2 INPUT 
-        <script src="../../../js/plugin/select2/select2.min.js"></script>-->
+        <!--         JQUERY SELECT2 INPUT -->
+        <script src="../../../js/plugin/select2/select2.min.js"></script>
 
-        <!-- JQUERY UI + Bootstrap Slider 
-        <script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
+        <!--         JQUERY UI + Bootstrap Slider -->
+        <script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
 
-        <!-- browser msie issue fix -->
-        <script src="../../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
-
-        <!-- FastClick: For mobile devices -->
-        <script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
-
-        <!--[if IE 8]>
-
-        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-
-        <![endif]-->
-
-        <!-- Demo purpose only -->
+        <!--         browser msie issue fix 
+        
+                 FastClick: For mobile devices 
+        
+                [if IE 8]>-->
+        <!--
+                <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>-->
+        <!--
+                <![endif]
+        
+                 Demo purpose only -->
         <script src="../../../js/demo.min.js"></script>
 
-        <!-- MAIN APP JS FILE -->
-        <script src="../../../js/app.min.js"></script>
-
-        <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-        <!-- Voice command : plugin 
-        <script src="../../../js/speech/voicecommand.min.js"></script>-->
+        <!--         MAIN APP JS FILE -->
+        <script src="../../../js/app.min.js" ></script>
 
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="../../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
         <script src="../../../js/bootstrap/fileinput.js" type="text/javascript"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
-
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="../../../js/notification/SmartNotification.min.js" type="text/javascript"></script>
         <script type="text/javascript" src="../../../js/shadowbox/demo.js"></script>
         <script type="text/javascript" src="../../../js/shadowbox/shadowbox.js"></script>
+
         <script type="text/javascript">
                                                     Shadowbox.init({
                                                         // a darker overlay looks better on this particular site
@@ -921,87 +931,147 @@
             }
 
 
+            function validar() {
+                var x = true;
+                console.log("enter to function validar")
+
+                $.each($(".fileDocument"), function (index) {
+                    var thisObject = $(this);
+                    if (thisObject.val()!== "") {
+                        // console.log("value input :" + thisObject.val())
+                        //   console.log("tam input :" + thisObject[0].files.size)
+
+                        //  $("#ulList").empty();
+                        var fp = thisObject;
+                        var lg = fp[0].files.length; // get length
+                        var items = fp[0].files;
+                        var fragment = "";
+
+                        if (lg > 0) {
+                            for (var i = 0; i < lg; i++) {
+                                var fileName = items[i].name; // get file name
+                                var fileSize = items[i].size; // get file size 
+                                var fileType = items[i].type; // get file type
+
+                                // append li to UL tag to display File info
+                                fragment = "<li>" + fileName + " (<b>" + fileSize + "</b> bytes) - Type :" + fileType + "</li>";
+                                console.log(fragment)
 
 
+                                if (fileSize > 512000) {
+                                     // $(thisObject).val(" ");
+                                          //    thisObject.clik(".kv-file-remove");
+                                            $(thisObject).focus();  
+                                    x = false;
+                                  
+
+                                }
+
+                            }
+
+                            // $("#ulList").append(fragment);
+                        }
+
+                    }
+                    console.log(index)
+                    //   console.log(thisObject.files.length);
+                });
+                console.log(x)
+                return x;
+            }
 
             $(document).ready(function () {
+
                 pageSetUp();
                 $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
-                $("#test-upload").fileinput({
-                    'showPreview': false,
-                    'allowedFileExtensions': ['jpg', 'png', 'gif'],
-                    'elErrorContainer': '#errorBlock'
-                });
-                $("#file-0").fileinput({
-                    'allowedFileExtensions': ['jpg', 'png', 'gif'],
-                });
 
-                function validSize(objFile) {
-                    var tamFiles = objFile.files.length;
-                    console.log("dfd:" + tamFiles);
-                    var x = true;
-                    for (var i = 0; i < tamFiles; i++) {
-                        console.log("(" + i + ") iteracion")
-                        var sizeByte = objFile.files[i].size;
-                        console.log("amama:" + sizeByte);
-//                         var s  = parseInt(sizeByte / 1024);
-                        if (sizeByte > 512000) {
-                            console.log("tamaño superado")
-                            //alert('El tamaño supera el limite permitido');
-                            // $(objFile).val('');
-
-                            x = false;
-                        }
-                        else {
-                            console.log("hola")
-                            x = true;
-                        }
-
-//                    if (siezekiloByte >$(objFile).attr('size')) {
-//                            console.log( "amama:" + siezekiloByte);
-//                        
-//                        //alert('El tamaño supera el limite permitido');
-//                        $(objFile).val('');
-//                        console.log("tamaño superado")
-//                        return false;
-//                    }
-
+                $(".btn_reg_doc").click(function () {
+                    console.log(validar());
+                    if (validar()) {
+                        $(".formDocument").submit()
                     }
+                });
 
-                    return x;
+                $(".fileDocument").fileinput({
+                    'allowedFileExtensions': ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc', 'txt'],
+                    'initialPreviewAsData': true,
+                    'overwriteInitial': false,
+                    'removeFromPreviewOnError': false,
+                    'maxFileSize': 500,
+                    'maxFilesNum': 10,
+//                    'initialCaption': "files",
+//                     'browseClass': "btn btn-primary btn-sm",
+//                    'removeClass': "btn btn-danger btn-sm",
+//                 dropZoneTitleClass: {
+//                     "holaa"
+//                 },
+                    layoutTemplates: {
+                        main1:
+                                "{preview}\n" +
+                                "<div class=\'input-group {class}\'>\n" +
+                                "   <div class=\'input-group-btn\'>\n" +
+                                "       {browse}\n" +
+                                "       {upload}\n" +
+                                "       {remove}\n" +
+                                "   </div>\n" +
+                                "   {caption}\n" +
+                                "</div>"
+                    }, slugCallback:
+                            function (filename) {
+                                return filename.replace('(', '_').replace(']', '_');
+                            }
 
-                }
 
-//var sizeByte = objFile.files[0].size;
-//                    var siezekiloByte = parseInt(sizeByte / 1024);
-//                    if (siezekiloByte > $(objFile).attr('size')) {
-//                        //alert('El tamaño supera el limite permitido');
-//                        $(objFile).val('');
-//                        console.log("tamaño superado")
+
+                });
+
+
+//                function validSize(objFile) {
+//                    var x = true;
+//                    var tamFiles = objFile.files.length;
+//                    console.log("longitud:" + tamFiles);
+//                    for (var i = 0; i < tamFiles; i++) {
+//                        console.log("(" + i + ") iteracion")
+//                        console.log("prubea mira")
+//
+//                        var sizeByte = objFile.files[i].size;
+//                        console.log("tamaño:" + objFile.files[i].size);
+//
+//
+//                        if (sizeByte > 512000) {
+//                            console.log("tamaño superado")
+//
+//                            x = false;
+//                        }
+//                        else {
+//                            console.log("agregado")
+//                            x = true;
+//                        }
+//
+////                       
+//                    }
+//                    return x;
+//                }
+//                $(".btn_reg_doc").click(function (e) {
+//
+//
+//                    var d = validSize(e.target);
+////                  
+//                    if (!d) {
+//
 //                        return false;
 //                    }
 //                    return true;
-
-                $(".file").change(function (e) {
-
-//   console.log ("dfd:"+e.target.files.length);
-
-                    if (!validSize(e.target)) {
-                        // $('.file').fileinput('reset');
-
-// method chaining
-                   $('.file').fileinput('destroy').fileinput('disable');
-
-                    } else {
-
-                        return true;
-                    }
-
-
-                });
-
+//                });
+//                $(".fileDocument").on("filepredelete", function (p) {
+//                    var abort = true;
+//                    if (confirm("esta seguro que desea eliminar?")) {
+//                        abort = false;
+//                    }
+//                    return abort;
+//                });
 //                $(".file").change(function (e) {
 //                 
 //                    if (!validSize(e.target)) {
@@ -1010,43 +1080,10 @@
 //                    
 //        return true;    
 //                    }
-//                    
-//                   
-//                        
-//                  
+
+
 //                });
-                $(".file").fileinput({
-                    // initialPreview: ["<img src='Desert.jpg' class='file-preview-image'>", "<img src='Jellyfish.jpg' class='file-preview-image'>"],
-                    /*   initialPreviewConfig: [
-                     {caption: 'Desert.jpg', width: '120px', url: '#'},
-                     {caption: 'Jellyfish.jpg', width: '120px', url: '#'},
-                     ],*/
-                    //uploadUrl: '#',
 
-                    showUpload: false,
-                    layoutTemplates: {
-                        main1: "{preview}\n" +
-                                "<div class=\'input-group {class}\'>\n" +
-                                "   <div class=\'input-group-btn\'>\n" +
-                                "       {browse}\n" +
-                                "       {upload}\n" +
-                                "       {remove}\n" +
-                                "   </div>\n" +
-                                "   {caption}\n" +
-                                "</div>"},
-                    'allowedFileExtensions': ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc'],
-                    overwriteInitial: false,
-                    maxTotalFileSize: 5000000,
-                    maxFilesNum: 10,
-                    //allowedFileTypes: ['image', 'video', 'flash'],
-                    slugCallback:
-                            function (filename) {
-                                return filename.replace('(', '_').replace(']', '_');
-                            }
-
-
-
-                });
                 $("#file-3").fileinput({
                     showUpload: false,
                     showCaption: false,
@@ -1068,7 +1105,7 @@
                 $(".btn-info").on('click', function () {
                     $('#file-4').fileinput('refresh', {previewClass: 'bg-info'});
                 });
-                $.each($(".file"), function (i) {
+                $.each($(".fileDocument"), function (i) {
 
                     if ((i + 1) == 0) {
                         $(".btn_reg_doc").hide();
