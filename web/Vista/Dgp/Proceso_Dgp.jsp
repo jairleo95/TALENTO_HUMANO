@@ -169,7 +169,7 @@
             <div id="content">
 
                 <!-- widget grid -->
-                <section id="widget-grid" class="">
+                <section id="widget-grid" class="slideInDown fast animated" >
 
                     <!-- row -->
                     <div class="row">
@@ -221,10 +221,10 @@
                                                 <tr>
                                                     <th data-hide="phone">Nro</th>
                                                     <th>MES</th>
-                                                    <th data-hide="phone,tablet"><i class="fa fa-fw fa-building text-muted hidden-md hidden-sm hidden-xs"></i> Acciones</th>
+                                                    <th data-hide="phone,tablet" style="width: 5px">Accion</th>
 
                                                     <th data-class="expand">Nombre</th>
-                                                    <th data-class="expand">Proceso</th>
+                                                    <th data-class="expand" style="width: 35%">Proceso</th>
                                                         <%if (ID_DEP.equals("DPT-0019")) {%>
                                                     <th data-hide="phone,tablet">Departamento</th>
                                                         <%}%>
@@ -245,7 +245,8 @@
                                                 <td>
                                                     <div class="btn-group">
                                                         <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                            Accion <span class="caret"></span>
+                                                            <i class="fa fa-gear fa-lg"></i>
+                                                          <i class="fa fa-caret-down"></i>
                                                         </button>
                                                         <ul class="dropdown-menu">
                                                             <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>
@@ -262,7 +263,7 @@
 
                                                 </td> 
                                                 <% if (r.getAr_foto() == null) {%>
-                                                <td><img class="user_avatar_<%=r.getId_trabajador()%>"  src="../../imagenes/avatar_default.jpg"  width="30"  height="30">
+                                                <td><img class="user_avatar_<%=r.getId_trabajador()%>"  src="../../img/avatar_default.jpg"  width="30"  height="30">
                                                     <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> 
                                                         <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a>
                                                 </td>
@@ -374,10 +375,7 @@
 
 
 <!--================================================== -->
-
-<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
-
+ 
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 
@@ -551,6 +549,7 @@
                                                                     var obj = $(rows[i]).find(".prog_aut");
                                                                     Imprimir_det_proceso(obj);
                                                                 }
+                                                              
 
                                                             });
 

@@ -1,75 +1,75 @@
 
-                                        .area-coment{
-                                            display: none;
-                                        }
-                                        .mensaje{
-                                            width:550px;
-                                            height: 70px;
-                                            max-width: 550px;
-                                            border-radius: 5px;
-                                            border: solid 1px #0c95be;
-                                        }
+.area-coment{
+    display: none;
+}
+.mensaje{
+    width:550px;
+    height: 70px;
+    max-width: 550px;
+    border-radius: 5px;
+    border: solid 1px #0c95be;
+}
 
-                                        .contador{
-                                            font-size: 13px;
-                                            color: #ff3333;
+.contador{
+    font-size: 13px;
+    color: #ff3333;
 
-                                        }
-                                        .indicador{
-                                            font-size: 13px;
-                                            color: #8899a6;
-                                        }
-                                        .thumbnail {
-                                            padding:0px;
-                                        }
-                                        .panel {
-                                            position:relative;
-                                        }
-                                        .panel>.panel-heading:after,.panel>.panel-heading:before{
-                                            position:absolute;
-                                            top:11px;left:-16px;
-                                            right:100%;
-                                            width:0;
-                                            height:0;
-                                            display:block;
-                                            content:" ";
-                                            border-color:transparent;
-                                            border-style:solid solid outset;
-                                            pointer-events:none;
-                                        }
-                                        .panel>.panel-heading:after{
-                                            border-width:7px;
-                                            border-right-color:#9cb4c5;
-                                            margin-top:1px;
-                                            margin-left:2px;
-                                        }
-                                        .panel>.panel-heading:before{
-                                            border-right-color:#9cb4c5;
-                                            border-width:8px;
-                                        }
-                                        .todoc{outline: none;}
-                                        .txt_mensaje{
-                                            width:550px;
-                                            height: 70px;
-                                            max-width: 550px;
-                                            border-radius: 5px;
-                                            border: solid 1px #0c95be;
-                                        }
-                                        .avatar-user img{
-                                            margin-top: 8px;
-                                            position: absolute;
-                                            border-radius: 50%;
-                                            height: 70px;
-                                            width: 70px;
-                                            z-index: 1;
-                                        }
-                                        .spanuser{
-                                            margin-top: 15px;
-                                        }
+}
+.indicador{
+    font-size: 13px;
+    color: #8899a6;
+}
+.thumbnail {
+    padding:0px;
+}
+.panel {
+    position:relative;
+}
+.panel>.panel-heading:after,.panel>.panel-heading:before{
+    position:absolute;
+    top:11px;left:-16px;
+    right:100%;
+    width:0;
+    height:0;
+    display:block;
+    content:" ";
+    border-color:transparent;
+    border-style:solid solid outset;
+    pointer-events:none;
+}
+.panel>.panel-heading:after{
+    border-width:7px;
+    border-right-color:#9cb4c5;
+    margin-top:1px;
+    margin-left:2px;
+}
+.panel>.panel-heading:before{
+    border-right-color:#9cb4c5;
+    border-width:8px;
+}
+.todoc{outline: none;}
+.txt_mensaje{
+    width:550px;
+    height: 70px;
+    max-width: 550px;
+    border-radius: 5px;
+    border: solid 1px #0c95be;
+}
+.avatar-user img{
+    margin-top: 8px;
+    position: absolute;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    z-index: 1;
+}
+.spanuser{
+    margin-top: 15px;
+}
 
-                                        
-                              
-        
-   
-   
-     
+
+
+
+
+
+

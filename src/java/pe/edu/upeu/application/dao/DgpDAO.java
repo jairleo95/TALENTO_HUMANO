@@ -1091,6 +1091,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     public boolean val_fe_inicio_dgp(String fecha) {
         boolean estado = false;
         try {
+            System.out.println("fecha in DAO"+fecha);
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cs = this.conn.conex.prepareCall("begin   ? :=rhfu_val_fe_desde_dgp(?);end;");
             cs.registerOutParameter(1, Types.INTEGER);

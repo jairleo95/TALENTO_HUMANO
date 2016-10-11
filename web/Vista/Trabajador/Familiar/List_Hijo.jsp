@@ -161,14 +161,14 @@
                                 <% if (rol1.trim().equals("ROL-0002") | rol1.trim().equals("ROL-0005") | rol1.trim().equals("ROL-0001") | rol1.trim().equals("ROL-0013")) {%>
 
                                 <a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=modificar" >
-                                    <img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a>
+                                    <img src="../../../img/lapiz.png" alt="" width="25px" height="25px"/></a>
 
                             </td>
                             <td>
                     
                         <a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=eliminar"
                            class="eliminar" >
-                            <img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a>
+                            <img src="../../../img/eliminar.png" alt=""   width="25px" height="25px"/></a>
                    
                     <%}%>
                     </tr>
