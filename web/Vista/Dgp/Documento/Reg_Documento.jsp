@@ -742,10 +742,6 @@
                                                         id_dgp = d.getIddgp();
 
                                                     }%>
-
-
-
-
                                                 <input type="hidden" name="num" value="<%=i + 1%>">
                                                 <% if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001")) { %>
                                                 <%if (request.getParameter("P2") != null) {%>
@@ -834,10 +830,6 @@
         <!-- END SHORTCUT AREA -->
 
         <!--================================================== -->
-
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
-
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>

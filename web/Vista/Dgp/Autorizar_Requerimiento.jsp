@@ -293,9 +293,9 @@
                                                     <td ><%=a.getNo_area()%></td>
                                                     <td ><%=a.getNo_dep()%></td>
                                                     <td ><%=a.getNo_req()%></td>
-                                            <input type="hidden" class="val_aut<%=(f + 1)%>" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
+                                            <input type="hidden" class="val_aut<%=(f + 1)%> valAut" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                             <input type="hidden" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
-                                            <input type="hidden" class="correos_<%=(f + 1)%>" value="&IDTR=<%=a.getId_trabajador()%>&co_inst=<%=a.getDi_correo_inst()%>&co_pers=<%=a.getDi_correo_personal()%>"/>
+                                            <input type="hidden" class="correos_<%=(f + 1)%> correoTrabajador" value="&IDTR=<%=a.getId_trabajador()%>&co_inst=<%=a.getDi_correo_inst()%>&co_pers=<%=a.getDi_correo_personal()%>"/>
                                             <td class="text-info"><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>"><strong><%=a.getDe_pasos()%></strong></a></td>
                                             <td ><%=a.getFe_creacion()%></td>
                                             <td><%if (a.getLi_motivo() != null) {
@@ -377,7 +377,7 @@
                                             <td>
                                                 <input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%> inp_cod_aps" style="width:50px"/>
                                             </td>
-                                            <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
+                                            <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%> idTrabajador" value="<%=a.getId_trabajador()%>" />
                                             <%} else {%>
                                             <td><strong><%=a.getCo_aps()%></strong></td>
                                             <%}
@@ -453,16 +453,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-
-
-
-
-
-
                             </div>
                             <!-- end widget div -->
                     </div>
@@ -562,12 +552,6 @@
 <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 
 
-<script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
-
-<!-- FastClick: For mobile devices -->
-<script src="../../js/plugin/fastclick/fastclick.min.js"></script>
-
-
 
 <!-- Demo purpose only -->
 <script src="../../js/demo.min.js"></script>
@@ -654,7 +638,7 @@
                     url: "../../contrato",
                     type: "POST", success: function (data, textStatus, jqXHR) {
                         if (data.rpta) {
-                            console.log("status firma updated:" + data.rpta)
+                            console.log("status firma updated:" + data.rpta);
                             $.ajax({
                                 async: false,
                                 url: "../../autorizacion",
@@ -665,9 +649,9 @@
                                          table.row(currentInputFirma.parents('tr')).remove().draw();*/
                                         /*Agregar Boton*/
                                         exito("Procesado con exito!", "Se ha actualizado el contrato");
-                                        statusBtnSendToRem()
-                                        statusBtnSendFirma()
-                                        statusFirmaAndRem()
+                                        statusBtnSendToRem();
+                                        statusBtnSendFirma();
+                                        statusFirmaAndRem();
                                     }
                                 },
                                 data: "opc=AceptarMasivo" + $(".val_aut" + currentInputFirma.val()).val()
@@ -739,7 +723,7 @@
             });
 
 
-         
+
         }
     }
     function registerCOdHuella(inputItem, callback) {
@@ -747,7 +731,7 @@
         if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
             $.ajax({
                 async: false,
-                url: "../../trabajador", data: "opc=registrar_huella&cod=" + inputItem.val() + "&idtr=" + $(".idtr" + r).val(),
+                url: "../../trabajador", data: "opc=registrar_huella&cod=" + inputItem.val() + "&idtr=" + inputItem.parents("tr").find(".idTrabajador").val(),
                 type: "POST", success: function (data, textStatus, jqXHR) {
                     if (data.rpta) {
                         console.log("huella registrada!");
@@ -786,8 +770,6 @@
             url: "../../autorizacion",
             type: "POST", success: function (data, textStatus, jqXHR) {
                 if (data.rpta) {
-                    console.log("senedto" + data.sendto);
-                    console.log("correos enviados!");
                     statusBarAut.text("Correos enviados!").fadeOut('slow');
                     //  console.log(table.row(inputItem.parent('tr')).data());
                     $.bigBox({
@@ -918,19 +900,23 @@
                 if (ButtonPressed === "Si") {
                     for (var r = 1; r <= lenghtDatatable; r++) {
                         var objInputHuella = $(".cod_huella" + r);
-                        registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + $(".correos_" + r).val(), $(".val_aut" + r).val());
+                        var valAut = objInputHuella.parents('tr').find(".valAut");
+                        var correoTrabajador = objInputHuella.parents('tr').find(".correoTrabajador");
+                        registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + correoTrabajador.val(), valAut.val());
                     }
                     $.each($(".cbHuellaItem"), function (index) {
                         var itemRegistered = $(this);
                         if (itemRegistered.prop('checked')) {
                             console.log(index + 1)
                             if (itemRegistered.val() !== "" & typeof itemRegistered.val() !== "undefined") {
-                                processAutorizacionMasive($(".val_aut" + (index + 1)).val(), function () {
+                                var itemValue = itemRegistered.parents('tr').find(".valAut");
+                                var correoTrabajador = itemRegistered.parents('tr').find(".correoTrabajador");
+                                processAutorizacionMasive(itemValue.val(), function () {
                                     $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-                                    sendEmail("opc=Enviar_Correo" + $(".correos_" + (index + 1)).val(), function () {
+                                    sendEmail("opc=Enviar_Correo" + correoTrabajador.val(), function () {
                                         $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                                         var table = new $.fn.dataTable.Api('#dt_basic1');
-                                        table.row(itemRegistered.parent('tr')).remove().draw();
+                                        table.row(itemRegistered.parents('tr')).remove().draw();
 
                                     });
                                 });
@@ -940,7 +926,6 @@
                     });
 
                     //  registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + $(".correos_" + t).val(), $(".val_aut" + t).val());
-
                     // $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                 }
                 if (ButtonPressed === "No") {

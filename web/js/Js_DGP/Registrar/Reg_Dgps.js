@@ -647,7 +647,7 @@ $(document).ready(function () {
         }
     });
     jQuery.validator.addMethod("val_fecha", function (value, element) {
-        var d = value.split("-");
+        var d = value.split("/");
         return this.optional(element) || String(parseInt(d[0])).length == 4;
     }, "¡Fecha ingresada invalida!");
    
