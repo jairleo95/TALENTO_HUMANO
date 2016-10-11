@@ -150,8 +150,8 @@ public class CDgp extends HttpServlet {
             }
             if (opc.equals("Val_Fe_Inicio")) {
                 String fecha = request.getParameter("fecha");
-                String newFormat=FactoryConnectionDB.convertFecha3(fecha);
-                System.out.println("new format :"+newFormat);
+                String newFormat = FactoryConnectionDB.convertFecha3(fecha);
+                System.out.println("new format :" + newFormat);
                 boolean respuesta = dgp.val_fe_inicio_dgp(newFormat);
                 rpta.put("rpta", "1");
                 rpta.put("estado", respuesta);
@@ -184,7 +184,7 @@ public class CDgp extends HttpServlet {
                 double DE_BEV = 0.0;
                 double ASIGNACION_FAMILIAR = 0.0;
                 //----CA_CENTRO_COSTOS NO EXISTE EN TABLA RHTM_DGP---
-            /*Fuera de planilla*/
+                /*Fuera de planilla*/
                 if (ID_REQUERIMIENTO.equals("REQ-0007") || ID_REQUERIMIENTO.equals("REQ-0008") || ID_REQUERIMIENTO.equals("REQ-0009") || ID_REQUERIMIENTO.equals("REQ-0010") || ID_REQUERIMIENTO.equals("REQ-0011")) {
                     CA_BONO_ALIMENTARIO = 0.0;
                     DE_BEV = 0.0;
@@ -249,6 +249,7 @@ public class CDgp extends HttpServlet {
                 } else {
                     ES_PRESUPUESTADO = "0";
                 }
+                FE_DESDE = FactoryConnectionDB.convertFecha3(FE_DESDE);
                 dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO,
                         DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION,
                         ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD,
@@ -762,19 +763,15 @@ public class CDgp extends HttpServlet {
             if (h.toUpperCase().equals("AM")) {
                 if (x < 12) {
                     ret = x + ":" + y;
-                } else {
-                    if (x == 12) {
-                        ret = 0 + ":" + y;
-                    }
+                } else if (x == 12) {
+                    ret = 0 + ":" + y;
                 }
             }
             if (h.toUpperCase().equals("PM")) {
                 if (x < 12) {
                     ret = (x + 12) + ":" + y;
-                } else {
-                    if (x == 12) {
-                        ret = x + ":" + y;
-                    }
+                } else if (x == 12) {
+                    ret = x + ":" + y;
                 }
 
             }
