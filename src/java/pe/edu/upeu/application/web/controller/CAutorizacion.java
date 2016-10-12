@@ -105,30 +105,25 @@ public class CAutorizacion extends HttpServlet {
 
                         a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
                         String idpu = e.Id_Puesto_Personal(ide);
-                        InterfaceNotificationDAO notdao=new NotificationDAO();
-                        Notification not=new Notification();
-                        InterfaceUsuarioDAO udao=new UsuarioDAO();
-                        String username=udao.List_ID_User(iduser).get(0).getNo_usuario();
+                        InterfaceNotificationDAO notdao = new NotificationDAO();
+                        Notification not = new Notification();
+                        InterfaceUsuarioDAO udao = new UsuarioDAO();
+                        String username = udao.List_ID_User(iduser).get(0).getNo_usuario();
                         not.setId_rol("ROL-0001");
                         not.setEs_visualizado("0");
                         not.setEs_leido("0");
                         not.setTipo_notification("1");
-                        not.setDe_notification("Empleado autorizado por "+username);
-                        not.setDi_notification("trabajador?idtr="+idtrab+"&opc=list");
+                        not.setDe_notification("Empleado autorizado por " + username);
+                        not.setDi_notification("trabajador?idtr=" + idtrab + "&opc=list");
                         not.setTitulo(nombres);
-                        /*
-                        SELECT  * FROM RHTV_AUTORIZACION WHERE ID_DGP='DGP-000146';
-                        HACER UNA LISTA CON LA CONSULTA DE LOS AUTORIZACIONES
-                        RECORRER LA LISTA (FOR)
-                        AGREGAR UN CAMPO MAS ID_USUARIO
-                        
-                        LUEGO INSERTAR EL METODO notdaoregistrar(not);
-                        */
-                        
-                        notdao.Registrar(not);
+                        List<String> ids = notdao.PrevSteps(iddgp);
+                        for (int i = 0; i < ids.size(); i++) {
+                            not.setId_usuario(ids.get(i));
+                            notdao.Registrar(not);
+                        }
                         sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
-                       /* response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");*/
+                        /* response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");*/
                         rpta.put("rpta", true);
                     }
                     if (opc.equals("AceptarMasivo")) {
@@ -178,18 +173,22 @@ public class CAutorizacion extends HttpServlet {
                         String id_autorizacion = a.Insert_Autorizacion_dev("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
                         a.Insert_comentario_Aut("", id_autorizacion, iddgp, iduser, "1", id_autorizacion, comentario);
                         String idpu = e.Id_Puesto_Personal(ide);
-                        InterfaceNotificationDAO notdao=new NotificationDAO();
-                        Notification not=new Notification();
-                        InterfaceUsuarioDAO udao=new UsuarioDAO();
-                        String username=udao.List_ID_User(iduser).get(0).getNo_usuario();
+                        InterfaceNotificationDAO notdao = new NotificationDAO();
+                        Notification not = new Notification();
+                        InterfaceUsuarioDAO udao = new UsuarioDAO();
+                        String username = udao.List_ID_User(iduser).get(0).getNo_usuario();
                         not.setId_rol(idrol);
                         not.setEs_visualizado("0");
                         not.setEs_leido("0");
                         not.setTipo_notification("0");
-                        not.setDe_notification("Empleado rechazado por "+username);
-                        not.setDi_notification("trabajador?idtr="+idtrab+"&opc=list");
+                        not.setDe_notification("Empleado rechazado por " + username);
+                        not.setDi_notification("trabajador?idtr=" + idtrab + "&opc=list");
                         not.setTitulo(nombres);
-                        notdao.Registrar(not);
+                        List<String> ids = notdao.PrevSteps(iddgp);
+                        for (int i = 0; i < ids.size(); i++) {
+                            not.setId_usuario(ids.get(i));
+                            notdao.Registrar(not);
+                        }
                         sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");

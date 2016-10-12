@@ -20,8 +20,9 @@ public class Notification {
     private String titulo;
     private String fecha;
     private String tipo_notification;
+    private String id_usuario;
 
-    public Notification(String id_notification, String id_rol, String es_visualizado, String es_leido, String de_notification, String di_notification, String titulo, String fecha, String tipo_notification) {
+    public Notification(String id_notification, String id_rol, String es_visualizado, String es_leido, String de_notification, String di_notification, String titulo, String fecha, String tipo_notification, String id_usuario) {
         this.id_notification = id_notification;
         this.id_rol = id_rol;
         this.es_visualizado = es_visualizado;
@@ -31,9 +32,10 @@ public class Notification {
         this.titulo = titulo;
         this.fecha = fecha;
         this.tipo_notification = tipo_notification;
+        this.id_usuario = id_usuario;
     }
 
-    public Notification(String id_rol, String es_visualizado, String es_leido, String de_notification, String di_notification, String titulo, String fecha, String tipo_notification) {
+    public Notification(String id_rol, String es_visualizado, String es_leido, String de_notification, String di_notification, String titulo, String fecha, String tipo_notification, String id_usuario) {
         this.id_rol = id_rol;
         this.es_visualizado = es_visualizado;
         this.es_leido = es_leido;
@@ -42,6 +44,7 @@ public class Notification {
         this.titulo = titulo;
         this.fecha = fecha;
         this.tipo_notification = tipo_notification;
+        this.id_usuario = id_usuario;
     }
 
     public Notification() {
@@ -118,6 +121,13 @@ public class Notification {
     public void setTipo_notification(String tipo_notification) {
         this.tipo_notification = tipo_notification;
     }
-    
+
+    public String getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(String id_usuario) {
+        this.id_usuario = id_usuario;
+    }
     
 }

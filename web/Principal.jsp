@@ -101,7 +101,7 @@
                     <div class="btn-group btn-group-justified"  data-toggle="buttons">
                         <label class="btn btn-default autorizacionList">
                             <input type="radio" name="activity">
-                            Autori... </label>
+                            Autorizados </label>
                         <label class="btn btn-default rechazarList">
                             <input type="radio" name="activity" >
                             Rechazados </label>
@@ -331,6 +331,7 @@
                 <div class="row">
                     <div class="avatar-user col-md-3">
                         <input id="id_trabajador" type="hidden" value="<%out.println(sesion.getAttribute("IDTR"));%>" />
+                        <input id="iuser" type="hidden" value="<%out.println(id_user);%>" />
                         <a href="javascript:void(0);" id="show-shortcut" >
                             <img id="foto_usuario" src="img/avatar_default.jpg"  />
                         </a>  
@@ -715,7 +716,8 @@
             //console.log("aqui");
             var page = "cnot";
             $.post(page, {
-                op: 5
+                op: 5,
+                id:'<%=id_user%>'
             }, function (objson) {
                 var rpta = objson.rpta;
                 if (rpta === "1") {
@@ -744,7 +746,7 @@
             var url = "cnot";
             $.ajax({
                 url: url,
-                data: 'op=1', async: false,
+                data: 'op=1&id=<%=id_user%>', async: false,
                 type: 'POST', success: function (objson, textStatus, jqXHR) {
                     var rpta = 0;
                     rpta = objson.rpta;
@@ -762,7 +764,7 @@
                                     listid.push(lista[i].id_notification);
                                     count++;
                                 }
-                                if (lista[i].es_visualizado == 1) {
+                                else if (lista[i].es_visualizado == 1) {
                                     infoaut += '<span>';
                                 }
                                 fcn = "readNotification('" + lista[i].id_notification + "')"
@@ -813,11 +815,11 @@
                         }
                         if (count > 0) {
                             $(".autorizacionList").empty();
-                            $(".autorizacionList").append("Autori... (" + count + ") ");
+                            $(".autorizacionList").append("Autorizados (" + count + ") ");
                         }
                         if (count == 0) {
                             $(".autorizacionList").empty();
-                            $(".autorizacionList").append("Autori... ");
+                            $(".autorizacionList").append("Autorizados ");
                         }
                         if (listid.length > 0) {
                             $.post(url, {
@@ -841,7 +843,7 @@
             var url = "cnot";
             $.ajax({
                 url: url,
-                data: 'op=3', async: false,
+                data: 'op=3&id=<%=id_user%>', async: false,
                 type: 'POST',
                 success: function (objson, textStatus, jqXHR) {
                     var rpta = 0;
@@ -934,6 +936,7 @@
             getAvatar("perfil", idtra);
             pageSetUp();
             UpdateNotifications();
+            //var iduser=$("#iuser").val();
             // alert('<%="Maximum Inactive Interval of Session in Seconds is : " + sesion.getMaxInactiveInterval() / 60%>');
             $(".menu-item-parent").parent().click(function () {
                 $(".titulo_menu").text(" " + $(this).text());

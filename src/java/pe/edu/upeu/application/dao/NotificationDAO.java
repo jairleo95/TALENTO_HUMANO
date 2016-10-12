@@ -29,7 +29,7 @@ public class NotificationDAO implements InterfaceNotificationDAO {
 
     @Override
     public void Registrar(Notification x) {
-        sql = "{CALL RHSP_INSERT_NOTIFICATION( ?, ?, ?, ?, ?, ?, ?)}";
+        sql = "{CALL RHSP_INSERT_NOTIFICATION( ?, ?, ?, ?, ?, ?, ?, ?)}";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall(sql);
@@ -40,6 +40,7 @@ public class NotificationDAO implements InterfaceNotificationDAO {
             cst.setString(5, x.getDi_notification());
             cst.setString(6, x.getTitulo());
             cst.setString(7, x.getTipo_notification());
+            cst.setString(8, x.getId_usuario());
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -73,6 +74,7 @@ public class NotificationDAO implements InterfaceNotificationDAO {
                 n.setTitulo(rs.getString("titulo"));
                 n.setFecha(rs.getString("fecha_reg"));
                 n.setTipo_notification(rs.getString("tipo_notification"));
+                n.setId_usuario(rs.getString("id_usuario"));
                 list.add(n);
             }
         } catch (SQLException e) {
@@ -86,9 +88,9 @@ public class NotificationDAO implements InterfaceNotificationDAO {
     }
 
     @Override
-    public int CountUnreadAuthorized() {
+    public int CountUnreadAuthorized(String id) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        sql = "select count(*) as nuevas from RHTV_NOTIFICATION where ES_VISUALIZADO=0 and TIPO_NOTIFICATION=1 order by FECHA_REG desc";
+        sql = "select count(*) as nuevas from RHTV_NOTIFICATION where ES_VISUALIZADO=0 and TIPO_NOTIFICATION=1 and ID_USUARIO='"+id+"' order by FECHA_REG desc";
         int n=0;
         try {
             rs = this.conn.query(sql);
@@ -106,9 +108,9 @@ public class NotificationDAO implements InterfaceNotificationDAO {
     }
 
     @Override
-    public int CountUnreadUnAuthorized() {
+    public int CountUnreadUnAuthorized(String id) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        sql = "select count(*) as nuevas from RHTV_NOTIFICATION where ES_VISUALIZADO=0 and TIPO_NOTIFICATION=0 order by FECHA_REG desc";
+        sql = "select count(*) as nuevas from RHTV_NOTIFICATION where ES_VISUALIZADO=0 and TIPO_NOTIFICATION=0 and ID_USUARIO='"+id+"' order by FECHA_REG desc";
         int n=0;
         try {
             rs = this.conn.query(sql);
@@ -126,11 +128,11 @@ public class NotificationDAO implements InterfaceNotificationDAO {
     }
     
     @Override
-    public List<Map<String, ?>> List_Notifications_json() {
+    public List<Map<String, ?>> List_Notifications_json(String id) {
         List<Map<String, ?>> list = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            sql = "select * from rhtv_notification order by FECHA_REG desc";
+            sql = "select * from rhtv_notification where ID_USUARIO='"+id+"' order by FECHA_REG desc";
             rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -143,6 +145,7 @@ public class NotificationDAO implements InterfaceNotificationDAO {
                 rec.put("titulo", rs.getString("titulo"));
                 rec.put("fecha", rs.getString("fecha_reg"));
                 rec.put("tipo_notification", rs.getString("tipo_notification"));
+                rec.put("id_usuario", rs.getString("id_usuario"));
                 list.add(rec);
             }
         } catch (SQLException e) {
@@ -201,6 +204,32 @@ public class NotificationDAO implements InterfaceNotificationDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
+    }
+
+    @Override
+    public List<String> PrevSteps(String id) {
+        List<String> lista=new ArrayList<String>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            sql = "SELECT  US_CREACION FROM RHTV_AUTORIZACION WHERE ID_DGP='"+id+"'";
+            rs = this.conn.query(sql);
+            while (rs.next()) {
+                String idusers;
+                idusers=rs.getString("US_CREACION");
+                lista.add(idusers);
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR SQL: " + e);
+        } catch (Exception e) {
+            System.out.println("ERROR EXCEPTION: " + e);
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return lista;
     }
 
 }

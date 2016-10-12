@@ -46,11 +46,14 @@ public class CNotification extends HttpServlet {
         Map<String, Object> rpta = new HashMap<String, Object>();
         PrintWriter out = response.getWriter();
         int op = Integer.parseInt(request.getParameter("op"));
+        String iduser;
         switch (op) {
             case 1:
+                iduser=request.getParameter("id");
+                System.out.println(iduser);
                 try {
                     rpta.put("rpta", "1");
-                    rpta.put("lista", notdao.List_Notifications_json());
+                    rpta.put("lista", notdao.List_Notifications_json(iduser));
                 } catch (Exception e) {
                     rpta.put("rpta", "-1");
                     rpta.put("mensaje", e.getMessage());
@@ -65,9 +68,10 @@ public class CNotification extends HttpServlet {
                 notdao.leido(id);
                 break;
             case 3:
+                iduser=request.getParameter("id");
                 try {
                     rpta.put("rpta", "1");
-                    rpta.put("lista", notdao.List_Notifications_json());
+                    rpta.put("lista", notdao.List_Notifications_json(iduser));
 
                 } catch (Exception e) {
                     rpta.put("rpta", "-1");
@@ -91,9 +95,12 @@ public class CNotification extends HttpServlet {
                 }
                 break;
             case 5:
+                iduser=request.getParameter("id");
                 try{
-                    int n=notdao.CountUnreadAuthorized();
-                    int no=notdao.CountUnreadUnAuthorized();
+                    int n=0;
+                    int no=0;
+                    n=notdao.CountUnreadAuthorized(iduser);
+                    no=notdao.CountUnreadUnAuthorized(iduser);
                     rpta.put("rpta", "1");
                     rpta.put("si", n);
                     rpta.put("no", no);
