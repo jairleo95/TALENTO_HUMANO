@@ -664,6 +664,7 @@
                     if (data.rpta === "1") {
                         divBotones.append(data.data);
                         $(".btn-autor").click(function (e) {
+                            $(".btn-autor").attr("disabled","disabled");
                             $.SmartMessageBox({
                                 title: "¡Alerta de Confirmación!",
                                 content: "¿Está totalmente seguro de autorizar este requerimiento?",
@@ -732,7 +733,6 @@
                 }, function (ButtonPressed) {
                     if (ButtonPressed === "Si") {
                         $(".form-rech").submit();
-                        //$(".form-rech").submit();
                     }
                     if (ButtonPressed === "No") {
                         return false;
@@ -769,7 +769,8 @@
             /*FIN carga academica*/
 
             /*AUTORIZACIONES*/
-            $(".btn-autor1").click(function (e) {   //---------->fue modificado
+            $(".btn-autor1").click(function (e) {   
+                $(".btn-autor1").attr("disabled","disabled");
                 $.SmartMessageBox({
                     title: "¡Alerta de Confirmación!",
                     content: "¿Está totalmente seguro de autorizar este requerimientoklñklñ?",
@@ -789,6 +790,7 @@
                 e.preventDefault();
             });
             $(".btn-rech").click(function (e) {
+                $(".btn-rech").attr("disabled","disabled")
                 $.SmartMessageBox({
                     title: "Alerta de Confirmación!",
                     content: "¿Está totalmente seguro de rechazar este requerimiento?",

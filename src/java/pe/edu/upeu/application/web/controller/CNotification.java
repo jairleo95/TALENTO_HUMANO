@@ -69,6 +69,7 @@ public class CNotification extends HttpServlet {
                 break;
             case 3:
                 iduser=request.getParameter("id");
+                System.out.println(iduser);
                 try {
                     rpta.put("rpta", "1");
                     rpta.put("lista", notdao.List_Notifications_json(iduser));

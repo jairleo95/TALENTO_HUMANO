@@ -866,7 +866,7 @@
                                                 </fieldset>
                                                 <footer>
                                                     <input  type="hidden" name="opc" value="REG_CASOS_ESP">
-                                                    <button type="submit" class="btn btn-primary" >
+                                                    <button type="submit" id="submit" class="btn btn-primary" >
                                                         Siguiente
                                                     </button>
                                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
@@ -922,6 +922,9 @@
             $("#sueldo_total").val(x);
         }
         $(document).ready(
+                $("#submit").click(function(){
+                    $(this).attr("disabled","disabled");
+                });
                 function () {
 
 

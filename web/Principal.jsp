@@ -834,11 +834,10 @@
 
         }
         function listAjaxNotificationRec(objOption) {
+            console.log("enter to listAjaxREC");
             if (typeof objOption !== 'undefined') {
                 objOption.parent().find("label").removeClass("active");
             }
-
-
             var listid2 = [];
             var url = "cnot";
             $.ajax({

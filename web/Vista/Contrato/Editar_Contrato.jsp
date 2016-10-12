@@ -187,7 +187,7 @@
                                                 <%} else {%>
                                                 <input type="date" name="FEC_HASTA" value="<%=con.convertFecha3(a.getFe_hasta())%>" class="input-group-sm" required="">
                                                 <%}
-                                                } else {%>
+                                                } else{%>
                                                 <% if (a.getId_dgp() == null) {%>
                                                 <input type="date" name="FEC_HASTA" value="" class="input-group-sm" >
                                                 <%} else {%>
@@ -939,6 +939,9 @@
                                             $("#su_t").numeric();
                                             $("#asig").numeric();
                                             pageSetUp();
+                                            $("#submit").click(function () {
+                                                $(this).attr("disabled", "disabled");
+                                            });
                                             $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                                                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                             });
@@ -1095,6 +1098,9 @@
             });
         }
         $(document).ready(function () {
+            $("#submit").click(function () {
+                $(this).attr("disabled", "disabled");
+            });
             Listar_pue();
             Listar_dep();
             Listar_sec();

@@ -798,7 +798,9 @@
                 });
             }
             $(document).ready(function () {
-
+                $("#submit").click(function(){
+                    $("#submit").attr("disabled","disabled");
+                });
                 pageSetUp();
                 $("#ca_bono_pu").numeric();
                 $("#remu").numeric();
@@ -940,6 +942,7 @@
                     });
                 });
                 $("#btn-registrar").click(function () {
+                    $(this).attr("disabled","disabled");
                     var pr = $("#select-proceso").val();
                     $.post("../../paso", $("#form-paso").serialize(), function () {
                         Listar_Paso(pr);
