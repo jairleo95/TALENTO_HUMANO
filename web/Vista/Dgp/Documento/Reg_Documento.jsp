@@ -183,7 +183,7 @@
                                                                     <td class="caji<%=(i + 1)%>"  align="center">
                                                                         <% if (d.getId_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
                                                                         <div class="form-group">
-                                                                            <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
+                                                                            <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
                                                                                     out.println(" required='required' ");
                                                                                 }%> name="archivos<%=(i + 1)%>" >
                                                                         </div>
@@ -265,7 +265,7 @@
                                                             <tr><td align="center" style="border:1px solid;border-color: #D2691E;height:30%"><strong><%=d.getDocumento()%></strong></td></tr><br>
                                                             <tr><td  class="caji<%=(i + 1)%>"   align="center"><% if (d.getId_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
+                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
                                                                                 out.println(" required='required' ");
                                                                             }%> name="archivos<%=(i + 1)%>" >
                                                                     </div>
@@ -361,7 +361,7 @@
                                                                 <td class="caji<%=(i + 1)%>"  align="center" >
                                                                     <% if (d.getId_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
+                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
                                                                                 out.println(" required='required' ");
                                                                             }%> name="archivos<%=(i + 1)%>" style="height:40px;">
                                                                     </div>
@@ -447,7 +447,7 @@
                                                             <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
                                                                         <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
                                                                     </div>
                                                                     <% } else { %>
@@ -528,7 +528,7 @@
                                                             <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                     <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
                                                                         <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
                                                                     </div>
                                                                     <% } else { %>
@@ -606,7 +606,7 @@
                                                             <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                     <% if ((rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
                                                                     <div class="form-group">
-                                                                        <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
+                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"   name="archivos<%=(i + 1)%>" >
                                                                         <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
                                                                     </div>
                                                                     <% } else { %>
@@ -663,7 +663,7 @@
                                                             <td class="caji<%=(i + 1)%>"  align="center">
                                                                 <% if (d.getId_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
                                                                 <div class="form-group">
-                                                                    <input id="file-5" class="file" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
+                                                                    <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
                                                                             out.println(" required='required' ");
                                                                         }%> name="archivos<%=(i + 1)%>" >
                                                                 </div>
@@ -764,7 +764,7 @@
 
                                                 <a class="btn btn-success btn-labeled" href="../../../dgp?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd">CONTINUAR <i class="fa fa-arrow-circle-right"></i> </a>
 
-                                                <button type="submit" class="btn btn-primary btn_reg_doc" style="display:none"> <i class="fa fa-plus-square"></i>
+                                                <button type="button" class="btn btn-primary btn_reg_doc" style="display:none"> <i class="fa fa-plus-square"></i>
                                                     Registrar
                                                 </button>
 
@@ -773,7 +773,7 @@
                                                 } else {%>
                                                 <a class="btn btn-success btn-labeled btn_continuar_det" style="display:none" href="../../../dgp?iddgp=<%=id_dgp%>&idtr=<%=request.getParameter("idtr")%>&opc=rd">CONTINUAR <i class="fa fa-arrow-circle-right"></i> </a>
 
-                                                <button type="submit" class="btn btn-primary btn_reg_doc"  style="display:none" >
+                                                <button type="button" class="btn btn-primary btn_reg_doc"  style="display:none" >
                                                     Registrar
                                                 </button>
                                                 <button type="button" onclick="history.back()"  class="btn btn-default btn_atras">
@@ -942,6 +942,59 @@
                                                             timeout: 6000
                                                         });
                                                     }
+
+
+
+                                                    function validar() {
+                                                        var x = true;
+                                                        console.log("enter to function validar")
+
+                                                        $.each($(".fileDocument"), function (index) {
+                                                            var thisObject = $(this);
+                                                            if (thisObject.val() !== "") {
+                                                                // console.log("value input :" + thisObject.val())
+                                                                //   console.log("tam input :" + thisObject[0].files.size)
+
+                                                                //  $("#ulList").empty();
+                                                                var fp = thisObject;
+                                                                var lg = fp[0].files.length; // get length
+                                                                var items = fp[0].files;
+                                                                var fragment = "";
+
+                                                                if (lg > 0) {
+                                                                    for (var i = 0; i < lg; i++) {
+                                                                        var fileName = items[i].name; // get file name
+                                                                        var fileSize = items[i].size; // get file size 
+                                                                        var fileType = items[i].type; // get file type
+
+                                                                        // append li to UL tag to display File info
+                                                                        fragment = "<li>" + fileName + " (<b>" + fileSize + "</b> bytes) - Type :" + fileType + "</li>";
+                                                                        console.log(fragment)
+
+
+                                                                        if (fileSize > 512000) {
+                                                                            // $(thisObject).val(" ");
+                                                                            //    thisObject.clik(".kv-file-remove");
+                                                                            $(thisObject).focus();
+                                                                            x = false;
+
+
+                                                                        }
+
+                                                                    }
+
+                                                                    // $("#ulList").append(fragment);
+                                                                }
+
+                                                            }
+                                                            console.log(index)
+                                                            //   console.log(thisObject.files.length);
+                                                        });
+                                                        console.log(x)
+                                                        return x;
+                                                    }
+
+
                                                     $(document).ready(function () {
                                                         pageSetUp();
                                                         $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
@@ -950,7 +1003,17 @@
                                                         $("#file-0").fileinput({
                                                             'allowedFileExtensions': ['jpg', 'png', 'gif'],
                                                         });
-                                                        $(".file").fileinput({
+
+                                                        $(".btn_reg_doc").click(function () {
+                                                            console.log(validar());
+                                                            if (validar()) {
+                                                                $(".form_dgp_doc").submit()
+                                                            }
+                                                        });
+
+
+
+                                                        $(".fileDocument").fileinput({
                                                             showUpload: false,
                                                             layoutTemplates: {
                                                                 main1: "{preview}\n" +
