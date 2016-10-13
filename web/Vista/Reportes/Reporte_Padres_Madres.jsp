@@ -36,7 +36,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <style>
             .caja{
-                background:transparent url(../../imagenes/Gifloader.GIF) center no-repeat;
+                background:transparent url(../../img/Gifloader.GIF) center no-repeat;
             }
         </style>
         <title>REPORTE PADRES HIJOS</title>

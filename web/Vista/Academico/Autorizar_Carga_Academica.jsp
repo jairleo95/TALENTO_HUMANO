@@ -61,16 +61,6 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
-        <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
-
-
-        <script type="text/javascript" src="../../js/Js_Alerta/alertify.js"></script>
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.core.css" />
-        <link rel="stylesheet" href="../../css/Css_Alerta/alertify.default.css" />
-        <script type="text/javascript"  src="../../js/Js_Alerta/Alertas.js"></script>
-
-
-
     </head>
     <%
         CConversion c = new CConversion();
@@ -394,7 +384,7 @@
                                                     </td>
                                                     <td ><%=a.getMes_creacion()%></td>   
                                                     <% if (a.getAr_foto() == null) {%>
-                                                    <td><img src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
+                                                    <td><img src="../../img/avatar_default.jpg"  width="30"  height="30"></td>
                                                         <% } else {%>
                                                     <td><img src="../Usuario/Fotos/<%=a.getAr_foto()%>"  width="30"  height="30"></td>
                                                         <% }%>
@@ -530,11 +520,7 @@
     </body>
 
     <!--================================================== -->
-
-    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
-
-    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
                                         if (!window.jQuery) {
@@ -783,21 +769,7 @@
 
     </script>
 
-    <!-- Your GOOGLE ANALYTICS CODE Below -->
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
+     
 
 </html>
 <%} else {

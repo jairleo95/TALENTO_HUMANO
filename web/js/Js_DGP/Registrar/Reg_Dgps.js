@@ -592,7 +592,7 @@ $(document).ready(function () {
     });
     $(".val_fe").change(function () {
         var fecha = $(this).val().split("-");
-        if (fecha[0].length > 4) {
+        if (fecha[0].length >10) {
             $(this).val("");
         }
     });
@@ -626,10 +626,10 @@ $(document).ready(function () {
 // Rules for form validation
         rules: {
             FEC_DESDE: {
-                val_fecha: true
+              //  val_fecha: true
             },
             FEC_HASTA: {
-                val_fecha: true
+             //   val_fecha: true
             },
             horas_totales: {
                 required: true
@@ -646,10 +646,10 @@ $(document).ready(function () {
             error.insertAfter(element.parent());
         }
     });
-    jQuery.validator.addMethod("val_fecha", function (value, element) {
-        var d = value.split("-");
+  /*  jQuery.validator.addMethod("val_fechas", function (value, element) {
+        var d = value.split("/");
         return this.optional(element) || String(parseInt(d[0])).length == 4;
-    }, "¡Fecha ingresada invalida!");
+    }, "¡Fecha ingresada invalida!");*/
    
     var cantidad = 1;
     $("#btn_add").click(function () {

@@ -38,8 +38,8 @@
                     <td class="caji"><%=i + 1%></td>
                     <td class="caji"><%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></td>
                     <td class="caji"><%=h.getNu_doc()%></td>
-                    <td class="caji"> <a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=modificar" ><img src="../../../imagenes/lapiz.png" alt="" width="25px" height="25px"/></a></td>
-                    <td class="caji"> <a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=eliminar" ><img src="../../../imagenes/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
+                    <td class="caji"> <a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=modificar" ><img src="../../../img/lapiz.png" alt="" width="25px" height="25px"/></a></td>
+                    <td class="caji"> <a href="../../../familiar?idhijo=<%=h.getId_datos_hijos_trabajador()%>&idtr=<%=h.getId_trabajador()%>&opc=eliminar" ><img src="../../../img/eliminar.png" alt=""   width="25px" height="25px"/></a></td> 
                             
                 </tr>
                 <% }}

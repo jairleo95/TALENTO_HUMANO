@@ -75,7 +75,7 @@
                          console.log("XDcantidad coment "+cant_coment+" ln: "+ln+""+"idx"+idx);
                          
                          if(objt.ar_foto == null || objt.ar_foto == "" ){
-                                img+="../../imagenes/avatar_default.jpg"; 
+                                img+="../../img/avatar_default.jpg"; 
                               }else{
                                 img+="../../Vista/Usuario/Fotos/"+objt.ar_foto; 
                               }

@@ -105,20 +105,26 @@ public class CAutorizacion extends HttpServlet {
 
                         //a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
                         String idpu = e.Id_Puesto_Personal(ide);
-                        InterfaceNotificationDAO notdao=new NotificationDAO();
-                        Notification not=new Notification();
-                        InterfaceUsuarioDAO udao=new UsuarioDAO();
-                        String username=udao.List_ID_User(iduser).get(0).getNo_usuario();
+                        InterfaceNotificationDAO notdao = new NotificationDAO();
+                        Notification not = new Notification();
+                        InterfaceUsuarioDAO udao = new UsuarioDAO();
+                        String username = udao.List_ID_User(iduser).get(0).getNo_usuario();
                         not.setId_rol(idrol);
                         not.setEs_visualizado("0");
                         not.setEs_leido("0");
-                        not.setDe_notification("Empleado autorizado por "+username);
-                        not.setDi_notification("trabajador?idtr="+idtrab+"&opc=list");
+                        not.setTipo_notification("1");
+                        not.setDe_notification("Empleado autorizado por " + username);
+                        not.setDi_notification("trabajador?idtr=" + idtrab + "&opc=list");
                         not.setTitulo(nombres);
-                        notdao.Registrar(not);
+                        List<String> ids = notdao.PrevSteps(iddgp);
+                        for (int i = 0; i < ids.size(); i++) {
+                            not.setId_usuario(ids.get(i));
+                            notdao.Registrar(not);
+                        }
                         sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
-                        response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
+                        /* response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");*/
+                        rpta.put("rpta", true);
                     }
                     if (opc.equals("AceptarMasivo")) {
                         String iddgp = request.getParameter("IDDETALLE_DGP");
@@ -159,18 +165,40 @@ public class CAutorizacion extends HttpServlet {
                         String cod = request.getParameter("COD");
                         String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
                         String idpasos = request.getParameter("IDPASOS");
+                        String nombres = request.getParameter("NOMBRES");
+                        String idtrab = request.getParameter("IDTRAB");
                         /*Cambiar con un trigger al momento de insertar*/
-                        dgp.VAL_DGP_PASOS();
-                        dgp.RECHAZAR_DGP(iddgp);
-                        String id_autorizacion = a.Insert_Autorizacion_dev("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
-                        a.Insert_comentario_Aut("", id_autorizacion, iddgp, iduser, "1", id_autorizacion, comentario);
+                        //dgp.VAL_DGP_PASOS();
+                        //dgp.RECHAZAR_DGP(iddgp);
+                        //String id_autorizacion = a.Insert_Autorizacion_dev("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
+                        //a.Insert_comentario_Aut("", id_autorizacion, iddgp, iduser, "1", id_autorizacion, comentario);
                         String idpu = e.Id_Puesto_Personal(ide);
+                        InterfaceNotificationDAO notdao = new NotificationDAO();
+                        Notification not = new Notification();
+                        InterfaceUsuarioDAO udao = new UsuarioDAO();
+                        String username = udao.List_ID_User(iduser).get(0).getNo_usuario();
+                        not.setId_rol(idrol);
+                        not.setEs_visualizado("0");
+                        not.setEs_leido("0");
+                        not.setTipo_notification("0");
+                        not.setDe_notification("Empleado rechazado por " + username);
+                        not.setDi_notification("trabajador?idtr=" + idtrab + "&opc=list");
+                        not.setTitulo(nombres);
+                        List<String> ids = notdao.PrevSteps(iddgp);
+                        for (int i = 0; i < ids.size(); i++) {
+                            not.setId_usuario(ids.get(i));
+                            notdao.Registrar(not);
+                        }
+                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
+                        sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
+                        response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
                         sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                         //out.print(id_autorizacion);
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
                         out.print("correcto ");
                     }
+
                     //AUTORIZACION CARGA ACADEMICA POR DOCENTE
                     if (opc.equals("Autorizacion_CD")) {
                         String idpu = e.Id_Puesto_Personal(ide);
@@ -235,7 +263,7 @@ public class CAutorizacion extends HttpServlet {
                         if (idrol.trim().equals("ROL-0009")) {
                             int val_aps = val_aps = e.val_cod_aps_empleado(idtr);
                             if (val_aps > 0) {
-                                html = "<button class='btn btn-labeled btn-success btn-autor' type='submit'>"
+                                html = "<button class='btn btn-labeled btn-success btn-autor' type='button'>"
                                         + "                            <span class='btn-label'><i class='glyphicon glyphicon-ok'></i></span>PROCESAR REQUERIMIENTO "
                                         + "                        </button>";
                             } else {
@@ -244,7 +272,7 @@ public class CAutorizacion extends HttpServlet {
                         } else if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {
                             int val_huella = e.val_cod_huella(idtr);
                             if (val_huella > 0) {
-                                html = "<button class='btn btn-labeled btn-success btn-autor' type='submit'>"
+                                html = "<button class='btn btn-labeled btn-success btn-autor' type='button'>"
                                         + "                            <span class='btn-label'><i class='glyphicon glyphicon-ok'></i></span>AUTORIZAR REQUERIMIENTO "
                                         + "                        </button>";
 
@@ -252,7 +280,7 @@ public class CAutorizacion extends HttpServlet {
                                 html = "<div class='alert alert-warning fade in'><i class='fa-fw fa fa-warning'></i><strong>Atención!</strong> Usted no puede <strong>AUTORIZAR</strong> el requerimiento, debe primero registrar el <strong>Código de Huella Digital</strong>.</div>";
                             }
                         } else {
-                            html = "<button class='btn btn-labeled btn-success btn-autor' type='submit'>"
+                            html = "<button class='btn btn-labeled btn-success btn-autor' type='button'>"
                                     + "                            <span class='btn-label'><i class='glyphicon glyphicon-ok'></i></span>AUTORIZAR REQUERIMIENTO "
                                     + "                        </button>";
                         }

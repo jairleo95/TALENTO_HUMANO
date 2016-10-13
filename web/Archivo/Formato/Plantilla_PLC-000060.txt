@@ -1,6 +1,6 @@
 <p style="margin-left:14.2pt; text-align:center"><strong>CONTRATO INDIVIDUAL DE TRABAJO A PLAZO DETERMINADO Y SUJETO A MODALIDAD</strong></p>
 
-<p style="margin-left:14.2pt; text-align:justify">Conste por el presente documento, el contrato individual de trabajo a plazo determinado y sujeto a modalidad (Innominado), conforme lo dispone el Art. 82 del T.U.O del D. Leg. 728, Ley de Productividad y Competitividad Laboral (D.S. Nº 003-97-TR), que celebran de una parte la <strong>UNIVERSIDAD PERUANA UNIÓN</strong>, con <strong>RUC Nº 20138122256</strong>, con domicilio legal en Villa Unión s/n, altura del Km. 19 de la Carretera Central, Ñaña, Lurigancho-Chosica, a quien en adelante se le denominará <strong>EL</strong> <strong>EMPLEADOR</strong> representada por su Apoderado Dr. Julio Cesar Rengifo Peña, con DNI No. 06690086, facultado según poder inscrito en la partida Nº 01894897, asiento A00028 del Libro de Asociaciones del Registro de Personas Jurídicas de la Zona Registral No. IX-Sede Lima, y de la otra parte <strong>[app] [apm]</strong> <strong>[nombre]</strong>, con DNI Nº <strong>[dni]</strong>, con domicilio en__ , a quien se le denominará <strong>EL (LA) TRABAJADOR(A)</strong>, en los términos y condiciones siguientes:</p>
+<p style="margin-left:14.2pt; text-align:justify">Conste por el presente documento, el contrato individual de trabajo a plazo determinado y sujeto a modalidad (Innominado), conforme lo dispone el Art. 82 del T.U.O del D. Leg. 728, Ley de Productividad y Competitividad Laboral (D.S. Nº 003-97-TR), que celebran de una parte la <strong>UNIVERSIDAD PERUANA UNIÓN</strong>, con <strong>RUC Nº 20138122256</strong>, con domicilio legal en Villa Unión s/n, altura del Km. 19 de la Carretera Central, Ñaña, Lurigancho-Chosica, a quien en adelante se le denominará <strong>EL</strong> <strong>EMPLEADOR</strong> representada por su Apoderado Dr. Julio Cesar Rengifo Peña, con DNI No. 06690086, facultado según poder inscrito en la partida Nº 01894897, asiento A00028 del Libro de Asociaciones del Registro de Personas Jurídicas de la Zona Registral No. IX-Sede Lima, y de la otra parte <strong>[app] [apm]</strong> <strong>[nombre]</strong>, con DNI Nº <strong>[dni]</strong>, con domicilio en  <span style="background-color:rgb(249, 242, 244); color:rgb(199, 37, 78); font-family:monaco,menlo,consolas,courier new,monospace; font-size:11.7px">[dir]</span>, a quien se le denominará <strong>EL (LA) TRABAJADOR(A)</strong>, en los términos y condiciones siguientes:</p>
 
 <p style="margin-left:14.2pt"><strong>ACTIVIDAD DEL EMPLEADOR:</strong></p>
 
@@ -18,11 +18,11 @@
 
 <p style="margin-left:14.2pt; text-align:justify"><strong>DURACIÓN DEL SERVICIO:</strong></p>
 
-<p style="margin-left:14.2pt; text-align:justify">CUARTA: <strong>EL EMPLEADOR </strong>en virtud del presente documento, contrata a <strong>EL(LA) TRABAJADOR(A)</strong>, desde el 01 de febrero de 2016 hasta el 31 de diciembre de 2016.</p>
+<p style="margin-left:14.2pt; text-align:justify">CUARTA: <strong>EL EMPLEADOR </strong>en virtud del presente documento, contrata a <strong>EL(LA) TRABAJADOR(A)</strong>, desde el <span style="background-color:rgb(249, 242, 244); color:rgb(199, 37, 78); font-family:monaco,menlo,consolas,courier new,monospace; font-size:11.7px">[desde]</span> hasta el  <span style="background-color:rgb(249, 242, 244); color:rgb(199, 37, 78); font-family:monaco,menlo,consolas,courier new,monospace; font-size:11.7px">[hasta].</span></p>
 
 <p style="margin-left:14.2pt; text-align:justify"><strong>REMUNERACIÓN MENSUAL Y JORNADA DE TRABAJO:              </strong></p>
 
-<p style="margin-left:14.2pt; text-align:justify">QUINTA: <strong>EL(LA) TRABAJADOR(A) </strong>percibirá una remuneración mensual de S/ <strong>[sueldo]</strong> (Soles), como retribución por las labores realizadas en la jornada y horario de trabajo establecido por el “EMPLEADOR”, la que será de 48 horas semanales. La jornada y horario establecido, podrá ser modificado por <strong>EL EMPLEADOR </strong>en ejercicio de las facultades de dirección y administración otorgadas por el artículo 9 del T.U.O del Decreto Legislativo No. 728, Ley de Productividad y Competitividad Laboral. Asimismo, de acuerdo a estas facultades, <strong>EL EMPLEADOR </strong>podrá efectuar la variación o cambio de lugar de trabajo, cargo y funciones que permita el logro de los objetivos y metas comerciales.</p>
+<p style="margin-left:14.2pt; text-align:justify">QUINTA: <strong>EL(LA) TRABAJADOR(A) </strong>percibirá una remuneración mensual de S/ <strong>[sueldo]</strong> (Soles), como retribución por las labores realizadas en la jornada y horario de trabajo establecido por el “EMPLEADOR”, la que será de <s>48</s> horas semanales. La jornada y horario establecido, podrá ser modificado por <strong>EL EMPLEADOR </strong>en ejercicio de las facultades de dirección y administración otorgadas por el artículo 9 del T.U.O del Decreto Legislativo No. 728, Ley de Productividad y Competitividad Laboral. Asimismo, de acuerdo a estas facultades, <strong>EL EMPLEADOR </strong>podrá efectuar la variación o cambio de lugar de trabajo, cargo y funciones que permita el logro de los objetivos y metas comerciales.</p>
 
 <p style="margin-left:14.2pt; text-align:justify">Las remuneraciones de <strong>EL(LA) TRABAJADOR(A), </strong>conforme al Decreto Supremo No. 003-2010-TR, será pagado mediante depósito bancario en una cuenta que para tal efecto abrirá <strong>EL(LA) TRABAJADOR(A) </strong>en la entidad bancaria de su preferencia, caso contrario <strong>EL EMPLEADOR</strong>, de acuerdo a Ley, podrá efectuar los depósitos de la remuneración, en cualquier empresa del sistema financiero donde se ubique el centro laboral en el que preste servicios <strong>EL(LA) TRABAJADOR(A)</strong>.</p>
 
@@ -42,14 +42,20 @@
 
 <p style="margin-left:14.2pt; text-align:justify">NOVENA: En todo lo no previsto en el presente contrato se aplicará la Ley vigente de nuestro país.</p>
 
-<p style="margin-left:14.2pt; text-align:justify">Conformes en todo el contenido del presente contrato, firman las partes en señal de aceptación, en Ñaña, Chosica, Lima, al 01 de febrero de 2016.</p>
+<p style="margin-left:14.2pt; text-align:justify">Conformes en todo el contenido del presente contrato, firman las partes en señal de aceptación, en Ñaña, Chosica, Lima, al [fe_suscripcion].</p>
 
-<p style="margin-left:14.2pt; text-align:justify">                                                   </p>
+<p><img alt="" src="http://gth.upeu.edu.pe/TALENTO_HUMANO/Archivo/Firmas/FIR-0001_Rengifo.jpg" style="height:80px; line-height:20.8px; margin:0px 100px; opacity:0.9; position:absolute; text-align:justify; width:200px; z-index:-1" /></p>
 
-<div>                     <img alt="" src="http://gth.upeu.edu.pe/TALENTO_HUMANO/Archivo/Firmas/FIR-0001_Rengifo.jpg" style="height:40px; line-height:20.8px; opacity:0.9; position:absolute; text-align:justify; width:131px" /></div>
+<div> </div>
+
+<p style="margin-left:14.2pt; text-align:justify">      </p>
+
+<p style="margin-left:14.2pt; text-align:justify"> </p>
 
 <div>
-<h4 style="text-align:justify">             <strong>                 </strong><strong> </strong><strong>EMPLEADOR                                                      TRABAJADOR (A)</strong></h4>
+<div>
+<h4 style="text-align:justify">             <strong>                 </strong><strong>              </strong><strong>EMPLEADOR                                                      TRABAJADOR (A)</strong></h4>
 </div>
 
 <p style="margin-left:14.2pt"> </p>
+</div>

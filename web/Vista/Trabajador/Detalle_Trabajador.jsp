@@ -129,8 +129,8 @@
             String id_pasos = request.getParameter("pas");
             String nropaso = request.getParameter("np");
             String edit = request.getParameter("edit");
-          
-           
+
+
         %>
         <!--Begin Detalle Trabajador-->
 
@@ -164,7 +164,7 @@
                             <input type="hidden" name="idtr" class="idtr" id="input-file" value="<%=t.getId_trabajador()%>">
                             <input style="display:none" class="file-foto" type="file" name="archivo" required="">
                         </form>
-                        <a class="avatar mustang-gallery pull-left" href="../../imagenes/avatar_default.jpg" ><img src="../../imagenes/avatar_default.jpg" class="borde" width="100" height="100" ></a>
+                        <a class="avatar mustang-gallery pull-left" href="../../img/avatar_default.jpg" ><img src="../../img/avatar_default.jpg" class="borde" width="100" height="100" ></a>
                         <div class="foto-user" style="display: none;">
                         </div>
                         <a class="ver_foto btn bg-color-purple txt-color-white btn-xs">Cambiar Imagen</a>           
@@ -174,7 +174,7 @@
                                 for (int index = 0; index < ListaridTrabajador.size(); index++) {
                                     V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                                     trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
-                                    String nombres = trb.getNo_trabajador().toUpperCase()+" "+trb.getAp_paterno().toUpperCase();
+                                    String nombres = trb.getNo_trabajador().toUpperCase() + " " + trb.getAp_paterno().toUpperCase();
                                     String idtrab = trb.getId_trabajador();
                             %>
                             <button data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">asas</button>
@@ -374,7 +374,7 @@
                                         int vnc = Integer.parseInt(request.getParameter("vnc"));
                                         if (vnc > 0) {
                                 %>
-                        <button class="btn btn-labeled btn-success btn-autor" type="submit">
+                        <button class="btn btn-labeled btn-success btn-autor" type="button">
                             <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>PROCESAR  </button>
                                 <%
                                     }
@@ -395,8 +395,10 @@
                         <input type="hidden" name="COD" value="<%=cod%>"  >               
                         <input type="hidden" name="PUESTO_ID" value="<%=idp%>" >  
                         <input type="hidden" name="IDDETALLE_REQ_PROCESO" value="<%=iddrp%>"  >  
-                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>" 
-                               <tr><td><input type="hidden" name="opc"  class="submit" value="Rechazar"/></td></tr>
+                        <input type="hidden" name="IDPASOS" value="<%=id_pasos%>">
+                        <input type="hidden" name="NOMBRES" value="<%=nombres%>"> 
+                        <input type="hidden" name="IDTRAB" value="<%=idtrab%>">
+                        <tr><td><input type="hidden" name="opc"  class="submit" value="Rechazar"/></td></tr>
                         <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -613,22 +615,6 @@
         -->
 
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
-
-
-        <!-- PAGE RELATED PLUGIN(S)
-         <script src="../../js/plugin/maxlength/bootstrap-maxlength.min.js"></script>
-         <script src="../../js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
-         <script src="../../js/plugin/clockpicker/clockpicker.min.js"></script>
-         <script src="../../js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js"></script>
-         <script src="../../js/plugin/noUiSlider/jquery.nouislider.min.js"></script>
-         <script src="../../js/plugin/ion-slider/ion.rangeSlider.min.js"></script>
-         <script src="../../js/plugin/colorpicker/bootstrap-colorpicker.min.js"></script>
-         <script src="../../js/plugin/knob/jquery.knob.min.js"></script>
-         <script src="../../js/plugin/x-editable/moment.min.js"></script>
-         <script src="../../js/plugin/x-editable/jquery.mockjax.min.js"></script>
-         <script src="../../js/plugin/x-editable/x-editable.min.js"></script>
-         <script src="../../js/plugin/typeahead/typeahead.min.js"></script>
-         <script src="../../js/plugin/typeahead/typeaheadjs.min.js"></script> -->
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script src="../../js/shadowbox/shadowbox.js" type="text/javascript"></script>
@@ -670,6 +656,45 @@
                 counterType: "skip"
             });
         }
+        function ValBtnAutorizarDgp(trabajador, divBotones) {
+            divBotones.empty();
+            alert("hcsrgrt");
+            $.ajax({
+                url: "../../autorizacion", data: "opc=ValBtnAutorizacion&trabajador=" + trabajador, type: 'POST', success: function (data, textStatus, jqXHR) {
+                    if (data.rpta === "1") {
+                        divBotones.append(data.data);
+                        $(".btn-autor").click(function (e) {
+                            $(".btn-autor").attr("disabled","disabled");
+                            $.SmartMessageBox({
+                                title: "¡Alerta de Confirmación!",
+                                content: "¿Está totalmente seguro de autorizar este requerimiento?",
+                                buttons: '[No][Si]'
+                            }, function (ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+                                    //$(".form-aut").submit();
+                                    $.ajax({url: "../../autorizacion",
+                                        data: $(".form-aut").serialize(),
+                                        type: 'POST',
+                                        success: function (data, textStatus, jqXHR) {
+                                            if (data.rpta) {
+                                                window.parent.UpdateNotifications();
+                                                window.parent.sendMessage();
+                                                window.location.href="../Dgp/Autorizar_Requerimiento.jsp?r=ok";
+                                            }
+                                        }});
+                                }
+                                if (ButtonPressed === "No") {
+                                    return false;
+                                }
+                            });
+                            e.preventDefault();
+                        });
+                    } else {
+                        /*error*/
+                    }
+                }
+            });
+        }
         $(document).ready(function () {
             getAvatar("perfil", idtrl);
             getAvatar("todo", idtrl);
@@ -703,12 +728,11 @@
             $(".btn-conti").click(function (e) {
                 $.SmartMessageBox({
                     title: "Alerta de Confirmación",
-                    content: "¿Está totalmente seguro de rechazar este requerimiento?",
+                    content: "¿Está totalmente seguro de rechazar este requerimiento999?",
                     buttons: '[No][Si]'
                 }, function (ButtonPressed) {
                     if (ButtonPressed === "Si") {
                         $(".form-rech").submit();
-                        //$(".form-rech").submit();
                     }
                     if (ButtonPressed === "No") {
                         return false;
@@ -745,15 +769,19 @@
             /*FIN carga academica*/
 
             /*AUTORIZACIONES*/
-            $(".btn-autor").click(function (e) {
+            $(".btn-autor1").click(function (e) {   
+                $(".btn-autor1").attr("disabled","disabled");
                 $.SmartMessageBox({
                     title: "¡Alerta de Confirmación!",
-                    content: "¿Está totalmente seguro de autorizar este requerimiento?",
+                    content: "¿Está totalmente seguro de autorizar este requerimientoklñklñ?",
                     buttons: '[No][Si]'
                 }, function (ButtonPressed) {
                     if (ButtonPressed === "Si") {
+                        //   window.parent.sendOk();
+                        // parent.sendOk();
                         $(".form-aut").submit();
-                        window.parent.sendMessage();
+                        //window.sendMessage();
+                        //window.parent.websocket.send("texto");
                     }
                     if (ButtonPressed === "No") {
                         return false;
@@ -762,6 +790,7 @@
                 e.preventDefault();
             });
             $(".btn-rech").click(function (e) {
+                $(".btn-rech").attr("disabled","disabled")
                 $.SmartMessageBox({
                     title: "Alerta de Confirmación!",
                     content: "¿Está totalmente seguro de rechazar este requerimiento?",
@@ -985,12 +1014,12 @@
                             if (obj.EFOTO === "2") {
                                 /* your photo rechazada*/
                                 $('.modal').modal('show');
-                                $('.borde').attr('src', '../../imagenes/Desaprobado.png');
+                                $('.borde').attr('src', '../../img/Desaprobado.png');
 
                                 var padre = $(window.parent.document.getElementById('foto_usuario'));
                                 var idtra = $(window.parent.document.getElementById('id_trabajador')).val();
                                 if (idtra.trim() == $(".idtr").val().trim()) {
-                                    $(padre).attr("src", "imagenes/Desaprobado.png");
+                                    $(padre).attr("src", "img/Desaprobado.png");
                                 }
                             } else {
                                 if (obj.EFOTO != 2) {

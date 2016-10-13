@@ -17,7 +17,7 @@ import org.json.XML;
 
 public class WSClienteAcademico {
     
-   public void start_ws_academico (String semestre) throws Exception{
+   public static void start_ws_academico (String semestre) throws Exception{
   //public static void main(String args[]) throws Exception { String semestre = "2015-1";
         JSONArray arr = WSClienteAcademico.getRequest(semestre);
         int tamaño = arr.length();

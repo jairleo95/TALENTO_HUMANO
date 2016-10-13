@@ -47,7 +47,7 @@
         <title>Reporte Datos Hijos</title>
         <style>
             .caja{
-                background:transparent url(../../imagenes/Gifloader.GIF) center no-repeat;
+                background:transparent url(../../img/Gifloader.GIF) center no-repeat;
             }
         </style>
     </head>

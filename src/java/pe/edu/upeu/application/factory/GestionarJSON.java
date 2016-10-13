@@ -53,11 +53,11 @@ public class GestionarJSON {
     }
     
     private static void showJSON(String json){
-        System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
+       System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
         JSONObject jsonObject = new JSONObject("{\"phonetype\":\"N95\",\"cat\":\"WP\"}");
         
         System.out.println(jsonObject);
-        
+     
        
     }
 }

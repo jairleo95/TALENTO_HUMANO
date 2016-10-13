@@ -58,15 +58,16 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
         <style>
             .ui-datepicker-calendar {
                 display: none;
             }
+            .form-inline .checkbox input[type=checkbox].checkbox+span, .form-inline .radiobox input[type=radio].radiobox+span {
+                margin-left: -20px;
+            }
         </style>
     </head>
     <%
-        CConversion c = new CConversion();
         int t = List_id_Autorizacion.size();
     %>
     <%if (request.getParameter("r") != null) {
@@ -104,7 +105,7 @@
             <!-- MAIN CONTENT -->
             <div id="content">
                 <!-- widget grid -->
-                <section id="widget-grid" class="">
+                <section id="widget-grid" class="slideInDown fast animated" >
 
                     <!-- row -->
                     <div class="row">
@@ -141,7 +142,8 @@
                                     <span class="widget-icon"> <i class="glyphicon glyphicon-inbox"></i> </span>
                                     <h2 class="font-md"><strong>Requerimientos por </strong> <i>Autorizar</i></h2>
                                     <div class="widget-toolbar">
-                                        <span class="jarviswidget" ><i class="fa fa-refresh fa-spin"></i></span>
+                                        <span class="statusBarAut"></span>
+                                        <span class="jarviswidget" ><i class="fa fa-refreshs fa-spin"></i></span>
                                     </div> 
                                 </header>
                                 <!-- widget div-->
@@ -187,9 +189,12 @@
                                             %>
                                             <tr>
                                                 <th class='hasinput' colspan='15' style='width:95%' ></th>
-                                                <th class='hasinput'  style='' ><center><button   rel="tooltip" data-placement="top" data-original-title="Procesar Firmas"  class='btn btn-primary btn-circle btn-lg btn_pro_firma'><i class='glyphicon glyphicon-ok'></i></button></center></th>
-                                            <th class='hasinput'  style='' ><center><button  rel="tooltip" data-placement="top" data-original-title="Procesar a remuneraciones"  class='btn btn-default btn-circle btn-lg btn_pro_remuneracion'><i class='glyphicon glyphicon-ok'></i></button></center></th>
-                                            <th class='hasinput'  style='' ><center><button  rel="tooltip" data-placement="top" data-original-title="Procesar a Firmas y Envio a Remuneraciones"  class='btn btn-warning btn-circle btn-lg btnProcesarFirmaAndRem'><i class='glyphicon glyphicon-ok'></i></button></center></th>
+                                                <th class='hasinput'  style='' ><center>
+                                                <button   disabled="" rel="tooltip" data-placement="top" data-original-title="Procesar Firmas"  class='btn btn-primary btn-circle btn-lg btn_pro_firma'><i class='glyphicon glyphicon-ok'></i></button></center></th>
+                                            <th class='hasinput'  style='' ><center>
+                                                <button  disabled="" rel="tooltip" data-placement="top" data-original-title="Procesar a remuneraciones"  class='btn btn-default btn-circle btn-lg btn_pro_remuneracion'><i class='glyphicon glyphicon-ok'></i></button></center></th>
+                                            <th class='hasinput'  style='' ><center>
+                                                <button  disabled=""  rel="tooltip" data-placement="top" data-original-title="Procesar a Firmas y Envio a Remuneraciones"  class='btn btn-warning btn-circle btn-lg btnProcesarFirmaAndRem'><i class='glyphicon glyphicon-ok'></i></button></center></th>
                                             </tr>
                                             <%}%>
                                             <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>
@@ -239,7 +244,8 @@
                                                     <td>
                                                         <div class="btn-group">
                                                             <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                                Accion <span class="caret"></span>
+                                                                <i class="fa fa-gear fa-lg"></i>
+                                                                <i class="fa fa-caret-down"></i>
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li><a href="../../dgp?iddgp=<%=a.getId_dgp().trim()%>&opc=Seguimiento">Ver Proceso</a></li>
@@ -278,7 +284,7 @@
                                                     </td>
                                                     <td ><%out.print(aupl.Mes_plazo(a.getId_dgp()));%></td>   
                                                     <% if (a.getAr_foto() == null) {%>
-                                                    <td><img class="user_avatar_<%=a.getId_trabajador()%>" src="../../imagenes/avatar_default.jpg"  width="30"  height="30"></td>
+                                                    <td><img class="user_avatar_<%=a.getId_trabajador()%>" src="../../img/avatar_default.jpg"  width="30"  height="30"></td>
                                                         <% } else {%>
                                                     <td><img class="user_avatar_<%=a.getId_trabajador()%>" src="../Usuario/Fotos/<%=a.getAr_foto()%>"  width="30"  height="30"></td>
                                                         <% }%>
@@ -287,9 +293,9 @@
                                                     <td ><%=a.getNo_area()%></td>
                                                     <td ><%=a.getNo_dep()%></td>
                                                     <td ><%=a.getNo_req()%></td>
-                                            <input type="hidden" class="val_aut<%=(f + 1)%>" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
+                                            <input type="hidden" class="val_aut<%=(f + 1)%> valAut" value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                             <input type="hidden" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
-                                            <input type="hidden" class="correos_<%=(f + 1)%>" value="&IDTR=<%=a.getId_trabajador()%>&co_inst=<%=a.getDi_correo_inst()%>&co_pers=<%=a.getDi_correo_personal()%>"/>
+                                            <input type="hidden" class="correos_<%=(f + 1)%> correoTrabajador" value="&IDTR=<%=a.getId_trabajador()%>&co_inst=<%=a.getDi_correo_inst()%>&co_pers=<%=a.getDi_correo_personal()%>"/>
                                             <td class="text-info"><a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>"><strong><%=a.getDe_pasos()%></strong></a></td>
                                             <td ><%=a.getFe_creacion()%></td>
                                             <td><%if (a.getLi_motivo() != null) {
@@ -350,7 +356,7 @@
                                                 if (Integer.parseInt(a.getVal_firm_contrato()) != 0 & Integer.parseInt(a.getElab_contrato()) != 0) {
                                                 %>
                                                 <div class="smart-form">
-                                                    <label class="toggle"><input type="checkbox" value="<%=(f + 1)%>"  class="env_rem<%=(f + 1)%>"  name="estado" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
+                                                    <label class="toggle"><input type="checkbox" value="<%=(f + 1)%>"  class="env_rem<%=(f + 1)%> envioRem"  name="estado" name="checkbox-toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                 </div>
                                                 <%
                                                     } else {
@@ -371,7 +377,7 @@
                                             <td>
                                                 <input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%> inp_cod_aps" style="width:50px"/>
                                             </td>
-                                            <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
+                                            <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%> idTrabajador" value="<%=a.getId_trabajador()%>" />
                                             <%} else {%>
                                             <td><strong><%=a.getCo_aps()%></strong></td>
                                             <%}
@@ -383,7 +389,21 @@
                                             <td><input type="text" name="cod_huella" maxlength="6" class="form-control cod_huella<%=(f + 1)%> inp_cod_huella" style="width:70px"/></td>
                                             <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%>" value="<%=a.getId_trabajador()%>" />
                                             <%} else {%>
-                                            <td><strong><%=a.getCo_huella_digital()%></strong></td>
+                                            <td class="" >
+                                                <div class="input-group" >
+
+                                                    <input class="form-control" placeholder=""  style="width: 70px;" type="text" value="<%=a.getCo_huella_digital()%>">
+                                                    <span class="input-group-addon"  >
+                                                        <span class="checkbox">
+                                                            <label >
+                                                                <input type="checkbox" class="checkbox style-0 cbHuellaItem" >
+                                                                <span></span>
+                                                            </label>
+                                                        </span>
+                                                    </span>
+
+                                                </div>
+                                            </td>
                                             <%}
                                                 }%>   
                                             </tr>
@@ -433,16 +453,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-
-
-
-
-
-
                             </div>
                             <!-- end widget div -->
                     </div>
@@ -510,7 +520,6 @@
 <!--===========================Modal======================= -->
 
 <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -542,35 +551,7 @@
 <!-- JARVIS WIDGETS -->
 <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-<!-- EASY PIE CHARTS 
-<script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
 
-<!-- SPARKLINES 
-<script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>-->
-
-<!-- JQUERY VALIDATE 
-<script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>-->
-
-<!-- JQUERY MASKED INPUT 
-<script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
-
-<!-- JQUERY SELECT2 INPUT 
-<script src="../../js/plugin/select2/select2.min.js"></script>-->
-
-<!-- JQUERY UI + Bootstrap Slider 
-<script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
-
-<!-- browser msie issue fix -->
-<script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
-
-<!-- FastClick: For mobile devices -->
-<script src="../../js/plugin/fastclick/fastclick.min.js"></script>
-
-<!--[if IE 8]>
-
-<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-
-<![endif]-->
 
 <!-- Demo purpose only -->
 <script src="../../js/demo.min.js"></script>
@@ -578,15 +559,9 @@
 <!-- MAIN APP JS FILE -->
 <script src="../../js/app.min.js"></script>
 
-<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT
-<!-- Voice command : plugin -->
-
-<!-- PAGE RELATED PLUGIN(S) 
-<script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>-->
 
 <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
 <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
-<script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
 <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
 <script src="../../js/coment/comenth.js" type="text/javascript"></script>
@@ -610,6 +585,33 @@
                                                         $.datepicker.setDefaults($.datepicker.regional['es']);
 </script>
 <script>
+    var statusBarAut = $(".statusBarAut");
+    function statusBtnSendToRem() {
+        if ($(".envioRem").length == 0) {
+            $(".btn_pro_remuneracion").attr("disabled", "disabled");
+            return false;
+        } else {
+            $(".btn_pro_remuneracion").removeAttr("disabled");
+            return true;
+        }
+    }
+    function statusBtnSendFirma() {
+        if ($(".firm_contr").length == 0) {
+            $(".btn_pro_firma").attr("disabled", "disabled");
+            return true;
+        } else {
+            $(".btn_pro_firma").removeAttr("disabled");
+            return false;
+        }
+    }
+    function statusFirmaAndRem() {
+        if (!statusBtnSendToRem() == true & statusBtnSendFirma() == true) {
+            $(".btnProcesarFirmaAndRem").attr("disabled", "disabled");
+        } else {
+            $(".btnProcesarFirmaAndRem").removeAttr("disabled");
+        }
+    }
+
     function nobackbutton() {
         window.location.hash = "no-back-button";
         window.location.hash = "Again-No-back-button" //chrome
@@ -629,61 +631,168 @@
     }
     function procesarFirmas(callback) {
         $.each($(".firm_contr"), function () {
-            if ($(this).prop('checked')) {
-                console.log("procesando firnas");
+            var currentInputFirma = $(this);
+            if (currentInputFirma.prop('checked')) {
                 $.ajax({
                     async: false,
                     url: "../../contrato",
-                    type: "POST",
-                    data: "opc=Actualizar_Firma" + $(".val_firm" + $(this).val()).val()
-                }).done(function () {
-                });
-                $.ajax({
-                    async: false,
-                    url: "../../autorizacion",
                     type: "POST", success: function (data, textStatus, jqXHR) {
-
+                        if (data.rpta) {
+                            console.log("status firma updated:" + data.rpta);
+                            $.ajax({
+                                async: false,
+                                url: "../../autorizacion",
+                                type: "POST", success: function (data, textStatus, jqXHR) {
+                                    if (data.rpta) {
+                                        console.log("procesando firnas");
+                                        /* var table = new $.fn.dataTable.Api('#dt_basic1');
+                                         table.row(currentInputFirma.parents('tr')).remove().draw();*/
+                                        /*Agregar Boton*/
+                                        exito("Procesado con exito!", "Se ha actualizado el contrato");
+                                        statusBtnSendToRem();
+                                        statusBtnSendFirma();
+                                        statusFirmaAndRem();
+                                    }
+                                },
+                                data: "opc=AceptarMasivo" + $(".val_aut" + currentInputFirma.val()).val()
+                            })
+                        }
 
                     },
-                    data: "opc=Aceptar" + $(".val_aut" + $(this).val()).val()
-                }).done(function () {
-
+                    data: "opc=Actualizar_Firma" + $(".val_firm" + currentInputFirma.val()).val()
                 });
+
             }
         });
         if (typeof callback !== 'undefined') {
             callback();
         } else {
-            window.location.href = "../../autorizacion";
+            //  window.location.href = "../../autorizacion";
         }
 
     }
     function refreshCurrentPage() {
-        console.log("redirecto to autorizacion")
+        console.log("redirecto to autorizacion");
         window.location.href = "../../autorizacion";
     }
     function procesarSendToRemu(callback) {
-        for (var i = 1; i <= <%=List_id_Autorizacion.size()%>; i++) {
+        console.log("enter to procesarSendToRemu function");
+        $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+        var lenghtDatatable = $('#dt_basic1 tr').length;
+        for (var i = 1; i <= lenghtDatatable; i++) {
             if ($(".env_rem" + i).prop('checked')) {
+                console.log("checked condition");
                 $.ajax({
                     async: false,
                     url: "../../autorizacion",
                     type: "POST", success: function (data, textStatus, jqXHR) {
-
+                        if (data.rpta) {
+                            $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                            var table = new $.fn.dataTable.Api('#dt_basic1');
+                            table.row($(".env_rem" + i).parents('tr')).remove().draw();
+                            exito("Procesado con exito!", "Envió el requerimiento correctamente");
+                            statusBtnSendToRem();
+                            statusBtnSendFirma();
+                            statusFirmaAndRem();
+                        }
+                        console.log("Autorizacion :" + data.rpta)
                     },
-                    data: "opc=Aceptar" + $(".val_aut" + $(".env_rem" + i).val()).val()
-                }).done(function () {
-
+                    data: "opc=AceptarMasivo" + $(".val_aut" + $(".env_rem" + i).val()).val()
                 });
             }
         }
         if (typeof callback !== 'undefined') {
             callback();
         } else {
-            window.location.href = "../../autorizacion";
+            // window.location.href = "../../autorizacion";
         }
     }
+    function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
+
+        console.log("::enter to registerAndProcessCodHuella function");
+        if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
+            registerCOdHuella(inputItem, function () {
+                processAutorizacionMasive(dataProcess, function () {
+                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+                    sendEmail(dataEmail, function () {
+                        var table = new $.fn.dataTable.Api('#dt_basic1');
+                        table.row(inputItem.parent('tr')).remove().draw();
+                        $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                    });
+                });
+            });
+
+
+
+        }
+    }
+    function registerCOdHuella(inputItem, callback) {
+        console.log("::enter to registerCOdHuella function");
+        if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
+            $.ajax({
+                async: false,
+                url: "../../trabajador", data: "opc=registrar_huella&cod=" + inputItem.val() + "&idtr=" + inputItem.parents("tr").find(".idTrabajador").val(),
+                type: "POST", success: function (data, textStatus, jqXHR) {
+                    if (data.rpta) {
+                        console.log("huella registrada!");
+                        if (typeof callback !== 'undefined') {
+                            callback(data);
+                        }
+                    }
+                }
+
+            });
+        }
+
+    }
+    function processAutorizacionMasive(values, callback) {
+        console.log("::enter to processAutorizacionMasive function");
+        $.ajax({
+            async: false,
+            url: "../../autorizacion",
+            data: "opc=AceptarMasivo" + values,
+            type: "POST", success: function (data, textStatus, jqXHR) {
+                if (data.rpta) {
+                    console.log("autorizacion registrada");
+                    if (typeof callback !== 'undefined') {
+                        callback();
+                    }
+                }
+            }
+        });
+    }
+
+    function sendEmail(dataRequest, callback) {
+        console.log("::enter to sendEmail function");
+        statusBarAut.text("Enviando correos...");
+        $.ajax({
+            //  async: false,
+            url: "../../autorizacion",
+            type: "POST", success: function (data, textStatus, jqXHR) {
+                if (data.rpta) {
+                    statusBarAut.text("Correos enviados!").fadeOut('slow');
+                    //  console.log(table.row(inputItem.parent('tr')).data());
+                    $.bigBox({
+                        title: "Registro terminado!",
+                        content: "<i class='fa fa-clock-o'></i> <i>Se enviaron a los correos del trabajador: " + data.sendto + "...</i>",
+                        color: "#296191",
+                        icon: "fa fa-check shake animated",
+                        number: "1",
+                        timeout: 6000
+                    });
+                    if (typeof callback !== 'undefined') {
+                        callback(data);
+                    }
+                }
+            },
+            data: dataRequest
+        });
+    }
     $(document).ready(function () {
+        statusBtnSendToRem();
+        statusBtnSendFirma();
+        statusFirmaAndRem();
+
         $(".btnProcesarFirmaAndRem").click(function () {
             $.SmartMessageBox({
                 title: "¡Advertencia!",
@@ -704,8 +813,7 @@
                 buttons: '[No][Si]'
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
-
-                    procesarSendToRemu(refreshCurrentPage);
+                    procesarSendToRemu();
                 }
                 if (ButtonPressed === "No") {
                 }
@@ -719,8 +827,7 @@
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
                     try {
-
-                        procesarFirmas(refreshCurrentPage);
+                        procesarFirmas();
                         // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
                     } catch (err) {
 
@@ -738,12 +845,13 @@
                 buttons: '[No][Si]'
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
-                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+
                     var lenghtDatatable = $('#dt_basic1 tr').length;
                     for (var r = 1; r <= lenghtDatatable; r++) {
                         console.log("(" + r + ")Iterate items cod aps:" + $(".cod_aps" + r).val());
                         if ($(".cod_aps" + r).val() !== "" & typeof $(".cod_aps" + r).val() !== 'undefined') {
                             console.log(r + "codigo aps: " + $(".cod_aps" + r).val());
+                            $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
                             $.ajax({
                                 async: false,
                                 url: "../../trabajador", data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val(),
@@ -754,24 +862,20 @@
                                             url: "../../autorizacion",
                                             type: "POST", success: function (objJson, textStatus, jqXHR) {
                                                 if (objJson.rpta) {
-                                                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                                                     var table = new $.fn.dataTable.Api('#dt_basic1');
                                                     table.row($(".cod_aps" + r).parents('tr')).remove().draw();
                                                     exito("Procesado con exito!", "Codigo APS ingresado correctamente");
                                                     console.log("autorizado!");
-
+                                                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                                                 }
                                             },
                                             data: "opc=AceptarMasivo" + $(".val_aut" + r).val()
-                                        }).done(function () {
-
                                         });
                                     }
 
                                 }
 
-                            }).done(function () {
-                            });
+                            })
 
                         }
                     }
@@ -784,78 +888,52 @@
             });
         });
         $(".btn_cod_huella").click(function () {
+            /*  testFunction1(function () {
+             testFunction2("gg")
+             });*/
+            var lenghtDatatable = $('#dt_basic1 tr').length;
             $.SmartMessageBox({
                 title: "¡Advertencia!",
                 content: "¿Esta seguro de procesar códigos de huella a estos requerimientos?",
                 buttons: '[No][Si]'
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
-
-                    var numCorreos = [];
-
-                    for (var r = 1; r <= parseInt($(".num_huella").val()); r++) {
-                        if ($(".cod_huella" + r).val() !== "" & typeof $(".cod_huella" + r).val() !== "undefined") {
-                            console.log(r + "codigo huella" + $(".cod_huella" + r).val())
-                            numCorreos.push($(".cod_huella" + r).val());
-                            $.ajax({
-                                async: false,
-                                url: "../../trabajador", data: "opc=registrar_huella&cod=" + $(".cod_huella" + r).val() + "&idtr=" + $(".idtr" + r).val(),
-                                type: "POST", success: function (data, textStatus, jqXHR) {
-                                    if (data.rpta) {
-                                        console.log("huella registrada!");
-                                        $.ajax({
-                                            async: false,
-                                            url: "../../autorizacion",
-                                            data: "opc=AceptarMasivo" + $(".val_aut" + r).val(),
-                                            type: "POST", success: function (data, textStatus, jqXHR) {
-                                                if (data.rpta) {
-                                                    console.log("autorizacion registrada");
-                                                    $.ajax({
-                                                        //  async: false,
-                                                        url: "../../autorizacion",
-                                                        type: "POST", success: function (data, textStatus, jqXHR) {
-                                                            if (data.rpta) {
-                                                                console.log("senedto" + data.sendto);
-                                                                console.log("correos enviados!");
-                                                                var table = new $.fn.dataTable.Api('#dt_basic1');
-                                                                //    table.row($(".cod_huella" + r).parent('tr')).remove().draw();
-                                                                console.log(table.row($(".cod_huella" + r)).data());
-                                                                $.bigBox({
-                                                                    title: "Registro terminado!",
-                                                                    content: "<i class='fa fa-clock-o'></i> <i>Se enviaron a los correos del trabajador: " + data.sendto + "...</i>",
-                                                                    color: "#296191",
-                                                                    icon: "fa fa-check shake animated",
-                                                                    number: "1",
-                                                                    timeout: 6000
-                                                                });
-                                                            }
-                                                        },
-                                                        data: "opc=Enviar_Correo" + $(".correos_" + r).val()
-                                                    })
-                                                }
-
-
-                                            }
-                                        });
-                                    }
-
-                                }
-
-                            });
-
-
-                        }
+                    for (var r = 1; r <= lenghtDatatable; r++) {
+                        var objInputHuella = $(".cod_huella" + r);
+                        var valAut = objInputHuella.parents('tr').find(".valAut");
+                        var correoTrabajador = objInputHuella.parents('tr').find(".correoTrabajador");
+                        registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + correoTrabajador.val(), valAut.val());
                     }
+                    $.each($(".cbHuellaItem"), function (index) {
+                        var itemRegistered = $(this);
+                        if (itemRegistered.prop('checked')) {
+                            console.log(index + 1)
+                            if (itemRegistered.val() !== "" & typeof itemRegistered.val() !== "undefined") {
+                                var itemValue = itemRegistered.parents('tr').find(".valAut");
+                                var correoTrabajador = itemRegistered.parents('tr').find(".correoTrabajador");
+                                processAutorizacionMasive(itemValue.val(), function () {
+                                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+                                    sendEmail("opc=Enviar_Correo" + correoTrabajador.val(), function () {
+                                        $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                                        var table = new $.fn.dataTable.Api('#dt_basic1');
+                                        table.row(itemRegistered.parents('tr')).remove().draw();
 
-                    console.log("correos" + numCorreos)
+                                    });
+                                });
+                            }
+                        }
 
-                    //   window.location.href = "../../autorizacion?opc=mens_cod_huella";
+                    });
+
+                    //  registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + $(".correos_" + t).val(), $(".val_aut" + t).val());
+                    // $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                 }
                 if (ButtonPressed === "No") {
                 }
             });
         });
     });
+
 </script>
 <script type="text/javascript">
     var año = '';

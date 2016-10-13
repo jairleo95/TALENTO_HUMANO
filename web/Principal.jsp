@@ -70,6 +70,12 @@
         <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <script type="text/javascript" src="js/JQuery/jquery.autoheight.js"></script>
+        <style>
+            .smart-style-1 nav ul li a {
+                /*  padding: 12px 17px 12px 16px;*/
+                padding:  10px 10px 10px 10px;
+            }
+        </style>
 
     </head>
     <body class="smart-style-1 fixed-header fixed-footer"  onload="nobackbutton();
@@ -81,33 +87,29 @@
 
             <div id="logo-group" >
                 <!-- PLACE YOUR LOGO HERE -->
-                <span id="logo"> <img src="img/logo_rrhh.jpg" style=" position: absolute;top: 6px; width:130px; height:36px " alt="Talento Humano"> </span>
+                <span id="logo"> <img src="img/logoRRHH.png" style=" position: absolute;top: 8px; width:100px; height:36px " alt="Talento Humano"> </span>
                 <!-- END LOGO PLACEHOLDER -->
 
                 <!-- Note: The activity badge color changes when clicked and resets the number to 0
                 Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
-                <span id="activity" class="activity-dropdown hola2"> <i class="fa fa-user"></i> <b class="badge"> 21 </b> </span>
+                <span id="activity" class="activity-dropdown hola2"> <i class="fa fa-user"></i> <b class="badge total"> 0 </b> </span>
 
                 <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
-                <div class="ajax-dropdown hola">
+                <div class="ajax-dropdown">
 
                     <!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
                     <div class="btn-group btn-group-justified"  data-toggle="buttons">
                         <label class="btn btn-default autorizacionList">
-                            <input type="radio" name="activity" 
-                                   >
-                            Autori... </label>
-                        <label class="btn btn-default ">
                             <input type="radio" name="activity">
-                            Rechazados (3) </label>
-                        <label class="btn btn-default ">
-                            <input type="radio" name="activity">
-                            Por autor... (4) </label>
+                            Autorizados </label>
+                        <label class="btn btn-default rechazarList">
+                            <input type="radio" name="activity" >
+                            Rechazados </label>
                     </div>
 
                     <!-- notification content -->
-                    <div class="ajax-notificationss custom-scroll" style="overflow: scroll;">
-                        <ul class="notification-body autnot" >
+                    <div class="ajax-notifications custom-scroll">
+                        <ul class="notification-body autnot recnot poraut" >
                             <div class="alert alert-transparent">
                                 <h4>Click en el boton para mostrar el mensaje</h4>
 
@@ -121,6 +123,7 @@
 
                 </div>
                 <!-- END AJAX-DROPDOWN -->
+
             </div>
             <%if (false) {
             %>
@@ -166,7 +169,7 @@
                 <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
                     <li class="">
                         <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown"> 
-                            <img src="imagenes/avatar_default.jpg" alt="<%out.println((String) sesion.getAttribute("USER")); %>" class="online" />  
+                            <img src="img/avatar_default.jpg" alt="<%out.println((String) sesion.getAttribute("USER")); %>" class="online" />  
                         </a>
                         <ul class="dropdown-menu pull-right">
                             <li>
@@ -187,7 +190,7 @@
                             <li class="divider"></li>
                             <li>
                                 <a href="login.html" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout"><i class="fa fa-sign-out fa-lg"></i> <strong><u>L</u>ogout</strong></a>
-                            </li>.
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -328,8 +331,9 @@
                 <div class="row">
                     <div class="avatar-user col-md-3">
                         <input id="id_trabajador" type="hidden" value="<%out.println(sesion.getAttribute("IDTR"));%>" />
+                        <input id="iuser" type="hidden" value="<%out.println(id_user);%>" />
                         <a href="javascript:void(0);" id="show-shortcut" >
-                            <img id="foto_usuario" src="imagenes/avatar_default.jpg"  />
+                            <img id="foto_usuario" src="img/avatar_default.jpg"  />
                         </a>  
                     </div>
                     <div class="col-md-9">
@@ -361,7 +365,7 @@
                 -->
 
                 <ul >
-                    
+
 
                     <%
                         for (int i = 0; i < listarURL.size(); i++) {
@@ -656,7 +660,6 @@
 
         <script>
         var btnclose = 0;
-        var listid = [];
         document.oncontextmenu = function () {
             return false;
         }
@@ -669,125 +672,270 @@
         }
         /*WEBSOCKET*/
         var websocket = new WebSocket("ws://" + document.location.host + "/TALENTO_HUMANO/serverGth");
-        websocket.onmessage = function processMessage(message) {
-            var jsonData = JSON.parse(message.data);
-            if (jsonData.message != null) {
-                $.smallBox({
-                    title: "Se ha autorizado un requerimiento...",
-                    content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-                    color: "#296191",
-                    iconSmall: "fa fa-thumbs-up bounce animated",
-                    timeout: 4000
-                });
+
+        websocket.onopen = function openConnection() {
+            websocket.send("Hi");
+        }
+        websocket.onmessage = function processMessage(request) {
+            var data = JSON.parse(request.data);
+            console.log(data);
+            if (data.data !== null) {
+                if (data.message === "Autorizacion") {
+                    UpdateNotifications();
+                    $.smallBox({
+                        title: "Se ha autorizado un requerimiento...",
+                        content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+                        color: "#296191",
+                        iconSmall: "fa fa-thumbs-up bounce animated",
+                        timeout: 4000
+                    });
+                } else {
+
+                }
 
                 // messagesTextArea.value += jsonData.message + "\n";
             }
         }
         function sendMessage() {
-            websocket.send("mensaje");
+            websocket.send("Autorizacion");
+
         }
+
         document.getElementById('myframe').onload = function () {
             /*$(".iframe_principal").show(250);
-            $(".animacion_load").empty();*/
+             $(".animacion_load").empty();*/
         };
         function readNotification(idnoti) {
             var page = "cnot";
             $.post(page, {
                 data: idnoti,
                 op: 2
-            }, function () {
-                alert("Excelente");
             });
         }
-        var ii = 0;
-        function listAjaxNotification() {
-            var url = "cnot";
-            $.post(url, {
-                'listid[]': listid,
-                op: 1
+        function UpdateNotifications() {
+            //console.log("aqui");
+            var page = "cnot";
+            $.post(page, {
+                op: 5,
+                id:'<%=id_user%>'
             }, function (objson) {
-                var rpta = 0;
-                rpta = objson.rpta;
+                var rpta = objson.rpta;
                 if (rpta === "1") {
-                    var lista = objson.lista;
-                    var info = "";
-                    var fcn = "";
-                    var count = 0;
-                    listid = [];
-                    for (var i = 0; i < lista.length; i++) {
-                        info += '<li>';
-                        if (lista[i].es_visualizado == 0) {
-                            info += '<span class="unread">';
-                            listid.push(lista[i].id_notification);
-                            count++;
-                        }
-                        if (lista[i].es_visualizado == 1) {
-                            info += '<span>';
-                        }
-                        fcn = "readNotification('" + lista[i].id_notification + "')"
-                        info += '<a onclick="' + fcn + '" target="myframe" href="' + lista[i].di_notification + '" class="msg">';
-                        info += '<img src="img/avatars/4.png" alt="" class="air air-top-left margin-top-5" width="40" height="40" />';
-                        info += '<span class="from">' + lista[i].titulo + ' <i class="icon-paperclip"></i></span>';
-                        var d = new Date(); //establecemos la fecha de hoy
-                        //Establecemos la fecha final con los parametros anteriores
-                        var fechaFinal = new Date(d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
-
-                        //Establecemos la fecha inicio
-                        var fechaInicio = new Date(lista[i].fecha);
-
-                        //Restamos la fechaFinal menos fechaInicio,
-                        //esto establece la diferencia entre las fechas
-                        var fechaResta = fechaFinal - fechaInicio;
-
-                        //imprimir
-                        if ((((fechaResta / 1000) / 60) / 60) / 24 < 2) {     //dias
-                            if ((((fechaResta / 1000) / 60) / 60) / 24 < 1) {
-                                if (((fechaResta / 1000) / 60) / 60 >= 1) {
-                                    info += '<time>Hace ' + parseInt(((fechaResta / 1000) / 60) / 60) + ' horas</time>';
-                                } else {
-                                    if (parseInt((fechaResta / 1000) / 60) >= 1) {
-                                        info += '<time>Hace ' + parseInt((fechaResta / 1000) / 60) + ' minutos</time>';
-                                    } else {
-                                        info += '<time>Recientemente</time>';
-                                    }
-                                }
-                            } else {
-                                if ((((fechaResta / 1000) / 60) / 60) / 24 == 1) {
-                                    info += '<time>Hace 1 día</time>';
-                                } else {
-                                    info += '<time>Hace 2 días</time>';
-                                }
-                            }
-                        } else {
-                            info += '<time>' + fechaInicio.getDay() + "/" + fechaInicio.getMonth() + '/' + fechaInicio.getFullYear() + '</time>';
-                        }
-                        info += '<span class="subject">' + lista[i].de_notification + '</span>';
-                        info += '<span class="msg-body">Nada importante</span>';
-                        info += '</a>';
-                        info += '</span>';
-                        info += '</li>';
-                    }
-                    if (ii!=0){
-                        $(".autnot").empty();
-                        $(".autnot").append(info);
-                    }
-                    if (count != 0) {
+                    var si = parseInt(objson.si);
+                    var no = parseInt(objson.no);
+                    var total = si + no;
+                    if (total !== 0) {
                         $(".autorizacionList").empty();
-                        $(".autorizacionList").append("Autori... (" + count + ") ");
-                    }
-                    if(count==0){
-                        $(".autorizacionList").empty();
-                        $(".autorizacionList").append("Autori... ");
-                        
+                        $(".autorizacionList").append("Autori... (" + si + ") ");
+                        $(".rechazarList").empty();
+                        $(".rechazarList").append("Rechazados (" + no + ") ");
+                        $(".total").empty();
+                        $(".total").append(total);
+                        $(".total").addClass("bg-color-red");
                     }
                 }
             });
         }
-        
+        var ii = 0;
+        function listAjaxNotification(objOption) {
+            console.log("enter to listAjax");
+            if (typeof objOption !== 'undefined') {
+                objOption.parent().find("label").removeClass("active");
+            }
+            var listid = [];
+            var url = "cnot";
+            $.ajax({
+                url: url,
+                data: 'op=1&id=<%=id_user%>', async: false,
+                type: 'POST', success: function (objson, textStatus, jqXHR) {
+                    var rpta = 0;
+                    rpta = objson.rpta;
+                    if (rpta === "1") {
+                        var lista = objson.lista;
+                        var infoaut = "";
+                        var fcn = "";
+                        var count = 0;
+                        listid = [];
+                        for (var i = 0; i < lista.length; i++) {
+                            if (lista[i].tipo_notification == 1) {
+                                infoaut += '<li>';
+                                if (lista[i].es_visualizado == 0) {
+                                    infoaut += '<span class="unread">';
+                                    listid.push(lista[i].id_notification);
+                                    count++;
+                                }
+                                else if (lista[i].es_visualizado == 1) {
+                                    infoaut += '<span>';
+                                }
+                                fcn = "readNotification('" + lista[i].id_notification + "')"
+                                infoaut += '<a onclick="' + fcn + '" target="myframe" href="' + lista[i].di_notification + '" class="msg">';
+                                infoaut += '<img src="img/avatars/4.png" alt="" class="air air-top-left margin-top-5" width="40" height="40" />';
+                                infoaut += '<span class="from">' + lista[i].titulo + ' <i class="icon-paperclip"></i></span>';
+                                var d = new Date(); //establecemos la fecha de hoy
+                                //Establecemos la fecha final con los parametros anteriores
+                                var fechaFinal = new Date(d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
+
+                                //Establecemos la fecha inicio
+                                var fechaInicio = new Date(lista[i].fecha);
+
+                                //Restamos la fechaFinal menos fechaInicio,
+                                //esto establece la diferencia entre las fechas
+                                var fechaResta = fechaFinal - fechaInicio;
+
+                                //imprimir
+                                if ((((fechaResta / 1000) / 60) / 60) / 24 < 2) {     //dias
+                                    if ((((fechaResta / 1000) / 60) / 60) / 24 < 1) {
+                                        if (((fechaResta / 1000) / 60) / 60 >= 1) {
+                                            infoaut += '<time>Hace ' + parseInt(((fechaResta / 1000) / 60) / 60) + ' horas</time>';
+                                        } else {
+                                            if (parseInt((fechaResta / 1000) / 60) >= 1) {
+                                                infoaut += '<time>Hace ' + parseInt((fechaResta / 1000) / 60) + ' minutos</time>';
+                                            } else {
+                                                infoaut += '<time>Recientemente</time>';
+                                            }
+                                        }
+                                    } else {
+                                        if ((((fechaResta / 1000) / 60) / 60) / 24 == 1) {
+                                            infoaut += '<time>Hace 1 día</time>';
+                                        } else {
+                                            infoaut += '<time>Hace 2 días</time>';
+                                        }
+                                    }
+                                } else {
+                                    infoaut += '<time>' + fechaInicio.getDay() + "/" + fechaInicio.getMonth() + '/' + fechaInicio.getFullYear() + '</time>';
+                                }
+                                infoaut += '<span class="subject">' + lista[i].de_notification + '</span>';
+                                infoaut += '<span class="msg-body">Nada importante</span>';
+                                infoaut += '</a>';
+                                infoaut += '</span>';
+                                infoaut += '</li>';
+                            }
+                            $(".autnot").empty();
+                            $(".autnot").append(infoaut);
+                        }
+                        if (count > 0) {
+                            $(".autorizacionList").empty();
+                            $(".autorizacionList").append("Autorizados (" + count + ") ");
+                        }
+                        if (count == 0) {
+                            $(".autorizacionList").empty();
+                            $(".autorizacionList").append("Autorizados ");
+                        }
+                        if (listid.length > 0) {
+                            $.post(url, {
+                                op: 4,
+                                'listid[]': listid
+                            });
+                        }
+                    }
+
+
+                }});
+
+        }
+        function listAjaxNotificationRec(objOption) {
+            console.log("enter to listAjaxREC");
+            if (typeof objOption !== 'undefined') {
+                objOption.parent().find("label").removeClass("active");
+            }
+            var listid2 = [];
+            var url = "cnot";
+            $.ajax({
+                url: url,
+                data: 'op=3&id=<%=id_user%>', async: false,
+                type: 'POST',
+                success: function (objson, textStatus, jqXHR) {
+                    var rpta = 0;
+                    rpta = objson.rpta;
+                    if (rpta === "1") {
+                        var lista = objson.lista;
+                        var inforec = "";
+                        var fcn = "";
+                        var count2 = 0;
+                        listid2 = [];
+                        for (var i = 0; i < lista.length; i++) {
+                            if (lista[i].tipo_notification == 0) {
+                                inforec += '<li>';
+                                if (lista[i].es_visualizado == 0) {
+                                    inforec += '<span class="unread">';
+                                    listid2.push(lista[i].id_notification);
+                                    count2++;
+                                }
+                                if (lista[i].es_visualizado == 1) {
+                                    inforec += '<span>';
+                                }
+                                fcn = "readNotification('" + lista[i].id_notification + "')"
+                                inforec += '<a onclick="' + fcn + '" target="myframe" href="' + lista[i].di_notification + '" class="msg">';
+                                inforec += '<img src="img/avatars/4.png" alt="" class="air air-top-left margin-top-5" width="40" height="40" />';
+                                inforec += '<span class="from">' + lista[i].titulo + ' <i class="icon-paperclip"></i></span>';
+                                var d = new Date(); //establecemos la fecha de hoy
+                                //Establecemos la fecha final con los parametros anteriores
+                                var fechaFinal = new Date(d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
+
+                                //Establecemos la fecha inicio
+                                var fechaInicio = new Date(lista[i].fecha);
+
+                                //Restamos la fechaFinal menos fechaInicio,
+                                //esto establece la diferencia entre las fechas
+                                var fechaResta = fechaFinal - fechaInicio;
+
+                                //imprimir
+                                if ((((fechaResta / 1000) / 60) / 60) / 24 < 2) {     //dias
+                                    if ((((fechaResta / 1000) / 60) / 60) / 24 < 1) {
+                                        if (((fechaResta / 1000) / 60) / 60 >= 1) {
+                                            inforec += '<time>Hace ' + parseInt(((fechaResta / 1000) / 60) / 60) + ' horas</time>';
+                                        } else {
+                                            if (parseInt((fechaResta / 1000) / 60) >= 1) {
+                                                inforec += '<time>Hace ' + parseInt((fechaResta / 1000) / 60) + ' minutos</time>';
+                                            } else {
+                                                inforec += '<time>Recientemente</time>';
+                                            }
+                                        }
+                                    } else {
+                                        if ((((fechaResta / 1000) / 60) / 60) / 24 == 1) {
+                                            inforec += '<time>Hace 1 día</time>';
+                                        } else {
+                                            inforec += '<time>Hace 2 días</time>';
+                                        }
+                                    }
+                                } else {
+                                    inforec += '<time>' + fechaInicio.getDay() + "/" + fechaInicio.getMonth() + '/' + fechaInicio.getFullYear() + '</time>';
+                                }
+                                inforec += '<span class="subject">' + lista[i].de_notification + '</span>';
+                                inforec += '<span class="msg-body">Nada importante</span>';
+                                inforec += '</a>';
+                                inforec += '</span>';
+                                inforec += '</li>';
+                            }
+                            $(".recnot").empty();
+                            $(".recnot").append(inforec);
+                        }
+                        if (count2 > 0) {
+                            $(".rechazarList").empty();
+                            $(".rechazarList").append("Rechazados (" + count2 + ") ");
+                        }
+                        if (count2 == 0) {
+                            $(".rechazarList").empty();
+                            $(".rechazarList").append("Rechazados ");
+                        }
+                        if (listid2.length > 0) {
+                            $.post(url, {
+                                op: 4,
+                                'listid[]': listid2
+                            });
+                        }
+                    }
+                }});
+
+        }
+
+
         $(document).ready(function () {
-            var idtra = $('#id_trabajador').val()
+            var idtra = $('#id_trabajador').val();
             getAvatar("perfil", idtra);
             pageSetUp();
+            UpdateNotifications();
+            //var iduser=$("#iuser").val();
             // alert('<%="Maximum Inactive Interval of Session in Seconds is : " + sesion.getMaxInactiveInterval() / 60%>');
             $(".menu-item-parent").parent().click(function () {
                 $(".titulo_menu").text(" " + $(this).text());
@@ -809,6 +957,9 @@
                 $this.parent().addClass('active');
             });
 
+            $(".hola2 ").click(function () {
+                $(".autorizacionList").click();
+            });
             function getAvatar(tipo, idtra) {
                 $.ajax({
                     url: "./foto",
@@ -830,12 +981,25 @@
 
             }
             $(".autorizacionList").click(function () {
-                listAjaxNotification();
+                listAjaxNotification($(this));
+
             });
-            $(".hola2").click(function () {
-                listAjaxNotification();
-                ii=1;
+            $(".rechazarList").click(function () {
+                listAjaxNotificationRec($(this));
+
             });
+            $(".porautList").click(function () {
+                listAjaxNotification($(this));
+
+            });
+            /*$(".hola2").click(function () {
+             if (ii == 0) {
+             ii = 1;
+             } else {
+             listAjaxNotification();
+             listAjaxNotificationRec()();
+             }
+             });*/
         });
 
         $("#btn-ocultar").click(function () {

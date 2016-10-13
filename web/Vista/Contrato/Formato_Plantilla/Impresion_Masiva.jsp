@@ -20,15 +20,7 @@
 Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
 -->
-<%@page import="pe.edu.upeu.application.model.Usuario"%>
-<%@page import="java.util.GregorianCalendar"%>
-<%@page import="pe.edu.upeu.application.dao.ListaDAO"%>
-<%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
-<%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
-<%@page import="java.util.Calendar;"%>
 <jsp:useBean id="lista" scope="session" class="java.util.ArrayList"/>
-<jsp:useBean id="List_contra_x_idcto" scope="session" class="java.util.ArrayList"/>
-<jsp:useBean id="List_x_fun_x_idpu" scope="session" class="java.util.ArrayList"/>
 <html>
     <head>
         <meta charset="utf-8">
@@ -43,22 +35,44 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 background:transparent url(../../../imagenes/Gifloader.GIF) center no-repeat;
             }
         </style>
-    <input type="hidden" id="cant_con" class="cant_con" value="<%=lista.size()%>">
-    <%
-        for (int i = 0; i < lista.size(); i++) {
-            String cadena = lista.get(i).toString();
-            String[] cadena2 = cadena.split("/");
-            String id_contrato = cadena2[0];
-            String id_pl = cadena2[1].toString();
-    %>
-    <input type="hidden" class="contrato<%=i%>" id="contrato<%=i%>" value="<%=id_contrato%>">
-    <input type="hidden" class="plantilla<%=i%>" id="plantilla<%=i%>" value="<%=id_pl%>">
-    <%}%>
+    </head>
+
+    <body style="height: 1080px">
+        <input type="hidden" id="cant_con" class="cant_con" value="<%=lista.size()%>">
+        <%
+            for (int i = 0; i < lista.size(); i++) {
+                String cadena = lista.get(i).toString();
+                String[] cadena2 = cadena.split("/");
+                String id_contrato = cadena2[0];
+                String id_pl = cadena2[1].toString();
+        %>
+        <input type="hidden" class="contrato<%=i%>" id="contrato<%=i%>" value="<%=id_contrato%>">
+        <input type="hidden" class="plantilla<%=i%>" id="plantilla<%=i%>" value="<%=id_pl%>">
+        <% } %>
+    <center><h3 class="text-danger" style="font-size: 26pt;">PLANTILLA CONTRACTUAL</h3></center>
+    <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
+        <div id="wait"  align="center"><img src='../../../imagenes/por-favor-espere.gif' width="100" height="100" /><br>Cargando..</div>
+        <textarea cols="100" id="editor1" name="editor1" rows="10">
+        </textarea>
+        <div id="eButtons" >
+            <textarea id="texto" class="texto"></textarea>
+            <textarea id="texto2" class="texto2"></textarea>
+            <input  type="hidden" name="opc" value="Actualizar"/>
+            <input  type="hidden" name="id" value="" class="id_pl"/>
+        </div>
+    </form>
+    <div id="eButtons" class="hidden" >
+        <textarea id="texto" class="texto"></textarea>
+        <textarea id="texto2" class="texto2"></textarea>
+        <input  type="hidden" name="opc" value="Actualizar"/>
+        <input  type="hidden" name="id" value="" class="id_pl"/>
+        <input type="submit" value="Actualizar Formato" id="actu" onclick="leer();">
+    </div>
     <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
 // its initialization.
         function ckeditor() {
-            CKEDITOR.on('instanceReady', function(ev) {
+            CKEDITOR.on('instanceReady', function (ev) {
                 // Show the editor name and description in the browser status bar.
                 document.getElementById('eMessage').innerHTML = 'Instance <code>' + ev.editor.name + '<\/code> loaded.';
                 // Show this sample buttons.
@@ -154,7 +168,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         }
         function procesar_texto(valor, asa) {
             // var editor = CKEDITOR.instances.editor1;
-            $.post("../../../Imprimir", "opc=Listar_contrato&" + "id=" + valor, function(objJson) {
+            $.post("../../../Imprimir", "opc=Listar_contrato&" + "id=" + valor, function (objJson) {
                 var Lista = objJson.lista;
                 var texto = asa;
                 //alert(Lista.length)
@@ -389,7 +403,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             ExecuteCommand('print');
         }
         function procesar_texto_1(plan, valor) {
-            $.post("../../../formato_plantilla", "opc=Listar2&id=" + plan.trim(), function(objJson) {
+            $.post("../../../formato_plantilla", "opc=Listar2&id=" + plan.trim(), function (objJson) {
                 var imprimir = objJson.imprimir;
                 //var editor2 = editor.getData();
                 imprimir = imprimir + '<div style="page-break-after: always;"><span style="display:none">&nbsp;</span></div>';
@@ -409,7 +423,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             editor.setData("");
             //InsertHTML().before(ExecuteCommand("print"));
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             $("#actu").hide();
             $("#texto").hide();
@@ -418,79 +432,46 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             $("#wait").show();
             recorido();
             var time = parseInt($(".cant_con").val())
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#wait").hide();
                 $("#editor1").show();
                 ckeditor();
                 ckeditor2();
                 //InsertHTML();
                 //imp();
-                setTimeout(function() {
+                setTimeout(function () {
                     InsertHTML();
                     imp();
                 }, 1200);
             }, (time * 175));
+        });</script>
+    <script>
+        // Replace the <textarea id="editor1"> with an CKEditor instance.
+        function ckeditor2() {
+            CKEDITOR.replace('editor1',
+                    {
+                        toolbar:
+                                [['Source', '-', 'NewPage', 'Preview', '-', 'Templates'],
+                                    ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Print', 'SpellChecker', 'Scayt'],
+                                    ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
+                                    ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
+                                    '/',
+                                    ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
+                                    ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
+                                    ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                                    ['Link', 'Unlink', 'Anchor'],
+                                    ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
+                                    '/',
+                                    ['Styles', 'Format', 'Font', 'FontSize'],
+                                    ['TextColor', 'BGColor'],
+                                    ['Maximize', 'ShowBlocks', '-', 'About'],
+                                    ['Styles', 'Format'],
+                                    ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', '-', 'About']
+                                ],
+                        height: '800px'
+                    });
+        }</script>
 
-            /*setTimeout(function() {
-             InsertHTML();
-             ExecuteCommand("print");
-             }, 20000);*/
-            //$(document).ajaxStart(function() {
-            //});
-            /*$(document).ajaxComplete(function() {
-             $("#wait").css("display", "none");
-             });*/
-
-        }
-        );</script>
-
-</head>
-
-<body style="height: 1080px">
-    <h3 class="h">CARGAR PLANTILLAS</h3>
-    <input type="hidden" id="no_arch" class="no_arc" value="<%%>">
-    <button type="button" id="btn1" class=" btn btn-success btn2" onclick="InsertHTML();" >Cargar Contratos</button>
-    <button type="button" id="btn2" class="btn2 btn btn-danger" onclick="resetear();" >Borrar Todo</button>
-    <button type="button" id="btn2" class="btn2 btn btn-primary" onclick="imp();" >Imprimir</button>
-    <h3>EDITAR PLANTILLAS</h3>
-    <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
-        <div id="wait"  align="center"><img src='../../../imagenes/por-favor-espere.gif' width="100" height="100" /><br>Cargando..</div>
-        <textarea cols="100" id="editor1" name="editor1" rows="10">
-        </textarea>
-        <script>
-            // Replace the <textarea id="editor1"> with an CKEditor instance.
-            function ckeditor2() {
-                CKEDITOR.replace('editor1',
-                        {
-                            toolbar:
-                                    [['Source', '-', 'NewPage', 'Preview', '-', 'Templates'],
-                                        ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Print', 'SpellChecker', 'Scayt'],
-                                        ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
-                                        ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
-                                        '/',
-                                        ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
-                                        ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
-                                        ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-                                        ['Link', 'Unlink', 'Anchor'],
-                                        ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
-                                        '/',
-                                        ['Styles', 'Format', 'Font', 'FontSize'],
-                                        ['TextColor', 'BGColor'],
-                                        ['Maximize', 'ShowBlocks', '-', 'About'],
-                                        ['Styles', 'Format'],
-                                        ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', '-', 'About']
-                                    ],
-                            height: '800px'
-                        });
-            }</script>
-        <div id="eButtons" >
-            <textarea id="texto" class="texto"></textarea>
-            <textarea id="texto2" class="texto2"></textarea>
-            <input  type="hidden" name="opc" value="Actualizar"/>
-            <input  type="hidden" name="id" value="" class="id_pl"/>
-            <input type="submit" value="Actualizar Formato" id="actu" onclick="leer();">
-        </div>
-    </form>
 </body>
 
 </html>

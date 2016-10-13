@@ -15,8 +15,11 @@ import pe.edu.upeu.application.model.Notification;
  */
 public interface InterfaceNotificationDAO {
     public void Registrar(Notification x);
-    public List<Map<String, ?>> List_Notifications_json();
+    public List<Map<String, ?>> List_Notifications_json(String id);
     public List<Notification> List_Notifications();
     public void visualizado(String id);
     public void leido(String id);
+    public int CountUnreadAuthorized(String id);
+    public int CountUnreadUnAuthorized(String id);
+    public List<String> PrevSteps(String id);
 }

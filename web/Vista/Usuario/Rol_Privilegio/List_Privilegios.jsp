@@ -41,10 +41,10 @@
                     <td class="caji"> Activado </td> 
                 <%}%>
                 
-                 <td class="caji"> <a href="../../../Privilegio?id_priv=<%=r.getId_privilegio()%>&opc=modificar_Priv1" ><img src="../../../imagenes/lapiz.png" alt="" width="20px" height="20px"/></a></td>
-                 <td class="caji"><a href="../../../Privilegio?id_priv=<%=r.getId_privilegio()%>&opc=Desactivar_Priv" ><img src="../../../imagenes/eliminar.png" alt=""   width="20px" height="20px"/></a></td> 
-                 <td class="caji"><a href="../../../Privilegio?id_priv=<%=r.getId_privilegio()%>&opc=Activar_Priv" ><img src="../../../imagenes/Aprobado.png" alt=""   width="20px" height="20px"/></a></td> 
-                 <td class="caji"><a href="../../../Privilegio?id_priv=<%=r.getId_privilegio()%>&opc=Eliminar_Priv" ><img src="../../../imagenes/Desaprobado.png" alt=""   width="20px" height="20px"/></a></td> 
+                 <td class="caji"> <a href="../../../Privilegio?id_priv=<%=r.getId_privilegio()%>&opc=modificar_Priv1" ><img src="../../../img/lapiz.png" alt="" width="20px" height="20px"/></a></td>
+                 <td class="caji"><a href="../../../Privilegio?id_priv=<%=r.getId_privilegio()%>&opc=Desactivar_Priv" ><img src="../../../img/eliminar.png" alt=""   width="20px" height="20px"/></a></td> 
+                 <td class="caji"><a href="../../../Privilegio?id_priv=<%=r.getId_privilegio()%>&opc=Activar_Priv" ><img src="../../../img/Aprobado.png" alt=""   width="20px" height="20px"/></a></td> 
+                 <td class="caji"><a href="../../../Privilegio?id_priv=<%=r.getId_privilegio()%>&opc=Eliminar_Priv" ><img src="../../../img/Desaprobado.png" alt=""   width="20px" height="20px"/></a></td> 
             <tr>
             <%}%>
         </table>
