@@ -31,7 +31,8 @@
         <meta name="author" content="">
         <title>Detalle de Trabajador</title>
         <!-- Estilos plantilla-->
-        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+      
+        <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
 
@@ -73,8 +74,9 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <link rel="stylesheet" type="text/css" href="../../js/shadowbox/shadowbox.css"/>
-        <link rel="stylesheet" type="text/css" href=".../../js/shadowbox/style.css"/>
-        <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
+       
+        <link href="../../js/shadowbox/style.css" rel="stylesheet" type="text/css"/>
+<!--        <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>-->
         <style type="text/css">
             body{
 
