@@ -416,106 +416,106 @@
                                         <input class="num_huella" type="hidden" value="<%=num_cod_huella%>" 
                                     </div>
                                     <!-- end widget content -->
-                                    <!---Modal---------------->
-                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    <div class="datos_trabajador text-left">
-                                                    </div>
-                                                    <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
-                                                </div>
-                                                <div class="modal-body">
 
-                                                    <!-- <button class="add-coment btn btn-primary btn-block">Add Comentario</button> -->
-                                                    <div class="area-coment">
-                                                        <form class="comentari-form" method="post">
-                                                            <textarea class="mensaje"></textarea>
-                                                            <p></p>
-                                                            <input name="idDgp" class="idDgp" type="hidden" value="">
-                                                            <div class="contador">
-                                                        </form>
-                                                    </div>
-                                                </div>
-
-                                                <div class="comentarios">
-                                                    <div>
-                                                        <legend>Comentarios </legend>
-                                                        <div class="comentario-dgp"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="button" onclick="Registrar()" class="comet btn btn-success">Comentar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
+                                <!-- end widget div -->
                             </div>
-                            <!-- end widget div -->
                     </div>
+                    <!-- end widget -->
+                    </article>
+                    <!-- WIDGET END -->
             </div>
-            <!-- end widget -->
-        </article>
-        <!-- WIDGET END -->
+            <!-- end row -->
+            <div class="row">
+                <!-- NEW WIDGET START -->
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="alerta_dgp">
+                    </div>
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-color-red" id="wid-id-1"  data-widget-editbutton="false"  data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+                        <!-- widget options:
+                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+        
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
+        
+                        -->
+                        <header>
+                            <span class="widget-icon"> <i class="glyphicon glyphicon-saved"></i> </span>
+                            <h2 class="font-md"><strong>Requerimientos </strong> <i>Autorizados</i></h2>
+                        </header>
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+                            <!-- end widget edit box -->
+
+                            <!-- widget content -->
+                            <div class="widget-body no-padding imprimir_tabla">
+
+                            </div>
+                            <!-- end widget content -->
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
+                    <!-- end widget -->
+                </article>
+                <!-- WIDGET END -->
+            </div>
+            <!-- end row -->
+        </section>
+        <!-- end widget grid -->
     </div>
-    <!-- end row -->
-    <div class="row">
-        <!-- NEW WIDGET START -->
-        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div id="alerta_dgp">
-            </div>
-            <!-- Widget ID (each widget will need unique ID)-->
-            <div class="jarviswidget jarviswidget-color-red" id="wid-id-1"  data-widget-editbutton="false"  data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
-                <!-- widget options:
-                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-
-                data-widget-colorbutton="false"
-                data-widget-editbutton="false"
-                data-widget-togglebutton="false"
-                data-widget-deletebutton="false"
-                data-widget-fullscreenbutton="false"
-                data-widget-custombutton="false"
-                data-widget-collapsed="true"
-                data-widget-sortable="false"
-
-                -->
-                <header>
-                    <span class="widget-icon"> <i class="glyphicon glyphicon-saved"></i> </span>
-                    <h2 class="font-md"><strong>Requerimientos </strong> <i>Autorizados</i></h2>
-                </header>
-                <!-- widget div-->
-                <div>
-
-                    <!-- widget edit box -->
-                    <div class="jarviswidget-editbox">
-                        <!-- This area used as dropdown edit box -->
-
-                    </div>
-                    <!-- end widget edit box -->
-
-                    <!-- widget content -->
-                    <div class="widget-body no-padding imprimir_tabla">
-
-                    </div>
-                    <!-- end widget content -->
-                </div>
-                <!-- end widget div -->
-
-            </div>
-            <!-- end widget -->
-        </article>
-        <!-- WIDGET END -->
-    </div>
-    <!-- end row -->
-</section>
-<!-- end widget grid -->
-</div>
 </div>
 <!-------------- Modal  ----------->
+<!---Modal---------------->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="datos_trabajador text-left">
+                </div>
+                <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
+            </div>
+            <div class="modal-body">
 
+                <!-- <button class="add-coment btn btn-primary btn-block">Add Comentario</button> -->
+                <div class="area-coment">
+                    <form class="comentari-form" method="post">
+                        <textarea class="mensaje"></textarea>
+                        <p></p>
+                        <input name="idDgp" class="idDgp" type="hidden" value="">
+                        <div class="contador">
+                    </form>
+                </div>
+            </div>
+
+            <div class="comentarios">
+                <div>
+                    <legend>Comentarios </legend>
+                    <div class="comentario-dgp"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" onclick="Registrar()" class="comet btn btn-success">Comentar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 
 <!--===========================Modal======================= -->
 
@@ -524,16 +524,16 @@
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script>
-                                                        if (!window.jQuery) {
-                                                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                        }
+                    if (!window.jQuery) {
+                        document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                    }
 </script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script>
-                                                        if (!window.jQuery.ui) {
-                                                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                        }
+                    if (!window.jQuery.ui) {
+                        document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                    }
 </script>
 
 <!-- IMPORTANT: APP CONFIG -->
@@ -567,22 +567,22 @@
 <script src="../../js/coment/comenth.js" type="text/javascript"></script>
 <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
 <script>
-                                                        $.datepicker.regional['es'] = {
-                                                            closeText: 'Mostrar',
-                                                            currentText: 'Hoy',
-                                                            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                                                            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                                                            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                                                            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
-                                                            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-                                                            weekHeader: 'Sm',
-                                                            dateFormat: 'dd/mm/yy',
-                                                            firstDay: 1,
-                                                            isRTL: false,
-                                                            showMonthAfterYear: false,
-                                                            yearSuffix: ''
-                                                        };
-                                                        $.datepicker.setDefaults($.datepicker.regional['es']);
+                    $.datepicker.regional['es'] = {
+                        closeText: 'Mostrar',
+                        currentText: 'Hoy',
+                        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+                        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+                        weekHeader: 'Sm',
+                        dateFormat: 'dd/mm/yy',
+                        firstDay: 1,
+                        isRTL: false,
+                        showMonthAfterYear: false,
+                        yearSuffix: ''
+                    };
+                    $.datepicker.setDefaults($.datepicker.regional['es']);
 </script>
 <script>
     var statusBarAut = $(".statusBarAut");
