@@ -639,6 +639,7 @@
                             $(".conTablas").empty();
                             $(".conTablas").append('<div class="alert alert-danger">No sujeto a fiscalización</div>');
                         }
+                        //asdasd
                     });
                 }
                 function createTable(a) {
@@ -881,21 +882,9 @@
                                 });
                             }
                         }
-                    }
-                });
-            }
-            $(document).ready(function () {
-                $("#submit").click(function(){
-                    $("#submit").attr("disabled","disabled");
-                });
-                pageSetUp();
-                $("#ca_bono_pu").numeric();
-                $("#remu").numeric();
-                $("#rein").numeric();
-                $("#bo_a").numeric();
-                $("#bev").numeric();
-                $("#su_t").numeric();
-                $("#asig").numeric();
+                    });
+                }
+                $(document).ready(function () {
 
                     pageSetUp();
                     $("#ca_bono_pu").numeric();
