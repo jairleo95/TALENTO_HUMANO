@@ -103,7 +103,7 @@ public class CAutorizacion extends HttpServlet {
                         /*Cambiar con un trigger al momento de insertar*/
                         dgp.VAL_DGP_PASOS();
 
-                        //a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
+                        a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
                         String idpu = e.Id_Puesto_Personal(ide);
                         InterfaceNotificationDAO notdao = new NotificationDAO();
                         Notification not = new Notification();
@@ -168,10 +168,10 @@ public class CAutorizacion extends HttpServlet {
                         String nombres = request.getParameter("NOMBRES");
                         String idtrab = request.getParameter("IDTRAB");
                         /*Cambiar con un trigger al momento de insertar*/
-                        //dgp.VAL_DGP_PASOS();
-                        //dgp.RECHAZAR_DGP(iddgp);
-                        //String id_autorizacion = a.Insert_Autorizacion_dev("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
-                        //a.Insert_comentario_Aut("", id_autorizacion, iddgp, iduser, "1", id_autorizacion, comentario);
+                        dgp.VAL_DGP_PASOS();
+                        dgp.RECHAZAR_DGP(iddgp);
+                        String id_autorizacion = a.Insert_Autorizacion_dev("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
+                        a.Insert_comentario_Aut("", id_autorizacion, iddgp, iduser, "1", id_autorizacion, comentario);
                         String idpu = e.Id_Puesto_Personal(ide);
                         InterfaceNotificationDAO notdao = new NotificationDAO();
                         Notification not = new Notification();

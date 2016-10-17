@@ -108,17 +108,3 @@ function list_selectJavaBeans(objSelect, url, datos,id_select,opcion_select, opc
     }
 
 }
-//Formato de Fecha-DATEPICKER AND DATEMASK
- $(function () {
-    $(".fecha").datepicker(
-            {dateFormat: 'dd/mm/yy'}
-    );
-    $(".fe_hasta").change(function () {
-        console.log(" f: " + $(this).val());
-    })
-
-});
-$(function () {
-    $(".fecha1").datepicker(
-            {dateFormat: 'dd/mm/yy'}
-    )});

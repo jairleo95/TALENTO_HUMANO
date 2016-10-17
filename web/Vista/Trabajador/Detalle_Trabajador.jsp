@@ -31,7 +31,8 @@
         <meta name="author" content="">
         <title>Detalle de Trabajador</title>
         <!-- Estilos plantilla-->
-        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+      
+        <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
 

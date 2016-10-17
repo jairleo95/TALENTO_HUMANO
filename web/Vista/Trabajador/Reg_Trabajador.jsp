@@ -78,7 +78,6 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <style>
             #btn-duplicar{
                 margin: 1%;
@@ -243,7 +242,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-calendar fa-lg fa-fw"></i><label class="edad"></label></span>
 
-                                                                            <input type="text" name="FECHA_NAC" required=""  id="edad" placeholder="Fecha de Nacimiento" class="simple-field-data-mask fecha form-control input-group-sm fecha" data-mask="00/00/0000" autocomplete="off" >
+                                                                            <input type="date" name="FECHA_NAC" required=""  id="edad" placeholder="Fecha de Nacimiento" class="form-control input-group-sm fecha" >
 
                                                                         </div>
                                                                     </div>
@@ -1666,8 +1665,7 @@
     <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script type="text/javascript" src="../../js/Js_Validar/Validar_Formulario.js"></script>
-    <script src="../../js/jquery-ui.js" type="text/javascript"></script>
-    <script src="../../js/jquery.mask.js" type="text/javascript"></script>
+
     
     <script type="text/javascript" src="../../js/Js_Trabajador/Js_Form_Trabajador.js"></script>
     <script type="text/javascript">
