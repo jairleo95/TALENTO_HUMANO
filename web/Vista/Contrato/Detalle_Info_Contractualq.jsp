@@ -265,7 +265,7 @@
                     <tr><td class="text-info table-bordered"><strong>Centro costo </strong></td><td colspan="6" class="table-bordered" ><p>No tiene</p></td>
                     </tr><%}%>
 
-                    <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6" class="table-bordered" ><p><%
+                    <tr><td class="text-info table-bordered"><strong>Condición:</strong></td> <td colspan="6" class="table-bordered" ><strong style="color:#b71c1c;"><%
                         if (n.getLi_condicion() != null) {
                             for (int h = 0; h < list_Condicion_contrato.size(); h++) {
 
@@ -275,7 +275,7 @@
                             }
                         } else {
                             out.print("No tiene");
-                        }%> </p></td></tr>
+                        }%> </strong></td></tr>
                     <tr><td class="text-info table-bordered"><strong>Sueldo:</strong></td><td>S/.<%=n.getCa_sueldo()%></td><td class="text-info table-bordered" colspan="1"><strong>Reintegro:</strong></td><td colspan="1">S/.<%=n.getCa_reintegro()%></td><td class="text-info table-bordered" colspan="2"><strong>Bono Alimentario:</strong></td><td class="table-bordered" >S/.<%=n.getCa_bono_alimento()%> </td></tr>
                     <tr><td class="text-info table-bordered"><strong>Bev:</strong></td><td class="table-bordered"  colspan="6">S/.<%if (n.getCa_bev() != null) {
                             out.print(n.getCa_bev());

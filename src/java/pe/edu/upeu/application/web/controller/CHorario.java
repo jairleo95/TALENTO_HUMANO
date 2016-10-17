@@ -21,6 +21,7 @@ import pe.edu.upeu.application.dao.HorarioDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
+import pe.edu.upeu.application.model.V_Horario;
 
 /**
  *
@@ -39,6 +40,7 @@ public class CHorario extends HttpServlet {
      */
     InterfaceHorarioDAO IHor = new HorarioDAO();
     InterfaceListaDAO Ilis = new ListaDAO();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
@@ -99,10 +101,27 @@ public class CHorario extends HttpServlet {
                 response.sendRedirect("Vista/Dgp/Horario/Detalle_Horario.jsp");
 
             }
+            if (opc.equals("Listar2")) {
+                ArrayList<Map<String, ?>> lista = new ArrayList<>();                
+                String ID_DGP = request.getParameter("iddgp");
+                List<V_Horario> lv = IHor.List_V_Horario(ID_DGP);
+                for (int i = 0; i < lv.size(); i++) {
+                    Map<String, Object> a = new HashMap<>();
+                    a.put("dia_horario", lv.get(i).getDia_horario());
+                    a.put("ho_desde", lv.get(i).getHo_desde());
+                    a.put("ho_hasta", lv.get(i).getHo_hasta());
+                    a.put("id_detalle_horario", lv.get(i).getId_detalle_horario());
+                    a.put("id_dgp", lv.get(i).getId_dgp());
+                    a.put("id_horario", lv.get(i).getId_horario());
+                    a.put("no_horario", lv.get(i).getNo_ti_horario());
+                    lista.add(a);
+                }                
+                rpta.put("listar", lista);
+            }
             if (opc.equals("listaHorario")) {
 
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException | IOException e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
         }

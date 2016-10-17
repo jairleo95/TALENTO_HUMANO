@@ -132,7 +132,7 @@
                                                 if (d.getId_dgp() == null) {
                                         %>
                                         <%} else {%>
-                                        <form action="../../contrato" id="checkout-form" class="smart-form tosubmit"  method="get" novalidate="novalidate">
+                                        <form action="../../contrato" id="checkout-form" class="smart-form"  method="get" novalidate="novalidate">
                                             <fieldset>
                                                 <div class="row">
                                                     <section class="col col-3">
@@ -178,7 +178,7 @@
                                                     <input type="hidden"  value="<%=d.getId_trabajador()%>" class="idtr">                              
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Inicio: 
-                                                            <input type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" class=" input-group-sm" required="">
+                                                            <input onchange="c()" type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" id="ifechai" class=" input-group-sm" required="">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
@@ -375,9 +375,8 @@
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
-                                                        <%String Fecha = request.getParameter("fe_subs");%>
-                                                        <label class="input" id="titulo">Fecha de Suscripción: 
-                                                            <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm"  value="<%=Fecha%>" />
+                                                        <label class="input" id="titulo">Fecha de Suscripción:
+                                                            <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION" class="input-group-sm"  value="<%=c.convertFecha3(d.getFe_desde())%>" max="<%=c.convertFecha3(d.getFe_desde())%>">
                                                         </label>
                                                     </section>
                                                     <section class="col col-2">
@@ -570,7 +569,7 @@
                                                 <button type="submit" id="submit" class="btn btn-primary">
                                                     Registrar Contrato
                                                 </button>
-                                                <a type="button" class="btn btn-success" href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar">Ver Horario</a>
+                                                <button type="button" class="btn btn-success" onclick="listHorario(this.value)" value="<%=d.getId_dgp()%>" data-toggle="modal" data-target="#exampleModal">Ver Horario</button>
                                                 <a type="button" class="btn btn-success" href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a>
                                             </footer>
                                         </form>
@@ -587,9 +586,96 @@
                     </div>   
                 </section>
             </div>
+            <script>
+                var l = [];
+                l[0] = "lun";
+                l[1] = "mar";
+                l[2] = "mie";
+                l[3] = "jue";
+                l[4] = "vie";
+                l[5] = "sab";
+                l[6] = "dom";
+                var lb = [];
+                lb[0] = "Lunes";
+                lb[1] = "Martes";
+                lb[2] = "Miércoles";
+                lb[3] = "Jueves";
+                lb[4] = "Viernes";
+                lb[5] = "Sabado";
+                lb[6] = "Domingo";
+                function listHorario(id_dgp) {
+                    var url = '../../horario?iddgp=' + id_dgp;
+                    var data = 'opc=Listar2';
+                    $.post(url, data, function (objJson) {
+                        var listas = objJson.listar;
+                        if (listas.length > 0) {
+                            $(".tipoh").empty();
+                            $(".tipoh").append("Oficina");
+                            $(".conTablas").empty();
+                            for (var j = 0; j < l.length; j++) {
+                                var f = 0;
+                                var t = '';
+                                var d = 0;
+                                for (var i = 0; i < listas.length; i++) {
+                                    if (listas[i].dia_horario.toString() === l[j].toString()) {
+                                        d = d + 1;
+                                        t += '<tr>';
+                                        t += '<td>Turno ' + d + '</td>';
+                                        t += '<td>' + listas[i].ho_desde + '</td>';
+                                        t += '<td>' + listas[i].ho_hasta + '</td>';
+                                        t += '</tr>';
+                                        f = 1;
+                                    }
+                                }
+                                if (f > 0) {
+                                    var g = createTable(j);
+                                    $(".conTablas").append(g);
+                                    $(".data" + l[j] + "").empty();
+                                    $(".data" + l[j] + "").append(t);                                    
+                                }
+                            }
+                            $(".dataHor").dataTable();
+                        } else {
+                            $(".conTablas").empty();
+                            $(".conTablas").append('<div class="alert alert-danger">No sujeto a fiscalización</div>');
+                        }
+                    });
+                }
+                function createTable(a) {
+                    var t = '<div class="col-md-12">';
+                    t += '<table class="table table-condensed table-bordered dataHor">';
+                    t += '<thead>';
+                    t += '<tr>';
+                    t += '<th colspan="3" style="background:#6d4c41;color:white;"><center>' + lb[a] + '</center></th>';
+                    t += '</tr>';
+                    t += '</thead>';
+                    t += '<tbody class="data' + l[a] + '">';
+                    t += '</tbody>';
+                    t += '</table>';
+                    t += '</div>';
+                    return t;
+                }
+
+            </script>
 
 
-
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Horarios</h4>
+                        <h6 class="tipoh hidden"></h6>
+                    </div>
+                    <div class="modal-body" style="height:550px;">
+                        <div class="conTablas"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!--================================================== -->
@@ -600,16 +686,16 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-            if (!window.jQuery) {
-                document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-            }
+                if (!window.jQuery) {
+                    document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }
+                if (!window.jQuery.ui) {
+                    document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                }
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
@@ -672,290 +758,291 @@
 
     </body>
     <script  type="text/javascript">
-            function Listar_dep() {
-                var s = $(".selec_dep");
-                $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function (objJson) {
-                    s.empty();
-                    var lista = objJson.lista;
-                    s.append("<option value='' > [SELECCIONE] </option>");
-                    for (var j = 0; j < lista.length; j++) {
-                        if ($(".dep_pu").val() == lista[j].id) {
-                            s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
+                function Listar_dep() {
+                    var s = $(".selec_dep");
+                    $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function (objJson) {
+                        s.empty();
+                        var lista = objJson.lista;
+                        s.append("<option value='' > [SELECCIONE] </option>");
+                        for (var j = 0; j < lista.length; j++) {
+                            if ($(".dep_pu").val() == lista[j].id) {
+                                s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
 
-                        } else {
-                            s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
+                            } else {
+                                s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
+                            }
                         }
-                    }
 
 
-                });
-            }
-            function Listar_area() {
-                var s = $(".Selec_Area");
+                    });
+                }
+                function Listar_area() {
+                    var s = $(".Selec_Area");
 
-                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function (objJson) {
-                    s.empty();
-                    var lista = objJson.lista;
-                    s.append("<option value='' > [SELECCIONE] </option>");
-                    for (var j = 0; j < lista.length; j++) {
+                    $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function (objJson) {
+                        s.empty();
+                        var lista = objJson.lista;
+                        s.append("<option value='' > [SELECCIONE] </option>");
+                        for (var j = 0; j < lista.length; j++) {
 
-                        if ($(".area_pu").val() == lista[j].id) {
-                            s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
-                        } else {
-                            s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
+                            if ($(".area_pu").val() == lista[j].id) {
+                                s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
+                            } else {
+                                s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
+                            }
                         }
-                    }
 
-                });
-            }
-            function Listar_sec() {
-                var s = $("#select_sec");
+                    });
+                }
+                function Listar_sec() {
+                    var s = $("#select_sec");
 
-                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function (objJson) {
-                    s.empty();
-                    var lista = objJson.lista;
-                    s.append("<option value='' > [SELECCIONE] </option>");
-                    for (var j = 0; j < lista.length; j++) {
+                    $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function (objJson) {
+                        s.empty();
+                        var lista = objJson.lista;
+                        s.append("<option value='' > [SELECCIONE] </option>");
+                        for (var j = 0; j < lista.length; j++) {
 
-                        if ($(".sec_pu").val() == lista[j].id) {
-                            s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
-                        } else {
-                            s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
+                            if ($(".sec_pu").val() == lista[j].id) {
+                                s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
+                            } else {
+                                s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
+                            }
                         }
-                    }
-                });
-            }
-            function Listar_plantilla() {
-                var s = $(".con_pl_pu");
-                $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function (objJson) {
-                    s.empty();
-                    var lista = objJson.lista;
-                    s.append("<option value='' > [SELECCIONE] </option>");
-                    for (var i = 0; i < lista.length; i++) {
-                        s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
-                    }
-                });
-            }
-            function showEsDiezmo() {
-                var obj = $(".div_input_diezmo");
-                obj.hide(100);
-                obj.empty();
-                $.ajax({
-                    url: "../../trabajador", data: "opc=ShowEsDiezmoTrabajador&id=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
-                        if (data.rpta) {
-                            obj.append(data.html);
-                            obj.show(100);
-                            $(".cbkDiezmo").click(function () {
-                                $.SmartMessageBox({
-                                    title: "&iexcl;Alerta!",
-                                    content: "Esta seguro de modificar la autorizaci&oacute;n de descuento diezmo?",
-                                    buttons: '[No][Si]'
-                                }, function (ButtonPressed) {
-                                    if (ButtonPressed === "Si") {
-                                        if ($(".cbkDiezmo").prop("checked")) {
-                                            $.ajax({
-                                                url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=0", type: 'POST', success: function (data, textStatus, jqXHR) {
-                                                    if (data.status) {
-                                                        $(".cbkDiezmo").prop("checked", false);
-                                                        $.smallBox({
-                                                            title: "&iexcl;Atenci&oacute;n!",
-                                                            content: "<i class='fa fa-clock-o'></i> <i>Se neg&oacute; el descuento de diezmo...</i>",
-                                                            color: "#C46A69",
-                                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                            timeout: 6000
-                                                        });
+                    });
+                }
+                function Listar_plantilla() {
+                    var s = $(".con_pl_pu");
+                    $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function (objJson) {
+                        s.empty();
+                        var lista = objJson.lista;
+                        s.append("<option value='' > [SELECCIONE] </option>");
+                        for (var i = 0; i < lista.length; i++) {
+                            s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
+                        }
+                    });
+                }
+                function showEsDiezmo() {
+                    var obj = $(".div_input_diezmo");
+                    obj.hide(100);
+                    obj.empty();
+                    $.ajax({
+                        url: "../../trabajador", data: "opc=ShowEsDiezmoTrabajador&id=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
+                            if (data.rpta) {
+                                obj.append(data.html);
+                                obj.show(100);
+                                $(".cbkDiezmo").click(function () {
+                                    $.SmartMessageBox({
+                                        title: "&iexcl;Alerta!",
+                                        content: "Esta seguro de modificar la autorizaci&oacute;n de descuento diezmo?",
+                                        buttons: '[No][Si]'
+                                    }, function (ButtonPressed) {
+                                        if (ButtonPressed === "Si") {
+                                            if ($(".cbkDiezmo").prop("checked")) {
+                                                $.ajax({
+                                                    url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=0", type: 'POST', success: function (data, textStatus, jqXHR) {
+                                                        if (data.status) {
+                                                            $(".cbkDiezmo").prop("checked", false);
+                                                            $.smallBox({
+                                                                title: "&iexcl;Atenci&oacute;n!",
+                                                                content: "<i class='fa fa-clock-o'></i> <i>Se neg&oacute; el descuento de diezmo...</i>",
+                                                                color: "#C46A69",
+                                                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                                timeout: 6000
+                                                            });
+                                                        }
+
                                                     }
-
-                                                }
-                                            });
-                                        } else {
-                                            $.ajax({
-                                                url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=1", type: 'POST', success: function (data, textStatus, jqXHR) {
-                                                    if (data.status) {
-                                                        $(".cbkDiezmo").prop("checked", true);
-                                                        $.smallBox({
-                                                            title: "&iexcl;Atenci&oacute;n!",
-                                                            content: "<i class='fa fa-clock-o'></i> <i>Se autoriz&oacute; el descuento de diezmo...</i>",
-                                                            color: "#659265",
-                                                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                            timeout: 6000
-                                                        });
+                                                });
+                                            } else {
+                                                $.ajax({
+                                                    url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=1", type: 'POST', success: function (data, textStatus, jqXHR) {
+                                                        if (data.status) {
+                                                            $(".cbkDiezmo").prop("checked", true);
+                                                            $.smallBox({
+                                                                title: "&iexcl;Atenci&oacute;n!",
+                                                                content: "<i class='fa fa-clock-o'></i> <i>Se autoriz&oacute; el descuento de diezmo...</i>",
+                                                                color: "#659265",
+                                                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                                                timeout: 6000
+                                                            });
+                                                        }
                                                     }
-                                                }
-                                            });
+                                                });
+                                            }
+                                            showEsDiezmo();
+
+
                                         }
-                                        showEsDiezmo();
+                                    });
+                                    return false;
 
 
-                                    }
                                 });
-                                return false;
-
-
-                            });
+                            }
                         }
-                    }
-                });
-            }
-            $(document).ready(function () {
-                $(".tosubmit").submit(function(){
-                    $("#submit").attr("disabled","disabled");
-                });
-                pageSetUp();
-                $("#ca_bono_pu").numeric();
-                $("#remu").numeric();
-                $("#rein").numeric();
-                $("#bo_a").numeric();
-                $("#bev").numeric();
-                $("#su_t").numeric();
-                $("#asig").numeric();
+                    });
+                }
+                $(document).ready(function () {
 
-                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
-                });
-                ListCentroCostoDGP($("#id_dgp").val());
-                showEsDiezmo();
-                list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato", "id_tipo_contrato", "de_ti_contrato");
+                    pageSetUp();
+                    $("#ca_bono_pu").numeric();
+                    $("#remu").numeric();
+                    $("#rein").numeric();
+                    $("#bo_a").numeric();
+                    $("#bev").numeric();
+                    $("#su_t").numeric();
+                    $("#asig").numeric();
 
-                $('#checkout-form').validate({
-                    // Rules for form validation
-                    rules: {
-                        fname: {
-                            required: true
+                    $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                        $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
+                    });
+                    ListCentroCostoDGP($("#id_dgp").val());
+                    showEsDiezmo();
+                    list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato", "id_tipo_contrato", "de_ti_contrato");
+
+                    $('#checkout-form').validate({
+                        // Rules for form validation
+                        rules: {
+                            fname: {
+                                required: true
+                            },
+                            FEC_DESDE: {
+                                val_fecha: true
+                            },
+                            FEC_HASTA: {
+                                val_fecha: true
+                            }
                         },
-                        FEC_DESDE: {
-                            val_fecha: true
-                        },
-                        FEC_HASTA: {
-                            val_fecha: true
+                        // Do not change code below
+                        errorPlacement: function (error, element) {
+                            error.insertAfter(element.parent());
                         }
-                    },
-                    // Do not change code below
-                    errorPlacement: function (error, element) {
-                        error.insertAfter(element.parent());
-                        $("#submit").removeAttr("disabled");
-                    }
-                });
-                jQuery.validator.addMethod("val_fecha", function (value, element) {
-                    var d = value.split("-");
-                    return this.optional(element) || String(parseInt(d[0])).length === 4;
-                }, "¡Fecha ingresada invalida!");
+                    });
+                    jQuery.validator.addMethod("val_fecha", function (value, element) {
+                        var d = value.split("-");
+                        return this.optional(element) || String(parseInt(d[0])).length === 4;
+                    }, "¡Fecha ingresada invalida!");
 
-                Listar_dep();
-                Listar_sec();
-                Listar_area();
-                Listar_plantilla();
+                    Listar_dep();
+                    Listar_sec();
+                    Listar_area();
+                    Listar_plantilla();
 
-                var a = $("#select-sub-mod");
-                var c = $("#Selec_Area");
-                var d = $("#select_sec");
-                var b = $("#selec_dep");
-                var e = $("#pu_id_se");
-                var f = $(".select_dir");
-                c.attr("disabled", true);
-                d.attr("disabled", true);
-                b.attr("disabled", true);
-                e.attr("disabled", true);
-                f.attr("disabled", true);
-                $(".date").keyup(function () {
-                    $(".conteni").val($(".date").val());
-                });
-                $("#select_mod").change(function () {
-                    $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
-                        a.empty();
-                        var list = objJson.lista;
-                        a.append("<option value='' > [SELECCIONE] </option>");
-                        if (list.length !== 0) {
-                            for (var i = 0; i < list.length; i++) {
-                                a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
-                            }
-                        }
+                    var a = $("#select-sub-mod");
+                    var c = $("#Selec_Area");
+                    var d = $("#select_sec");
+                    var b = $("#selec_dep");
+                    var e = $("#pu_id_se");
+                    var f = $(".select_dir");
+                    c.attr("disabled", true);
+                    d.attr("disabled", true);
+                    b.attr("disabled", true);
+                    e.attr("disabled", true);
+                    f.attr("disabled", true);
+                    $(".date").keyup(function () {
+                        $(".conteni").val($(".date").val());
                     });
-                });
-                $("#selec_dep").change(function () {
-                    $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
-                        c.empty();
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-                        var list = objJson.lista;
-                        c.append("<option value='' > [SELECCIONE] </option>");
-                        if (list.length !== 0) {
-                            for (var i = 0; i < list.length; i++) {
-                                c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                    $("#select_mod").change(function () {
+                        $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
+                            a.empty();
+                            var list = objJson.lista;
+                            a.append("<option value='' > [SELECCIONE] </option>");
+                            if (list.length !== 0) {
+                                for (var i = 0; i < list.length; i++) {
+                                    a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
+                                }
                             }
-                        } else {
-                            c.append("<option value='' > [no hay] </option>");
-                        }
+                        });
                     });
-                });
-                $("#select_dir").change(function () {
-                    $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
-                        b.empty();
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-                        var list = objJson.lista;
-                        b.append("<option value='' > [SELECCIONE] </option>");
-                        if (list.length !== 0) {
-                            for (var i = 0; i < list.length; i++) {
-                                b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                    $("#selec_dep").change(function () {
+                        $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
+                            c.empty();
+                            if (objJson.rpta == -1) {
+                                alert(objJson.mensaje);
+                                return;
                             }
-                        } else {
-                            b.append("<option value='' > [] </option>");
-                        }
+                            var list = objJson.lista;
+                            c.append("<option value='' > [SELECCIONE] </option>");
+                            if (list.length !== 0) {
+                                for (var i = 0; i < list.length; i++) {
+                                    c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                                }
+                            } else {
+                                c.append("<option value='' > [no hay] </option>");
+                            }
+                        });
                     });
-                });
-                $("#Selec_Area").change(function () {
-                    $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
-                        d.empty();
+                    $("#select_dir").change(function () {
+                        $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
+                            b.empty();
+                            if (objJson.rpta == -1) {
+                                alert(objJson.mensaje);
+                                return;
+                            }
+                            var list = objJson.lista;
+                            b.append("<option value='' > [SELECCIONE] </option>");
+                            if (list.length !== 0) {
+                                for (var i = 0; i < list.length; i++) {
+                                    b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                                }
+                            } else {
+                                b.append("<option value='' > [] </option>");
+                            }
+                        });
+                    });
+                    $("#Selec_Area").change(function () {
+                        $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
+                            d.empty();
 
-                        var list = objJson.lista;
-                        d.append("<option value='' > [SELECCIONE] </option>");
-                        if (list.length !== 0) {
-                            for (var i = 0; i < list.length; i++) {
-                                d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                            var list = objJson.lista;
+                            d.append("<option value='' > [SELECCIONE] </option>");
+                            if (list.length !== 0) {
+                                for (var i = 0; i < list.length; i++) {
+                                    d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                                }
+                            } else {
+                                d.append("<option value='' > [no hay] </option>");
                             }
-                        } else {
-                            d.append("<option value='' > [no hay] </option>");
-                        }
+                        });
                     });
-                });
-                $("#select_sec").change(function () {
-                    $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
-                        e.empty();
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-                        var list = objJson.lista;
-                        e.append("<option value='' > [SELECCIONE] </option>");
-                        if (list.length !== 0) {
-                            for (var i = 0; i < list.length; i++) {
-                                e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                            }
-                        } else {
+                    $("#select_sec").change(function () {
+                        $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
                             e.empty();
-                            e.append("<option value='' > [] </option>");
-                        }
+                            if (objJson.rpta == -1) {
+                                alert(objJson.mensaje);
+                                return;
+                            }
+                            var list = objJson.lista;
+                            e.append("<option value='' > [SELECCIONE] </option>");
+                            if (list.length !== 0) {
+                                for (var i = 0; i < list.length; i++) {
+                                    e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                                }
+                            } else {
+                                e.empty();
+                                e.append("<option value='' > [] </option>");
+                            }
+                        });
                     });
-                });
-                $("#btn-registrar").click(function () {
-                    $(this).attr("disabled","disabled");
-                    var pr = $("#select-proceso").val();
-                    $.post("../../paso", $("#form-paso").serialize(), function () {
-                        Listar_Paso(pr);
+                    $("#btn-registrar").click(function () {
+                        var pr = $("#select-proceso").val();
+                        $.post("../../paso", $("#form-paso").serialize(), function () {
+                            Listar_Paso(pr);
+                        });
+                        $("#btn-registrar").val("Registrar Paso");
+                        $(".opc").val("Registrar");
+                        $("#form-paso")[0].reset();
+
+                        return false;
                     });
-                    $("#btn-registrar").val("Registrar Paso");
-                    $(".opc").val("Registrar");
-                    $("#form-paso")[0].reset();
 
-                    return false;
                 });
-
-            });
+                function c() {
+                    var max = $("#ifechai").val();
+                    $("#suscripcion").attr("max", max);
+                    $("#suscripcion").attr("value", max);
+                }
     </script>
 </html>
 <%} else {
