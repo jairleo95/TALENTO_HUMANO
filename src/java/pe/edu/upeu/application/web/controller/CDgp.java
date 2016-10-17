@@ -291,6 +291,7 @@ public class CDgp extends HttpServlet {
                 dia.add("sab");
                 dia.add("dom");
 
+                
                 String ID_DETALLE_HORARIO = request.getParameter("ID_DETALLE_HORARIO");
                 String ES_DETALLE_HORARIO = "1";
                 String ES_HORARIO = "1";
