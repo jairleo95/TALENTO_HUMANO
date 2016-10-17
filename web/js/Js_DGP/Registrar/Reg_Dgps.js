@@ -619,7 +619,6 @@ $(document).ready(function () {
     });
     $(".fe_inicio_dgp").change(function () {
         var fecha = $(this).val();
-        console.log(" f: " + $(this).val());
         AlertCumplimientoPlazo_Fecha(fecha);
     });
    

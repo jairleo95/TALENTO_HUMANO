@@ -416,124 +416,124 @@
                                         <input class="num_huella" type="hidden" value="<%=num_cod_huella%>" 
                                     </div>
                                     <!-- end widget content -->
+                                    <!---Modal---------------->
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <div class="datos_trabajador text-left">
+                                                    </div>
+                                                    <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
+                                                </div>
+                                                <div class="modal-body">
 
+                                                    <!-- <button class="add-coment btn btn-primary btn-block">Add Comentario</button> -->
+                                                    <div class="area-coment">
+                                                        <form class="comentari-form" method="post">
+                                                            <textarea class="mensaje"></textarea>
+                                                            <p></p>
+                                                            <input name="idDgp" class="idDgp" type="hidden" value="">
+                                                            <div class="contador">
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                                <div class="comentarios">
+                                                    <div>
+                                                        <legend>Comentarios </legend>
+                                                        <div class="comentario-dgp"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" onclick="Registrar()" class="comet btn btn-success">Comentar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- end widget div -->
                             </div>
+                            <!-- end widget div -->
                     </div>
-                    <!-- end widget -->
-                    </article>
-                    <!-- WIDGET END -->
             </div>
-            <!-- end row -->
-            <div class="row">
-                <!-- NEW WIDGET START -->
-                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div id="alerta_dgp">
-                    </div>
-                    <!-- Widget ID (each widget will need unique ID)-->
-                    <div class="jarviswidget jarviswidget-color-red" id="wid-id-1"  data-widget-editbutton="false"  data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
-                        <!-- widget options:
-                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-        
-                        data-widget-colorbutton="false"
-                        data-widget-editbutton="false"
-                        data-widget-togglebutton="false"
-                        data-widget-deletebutton="false"
-                        data-widget-fullscreenbutton="false"
-                        data-widget-custombutton="false"
-                        data-widget-collapsed="true"
-                        data-widget-sortable="false"
-        
-                        -->
-                        <header>
-                            <span class="widget-icon"> <i class="glyphicon glyphicon-saved"></i> </span>
-                            <h2 class="font-md"><strong>Requerimientos </strong> <i>Autorizados</i></h2>
-                        </header>
-                        <!-- widget div-->
-                        <div>
-
-                            <!-- widget edit box -->
-                            <div class="jarviswidget-editbox">
-                                <!-- This area used as dropdown edit box -->
-
-                            </div>
-                            <!-- end widget edit box -->
-
-                            <!-- widget content -->
-                            <div class="widget-body no-padding imprimir_tabla">
-
-                            </div>
-                            <!-- end widget content -->
-                        </div>
-                        <!-- end widget div -->
-
-                    </div>
-                    <!-- end widget -->
-                </article>
-                <!-- WIDGET END -->
-            </div>
-            <!-- end row -->
-        </section>
-        <!-- end widget grid -->
+            <!-- end widget -->
+        </article>
+        <!-- WIDGET END -->
     </div>
+    <!-- end row -->
+    <div class="row">
+        <!-- NEW WIDGET START -->
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div id="alerta_dgp">
+            </div>
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-red" id="wid-id-1"  data-widget-editbutton="false"  data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon"> <i class="glyphicon glyphicon-saved"></i> </span>
+                    <h2 class="font-md"><strong>Requerimientos </strong> <i>Autorizados</i></h2>
+                </header>
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+
+                    <!-- widget content -->
+                    <div class="widget-body no-padding imprimir_tabla">
+
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+        </article>
+        <!-- WIDGET END -->
+    </div>
+    <!-- end row -->
+</section>
+<!-- end widget grid -->
+</div>
 </div>
 <!-------------- Modal  ----------->
-<!---Modal---------------->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <div class="datos_trabajador text-left">
-                </div>
-                <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
-            </div>
-            <div class="modal-body">
 
-                <!-- <button class="add-coment btn btn-primary btn-block">Add Comentario</button> -->
-                <div class="area-coment">
-                    <form class="comentari-form" method="post">
-                        <textarea class="mensaje"></textarea>
-                        <p></p>
-                        <input name="idDgp" class="idDgp" type="hidden" value="">
-                        <div class="contador">
-                    </form>
-                </div>
-            </div>
-
-            <div class="comentarios">
-                <div>
-                    <legend>Comentarios </legend>
-                    <div class="comentario-dgp"></div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" onclick="Registrar()" class="comet btn btn-success">Comentar</button>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
 
 <!--===========================Modal======================= -->
 
 <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
 
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script>
-                    if (!window.jQuery) {
-                        document.write('<script src="../../js/libs/jquery-2.1.1.min.js"><\/script>');
-                    }
+                                                        if (!window.jQuery) {
+                                                            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                        }
 </script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script>
-                    if (!window.jQuery.ui) {
-                        document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                    }
+                                                        if (!window.jQuery.ui) {
+                                                            document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                        }
 </script>
 
 <!-- IMPORTANT: APP CONFIG -->
@@ -567,22 +567,23 @@
 <script src="../../js/coment/comenth.js" type="text/javascript"></script>
 <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
 <script>
-                    $.datepicker.regional['es'] = {
-                        closeText: 'Mostrar',
-                        currentText: 'Hoy',
-                        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
-                        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-                        weekHeader: 'Sm',
-                        dateFormat: 'dd/mm/yy',
-                        firstDay: 1,
-                        isRTL: false,
-                        showMonthAfterYear: false,
-                        yearSuffix: ''
-                    };
-                    $.datepicker.setDefaults($.datepicker.regional['es']);</script>
+                                                        $.datepicker.regional['es'] = {
+                                                            closeText: 'Mostrar',
+                                                            currentText: 'Hoy',
+                                                            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                                                            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                                                            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                                                            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+                                                            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+                                                            weekHeader: 'Sm',
+                                                            dateFormat: 'dd/mm/yy',
+                                                            firstDay: 1,
+                                                            isRTL: false,
+                                                            showMonthAfterYear: false,
+                                                            yearSuffix: ''
+                                                        };
+                                                        $.datepicker.setDefaults($.datepicker.regional['es']);
+</script>
 <script>
     var statusBarAut = $(".statusBarAut");
     function statusBtnSendToRem() {
@@ -628,10 +629,9 @@
             timeout: 3000
         });
     }
-    function procesarFirmas(callback, callbackOnItem) {
+    function procesarFirmas(callback) {
         $.each($(".firm_contr"), function () {
             var currentInputFirma = $(this);
-            var valAut = currentInputFirma.parents('tr').find(".valAut");
             if (currentInputFirma.prop('checked')) {
                 $.ajax({
                     async: false,
@@ -644,33 +644,24 @@
                                 url: "../../autorizacion",
                                 type: "POST", success: function (data, textStatus, jqXHR) {
                                     if (data.rpta) {
-                                        console.log("autorizado!");
-                                        var table = new $.fn.dataTable.Api('#dt_basic1');
-                                        var thisTD = currentInputFirma.parents("td");
-
-                                        //    table.row(currentInputFirma.parents('tr')).remove().draw();
-                                        currentInputFirma.parent().remove();
-                                        thisTD.append("Si");
-                                        thisTD.next().empty();
-                                        thisTD.next().append('<div class="smart-form"><label class="toggle"><input type="checkbox" value=""  class="envioRem"  name="estado" name="checkbox - toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label></div>');
+                                        console.log("procesando firnas");
+                                        /* var table = new $.fn.dataTable.Api('#dt_basic1');
+                                         table.row(currentInputFirma.parents('tr')).remove().draw();*/
                                         /*Agregar Boton*/
                                         exito("Procesado con exito!", "Se ha actualizado el contrato");
                                         statusBtnSendToRem();
                                         statusBtnSendFirma();
                                         statusFirmaAndRem();
-                                        if (typeof callbackOnItem !== 'undefined') {
-                                            console.log("Enter to callbackOnItem:" + valAut.val())
-                                            callbackOnItem(valAut, data);
-                                        }
                                     }
                                 },
-                                data: "opc=AceptarMasivo" + valAut.val()
-                            });
+                                data: "opc=AceptarMasivo" + $(".val_aut" + currentInputFirma.val()).val()
+                            })
                         }
 
                     },
-                    data: "opc=Actualizar_Firma" + valAut.val()
+                    data: "opc=Actualizar_Firma" + $(".val_firm" + currentInputFirma.val()).val()
                 });
+
             }
         });
         if (typeof callback !== 'undefined') {
@@ -687,27 +678,33 @@
     function procesarSendToRemu(callback) {
         console.log("enter to procesarSendToRemu function");
         $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-        //  var lenghtDatatable = $('#dt_basic1 tr').length;
-        $.each($(".envioRem"), function (index) {
-            var thisObject = $(this);
-            var valAut = thisObject.parents('tr').find(".valAut");
-            if (thisObject.prop('checked')) {
+        var lenghtDatatable = $('#dt_basic1 tr').length;
+        for (var i = 1; i <= lenghtDatatable; i++) {
+            if ($(".env_rem" + i).prop('checked')) {
                 console.log("checked condition");
-                processAutorizacionMasive(valAut.val(), function (data) {
-                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-                    var table = new $.fn.dataTable.Api('#dt_basic1');
-                    table.row(thisObject.parents('tr')).remove().draw();
-                    exito("Procesado con exito!", "Envió el requerimiento correctamente");
-                    statusBtnSendToRem();
-                    statusBtnSendFirma();
-                    statusFirmaAndRem();
-                    console.log("Autorizacion :" + data.rpta);
+                $.ajax({
+                    async: false,
+                    url: "../../autorizacion",
+                    type: "POST", success: function (data, textStatus, jqXHR) {
+                        if (data.rpta) {
+                            $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                            var table = new $.fn.dataTable.Api('#dt_basic1');
+                            table.row($(".env_rem" + i).parents('tr')).remove().draw();
+                            exito("Procesado con exito!", "Envió el requerimiento correctamente");
+                            statusBtnSendToRem();
+                            statusBtnSendFirma();
+                            statusFirmaAndRem();
+                        }
+                        console.log("Autorizacion :" + data.rpta)
+                    },
+                    data: "opc=AceptarMasivo" + $(".val_aut" + $(".env_rem" + i).val()).val()
                 });
             }
-        });
+        }
         if (typeof callback !== 'undefined') {
             callback();
         } else {
+            // window.location.href = "../../autorizacion";
         }
     }
     function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
@@ -724,6 +721,9 @@
                     });
                 });
             });
+
+
+
         }
     }
     function registerCOdHuella(inputItem, callback) {
@@ -743,6 +743,7 @@
 
             });
         }
+
     }
     function processAutorizacionMasive(values, callback) {
         console.log("::enter to processAutorizacionMasive function");
@@ -754,7 +755,7 @@
                 if (data.rpta) {
                     console.log("autorizacion registrada");
                     if (typeof callback !== 'undefined') {
-                        callback(data);
+                        callback();
                     }
                 }
             }
@@ -791,6 +792,7 @@
         statusBtnSendToRem();
         statusBtnSendFirma();
         statusFirmaAndRem();
+
         $(".btnProcesarFirmaAndRem").click(function () {
             $.SmartMessageBox({
                 title: "¡Advertencia!",
@@ -798,16 +800,7 @@
                 buttons: '[No][Si]'
             }, function (ButtonPressed) {
                 if (ButtonPressed === "Si") {
-                    procesarFirmas(function () {
-                        console.log("item");
-                    }, function (item) {
-                        console.log("item:" + item);
-                        processAutorizacionMasive(item.val(), function () {
-                            /*termina la autorizacion*/
-                            var table = new $.fn.dataTable.Api('#dt_basic1');
-                            table.row(item.parents('tr')).remove().draw();
-                        });
-                    });
+                    procesarFirmas(procesarSendToRemu);
                 }
                 if (ButtonPressed === "No") {
                 }
@@ -924,12 +917,14 @@
                                         $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                                         var table = new $.fn.dataTable.Api('#dt_basic1');
                                         table.row(itemRegistered.parents('tr')).remove().draw();
+
                                     });
                                 });
                             }
                         }
 
                     });
+
                     //  registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + $(".correos_" + t).val(), $(".val_aut" + t).val());
                     // $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                 }
@@ -937,7 +932,9 @@
                 }
             });
         });
-    });</script>
+    });
+
+</script>
 <script type="text/javascript">
     var año = '';
     var mes = '';
@@ -1062,11 +1059,14 @@
                     text_html += "<td>Si</td>";
                 }
                 text_html += "</tr>";
+
+
             }
             crear_tabla();
             $(".tbody_autorizado").append(text_html);
             text_html = "";
             reload_table();
+
         });
     }
     $(document).ready(function () {
@@ -1074,6 +1074,7 @@
         $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
             $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
         });
+
         $(".inp_cod_aps").keypress(function (event) {
             return /\d/.test(String.fromCharCode(event.keyCode));
         });
@@ -1087,6 +1088,8 @@
             tablet: 1024,
             phone: 480
         };
+
+
         $('#dt_basic1').dataTable({
             "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
                     "t" +
