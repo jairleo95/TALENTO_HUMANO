@@ -592,7 +592,7 @@ $(document).ready(function () {
     });
     $(".val_fe").change(function () {
         var fecha = $(this).val().split("-");
-        if (fecha[0].length >4) {
+        if (fecha[0].length >10) {
             $(this).val("");
         }
     });
@@ -619,7 +619,6 @@ $(document).ready(function () {
     });
     $(".fe_inicio_dgp").change(function () {
         var fecha = $(this).val();
-        console.log(" f: " + $(this).val());
         AlertCumplimientoPlazo_Fecha(fecha);
     });
    
