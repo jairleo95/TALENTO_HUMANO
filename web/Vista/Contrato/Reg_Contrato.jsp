@@ -881,9 +881,21 @@
                                 });
                             }
                         }
-                    });
-                }
-                $(document).ready(function () {
+                    }
+                });
+            }
+            $(document).ready(function () {
+                $("#submit").click(function(){
+                    $("#submit").attr("disabled","disabled");
+                });
+                pageSetUp();
+                $("#ca_bono_pu").numeric();
+                $("#remu").numeric();
+                $("#rein").numeric();
+                $("#bo_a").numeric();
+                $("#bev").numeric();
+                $("#su_t").numeric();
+                $("#asig").numeric();
 
                     pageSetUp();
                     $("#ca_bono_pu").numeric();
