@@ -103,7 +103,7 @@ public class CAutorizacion extends HttpServlet {
                         /*Cambiar con un trigger al momento de insertar*/
                         dgp.VAL_DGP_PASOS();
 
-                        //a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
+                        a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
                         String idpu = e.Id_Puesto_Personal(ide);
                         InterfaceNotificationDAO notdao = new NotificationDAO();
                         Notification not = new Notification();
