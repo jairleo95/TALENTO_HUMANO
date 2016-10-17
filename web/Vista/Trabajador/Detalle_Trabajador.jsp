@@ -74,9 +74,9 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <link rel="stylesheet" type="text/css" href="../../js/shadowbox/shadowbox.css"/>
-       
-        <link href="../../js/shadowbox/style.css" rel="stylesheet" type="text/css"/>
-<!--        <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>-->
+        <link rel="stylesheet" type="text/css" href=".../../js/shadowbox/style.css"/>
+        <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <style type="text/css">
             body{
 
@@ -448,13 +448,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Fecha de Inicio:</label>
-                                        <input type="date" class="form-control fe_desde_p" value="" name="DESDE" required />
+                                        <input type="text" class="simple-field-data-mask fecha form-control fe_desde_p" value="" name="DESDE" data-mask="00/00/0000" autocomplete="off" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Fecha de Cese:</label>
-                                        <input type="date" class="form-control fe_hasta_p" value="" name="HASTA" required />
+                                        <input type="text" class="simple-field-data-mask fecha1 form-control fe_hasta_p" value="" name="HASTA" data-mask="00/00/0000" autocomplete="off" required />
                                     </div>
                                 </div>
                             </div>
@@ -607,14 +607,14 @@
         <!-- Voice command : plugin -->
         <script src="../../js/speech/voicecommand.min.js"></script>
 
-        <!-- PAGE RELATED PLUGIN(S) 
+    PAGE RELATED PLUGIN(S) 
         <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
         <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
         
         
         <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
-        -->
+      
 
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
@@ -624,6 +624,8 @@
         <script type="text/javascript" src="../../js/Js_Trabajador/Js_Trabajador.js"></script>
         <script type="text/javascript" src="../../js/Js_Autorizacion/Js_Autorizacion.js"></script>
         <script type="text/javascript" src="../../js/Js_Academico/Js_Carga_Academica.js"></script>
+        <script src="../../js/jquery-ui.js" type="text/javascript"></script>
+        <script src="../../js/jquery.mask.js" type="text/javascript"></script>
         <script type="text/javascript">
         var url_archivos = $(".url_archivo").val() + "Fotos/";
         var idtrl = $(".idtr").val().trim();
@@ -666,7 +668,6 @@
                     if (data.rpta === "1") {
                         divBotones.append(data.data);
                         $(".btn-autor").click(function (e) {
-                            $(".btn-autor").attr("disabled","disabled");
                             $.SmartMessageBox({
                                 title: "¡Alerta de Confirmación!",
                                 content: "¿Está totalmente seguro de autorizar este requerimiento?",
@@ -674,6 +675,7 @@
                             }, function (ButtonPressed) {
                                 if (ButtonPressed === "Si") {
                                     //$(".form-aut").submit();
+                                    $(".btn-autor").attr("disabled", "disabled");
                                     $.ajax({url: "../../autorizacion",
                                         data: $(".form-aut").serialize(),
                                         type: 'POST',
@@ -681,7 +683,7 @@
                                             if (data.rpta) {
                                                 window.parent.UpdateNotifications();
                                                 window.parent.sendMessage();
-                                                window.location.href="../Dgp/Autorizar_Requerimiento.jsp?r=ok";
+                                                window.location.href = "../Dgp/Autorizar_Requerimiento.jsp?r=ok";
                                             }
                                         }});
                                 }
@@ -771,8 +773,7 @@
             /*FIN carga academica*/
 
             /*AUTORIZACIONES*/
-            $(".btn-autor1").click(function (e) {   
-                $(".btn-autor1").attr("disabled","disabled");
+            $(".btn-autor1").click(function (e) {
                 $.SmartMessageBox({
                     title: "¡Alerta de Confirmación!",
                     content: "¿Está totalmente seguro de autorizar este requerimientoklñklñ?",
@@ -781,6 +782,7 @@
                     if (ButtonPressed === "Si") {
                         //   window.parent.sendOk();
                         // parent.sendOk();
+                        $(".btn-autor1").attr("disabled", "disabled");
                         $(".form-aut").submit();
                         //window.sendMessage();
                         //window.parent.websocket.send("texto");
@@ -792,13 +794,13 @@
                 e.preventDefault();
             });
             $(".btn-rech").click(function (e) {
-                $(".btn-rech").attr("disabled","disabled")
                 $.SmartMessageBox({
                     title: "Alerta de Confirmación!",
                     content: "¿Está totalmente seguro de rechazar este requerimiento?",
                     buttons: '[No][Si]'
                 }, function (ButtonPressed) {
                     if (ButtonPressed === "Si") {
+                        $(".btn-rech").attr("disabled", "disabled")
                         $(".btn-mos").click();
                         $(".form-rech").submit();
                     }
