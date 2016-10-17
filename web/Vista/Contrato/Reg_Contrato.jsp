@@ -647,7 +647,7 @@
                     t += '<table class="table table-condensed table-bordered dataHor">';
                     t += '<thead>';
                     t += '<tr>';
-                    t += '<th colspan="3" style="background:#6d4c41;color:white;"><center>' + lb[a] + '</center></th>';
+                    t += '<th colspan="3" style="background:#01579b ;color:white;"><center>' + lb[a] + '</center></th>';
                     t += '</tr>';
                     t += '</thead>';
                     t += '<tbody class="data' + l[a] + '">';
