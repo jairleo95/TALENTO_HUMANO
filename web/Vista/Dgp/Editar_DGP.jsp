@@ -80,6 +80,7 @@
 
         <script language="javascript" type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <link rel="stylesheet" href="../../css/chosen.css"  type="text/css" > 
+        <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <style>
             .td{
                 font-weight: bold;
@@ -289,12 +290,12 @@
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
-                                                                <input type="date" name="FEC_DESDE" id="datepicker" required="" class="val_fe" min="<%=fecha_maxima_plazo%>" value="<%=c.convertFecha3(dg.getFe_desde())%>">
+                                                                <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask fecha val_fe" min="<%=fecha_maxima_plazo%>"  data-mask="00/00/0000" autocomplete="off">
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
-                                                                <input type="date" name="FEC_HASTA"  required="" id="datepicker" class="val_fe" min="<%=fecha_maxima_plazo%>" value="<%=c.convertFecha3(dg.getFe_hasta())%>">
+                                                                <input type="date" name="FEC_HASTA"  required=""  class="simple-field-data-mask fecha val_fe" min="<%=fecha_maxima_plazo%>"  data-mask="00/00/0000" autocomplete="off">
                                                             </label>
                                                         </section>
                                                     </div>
@@ -1004,7 +1005,8 @@
     <!--Funciones globales-->
     <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
     <script src="../../js/Js_Plazo/Js_plazo_advertencia.js" type="text/javascript"></script>
-
+    <script src="../../js/jquery.mask.js" type="text/javascript"></script>
+    <script src="../../js/jquery-ui.js" type="text/javascript"></script>
     <script>
                                                         function periodo_pago(cantidad) {
                                                             var sueldo = parseFloat($("#sueldo").val());
