@@ -178,12 +178,12 @@
                                                     <input type="hidden"  value="<%=d.getId_trabajador()%>" class="idtr">                              
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Inicio: 
-                                                            <input type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" class=" input-group-sm" required="">
+                                                            <input type="text" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Cese: 
-                                                            <input type="date" name="FEC_HASTA" value="<%=c.convertFecha3(d.getFe_hasta())%>" class="input-group-sm" required="">
+                                                            <input type="text" name="FEC_HASTA" value="<%=c.convertFecha3(d.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3" id="titulo">

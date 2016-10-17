@@ -110,15 +110,43 @@ function list_selectJavaBeans(objSelect, url, datos,id_select,opcion_select, opc
 }
 //Formato de Fecha-DATEPICKER AND DATEMASK
  $(function () {
-    $(".fecha").datepicker(
+    $(".fechapicker").datepicker(
             {dateFormat: 'dd/mm/yy'}
     );
     $(".fe_hasta").change(function () {
-        console.log(" f: " + $(this).val());
-    })
+        console.log("f:" + $(this).val());
+    });
 
 });
 $(function () {
     $(".fecha1").datepicker(
             {dateFormat: 'dd/mm/yy'}
     )});
+     // Date Range Picker
+     $(function(){
+         $(".from-datepicker").datepicker({
+			    defaultDate: "+1w",
+			    changeMonth: true,
+			    numberOfMonths: 2,
+			    prevText: '<i class="fa fa-chevron-left"></i>',
+			    nextText: '<i class="fa fa-chevron-right"></i>',
+			    onClose: function (selectedDate) {
+			        $(".topicker").datepicker("option", "minDate", selectedDate);
+			    }
+		
+			});
+        $(".fe_hasta").change(function () {
+        console.log("f:" + $(this).val());
+    })                
+     });
+			
+	$(".to-datepicker").datepicker({
+    defaultDate: "+1w",
+    changeMonth: true,
+    numberOfMonths: 2,
+    prevText: '<i class="fa fa-chevron-left"></i>',
+    nextText: '<i class="fa fa-chevron-right"></i>',
+    onClose: function (selectedDate) {
+        $("#from").datepicker("option", "maxDate", selectedDate);
+    }
+});

@@ -243,7 +243,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-calendar fa-lg fa-fw"></i><label class="edad"></label></span>
 
-                                                                            <input type="text" name="FECHA_NAC" required=""  id="edad" placeholder="Fecha de Nacimiento" class="simple-field-data-mask fecha form-control input-group-sm fecha" data-mask="00/00/0000" autocomplete="off" >
+                                                                            <input type="text" name="FECHA_NAC" required=""  id="edad" placeholder="Fecha de Nacimiento" class="simple-field-data-mask from-datepicker form-control input-group-sm fecha" data-mask="00/00/0000" autocomplete="off" >
 
                                                                         </div>
                                                                     </div>

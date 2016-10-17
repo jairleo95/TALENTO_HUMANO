@@ -317,14 +317,14 @@
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
 
-                                                                <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask val_fe fe_inicio_dgp" data-mask="00/00/0000" autocomplete="off" >
+                                                                <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask val_fe fe_inicio_dgp from-datepicker" data-mask="00/00/0000" autocomplete="off" >
 
 
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
-                                                                <input type="text" name="FEC_HASTA"  required=""  value="" class="simple_field-data-mask val_fe fe_hasta fecha" data-mask="00/00/0000" autocomplete="off">
+                                                                <input type="text" name="FEC_HASTA"  required=""  value="" class="simple_field-data-mask val_fe fe_hasta to-datepicker" data-mask="00/00/0000" autocomplete="off">
                                                             </label>
                                                         </section>
                                                     </div>
