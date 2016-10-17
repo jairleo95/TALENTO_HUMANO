@@ -132,7 +132,7 @@
                                                 if (d.getId_dgp() == null) {
                                         %>
                                         <%} else {%>
-                                        <form action="../../contrato" id="checkout-form" class="smart-form"  method="get" novalidate="novalidate">
+                                        <form action="../../contrato" id="checkout-form" class="smart-form tosubmit"  method="get" novalidate="novalidate">
                                             <fieldset>
                                                 <div class="row">
                                                     <section class="col col-3">
@@ -798,7 +798,7 @@
                 });
             }
             $(document).ready(function () {
-                $("#submit").click(function(){
+                $(".tosubmit").submit(function(){
                     $("#submit").attr("disabled","disabled");
                 });
                 pageSetUp();
@@ -833,6 +833,7 @@
                     // Do not change code below
                     errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
+                        $("#submit").removeAttr("disabled");
                     }
                 });
                 jQuery.validator.addMethod("val_fecha", function (value, element) {

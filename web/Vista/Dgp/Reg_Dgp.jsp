@@ -11,6 +11,7 @@
 <%@page import="pe.edu.upeu.application.model.V_Puesto_Direccion"%>
 <%@page import="pe.edu.upeu.application.model.Puesto"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
+<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <jsp:useBean id="Listar_Trabajador_id" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Puesto" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Requerimiento" scope="session" class="java.util.ArrayList"/>
@@ -316,14 +317,14 @@
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
 
-                                                                <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask val_fe fe_inicio_dgp" data-mask="00/00/0000" autocomplete="off" id="abr" placeholder="mm/dd/yyyy">
+                                                                <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask val_fe fe_inicio_dgp" data-mask="00/00/0000" autocomplete="off" >
 
 
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
-                                                                <input type="date" name="FEC_HASTA"  required=""  value="" class="val_fe fe_hasta" >
+                                                                <input type="text" name="FEC_HASTA"  required=""  value="" class="simple_field-data-mask val_fe fe_hasta fecha" data-mask="00/00/0000" autocomplete="off">
                                                             </label>
                                                         </section>
                                                     </div>
@@ -885,18 +886,6 @@
     <script src="../../js/Js_Horario/horario.js" type="text/javascript"></script>
     <script src="../../js/Js_Plazo/Js_plazo_advertencia.js" type="text/javascript"></script>    
     <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
-    <script type="text/javascript">
-                                                        $(function () {
-                                                            $("#abr").datepicker(
-                                                                    {dateFormat: 'dd/mm/yy'}
-                                                            );
-                                                    $(".fe_hasta").change(function (){
-                                                        console.log(" f: "+ $(this).val());
-                                                    })
-
-                                                        });
-
-    </script>
 </html>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");

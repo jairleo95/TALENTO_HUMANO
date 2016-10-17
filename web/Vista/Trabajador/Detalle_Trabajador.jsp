@@ -75,6 +75,7 @@
         <link rel="stylesheet" type="text/css" href="../../js/shadowbox/shadowbox.css"/>
         <link rel="stylesheet" type="text/css" href=".../../js/shadowbox/style.css"/>
         <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <style type="text/css">
             body{
 
@@ -446,13 +447,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Fecha de Inicio:</label>
-                                        <input type="date" class="form-control fe_desde_p" value="" name="DESDE" required />
+                                        <input type="text" class="simple-field-data-mask fecha form-control fe_desde_p" value="" name="DESDE" data-mask="00/00/0000" autocomplete="off" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Fecha de Cese:</label>
-                                        <input type="date" class="form-control fe_hasta_p" value="" name="HASTA" required />
+                                        <input type="text" class="simple-field-data-mask fecha1 form-control fe_hasta_p" value="" name="HASTA" data-mask="00/00/0000" autocomplete="off" required />
                                     </div>
                                 </div>
                             </div>
@@ -605,14 +606,14 @@
         <!-- Voice command : plugin -->
         <script src="../../js/speech/voicecommand.min.js"></script>
 
-        <!-- PAGE RELATED PLUGIN(S) 
+    PAGE RELATED PLUGIN(S) 
         <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
         <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
         
         
         <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
-        -->
+      
 
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
@@ -622,6 +623,8 @@
         <script type="text/javascript" src="../../js/Js_Trabajador/Js_Trabajador.js"></script>
         <script type="text/javascript" src="../../js/Js_Autorizacion/Js_Autorizacion.js"></script>
         <script type="text/javascript" src="../../js/Js_Academico/Js_Carga_Academica.js"></script>
+        <script src="../../js/jquery-ui.js" type="text/javascript"></script>
+        <script src="../../js/jquery.mask.js" type="text/javascript"></script>
         <script type="text/javascript">
         var url_archivos = $(".url_archivo").val() + "Fotos/";
         var idtrl = $(".idtr").val().trim();
