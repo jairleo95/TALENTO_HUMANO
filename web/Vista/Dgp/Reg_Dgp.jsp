@@ -679,7 +679,7 @@
                                             <%}%>
                                             <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>">
                                             <div id="div_2" class="contenido" style="display: none">
-                                                <table  class="table">
+                                                <table  class="table1">
                                                     <tr><td class="td">Subvencion:</td><td><input type="text" name="SUBVENCION"  ></td></tr>   
                                                     <tr><td class="td">Horario de Capacitacion:</td><td><input type="text" name="HORARIO_CAPACITACION"  ></td></tr>   
                                                     <tr><td class="td">Horario de Refrigerio:</td><td><input type="text" name="HORARIO_REFRIGERIO"  ></td></tr>  
