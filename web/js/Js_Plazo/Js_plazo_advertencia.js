@@ -20,7 +20,7 @@ function listar_mensaje_plazo(tipo, warning, info, req) {
                     }
                 }
             }
-        }
+        }   
     });
 }
 

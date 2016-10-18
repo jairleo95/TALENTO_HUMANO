@@ -27,7 +27,8 @@
         <meta name="author" content="">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+   <link href="../../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <!-- Basic Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
@@ -71,10 +72,9 @@
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <!--        <link rel="stylesheet" type="text/css" href="../../../js/shadowbox/shadowbox.css"/>-->
-    <link href="../../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    
+      <link rel="stylesheet" type="text/css" href="../../../js/shadowbox/shadowbox.css"/>
+<!--        <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
+
     </head>
 
     <body onload="closedthis();
@@ -172,592 +172,592 @@
                                                 <thead>
                                                 <center>
                                                     <div class=" container-fluid cajita" style=" font: oblique bold 100%  sans-serif ; margin-top: 8px;margin-bottom: -5px;">
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cajita">
-                                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita"  style="text-align:center;" align="center">ADJUNTAR, DESCRIPCION Y ACCION </div>   
-                                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita"   style="text-align:center;" align="center">ADJUNTAR, DESCRIPCION Y ACCION</div>   
-                                                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita"   style="text-align:center;" align="center">ADJUNTAR, DESCRIPCION Y ACCION</div>   
-                                                    </div>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cajita">
+                                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita"  style="text-align:center;" align="center">ADJUNTAR, DESCRIPCION Y ACCION </div>   
+                                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita"   style="text-align:center;" align="center">ADJUNTAR, DESCRIPCION Y ACCION</div>   
+                                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita"   style="text-align:center;" align="center">ADJUNTAR, DESCRIPCION Y ACCION</div>   
+                                                        </div>
                                                     </div>
                                                 </center>
                                                 </thead>
-                                                
-                                               <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 "> 
-                                                <tbody>
-                                                    <% int i = 0;
-                                                        for (int z = 0; z < Lis_doc_trabajador.size(); z++) {
-                                                            Lis_Doc_tra d = new Lis_Doc_tra();
-                                                            d = (Lis_Doc_tra) Lis_doc_trabajador.get(z);
-                                                    %>
 
-                                                    <%  if (d.getTi_documento().trim().equals("DOCA")) {%>
-                                                    <%  if (n_nac != 0) {%>
-                                                                                                       
-                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                                                        <td    style="width: 40%;" align="center">
+                                                <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 "> 
+                                                    <tbody>
+                                                        <% int i = 0;
+                                                            for (int z = 0; z < Lis_doc_trabajador.size(); z++) {
+                                                                Lis_Doc_tra d = new Lis_Doc_tra();
+                                                                d = (Lis_Doc_tra) Lis_doc_trabajador.get(z);
+                                                        %>
+
+                                                        <%  if (d.getTi_documento().trim().equals("DOCA")) {%>
+                                                        <%  if (n_nac != 0) {%>
+
+                                                        <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                                            <td    style="width: 40%;" align="center">
+                                                                <table class="table table-striped ">
+                                                                    <tr><td align="center" style="border:1px solid;border-color: purple; height:50px;"><strong><%=d.getNo_documento()%></strong></td></tr>
+                                                                    <tr>
+                                                                        <td class="caji<%=(i + 1)%>" align="center"><% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                            <div class="form-group">
+                                                                                <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" size="500" >
+                                                                            </div>
+                                                                            <% } else { %>
+                                                                            <% if (d.getId_documento_adjunto() == null) { %>
+                                                                            <label class="null">No Registrado</label>
+                                                                            <% } else {%>   
+                                                                            <%
+                                                                                out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));
+                                                                            %>
+                                                                            <% }
+                                                                            } %>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                                <!--  </td>
+          
+                                                                  <td  style="text-align:center;" align="center">-->
+                                                                <div style="margin-top:-15px;">
+                                                                    <section  class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
+                                                                        <label>DESCRIPCION:</label><BR>
+                                                                        <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                        <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                                        <% } else { %>
+                                                                        <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null) { %>
+                                                                        <label class="null" >No Registrado</label><BR><BR>
+                                                                        <% } else {%>
+                                                                        <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
+
+                                                                        <% }
+                                                                } %> 
+                                                                        <%if (d.getEs_documento_adjunto() == null) {%>
+
+                                                                    </section></div>
+                                                                    <%}%>
+                                                                <div>
+                                                                    <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                    <a type="button"  class="btn btn-danger btn-sm btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                                    <%} else {
+                                                                            out.print("");
+                                                                        }%>
+                                                                </div</td>
+                                                    <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
+                                                    </tr>  
+
+
+                                                    <%}
+                                                    }%>
+                                                    <%  if (d.getTi_documento().trim().equals("COFE")) {%>
+                                                    <%  if (num_ad != 0) {%>
+
+                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
+
+                                                        <td  style="width: 40%;" align="center">
                                                             <table class="table table-striped ">
-                                                                <tr><td align="center" style="border:1px solid;border-color: purple; height:50px;"><strong><%=d.getNo_documento()%></strong></td></tr>
+                                                                <tr><td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107);height:50px;"><strong><%=d.getNo_documento()%></strong></td></tr>
                                                                 <tr>
-                                                                    <td class="caji<%=(i + 1)%>" align="center"><% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                    <td class="caji<%=(i + 1)%>" align="center">
+                                                                        <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                         <div class="form-group">
-                                                                            <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" size="500" >
+                                                                            <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="any"  size="500" name="archivos<%=(i + 1)%>" size="500000" >
                                                                         </div>
                                                                         <% } else { %>
                                                                         <% if (d.getId_documento_adjunto() == null) { %>
                                                                         <label class="null">No Registrado</label>
-                                                                        <% } else {%>   
+                                                                        <% } else {%>
+                                                                        <%
+                                                                            out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));
+                                                                        %>
+
+                                                                        <% }
+                                                                        }%>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <!-- </td>
+         
+                                                             <td  style="text-align:center;" align="center">-->
+
+                                                            <div style="margin-top:-15px;" >
+                                                                <label>DESCRIPCION:</label><BR>
+                                                                <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                                <% } else { %>
+                                                                <% if (d.getDe_documento_adjunto() == null) { %>
+                                                                <label class="null" >No Registrado</label><BR><BR>
+                                                                <% } else {%>
+                                                                <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
+
+                                                                <% } %>
+                                                                <% } %> 
+                                                                <%if (d.getEs_documento_adjunto() == null) {%>
+                                                                <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
+                                                                    <%}%>
+                                                                    <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                    <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px; margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i>¿RECIBIDO EN FISICO?:</label>
+                                                                        <% } else { %>
+                                                                        <% if (d.getEs_documento_adjunto() == null) { %>
+
+                                                                    <label class="null">¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
+                                                                        <% } else { %>
+                                                                    <label><% if (d.getEs_documento_adjunto().trim().equals("1")) {
+                                                                        %>
+
+                                                                        ¿RECIBIDO EN FISICO?:<BR><img src="Aprobado.png" width="20" height="20">
+                                                                        <%
+                                                                        } else {
+
+                                                                        %>
+                                                                        ¿RECIBIDO EN FISICO?:<BR><img src="Desaprobado.png" width="20" height="20">
+                                                                    </label>
+                                                                    <% }
+                                                                            }
+                                                                        }%>
+                                                                    <%if (d.getEs_documento_adjunto() == null) {%>
+                                                                </section></div>
+                                                                <%}%>
+                                                            <!-- </td>
+                                                             <td  style="text-align:center;" align="center">-->
+                                                            <div style="text-align:center;" align="center"> 
+                                                                <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
+                                                                <a type="button"  class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                                <%} else {
+                                                                        out.print("");
+                                                                    }%>
+                                                            </div> </td>
+                                                    <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
+                                                    </tr>  
+
+
+                                                    <%}
+                                                    }%>
+                                                    <%  if (d.getTi_documento().trim().equals("DNIC") | d.getTi_documento().trim().equals("ACMA")) {%>
+
+                                                    <%if (List_Conyugue.size() > 0) {
+
+                                                            for (int kj = 0; kj < List_Conyugue.size(); kj++) {
+                                                                Padre_Madre_Conyugue co = new Padre_Madre_Conyugue();
+                                                                co = (Padre_Madre_Conyugue) List_Conyugue.get(kj);
+                                                    %>             
+
+
+                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 "  >
+                                                        <td  style="width: 40%;" align="center" >
+                                                            <table class="table table-striped" style="margin-top: -39px;" >
+                                                                <tr style="padding: 0px;">
+                                                                    <td align="center" style="border:1px solid;border-color:  purple rgb(101, 89, 107);">
+                                                                        <strong><%  if (d.getTi_documento().trim().equals("ACMA")) {
+                                                                                out.println("ACTA DE MATRIMONIO CON: <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
+                                                                            }
+                                                                            if (d.getTi_documento().trim().equals("DNIC")) {
+                                                                                out.println("COPIA DNI CONYUGUE : <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
+                                                                            }%>
+                                                                        </strong>
+                                                                    </td><br>
+                                                                </tr><br>
+                                                                <tr>
+                                                                    <td class="caji<%=(i + 1)%>" align="center">
+                                                                        <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                        <div class="form-group">
+                                                                            <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
+                                                                        </div>
+                                                                        <% } else { %>
+                                                                        <% if (d.getId_documento_adjunto() == null) { %>
+                                                                        <label clas s="null">No Registrado</label>
+                                                                        <% } else {%>
                                                                         <%
                                                                             out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));
                                                                         %>
                                                                         <% }
-                                                                            } %>
+                                                                        } %>
                                                                     </td>
                                                                 </tr>
                                                             </table>
-                                                      <!--  </td>
+                                                            <!--   </td>
+           
+                                                               <td  style="text-align:center;" align="center">-->
+                                                            <div style="margin-top:-15px;">
+                                                                <label>DESCRIPCION:</label><BR>
+                                                                <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                                <% } else { %>
+                                                                <% if (d.getDe_documento_adjunto() == null) { %>
+                                                                <label class="null" >No Registrado</label><BR><BR>
+                                                                <% } else {%>
+                                                                <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
 
-                                                        <td  style="text-align:center;" align="center">-->
-                                                          <div style="margin-top:-15px;">
-                                                      <section  class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
+                                                                <% } %>
+                                                                <% } %>   
+                                                                <%if (d.getEs_documento_adjunto() == null) {%>
+                                                                <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px;margin-top:-4px; " align="center">
+                                                                    <%}%>
+                                                                    <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                    <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:40px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i>¿RECIBIDO EN FISICO?:</label>
+                                                                        <% } else { %>
+                                                                        <% if (d.getEs_documento_adjunto() == null) { %>
+
+                                                                    <div> <label class="null">¿RECIBIDO EN FISICO?:<BR>No Registrado</label></div></section>
+                                                                            <% } else { %>
+                                                                <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
+                                                                    ¿RECIBIDO EN FISICO?:<BR> <img  src="Aprobado.png" width="20" height="20">
+                                                                    <%
+                                                                    } else {
+
+                                                                    %>
+                                                                    ¿RECIBIDO EN FISICO?:<BR><img src="Desaprobado.png" width="20" height="20">
+                                                                </label>
+                                                                <% }
+                                                                        }
+                                                                    }%>
+                                                                <%if (d.getEs_documento_adjunto() == null) {%>
+
+                                                                <%}%>
+                                                                <!--  </td>
+                                                                  <td  style="text-align:center;" align="center">-->
+                                                                <div style="text-align:center;" align="center">  
+                                                                    <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
+                                                                    <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                                    <%} else {
+                                                                out.print("");
+                                                            }%></div>
+                                                            </div> </td>
+                                                    <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
+                                                    </tr>  
+
+
+
+                                                    <% }
+                                                    } %>
+                                                    <% } %>
+
+                                                    <%  if (d.getTi_documento().trim().equals("DNIH")) {%>
+                                                    <%if (List_Hijos.size() > 0)
+                                                            for (int kk = 0; kk < List_Hijos.size(); kk++) {
+                                                                Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();
+                                                                h = (Datos_Hijo_Trabajador) List_Hijos.get(kk);
+                                                                if (d.getId_datos_hijo() == null) {
+                                                    %>
+
+                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
+                                                        <td   style="width: 40%;" align="center">
+                                                            <table class="table table-striped ">
+                                                                <tr><td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107);height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
+                                                                <tr><td class="caji<%=(i + 1)%>"  align="center">
+                                                                        <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                        <div class="form-group">
+                                                                            <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" size="500"  name="archivos<%=(i + 1)%>" >
+                                                                            <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
+                                                                        </div>
+                                                                        <% } else { %>
+                                                                        <% if (d.getId_documento_adjunto() == null) { %>
+                                                                        <label class="null">No Registrado</label>
+                                                                        <% } else {%>
+                                                                        <%
+                                                                            out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));
+                                                                        %>
+
+                                                                        <% }
+                                                                        } %>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <!--   </td>
+           
+                                                               <td  style="text-align:center;" align="center">-->
+                                                            <div style="margin-top:-15px;" >
+                                                                <label>DESCRIPCION:</label><BR>
+                                                                <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                                <% } else { %>
+                                                                <% if (d.getDe_documento_adjunto() == null) { %>
+                                                                <label class="null" >No Registrado</label><BR><BR>
+                                                                <% } else {%>
+                                                                <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
+
+                                                                <% } %>
+                                                                <% } %>    
+                                                                <%if (d.getEs_documento_adjunto() == null) {%>
+                                                                <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
+                                                                    <%}%>
+                                                                    <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                    <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                                        <% } else { %>
+                                                                        <% if (d.getEs_documento_adjunto() == null) { %>
+
+                                                                    <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
+                                                                        <% } else { %>
+                                                                    <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
+
+                                                                        ¿RECIBIDO EN FISICO?:<BR><img src="Aprobado.png" width="20" height="20">
+                                                                        <%
+                                                                        } else {
+
+                                                                        %>
+                                                                        ¿RECIBIDO EN FISICO?:<BR><img src="Desaprobado.png" width="20" height="20">
+                                                                    </label>
+                                                                    <% }
+                                                                            }
+                                                                        }%>
+                                                                    <%if (d.getEs_documento_adjunto() == null) {%>
+                                                                </section></div>
+                                                                <%}%>
+                                                            <!--  </td>
+                                                              <td  style="text-align:center;" align="center">-->
+                                                            <div style="text-align:center;" align="center"> 
+                                                                <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
+                                                                <a type="button" style="float: right" class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                                <%} else {
+                                                                        out.print("");
+                                                                    }%>
+                                                            </div> </td>
+                                                    <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
+                                                    </tr>  
+
+
+                                                    <%
+
+                                                    } else {
+
+                                                        if (h.getVal_doc() > 0 & d.getId_datos_hijo().equals(h.getId_datos_hijos_trabajador().trim())) {
+                                                            //   i++;
+                                                    %>
+                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
+                                                        <td  style="width:40%;" align="center">
+                                                            <table class="table table-striped ">
+                                                                <tr><td align="center" style="border:1px solid;border-color:  purple rgb(101, 89, 107); height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
+                                                                <tr><td class="caji<%=(i + 1)%>"  align="center">
+                                                                        <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                        <div class="form-group">
+                                                                            <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
+                                                                            <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
+                                                                        </div>
+                                                                        <% } else { %>
+                                                                        <% if (d.getId_documento_adjunto() == null) { %>
+                                                                        <label class="null">No Registrado</label>
+                                                                        <% } else {%>
+                                                                        <%
+                                                                            out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));
+                                                                        %>
+
+                                                                        <% }
+                                                                        } %>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <!--    </td>
+            
+                                                                <td  style="text-align:center;" align="center">-->
+                                                            <div style="margin-top:-15px;">
+                                                                <label>DESCRIPCION:</label><BR>
+                                                                <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                                <% } else { %>
+                                                                <% if (d.getDe_documento_adjunto() == null) { %>
+                                                                <label class="null" >No Registrado</label><BR><BR>
+                                                                <% } else {%>
+                                                                <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
+
+                                                                <% } %>
+                                                                <% } %>    
+                                                                <%if (d.getEs_documento_adjunto() == null) {%>
+                                                                <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
+                                                                    <%}%>
+                                                                    <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                    <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                                        <% } else { %>
+                                                                        <% if (d.getEs_documento_adjunto() == null) { %>
+
+                                                                    <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
+                                                                        <% } else { %>
+                                                                    <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
+
+                                                                        ¿RECIBIDO EN FISICO?:<BR><img src="Aprobado.png" width="20" height="20">
+                                                                        <%
+                                                                        } else {
+
+                                                                        %>
+                                                                        ¿RECIBIDO EN FISICO?:<BR><img src="Desaprobado.png" width="20" height="20">
+                                                                    </label>
+                                                                    <% }
+                                                                            }
+                                                                        }%>
+                                                                    <%if (d.getEs_documento_adjunto() == null) {%>
+                                                                </section></div>
+                                                                <%}%>
+                                                            <!--  </td>
+                                                              <td  style="text-align:center;" align="center">-->
+                                                            <div style="text-align:center;" align="center"> 
+                                                                <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
+                                                                <a type="button"   class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                                <%} else {
+                                                                        out.print("");
+                                                                    }%>
+                                                            </div> </td>
+                                                    <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
+                                                    </tr>  
+
+                                                    <%
+
+                                                    } else if (h.getVal_doc() == 0 & !id_hijo_faltante.equals(h.getId_datos_hijos_trabajador())) {
+                                                        // out.print(kk);
+                                                    %>
+                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
+                                                        <td style="width: 40%;" align="center"> 
+                                                            <table class="table table-striped ">
+                                                                <tr><td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107); height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
+                                                                <tr><td class="caji<%=(i + 1)%>"  align="center">
+                                                                        <% if ((permissionEditDocument)) {%>
+                                                                        <div class="form-group">
+                                                                            <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
+                                                                            <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
+                                                                        </div>
+                                                                        <% } else { %>
+                                                                        <label class="null">No Registrado</label>
+                                                                        <% } %>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <!-- </td>
+          
+                                                              <td  style="text-align:center;" align="center">-->
+                                                            <div style="margin-top:-15px;">
+                                                                <label>DESCRIPCION:</label><BR>
+                                                                <% if ((permissionEditDocument)) {%>
+                                                                <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                                <% } else { %>
+                                                                <label class="null" >No Registrado</label><BR><BR>
+                                                                <% } %> 
+
+
+                                                                <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px;" align="center">
+                                                                    <% if ((permissionEditDocument)) {%>
+                                                                    <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                                        <% } else {%>
+                                                                    <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
+                                                                        <% }%>
+                                                                </section>
+                                                            </div>
+                                                        </td>
+                                                        <td  style="text-align:center;" align="center">
+                                                        </td>
+                                                    <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
+                                                    </tr> 
+
+                                                    <%
+                                                                        id_hijo_faltante = h.getId_datos_hijos_trabajador();
+                                                                    }
+
+                                                                }
+                                                                i++;
+                                                            }
+                                                    %>
+
+                                                    <%} else if (!d.getTi_documento().trim().equals("DNIH") & !d.getTi_documento().trim().equals("DNIC") & !d.getTi_documento().trim().equals("ACMA") & !d.getTi_documento().trim().equals("COFE") & !d.getTi_documento().trim().equals("DOCA")) {
+                                                    %>
+                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6" >
+                                                    <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
+                                                    <td style="width: 36%;" align="center">
+                                                        <table class="table table-striped ">
+                                                            <tr><td align="center" style="border:1px solid;border-color:  purple rgb(101, 89, 107); height:50px;"><strong><%=d.getNo_documento()%></strong></td></tr>
+                                                            <tr><td class="caji<%=(i + 1)%>" align="center"> <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
+                                                                    <div class="form-group">
+                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" size="500" name="archivos<%=(i + 1)%>">
+                                                                    </div>
+
+                                                                    <% } else { %>
+                                                                    <% if (d.getId_documento_adjunto() == null) { %>
+                                                                    <label class="null">No Registrado</label>
+                                                                    <% } else {%>
+                                                                    <%
+                                                                        out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));
+                                                                    %>
+
+                                                                    <% }
+                                                                    } %></td></tr>
+                                                        </table>
+                                                        <!-- </td>
+         
+         
+         
+                                                         <td  style="text-align:center;" align="center">-->
+                                                        <div style="margin-top:-15px;" >
                                                             <label>DESCRIPCION:</label><BR>
                                                             <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                            <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                            <input type="text"   name="lob_description<%=i + 1%>"><BR><BR>
                                                             <% } else { %>
-                                                            <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null) { %>
+
+
+                                                            <% if (d.getDe_documento_adjunto() == null) { %>
                                                             <label class="null" >No Registrado</label><BR><BR>
                                                             <% } else {%>
                                                             <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
 
-                                                            <% }
-                                                                } %> 
+                                                            <% } %>
+                                                            <% } %>  
                                                             <%if (d.getEs_documento_adjunto() == null) {%>
-                                                           
-                                                            </section></div>
+                                                            <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
                                                                 <%}%>
-                                                                <div>
                                                                 <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                                <a type="button"  class="btn btn-danger btn-sm btn_reg_doc elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
-                                                                <%} else {
-                                                                        out.print("");
-                                                                    }%>
-                                                                    </div</td>
-                                                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
-                                                </tr>  
-
-
-                                                <%}
-                                                    }%>
-                                                <%  if (d.getTi_documento().trim().equals("COFE")) {%>
-                                                <%  if (num_ad != 0) {%>
-                                                
-                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
-
-                                                    <td  style="width: 40%;" align="center">
-                                                        <table class="table table-striped ">
-                                                            <tr><td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107);height:50px;"><strong><%=d.getNo_documento()%></strong></td></tr>
-                                                            <tr>
-                                                                <td class="caji<%=(i + 1)%>" align="center">
-                                                                    <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                                    <div class="form-group">
-                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="any"  size="500" name="archivos<%=(i + 1)%>" size="500000" >
-                                                                    </div>
+                                                                <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
                                                                     <% } else { %>
-                                                                    <% if (d.getId_documento_adjunto() == null) { %>
-                                                                    <label class="null">No Registrado</label>
-                                                                    <% } else {%>
+                                                                    <% if (d.getEs_documento_adjunto() == null) { %>
+
+                                                                <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
+                                                                    <% } else { %>
+                                                                <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
+                                                                    ¿RECIBIDO EN FISICO?:<BR><img src="Aprobado.png" width="20" height="20">
                                                                     <%
-                                                                        out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));
+                                                                    } else {
+
                                                                     %>
-
-                                                                    <% }
-                                                                        }%>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                   <!-- </td>
-
-                                                    <td  style="text-align:center;" align="center">-->
-                                                   
-                                                        <div style="margin-top:-15px;" >
-                                                        <label>DESCRIPCION:</label><BR>
-                                                        <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                        <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
-                                                        <% } else { %>
-                                                        <% if (d.getDe_documento_adjunto() == null) { %>
-                                                        <label class="null" >No Registrado</label><BR><BR>
-                                                        <% } else {%>
-                                                        <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
-
-                                                        <% } %>
-                                                        <% } %> 
-                                                        <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
-                                                            <%}%>
-                                                            <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px; margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i>¿RECIBIDO EN FISICO?:</label>
-                                                                <% } else { %>
-                                                                <% if (d.getEs_documento_adjunto() == null) { %>
-
-                                                            <label class="null">¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
-                                                                <% } else { %>
-                                                            <label><% if (d.getEs_documento_adjunto().trim().equals("1")) {
-                                                                %>
-
-                                                                ¿RECIBIDO EN FISICO?:<BR><img src="Aprobado.png" width="20" height="20">
-                                                                <%
-                                                                } else {
-
-                                                                %>
-                                                                ¿RECIBIDO EN FISICO?:<BR><img src="Desaprobado.png" width="20" height="20">
-                                                            </label>
-                                                            <% }
-                                                                    }
-                                                                }%>
-                                                            <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        </section></div>
-                                                        <%}%>
-                                                   <!-- </td>
-                                                    <td  style="text-align:center;" align="center">-->
-                                                   <div style="text-align:center;" align="center"> 
-                                                        <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
-                                                        <a type="button"  class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
-                                                        <%} else {
-                                                                out.print("");
-                                                            }%>
-                                                   </div> </td>
-                                                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
-                                                </tr>  
-
-
-                                                <%}
-                                                    }%>
-                                                <%  if (d.getTi_documento().trim().equals("DNIC") | d.getTi_documento().trim().equals("ACMA")) {%>
-
-                                                <%if (List_Conyugue.size() > 0) {
-
-                                                        for (int kj = 0; kj < List_Conyugue.size(); kj++) {
-                                                            Padre_Madre_Conyugue co = new Padre_Madre_Conyugue();
-                                                            co = (Padre_Madre_Conyugue) List_Conyugue.get(kj);
-                                                %>             
-
-
-                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 "  >
-                                                    <td  style="width: 40%;" align="center" >
-                                                        <table class="table table-striped" style="margin-top: -39px;" >
-                                                            <tr style="padding: 0px;">
-                                                                <td align="center" style="border:1px solid;border-color:  purple rgb(101, 89, 107);">
-                                                                    <strong><%  if (d.getTi_documento().trim().equals("ACMA")) {
-                                                                            out.println("ACTA DE MATRIMONIO CON: <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
-                                                                        }
-                                                                        if (d.getTi_documento().trim().equals("DNIC")) {
-                                                                            out.println("COPIA DNI CONYUGUE : <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
-                                                                        }%>
-                                                                    </strong>
-                                                                </td><br>
-                                                            </tr><br>
-                                                            <tr>
-                                                                <td class="caji<%=(i + 1)%>" align="center">
-                                                                    <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                                    <div class="form-group">
-                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
-                                                                    </div>
-                                                                    <% } else { %>
-                                                                    <% if (d.getId_documento_adjunto() == null) { %>
-                                                                    <label clas s="null">No Registrado</label>
-                                                                    <% } else {%>
-                                                                    <%
-                                                                        out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));
-                                                                    %>
-                                                                    <% }
-                                                                        } %>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                 <!--   </td>
-
-                                                    <td  style="text-align:center;" align="center">-->
-                                                        <div style="margin-top:-15px;">
-                                                        <label>DESCRIPCION:</label><BR>
-                                                        <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                        <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
-                                                        <% } else { %>
-                                                        <% if (d.getDe_documento_adjunto() == null) { %>
-                                                        <label class="null" >No Registrado</label><BR><BR>
-                                                        <% } else {%>
-                                                        <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
-
-                                                        <% } %>
-                                                        <% } %>   
-                                                        <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px;margin-top:-4px; " align="center">
-                                                            <%}%>
-                                                            <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:40px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i>¿RECIBIDO EN FISICO?:</label>
-                                                                <% } else { %>
-                                                                <% if (d.getEs_documento_adjunto() == null) { %>
-
-                                                            <div> <label class="null">¿RECIBIDO EN FISICO?:<BR>No Registrado</label></div></section>
-                                                                <% } else { %>
-                                                            <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
-                                                                ¿RECIBIDO EN FISICO?:<BR> <img  src="Aprobado.png" width="20" height="20">
-                                                                <%
-                                                                } else {
-
-                                                                %>
-                                                                ¿RECIBIDO EN FISICO?:<BR><img src="Desaprobado.png" width="20" height="20">
-                                                            </label>
-                                                            <% }
-                                                                    }
-                                                                }%>
-                                                            <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        
-                                                        <%}%>
-                                                  <!--  </td>
-                                                    <td  style="text-align:center;" align="center">-->
-                                                    <div style="text-align:center;" align="center">  
-                                                      <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
-                                                        <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
-                                                        <%} else {
-                                                                out.print("");
-                                                        }%></div>
-                                                             </div> </td>
-                                                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
-                                                </tr>  
-
-
-
-                                                <% }
-                                                    } %>
-                                                <% } %>
-
-                                                <%  if (d.getTi_documento().trim().equals("DNIH")) {%>
-                                                <%if (List_Hijos.size() > 0)
-                                                        for (int kk = 0; kk < List_Hijos.size(); kk++) {
-                                                            Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();
-                                                            h = (Datos_Hijo_Trabajador) List_Hijos.get(kk);
-                                                            if (d.getId_datos_hijo() == null) {
-                                                %>
-
-                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
-                                                    <td   style="width: 40%;" align="center">
-                                                        <table class="table table-striped ">
-                                                            <tr><td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107);height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
-                                                            <tr><td class="caji<%=(i + 1)%>"  align="center">
-                                                                    <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                                    <div class="form-group">
-                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" size="500"  name="archivos<%=(i + 1)%>" >
-                                                                        <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
-                                                                    </div>
-                                                                    <% } else { %>
-                                                                    <% if (d.getId_documento_adjunto() == null) { %>
-                                                                    <label class="null">No Registrado</label>
-                                                                    <% } else {%>
-                                                                    <%
-                                                                        out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));
-                                                                    %>
-
-                                                                    <% }
-                                                                        } %>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                 <!--   </td>
-
-                                                    <td  style="text-align:center;" align="center">-->
-                                                      <div style="margin-top:-15px;" >
-                                                        <label>DESCRIPCION:</label><BR>
-                                                        <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                        <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
-                                                        <% } else { %>
-                                                        <% if (d.getDe_documento_adjunto() == null) { %>
-                                                        <label class="null" >No Registrado</label><BR><BR>
-                                                        <% } else {%>
-                                                        <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
-
-                                                        <% } %>
-                                                        <% } %>    
-                                                        <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
-                                                            <%}%>
-                                                            <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
-                                                                <% } else { %>
-                                                                <% if (d.getEs_documento_adjunto() == null) { %>
-
-                                                            <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
-                                                                <% } else { %>
-                                                            <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
-
-                                                                ¿RECIBIDO EN FISICO?:<BR><img src="Aprobado.png" width="20" height="20">
-                                                                <%
-                                                                } else {
-
-                                                                %>
-                                                                ¿RECIBIDO EN FISICO?:<BR><img src="Desaprobado.png" width="20" height="20">
-                                                            </label>
-                                                            <% }
-                                                                    }
-                                                                }%>
-                                                            <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        </section></div>
-                                                        <%}%>
-                                                  <!--  </td>
-                                                    <td  style="text-align:center;" align="center">-->
-                                                  <div style="text-align:center;" align="center"> 
-                                                        <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
-                                                        <a type="button" style="float: right" class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
-                                                        <%} else {
-                                                                out.print("");
-                                                            }%>
-                                                  </div> </td>
-                                                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
-                                                </tr>  
-
-
-                                                <%
-
-                                                } else {
-
-                                                    if (h.getVal_doc() > 0 & d.getId_datos_hijo().equals(h.getId_datos_hijos_trabajador().trim())) {
-                                                        //   i++;
-%>
-                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
-                                                    <td  style="width:40%;" align="center">
-                                                        <table class="table table-striped ">
-                                                            <tr><td align="center" style="border:1px solid;border-color:  purple rgb(101, 89, 107); height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
-                                                            <tr><td class="caji<%=(i + 1)%>"  align="center">
-                                                                    <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                                    <div class="form-group">
-                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
-                                                                        <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
-                                                                    </div>
-                                                                    <% } else { %>
-                                                                    <% if (d.getId_documento_adjunto() == null) { %>
-                                                                    <label class="null">No Registrado</label>
-                                                                    <% } else {%>
-                                                                    <%
-                                                                        out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));
-                                                                    %>
-
-                                                                    <% }
-                                                                        } %>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                <!--    </td>
-
-                                                    <td  style="text-align:center;" align="center">-->
-                                                    <div style="margin-top:-15px;">
-                                                        <label>DESCRIPCION:</label><BR>
-                                                        <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                        <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
-                                                        <% } else { %>
-                                                        <% if (d.getDe_documento_adjunto() == null) { %>
-                                                        <label class="null" >No Registrado</label><BR><BR>
-                                                        <% } else {%>
-                                                        <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
-
-                                                        <% } %>
-                                                        <% } %>    
-                                                        <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
-                                                            <%}%>
-                                                            <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
-                                                                <% } else { %>
-                                                                <% if (d.getEs_documento_adjunto() == null) { %>
-
-                                                            <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
-                                                                <% } else { %>
-                                                            <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
-
-                                                                ¿RECIBIDO EN FISICO?:<BR><img src="Aprobado.png" width="20" height="20">
-                                                                <%
-                                                                } else {
-
-                                                                %>
-                                                                ¿RECIBIDO EN FISICO?:<BR><img src="Desaprobado.png" width="20" height="20">
-                                                            </label>
-                                                            <% }
-                                                                    }
-                                                                }%>
-                                                            <%if (d.getEs_documento_adjunto() == null) {%>
-                                                        </section></div>
-                                                        <%}%>
-                                                  <!--  </td>
-                                                    <td  style="text-align:center;" align="center">-->
-                                                  <div style="text-align:center;" align="center"> 
-                                                        <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
-                                                        <a type="button"   class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
-                                                        <%} else {
-                                                                out.print("");
-                                                            }%>
-                                                  </div> </td>
-                                                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
-                                                </tr>  
-
-                                                <%
-
-                                                } else if (h.getVal_doc() == 0 & !id_hijo_faltante.equals(h.getId_datos_hijos_trabajador())) {
-                                                    // out.print(kk);
-%>
-                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
-                                                    <td style="width: 40%;" align="center"> 
-                                                        <table class="table table-striped ">
-                                                            <tr><td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107); height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr>
-                                                            <tr><td class="caji<%=(i + 1)%>"  align="center">
-                                                                    <% if ((permissionEditDocument)) {%>
-                                                                    <div class="form-group">
-                                                                        <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  size="500" name="archivos<%=(i + 1)%>" >
-                                                                        <input type="hidden" name="idh<%=(i + 1)%>" value="<%=h.getId_datos_hijos_trabajador().trim()%>" >
-                                                                    </div>
-                                                                    <% } else { %>
-                                                                    <label class="null">No Registrado</label>
-                                                                    <% } %>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                  <!-- </td>
-
-                                                    <td  style="text-align:center;" align="center">-->
-                                                      <div style="margin-top:-15px;">
-                                                        <label>DESCRIPCION:</label><BR>
-                                                        <% if ((permissionEditDocument)) {%>
-                                                        <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
-                                                        <% } else { %>
-                                                        <label class="null" >No Registrado</label><BR><BR>
-                                                        <% } %> 
-
-
-                                                        <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px;" align="center">
-                                                            <% if ((permissionEditDocument)) {%>
-                                                            <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
-                                                                <% } else {%>
-                                                            <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
-                                                                <% }%>
-                                                        </section>
-                                                     </div>
-                                                    </td>
-                                                    <td  style="text-align:center;" align="center">
-                                                    </td>
-                                                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
-                                                </tr> 
-
-                                                <%
-                                                                    id_hijo_faltante = h.getId_datos_hijos_trabajador();
-                                                                }
-
-                                                            }
-                                                            i++;
-                                                        }
-                                                %>
-
-                                                <%} else if (!d.getTi_documento().trim().equals("DNIH") & !d.getTi_documento().trim().equals("DNIC") & !d.getTi_documento().trim().equals("ACMA") & !d.getTi_documento().trim().equals("COFE") & !d.getTi_documento().trim().equals("DOCA")) {
-                                                %>
-                                                <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6" >
-                                                <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
-                                                <td style="width: 36%;" align="center">
-                                                    <table class="table table-striped ">
-                                                        <tr><td align="center" style="border:1px solid;border-color:  purple rgb(101, 89, 107); height:50px;"><strong><%=d.getNo_documento()%></strong></td></tr>
-                                                        <tr><td class="caji<%=(i + 1)%>" align="center"> <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                                <div class="form-group">
-                                                                    <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#" size="500" name="archivos<%=(i + 1)%>">
-                                                                </div>
-
-                                                                <% } else { %>
-                                                                <% if (d.getId_documento_adjunto() == null) { %>
-                                                                <label class="null">No Registrado</label>
-                                                                <% } else {%>
-                                                                <%
-                                                                    out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));
-                                                                %>
-
+                                                                    ¿RECIBIDO EN FISICO?:<BR><img src="Desaprobado.png" width="20" height="20">
+                                                                </label>
                                                                 <% }
-                                                                    } %></td></tr>
-                                                    </table>
-                                               <!-- </td>
-
-
-
-                                                <td  style="text-align:center;" align="center">-->
-                                               <div style="margin-top:-15px;" >
-                                                    <label>DESCRIPCION:</label><BR>
-                                                    <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                    <input type="text"   name="lob_description<%=i + 1%>"><BR><BR>
-                                                    <% } else { %>
-
-
-                                                    <% if (d.getDe_documento_adjunto() == null) { %>
-                                                    <label class="null" >No Registrado</label><BR><BR>
-                                                    <% } else {%>
-                                                    <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
-
-                                                    <% } %>
-                                                    <% } %>  
-                                                    <%if (d.getEs_documento_adjunto() == null) {%>
-                                                    <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
-                                                        <%}%>
-                                                        <% if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
-                                                        <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" ><i style="top:110%;text-align:center;margin-left:60px;margin-bottom: 10px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
-                                                            <% } else { %>
-                                                            <% if (d.getEs_documento_adjunto() == null) { %>
-
-                                                        <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
-                                                            <% } else { %>
-                                                        <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
-                                                            ¿RECIBIDO EN FISICO?:<BR><img src="Aprobado.png" width="20" height="20">
-                                                            <%
-                                                            } else {
-
+                                                                        }
+                                                                    }%>
+                                                                <%if (d.getEs_documento_adjunto() == null) {%>
+                                                            </section></div>
+                                                            <%}%>
+                                                        <!--   </td>
+                                                           <td  style="text-align:center;" align="center">-->
+                                                        <div style="text-align:center;" align="center"> 
+                                                            <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
+                                                            <%if (request.getParameter("P2") == null & request.getParameter("pro") == null) {
                                                             %>
-                                                            ¿RECIBIDO EN FISICO?:<BR><img src="Desaprobado.png" width="20" height="20">
-                                                        </label>
-                                                        <% }
-                                                                }
-                                                            }%>
-                                                        <%if (d.getEs_documento_adjunto() == null) {%>
-                                                    </section></div>
+                                                            <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                            <%} else if (request.getParameter("P2") != null & request.getParameter("pro") != null) {
+                                                            %>
+                                                            <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>&P2=TRUE"><i class="fa fa-trash-o"></i> Eliminar</a>
+
+                                                            <%                                                       } %>
+                                                            <%} else {
+                                                                    out.print("");
+                                                                }%>
+                                                        </div>
+                                                    </td>
+                                                    </tr>  
+                                                    <input type="hidden" name="iddgp" value="<%=d.getId_dgp()%>">
+                                                    <input type="hidden" name="idctr" value="<%=request.getParameter("idctr")%>">
+                                                    <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
+                                                    <%if (request.getParameter("ms") != null) {%>
+                                                    <input type="hidden" name="ms" value="<%=request.getParameter("ms")%>">
                                                     <%}%>
-                                             <!--   </td>
-                                                <td  style="text-align:center;" align="center">-->
-                                             <div style="text-align:center;" align="center"> 
-                                                    <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
-                                                    <%if (request.getParameter("P2") == null & request.getParameter("pro") == null) {
-                                                    %>
-                                                    <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
-                                                    <%} else if (request.getParameter("P2") != null & request.getParameter("pro") != null) {
-                                                    %>
-                                                    <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>&P2=TRUE"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                    <%if (request.getParameter("dt") != null) {%>
+                                                    <input type="hidden" name="dt" value="<%=request.getParameter("dt")%>">
+                                                    <%}%>
+                                                    <% }
+                                                            i++;
+                                                            //id_dgp = d.getIddgp();
 
-                                                    <%                                                       } %>
-                                                    <%} else {
-                                                            out.print("");
                                                         }%>
-                                             </div>
-                                             </td>
-                                                </tr>  
-                                                <input type="hidden" name="iddgp" value="<%=d.getId_dgp()%>">
-                                                <input type="hidden" name="idctr" value="<%=request.getParameter("idctr")%>">
-                                                <input type="hidden" name="idtr" value="<%=request.getParameter("idtr")%>">
-                                                <%if (request.getParameter("ms") != null) {%>
-                                                <input type="hidden" name="ms" value="<%=request.getParameter("ms")%>">
-                                                <%}%>
-                                                <%if (request.getParameter("dt") != null) {%>
-                                                <input type="hidden" name="dt" value="<%=request.getParameter("dt")%>">
-                                                <%}%>
-                                                <% }
-                                                        i++;
-                                                        //id_dgp = d.getIddgp();
-
-                                                    }%>
-                                                <input type="hidden" name="num" value="<%=i + 1%>">
-                                                <% if (permissionEditDocument) { %>
-                                                <%if (request.getParameter("P2") != null) {%>
-                                                <%} else {%>
-                                                <tr><td><input  type="hidden" value="Registrar" name="opc" ></td></tr>
-                                                        <%}%>
-                                                        <%}%>
-                                                </tbody>
-                                               </section>
+                                                    <input type="hidden" name="num" value="<%=i + 1%>">
+                                                    <% if (permissionEditDocument) { %>
+                                                    <%if (request.getParameter("P2") != null) {%>
+                                                    <%} else {%>
+                                                    <tr><td><input  type="hidden" value="Registrar" name="opc" ></td></tr>
+                                                            <%}%>
+                                                            <%}%>
+                                                    </tbody>
+                                                </section>
                                             </table>
                                             <footer>
                                                 <%
@@ -840,16 +840,14 @@
 
         <!--================================================== -->
 
-
-        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
                                                     if (!window.jQuery) {
                                                         document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
                                                     }
         </script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
                                                     if (!window.jQuery.ui) {
                                                         document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
@@ -859,61 +857,70 @@
         <!-- IMPORTANT: APP CONFIG -->
         <script src="../../../js/app.config.js"></script>
 
-        <!--         JS TOUCH : include this plugin for mobile drag / drop touch events-->
-        <!--
-                 BOOTSTRAP JS -->
+        <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+        <script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+
+        <!-- BOOTSTRAP JS -->
         <script src="../../../js/bootstrap/bootstrap.min.js"></script>
 
-        <!--         CUSTOM NOTIFICATION -->
-        <script src="../../../js/notification/SmartNotification.min.js"></script>
+        <!-- CUSTOM NOTIFICATION -->
 
+        <!-- JARVIS WIDGETS -->
+        <script src="../../../js/smartwidgets/jarvis.widget.min.js"></script>
 
+        <!-- EASY PIE CHARTS 
+        <script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>-->
 
-        <script src="../../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+        <!-- SPARKLINES 
+        <script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script>-->
 
-        <!--         SPARKLINES-->
-        <script src="../../../js/plugin/sparkline/jquery.sparkline.min.js"></script> 
-
-        <!--         JQUERY VALIDATE -->
+        <!-- JQUERY VALIDATE -->
         <script src="../../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-        <!--         JQUERY MASKED INPUT -->
-        <script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+        <!-- JQUERY MASKED INPUT 
+        <script src="../../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
 
-        <!--         JQUERY SELECT2 INPUT -->
-        <script src="../../../js/plugin/select2/select2.min.js"></script>
+        <!-- JQUERY SELECT2 INPUT 
+        <script src="../../../js/plugin/select2/select2.min.js"></script>-->
 
-        <!--         JQUERY UI + Bootstrap Slider -->
+        <!-- JQUERY UI + Bootstrap Slider -->
         <script src="../../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
 
-        <!--         browser msie issue fix 
-        
-                 FastClick: For mobile devices 
-        
-                [if IE 8]>-->
-        <!--
-                <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>-->
-        <!--
-                <![endif]
-        
-                 Demo purpose only -->
+        <!-- browser msie issue fix -->
+        <script src="../../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+
+        <!-- FastClick: For mobile devices -->
+        <script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
+
+
+
+        <!--[if IE 8]>
+
+        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+        <![endif]-->
+
+        <!-- Demo purpose only -->
         <script src="../../../js/demo.min.js"></script>
 
-        <!--         MAIN APP JS FILE -->
-        <script src="../../../js/app.min.js" ></script>
+        <!-- MAIN APP JS FILE -->
+        <script src="../../../js/app.min.js"></script>
+
+        <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+        <!-- Voice command : plugin 
+        <script src="../../../js/speech/voicecommand.min.js"></script>-->
 
         <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
-        
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
+
+        <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="../../../js/bootstrap/fileinput.js" type="text/javascript"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
-       
-        <script src="../../../js/notification/SmartNotification.min.js" type="text/javascript"></script>
+        <script src="../../../js/notification/SmartNotification.min.js"></script>
         <script type="text/javascript" src="../../../js/shadowbox/demo.js"></script>
         <script type="text/javascript" src="../../../js/shadowbox/shadowbox.js"></script>
- 
+
         <script type="text/javascript">
                                                     Shadowbox.init({
                                                         // a darker overlay looks better on this particular site
@@ -939,7 +946,7 @@
 
                 $.each($(".fileDocument"), function (index) {
                     var thisObject = $(this);
-                    if (thisObject.val()!== "") {
+                    if (thisObject.val() !== "") {
                         // console.log("value input :" + thisObject.val())
                         //   console.log("tam input :" + thisObject[0].files.size)
 
@@ -961,11 +968,11 @@
 
 
                                 if (fileSize > 512000) {
-                                     // $(thisObject).val(" ");
-                                          //    thisObject.clik(".kv-file-remove");
-                                            $(thisObject).focus();  
+                                    // $(thisObject).val(" ");
+                                    //    thisObject.clik(".kv-file-remove");
+                                    $(thisObject).focus();
                                     x = false;
-                                  
+
 
                                 }
 
@@ -982,6 +989,8 @@
                 return x;
             }
 
+
+
             $(document).ready(function () {
 
                 pageSetUp();
@@ -992,99 +1001,35 @@
                 $(".btn_reg_doc").click(function () {
                     console.log(validar());
                     if (validar()) {
-                        $(".formDocument").submit()
+                        $(".formDocument").submit();
                     }
                 });
 
                 $(".fileDocument").fileinput({
-                    'allowedFileExtensions': ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc', 'txt'],
-                    'initialPreviewAsData': true,
-                    'overwriteInitial': false,
-                    'removeFromPreviewOnError': false,
-                    'maxFileSize': 500,
-                    'maxFilesNum': 10,
-//                    'initialCaption': "files",
-//                     'browseClass': "btn btn-primary btn-sm",
-//                    'removeClass': "btn btn-danger btn-sm",
-//                 dropZoneTitleClass: {
-//                     "holaa"
-//                 },
+                    showUpload: false,
                     layoutTemplates: {
-                        main1:
-                                "{preview}\n" +
+                        main1: "{preview}\n" +
                                 "<div class=\'input-group {class}\'>\n" +
-                                "   <div class=\'input-group-btn\'>\n" +
+                                "   <div class=\'input-group-btn\' >\n" +
                                 "       {browse}\n" +
                                 "       {upload}\n" +
                                 "       {remove}\n" +
                                 "   </div>\n" +
                                 "   {caption}\n" +
-                                "</div>"
-                    }, slugCallback:
-                            function (filename) {
-                                return filename.replace('(', '_').replace(']', '_');
-                            }
-
-
-
+                                "</div>"},
+                    allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc'],
+                    overwriteInitial: false,
+                    maxFileSize: 500,
+                    maxFilesNum: 10,
+                    browseClass: "btn btn-primary btn-sm",
+                    removeClass: "btn btn-danger btn-sm",
+                    //allowedFileTypes: ['image', 'video', 'flash'],
+                    slugCallback: function (filename) {
+                        return filename.replace('(', '_').replace(']', '_');
+                    }
                 });
 
 
-//                function validSize(objFile) {
-//                    var x = true;
-//                    var tamFiles = objFile.files.length;
-//                    console.log("longitud:" + tamFiles);
-//                    for (var i = 0; i < tamFiles; i++) {
-//                        console.log("(" + i + ") iteracion")
-//                        console.log("prubea mira")
-//
-//                        var sizeByte = objFile.files[i].size;
-//                        console.log("tamaño:" + objFile.files[i].size);
-//
-//
-//                        if (sizeByte > 512000) {
-//                            console.log("tamaño superado")
-//
-//                            x = false;
-//                        }
-//                        else {
-//                            console.log("agregado")
-//                            x = true;
-//                        }
-//
-////                       
-//                    }
-//                    return x;
-//                }
-//                $(".btn_reg_doc").click(function (e) {
-//
-//
-//                    var d = validSize(e.target);
-////                  
-//                    if (!d) {
-//
-//                        return false;
-//                    }
-//                    return true;
-//                });
-//                $(".fileDocument").on("filepredelete", function (p) {
-//                    var abort = true;
-//                    if (confirm("esta seguro que desea eliminar?")) {
-//                        abort = false;
-//                    }
-//                    return abort;
-//                });
-//                $(".file").change(function (e) {
-//                 
-//                    if (!validSize(e.target)) {
-//                     e.preventDefault();
-//        }else{
-//                    
-//        return true;    
-//                    }
-
-
-//                });
 
                 $("#file-3").fileinput({
                     showUpload: false,
