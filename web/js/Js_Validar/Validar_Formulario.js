@@ -5,6 +5,9 @@
  */
 
 function calcular_edad(fecha) {
+    /* format 2016-12-11 yyyy-mm-dd
+     * 09
+     * */
     var fechaActual = new Date();
     var diaActual = fechaActual.getDate();
     var mmActual = fechaActual.getMonth() + 1;
