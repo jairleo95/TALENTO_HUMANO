@@ -96,11 +96,13 @@ public class FactoryConnectionDB {
     }
 
     public static String convertFecha3(String fecha) {
+        System.out.println("Fecha :" + fecha);
         String f[] = fecha.split("/");
         return f[2] + "-" + f[1] + "-" + f[0];
     }
 
     public static String convertFecha4(String fecha) {
+        System.out.println("Fecha :" + fecha);
         String f[] = fecha.split("-");
         return f[2] + "/" + f[1] + "/" + f[0];
     }

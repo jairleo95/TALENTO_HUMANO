@@ -662,7 +662,6 @@
         }
         function ValBtnAutorizarDgp(trabajador, divBotones) {
             divBotones.empty();
-            alert("hcsrgrt");
             $.ajax({
                 url: "../../autorizacion", data: "opc=ValBtnAutorizacion&trabajador=" + trabajador, type: 'POST', success: function (data, textStatus, jqXHR) {
                     if (data.rpta === "1") {

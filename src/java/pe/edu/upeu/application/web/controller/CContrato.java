@@ -260,7 +260,7 @@ public class CContrato extends HttpServlet {
                 if (PRACTICANTE == null) {
                     PRACTICANTE = "0";
                 }
-FE_DESDE = FactoryConnectionDB.convertFecha3(FE_DESDE);
+                FE_DESDE = FactoryConnectionDB.convertFecha3(FE_DESDE);
                 FE_HASTA = FactoryConnectionDB.convertFecha3(FE_HASTA);
                 con.MODIFICAR_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR, CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV, ID_TIPO_PLANILLA, ES_REMUNERACION_PROCESADO, ID_HORARIO, ID_PLANTILLA_CONTRACTUAL, ca_bonificacion_p, PRACTICANTE);
 
@@ -434,15 +434,12 @@ FE_DESDE = FactoryConnectionDB.convertFecha3(FE_DESDE);
                 String LI_TIPO_CONVENIO = request.getParameter("TIPO_CONVENIO");
                 String ES_FIRMO_CONTRATO = "0";
                 double NU_CONTRATO = 0.0;/*Double.parseDouble(request.getParameter("NU_CONTRATO"));*/
-
                 out.print("0");
                 String DE_OBSERVACION = request.getParameter("OBSERVACION");
                 String ES_APOYO = "";/*request.getParameter("ES_APOYO");*/
-
                 String TI_HORA_PAGO = request.getParameter("TIPO_HORA_PAGO");
                 String NU_DOCUMENTO = "";
                 /*request.getParameter("NU_DOCUMENTO");*/
-
                 String ES_ENTREGAR_DOC_REGLAMENTOS = request.getParameter("ENTREGAR_DOC_REGLAMENTOS");
                 String ES_REGISTRO_HUELLA = request.getParameter("REGISTRO_HUELLA");
                 String DE_REGISTRO_SISTEM_REMU = request.getParameter("REGISTRO_SISTEM_REMU");
@@ -473,14 +470,16 @@ FE_DESDE = FactoryConnectionDB.convertFecha3(FE_DESDE);
                 } else {
                     ES_MFL = "1";
                 }
-                String PRACTICANTE = request.getParameter("PRACTICANTE");
-                if (PRACTICANTE == null) {
+                String PRACTICANTE = "0";
+                /* if (PRACTICANTE == null) {
                     PRACTICANTE = "0";
-                }
-                out.print("1");
-                FE_DESDE = FactoryConnectionDB.convertFecha3(FE_DESDE);
-                FE_HASTA = FactoryConnectionDB.convertFecha3(FE_HASTA);
+                }*/
+                       out.print("DESDE:" + FE_DESDE);
+                //FE_DESDE = FactoryConnectionDB.convertFecha4(FE_DESDE);
+              //  FE_HASTA = FactoryConnectionDB.convertFecha4(FE_HASTA);
+         
                 con.INSERT_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA, NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR, CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV, ID_TIPO_PLANILLA, ES_REMUNERACION_PROCESADO, ID_HORARIO, ID_PLANTILLA_CONTRACTUAL, ca_bonificacion_p, ES_MFL, PRACTICANTE);
+ out.print("QInseto Contrato");
                 String idtr1 = ID_TRABAJADOR;
                 String id_cto = con.Contrato_max(idtr1);
                 out.print("2");
