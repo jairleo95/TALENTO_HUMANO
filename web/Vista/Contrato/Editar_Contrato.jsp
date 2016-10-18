@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="pe.edu.upeu.application.model.Grupo_Ocupaciones"%>
@@ -59,6 +60,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <style type="text/css">
             #titulo{
                 font-weight: bold;
@@ -173,9 +175,9 @@
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Desde:
                                                 <%if (a.getFe_desde() != null) {%>
-                                                <input type="date" name="FEC_DESDE" value="<%=con.convertFecha3(a.getFe_desde())%>" class=" input-group-sm" required="">
+                                                <input type="text" name="FEC_DESDE" value="<%=(a.getFe_desde())%>" class="simple-field-data-mask fecha input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
                                                 <%} else {%>
-                                                <input type="date" name="FEC_DESDE" class=" input-group-sm" required="">
+                                                <input type="text" name="FEC_DESDE" class="simple-field-data-mask fecha input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
                                                 <%}%>
                                             </label>
                                         </section>
@@ -183,15 +185,15 @@
                                             <label class="input" id="titulo">Hasta: 
                                                 <%if (a.getFe_hasta() != null) {
                                                         if (a.getId_dgp() == null) {%>
-                                                <input type="date" name="FEC_HASTA" value="<%=con.convertFecha3(a.getFe_hasta())%>" class="input-group-sm" >
+                                                        <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask fecha input-group-sm" data-mask="00/00/0000" autocomplete="off">
                                                 <%} else {%>
-                                                <input type="date" name="FEC_HASTA" value="<%=con.convertFecha3(a.getFe_hasta())%>" class="input-group-sm" required="">
+                                                <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask fecha input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
                                                 <%}
                                                 } else{%>
                                                 <% if (a.getId_dgp() == null) {%>
-                                                <input type="date" name="FEC_HASTA" value="" class="input-group-sm" >
+                                                <input type="text" name="FEC_HASTA" value="" class="simple-field-data-mask fecha input-group-sm" data-mask="00/00/0000" autocomplete="off">
                                                 <%} else {%>
-                                                <input type="date" name="FEC_HASTA" value="" class="input-group-sm" required="">
+                                                <input type="text" name="FEC_HASTA" value="" class="simple-field-data-mask fecha input-group-sm" data-mask=00/00/0000" autocomplete="off" required="">
                                                 <%}
                                                     }%>
                                             </label>
@@ -866,6 +868,8 @@
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
         <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
+        <script src="../../js/jquery-ui.js" type="text/javascript"></script>
+        <script src="../../js/jquery.mask.js" type="text/javascript"></script>
         <script type="text/javascript">
 
                                         function showEsDiezmo() {
@@ -964,10 +968,10 @@
                                                     error.insertAfter(element.parent());
                                                 }
                                             });
-                                            jQuery.validator.addMethod("val_fecha", function (value, element) {
+                                          /*  jQuery.validator.addMethod("val_fecha", function (value, element) {
                                                 var d = value.split("-");
                                                 return this.optional(element) || String(parseInt(d[0])).length == 4;
-                                            }, "¡Fecha ingresada invalida!");
+                                            }, "¡Fecha ingresada invalida!");*/
 
 
 

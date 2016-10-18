@@ -31,8 +31,8 @@ public class FactoryConnectionDB {
 //    public static final String url_archivos = "http://localhost:8089/TALENTO_HUMANO/Archivo/Archivo";
 
     //  public static String[] configORACLE = {"procesosrh", "rrhh", "procesrh-db.upeu", "1521", "upeu"};
-public static final String url = "/usr/share/tomcat7/webapps/TALENTO_HUMANO/Archivo/";
- public static final String url_archivos = "http://procesosrh-app.upeu/TALENTO_HUMANO/Archivo/";
+    public static final String url = "/usr/share/tomcat7/webapps/TALENTO_HUMANO/Archivo/";
+    public static final String url_archivos = "http://procesosrh-app.upeu/TALENTO_HUMANO/Archivo/";
 
     /* WebService Carga Academica*/
     public static final String keyApp = "4a7c88ee0791cad24a15d43a525982f8";
@@ -98,5 +98,10 @@ public static final String url = "/usr/share/tomcat7/webapps/TALENTO_HUMANO/Arch
     public static String convertFecha3(String fecha) {
         String f[] = fecha.split("/");
         return f[2] + "-" + f[1] + "-" + f[0];
+    }
+
+    public static String convertFecha4(String fecha) {
+        String f[] = fecha.split("-");
+        return f[2] + "/" + f[1] + "/" + f[0];
     }
 }

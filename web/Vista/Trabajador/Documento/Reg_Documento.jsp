@@ -992,99 +992,35 @@
                 $(".btn_reg_doc").click(function () {
                     console.log(validar());
                     if (validar()) {
-                        $(".formDocument").submit()
+                        $(".formDocument").submit();
                     }
                 });
 
-                $(".fileDocument").fileinput({
-                    'allowedFileExtensions': ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc', 'txt'],
-                    'initialPreviewAsData': true,
-                    'overwriteInitial': false,
-                    'removeFromPreviewOnError': false,
-                    'maxFileSize': 500,
-                    'maxFilesNum': 10,
-//                    'initialCaption': "files",
-//                     'browseClass': "btn btn-primary btn-sm",
-//                    'removeClass': "btn btn-danger btn-sm",
-//                 dropZoneTitleClass: {
-//                     "holaa"
-//                 },
-                    layoutTemplates: {
-                        main1:
-                                "{preview}\n" +
-                                "<div class=\'input-group {class}\'>\n" +
-                                "   <div class=\'input-group-btn\'>\n" +
-                                "       {browse}\n" +
-                                "       {upload}\n" +
-                                "       {remove}\n" +
-                                "   </div>\n" +
-                                "   {caption}\n" +
-                                "</div>"
-                    }, slugCallback:
-                            function (filename) {
-                                return filename.replace('(', '_').replace(']', '_');
-                            }
+                 $(".fileDocument").fileinput({
+                                                            showUpload: false,
+                                                            layoutTemplates: {
+                                                                main1: "{preview}\n" +
+                                                                        "<div class=\'input-group {class}\'>\n" +
+                                                                        "   <div class=\'input-group-btn\' >\n" +
+                                                                        "       {browse}\n" +
+                                                                        "       {upload}\n" +
+                                                                        "       {remove}\n" +
+                                                                        "   </div>\n" +
+                                                                        "   {caption}\n" +
+                                                                        "</div>"},
+                                                            allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc'],
+                                                            overwriteInitial: false,
+                                                            maxFileSize: 500,
+                                                            maxFilesNum: 10,
+                                                            browseClass: "btn btn-primary btn-sm",
+                                                            removeClass: "btn btn-danger btn-sm",
+                                                            //allowedFileTypes: ['image', 'video', 'flash'],
+                                                            slugCallback: function (filename) {
+                                                                return filename.replace('(', '_').replace(']', '_');
+                                                            }
+                                                        });
 
 
-
-                });
-
-
-//                function validSize(objFile) {
-//                    var x = true;
-//                    var tamFiles = objFile.files.length;
-//                    console.log("longitud:" + tamFiles);
-//                    for (var i = 0; i < tamFiles; i++) {
-//                        console.log("(" + i + ") iteracion")
-//                        console.log("prubea mira")
-//
-//                        var sizeByte = objFile.files[i].size;
-//                        console.log("tamaño:" + objFile.files[i].size);
-//
-//
-//                        if (sizeByte > 512000) {
-//                            console.log("tamaño superado")
-//
-//                            x = false;
-//                        }
-//                        else {
-//                            console.log("agregado")
-//                            x = true;
-//                        }
-//
-////                       
-//                    }
-//                    return x;
-//                }
-//                $(".btn_reg_doc").click(function (e) {
-//
-//
-//                    var d = validSize(e.target);
-////                  
-//                    if (!d) {
-//
-//                        return false;
-//                    }
-//                    return true;
-//                });
-//                $(".fileDocument").on("filepredelete", function (p) {
-//                    var abort = true;
-//                    if (confirm("esta seguro que desea eliminar?")) {
-//                        abort = false;
-//                    }
-//                    return abort;
-//                });
-//                $(".file").change(function (e) {
-//                 
-//                    if (!validSize(e.target)) {
-//                     e.preventDefault();
-//        }else{
-//                    
-//        return true;    
-//                    }
-
-
-//                });
 
                 $("#file-3").fileinput({
                     showUpload: false,
