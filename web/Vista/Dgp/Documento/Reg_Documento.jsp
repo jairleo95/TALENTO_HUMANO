@@ -1054,7 +1054,7 @@
                                                                         "   </div>\n" +
                                                                         "   {caption}\n" +
                                                                         "</div>"},
-                                                            allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc'],
+                                                            allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc','txt'],
                                                             overwriteInitial: false,
                                                             maxFileSize: 500,
                                                             maxFilesNum: 10,
