@@ -67,6 +67,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
                 list.add(tih);
             }
         } catch (Exception e) {
+            System.out.println("Error al mostrar el tipo de horario : "+e);
         } finally {
             this.conn.close();
         }
