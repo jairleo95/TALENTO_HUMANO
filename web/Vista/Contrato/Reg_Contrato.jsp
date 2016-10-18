@@ -251,6 +251,10 @@
                                                                 <option value="2">Contratado Independiente</option>
                                                                 <option value="3">Enpleado</option>
                                                                 <option value="4">Misionero</option>
+                                                                <option value="5">Practicante Profesional</option>
+                                                                <option value="6">Practicante Pre profesional</option>
+                                                                <option value="7">Convenio Laboral Juvenil</option>
+                                                                <option value="8">MFL-Contrato</option>
                                                             </select>
                                                         </label>
                                                     </section>
@@ -631,7 +635,7 @@
                                     var g = createTable(j);
                                     $(".conTablas").append(g);
                                     $(".data" + l[j] + "").empty();
-                                    $(".data" + l[j] + "").append(t);                                    
+                                    $(".data" + l[j] + "").append(t);
                                 }
                             }
                             $(".dataHor").dataTable();
