@@ -290,12 +290,12 @@
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
-                                                                <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask from-datepicker val_fe" min="<%=fecha_maxima_plazo%>"  data-mask="00/00/0000" autocomplete="off">
+                                                                <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask frompicker val_fe" min="<%=fecha_maxima_plazo%>"  data-mask="00/00/0000" autocomplete="off">
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
-                                                                <input type="date" name="FEC_HASTA"  required=""  class="simple-field-data-mask to-datepicker val_fe" min="<%=fecha_maxima_plazo%>"  data-mask="00/00/0000" autocomplete="off">
+                                                                <input type="date" name="FEC_HASTA"  required=""  class="simple-field-data-mask topicker val_fe" min="<%=fecha_maxima_plazo%>"  data-mask="00/00/0000" autocomplete="off">
                                                             </label>
                                                         </section>
                                                     </div>
@@ -1988,7 +1988,35 @@
                 return this.optional(element) || String(parseInt(d[0])).length == 4;
             }, "¡Fecha ingresada invalida!");
         })
+ $(function () {
+        $(".frompicker").datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 2,
+            prevText: '<i class="fa fa-chevron-left"></i>',
+            nextText: '<i class="fa fa-chevron-right"></i>',
+            onClose: function (selectedDate) {
+                $(".topicker").datepicker("option", "minDate", selectedDate);
+            }
+
+        });
+        $(".fe_hasta").change(function () {
+            console.log("f:" + $(this).val());
+        })
+    });
+
+    $(".topicker").datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 2,
+        prevText: '<i class="fa fa-chevron-left"></i>',
+        nextText: '<i class="fa fa-chevron-right"></i>',
+        onClose: function (selectedDate) {
+            $(".frompicker").datepicker("option", "maxDate", selectedDate);
+        }
+    });
 
     </script>
+    
 </html>
 <%}%>
