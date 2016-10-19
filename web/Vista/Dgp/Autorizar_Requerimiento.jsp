@@ -567,6 +567,7 @@
 <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
 <script src="../../js/coment/comenth.js" type="text/javascript"></script>
 <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+
 <script>
                     $.datepicker.regional['es'] = {
                         closeText: 'Mostrar',
@@ -583,362 +584,359 @@
                         showMonthAfterYear: false,
                         yearSuffix: ''
                     };
-                    $.datepicker.setDefaults($.datepicker.regional['es']);</script>
-<script>
-    var statusBarAut = $(".statusBarAut");
-    function statusBtnSendToRem() {
-        if ($(".envioRem").length == 0) {
-            $(".btn_pro_remuneracion").attr("disabled", "disabled");
-            return false;
-        } else {
-            $(".btn_pro_remuneracion").removeAttr("disabled");
-            return true;
-        }
-    }
-    function statusBtnSendFirma() {
-        if ($(".firm_contr").length == 0) {
-            $(".btn_pro_firma").attr("disabled", "disabled");
-            return true;
-        } else {
-            $(".btn_pro_firma").removeAttr("disabled");
-            return false;
-        }
-    }
-    function statusFirmaAndRem() {
-        if (!statusBtnSendToRem() == true & statusBtnSendFirma() == true) {
-            $(".btnProcesarFirmaAndRem").attr("disabled", "disabled");
-        } else {
-            $(".btnProcesarFirmaAndRem").removeAttr("disabled");
-        }
-    }
-
-    function nobackbutton() {
-        window.location.hash = "no-back-button";
-        window.location.hash = "Again-No-back-button" //chrome
-
-        window.onhashchange = function () {
-            window.location.hash = "";
-        }
-    }
-    function exito(titulo, mensaje) {
-        $.smallBox({
-            title: titulo,
-            content: mensaje,
-            color: "#739E73",
-            iconSmall: "fa fa-cloud",
-            timeout: 3000
-        });
-    }
-    function procesarFirmas(callback, callbackOnItem) {
-        $.each($(".firm_contr"), function () {
-            var currentInputFirma = $(this);
-            var valAut = currentInputFirma.parents('tr').find(".valAut");
-            if (currentInputFirma.prop('checked')) {
-                $.ajax({
-                    async: false,
-                    url: "../../contrato",
-                    type: "POST", success: function (data, textStatus, jqXHR) {
-                        if (data.rpta) {
-                            console.log("status firma updated:" + data.rpta);
-                            $.ajax({
-                                async: false,
-                                url: "../../autorizacion",
-                                type: "POST", success: function (data, textStatus, jqXHR) {
-                                    if (data.rpta) {
-                                        console.log("autorizado!");
-                                        var table = new $.fn.dataTable.Api('#dt_basic1');
-                                        var thisTD = currentInputFirma.parents("td");
-
-                                        //    table.row(currentInputFirma.parents('tr')).remove().draw();
-                                        currentInputFirma.parent().remove();
-                                        thisTD.append("Si");
-                                        thisTD.next().empty();
-                                        thisTD.next().append('<div class="smart-form"><label class="toggle"><input type="checkbox" value=""  class="envioRem"  name="estado" name="checkbox - toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label></div>');
-                                        /*Agregar Boton*/
-                                        exito("Procesado con exito!", "Se ha actualizado el contrato");
-                                        statusBtnSendToRem();
-                                        statusBtnSendFirma();
-                                        statusFirmaAndRem();
-                                        if (typeof callbackOnItem !== 'undefined') {
-                                            console.log("Enter to callbackOnItem:" + valAut.val())
-                                            callbackOnItem(valAut, data);
-                                        }
-                                    }
-                                },
-                                data: "opc=Aceptar" + valAut.val()
-                            });
-                        }
-
-                    },
-                    data: "opc=Actualizar_Firma" + valAut.val()
-                });
-            }
-        });
-        if (typeof callback !== 'undefined') {
-            callback();
-        } else {
-            //  window.location.href = "../../autorizacion";
-        }
-
-    }
-    function refreshCurrentPage() {
-        console.log("redirecto to autorizacion");
-        window.location.href = "../../autorizacion";
-    }
-    function procesarSendToRemu(callback) {
-        console.log("enter to procesarSendToRemu function");
-        $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-        //  var lenghtDatatable = $('#dt_basic1 tr').length;
-        $.each($(".envioRem"), function (index) {
-            var thisObject = $(this);
-            var valAut = thisObject.parents('tr').find(".valAut");
-            if (thisObject.prop('checked')) {
-                console.log("checked condition");
-                processAutorizacionMasive(valAut.val(), function (data) {
-                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-                    var table = new $.fn.dataTable.Api('#dt_basic1');
-                    table.row(thisObject.parents('tr')).remove().draw();
-                    exito("Procesado con exito!", "Envió el requerimiento correctamente");
-                    statusBtnSendToRem();
-                    statusBtnSendFirma();
-                    statusFirmaAndRem();
-                    console.log("Autorizacion :" + data.rpta);
-                });
-            }
-        });
-        if (typeof callback !== 'undefined') {
-            callback();
-        } else {
-        }
-    }
-    function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
-
-        console.log("::enter to registerAndProcessCodHuella function");
-        if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
-            registerCOdHuella(inputItem, function () {
-                processAutorizacionMasive(dataProcess, function () {
-                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-                    sendEmail(dataEmail, function () {
-                        var table = new $.fn.dataTable.Api('#dt_basic1');
-                        table.row(inputItem.parent('tr')).remove().draw();
-                        $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-                    });
-                });
-            });
-        }
-    }
-    function registerCOdHuella(inputItem, callback) {
-        console.log("::enter to registerCOdHuella function");
-        if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
-            $.ajax({
-                async: false,
-                url: "../../trabajador", data: "opc=registrar_huella&cod=" + inputItem.val() + "&idtr=" + inputItem.parents("tr").find(".idTrabajador").val(),
-                type: "POST", success: function (data, textStatus, jqXHR) {
-                    if (data.rpta) {
-                        console.log("huella registrada!");
-                        if (typeof callback !== 'undefined') {
-                            callback(data);
+                    $.datepicker.setDefaults($.datepicker.regional['es']);
+                    var statusBarAut = $(".statusBarAut");
+                    function statusBtnSendToRem() {
+                        if ($(".envioRem").length == 0) {
+                            $(".btn_pro_remuneracion").attr("disabled", "disabled");
+                            return false;
+                        } else {
+                            $(".btn_pro_remuneracion").removeAttr("disabled");
+                            return true;
                         }
                     }
-                }
-
-            });
-        }
-    }
-    function processAutorizacionMasive(values, callback) {
-        console.log("::enter to processAutorizacionMasive function");
-        $.ajax({
-            async: false,
-            url: "../../autorizacion",
-            data: "opc=Aceptar" + values,
-            type: "POST", success: function (data, textStatus, jqXHR) {
-                if (data.rpta) {
-                    console.log("autorizacion registrada");
-                    if (typeof callback !== 'undefined') {
-                        callback(data);
+                    function statusBtnSendFirma() {
+                        if ($(".firm_contr").length == 0) {
+                            $(".btn_pro_firma").attr("disabled", "disabled");
+                            return true;
+                        } else {
+                            $(".btn_pro_firma").removeAttr("disabled");
+                            return false;
+                        }
                     }
-                }
-            }
-        });
-    }
-
-    function sendEmail(dataRequest, callback) {
-        console.log("::enter to sendEmail function");
-        statusBarAut.text("Enviando correos...");
-        $.ajax({
-            //  async: false,
-            url: "../../autorizacion",
-            type: "POST", success: function (data, textStatus, jqXHR) {
-                if (data.rpta) {
-                    statusBarAut.text("Correos enviados!").fadeOut('slow');
-                    //  console.log(table.row(inputItem.parent('tr')).data());
-                    $.bigBox({
-                        title: "Registro terminado!",
-                        content: "<i class='fa fa-clock-o'></i> <i>Se enviaron a los correos del trabajador: " + data.sendto + "...</i>",
-                        color: "#296191",
-                        icon: "fa fa-check shake animated",
-                        number: "1",
-                        timeout: 6000
-                    });
-                    if (typeof callback !== 'undefined') {
-                        callback(data);
+                    function statusFirmaAndRem() {
+                        if (!statusBtnSendToRem() == true & statusBtnSendFirma() == true) {
+                            $(".btnProcesarFirmaAndRem").attr("disabled", "disabled");
+                        } else {
+                            $(".btnProcesarFirmaAndRem").removeAttr("disabled");
+                        }
                     }
-                }
-            },
-            data: dataRequest
-        });
-    }
-    $(document).ready(function () {
-        statusBtnSendToRem();
-        statusBtnSendFirma();
-        statusFirmaAndRem();
-        $(".btnProcesarFirmaAndRem").click(function () {
-            $.SmartMessageBox({
-                title: "¡Advertencia!",
-                content: "¿Esta seguro de procesar Firmas y Envio a Remuneración?",
-                buttons: '[No][Si]'
-            }, function (ButtonPressed) {
-                if (ButtonPressed === "Si") {
-                    procesarFirmas(function () {
-                        console.log("item");
-                    }, function (item) {
-                        console.log("item:" + item);
-                        processAutorizacionMasive(item.val(), function () {
-                            /*termina la autorizacion*/
-                            var table = new $.fn.dataTable.Api('#dt_basic1');
-                            table.row(item.parents('tr')).remove().draw();
+
+                    function nobackbutton() {
+                        window.location.hash = "no-back-button";
+                        window.location.hash = "Again-No-back-button" //chrome
+
+                        window.onhashchange = function () {
+                            window.location.hash = "";
+                        }
+                    }
+                    function exito(titulo, mensaje) {
+                        $.smallBox({
+                            title: titulo,
+                            content: mensaje,
+                            color: "#739E73",
+                            iconSmall: "fa fa-cloud",
+                            timeout: 3000
                         });
-                    });
-                }
-                if (ButtonPressed === "No") {
-                }
-            });
-        });
-        $(".btn_pro_remuneracion").click(function () {
-            $.SmartMessageBox({
-                title: "¡Advertencia!",
-                content: "¿Esta seguro de procesar estos requerimientos?",
-                buttons: '[No][Si]'
-            }, function (ButtonPressed) {
-                if (ButtonPressed === "Si") {
-                    procesarSendToRemu();
-                }
-                if (ButtonPressed === "No") {
-                }
-            });
-        });
-        $(".btn_pro_firma").click(function () {
-            $.SmartMessageBox({
-                title: "¡Advertencia!",
-                content: "¿Esta seguro de procesar firmas a estos requerimientos?",
-                buttons: '[No][Si]'
-            }, function (ButtonPressed) {
-                if (ButtonPressed === "Si") {
-                    try {
-                        procesarFirmas();
-                        // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
-                    } catch (err) {
-
-                    } finally {
                     }
-                }
-                if (ButtonPressed === "No") {
-                }
-            });
-        });
-        $(".btn_cod_aps").click(function () {
-            $.SmartMessageBox({
-                title: "¡Advertencia!",
-                content: "¿Esta seguro de procesar codigos APS a estos requerimientos?",
-                buttons: '[No][Si]'
-            }, function (ButtonPressed) {
-                if (ButtonPressed === "Si") {
+                    function procesarFirmas(callback, callbackOnItem) {
+                        $.each($(".firm_contr"), function () {
+                            var currentInputFirma = $(this);
+                            var valAut = currentInputFirma.parents('tr').find(".valAut");
+                            if (currentInputFirma.prop('checked')) {
+                                $.ajax({
+                                    async: false,
+                                    url: "../../contrato",
+                                    type: "POST", success: function (data, textStatus, jqXHR) {
+                                        if (data.rpta) {
+                                            console.log("status firma updated:" + data.rpta);
+                                            $.ajax({
+                                                async: false,
+                                                url: "../../autorizacion",
+                                                type: "POST", success: function (data, textStatus, jqXHR) {
+                                                    if (data.rpta) {
+                                                        console.log("autorizado!");
+                                                        var table = new $.fn.dataTable.Api('#dt_basic1');
+                                                        var thisTD = currentInputFirma.parents("td");
 
-                    var lenghtDatatable = $('#dt_basic1 tr').length;
-                    for (var r = 1; r <= lenghtDatatable; r++) {
-                        console.log("(" + r + ")Iterate items cod aps:" + $(".cod_aps" + r).val());
-                        if ($(".cod_aps" + r).val() !== "" & typeof $(".cod_aps" + r).val() !== 'undefined') {
-                            console.log(r + "codigo aps: " + $(".cod_aps" + r).val());
-                            $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-                            $.ajax({
-                                async: false,
-                                url: "../../trabajador", data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val(),
-                                type: "POST", success: function (objJson, textStatus, jqXHR) {
-                                    if (objJson.rpta) {
-                                        $.ajax({
-                                            async: false,
-                                            url: "../../autorizacion",
-                                            type: "POST", success: function (objJson, textStatus, jqXHR) {
-                                                if (objJson.rpta) {
-                                                    var table = new $.fn.dataTable.Api('#dt_basic1');
-                                                    table.row($(".cod_aps" + r).parents('tr')).remove().draw();
-                                                    exito("Procesado con exito!", "Codigo APS ingresado correctamente");
-                                                    console.log("autorizado!");
-                                                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-                                                }
-                                            },
-                                            data: "opc=Aceptar" + $(".val_aut" + r).val()
-                                        });
-                                    }
+                                                        //    table.row(currentInputFirma.parents('tr')).remove().draw();
+                                                        currentInputFirma.parent().remove();
+                                                        thisTD.append("Si");
+                                                        thisTD.next().empty();
+                                                        thisTD.next().append('<div class="smart-form"><label class="toggle"><input type="checkbox" value=""  class="envioRem"  name="estado" name="checkbox - toggle" ><i data-swchon-text="SI" data-swchoff-text="NO"></i></label></div>');
+                                                        /*Agregar Boton*/
+                                                        exito("Procesado con exito!", "Se ha actualizado el contrato");
+                                                        statusBtnSendToRem();
+                                                        statusBtnSendFirma();
+                                                        statusFirmaAndRem();
+                                                        if (typeof callbackOnItem !== 'undefined') {
+                                                            console.log("Enter to callbackOnItem:" + valAut.val())
+                                                            callbackOnItem(valAut, data);
+                                                        }
+                                                    }
+                                                },
+                                                data: "opc=Aceptar" + valAut.val()
+                                            });
+                                        }
 
-                                }
-
-                            })
-
-                        }
-                    }
-
-
-                    //  window.location.href = "../../autorizacion?opc=mens_cod_aps";
-                }
-                if (ButtonPressed === "No") {
-                }
-            });
-        });
-        $(".btn_cod_huella").click(function () {
-            /*  testFunction1(function () {
-             testFunction2("gg")
-             });*/
-            var lenghtDatatable = $('#dt_basic1 tr').length;
-            $.SmartMessageBox({
-                title: "¡Advertencia!",
-                content: "¿Esta seguro de procesar códigos de huella a estos requerimientos?",
-                buttons: '[No][Si]'
-            }, function (ButtonPressed) {
-                if (ButtonPressed === "Si") {
-                    for (var r = 1; r <= lenghtDatatable; r++) {
-                        var objInputHuella = $(".cod_huella" + r);
-                        var valAut = objInputHuella.parents('tr').find(".valAut");
-                        var correoTrabajador = objInputHuella.parents('tr').find(".correoTrabajador");
-                        registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + correoTrabajador.val(), valAut.val());
-                    }
-                    $.each($(".cbHuellaItem"), function (index) {
-                        var itemRegistered = $(this);
-                        if (itemRegistered.prop('checked')) {
-                            console.log(index + 1)
-                            if (itemRegistered.val() !== "" & typeof itemRegistered.val() !== "undefined") {
-                                var itemValue = itemRegistered.parents('tr').find(".valAut");
-                                var correoTrabajador = itemRegistered.parents('tr').find(".correoTrabajador");
-                                processAutorizacionMasive(itemValue.val(), function () {
-                                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-                                    sendEmail("opc=Enviar_Correo" + correoTrabajador.val(), function () {
-                                        $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-                                        var table = new $.fn.dataTable.Api('#dt_basic1');
-                                        table.row(itemRegistered.parents('tr')).remove().draw();
-                                    });
+                                    },
+                                    data: "opc=Actualizar_Firma" + valAut.val()
                                 });
                             }
+                        });
+                        if (typeof callback !== 'undefined') {
+                            callback();
+                        } else {
+                            //  window.location.href = "../../autorizacion";
                         }
 
-                    });
-                    //  registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + $(".correos_" + t).val(), $(".val_aut" + t).val());
-                    // $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-                }
-                if (ButtonPressed === "No") {
-                }
-            });
-        });
-    });</script>
+                    }
+                    function refreshCurrentPage() {
+                        console.log("redirecto to autorizacion");
+                        window.location.href = "../../autorizacion";
+                    }
+                    function procesarSendToRemu(callback) {
+                        console.log("enter to procesarSendToRemu function");
+                        $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+                        //  var lenghtDatatable = $('#dt_basic1 tr').length;
+                        $.each($(".envioRem"), function (index) {
+                            var thisObject = $(this);
+                            var valAut = thisObject.parents('tr').find(".valAut");
+                            if (thisObject.prop('checked')) {
+                                console.log("checked condition");
+                                processAutorizacionMasive(valAut.val(), function (data) {
+                                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                                    var table = new $.fn.dataTable.Api('#dt_basic1');
+                                    table.row(thisObject.parents('tr')).remove().draw();
+                                    exito("Procesado con exito!", "Envió el requerimiento correctamente");
+                                    statusBtnSendToRem();
+                                    statusBtnSendFirma();
+                                    statusFirmaAndRem();
+                                    console.log("Autorizacion :" + data.rpta);
+                                });
+                            }
+                        });
+                        if (typeof callback !== 'undefined') {
+                            callback();
+                        } else {
+                        }
+                    }
+                    function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
+
+                        console.log("::enter to registerAndProcessCodHuella function");
+                        if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
+                            registerCOdHuella(inputItem, function () {
+                                processAutorizacionMasive(dataProcess, function () {
+                                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+                                    sendEmail(dataEmail, function () {
+                                        var table = new $.fn.dataTable.Api('#dt_basic1');
+                                        table.row(inputItem.parents('tr')).remove().draw();
+                                        $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                                    });
+                                });
+                            });
+                        }
+                    }
+                    function registerCOdHuella(inputItem, callback) {
+                        console.log("::enter to registerCOdHuella function");
+                        if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
+                            $.ajax({
+                                async: false,
+                                url: "../../trabajador", data: "opc=registrar_huella&cod=" + inputItem.val() + "&idtr=" + inputItem.parents("tr").find(".idTrabajador").val(),
+                                type: "POST", success: function (data, textStatus, jqXHR) {
+                                    if (data.rpta) {
+                                        console.log("huella registrada!");
+                                        if (typeof callback !== 'undefined') {
+                                            callback(data);
+                                        }
+                                    }
+                                }
+
+                            });
+                        }
+                    }
+                    function processAutorizacionMasive(values, callback) {
+                        console.log("::enter to processAutorizacionMasive function");
+                        $.ajax({
+                            async: false,
+                            url: "../../autorizacion",
+                            data: "opc=Aceptar" + values,
+                            type: "POST", success: function (data, textStatus, jqXHR) {
+                                if (data.rpta) {
+                                    console.log("autorizacion registrada");
+                                    if (typeof callback !== 'undefined') {
+                                        callback(data);
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+                    function sendEmail(dataRequest, callback) {
+                        console.log("::enter to sendEmail function");
+                        statusBarAut.text("Enviando correos...");
+                        $.ajax({
+                            //  async: false,
+                            url: "../../autorizacion",
+                            type: "POST", success: function (data, textStatus, jqXHR) {
+                                if (data.rpta) {
+                                    statusBarAut.text("Correos enviados!").fadeOut('slow');
+                                    //  console.log(table.row(inputItem.parent('tr')).data());
+                                    $.bigBox({
+                                        title: "Registro terminado!",
+                                        content: "<i class='fa fa-clock-o'></i> <i>Se enviaron a los correos del trabajador: " + data.sendto + "...</i>",
+                                        color: "#296191",
+                                        icon: "fa fa-check shake animated",
+                                        number: "1",
+                                        timeout: 6000
+                                    });
+                                    if (typeof callback !== 'undefined') {
+                                        callback(data);
+                                    }
+                                }
+                            },
+                            data: dataRequest
+                        });
+                    }
+                    $(document).ready(function () {
+                        statusBtnSendToRem();
+                        statusBtnSendFirma();
+                        statusFirmaAndRem();
+                        $(".btnProcesarFirmaAndRem").click(function () {
+                            $.SmartMessageBox({
+                                title: "¡Advertencia!",
+                                content: "¿Esta seguro de procesar Firmas y Envio a Remuneración?",
+                                buttons: '[No][Si]'
+                            }, function (ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+                                    procesarFirmas(function () {
+                                        console.log("item");
+                                    }, function (item) {
+                                        console.log("item:" + item);
+                                        processAutorizacionMasive(item.val(), function () {
+                                            /*termina la autorizacion*/
+                                            var table = new $.fn.dataTable.Api('#dt_basic1');
+                                            table.row(item.parents('tr')).remove().draw();
+                                        });
+                                    });
+                                }
+                                if (ButtonPressed === "No") {
+                                }
+                            });
+                        });
+                        $(".btn_pro_remuneracion").click(function () {
+                            $.SmartMessageBox({
+                                title: "¡Advertencia!",
+                                content: "¿Esta seguro de procesar estos requerimientos?",
+                                buttons: '[No][Si]'
+                            }, function (ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+                                    procesarSendToRemu();
+                                }
+                                if (ButtonPressed === "No") {
+                                }
+                            });
+                        });
+                        $(".btn_pro_firma").click(function () {
+                            $.SmartMessageBox({
+                                title: "¡Advertencia!",
+                                content: "¿Esta seguro de procesar firmas a estos requerimientos?",
+                                buttons: '[No][Si]'
+                            }, function (ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+                                    try {
+                                        procesarFirmas();
+                                        // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
+                                    } catch (err) {
+
+                                    } finally {
+                                    }
+                                }
+                                if (ButtonPressed === "No") {
+                                }
+                            });
+                        });
+                        $(".btn_cod_aps").click(function () {
+                            $.SmartMessageBox({
+                                title: "¡Advertencia!",
+                                content: "¿Esta seguro de procesar codigos APS a estos requerimientos?",
+                                buttons: '[No][Si]'
+                            }, function (ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+
+                                    var lenghtDatatable = $('#dt_basic1 tr').length;
+                                    for (var r = 1; r <= lenghtDatatable; r++) {
+                                        console.log("(" + r + ")Iterate items cod aps:" + $(".cod_aps" + r).val());
+                                        if ($(".cod_aps" + r).val() !== "" & typeof $(".cod_aps" + r).val() !== 'undefined') {
+                                            console.log(r + "codigo aps: " + $(".cod_aps" + r).val());
+                                            $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+                                            $.ajax({
+                                                async: false,
+                                                url: "../../trabajador", data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val(),
+                                                type: "POST", success: function (objJson, textStatus, jqXHR) {
+                                                    if (objJson.rpta) {
+                                                        $.ajax({
+                                                            async: false,
+                                                            url: "../../autorizacion",
+                                                            type: "POST", success: function (objJson, textStatus, jqXHR) {
+                                                                if (objJson.rpta) {
+                                                                    var table = new $.fn.dataTable.Api('#dt_basic1');
+                                                                    table.row($(".cod_aps" + r).parents('tr')).remove().draw();
+                                                                    exito("Procesado con exito!", "Codigo APS ingresado correctamente");
+                                                                    console.log("autorizado!");
+                                                                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                                                                }
+                                                            },
+                                                            data: "opc=Aceptar" + $(".val_aut" + r).val()
+                                                        });
+                                                    }
+
+                                                }
+
+                                            })
+
+                                        }
+                                    }
+
+
+                                    //  window.location.href = "../../autorizacion?opc=mens_cod_aps";
+                                }
+                                if (ButtonPressed === "No") {
+                                }
+                            });
+                        });
+                        $(".btn_cod_huella").click(function () {
+
+                            $.SmartMessageBox({
+                                title: "¡Advertencia!",
+                                content: "¿Esta seguro de procesar códigos de huella a estos requerimientos?",
+                                buttons: '[No][Si]'
+                            }, function (ButtonPressed) {
+                                if (ButtonPressed === "Si") {
+                                    $.each($(".inp_cod_huella"), function (index) {
+                                        var objInputHuella = $(this);
+                                        var valAut = objInputHuella.parents('tr').find(".valAut");
+                                        var correoTrabajador = objInputHuella.parents('tr').find(".correoTrabajador");
+                                        registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + correoTrabajador.val(), valAut.val());
+                                    });
+
+                                    $.each($(".cbHuellaItem"), function (index) {
+                                        var itemRegistered = $(this);
+                                        if (itemRegistered.prop('checked')) {
+                                            console.log(index + 1)
+                                            if (itemRegistered.val() !== "" & typeof itemRegistered.val() !== "undefined") {
+                                                var itemValue = itemRegistered.parents('tr').find(".valAut");
+                                                var correoTrabajador = itemRegistered.parents('tr').find(".correoTrabajador");
+                                                processAutorizacionMasive(itemValue.val(), function () {
+                                                    $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+                                                    sendEmail("opc=Enviar_Correo" + correoTrabajador.val(), function () {
+                                                        $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                                                        var table = new $.fn.dataTable.Api('#dt_basic1');
+                                                        table.row(itemRegistered.parents('tr')).remove().draw();
+                                                    });
+                                                });
+                                            }
+                                        }
+
+                                    });
+                                    //  registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + $(".correos_" + t).val(), $(".val_aut" + t).val());
+                                    // $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                                }
+                                if (ButtonPressed === "No") {
+                                }
+                            });
+                        });
+                    });</script>
 <script type="text/javascript">
     var año = '';
     var mes = '';
