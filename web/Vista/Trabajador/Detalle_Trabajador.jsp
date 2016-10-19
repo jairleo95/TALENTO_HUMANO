@@ -1026,9 +1026,9 @@
                                 }
                             } else {
                                 if (obj.EFOTO != 2) {
-                                    $('.borde').attr("src", "../../Vista/Usuario/Fotos/" + obj.ar_foto);
-                                    $(".avatar").attr("href", "../../Vista/Usuario/Fotos/" + obj.ar_foto);
-                                    $("#sb-player").attr("href", "../../Usuario/Fotos/" + obj.ar_foto);
+                                    $('.borde').attr("src", "../../Archivo/Fotos/" + obj.ar_foto);
+                                    $(".avatar").attr("href", "../../Archivo/Fotos/" + obj.ar_foto);
+                                    $("#sb-player").attr("href", "../../Archivo/Fotos/" + obj.ar_foto);
                                     console.log(obj.ar_foto);
                                 }
                             }
