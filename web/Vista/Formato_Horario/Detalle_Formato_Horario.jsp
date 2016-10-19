@@ -28,26 +28,26 @@
         <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <title>JSP Page</title>
 
-    <style>
-        .btnAgregar{
-            -webkit-box-shadow: 2px 3px 6px 0px rgba(50, 50, 50, 0.5);
-            -moz-box-shadow:    2px 3px 6px 0px rgba(50, 50, 50, 0.5);
-            box-shadow:         2px 3px 6px 0px rgba(50, 50, 50, 0.5);
-        }
-        .btnGuardar{
-            -webkit-box-shadow: 2px 3px 6px 0px rgba(50, 50, 50, 0.5);
-            -moz-box-shadow:    2px 3px 6px 0px rgba(50, 50, 50, 0.5);
-            box-shadow:         2px 3px 6px 0px rgba(50, 50, 50, 0.5);
-        }
-        .btnClose{
-            -webkit-box-shadow: 2px 3px 6px 0px rgba(50, 50, 50, 0.5);
-            -moz-box-shadow:    2px 3px 6px 0px rgba(50, 50, 50, 0.5);
-            box-shadow:         2px 3px 6px 0px rgba(50, 50, 50, 0.5);
-        }
-        
+        <style>
+            .btnAgregar{
+                -webkit-box-shadow: 2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+                -moz-box-shadow:    2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+                box-shadow:         2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+            }
+            .btnGuardar{
+                -webkit-box-shadow: 2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+                -moz-box-shadow:    2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+                box-shadow:         2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+            }
+            .btnClose{
+                -webkit-box-shadow: 2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+                -moz-box-shadow:    2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+                box-shadow:         2px 3px 6px 0px rgba(50, 50, 50, 0.5);
+            }
 
 
-    </style>
+
+        </style>
     </head>
     <body>
         <div class="well">
@@ -138,8 +138,8 @@
                     <section class="col col-sm-12">
                         <div class="table-responsive cnt_t">
                             <table class="table table-hover table-responsive table-striped tbd_t">
-                                <thead><tr><td>Nro</td><td>Nombre</td><td>Comentario</td><td>Cant Horas</td>
-                                        <td>Departamento</td><td>Area</td><td>Seccion</td><td>Opciones</td></tr>
+                                <thead><tr><th>Nro</th><th>Nombre</th><th>Comentario</th><th>Cant Horas</th>
+                                        <th>Departamento</th><th>Area</th><th>Seccion</th><th>Opciones</th><th>Habilitar</th></tr>
                                 </thead><tbody class="tbd"></tbody></table>
                         </div>
                     </section>
@@ -253,22 +253,22 @@
                 document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
             }
         </script>
-        <!--<script src="../../js/app.config.js"></script>
+        <script src="../../js/app.config.js"></script>
         <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
         <script src="../../js/bootstrap/bootstrap.min.js"></script>-->
         <script src="../../js/notification/SmartNotification.min.js"></script>
-        <!--<script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
-        <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+        <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
+        <!--<script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
         <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
         <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
         <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
         <script src="../../js/plugin/select2/select2.min.js"></script>
         <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
         <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
-        <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
+        <script src="../../js/plugin/fastclick/fastclick.min.js"></script>-->
         <script src="../../js/demo.min.js"></script>
         <script src="../../js/app.min.js"></script>
-        <script src="../../js/speech/voicecommand.min.js"></script>
+        <!--<script src="../../js/speech/voicecommand.min.js"></script>
         <script src="../../js/plugin/jquery-nestable/jquery.nestable.min.js"></script>-->
         <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
@@ -281,6 +281,32 @@
         <script src="../../js/Js_Horario/horario-api.js" type="text/javascript"></script>
         <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
         <script>
+            function statupdate(id, obj) {
+                var datos;
+                if (obj.is(":checked")) {
+                    datos = {
+                        id: id,
+                        es: 1
+                    };
+                    $.ajax({
+                        async: false,
+                        url: '../../formato_horario?opc=statupdate',
+                        data: datos,
+                        type: 'POST'
+                    });
+                } else {
+                    datos = {
+                        id: id,
+                        es: 0
+                    };
+                    $.ajax({
+                        async: false,
+                        url: '../../formato_horario?opc=statupdate',
+                        data: datos,
+                        type: 'POST'
+                    });
+                }
+            }
             $(document).ready(function () {
                 // Global Variables
                 var typeofSave = 1;
@@ -552,6 +578,16 @@
                                 t += "<td><a class='btn btn-link btnVer' target='_blanck' href='../../formato_horario?opc=LISTAR_FORMATO_HORARIO&idth=" + lista[i].id + "&nofor=" + lista[i].nombre + "'><span><i class='fa fa-eye'></i></span></a>";
                                 t += "<a id='" + x + "' class='btn btn-link btnEditar' href='#'><span><i class='fa fa-pencil'></i></span></a>";
                                 t += "<a class='btn btn-link btnEliminar' href='#'><span><i class='fa fa-times'></i></span></a></td>";
+                                var info = 'statupdate("' + lista[i].id + '",$(this))';
+                                if (lista[i].es_horario == 1) {
+                                    t += "<td><div class='smart-form'><label class='toggle'>" +
+                                            "<input type='checkbox' onchange='" + info + "' name='checkbox-toggle' checked='checked'>" +
+                                            "<i data-swchon-text='ACTIVO' data-swchoff-text='INACTIVO'></i></label></div></td>";
+                                } else {
+                                    t += "<td><div class='smart-form'><label class='toggle'>" +
+                                            "<input type='checkbox' onchange='" + info + "' name='checkbox-toggle'>" +
+                                            "<i data-swchon-text='ACTIVO' data-swchoff-text='INACTIVO'></i></label></div></td>";
+                                }
                                 t += "</tr>";
                             }
                             crear_tabla();
@@ -625,7 +661,7 @@
                     var t = "";
                     t += '<table class="table table-hover table-responsive table-striped tbd_t">';
                     t += '<thead><tr><td>Nro</td><td>Nombre</td><td>Comentario</td><td>Cant Horas</td>';
-                    t += '<td>Departamento</td><td>Area</td><td>Seccion</td><td>Opciones</td></tr>';
+                    t += '<td>Departamento</td><td>Area</td><td>Seccion</td><td>Opciones</td><td>Habilitar</td></tr>';
                     t += '</thead><tbody class="tbd"></tbody></table>';
                     $('.cnt_t').empty();
                     $('.cnt_t').append(t);

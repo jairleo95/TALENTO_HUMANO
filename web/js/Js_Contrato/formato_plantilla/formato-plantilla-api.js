@@ -344,7 +344,7 @@ function list_dir_fil(c, fil) {
                 c.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
             }
         } else {
-            c.append("<option value='' > [] </option>");
+            c.append("<option value='' > [TODO] </option>");
         }
     });
 }
@@ -459,10 +459,12 @@ $(document).ready(function () {
     $(".fil").change(function () {
         var c = $(".dir");
         list_dir_fil(c, $(this));
+        alert($(this));
     });
     $(".fil_as").change(function () {
         var c = $(".dir_as");
         list_dir_fil(c, $(this));
+        alert($(this));
     });
     $("#dir").change(function () {
         var d = $(".dep");
