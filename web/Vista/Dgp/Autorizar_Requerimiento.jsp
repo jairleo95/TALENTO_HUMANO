@@ -286,7 +286,7 @@
                                                     <% if (a.getAr_foto() == null) {%>
                                                     <td><img class="user_avatar_<%=a.getId_trabajador()%>" src="../../img/avatar_default.jpg"  width="30"  height="30"></td>
                                                         <% } else {%>
-                                                    <td><img class="user_avatar_<%=a.getId_trabajador()%>" src="../Usuario/Fotos/<%=a.getAr_foto()%>"  width="30"  height="30"></td>
+                                                    <td><img class="user_avatar_<%=a.getId_trabajador()%>" src="../../Archivo/Fotos/<%=a.getAr_foto()%>"  width="30"  height="30"></td>
                                                         <% }%>
                                                     <td ><%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%></td>
                                                     <td ><%=a.getNo_puesto()%></td>

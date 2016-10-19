@@ -430,11 +430,12 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR!");
+            throw new RuntimeException("Error!" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
         return lista;
@@ -639,7 +640,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                 tmp.add(x.get(i));
             }
         }
-        System.out.println("Buscando " + arr1[0]+" "+arr1[1]+" "+arr1[2]+" encontrado:"+tmp.size());
+        System.out.println("Buscando " + arr1[0] + " " + arr1[1] + " " + arr1[2] + " encontrado:" + tmp.size());
         return tmp;
     }
 
