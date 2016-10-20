@@ -448,13 +448,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Fecha de Inicio:</label>
-                                        <input type="text" class="simple-field-data-mask fecha form-control fe_desde_p" value="" name="DESDE" data-mask="00/00/0000" autocomplete="off" required />
+                                        <input type="text" class="simple-field-data-mask fecha form-control fe_desde_p topicker" value="" name="DESDE" data-mask="00/00/0000" autocomplete="off" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Fecha de Cese:</label>
-                                        <input type="text" class="simple-field-data-mask fecha1 form-control fe_hasta_p" value="" name="HASTA" data-mask="00/00/0000" autocomplete="off" required />
+                                        <input type="text" class="simple-field-data-mask fecha1 form-control fe_hasta_p frompicker" value="" name="HASTA" data-mask="00/00/0000" autocomplete="off" required />
                                     </div>
                                 </div>
                             </div>

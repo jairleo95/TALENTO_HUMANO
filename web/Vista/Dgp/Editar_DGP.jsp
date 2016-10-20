@@ -1988,34 +1988,7 @@
                 return this.optional(element) || String(parseInt(d[0])).length == 4;
             }, "¡Fecha ingresada invalida!");
         })
- $(function () {
-        $(".frompicker").datepicker({
-            defaultDate: "+1w",
-            changeMonth: true,
-            numberOfMonths: 2,
-            prevText: '<i class="fa fa-chevron-left"></i>',
-            nextText: '<i class="fa fa-chevron-right"></i>',
-            onClose: function (selectedDate) {
-                $(".topicker").datepicker("option", "minDate", selectedDate);
-            }
-
-        });
-        $(".fe_hasta").change(function () {
-            console.log("f:" + $(this).val());
-        })
-    });
-
-    $(".topicker").datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        numberOfMonths: 2,
-        prevText: '<i class="fa fa-chevron-left"></i>',
-        nextText: '<i class="fa fa-chevron-right"></i>',
-        onClose: function (selectedDate) {
-            $(".frompicker").datepicker("option", "maxDate", selectedDate);
-        }
-    });
-
+ 
     </script>
     
 </html>

@@ -128,6 +128,7 @@ $(function () {
             defaultDate: "+1w",
             changeMonth: true,
             numberOfMonths: 2,
+            dateformat:'dd/mm/yy',
             prevText: '<i class="fa fa-chevron-left"></i>',
             nextText: '<i class="fa fa-chevron-right"></i>',
             onClose: function (selectedDate) {
@@ -144,6 +145,7 @@ $(function () {
         defaultDate: "+1w",
         changeMonth: true,
         numberOfMonths: 2,
+        dateformat: 'dd/mm/yy',
         prevText: '<i class="fa fa-chevron-left"></i>',
         nextText: '<i class="fa fa-chevron-right"></i>',
         onClose: function (selectedDate) {

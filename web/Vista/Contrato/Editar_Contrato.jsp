@@ -362,7 +362,7 @@
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Desde:
                                                 <%if (a.getFe_desde() != null) {%>
-                                                <input type="text" name="FEC_DESDE" value="<%=(a.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
+                                                <input type="text" name="FEC_DESDE" value="<%=(a.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm topicker" data-mask="00/00/0000" autocomplete="off" required="">
                                                 <%} else {%>
                                                 <input type="text" name="FEC_DESDE" class="simple-field-data-mask from-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
                                                 <%}%>
@@ -373,9 +373,9 @@
                                                 <%if (a.getFe_hasta() != null) {
                                                         if (a.getId_dgp() == null) {%>
 
-                                                        <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off">
+                                                        <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm frompicker" data-mask="00/00/0000" autocomplete="off">
 =======
-                                                <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask fecha input-group-sm" data-mask="00/00/0000" autocomplete="off">
+                                                <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask fecha input-group-sm " data-mask="00/00/0000" autocomplete="off">
                                                 <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask fecha input-group-sm" data-mask="00/00/0000" autocomplete="off">
                                                 <%} else {%>
                                                 <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">

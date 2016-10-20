@@ -323,7 +323,7 @@
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
 
-                                                                <input type="text" name="FEC_HASTA"  required=""  value="" class="simple_field-data-mask val_fe topicker" id="topicker" data-mask="00/00/0000" autocomplete="off">
+                                                                <input type="text" name="FEC_HASTA"  required=""  value="" class="simple_field-data-mask val_fe topicker" data-mask="00/00/0000" autocomplete="off">
 
                                                             </label>
                                                         </section>
@@ -885,37 +885,7 @@
     <script src="../../js/Js_Horario/horario.js" type="text/javascript"></script>
     <script src="../../js/Js_Plazo/Js_plazo_advertencia.js" type="text/javascript"></script>    
     <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
-  <script type="text/javascript">
-                                                      $(function () {
-        $(".frompicker").datepicker({
-            defaultDate: "+1w",
-            changeMonth: true,
-            numberOfMonths: 2,
-            prevText: '<i class="fa fa-chevron-left"></i>',
-            nextText: '<i class="fa fa-chevron-right"></i>',
-            onClose: function (selectedDate) {
-                $(".topicker").datepicker("option", "minDate", selectedDate);
-            }
-
-        });
-        $(".fe_hasta").change(function () {
-            console.log("f:" + $(this).val());
-        })
-    });
-
-    $(".topicker").datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        numberOfMonths: 3,
-        prevText: '<i class="fa fa-chevron-left"></i>',
-        nextText: '<i class="fa fa-chevron-right"></i>',
-        onClose: function (selectedDate) {
-            $(".frompicker").datepicker("option", "maxDate", selectedDate);
-        }
-    });
-
-
-    </script>
+ 
 </html>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");

@@ -69,6 +69,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <%
             String id_rol = (String) session.getAttribute("IDROL");%>
         <style type="text/css">
@@ -180,7 +181,7 @@
                                                         <label class="input" id="titulo">Fecha de Inicio: 
 <<<<<<< HEAD
 <<<<<<< HEAD
-                                                            <input type="text" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
+                                                            <input type="text" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm frompicker" data-mask="00/00/0000" autocomplete="off" required="">
 =======
                                                             <input onchange="c()" type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" id="ifechai" class=" input-group-sm" required="">
 >>>>>>> origin/master
@@ -191,7 +192,7 @@
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Cese: 
-                                                            <input type="text" name="FEC_HASTA" value="<%=c.convertFecha3(d.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
+                                                            <input type="text" name="FEC_HASTA" value="<%=c.convertFecha3(d.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm topicker" data-mask="00/00/0000" autocomplete="off" required="">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3" id="titulo">
@@ -1098,6 +1099,11 @@
                     var max = $("#ifechai").val();
                     $("#suscripcion").attr("max", max);
                     $("#suscripcion").attr("value", max);
+                }
+                $(function () {
+    $(".fechapicker").datepicker(
+            {dateFormat: 'dd/mm/yy'}
+    );
                 }
     </script>
 </html>
