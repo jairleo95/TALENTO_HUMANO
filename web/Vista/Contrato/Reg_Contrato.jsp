@@ -179,7 +179,11 @@
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Inicio: 
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                             <input type="text" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
+=======
+                                                            <input onchange="c()" type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" id="ifechai" class=" input-group-sm" required="">
+>>>>>>> origin/master
 =======
                                                             <input onchange="c()" type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" id="ifechai" class=" input-group-sm" required="">
 >>>>>>> origin/master
