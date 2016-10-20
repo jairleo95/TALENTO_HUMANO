@@ -134,7 +134,13 @@ public class CAutorizacion extends HttpServlet {
                             System.out.println("Enter to Autorizacion academico");
                             List<V_Autorizar_Dgp> autAcademico = a.List_Autorizacion_Academico(idp, iduser, iddgp);
                             if (autAcademico.size() == 1) {
-                                V_Autorizar_Dgp vAutAcademico = l.get(0);
+                                V_Autorizar_Dgp vAutAcademico = autAcademico.get(0);
+                                System.out.println("Academico");
+                                System.out.println("1 :" + vAutAcademico.getNu_pasos());
+                                System.out.println("2 :" + vAutAcademico.getId_pasos());
+                                System.out.println("3 :" + vAutAcademico.getCo_pasos());
+                                System.out.println("4 :" + vAutAcademico.getId_detalle_req_proceso());
+                                System.out.println("5 :" + idp);
                                 /*Autorización*/
                                 a.Insert_Autorizacion("", iddgp, estado, vAutAcademico.getNu_pasos(), "", iduser, "", "", vAutAcademico.getCo_pasos(), idp, vAutAcademico.getId_detalle_req_proceso(), vAutAcademico.getId_pasos());
                                 sesion.setAttribute("List_Autorizacion_Academico", a.List_Autorizacion_Academico(idp, iduser, ""));
