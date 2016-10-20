@@ -276,7 +276,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public List<V_Autorizar_Dgp> List_id_Autorizacion(String id_aurotizacion, String id_user,String iddgp) {
+    public List<V_Autorizar_Dgp> List_id_Autorizacion(String id_aurotizacion, String id_user, String iddgp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select ID_TRABAJADOR, NO_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_PUESTO, NU_PASOS, ID_DGP, CO_PASOS, ID_DETALLE_REQ_PROCESO, DE_PASOS, ID_DEPARTAMENTO, "
                 + "ID_PUESTO, ID_REQUERIMIENTO, ID_TIPO_PLANILLA, NO_REQ, ID_PASOS, NO_USUARIO, ID_USUARIO, NO_SECCION,"
@@ -353,10 +353,11 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public List<V_Autorizar_Dgp> List_Autorizacion_Academico(String id, String id_user) {
+    public List<V_Autorizar_Dgp> List_Autorizacion_Academico(String id, String id_user, String iddgp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select *  from RHVD_AUTORIZAR_CARGA_ACADEMICA where id_puesto='" + id + "'";
         sql += (!"".equals(id_user)) ? " and id_usuario='" + id_user + "'" : "";
+        sql += (!"".equals(iddgp)) ? " and id_dgp='" + iddgp + "'" : "";
 
         List<V_Autorizar_Dgp> list = new ArrayList<V_Autorizar_Dgp>();
         try {
