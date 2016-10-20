@@ -96,8 +96,10 @@ public class CAutorizacion extends HttpServlet {
                         String nombres = request.getParameter("NOMBRES");
                         String idtrab = request.getParameter("IDTRAB");
                         /*Cambiar con un trigger al momento de insertar*/
+                        System.out.println("Call List_id_Autorizacion");
                         List<V_Autorizar_Dgp> l = a.List_id_Autorizacion(idp, iduser, iddgp);
                         if (l.size() == 1) {
+                            System.out.println("Enter to Autorizacion DGP");
                             V_Autorizar_Dgp vAut = l.get(0);
                             System.out.println("1 :" + vAut.getNu_pasos());
                             System.out.println("2 :" + vAut.getId_pasos());
