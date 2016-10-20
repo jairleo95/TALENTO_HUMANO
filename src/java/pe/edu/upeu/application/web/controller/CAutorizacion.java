@@ -97,7 +97,7 @@ public class CAutorizacion extends HttpServlet {
                         String idtrab = request.getParameter("IDTRAB");
                         /*Cambiar con un trigger al momento de insertar*/
                         List<V_Autorizar_Dgp> l = a.List_id_Autorizacion(idp, iduser, iddgp);
-                        if (!l.isEmpty()) {
+                        if (l.size() == 1) {
                             V_Autorizar_Dgp vAut = l.get(0);
                             System.out.println("1 :" + vAut.getNu_pasos());
                             System.out.println("2 :" + vAut.getId_pasos());
@@ -129,8 +129,9 @@ public class CAutorizacion extends HttpServlet {
                             sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idp, iduser, ""));
                             sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idp));
                         } else {
+                            System.out.println("Enter to Autorizacion academico");
                             List<V_Autorizar_Dgp> autAcademico = a.List_Autorizacion_Academico(idp, iduser, iddgp);
-                            if (!autAcademico.isEmpty()) {
+                            if (autAcademico.size() == 1) {
                                 V_Autorizar_Dgp vAutAcademico = l.get(0);
                                 /*Autorización*/
                                 a.Insert_Autorizacion("", iddgp, estado, vAutAcademico.getNu_pasos(), "", iduser, "", "", vAutAcademico.getCo_pasos(), idp, vAutAcademico.getId_detalle_req_proceso(), vAutAcademico.getId_pasos());
