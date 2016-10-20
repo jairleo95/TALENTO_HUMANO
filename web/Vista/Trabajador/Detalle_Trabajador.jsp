@@ -31,7 +31,8 @@
         <meta name="author" content="">
         <title>Detalle de Trabajador</title>
         <!-- Estilos plantilla-->
-        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+      
+        <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
 
@@ -661,7 +662,6 @@
         }
         function ValBtnAutorizarDgp(trabajador, divBotones) {
             divBotones.empty();
-            alert("hcsrgrt");
             $.ajax({
                 url: "../../autorizacion", data: "opc=ValBtnAutorizacion&trabajador=" + trabajador, type: 'POST', success: function (data, textStatus, jqXHR) {
                     if (data.rpta === "1") {
@@ -1026,9 +1026,9 @@
                                 }
                             } else {
                                 if (obj.EFOTO != 2) {
-                                    $('.borde').attr("src", "../../Vista/Usuario/Fotos/" + obj.ar_foto);
-                                    $(".avatar").attr("href", "../../Vista/Usuario/Fotos/" + obj.ar_foto);
-                                    $("#sb-player").attr("href", "../../Usuario/Fotos/" + obj.ar_foto);
+                                    $('.borde').attr("src", "../../Archivo/Fotos/" + obj.ar_foto);
+                                    $(".avatar").attr("href", "../../Archivo/Fotos/" + obj.ar_foto);
+                                    $("#sb-player").attr("href", "../../Archivo/Fotos/" + obj.ar_foto);
                                     console.log(obj.ar_foto);
                                 }
                             }

@@ -298,9 +298,9 @@ public class ListaDAO implements InterfaceListaDAO {
         list.add("Contrato Independiente");
         list.add("Empleado");
         list.add("Misionero");
-        list.add("MFL-Práctica Pre-Profesional");
-        list.add("MFL-Práctica Profesional");
-        list.add("MFL-CLJ");
+        list.add("Práctica Profesional");
+        list.add("MFL-Práctica Pre Profesional");
+        list.add("Convenio Laboral Juvenil");
         list.add("MFL-Contrato");
         return list;
     }

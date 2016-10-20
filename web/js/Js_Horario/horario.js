@@ -7,9 +7,6 @@
 var guardar = false;
 var nInputs = 0;
 $(document).ready(function () {
-
-
-
     plHeader($('.contheader'));
     $('.btnSig').hide();
     $('.btnSig').click(function () {

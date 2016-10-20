@@ -802,7 +802,7 @@
                                         }
                                     }
                                 } else {
-                                    infoaut += '<time>' + fechaInicio.getDay() + "/" + fechaInicio.getMonth() + '/' + fechaInicio.getFullYear() + '</time>';
+                                    infoaut += '<time>' + fechaInicio.getDate() + "/" + (parseInt(fechaInicio.getMonth())+1) + '/' + fechaInicio.getFullYear() + '</time>';
                                 }
                                 infoaut += '<span class="subject">' + lista[i].de_notification + '</span>';
                                 infoaut += '<span class="msg-body">Nada importante</span>';
@@ -899,7 +899,7 @@
                                         }
                                     }
                                 } else {
-                                    inforec += '<time>' + fechaInicio.getDay() + "/" + fechaInicio.getMonth() + '/' + fechaInicio.getFullYear() + '</time>';
+                                    inforec += '<time>' + fechaInicio.getDate() + "/" + (parseInt(fechaInicio.getMonth())+1) + '/' + fechaInicio.getFullYear() + '</time>';
                                 }
                                 inforec += '<span class="subject">' + lista[i].de_notification + '</span>';
                                 inforec += '<span class="msg-body">Nada importante</span>';
@@ -971,7 +971,7 @@
                 function getImagen(data) {
                     $.each(data, function (i, datos) {
                         $.each(datos, function (i, obj) {
-                            $('#foto_usuario').attr("src", "Vista/Usuario/Fotos/" + obj.ar_foto);
+                            $('#foto_usuario').attr("src", "Archivo/Fotos/" + obj.ar_foto);
                         });
                     });
                 }

@@ -185,7 +185,11 @@
                                             <label class="input" id="titulo">Hasta: 
                                                 <%if (a.getFe_hasta() != null) {
                                                         if (a.getId_dgp() == null) {%>
+<<<<<<< HEAD
                                                         <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off">
+=======
+                                                <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask fecha input-group-sm" data-mask="00/00/0000" autocomplete="off">
+>>>>>>> origin/master
                                                 <%} else {%>
                                                 <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
                                                 <%}
@@ -264,9 +268,9 @@
                                                     <option value="2" <%if (a.getLi_condicion().trim().equals("2")) {%>selected=""<%}%>>Contratado Independiente</option>
                                                     <option value="3" <%if (a.getLi_condicion().trim().equals("3")) {%>selected=""<%}%>> Enpleado</option>
                                                     <option value="4" <%if (a.getLi_condicion().trim().equals("4")) {%>selected=""<%}%>>Misionero</option>
-                                                    <option value="5" <%if (a.getLi_condicion().trim().equals("5")) {%>selected=""<%}%>>MFL-Práctica Pre-Profesional</option>
-                                                    <option value="6" <%if (a.getLi_condicion().trim().equals("6")) {%>selected=""<%}%>>MFL-Práctica Profesionales</option>
-                                                    <option value="7" <%if (a.getLi_condicion().trim().equals("7")) {%>selected=""<%}%>>MFL-CLJ</option>
+                                                    <option value="5" <%if (a.getLi_condicion().trim().equals("5")) {%>selected=""<%}%>>Práctica Profesional</option>
+                                                    <option value="6" <%if (a.getLi_condicion().trim().equals("6")) {%>selected=""<%}%>>Práctica Pre Profesionales</option>
+                                                    <option value="7" <%if (a.getLi_condicion().trim().equals("7")) {%>selected=""<%}%>>Convenio Laboral Juvenil</option>
                                                     <option value="8" <%if (a.getLi_condicion().trim().equals("8")) {%>selected=""<%}%>>MFL-Contrato</option>
                                                     <%} else {%>
                                                     <option value="">[SELECCIONE]</option>
@@ -274,9 +278,9 @@
                                                     <option value="2">Contratado Independiente</option>
                                                     <option value="3">Enpleado</option>
                                                     <option value="4">Misionero</option>
-                                                    <option value="5">MFL-Práctica Pre-Profesional</option>
-                                                    <option value="6">MFL-Práctica Profesionales</option>
-                                                    <option value="7">MFL-CLJ</option>
+                                                    <option value="5">Práctica Profesional</option>
+                                                    <option value="6">Práctica Pre Profesionales</option>
+                                                    <option value="7">Convenio Laboral Juvenil</option>
                                                     <option value="8">MFL-Contrato</option>
                                                     <%}%>
                                                 </select>
@@ -968,10 +972,10 @@
                                                     error.insertAfter(element.parent());
                                                 }
                                             });
-                                          /*  jQuery.validator.addMethod("val_fecha", function (value, element) {
-                                                var d = value.split("-");
-                                                return this.optional(element) || String(parseInt(d[0])).length == 4;
-                                            }, "¡Fecha ingresada invalida!");*/
+                                            /*  jQuery.validator.addMethod("val_fecha", function (value, element) {
+                                             var d = value.split("-");
+                                             return this.optional(element) || String(parseInt(d[0])).length == 4;
+                                             }, "¡Fecha ingresada invalida!");*/
 
 
 

@@ -161,7 +161,7 @@
                                                     <td><img src="../../img/avatar_default.jpg"  width="30"  height="30">
                                                         <a style="margin-left: 3%;" href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
                                                         <% } else {%>
-                                                    <td><img src="../Usuario/Fotos/<%=r.getAr_foto()%>"  width="60"  height="60"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
+                                                    <td><img src="../../Archivo/Fotos/<%=r.getAr_foto()%>"  width="40"  height="40"><a href="../../trabajador?idtr=<%=r.getId_trabajador()%>&opc=list"> <strong><%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%></strong></a></td>
                                                         <% }%>
                                                     <td> <%=r.getNo_dep()%></td>
                                                     <td> <%=r.getNo_area()%></td>
