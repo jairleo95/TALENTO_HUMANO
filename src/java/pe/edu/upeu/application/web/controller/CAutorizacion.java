@@ -93,7 +93,7 @@ public class CAutorizacion extends HttpServlet {
                     if (opc.equals("Aceptar")) {
                         String iddgp = request.getParameter("IDDETALLE_DGP");
                         String estado = "1";
-                        System.out.println(nombres);
+                     //   System.out.println(nombres);
                         String idtrab = request.getParameter("IDTRAB");
                         /*Cambiar con un trigger al momento de insertar*/
                         List<V_Autorizar_Dgp> l = a.List_id_Autorizacion(idp, iduser, iddgp);
