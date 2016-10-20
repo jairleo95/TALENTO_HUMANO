@@ -906,7 +906,7 @@
     $(".topicker").datepicker({
         defaultDate: "+1w",
         changeMonth: true,
-        numberOfMonths: 2,
+        numberOfMonths: 3,
         prevText: '<i class="fa fa-chevron-left"></i>',
         nextText: '<i class="fa fa-chevron-right"></i>',
         onClose: function (selectedDate) {
