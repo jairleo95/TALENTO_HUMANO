@@ -93,7 +93,7 @@ public class CAutorizacion extends HttpServlet {
                     if (opc.equals("Aceptar")) {
                         String iddgp = request.getParameter("IDDETALLE_DGP");
                         String estado = "1";
-                        String nombres = request.getParameter("NOMBRES");
+                        System.out.println(nombres);
                         String idtrab = request.getParameter("IDTRAB");
                         /*Cambiar con un trigger al momento de insertar*/
                         List<V_Autorizar_Dgp> l = a.List_id_Autorizacion(idp, iduser, iddgp);
@@ -106,7 +106,7 @@ public class CAutorizacion extends HttpServlet {
                             System.out.println("5 :" + idp);
                             /*Cambiar con un trigger al momento de insertar*/
                             dgp.VAL_DGP_PASOS();
-                            a.Insert_Autorizacion("", iddgp, estado, vAut.getNu_pasos(), "", iduser, "", "", vAut.getCo_pasos(), idp, vAut.getId_detalle_req_proceso(), vAut.getId_pasos());
+                            //a.Insert_Autorizacion("", iddgp, estado, vAut.getNu_pasos(), "", iduser, "", "", vAut.getCo_pasos(), idp, vAut.getId_detalle_req_proceso(), vAut.getId_pasos());
                             InterfaceNotificationDAO notdao = new NotificationDAO();
                             Notification not = new Notification();
                             InterfaceUsuarioDAO udao = new UsuarioDAO();
@@ -117,7 +117,7 @@ public class CAutorizacion extends HttpServlet {
                             not.setTipo_notification("1");
                             not.setDe_notification("Empleado autorizado por " + username);
                             not.setDi_notification("trabajador?idtr=" + idtrab + "&opc=list");
-                            not.setTitulo(nombres);
+                            not.setTitulo(vAut.getNo_trabajador()+" "+vAut.getAp_paterno()+" "+vAut.getAp_materno());
                             List<String> ids = notdao.PrevSteps(iddgp);
                             for (int i = 0; i < ids.size(); i++) {
                                 not.setId_usuario(ids.get(i));
