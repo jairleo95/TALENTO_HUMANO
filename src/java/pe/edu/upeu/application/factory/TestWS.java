@@ -12,7 +12,7 @@ package pe.edu.upeu.application.factory;
 public class TestWS {
     
       public static void main(String[] args) throws Exception {
-       WSClienteAcademico.start_ws_academico("2015-1");
+       WSClienteAcademico.start_ws_academico("2016-1");
 
     }  
     

@@ -290,12 +290,12 @@
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
-                                                                <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask fecha val_fe" min="<%=fecha_maxima_plazo%>"  data-mask="00/00/0000" autocomplete="off">
+                                                                <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask frompicker val_fe" min="<%=fecha_maxima_plazo%>"  data-mask="00/00/0000" autocomplete="off">
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
-                                                                <input type="date" name="FEC_HASTA"  required=""  class="simple-field-data-mask fecha val_fe" min="<%=fecha_maxima_plazo%>"  data-mask="00/00/0000" autocomplete="off">
+                                                                <input type="date" name="FEC_HASTA"  required=""  class="simple-field-data-mask topicker val_fe" min="<%=fecha_maxima_plazo%>"  data-mask="00/00/0000" autocomplete="off">
                                                             </label>
                                                         </section>
                                                     </div>
@@ -1988,7 +1988,8 @@
                 return this.optional(element) || String(parseInt(d[0])).length == 4;
             }, "¡Fecha ingresada invalida!");
         })
-
+ 
     </script>
+    
 </html>
 <%}%>

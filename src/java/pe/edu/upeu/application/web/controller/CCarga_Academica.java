@@ -121,6 +121,9 @@ public class CCarga_Academica extends HttpServlet {
                 String IP_USUARIO = request.getParameter("IP_USUARIO");
                 String NO_USUARIO = request.getParameter("NO_USUARIO");
 
+                FE_DESDE= FactoryConnectionDB.convertFecha3(FE_DESDE);
+                FE_HASTA= FactoryConnectionDB.convertFecha3(FE_HASTA);
+                
                 int numero = Integer.parseInt(request.getParameter("num_itera"));
                 String ID_TRABAJADOR = request.getParameter("IDTR");
                 String eap = request.getParameter("eap");

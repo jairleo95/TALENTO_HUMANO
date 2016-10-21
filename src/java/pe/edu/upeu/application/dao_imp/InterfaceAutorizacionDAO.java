@@ -27,7 +27,7 @@ public interface InterfaceAutorizacionDAO {
 
     public List<V_Autorizar_Dgp> List_id_Autorizacion(String id_aurotizacion, String id_user,String iddgp);
 
-    public List<V_Autorizar_Dgp> List_Autorizacion_Academico(String id_aurotizacion, String id_user);
+    public List<V_Autorizar_Dgp> List_Autorizacion_Academico(String id_aurotizacion, String id_user,String iddgp);
 
     public List<Autorizacion> NO_List_DGP();
 

@@ -136,7 +136,7 @@ public class WSClienteAcademico {
         soapResponse.writeTo(out);
         String strMsg = new String(out.toByteArray());
         JSONObject jsonObject = XML.toJSONObject(strMsg);
-        // System.out.println(jsonObject);
+         System.out.println(jsonObject);
         JSONArray arr = jsonObject.getJSONObject("SOAP-ENV:Envelope").
                 getJSONObject("SOAP-ENV:Body").getJSONObject("ns1:DocenteXCursoResponse").
                 getJSONObject("return").
@@ -166,9 +166,9 @@ public class WSClienteAcademico {
             soapMessage.saveChanges();
 
             /* Print the request message */
-            //System.out.println("Request SOAP Message:");
-            // soapMessage.writeTo(System.out);
-            //System.out.println();
+            System.out.println("Request SOAP Message:");
+             soapMessage.writeTo(System.out);
+            System.out.println();
             return soapMessage;
         } catch (Exception e) {
             System.out.println("------------------------------MESSAGE");
