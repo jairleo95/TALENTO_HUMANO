@@ -424,7 +424,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i><label class="edad"></label></span>
                                                                             
-                                                                            <input type="text" name="FECHA_NAC" <%if (!rol.equals("ROL-0001")) out.print("readonly=''");   %> required="" value="<%=FactoryConnectionDB.convertFecha4(t.getFe_nac())%>" id="edad"  class=" form-control input-group-sm fecha"  >
+                                                                            <input type="text" name="FECHA_NAC" <%if (!rol.equals("ROL-0001")) out.print("readonly=''");   %> required="" value="<%=FactoryConnectionDB.convertFecha4(t.getFe_nac())%>" id="edad"  class=" form-control input-group-sm fecha fechapicker"  data-mask="00/00/0000" autocomplete="off" required="">
                                                                         </div>
                                                                     </div>
                                                                 </div>
