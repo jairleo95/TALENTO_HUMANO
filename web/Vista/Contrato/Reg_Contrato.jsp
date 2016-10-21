@@ -179,20 +179,12 @@
                                                     <input type="hidden"  value="<%=d.getId_trabajador()%>" class="idtr">                              
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Inicio: 
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                                            <input type="text" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm frompicker" data-mask="00/00/0000" autocomplete="off" required="">
-=======
-                                                            <input onchange="c()" type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" id="ifechai" class=" input-group-sm" required="">
->>>>>>> origin/master
-=======
-                                                            <input onchange="c()" type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" id="ifechai" class=" input-group-sm" required="">
->>>>>>> origin/master
+                                                            <input type="text" name="FEC_DESDE" value="<%=(d.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm frompicker" data-mask="00/00/0000" autocomplete="off" required="">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Cese: 
-                                                            <input type="text" name="FEC_HASTA" value="<%=c.convertFecha3(d.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm topicker" data-mask="00/00/0000" autocomplete="off" required="">
+                                                            <input type="text" name="FEC_HASTA" value="<%=(d.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm topicker" data-mask="00/00/0000" autocomplete="off" required="">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3" id="titulo">
@@ -950,6 +942,9 @@
                     $("#bev").numeric();
                     $("#su_t").numeric();
                     $("#asig").numeric();
+                    $(".fechapicker").datepicker(
+                            {dateFormat: 'dd/mm/yy'}
+                    );
 
                     $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                         $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
@@ -961,14 +956,12 @@
                     $('#checkout-form').validate({
                         // Rules for form validation
                         rules: {
-                            fname: {
-                                required: true
-                            },
+                             
                             FEC_DESDE: {
-                                val_fecha: true
+                               // val_fecha: true
                             },
                             FEC_HASTA: {
-                                val_fecha: true
+                               // val_fecha: true
                             }
                         },
                         // Do not change code below
@@ -976,10 +969,10 @@
                             error.insertAfter(element.parent());
                         }
                     });
-                    jQuery.validator.addMethod("val_fecha", function (value, element) {
+                   /* jQuery.validator.addMethod("val_fecha", function (value, element) {
                         var d = value.split("-");
                         return this.optional(element) || String(parseInt(d[0])).length === 4;
-                    }, "¡Fecha ingresada invalida!");
+                    }, "¡Fecha ingresada invalida!");*/
 
                     Listar_dep();
                     Listar_sec();
@@ -1100,11 +1093,7 @@
                     $("#suscripcion").attr("max", max);
                     $("#suscripcion").attr("value", max);
                 }
-                $(function () {
-    $(".fechapicker").datepicker(
-            {dateFormat: 'dd/mm/yy'}
-    );
-                }
+
     </script>
 </html>
 <%} else {
