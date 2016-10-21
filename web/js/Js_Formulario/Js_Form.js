@@ -3,15 +3,51 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+$(".frompicker").datepicker({
+    defaultDate: "+1w",
+    changeMonth: true,
+    numberOfMonths: 2,
+    dateformat: 'dd/mm/yy',
+    prevText: '<i class="fa fa-chevron-left"></i>',
+    nextText: '<i class="fa fa-chevron-right"></i>',
+    onClose: function (selectedDate) {
+        $(".topicker").datepicker("option", "minDate", selectedDate);
+    }
+
+});
+
+$(".topicker").datepicker({
+    defaultDate: "+1w",
+    changeMonth: true,
+    numberOfMonths: 2,
+    dateformat: 'dd/mm/yy',
+    prevText: '<i class="fa fa-chevron-left"></i>',
+    nextText: '<i class="fa fa-chevron-right"></i>',
+    onClose: function (selectedDate) {
+        $(".frompicker").datepicker("option", "maxDate", selectedDate);
+    }
+});
+$(".datePickerInput").datepicker({
+    defaultDate: "+1w",
+    changeMonth: true,
+    numberOfMonths: 2,
+    dateformat: 'dd/mm/yy',
+    prevText: '<i class="fa fa-chevron-left"></i>',
+    nextText: '<i class="fa fa-chevron-right"></i>',
+    onClose: function (selectedDate) {
+        //$(".frompicker").datepicker("option", "maxDate", selectedDate);
+    }
+});
+
 
 
 function list_select(objSelect, url, datos, opc, id) {
-     
+
     var text_html = "";
     objSelect.empty();
     objSelect.removeClass("chosen-select");
     objSelect.append("<option  value='' >Cargando...</option>");
-    $.post(url, datos, function(objJson) {
+    $.post(url, datos, function (objJson) {
         objSelect.empty();
         if (objJson.rpta === -1) {
             alert(objJson.mensaje);
@@ -40,7 +76,7 @@ function list_select(objSelect, url, datos, opc, id) {
         text_html = "";
         if (opc === "3" | opc === "4") {
             objSelect.addClass("chosen-select");
-             $(".chosen-select").trigger("chosen:updated");
+            $(".chosen-select").trigger("chosen:updated");
             var config = {
                 '.chosen-select': {no_results_text: 'Oops, nada encontrado!', allow_single_deselect: true},
                 '.chosen-select-width': {width: "95%"}
@@ -49,7 +85,7 @@ function list_select(objSelect, url, datos, opc, id) {
                 $(selector).chosen(config[selector]);
             }
         }
-       
+
     });
     if (opc === "3" | opc === "4") {
         /*sirve para validar cuando es required*/
@@ -57,12 +93,12 @@ function list_select(objSelect, url, datos, opc, id) {
     }
 
 }
-function list_selectJavaBeans(objSelect, url, datos,id_select,opcion_select, opc, id) {
+function list_selectJavaBeans(objSelect, url, datos, id_select, opcion_select, opc, id) {
     var text_html = "";
     objSelect.empty();
     objSelect.removeClass("chosen-select");
     objSelect.append("<option  value='' >Cargando...</option>");
-    $.post(url, datos, function(objJson) {
+    $.post(url, datos, function (objJson) {
         objSelect.empty();
         if (objJson.rpta == -1) {
             alert(objJson.mensaje);
@@ -73,15 +109,15 @@ function list_selectJavaBeans(objSelect, url, datos,id_select,opcion_select, opc
             objSelect.append("<option value=''>[Seleccione]</option>");
             if (opc == "1" | opc == "4") {
                 for (var i = 0; i < lista.length; i++) {
-                    if (id == lista[i][id_select] ) {
+                    if (id == lista[i][id_select]) {
                         text_html += "<option selected value='" + lista[i][id_select] + "'>" + lista[i][opcion_select] + "</option>";
                     } else {
-                        text_html += "<option value='" + lista[i][id_select] + "'>" + lista[i][opcion_select]+ "</option>";
+                        text_html += "<option value='" + lista[i][id_select] + "'>" + lista[i][opcion_select] + "</option>";
                     }
                 }
             } else {
                 for (var i = 0; i < lista.length; i++) {
-                    text_html += "<option value='" + lista[i][id_select] + "'>" +lista[i][opcion_select] + "</option>";
+                    text_html += "<option value='" + lista[i][id_select] + "'>" + lista[i][opcion_select] + "</option>";
                 }
             }
         } else {
@@ -91,7 +127,7 @@ function list_selectJavaBeans(objSelect, url, datos,id_select,opcion_select, opc
         text_html = "";
         if (opc == "3" | opc == "4") {
             objSelect.addClass("chosen-select");
-             $(".chosen-select").trigger("chosen:updated");
+            $(".chosen-select").trigger("chosen:updated");
             var config = {
                 '.chosen-select': {no_results_text: 'Oops, nada encontrado!', allow_single_deselect: true},
                 '.chosen-select-width': {width: "95%"}
@@ -100,7 +136,7 @@ function list_selectJavaBeans(objSelect, url, datos,id_select,opcion_select, opc
                 $(selector).chosen(config[selector]);
             }
         }
-       
+
     });
     if (opc == "3" | opc == "4") {
         /*sirve para validar cuando es required*/
@@ -109,7 +145,11 @@ function list_selectJavaBeans(objSelect, url, datos,id_select,opcion_select, opc
 
 }
 //Formato de Fecha-DATEPICKER AND DATEMASK
+<<<<<<< HEAD
  $(function () {
+=======
+$(function () {
+>>>>>>> origin/master
     $(".fechapicker").datepicker(
             {dateFormat: 'dd/mm/yy'}
     );
@@ -121,6 +161,7 @@ function list_selectJavaBeans(objSelect, url, datos,id_select,opcion_select, opc
 $(function () {
     $(".fecha1").datepicker(
             {dateFormat: 'dd/mm/yy'}
+<<<<<<< HEAD
     )});
      // Date Range Picker
       $(function () {
@@ -152,3 +193,10 @@ $(function () {
             $(".frompicker").datepicker("option", "maxDate", selectedDate);
         }
     });
+=======
+    )
+});
+// Date Range Picker
+
+        
+>>>>>>> origin/master

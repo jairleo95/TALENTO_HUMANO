@@ -20,7 +20,8 @@
 <!DOCTYPE html >
 <html>
     <head>
-        <meta charset="ISO-8859-1" />
+
+        
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
         <title> Registrar DGP </title>
         <meta name="description" content="">
@@ -68,7 +69,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <link rel="stylesheet" href="../../css/chosen.css"  type="text/css" > 
-        <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        
         <style>
             .td{
                 font-weight: bold;
@@ -316,14 +317,22 @@
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
+<<<<<<< HEAD
                                                                 <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask val_fe fe_inicio_dgp frompicker" data-mask="00/00/0000" autocomplete="off" >
 
+=======
+                                                                <input type="text" name="FEC_DESDE"  required="" class="feInicioDgp frompicker" data-mask="99/99/9999" data-mask-placeholder= "_" >
+>>>>>>> origin/master
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
 
+<<<<<<< HEAD
                                                                 <input type="text" name="FEC_HASTA"  required=""  value="" class="simple_field-data-mask val_fe topicker" data-mask="00/00/0000" autocomplete="off">
+=======
+                                                                <input type="text" name="FEC_HASTA"  required=""  value="" class="topicker" data-mask="99/99/9999" data-mask-placeholder= "_">
+>>>>>>> origin/master
 
                                                             </label>
                                                         </section>
@@ -841,8 +850,7 @@
 
     <!-- JQUERY MASKED INPUT -->
     <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
-    <!-- JQUERY MASKED DATE -->
-    <script src="../../js/jquery.mask.js" type="text/javascript"></script>
+  
     <!-- JQUERY SELECT2 INPUT -->
     <script src="../../js/plugin/select2/select2.min.js"></script>
 
@@ -874,7 +882,6 @@
     <!-- Voice command : plugin 
     <script src="../../js/speech/voicecommand.min.js"></script>-->
     <!-- PAGE RELATED PLUGIN(S) -->
-    <script src="../../js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
     <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script src="../../js/chosen.jquery.js" type="text/javascript"></script>

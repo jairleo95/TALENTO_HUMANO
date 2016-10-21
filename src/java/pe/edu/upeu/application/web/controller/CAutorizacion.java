@@ -93,11 +93,19 @@ public class CAutorizacion extends HttpServlet {
                     if (opc.equals("Aceptar")) {
                         String iddgp = request.getParameter("IDDETALLE_DGP");
                         String estado = "1";
+<<<<<<< HEAD
                      //   System.out.println(nombres);
                         String idtrab = request.getParameter("IDTRAB");
+=======
+>>>>>>> origin/master
                         /*Cambiar con un trigger al momento de insertar*/
+                        System.out.println("Call List_id_Autorizacion");
                         List<V_Autorizar_Dgp> l = a.List_id_Autorizacion(idp, iduser, iddgp);
                         if (l.size() == 1) {
+<<<<<<< HEAD
+=======
+                            System.out.println("Enter to Autorizacion DGP");
+>>>>>>> origin/master
                             V_Autorizar_Dgp vAut = l.get(0);
                             System.out.println("1 :" + vAut.getNu_pasos());
                             System.out.println("2 :" + vAut.getId_pasos());
@@ -118,8 +126,13 @@ public class CAutorizacion extends HttpServlet {
                             not.setEs_leido("0");
                             not.setTipo_notification("1");
                             not.setDe_notification("Empleado autorizado por " + username);
+<<<<<<< HEAD
                             not.setDi_notification("trabajador?idtr=" + idtrab + "&opc=list");
                             not.setTitulo(vAut.getNo_trabajador()+" "+vAut.getAp_paterno()+" "+vAut.getAp_materno());
+=======
+                            not.setDi_notification("trabajador?idtr=" + vAut.getId_trabajador() + "&opc=list");
+                            not.setTitulo(vAut.getNo_trabajador() + " " + vAut.getAp_paterno() + " " + vAut.getAp_materno());
+>>>>>>> origin/master
                             List<String> ids = notdao.PrevSteps(iddgp);
                             for (int i = 0; i < ids.size(); i++) {
                                 not.setId_usuario(ids.get(i));
@@ -132,7 +145,17 @@ public class CAutorizacion extends HttpServlet {
                             System.out.println("Enter to Autorizacion academico");
                             List<V_Autorizar_Dgp> autAcademico = a.List_Autorizacion_Academico(idp, iduser, iddgp);
                             if (autAcademico.size() == 1) {
+<<<<<<< HEAD
                                 V_Autorizar_Dgp vAutAcademico = l.get(0);
+=======
+                                V_Autorizar_Dgp vAutAcademico = autAcademico.get(0);
+                                System.out.println("Academico");
+                                System.out.println("1 :" + vAutAcademico.getNu_pasos());
+                                System.out.println("2 :" + vAutAcademico.getId_pasos());
+                                System.out.println("3 :" + vAutAcademico.getCo_pasos());
+                                System.out.println("4 :" + vAutAcademico.getId_detalle_req_proceso());
+                                System.out.println("5 :" + idp);
+>>>>>>> origin/master
                                 /*Autorización*/
                                 a.Insert_Autorizacion("", iddgp, estado, vAutAcademico.getNu_pasos(), "", iduser, "", "", vAutAcademico.getCo_pasos(), idp, vAutAcademico.getId_detalle_req_proceso(), vAutAcademico.getId_pasos());
                                 sesion.setAttribute("List_Autorizacion_Academico", a.List_Autorizacion_Academico(idp, iduser, ""));

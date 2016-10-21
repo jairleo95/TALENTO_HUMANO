@@ -615,9 +615,7 @@
 
         <!-- JQUERY MASKED INPUT -->
         <script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>
-
-        <!-- JQUERY SELECT2 INPUT 
-        <script src="js/plugin/select2/select2.min.js"></script>-->
+ 
 
         <!-- JQUERY UI + Bootstrap Slider -->
         <script src="js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
@@ -628,35 +626,14 @@
         <!-- FastClick: For mobile devices -->
         <script src="js/plugin/fastclick/fastclick.min.js"></script>
 
-        <!--[if IE 8]>
-
-        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-
-        <![endif]-->
-
+    
         <!-- Demo purpose only -->
         <script src="js/demo.min.js"></script>
 
         <!-- MAIN APP JS FILE -->
         <script src="js/app.min.js"></script>
 
-        <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-        <!-- Voice command : plugin
-        <script src="js/speech/voicecommand.min.js"></script> -->
-
-        <!-- PAGE RELATED PLUGIN(S) -->
-
-        <!-- Flot Chart Plugin: Flot Engine, Flot Resizer, Flot Tooltip 
-        <script src="js/plugin/flot/jquery.flot.cust.min.js"></script>
-        <script src="js/plugin/flot/jquery.flot.resize.min.js"></script>
-        <script src="js/plugin/flot/jquery.flot.tooltip.min.js"></script>-->
-
-        <!-- Vector Maps Plugin: Vectormap engine, Vectormap language 
-        <script src="js/plugin/vectormap/jquery-jvectormap-1.2.2.min.js"></script>
-        <script src="js/plugin/vectormap/jquery-jvectormap-world-mill-en.js"></script>-->
-
-        <!-- Full Calendar 
-        <script src="js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>-->
+         
 
         <script>
         var btnclose = 0;
@@ -671,7 +648,7 @@
             }
         }
         /*WEBSOCKET*/
-        var websocket = new WebSocket("ws://" + document.location.host + "/TALENTO_HUMANO/serverGth");
+        var websocket = new WebSocket("ws://" + document.location.host + "/gth/serverGth");
 
         websocket.onopen = function openConnection() {
             websocket.send("Hi");
