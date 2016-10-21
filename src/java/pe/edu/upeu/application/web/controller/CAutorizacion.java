@@ -93,8 +93,6 @@ public class CAutorizacion extends HttpServlet {
                     if (opc.equals("Aceptar")) {
                         String iddgp = request.getParameter("IDDETALLE_DGP");
                         String estado = "1";
-                     //   System.out.println(nombres);
-                        String idtrab = request.getParameter("IDTRAB");
                         /*Cambiar con un trigger al momento de insertar*/
                         System.out.println("Call List_id_Autorizacion");
                         List<V_Autorizar_Dgp> l = a.List_id_Autorizacion(idp, iduser, iddgp);
@@ -120,8 +118,8 @@ public class CAutorizacion extends HttpServlet {
                             not.setEs_leido("0");
                             not.setTipo_notification("1");
                             not.setDe_notification("Empleado autorizado por " + username);
-                            not.setDi_notification("trabajador?idtr=" + idtrab + "&opc=list");
-                            not.setTitulo(vAut.getNo_trabajador()+" "+vAut.getAp_paterno()+" "+vAut.getAp_materno());
+                            not.setDi_notification("trabajador?idtr=" + vAut.getId_trabajador() + "&opc=list");
+                            not.setTitulo(vAut.getNo_trabajador() + " " + vAut.getAp_paterno() + " " + vAut.getAp_materno());
                             List<String> ids = notdao.PrevSteps(iddgp);
                             for (int i = 0; i < ids.size(); i++) {
                                 not.setId_usuario(ids.get(i));

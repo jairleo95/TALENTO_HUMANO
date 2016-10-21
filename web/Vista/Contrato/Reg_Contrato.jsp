@@ -179,12 +179,12 @@
                                                     <input type="hidden"  value="<%=d.getId_trabajador()%>" class="idtr">                              
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Inicio: 
-                                                            <input type="text" name="FEC_DESDE" value="<%=(d.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm frompicker" data-mask="00/00/0000" autocomplete="off" required="">
+                                                            <input type="text" name="FEC_DESDE" value="<%=(d.getFe_desde())%>" class="input-group-sm frompicker" data-mask="99/99/9999" data-mask-placeholder= "_" required="">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Cese: 
-                                                            <input type="text" name="FEC_HASTA" value="<%=(d.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm topicker" data-mask="00/00/0000" autocomplete="off" required="">
+                                                            <input type="text" name="FEC_HASTA" value="<%=(d.getFe_hasta())%>" class="input-group-sm topicker" data-mask="99/99/9999" data-mask-placeholder= "_" required="">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3" id="titulo">
@@ -401,7 +401,7 @@
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Suscripción:
-                                                            <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION" class="input-group-sm"  value="<%=c.convertFecha3(d.getFe_desde())%>" max="<%=c.convertFecha3(d.getFe_desde())%>" 
+                                                            <input id="suscripcion" type="text" name="FECHA_SUSCRIPCION" class="input-group-sm datePickerInput"  data-mask="99/99/9999" data-mask-placeholder= "_" value="<%=(d.getFe_desde()%>" max="<%=c.convertFecha3(d.getFe_desde())%>" 
                                                                    <%
                                                                        if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
                                                                            out.print("required='required'");
@@ -770,6 +770,7 @@
         <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
         <!-- JQUERY MASKED INPUT -->
+	<script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
         <!-- JQUERY SELECT2 INPUT -->
         <script src="../../js/plugin/select2/select2.min.js"></script>
@@ -942,9 +943,7 @@
                     $("#bev").numeric();
                     $("#su_t").numeric();
                     $("#asig").numeric();
-                    $(".fechapicker").datepicker(
-                            {dateFormat: 'dd/mm/yy'}
-                    );
+                    
 
                     $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                         $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
