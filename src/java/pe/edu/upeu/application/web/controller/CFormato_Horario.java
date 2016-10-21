@@ -220,6 +220,11 @@ public class CFormato_Horario extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }
+            if (opc.equals("statupdate")) {
+                String id = request.getParameter("id");
+                String es = request.getParameter("es");
+                Ifh.StatUpdate(id, es);
+            }
             if (opc.equals("Eliminar_turno")) {
                 String id_horario = request.getParameter("id_horario");
                 Ifh.Eliminar_turno(id_horario);

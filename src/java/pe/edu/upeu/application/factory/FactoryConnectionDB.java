@@ -24,15 +24,15 @@ public class FactoryConnectionDB {
 
     public static String[] configMYSQL = {"bd_almacen", "root", "root"};
 
-    public static String[] configORACLE = {"procesosrh", "rrhh", "192.168.21.4", "1521", "xe"};
-
-    public static final String url = "C:\\Users\\ALPHA\\Documents\\NetBeansProjects\\TALENTO_HUMANO\\web\\Archivo\\";
-    //public static final String url = "E:\\Projects\\TH\\th 1\\TALENTO_HUMANO\\web\\Archivo";  ESTE URL CAMBIA DE ACUERDO A LA MAQUINA
-    public static final String url_archivos = "http://localhost:8082/TALENTO_HUMANO/Archivo/";
+    public static String[] configORACLE = {"procesosrh", "rrhh", "192.168.21.12", "1521", "xe"};
+//
+      public static final String url = "C:\\Users\\ALPHA\\Documents\\NetBeansProjects\\Current\\TALENTO_HUMANO\\web\\Archivo\\";
+//public static final String url = "E:\\Projects\\TH\\th 1\\TALENTO_HUMANO\\web\\Archivo";  ESTE URL CAMBIA DE ACUERDO A LA MAQUINA
+   public static final String url_archivos = "http://localhost:8082/TALENTO_HUMANO/Archivo/";
 
     //  public static String[] configORACLE = {"procesosrh", "rrhh", "procesrh-db.upeu", "1521", "upeu"};
-//public static final String url = "/usr/share/tomcat7/webapps/TALENTO_HUMANO/Archivo/";
-// public static final String url_archivos = "http://procesosrh-app.upeu/TALENTO_HUMANO/Archivo/";
+   // public static final String url = "/usr/share/tomcat7/webapps/TALENTO_HUMANO/Archivo/";
+ //   public static final String url_archivos = "http://procesosrh-app.upeu/TALENTO_HUMANO/Archivo/";
 
     /* WebService Carga Academica*/
     public static final String keyApp = "4a7c88ee0791cad24a15d43a525982f8";
@@ -96,7 +96,14 @@ public class FactoryConnectionDB {
     }
 
     public static String convertFecha3(String fecha) {
+        System.out.println("Fecha :" + fecha);
         String f[] = fecha.split("/");
         return f[2] + "-" + f[1] + "-" + f[0];
+    }
+
+    public static String convertFecha4(String fecha) {
+        System.out.println("Fecha :" + fecha);
+        String f[] = fecha.split("-");
+        return f[2] + "/" + f[1] + "/" + f[0];
     }
 }

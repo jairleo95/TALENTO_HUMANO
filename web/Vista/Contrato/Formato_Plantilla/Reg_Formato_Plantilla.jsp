@@ -113,6 +113,7 @@
                                                                             <label class="select">Filial:
                                                                                 <select  name="filial" class="fil_as form-control input-group-sm" required="" >
                                                                                     <option value="">[Filial]</option>
+                                                                                    <option value="0">[TODOS/GENERALES]</option>
                                                                                     <option value="1">Filial Lima</option>
                                                                                     <option value="2">Filial Juliaca</option>
                                                                                     <option value="5">Filial Tarapoto</option>
@@ -129,7 +130,7 @@
                                                                         <section class="col col-4"  >
                                                                             <label class="select">Departamento:
                                                                                 <select name="dep" class="dep_as form-control input-group-sm"  required="" >
-                                                                                    <option value="">[TODO]</option>
+                                                                                    <option value="0">[TODO]</option>
                                                                                 </select>
                                                                             </label>
                                                                         </section>
@@ -169,6 +170,7 @@
                                                                             <label class="select">Filial:
                                                                                 <select class="fil select" id="fil" name="id_di" >
                                                                                     <option value="" >[Filial]</option>
+                                                                                    <option value="0" >[TODOS/GENERALES]</option>
                                                                                     <option value="1" >Filial Lima</option>
                                                                                     <option value="2" >Filial Juliaca</option>
                                                                                     <option value="5" >Filial Tarapoto</option>

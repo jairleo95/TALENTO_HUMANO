@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import pe.edu.upeu.application.dao.Carga_AcademicaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO;
+import pe.edu.upeu.application.factory.FactoryConnectionDB;
 
 /**
  *
@@ -41,14 +42,14 @@ public class CPago_Docente extends HttpServlet {
         InterfaceCarga_AcademicaDAO c = new Carga_AcademicaDAO();
         String opc = request.getParameter("opc");
         Map<String, Object> rpta = new HashMap<String, Object>();
-        CConversion convert = new CConversion();
         try {
             if (opc.equals("Listar_Cuotas")) {
-                String fe_desde = request.getParameter("fe_desde");
-                String fe_hasta = request.getParameter("fe_hasta");
+                String feDesde = request.getParameter("fe_desde");
+                String feHasta = request.getParameter("fe_hasta");
                 double ca_pago_semanal = Double.parseDouble(request.getParameter("pago_semanal"));
-
-                List<Map<String, ?>> lista = c.Cuotas_Pago_Docente(convert.convertFecha(fe_desde), convert.convertFecha(fe_hasta), ca_pago_semanal);
+                feDesde=FactoryConnectionDB.convertFecha3(feDesde);
+                feHasta=FactoryConnectionDB.convertFecha3(feHasta);
+                List<Map<String, ?>> lista = c.Cuotas_Pago_Docente(FactoryConnectionDB.convertFecha(feDesde), FactoryConnectionDB.convertFecha(feHasta), ca_pago_semanal);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }

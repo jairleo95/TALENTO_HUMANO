@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <%@page import="pe.edu.upeu.application.model.Ub_Distrito"%>
 <%@page import="pe.edu.upeu.application.model.Ub_Provincia"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
@@ -93,9 +94,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
-        <style>
-
-        </style>
+        <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
 
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript">
@@ -425,7 +424,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i><label class="edad"></label></span>
                                                                             
-                                                                            <input type="date" name="FECHA_NAC" <%if (!rol.equals("ROL-0001")) out.print("readonly=''");   %> required="" value="<%=t.getFe_nac()%>" id="edad"  class="form-control input-group-sm fecha" >
+                                                                            <input type="text" name="FECHA_NAC" <%if (!rol.equals("ROL-0001")) out.print("readonly=''");   %> required="" value="<%=FactoryConnectionDB.convertFecha4(t.getFe_nac())%>" id="edad"  class=" form-control input-group-sm fecha fechapicker"  data-mask="00/00/0000" autocomplete="off" required="">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1050,6 +1049,9 @@
     <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
     <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+    <script src="../../js/jquery-ui.js" type="text/javascript"></script>
+    <script src="../../js/jquery.mask.js" type="text/javascript"></script>
+    <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
     <script>$(document).ready(function() {
                                                                                     $('#doc').click(function() {
                                                                                         // $('#doc').val("");
@@ -1463,10 +1465,10 @@
                     }
                 }
             });
-            jQuery.validator.addMethod("val_fecha", function(value, element) {
+           /* jQuery.validator.addMethod("val_fecha", function(value, element) {
                 var d = value.split("-");
                 return this.optional(element) || String(parseInt(d[0])).length == 4;
-            }, "¡Fecha ingresada invalida!");
+            }, "¡Fecha ingresada invalida!");*/
 
             $('#bootstrap-wizard-1').bootstrapWizard({
                 'tabClass': 'form-wizard',

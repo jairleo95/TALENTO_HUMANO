@@ -11,6 +11,7 @@
 <%@page import="pe.edu.upeu.application.model.V_Puesto_Direccion"%>
 <%@page import="pe.edu.upeu.application.model.Puesto"%>
 <%@page import="pe.edu.upeu.application.model.Trabajador"%>
+<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <jsp:useBean id="Listar_Trabajador_id" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Puesto" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Requerimiento" scope="session" class="java.util.ArrayList"/>
@@ -315,15 +316,15 @@
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
-
-                                                                <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask val_fe fe_inicio_dgp" data-mask="00/00/0000" autocomplete="off" id="abr" placeholder="mm/dd/yyyy">
-
+                                                                <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask val_fe fe_inicio_dgp frompicker" data-mask="00/00/0000" autocomplete="off" >
 
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
-                                                                <input type="date" name="FEC_HASTA"  required=""  value="" class="val_fe fe_hasta" >
+
+                                                                <input type="text" name="FEC_HASTA"  required=""  value="" class="simple_field-data-mask val_fe topicker" data-mask="00/00/0000" autocomplete="off">
+
                                                             </label>
                                                         </section>
                                                     </div>
@@ -332,8 +333,7 @@
                                                     <%String es_cue_sue = request.getParameter("es_cs");%>
                                                     <input type="hidden" name="ESTADO" value="<%=es_cue_sue%>">
                                                     <%if (es_cue_sue.equals("0")) {%>
-                                                    <input type="hidden" name="ES_CUENTA_SUELDO" value="1" required="" />
-                                                    <div class="row"> 
+                                                    <input type="hidden" name="ES_CUENTA_SUELDO" value="1" rz
                                                         <section class="col col-3" name="">
                                                             <label class="select" id="titu">Cta Sueldo - Banco:
                                                                 <select name="BANCO" id="banco" required="">
@@ -679,7 +679,7 @@
                                             <%}%>
                                             <input type="hidden" name="IDREQUERIMIENTO"  id="combito"  value="<%=idreq%>">
                                             <div id="div_2" class="contenido" style="display: none">
-                                                <table  class="table">
+                                                <table  class="table1">
                                                     <tr><td class="td">Subvencion:</td><td><input type="text" name="SUBVENCION"  ></td></tr>   
                                                     <tr><td class="td">Horario de Capacitacion:</td><td><input type="text" name="HORARIO_CAPACITACION"  ></td></tr>   
                                                     <tr><td class="td">Horario de Refrigerio:</td><td><input type="text" name="HORARIO_REFRIGERIO"  ></td></tr>  
@@ -885,18 +885,7 @@
     <script src="../../js/Js_Horario/horario.js" type="text/javascript"></script>
     <script src="../../js/Js_Plazo/Js_plazo_advertencia.js" type="text/javascript"></script>    
     <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
-    <script type="text/javascript">
-                                                        $(function () {
-                                                            $("#abr").datepicker(
-                                                                    {dateFormat: 'dd/mm/yy'}
-                                                            );
-                                                    $(".fe_hasta").change(function (){
-                                                        console.log(" f: "+ $(this).val());
-                                                    })
-
-                                                        });
-
-    </script>
+ 
 </html>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");

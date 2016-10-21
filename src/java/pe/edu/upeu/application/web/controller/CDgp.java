@@ -250,6 +250,8 @@ public class CDgp extends HttpServlet {
                     ES_PRESUPUESTADO = "0";
                 }
                 FE_DESDE = FactoryConnectionDB.convertFecha3(FE_DESDE);
+                FE_HASTA = FactoryConnectionDB.convertFecha3(FE_HASTA);
+                
                 dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO,
                         DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION,
                         ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD,
@@ -291,6 +293,7 @@ public class CDgp extends HttpServlet {
                 dia.add("sab");
                 dia.add("dom");
 
+                
                 String ID_DETALLE_HORARIO = request.getParameter("ID_DETALLE_HORARIO");
                 String ES_DETALLE_HORARIO = "1";
                 String ES_HORARIO = "1";
@@ -627,6 +630,8 @@ public class CDgp extends HttpServlet {
                 } else {
                     ES_PRESUPUESTADO = "1";
                 }
+                FE_DESDE = FactoryConnectionDB.convertFecha3(FE_DESDE);
+                FE_HASTA = FactoryConnectionDB.convertFecha3(FE_HASTA);
                 dgp.MODIFICAR_DGP(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO,
                         DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION,
                         ES_DGP, null, FE_CREACION, iduser, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD,
