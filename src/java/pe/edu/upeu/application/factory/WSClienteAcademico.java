@@ -127,7 +127,6 @@ public class WSClienteAcademico {
         String keyPub = StringMD.getStringMessageDigest(FactoryConnectionDB.keyApp + hour, StringMD.MD5);
         System.out.println(FactoryConnectionDB.service + keyPub);
         System.out.println(FactoryConnectionDB.keyApp + hour);
-        
         SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(semestre), FactoryConnectionDB.service + keyPub);
          
         // print SOAP Response
@@ -148,6 +147,8 @@ public class WSClienteAcademico {
     public static SOAPMessage createSOAPRequest(String semestre) {
         try {
             MessageFactory messageFactory = MessageFactory.newInstance();
+            String proxyAuth = System.getProperty("https.proxyAuth");
+            System.out.println("Puerto :"+proxyAuth);
             SOAPMessage soapMessage = messageFactory.createMessage();
             SOAPPart soapPart = soapMessage.getSOAPPart();
             // SOAP Envelope
