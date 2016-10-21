@@ -2067,7 +2067,7 @@
                                                             var $valid = $("#wizard-1").valid();
                                                             if (!$valid) {
                                                                 $validator.focusInvalid();
-                                                                return false;
+                                                                return true;
                                                             } else {
                                                                 $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
                                                                         'complete');
