@@ -131,7 +131,9 @@
                                                                     <li class="divider"></li>
                                                                     <li>
                                                                     <li>
-                                                                        <a href="" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" >Carga Academica</a>
+                                                                        <a href="" data-toggle="modal" data-target="#myModal" data-backdrop="static" 
+                                                                           data-keyboard="false" class="btnCargaAcademica"
+                                                                           data-valor="&nro_doc=<%=ca.getNu_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>&idtr=<%=ca.getId_trabajador()%>&ciclo=<%=ca.getDe_carga()%>"  >Carga Academica</a>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -183,39 +185,36 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <div class="datos_trabajador text-left">
-                        </div>
-                        <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
+
+                        <h4 class="modalTitle" id="myModalLabel">Académico</h4>
                     </div>
                     <div class="modal-body">
-                        <!--<button class="add-coment btn btn-primary btn-block">Add Comentario</button> -->
-                        <div class="area-coment">
-                            <form class="comentari-form" method="post">
+                        <div class="areaModal">
 
-                            </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" onclick="Registrar()" class="comet btn btn-success">Comentar</button>
+                            <button type="button" onclick="" class="btn btn-success">Aceptar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-----Modal------------------------------------------->
+
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-                                if (!window.jQuery) {
-                                    document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                }
+            if (!window.jQuery) {
+                document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
+            }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-                                if (!window.jQuery.ui) {
-                                    document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                }
+            if (!window.jQuery.ui) {
+                document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+            }
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
@@ -281,164 +280,213 @@
         <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script type="text/javascript">
-                                $(document).ready(function () {
-                                    var opc = "list";
-                                    var dataAditional = "";
-                                    var idRow = "";
-                                    var urlListDatatable = "../usuario/executeCrudUsuario.htm";
-                                    // PAGE RELATED SCRIPTS
-                                    var responsiveHelper_dt_basic = undefined;
-                                    var responsiveHelper_datatable_fixed_column = undefined;
-                                    var responsiveHelper_datatable_col_reorder = undefined;
-                                    var responsiveHelper_datatable_tabletools = undefined;
-                                    var breakpointDefinition = {
-                                        tablet: 1024,
-                                        phone: 480
-                                    };
+            function showCargaAcademica(objBodyPrint,dataAjax) {
+                var url = '../../../carga_academica';
+                var arr = [];
+                var fila = 1;
+                var columna = 0;
+                var g = 0;
 
-                                    var tableRepAcademico = $('#datatableRepCargaAcademica')
-                                            .DataTable(
-                                                    {
-                                                        "ajax": {
-                                                            "url": urlListDatatable,
-                                                            "type": "POST",
-                                                            "dataSrc": "data",
-                                                            "data": {
-                                                                "opc": "list"
-                                                            }
-                                                        },
-                                                        "columns": [{
-                                                                "data": "personaBean.idPersona"
-                                                            }, {
-                                                                "data": "nombres"
-                                                            }, {
-                                                                "data": "varUsuario"
-                                                            }, {
-                                                                "data": "varClave",
-                                                                "defaultContent": ""
-                                                            }, {
-                                                                "data": "fecInicio"
-                                                            }, {
-                                                                "data": "fecFin"
-                                                            }, {
-                                                                "orderable": false,
-                                                                "data": null,
-                                                                "defaultContent": ""
-                                                            }],
-                                                        "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>"
-                                                                + "t"
-                                                                + "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                                                        "oLanguage": {
-                                                            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-                                                        },
-                                                        "autoWidth": true,
-                                                        "preDrawCallback": function () {
-                                                            // Initialize the responsive datatables helper once.
-                                                            if (!responsiveHelper_dt_basic) {
-                                                                responsiveHelper_dt_basic = new ResponsiveDatatablesHelper(
-                                                                        $('#dt_basic'),
-                                                                        breakpointDefinition);
-                                                            }
-                                                        },
-                                                        "rowCallback": function (row, data, index) {
-                                                            responsiveHelper_dt_basic.createExpandIcon(row);
-                                                            $('td:eq(0)', row).html(index + 1);
-                                                            console.log(data.personaBean.idPersona);
-                                                            $('td:eq(6)', row)
-                                                                    .html(
-                                                                            '<button class="btn btn-success btn-xs btnEditar" value="' + data.personaBean.idPersona + '" ><i class="fa fa-pencil" ></i></button> '
-                                                                            + '<button class="btn btn-danger btn-xs btnEliminar" value="' + data.personaBean.idPersona + '" ><i class="fa fa-times"></i></button>');
+                objBodyPrint.empty();
+                $.ajax({url: "horarioCursosAcademico.html", type: 'POST', success: function (htmlContent, textStatus, jqXHR) {
+                        objBodyPrint.append(htmlContent);
+                        /*test*/
+                        $.post(url, 'opc=getDetCargaAcademica'+dataAjax, function (data) {
+                            /*imprimir los cursos*/
+                            $.each(data, function (f, campo) {
+                                $('.tbody-cursos').append('<tr><td >' + (g + 1) + '.</td><td><b>' + campo.nombrecurso + '</b></td><td ><li> ' + campo.nombre + '</li><li>Ing.Sist. Ciclo:6</li></td></tr>');
+                                arr[g] = campo.horario.toString();
+                                g++;
+                            });
+                            arr[0] = '0100100010010001001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000';
+                            arr[1] = '0000000000000000000100000010000001000000100000000000000000000000000000000000000000000000000000000000000000000000';
+                            for (var j = 0; j < arr.length; j++) {
+                                var myArray = arr[j].split('');
+                                for (var i = 0; i < myArray.length; i++) {
+                                    columna++;
+                                    if (myArray[i] == "1") {
+                                        $(".fila-" + fila + " .columna-" + columna).css("background", "blue");
+                                    }
+                                    if (columna == 7) {
+                                        columna = 0;
+                                        fila++;
+                                    }
+                                }
+                                fila = 1;
+                                columna = 0;
+                            }
+                        });
 
-                                                        },
-                                                        "drawCallback": function (oSettings) {
-                                                            responsiveHelper_dt_basic.respond();
-                                                            // var api = this.api();
-                                                            console.log("Enter to drawCallBack")
-                                                            $(".btnEditar")
-                                                                    .click(
-                                                                            function () {
-                                                                                var id = $(this).val();
-                                                                                idRow = $(this).val();
-                                                                                console.log("idEdit : "
-                                                                                        + idRow)
-                                                                                opc = "findById";
-                                                                                $
-                                                                                        .ajax({
-                                                                                            url: "../usuario/executeCrudUsuario.htm",
-                                                                                            data: "opc="
-                                                                                                    + opc
-                                                                                                    + "&id="
-                                                                                                    + id,
-                                                                                            type: "POST",
-                                                                                            success: function (
-                                                                                                    objJson) {
-                                                                                                objJson = JSON
-                                                                                                        .parse(objJson);
-                                                                                                var mensaje = objJson.message;
-                                                                                                var item = objJson.showItem;
-                                                                                                $(
-                                                                                                        ".persona, .select2")
-                                                                                                        .hide();
-                                                                                                $(
-                                                                                                        ".persona")
-                                                                                                        .attr(
-                                                                                                                "disabled",
-                                                                                                                true);
-                                                                                                $(
-                                                                                                        ".personaReadOnly")
-                                                                                                        .show(
-                                                                                                                200);
-                                                                                                $(
-                                                                                                        ".personaReadOnly")
-                                                                                                        .empty();
-                                                                                                $(
-                                                                                                        ".personaReadOnly")
-                                                                                                        .append(
-                                                                                                                "<option>"
-                                                                                                                + item["nombres"]
-                                                                                                                + "</option>");
-                                                                                                $(".user")
-                                                                                                        .val(
-                                                                                                                item["varUsuario"]);
-                                                                                                $('#from')
-                                                                                                        .datepicker(
-                                                                                                                'setDate',
-                                                                                                                item["fecInicio"]);
-                                                                                                $('#to')
-                                                                                                        .datepicker(
-                                                                                                                'setDate',
-                                                                                                                item["fecFin"]);
-                                                                                                formData = $(
-                                                                                                        ".formSubmit")
-                                                                                                        .serialize();
-                                                                                                $(
-                                                                                                        ".btnAgregar")
-                                                                                                        .click();
-                                                                                                opc = "edit";
-                                                                                                dataAditional = "&id="
-                                                                                                        + id;
-                                                                                                fieldUniqueSave = "fieldUniqueEdit";
-                                                                                            }
-                                                                                        });
-                                                                            });
-                                                            $(".btnEliminar")
-                                                                    .click(
-                                                                            function () {
-                                                                                idRow = $(this).val();
-                                                                                console.log("idEdit : "
-                                                                                        + idRow)
-                                                                                deleteRecord(
-                                                                                        idRow,
-                                                                                        "../usuario/executeCrudUsuario.htm",
-                                                                                        "", $("#dt_basic"));
+                    }});
+            }
+            $(document).ready(function () {
+                var opc = "list";
+                var dataAditional = "";
+                var idRow = "";
+                var urlListDatatable = "../usuario/executeCrudUsuario.htm";
+                // PAGE RELATED SCRIPTS
+                var responsiveHelper_dt_basic = undefined;
+                var responsiveHelper_datatable_fixed_column = undefined;
+                var responsiveHelper_datatable_col_reorder = undefined;
+                var responsiveHelper_datatable_tabletools = undefined;
+                var breakpointDefinition = {
+                    tablet: 1024,
+                    phone: 480
+                };
 
-                                                                                listPersona()
-                                                                            });
-                                                        }
-                                                    });
+                var tableRepAcademico = $('#datatableRepCargaAcademica')
+                        .DataTable(
+                                {
+                                    "ajax": {
+                                        "url": urlListDatatable,
+                                        "type": "POST",
+                                        "dataSrc": "data",
+                                        "data": {
+                                            "opc": "list"
+                                        }
+                                    },
+                                    "columns": [{
+                                            "data": "personaBean.idPersona"
+                                        }, {
+                                            "data": "nombres"
+                                        }, {
+                                            "data": "varUsuario"
+                                        }, {
+                                            "data": "varClave",
+                                            "defaultContent": ""
+                                        }, {
+                                            "data": "fecInicio"
+                                        }, {
+                                            "data": "fecFin"
+                                        }, {
+                                            "orderable": false,
+                                            "data": null,
+                                            "defaultContent": ""
+                                        }],
+                                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>"
+                                            + "t"
+                                            + "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                                    "oLanguage": {
+                                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+                                    },
+                                    "autoWidth": true,
+                                    "preDrawCallback": function () {
+                                        // Initialize the responsive datatables helper once.
+                                        if (!responsiveHelper_dt_basic) {
+                                            responsiveHelper_dt_basic = new ResponsiveDatatablesHelper(
+                                                    $('#dt_basic'),
+                                                    breakpointDefinition);
+                                        }
+                                    },
+                                    "rowCallback": function (row, data, index) {
+                                        responsiveHelper_dt_basic.createExpandIcon(row);
+                                        $('td:eq(0)', row).html(index + 1);
+                                        console.log(data.personaBean.idPersona);
+                                        $('td:eq(6)', row)
+                                                .html(
+                                                        '<button class="btn btn-success btn-xs btnEditar" value="' + data.personaBean.idPersona + '" ><i class="fa fa-pencil" ></i></button> '
+                                                        + '<button class="btn btn-danger btn-xs btnEliminar" value="' + data.personaBean.idPersona + '" ><i class="fa fa-times"></i></button>');
 
+                                    },
+                                    "drawCallback": function (oSettings) {
+                                        responsiveHelper_dt_basic.respond();
+                                        // var api = this.api();
+                                        console.log("Enter to drawCallBack")
+                                        $(".btnEditar")
+                                                .click(
+                                                        function () {
+                                                            var id = $(this).val();
+                                                            idRow = $(this).val();
+                                                            console.log("idEdit : "
+                                                                    + idRow)
+                                                            opc = "findById";
+                                                            $
+                                                                    .ajax({
+                                                                        url: "../usuario/executeCrudUsuario.htm",
+                                                                        data: "opc="
+                                                                                + opc
+                                                                                + "&id="
+                                                                                + id,
+                                                                        type: "POST",
+                                                                        success: function (
+                                                                                objJson) {
+                                                                            objJson = JSON
+                                                                                    .parse(objJson);
+                                                                            var mensaje = objJson.message;
+                                                                            var item = objJson.showItem;
+                                                                            $(
+                                                                                    ".persona, .select2")
+                                                                                    .hide();
+                                                                            $(
+                                                                                    ".persona")
+                                                                                    .attr(
+                                                                                            "disabled",
+                                                                                            true);
+                                                                            $(
+                                                                                    ".personaReadOnly")
+                                                                                    .show(
+                                                                                            200);
+                                                                            $(
+                                                                                    ".personaReadOnly")
+                                                                                    .empty();
+                                                                            $(
+                                                                                    ".personaReadOnly")
+                                                                                    .append(
+                                                                                            "<option>"
+                                                                                            + item["nombres"]
+                                                                                            + "</option>");
+                                                                            $(".user")
+                                                                                    .val(
+                                                                                            item["varUsuario"]);
+                                                                            $('#from')
+                                                                                    .datepicker(
+                                                                                            'setDate',
+                                                                                            item["fecInicio"]);
+                                                                            $('#to')
+                                                                                    .datepicker(
+                                                                                            'setDate',
+                                                                                            item["fecFin"]);
+                                                                            formData = $(
+                                                                                    ".formSubmit")
+                                                                                    .serialize();
+                                                                            $(
+                                                                                    ".btnAgregar")
+                                                                                    .click();
+                                                                            opc = "edit";
+                                                                            dataAditional = "&id="
+                                                                                    + id;
+                                                                            fieldUniqueSave = "fieldUniqueEdit";
+                                                                        }
+                                                                    });
+                                                        });
+                                        $(".btnEliminar")
+                                                .click(
+                                                        function () {
+                                                            idRow = $(this).val();
+                                                            console.log("idEdit : "
+                                                                    + idRow)
+                                                            deleteRecord(
+                                                                    idRow,
+                                                                    "../usuario/executeCrudUsuario.htm",
+                                                                    "", $("#dt_basic"));
+
+                                                            listPersona();
+                                                        });
+                                    }
                                 });
+
+                $(".btnCargaAcademica").click(function () {
+                    var objBodyPrint = $(".areaModal");
+                    showCargaAcademica(objBodyPrint,$(this).data("valor"));
+                });
+
+
+
+            });
         </script>
+
+
+
     </body>
 
 </html>

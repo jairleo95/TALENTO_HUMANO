@@ -251,7 +251,7 @@ public class CDgp extends HttpServlet {
                 }
                 FE_DESDE = FactoryConnectionDB.convertFecha3(FE_DESDE);
                 FE_HASTA = FactoryConnectionDB.convertFecha3(FE_HASTA);
-                
+
                 dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO,
                         DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION,
                         ES_DGP, iduser, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD,
@@ -293,7 +293,6 @@ public class CDgp extends HttpServlet {
                 dia.add("sab");
                 dia.add("dom");
 
-                
                 String ID_DETALLE_HORARIO = request.getParameter("ID_DETALLE_HORARIO");
                 String ES_DETALLE_HORARIO = "1";
                 String ES_HORARIO = "1";
@@ -478,23 +477,23 @@ public class CDgp extends HttpServlet {
             if (opc.equals("Seguimiento")) {
                 String iddgp = request.getParameter("iddgp");
                 /*corregir*/
-               String idrp = IReq.id_det_req_proc(iddgp);
+                String idrp = IReq.id_det_req_proc(iddgp);
                 sesion.setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(iddgp, idrp));
                 response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
             }
             if (opc.equals("SeguimientoH")) {
                 String iddgp = request.getParameter("iddgp");
                 String idrp = IReq.id_det_req_proc(iddgp);
-                rpta.put("listar", a.List_Detalle_Autorizacion(iddgp, idrp));    
+                rpta.put("listar", a.List_Detalle_Autorizacion(iddgp, idrp));
             }
             if (opc.equals("Proceso")) {
                 if (permissionDepartFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", false));
                 }
                 if (permissionDireccionFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir));
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, false));
                 } else {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", false));
                 }
 
                 response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
@@ -515,12 +514,12 @@ public class CDgp extends HttpServlet {
                 out.print(iddgp);
                 dgp.REG_DGP_FINAL(iddgp);
                 if (permissionDepartFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", false));
                 }
                 if (permissionDireccionFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir));
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, false));
                 } else {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", false));
                 }
                 response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp?a=t");
             }

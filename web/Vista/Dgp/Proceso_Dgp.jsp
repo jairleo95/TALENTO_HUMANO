@@ -210,7 +210,7 @@
                                     <h2 class="font-md"><strong>Estado de </strong> <i>Requerimientos</i></h2>
                                     <ul id="widget-tab-1" class="nav nav-tabs pull-right">
                                         <li class="active">
-                                            <a data-toggle="tab" href="#hr1"> <i class="fa fa-lg fa-arrow-circle-o-down"></i> <span class="hidden-mobile hidden-tablet"> Tab 1 </span> </a>
+                                            <a data-toggle="tab" href="#hr1"> <i class="fa fa-lg fa-arrow-circle-o-down"></i> <span class="hidden-mobile hidden-tablet"> DGP </span> </a>
                                         </li>
                                         <li>
                                             <a data-toggle="tab" href="#hr2"> <i class="fa fa-lg fa-arrow-circle-o-up"></i> <span class="hidden-mobile hidden-tablet"> Carga académica</span></a>
@@ -918,13 +918,18 @@
                                             "data": null,
                                             "defaultContent": ""
                                         },
-                                        {"data": "mes_procesamiento"},
                                         {
                                             "orderable": false,
                                             "data": null,
                                             "defaultContent": ""
                                         },
-                                        {"data": "ap_materno"},
+                                       
+                                        {
+                                            "orderable": false,
+                                            "data": null,
+                                            "defaultContent": ""
+                                        },
+                                        {"data": "ap_paterno"},
                                         {
                                             "orderable": false,
                                             "data": null,
@@ -954,6 +959,7 @@
                                     "rowCallback": function (row, data, index) {
                                         responsiveHelperCAacademico.createExpandIcon(row);
                                         $('td:eq(0)', row).html(index + 1);
+                                        $('td:eq(0)', row).html(data.mes_procesamiento);
                                         $('td:eq(2)', row)
                                                 .html(
                                                         '<div class="btn-group">'
@@ -962,13 +968,13 @@
                                                         + '     <i class="fa fa-caret-down"></i>'
                                                         + ' </button>'
                                                         + ' <ul class="dropdown-menu">'
-                                                        + '     <li><a href="../../dgp?iddgp=&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>'
-                                                        + '<li><a href="../../dgp?iddgp=&opc=Seguimiento">Ver Historial</a> </li>'
-                                                        + '<li><a href="../../documento?iddgp=&idtr=&opc=Ver_Documento">Ver Documentos</a></li>'
-                                                        + ' <li><a data-valor="<%/*=r.getId_dgp().trim()*/%>;<%/*=r.getId_trabajador().trim()*/%>;<%/*=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()*/%>" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjaxComment()" >Comentario</a></li>'
-                                                        + ' <li><a href="../../solicitud_requerimiento?iddgp=<%/*=r.getId_dgp().trim()*/%>&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>'
+                                                        + '     <li><a href="../../dgp?iddgp='+data.id_dgp+'&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>'
+                                                        + '<li><a href="../../dgp?iddgp='+data.id_dgp+'&opc=Seguimiento">Ver Historial</a> </li>'
+                                                        + '<li><a href="../../documento?iddgp='+data.id_dgp+'&idtr='+data.id_trabajador+'&opc=Ver_Documento">Ver Documentos</a></li>'
+                                                        + ' <li><a data-valor="'+data.id_dgp+';'+data.id_trabajador+';'+data.ap_paterno+' '+data.ap_materno+' '+data.no_trabajador+'" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjaxComment()" >Comentario</a></li>'
+                                                        + ' <li><a href="../../solicitud_requerimiento?iddgp='+data.id_dgp+'&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>'
                                                         + ' <li class="divider"></li><li>'
-                                                        + '<li><a href="../../dgp?iddgp=<%/*=r.getId_dgp().trim()*/%>&idtr=<%/*=r.getId_trabajador().trim()*/%>&opc=Detalle">Ver Requerimiento</a> </li>'
+                                                        + '<li><a href="../../dgp?iddgp='+data.id_dgp+'&idtr='+data.id_trabajador+'&opc=Detalle">Ver Requerimiento</a> </li>'
                                                         + ' </ul>'
                                                         + ' </div>'
                                                         );
@@ -977,6 +983,7 @@
                                         } else {
                                             $('td:eq(6)', row).html('<span class="label label-primary">En Proceso</span>');
                                         }
+                                         $('td:eq(3)', row).html(data.ap_paterno+' '+data.ap_materno+' '+data.no_trabajador);
                                         // var rows = varTableCAcademica.fnGetNodes();
                                         //   for (var i = 0; i < rows.length; i++) {
                                         //  var obj = $(rows[i]).find(".prog_aut");

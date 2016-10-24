@@ -165,12 +165,12 @@ public class CAutorizacion extends HttpServlet {
                         out.print(iddgp);
                         dgp.HABILITAR_DGP(iddgp);
                         if (permissionDepartFilter) {
-                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "",false));
                         }
                         if (permissionDireccionFilter) {
-                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir));
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir,false));
                         } else {
-                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, ""));
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "",false));
                         }
                         // sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
                         response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
