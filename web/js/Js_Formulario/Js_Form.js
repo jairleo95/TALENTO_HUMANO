@@ -145,11 +145,9 @@ function list_selectJavaBeans(objSelect, url, datos, id_select, opcion_select, o
 
 }
 //Formato de Fecha-DATEPICKER AND DATEMASK
-<<<<<<< HEAD
- $(function () {
-=======
+
 $(function () {
->>>>>>> origin/master
+
     $(".fechapicker").datepicker(
             {dateFormat: 'dd/mm/yy'}
     );
@@ -161,42 +159,9 @@ $(function () {
 $(function () {
     $(".fecha1").datepicker(
             {dateFormat: 'dd/mm/yy'}
-<<<<<<< HEAD
-    )});
-     // Date Range Picker
-      $(function () {
-        $(".frompicker").datepicker({
-            defaultDate: "+1w",
-            changeMonth: true,
-            numberOfMonths: 2,
-            dateformat:'dd/mm/yy',
-            prevText: '<i class="fa fa-chevron-left"></i>',
-            nextText: '<i class="fa fa-chevron-right"></i>',
-            onClose: function (selectedDate) {
-                $(".topicker").datepicker("option", "minDate", selectedDate);
-            }
 
-        });
-        $(".fe_hasta").change(function () {
-            console.log("f:" + $(this).val());
-        })
-    });
-
-    $(".topicker").datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        numberOfMonths: 2,
-        dateformat: 'dd/mm/yy',
-        prevText: '<i class="fa fa-chevron-left"></i>',
-        nextText: '<i class="fa fa-chevron-right"></i>',
-        onClose: function (selectedDate) {
-            $(".frompicker").datepicker("option", "maxDate", selectedDate);
-        }
-    });
-=======
     )
 });
 // Date Range Picker
 
         
->>>>>>> origin/master
