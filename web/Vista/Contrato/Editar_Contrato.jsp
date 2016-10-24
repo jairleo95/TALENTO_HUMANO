@@ -175,9 +175,9 @@
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Desde:
                                                 <%if (a.getFe_desde() != null) {%>
-                                                <input type="text" name="FEC_DESDE" value="<%=(a.getFe_desde())%>" class="simple-field-data-mask fecha input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
+                                                <input type="text" name="FEC_DESDE" value="<%=(a.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
                                                 <%} else {%>
-                                                <input type="text" name="FEC_DESDE" class="simple-field-data-mask fecha input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
+                                                <input type="text" name="FEC_DESDE" class="simple-field-data-mask from-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
                                                 <%}%>
                                             </label>
                                         </section>
@@ -185,15 +185,206 @@
                                             <label class="input" id="titulo">Hasta: 
                                                 <%if (a.getFe_hasta() != null) {
                                                         if (a.getId_dgp() == null) {%>
-                                                        <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask fecha input-group-sm" data-mask="00/00/0000" autocomplete="off">
+<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
+<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="pe.edu.upeu.application.model.Grupo_Ocupaciones"%>
+<%@page import="pe.edu.upeu.application.model.Modalidad"%>
+<%@page import="pe.edu.upeu.application.model.Regimen_Laboral"%>
+<%@page import="pe.edu.upeu.application.model.Direccion"%>
+<%@page import="pe.edu.upeu.application.model.V_Contrato_dgp"%>
+<%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
+<%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
+<jsp:useBean id="List_contrato" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Direccion" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="list_reg_labo" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_modalidad" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="List_grup_ocu" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="list_cc_x_con" scope="session" class="java.util.ArrayList"/>
+<!DOCTYPE html >
+<html>
+    <head>
+        <meta charset="windows-1252">
+        <title>Editar Contrato</title>
+
+        <!-- Basic Styles -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
+        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
+
+        <!-- SmartAdmin RTL Support is under construction
+                 This RTL CSS will be released in version 1.5
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> -->
+
+        <!-- We recommend you use "your_style.css" to override SmartAdmin
+             specific styles this will also ensure you retrain your customization with each SmartAdmin update.
+        <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
+
+        <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/demo.min.css">
+
+        <!-- FAVICONS -->
+        <link rel="shortcut icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
+
+        <!-- GOOGLE FONT -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+        <!-- Specifying a Webpage Icon for Web Clip 
+                 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+        <link rel="apple-touch-icon" href="../../img/splash/sptouch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../img/splash/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../img/splash/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../img/splash/touch-icon-ipad-retina.png">
+
+        <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <!-- Startup image for web apps -->
+        <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+        <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+        <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <style type="text/css">
+            #titulo{
+                font-weight: bold;
+                color: #005cac;
+            }
+            #titu{
+                font-weight: bold;
+                color: #005cac;
+            }
+        </style>
+    </head>
+
+
+    <body>
+        <!-- Widget ID (each widget will need unique ID)-->
+
+
+        <div id="main" role="main" style="margin:0px;">
+            <div id="content" >
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" 
+                     data-widget-togglebutton="false"
+                     data-widget-deletebutton="false"
+                     data-widget-fullscreenbutton="false">
+                    <!-- widget options:
+                            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                            
+                            data-widget-colorbutton="false"	
+                            data-widget-editbutton="false"
+                            data-widget-togglebutton="false"
+                            data-widget-deletebutton="false"
+                            data-widget-fullscreenbutton="false"
+                            data-widget-custombutton="false"
+                            data-widget-collapsed="true" 
+                            data-widget-sortable="false"
+                            
+                    -->
+                    <header>
+                        <span class="widget-icon"> <i class="glyphicon glyphicon-edit"></i> </span>
+                        <h2 class="font-md"><strong>Ficha </strong> <i>Contractual</i></h2>
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <% CConversion con = new CConversion();
+                                HttpSession sesion = request.getSession(true);
+                                String idrol = (String) sesion.getAttribute("IDROL");
+                            %>
+                            <%for (int i = 0; i < List_contrato.size(); i++) {
+                                    V_Contrato_dgp a = new V_Contrato_dgp();
+                                    a = (V_Contrato_dgp) List_contrato.get(i);
+                            %>
+
+                            <form action="../../contrato" id="checkout-form" class="smart-form"  method="POST" >
+                                <fieldset >
+                                    <%if (a.getId_dgp() != null) {%>
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            <label class="select" id="titulo">Motivo :
+                                                <select class="input-group-sm" disabled="">
+                                                    <%if (a.getLi_motivo() != null) {%>
+                                                    <%if (a.getLi_motivo().trim().equals("1")) {%>
+                                                    <option value="1" selected="">Trabajador Nuevo</option>   
+                                                    <option value="2" >renovación</option>   
+                                                    <%} else {%>
+                                                    <option value="1" >Trabajador Nuevo</option>   
+                                                    <option value="2" selected="">renovación</option>
+                                                    <%}%>
+                                                    <%} else {%>
+                                                    <option value="1" >Trabajador Nuevo</option>   
+                                                    <option value="2" >renovación</option>
+                                                    <%}%>
+                                                </select>
+                                            </label>
+                                        </section >
+                                        <section class="col col-3" >
+                                            <label id="titulo" >MFL:</label>
+                                            <label class="toggle" id="titulo" > 
+                                                <input type="checkbox" name="checkbox-toggle"  >
+                                                <%if (a.getEs_mfl() != null) {%>
+                                                <%if (a.getEs_mfl().trim().equals("1")) {%>
+                                                <input type="checkbox" name="checkbox-toggle" checked="" disabled="">
                                                 <%} else {%>
-                                                <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask fecha input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
+                                                <input type="checkbox" name="checkbox-toggle"  disabled="">
+                                                <%}
+                                                } else {%>
+                                                <%}%>
+                                                <i data-swchoff-text="NO"  data-swchon-text="SI"></i>
+                                            </label>
+                                        </section>
+                                        <section class="col col-3" >
+                                            <div class="div_input_diezmo">
+                                            </div>
+                                        </section>
+                                        <input type="hidden" value="<%=a.getId_dgp()%>" id="id_dgp">
+
+                                    </div>
+                                    <%}%>
+                                    <input type="hidden"  value="<%=a.getId_trabajador()%>" class="idtr">
+                                    <div class="row" >
+                                        <input type="hidden" name="id_rol_ses" id="id_rol_s" value="<%=idrol%>">
+                                        <input type="hidden" name="TIPO_PLANILLA"  value="<%%>">
+                                        <input type="hidden" name="HORARIO"  value="">
+
+                                        <input type="hidden" name="IDDETALLE_DGP" value="<%=a.getId_dgp()%>" class="text-box id_dg" id="id_dg" >                              
+                                        <section class="col col-2">
+                                            <label class="input" id="titulo">Desde:
+                                                <%if (a.getFe_desde() != null) {%>
+                                                <input type="text" name="FEC_DESDE" value="<%=(a.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm topicker" data-mask="00/00/0000" autocomplete="off" required="">
+                                                <%} else {%>
+                                                <input type="text" name="FEC_DESDE" class="simple-field-data-mask from-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
+                                                <%}%>
+                                            </label>
+                                        </section>
+                                        <section class="col col-2">
+                                            <label class="input" id="titulo">Hasta: 
+                                                <%if (a.getFe_hasta() != null) {
+                                                        if (a.getId_dgp() == null) {%>
+
+                                                        <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm frompicker" data-mask="00/00/0000" autocomplete="off">
+=======
+                                                <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask fecha input-group-sm " data-mask="00/00/0000" autocomplete="off">
+                                                <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask fecha input-group-sm" data-mask="00/00/0000" autocomplete="off">
+                                                <%} else {%>
+                                                <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
                                                 <%}
                                                 } else{%>
                                                 <% if (a.getId_dgp() == null) {%>
-                                                <input type="text" name="FEC_HASTA" value="" class="simple-field-data-mask fecha input-group-sm" data-mask="00/00/0000" autocomplete="off">
+                                                <input type="text" name="FEC_HASTA" value="" class="simple-field-data-mask to-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off">
                                                 <%} else {%>
-                                                <input type="text" name="FEC_HASTA" value="" class="simple-field-data-mask fecha input-group-sm" data-mask=00/00/0000" autocomplete="off" required="">
+                                                <input type="text" name="FEC_HASTA" value="" class="simple-field-data-mask to-datepicker input-group-sm" data-mask=00/00/0000" autocomplete="off" required="">
                                                 <%}
                                                     }%>
                                             </label>
@@ -264,9 +455,9 @@
                                                     <option value="2" <%if (a.getLi_condicion().trim().equals("2")) {%>selected=""<%}%>>Contratado Independiente</option>
                                                     <option value="3" <%if (a.getLi_condicion().trim().equals("3")) {%>selected=""<%}%>> Enpleado</option>
                                                     <option value="4" <%if (a.getLi_condicion().trim().equals("4")) {%>selected=""<%}%>>Misionero</option>
-                                                    <option value="5" <%if (a.getLi_condicion().trim().equals("5")) {%>selected=""<%}%>>MFL-Práctica Pre-Profesional</option>
-                                                    <option value="6" <%if (a.getLi_condicion().trim().equals("6")) {%>selected=""<%}%>>MFL-Práctica Profesionales</option>
-                                                    <option value="7" <%if (a.getLi_condicion().trim().equals("7")) {%>selected=""<%}%>>MFL-CLJ</option>
+                                                    <option value="5" <%if (a.getLi_condicion().trim().equals("5")) {%>selected=""<%}%>>Práctica Profesional</option>
+                                                    <option value="6" <%if (a.getLi_condicion().trim().equals("6")) {%>selected=""<%}%>>Práctica Pre Profesionales</option>
+                                                    <option value="7" <%if (a.getLi_condicion().trim().equals("7")) {%>selected=""<%}%>>Convenio Laboral Juvenil</option>
                                                     <option value="8" <%if (a.getLi_condicion().trim().equals("8")) {%>selected=""<%}%>>MFL-Contrato</option>
                                                     <%} else {%>
                                                     <option value="">[SELECCIONE]</option>
@@ -274,9 +465,9 @@
                                                     <option value="2">Contratado Independiente</option>
                                                     <option value="3">Enpleado</option>
                                                     <option value="4">Misionero</option>
-                                                    <option value="5">MFL-Práctica Pre-Profesional</option>
-                                                    <option value="6">MFL-Práctica Profesionales</option>
-                                                    <option value="7">MFL-CLJ</option>
+                                                    <option value="5">Práctica Profesional</option>
+                                                    <option value="6">Práctica Pre Profesionales</option>
+                                                    <option value="7">Convenio Laboral Juvenil</option>
                                                     <option value="8">MFL-Contrato</option>
                                                     <%}%>
                                                 </select>
@@ -968,10 +1159,10 @@
                                                     error.insertAfter(element.parent());
                                                 }
                                             });
-                                          /*  jQuery.validator.addMethod("val_fecha", function (value, element) {
-                                                var d = value.split("-");
-                                                return this.optional(element) || String(parseInt(d[0])).length == 4;
-                                            }, "¡Fecha ingresada invalida!");*/
+                                            /*  jQuery.validator.addMethod("val_fecha", function (value, element) {
+                                             var d = value.split("-");
+                                             return this.optional(element) || String(parseInt(d[0])).length == 4;
+                                             }, "¡Fecha ingresada invalida!");*/
 
 
 

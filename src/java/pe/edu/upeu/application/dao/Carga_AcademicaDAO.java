@@ -104,8 +104,8 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PROCESO_CA_DGP( ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
             cst.setString(1, null);
-            cst.setString(2, c.convertFecha(FE_DESDE));
-            cst.setString(3, c.convertFecha(FE_HASTA));
+            cst.setString(2, FactoryConnectionDB.convertFecha(FE_DESDE));
+            cst.setString(3, FactoryConnectionDB.convertFecha(FE_HASTA));
             cst.setDouble(4, 0.0);
             cst.setString(5, DE_DIAS_TRABAJO);
             cst.setString(6, ID_PUESTO);
@@ -125,7 +125,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             cst.setString(20, FE_CREACION);
             cst.setString(21, US_MODIF);
             cst.setString(22, FE_MODIF);
-            cst.setString(23, IP_USUARIO);
+            cst.setString(23, FactoryConnectionDB.detalle_ip());
             cst.setDouble(24, 0.0);
             cst.setDouble(25, 0.0);
             cst.setString(26, DE_ANTECEDENTES_POLICIALES);
@@ -430,11 +430,12 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR!");
+            throw new RuntimeException("Error!" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
         return lista;
@@ -639,7 +640,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                 tmp.add(x.get(i));
             }
         }
-        System.out.println("Buscando " + arr1[0]+" "+arr1[1]+" "+arr1[2]+" encontrado:"+tmp.size());
+        System.out.println("Buscando " + arr1[0] + " " + arr1[1] + " " + arr1[2] + " encontrado:" + tmp.size());
         return tmp;
     }
 

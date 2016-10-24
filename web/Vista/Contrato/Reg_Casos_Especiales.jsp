@@ -179,15 +179,15 @@
                                                     <div class="row" >
                                                         <section class="col col-2 ">
                                                             <label class="input" id="titu">Desde: 
-                                                                <input type="date" name="FEC_DESDE"  class="input-group-sm" required="">
+                                                                <input type="text" name="FEC_DESDE"  class="input-group-sm simple-field-data-mask frompicker" data-mask="00/00/0000" autocomplete="off" required="">
                                                             </label>
                                                         </section>
                                                         <section class="col col-2">
                                                             <label class="input" id="titu">Hasta: 
-                                                                <input type="date" name="FEC_HASTA"  class="input-group-sm">
+                                                                <input type="text" name="FEC_HASTA"  class="input-group-sm simple-field-data-mask topicker" data-mask="00/00/0000" autocomplete="off" required="">
                                                             </label>
                                                         </section>
-                                                        <section class="col col-2" id="titulo">
+                                                        <section class="col col-2" id="titu">
                                                             <label class="select" id="titu">Dirección:
                                                                 <select name="DIRECCION" class="input-group-sm select_dir" required="">
 

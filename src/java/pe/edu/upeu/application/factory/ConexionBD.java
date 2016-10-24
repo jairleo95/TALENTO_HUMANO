@@ -27,6 +27,7 @@ public abstract class ConexionBD {
         try {
             st = conex.createStatement();
             rs = st.executeQuery(sql);
+            System.out.println("query  :"+sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }

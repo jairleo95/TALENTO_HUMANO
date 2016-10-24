@@ -617,7 +617,7 @@ $(document).ready(function () {
         $(".select-area,.select-seccion,.select-puesto").val("");
         $(".chosen-select").trigger("chosen:updated");
     });
-    $(".fe_inicio_dgp").change(function () {
+    $(".feInicioDgp").change(function () {
         var fecha = $(this).val();
         AlertCumplimientoPlazo_Fecha(fecha);
     });

@@ -112,7 +112,7 @@
                         <article class="col-sm-12 col-md-12 col-lg-12">
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-purple" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false"   data-widget-deletebutton="false">
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false"   data-widget-deletebutton="false">
                                 <!-- widget options:
                                         usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
                                         
@@ -145,22 +145,19 @@
                                     <!-- widget content -->
                                     <div class="widget-body no-padding"  >
 
-
-
-                                        <!--<form action="../../../documento" method="post" enctype="multipart/form-data" class="smart-form" novalidate="novalidate" id="checkout-form">-->
                                         <form action="../../../documento" method="post" enctype="multipart/form-data"  class="smart-form form_dgp_doc" >
 
 
 
-                                            <table id="datatable_tabletools" class="table table-bordered table-hover table-responsive" width="100%">
+                                            <table id="datatable_tabletools" class="table table-bordered table-responsive" width="100%">
 
                                                 <thead>
                                                 <center>
-                                                    <div class=" container-fluid cajita" style=" font: oblique bold 100%  sans-serif ; margin-top: 8px;margin-bottom: -5px;">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cajita">
-                                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita" style="text-align:center;">Ajuntar,Detalle y Acción</div>   
-                                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita" style="text-align:center;">Ajuntar,Detalle y Acción</div>   
-                                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 cajita" style="text-align:center;">Ajuntar,Detalle y Acción</div>   
+                                                    <div class="container-fluid text-center" style="margin-top: 8px;margin-bottom: -5px;">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"  >Adjuntar,Detalle y Acción</div>   
+                                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" >Adjuntar,Detalle y Acción</div>   
+                                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" >Adjuntar,Detalle y Acción</div>   
                                                         </div>
                                                     </div>
                                                 </center>
@@ -180,7 +177,7 @@
                                                             <td   style="width:40%; margin-top: -15px;" align="center">
                                                                 <table class="table table-striped" style="margin-top: -9px;">
                                                                     <tr>
-                                                                        <td align="center" style="border:1px solid;border-color:purple rgb(101, 89, 107);height:50px;"><strong><%=d.getDocumento()%></strong></td>
+                                                                        <td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107); height:30px;background: white"><%=d.getDocumento()%></td>
                                                                     </tr><br>
                                                                     <tr>
                                                                         <td class="caji<%=(i + 1)%>"  align="center">
@@ -206,15 +203,16 @@
           
                                                                   <td style="text-align:center;" align="center">-->
 
-                                                                <div >
-                                                                    <label >DESCRIPCIÓN:</label><BR>
+                                                                <div>
+
                                                                     <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                                    <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                                    <input type="text" placeholder="Escribe una descripción" class="form-control" name="lob_description<%=i + 1%>">
                                                                     <% } else { %>
                                                                     <% if (d.getDe_documento_adjunto() == null) { %>
-                                                                    <label class="null" >No Registrado</label><BR><BR>
+                                                                    <label class="null" >No Registrado</label>
                                                                     <% } else {%>
-                                                                    <label style="font-weight: normal;"><%=d.getDe_documento_adjunto()%> </label><br><br>
+                                                                  <label >Descripción:</label>
+                                                                    <label style="font-weight: normal;"><%=d.getDe_documento_adjunto()%> </label><br>
 
                                                                     <% } %>
                                                                     <% } %>    
@@ -222,21 +220,21 @@
                                                                     <section  class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;" align="center">
                                                                         <%}%>
                                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                                        <label>¿RECIBIDO EN FISICO?:</label><br> <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;" ><i style="margin-top: -5px;" data-swchon-text="SI" data-swchoff-text="NO"></i></label>
+                                                                        <label>¿Recibido en fisico?:</label> <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;" ><i style="margin-top: -5px;" data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                             <% } else { %>
                                                                             <% if (d.getEs_documento_adjunto() == null) { %>
 
-                                                                        <label class="null">¿RECIBIDO EN FISICO?:<br>No Registrado</label>
+                                                                        <label class="null">¿Recibido en fisico?:No Registrado</label>
                                                                             <% } else { %>
                                                                         <label ><% if (d.getEs_documento_adjunto().trim().equals("1")) {
                                                                             %>
 
-                                                                            ¿RECIBIDO EN FISICO?:<br><img src="Aprobado.png" width="20" height="20">
+                                                                            ¿Recibido en fisico?: Si
                                                                             <%
                                                                             } else {
 
                                                                             %>
-                                                                            ¿RECIBIDO EN FISICO?:<br><img src="Desaprobado.png" width="20" height="20">
+                                                                            ¿Recibido en fisico?: No
                                                                         </label>
                                                                         <% }
                                                                                 }
@@ -247,9 +245,9 @@
 
                                                                 <!---    </td>
                                                                      <td class="table-bordered" style="text-align:center;" align="center">-->
-                                                                <div style="text-align:center;" align="center">
+                                                                <div>
                                                                     <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                                    <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getIddgp()%>&idtr=<%=d.getId_trabajador()%>"><i style="margin-top: -5px;" class="fa fa-trash-o"></i> Eliminar</a>
+                                                                    <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getIddgp()%>&idtr=<%=d.getId_trabajador()%>"><i style="margin-top: -5px;" class="fa fa-trash-o"></i></a>
                                                                     <%} else {
                                                                             out.print("");
                                                                         }%>
@@ -257,10 +255,6 @@
                                                             </td>
                                                     <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                     </tr>  
-
-
-
-
                                                     <%}
                                                     }%>
                                                     <%  if (d.getTi_documento().trim().equals("COFE")) {%>
@@ -268,7 +262,7 @@
                                                     <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                         <td   style="width:35%; margin-top: -15px;" align="center">
                                                             <table class="table table-striped" style="margin-top: -8px;">
-                                                                <tr><td align="center"  style="border:1px solid;border-color:purple rgb(101, 89, 107);height:50px;"><strong><%=d.getDocumento()%></strong></td></tr><br>
+                                                                <tr><td align="center"  style="border:1px solid;border-color: purple rgb(101, 89, 107); height:30px;background: white"><%=d.getDocumento()%></td></tr><br>
                                                                 <tr><td  class="caji<%=(i + 1)%>"   align="center"><% if (d.getId_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
                                                                         <div class="form-group">
                                                                             <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  <%if (d.getEs_obligatorio().equals("1")) {
@@ -293,35 +287,35 @@
          
                                                              <td style="text-align:center;" align="center">-->
                                                             <div >
-                                                                <label >DESCRIPCIÓN:</label><BR>
+                                                              
                                                                 <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                                <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                                <input type="text"  placeholder="Escribe una descripción" class="form-control" name="lob_description<%=i + 1%>">
                                                                 <% } else { %>
                                                                 <% if (d.getDe_documento_adjunto() == null) { %>
-                                                                <label class="null" >No Registrado</label><BR><BR>
-                                                                <% } else {%>
-                                                                <label style="font-weight: normal;"><%=d.getDe_documento_adjunto()%> </label><br><br>
+                                                                <label class="null" >No Registrado</label>
+                                                                <% } else {%> <label>Descripción:</label> 
+                                                                <label style="font-weight: normal;"><%=d.getDe_documento_adjunto()%> </label><br>
 
                                                                 <% } %>
                                                                 <% } %>    
 
                                                                 <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
                                                                 <section  class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:0px;margin-top:-4px; " align="center">
-                                                                    <label>¿RECIBIDO EN FISICO?:</label><br> <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;" ><i style="margin-top: -5px;" data-swchon-text="SI" data-swchoff-text="NO"></i></label>
+                                                                    <label>¿Recibido en fisico?:</label><label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;" ><i style="margin-top: -5px;" data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                         <% } else { %>
                                                                         <% if (d.getEs_documento_adjunto() == null) { %>
 
-                                                                    <label class="null">¿RECIBIDO EN FISICO?:<br>No Registrado</label></section>
+                                                                    <label class="null">¿Recibido en fisico?:No Registrado</label></section>
                                                                         <% } else { %>
                                                                 <label ><% if (d.getEs_documento_adjunto().trim().equals("1")) {
                                                                     %>
 
-                                                                    ¿RECIBIDO EN FISICO?:<br><img src="Aprobado.png" width="20" height="20">
+                                                                    ¿Recibido en fisico?:Si
                                                                     <%
                                                                     } else {
 
                                                                     %>
-                                                                    ¿RECIBIDO EN FISICO?:<br><img src="Desaprobado.png" width="20" height="20">
+                                                                    ¿Recibido en fisico?:No
                                                                 </label>
                                                                 <% }
                                                                         }
@@ -329,9 +323,9 @@
                                                             </div>
                                                             <!-- </td>
                                                              <td class="table-bordered" style="text-align:center;" align="center">-->
-                                                            <div  style="text-align:center;">
+                                                            <div >
                                                                 <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                                <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getIddgp()%>&idtr=<%=d.getId_trabajador()%>"><i style="margin-top: -5px;" class="fa fa-trash-o"></i> Eliminar</a>
+                                                                <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getIddgp()%>&idtr=<%=d.getId_trabajador()%>"><i style="margin-top: -5px;" class="fa fa-trash-o"></i></a>
                                                                 <%} else {
                                                                         out.print("");
                                                                     }%>
@@ -357,14 +351,14 @@
                                                         <td style="width:40%; margin-top: -15px;" align="center">
                                                             <table class="table table-striped" style="margin-top: -11px;">
                                                                 <tr> 
-                                                                    <td align="center" style="border:1px solid;border-color:purple rgb(101, 89, 107);height:50px;">
-                                                                        <strong><%  if (d.getTi_documento().trim().equals("ACMA")) {
-                                                                                out.println("ACTA DE MATRIMONIO CON: <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
+                                                                    <td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107); height:30px;background: white">
+                                                                        <%  if (d.getTi_documento().trim().equals("ACMA")) {
+                                                                                out.println("Acta de matrimonio conN: <p class='txt-color-red'' >" + co.getAp_nombres_conyugue() + "</p>");
                                                                             }
                                                                             if (d.getTi_documento().trim().equals("DNIC")) {
-                                                                                out.println("COPIA DNI CONYUGUE : <p style='color:red;' >" + co.getAp_nombres_conyugue() + "</p>");
+                                                                                out.println("Copia DNI cónyugue : <p class='txt-color-red'' >" + co.getAp_nombres_conyugue() + "</p>");
                                                                             }%>
-                                                                        </strong>
+                                                                        
                                                                     </td>
                                                                 </tr><br>
                                                                 <tr> 
@@ -392,34 +386,35 @@
            
                                                                <td  style="text-align:center;" align="center">-->
                                                             <div style="text-align:center;">
-                                                                <label>DESCRIPCIÓN:</label><BR>
+                                                               
                                                                 <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                                <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                                <input type="text"  placeholder="Escribe una descripción"  class="form-control" name="lob_description<%=i + 1%>">
                                                                 <% } else { %>
                                                                 <% if (d.getDe_documento_adjunto() == null) { %>
-                                                                <label class="null" >No Registrado</label><BR><BR>
+                                                                <label class="null" >No Registrado</label>
                                                                 <% } else {%>
-                                                                <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
+                                                                <label>Descripción:</label>
+                                                                <label> <%=d.getDe_documento_adjunto()%></label>
 
                                                                 <% } %>
                                                                 <% } %> 
                                                                 <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:0px;margin-top:-4px; " align="center">
                                                                     <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                                    <label>¿RECIBIDO EN FISICO?:</label><br> <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;" ><i style="margin-top: -5px;" data-swchon-text="SI" data-swchoff-text="NO"></i></label>
+                                                                    <label>¿Recibido en fisico?:</label><label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;" ><i style="margin-top: -5px;" data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                         <% } else { %>
                                                                         <% if (d.getEs_documento_adjunto() == null) { %>
 
-                                                                    <label class="null">¿RECIBIDO EN FISICO?:<br>No Registrado</label></section>
+                                                                    <label class="null">¿Recibido en fisico?:No Registrado</label></section>
                                                                         <% } else { %>
                                                                 <label ><% if (d.getEs_documento_adjunto().trim().equals("1")) {
                                                                     %>
 
-                                                                    ¿RECIBIDO EN FISICO?:<br><img src="Aprobado.png" width="20" height="20">
+                                                                    ¿Recibido en fisico?:Si
                                                                     <%
                                                                     } else {
 
                                                                     %>
-                                                                    ¿RECIBIDO EN FISICO?:<br><img src="Desaprobado.png" width="20" height="20">
+                                                                    ¿Recibido en fisico?:No
                                                                 </label>
                                                                 <% }
                                                                         }
@@ -428,9 +423,9 @@
                                                             <!--  </td>
           
                                                               <td class="table-bordered" style="text-align:center;" align="center">-->
-                                                            <div style="text-align:center;">
+                                                            <div>
                                                                 <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                                <a type="button"  style="margin-top: -15px;" class="btn btn-danger btn-sm  elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getIddgp()%>&idtr=<%=d.getId_trabajador()%>"><i style="margin-top: -5px;" class="fa fa-trash-o"></i> Eliminar</a>
+                                                                <a type="button"  style="margin-top: -15px;" class="btn btn-danger btn-sm  elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getIddgp()%>&idtr=<%=d.getId_trabajador()%>"><i style="margin-top: -5px;" class="fa fa-trash-o"></i></a>
                                                                 <%} else {
                                                                         out.print("");
                                                                     }%>
@@ -458,7 +453,7 @@
                                                     <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                         <td   style="width:40%; margin-top: -15px;" align="center" >
                                                             <table class="table table-striped " style="margin-top: -33px;">
-                                                                <tr><td  align="center" style="border:1px solid; border-color:purple rgb(101, 89, 107);height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr><br><br>
+                                                                <tr><td  align="center" style="border:1px solid; border-color:purple rgb(101, 89, 107);height:50px;">Copia DNI hijo :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></td></tr><br>
                                                                 <tr><td  class="caji<%=(i + 1)%>"  align="center">
                                                                         <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
                                                                         <div class="form-group">
@@ -482,14 +477,14 @@
           
                                                               <td  style="text-align:center;" align="center">-->
                                                             <div style="text-align:center;">
-                                                                <label>DESCRIPCION:</label><BR>
+                                                               
                                                                 <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
-                                                                <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                                <input type="text"  placeholder="Escribe una descripción" class="form-control" name="lob_description<%=i + 1%>">
                                                                 <% } else { %>
                                                                 <% if (d.getDe_documento_adjunto() == null) { %>
-                                                                <label class="null" >No Registrado</label><BR><BR>
-                                                                <% } else {%>
-                                                                <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
+                                                                <label class="null" >No Registrado</label>
+                                                                <% } else {%> <label>Descripción:</label>
+                                                                <label> <%=d.getDe_documento_adjunto()%></label>
 
                                                                 <% } %>
                                                                 <% } %>    
@@ -499,20 +494,20 @@
                                                                     <%}%>
 
                                                                     <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
-                                                                    <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;" ><i style="top:110%;text-align:center;margin-left:60px;margin-top: -5px;" style="top:110%;text-align:center;margin-left:60px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                                    <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;" ><i style="top:110%;text-align:center;margin-left:60px;margin-top: -5px;" style="top:110%;text-align:center;margin-left:60px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿Recibido en fisico?:</label>
                                                                         <% } else { %>
                                                                         <% if (d.getEs_documento_adjunto() == null) { %>
 
-                                                                    <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label></section>
+                                                                    <label class="null"> ¿Recibido en fisico?:No Registrado</label></section>
                                                                         <% } else { %>
                                                                 <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
 
-                                                                    ¿RECIBIDO EN FISICO?:<BR><img src="Aprobado.png" width="20" height="20">
+                                                                    ¿Recibido en fisico?:Si
                                                                     <%
                                                                     } else {
 
                                                                     %>
-                                                                    ¿RECIBIDO EN FISICO?:<BR><img src="Desaprobado.png" width="20" height="20">
+                                                                    ¿Recibido en fisico?:No
                                                                 </label>
                                                                 <% }
                                                                         }
@@ -524,7 +519,7 @@
                                                              <td  style="text-align:center;" align="center">-->
                                                             <div>
                                                                 <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
-                                                                <a type="button"  class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i style="margin-top: -5px;" class="fa fa-trash-o"></i> Eliminar</a>
+                                                                <a type="button"  class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i style="margin-top: -5px;" class="fa fa-trash-o"></i></a>
                                                                 <%} else {
                                                                         out.print("");
                                                                     }%>
@@ -544,7 +539,7 @@
                                                     <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                         <td   style="width:40%; margin-top: -15px;" align="center">
                                                             <table class="table table-striped " style="margin-top: -27px;">
-                                                                <tr><td align="center"style="border:1px solid;border-color: purple rgb(101, 89, 107);height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr><br><br>
+                                                                <tr><td align="center"style="border:1px solid;border-color: purple rgb(101, 89, 107);height:50px;">Copia DNI hijo:  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></td></tr><br>
                                                                 <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                         <% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
                                                                         <div class="form-group">
@@ -568,14 +563,15 @@
          
                                                              <td  style="text-align:center;" align="center">-->
                                                             <div style="text-align:center;">
-                                                                <label>DESCRIPCION:</label><BR>
+                                                              
                                                                 <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
-                                                                <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                                <input type="text"  placeholder="Escribe una descripción"  class="form-control" name="lob_description<%=i + 1%>">
                                                                 <% } else { %>
                                                                 <% if (d.getDe_documento_adjunto() == null) { %>
-                                                                <label class="null" >No Registrado</label><BR><BR>
+                                                                <label class="null" >No Registrado</label>
                                                                 <% } else {%>
-                                                                <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
+                                                                  <label>Descripción:</label>
+                                                                <label> <%=d.getDe_documento_adjunto()%></label>
 
                                                                 <% } %>
                                                                 <% } %>    
@@ -584,20 +580,20 @@
                                                                     <%}%>
                                                                     <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:0px;margin-top:-4px; " align="center">
                                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
-                                                                        <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;"><i style="margin-top: -5px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                                        <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;"><i style="margin-top: -5px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿Recibido en fisico?:</label>
                                                                             <% } else { %>
                                                                             <% if (d.getEs_documento_adjunto() == null) { %>
 
-                                                                        <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label></section>
+                                                                        <label class="null"> ¿Recibido en fisico?:No Registrado</label></section>
                                                                             <% } else { %>
                                                                     <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
 
-                                                                        ¿RECIBIDO EN FISICO?:<BR><img src="Aprobado.png" width="20" height="20">
+                                                                        ¿Recibido en fisico?:Si
                                                                         <%
                                                                         } else {
 
                                                                         %>
-                                                                        ¿RECIBIDO EN FISICO?:<BR><img src="Desaprobado.png" width="20" height="20">
+                                                                        ¿Recibido en fisico?:No
                                                                     </label>
                                                                     <% }
                                                                             }
@@ -607,9 +603,9 @@
                                                                 <%}%>
                                                             <!--   </td>
                                                                <td  style="text-align:center;" align="center">-->
-                                                            <div style="text-align:center;margin-bottom: -10px;" >
+                                                            <div >
                                                                 <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
-                                                                <a type="button"  class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                                <a type="button"  class="btn btn-danger btn-sm elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> </a>
                                                                 <%} else {
                                                                         out.print("");
                                                                     }%>
@@ -625,7 +621,7 @@
                                                     <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6" >
                                                         <td style=" width:40%; margin-top: -15px;" align="center">
                                                             <table class="table table-striped "  style="margin-top: -9px;">
-                                                                <tr><td align="center" style="border:1px solid;border-color:purple rgb(101, 89, 107);height:50px;"><strong>COPIA DNI DEL HIJO :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></strong></td></tr><br><br>
+                                                                <tr><td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107); height:30px;background: white">Copia DNI hijo :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></td></tr><br>
                                                                 <tr><td class="caji<%=(i + 1)%>"  align="center">
                                                                         <% if ((rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
                                                                         <div class="form-group">
@@ -642,19 +638,20 @@
          
                                                              <td  style="text-align:center;" align="center">-->
                                                             <div>
-                                                                <label>DESCRIPCION:</label><BR>
+                                                                
                                                                 <% if ((rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
-                                                                <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
+                                                                <input type="text"  placeholder="Escribe una descripción" class="form-control" name="lob_description<%=i + 1%>">
                                                                 <% } else { %>
-                                                                <label class="null" >No Registrado</label><BR><BR>
+                                                                <label>Descripción:</label>
+                                                                <label class="null" >No Registrado</label>
                                                                 <% } %> 
 
 
                                                                 <section class="col col-10" style="text-align:center;" align="center">
                                                                     <% if ((rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
-                                                                    <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle"  style="margin-left:auto; margin-right:auto;"><i style="margin-top: -5px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿RECIBIDO EN FISICO?:</label>
+                                                                    <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle"  style="margin-left:auto; margin-right:auto;"><i style="margin-top: -5px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿Recibido en fisico?:</label>
                                                                         <% } else {%>
-                                                                    <label class="null"> ¿RECIBIDO EN FISICO?:<BR>No Registrado</label>
+                                                                    <label class="null"> ¿Recibido en fisico?: No Registrado</label>
                                                                         <% }%>
                                                                 </section>
                                                             </div>
@@ -680,8 +677,8 @@
                                                     <td  style="width:40%; margin-top: -15px;" align="center">
                                                         <table class="table table-striped" style="margin-top: -9px;">
                                                             <tr> 
-                                                                <td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107); height:50px;">
-                                                                    <strong><%=d.getDocumento()%></strong>
+                                                                <td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107); height:30px;background: white">
+                                                                    <%=d.getDocumento()%>
                                                                 </td>
                                                             </tr><br>
                                                             <tr> 
@@ -706,28 +703,22 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-
-                                                        <!--  </td>
-          
-          
-          
-                                                          <td  style="text-align:center;" align="center">-->
                                                         <div style="text-align:center;">
-                                                            <label> DESCRIPCIÓN:</label><BR>
+                                                            
                                                             <% if (d.getDe_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                            <input type="text"   name="lob_description<%=i + 1%>"><BR><BR>
+                                                            <input type="text"  placeholder="Escribe una descripción" class="form-control"   name="lob_description<%=i + 1%>">
                                                             <% } else { %>
-
+<label> Descripción:</label>
 
                                                             <% if (d.getDe_documento_adjunto() == null) { %>
-                                                            <label class="null" >No Registrado</label><BR><BR>
+                                                            <label class="null" >No Registrado</label>
                                                             <% } else {%>
-                                                            <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
+                                                            <label> <%=d.getDe_documento_adjunto()%></label>
 
                                                             <% } %>
                                                             <% } %>
                                                             <%if (d.getEs_documento_adjunto() == null) {%>
-                                                            <label>¿RECIBIDO EN FISICO?:</label><br>
+                                                            <label>¿Recibido en fisico?:</label>
                                                             <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:0px;margin-top:-4px; " align="center">
                                                                 <%}%>
                                                                 <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
@@ -735,15 +726,15 @@
                                                                     <% } else { %>
                                                                     <% if (d.getEs_documento_adjunto() == null) { %>
 
-                                                                <label class="null">¿RECIBIDO EN FISICO?:<BR>No Registrado</label></section>
+                                                                <label class="null">¿Recibido en fisico?: No Registrado</label></section>
                                                                     <% } else { %>
                                                             <label><% if (d.getEs_documento_adjunto().trim().equals("1")) { %>
-                                                                ¿RECIBIDO EN FISICO?:<BR><img src="Aprobado.png" width="20" height="20">
+                                                                ¿Recibido en fisico?: Si
                                                                 <%
                                                                 } else {
 
                                                                 %>
-                                                                ¿RECIBIDO EN FISICO?:<BR><img src="Desaprobado.png" width="20" height="20">
+                                                                ¿Recibido en fisico?: No
                                                             </label>
                                                             <% }
                                                                     }
@@ -754,9 +745,9 @@
                                                         </div>
                                                         <!-- </td>
                                                          <td  class="table-bordered" style="text-align:center;" align="center">-->
-                                                        <div style="text-align:center;">
+                                                        <div>
                                                             <%if (d.getEs_documento_adjunto() != null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                            <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getIddgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                            <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&iddgp=<%=d.getIddgp()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> </a>
                                                             <%} else {
                                                                     out.print("");
                                                                 }%>
@@ -974,7 +965,7 @@
 
 
 
-                                                    function validar() {
+                                                    function validateSizeFile() {
                                                         var x = true;
                                                         console.log("enter to function validar")
 
@@ -1009,6 +1000,9 @@
 
 
                                                                         }
+                                                                       
+                                                                        
+                                                                        
 
                                                                     }
 
@@ -1034,9 +1028,9 @@
                                                         });
 
                                                         $(".btn_reg_doc").click(function () {
-                                                            console.log(validar());
-                                                            if (validar()) {
-                                                                $(".formDocument").submit();
+                                                            console.log(validateSizeFile());
+                                                            if (validateSizeFile()) {
+                                                                $(".form_dgp_doc").submit();
                                                             }
                                                         });
 
@@ -1054,7 +1048,7 @@
                                                                         "   </div>\n" +
                                                                         "   {caption}\n" +
                                                                         "</div>"},
-                                                            allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc'],
+                                                            allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc','txt'],
                                                             overwriteInitial: false,
                                                             maxFileSize: 500,
                                                             maxFilesNum: 10,
@@ -1087,7 +1081,7 @@
                                                         $(".btn-info").on('click', function () {
                                                             $('#file-4').fileinput('refresh', {previewClass: 'bg-info'});
                                                         });
-                                                        if ($(".file").length) {
+                                                        if ($(".fileDocument").length) {
                                                             $(".btn_reg_doc").show();
                                                         } else {
                                                             $(".btn_reg_doc").hide();

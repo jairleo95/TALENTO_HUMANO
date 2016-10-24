@@ -31,6 +31,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceNotificationDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 import pe.edu.upeu.application.model.Notification;
+import pe.edu.upeu.application.model.V_Autorizar_Dgp;
 
 /**
  *
@@ -51,7 +52,6 @@ public class CAutorizacion extends HttpServlet {
         String iduser = (String) sesion.getAttribute("IDUSER");
         CCriptografiar cr = new CCriptografiar();
         if (iduser != null) {
-
             String ide = (String) sesion.getAttribute("IDPER");
             String idp = (String) sesion.getAttribute("PUESTO_ID");
             String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
@@ -93,51 +93,81 @@ public class CAutorizacion extends HttpServlet {
                     if (opc.equals("Aceptar")) {
                         String iddgp = request.getParameter("IDDETALLE_DGP");
                         String estado = "1";
-                        String nropaso = request.getParameter("NROPASO");
-                        //String usuario_ip = "";
-                        String cod = request.getParameter("COD");
-                        String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
-                        String idpasos = request.getParameter("IDPASOS");
-                        String nombres = request.getParameter("NOMBRES");
+<<<<<<< HEAD
+                     //   System.out.println(nombres);
                         String idtrab = request.getParameter("IDTRAB");
+=======
+>>>>>>> origin/master
                         /*Cambiar con un trigger al momento de insertar*/
-                        dgp.VAL_DGP_PASOS();
+                        System.out.println("Call List_id_Autorizacion");
+                        List<V_Autorizar_Dgp> l = a.List_id_Autorizacion(idp, iduser, iddgp);
+                        if (l.size() == 1) {
+<<<<<<< HEAD
+=======
+                            System.out.println("Enter to Autorizacion DGP");
+>>>>>>> origin/master
+                            V_Autorizar_Dgp vAut = l.get(0);
+                            System.out.println("1 :" + vAut.getNu_pasos());
+                            System.out.println("2 :" + vAut.getId_pasos());
+                            System.out.println("3 :" + vAut.getCo_pasos());
+                            System.out.println("4 :" + vAut.getId_detalle_req_proceso());
+                            System.out.println("5 :" + idp);
+                            /*Cambiar con un trigger al momento de insertar*/
+                            dgp.VAL_DGP_PASOS();
+                            /*Autorización*/
+                            a.Insert_Autorizacion("", iddgp, estado, vAut.getNu_pasos(), "", iduser, "", "", vAut.getCo_pasos(), idp, vAut.getId_detalle_req_proceso(), vAut.getId_pasos());
+                            /*Notificaciones*/
+                            InterfaceNotificationDAO notdao = new NotificationDAO();
+                            Notification not = new Notification();
+                            InterfaceUsuarioDAO udao = new UsuarioDAO();
+                            String username = udao.List_ID_User(iduser).get(0).getNo_usuario();
+                            not.setId_rol(idrol);
+                            not.setEs_visualizado("0");
+                            not.setEs_leido("0");
+                            not.setTipo_notification("1");
+                            not.setDe_notification("Empleado autorizado por " + username);
+<<<<<<< HEAD
+                            not.setDi_notification("trabajador?idtr=" + idtrab + "&opc=list");
+                            not.setTitulo(vAut.getNo_trabajador()+" "+vAut.getAp_paterno()+" "+vAut.getAp_materno());
+=======
+                            not.setDi_notification("trabajador?idtr=" + vAut.getId_trabajador() + "&opc=list");
+                            not.setTitulo(vAut.getNo_trabajador() + " " + vAut.getAp_paterno() + " " + vAut.getAp_materno());
+>>>>>>> origin/master
+                            List<String> ids = notdao.PrevSteps(iddgp);
+                            for (int i = 0; i < ids.size(); i++) {
+                                not.setId_usuario(ids.get(i));
+                                notdao.Registrar(not);
+                            }
+                            rpta.put("rpta", true);
+                            sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idp, iduser, ""));
+                            sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idp));
+                        } else {
+                            System.out.println("Enter to Autorizacion academico");
+                            List<V_Autorizar_Dgp> autAcademico = a.List_Autorizacion_Academico(idp, iduser, iddgp);
+                            if (autAcademico.size() == 1) {
+<<<<<<< HEAD
+                                V_Autorizar_Dgp vAutAcademico = l.get(0);
+=======
+                                V_Autorizar_Dgp vAutAcademico = autAcademico.get(0);
+                                System.out.println("Academico");
+                                System.out.println("1 :" + vAutAcademico.getNu_pasos());
+                                System.out.println("2 :" + vAutAcademico.getId_pasos());
+                                System.out.println("3 :" + vAutAcademico.getCo_pasos());
+                                System.out.println("4 :" + vAutAcademico.getId_detalle_req_proceso());
+                                System.out.println("5 :" + idp);
+>>>>>>> origin/master
+                                /*Autorización*/
+                                a.Insert_Autorizacion("", iddgp, estado, vAutAcademico.getNu_pasos(), "", iduser, "", "", vAutAcademico.getCo_pasos(), idp, vAutAcademico.getId_detalle_req_proceso(), vAutAcademico.getId_pasos());
+                                sesion.setAttribute("List_Autorizacion_Academico", a.List_Autorizacion_Academico(idp, iduser, ""));
+                                rpta.put("rpta", true);
+                            } else {
+                                rpta.put("rpta", false);
+                                rpta.put("message", "No se obtuvo valores de Autorización");
+                            }
 
-                        a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
-                        String idpu = e.Id_Puesto_Personal(ide);
-                        InterfaceNotificationDAO notdao = new NotificationDAO();
-                        Notification not = new Notification();
-                        InterfaceUsuarioDAO udao = new UsuarioDAO();
-                        String username = udao.List_ID_User(iduser).get(0).getNo_usuario();
-                        not.setId_rol(idrol);
-                        not.setEs_visualizado("0");
-                        not.setEs_leido("0");
-                        not.setTipo_notification("1");
-                        not.setDe_notification("Empleado autorizado por " + username);
-                        not.setDi_notification("trabajador?idtr=" + idtrab + "&opc=list");
-                        not.setTitulo(nombres);
-                        List<String> ids = notdao.PrevSteps(iddgp);
-                        for (int i = 0; i < ids.size(); i++) {
-                            not.setId_usuario(ids.get(i));
-                            notdao.Registrar(not);
                         }
-                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
-                        sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
+
                         /* response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");*/
-                        rpta.put("rpta", true);
-                    }
-                    if (opc.equals("AceptarMasivo")) {
-                        String iddgp = request.getParameter("IDDETALLE_DGP");
-                        String estado = "1";
-                        String nropaso = request.getParameter("NROPASO");
-                        //String usuario_ip = "";
-                        String cod = request.getParameter("COD");
-                        String iddrp = request.getParameter("IDDETALLE_REQ_PROCESO");
-                        String idpasos = request.getParameter("IDPASOS");
-                        /*Cambiar con un trigger al momento de insertar*/
-                        dgp.VAL_DGP_PASOS();
-                        a.Insert_Autorizacion("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
-                        rpta.put("rpta", true);
                     }
                     if (opc.equals("HDGP")) {
 
@@ -154,7 +184,6 @@ public class CAutorizacion extends HttpServlet {
                         }
                         // sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
                         response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
-
                     }
                     if (opc.equals("Rechazar")) {
                         String iddgp = request.getParameter("IDDETALLE_DGP");
@@ -189,10 +218,10 @@ public class CAutorizacion extends HttpServlet {
                             not.setId_usuario(ids.get(i));
                             notdao.Registrar(not);
                         }
-                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
+                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser, ""));
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
-                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
+                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser, ""));
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                         //out.print(id_autorizacion);
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
@@ -202,18 +231,18 @@ public class CAutorizacion extends HttpServlet {
                     //AUTORIZACION CARGA ACADEMICA POR DOCENTE
                     if (opc.equals("Autorizacion_CD")) {
                         String idpu = e.Id_Puesto_Personal(ide);
-                        sesion.setAttribute("List_Autorizacion_Academico", a.List_Autorizacion_Academico(idpu, iduser));
+                        sesion.setAttribute("List_Autorizacion_Academico", a.List_Autorizacion_Academico(idpu, iduser, ""));
                         response.sendRedirect("Vista/Academico/Autorizar_Carga_Academica.jsp");
                     }
                     if (opc.equals("mens_cod_aps")) {
                         String idpu = e.Id_Puesto_Personal(ide);
-                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
+                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser, ""));
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?m=si");
                     }
                     if (opc.equals("mens_cod_huella")) {
                         String idpu = e.Id_Puesto_Personal(ide);
-                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
+                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser, ""));
                         sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?h=si");
                     }
@@ -408,11 +437,10 @@ public class CAutorizacion extends HttpServlet {
                 } else {
                     Logger.getLogger(getClass().getName()).log(Level.INFO, ide);
                     String idpu = e.Id_Puesto_Personal(ide);
-                    sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser));
+                    sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser, ""));
                     out.print(a.List_Autorizados(idpu).size());
                     response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
                 }
-
             } catch (Exception ex) {
                 rpta.put("rpta", "-1");
                 rpta.put("mensaje", ex.getMessage());
