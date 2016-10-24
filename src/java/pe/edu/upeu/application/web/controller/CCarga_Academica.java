@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.AutorizacionDAO;
 import pe.edu.upeu.application.dao.Carga_AcademicaDAO;
-import pe.edu.upeu.application.dao.Carrera_UniversidadDAO;
+import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
@@ -27,7 +27,7 @@ import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UbigeoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO;
-import pe.edu.upeu.application.dao_imp.InterfaceCarrera_UniversidadDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
@@ -58,6 +58,7 @@ public class CCarga_Academica extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         Map<String, Object> rpta = new HashMap<String, Object>();
+
         InterfaceCarga_AcademicaDAO carga = new Carga_AcademicaDAO();
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
         InterfaceListaDAO li = new ListaDAO();
@@ -67,8 +68,10 @@ public class CCarga_Academica extends HttpServlet {
         String opc = request.getParameter("opc");
         InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
         InterfaceAutorizacionDAO a = new AutorizacionDAO();
+        InterfaceDgpDAO dgp = new DgpDAO();
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
+        String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         String semestre = request.getParameter("semestre");
         try {
             if (opc.equals("Completar_Datos")) {
@@ -121,9 +124,9 @@ public class CCarga_Academica extends HttpServlet {
                 String IP_USUARIO = request.getParameter("IP_USUARIO");
                 String NO_USUARIO = request.getParameter("NO_USUARIO");
 
-                FE_DESDE= FactoryConnectionDB.convertFecha3(FE_DESDE);
-                FE_HASTA= FactoryConnectionDB.convertFecha3(FE_HASTA);
-                
+                FE_DESDE = FactoryConnectionDB.convertFecha3(FE_DESDE);
+                FE_HASTA = FactoryConnectionDB.convertFecha3(FE_HASTA);
+
                 int numero = Integer.parseInt(request.getParameter("num_itera"));
                 String ID_TRABAJADOR = request.getParameter("IDTR");
                 String eap = request.getParameter("eap");
@@ -188,7 +191,9 @@ public class CCarga_Academica extends HttpServlet {
             if (opc.equals("List_ws")) {
                 rpta.put("List_ws", carga.List_Carga_Academica_WS(semestre));
             }
-            
+            if (opc.equals("listEsCargaAcademica")) {
+                rpta.put("list", dgp.LIST_DGP_PROCESO(iddep, ""));
+            }
 
             if (opc.equals("actualizar_ws")) {
                 //WSClienteAcademico ws = new WSClienteAcademico();
