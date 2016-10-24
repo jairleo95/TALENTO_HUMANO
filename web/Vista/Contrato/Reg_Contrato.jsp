@@ -569,7 +569,7 @@
                                                 <button type="submit" id="submit" class="btn btn-primary">
                                                     Registrar Contrato
                                                 </button>
-                                                <button type="button" class="btn btn-success" onclick="listHorario(this.value)" value="<%=d.getId_dgp()%>" data-toggle="modal" data-target="#exampleModal">Ver Horario</button>
+                                                <button type="button" class="btn btn-success" onclick="listHorario(this.value)" value="<%=d.getId_dgp()%>" data-toggle="modal" data-target="#HorariosModal">Ver Horario</button>
                                                 <a type="button" class="btn btn-success" href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a>
                                             </footer>
                                         </form>
@@ -661,7 +661,7 @@
 
 
         </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal fade" id="HorariosModal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

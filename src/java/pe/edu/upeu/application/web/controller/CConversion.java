@@ -24,7 +24,7 @@ public class CConversion {
                  return f[2] + "/" + f[1] + "/" + f[0];
                  } else {*/
                 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
-                nueva_fecha = new SimpleDateFormat("dd-MMM-yy").format(date).toUpperCase();
+                nueva_fecha = new SimpleDateFormat("dd/MM/yy").format(date).toUpperCase();
                 // }
             } else {
                 nueva_fecha = null;
