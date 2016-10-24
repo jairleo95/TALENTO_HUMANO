@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.web.controller;
 
 import com.google.gson.Gson;
@@ -35,7 +34,8 @@ public class CImpresion_Masiva extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    CConversion co=new CConversion();
+    CConversion co = new CConversion();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
@@ -45,33 +45,36 @@ public class CImpresion_Masiva extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         PrintWriter out = response.getWriter();
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
-        CConversion co=new CConversion();
-        InterfaceContratoDAO c=new ContratoDAO();
-        try{
-            if(opc.equals("filtrar")){
-                String del=request.getParameter("desde").trim();
-               
-                String al=request.getParameter("al").trim();
-                String nom_ape=request.getParameter("nom_ape");
-                String direccion=request.getParameter("direccion");
-                String departamento=request.getParameter("departamento");
-                String area=request.getParameter("area");
-                String seccion=request.getParameter("seccion");
-                String puesto=request.getParameter("puesto");
-                String fec_i=request.getParameter("fec_i");
-                String fec_f=request.getParameter("fec_f");
-                String sueldo=request.getParameter("sueldo");
-                String fe_sus=request.getParameter("fe_sus");
-                List<Map<String, ?>> list = c.Listar_Contratos(del, al, direccion, departamento, area, seccion, puesto, sueldo, nom_ape, fec_i, fec_f,fe_sus,iddep);
-                String List=del+","+al+","+direccion+","+nom_ape+","+departamento+","+area+","+seccion+","+puesto+","+fec_i+","+fec_f+","+sueldo;
+        CConversion co = new CConversion();
+        InterfaceContratoDAO c = new ContratoDAO();
+        try {
+            if (opc.equals("filtrar")) {
+                String del = request.getParameter("desde").trim();
+
+                String al = request.getParameter("al").trim();
+                String nom_ape = request.getParameter("nom_ape");
+                String direccion = request.getParameter("direccion");
+                String departamento = request.getParameter("departamento");
+                String area = request.getParameter("area");
+                String seccion = request.getParameter("seccion");
+                String puesto = request.getParameter("puesto");
+                String fec_i = request.getParameter("fec_i");
+                String fec_f = request.getParameter("fec_f");
+                String sueldo = request.getParameter("sueldo");
+                String fe_sus = request.getParameter("fe_sus");
+                if (direccion.equals("null")) {
+                    direccion = null;
+                }
+                List<Map<String, ?>> list = c.Listar_Contratos(del, al, direccion, departamento, area, seccion, puesto, sueldo, nom_ape, fec_i, fec_f, fe_sus, iddep);
+                String List = del + "," + al + "," + direccion + "," + nom_ape + "," + departamento + "," + area + "," + seccion + "," + puesto + "," + fec_i + "," + fec_f + "," + sueldo;
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
         }
-        Gson gson =new Gson();
+        Gson gson = new Gson();
         out.print(gson.toJson(rpta));
         out.flush();
         out.close();
