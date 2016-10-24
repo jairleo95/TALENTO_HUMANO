@@ -478,9 +478,14 @@ public class CDgp extends HttpServlet {
             if (opc.equals("Seguimiento")) {
                 String iddgp = request.getParameter("iddgp");
                 /*corregir*/
-                String idrp = IReq.id_det_req_proc(iddgp);
+               String idrp = IReq.id_det_req_proc(iddgp);
                 sesion.setAttribute("Det_Autorizacion", a.List_Detalle_Autorizacion(iddgp, idrp));
                 response.sendRedirect("Vista/Dgp/Detalle_Seguimiento_Dgp.jsp");
+            }
+            if (opc.equals("SeguimientoH")) {
+                String iddgp = request.getParameter("iddgp");
+                String idrp = IReq.id_det_req_proc(iddgp);
+                rpta.put("listar", a.List_Detalle_Autorizacion(iddgp, idrp));    
             }
             if (opc.equals("Proceso")) {
                 if (permissionDepartFilter) {

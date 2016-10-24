@@ -196,16 +196,13 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
             }
             rs.close();
         } catch (SQLException e) {
-            System.out.println("Error SQL : "+e);
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            System.out.println("Error : "+e);
             throw new RuntimeException("Error!");
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
-                System.out.println("Error al cerrar conexion List_Tipo_HorarioSec : "+e);
             }
         }
         return Lista;
