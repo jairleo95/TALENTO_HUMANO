@@ -123,17 +123,13 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(62, PRACTICANTE);
             cst.execute();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             throw new RuntimeException(e.getMessage());
-            
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             throw new RuntimeException("Error :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
                 throw new RuntimeException(e.getMessage());
             }
         }

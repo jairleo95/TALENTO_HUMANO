@@ -365,7 +365,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  * from RHVD_TIPO_HORARIO";
+            String sql = "select  * from RHVD_TIPO_HORARIO where trim(es_horario) ='1'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -379,7 +379,6 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
                 rec.put("iddep", rs.getString("ID_DEPARTAMENTO"));
                 rec.put("idarea", rs.getString("ID_AREA"));
                 rec.put("idseccion", rs.getString("ID_SECCION"));
-                rec.put("es_horario", rs.getString("ES_HORARIO"));
                 Lista.add(rec);
             }
             rs.close();
@@ -474,18 +473,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
 
     @Override
     public void StatUpdate(String id, String es) {
-        try{
-            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_UPDATE_TIPO_HORARIO(?,?)}");
-            cst.setString(1, id);
-            cst.setString(2, es);
-            cst.execute();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            throw new RuntimeException(ex.getMessage());
-        }finally{
-            this.conn.close();
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
