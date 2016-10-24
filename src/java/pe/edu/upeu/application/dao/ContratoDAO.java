@@ -39,19 +39,19 @@ public class ContratoDAO implements InterfaceContratoDAO {
     @Override
     public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE,
             String ID_FUNC, String LI_CONDICION, double CA_SUELDO, double CA_REINTEGRO, double CA_ASIG_FAMILIAR,
-            double HO_SEMANA, double NU_HORAS_LAB, double DIA_CONTRATO, String TI_TRABAJADOR, 
+            double HO_SEMANA, double NU_HORAS_LAB, double DIA_CONTRATO, String TI_TRABAJADOR,
             String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO,
             String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF,
-            String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, 
+            String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL,
             String ID_PUESTO, double CA_BONO_ALIMENTO, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO,
             double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO,
             String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU,
-            String ID_TRABAJADOR, double CA_SUELDO_TOTAL, String ID_REGIMEN_LABORAL, String ID_MODALIDAD, 
+            String ID_TRABAJADOR, double CA_SUELDO_TOTAL, String ID_REGIMEN_LABORAL, String ID_MODALIDAD,
             String ID_SUB_MODALIDAD, String CO_GR_OCUPACION, String FE_SUSCRIPCION, String CO_TI_MONEDA,
             String CO_TI_REM_VARIAB, String DE_REMU_ESPECIE, String DE_RUC_EMP_TRAB, String CO_SUCURSAL,
-            String DE_MYPE, String ES_TI_CONTRATACION, double CA_BEV, String ID_TIPO_PLANILLA, 
+            String DE_MYPE, String ES_TI_CONTRATACION, double CA_BEV, String ID_TIPO_PLANILLA,
             String ES_REMUNERACION_PROCESADO, String ID_HORARIO, String ID_PLANTILLA_CONTRACTUAL,
-            double ca_bonificacion_p, String ES_MFL,String PRACTICANTE) {
+            double ca_bonificacion_p, String ES_MFL, String PRACTICANTE) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? ,?)} ");
@@ -444,7 +444,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error al insertar archivo : "+e);
+            throw new RuntimeException("Error al insertar archivo : " + e);
         } finally {
             try {
                 this.conn.close();
@@ -478,8 +478,6 @@ public class ContratoDAO implements InterfaceContratoDAO {
         }
         return Maxcto;
     }
-
-
 
     @Override
     public void INSERT_CONTRATO_ADJUNTO(String ID_CONTRATO_ADJUNTO, String ID_CONTRATO, String NO_ARCHIVO, String NO_ARCHIVO_ORIGINAL, String ES_CONTRATO_ADJUNTO, String IP_USUARIO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF) {
@@ -575,25 +573,48 @@ public class ContratoDAO implements InterfaceContratoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  *  from RHVD_FILTRO_CONTRATO_TERMINADO WHERE FE_CREACION IS NOT NULL";
-            // if(sueldo_total!=null ){sql+=" and CA_SUELDO_TOTAL="+sueldo_total;}else{}
-            sql += (!nombre.equals("")) ? " AND  UPPER(NO_AP)  like '%" + nombre.toUpperCase() + "%'" : "";
-            sql += (!de.equals("") & !al.equals("")) ? " AND FE_CREACION BETWEEN '" + c.convertFecha(de.trim()) + "' and '" + c.convertFecha(al.trim()) + "'" : "";
-            if (!id_dep_ses.equals("")) {
-                if (!id_dep_ses.trim().equals("DPT-0019")) {
-                    sql += (!id_dep_ses.equals("")) ? " and ID_DEPARTAMENTO= '" + id_dep_ses.trim() + "'" : "";
-                } else {
-                    sql += (!direccion.equals("")) ? " AND ID_DIRECCION = '" + direccion.trim() + "'" : "";
-                    sql += (!dep.equals("")) ? " and ID_DEPARTAMENTO= '" + dep.trim() + "'" : "";
+            String sql = "select  *  from RHVD_FILTRO_CONTRATO_TERMINADO WHERE FE_CREACION IS NOT NULL ";
+            if (!de.equals("") || !al.equals("") || !fe_i.equals("") || !fe_fin.equals("") || !fe_sus.equals("")) {//si busca por fecha
+                if (!de.equals("") && !al.equals("")) {
+                    sql += "AND FE_CREACION BETWEEN '" + c.convertFecha(de) + "' AND '" + c.convertFecha(al) + "' ";
                 }
+                if (!fe_i.equals("") && !fe_fin.equals("")) {
+                    sql += "AND FE_DESDE >= '" + c.convertFecha(fe_i) + "' AND FE_HASTA <='" + c.convertFecha(fe_fin) + "' ";
+                } else {
+                    if (!fe_i.equals("")) {
+                        sql += "AND FE_DESDE BETWEEN '" + c.convertFecha(fe_i) + "' AND (select SYSDATE from dual) ";
+                    }
+                    if (!fe_fin.equals("")) {
+                        sql += "AND FE_HASTA BETWEEN (SELECT MIN(FE_DESDE) AND '" + c.convertFecha(fe_fin) + "' ";
+                    }
+                }
+                if (!fe_sus.equals("")) {
+                    sql += "AND FE_SUSCRIPCION = '" + c.convertFecha(fe_sus) + "' ";
+                }
+
             }
-            sql += (!area.equals("")) ? " and ID_AREA= '" + area.trim() + "'" : "";
-            sql += (!sec.equals("")) ? " and ID_SECCION= '" + sec.trim() + "'" : "";
-            sql += (!sueldo_total.equals("")) ? " and CA_SUELDO_TOTAL= '" + sueldo_total.trim() + "'" : "";
-            sql += (!puesto.equals("")) ? " and ID_PUESTO= '" + puesto.trim() + "'" : "";
-            sql += (!fe_i.equals("")) ? " and FE_DESDE= '" + c.convertFecha(fe_i.trim()) + "'" : "";
-            sql += (!fe_fin.equals("")) ? " or FE_HASTA= '" + c.convertFecha(fe_fin.trim()) + "'" : "";
-            sql += (!fe_sus.equals("")) ? " and FE_SUSCRIPCION= '" + c.convertFecha(fe_sus.trim()) + "'" : "";
+            if (direccion != null) {
+                if (!id_dep_ses.equals("")) {
+                    if (!id_dep_ses.trim().equals("DPT-0019")) {
+                        sql += (!id_dep_ses.equals("")) ? " and ID_DEPARTAMENTO= '" + id_dep_ses.trim() + "'" : "";
+                    } else {
+                        sql += (!direccion.equals("")) ? " AND ID_DIRECCION = '" + direccion.trim() + "'" : "";
+                        sql += (!dep.equals("")) ? " and ID_DEPARTAMENTO= '" + dep.trim() + "'" : "";
+                    }
+                }
+                sql += (!area.equals("")) ? " and ID_AREA= '" + area.trim() + "'" : "";
+                sql += (!sec.equals("")) ? " and ID_SECCION= '" + sec.trim() + "'" : "";
+                sql += (!sueldo_total.equals("")) ? " and CA_SUELDO_TOTAL= '" + sueldo_total.trim() + "'" : "";
+                sql += (!puesto.equals("")) ? " and ID_PUESTO= '" + puesto.trim() + "'" : "";
+
+            }
+            if (!nombre.equals("") || !sueldo_total.equals("")) {//si busca por datos del trabajador
+                if (!sueldo_total.equals("")) {
+                    sql += " and CA_SUELDO_TOTAL=" + sueldo_total;
+                }
+                sql += (!nombre.equals("")) ? " AND  UPPER(NO_AP)  like '%" + nombre.toUpperCase() + "%'" : "";
+            }
+            System.out.println(sql);
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -865,7 +886,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
     }
 
     @Override
-    public void MODIFICAR_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_PUESTO, Double CA_BONO_ALIMENTO, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR, Double CA_SUELDO_TOTAL, String ID_REGIMEN_LABORAL, String ID_MODALIDAD, String ID_SUB_MODALIDAD, String CO_GR_OCUPACION, String FE_SUSCRIPCION, String CO_TI_MONEDA, String CO_TI_REM_VARIAB, String DE_REMU_ESPECIE, String DE_RUC_EMP_TRAB, String CO_SUCURSAL, String DE_MYPE, String ES_TI_CONTRATACION, Double CA_BEV, String ID_TIPO_PLANILLA, String ES_REMUNERACION_PROCESADO, String ID_HORARIO, String ID_PLANTILLA_CONTRACTUAL, Double ca_bonificacion_p,String PRACTICANTE) {
+    public void MODIFICAR_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_PUESTO, Double CA_BONO_ALIMENTO, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR, Double CA_SUELDO_TOTAL, String ID_REGIMEN_LABORAL, String ID_MODALIDAD, String ID_SUB_MODALIDAD, String CO_GR_OCUPACION, String FE_SUSCRIPCION, String CO_TI_MONEDA, String CO_TI_REM_VARIAB, String DE_REMU_ESPECIE, String DE_RUC_EMP_TRAB, String CO_SUCURSAL, String DE_MYPE, String ES_TI_CONTRATACION, Double CA_BEV, String ID_TIPO_PLANILLA, String ES_REMUNERACION_PROCESADO, String ID_HORARIO, String ID_PLANTILLA_CONTRACTUAL, Double ca_bonificacion_p, String PRACTICANTE) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MODIF_CONTRATO( ?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? )} ");
