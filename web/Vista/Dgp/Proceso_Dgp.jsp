@@ -72,7 +72,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
-        <style type="text/css">
+        <style type="text/css" class="styleProcess">
 
             /* Form Progress */
             .new-progress {
@@ -106,7 +106,7 @@
                 /*// line-height: 32px;*/
                 border-radius: 32px;
                 margin-top: 3px;
-                color: #b5b5ba;
+                /*color: #b5b5ba;*/
                 /*  // font-size: 17px;*/
             }
             .new-progress .new-circle .new-title {
@@ -131,7 +131,8 @@
             }
             .new-progress .new-circle.done .new-label {
                 color: #FFF;
-                background: #8bc435;
+               /* background: #8bc435;*/
+                background: #0aa699;
                 box-shadow: inset 0 0 2px rgba(0,0,0,.2);
             }
             .new-progress .new-circle.done .new-title {
@@ -139,7 +140,7 @@
             }
             .new-progress .new-circle.active .new-label {
                 color: #FFF;
-                background: #0c95be;
+                background: #3276b1;
                 box-shadow: inset 0 0 2px rgba(0,0,0,.2);
             }
             .new-progress .new-circle.active .new-title {
@@ -655,7 +656,7 @@
                                         //   for (var i = 0; i < rows.length; i++) {
                                         //  var obj = $(rows[i]).find(".prog_aut");
                                         printDetProceso($('td:eq(4)', row), "&dgp=" + data.id_dgp + "&idrp=" + data.id_detalle_req_proceso + "&iddep=" + data.id_departamento);
-
+                                        $('td:eq(4)', row).addClass("new-progress");
                                         // }
 
                                     },
