@@ -179,12 +179,28 @@
                                                     <input type="hidden"  value="<%=d.getId_trabajador()%>" class="idtr">                              
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Inicio: 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                                            <input type="text" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm frompicker" data-mask="00/00/0000" autocomplete="off" required="">
+=======
+                                                            <input onchange="c()" type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" id="ifechai" class=" input-group-sm" required="">
+>>>>>>> origin/master
+=======
+                                                            <input onchange="c()" type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" id="ifechai" class=" input-group-sm" required="">
+>>>>>>> origin/master
+=======
                                                             <input type="text" name="FEC_DESDE" value="<%=(d.getFe_desde())%>" class="input-group-sm frompicker" data-mask="99/99/9999" data-mask-placeholder= "_" required="">
+>>>>>>> origin/master
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Cese: 
+<<<<<<< HEAD
+                                                            <input type="text" name="FEC_HASTA" value="<%=c.convertFecha3(d.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm topicker" data-mask="00/00/0000" autocomplete="off" required="">
+=======
                                                             <input type="text" name="FEC_HASTA" value="<%=(d.getFe_hasta())%>" class="input-group-sm topicker" data-mask="99/99/9999" data-mask-placeholder= "_" required="">
+>>>>>>> origin/master
                                                         </label>
                                                     </section>
                                                     <section class="col col-3" id="titulo">
@@ -617,7 +633,7 @@
                                                 <button type="submit" id="submit" class="btn btn-primary">
                                                     Registrar Contrato
                                                 </button>
-                                                <button type="button" class="btn btn-success" onclick="listHorario(this.value)" value="<%=d.getId_dgp()%>" data-toggle="modal" data-target="#exampleModal">Ver Horario</button>
+                                                <button type="button" class="btn btn-success" onclick="listHorario(this.value)" value="<%=d.getId_dgp()%>" data-toggle="modal" data-target="#HorariosModal">Ver Horario</button>
                                                 <a type="button" class="btn btn-success" href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a>
                                             </footer>
                                         </form>
@@ -709,7 +725,7 @@
 
 
         </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal fade" id="HorariosModal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -1092,7 +1108,15 @@
                     $("#suscripcion").attr("max", max);
                     $("#suscripcion").attr("value", max);
                 }
+<<<<<<< HEAD
+                $(function () {
+    $(".fechapicker").datepicker(
+            {dateFormat: 'dd/mm/yy'}
+    );
+                }
+=======
 
+>>>>>>> origin/master
     </script>
 </html>
 <%} else {

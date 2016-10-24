@@ -27,8 +27,8 @@
         <meta name="author" content="">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-   <link href="../../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
-        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"> test
         <!-- Basic Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
@@ -72,8 +72,8 @@
         <link rel="apple-touch-startup-image" href="../../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <!--        <link rel="stylesheet" type="text/css" href="../../../js/shadowbox/shadowbox.css"/>-->
-      <link rel="stylesheet" type="text/css" href="../../../js/shadowbox/shadowbox.css"/>
-<!--        <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
+        <link rel="stylesheet" type="text/css" href="../../../js/shadowbox/shadowbox.css"/>
+        <!--        <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
 
     </head>
 
@@ -193,13 +193,13 @@
                                                         <%  if (n_nac != 0) {%>
 
                                                         <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                                                            <td    style="width: 40%;" align="center">
+                                                            <td    style="width: 40%; " align="center">
                                                                 <table class="table table-striped ">
                                                                     <tr><td align="center" style="border:1px solid;border-color: purple; height:50px;"><strong><%=d.getNo_documento()%></strong></td></tr>
                                                                     <tr>
                                                                         <td class="caji<%=(i + 1)%>" align="center"><% if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                             <div class="form-group">
-                                                                                <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" size="500" >
+                                                                                <input id="file-5" class="fileDocument" type="file" multiple=true data-preview-file-type="any" data-upload-url="#"  name="archivos<%=(i + 1)%>" size="500"  >
                                                                             </div>
                                                                             <% } else { %>
                                                                             <% if (d.getId_documento_adjunto() == null) { %>
@@ -209,7 +209,7 @@
                                                                                 out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));
                                                                             %>
                                                                             <% }
-                                                                            } %>
+                                                                                } %>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -228,7 +228,7 @@
                                                                         <label> <%=d.getDe_documento_adjunto()%></label><BR><BR>
 
                                                                         <% }
-                                                                } %> 
+                                                                            } %> 
                                                                         <%if (d.getEs_documento_adjunto() == null) {%>
 
                                                                     </section></div>
@@ -245,7 +245,7 @@
 
 
                                                     <%}
-                                                    }%>
+                                                        }%>
                                                     <%  if (d.getTi_documento().trim().equals("COFE")) {%>
                                                     <%  if (num_ad != 0) {%>
 
@@ -269,7 +269,7 @@
                                                                         %>
 
                                                                         <% }
-                                                                        }%>
+                                                                            }%>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -329,7 +329,7 @@
 
 
                                                     <%}
-                                                    }%>
+                                                        }%>
                                                     <%  if (d.getTi_documento().trim().equals("DNIC") | d.getTi_documento().trim().equals("ACMA")) {%>
 
                                                     <%if (List_Conyugue.size() > 0) {
@@ -368,7 +368,7 @@
                                                                             out.print(doc_.List_file_url(d.getId_documento_adjunto().trim()));
                                                                         %>
                                                                         <% }
-                                                                        } %>
+                                                                            } %>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -417,8 +417,8 @@
                                                                     <%if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {%>
                                                                     <a type="button"  class="btn btn-danger btn-sm  elimi" href="../../../documento_trabajador?opc=Eliminar&id_doc=<%=d.getId_documento_adjunto()%>&idtr=<%=d.getId_trabajador()%>"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                                     <%} else {
-                                                                out.print("");
-                                                            }%></div>
+                                                                            out.print("");
+                                                                        }%></div>
                                                             </div> </td>
                                                     <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_documentos()%>">
                                                     </tr>  
@@ -426,7 +426,7 @@
 
 
                                                     <% }
-                                                    } %>
+                                                        } %>
                                                     <% } %>
 
                                                     <%  if (d.getTi_documento().trim().equals("DNIH")) {%>
@@ -456,7 +456,7 @@
                                                                         %>
 
                                                                         <% }
-                                                                        } %>
+                                                                            } %>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -519,7 +519,7 @@
 
                                                         if (h.getVal_doc() > 0 & d.getId_datos_hijo().equals(h.getId_datos_hijos_trabajador().trim())) {
                                                             //   i++;
-                                                    %>
+%>
                                                     <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
                                                         <td  style="width:40%;" align="center">
                                                             <table class="table table-striped ">
@@ -539,7 +539,7 @@
                                                                         %>
 
                                                                         <% }
-                                                                        } %>
+                                                                            } %>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -599,7 +599,7 @@
 
                                                     } else if (h.getVal_doc() == 0 & !id_hijo_faltante.equals(h.getId_datos_hijos_trabajador())) {
                                                         // out.print(kk);
-                                                    %>
+%>
                                                     <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6 " >
                                                         <td style="width: 40%;" align="center"> 
                                                             <table class="table table-striped ">
@@ -672,7 +672,7 @@
                                                                     %>
 
                                                                     <% }
-                                                                    } %></td></tr>
+                                                                        } %></td></tr>
                                                         </table>
                                                         <!-- </td>
          
@@ -840,7 +840,7 @@
 
         <!--================================================== -->
 
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
                                                     if (!window.jQuery) {
                                                         document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
@@ -855,10 +855,10 @@
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
-        <script src="../../../js/app.config.js"></script>
+<!--        <script src="../../../js/app.config.js"></script> test -->
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-        <script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+<!--        <script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>  test -->
 
         <!-- BOOTSTRAP JS -->
         <script src="../../../js/bootstrap/bootstrap.min.js"></script>
@@ -901,7 +901,7 @@
         <![endif]-->
 
         <!-- Demo purpose only -->
-        <script src="../../../js/demo.min.js"></script>
+<!--        <script src="../../../js/demo.min.js"></script>-->
 
         <!-- MAIN APP JS FILE -->
         <script src="../../../js/app.min.js"></script>
@@ -975,6 +975,9 @@
 
 
                                 }
+                                else {
+                                    x=true;
+                                }
 
                             }
 
@@ -1017,7 +1020,7 @@
                                 "   </div>\n" +
                                 "   {caption}\n" +
                                 "</div>"},
-                    allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc','txt'],
+                    allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc', 'txt'],
                     overwriteInitial: false,
                     maxFileSize: 500,
                     maxFilesNum: 10,

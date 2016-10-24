@@ -145,7 +145,9 @@ function list_selectJavaBeans(objSelect, url, datos, id_select, opcion_select, o
 
 }
 //Formato de Fecha-DATEPICKER AND DATEMASK
+
 $(function () {
+
     $(".fechapicker").datepicker(
             {dateFormat: 'dd/mm/yy'}
     );
@@ -157,6 +159,7 @@ $(function () {
 $(function () {
     $(".fecha1").datepicker(
             {dateFormat: 'dd/mm/yy'}
+
     )
 });
 // Date Range Picker

@@ -317,13 +317,22 @@
                                                     <div class="row">
                                                         <section class="col col-6" >
                                                             <label class="input" id="titu">Fecha de Inicio :
+<<<<<<< HEAD
+                                                                <input type="text" name="FEC_DESDE"  required="" class="simple-field-data-mask val_fe fe_inicio_dgp frompicker" data-mask="00/00/0000" autocomplete="off" >
+
+=======
                                                                 <input type="text" name="FEC_DESDE"  required="" class="feInicioDgp frompicker" data-mask="99/99/9999" data-mask-placeholder= "_" >
+>>>>>>> origin/master
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
 
+<<<<<<< HEAD
+                                                                <input type="text" name="FEC_HASTA"  required=""  value="" class="simple_field-data-mask val_fe topicker" data-mask="00/00/0000" autocomplete="off">
+=======
                                                                 <input type="text" name="FEC_HASTA"  required=""  value="" class="topicker" data-mask="99/99/9999" data-mask-placeholder= "_">
+>>>>>>> origin/master
 
                                                             </label>
                                                         </section>
@@ -717,7 +726,7 @@
                                     -->
                                     <header>
                                         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                        <h2 class="font-md"><strong>Registrar </strong> <i>Horario</i></h2>
+                                        <h2 class="font-md"><strong>Registrar </strong>Horario</h2>
                                     </header>
                                     <!-- widget div-->
                                     <div>
