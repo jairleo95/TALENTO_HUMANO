@@ -274,6 +274,9 @@
                                                                     <li><a href="../../solicitud_requerimiento?iddgp=<%=r.getId_dgp().trim()%>&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>
                                                                     <li class="divider"></li><li>
                                                                     <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Detalle">Ver Requerimiento</a> </li>
+                                                                    <li><a onclick="listHistory(<%=i%>)" data-toggle="modal" data-target="#ModalHisto">Prueba</a></li>
+                                                          
+                                                                    <input type="hidden" class="vHist<%=i%>" value="<%=r.getId_dgp().trim()%>">
                                                                 </ul>
                                                             </div>
 
@@ -720,7 +723,103 @@
                                             m += '<td>' + lista[i].nu_pasos + '</td>';
                                             m += '<td>' + lista[i].de_pasos + '</td>';
                                             if (lista[i].es_autorizacion != null) {
+                                                
+                                                
+                                                  if (lista[i].es_autorizacion !== null) {
+                                                    if (lista[i].es_autorizacion.equals("1")) {
+                                                        m += '<td><img src="../../img/Aprobado.png" width="20" height="20"></td>';
+                                                    }
+                                                    if (lista[i].es_autorizacion.equals("2")) {
+                                                        m += '<td><img src="../../img/Desaprobado.png" width="20" height="20"></td>';
+                                                    }
+                                                } else {
+                                                    m += '<td>No Registrado</td>';
+                                                }
+                                                
+                                                
 
+                                                if (lista[i].us_ap_mat !== null) {
+                                                    m += '<td>' + lista[i].us_ap_p + " " + lista[i].us_ap_mat + " " + lista[i].us_no_tr + '</td>';
+                                                } else {
+                                                    alert("No Registrado");
+                                                }
+                                                m += '<td>' + lista[i].us_no_puesto + '</td>';
+                                                m += '<td>' + lista[i].no_usuario + '</td>';
+                                                m += '<td>' + lista[i].us_no_area + '</td>';
+                                                m += '<td>' + lista[i].us_no_dep + '</td>';
+                                                m += '<td>' + lista[i].fe_creacion + '</td>';
+                                            } else {
+                                                m += '<td colspan="7" style="text-align:center;"> No definido </td>';
+                                            }
+
+                                            m += '</tr>';
+                                            if (lista[i].es_autorizacion !== null) {
+                                                if (lista[i].es_autorizacion === '2' & (rol === "ROL-0002" || rol === "ROL-0005" || rol === "ROL-0001")) {
+
+                                                    function DivEspecial() {
+                                                        var DivEspecial = '<div id="divEs" class="alert alert-danger alert-block">';
+                                                        DivEspecial += '<a class="close" data-dismiss="alert" href="#">×</a>';
+                                                        DivEspecial += ' <h4 class="alert-heading">DGP fuera de Proceso!</h4>';
+                                                        DivEspecial += ' <p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp=lista[i].id_dgp.&IDlista[i].id_departamento()" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=lista[i].id_dgp>" class="btn btn-primary"><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" href="#myModal6" class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>';
+                                                        DivEspecial += ' </p>';
+                                                        DivEspecial += ' <input type="hidden" class="id-autorizacion" value="lista[i].id_autorizacion">';
+                                                        DivEspecial += ' </div>';
+
+                                                        return DivEspecial;
+                                                    }
+                                                }
+                                            }
+
+                                        }
+
+                                        //var DivEspecial = DivEspecialL();
+                                        var table = createTable();
+                                        $(".contM").empty();
+                                        $(".contM").append(table);
+                                        $(".contM").append(DivEspecial);
+                                        $("#dataB").empty();
+                                        $("#dataB").append(m);
+                                        // $("#divEs").append(DivEspecial);
+                                        //  $("#dt").dataTable();
+                                        //$("#divEs").dataDivEspecial();
+                                        //anexar a la tabla
+                                    } else {
+                                        alert("vacio");
+                                    }
+                                });
+                            }
+                            function createTable() {
+                                var table = '<table id="dt" class="table table-striped">';
+                                table += '<thead>';
+                                table += '<tr>';
+                                table += '<th>Paso</th>';
+                                table += '<th data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i>Detalle</th>';
+                                table += '<th data-class="expand><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Estado</th>';
+                                table += '<th data-hide="phone"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Encargado</th>';
+                                table += '<th>Cargo Encargado</th>';
+                                table += '<th>Usuario</th>';
+                                table += '<th data-hide="phone,tablet"> <i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> Area</th>';
+                                table += '<th data-hide="phone,tablet">Departamento</th>';
+                                table += '<th data-hide="phone,tablet">Fecha Autorizacion</th>';
+                                table += '</tr>';
+                                table += '</thead>';
+                                table += '<tbody id="dataB">';
+                                table += '</tbody>';
+                                table += '</table>';
+                                return table;
+                            }
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             // DO NOT REMOVE : GLOBAL FUNCTIONS!
                             function closedthis() {
                                 $.smallBox({
@@ -891,7 +990,7 @@
 
     </script>
 
- 
+
 
 </body>
 
