@@ -123,17 +123,13 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(62, PRACTICANTE);
             cst.execute();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             throw new RuntimeException(e.getMessage());
-            
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             throw new RuntimeException("Error :" + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
                 throw new RuntimeException(e.getMessage());
             }
         }
@@ -577,25 +573,48 @@ public class ContratoDAO implements InterfaceContratoDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  *  from RHVD_FILTRO_CONTRATO_TERMINADO WHERE FE_CREACION IS NOT NULL";
-            // if(sueldo_total!=null ){sql+=" and CA_SUELDO_TOTAL="+sueldo_total;}else{}
-            sql += (!nombre.equals("")) ? " AND  UPPER(NO_AP)  like '%" + nombre.toUpperCase() + "%'" : "";
-            sql += (!de.equals("") & !al.equals("")) ? " AND FE_CREACION BETWEEN '" + c.convertFecha(de.trim()) + "' and '" + c.convertFecha(al.trim()) + "'" : "";
-            if (!id_dep_ses.equals("")) {
-                if (!id_dep_ses.trim().equals("DPT-0019")) {
-                    sql += (!id_dep_ses.equals("")) ? " and ID_DEPARTAMENTO= '" + id_dep_ses.trim() + "'" : "";
-                } else {
-                    sql += (!direccion.equals("")) ? " AND ID_DIRECCION = '" + direccion.trim() + "'" : "";
-                    sql += (!dep.equals("")) ? " and ID_DEPARTAMENTO= '" + dep.trim() + "'" : "";
+            String sql = "select  *  from RHVD_FILTRO_CONTRATO_TERMINADO WHERE FE_CREACION IS NOT NULL ";
+            if (!de.equals("") || !al.equals("") || !fe_i.equals("") || !fe_fin.equals("") || !fe_sus.equals("")) {//si busca por fecha
+                if (!de.equals("") && !al.equals("")) {
+                    sql += "AND FE_CREACION BETWEEN '" + c.convertFecha(de) + "' AND '" + c.convertFecha(al) + "' ";
                 }
+                if (!fe_i.equals("") && !fe_fin.equals("")) {
+                    sql += "AND FE_DESDE >= '" + c.convertFecha(fe_i) + "' AND FE_HASTA <='" + c.convertFecha(fe_fin) + "' ";
+                } else {
+                    if (!fe_i.equals("")) {
+                        sql += "AND FE_DESDE BETWEEN '" + c.convertFecha(fe_i) + "' AND (select SYSDATE from dual) ";
+                    }
+                    if (!fe_fin.equals("")) {
+                        sql += "AND FE_HASTA BETWEEN (SELECT MIN(FE_DESDE) AND '" + c.convertFecha(fe_fin) + "' ";
+                    }
+                }
+                if (!fe_sus.equals("")) {
+                    sql += "AND FE_SUSCRIPCION = '" + c.convertFecha(fe_sus) + "' ";
+                }
+
             }
-            sql += (!area.equals("")) ? " and ID_AREA= '" + area.trim() + "'" : "";
-            sql += (!sec.equals("")) ? " and ID_SECCION= '" + sec.trim() + "'" : "";
-            sql += (!sueldo_total.equals("")) ? " and CA_SUELDO_TOTAL= '" + sueldo_total.trim() + "'" : "";
-            sql += (!puesto.equals("")) ? " and ID_PUESTO= '" + puesto.trim() + "'" : "";
-            sql += (!fe_i.equals("")) ? " and FE_DESDE= '" + c.convertFecha(fe_i.trim()) + "'" : "";
-            sql += (!fe_fin.equals("")) ? " or FE_HASTA= '" + c.convertFecha(fe_fin.trim()) + "'" : "";
-            sql += (!fe_sus.equals("")) ? " and FE_SUSCRIPCION= '" + c.convertFecha(fe_sus.trim()) + "'" : "";
+            if (direccion != null) {
+                if (!id_dep_ses.equals("")) {
+                    if (!id_dep_ses.trim().equals("DPT-0019")) {
+                        sql += (!id_dep_ses.equals("")) ? " and ID_DEPARTAMENTO= '" + id_dep_ses.trim() + "'" : "";
+                    } else {
+                        sql += (!direccion.equals("")) ? " AND ID_DIRECCION = '" + direccion.trim() + "'" : "";
+                        sql += (!dep.equals("")) ? " and ID_DEPARTAMENTO= '" + dep.trim() + "'" : "";
+                    }
+                }
+                sql += (!area.equals("")) ? " and ID_AREA= '" + area.trim() + "'" : "";
+                sql += (!sec.equals("")) ? " and ID_SECCION= '" + sec.trim() + "'" : "";
+                sql += (!sueldo_total.equals("")) ? " and CA_SUELDO_TOTAL= '" + sueldo_total.trim() + "'" : "";
+                sql += (!puesto.equals("")) ? " and ID_PUESTO= '" + puesto.trim() + "'" : "";
+
+            }
+            if (!nombre.equals("") || !sueldo_total.equals("")) {//si busca por datos del trabajador
+                if (!sueldo_total.equals("")) {
+                    sql += " and CA_SUELDO_TOTAL=" + sueldo_total;
+                }
+                sql += (!nombre.equals("")) ? " AND  UPPER(NO_AP)  like '%" + nombre.toUpperCase() + "%'" : "";
+            }
+            System.out.println(sql);
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();

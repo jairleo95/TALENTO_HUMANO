@@ -383,7 +383,7 @@
         HttpSession sesion = request.getSession();
         String rol = (String) sesion.getAttribute("IDROL");%>
 
-
+    <input type="hidden" id="rolse" value="<%=rol%>">
     <div class="modal fade" id="myModalHis" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" style=" width:180%;margin-left:-40%;">
@@ -545,6 +545,7 @@
         <div class="modal-dialog" >
             <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12" style="width:220%;margin-left: -60%;">
                 <div class="modal-header">
+                    <div class="contD"></div>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <div class="jarviswidget jarviswidget-color-yellow" id="wid-id-0" data-widget-editbutton="false" style="margin-bottom:-5px;">
                         <!-- widget options:
@@ -665,11 +666,15 @@
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
     <script src="../../js/coment/comenth.js" type="text/javascript"></script>
+
+
     <script type="text/javascript">
+                            // DO NOT REMOVE : GLOBAL FUNCTIONS!
                             function listHistory(at) {
                                 var id = $(".vHist" + at + "").val();
                                 var url = '../../dgp?opc=SeguimientoH';
                                 var data = 'iddgp=' + id;
+                                var rol = $("#rolse").val();
                                 $.post(url, data, function (objJson) {
                                     var lista = objJson.listar;
                                     if (lista.length > 0) {
@@ -682,35 +687,68 @@
                                             m += '<tr>';
                                             m += '<td>' + lista[i].nu_pasos + '</td>';
                                             m += '<td>' + lista[i].de_pasos + '</td>';
-                                           if (lista[i].es_autorizacion !=null) {
-                                            
+                                            if (lista[i].es_autorizacion != null) {
 
-                                             m += '<td>' + lista[i].de_pasos + '</td>';
-                                       
+                                                if (lista[i].es_autorizacion !== null) {
+                                                    if (lista[i].es_autorizacion === "1") {
+                                                        m += '<td><img src="../../img/Aprobado.png" width="20" height="20"></td>';
+                                                    }
+                                                    if (lista[i].es_autorizacion === "2") {
+                                                        m += '<td><img src="../../img/Desaprobado.png" width="20" height="20"></td>';
+                                                    }
+                                                } else {
+                                                    m += '<td>No Registrado</td>';
+                                                }
+                                                // m += '<td>' + lista[i].de_pasos + '</td>';
 
 
-                                            if (lista[i].us_ap_mat !== null) {
-                                                m += '<td>' + lista[i].us_ap_p + " " + lista[i].us_ap_mat + " " + lista[i].us_no_tr + '</td>';
+
+
+
+                                                if (lista[i].us_ap_mat !== null) {
+                                                    m += '<td>' + lista[i].us_ap_p + " " + lista[i].us_ap_mat + " " + lista[i].us_no_tr + '</td>';
+                                                } else {
+                                                    alert("No Registrado");
+                                                }
+                                                m += '<td>' + lista[i].us_no_puesto + '</td>';
+                                                m += '<td>' + lista[i].no_usuario + '</td>';
+                                                m += '<td>' + lista[i].us_no_area + '</td>';
+                                                m += '<td>' + lista[i].us_no_dep + '</td>';
+                                                m += '<td>' + lista[i].fe_creacion + '</td>';
                                             } else {
-                                                alert("No Registrado");
+                                                m += '<td colspan="7" style="text-align:center;"> No definido </td>';
                                             }
-                                            m += '<td>' + lista[i].us_no_puesto + '</td>';
-                                            m += '<td>' + lista[i].no_usuario + '</td>';
-                                            m += '<td>' + lista[i].us_no_area + '</td>';
-                                            m += '<td>' + lista[i].us_no_dep + '</td>';
-                                            m += '<td>' + lista[i].fe_creacion + '</td>';
-                                              } else {
-                                            m +=  '<td colspan="7" style="text-align:center;"> No definido </td>';
-                                              }
-                                            
+
                                             m += '</tr>';
+                                            if (lista[i].es_autorizacion !== null) {
+                                                if (lista[i].es_autorizacion === '2' & (rol === "ROL-0002" || rol === "ROL-0005" || rol === "ROL-0001")) {
+
+                                                    function DivEspecial() {
+                                                        var DivEspecial = '<div id="divEs" class="alert alert-danger alert-block">';
+                                                        DivEspecial += '<a class="close" data-dismiss="alert" href="#">×</a>';
+                                                        DivEspecial += ' <h4 class="alert-heading">DGP fuera de Proceso!</h4>';
+                                                        DivEspecial += ' <p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp=lista[i].id_dgp.&IDlista[i].id_departamento()" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=lista[i].id_dgp>" class="btn btn-primary"><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" href="#myModal6" class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>';
+                                                        DivEspecial += ' </p>';
+                                                        DivEspecial += ' <input type="hidden" class="id-autorizacion" value="lista[i].id_autorizacion">';
+                                                        DivEspecial += ' </div>';
+
+                                                        return DivEspecial;
+                                                    }
+                                                }
+                                            }
+
                                         }
+
+                                        //var DivEspecial = DivEspecialL();
                                         var table = createTable();
                                         $(".contM").empty();
                                         $(".contM").append(table);
+                                        $(".contM").append(DivEspecial);
                                         $("#dataB").empty();
                                         $("#dataB").append(m);
-                                        $("#dt").dataTable();
+                                        // $("#divEs").append(DivEspecial);
+                                      //  $("#dt").dataTable();
+                                        //$("#divEs").dataDivEspecial();
                                         //anexar a la tabla
                                     } else {
                                         alert("vacio");
@@ -718,7 +756,7 @@
                                 });
                             }
                             function createTable() {
-                                var table = '<table id="dt" class="table table-striped" >';
+                                var table = '<table id="dt" class="table table-striped">';
                                 table += '<thead>';
                                 table += '<tr>';
                                 table += '<th>Paso</th>';
@@ -737,92 +775,85 @@
                                 table += '</table>';
                                 return table;
                             }
+                            function closedthis() {
+                                $.smallBox({
+                                    title: "¡DGP registrada correctamente!",
+                                    content: "Ya puede visualizar la informacion del DGP",
+                                    color: "#739E73",
+                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                    timeout: 6000
+                                });
+                            }
+                            function closedthis2() {
+                                $.smallBox({
+                                    title: "¡Documentos del trabajador registrados correctamente!",
+                                    content: "ya puede visualizar toda los documentos del trabajador...",
+                                    color: "#739E73",
+                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                    timeout: 6000
+                                });
+                            }
+                            function Imprimir_det_proceso(objProg_aut) {
+                                objProg_aut.empty();
+                                objProg_aut.append('<img src="../../img/ajax-loader/horizontal_fountain.gif" />');
+                                $.ajax({
+                                    url: "../../dgp", data: "opc=Imprimir_det_proceso" + objProg_aut.data("value"), type: 'POST', success: function (data, textStatus, jqXHR) {
+                                        if (data.rpta === "1") {
+                                            objProg_aut.empty();
+                                            objProg_aut.append(data.html);
+                                            objProg_aut.find(".new-circle").popover({trigger: 'hover click'});
+                                        }
+                                    }
+                                });
+                            }
+
+                            $(document).ready(function () {
+                                pageSetUp();
+                                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                                });
+                                $('#coment-s1').click(function () {
+                                    console.log("jalar comentario");
+                                    $.get('../../comentario?iddgp=DGP-000119&opc=Comentar_Dgp', function (responseJson) {
+                                        var $select = $('.comentarios');
+                                        $select.find('h2').remove();
+                                        $.each(responseJson, function (value) {
+                                            $('<p>').text(value).appendTo($select);
+                                        });
+                                    });
+                                });
+                                var responsiveHelper_dt_basic = undefined;
+                                var breakpointDefinition = {
+                                    tablet: 1024,
+                                    phone: 480
+                                };
+                                var table_req = $('#dt_basic').dataTable({
+                                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                                            "t" +
+                                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                                    "autoWidth": true,
+                                    "preDrawCallback": function () {
+                                        // Initialize the responsive datatables helper once.
+                                        if (!responsiveHelper_dt_basic) {
+                                            responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                                        }
+                                    },
+                                    "rowCallback": function (nRow) {
+                                        responsiveHelper_dt_basic.createExpandIcon(nRow);
+                                    },
+                                    "drawCallback": function (oSettings) {
+                                        responsiveHelper_dt_basic.respond();
+                                    }
+                                });
+                                /* END BASIC */
+                                var rows = table_req.fnGetNodes();
+                                for (var i = 0; i < rows.length; i++) {
+                                    var obj = $(rows[i]).find(".prog_aut");
+                                    Imprimir_det_proceso(obj);
+                                }
 
 
-    </script>  
-
-
-    <script type="text/javascript">
-        // DO NOT REMOVE : GLOBAL FUNCTIONS!
-        function closedthis() {
-            $.smallBox({
-                title: "¡DGP registrada correctamente!",
-                content: "Ya puede visualizar la informacion del DGP",
-                color: "#739E73",
-                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                timeout: 6000
-            });
-        }
-        function closedthis2() {
-            $.smallBox({
-                title: "¡Documentos del trabajador registrados correctamente!",
-                content: "ya puede visualizar toda los documentos del trabajador...",
-                color: "#739E73",
-                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                timeout: 6000
-            });
-        }
-        function Imprimir_det_proceso(objProg_aut) {
-            objProg_aut.empty();
-            objProg_aut.append('<img src="../../img/ajax-loader/horizontal_fountain.gif" />');
-            $.ajax({
-                url: "../../dgp", data: "opc=Imprimir_det_proceso" + objProg_aut.data("value"), type: 'POST', success: function (data, textStatus, jqXHR) {
-                    if (data.rpta === "1") {
-                        objProg_aut.empty();
-                        objProg_aut.append(data.html);
-                        objProg_aut.find(".new-circle").popover({trigger: 'hover click'});
-                    }
-                }
-            });
-        }
-
-        $(document).ready(function () {
-            pageSetUp();
-            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-            });
-            $('#coment-s1').click(function () {
-                console.log("jalar comentario");
-                $.get('../../comentario?iddgp=DGP-000119&opc=Comentar_Dgp', function (responseJson) {
-                    var $select = $('.comentarios');
-                    $select.find('h2').remove();
-                    $.each(responseJson, function (value) {
-                        $('<p>').text(value).appendTo($select);
-                    });
-                });
-            });
-            var responsiveHelper_dt_basic = undefined;
-            var breakpointDefinition = {
-                tablet: 1024,
-                phone: 480
-            };
-            var table_req = $('#dt_basic').dataTable({
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                        "t" +
-                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                "autoWidth": true,
-                "preDrawCallback": function () {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_dt_basic) {
-                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                    }
-                },
-                "rowCallback": function (nRow) {
-                    responsiveHelper_dt_basic.createExpandIcon(nRow);
-                },
-                "drawCallback": function (oSettings) {
-                    responsiveHelper_dt_basic.respond();
-                }
-            });
-            /* END BASIC */
-            var rows = table_req.fnGetNodes();
-            for (var i = 0; i < rows.length; i++) {
-                var obj = $(rows[i]).find(".prog_aut");
-                Imprimir_det_proceso(obj);
-            }
-
-
-        });</script>
+                            });</script>
 
     <script type="text/javascript">
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
@@ -958,12 +989,7 @@
 
     </script>
 
-
-    <script>
-        $(document).ready(function () {
-            if ($(".estado-aut").val() == )
-        })
-    </script>
+ 
 
 </body>
 
