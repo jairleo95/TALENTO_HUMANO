@@ -3,43 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
 $(".frompicker").datepicker({
-    defaultDate: "+1w",
-    changeMonth: true,
-    numberOfMonths: 2,
-    dateformat: 'dd/mm/yy',
-    prevText: '<i class="fa fa-chevron-left"></i>',
-    nextText: '<i class="fa fa-chevron-right"></i>',
-    onClose: function (selectedDate) {
-        $(".topicker").datepicker("option", "minDate", selectedDate);
-    }
+                                                            defaultDate: "+1w",
+                                                            changeMonth: true,
+                                                            numberOfMonths: 2,
+                                                            dateFormat: 'dd/mm/yy',
+                                                            prevText: '<i class="fa fa-chevron-left"></i>',
+                                                            nextText: '<i class="fa fa-chevron-right"></i>',
+                                                            onClose: function (selectedDate) {
+                                                                $(".topicker").datepicker("option", "minDate", selectedDate);
+                                                            }
 
-});
+                                                        });
 
-$(".topicker").datepicker({
-    defaultDate: "+1w",
-    changeMonth: true,
-    numberOfMonths: 2,
-    dateformat: 'dd/mm/yy',
-    prevText: '<i class="fa fa-chevron-left"></i>',
-    nextText: '<i class="fa fa-chevron-right"></i>',
-    onClose: function (selectedDate) {
-        $(".frompicker").datepicker("option", "maxDate", selectedDate);
-    }
-});
-$(".datePickerInput").datepicker({
-    defaultDate: "+1w",
-    changeMonth: true,
-    numberOfMonths: 2,
-    dateformat: 'dd/mm/yy',
-    prevText: '<i class="fa fa-chevron-left"></i>',
-    nextText: '<i class="fa fa-chevron-right"></i>',
-    onClose: function (selectedDate) {
-        //$(".frompicker").datepicker("option", "maxDate", selectedDate);
-    }
-});
-
-
+                                                        $(".topicker").datepicker({
+                                                            defaultDate: "+1w",
+                                                            changeMonth: true,
+                                                            numberOfMonths: 2,
+                                                            dateFormat: 'dd/mm/yy',
+                                                            prevText: '<i class="fa fa-chevron-left"></i>',
+                                                            nextText: '<i class="fa fa-chevron-right"></i>',
+                                                            onClose: function (selectedDate) {
+                                                                $(".frompicker").datepicker("option", "maxDate", selectedDate);
+                                                            }
+                                                        });
+                                                        $(".datePickerInput").datepicker({
+                                                            defaultDate: "+1w",
+                                                            changeMonth: true,
+                                                            numberOfMonths: 2,
+                                                            dateFormat: 'dd/mm/yy',
+                                                            prevText: '<i class="fa fa-chevron-left"></i>',
+                                                            nextText: '<i class="fa fa-chevron-right"></i>',
+                                                            onClose: function (selectedDate) {
+                                                                //$(".frompicker").datepicker("option", "maxDate", selectedDate);
+                                                            }
+                                                        });
 
 function list_select(objSelect, url, datos, opc, id) {
 

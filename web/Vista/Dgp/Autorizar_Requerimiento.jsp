@@ -695,14 +695,15 @@
                             if (thisObject.prop('checked')) {
                                 console.log("checked condition");
                                 processAutorizacionMasive(valAut.val(), function (data) {
-                                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-                                    var table = new $.fn.dataTable.Api('#dt_basic1');
-                                    table.row(thisObject.parents('tr')).remove().draw();
+                                    console.log("enter to autorizacion");
                                     exito("Procesado con exito!", "Envió el requerimiento correctamente");
                                     statusBtnSendToRem();
                                     statusBtnSendFirma();
                                     statusFirmaAndRem();
                                     console.log("Autorizacion :" + data.rpta);
+                                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                                    var table = new $.fn.dataTable.Api('#dt_basic1');
+                                    table.row(thisObject.parents('tr')).remove().draw();
                                 });
                             }
                         });
