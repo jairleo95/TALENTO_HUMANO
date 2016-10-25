@@ -25,8 +25,7 @@ function InsertHTML() {
         // Insert HTML code.
         // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-insertHtml
         editor.insertHtml(value);
-    }
-    else
+    } else
         alert('You must be in WYSIWYG mode!');
 }
 
@@ -41,8 +40,7 @@ function InsertText() {
         // Insert as plain text.
         // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-insertText
         editor.insertText(value);
-    }
-    else
+    } else
         alert('You must be in WYSIWYG mode!');
 }
 
@@ -76,8 +74,7 @@ function ExecuteCommand(commandName) {
         // Execute the command.
         // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-execCommand
         editor.execCommand(commandName);
-    }
-    else
+    } else
         alert('You must be in WYSIWYG mode!');
 }
 
@@ -170,58 +167,97 @@ function lis_dep(b) {
     });
 }
 function  lis_dir_id(d, valor) {
-    $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor.trim(), function (objJson) {
-        d.empty();
-        if (objJson.rpta == -1) {
-            alert(objJson.mensaje);
-            return;
-        }
-        var list = objJson.lista;
-        d.append("<option value='' selected=''> [TODOS] </option>");
-        if (list.length !== 0) {
-            for (var i = 0; i < list.length; i++) {
-                d.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+    d.empty();
+    if (valor != 0) {
+        $.post("../../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor.trim(), function (objJson) {
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
             }
-        } else {
-            d.append("<option value='' > [] </option>");
-        }
-    });
+            var list = objJson.lista;
+            d.append("<option value='' selected=''> [TODOS] </option>");
+            if (list.length !== 0) {
+                for (var i = 0; i < list.length; i++) {
+                    d.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                }
+            } else {
+                d.append("<option value='' > [NO HAY] </option>");
+            }
+        });
+    } else {
+        d.append("<option value='0' selected=''> [GENERAL] </option>");
+        list_area_id($(".area"), $(".dep").val());
+    }
 }
 function list_area_id(c, valor) {
-    $.post("../../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function (objJson) {
-        c.empty();
-        if (objJson.rpta == -1) {
-            alert(objJson.mensaje);
-            return;
-        }
-        var list = objJson.lista;
-        c.append("<option value='' selected='' > [TODOS] </option>");
-        if (list.length !== 0) {
-            for (var i = 0; i < list.length; i++) {
-                c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+    c.empty();
+    if (valor != 0) {
+        $.post("../../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function (objJson) {
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
             }
-        } else {
-            c.append("<option value='' > [no hay] </option>");
-        }
-    });
+            var list = objJson.lista;
+            c.append("<option value='' selected='' > [TODOS] </option>");
+            if (list.length !== 0) {
+                for (var i = 0; i < list.length; i++) {
+                    c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                }
+            } else {
+                c.append("<option value='' > [no hay] </option>");
+            }
+        });
+    } else {
+        c.append("<option value='0' selected='' > [GENERAL] </option>");
+        list_sec_id($(".seccion"), $(".area").val());
+    }
 }
 function list_sec_id(d, valor) {
-    $.post("../../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
-        d.empty();
-        if (objJson.rpta == -1) {
-            alert(objJson.mensaje);
-            return;
-        }
-        var list = objJson.lista;
-        d.append("<option value='' selected='' > [TODOS] </option>");
-        if (list.length !== 0) {
-            for (var i = 0; i < list.length; i++) {
-                d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+    d.empty();
+    if (valor != 0) {
+        $.post("../../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
             }
-        } else {
-            d.append("<option value='' > [no hay] </option>");
-        }
-    });
+            var list = objJson.lista;
+            d.append("<option value='' selected='' > [TODOS] </option>");
+            if (list.length !== 0) {
+                for (var i = 0; i < list.length; i++) {
+                    d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                }
+            } else {
+                d.append("<option value='' > [no hay] </option>");
+            }
+        });
+    } else {
+        d.append("<option value='0' selected='' > [GENERAL] </option>");
+        list_puesto_id($(".puesto"), $(".seccion").val());
+    }
+}
+function list_puesto_id(e, valor) {
+    e.empty();
+    if (valor != 0) {
+        $.post("../../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + valor, function (objJson) {
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
+            }
+            var list = objJson.lista;
+            e.append("<option value='' selected='' > [TODOS] </option>");
+            if (list.length !== 0) {
+                for (var i = 0; i < list.length; i++) {
+                    e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                }
+            } else {
+                e.empty();
+                e.append("<option value='' > [] </option>");
+            }
+        });
+    } else {
+        e.append("<option value='0' selected='' > [GENERAL] </option>");
+        Listar_Plantilla();
+    }
 }
 
 function mostrar_plantilla(valor) {
@@ -251,6 +287,7 @@ function Listar_Plantilla() {
                 texto += '<tr style="height:5px" class="tr_li_plantilla" data-value="' + i + '">';
                 texto += '<td align="center" style="width:.5%">' + (i + 1) + '</td>';
                 texto += '<td ><i class="fa fa-file-text"></i> ' + list[i].nom_pl + '</td>';
+                texto += '<td >' + list[i].nom_pp + '</td>';
                 texto += '<input type="hidden" value="' + list[i].id + '" class="id_plantilla' + i + '" />';
                 texto += '<input type="hidden" value="' + list[i].nom_ar + '" class="plantilla' + i + '" />';
                 texto += '<input type="hidden" value="' + list[i].id_pp + '" class="idplpu' + i + '" />';
@@ -265,8 +302,7 @@ function Listar_Plantilla() {
             texto += '</tr>';
             d.append(texto);
             $(".tabla_plant").show('slow');
-        }
-        else {
+        } else {
             // d.append("<tr><td>NO HAY PLANTILLAS</td></tr>");
         }
         document.getElementById("table_plantilla").onselectstart = function () {
@@ -316,21 +352,32 @@ function Desac_Plantilla(id_pp, opc) {
         Listar_Plantilla();
     });
 }
-function  lis_sel(d, valor, opc) {
-    $.post("../../../Direccion_Puesto", "opc=" + opc + "&" + "id=" + valor, function (objJson) {
-        d.empty();
-        var list = objJson.lista;
-        d.append("<option value='0' selected=''> [TODOS] </option>");
-        if (list.length !== 0) {
-            for (var i = 0; i < list.length; i++) {
-                d.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-            }
-        } else {
-            d.append("<option value='0' > [] </option>");
+function  lis_sel(d, valor, opc, num) {
+    d.empty();
+    if (num == 1) {
+        $(".dep_as").append("<option value='0' > [GENERAL] </option>");
+        $(".area_as").append("<option value='0' > [GENERAL] </option>");
+        $(".seccion_as").append("<option value='0' > [GENERAL] </option>");
+        $(".puesto_as").append("<option value='0' > [GENERAL] </option>");
+    } else {
+        if (valor != 0) {
+            $.post("../../../Direccion_Puesto", "opc=" + opc + "&" + "id=" + valor, function (objJson) {
+                var list = objJson.lista;
+                d.append("<option value='0' selected=''> [TODOS] </option>");
+                if (list.length !== 0) {
+                    for (var i = 0; i < list.length; i++) {
+                        d.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                    }
+                } else {
+                    d.append("<option value='' > [NO HAY] </option>");
+                }
+            });
+        }else{
+            d.append("<option value='0' > [GENERAL] </option>");
         }
-    });
+    }
 }
-function list_dir_fil(c, fil) {
+function list_dir_fil(c, fil, op) {
     $.post("../../../Direccion_Puesto", "opc=Listar_direccion_filial&id_fil=" + fil.val(), function (objJson) {
         c.empty();
         if (objJson.rpta == -1) {
@@ -338,13 +385,25 @@ function list_dir_fil(c, fil) {
             return;
         }
         var list = objJson.lista;
-        c.append("<option value='' > [SELECCIONE] </option>");
         if (list.length !== 0) {
+            c.append("<option value='' > [SELECCIONE] </option>");
             for (var i = 0; i < list.length; i++) {
                 c.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
             }
         } else {
-            c.append("<option value='' > [TODO] </option>");
+            if (!op) {
+                c.append("<option value='0' selected > [GENERAL] </option>");
+                var d = $(".dep");
+                var valor = $("#dir").val();
+                lis_dir_id(d, valor);
+            } else {
+                var d = $(".dep_as");
+                var valor = $(".dir_as").val();
+                var opc = "Listar_dir_dep";
+                var num = 1;
+                lis_sel(d, valor, opc, num);
+                $("#di_sig").val(valor.trim());
+            }
         }
     });
 }
@@ -463,7 +522,7 @@ $(document).ready(function () {
     });
     $(".fil_as").change(function () {
         var c = $(".dir_as");
-        list_dir_fil(c, $(this));
+        list_dir_fil(c, $(this), true);
         alert($(this));
     });
     $("#dir").change(function () {
@@ -486,23 +545,8 @@ $(document).ready(function () {
     $(".seccion").change(function () {
         Listar_Plantilla();
         var e = $(".puesto");
-        $.post("../../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(this).val(), function (objJson) {
-            e.empty();
-            if (objJson.rpta == -1) {
-                alert(objJson.mensaje);
-                return;
-            }
-            var list = objJson.lista;
-            e.append("<option value='' selected='' > [TODOS] </option>");
-            if (list.length !== 0) {
-                for (var i = 0; i < list.length; i++) {
-                    e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                }
-            } else {
-                e.empty();
-                e.append("<option value='' > [] </option>");
-            }
-        });
+        var valor = $(this).val();
+        list_puesto_id(e, valor);
     });
     $(".puesto").change(function () {
         Listar_Plantilla();

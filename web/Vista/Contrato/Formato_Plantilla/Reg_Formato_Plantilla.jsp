@@ -130,7 +130,7 @@
                                                                         <section class="col col-4"  >
                                                                             <label class="select">Departamento:
                                                                                 <select name="dep" class="dep_as form-control input-group-sm"  required="" >
-                                                                                    <option value="0">[TODO]</option>
+                                                                                    <option value="">[Departamento]</option>
                                                                                 </select>
                                                                             </label>
                                                                         </section>
@@ -139,21 +139,21 @@
                                                                         <section class="col col-4" >
                                                                             <label class="select">Area:
                                                                                 <select name="area" class="area_as" >
-                                                                                    <option value="0">[TODO]</option>
+                                                                                    <option value="">[Area]</option>
                                                                                 </select>
                                                                             </label>
                                                                         </section>
                                                                         <section class="col col-4"   >
                                                                             <label class="select">Sección:
                                                                                 <select name="seccion" class="seccion_as"   >
-                                                                                    <option value="0">[TODO]</option>
+                                                                                    <option value="">[Sección]</option>
                                                                                 </select>
                                                                             </label>
                                                                         </section>
                                                                         <section class="col col-4" >
                                                                             <label  class="select">Puesto:
                                                                                 <select name="puesto" class="puesto_as" >
-                                                                                    <option value="0">[TODO]</option>
+                                                                                    <option value="">[Puesto]</option>
                                                                                 </select>
                                                                             </label>
                                                                         </section>
@@ -188,7 +188,7 @@
                                                                         <section class="col col-4">
                                                                             <label class="select" >Departamento:
                                                                                 <select class="dep select" id="dep" name="id_dep" >
-                                                                                    <option value="">[TODO]</option>
+                                                                                    <option value="">[Departamento]</option>
                                                                                 </select>
                                                                             </label>
                                                                         </section>
@@ -197,7 +197,7 @@
                                                                         <section class="col col-4">
                                                                             <label class="select">Area:
                                                                                 <select class="area form-control" id="area" name="id_are" >
-                                                                                    <option value="">[TODO]</option>
+                                                                                    <option value="">[Area]</option>
                                                                                 </select>
                                                                             </label>
                                                                         </section>
@@ -205,14 +205,14 @@
                                                                         <section class="col col-4">
                                                                             <label class="select">Sección:
                                                                                 <select class="seccion form-control" id="seccion" name="id_sec" >
-                                                                                    <option value="">[TODO]</option>
+                                                                                    <option value="">[Sección]</option>
                                                                                 </select>
                                                                             </label>
                                                                         </section>
                                                                         <section class="col col-4" >
                                                                             <label class="select">Puesto:
                                                                                 <select class="puesto form-control" id="puesto" name="id_pu" >
-                                                                                    <option value="">[TODO]</option>
+                                                                                    <option value="">[Puesto]</option>
                                                                                 </select>
                                                                             </label>
                                                                         </section>
@@ -227,6 +227,7 @@
                                                                     <tr>
                                                                         <th align="center" style="text-align:center;">Nro</th>
                                                                         <th align="center" style="text-align:center;">Nombre Plantilla</th>
+                                                                        <th align="center" style="text-align:center;">Puesto</th>
                                                                         <th S style="text-align:center;">Acciones</th>
                                                                     </tr>
                                                                 </thead>
