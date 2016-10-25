@@ -955,7 +955,8 @@
                 + ' <th class="hasinput" ></th>'
                 + '  <th class="hasinput"></th>'
                 + ' <th class="hasinput" > </th>'
-                + ' <th class="hasinput" ></th></tr>'
+                + ' <th class="hasinput" ></th>'+
+                '</tr>'
                 + '  <tr data-hide="phone,tablet"> <th><strong>Nro</strong></th>'
                 + '<th ><strong>MES PROCESADO</strong></th>'
                 + '  <th data-class="expand" ><strong>Apellidos Y Nombres</strong></th>'

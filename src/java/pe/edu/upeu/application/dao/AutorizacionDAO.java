@@ -37,9 +37,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     @Override
     public void Insert_Autorizacion(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String US_MODIF, String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS) {
         CallableStatement cst;
-
         try {
-
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             cst = conn.conex.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, null);
@@ -68,7 +66,6 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             }
         }
     }
-
     @Override
     public List<X_List_De_Autorizacion> List_Detalle_Autorizacion(String iddgp, String idrp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
