@@ -337,7 +337,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     }
 
     @Override
-    public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep, String id_dir) {
+    public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep, String id_dir, Boolean procAcad) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select * from RHVD_ES_REQUERIMIENTO where  ES_PORCENT IS NOT NULL  ";
         sql += (id_dep.trim().equals("")) ? "" : " and ID_DEPARTAMENTO='" + id_dep.trim() + "' ";
@@ -346,6 +346,7 @@ public class DgpDAO implements InterfaceDgpDAO {
         if (id_dep.equals("DPT-0019")) {
             sql = "select * from RHVD_ES_REQUERIMIENTO where ES_PORCENT IS NOT NULL  ";
         }
+        sql += (procAcad) ? " and es_proc_acad>0" : " and es_proc_acad=0 ";
         sql += " ORDER BY TO_NUMBER(SUBSTR(ID_DGP,5,LENGTH(ID_DGP))) DESC";
 
         Logger.getLogger(getClass().getName()).log(Level.INFO, id_dir);
@@ -375,6 +376,7 @@ public class DgpDAO implements InterfaceDgpDAO {
                 v.setNo_dep(rs.getString("no_dep"));
                 v.setAnno_procesamiento(rs.getString("anno_procesamiento"));
                 v.setMes_procesamiento(rs.getString("mes_procesamiento"));
+                v.setEs_proc_acad(rs.getInt("es_proc_acad"));
                 Lista.add(v);
             }
         } catch (SQLException ex) {
@@ -888,26 +890,23 @@ public class DgpDAO implements InterfaceDgpDAO {
                                 + " </div>";
 
                     }
+                } else if (rs.getInt("count_aut") + 1 == i) {
+                    //if (false) {
+                    cadena = cadena
+                            + " <span class=\"new-bar active\"></span> "
+                            + "<div class=\"new-circle active\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"" + rs.getString("de_pasos") + "\" data-content=\"" + rs.getString("puesto_aut") + " \" data-html=\"true\">"
+                            + "<span class=\"new-label fa fa-inbox\"></span>"
+                            + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span>"
+                            + " </div>";
+
                 } else {
+                    cadena = cadena
+                            + " <span class=\"new-bar \"></span> "
+                            + "<div class=\"new-circle\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"" + rs.getString("de_pasos") + "\" data-content=\"" + rs.getString("puesto_aut") + " \" data-html=\"true\">"
+                            + "<span class=\"new-label fa fa-lock\"></span>"
+                            + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span>"
+                            + " </div>";
 
-                    if (rs.getInt("count_aut") + 1 == i) {
-                        //if (false) {
-                        cadena = cadena
-                                + " <span class=\"new-bar active\"></span> "
-                                + "<div class=\"new-circle active\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"" + rs.getString("de_pasos") + "\" data-content=\"" + rs.getString("puesto_aut") + " \" data-html=\"true\">"
-                                + "<span class=\"new-label fa fa-inbox\"></span>"
-                                + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span>"
-                                + " </div>";
-
-                    } else {
-                        cadena = cadena
-                                + " <span class=\"new-bar \"></span> "
-                                + "<div class=\"new-circle\" rel=\"popover-hover\" data-placement=\"top\" data-original-title=\"" + rs.getString("de_pasos") + "\" data-content=\"" + rs.getString("puesto_aut") + " \" data-html=\"true\">"
-                                + "<span class=\"new-label fa fa-lock\"></span>"
-                                + "<span class=\"new-title\">" + rs.getString("nu_pasos") + "</span>"
-                                + " </div>";
-
-                    }
                 }
 
             }
@@ -1036,7 +1035,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     }
 
     @Override
-    public void MODIFICAR_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO, String LI_MOTIVO, String ES_MFL, double BONO_PUESTO,String ES_PRESUPUESTADO) {
+    public void MODIFICAR_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO, String LI_MOTIVO, String ES_MFL, double BONO_PUESTO, String ES_PRESUPUESTADO) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MODIFICAR_DGP( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)}");
@@ -1091,7 +1090,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     public boolean val_fe_inicio_dgp(String fecha) {
         boolean estado = false;
         try {
-            System.out.println("fecha in DAO"+fecha);
+            System.out.println("fecha in DAO" + fecha);
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cs = this.conn.conex.prepareCall("begin   ? :=rhfu_val_fe_desde_dgp(?);end;");
             cs.registerOutParameter(1, Types.INTEGER);

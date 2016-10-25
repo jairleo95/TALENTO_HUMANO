@@ -106,19 +106,19 @@
                             <div class="form-group">
                                 <label>Area :</label><br>
                                 <select name="area" class="form-control selectarea" id="select_area" style="width: 250px"> 
-                                    <option value="">[Seleccione]</option>
+                                    <option value="" selected disabled>[Seleccione]</option>
                                 </select>
                             </div><%}%>
                             <div class="form-group" >
                                 <label>Seccion :</label><br>
                                 <select name="seccion" class="form-control selectsec" id="select_sec" style="width: 250px"> 
-                                    <option value="">[Seleccione]</option>
+                                    <option value="" selected disabled>[Seleccione]</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Puesto :</label><br>
                                 <select name="puesto" class="form-control selectpu" id="select_pu" style="width: 250px"> 
-                                    <option value="">[Seleccione]</option>
+                                    <option value="" selected disabled>[Seleccione]</option>
                                 </select>
                             </div>
                         </div>
@@ -361,10 +361,12 @@
                  );*/
                 $("#btncancel").click(
                         function () {
-                            document.formulario.reset();
-                            html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
-                            $(".tbodys").html(html);
+                            $(".conTable").empty();
+                            /*document.formulario.reset();
+                             html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                             $(".tbodys").html(html);*/
                         }
+
                 );
                 $(".validarform").submit(function () {
                     var check = $("input[type='checkbox']:checked").length;

@@ -1,141 +1,13 @@
-<%@page import="pe.edu.upeu.application.model.Usuario"%>
-<%
-    HttpSession sesion = request.getSession();
-    String id_user = (String) sesion.getAttribute("IDUSER");
-    if (id_user != null) {
-%>
-<head>
-
-    <title>Carga Academica</title>
-    <link href="academico.css" rel="STYLESHEET" type="text/css">
-    <script type="text/javascript" src="../../../js/JQuery/jQuery.js" ></script>
-
-</head>
-
-<body >
-    <input type="hidden"  class="dni_tr"  value="<%=request.getParameter("dni")%>"  />
-    <input type="hidden"  class="semestre"  value="<%=request.getParameter("semestre")%>"  />
-    <div id="myDiv"></div>
-
-
-
-    <table width="100%" cellspacing="0" cellpadding="0" >
-
-        <tr>
-            <td colspan="3" class="head">
-
-                102-Facultad de IngenierÌa y Arquitectura - 10202-IngenierÌa de Sistemas</b>
-
-            </td>
-        </tr>
-    </table>
-
-
-
-    <table cellpadding="0" cellspacing="1" border="0" width="100%">
-        <tr>
-
-            <td width="100%" valign="top">
-
-                <!-- inicio de estructura -->
-
-                <table cellpaddinng="1" cellspacing="0" align="center">
-                    <tr>
-                    <form name="datos">
-                        <td colspan="3" align="center" valign="top">
-                            <strong>Cursos Matriculados</strong> 
-                            
-                        </td>
-                    </form>
-        </tr>
-
-        <tr>
-            <td valign="TOP">
-
-                <table width="100%" cellpadding="0" cellspacing="1" valign="TOP" >
-
-                    <tr align='CENTER'>
-                        <th  >#</th>
-                        <th  >Cursos</th>
-
-                    </tr>
-                    <tbody class="tbody-cursos">
-
-                    </tbody>
-                </table>
-            </td>
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-
-                var url = 'http://localhost/demo/data.php';
-                var arr = [];
-                var fila = 1;
-                var columna = 0;
-                var g = 0;
-
-                $.post(url, "semestre=" + $(".semestre").val(), function (data) {
-
-                    $.each(data, function (f, campo) {
-                        if (campo.numerodocumento == $(".dni_tr").val()) {
-
-                            $('.tbody-cursos').append('<tr><td >' + (g + 1) + '.</td><td><b>' + campo.nombrecurso + '</b></td><td ><li> ' + campo.nombre + '</li><li>Ing.Sist. Ciclo:6</li></td></tr>');
-
-                            arr[g] = campo.horario.toString();
-                            g++;
-                        }
-
-
-                    });
-                    for (var j = 0; j < arr.length; j++) {
-                        var myArray = arr[j].split('');
-
-                        for (var i = 0; i < myArray.length; i++) {
-                            columna++;
-                            if (myArray[i] === "1") {
-                                $(".fila-" + fila + " .columna-" + columna).css("background", "blue");
-                            }
-                            if (columna === 7) {
-                                columna = 0;
-                                fila++;
-                            }
-                        }
-                        fila = 1;
-                        columna = 0;
-                    }
-
-                });
-
-
-                //arr[0] = '0100100010010001001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000';
-                //arr[1] = '0000000000000000000100000010000001000000100000000000000000000000000000000000000000000000000000000000000000000000';
-
-                /*  for (var j = 0; j < arr.length; j++) {
-                 var myArray = arr[j].split('');
-                 
-                 for (var i = 0; i < myArray.length; i++) {
-                 columna++;
-                 if (myArray[i] == "1") {
-                 $(".fila-" + fila + " .columna-" + columna).css("background", "blue");
-                 }
-                 if (columna == 7) {
-                 columna = 0;
-                 fila++;
-                 }
-                 }
-                 fila = 1;
-                 columna = 0;
-                 }*/
-
-
-            });
-
-        </script>
-        <td valign="TOP">
-            <table cellpadding="0" cellspacing="1" valign="TOP" align='CENTER' class="tabla-horario">
-                <tr>
-                    <th colspan="9">Carga Acad&eacute;mica</th>
-                </tr>
+<div class="row text-center">
+    <h3>102-Facultad de Ingenier√≠a y Arquitectura - 10202-Ingenier√≠a de Sistemas</h3>
+    <span> <strong>Cursos Matriculados</strong> </span>
+</div>
+<div class="row">
+    <div class="col col-md-6">Cursos</div>
+    <div class="col col-md-6">
+        <div class="row">Carga acad√©mica</div> 
+        <div class="row">
+            <table  class="tabla-horario">
                 <tr align='CENTER'>
                     <th colspan=2>Periodo</th>
                     <th>D</th>
@@ -318,7 +190,6 @@
                     <td class="columna-6" ></td>
                     <td class="columna-7" ></td>
                 </tr>
-
                 <tr class="fila-16">
                     <td ><b>4.</b></td>
                     <td >9:30 - 10:20</td>
@@ -329,29 +200,8 @@
                     <td class="columna-5" ></td>
                     <td class="columna-6" ></td>
                     <td class="columna-7" ></td>
-
                 </tr>
-
             </table>
-        <td valign="TOP">
-
-            </tr>
-
-
-
-    </table>
-
-</td>
-</tr>
-</table>
-
-<!-- fin de estructura -->
-
-
-</body>
-
-<html>
-    <%} else {
-            out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
-        }
-    %>
+        </div> 
+    </div>
+</div>

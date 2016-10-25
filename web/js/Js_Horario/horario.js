@@ -31,6 +31,10 @@ $(document).ready(function () {
         });
 
     });
+    $('.select-seccion').change(function(){
+        console.log("cambiando horarios");
+        cargar_horarios($('.t_horario'));
+    });
 
 });
 function cargar_horarios(sel, dep, nombre) {
@@ -39,7 +43,7 @@ function cargar_horarios(sel, dep, nombre) {
     $.post("../../formato_horario", "opc=Listar_Tip_Horario&sec=" + $('.select-seccion').val(), function (objJson) {
         var lista = objJson.lista;
         sel.empty();
-        sel.append('<option value="0" >[SELECCIONE]</option>');
+        sel.append('<option value="0" selected disabled >[SELECCIONE]</option>');
         for (var i = 0; i < lista.length; i++) {
             if (lista[i].nombre === nombre) {
                 x = lista[i].id;

@@ -718,7 +718,7 @@
                                     -->
                                     <header>
                                         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                        <h2 class="font-md"><strong>Registrar </strong> <i>Horario</i></h2>
+                                        <h2 class="font-md"><strong>Registrar </strong>Horario</h2>
                                     </header>
                                     <!-- widget div-->
                                     <div>
