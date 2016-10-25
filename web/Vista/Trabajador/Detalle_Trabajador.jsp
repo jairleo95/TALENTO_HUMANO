@@ -607,7 +607,7 @@
         <!-- Voice command : plugin -->
         <script src="../../js/speech/voicecommand.min.js"></script>
 
-    PAGE RELATED PLUGIN(S) 
+<!--    PAGE RELATED PLUGIN(S) -->
         <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
         <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
         
