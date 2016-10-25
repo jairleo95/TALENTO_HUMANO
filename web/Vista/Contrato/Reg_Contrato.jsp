@@ -251,6 +251,10 @@
                                                                 <option value="2">Contratado Independiente</option>
                                                                 <option value="3">Enpleado</option>
                                                                 <option value="4">Misionero</option>
+                                                                <option value="5">Practicante Profesional</option>
+                                                                <option value="6">Practicante Pre profesional</option>
+                                                                <option value="7">Convenio Laboral Juvenil</option>
+                                                                <option value="8">MFL-Contrato</option>
                                                             </select>
                                                         </label>
                                                     </section>
@@ -316,7 +320,11 @@
                                                 <div class="row">
                                                     <section class="col col-3">
                                                         <label class="select" id="titulo">Regimen Laboral Mintra:
-                                                            <select name="REG_LAB_MINTRA" class="input-group-sm" required="">
+                                                            <select name="REG_LAB_MINTRA" class="input-group-sm"  <%
+                                                                if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
+                                                                    out.print("required='required'");
+                                                                }
+                                                                    %> >
                                                                 <option value="">[SELECCIONE]</option>
                                                                 <%for (int q = 0; q < list_reg_labo.size(); q++) {
                                                                         Regimen_Laboral re = new Regimen_Laboral();
@@ -329,7 +337,11 @@
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="select" id="titulo">Modalidad:
-                                                            <select name="MODALIDAD" class="input-group-sm" id="select_mod" required="">
+                                                            <select name="MODALIDAD" class="input-group-sm" id="select_mod"  <%
+                                                                if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
+                                                                    out.print("required='required'");
+                                                                }
+                                                                    %> >
                                                                 <option value="">[SELECCIONE]</option>
                                                                 <%for (int l = 0; l < List_modalidad.size(); l++) {
                                                                         Modalidad mo = new Modalidad();
@@ -343,14 +355,22 @@
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="select" id="titulo">SUB-Modalidad:
-                                                            <select name="SUB_MODALIDAD" class="input-group-sm" id="select-sub-mod" required="">
+                                                            <select name="SUB_MODALIDAD" class="input-group-sm" id="select-sub-mod"  <%
+                                                                if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
+                                                                    out.print("required='required'");
+                                                                }
+                                                                    %> >
                                                                 <option value="">[SELECCIONE]</option>
                                                             </select>
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="select" id="titulo">Tipo Contratación:
-                                                            <select name="REG_LAB_MINTRA" class="input-group-sm" >
+                                                            <select name="REG_LAB_MINTRA" class="input-group-sm"   <%
+                                                                if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
+                                                                    out.print("required='required'");
+                                                                }
+                                                                    %> >
                                                                 <option value="">[SELECCIONE]</option>
                                                                 <option value="I">INICIO</option>
                                                                 <option value="R">RENOVACION</option>
@@ -363,7 +383,11 @@
                                                 <div class="row">
                                                     <section class="col col-3">
                                                         <label class="select" id="titulo">Cod. Grupo de Ocupaciones:
-                                                            <select name="CO_GRUPO_OCU" class="input-group-sm" required="">
+                                                            <select name="CO_GRUPO_OCU" class="input-group-sm"  <%
+                                                                if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
+                                                                    out.print("required='required'");
+                                                                }
+                                                                    %> >
                                                                 <option value="">[SELECCIONE]</option>
                                                                 <%for (int gr = 0; gr < List_grup_ocu.size(); gr++) {
                                                                         Grupo_Ocupaciones g = new Grupo_Ocupaciones();
@@ -376,12 +400,22 @@
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Suscripción:
-                                                            <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION" class="input-group-sm"  value="<%=c.convertFecha3(d.getFe_desde())%>" max="<%=c.convertFecha3(d.getFe_desde())%>">
+                                                            <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION" class="input-group-sm"  value="<%=c.convertFecha3(d.getFe_desde())%>" max="<%=c.convertFecha3(d.getFe_desde())%>" 
+                                                                   <%
+                                                                       if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
+                                                                           out.print("required='required'");
+                                                                       }
+                                                                   %> 
+                                                                   >
                                                         </label>
                                                     </section>
                                                     <section class="col col-2">
-                                                        <label class="select" id="titulo">Tipo de Modeda:
-                                                            <select name="TIPO_MONEDA" class="input-group-sm" required="">
+                                                        <label class="select" id="titulo">Tipo de Moneda:
+                                                            <select name="TIPO_MONEDA" class="input-group-sm"  <%
+                                                                if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
+                                                                    out.print("required='required'");
+                                                                }
+                                                                    %> >
                                                                 <option value="">[SELECCIONE]</option>
                                                                 <option value="01" selected="">SOLES</option>
                                                                 <option value="02">DOLARES</option>
@@ -391,7 +425,11 @@
                                                     </section>
                                                     <section class="col col-2">
                                                         <label class="select" id="titulo">Tipo Rem. Variable:
-                                                            <select name="REM_VARIABLE" class="input-group-sm" required="">
+                                                            <select name="REM_VARIABLE" class="input-group-sm"  <%
+                                                                if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
+                                                                    out.print("required='required'");
+                                                                }
+                                                                    %> >
                                                                 <option value="">[SELECCIONE]</option>
                                                                 <option value="1">DESTAJO</option>
                                                                 <option value="2">COMISIONES</option>
@@ -401,7 +439,11 @@
                                                     </section>
                                                     <section class="col col-2">
                                                         <label class="select" id="titulo">Remuneración en Especie:
-                                                            <select name="REM_ESPECIE" class="input-group-sm" required="">
+                                                            <select name="REM_ESPECIE" class="input-group-sm"  <%
+                                                                if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
+                                                                    out.print("required='required'");
+                                                                }
+                                                                    %> >
                                                                 <option value="">[SELECCIONE]</option>
                                                                 <option value="1">SI</option>
                                                                 <option value="0">NO</option>
@@ -474,7 +516,13 @@
                                                     </section>
                                                     <section class="col col-4">
                                                         <label class="select" id="titulo">Tipo Contrato:
-                                                            <select name="TIPO_CONTRATO" class="input-group-sm ti_contrato" required="">
+                                                            <select name="TIPO_CONTRATO" class="input-group-sm ti_contrato" 
+                                                                    <%
+                                                                        if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
+                                                                            out.print("required='required'");
+                                                                        }
+                                                                    %>   
+                                                                    >
                                                                 <option value="">[SELECCIONE]</option>
                                                                 <option value="1">Necesidad de Mercado</option>
                                                                 <option value="2">Incremento de Actividad</option>
@@ -493,7 +541,6 @@
                                                     </section>
                                                     <%
                                                         if (d.getId_tipo_planilla().trim().equals("TPL-0001")) {
-
                                                     %>
                                                     <section class="col col-4">
                                                         <label class="select" id="titulo">Tipo Convenio:
@@ -569,7 +616,7 @@
                                                 <button type="submit" id="submit" class="btn btn-primary">
                                                     Registrar Contrato
                                                 </button>
-                                                <button type="button" class="btn btn-success" onclick="listHorario(this.value)" value="<%=d.getId_dgp()%>" data-toggle="modal" data-target="#HorariosModal">Ver Horario</button>
+                                                <button type="button" class="btn btn-success" onclick="listHorario(this.value)" value="<%=d.getId_dgp()%>" data-toggle="modal" data-target="#exampleModal">Ver Horario</button>
                                                 <a type="button" class="btn btn-success" href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a>
                                             </footer>
                                         </form>
@@ -631,7 +678,7 @@
                                     var g = createTable(j);
                                     $(".conTablas").append(g);
                                     $(".data" + l[j] + "").empty();
-                                    $(".data" + l[j] + "").append(t);                                    
+                                    $(".data" + l[j] + "").append(t);
                                 }
                             }
                             $(".dataHor").dataTable();
@@ -661,7 +708,7 @@
 
 
         </div>
-        <div class="modal fade" id="HorariosModal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
