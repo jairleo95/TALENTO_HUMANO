@@ -355,10 +355,14 @@ function Desac_Plantilla(id_pp, opc) {
 function  lis_sel(d, valor, opc, num) {
     d.empty();
     if (num == 1) {
-        $(".dep_as").append("<option value='0' > [GENERAL] </option>");
-        $(".area_as").append("<option value='0' > [GENERAL] </option>");
-        $(".seccion_as").append("<option value='0' > [GENERAL] </option>");
-        $(".puesto_as").append("<option value='0' > [GENERAL] </option>");
+        $(".dep_as").empty();
+        $(".dep_as").append("<option value='0' selected='' > [GENERAL] </option>");
+        $(".area_as").empty();
+        $(".area_as").append("<option value='0' selected='' > [GENERAL] </option>");
+        $(".seccion_as").empty();
+        $(".seccion_as").append("<option value='0' selected='' > [GENERAL] </option>");
+        $(".puesto_as").empty();
+        $(".puesto_as").append("<option value='0' selected='' > [GENERAL] </option>");
     } else {
         if (valor != 0) {
             $.post("../../../Direccion_Puesto", "opc=" + opc + "&" + "id=" + valor, function (objJson) {
@@ -372,7 +376,7 @@ function  lis_sel(d, valor, opc, num) {
                     d.append("<option value='' > [NO HAY] </option>");
                 }
             });
-        }else{
+        } else {
             d.append("<option value='0' > [GENERAL] </option>");
         }
     }
@@ -391,12 +395,12 @@ function list_dir_fil(c, fil, op) {
                 c.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
             }
         } else {
-            if (!op) {
-                c.append("<option value='0' selected > [GENERAL] </option>");
+            c.append("<option value='0' selected > [GENERAL] </option>");
+            if (op !== true) {
                 var d = $(".dep");
                 var valor = $("#dir").val();
                 lis_dir_id(d, valor);
-            } else {
+            } else if (op === true) {
                 var d = $(".dep_as");
                 var valor = $(".dir_as").val();
                 var opc = "Listar_dir_dep";
