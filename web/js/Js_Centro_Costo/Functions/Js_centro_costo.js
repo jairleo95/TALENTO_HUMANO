@@ -166,13 +166,13 @@ function ListCentroCostoDGP(iddgp) {
         for (var i = 0; i < lista.length; i++) {
             numero = numero + i;
 
-            texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo Nº' + (i + 1) + ':</label>';
+            texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo N&#186;' + (i + 1) + ':</label>';
             texto += '<div  class="row centro-costo_' + ag + ' cc_registrado" >';
-            texto += '<section class="col col-3"><label class="select" id="titu">Dirección :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
+            texto += '<section class="col col-3"><label class="select" id="titu">Direcci&#243;n :<select required="" class="cc-dir' + ag + '" id="cc-dir' + ag + '" readonly="readonly"  disabled><option value="">[DIRECCION]</option></select></label></section>';
             texto += '<section class="col col-3" ><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '" readonly="readonly"  disabled><option value="">[DEPARTAMENTO]</option></select></label></section>';
             /* nuevo agregado : area y seccion*/
             texto += '<section class="col col-3"><label class="select" id="titu"> Area :<select  class="cc-area' + ag + '"><option value="">[AREA]</option></select></label></section>';
-            texto += '<section class="col col-3"><label class="select" id="titu"> Seccion :<select   class="cc-seccion' + ag + '"><option value="">[SECCION]</option></select></label></section>';
+            texto += '<section class="col col-3"><label class="select" id="titu"> Secci&#243;n :<select   class="cc-seccion' + ag + '"><option value="">[SECCION]</option></select></label></section>';
 
             texto += '<section class="col col-3" ><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required="" readonly="readonly"  disabled=""><option value="">[CENTRO COSTO]</option></select></label></section>';
             texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '" value="' + lista[i].ca_por_cc + '"  type="text" required="" class="porcentaje_cc"/></label></section>';

@@ -191,14 +191,14 @@
                                                             <select name="DIRECCION" class="select_dir input-group-sm" disabled=""  id="select_dir" >
                                                                 <option value="" >[SELECCIONE]</option>
                                                                 <%for (int g = 0; g < Listar_Direccion.size(); g++) {
-                                                                        Direccion di = new Direccion();
-                                                                        di = (Direccion) Listar_Direccion.get(g);
+                                                                        Direccion direccion = new Direccion();
+                                                                        direccion = (Direccion) Listar_Direccion.get(g);
                                                                         String id_direc = request.getParameter("id_direc");
-                                                                        if (id_direc.trim().equals(di.getId_direccion().trim())) {
+                                                                        if (id_direc.trim().equals(direccion.getId_direccion().trim())) {
                                                                 %>
-                                                                <option value="<%=di.getId_direccion()%>" selected=""><%=di.getNo_direccion()%></option>
+                                                                <option value="<%=direccion.getId_direccion()%>" selected=""><%=direccion.getNo_direccion()%></option>
                                                                 <%} else {%>
-                                                                <option value="<%=di.getId_direccion()%>"><%=di.getNo_direccion()%></option>
+                                                                <option value="<%=direccion.getId_direccion()%>"><%=direccion.getNo_direccion()%></option>
                                                                 <%}
                                                                     }%>
                                                             </select>  </label>
