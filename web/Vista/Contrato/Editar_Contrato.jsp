@@ -172,43 +172,6 @@
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Desde:
                                                 <%if (a.getFe_desde() != null) {%>
-                                                <input type="text" name="FEC_DESDE" value="<%=(a.getFe_desde())%>" class="input-group-sm frompicker" data-mask="99/99/9999" data-mask-placeholder= "_" required="">
-                                                <%} else {%>
-                                                <input type="text" name="FEC_DESDE" class="input-group-sm frompicker" data-mask="99/99/9999" data-mask-placeholder= "_" required="">
-                                                <%}%>
-                                            </label>
-                                        </section>
-                                        <section class="col col-2">
-                                            <label class="input" id="titulo">Hasta: 
-                                                <%if (a.getFe_hasta() != null) {
-                                                        if (a.getId_dgp() == null) {%>
-                                                <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="input-group-sm topicker" data-mask="99/99/9999" data-mask-placeholder= "_">
-                                                <%} else {%>
-                                                <input type="checkbox" name="checkbox-toggle"  disabled="">
-                                                <%}
-                                                } else {%>
-                                                <%}%>
-                                                <i data-swchoff-text="NO"  data-swchon-text="SI"></i>
-                                            </label>
-                                        </section>
-                                        <section class="col col-3" >
-                                            <div class="div_input_diezmo">
-                                            </div>
-                                        </section>
-                                        <input type="hidden" value="<%=a.getId_dgp()%>" id="id_dgp">
-
-                                    </div>
-                                    <%}%>
-                                    <input type="hidden"  value="<%=a.getId_trabajador()%>" class="idtr">
-                                    <div class="row" >
-                                        <input type="hidden" name="id_rol_ses" id="id_rol_s" value="<%=idrol%>">
-                                        <input type="hidden" name="TIPO_PLANILLA"  value="<%%>">
-                                        <input type="hidden" name="HORARIO"  value="">
-
-                                        <input type="hidden" name="IDDETALLE_DGP" value="<%=a.getId_dgp()%>" class="text-box id_dg" id="id_dg" >                              
-                                        <section class="col col-2">
-                                            <label class="input" id="titulo">Desde:
-                                                <%if (a.getFe_desde() != null) {%>
                                                 <input type="text" name="FEC_DESDE" value="<%=(a.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm topicker" data-mask="00/00/0000" autocomplete="off" required="">
                                                 <%} else {%>
                                                 <input type="text" name="FEC_DESDE" class="simple-field-data-mask from-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
@@ -759,8 +722,12 @@
             </div>
 
         </div>
-
+        <button  data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">
+            Launch demo modal
+        </button>
         <!--================================================== -->
+        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
@@ -833,7 +800,9 @@
         <script type="text/javascript"  src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
-        <script type="text/javascript" src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" ></script>
+        <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
+        <script src="../../js/jquery-ui.js" type="text/javascript"></script>
+        <script src="../../js/jquery.mask.js" type="text/javascript"></script>
         <script type="text/javascript">
                                         function Listar_dep() {
                                             var s = $(".selec_dep");
@@ -1019,21 +988,8 @@
                                         }
 
                                         $(document).ready(function () {
-                                            $("#ca_bono_pu").numeric();
-                                            $("#remu").numeric();
-                                            $("#rein").numeric();
-                                            $("#bo_a").numeric();
-                                            $("#bev").numeric();
-                                            $("#su_t").numeric();
-                                            $("#asig").numeric();
-                                            pageSetUp();
-                                            $(".btnModificarContrato").click(function () {
-                                                if ($(".formEditawrContrato").valid()) {
-
-                                                    $(".formEditawrContrato").submit();
-                                                    $(".btnModificarContrato").attr("disabled", "disabled");
-                                                }
-
+            $("#submit").click(function () {
+                $(this).attr("disabled", "disabled");
                                             });
                                             Listar_pue();
                                             Listar_dep();
@@ -1073,10 +1029,6 @@
                                                 });
                                             });
                                             $("#selec_dep").change(function () {
-                                                $("#select_dir").val("");
-                                                $("#Selec_Area").val("");
-                                                $("#select_sec").val("");
-                                                $("#pu_id_se").val("");
                                                 $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
                                                     c.empty();
                                                     if (objJson.rpta == -1) {
@@ -1095,9 +1047,6 @@
                                                 });
                                             });
                                             $("#select_dir").change(function () {
-                                                $("#Selec_Area").val("");
-                                                $("#select_sec").val("");
-                                                $("#pu_id_se").val("");
                                                 $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
                                                     b.empty();
                                                     if (objJson.rpta == -1) {
@@ -1116,8 +1065,6 @@
                                                 });
                                             });
                                             $("#Selec_Area").change(function () {
-                                                $("#select_sec").val("");
-                                                $("#pu_id_se").val("");
                                                 $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
                                                     d.empty();
                                                     var list = objJson.lista;
@@ -1130,10 +1077,8 @@
                                                         d.append("<option value='' > [no hay] </option>");
                                                     }
                                                 });
-
                                             });
                                             $("#select_sec").change(function () {
-                                                $("#pu_id_se").val("");
                                                 $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
                                                     e.empty();
                                                     if (objJson.rpta == -1) {
