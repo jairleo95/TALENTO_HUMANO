@@ -219,4 +219,71 @@
     </div>
 
 </div>
+<div class="well">
+    <form class="form_carga_academica">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="category"> Fecha de Inicio:</label>
+                    <input type="text" class="fecha form-control fe_desde_p frompicker" value="" name="DESDE" data-mask="99/99/9999" data-mask-placeholder= "_" required />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="category"> Fecha de Cese:</label>
+                    <input type="text" class="fecha1 form-control fe_hasta_p topicker" value="" name="HASTA" data-mask="99/99/9999" data-mask-placeholder= "_" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="category"> Tipo de Hora Pago:</label>
+                    <input type="text" class="form-control ti_hp_docente" value="25" placeholder="0.0"  name="TI_HORA_PAGO" required />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="category"> Horas Laborables:</label>
+                    <!--       <%
+                           if (hl != null) {
+                           if (Boolean.valueOf(academico) == true) {
+                           %>
+                           <input type="text" class="form-control hl_docente" value="0" name="HL" placeholder="0" required />
+                           <%} else {%>
+                           <input type="text" class="form-control hl_docente" value="0" name="HL" placeholder="0" required />
+                           <%}%>-->
+                </div>
+            </div>
+        </div>
+        <label for="category" > <strong>CUOTAS</strong></label>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="cuota_docente">
+
+                    </div>
+                    <input type="hidden" name="PUESTO" value="PUT-000482" >
+                    <input type="hidden" name="REQ" value="REQ-0018">
+                    <input type="hidden" name="IDTR" value="<%=idtr%>" >
+                    <!--  <input type="hidden" name="eap" value="<%=request.getParameter("eap")%>" >
+                             <input type="hidden" name="facultad" value="<%=request.getParameter("facultad")%>" >
+                             <input type="hidden" name="dgp"  class="dgp" value="<%=request.getParameter("dgp")%>" >
+                             <input type="hidden" name="proceso" class="proceso" value="<%=request.getParameter("proceso")%>" >-->
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+                Cancelar
+            </button>
+            <button type="button" class="btn btn-primary btn_guardar_ca"  data-dismiss="modal">
+                Guardar
+            </button>
+
+        </div>
+    </form>
+
+</div>
 

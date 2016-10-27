@@ -222,6 +222,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                 ca.setDe_condicion(rs.getString("de_condicion"));
                 ca.setDe_carga(rs.getString("de_carga"));
                 ca.setId_proceso_carga_ac(rs.getString("id_proceso_carga_ac"));
+                ca.setCountCursos(rs.getInt("countCursos"));
                 list.add(ca);
             }
         } catch (SQLException e) {

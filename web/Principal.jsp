@@ -615,7 +615,7 @@
 
         <!-- JQUERY MASKED INPUT -->
         <script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>
- 
+
 
         <!-- JQUERY UI + Bootstrap Slider -->
         <script src="js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
@@ -626,14 +626,14 @@
         <!-- FastClick: For mobile devices -->
         <script src="js/plugin/fastclick/fastclick.min.js"></script>
 
-    
+
         <!-- Demo purpose only -->
         <script src="js/demo.min.js"></script>
 
         <!-- MAIN APP JS FILE -->
         <script src="js/app.min.js"></script>
 
-         
+
 
         <script>
         var btnclose = 0;
@@ -694,7 +694,7 @@
             var page = "cnot";
             $.post(page, {
                 op: 5,
-                id:'<%=id_user%>'
+                id: '<%=id_user%>'
             }, function (objson) {
                 var rpta = objson.rpta;
                 if (rpta === "1") {
@@ -740,8 +740,7 @@
                                     infoaut += '<span class="unread">';
                                     listid.push(lista[i].id_notification);
                                     count++;
-                                }
-                                else if (lista[i].es_visualizado == 1) {
+                                } else if (lista[i].es_visualizado == 1) {
                                     infoaut += '<span>';
                                 }
                                 fcn = "readNotification('" + lista[i].id_notification + "')"
@@ -779,7 +778,7 @@
                                         }
                                     }
                                 } else {
-                                    infoaut += '<time>' + fechaInicio.getDate() + "/" + (parseInt(fechaInicio.getMonth())+1) + '/' + fechaInicio.getFullYear() + '</time>';
+                                    infoaut += '<time>' + fechaInicio.getDate() + "/" + (parseInt(fechaInicio.getMonth()) + 1) + '/' + fechaInicio.getFullYear() + '</time>';
                                 }
                                 infoaut += '<span class="subject">' + lista[i].de_notification + '</span>';
                                 infoaut += '<span class="msg-body">Nada importante</span>';
@@ -876,7 +875,7 @@
                                         }
                                     }
                                 } else {
-                                    inforec += '<time>' + fechaInicio.getDate() + "/" + (parseInt(fechaInicio.getMonth())+1) + '/' + fechaInicio.getFullYear() + '</time>';
+                                    inforec += '<time>' + fechaInicio.getDate() + "/" + (parseInt(fechaInicio.getMonth()) + 1) + '/' + fechaInicio.getFullYear() + '</time>';
                                 }
                                 inforec += '<span class="subject">' + lista[i].de_notification + '</span>';
                                 inforec += '<span class="msg-body">Nada importante</span>';
