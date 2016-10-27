@@ -165,12 +165,12 @@ public class CAutorizacion extends HttpServlet {
                         out.print(iddgp);
                         dgp.HABILITAR_DGP(iddgp);
                         if (permissionDepartFilter) {
-                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "",false));
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", false));
                         }
                         if (permissionDireccionFilter) {
-                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir,false));
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, false));
                         } else {
-                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "",false));
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", false));
                         }
                         // sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
                         response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
@@ -191,7 +191,6 @@ public class CAutorizacion extends HttpServlet {
                         dgp.RECHAZAR_DGP(iddgp);
                         String id_autorizacion = a.Insert_Autorizacion_dev("", iddgp, estado, nropaso, "", iduser, "", "", cod.trim(), idp, iddrp, idpasos);
                         a.Insert_comentario_Aut("", id_autorizacion, iddgp, iduser, "1", id_autorizacion, comentario);
-                        String idpu = e.Id_Puesto_Personal(ide);
                         InterfaceNotificationDAO notdao = new NotificationDAO();
                         Notification not = new Notification();
                         InterfaceUsuarioDAO udao = new UsuarioDAO();
@@ -208,11 +207,11 @@ public class CAutorizacion extends HttpServlet {
                             not.setId_usuario(ids.get(i));
                             notdao.Registrar(not);
                         }
-                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser, ""));
-                        sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
+                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idp, iduser, ""));
+                        sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idp));
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
-                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser, ""));
-                        sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idpu));
+                        sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idp, iduser, ""));
+                        sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idp));
                         //out.print(id_autorizacion);
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");
                         out.print("correcto ");
@@ -223,6 +222,283 @@ public class CAutorizacion extends HttpServlet {
                         String idpu = e.Id_Puesto_Personal(ide);
                         sesion.setAttribute("List_Autorizacion_Academico", a.List_Autorizacion_Academico(idpu, iduser, ""));
                         response.sendRedirect("Vista/Academico/Autorizar_Carga_Academica.jsp");
+                    }
+                    if (opc.equals("headerTableAutorizacionCA")) {
+                        String htmlHeader = "";
+                        if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {
+
+                            htmlHeader += "  <tr>";
+                            htmlHeader += " <th class='hasinput' colspan='14' style='width:95%' ></th>";
+                            htmlHeader += "<th class='hasinput'>";
+                            htmlHeader += " <button   rel='tooltip' data-placement='left' data-original-title='Autorizar y Procesar codigo de huella digital'  class='btn btn-warning btn-circle btn-lg  btn_cod_huella'>";
+                            htmlHeader += "  <i class='glyphicon glyphicon-ok'></i></button>";
+                            htmlHeader += " </th>";
+                            htmlHeader += "   </tr>";
+                        }
+                        if (idrol.trim().equals("ROL-0009")) {
+                            htmlHeader += "     <tr>";
+                            htmlHeader += "   <th class='hasinput' colspan='14' style='width:95%' ></th>";
+                            htmlHeader += "   <th class='hasinput'  style='' >";
+                            htmlHeader += "      <button   rel='tooltip' data-placement='left' data-original-title='Autorizar y Procesar código aps'";
+                            htmlHeader += "            class='btn bg-color-magenta txt-color-white btn-circle btn-lg  btn_cod_aps'>";
+                            htmlHeader += "        <i class='glyphicon glyphicon-ok'></i></button>";
+                            htmlHeader += "    </th>";
+                            htmlHeader += "  </tr>";
+                        }
+                        if (idrol.trim().equals("ROL-0006")) {
+                            htmlHeader += "   <tr>";
+                            htmlHeader += "  <th class='hasinput' colspan='15' style='width:95%' ></th>";
+                            htmlHeader += "  <th class='hasinput'>";
+                            htmlHeader += "     <button   disabled rel='tooltip' data-placement='top' data-original-title='Procesar Firmas'  class='btn btn-primary btn-circle btn-sm btn_pro_firma'>";
+                            htmlHeader += "       <i class='glyphicon glyphicon-ok'></i></button>";
+                            htmlHeader += " </th>";
+                            htmlHeader += "  <th class='hasinput' >";
+                            htmlHeader += "   <button  disabled rel='tooltip' data-placement='top' data-original-title='Procesar a remuneraciones'  class='btn btn-default btn-circle btn-sm btn_pro_remuneracion'>";
+                            htmlHeader += "     <i class='glyphicon glyphicon-ok'></i></button>";
+                            htmlHeader += "   </th>";
+                            htmlHeader += "   <th class='hasinput'  style='' >";
+                            htmlHeader += " <button  disabled  rel='tooltip' data-placement='top' data-original-title='Procesar a Firmas y Envio a Remuneraciones'  class='btn btn-warning btn-circle btn-sm btnProcesarFirmaAndRem'>";
+                            htmlHeader += "    <i class='glyphicon glyphicon-ok'></i></button>";
+                            htmlHeader += "   </th>";
+                            htmlHeader += "   </tr>";
+                        }
+                        htmlHeader += "  <tr data-hide='phone,tablet'>";
+                        htmlHeader += "   <th><strong>Nro</strong></th>";
+                        htmlHeader += "    <th data-hide='phone,tablet'><strong>Acción</strong></th>";
+                        htmlHeader += "  <th>Mes</th>";
+                        htmlHeader += "   <th data-hide='phone,tablet'><strong>Foto</strong> </th>";
+                        htmlHeader += "   <th data-class='expand' ><strong>Apellidos Y Nombres</strong></th>";
+                        htmlHeader += "    <th data-hide='phone,tablet'><strong>Puesto</strong></th>";
+                        htmlHeader += "    <th data-hide='phone,tablet'><strong>Area</strong></th>";
+                        htmlHeader += "    <th data-hide='phone,tablet'><strong>Departamento</strong></th>";
+                        htmlHeader += "   <th data-hide='phone,tablet'><strong>Requerimiento</strong></th>";
+                        htmlHeader += "  <th data-hide='phone,tablet'><strong>Descripción</strong></th>";
+                        htmlHeader += "   <th  data-hide='phone,tablet'>Fecha de Creación</th>  ";
+                        htmlHeader += "    <th  data-hide='phone,tablet'>Motivo</th>  ";
+                        htmlHeader += "   <th  data-hide='phone,tablet'>MFL</th>  ";
+                        if (iddep.equals("DPT-0019")) {
+                            htmlHeader += "  <th><strong>¿Cumplio Plazos?</strong></th>";
+                            if (idrol.trim().equals("ROL-0006")) {
+                                htmlHeader += "   <th><strong>¿Contrato Elaborado?</strong></th>";
+                                htmlHeader += "    <th><strong>¿Firmo Contrato?</strong></th>";
+                                htmlHeader += " <th><strong>Enviar a Rem.</strong></th>";
+                                htmlHeader += "  <th><strong>¿Contrato Subido?</strong></th>";
+                            }
+                        }
+                        if (idrol.trim().equals("ROL-0009")) {
+                            htmlHeader += "  <th><strong>Código APS</strong></th>";
+                        }
+                        if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {
+                            htmlHeader += " <th><strong>Código Huella</strong></th>";
+                        }
+                        htmlHeader += "  </tr>";
+                        rpta.put("htmlHeader", htmlHeader);
+                        String htmlBody = "";
+                        int num_cod_aps = 0;
+                        int num_cod_huella = 0;
+
+                        List<V_Autorizar_Dgp> listaAutCA = a.List_id_Autorizacion(idp, iduser, "");
+
+                        for (int f = 0; f < listaAutCA.size(); f++) {
+                            V_Autorizar_Dgp autCA = new V_Autorizar_Dgp();
+                            autCA = (V_Autorizar_Dgp) listaAutCA.get(f);
+
+                            htmlBody += "<tr>";
+                            htmlBody += "<td>" + (f + 1) + "</td>";
+                            htmlBody += "   <td>";
+                            htmlBody += " <div class='btn-group'>";
+                            htmlBody += "<button class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>";
+                            htmlBody += "<i class='fa fa-gear fa-lg'></i>";
+                            htmlBody += "  <i class='fa fa-caret-down'></i>";
+                            htmlBody += "  </button>";
+                            htmlBody += " <ul class='dropdown-menu'>";
+                            htmlBody += "  <li><a href='../../dgp?iddgp=" + autCA.getId_dgp().trim() + "&opc=Seguimiento'>Ver Proceso</a></li>";
+                            htmlBody += "  <li><a href='../../documento?iddgp=" + autCA.getId_dgp().trim() + "&idtr=" + autCA.getId_trabajador().trim() + "&opc=Reg_Pro_Dgp'>Ver Documentos</a></li>";
+                            htmlBody += "   <li><a  data-valor='" + autCA.getId_dgp().trim() + ";" + autCA.getId_trabajador().trim() + ";" + autCA.getAp_paterno() + " " + autCA.getAp_materno() + " "
+                                    + autCA.getNo_trabajador() + "' class='click' data-toggle='modal' data-target='#myModal' data-backdrop='static' data-keyboard='false' onclick='sendAjax('')' >Comentario</a></li>";
+                            if (Integer.parseInt(autCA.getElab_contrato()) > 0) {
+                                htmlBody += "<li>";
+                                htmlBody += "  <a href='../../contrato?idtr=" + autCA.getId_trabajador().trim() + "&opc=Detalle_Contractual'>Ver Contrato</a></li>";
+                            }
+                            htmlBody += "   <li class='divider'></li>";
+                            htmlBody += " <li>";
+                            htmlBody += " <li>";
+
+                            int num = autCA.getVal_dgp_cotrato();
+
+                            htmlBody += "   <a href='../../trabajador?idtr=" + autCA.getId_trabajador() + "&IDDETALLE_REQ_PROCESO=" + autCA.getId_detalle_req_proceso()
+                                    + "&iddetalle_dgp=" + autCA.getId_dgp() + "&p=" + autCA.getId_puesto() + "&cod=" + autCA.getCo_pasos() + "&idpasos=" + autCA.getId_pasos() + "&autorizacion=1&opc=aut&nup=" + autCA.getNu_pasos() + "'>";
+
+                            if (idrol != null) {
+                                if (idrol.trim().equals("ROL-0006")) {
+                                    if (num >= 1) {
+                                        htmlBody += "Registrar Firma";
+                                    }
+                                    if (num == 0) {
+                                        htmlBody += "Hacer Contrato";
+                                    } else {
+                                        htmlBody += "Autorizar";
+                                    }
+                                } else {
+                                    htmlBody += "Autorizar";
+                                }
+                            }
+                            htmlBody += " </a>";
+                            htmlBody += " </li>";
+                            htmlBody += "  </ul>";
+                            htmlBody += " </div>";
+                            htmlBody += " </td>";
+                            htmlBody += " <td >";
+                            htmlBody += a.Mes_plazo(autCA.getId_dgp());
+                            htmlBody += "  </td>   ";
+                            if (autCA.getAr_foto() == null) {
+                                htmlBody += " <td>";
+                                htmlBody += " <img class='user_avatar_" + autCA.getId_trabajador() + "' src='../../img/avatar_default.jpg'  width='30'  height='30'>";
+                                htmlBody += "</td>";
+                            } else {
+                                htmlBody += " <td>";
+                                htmlBody += "   <img class='user_avatar_" + autCA.getId_trabajador() + "' src='../../Archivo/Fotos/" + autCA.getAr_foto() + "'  width='30'  height='30'>";
+                                htmlBody += " </td>";
+                            }
+                            htmlBody += "  <td >" + autCA.getAp_paterno() + " " + autCA.getAp_materno() + " " + autCA.getNo_trabajador() + "</td>";
+                            htmlBody += " <td >" + autCA.getNo_puesto() + "</td>";
+                            htmlBody += "  <td >" + autCA.getNo_area() + "</td>";
+                            htmlBody += "<td >" + autCA.getNo_dep() + "</td>";
+                            htmlBody += " <td >" + autCA.getNo_req() + "</td>";
+                            htmlBody += " <input type='hidden' class='val_aut" + (f + 1) + " valAut' "
+                                    + " value='&IDDETALLE_REQ_PROCESO=" + autCA.getId_detalle_req_proceso() + "&IDDETALLE_DGP=" + autCA.getId_dgp() + "&p==a.getId_puesto()+"
+                                    + "&COD=" + autCA.getCo_pasos() + "&IDPASOS=" + autCA.getId_pasos() + "&NROPASO=" + autCA.getNu_pasos() + "&IDTR=" + autCA.getId_trabajador() + "'/>";
+                            htmlBody += "    <input type='hidden' class='val_firm" + (f + 1) + "' value='&IDDETALLE_DGP=" + autCA.getId_dgp() + "&IDTR=" + autCA.getId_trabajador() + "'/>";
+                            htmlBody += "   <input type='hidden' class='correos_" + (f + 1) + " correoTrabajador' value='&IDTR=" + autCA.getId_trabajador() + "&co_inst=" + autCA.getDi_correo_inst()
+                                    + "&co_pers=" + autCA.getDi_correo_personal() + "'/>";
+                            htmlBody += " <td class='text-info'>";
+                            htmlBody += "    <a href='../../trabajador?idtr=" + autCA.getId_trabajador() + "&IDDETALLE_REQ_PROCESO=" + autCA.getId_detalle_req_proceso() + "&iddetalle_dgp=" + autCA.getId_dgp() + "&p="
+                                    + autCA.getId_puesto() + "&cod=" + autCA.getCo_pasos() + "&idpasos=" + autCA.getId_pasos() + "+&autorizacion=1&opc=aut&nup=" + autCA.getNu_pasos() + "'>";
+                            htmlBody += "       <strong>" + autCA.getDe_pasos() + "</strong>";
+                            htmlBody += "   </a>";
+                            htmlBody += "  </td>";
+                            htmlBody += "   <td >"+autCA.getFe_creacion()+"</td>";
+                            htmlBody += " <td>";
+                            if (autCA.getLi_motivo() != null) {
+
+                                if (autCA.getLi_motivo().trim().equals("1")) {
+                                    htmlBody += " Trabajdor Nuevo";
+                                }
+                                if (autCA.getLi_motivo().trim().equals("2")) {
+                                    htmlBody += "Renovación";
+                                }
+                            } else {
+                                htmlBody += "No registrado";
+                            }
+                            htmlBody += " </td> ";
+                            htmlBody += "  <td>";
+                            if (autCA.getEs_mfl() != null) {
+                                if (autCA.getEs_mfl().trim().equals("0")) {
+                                    htmlBody += "No";
+                                }
+                                if (autCA.getEs_mfl().trim().equals("1")) {
+                                    htmlBody += "Si";
+                                }
+                            } else {
+                                htmlBody += "No registrado";
+                            }
+                            htmlBody += " </td> ";
+                            if (iddep.equals("DPT-0019")) {
+                                htmlBody += "<td>";
+                                if (autCA.getVal_plazo() > 0) {
+                                    htmlBody += " <a href='../../plazo_dgp?opc=Ver_detalle_plazo&iddgp=" + autCA.getId_dgp() + "' class='label label-danger popoverPlazo'  data-toggle='popover' data-trigger='hover' data-placement='top' title='Record de plazos cumplidos' data-content=\"" + autCA.getVer_list_plazo() + "\" data-html='true'> <strong>No cumplio plazos</strong></a>";
+                                    htmlBody += " </td>";
+                                } else if (autCA.getVal_plazo() == 0) {
+                                    htmlBody += "   <a href='../../plazo_dgp?opc=Ver_detalle_plazo&iddgp=" + autCA.getId_dgp() + "' class='label label-primary popoverPlazo' data-toggle='popover' data-trigger='hover' data-placement='top' title='Record de plazos cumplidos' data-content=\"" + autCA.getVer_list_plazo()+ "\" data-html='true'> <strong>Cumplio plazos</strong></a></td>";
+                                }
+                                if (idrol.trim().equals("ROL-0006")) {
+
+                                    htmlBody += "<td >";
+                                    if (Integer.parseInt(autCA.getElab_contrato()) == 0) {
+                                        htmlBody += "No";
+                                    } else {
+                                        htmlBody += "Si";
+                                    }
+                                    htmlBody += "  </td> ";
+                                    htmlBody += " <td>";
+                                    if (Integer.parseInt(autCA.getVal_firm_contrato()) == 0) {
+                                        if (Integer.parseInt(autCA.getElab_contrato()) == 0) {
+                                            htmlBody += "  !Falta procesar¡";
+                                        } else {
+                                            htmlBody += "    <div class='smart-form'>";
+                                            htmlBody += "    <label class='toggle'><input type='checkbox' value='" + (f + 1) + "'  class='firm_contr'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label>";
+                                            htmlBody += "   </div>";
+                                        }
+                                    } else {
+                                        htmlBody += " Si";
+                                    }
+                                    htmlBody += "    </td>";
+                                    htmlBody += "    <td>";
+                                    if (Integer.parseInt(autCA.getVal_firm_contrato()) != 0 & Integer.parseInt(autCA.getElab_contrato()) != 0) {
+
+                                        htmlBody += "    <div class='smart-form'>";
+                                        htmlBody += "       <label class='toggle'><input type='checkbox' value='" + (f + 1) + "'  class='env_rem" + (f + 1) + "envioRem'  name='estado' name='checkbox-toggle' ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label>";
+                                        htmlBody += " </div>";
+
+                                    } else {
+                                        htmlBody += "¡Falta Procesar!";
+                                    }
+
+                                    htmlBody += " </td>";
+                                    htmlBody += " <td>";
+
+                                    if (autCA.getVal_contrato_adjunto() == 0) {
+                                        htmlBody += " No";
+                                    } else {
+                                        htmlBody += "  Si";
+                                    }
+
+                                    htmlBody += "  </td>";
+                                }
+                                if (idrol.trim().equals("ROL-0009")) {
+                                    if (autCA.getVal_cod_aps_empleado() == 0) {
+                                        num_cod_aps++;
+                                        htmlBody += " <td>";
+                                        htmlBody += "  <input type='text' name='cod_aps' maxlength='6' class='cod_aps" + (f + 1) + " inp_cod_aps' style='width:50px'/>";
+                                        htmlBody += "</td>";
+                                        htmlBody += " <input type='hidden' name='idtr'  class='idtr" + (f + 1) + " idTrabajador' value='" + autCA.getId_trabajador() + "' />";
+                                    } else {
+                                        htmlBody += "  <td>";
+                                        htmlBody += "  <strong>" + autCA.getCo_aps() + "</strong>";
+                                        htmlBody += "  </td>";
+                                    }
+                                }
+                                if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {
+                                    if (autCA.getVal_cod_huella() == 0) {
+                                        num_cod_huella++;
+
+                                        htmlBody += "  <td>";
+                                        htmlBody += "   <input type='text' name='cod_huella' maxlength='6' class='form-control cod_huella" + (f + 1) + " inp_cod_huella' style='width:70px'/>";
+                                        htmlBody += "   </td>";
+                                        htmlBody += " <input type='hidden' name='idtr'  class='idtr=" + (f + 1) + " value='" + autCA.getId_trabajador() + "' />";
+                                    } else {
+                                        htmlBody += "  <td class='' >";
+                                        htmlBody += "  <div class='input-group' >";
+
+                                        htmlBody += "   <input class='form-control' placeholder=''  style='width: 70px;' type='text' value='" + autCA.getCo_huella_digital() + "'>";
+                                        htmlBody += "     <span class='input-group-addon'  >";
+                                        htmlBody += "     <span class='checkbox'>";
+                                        htmlBody += " <label >";
+                                        htmlBody += "   <input type='checkbox' class='checkbox style-0 cbHuellaItem' >";
+                                        htmlBody += "       <span></span>";
+                                        htmlBody += "    </label>";
+                                        htmlBody += "  </span>";
+                                        htmlBody += "  </span>";
+
+                                        htmlBody += "  </div>";
+                                        htmlBody += "  </td>";
+                                    }
+                                }
+                                htmlBody += " </tr>";
+                            }
+                        }
+                        rpta.put("htmlBody", htmlBody);
+                        rpta.put("access", true);
                     }
                     if (opc.equals("mens_cod_aps")) {
                         String idpu = e.Id_Puesto_Personal(ide);

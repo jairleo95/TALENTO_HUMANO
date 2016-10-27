@@ -29,6 +29,7 @@ import pe.edu.upeu.application.dao.ContratoDAO;
 import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceContratoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
+import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Renombrar;
 
 /**
@@ -69,9 +70,7 @@ public class Cdocumento_adjunto extends HttpServlet {
             }
         } else {
 
-            //String ubicacion = "/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
-            String ubicacion = getServletConfig().getServletContext().getRealPath("/") + "Vista/Contrato/Contratos_Adjuntos/";
-            //String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Contrato\\Contratos_Adjuntos";
+            String ubicacion = FactoryConnectionDB.url+ "Contratos_Adjuntos/";
             System.out.println("Enter to Save Contrato");
 
             DiskFileItemFactory f = new DiskFileItemFactory();
