@@ -137,7 +137,7 @@
         %>
         <!--Begin Detalle Trabajador-->
 
-        <div class="jarviswidget jarviswidget-color-darken" id="wid-id-3" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+        <div class="jarviswidget jarviswidget-color-darken slideInDown fast animated" id="wid-id-3" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
             <header>
                 <span class="widget-icon"> <i class="fa fa-user"></i> </span>
                 <h2 class="font-md"><strong>Datos del</strong> <i>Trabajador</i></h2>				
@@ -449,7 +449,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Fecha de Inicio:</label>
-                                        <input type="text" class="fecha form-control fe_desde_p frompicker" value="" name="DESDE"data-mask="99/99/9999" data-mask-placeholder= "_" required />
+                                        <input type="text" class="fecha form-control fe_desde_p frompicker" value="" name="DESDE" data-mask="99/99/9999" data-mask-placeholder= "_" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">

@@ -21,8 +21,7 @@
         <title>Datos generales</title>
     </head>
 
-    <body>
-        <form  align="center" ethod="post" action="" >
+    <body class="slideInDown fast animated">
             <table class="table table-striped table-hover table-responsive  ">
 
                 <%String edit = request.getParameter("edit");
@@ -185,7 +184,7 @@
                 </tr>
                 <%}%>
             </table>
-        </form>
+    
 
     </body>
 </html>

@@ -20,7 +20,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <meta charset="windows-1252">
+        <meta charset="windows-1252">
         <link type="text/css" rel="stylesheet" href="../../css/Css_Detalle/CSS_DETALLE.css">  
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
@@ -30,14 +30,13 @@
 
     </head>
     <body>
-
-        <form align="center" action="../../trabajador"  >
-            <table class="table table-hover table-striped table-bordered table-responsive" style="border-radius: 30px ">
+        
+        <form  action="../../trabajador"  >
+            <table class="table table-hover table-striped table-bordered table-responsive slideInDown fast animated">
                 <%for (int index = 0; index < ListaridTrabajador.size(); index++) {
                         V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                         trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
                 %>   
-
                 <tr>
                     <td >
                         <div class="title">Direccion Domicilio Actual</div>
@@ -45,20 +44,21 @@
 
                     <%String IDTR = trb.getId_trabajador();%>
                     <td>
-                        <a class="btn btn-success btn-labeled" href="../../trabajador?opc=Editar_Asp_Soc&idtr=<%=IDTR%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </a>
+                        <a class="btn btn-primary btn-labeled" href="../../trabajador?opc=Editar_Asp_Soc&idtr=<%=IDTR%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </a>
                     </td>
 
                 </tr> 
-                <tr><td class="text-info">Dirección :</td><td>
+                <tr>
+                    <td class="text-info">Dirección :</td><td>
                         <%
                             if (trb.getLi_di_dom_a_d1() != null) {
                                 for (int i = 0; i < List_Dom_D1_Id.size(); i++) {
                                     Via v = new Via();
-                                    v = (Via)List_Dom_D1_Id.get(i);
+                                    v = (Via) List_Dom_D1_Id.get(i);
                                     if (v.getId_via().trim().equals(trb.getLi_di_dom_a_d1().trim())) {
                                         out.println(v.getDe_via());
                                     }
-                                    
+
                                 }
                             }
                             //out.print(List_Dom_D1_Id.size());
@@ -67,7 +67,7 @@
                             } else {
                                 out.print(" -- ");
                             }
-                             //out.print(List_Dom_D3_Id.size());
+                            //out.print(List_Dom_D3_Id.size());
                             if (trb.getLi_di_dom_a_d3() != null) {
                                 for (int j = 0; j < List_Dom_D3_Id.size(); j++) {
                                     String num = Integer.toString(j + 1);
@@ -76,58 +76,58 @@
                                     }
                                 }
                             }
-                            
+
                             if (trb.getDi_dom_a_d4() != null) {
                                 out.print(" " + trb.getDi_dom_a_d4());
                             } else {
                                 out.print(" -- ");
                             }
-                            
+
                             if (trb.getLi_di_dom_a_d5() != null) {
                                 for (int p = 0; p < List_Dom_D5_Id.size(); p++) {
                                     Zona z = new Zona();
-                                    z = (Zona)List_Dom_D5_Id.get(p);
+                                    z = (Zona) List_Dom_D5_Id.get(p);
                                     if (trb.getLi_di_dom_a_d5().trim().equals(z.getId_zona().trim())) {
                                         out.println(z.getDe_zona());
                                     }
                                 }
                             }
-                            
+
                             if (trb.getDi_dom_a_d6() != null) {
                                 out.print(" " + trb.getDi_dom_a_d6());
                             } else {
                                 out.print(" -- ");
                             }
-                            
+
                         %></td></tr>
 
                 <tr><td class="text-info">Referencia:</td><td><%if (trb.getDi_dom_a_ref() != null) {
                         out.print(trb.getDi_dom_a_ref());
                     } else {
-                        out.print("NO REGISTRADO");
+                        out.print("No registrado");
                     }%></td></tr>
                 <tr><td class="text-info">Dpto / Prov / Dtto:</td>
                     <%
                         for (int h = 0; h < List_Ubigeo.size(); h++) {
                             V_Ubigeo vu = new V_Ubigeo();
                             vu = (V_Ubigeo) List_Ubigeo.get(h);
-                            
-        if (trb.getId_di_dom_a_distrito().trim().equals(vu.getId_distrito().trim())) {%>
+
+                            if (trb.getId_di_dom_a_distrito().trim().equals(vu.getId_distrito().trim())) {%>
                     <td><%=vu.getNo_departamento() + " / " + vu.getNo_provincia() + " / " + vu.getNo_distrito()%></td> 
                     <%}
                         }%>
                 </tr>
-                <tr><td colspan="2"><div class="title">Direccion Segun Dni</div></td></tr>
+                <tr><td ><div class="title">Direccion Segun Dni</div></td></tr>
                 <tr><td class="text-info">Dirección :</td><td>
                         <%
                             if (trb.getLi_di_dom_leg_d1() != null) {
                                 for (int i = 0; i < List_Dom_D1_Id.size(); i++) {
                                     Via v = new Via();
-                                    v = (Via)List_Dom_D1_Id.get(i);
+                                    v = (Via) List_Dom_D1_Id.get(i);
                                     if (v.getId_via().trim().equals(trb.getLi_di_dom_leg_d1().trim())) {
                                         out.println(v.getDe_via());
                                     }
-                                    
+
                                 }
                             }
                             if (trb.getDi_dom_leg_d2() != null) {
@@ -135,7 +135,7 @@
                             } else {
                                 out.print(" -- ");
                             }
-                            
+
                             if (trb.getLi_di_dom_leg_d3() != null) {
                                 for (int j = 0; j < List_Dom_D3_Id.size(); j++) {
                                     String num = Integer.toString(j + 1);
@@ -144,17 +144,17 @@
                                     }
                                 }
                             }
-                            
+
                             if (trb.getDi_dom_leg_d4() != null) {
                                 out.print(" " + trb.getDi_dom_leg_d4());
                             } else {
                                 out.print(" -- ");
                             }
-                            
+
                             if (trb.getLi_di_dom_leg_d5() != null) {
                                 for (int c = 0; c < List_Dom_D5_Id.size(); c++) {
                                     Zona z = new Zona();
-                                    z = (Zona)List_Dom_D5_Id.get(c);
+                                    z = (Zona) List_Dom_D5_Id.get(c);
                                     if (trb.getLi_di_dom_leg_d5().trim().equals(z.getId_zona().trim())) {
                                         out.println(z.getDe_zona());
                                     }
@@ -162,29 +162,30 @@
                             } else {
                                 out.print("--");
                             }
-                            
+
                             if (trb.getDi_dom_leg_d6() != null) {
                                 out.print(" " + trb.getDi_dom_leg_d6());
                             } else {
                                 out.print(" -- ");
                             }
-                            
+
 
                         %></td></tr>
                 <tr><td class="text-info">Dpto / Prov / Dtto</td>
-                    <% if(trb.getId_di_dom_leg_distrito()!=null){
+                    <% if (trb.getId_di_dom_leg_distrito() != null) {
                             for (int h = 0; h < List_Ubigeo.size(); h++) {
-                            V_Ubigeo vu = new V_Ubigeo();
-                            vu = (V_Ubigeo) List_Ubigeo.get(h);
-                            if (trb.getId_di_dom_leg_distrito().trim().equals(vu.getId_distrito().trim())) {%>
+                                V_Ubigeo vu = new V_Ubigeo();
+                                vu = (V_Ubigeo) List_Ubigeo.get(h);
+                                if (trb.getId_di_dom_leg_distrito().trim().equals(vu.getId_distrito().trim())) {%>
                     <td><%=vu.getNo_departamento() + " / " + vu.getNo_provincia() + " / " + vu.getNo_distrito()%></td> 
                     <%}
-                        }}
+                            }
+                        }
                     %>
 
                 </tr>
 
-                <tr><td colspan="2"><div class="title">Ingresos de Quinta Categoria</div></td></tr> 
+                <tr><td ><div class="title">Ingresos de Quinta Categoria</div></td></tr> 
                 <tr><td class="text-info">Empresa:</td><td><%if (trb.getCa_ing_qta_cat_empresa() == null) {
                         out.print("NO TIENE");
                     } else {
@@ -207,9 +208,9 @@
                     </td>
                     <td >
                         <input type="hidden" name="idtr" value="<%=IDTR%>">  
-                        <input type="hidden" type="submit" name="opc" value="Editar_Asp_Rel">  
+                        <input type="hidden"  name="opc" value="Editar_Asp_Rel">  
                         <input  type="hidden"  value="EDITAR">  
-                        <button class="btn btn-success btn-labeled" href="../../trabajador?opc=Editar_Asp_Soc&idtr=<%=IDTR%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </button>
+                        <button class="btn btn-primary btn-labeled"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </button>
                     </td>
                 </tr>
                 <tr><td class="text-info">Religión:</td><td><%
@@ -250,7 +251,7 @@
                     } else {
                         out.print("NO REGISTRADO");
                     }
-                    
+
                         %></td></tr>
                 <tr><td class="text-info">Nombres y Apellidos:</td><td><%if (trb.getNo_ap_autoridad() == null) {
                         out.print("NO REGISTRADO");
@@ -267,8 +268,7 @@
                 %>
                 <tr></tr>
             </table>
-        </form>
-
+                </form>
     </body>
 </html>
 <%} else {

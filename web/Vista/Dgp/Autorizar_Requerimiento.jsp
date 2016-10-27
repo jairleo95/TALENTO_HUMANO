@@ -134,7 +134,7 @@
                             data-widget-sortable="false"
 
                             -->
-                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-2"   data-widget-editbutton="false"  data-widget-deletebutton="false"  >
+                            <div class="jarviswidget jarviswidget-color-white" id="wid-id-2"   data-widget-editbutton="false"  data-widget-deletebutton="false"  >
                                 <header class="headerReqAutorizado">
                                     <span class="widget-icon"> <i class="glyphicon glyphicon-inbox"></i> </span>
                                     <h2 class="font-md"><strong>Requerimientos por </strong> <i>Autorizar</i></h2>
@@ -150,7 +150,7 @@
                                         <li>
                                             <a data-toggle="tab" href="#hr2"> <i class="fa fa-lg fa-arrow-circle-o-up"></i>
                                                 <span class="hidden-mobile hidden-tablet"> Carga académica</span>
-                                                <sup class="badge bg-color-red bounceIn animated badgeCAcademicoAutorizar" style="display: none" >0</sup></a>
+                                                <sup class="badge bg-color-red bounceIn animated badgeAutCAcademico" style="display: none" >0</sup></a>
                                         </li>
 
                                     </ul>
@@ -177,9 +177,10 @@
                                                         <tr>
                                                             <th class='hasinput' colspan='14' style='width:95%' ></th>
                                                             <th class='hasinput'>
+                                                    <center>
                                                                 <button   rel="tooltip" data-placement="left" data-original-title="Autorizar y Procesar codigo de huella digital" 
-                                                                          class='btn btn-warning btn-circle btn-lg  btn_cod_huella'>
-                                                                    <i class='glyphicon glyphicon-ok'></i></button>
+                                                                          class='btn btn-warning btn-circle btn-sm  btn_cod_huella'>
+                                                                    <i class='glyphicon glyphicon-ok'></i></button></center>
                                                             </th>
                                                         </tr>
                                                         <%}%>
@@ -188,7 +189,7 @@
                                                             <th class='hasinput' colspan='14' style='width:95%' ></th>
                                                             <th class='hasinput'  style='' >
                                                                 <button   rel="tooltip" data-placement="left" data-original-title="Autorizar y Procesar código aps"
-                                                                          class='btn bg-color-magenta txt-color-white btn-circle btn-lg  btn_cod_aps'>
+                                                                          class='btn bg-color-magenta txt-color-white btn-circle btn-sm  btn_cod_aps'>
                                                                     <i class='glyphicon glyphicon-ok'></i></button>
                                                             </th>
                                                         </tr>

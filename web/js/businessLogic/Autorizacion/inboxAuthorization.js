@@ -142,9 +142,15 @@ function loadDatatableCargaAcademica() {
                 $(".tHeadAutCA").append(data.htmlHeader);
                 $(".tBodyAutCA").append(data.htmlBody);
                 $(".popoverPlazo").popover({
-                     html : true
+                    html: true
                 });
-                $(".tableAutCargaAcademica").DataTable();
+                $(".tableAutCargaAcademica").DataTable({
+                    "initComplete": function (settings, json) {
+                          var api = this.api();
+                          console.log(api.rows());
+                        $(".badgeAutCAcademico").text(api.data.length).show();
+                    }
+                });
             }
         }
     });
@@ -356,12 +362,12 @@ function sendEmail(dataRequest, callback) {
 }
 
 $(document).ready(function () {
- 
+
     statusBtnSendToRem();
     statusBtnSendFirma();
     statusFirmaAndRem();
     loadDatatableCargaAcademica();
-       pageSetUp();
+    pageSetUp();
     $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
         $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
     });
