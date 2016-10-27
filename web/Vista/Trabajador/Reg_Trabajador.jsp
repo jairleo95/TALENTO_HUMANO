@@ -243,8 +243,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-calendar fa-lg fa-fw"></i><label class="edad"></label></span>
 
-                                                                            <input type="text" name="FECHA_NAC" required=""  id="edad"   class="simple-field-data-mask from-datepicker form-control input-group-sm datePickerInput"
-                                                                                   data-mask="99/99/9999" data-mask-placeholder= "_"  >
+                                                                            <input type="text" name="FECHA_NAC" required=""  id="edad" placeholder="Fecha de Nacimiento" class="simple-field-data-mask from-datepicker form-control input-group-sm fechapicker" data-mask="00/00/0000" autocomplete="off" >
 
                                                                         </div>
                                                                     </div>
@@ -296,7 +295,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
-                                                                            <select class="form-control input-group-sm" id="pro_nac" name=""   required="">
+                                                                            <select class="form-control input-group-sm" id="pro_nac" name="" id="dist_nac" required="">
                                                                                 <option value="" selected="selected">[Provincia]</option>
 
                                                                             </select>
@@ -331,7 +330,7 @@
                                                                                         Tipo_Documento tdoc = new Tipo_Documento();
                                                                                         tdoc = (Tipo_Documento) Listar_tipo_doc.get(h);
                                                                                         if (tidoc == null) {
-
+                                                                                            
                                                                                             if (tdoc.getId_tipo_doc_ident().trim().equals("1")) {
                                                                                 %>
                                                                                 <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
@@ -354,7 +353,7 @@
                                                                                 <%} else if (tidoc.equals("PAS")) {
                                                                                 %>
 
-                                                                                <%
+                                                                                <%    
                                                                                     if (tdoc.getId_tipo_doc_ident().trim().equals("4")) {
                                                                                 %>
                                                                                 <option selected="selected" value="<%=tdoc.getId_tipo_doc_ident().trim()%>"><%=tdoc.getDe_tdoc_abreviada()%></option>
@@ -391,7 +390,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-list-alt fa-lg fa-fw"></i></span>
-                                                                            <input type="date" name="FE_CAD" id="fec"  class="form-control input-group-sm" >
+                                                                            <input type="date" name="FE_CAD" id="fec"  placeholder="Fecha de Caducidad"  class="form-control input-group-sm" >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -659,7 +658,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-align-justify fa-lg fa-fw"></i></span>
-                                                                            <textarea name="OTROS_ESTUDIOS"  placeholder="Otros Estudios"  class="form-control input-group-sm"  cols="60" rows="6" maxlength="500"></textarea>
+                                                                            <textarea name="OTROS_ESTUDIOS"  placeholder="Otros Estudios"  class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="500"></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -669,7 +668,7 @@
 
                                                             <h3>Cuenta sueldo </h3>
                                                             <div class="row">
-                                                                <div class="col-sm-4" >
+                                                                <div class="col-sm-4" id="" >
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-credit-card  fa-lg fa-fw"></i></span>
@@ -757,6 +756,7 @@
                                                                             <span class="input-group-addon"><i class="fa fa-pencil fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm"    placeholder="" type="text" name="DIR_DOM_A_D2" id="DOM_A_D2" maxlength="100">
 
+                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1244,8 +1244,7 @@
 
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-calendar fa-lg fa-fw"></i><label class="text_edad"></label></span>
-                                                                            <input id="nac_con" type="text" name="FECHA_NAC_CONYUGUE" data-mask="99/99/9999" data-mask-placeholder= "_" 
-                                                                                   class="date f_nac form-control input-group-sm fe_nac_c datePickerInput" required="">
+                                                                            <input id="nac_con" type="date" name="FECHA_NAC_CONYUGUE" placeholder="Fecha de Nacimiento dd/mm/yy" class="date f_nac form-control input-group-sm fe_nac_c" required="">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1339,8 +1338,7 @@
                                                                     <div class="form-group">
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-calendar fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="FECHA_NAC_H" data-mask="99/99/9999" data-mask-placeholder= "_"  
-                                                                                   class="form-control input-group-sm i_fnac_h formHijo datePickerInput"  />
+                                                                            <input type="date" name="FECHA_NAC_H" placeholder="Fecha de Nacimiento dd/mm/yy"  class="form-control input-group-sm i_fnac_h formHijo"  />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1668,7 +1666,10 @@
     <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script type="text/javascript" src="../../js/Js_Validar/Validar_Formulario.js"></script>
+    <script src="../../js/jquery-ui.js" type="text/javascript"></script>
+    <script src="../../js/jquery.mask.js" type="text/javascript"></script>
     <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
+
     <script type="text/javascript" src="../../js/Js_Trabajador/Js_Form_Trabajador.js"></script>
     <script type="text/javascript">
                                                     $(".cod_uni").keypress(function (event) {
@@ -1774,7 +1775,7 @@
                                                             $("#es_cuenta").val(1);
                                                         }
                                                         if (banco == '2') {
-
+                                                            
                                                             $("#generar").hide(200);
                                                             $("#subscription").attr('checked', false);
                                                             $("#no_cuen_ban").hide(200);
@@ -1837,10 +1838,10 @@
                                                         // $("#pro_dir_l").val(PRO_ACT);
                                                     }
                                                     function nobackbutton() {
-
+                                                        
                                                         window.location.hash = "no-back-button";
                                                         window.location.hash = "Again-No-back-button" //chrome
-
+                                                        
                                                         window.onhashchange = function () {
                                                             window.location.hash = "no-back-button";
                                                         }
@@ -1863,7 +1864,7 @@
                                                         }
                                                         return x;
                                                     }
-
+                                                    
                                                     function val_diezmo() {
                                                         var x = false;
                                                         if ($('.cbkDiezmo').is(':visible')) {
@@ -1878,7 +1879,7 @@
                                                         }
                                                         return x;
                                                     }
-
+                                                    
                                                     function list_prov_id_dep(rg, ti, selected, id_select) {
                                                         var data = "id_dep=" + rg + "&opc=dep_nac";
                                                         ti.append('<option value="">Cargando...</option>').val('');
@@ -1897,7 +1898,7 @@
                                                                         ti.append(item);
                                                                     }
                                                                 } else if (selected == "1") {
-
+                                                                    
                                                                     ti.append("<option value=''>[Seleccione]</option>");
                                                                     for (var i = 0; i < lista.length; i++) {
                                                                         if (id_select === lista[i].id) {
@@ -1920,7 +1921,7 @@
                                                         ti.append('<option value="">Cargando...</option>').val('');
                                                         ti.empty();
                                                         $.post("../../ubigeo", data, function (objJson) {
-
+                                                            
                                                             if (objJson.rpta == -1) {
                                                                 alert(objJson.mensaje);
                                                                 return;
@@ -1950,14 +1951,14 @@
                                                             }
                                                         });
                                                     }
-
+                                                    
                                                     //PROVINCIA
                                                     $("#dep_dir_l").change(function () {
                                                         var ti = $("#pro_dir_l");
                                                         var rg = $("#dep_dir_l").val();
                                                         list_prov_id_dep(rg, ti, "0", "");
                                                     });
-
+                                                    
                                                     $(document).ready(function () {
                                                         $("#wizard-1")[0].reset();
                                                         pageSetUp();
@@ -1969,7 +1970,7 @@
                                                                 },
                                                                 FECHA_NAC: {
                                                                     required: true,
-                                                                    // val_fecha: true,
+                                                                    val_fecha: true,
                                                                     val_edad: true
                                                                 }
                                                                 ,
@@ -1978,7 +1979,7 @@
                                                                 }
                                                                 ,
                                                                 FECHA_NAC_CONYUGUE: {
-                                                                    //  val_fecha: true,
+                                                                    val_fecha: true,
                                                                     val_edad: true
                                                                 },
                                                                 wphone: {
@@ -1992,7 +1993,7 @@
                                                                     val_doc: true
                                                                 }, COD_UNI: {
                                                                     val_cod_uni: true
-
+                                                                            
                                                                 }
                                                                 /*, diezmo: {
                                                                  required: true
@@ -2008,7 +2009,7 @@
                                                             },
                                                             highlight: function (element) {
                                                                 $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-
+                                                                
                                                             },
                                                             unhighlight: function (element) {
                                                                 $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
@@ -2023,23 +2024,23 @@
                                                                 }
                                                             }
                                                         });
-
-                                                        /*   jQuery.validator.addMethod("val_fecha", function (value, element) {
-                                                         var d = value.split("-");
-                                                         return this.optional(element) || String(parseInt(d[0])).length === 4;
-                                                         }, "¡Fecha ingresada invalida!");*/
+                                                        
+                                                        jQuery.validator.addMethod("val_fecha", function (value, element) {
+                                                            var d = value.split("-");
+                                                            return this.optional(element) || String(parseInt(d[0])).length === 4;
+                                                        }, "¡Fecha ingresada invalida!");
                                                         jQuery.validator.addMethod("val_edad", function (value, element) {
                                                             return this.optional(element) || calcular_edad(value) > 0;
                                                         }, "¡La edad debe ser mayor a cero!");
-
+                                                        
                                                         jQuery.validator.addMethod("val_doc", function (value, element) {
                                                             return this.optional(element) || val_doc(value);
                                                         }, "¡Numero de documento ya existe!");
                                                         jQuery.validator.addMethod("val_cod_uni", function (value, element) {
                                                             return this.optional(element) || cod_uni_unico();
                                                         }, "¡Código universitario ya existe!");
-
-
+                                                        
+                                                        
                                                         $('.step').click(function () {
                                                             var index = $('#bootstrap-wizard-1').bootstrapWizard('currentIndex');
                                                             if ($(this).find('i').hasClass("fa-check")) {
@@ -2056,7 +2057,7 @@
                                                                             'complete');
                                                                     $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index).find('.step')
                                                                             .html('<i class="fa fa-check"></i>');
-
+                                                                    
                                                                     if ($('.step').eq($('.step').index(this) - 1).find('i').hasClass("fa-check")) {
                                                                         $('#bootstrap-wizard-1').bootstrapWizard('show', $('.step').index(this));
                                                                     }
@@ -2067,7 +2068,7 @@
                                                             var $valid = $("#wizard-1").valid();
                                                             if (!$valid) {
                                                                 $validator.focusInvalid();
-                                                                return false;
+                                                                return true;
                                                             } else {
                                                                 $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
                                                                         'complete');
@@ -2076,7 +2077,7 @@
                                                             }
                                                             return true;
                                                         }
-
+                                                        
                                                         $('#bootstrap-wizard-1').bootstrapWizard({
                                                             'tabClass': 'form-wizard',
                                                             onTabClick: function (tab, navigation, index) {
@@ -2179,21 +2180,21 @@
                                                             $(".numeric,.integer,.positive").removeNumeric();
                                                         }
                                                         );
-
+                                                        
                                                         $("#reli").change(function () {
                                                             if ($(this).val() === "1") {
                                                                 $(".div_diezmo").show(200);
-
+                                                                
                                                             } else {
                                                                 $(".div_diezmo").hide(200);
-
+                                                                
                                                             }
                                                         });//
                                                         $('.cbkDiezmo').click(function () {
                                                             val_diezmo();
                                                         });
                                                         //  }
-
+                                                        
                                                         /*Ubigeo*/
                                                         $("#dep_nac").change(function () {
                                                             var ti = $("#pro_nac");
@@ -2292,7 +2293,7 @@
                                                                 }
                                                             });
                                                         });
-
+                                                        
                                                         $("#nac").change(
                                                                 function () {
                                                                     if ($("#nac").val() !== "NAC-0193") {
@@ -2358,8 +2359,8 @@
                                                             var rg = $("#pro_dir_l").val();
                                                             list_dist_id_prov(rg, ti, "0", "");
                                                         });
-
-
+                                                        
+                                                        
                                                         $(".select-doc").change(
                                                                 function () {
                                                                     $(".doc").val("");
@@ -2385,17 +2386,17 @@
                                                                 $(".doc_c").attr("maxlength", "8");
                                                                 $(".doc_c").attr("minlength", "8");
                                                             } else {
-
+                                                                
                                                                 $(".doc_c").removeNumeric();
                                                                 $(".doc_c").attr("maxlength", "10");
                                                                 $(".doc_c").removeAttr("minlength");
                                                                 //    $(".doc").val("");
                                                             }
-
+                                                            
                                                         }
                                                         );
-
-
+                                                        
+                                                        
                                                         $(".alerta-req").hide(200);
                                                         $("#edad").change(function () {
                                                             $(".alerta-req").hide(200);
@@ -2415,14 +2416,14 @@
                                                                 $("#nom_afp").val("6");
                                                             }
                                                             if ($("#sis_pens").val() === "1") {
-
+                                                                
                                                                 $("#nom_afp").val("");
                                                                 $("#nom_afp").removeAttr("disabled");
                                                                 $(".n_afp").remove();
                                                             }
                                                         }
                                                         );
-
+                                                        
                                                         $("#no_cuen").hide(200);
                                                         $("#no_cuen_ban").hide(200);
                                                         $("#generar").hide(200);
@@ -2460,7 +2461,7 @@
                                                                 $("#igle").removeAttr("required");
                                                             }
                                                         });
-
+                                                        
                                                         $(".i_ndoc_h").numeric(false);
                                                         var p = 1;
                                                         var texto_h = "";
@@ -2507,7 +2508,7 @@
                                                                 if (ap_mat.parents(".form-group").find(".help-block").length === 0) {
                                                                     ap_mat.parents(".form-group").append("<span  class='help-block'>Ingrese un apellido materno</span>");
                                                                 }
-
+                                                                
                                                                 b = false;
                                                             } else {
                                                                 ap_mat.parents(".form-group").find(".help-block").remove();
@@ -2520,7 +2521,7 @@
                                                                 if (nombre.parents(".form-group").find(".help-block").length === 0) {
                                                                     nombre.parents(".form-group").append("<span  class='help-block'>Ingrese un nombre</span>");
                                                                 }
-
+                                                                
                                                                 c = false;
                                                             } else {
                                                                 nombre.parents(".form-group").find(".help-block").remove();
@@ -2533,7 +2534,7 @@
                                                                 if (fe_nac.parents(".form-group").find(".help-block").length === 0) {
                                                                     fe_nac.parents(".form-group").append("<span  class='help-block'>Ingrese fecha de nacimiento</span>");
                                                                 }
-
+                                                                
                                                                 d = false;
                                                             } else {
                                                                 fe_nac.parents(".form-group").find(".help-block").remove();
@@ -2546,7 +2547,7 @@
                                                                 if (sexo.parents(".form-group").find(".help-block").length === 0) {
                                                                     sexo.parents(".form-group").append("<span  class='help-block'>Seleccione un género</span>");
                                                                 }
-
+                                                                
                                                                 e = false;
                                                             } else {
                                                                 sexo.parents(".form-group").find(".help-block").remove();
@@ -2558,7 +2559,7 @@
                                                                 $p.addClass('has-error');
                                                                 if (t_doc.parents(".form-group").find(".help-block").length === 0) {
                                                                     t_doc.parents(".form-group").append("<span  class='help-block'>Seleccione un tipo de documento</span>");
-
+                                                                    
                                                                 }
                                                                 f = false;
                                                             } else {
@@ -2583,7 +2584,7 @@
                                                                 $p.addClass('has-error');
                                                                 if (essalud.parents(".form-group").find(".help-block").length === 0) {
                                                                     essalud.parents(".form-group").append("<span  class='help-block'>Seleccione un item</span>");
-
+                                                                    
                                                                 }
                                                                 h = essalud;
                                                             } else {
@@ -2597,7 +2598,7 @@
                                                                 if (es_sup.parents(".form-group").find(".help-block").length === 0) {
                                                                     es_sup.parents(".form-group").append("<span  class='help-block'>Seleccione un item</span>");
                                                                 }
-
+                                                                
                                                                 i = false;
                                                             } else {
                                                                 es_sup.parents(".form-group").find(".help-block").remove();
@@ -2653,7 +2654,7 @@
                                                                 essalud.val("");
                                                                 es_sup.val("");
                                                                 $(".num_hijo").val(p);
-
+                                                                
                                                                 texto_h = "";
                                                                 //  $(".num_hijo").val($(".tr_item_hijo").length);
                                                                 console.log("p:" + p)
@@ -2672,37 +2673,37 @@
                                                                     $(".btn-mant").append('<button type="button" value="' + $(this).val() + '" class="btn-mod-hijo btn btn-info">Modificar Hijo</button>');
                                                                     $(".btn-mod-hijo").click(function () {
                                                                         if (validarFormHijo()) {
-                                                                            $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
-                                                                            $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
-                                                                            $(".no_h_" + $(this).val()).val(nombre.val());
-                                                                            $(".fe_n_h_" + $(this).val()).val(fe_nac.val());
-                                                                            $(".sex_h_" + $(this).val()).val(sexo.val());
-                                                                            $(".ti_doc_h_" + $(this).val()).val(t_doc.val());
-                                                                            $(".nu_doc_h_" + $(this).val()).val(ndoc.val());
-                                                                            $(".essalud_h_" + $(this).val()).val(essalud.val());
-                                                                            $(".es_sup_h_" + $(this).val()).val(es_sup.val());
-                                                                            $(".td-ap_pat" + $(this).val()).text(ap_pat.val());
-                                                                            $(".td-ap_mat" + $(this).val()).text(ap_mat.val());
-                                                                            $(".td-nom" + $(this).val()).text(nombre.val());
-                                                                            $(".td-fe_nac" + $(this).val()).text(fe_nac.val());
-                                                                            $(".td-sex" + $(this).val()).text($(".i_sexo_h option:selected").html());
-                                                                            $(".td-tdoc" + $(this).val()).text($(".i_tdoc_h option:selected").html());
-                                                                            $(".td-ndoc" + $(this).val()).text(ndoc.val());
-                                                                            $(".td-essalud" + $(this).val()).text($(".i_essalud_h option:selected").html());
-                                                                            $(".td-es_sup" + $(this).val()).text($(".i_es_sup_h option:selected").html());
-                                                                            ap_pat.val("");
-                                                                            ap_mat.val("");
-                                                                            nombre.val("");
-                                                                            fe_nac.val("");
-                                                                            sexo.val("");
-                                                                            t_doc.val("");
-                                                                            ndoc.val("");
-                                                                            essalud.val("");
-                                                                            es_sup.val("");
-                                                                            $(".btn-reg-hijo").show(200);
-                                                                            $(".btn-mod-hijo").remove();
+                                                                         $(".ap_p_h_" + $(this).val()).val(ap_pat.val());
+                                                                        $(".ap_m_h_" + $(this).val()).val(ap_mat.val());
+                                                                        $(".no_h_" + $(this).val()).val(nombre.val());
+                                                                        $(".fe_n_h_" + $(this).val()).val(fe_nac.val());
+                                                                        $(".sex_h_" + $(this).val()).val(sexo.val());
+                                                                        $(".ti_doc_h_" + $(this).val()).val(t_doc.val());
+                                                                        $(".nu_doc_h_" + $(this).val()).val(ndoc.val());
+                                                                        $(".essalud_h_" + $(this).val()).val(essalud.val());
+                                                                        $(".es_sup_h_" + $(this).val()).val(es_sup.val());
+                                                                        $(".td-ap_pat" + $(this).val()).text(ap_pat.val());
+                                                                        $(".td-ap_mat" + $(this).val()).text(ap_mat.val());
+                                                                        $(".td-nom" + $(this).val()).text(nombre.val());
+                                                                        $(".td-fe_nac" + $(this).val()).text(fe_nac.val());
+                                                                        $(".td-sex" + $(this).val()).text($(".i_sexo_h option:selected").html());
+                                                                        $(".td-tdoc" + $(this).val()).text($(".i_tdoc_h option:selected").html());
+                                                                        $(".td-ndoc" + $(this).val()).text(ndoc.val());
+                                                                        $(".td-essalud" + $(this).val()).text($(".i_essalud_h option:selected").html());
+                                                                        $(".td-es_sup" + $(this).val()).text($(".i_es_sup_h option:selected").html());
+                                                                        ap_pat.val("");
+                                                                        ap_mat.val("");
+                                                                        nombre.val("");
+                                                                        fe_nac.val("");
+                                                                        sexo.val("");
+                                                                        t_doc.val("");
+                                                                        ndoc.val("");
+                                                                        essalud.val("");
+                                                                        es_sup.val("");
+                                                                        $(".btn-reg-hijo").show(200);
+                                                                        $(".btn-mod-hijo").remove();   
                                                                         }
-
+                                                                        
                                                                     });
                                                                 });
                                                                 p++;
@@ -2711,10 +2712,10 @@
                                                                 $('.tr-hijo_' + $(this).val()).remove();
                                                                 // $(".num_hijo").val($(".tr_item_hijo").length);
                                                             });
-
-
+                                                            
+                                                            
                                                         });
-
+                                                        
                                                         var b = $(".tbodys");
                                                         $("#btnfiltrar").click(
                                                                 function () {
@@ -2750,6 +2751,7 @@
                                                                     );
                                                                 });
                                                         $(".btn-salir-busc, .close").click(function () {
+                                                            
                                                             $(".select-conyugue").val("0");
                                                         });
                                                         $(".select-conyugue").change(function () {

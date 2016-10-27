@@ -75,7 +75,7 @@
     <body>
     <center>
         <!--begin widget-->
-        <div class="jarviswidget slideInDown fast animated" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+        <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
 
             <header>
                 <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
@@ -106,8 +106,8 @@
                             <center>
                                 <section class="col col-4" id="sec">
                                     <label class="select" >
-                                        <select name="RE_EVALUACION" required="" class="input-sm">
-                                            <option value="" selected=""  disabled="">[Seleccione]</option>
+                                        <select name="RE_EVALUACION" required="" class="input-lg">
+                                            <option value="" selected=""  disabled="">[SELECCIONE]</option>
                                             <option value="0">No es Jefe</option>
                                             <option value="1">Jefe de Sección</option>
                                             <option value="2">Jefe de Area</option>
@@ -140,7 +140,8 @@
         </div>
         <!-- end widget -->
 
-        
+        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
 
     </body>
 </html>

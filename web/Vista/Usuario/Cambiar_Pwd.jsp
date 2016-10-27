@@ -20,7 +20,8 @@
             <div id="content" >
                 <section id="widget-grid" class="">
                     <div class="row">
-                        <div class="well slideInDown fast animated">
+
+                        <div class="well">
                             <h1 class="text-center"><strong>Cambiar Contraseña  </strong> <small>  </small></h1><br>
                             <form class="smart-form form_cambiar_clave" >
                                 <div class="row">
@@ -56,6 +57,7 @@
 
             </div>
         </div>
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -131,9 +133,15 @@
         <script src="..."></script>-->
         <script src="../../js/notification/SmartNotification.min.js"></script>
         <script type="text/javascript">
+
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
             $(document).ready(function () {
+
                 pageSetUp();
+
+
+
                 $(".btn_validar_form ").click(function () {
                     if ($(".form_cambiar_clave").valid()) {
                         $.ajax({

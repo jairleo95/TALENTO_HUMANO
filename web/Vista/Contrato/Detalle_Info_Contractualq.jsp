@@ -148,7 +148,7 @@
 
         </style>
     </head>
-    <body class="slideInDown fast animated">
+    <body>
 
         <%
             String ID_CTO = request.getParameter("id_cto");

@@ -75,9 +75,6 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
       
         <style type="text/css">
-            body{
-                background: white;
-            }
             .text-info{
                 text-align: left;
             }
@@ -97,7 +94,7 @@
                 <center>
                     <div id="content" >
                         <section id="widget-grid" class="">
-                            <div class="row div_dgp slideInDown fast animated">
+                            <div class="row div_dgp">
                                 <form action="../../dgp">
                                     <table class="table table-bordered table-hover table-striped  table-responsive">
                                         <%
@@ -327,7 +324,8 @@
             </div>
 
         </body>
-   
+        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>

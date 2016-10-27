@@ -15,6 +15,7 @@
 <html>
     <head>
         <meta charset="windows-1252">
+        <link type="text/css" rel="stylesheet" href="../../../css/Css_Detalle/CSS_DETALLE.css">
         <!-- Basic Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
@@ -68,10 +69,10 @@
                 V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
                 tr = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(q);
         %>
-        <form  action="../../../familiar">
+        <form align="center" action="../../../familiar">
             <div>
                 <table class="table table-striped table-bordered table-hover" >
-                    <tr><td colspan="2"><h4>Datos de Padre y Madre</h4></td></tr>
+                    <tr><td colspan="2"><div class="title"><h4>DATOS DE PADRE Y MADRE</h4></div></td></tr>
 
                     <tr><td class="text-info">Nombres y Apellidos del padre:</td><td class="text-info-left"><%if (tr.getAp_nombres_padre() != null) {
                             out.print(tr.getAp_nombres_padre());
@@ -90,7 +91,7 @@
                     <tr><td colspan="2"> <a class="btn btn-primary" href="Reg_Padres.jsp?idtr=<%=request.getParameter("idtr")%>">Registrar Padres</a></td></tr>
                     <%}%>
                     <%} else {%>
-                    <tr><td colspan="2"> <a class="btn btn-primary" href="../../../familiar?opc=Modificar_Padres&idtr=<%=request.getParameter("idtr")%>">Modificar Padres</a></td></tr>
+                    <tr><td colspan="2"> <a class="btn btn-success" href="../../../familiar?opc=Modificar_Padres&idtr=<%=request.getParameter("idtr")%>">Modificar Padres</a></td></tr>
                     <%}%>
                 </table>
             </div>
@@ -98,7 +99,7 @@
 
 
             <table  class="table table-striped table-bordered table-hover"  >
-                <tr><td colspan="2"><div class="title"><h4>Datos de Cónyuge</h4></div></td></tr>
+                <tr><td colspan="2"><div class="title"><h4>DATOS DE CONYUGUE</h4></div></td></tr>
                 <%if (tr.getAp_nombres_c() != null) {
                 %>
                 <tr><td class="text-info">Trabaja en UPeU:</td><td class="text-info-left">
@@ -167,7 +168,7 @@
                         %>
                     </td></tr>
 
-                <%} else{%>
+                <%} else {%>
                 <tr><td colspan="2"> <label>Aun no se ha registrado los datos del cónyugue</label><br></td></tr> 
                         <%  if (rol.trim().equals("ROL-0002") || rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") || rol.trim().equals("ROL-0013")) {%>
                 <tr><td colspan="2"> <a class="btn btn-success" href=Reg_Conyugue.jsp?idtr=<%=request.getParameter("idtr")%>">Registrar Cónyugue</a></td></tr>
@@ -177,7 +178,7 @@
                 <%if (tr.getAp_nombres_c() != null ) {%>
                 <input type="hidden" name="idtra" value="<%=tr.getId_trabajador().trim()%>">
                 <input type="hidden" name="opc" value="Editar_Familiar">
-                <tr><td colspan="2"><input class="btn btn-primary" type="submit" value="Modificar Cónyugue"></td></tr>
+                <tr><td colspan="2"><input class="btn btn-success" type="submit" value="Modificar Cónyugue"></td></tr>
                         <%}%>
 
             </table>
@@ -188,19 +189,19 @@
     <center>
 
         <%        if (LISTA_HIJOS.size() != 0) {
-                //        if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") || rol.trim().equals("ROL-0013")) {
+        //        if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") || rol.trim().equals("ROL-0013")) {
                 if (true) {
         %>
         <div class="listar_hijos"></div>
         <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Registrar un hijo</a>
         <%}%>
-        <%} else{%>
+        <%} else {%>
 
-        <span>No se ha registrado ningun Hijo(a)</span><br>
+        <label>No se ha registrado ningun Hijo(a)</label><br>
 
         <%
             //if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") || rol.trim().equals("ROL-0001") || rol.trim().equals("ROL-0013")) {
-            if (true) {
+        if(true){
         %>
         <a href="Reg_Datos_Hijo.jsp?idtr=<%=request.getParameter("idtr")%>" class="btn btn-primary">Registrar Hijos</a>
         <%}%>
@@ -210,7 +211,10 @@
 
 </body>
 <!--================================================== -->
- 
+
+<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script>

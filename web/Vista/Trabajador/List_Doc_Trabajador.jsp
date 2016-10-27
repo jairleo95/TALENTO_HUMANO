@@ -62,6 +62,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+
         <link rel="stylesheet" type="text/css" href="../../js/shadowbox/shadowbox.css"/>
 
     </head>
@@ -85,7 +86,7 @@
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 
-                            <div class="jarviswidget jarviswidget-color-blueDark slideInDown fast animated" id="wid-id-1"        data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false"   data-widget-deletebutton="false" data-widget-colorbutton="false">
+                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1"        data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false"   data-widget-deletebutton="false" data-widget-colorbutton="false">
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -204,6 +205,8 @@
         </div>
         <!--================================================== -->
 
+        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
