@@ -1,12 +1,13 @@
 
-<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
-<%@page import="pe.edu.upeu.application.dao.TrabajadorDAO"%>
-<%@page import="pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO"%>
+
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
 %>
+<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
+<%@page import="pe.edu.upeu.application.dao.TrabajadorDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO"%>
 <%@page import="pe.edu.upeu.application.dao.Tipo_DocumentoDAO"%>
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO"%>
@@ -31,7 +32,7 @@
         <meta name="author" content="">
         <title>Detalle de Trabajador</title>
         <!-- Estilos plantilla-->
-      
+
         <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
@@ -169,7 +170,7 @@
                         <a class="avatar mustang-gallery pull-left" href="../../img/avatar_default.jpg" ><img src="../../img/avatar_default.jpg" class="borde" width="100" height="100" ></a>
                         <div class="foto-user" style="display: none;">
                         </div>
-                        <a class="ver_foto btn bg-color-purple txt-color-white btn-xs">Cambiar Imagen</a>           
+                        <a class="ver_foto btn bg-color-purple txt-color-white btn-xs">Cambiar Foto</a>           
                         <div class="media-body">
                             <%
                                 CConversion c = new CConversion();
@@ -243,7 +244,7 @@
                 <div class="col-md-4">
                     <% InterfaceTrabajadorDAO iTr = new TrabajadorDAO();
                         int porcentaje = iTr.ShowPorcentageTrabajador(idtr);%>
-                    <center><strong>Datos Completados: </strong><br>
+                    <center><strong>Completado: </strong>
                         <div class="showPorcentage">
                             <div class="easy-pie-chart txt-color-blue easyPieChart pcDatosCompTrabajador" data-percent="<%=porcentaje%>" data-pie-size="100"  >
                                 <span class="percent percent-sign txt-color-blue font-lg semi-bold spDatosCompTrabajador"><%=porcentaje%></span>
@@ -448,13 +449,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Fecha de Inicio:</label>
-                                        <input type="text" class="simple-field-data-mask fecha form-control fe_desde_p topicker" value="" name="DESDE" data-mask="00/00/0000" autocomplete="off" required />
+                                        <input type="text" class="fecha form-control fe_desde_p frompicker" value="" name="DESDE"data-mask="99/99/9999" data-mask-placeholder= "_" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Fecha de Cese:</label>
-                                        <input type="text" class="simple-field-data-mask fecha1 form-control fe_hasta_p frompicker" value="" name="HASTA" data-mask="00/00/0000" autocomplete="off" required />
+                                        <input type="text" class="fecha1 form-control fe_hasta_p topicker" value="" name="HASTA" data-mask="99/99/9999" data-mask-placeholder= "_" required />
                                     </div>
                                 </div>
                             </div>
@@ -534,8 +535,6 @@
         <div class="div_dialog"></div>
         <input  value="<%out.print(FactoryConnectionDB.url_archivos);%>" type="hidden" class="url_archivo"/> 
         <!-- #dialog-message -->
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -576,8 +575,8 @@
         <!-- JQUERY VALIDATE -->
         <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-        <!-- JQUERY MASKED INPUT 
-        <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
+        <!-- JQUERY MASKED INPUT -->
+        <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
         <!-- JQUERY SELECT2 INPUT 
         <script src="../../js/plugin/select2/select2.min.js"></script>-->
@@ -607,25 +606,19 @@
         <!-- Voice command : plugin -->
         <script src="../../js/speech/voicecommand.min.js"></script>
 
-    PAGE RELATED PLUGIN(S) 
+        <!--    PAGE RELATED PLUGIN(S) -->
         <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
         <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
-        
-        
         <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
-      
-
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-        <script src="../../js/shadowbox/shadowbox.js" type="text/javascript"></script>
-        <script src="../../js/JQuery/jquery.session.js" type="text/javascript"></script>
+        <script type="text/javascript" src="../../js/shadowbox/shadowbox.js" ></script>
+        <script  type="text/javascript" src="../../js/JQuery/jquery.session.js"></script>
         <script type="text/javascript" src="../../js/Js_Trabajador/Js_Trabajador.js"></script>
         <script type="text/javascript" src="../../js/Js_Autorizacion/Js_Autorizacion.js"></script>
         <script type="text/javascript" src="../../js/Js_Academico/Js_Carga_Academica.js"></script>
-        <script src="../../js/jquery-ui.js" type="text/javascript"></script>
-        <script src="../../js/jquery.mask.js" type="text/javascript"></script>
         <script type="text/javascript">
         var url_archivos = $(".url_archivo").val() + "Fotos/";
         var idtrl = $(".idtr").val().trim();

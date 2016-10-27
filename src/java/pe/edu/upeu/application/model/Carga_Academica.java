@@ -51,14 +51,14 @@ public class Carga_Academica {
 
     public Carga_Academica() {
         this.nu_doc = "";
-        this.es_tipo_doc = es_tipo_doc;
+        this.es_tipo_doc = "";
         this.no_trabajador = "";
         this.ap_paterno = "";
         this.ap_materno = "";
         this.no_eap = "";
         this.no_facultad = "";
         this.de_condicion = "";
-        this.de_condicion = de_carga;
+        this.de_condicion = "";
         this.id_proceso_carga_ac = "";
         this.id_trabajador = "";
         this.id_situacion_educativa = "";

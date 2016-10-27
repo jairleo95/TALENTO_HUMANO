@@ -10,7 +10,6 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Carga Académica</title>
-
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -47,9 +46,7 @@
         <div id="content">
             <div class="row">
                 <div class="col-sm-12">
-
                     <div class="well">
-
                         <h1><span class="semi-bold">Reporte</span> <i class="ultra-light">Carga Académica</i> (Docentes) <sup class="badge bg-color-red bounceIn animated">v 2.0</sup> <br>
                             <small class="text-danger slideInRight fast animated"><strong>Inicio de contratación</strong></small></h1>
                         <div class="row">
@@ -90,7 +87,6 @@
                             </header>
                             <div class="no-padding">
                                 <div class="widget-body">
-                                    <div id="myTabContent" class="tab-content">
                                         <div class="tab-pane fade active in padding-10 no-padding-bottom" id="s1">
                                             <table   class="table table-striped table-bordered table-hover datatableRepCargaAcademica" width="100%">
                                                 <thead>
@@ -98,7 +94,7 @@
                                                         <th>Acciones</th>
                                                         <th>Tipo Documento</th>
                                                         <th>N° Documento</th>
-                                                        <th>Apellidos y Nombres</th>
+                                                        <th style="width: 16%">Apellidos y Nombres</th>
                                                         <th>Facultad</th>
                                                         <th>Escuela</th>
                                                         <th>Situación Educativa</th>
@@ -117,9 +113,9 @@
                                                             ca = (Carga_Academica) ListCarAca.get(i);
                                                     %>
                                                     <tr >
-                                                        <td>
-                                                            <div class="btn-group">
-                                                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                        <td>  
+                                                            <div class="btn-group"> 
+                                                                <button class="btn btn-primary dropdown-toggle bounceIn animated" data-toggle="dropdown">
                                                                     <i class="fa fa-gear fa-lg"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu">
@@ -131,7 +127,9 @@
                                                                     <li class="divider"></li>
                                                                     <li>
                                                                     <li>
-                                                                        <a href="" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" >Carga Academica</a>
+                                                                        <a href="" data-toggle="modal" data-target="#myModal" data-backdrop="static" 
+                                                                           data-keyboard="false" class="btnCargaAcademica"
+                                                                           data-valor="&nro_doc=<%=ca.getNu_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>&idtr=<%=ca.getId_trabajador()%>&ciclo=<%=ca.getDe_carga()%>"  >Carga Academica</a>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -139,7 +137,8 @@
                                                         </td>
                                                         <td><%=ca.getEs_tipo_doc()%></td>
                                                         <td><%=ca.getNu_doc()%></td>
-                                                        <td><%=ca.getAp_paterno() + " " + ca.getAp_materno() + " " + ca.getNo_trabajador()%></td>
+                                                        <td><label><%=ca.getAp_paterno() + " " + ca.getAp_materno() + " " + ca.getNo_trabajador()%> </label>
+                                                            <sup class="badge bg-color-greenLight bounceIn animated">2</sup></td>
                                                         <td><%=ca.getNo_facultad()%></td>
                                                         <td><%=ca.getNo_eap()%></td>
                                                         <td><%=ca.getNo_s_educativa()%></td>
@@ -161,12 +160,11 @@
                                                         <th>AP_MATERNO</th>
                                                         <th>NO_FACULTAD</th>
                                                         <th>DE_CARGA</th>
-
                                                     </tr>
                                                 </thead>
                                             </table>
                                         </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -178,44 +176,41 @@
         </div>
 
         <!-------------- Modal  ----------->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
             <div class="modal-dialog" >
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <div class="datos_trabajador text-left">
-                        </div>
-                        <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
+
+                        <h4 class="modalTitle" id="myModalLabel">Académico</h4>
                     </div>
                     <div class="modal-body">
-                        <!--<button class="add-coment btn btn-primary btn-block">Add Comentario</button> -->
-                        <div class="area-coment">
-                            <form class="comentari-form" method="post">
+                        <div class="areaModal">
 
-                            </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" onclick="Registrar()" class="comet btn btn-success">Comentar</button>
+                            <button type="button" onclick="" class="btn btn-success">Aceptar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-----Modal------------------------------------------->
+
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-                                if (!window.jQuery) {
-                                    document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                }
+            if (!window.jQuery) {
+                document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
+            }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-                                if (!window.jQuery.ui) {
-                                    document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                }
+            if (!window.jQuery.ui) {
+                document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+            }
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
@@ -281,164 +276,65 @@
         <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script type="text/javascript">
-                                $(document).ready(function () {
-                                    var opc = "list";
-                                    var dataAditional = "";
-                                    var idRow = "";
-                                    var urlListDatatable = "../usuario/executeCrudUsuario.htm";
-                                    // PAGE RELATED SCRIPTS
-                                    var responsiveHelper_dt_basic = undefined;
-                                    var responsiveHelper_datatable_fixed_column = undefined;
-                                    var responsiveHelper_datatable_col_reorder = undefined;
-                                    var responsiveHelper_datatable_tabletools = undefined;
-                                    var breakpointDefinition = {
-                                        tablet: 1024,
-                                        phone: 480
-                                    };
+            function showCargaAcademica(objBodyPrint, dataAjax) {
+                var url = '../../../carga_academica';
+                var fila = 1;
+                var columna = 0;
+                var g = 0;
+                objBodyPrint.empty();
+                $.ajax({url: "horarioCursosAcademico.html", type: 'POST', success: function (htmlContent, textStatus, jqXHR) {
+                        objBodyPrint.append(htmlContent);
 
-                                    var tableRepAcademico = $('#datatableRepCargaAcademica')
-                                            .DataTable(
-                                                    {
-                                                        "ajax": {
-                                                            "url": urlListDatatable,
-                                                            "type": "POST",
-                                                            "dataSrc": "data",
-                                                            "data": {
-                                                                "opc": "list"
-                                                            }
-                                                        },
-                                                        "columns": [{
-                                                                "data": "personaBean.idPersona"
-                                                            }, {
-                                                                "data": "nombres"
-                                                            }, {
-                                                                "data": "varUsuario"
-                                                            }, {
-                                                                "data": "varClave",
-                                                                "defaultContent": ""
-                                                            }, {
-                                                                "data": "fecInicio"
-                                                            }, {
-                                                                "data": "fecFin"
-                                                            }, {
-                                                                "orderable": false,
-                                                                "data": null,
-                                                                "defaultContent": ""
-                                                            }],
-                                                        "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>"
-                                                                + "t"
-                                                                + "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                                                        "oLanguage": {
-                                                            "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-                                                        },
-                                                        "autoWidth": true,
-                                                        "preDrawCallback": function () {
-                                                            // Initialize the responsive datatables helper once.
-                                                            if (!responsiveHelper_dt_basic) {
-                                                                responsiveHelper_dt_basic = new ResponsiveDatatablesHelper(
-                                                                        $('#dt_basic'),
-                                                                        breakpointDefinition);
-                                                            }
-                                                        },
-                                                        "rowCallback": function (row, data, index) {
-                                                            responsiveHelper_dt_basic.createExpandIcon(row);
-                                                            $('td:eq(0)', row).html(index + 1);
-                                                            console.log(data.personaBean.idPersona);
-                                                            $('td:eq(6)', row)
-                                                                    .html(
-                                                                            '<button class="btn btn-success btn-xs btnEditar" value="' + data.personaBean.idPersona + '" ><i class="fa fa-pencil" ></i></button> '
-                                                                            + '<button class="btn btn-danger btn-xs btnEliminar" value="' + data.personaBean.idPersona + '" ><i class="fa fa-times"></i></button>');
+                        /*test*/
+                        $.post(url, 'opc=getDetCargaAcademica' + dataAjax, function (data) {
+                            var dataList = data.list;
+                            $.each(dataList, function (index, dataItem) {
+                                var myArray = dataItem.de_horario.trim();
+                                console.log(myArray);
+                                $('.bodyCursos').append('' + (g + 1) + '.' + dataItem.no_curso + '</br><li> ' + dataItem.no_eap + '</li><li>' + dataItem.de_tipo_curso + '</li>');
+                                for (var i = 0; i < myArray.length; i++) {
+                                    columna++;
+                                    if (myArray[i] === "1") {
+                                        $(".fila-" + fila + " .columna-" + columna).append('<span class="badge bg-color-blueLight">'+(g + 1)+'</span>');
+                                    }
+                                    if (columna === 7) {
+                                        columna = 0;
+                                        fila++;
+                                    }
+                                }
+                                fila = 1;
+                                columna = 0;
 
-                                                        },
-                                                        "drawCallback": function (oSettings) {
-                                                            responsiveHelper_dt_basic.respond();
-                                                            // var api = this.api();
-                                                            console.log("Enter to drawCallBack")
-                                                            $(".btnEditar")
-                                                                    .click(
-                                                                            function () {
-                                                                                var id = $(this).val();
-                                                                                idRow = $(this).val();
-                                                                                console.log("idEdit : "
-                                                                                        + idRow)
-                                                                                opc = "findById";
-                                                                                $
-                                                                                        .ajax({
-                                                                                            url: "../usuario/executeCrudUsuario.htm",
-                                                                                            data: "opc="
-                                                                                                    + opc
-                                                                                                    + "&id="
-                                                                                                    + id,
-                                                                                            type: "POST",
-                                                                                            success: function (
-                                                                                                    objJson) {
-                                                                                                objJson = JSON
-                                                                                                        .parse(objJson);
-                                                                                                var mensaje = objJson.message;
-                                                                                                var item = objJson.showItem;
-                                                                                                $(
-                                                                                                        ".persona, .select2")
-                                                                                                        .hide();
-                                                                                                $(
-                                                                                                        ".persona")
-                                                                                                        .attr(
-                                                                                                                "disabled",
-                                                                                                                true);
-                                                                                                $(
-                                                                                                        ".personaReadOnly")
-                                                                                                        .show(
-                                                                                                                200);
-                                                                                                $(
-                                                                                                        ".personaReadOnly")
-                                                                                                        .empty();
-                                                                                                $(
-                                                                                                        ".personaReadOnly")
-                                                                                                        .append(
-                                                                                                                "<option>"
-                                                                                                                + item["nombres"]
-                                                                                                                + "</option>");
-                                                                                                $(".user")
-                                                                                                        .val(
-                                                                                                                item["varUsuario"]);
-                                                                                                $('#from')
-                                                                                                        .datepicker(
-                                                                                                                'setDate',
-                                                                                                                item["fecInicio"]);
-                                                                                                $('#to')
-                                                                                                        .datepicker(
-                                                                                                                'setDate',
-                                                                                                                item["fecFin"]);
-                                                                                                formData = $(
-                                                                                                        ".formSubmit")
-                                                                                                        .serialize();
-                                                                                                $(
-                                                                                                        ".btnAgregar")
-                                                                                                        .click();
-                                                                                                opc = "edit";
-                                                                                                dataAditional = "&id="
-                                                                                                        + id;
-                                                                                                fieldUniqueSave = "fieldUniqueEdit";
-                                                                                            }
-                                                                                        });
-                                                                            });
-                                                            $(".btnEliminar")
-                                                                    .click(
-                                                                            function () {
-                                                                                idRow = $(this).val();
-                                                                                console.log("idEdit : "
-                                                                                        + idRow)
-                                                                                deleteRecord(
-                                                                                        idRow,
-                                                                                        "../usuario/executeCrudUsuario.htm",
-                                                                                        "", $("#dt_basic"));
+                                g++;
+                            });
+                        });
 
-                                                                                listPersona()
-                                                                            });
-                                                        }
-                                                    });
-
-                                });
+                    }});
+            }
+            $(document).ready(function () {
+                var opc = "list";
+                var dataAditional = "";
+                var idRow = "";
+                var urlListDatatable = "../usuario/executeCrudUsuario.htm";
+                // PAGE RELATED SCRIPTS
+                var responsiveHelper_dt_basic = undefined;
+                var responsiveHelper_datatable_fixed_column = undefined;
+                var responsiveHelper_datatable_col_reorder = undefined;
+                var responsiveHelper_datatable_tabletools = undefined;
+                var breakpointDefinition = {
+                    tablet: 1024,
+                    phone: 480
+                };
+                var tableRepAcademico = $('.datatableRepCargaAcademica').DataTable();
+                $(".btnCargaAcademica").click(function () {
+                    var objBodyPrint = $(".areaModal");
+                    showCargaAcademica(objBodyPrint, $(this).data("valor"));
+                });
+            });
         </script>
+
+
+
     </body>
 
 </html>

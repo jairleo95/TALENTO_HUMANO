@@ -31,6 +31,10 @@ $(document).ready(function () {
         });
 
     });
+    $('.select-seccion').change(function(){
+        console.log("cambiando horarios");
+        cargar_horarios($('.t_horario'));
+    });
 
 });
 function cargar_horarios(sel, dep, nombre) {

@@ -119,20 +119,10 @@ public class CDocumento_Trabajador extends HttpServlet {
                 }
             } else {
 
-                //------>   ./var/www/html/files/   (con: pwd)
-//                   String ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "Archivo";
-////                 String ubicacion = getServletContext().getRealPath("/")+"Archivo\\Archivo";
-////                 System.out.println(ubicacion+"--ubicacion");
-//                //String ubicacion = "/TALENTO_HUMANO/Vista/Dgp/Documento/Archivo/";
-                // String ubicacion = getServletConfig().getServletContext().getRealPath("/") + "Archivo/Archivo";
-//                //
                 String ubicacion = FactoryConnectionDB.url + "Archivo/";
-//out.print(ubicacion);
                 DiskFileItemFactory f = new DiskFileItemFactory();
                 f.setSizeThreshold(1024);
                 f.setRepository(new File(ubicacion));
-//      f.setRepository( new File(ubicacion + ""));
-
                 ServletFileUpload upload = new ServletFileUpload(f);
                 ServletRequestContext src = new ServletRequestContext(request);
                 List<FileItem> p = upload.parseRequest(src);

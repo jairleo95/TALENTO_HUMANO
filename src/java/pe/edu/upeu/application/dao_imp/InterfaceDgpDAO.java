@@ -37,7 +37,7 @@ public interface InterfaceDgpDAO {
 
     public void HABILITAR_DGP(String IDDGP);
 
-    public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep,String id_dir);
+    public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep,String id_dir, Boolean procAcad);
 
     public List<X_val_tra_dgp> VAL_TRA_DGP(String id_tr);
 
