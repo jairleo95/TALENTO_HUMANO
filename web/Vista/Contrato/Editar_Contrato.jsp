@@ -7,7 +7,7 @@
 <%@page import="pe.edu.upeu.application.model.Direccion"%>
 <%@page import="pe.edu.upeu.application.model.V_Contrato_dgp"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
-
+<%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
 <jsp:useBean id="List_contrato" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Direccion" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="list_reg_labo" scope="session" class="java.util.ArrayList"/>
@@ -15,7 +15,7 @@
 <jsp:useBean id="List_grup_ocu" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="list_cc_x_con" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html >
-
+<html>
     <head>
         <meta charset="windows-1252">
         <title>Editar Contrato</title>
@@ -23,7 +23,7 @@
         <!-- Basic Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
- 
+        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
@@ -108,7 +108,7 @@
                         <!-- end widget edit box -->
                         <!-- widget content -->
                         <div class="widget-body no-padding">
-                             <% CConversion con = new CConversion();
+                            <% CConversion con = new CConversion();
                                 HttpSession sesion = request.getSession(true);
                                 String idrol = (String) sesion.getAttribute("IDROL");
                             %>
@@ -172,9 +172,9 @@
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Desde:
                                                 <%if (a.getFe_desde() != null) {%>
-                                                <input type="text" name="FEC_DESDE" value="<%=(a.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm topicker" data-mask="00/00/0000" autocomplete="off" required="">
+                                                <input type="text" name="FEC_DESDE" value="<%=(a.getFe_desde())%>" class="input-group-sm frompicker" data-mask="99/99/9999" data-mask-placeholder= "_" required="">
                                                 <%} else {%>
-                                                <input type="text" name="FEC_DESDE" class="simple-field-data-mask from-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
+                                                <input type="text" name="FEC_DESDE" class="input-group-sm frompicker" data-mask="99/99/9999" data-mask-placeholder= "_" required="">
                                                 <%}%>
                                             </label>
                                         </section>
@@ -182,11 +182,9 @@
                                             <label class="input" id="titulo">Hasta: 
                                                 <%if (a.getFe_hasta() != null) {
                                                         if (a.getId_dgp() == null) {%>
-
-                                                        <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm frompicker" data-mask="00/00/0000" autocomplete="off">
-
+                                                <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="input-group-sm topicker" data-mask="99/99/9999" data-mask-placeholder= "_">
                                                 <%} else {%>
-                                                <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="simple-field-data-mask to-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
+                                                <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="input-group-sm topicker" data-mask="99/99/9999" data-mask-placeholder= "_" required="">
                                                 <%}
                                                 } else{%>
                                                 <% if (a.getId_dgp() == null) {%>
@@ -722,12 +720,8 @@
             </div>
 
         </div>
-        <button  data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">
-            Launch demo modal
-        </button>
+
         <!--================================================== -->
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
@@ -800,9 +794,7 @@
         <script type="text/javascript"  src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
-        <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
-        <script src="../../js/jquery-ui.js" type="text/javascript"></script>
-        <script src="../../js/jquery.mask.js" type="text/javascript"></script>
+        <script type="text/javascript" src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" ></script>
         <script type="text/javascript">
                                         function Listar_dep() {
                                             var s = $(".selec_dep");
@@ -988,8 +980,21 @@
                                         }
 
                                         $(document).ready(function () {
-            $("#submit").click(function () {
-                $(this).attr("disabled", "disabled");
+                                            $("#ca_bono_pu").numeric();
+                                            $("#remu").numeric();
+                                            $("#rein").numeric();
+                                            $("#bo_a").numeric();
+                                            $("#bev").numeric();
+                                            $("#su_t").numeric();
+                                            $("#asig").numeric();
+                                            pageSetUp();
+                                            $(".btnModificarContrato").click(function () {
+                                                if ($(".formEditawrContrato").valid()) {
+
+                                                    $(".formEditawrContrato").submit();
+                                                    $(".btnModificarContrato").attr("disabled", "disabled");
+                                                }
+
                                             });
                                             Listar_pue();
                                             Listar_dep();
@@ -1029,6 +1034,10 @@
                                                 });
                                             });
                                             $("#selec_dep").change(function () {
+                                                $("#select_dir").val("");
+                                                $("#Selec_Area").val("");
+                                                $("#select_sec").val("");
+                                                $("#pu_id_se").val("");
                                                 $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
                                                     c.empty();
                                                     if (objJson.rpta == -1) {
@@ -1047,6 +1056,9 @@
                                                 });
                                             });
                                             $("#select_dir").change(function () {
+                                                $("#Selec_Area").val("");
+                                                $("#select_sec").val("");
+                                                $("#pu_id_se").val("");
                                                 $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
                                                     b.empty();
                                                     if (objJson.rpta == -1) {
@@ -1065,6 +1077,8 @@
                                                 });
                                             });
                                             $("#Selec_Area").change(function () {
+                                                $("#select_sec").val("");
+                                                $("#pu_id_se").val("");
                                                 $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
                                                     d.empty();
                                                     var list = objJson.lista;
@@ -1077,8 +1091,10 @@
                                                         d.append("<option value='' > [no hay] </option>");
                                                     }
                                                 });
+
                                             });
                                             $("#select_sec").change(function () {
+                                                $("#pu_id_se").val("");
                                                 $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
                                                     e.empty();
                                                     if (objJson.rpta == -1) {

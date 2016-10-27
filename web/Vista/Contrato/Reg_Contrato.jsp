@@ -69,7 +69,6 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <%
             String id_rol = (String) session.getAttribute("IDROL");%>
         <style type="text/css">
@@ -179,12 +178,12 @@
                                                     <input type="hidden"  value="<%=d.getId_trabajador()%>" class="idtr">                              
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Inicio: 
-                                                            <input type="text" name="FEC_DESDE" value="<%=(d.getFe_desde())%>" class="input-group-sm frompicker" data-mask="99/99/9999" data-mask-placeholder= "_" required="">
+                                                            <input onchange="c()" type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" id="ifechai" class=" input-group-sm" required="">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Cese: 
-                                                            <input type="text" name="FEC_HASTA" value="<%=(d.getFe_hasta())%>" class="input-group-sm topicker" data-mask="99/99/9999" data-mask-placeholder= "_" required="">
+                                                            <input type="date" name="FEC_HASTA" value="<%=c.convertFecha3(d.getFe_hasta())%>" class="input-group-sm" required="">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3" id="titulo">
@@ -192,14 +191,14 @@
                                                             <select name="DIRECCION" class="select_dir input-group-sm" disabled=""  id="select_dir" >
                                                                 <option value="" >[SELECCIONE]</option>
                                                                 <%for (int g = 0; g < Listar_Direccion.size(); g++) {
-                                                                        Direccion di = new Direccion();
-                                                                        di = (Direccion) Listar_Direccion.get(g);
+                                                                        Direccion direccion = new Direccion();
+                                                                        direccion = (Direccion) Listar_Direccion.get(g);
                                                                         String id_direc = request.getParameter("id_direc");
-                                                                        if (id_direc.trim().equals(di.getId_direccion().trim())) {
+                                                                        if (id_direc.trim().equals(direccion.getId_direccion().trim())) {
                                                                 %>
-                                                                <option value="<%=di.getId_direccion()%>" selected=""><%=di.getNo_direccion()%></option>
+                                                                <option value="<%=direccion.getId_direccion()%>" selected=""><%=direccion.getNo_direccion()%></option>
                                                                 <%} else {%>
-                                                                <option value="<%=di.getId_direccion()%>"><%=di.getNo_direccion()%></option>
+                                                                <option value="<%=direccion.getId_direccion()%>"><%=direccion.getNo_direccion()%></option>
                                                                 <%}
                                                                     }%>
                                                             </select>  </label>
@@ -401,7 +400,7 @@
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Suscripción:
-                                                            <input id="suscripcion" type="text" name="FECHA_SUSCRIPCION" class="input-group-sm datePickerInput"  value="<%=(d.getFe_desde()%>" max="<%=c.convertFecha3(d.getFe_desde())%>" 
+                                                            <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION" class="input-group-sm"  value="<%=c.convertFecha3(d.getFe_desde())%>" max="<%=c.convertFecha3(d.getFe_desde())%>" 
                                                                    <%
                                                                        if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
                                                                            out.print("required='required'");
@@ -770,7 +769,6 @@
         <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
         <!-- JQUERY MASKED INPUT -->
-	<script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
         <!-- JQUERY SELECT2 INPUT -->
         <script src="../../js/plugin/select2/select2.min.js"></script>
@@ -943,7 +941,6 @@
                     $("#bev").numeric();
                     $("#su_t").numeric();
                     $("#asig").numeric();
-                    
 
                     $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                         $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
@@ -955,12 +952,14 @@
                     $('#checkout-form').validate({
                         // Rules for form validation
                         rules: {
-                             
+                            fname: {
+                                required: true
+                            },
                             FEC_DESDE: {
-                               // val_fecha: true
+                                val_fecha: true
                             },
                             FEC_HASTA: {
-                               // val_fecha: true
+                                val_fecha: true
                             }
                         },
                         // Do not change code below
@@ -968,10 +967,10 @@
                             error.insertAfter(element.parent());
                         }
                     });
-                   /* jQuery.validator.addMethod("val_fecha", function (value, element) {
+                    jQuery.validator.addMethod("val_fecha", function (value, element) {
                         var d = value.split("-");
                         return this.optional(element) || String(parseInt(d[0])).length === 4;
-                    }, "¡Fecha ingresada invalida!");*/
+                    }, "¡Fecha ingresada invalida!");
 
                     Listar_dep();
                     Listar_sec();
@@ -1092,7 +1091,6 @@
                     $("#suscripcion").attr("max", max);
                     $("#suscripcion").attr("value", max);
                 }
-
     </script>
 </html>
 <%} else {

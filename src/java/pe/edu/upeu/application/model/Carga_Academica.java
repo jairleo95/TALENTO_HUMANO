@@ -28,8 +28,7 @@ public class Carga_Academica {
     private String fe_desde;
     private String fe_hasta;
     private String fe_creacion;
-    private Integer countCursos;
-
+  private Integer countCursos;
     public Integer getCountCursos() {
         return countCursos;
     }

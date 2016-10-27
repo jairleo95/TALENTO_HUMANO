@@ -70,7 +70,7 @@ public class Cdocumento_adjunto extends HttpServlet {
             }
         } else {
 
-            String ubicacion = FactoryConnectionDB.url+ "Contratos_Adjuntos/";
+            String ubicacion = FactoryConnectionDB.url+ "/Contratos_Adjuntos/";
             System.out.println("Enter to Save Contrato");
 
             DiskFileItemFactory f = new DiskFileItemFactory();

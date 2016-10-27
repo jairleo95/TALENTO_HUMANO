@@ -32,7 +32,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <script src="../../../ajax/ajax.google.min.js"></script>
         <style>
             .caja{
-                background:transparent url(../../../imagenes/Gifloader.GIF) center no-repeat;
+                background:transparent url(../../../img/Gifloader.GIF) center no-repeat;
             }
         </style>
     </head>
@@ -49,9 +49,9 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <input type="hidden" class="contrato<%=i%>" id="contrato<%=i%>" value="<%=id_contrato%>">
         <input type="hidden" class="plantilla<%=i%>" id="plantilla<%=i%>" value="<%=id_pl%>">
         <% } %>
-    <center><h3 class="text-danger" style="font-size: 26pt;">PLANTILLA CONTRACTUAL</h3></center>
+    <center><h3 class="text-danger" style="font-size: 26pt;">Plantilla Contractual</h3></center>
     <form class="ckeditor_form" action="../../../formato_plantilla" method="post">
-        <div id="wait"  align="center"><img src='../../../imagenes/por-favor-espere.gif' width="100" height="100" /><br>Cargando..</div>
+        <div id="wait"  align="center"><img src='../../../img/por-favor-espere.gif' width="100" height="100" /><br>Cargando..</div>
         <textarea cols="100" id="editor1" name="editor1" rows="10">
         </textarea>
         <div id="eButtons" >
@@ -89,8 +89,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 // Insert HTML code.
                 // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-insertHtml
                 editor.insertHtml(value);
-            }
-            else
+            } else
                 alert('Tiempo de Espera Agotado presionar Cargar Contratos');
         }
         function InsertText() {
@@ -103,8 +102,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 // Insert as plain text.
                 // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-insertText
                 editor.insertText(value);
-            }
-            else
+            } else
                 alert('You must be in WYSIWYG mode!');
         }
         function SetContents() {
@@ -132,8 +130,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 // Execute the command.
                 // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-execCommand
                 editor.execCommand(commandName);
-            }
-            else
+            } else
                 alert('You must be in WYSIWYG mode!');
         }
         function CheckDirty() {

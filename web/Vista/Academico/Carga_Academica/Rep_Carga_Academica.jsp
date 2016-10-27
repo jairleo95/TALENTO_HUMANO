@@ -11,6 +11,7 @@
         <meta name="author" content="">
         <title>Carga Académica</title>
         <meta name="description" content="">
+        
         <meta name="author" content="">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -186,7 +187,7 @@
 
         <!-------------- Modal  ----------->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-            <div class="modal-dialog"  style="width: 1024px" >
+            <div class="modal-dialog"   >
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

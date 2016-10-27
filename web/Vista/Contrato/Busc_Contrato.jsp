@@ -33,7 +33,7 @@
     <body class="slideInDown fast animated"> 
 
         <form class="form-inline validarform" id="frm_filtro2" method="post" action="../../Imprimir" name="formulario" onclick="return marcado();" >
-            <center><h1 class="text-danger" style="font-size: 26pt;">CONTRATOS</h1></center>
+            <center><h1 class="text-danger" >Contratos</h1></center>
             <center>
                 <div id="contenido">                
                     <div class="col-md-12" style="padding:0 2%;box-sizing: border-box;">

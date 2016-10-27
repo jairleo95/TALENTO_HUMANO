@@ -12,10 +12,10 @@ function calcular_edad(fecha) {
     var diaActual = fechaActual.getDate();
     var mmActual = fechaActual.getMonth() + 1;
     var yyyyActual = fechaActual.getFullYear();
-    var FechaNac = fecha.split("-");
-    var diaCumple = FechaNac[2];
+    var FechaNac = fecha.split("/");
+    var diaCumple = FechaNac[0];
     var mmCumple = FechaNac[1];
-    var yyyyCumple = FechaNac[0];
+    var yyyyCumple = FechaNac[2];
     //retiramos el primer cero de la izquierda
     if (mmCumple.substr(0, 1) == 0) {
         mmCumple = mmCumple.substring(1, 2);
@@ -27,6 +27,7 @@ function calcular_edad(fecha) {
     if ((mmActual < mmCumple) || (mmActual == mmCumple && diaActual < diaCumple)) {
         edad--;
     }
+    console.log("EDAD:"+edad)
     return edad;
 }
 

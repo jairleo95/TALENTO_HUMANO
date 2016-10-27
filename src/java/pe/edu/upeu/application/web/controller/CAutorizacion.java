@@ -297,7 +297,7 @@ public class CAutorizacion extends HttpServlet {
                         int num_cod_aps = 0;
                         int num_cod_huella = 0;
 
-                        List<V_Autorizar_Dgp> listaAutCA = a.List_id_Autorizacion(idp, iduser, "");
+                        List<V_Autorizar_Dgp> listaAutCA = a.List_Autorizacion_Academico(idp, iduser, "");
 
                         for (int f = 0; f < listaAutCA.size(); f++) {
                             V_Autorizar_Dgp autCA = new V_Autorizar_Dgp();

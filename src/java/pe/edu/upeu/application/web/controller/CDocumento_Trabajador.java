@@ -118,6 +118,7 @@ public class CDocumento_Trabajador extends HttpServlet {
 
                 }
             } else {
+
                 String ubicacion = FactoryConnectionDB.url + "Archivo/";
                 DiskFileItemFactory f = new DiskFileItemFactory();
                 f.setSizeThreshold(1024);

@@ -213,7 +213,7 @@
                                             <a data-toggle="tab" href="#hr1"> <i class="fa fa-lg fa-arrow-circle-o-down"></i> <span class="hidden-mobile hidden-tablet"> DGP </span> </a>
                                         </li>
                                         <li>
-                                            <a data-toggle="tab" href="#hr2"> <i class="fa fa-lg fa-arrow-circle-o-up"></i> <span class="hidden-mobile hidden-tablet"> Carga académica</span></a>
+                                            <a data-toggle="tab" href="#hr2"> <i class="fa fa-lg fa-arrow-circle-o-up"></i> <span class="hidden-mobile hidden-tablet"> Carga académica</span> <sup class="badge bg-color-red bounceIn animated badgeCAcademico" style="display: none" >0</sup></a>
                                         </li>
 
                                     </ul>	
@@ -583,7 +583,7 @@
                 <div class="modal-header">
                     <div class="contD"></div>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <div class="jarviswidget jarviswidget-color-yellow" id="wid-id-0" data-widget-editbutton="false" style="margin-bottom:-5px;">
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" style="margin-bottom:-5px;">
                         <!-- widget options:
                         usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
                         data-widget-colorbutton="false"
@@ -604,6 +604,22 @@
                 </div>
                 <div class="modal-body">
                     <div class="contM"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" id="myModalComentario" tabindex="-1" role="dialog"  >
+        <div class="modal-dialog" >
+            <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12" style="width:100%;margin-left: 0%;">
+                <div class="modal-header">
+                    <h1 class="h1" style="color:#218FDD ;text-align: center; font-size:20px;"><strong>MOTIVO</strong></h1>
+
+                </div>
+                <div class="modal-body">
+                    <div class="contMO"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -706,10 +722,13 @@
 
     <script type="text/javascript">
                             // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                            function listHistory(at) {
+                              function listHistory(at) {
+                                var dgp = "id_dgp";
                                 var id = $(".vHist" + at + "").val();
+                                var id1 = $(".idDepart").val();
                                 var url = '../../dgp?opc=SeguimientoH';
                                 var data = 'iddgp=' + id;
+
                                 var rol = $("#rolse").val();
                                 $.post(url, data, function (objJson) {
                                     var lista = objJson.listar;
@@ -724,20 +743,17 @@
                                             m += '<td>' + lista[i].nu_pasos + '</td>';
                                             m += '<td>' + lista[i].de_pasos + '</td>';
                                             if (lista[i].es_autorizacion != null) {
-                                                
-                                                
-                                                  if (lista[i].es_autorizacion !== null) {
-                                                    if (lista[i].es_autorizacion.equals("1")) {
+
+                                                if (lista[i].es_autorizacion !== null) {
+                                                    if (lista[i].es_autorizacion === '1') {
                                                         m += '<td><img src="../../img/Aprobado.png" width="20" height="20"></td>';
                                                     }
-                                                    if (lista[i].es_autorizacion.equals("2")) {
+                                                    if (lista[i].es_autorizacion === '2') {
                                                         m += '<td><img src="../../img/Desaprobado.png" width="20" height="20"></td>';
                                                     }
                                                 } else {
                                                     m += '<td>No Registrado</td>';
                                                 }
-                                                
-                                                
 
                                                 if (lista[i].us_ap_mat !== null) {
                                                     m += '<td>' + lista[i].us_ap_p + " " + lista[i].us_ap_mat + " " + lista[i].us_no_tr + '</td>';
@@ -752,7 +768,7 @@
                                             } else {
                                                 m += '<td colspan="7" style="text-align:center;"> No definido </td>';
                                             }
-
+                                                  
                                             m += '</tr>';
                                             if (lista[i].es_autorizacion !== null) {
                                                 if (lista[i].es_autorizacion === '2' & (rol === "ROL-0002" || rol === "ROL-0005" || rol === "ROL-0001")) {
@@ -761,10 +777,11 @@
                                                         var DivEspecial = '<div id="divEs" class="alert alert-danger alert-block">';
                                                         DivEspecial += '<a class="close" data-dismiss="alert" href="#">×</a>';
                                                         DivEspecial += ' <h4 class="alert-heading">DGP fuera de Proceso!</h4>';
-                                                        DivEspecial += ' <p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp=lista[i].id_dgp.&IDlista[i].id_departamento()" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=lista[i].id_dgp>" class="btn btn-primary"><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" href="#myModal6" class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>';
-                                                        DivEspecial += ' </p>';
-                                                        DivEspecial += ' <input type="hidden" class="id-autorizacion" value="lista[i].id_autorizacion">';
-                                                        DivEspecial += ' </div>';
+                                                        DivEspecial += '<p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp='+id+'&ID'+id1+'" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=' + id + '" class="btn btn-primary id-dgp "><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" class="btn btn-primary" onclick="ListarMotivo()" data-toggle="modal" data-target="#myModalComentario"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>';
+                                                      //  alert(+lista[i].us_no_puesto+);                                                                                                                                                                                                                                                                                                                                                                                
+                                                        DivEspecial += '</p>';
+                                                        DivEspecial += '<input type="hidden" class="id-autorizacion" value="lista[i].id_autorizacion">';
+                                                        DivEspecial += '</div>';
 
                                                         return DivEspecial;
                                                     }
@@ -781,7 +798,7 @@
                                         $("#dataB").empty();
                                         $("#dataB").append(m);
                                         // $("#divEs").append(DivEspecial);
-                                        //  $("#dt").dataTable();
+                                        // $("#dt").dataTable();
                                         //$("#divEs").dataDivEspecial();
                                         //anexar a la tabla
                                     } else {
@@ -811,16 +828,45 @@
                             }
                             
                             
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                            function ListarMotivo(at) {
+                                alert("asdasdasd");
+                                var id = $(".vHist" + at + "").val();
+                                var url = '../../dgp?opc=SeguimientoH';
+                                var data = 'iddgp=' + id;
+
+                               
+                                $.post(url, data, function (objJson) {
+                                    var lista = objJson.listar;
+                                    if (lista.length > 0) {
+                                        var ma = '';
+                                        for (var i = 0; i < lista.length; i++) {
+                                            //  alert("asdasdasd");
+                                             $(".contMO").append("<td>" +lista[i].getDe_pasos+ "</td>");
+                                             $(".contMO").append("<td class='alert alert-danger'>" + lista[i].id_dgp + "</td>");
+                                           
+                                        }
+                                             $(".contMO").empty();
+                                             } else {
+                                        alert("vacio");
+                                    }
+                                });
+                            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             // DO NOT REMOVE : GLOBAL FUNCTIONS!
                             function closedthis() {
                                 $.smallBox({
