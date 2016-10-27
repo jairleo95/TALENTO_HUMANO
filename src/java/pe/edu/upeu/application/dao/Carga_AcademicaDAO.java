@@ -199,7 +199,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
     @Override
     public List<Carga_Academica> ListCarAca() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHVD_CARGA_ACADEMICA";
+        String sql = "SELECT * FROM RHVD_CARGA_ACADEMICA where ID_PROCESO_CARGA_AC is null";
         List<Carga_Academica> list = new ArrayList<Carga_Academica>();
         try {
             ResultSet rs = this.conn.query(sql);

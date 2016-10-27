@@ -592,7 +592,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM RHVD_DGP_AUTORIZADOS WHERE US_CREACION='" + id_usuario + "'  ";
+            String sql = "SELECT * FROM RHVD_DGP_AUTORIZADOS WHERE US_CREACION='" + id_usuario + "'  and mes_procesamiento is not null";
             /* sql += (!año.equals("")) ? " AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))='"
              + (mes + 1) + "' AND TRIM(año_procesamiento)='" + año
              + "' " : "  AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))=to_number(to_char(sysdate,'mm')) AND TRIM(año_procesamiento)=to_char(sysdate,'YYYY') "*/;
