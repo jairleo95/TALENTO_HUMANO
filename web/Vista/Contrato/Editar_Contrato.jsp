@@ -60,7 +60,6 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <style type="text/css">
             #titulo{
                 font-weight: bold;
@@ -76,8 +75,6 @@
 
     <body>
         <!-- Widget ID (each widget will need unique ID)-->
-
-
         <div id="main" role="main" style="margin:0px;">
             <div id="content" >
                 <div class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false" 
@@ -120,9 +117,7 @@
                                     a = (V_Contrato_dgp) List_contrato.get(i);
                             %>
 
-                           
-
-                            <form action="../../contrato" id="checkout-form" class="smart-form"  method="POST" >
+                            <form action="../../contrato"  class="smart-form formEditawrContrato"  method="POST" >
                                 <fieldset >
                                     <%if (a.getId_dgp() != null) {%>
                                     <div class="row">
@@ -177,6 +172,43 @@
                                         <section class="col col-2">
                                             <label class="input" id="titulo">Desde:
                                                 <%if (a.getFe_desde() != null) {%>
+                                                <input type="text" name="FEC_DESDE" value="<%=(a.getFe_desde())%>" class="input-group-sm frompicker" data-mask="99/99/9999" data-mask-placeholder= "_" required="">
+                                                <%} else {%>
+                                                <input type="text" name="FEC_DESDE" class="input-group-sm frompicker" data-mask="99/99/9999" data-mask-placeholder= "_" required="">
+                                                <%}%>
+                                            </label>
+                                        </section>
+                                        <section class="col col-2">
+                                            <label class="input" id="titulo">Hasta: 
+                                                <%if (a.getFe_hasta() != null) {
+                                                        if (a.getId_dgp() == null) {%>
+                                                <input type="text" name="FEC_HASTA" value="<%=(a.getFe_hasta())%>" class="input-group-sm topicker" data-mask="99/99/9999" data-mask-placeholder= "_">
+                                                <%} else {%>
+                                                <input type="checkbox" name="checkbox-toggle"  disabled="">
+                                                <%}
+                                                } else {%>
+                                                <%}%>
+                                                <i data-swchoff-text="NO"  data-swchon-text="SI"></i>
+                                            </label>
+                                        </section>
+                                        <section class="col col-3" >
+                                            <div class="div_input_diezmo">
+                                            </div>
+                                        </section>
+                                        <input type="hidden" value="<%=a.getId_dgp()%>" id="id_dgp">
+
+                                    </div>
+                                    <%}%>
+                                    <input type="hidden"  value="<%=a.getId_trabajador()%>" class="idtr">
+                                    <div class="row" >
+                                        <input type="hidden" name="id_rol_ses" id="id_rol_s" value="<%=idrol%>">
+                                        <input type="hidden" name="TIPO_PLANILLA"  value="<%%>">
+                                        <input type="hidden" name="HORARIO"  value="">
+
+                                        <input type="hidden" name="IDDETALLE_DGP" value="<%=a.getId_dgp()%>" class="text-box id_dg" id="id_dg" >                              
+                                        <section class="col col-2">
+                                            <label class="input" id="titulo">Desde:
+                                                <%if (a.getFe_desde() != null) {%>
                                                 <input type="text" name="FEC_DESDE" value="<%=(a.getFe_desde())%>" class="simple-field-data-mask from-datepicker input-group-sm topicker" data-mask="00/00/0000" autocomplete="off" required="">
                                                 <%} else {%>
                                                 <input type="text" name="FEC_DESDE" class="simple-field-data-mask from-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off" required="">
@@ -195,9 +227,9 @@
                                                 <%}
                                                 } else{%>
                                                 <% if (a.getId_dgp() == null) {%>
-                                                <input type="text" name="FEC_HASTA" value="" class="simple-field-data-mask to-datepicker input-group-sm" data-mask="00/00/0000" autocomplete="off">
+                                                <input type="text" name="FEC_HASTA" value="" class="input-group-sm topicker" data-mask="99/99/9999" data-mask-placeholder= "_">
                                                 <%} else {%>
-                                                <input type="text" name="FEC_HASTA" value="" class="simple-field-data-mask to-datepicker input-group-sm" data-mask=00/00/0000" autocomplete="off" required="">
+                                                <input type="text" name="FEC_HASTA" value="" class="input-group-sm topicker" data-mask="99/99/9999" data-mask-placeholder= "_" required="">
                                                 <%}
                                                     }%>
                                             </label>
@@ -342,73 +374,6 @@
                                         </section>
 
                                     </div>
-                                    <!--<div class="modal-body">
-        
-                                        <div class="row">
-                                            <div id="contenido">
-                                                <div >
-        
-                                                    <form class="form-inline" id="frm_filtro" method="post" name="formulario"  >
-        
-                                                        <div class="row">
-                                                            <div class="form-group" >
-                                                                <label class="control-label" >Nombres</label><br>
-                                                                <input type="text"  class="form-control"  name="nom" maxlength="80" >
-                                                            </div>
-                                                            <div class="form-group" >
-                                                                <label class="control-label" >Apellido Paterno</label><br>
-                                                                <input type="text"  class="form-control"  name="ap_pa" maxlength="80">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="form-group">
-                                                                <label class="control-label" >Apellido Materno</label><br>
-                                                                <input type="text"  class="form-control"  name="ap_ma" maxlength="80" >
-                                                            </div>
-        
-                                                            <div class="form-group">
-                                                                <label class="control-label" >DNI:</label><br>
-                                                                <input type="text"  class="form-control"  onKeyPress="return checkIt(event)"   name="dni" maxlength="8">
-                                                            </div>
-                                                        </div>
-        
-                                                        <div class="row">
-        
-                                                            <div class="form-group">                            
-                                                                <button type="button" class="btn btn-primary" id="btnfiltrar" >Buscar</button>
-                                                            </div>
-                                                            <div class="form-group">  
-                                                                <a href="javascript:;"  id="btncancel" class="btn btn-primary" >Cancelar</a>
-                                                            </div>
-        
-                                                        </div>
-        
-                                                    </form>
-        
-                                                </div> 
-        
-                                                <hr/>
-        
-                                                <table  id="data"  >
-                                                    <thead class="tab_cabe">
-                                                        <tr>
-                                                            <td><span title="NOMBRE_AP">Nombres y Apellidos</span></td>
-                                                            <td><span  >DNI</span></td>
-                                                            <td></td>
-        
-                                                        </tr>
-                                                    </thead>
-        
-                                                    <tbody class="tbodys">
-                                                    </tbody>
-                                                </table>
-        
-                                            </div>
-                                        </div>
-        
-        
-        
-                                    </div>-->
 
                                 </fieldset>
                                 <fieldset >
@@ -771,8 +736,8 @@
 
                                     <input type="hidden" name="opc"   value="MODIFICAR CONTRATO">
                                     <button type="button" class="btn btn-primary pull-left" onclick="window.history.back()"><i class="fa fa-backward"></i>&nbsp;&nbsp;Regresar</button>
-                                    <button type="submit" id="submit" class="btn btn-primary" >
-                                        MODIFICAR CONTRATO
+                                    <button type="submit"  class="btn btn-primary btnModificarContrato" >
+                                        Modificar Contrato
                                     </button>
                                     <!--<a type="button" class="btn btn-success" href="../../horario?iddgp=&opc=Listar">Ver Horario</a>
                                     <a type="button" class="btn btn-success" href="../../documento?iddgp=&idtr=&opc=Ver_Documento">Ver Documentos</a>-->
@@ -794,12 +759,9 @@
             </div>
 
         </div>
-        <button  data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">
-            Launch demo modal
-        </button>
+
         <!--================================================== -->
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -840,7 +802,7 @@
         <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
         <!-- JQUERY MASKED INPUT -->
-
+        <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
         <!-- JQUERY SELECT2 INPUT -->
         <script src="../../js/plugin/select2/select2.min.js"></script>
 
@@ -867,15 +829,133 @@
         <!-- Voice command : plugin -->
 
         <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="../../js/plugin/knob/jquery.knob.min.js"></script>
-        <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
+        <script type="text/javascript"  src="../../js/plugin/knob/jquery.knob.min.js"></script>
+        <script type="text/javascript"  src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
-        <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
-        <script src="../../js/jquery-ui.js" type="text/javascript"></script>
-        <script src="../../js/jquery.mask.js" type="text/javascript"></script>
+        <script type="text/javascript" src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" ></script>
         <script type="text/javascript">
+                                        function Listar_dep() {
+                                            var s = $(".selec_dep");
+                                            $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function (objJson) {
+                                                s.empty();
+                                                var lista = objJson.lista;
+                                                s.append("<option value='' > [SELECCIONE] </option>");
+                                                for (var j = 0; j < lista.length; j++) {
+                                                    if ($(".dep_pu").val() == lista[j].id) {
+                                                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
 
+                                                    } else {
+                                                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
+                                                    }
+                                                }
+
+
+                                            });
+                                        }
+                                        function Listar_area() {
+                                            var s = $(".Selec_Area");
+
+                                            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function (objJson) {
+                                                s.empty();
+                                                var lista = objJson.lista;
+                                                s.append("<option value='' > [SELECCIONE] </option>");
+                                                for (var j = 0; j < lista.length; j++) {
+
+                                                    if ($(".area_pu").val() == lista[j].id) {
+                                                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
+                                                    } else {
+                                                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
+                                                    }
+                                                }
+
+                                            });
+                                        }
+                                        function Listar_sec() {
+                                            var s = $("#select_sec");
+
+                                            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function (objJson) {
+                                                s.empty();
+                                                var lista = objJson.lista;
+                                                s.append("<option value='' > [SELECCIONE] </option>");
+                                                for (var j = 0; j < lista.length; j++) {
+                                                    if ($(".sec_pu").val() == lista[j].id) {
+                                                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
+                                                    } else {
+                                                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        function Listar_pue() {
+                                            var s = $("#pu_id_se");
+                                            $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(".sec_pu").val(), function (objJson) {
+                                                s.empty();
+                                                var lista = objJson.lista;
+                                                s.append("<option value='' > [SELECCIONE] </option>");
+                                                for (var j = 0; j < lista.length; j++) {
+
+                                                    if ($(".id_pu_dgp").val() == lista[j].id) {
+                                                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
+                                                    } else {
+                                                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        function Listar_plantilla() {
+                                            var s = $(".con_pl_pu");
+
+                                            $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function (objJson) {
+                                                s.empty();
+                                                var lista = objJson.lista;
+                                                s.append("<option value='' > [SELECCIONE] </option>");
+                                                for (var i = 0; i < lista.length; i++) {
+                                                    if ($(".id_pl_con").val() == lista[i].id) {
+                                                        s.append("<option value='" + lista[i].id + "' selected=''> " + lista[i].nom_pl + "</option>");
+                                                    } else {
+                                                        s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        function listar_sub_mod() {
+                                            var s = $("#select-sub-mod");
+                                            $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&" + "id=" + $(".id_mod_con").val(), function (objJson) {
+                                                s.empty();
+                                                var lista = objJson.lista;
+                                                s.append("<option value='' > [SELECCIONE] </option>");
+                                                for (var i = 0; i < lista.length; i++) {
+                                                    if ($(".id_sub_mod").val() != null) {
+                                                        if ($(".id_sub_mod").val() == lista[i].id) {
+                                                            s.append("<option value='" + lista[i].id + "' selected=''> " + lista[i].nombre + "</option>");
+                                                        } else {
+                                                            s.append("<option value='" + lista[i].id + "'> " + lista[i].nombre + "</option>");
+                                                        }
+                                                    } else {
+                                                        s.append("<option value='" + lista[i].id + "'> " + lista[i].nombre + "</option>");
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        function Listar_Direccion() {
+                                            var cc_dir = $(".cc-dir");
+                                            $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
+                                                if (objJson.rpta == -1) {
+                                                    alert(objJson.mensaje);
+                                                    return;
+                                                }
+                                                var lista = objJson.lista;
+                                                for (var i = 0; i < lista.length; i++) {
+                                                    if (lista[i].id == $(".id_dire").val()) {
+                                                        cc_dir.append("<option value='" + lista[i].id + "' selected=''>" + lista[i].nombre + "</option>");
+                                                    } else {
+                                                        cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
+                                                    }
+                                                }
+                                            });
+                                        }
                                         function showEsDiezmo() {
                                             var obj = $(".div_input_diezmo");
                                             obj.hide(100);
@@ -947,24 +1027,144 @@
                                             $("#su_t").numeric();
                                             $("#asig").numeric();
                                             pageSetUp();
-                                            $("#submit").click(function () {
-                                                $(this).attr("disabled", "disabled");
+                                            $(".btnModificarContrato").click(function () {
+                                                if ($(".formEditawrContrato").valid()) {
+
+                                                    $(".formEditawrContrato").submit();
+                                                    $(".btnModificarContrato").attr("disabled", "disabled");
+                                                }
+
                                             });
+                                            Listar_pue();
+                                            Listar_dep();
+                                            Listar_sec();
+                                            Listar_area();
+                                            Listar_plantilla();
+                                            listar_sub_mod();
+                                            Listar_Direccion();
+                                            ListCentroCostoDGP($("#id_dgp").val());
+                                            list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato", "id_tipo_contrato", "de_ti_contrato", "1", $(".id_ti_contrato").val());
+                                            var a = $("#select-sub-mod");
+                                            var c = $("#Selec_Area");
+                                            var d = $("#select_sec");
+                                            var b = $("#selec_dep");
+                                            var e = $("#pu_id_se");
+                                            $(".date").keyup(function () {
+                                                $(".conteni").val($(".date").val());
+                                            });
+                                            // $.post("../../  ")
+                                            $(".select_mod").change(function () {
+                                                // alert("?MODALIDAD="+$("#select_mod").val());
+                                                $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&id=" + $(".select_mod").val(), function (objJson) {
+                                                    a.empty();
+                                                    if (objJson.rpta == -1) {
+                                                        alert(objJson.mensaje);
+                                                        return;
+                                                    }
+                                                    var list = objJson.lista;
+                                                    a.append("<option value='' > [SELECCIONE] </option>");
+                                                    if (list.length !== 0) {
+                                                        for (var i = 0; i < list.length; i++) {
+                                                            a.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                                                        }
+                                                    } else {
+                                                        a.append("<option value='' > [no hay] </option>");
+                                                    }
+                                                });
+                                            });
+                                            $("#selec_dep").change(function () {
+                                                $("#select_dir").val("");
+                                                $("#Selec_Area").val("");
+                                                $("#select_sec").val("");
+                                                $("#pu_id_se").val("");
+                                                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
+                                                    c.empty();
+                                                    if (objJson.rpta == -1) {
+                                                        alert(objJson.mensaje);
+                                                        return;
+                                                    }
+                                                    var list = objJson.lista;
+                                                    c.append("<option value='' > [SELECCIONE] </option>");
+                                                    if (list.length !== 0) {
+                                                        for (var i = 0; i < list.length; i++) {
+                                                            c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                                                        }
+                                                    } else {
+                                                        c.append("<option value='' > [no hay] </option>");
+                                                    }
+                                                });
+                                            });
+                                            $("#select_dir").change(function () {
+                                                $("#Selec_Area").val("");
+                                                $("#select_sec").val("");
+                                                $("#pu_id_se").val("");
+                                                $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
+                                                    b.empty();
+                                                    if (objJson.rpta == -1) {
+                                                        alert(objJson.mensaje);
+                                                        return;
+                                                    }
+                                                    var list = objJson.lista;
+                                                    b.append("<option value='' > [SELECCIONE] </option>");
+                                                    if (list.length !== 0) {
+                                                        for (var i = 0; i < list.length; i++) {
+                                                            b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                                                        }
+                                                    } else {
+                                                        b.append("<option value='' > [] </option>");
+                                                    }
+                                                });
+                                            });
+                                            $("#Selec_Area").change(function () {
+                                                $("#select_sec").val("");
+                                                $("#pu_id_se").val("");
+                                                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
+                                                    d.empty();
+                                                    var list = objJson.lista;
+                                                    d.append("<option value='' > [SELECCIONE] </option>");
+                                                    if (list.length !== 0) {
+                                                        for (var i = 0; i < list.length; i++) {
+                                                            d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                                                        }
+                                                    } else {
+                                                        d.append("<option value='' > [no hay] </option>");
+                                                    }
+                                                });
+
+                                            });
+                                            $("#select_sec").change(function () {
+                                                $("#pu_id_se").val("");
+                                                $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
+                                                    e.empty();
+                                                    if (objJson.rpta == -1) {
+                                                        alert(objJson.mensaje);
+                                                        return;
+                                                    }
+                                                    var list = objJson.lista;
+                                                    e.append("<option value='' > [SELECCIONE] </option>");
+                                                    if (list.length !== 0) {
+                                                        for (var i = 0; i < list.length; i++) {
+                                                            e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                                                        }
+                                                    } else {
+                                                        e.empty();
+                                                        e.append("<option value='' > [] </option>");
+                                                    }
+                                                });
+                                            });
+
                                             $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                                                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                             });
                                             showEsDiezmo();
-                                            $('#checkout-form').validate({
+                                            $('.formEditawrContrato').validate({
                                                 // Rules for form validation
                                                 rules: {
-                                                    fname: {
-                                                        required: true
-                                                    },
                                                     FEC_DESDE: {
-                                                        val_fecha: true
+                                                        //  val_fecha: true
                                                     },
                                                     FEC_HASTA: {
-                                                        val_fecha: true
+                                                        // val_fecha: true
                                                     }
                                                 },
                                                 // Do not change code below
@@ -972,250 +1172,11 @@
                                                     error.insertAfter(element.parent());
                                                 }
                                             });
-                                            /*  jQuery.validator.addMethod("val_fecha", function (value, element) {
-                                             var d = value.split("-");
-                                             return this.optional(element) || String(parseInt(d[0])).length == 4;
-                                             }, "¡Fecha ingresada invalida!");*/
 
 
 
-                                        })
+                                        });
         </script>
-
     </body>
-    <script>
-        function Listar_dep() {
-            var s = $(".selec_dep");
-            $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function (objJson) {
-                s.empty();
-                var lista = objJson.lista;
-                s.append("<option value='' > [SELECCIONE] </option>");
-                for (var j = 0; j < lista.length; j++) {
-                    if ($(".dep_pu").val() == lista[j].id) {
-                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
 
-                    } else {
-                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
-                    }
-                }
-
-
-            });
-        }
-        function Listar_area() {
-            var s = $(".Selec_Area");
-
-            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function (objJson) {
-                s.empty();
-                var lista = objJson.lista;
-                s.append("<option value='' > [SELECCIONE] </option>");
-                for (var j = 0; j < lista.length; j++) {
-
-                    if ($(".area_pu").val() == lista[j].id) {
-                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
-                    } else {
-                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
-                    }
-                }
-
-            });
-        }
-        function Listar_sec() {
-            var s = $("#select_sec");
-
-            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function (objJson) {
-                s.empty();
-                var lista = objJson.lista;
-                s.append("<option value='' > [SELECCIONE] </option>");
-                for (var j = 0; j < lista.length; j++) {
-                    if ($(".sec_pu").val() == lista[j].id) {
-                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
-                    } else {
-                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
-                    }
-                }
-            });
-        }
-        function Listar_pue() {
-            var s = $("#pu_id_se");
-            $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(".sec_pu").val(), function (objJson) {
-                s.empty();
-                var lista = objJson.lista;
-                s.append("<option value='' > [SELECCIONE] </option>");
-                for (var j = 0; j < lista.length; j++) {
-
-                    if ($(".id_pu_dgp").val() == lista[j].id) {
-                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
-                    } else {
-                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
-                    }
-                }
-            });
-        }
-
-        function Listar_plantilla() {
-            var s = $(".con_pl_pu");
-
-            $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function (objJson) {
-                s.empty();
-                var lista = objJson.lista;
-                s.append("<option value='' > [SELECCIONE] </option>");
-                for (var i = 0; i < lista.length; i++) {
-                    if ($(".id_pl_con").val() == lista[i].id) {
-                        s.append("<option value='" + lista[i].id + "' selected=''> " + lista[i].nom_pl + "</option>");
-                    } else {
-                        s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
-                    }
-                }
-            });
-        }
-        function listar_sub_mod() {
-            var s = $("#select-sub-mod");
-            $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&" + "id=" + $(".id_mod_con").val(), function (objJson) {
-                s.empty();
-                var lista = objJson.lista;
-                s.append("<option value='' > [SELECCIONE] </option>");
-                for (var i = 0; i < lista.length; i++) {
-                    if ($(".id_sub_mod").val() != null) {
-                        if ($(".id_sub_mod").val() == lista[i].id) {
-                            s.append("<option value='" + lista[i].id + "' selected=''> " + lista[i].nombre + "</option>");
-                        } else {
-                            s.append("<option value='" + lista[i].id + "'> " + lista[i].nombre + "</option>");
-                        }
-                    } else {
-                        s.append("<option value='" + lista[i].id + "'> " + lista[i].nombre + "</option>");
-                    }
-                }
-            });
-        }
-        function Listar_Direccion() {
-            var cc_dir = $(".cc-dir");
-            $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
-                if (objJson.rpta == -1) {
-                    alert(objJson.mensaje);
-                    return;
-                }
-                var lista = objJson.lista;
-                for (var i = 0; i < lista.length; i++) {
-                    if (lista[i].id == $(".id_dire").val()) {
-                        cc_dir.append("<option value='" + lista[i].id + "' selected=''>" + lista[i].nombre + "</option>");
-                    } else {
-                        cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                    }
-                }
-            });
-        }
-        $(document).ready(function () {
-            $("#submit").click(function () {
-                $(this).attr("disabled", "disabled");
-            });
-            Listar_pue();
-            Listar_dep();
-            Listar_sec();
-            Listar_area();
-            Listar_plantilla();
-            listar_sub_mod();
-            Listar_Direccion();
-            ListCentroCostoDGP($("#id_dgp").val());
-            list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato", "id_tipo_contrato", "de_ti_contrato", "1", $(".id_ti_contrato").val());
-            var a = $("#select-sub-mod");
-            var c = $("#Selec_Area");
-            var d = $("#select_sec");
-            var b = $("#selec_dep");
-            var e = $("#pu_id_se");
-            $(".date").keyup(function () {
-                $(".conteni").val($(".date").val());
-            });
-            // $.post("../../  ")
-            $(".select_mod").change(function () {
-                // alert("?MODALIDAD="+$("#select_mod").val());
-                $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&id=" + $(".select_mod").val(), function (objJson) {
-                    a.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var list = objJson.lista;
-                    a.append("<option value='' > [SELECCIONE] </option>");
-                    if (list.length !== 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            a.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                        }
-                    } else {
-                        a.append("<option value='' > [no hay] </option>");
-                    }
-                });
-            });
-            $("#selec_dep").change(function () {
-                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
-                    c.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var list = objJson.lista;
-                    c.append("<option value='' > [SELECCIONE] </option>");
-                    if (list.length !== 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                        }
-                    } else {
-                        c.append("<option value='' > [no hay] </option>");
-                    }
-                });
-            });
-            $("#select_dir").change(function () {
-                $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
-                    b.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var list = objJson.lista;
-                    b.append("<option value='' > [SELECCIONE] </option>");
-                    if (list.length !== 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                        }
-                    } else {
-                        b.append("<option value='' > [] </option>");
-                    }
-                });
-            });
-            $("#Selec_Area").change(function () {
-                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
-                    d.empty();
-                    var list = objJson.lista;
-                    d.append("<option value='' > [SELECCIONE] </option>");
-                    if (list.length !== 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                        }
-                    } else {
-                        d.append("<option value='' > [no hay] </option>");
-                    }
-                });
-            });
-            $("#select_sec").change(function () {
-                $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
-                    e.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var list = objJson.lista;
-                    e.append("<option value='' > [SELECCIONE] </option>");
-                    if (list.length !== 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                        }
-                    } else {
-                        e.empty();
-                        e.append("<option value='' > [] </option>");
-                    }
-                });
-            });
-
-        });
-    </script>
 </html>
