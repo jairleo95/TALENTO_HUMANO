@@ -7,7 +7,7 @@
 <%@page import="pe.edu.upeu.application.model.Direccion"%>
 <%@page import="pe.edu.upeu.application.model.V_Contrato_dgp"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
-<%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
+
 <jsp:useBean id="List_contrato" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Direccion" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="list_reg_labo" scope="session" class="java.util.ArrayList"/>
@@ -194,7 +194,7 @@
 <%@page import="pe.edu.upeu.application.model.Direccion"%>
 <%@page import="pe.edu.upeu.application.model.V_Contrato_dgp"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
-<%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
+
 <jsp:useBean id="List_contrato" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Direccion" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="list_reg_labo" scope="session" class="java.util.ArrayList"/>
