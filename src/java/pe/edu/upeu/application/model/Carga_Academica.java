@@ -28,8 +28,19 @@ public class Carga_Academica {
     private String fe_desde;
     private String fe_hasta;
     private String fe_creacion;
+  private Integer countCursos;
+    public Integer getCountCursos() {
+        return countCursos;
+    }
 
-    public Carga_Academica(String nu_doc, String es_tipo_doc, String no_trabajador, String ap_paterno, String ap_materno, String no_eap, String no_facultad, String de_condicion, String de_carga, String id_proceso_carga_ac, String id_trabajador, String id_situacion_educativa, String no_s_educativa, String profesion_docente, String fe_desde, String fe_hasta, String fe_creacion) {
+    public void setCountCursos(Integer countCursos) {
+        this.countCursos = countCursos;
+    }
+
+    public Carga_Academica(String nu_doc, String es_tipo_doc, String no_trabajador, String ap_paterno, String ap_materno, String no_eap,
+            String no_facultad, String de_condicion, String de_carga,
+            String id_proceso_carga_ac, String id_trabajador, String id_situacion_educativa, String no_s_educativa, String profesion_docente, String fe_desde,
+            String fe_hasta, String fe_creacion, Integer countCursos) {
         this.nu_doc = nu_doc;
         this.es_tipo_doc = es_tipo_doc;
         this.no_trabajador = no_trabajador;
@@ -47,6 +58,7 @@ public class Carga_Academica {
         this.fe_desde = fe_desde;
         this.fe_hasta = fe_hasta;
         this.fe_creacion = fe_creacion;
+        this.countCursos = countCursos;
     }
 
     public Carga_Academica() {
@@ -67,6 +79,7 @@ public class Carga_Academica {
         this.fe_desde = "";
         this.fe_hasta = "";
         this.fe_creacion = "";
+        this.countCursos = 0;
     }
 
     public String getEs_tipo_doc() {
@@ -84,7 +97,6 @@ public class Carga_Academica {
     public void setDe_carga(String de_carga) {
         this.de_carga = de_carga;
     }
-    
 
     public String getNu_doc() {
         return nu_doc;

@@ -273,7 +273,7 @@ public class CDgp extends HttpServlet {
                     String ES_PER_PAGO = request.getParameter("ES_PERIODO");
                     pp.InsetarPeriodo_Pago(ID_PERIODO_PAG0, NU_CUOTA, FE_PAGAR, CA_MONTO, ID_DGP, ES_PER_PAGO);
                 }
-
+                System.out.println("Numero centro costo:" + NUMERO);
                 for (int g = 1; g <= NUMERO; g++) {
                     String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
                     double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
@@ -282,7 +282,9 @@ public class CDgp extends HttpServlet {
                     }
                 }
                 List<String> list = a.Det_Autorizacion(idrp);
+                System.out.println("Insertando autorizacion...");
                 a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "", "", list.get(1), idrp, list.get(0));
+
                 //HORARIO
                 List<String> dia = new ArrayList<String>();
                 dia.add("lun");
@@ -292,7 +294,6 @@ public class CDgp extends HttpServlet {
                 dia.add("vie");
                 dia.add("sab");
                 dia.add("dom");
-
                 String ID_DETALLE_HORARIO = request.getParameter("ID_DETALLE_HORARIO");
                 String ES_DETALLE_HORARIO = "1";
                 String ES_HORARIO = "1";
@@ -300,22 +301,33 @@ public class CDgp extends HttpServlet {
                 String ES_MOD_FORMATO = "1";
                 Double horas_totales = Double.parseDouble(request.getParameter("h_total"));
                 String id_d_hor = "";
+                System.out.println("Insertando Horario...");
                 id_d_hor = IHor.Insert_Detalle_Horario(ID_DETALLE_HORARIO, iddgp, ES_DETALLE_HORARIO, iduser, null, null, null, ID_TIPO_HORARIO, ES_MOD_FORMATO, horas_totales);
+                System.out.println("Insertando detalle horario...");
+                System.out.println("dias totales:" + dia);
                 for (int i = 0; i < dia.size(); i++) {
                     for (int j = 0; j < 10; j++) {
+
                         String hora_desde = request.getParameter("HORA_DESDE_" + dia.get(i) + j);
-                        hora_desde = parser24(hora_desde);
+
                         String hora_hasta = request.getParameter("HORA_HASTA_" + dia.get(i) + j);
-                        hora_hasta = parser24(hora_hasta);
+
                         String d = request.getParameter("DIA_" + dia.get(i) + j);
+
+                        System.out.println("dia:" + d);
+                        System.out.println("desde:" + hora_desde);
+                        System.out.println("hasta:" + hora_hasta);
                         if (hora_desde != null & d != null & hora_hasta != null) {
                             if (!hora_hasta.equals("") & !hora_desde.equals("") & !d.equals("")) {
+                                hora_desde = parser24(hora_desde);
+                                hora_hasta = parser24(hora_hasta);
                                 IHor.Insert_Horario(null, hora_desde, hora_hasta, d, ES_HORARIO, id_d_hor);
                                 //ifo.Insert_Formato_Horario(null, "T"+j, d, hora_desde, hora_hasta, "1", ID_TIPO_HORARIO);
                             }
                         }
                     }
                 }
+                System.out.println("set sessions" + dia);
                 sesion.setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
                 int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
                 int num_ad = doc.List_Adventista(ID_TRABAJADOR);

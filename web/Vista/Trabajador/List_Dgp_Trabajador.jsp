@@ -58,21 +58,10 @@
 
     </head>
     <body >
-
-
-
-
-        <!-- MAIN PANEL -->
         <div id="main" role="main" style="margin-left: 0px;">
-
-
-
             <!-- MAIN CONTENT -->
             <div id="content">
-
-
-
-                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                <div class="jarviswidget jarviswidget-color-darken slideInDown fast animated" id="wid-id-0" data-widget-editbutton="false">
                     <header>
                         <span class="widget-icon"> <i class="fa fa-list"></i> </span>
                         <h2 class="font-md"><strong>Historial </strong> <i>Requerimientos</i></h2>		
@@ -95,7 +84,7 @@
                                     </tr>
                                 </thead>
                                 <% CConversion c = new CConversion();
-                            if (LIST_ID_TRAB_DGP.size() == 0) {%>
+                                    if (LIST_ID_TRAB_DGP.size() == 0) {%>
 
                                 <%}%>
 
@@ -120,17 +109,17 @@
                                                     if (d.getEs_dgp().trim().equals("0")) {
                                             %>
                                             <a href="../../dgp?iddgp=<%=d.getId_dgp().trim()%>&opc=Seguimiento" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-arrow-right"></i></span>En Proceso </a>
-                                            <% }%>
-                                            <%if (d.getEs_dgp().trim().equals("1")) {
-                                            %>
+                                                    <% }%>
+                                                    <%if (d.getEs_dgp().trim().equals("1")) {
+                                                    %>
                                             <a href="../../dgp?iddgp=<%=d.getId_dgp().trim()%>&opc=Seguimiento" class="btn btn-labeled btn-success"> <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>Ver Proceso Terminado </a>
-                                            <% }
-                                    } else {%>
+                                                    <% }
+                                            } else {%>
                                             <a href="../../dgp?iddgp=<%=d.getId_dgp().trim()%>&opc=Seguimiento" class="btn btn-labeled btn-danger"> <span class="btn-label"><i class="glyphicon glyphicon-thumbs-down"></i></span>Incompleto - Interrumpido</a>
-                                            <%}%>
+                                                    <%}%>
                                         </td> 
                                         <td >
-                                          
+
                                             <a href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento"class="btn btn-labeled btn-default"> <span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span>Ver Documentos </a>
                                         </td> 
 
@@ -160,33 +149,11 @@
 
 
 
-        </article>
-        <!-- WIDGET END -->
+      
 
     </div>
 
-    <!-- end row -->
-
-    <!-- end row -->
-
-</section>
-<!-- end widget grid -->
-
-</div>
-<!-- END MAIN CONTENT -->
-
-</div>
-<!-- END MAIN PANEL -->
-
-
-
-
-
-<!--================================================== -->
-
-<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
-
+ 
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script>
