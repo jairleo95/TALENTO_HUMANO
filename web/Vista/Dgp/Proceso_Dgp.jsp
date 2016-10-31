@@ -256,7 +256,6 @@
                                                             V_Es_Requerimiento r = new V_Es_Requerimiento();
                                                             r = (V_Es_Requerimiento) LIST_DGP_PROCESO.get(i);
                                                             dgp = r.getId_dgp();
-
                                                     %>
 
                                                     <tr>
@@ -321,8 +320,9 @@
                                                     %>
                                                     </tbody>
                                                 </table>
+
+
                                             </div>
-                                                    
                                             <div class="tab-pane fade" id="hr2">
                                                 <table  class="table table-striped table-bordered table-hover tableEsCargaAcademica" width="100%">
                                                     <thead>
@@ -340,6 +340,7 @@
                                                         </tr>
                                                     </thead>
                                                 </table>
+
                                             </div>
 
                                         </div>
@@ -391,7 +392,6 @@
                                 <textarea class="mensaje"></textarea>
                                 <p></p>
                                 <input name="idDgp" class="idDgp" type="hidden" value="<%=dgp%>">
-
                                 <div class="contador">
                             </form>
                         </div>
@@ -452,7 +452,6 @@
                             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                 <thead>
                                     <tr>
-
                                         <td>Paso <%=Det_Autorizacion.size()%></td>
                                         <td data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i> Detalle</td>
                                         <td data-class="expand"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Estado</td>
@@ -464,19 +463,15 @@
                                         <td data-hide="phone,tablet">Fecha Autorizacion</td>
                                     </tr>
                                 </thead>
-                                <tbody> 
-                                    <%
-                                        for (int i = 0; i < Det_Autorizacion.size(); i++) {
+                                <tbody>
+                                    <%for (int i = 0; i < Det_Autorizacion.size(); i++) {
                                             X_List_De_Autorizacion a = new X_List_De_Autorizacion();
                                             a = (X_List_De_Autorizacion) Det_Autorizacion.get(i);
-
                                     %>
-
                                     <tr>
                                         <td class="caji"><%=a.getNu_pasos()%></td>
                                         <td><%=a.getDe_pasos()%></td>
                                         <% if (a.getEs_autorizacion() != null) {%>
-
                                         <td class="caji" >
                                             <%
                                                 if (a.getEs_autorizacion() != null) {
@@ -492,7 +487,6 @@
                                             } else {%>
                                             No registrado
                                             <%}%><input type="hidden" class="estado-aut" value="<%=a.getEs_autorizacion()%>"></td>
-
                                         <td><%
                                             if (a.getUs_ap_mat() != null) {
                                                 out.println(a.getUs_ap_p().toUpperCase() + " " + a.getUs_ap_mat().toUpperCase() + " " + a.getUs_no_tr().toUpperCase());
@@ -522,11 +516,9 @@
                                     <a class="close" data-dismiss="alert" href="#">×</a>
                                     <h4 class="alert-heading">DGP fuera de Proceso!</h4>
                                     <p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp=<%=a.getId_dgp().trim()%>&ID<%=a.getId_departamento()%>" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=<%=a.getId_dgp().trim()%>" class="btn btn-primary"><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" href="#myModal6" class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>
-
                                     </p>
-                                  
-                                </div><input type="hidden" class="id-autorizacion" value="<%=a.getId_autorizacion()%>">
-                                    <input type="hidden" class="idDepart" value="<%=a.getId_departamento()%>">
+                                    <input type="hidden" class="id-autorizacion" value="<%=a.getId_autorizacion()%>">
+                                </div>
 
                                 <div class="modal fade" id="myModal6" tabindex="-1" role="dialog">
                                     <div class="modal-dialog">
@@ -543,13 +535,11 @@
                                                             <h1 class="h1" style="color:#218FDD ; font-size:20px;"><strong>MOTIVO</strong></h1>
                                                             <div class="col col-10"  >
                                                                 <label class="input">
-
                                                                     <% if (a.getCm_comentario() != null & a.getId_autorizacion() != null & a.getId_dgp() != null) {
                                                                             String inf = "";
                                                                             inf = cm.Comentario_dgp_aut(a.getId_dgp(), a.getId_autorizacion());
                                                                             String info[] = inf.split("/");
                                                                     %>
-
                                                                     <P class="list_motivo"><%=info[0]%></P>
                                                                     <P class="list_motivo"><strong>Usuario:</strong><%=info[1]%></P>
                                                                     <P class="list_motivo"><strong>Fecha:</strong><%=info[2]%></P>
@@ -621,7 +611,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" id="myModalComentario" tabindex="-1" role="dialog"  >
+        <div class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" id="myModalComentario" tabindex="-1" role="dialog"  >
         <div class="modal-dialog" >
             <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12" style="width:100%;margin-left: 0%;">
                 <div class="modal-header">
@@ -732,10 +722,10 @@
 
     <script type="text/javascript">
                             // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                            function listHistory(at) {
-                                // var dgp = "id_dgp";
+                              function listHistory(at) {
+                                var dgp = "id_dgp";
                                 var id = $(".vHist" + at + "").val();
-                                var id1 = $(".id-autorizacion").val();
+                                var id1 = $(".idDepart").val();
                                 var url = '../../dgp?opc=SeguimientoH';
                                 var data = 'iddgp=' + id;
 
@@ -778,7 +768,7 @@
                                             } else {
                                                 m += '<td colspan="7" style="text-align:center;"> No definido </td>';
                                             }
-
+                                                  
                                             m += '</tr>';
                                             if (lista[i].es_autorizacion !== null) {
                                                 if (lista[i].es_autorizacion === '2' & (rol === "ROL-0002" || rol === "ROL-0005" || rol === "ROL-0001")) {
@@ -786,11 +776,13 @@
                                                     function DivEspecial() {
                                                         var DivEspecial = '<div id="divEs" class="alert alert-danger alert-block">';
                                                         DivEspecial += '<a class="close" data-dismiss="alert" href="#">×</a>';
-                                                        DivEspecial += '<h4 class="alert-heading">DGP fuera de Proceso!</h4>';
-                                                        DivEspecial += '<p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp= ' + id + '&ID' + id1 + ' " class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=' + id + '" class="btn btn-primary id-dgp "><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" class="btn btn-primary" onclick="ListarMotivo()" data-toggle="modal" data-target="#myModalComentario"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>';
+                                                        DivEspecial += ' <h4 class="alert-heading">DGP fuera de Proceso!</h4>';
+                                                        DivEspecial += '<p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp='+id+'&ID'+id1+'" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=' + id + '" class="btn btn-primary id-dgp "><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" class="btn btn-primary" onclick="ListarMotivo()" data-toggle="modal" data-target="#myModalComentario"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>';
+                                                      //  alert(+lista[i].us_no_puesto+);                                                                                                                                                                                                                                                                                                                                                                                
                                                         DivEspecial += '</p>';
                                                         DivEspecial += '<input type="hidden" class="id-autorizacion" value="lista[i].id_autorizacion">';
                                                         DivEspecial += '</div>';
+
                                                         return DivEspecial;
                                                     }
                                                 }
@@ -834,26 +826,27 @@
                                 table += '</table>';
                                 return table;
                             }
-
-
+                            
+                            
                             function ListarMotivo(at) {
                                 alert("asdasdasd");
                                 var id = $(".vHist" + at + "").val();
                                 var url = '../../dgp?opc=SeguimientoH';
                                 var data = 'iddgp=' + id;
 
+                               
                                 $.post(url, data, function (objJson) {
                                     var lista = objJson.listar;
                                     if (lista.length > 0) {
                                         var ma = '';
                                         for (var i = 0; i < lista.length; i++) {
                                             //  alert("asdasdasd");
-                                            $(".contMO").append("<td>" + lista[i].getDe_pasos + "</td>");
-                                            $(".contMO").append("<td class='alert alert-danger'>" + lista[i].id_dgp + "</td>");
-
+                                             $(".contMO").append("<td>" +lista[i].getDe_pasos+ "</td>");
+                                             $(".contMO").append("<td class='alert alert-danger'>" + lista[i].id_dgp + "</td>");
+                                           
                                         }
-                                        $(".contMO").empty();
-                                    } else {
+                                             $(".contMO").empty();
+                                             } else {
                                         alert("vacio");
                                     }
                                 });
@@ -1004,7 +997,9 @@
                                     "preDrawCallback": function () {
                                         // Initialize the responsive datatables helper once.
                                         if (!responsiveHelperCAacademico) {
-                                            responsiveHelperCAacademico = new ResponsiveDatatablesHelper($('.tableEsCargaAcademica'), breakpointDefinition);
+                                            responsiveHelperCAacademico = new ResponsiveDatatablesHelper(
+                                                    $('.tableEsCargaAcademica'),
+                                                    breakpointDefinition);
                                         }
                                     },
                                     "rowCallback": function (row, data, index) {
