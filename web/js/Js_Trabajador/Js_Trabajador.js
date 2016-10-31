@@ -4,6 +4,25 @@
  * and open the template in the editor.
  */
 
+  function closedthis() {
+            $.smallBox({
+                title: "¡Ficha de trabajador registrada correctamente!",
+                content: "ya puede visualizar toda la informacion del trabajador...",
+                color: "#739E73",
+                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                timeout: 6000
+            });
+        }
+        function closedthis2() {
+            $.smallBox({
+                title: "¡Contrato Especial registrado con exito!",
+                content: "ya puede visualizar el contrato en Detalle del Trabajador",
+                color: "#739E73",
+                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                timeout: 6000
+            });
+        }
+
 function showEsDiezmo() {
     var obj = $(".div_input_diezmo");
     obj.hide(100);

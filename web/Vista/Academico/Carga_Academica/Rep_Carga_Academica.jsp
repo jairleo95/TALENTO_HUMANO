@@ -11,7 +11,7 @@
         <meta name="author" content="">
         <title>Carga Académica</title>
         <meta name="description" content="">
-        
+
         <meta name="author" content="">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -94,15 +94,15 @@
                                                 <tr>
                                                     <th class="hasinput" colspan="10"  rowspan="1"></th>  
                                                     <th class='hasinput' >
-                                                        <input type="date" class='' />
+                                                        <input type="date" class='form-control input-sm' />
                                                     </th>
                                                     <th class='hasinput' >
-                                                        <input type="date" class='' />
+                                                        <input type="date" class='form-control input-sm' />
                                                     </th>
                                                 </tr>
                                                 <tr>
-                                                    <th>Acciones</th>
-                                                    <th>Tipo Documento</th>
+                                                    <th></th>
+                                                    <th>Tipo Doc.</th>
                                                     <th>N° Documento</th>
                                                     <th style="width: 16%">Apellidos y Nombres</th>
                                                     <th>Facultad</th>
@@ -122,16 +122,17 @@
                                                         Carga_Academica ca = new Carga_Academica();
                                                         ca = (Carga_Academica) ListCarAca.get(i);
                                                 %>
-                                                <tr >
+                                                <tr>
                                                     <td>  
                                                         <div class="btn-group"> 
                                                             <button class="btn btn-primary dropdown-toggle bounceIn animated" data-toggle="dropdown">
                                                                 <i class="fa fa-gear fa-lg"></i>
                                                             </button>
                                                             <ul class="dropdown-menu">
+                                                                <%if (ca.getValidateExistTrabajador() != null) {
+                                                                %>
                                                                 <li>
                                                                     <a href="../../../carga_academica?opc=Completar_Datos&nro_doc=<%=ca.getNu_doc()%>&ap_p=<%=ca.getAp_paterno()%>&ap_m=<%=ca.getAp_materno()%>&no_tr=<%=ca.getNo_trabajador()%>&ti_doc=<%=ca.getEs_tipo_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>"   >Completar Datos</a>
-
                                                                 </li>
 
                                                                 <li class="divider"></li>
@@ -141,6 +142,11 @@
                                                                        data-keyboard="false" class="btnCargaAcademica"
                                                                        data-valor="&nro_doc=<%=ca.getNu_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>&idtr=<%=ca.getId_trabajador()%>&ciclo=<%=ca.getDe_carga()%>"  >Carga Academica</a>
                                                                 </li>
+                                                                <%} else {%>
+                                                                <li>
+                                                                    <a href="../../../carga_academica?opc=Completar_Datos&nro_doc=<%=ca.getNu_doc()%>&ap_p=<%=ca.getAp_paterno()%>&ap_m=<%=ca.getAp_materno()%>&no_tr=<%=ca.getNo_trabajador()%>&ti_doc=<%=ca.getEs_tipo_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>"   >Completar Datos</a>
+                                                                </li>
+                                                                <%}%>
                                                             </ul>
                                                         </div>
 
@@ -198,10 +204,7 @@
                         <div class="areaModal">
 
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" onclick="" class="btn btn-success">Aceptar</button>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -285,42 +288,13 @@
         <script src="../../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        <script  type="text/javascript" src="../../../js/Js_Formulario/Js_Form.js"></script>
+        <script type="text/javascript" src="../../../js/Js_Academico/Js_Carga_Academica.js"></script>
         <script type="text/javascript">
-            function showCargaAcademica(objBodyPrint, dataAjax) {
-                var url = '../../../carga_academica';
-                var fila = 1;
-                var columna = 0;
-                var g = 0;
-                objBodyPrint.empty();
-                $.ajax({url: "horarioCursosAcademico.html", type: 'POST', success: function (htmlContent, textStatus, jqXHR) {
-                        objBodyPrint.append(htmlContent);
-                        /*test*/
-                        $.post(url, 'opc=getDetCargaAcademica' + dataAjax, function (data) {
-                            var dataList = data.list;
-                            $.each(dataList, function (index, dataItem) {
-                                var myArray = dataItem.de_horario.trim();
-                                console.log(myArray);
-                                $('.bodyCursos').append('' + (g + 1) + '.' + dataItem.no_curso + '</br><li> ' + dataItem.no_eap + '</li><li>' + dataItem.de_tipo_curso + '</li>');
-                                for (var i = 0; i < myArray.length; i++) {
-                                    columna++;
-                                    if (myArray[i] === "1") {
-                                        $(".fila-" + fila + " .columna-" + columna).append('<span class="badge bg-color-blueLight">' + (g + 1) + '</span>');
-                                    }
-                                    if (columna === 7) {
-                                        columna = 0;
-                                        fila++;
-                                    }
-                                }
-                                fila = 1;
-                                columna = 0;
-
-                                g++;
-                            });
-                        });
-
-                    }});
-            }
             $(document).ready(function () {
+                pageSetUp();
+                initFormPlugins();
+                initCargaAcademica();
                 var opc = "list";
                 var dataAditional = "";
                 var idRow = "";
@@ -335,15 +309,10 @@
                     phone: 480
                 };
                 var tableRepAcademico = $('.datatableRepCargaAcademica').DataTable();
-                $(".btnCargaAcademica").click(function () {
-                    var objBodyPrint = $(".areaModal");
-                    showCargaAcademica(objBodyPrint, $(this).data("valor"));
-                });
+
+
             });
         </script>
-
-
-
     </body>
 
 </html>

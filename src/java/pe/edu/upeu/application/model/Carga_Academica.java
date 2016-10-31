@@ -28,7 +28,18 @@ public class Carga_Academica {
     private String fe_desde;
     private String fe_hasta;
     private String fe_creacion;
-  private Integer countCursos;
+    private Integer countCursos;
+
+    private String validateExistTrabajador;
+
+    public String getValidateExistTrabajador() {
+        return validateExistTrabajador;
+    }
+
+    public void setValidateExistTrabajador(String validateExistTrabajador) {
+        this.validateExistTrabajador = validateExistTrabajador;
+    }
+
     public Integer getCountCursos() {
         return countCursos;
     }
@@ -40,7 +51,7 @@ public class Carga_Academica {
     public Carga_Academica(String nu_doc, String es_tipo_doc, String no_trabajador, String ap_paterno, String ap_materno, String no_eap,
             String no_facultad, String de_condicion, String de_carga,
             String id_proceso_carga_ac, String id_trabajador, String id_situacion_educativa, String no_s_educativa, String profesion_docente, String fe_desde,
-            String fe_hasta, String fe_creacion, Integer countCursos) {
+            String fe_hasta, String fe_creacion, Integer countCursos, String validateExistTrabajador) {
         this.nu_doc = nu_doc;
         this.es_tipo_doc = es_tipo_doc;
         this.no_trabajador = no_trabajador;
@@ -59,6 +70,7 @@ public class Carga_Academica {
         this.fe_hasta = fe_hasta;
         this.fe_creacion = fe_creacion;
         this.countCursos = countCursos;
+        this.validateExistTrabajador = validateExistTrabajador;
     }
 
     public Carga_Academica() {
@@ -80,6 +92,7 @@ public class Carga_Academica {
         this.fe_hasta = "";
         this.fe_creacion = "";
         this.countCursos = 0;
+        this.validateExistTrabajador = "";
     }
 
     public String getEs_tipo_doc() {
