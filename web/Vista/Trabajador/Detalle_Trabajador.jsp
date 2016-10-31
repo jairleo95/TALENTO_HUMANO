@@ -137,7 +137,7 @@
         %>
         <!--Begin Detalle Trabajador-->
 
-        <div class="jarviswidget jarviswidget-color-darken" id="wid-id-3" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+        <div class="jarviswidget jarviswidget-color-darken slideInDown fast animated" id="wid-id-3" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
             <header>
                 <span class="widget-icon"> <i class="fa fa-user"></i> </span>
                 <h2 class="font-md"><strong>Datos del</strong> <i>Trabajador</i></h2>				
@@ -449,7 +449,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category"> Fecha de Inicio:</label>
-                                        <input type="text" class="fecha form-control fe_desde_p frompicker" value="" name="DESDE"data-mask="99/99/9999" data-mask-placeholder= "_" required />
+                                        <input type="text" class="fecha form-control fe_desde_p frompicker" value="" name="DESDE" data-mask="99/99/9999" data-mask-placeholder= "_" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -608,7 +608,7 @@
 
         <!--    PAGE RELATED PLUGIN(S) -->
         <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-        <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
+        <script  type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
         <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
@@ -619,86 +619,13 @@
         <script type="text/javascript" src="../../js/Js_Trabajador/Js_Trabajador.js"></script>
         <script type="text/javascript" src="../../js/Js_Autorizacion/Js_Autorizacion.js"></script>
         <script type="text/javascript" src="../../js/Js_Academico/Js_Carga_Academica.js"></script>
+        <script type="text/javascript" src="../../js/businessLogic/foto/foto.js"></script>
         <script type="text/javascript">
-        var url_archivos = $(".url_archivo").val() + "Fotos/";
-        var idtrl = $(".idtr").val().trim();
-        var repeat = 0;
-
-        function closedthis() {
-            $.smallBox({
-                title: "¡Ficha de trabajador registrada correctamente!",
-                content: "ya puede visualizar toda la informacion del trabajador...",
-                color: "#739E73",
-                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                timeout: 6000
-            });
-        }
-        function closedthis2() {
-            $.smallBox({
-                title: "¡Contrato Especial registrado con exito!",
-                content: "ya puede visualizar el contrato en Detalle del Trabajador",
-                color: "#739E73",
-                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                timeout: 6000
-            });
-        }
-        function validar_shadowbox() {
-
-            Shadowbox.init({
-                overlayOpacity: 0.9
-            });
-            Shadowbox.setup("a.mustang-gallery", {
-                gallery: "mustang",
-                continuous: true,
-                counterType: "skip"
-            });
-        }
-        function ValBtnAutorizarDgp(trabajador, divBotones) {
-            divBotones.empty();
-            $.ajax({
-                url: "../../autorizacion", data: "opc=ValBtnAutorizacion&trabajador=" + trabajador, type: 'POST', success: function (data, textStatus, jqXHR) {
-                    if (data.rpta === "1") {
-                        divBotones.append(data.data);
-                        $(".btn-autor").click(function (e) {
-                            $.SmartMessageBox({
-                                title: "¡Alerta de Confirmación!",
-                                content: "¿Está totalmente seguro de autorizar este requerimiento?",
-                                buttons: '[No][Si]'
-                            }, function (ButtonPressed) {
-                                if (ButtonPressed === "Si") {
-                                    //$(".form-aut").submit();
-                                    $(".btn-autor").attr("disabled", "disabled");
-                                    $.ajax({url: "../../autorizacion",
-                                        data: $(".form-aut").serialize(),
-                                        type: 'POST',
-                                        success: function (data, textStatus, jqXHR) {
-                                            if (data.rpta) {
-                                                window.parent.UpdateNotifications();
-                                                window.parent.sendMessage();
-                                                window.location.href = "../Dgp/Autorizar_Requerimiento.jsp?r=ok";
-                                            }
-                                        }});
-                                }
-                                if (ButtonPressed === "No") {
-                                    return false;
-                                }
-                            });
-                            e.preventDefault();
-                        });
-                    } else {
-                        /*error*/
-                    }
-                }
-            });
-        }
         $(document).ready(function () {
-            getAvatar("perfil", idtrl);
-            getAvatar("todo", idtrl);
-
             Listar_Cod_Huella();
             Listar_Cod_APS();
             ShowCbk_Procesar_Ind($(".dgp").val());
-            ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
+            initAutorizacion();
             pageSetUp();
             $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
@@ -707,7 +634,7 @@
                 $(".tab_detalle_trabajador li").removeClass("active");
                 $(this).addClass("active");
             });
-            validar_shadowbox();
+            validateShadowBox();
             setTimeout(function () {
                 document.getElementById('myframe2').onload = function () {
                     porcentaje_datos($(".idtr").val());
@@ -715,349 +642,11 @@
             }, 5000);
             showEsDiezmo();
             ShowAFP_SP();
-
-
             $(".btnCodigoAPS").click(function () {
                 Actualizar_Cod_APS();
             });
-
-            $(".btn-conti").click(function (e) {
-                $.SmartMessageBox({
-                    title: "Alerta de Confirmación",
-                    content: "¿Está totalmente seguro de rechazar este requerimiento999?",
-                    buttons: '[No][Si]'
-                }, function (ButtonPressed) {
-                    if (ButtonPressed === "Si") {
-                        $(".form-rech").submit();
-                    }
-                    if (ButtonPressed === "No") {
-                        return false;
-                    }
-                });
-                e.preventDefault();
-
-            });
-
-            /*carga academica*/
-            $(".fe_desde_p, .fe_hasta_p, .hl_docente, .ti_hp_docente").change(function () {
-                calcularCuotasDocente($(".fe_desde_p").val(), $(".fe_hasta_p").val(), $(".hl_docente").val(), $(".ti_hp_docente").val());
-            });
-
-            $(".btn_guardar_ca").click(function () {
-                $.ajax({
-                    url: "../../carga_academica",
-                    type: "POST",
-                    data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-                }).done(function (data) {
-                    if (data.rpta === true) {
-                        alert("Registrado con exito!...");
-                        $(".proceso").val(data.proceso);
-                        $(".dgp").val(data.dgp);
-                        $(".btn_procesar").show();
-                    }
-                }).fail(function (e) {
-                    alert("Error: " + e);
-                });
-            });
-            $(".btn_procesar").click(function () {
-                ProcesarCargaAcademica($(".dgp").val(), $(".proceso").val());
-            });
-            /*FIN carga academica*/
-
-            /*AUTORIZACIONES*/
-            $(".btn-autor1").click(function (e) {
-                $.SmartMessageBox({
-                    title: "¡Alerta de Confirmación!",
-                    content: "¿Está totalmente seguro de autorizar este requerimientoklñklñ?",
-                    buttons: '[No][Si]'
-                }, function (ButtonPressed) {
-                    if (ButtonPressed === "Si") {
-                        //   window.parent.sendOk();
-                        // parent.sendOk();
-                        $(".btn-autor1").attr("disabled", "disabled");
-                        $(".form-aut").submit();
-                        //window.sendMessage();
-                        //window.parent.websocket.send("texto");
-                    }
-                    if (ButtonPressed === "No") {
-                        return false;
-                    }
-                });
-                e.preventDefault();
-            });
-            $(".btn-rech").click(function (e) {
-                $.SmartMessageBox({
-                    title: "Alerta de Confirmación!",
-                    content: "¿Está totalmente seguro de rechazar este requerimiento?",
-                    buttons: '[No][Si]'
-                }, function (ButtonPressed) {
-                    if (ButtonPressed === "Si") {
-                        $(".btn-rech").attr("disabled", "disabled")
-                        $(".btn-mos").click();
-                        $(".form-rech").submit();
-                    }
-                    if (ButtonPressed === "No") {
-                        return false;
-                    }
-                });
-                e.preventDefault();
-            });
-            /* FIN AUTORIZACIONES*/
+            initFoto();
         });
-
-
-        function addImage(e) {
-            var file = e.target.files[0], imageType = /image.*/;
-            if (!file.type.match(imageType))
-                return;
-            var reader = new FileReader();
-            reader.onload = fileOnload;
-            reader.readAsDataURL(file);
-            $('.ver_foto').hide(200);
-        }
-
-        function precarga(e) {
-            var file = e.target.files[0], imageType = /image.*/;
-            if (!file.type.match(imageType))
-                return;
-            var reader = new FileReader();
-            reader.onload = prefile;
-            reader.readAsDataURL(file);
-        }
-        function prefile(e) {
-            var result = e.target.result;
-            $('.pre_foto').attr("src", result);
-        }
-
-        // cargar imagen
-        function fileOnload(e) {
-            var result = e.target.result;
-            $('.pre_foto').attr("src", result);
-            $(function () {
-                $(".progressbar").show(200);
-                var progressbar = $(".progressbar"),
-                        progressLabel = $(".progress-label");
-
-                progressbar.progressbar({
-                    value: false,
-                    change: function () {
-                        progressLabel.text(progressbar.progressbar("value") + "%");
-                    },
-                    complete: function () {
-                        progressLabel.text("Complete!");
-                        $(".progressbar").hide(200);
-                    }});
-                function progress() {
-                    var val = progressbar.progressbar("value") || 0;
-
-                    progressbar.progressbar("value", val + 2);
-
-                    if (val < 99) {
-                        setTimeout(progress, 68);
-                    }
-                }
-
-                setTimeout(progress, 100);
-            });
-        }
-        $('.ver_foto').click(function () {
-            //$(".file-foto").val('');
-            $("#modal_link").click();
-            $(".file-foto").click();
-        });
-
-
-        $('.file-foto').change(function (e) {
-            var evento;
-            console.log("load foto");
-            evento = e;
-            if (this.files[0].size <= 500000) {
-                var objDivDialog = $(".div_dialog");
-                objDivDialog.empty();
-                $.ajax({url: "../../trabajador", data: "opc=ShowDialogFotoTrabajador&id=" + idtrl, type: 'POST', async: false, success: function (data, textStatus, jqXHR) {
-                        if (data.rpta == "1") {
-                            objDivDialog.append(data.html);
-                            $(".dialog-message").dialog({
-                                autoOpen: false,
-                                modal: true,
-                                height: 600,
-                                width: 630,
-                                title: "<div class='widget-header'><h4><i class='icon-ok'></i>¿ Seguro que desea cambiar ?</h4></div>",
-                                buttons: [{
-                                        html: "Cancel",
-                                        "class": "btn btn-default",
-                                        click: function () {
-                                            $(this).dialog("close");
-                                        }
-                                    }, {
-                                        html: "<i class='fa fa-check'></i>&nbsp; OK",
-                                        "class": "add-foto btn btn-primary",
-                                        click: function () {
-
-                                        }
-                                    }]
-
-                            });
-                            $('.dialog-message').dialog('open');
-                            precarga(e);
-                            $(".add-foto").on('click', function (event) {
-                                event.preventDefault();
-
-                                var jForm = new FormData();
-                                jForm.append("idtr", $('.idtr').val());
-                                jForm.append("archivo", $('.file-foto').get(0).files[0]);
-
-                                $.ajax({
-                                    type: "POST",
-                                    url: "../../foto",
-                                    cache: false,
-                                    processData: false,
-                                    contentType: false,
-                                    data: jForm, async: false,
-                                    success: function (objJson) {
-                                        console.log(objJson);
-                                        if (objJson.rpta === "-1") {
-                                            $.smallBox({
-                                                title: "¡Alerta!",
-                                                content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar su imagen...</i>",
-                                                color: "#C46A69",
-                                                iconSmall: "fa fa-cloud bounce animated",
-                                                timeout: 7000
-                                            });
-                                        } else if (objJson.rpta === "1") {
-                                            addImage(evento);
-                                            this.timer = setTimeout(function () {
-                                                var padre = $(window.parent.document.getElementById('foto_usuario'));
-                                                var idtra = $(window.parent.document.getElementById('id_trabajador')).val();
-                                                if (idtra.trim() == $(".idtr").val().trim()) {
-                                                    $('.foto-user').empty();
-                                                    $(padre).attr("src", url_archivos + objJson.archivo);
-                                                }
-                                                Shadowbox.clearCache();
-                                                validar_shadowbox();
-                                                getAvatar("perfil", idtrl);
-                                                getAvatar("todo", idtrl);
-                                                repeat = 0;
-                                                $(".borde").removeClass("ver_foto");
-                                                // $(".ver_foto").show(200);
-                                                // $(".form-subir-foto").remove();
-                                                $.smallBox({
-                                                    title: "¡Felicitaciones!",
-                                                    content: "<i class='fa fa-clock-o'></i> <i>Su imagen se ha subido con éxito...</i>",
-                                                    color: "#296191",
-                                                    iconSmall: "fa fa-cloud bounce animated",
-                                                    timeout: 6000
-                                                });
-                                                $('.dialog-message').dialog("close");
-                                            }, 4000);
-                                        }
-                                    }
-                                }).fail(function (objJson) {
-                                });
-                            });
-                        }
-                    }});
-
-
-
-            } else {
-                alert("Archivo no permitido, su tamaño debe ser menor a 500 KB");
-                $(this).val('');
-            }
-        });
-
-
-
-        function getAvatar(tipo, idtra) {
-            console.log("geAvatar");
-            $.ajax({
-                url: "../../foto",
-                type: "POST",
-                data: "opc=getfoto&tipo=" + tipo + "&idtra=" + idtra,
-                success: getImagen,
-                error: errors
-            });
-            function getImagen(data) {
-                $.each(data, function (i, datos) {
-                    $.each(datos, function (i, obj) {
-                        if (tipo == 'todo') {
-                            if (obj.EFOTO != 2) {
-                                console.log("foto todo");
-                                var imgens = '<img class="img-thumbnail" title="foto ' + i + '" src="' + url_archivos +
-                                        obj.ar_foto + '"style="width:100px; height:100px;" />';
-                                $('.fotos').append(imgens);
-
-                                if (repeat == 0) {
-                                    var imgens = '<a class="mustang-gallery pull-left" href="' + url_archivos + obj.ar_foto + '" >' +
-                                            '<img class="img-thumbnail" title="foto ' + i + '" src="' + url_archivos +
-                                            obj.ar_foto + '"style="width:100px; height:100px;" /></a>';
-                                    $('.foto-user').append(imgens);
-                                    $('.fotos').append(imgens);
-                                }
-                            }
-
-                        } else if (tipo == 'perfil') {
-                            console.log("foto perfil ");
-                            $('.borde').attr("src", url_archivos + obj.ar_foto);
-                            $(".avatar").attr("href", url_archivos + obj.ar_foto);
-                            $("#sb-player").attr("href", url_archivos + obj.ar_foto);
-
-                            if (obj.EFOTO === "1") {/* your photo success */
-                            }
-                            if (obj.EFOTO === "0") {
-                                $(".ver_foto").hide(200);
-                            }
-                            if (obj.EFOTO === "2") {
-                                /* your photo rechazada*/
-                                $('.modal').modal('show');
-                                $('.borde').attr('src', '../../img/Desaprobado.png');
-
-                                var padre = $(window.parent.document.getElementById('foto_usuario'));
-                                var idtra = $(window.parent.document.getElementById('id_trabajador')).val();
-                                if (idtra.trim() == $(".idtr").val().trim()) {
-                                    $(padre).attr("src", "img/Desaprobado.png");
-                                }
-                            } else {
-                                if (obj.EFOTO != 2) {
-                                    $('.borde').attr("src", "../../Archivo/Fotos/" + obj.ar_foto);
-                                    $(".avatar").attr("href", "../../Archivo/Fotos/" + obj.ar_foto);
-                                    $("#sb-player").attr("href", "../../Archivo/Fotos/" + obj.ar_foto);
-                                    console.log(obj.ar_foto);
-                                }
-                            }
-                        }
-                    });
-                });
-            }
-            function errors(data) {
-                console.log("error" + data);
-            }
-        }
-
-        $('.avatar').click(function () {
-            console.log("mostar-imegen");
-            var cont = '<div class="fotos conteiner"></div>';
-            $('#sb-overlay').html(cont);
-            getAvatar("todo", idtrl);
-            repeat = 1;
-            validar_shadowbox();
-        });
-
-        // Alert
-        $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-            _title: function (title) {
-                if (!this.options.title) {
-                    title.html("&#160;");
-                } else {
-                    title.html(this.options.title);
-                }
-            }
-        }));
-        $('.ver4foto').click(function () {
-            $('#dialog-message').dialog('open');
-            return false;
-        });
-
 
         </script>
 

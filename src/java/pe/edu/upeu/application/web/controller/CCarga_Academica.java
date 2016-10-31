@@ -75,6 +75,12 @@ public class CCarga_Academica extends HttpServlet {
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         String semestre = request.getParameter("semestre");
         try {
+            if (opc.equals("validateTrabajador")) {
+                String dni = request.getParameter("nro_doc");
+                String idtr = carga.DNI_ID_TRABAJADOR(dni);
+                rpta.put("validateData", (!idtr.equals("")));
+                rpta.put("status", true);
+            }
             if (opc.equals("Completar_Datos")) {
                 String eap = request.getParameter("eap");
                 String facu = request.getParameter("facultad");
@@ -99,7 +105,7 @@ public class CCarga_Academica extends HttpServlet {
                 } else {
                     String hl = request.getParameter("hl");
                     sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-                    sesion.setAttribute("Lista_detalle_academico", carga.Lista_detalle_academico(idtr, facu, eap,"",""));
+                    sesion.setAttribute("Lista_detalle_academico", carga.Lista_detalle_academico(idtr, facu, eap, "", ""));
                     //response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "id=" + cripto.Encriptar("idtr:" + idtr));
                     response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "idtr=" + idtr + "&academico=true" + "&hl=" + hl + "&eap=" + eap + "&facultad=" + facu);
                 }
@@ -175,9 +181,9 @@ public class CCarga_Academica extends HttpServlet {
                     /*FALTA US_CREACION*/
                     carga.INSERT_PAGO_DOCENTE(null, NU_CUOTA, CA_CUOTA, FE_PAGO, null, ID_PROCESO_CARGA_AC.trim(), null, null, null, IP_USUARIO, NO_USUARIO);
                 }
-                List<V_Detalle_Carga_Academica> lCargaAcad = carga.Lista_detalle_academico(ID_TRABAJADOR, facultad, eap,"","");
+                List<V_Detalle_Carga_Academica> lCargaAcad = carga.Lista_detalle_academico(ID_TRABAJADOR, facultad, eap, "", "");
                 for (int i = 0; i < lCargaAcad.size(); i++) {
-                    carga.INSERT_DETALLE_CARGA_ACADEMICA(null, ID_PROCESO_CARGA_AC.trim(),lCargaAcad.get(i).getId_carga_academica(), "1");
+                    carga.INSERT_DETALLE_CARGA_ACADEMICA(null, ID_PROCESO_CARGA_AC.trim(), lCargaAcad.get(i).getId_carga_academica(), "1");
                 }
                 String idrp = IReq.id_det_req_proc(iddgp.trim());
                 /* REGISTRAR PRIMERA AUTORIZACION*/

@@ -24,13 +24,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
+           <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <title></title>
 
     </head>
-    <body>
-
-
-        <form align="center">
+    <body class="slideInDown fast animated">
             <table class="table table-striped table-hover table-responsive">
                 <%  String edit = request.getParameter("edit");
                     InterfaceCarrera_UniversidadDAO icu = new Carrera_UniversidadDAO();
@@ -175,7 +173,8 @@
                 <%}%>
                 <%String IDTR = trb.getId_trabajador();%>
                 <td colspan="2">
-                    <a class="btn btn-success btn-labeled"  href="../../trabajador?opc=Editar_Asp_Acad&idtr=<%=IDTR%>&edit=<%=edit%>"> <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </a>
+                    <a class="btn btn-primary btn-labeled"  href="../../trabajador?opc=Editar_Asp_Acad&idtr=<%=IDTR%>&edit=<%=edit%>"> 
+                        <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span> Editar </a>
 
                 </td>
 
@@ -183,8 +182,6 @@
                 <%}%>
                 <!-- <tr><td colspan="2"><input class=""  type="submit" value="Editar"></td></tr>-->
             </table>
-        </form>
-
     </body>
 </html>
 <%} else {

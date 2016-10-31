@@ -135,7 +135,7 @@
             }
             .new-progress .new-circle.done .new-label {
                 color: #FFF;
-                /* background: #8bc435;*/
+               /* background: #8bc435;*/
                 background: #0aa699;
                 box-shadow: inset 0 0 2px rgba(0,0,0,.2);
             }
@@ -277,7 +277,7 @@
                                                                     <li class="divider"></li><li>
                                                                     <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Detalle">Ver Requerimiento</a> </li>
                                                                     <li><a onclick="listHistory(<%=i%>)" data-toggle="modal" data-target="#ModalHisto">Prueba</a></li>
-
+                                                          
                                                                     <input type="hidden" class="vHist<%=i%>" value="<%=r.getId_dgp().trim()%>">
                                                                 </ul>
                                                             </div>
@@ -957,7 +957,7 @@
                                     printDetProceso(obj, obj.data("value"));
                                 }
                                 var responsiveHelperCAacademico = undefined;
-                                var varTableCAcademica = $(".tableEsCargaAcademica").DataTable({
+                                var varTableCAcademica = $(".tableEsCargaAcademica").dataTable({
                                     "ajax": {
                                         "url": "../../carga_academica",
                                         "type": "POST",
@@ -976,6 +976,7 @@
                                             "data": null,
                                             "defaultContent": ""
                                         },
+                                       
                                         {
                                             "orderable": false,
                                             "data": null,
@@ -1018,13 +1019,13 @@
                                                         + '     <i class="fa fa-caret-down"></i>'
                                                         + ' </button>'
                                                         + ' <ul class="dropdown-menu">'
-                                                        + '     <li><a href="../../dgp?iddgp=' + data.id_dgp + '&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>'
-                                                        + '<li><a href="../../dgp?iddgp=' + data.id_dgp + '&opc=Seguimiento">Ver Historial</a> </li>'
-                                                        + '<li><a href="../../documento?iddgp=' + data.id_dgp + '&idtr=' + data.id_trabajador + '&opc=Ver_Documento">Ver Documentos</a></li>'
-                                                        + ' <li><a data-valor="' + data.id_dgp + ';' + data.id_trabajador + ';' + data.ap_paterno + ' ' + data.ap_materno + ' ' + data.no_trabajador + '" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjaxComment()" >Comentario</a></li>'
-                                                        + ' <li><a href="../../solicitud_requerimiento?iddgp=' + data.id_dgp + '&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>'
+                                                        + '     <li><a href="../../dgp?iddgp='+data.id_dgp+'&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>'
+                                                        + '<li><a href="../../dgp?iddgp='+data.id_dgp+'&opc=Seguimiento">Ver Historial</a> </li>'
+                                                        + '<li><a href="../../documento?iddgp='+data.id_dgp+'&idtr='+data.id_trabajador+'&opc=Ver_Documento">Ver Documentos</a></li>'
+                                                        + ' <li><a data-valor="'+data.id_dgp+';'+data.id_trabajador+';'+data.ap_paterno+' '+data.ap_materno+' '+data.no_trabajador+'" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjaxComment()" >Comentario</a></li>'
+                                                        + ' <li><a href="../../solicitud_requerimiento?iddgp='+data.id_dgp+'&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>'
                                                         + ' <li class="divider"></li><li>'
-                                                        + '<li><a href="../../dgp?iddgp=' + data.id_dgp + '&idtr=' + data.id_trabajador + '&opc=Detalle">Ver Requerimiento</a> </li>'
+                                                        + '<li><a href="../../dgp?iddgp='+data.id_dgp+'&idtr='+data.id_trabajador+'&opc=Detalle">Ver Requerimiento</a> </li>'
                                                         + ' </ul>'
                                                         + ' </div>'
                                                         );
@@ -1033,19 +1034,16 @@
                                         } else {
                                             $('td:eq(6)', row).html('<span class="label label-primary">En Proceso</span>');
                                         }
-                                        $('td:eq(3)', row).html(data.ap_paterno + ' ' + data.ap_materno + ' ' + data.no_trabajador);
+                                         $('td:eq(3)', row).html(data.ap_paterno+' '+data.ap_materno+' '+data.no_trabajador);
+                                        // var rows = varTableCAcademica.fnGetNodes();
+                                        //   for (var i = 0; i < rows.length; i++) {
+                                        //  var obj = $(rows[i]).find(".prog_aut");
                                         printDetProceso($('td:eq(4)', row), "&dgp=" + data.id_dgp + "&idrp=" + data.id_detalle_req_proceso + "&iddep=" + data.id_departamento);
                                         $('td:eq(4)', row).addClass("new-progress");
+                                        // }
 
-                                    }, "drawCallback": function (oSettings) {
-                                        responsiveHelperCAacademico.respond();
-                                        console.log("Enter to drawCallBack CAcademico");
-                                    }, "initComplete": function (settings, json) {
-                                        // console.log(json.list);
-                                        $(".badgeCAcademico").text(json.list.length).show();
-                                    }
+                                    },
                                 });
-
 
                             });
 

@@ -66,6 +66,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             }
         }
     }
+
     @Override
     public List<X_List_De_Autorizacion> List_Detalle_Autorizacion(String iddgp, String idrp) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);

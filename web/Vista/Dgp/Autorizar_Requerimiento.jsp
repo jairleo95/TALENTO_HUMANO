@@ -134,7 +134,7 @@
                             data-widget-sortable="false"
 
                             -->
-                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-2"   data-widget-editbutton="false"  data-widget-deletebutton="false"  >
+                            <div class="jarviswidget jarviswidget-color-white" id="wid-id-2"   data-widget-editbutton="false"  data-widget-deletebutton="false"  >
                                 <header class="headerReqAutorizado">
                                     <span class="widget-icon"> <i class="glyphicon glyphicon-inbox"></i> </span>
                                     <h2 class="font-md"><strong>Requerimientos por </strong> <i>Autorizar</i></h2>
@@ -150,7 +150,7 @@
                                         <li>
                                             <a data-toggle="tab" href="#hr2"> <i class="fa fa-lg fa-arrow-circle-o-up"></i>
                                                 <span class="hidden-mobile hidden-tablet"> Carga académica</span>
-                                                <sup class="badge bg-color-red bounceIn animated badgeCAcademicoAutorizar" style="display: none" >0</sup></a>
+                                                <sup class="badge bg-color-red bounceIn animated badgeAutCAcademico" style="display: none" >0</sup></a>
                                         </li>
 
                                     </ul>
@@ -177,9 +177,10 @@
                                                         <tr>
                                                             <th class='hasinput' colspan='14' style='width:95%' ></th>
                                                             <th class='hasinput'>
+                                                    <center>
                                                                 <button   rel="tooltip" data-placement="left" data-original-title="Autorizar y Procesar codigo de huella digital" 
-                                                                          class='btn btn-warning btn-circle btn-lg  btn_cod_huella'>
-                                                                    <i class='glyphicon glyphicon-ok'></i></button>
+                                                                          class='btn btn-warning btn-circle btn-sm  btn_cod_huella'>
+                                                                    <i class='glyphicon glyphicon-ok'></i></button></center>
                                                             </th>
                                                         </tr>
                                                         <%}%>
@@ -188,7 +189,7 @@
                                                             <th class='hasinput' colspan='14' style='width:95%' ></th>
                                                             <th class='hasinput'  style='' >
                                                                 <button   rel="tooltip" data-placement="left" data-original-title="Autorizar y Procesar código aps"
-                                                                          class='btn bg-color-magenta txt-color-white btn-circle btn-lg  btn_cod_aps'>
+                                                                          class='btn bg-color-magenta txt-color-white btn-circle btn-sm  btn_cod_aps'>
                                                                     <i class='glyphicon glyphicon-ok'></i></button>
                                                             </th>
                                                         </tr>
@@ -465,110 +466,61 @@
 
                                     </div>
                                     <!-- end widget content -->
-
                                 </div>
                                 <!-- end widget div -->
+
                             </div>
+                            <!-- end widget -->
+                        </article>
+                        <!-- WIDGET END -->
                     </div>
-                    <!-- end widget -->
-                    </article>
-                    <!-- WIDGET END -->
+                    <!-- end row -->
+                </section>
+                <!-- end widget grid -->
             </div>
-            <!-- end row -->
-            <div class="row">
-                <!-- NEW WIDGET START -->
-                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div id="alerta_dgp">
-                    </div>
-                    <!-- Widget ID (each widget will need unique ID)-->
-                    <div class="jarviswidget jarviswidget-color-red" id="wid-id-1"  data-widget-editbutton="false"  data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
-                        <!-- widget options:
-                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-        
-                        data-widget-colorbutton="false"
-                        data-widget-editbutton="false"
-                        data-widget-togglebutton="false"
-                        data-widget-deletebutton="false"
-                        data-widget-fullscreenbutton="false"
-                        data-widget-custombutton="false"
-                        data-widget-collapsed="true"
-                        data-widget-sortable="false"
-        
-                        -->
-                        <header>
-                            <span class="widget-icon"> <i class="glyphicon glyphicon-saved"></i> </span>
-                            <h2 class="font-md"><strong>Requerimientos </strong> <i>Autorizados</i></h2>
-                        </header>
-                        <!-- widget div-->
-                        <div>
-
-                            <!-- widget edit box -->
-                            <div class="jarviswidget-editbox">
-                                <!-- This area used as dropdown edit box -->
-
-                            </div>
-                            <!-- end widget edit box -->
-
-                            <!-- widget content -->
-                            <div class="widget-body no-padding imprimir_tabla">
-
-                            </div>
-                            <!-- end widget content -->
+        </div>
+        <!-------------- Modal  ----------->
+        <!---Modal---------------->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="datos_trabajador text-left">
                         </div>
-                        <!-- end widget div -->
-
+                        <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
                     </div>
-                    <!-- end widget -->
-                </article>
-                <!-- WIDGET END -->
-            </div>
-            <!-- end row -->
-        </section>
-        <!-- end widget grid -->
-    </div>
-</div>
-<!-------------- Modal  ----------->
-<!---Modal---------------->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <div class="datos_trabajador text-left">
-                </div>
-                <h4 class="modal-title" id="myModalLabel">Añadir Comentario</h4>
-            </div>
-            <div class="modal-body">
+                    <div class="modal-body">
 
-                <!-- <button class="add-coment btn btn-primary btn-block">Add Comentario</button> -->
-                <div class="area-coment">
-                    <form class="comentari-form" method="post">
-                        <textarea class="mensaje"></textarea>
-                        <p></p>
-                        <input name="idDgp" class="idDgp" type="hidden" value="">
-                        <div class="contador">
-                    </form>
-                </div>
-            </div>
+                        <!-- <button class="add-coment btn btn-primary btn-block">Add Comentario</button> -->
+                        <div class="area-coment">
+                            <form class="comentari-form" method="post">
+                                <textarea class="mensaje"></textarea>
+                                <p></p>
+                                <input name="idDgp" class="idDgp" type="hidden" value="">
+                                <div class="contador">
+                            </form>
+                        </div>
+                    </div>
 
-            <div class="comentarios">
-                <div>
-                    <legend>Comentarios </legend>
-                    <div class="comentario-dgp"></div>
+                    <div class="comentarios">
+                        <div>
+                            <legend>Comentarios </legend>
+                            <div class="comentario-dgp"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" onclick="Registrar()" class="comet btn btn-success">Comentar</button>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" onclick="Registrar()" class="comet btn btn-success">Comentar</button>
             </div>
         </div>
     </div>
-</div>
-</div>
 
-<!--===========================Modal======================= -->
+    <!--===========================Modal======================= -->
 
-<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
 
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
