@@ -122,16 +122,17 @@
                                                         Carga_Academica ca = new Carga_Academica();
                                                         ca = (Carga_Academica) ListCarAca.get(i);
                                                 %>
-                                                <tr >
+                                                <tr>
                                                     <td>  
                                                         <div class="btn-group"> 
                                                             <button class="btn btn-primary dropdown-toggle bounceIn animated" data-toggle="dropdown">
                                                                 <i class="fa fa-gear fa-lg"></i>
                                                             </button>
                                                             <ul class="dropdown-menu">
+                                                                <%if (ca.getValidateExistTrabajador() != null) {
+                                                                %>
                                                                 <li>
                                                                     <a href="../../../carga_academica?opc=Completar_Datos&nro_doc=<%=ca.getNu_doc()%>&ap_p=<%=ca.getAp_paterno()%>&ap_m=<%=ca.getAp_materno()%>&no_tr=<%=ca.getNo_trabajador()%>&ti_doc=<%=ca.getEs_tipo_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>"   >Completar Datos</a>
-
                                                                 </li>
 
                                                                 <li class="divider"></li>
@@ -141,6 +142,11 @@
                                                                        data-keyboard="false" class="btnCargaAcademica"
                                                                        data-valor="&nro_doc=<%=ca.getNu_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>&idtr=<%=ca.getId_trabajador()%>&ciclo=<%=ca.getDe_carga()%>"  >Carga Academica</a>
                                                                 </li>
+                                                                <%} else {%>
+                                                                <li>
+                                                                    <a href="../../../carga_academica?opc=Completar_Datos&nro_doc=<%=ca.getNu_doc()%>&ap_p=<%=ca.getAp_paterno()%>&ap_m=<%=ca.getAp_materno()%>&no_tr=<%=ca.getNo_trabajador()%>&ti_doc=<%=ca.getEs_tipo_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>"   >Completar Datos</a>
+                                                                </li>
+                                                                <%}%>
                                                             </ul>
                                                         </div>
 
@@ -198,10 +204,7 @@
                         <div class="areaModal">
 
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" onclick="" class="btn btn-success">Aceptar</button>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -288,9 +291,7 @@
         <script  type="text/javascript" src="../../../js/Js_Formulario/Js_Form.js"></script>
         <script type="text/javascript" src="../../../js/Js_Academico/Js_Carga_Academica.js"></script>
         <script type="text/javascript">
-
             $(document).ready(function () {
-
                 pageSetUp();
                 initFormPlugins();
                 initCargaAcademica();
@@ -312,9 +313,6 @@
 
             });
         </script>
-
-
-
     </body>
 
 </html>

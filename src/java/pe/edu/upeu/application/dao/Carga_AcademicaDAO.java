@@ -224,6 +224,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                 ca.setId_proceso_carga_ac(rs.getString("id_proceso_carga_ac"));
                 
                 ca.setCountCursos(rs.getInt("countCursos"));
+                ca.setValidateExistTrabajador(rs.getString("validateExistTrabajador"));
                 list.add(ca);
             }
         } catch (SQLException e) {

@@ -253,6 +253,7 @@
                            <%} else {%>
                            <input type="text" class="form-control hl_docente" value="0" name="HL" placeholder="0" required />
                            <%}%>-->
+                    <input type="text" class="form-control hl_docente" value="0" name="HL" placeholder="0" required />
                 </div>
             </div>
         </div>
@@ -266,24 +267,28 @@
                     </div>
                     <input type="hidden" name="PUESTO" value="PUT-000482" >
                     <input type="hidden" name="REQ" value="REQ-0018">
-                    <input type="hidden" name="IDTR" value="<%=idtr%>" >
-                    <!--  <input type="hidden" name="eap" value="<%=request.getParameter("eap")%>" >
-                             <input type="hidden" name="facultad" value="<%=request.getParameter("facultad")%>" >
-                             <input type="hidden" name="dgp"  class="dgp" value="<%=request.getParameter("dgp")%>" >
-                             <input type="hidden" name="proceso" class="proceso" value="<%=request.getParameter("proceso")%>" >-->
+                    <input type="hidden" name="IDTR" value="" >
+                    <input type="hidden" name="eap" value="" >
+                    <input type="hidden" name="facultad" value="" >
+                    <input type="hidden" name="dgp"  class="dgp" value="" >
+                    <input type="hidden" name="proceso" class="proceso" value="" > <!-- -->
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">
-                Cancelar
-            </button>
-            <button type="button" class="btn btn-primary btn_guardar_ca"  data-dismiss="modal">
-                Guardar
-            </button>
-
-        </div>
+        <!--  <div class="modal-footer">
+             <button type="button" class="btn btn-default" data-dismiss="modal">
+                 Cancelar
+             </button>
+             <button type="button" class="btn btn-primary btn_guardar_ca"  data-dismiss="modal">
+                 Guardar
+             </button>
+ 
+         </div>-->
     </form>
 
 </div>
 
+<div class="modal-footer">
+    <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" onclick="" class="btn btn-success btnAceptarCuotasCA">Aceptar</button>
+</div>

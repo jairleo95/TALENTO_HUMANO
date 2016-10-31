@@ -5,30 +5,31 @@ function initCargaAcademica() {
         showCargaAcademica(objBodyPrint, $(this).data("valor"), function () {
             pageSetUp();
             initFormPlugins();
+            $(".fe_desde_p, .fe_hasta_p, .hl_docente, .ti_hp_docente").change(function () {
+                calcularCuotasDocente($(".fe_desde_p").val(), $(".fe_hasta_p").val(), $(".hl_docente").val(), $(".ti_hp_docente").val());
+            });
+            $(".btnAceptarCuotasCA").click(function () {
+                $.ajax({
+                    url: "../../../carga_academica",
+                    type: "POST",
+                    data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
+                }).done(function (data) {
+                    if (data.rpta === true) {
+                        alert("Registrado con exito!...");
+                        $(".proceso").val(data.proceso);
+                        $(".dgp").val(data.dgp);
+                        $(".btn_procesar").show();
+                    }
+                }).fail(function (e) {
+                    alert("Error: " + e);
+                });
+            });
+            $(".btn_procesar").click(function () {
+                ProcesarCargaAcademica($(".dgp").val(), $(".proceso").val());
+            });
         });
     });
-    $(".fe_desde_p, .fe_hasta_p, .hl_docente, .ti_hp_docente").change(function () {
-        calcularCuotasDocente($(".fe_desde_p").val(), $(".fe_hasta_p").val(), $(".hl_docente").val(), $(".ti_hp_docente").val());
-    });
-    $(".btn_guardar_ca").click(function () {
-        $.ajax({
-            url: "../../carga_academica",
-            type: "POST",
-            data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
-        }).done(function (data) {
-            if (data.rpta === true) {
-                alert("Registrado con exito!...");
-                $(".proceso").val(data.proceso);
-                $(".dgp").val(data.dgp);
-                $(".btn_procesar").show();
-            }
-        }).fail(function (e) {
-            alert("Error: " + e);
-        });
-    });
-    $(".btn_procesar").click(function () {
-        ProcesarCargaAcademica($(".dgp").val(), $(".proceso").val());
-    });
+
 }
 /*FIN carga academica*/
 function showCargaAcademica(objBodyPrint, dataAjax, callback) {
@@ -71,7 +72,7 @@ function showCargaAcademica(objBodyPrint, dataAjax, callback) {
 }
 function ProcesarCargaAcademica(valorDgp, valorProceso) {
     $.ajax({
-        url: "../../carga_academica", data: "opc=Procesar&dgp=" + valorDgp + "&proceso=" + valorProceso, type: "POST"
+        url: "../../../carga_academica", data: "opc=Procesar&dgp=" + valorDgp + "&proceso=" + valorProceso, type: "POST"
     }).done(function (data) {
         if (data.rpta) {
             window.location.href = "../../carga_academica?opc=Reporte_Carga_Academica";
@@ -81,7 +82,7 @@ function ProcesarCargaAcademica(valorDgp, valorProceso) {
 function calcularCuotasDocente(valorFeDesde, valorFeHasta, valorHorasLaborales, valorTipoHoraPago) {
     var cuotas = $(".cuota_docente");
     cuotas.empty();
-    $.post("../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + valorFeDesde + "&fe_hasta=" + valorFeHasta + "&pago_semanal=" + (parseFloat(valorHorasLaborales) * parseFloat(valorTipoHoraPago)), function (objJson) {
+    $.post("../../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + valorFeDesde + "&fe_hasta=" + valorFeHasta + "&pago_semanal=" + (parseFloat(valorHorasLaborales) * parseFloat(valorTipoHoraPago)), function (objJson) {
         var lista = objJson.lista;
         if (objJson.rpta === -1) {
             alert(objJson.mensaje);
