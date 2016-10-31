@@ -147,8 +147,8 @@ function loadDatatableCargaAcademica() {
                 $(".tableAutCargaAcademica").DataTable({
                     "initComplete": function (settings, json) {
                         var api = this.api();
-                        console.log(api.rows());
-                        $(".badgeAutCAcademico").text(api.data.length).show();
+                        console.log(" numero de filas: "+api.rows().length);
+                        $(".badgeAutCAcademico").text(api.rows().length).show();
                     }
                 });
             }
