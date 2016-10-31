@@ -363,6 +363,11 @@ function  lis_sel(d, valor, opc, num) {
         $(".seccion_as").append("<option value='0' selected='' > [GENERAL] </option>");
         $(".puesto_as").empty();
         $(".puesto_as").append("<option value='0' selected='' > [GENERAL] </option>");
+        $("#de_sig").val("0");
+        $("#ar_sig").val("0");
+        $("#se_sig").val("0");
+        $("#pu_sig").val("0");
+        $("#di_sig").val("0");
     } else {
         if (valor != 0) {
             $.post("../../../Direccion_Puesto", "opc=" + opc + "&" + "id=" + valor, function (objJson) {
