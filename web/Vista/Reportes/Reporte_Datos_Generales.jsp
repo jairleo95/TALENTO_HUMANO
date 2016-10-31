@@ -6,12 +6,12 @@
 
 
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> SmartAdmin </title>
+        <title> Reportes Generales </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -64,290 +64,263 @@
             }
         </style>
     </head>
-    <body>
+    <body style="padding:1%;box-sizing: border-box;">
         <div class="spacing">
-            <center><h1 class="spacing" style="font-weight: bold;">Resportes Generales</h1></center> 
+            <center><h1 class="spacing" style="font-weight: bold;">REPORTES GENERALES</h1></center> 
         </div>
         <form class="form-inline validarform" id="frm_filtro2" method="post" action="../../Imprimir" name="formulario" onclick="return marcado();">
-            <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
-
-            <!-- HEADER -->
-            <!-- END HEADER -->
-
-            <!-- Left panel : Navigation area -->
-            <!-- Note: This width of the aside area can be adjusted through LESS variables -->
-            <!-- END NAVIGATION -->
-
-            <!-- MAIN PANEL -->
-            <center>
-                <div id="contenido">
-                    <div class="form-group" >
-                        <label>CODIGO APS</label><br>
-                        <input type="text"  class="form-control aps" placeholder="APS"  length="45" style="width: 80px" id="des"/>
-                    </div>
-                    <div class="form-group" >
-                        <label>DEPARTAMENTO</label><br>
-                        <input type="text"  class="form-control dep" placeholder="Ingrese el Departamento"   length="45" style="width: 150px" id="des"/>
-                    </div>
-                    <div class="form-group" >
-                        <label>AREA</label><br>
-                        <input type="text"  class="form-control are" placeholder="Ingrese su Area"  length="45" style="width: 150px" id="des"/>
-                    </div>
-                    <div class="form-group" >
-                        <label>SECCIÃ“N</label><br>
-                        <input type="text"  class="form-control sec" placeholder="Ingrese su SECCIÃ“N" length="45" style="width: 150px" id="des"/>
-                    </div>
-                    <div class="form-group" >
-                        <label>PUESTO</label><br>
-                        <input type="text"  class="form-control pue" placeholder="Ingrese su PUESTO" length="45" style="width: 150px" id="des"/>
-                    </div>
-                    <div class="form-group" >
-                        <label>APELLIDO PATERNO</label><br>
-                        <input type="text"  class="form-control pat" placeholder="Ingrese APELLIDOS Y NOMBRES" length="45" style="width: 250px" id="des"/>
-                    </div>
-                    <div class="form-group" >
-                        <label>APELLIDO MATERNO</label><br>
-                        <input type="text"  class="form-control mat" placeholder="Ingrese APELLIDOS Y NOMBRES" length="45" style="width: 250px" id="des"/>
-                    </div>
-                    <div class="form-group" >
-                        <label>NOMBRES</label><br>
-                        <input type="text"  class="form-control nom" placeholder="Ingrese APELLIDOS Y NOMBRES" length="45" style="width: 250px" id="des"/>
-                    </div>
-                    <div class="form-group" >
-                        <label>NÂº DOCUMENTO</label><br>
-                        <input type="text"  class="form-control num" placeholder="NÂº Documento"  length="45" style="width: 120px" id="des"/>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">  
-                            <br>
-                            <a id="btnbuscar"class="btn btn-primary btn-circle btn-xl btnEnviar">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </a>
-                            <a id="btncancel" class="btn btn-danger btn-circle btn-xl btnCancelar">
-                                <i class="glyphicon glyphicon-remove"></i>
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-                <div id="main" role="main" style="margin-left: 0px">
-
-                    <!-- RIBBON -->
-                    <!-- END RIBBON -->
-
-                    <!-- MAIN CONTENT -->
-                    <div id="content">
-
-                        <!-- widget grid -->
-                        <section id="widget-grid" class="">
-
-                            <!-- row -->
-                            <div class="row">
-
-                                <!-- NEW WIDGET START -->
-                                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <!-- end widget -->
-
-                                    <!-- Widget ID (each widget will need unique ID)-->
-                                    <!-- end widget -->
-
-                                    <!-- Widget ID (each widget will need unique ID)-->
-                                    <!-- end widget -->
-
-                                    <!-- Widget ID (each widget will need unique ID)-->
-                                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
-                                        <!-- widget options:
-                                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-        
-                                        data-widget-colorbutton="false"
-                                        data-widget-editbutton="false"
-                                        data-widget-togglebutton="false"
-                                        data-widget-deletebutton="false"
-                                        data-widget-fullscreenbutton="false"
-                                        data-widget-custombutton="false"
-                                        data-widget-collapsed="true"
-                                        data-widget-sortable="false"
-        
-                                        -->
-                                        <header>
-                                            <span class="widget-icon"><i class="fa fa-table"></i>  </span>
-                                            <label style=" font-size:21px; font-family:cambria; color:white ;padding-left:5px;padding-top: 2px;">Reporte Filtro</label>
-                                        </header>
-
-                                        <!-- widget div-->                                
-                                        <div>
-
-                                            <!-- widget edit box -->
-                                            <div class="jarviswidget-editbox">
-                                                <!-- This area used as dropdown edit box -->
-
-                                            </div>                                  
-                                            <!-- end widget edit box -->
-
-                                            <!-- widget content -->                                    
-                                            <div class="widget-body no-padding">
-
-                                                <table id="datatable_tabletools" class="table table-striped table-bordered table-hover table-responsive">
-                                                    <thead>
-                                                        <tr>
-                                                            <th data-hide="phone">#</th>
-                                                            <th data-class="APS">Codigo APS</th>
-                                                            <th data-hide="DEP">Departamento</th>
-                                                            <th data-hide="ARE">Area</th>
-                                                            <th data-hide="secc">SecciÃ³n</th>
-                                                            <th data-hide="pues">Puesto</th>
-                                                            <th data-class="fec_nac">Tipo Documento</th>
-                                                            <th data-class="ed">Numero Documento</th>
-                                                            <th data-class="nom">Apellidos Paterno</th>
-                                                            <th data-class="tip">Apellidos Materno</th>
-                                                            <th data-class="tip">Nombre</th>
-                                                            <th data-class="tip">Apellidos y Nombres</th>
-                                                            <th data-class="tip">Fecha de Sece</th>
-                                                            <th data-class="tip">DNI HIJ@</th>
-                                                            <th data-class="tip">Apellidos y Nombres del Hij@</th>
-                                                            <th data-class="tip">Genero</th>
-                                                            <th data-class="tip">Fecha Nacimiento del Hij@</th>
-                                                            <th data-class="tip">Edad</th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody id="Datos_generales">                                                                                             
-
-                                                    </tbody>
-
-                                                </table>
-                                                <div class="div_t">                                                                                     
-                                                </div>
-                                            </div>
-                                            <!-- end widget content -->
-
+            <center>                
+                <div class="cont" style="width:100%;padding: 1%;box-sizing: border-box;">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-body" style="background:#eeeeee  ;">
+                                <div class="col-md-4">
+                                    <div class="col-md-12">
+                                        <div class="form-group col-md-6">
+                                            <label>NOMBRES</label><br>
+                                            <input type="text"  class="form-control nom" placeholder="Ingrese APELLIDOS Y NOMBRES" length="45" style="width: 100%;" id="des"/>
+                                        </div>   
+                                        <div class="form-group col-md-6">
+                                            <label>APELLIDO PATERNO</label><br>
+                                            <input type="text"  class="form-control pat" placeholder="Ingrese el apellido paterno" length="45" style="width: 100%;" id="des"/>
                                         </div>
-                                        <!-- end widget div -->
-
+                                        <div class="form-group col-md-6" style="width: 50%;">
+                                            <label>APELLIDO MATERNO</label><br>
+                                            <input type="text"  class="form-control mat" placeholder="Ingrese el apellido materno" length="45" style="width: 100%;" id="des"/>
+                                        </div>                                                    
+                                        <div class="col-md-6">
+                                            <label>NACIONALIDAD</label><br>
+                                            <select class="form-control" style="width:100%;margin-top: 1%;">
+                                                <option selected disabled>Elegir Pais</option>
+                                                <option>Peru</option>
+                                                <option>Chile</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>ESTADO CIVIL</label><br>
+                                            <select class="form-control" style="width:100%;margin-top: 1%;">
+                                                <option selected disabled>Elegir Estado Civil</option>
+                                                <option>Casado</option>
+                                                <option>Es complicado</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>RELIGIÓN</label><br>
+                                            <select class="form-control" style="width:100%;margin-top: 1%;">
+                                                <option selected disabled>Elegir Religión</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>SEXO</label><br>
+                                            <label class="radio">
+                                                <input type="radio" name="radio">
+                                                Masculino   <i class="fa fa-male"></i></label>
+                                            <label class="radio">
+                                                <input type="radio" name="radio">
+                                                Femenino    <i class="fa fa-female"></i></label>
+                                        </div>
                                     </div>
-                                    <!-- end widget -->
-
-                                </article>
-                                <!-- WIDGET END -->
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-6">
+                                        <label>SISTEMA PENSIONARIO</label><br>
+                                        <select class="form-control" style="width:100%;margin-top: 1%;">
+                                            <option selected disabled>Elegir sdf</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>SITUACIÓN EDUCATIVA</label><br>
+                                        <select class="form-control" style="width:100%;margin-top: 1%;">
+                                            <option selected disabled>Elegir fds</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>AÑO DE EGRESO</label><br>
+                                        <select class="form-control" style="width:100%;margin-top: 1%;">
+                                            <option selected disabled>Elegir Año de Egreso</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>CONDICIÓN</label><br>
+                                        <select class="form-control" style="width:100%;margin-top: 1%;">
+                                            <option selected disabled>Elegir Condición</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>CARRERA</label><br>
+                                        <select class="form-control" style="width:100%;margin-top: 1%;">
+                                            <option selected disabled>Elegir Carrera</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>ESTADO</label><br>
+                                        <select class="form-control" style="width:100%;margin-top: 1%;">
+                                            <option selected disabled>Elegir Estado</option>
+                                            <option>Activo</option>
+                                            <option>Inactivo</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>TIPO DE REQUERIMIENTO</label><br>
+                                        <select class="form-control" style="width:100%;margin-top: 1%;">
+                                            <option selected disabled>Elegir Estado</option>
+                                            <option>Activo</option>
+                                            <option>Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="cselectores">
+                                        <div class="col-md-6">
+                                            <label>DIRECCIÓN</label><br>
+                                            <select onchange="listdepartamento(this.value)" class="form-control selDir" style="width:100%;margin-top: 1%;">
+                                                <option selected disabled>Elegir Dirección</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>DEPARTAMENTO</label><br>
+                                            <select onchange="listarea(this.value)"  class="form-control selDep" style="width:100%;margin-top: 1%;">
+                                                <option selected disabled>Elegir Departamento</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>ÁREA</label><br>
+                                            <select class="form-control selArea" style="width:100%;margin-top: 1%;">
+                                                <option selected disabled>Elegir Area</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>SECCIÓN</label><br>
+                                            <select class="form-control" style="width:100%;margin-top: 1%;">
+                                                <option selected disabled>Elegir Sección</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>PUESTO</label><br>
+                                            <select class="form-control" style="width:100%;margin-top: 1%;">
+                                                <option selected disabled>Elegir Puesto</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
-
-                            <!-- end row -->
-
-                            <!-- end row -->
-
-                        </section>
-                        <!-- end widget grid -->
-
+                        </div>
                     </div>
-                    <!-- END MAIN CONTENT -->
-
-                </div> 
-            </center>
+                </div>
+                <div class="row" style="padding:1%;box-sizing: border-box;">
+                    <div class="form-group">  
+                        <a id="btnbuscar" class="btn btn-primary btn-circle btn-lg btnEnviar">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </a>
+                        <a id="btncancel" class="btn btn-danger btn-circle btn-lg btnCancelar">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </a>
+                    </div>
+                </div>
+            </center>            
         </form>
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
-
-        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <script>
-            if (!window.jQuery) {
+    <center>
+        <div>
+            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>Datos Generales</h2>
+                </header>
+                <div>
+                    <div class="jarviswidget-editbox">
+                    </div>
+                    <div class="widget-body no-padding conTable">
+                        <!--<table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
+                        </table>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+    <!--<script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <!--<script>
+            /*if (!window.jQuery) {
                 document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-            }
-        </script>
+            }*/
+    </script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-        <script>
-            if (!window.jQuery.ui) {
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>-->
+    <!--<script>
+            /*if (!window.jQuery.ui) {
                 document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }
-        </script>
+            }*/
+    </script>
 
-        <!-- IMPORTANT: APP CONFIG -->
-        <script src="../../js/app.config.js"></script>
+    <!-- IMPORTANT: APP CONFIG -->
+    <script src="../../js/app.config.js"></script>
 
-        <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-        <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+    <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
 
-        <!-- BOOTSTRAP JS -->
-        <script src="../../js/bootstrap/bootstrap.min.js"></script>
+    <!-- BOOTSTRAP JS -->
+    <script src="../../js/bootstrap/bootstrap.min.js"></script>
 
-        <!-- CUSTOM NOTIFICATION -->
-        <script src="../../js/notification/SmartNotification.min.js"></script>
+    <!-- CUSTOM NOTIFICATION -->
+    <script src="../../js/notification/SmartNotification.min.js"></script>
 
-        <!-- JARVIS WIDGETS -->
-        <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
+    <!-- JARVIS WIDGETS -->
+    <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
 
-        <!-- EASY PIE CHARTS -->
-        <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+    <!-- EASY PIE CHARTS -->
+    <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
 
-        <!-- SPARKLINES -->
-        <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
+    <!-- SPARKLINES -->
+    <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>
 
-        <!-- JQUERY VALIDATE -->
-        <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
+    <!-- JQUERY VALIDATE -->
+    <script src="../../js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-        <!-- JQUERY MASKED INPUT -->
-        <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+    <!-- JQUERY MASKED INPUT -->
+    <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
-        <!-- JQUERY SELECT2 INPUT -->
-        <script src="../../js/plugin/select2/select2.min.js"></script>
+    <!-- JQUERY SELECT2 INPUT -->
+    <script src="../../js/plugin/select2/select2.min.js"></script>
 
-        <!-- JQUERY UI + Bootstrap Slider -->
-        <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+    <!-- JQUERY UI + Bootstrap Slider -->
+    <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
 
-        <!-- browser msie issue fix -->
-        <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+    <!-- browser msie issue fix -->
+    <script src="../../js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 
-        <!-- FastClick: For mobile devices -->
-        <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
+    <!-- FastClick: For mobile devices -->
+    <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
 
-        <!--[if IE 8]>
-    
-        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-    
-        <![endif]-->
+    <!--[if IE 8]>
 
-        <!-- Demo purpose only -->
-        <script src="../../js/demo.min.js"></script>
+    <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
 
-        <!-- MAIN APP JS FILE -->
-        <script src="../../js/app.min.js"></script>
+    <![endif]-->
 
-        <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-        <!-- Voice command : plugin -->
-        <script src="../../js/speech/voicecommand.min.js"></script>
+    <!-- Demo purpose only -->
+    <script src="../../js/demo.min.js"></script>
 
-        <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-        <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
-        <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
-        <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-        <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-        <script type="text/javascript">
+    <!-- MAIN APP JS FILE -->
+    <script src="../../js/app.min.js"></script>
+
+    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+    <!-- Voice command : plugin -->
+    <script src="../../js/speech/voicecommand.min.js"></script>
+
+    <!-- PAGE RELATED PLUGIN(S) -->
+    <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
+    <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
+    <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+
+    <script>
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-            $(document).ready(function () {
-
-                pageSetUp();
-
-                /* // DOM Position key index //
-                 
-                 l - Length changing (dropdown)
-                 f - Filtering input (search)
-                 t - The Table! (datatable)
-                 i - Information (records)
-                 p - Pagination (paging)
-                 r - pRocessing 
-                 < and > - div elements
-                 <"#id" and > - div with an id
-                 <"class" and > - div with a class
-                 <"#id.class" and > - div with an id and class
-                 
-                 Also see: http://legacy.datatables.net/usage/features
-                 */
-
-                /* BASIC ;*/
+            $(document).ready(function () {                
+                /*pageSetUp();
                 var responsiveHelper_dt_basic = undefined;
                 var responsiveHelper_datatable_fixed_column = undefined;
                 var responsiveHelper_datatable_col_reorder = undefined;
@@ -363,6 +336,9 @@
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                     "autoWidth": true,
+                    "oLanguage": {
+                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+                    },
                     "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_dt_basic) {
@@ -376,23 +352,15 @@
                         responsiveHelper_dt_basic.respond();
                     }
                 });
-
-                /* END BASIC */
-
-                /* COLUMN FILTER  */
                 var otable = $('#datatable_fixed_column').DataTable({
-                    //"bFilter": false,
-                    //"bInfo": false,
-                    //"bLengthChange": false
-                    //"bAutoWidth": false,
-                    //"bPaginate": false,
-                    //"bStateSave": true // saves sort state using localStorage
                     "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
                     "autoWidth": true,
+                    "oLanguage": {
+                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+                    },
                     "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_fixed_column) {
                             responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
                         }
@@ -405,11 +373,7 @@
                     }
 
                 });
-
-                // custom toolbar
-                $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
-
-                // Apply the filter
+                $("div.toolbar").html('<div class="text-right"><img src="../../img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
                 $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
 
                     otable
@@ -418,16 +382,15 @@
                             .draw();
 
                 });
-                /* END COLUMN FILTER */
-
-                /* COLUMN SHOW - HIDE */
                 $('#datatable_col_reorder').dataTable({
                     "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
                     "autoWidth": true,
+                    "oLanguage": {
+                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+                    },
                     "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_col_reorder) {
                             responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
                         }
@@ -439,16 +402,13 @@
                         responsiveHelper_datatable_col_reorder.respond();
                     }
                 });
-
-                /* END COLUMN SHOW - HIDE */
-
-                /* TABLETOOLS */
                 $('#datatable_tabletools').dataTable({
-                    // Tabletools options: 
-                    //   https://datatables.net/extensions/tabletools/button_options
                     "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
                             "t" +
                             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                    "oLanguage": {
+                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+                    },
                     "oTableTools": {
                         "aButtons": [
                             "copy",
@@ -465,11 +425,10 @@
                                 "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
                             }
                         ],
-                        "sSwfPath": "../../js/DataTables-1.10.4/media/js/copy_csv_xls_pdf.swf"
+                        "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
                     },
                     "autoWidth": true,
                     "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
                         if (!responsiveHelper_datatable_tabletools) {
                             responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
                         }
@@ -480,16 +439,27 @@
                     "drawCallback": function (oSettings) {
                         responsiveHelper_datatable_tabletools.respond();
                     }
-                });
+                });*/
+                //alert("as");
+                listdireccion();
+            });
 
-                /* END TABLETOOLS */
+            /*var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+            _gaq.push(['_trackPageview']);
 
-            })
-            //Listar padres_madres
+            (function () {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();*/
 
-        </script>
-        <script>
-            function listar_trabajor_na() {
+
+
+            /*function listar_trabajor_na() {
                 var ap = $(".aps").val();
                 var de = $(".dep").val();
                 var ar = $(".are").val();
@@ -543,8 +513,8 @@
                     }
                 });
 
-            }
-            $(document).ready(function () {
+            }*/
+            /*$(document).ready(function () {
                 var b = $('#tbodys');
 
                 $("#btnbuscar").click(
@@ -563,8 +533,8 @@
                         }
                 );
             }
-            );
-            function GifLoader(contenedor, msg, action) {
+            );*/
+            /*function GifLoader(contenedor, msg, action) {
                 $('.headerr').hide();
                 var text = "";
                 contenedor.empty();
@@ -574,28 +544,123 @@
                     text += "<div style='height:150px; width:150px; margin:auto; padding-top:30px;'><center><h3>" + msg + "</h3></center></div>";
                 }
                 contenedor.append(text);
+            }*/
+           /* function createTable() {
+                var t = '<table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">';
+                t += '<thead>';
+                t += '<tr>';
+                t += '<th data-hide="phone">N°</th>';
+                t += '<th data-class="APS">Codigo APS</th>';
+                t += '<th data-hide="DEP">Departamento</th>';
+                t += '<th data-hide="ARE">Area</th>';
+                t += '<th data-hide="secc">SecciÃ³n</th>';
+                t += '<th data-hide="pues">Puesto</th>';
+                t += '<th data-class="fec_nac">Tipo Documento</th>';
+                t += '<th data-class="ed">Numero Documento</th>';
+                t += '<th data-class="nom">Apellido Paterno</th>';
+                t += '<th data-class="nom">Apellido Materno</th>';
+                t += '<th data-class="tip">Nombre(s)</th>';
+                t += '<th data-class="tip">Apellidos y Nombre(s)</th>';
+                t += '<th data-class="tip">Fecha de Inicio</th>';
+                t += '<th data-class="tip">Fecha de Cese</th>';
+                t += '<th data-class="tip">Mes de Requerieminto</th>';
+                t += '<th data-class="tip">Sexo</th>';
+                t += '<th data-class="tip">Fecha de Nacimiento</th>';
+                t += '<th data-class="tip">Nacionalidad</th>';
+                t += '<th data-class="tip">Estado Civil</th>';
+                t += '<th data-class="tip">Grupo Sanguineo</th>';
+                t += '<th data-class="tip">Sistema Pensionario</th>';
+                t += '<th data-class="tip">AFP</th>';
+                t += '<th data-class="tip">Situación Educativa</th>';
+                t += '<th data-class="tip">Estudio en Instituto</th>';
+                t += '<th data-class="tip">Regimen</th>';
+                t += '<th data-class="tip">Tipo de Institución</th>';
+                t += '<th data-hide="pues">Institución</th>';
+                t += '<th data-class="fec_nac">Carrera</th>';
+                t += '<th data-class="ed">Año de Egreso</th>';
+                t += '<th data-class="nom">Tipo de Hora Pago</th>';
+                t += '<th data-class="nom">Domicilio Actual</th>';
+                t += '<th data-class="tip">Departamento</th>';
+                t += '<th data-class="tip">Provincia</th>';
+                t += '<th data-class="tip">Distrito</th>';
+                t += '<th data-class="tip">Religión</th>';
+                t += '<th data-class="tip">Iglesia</th>';
+                t += '<th data-class="tip">Cargo</th>';
+                t += '<th data-class="tip">Autoridad</th>';
+                t += '<th data-class="tip">Condición Laboral</th>';
+                t += '<th data-class="tip">Remuneración Básica</th>';
+                t += '<th data-class="tip">Bono de Alimentos</th>';
+                t += '<th data-class="tip">Bonificación por puesto</th>';
+                t += '<th data-class="tip">BEV</th>';
+                t += '<th data-class="tip">Sueldo Total</th>';
+                t += '<th data-class="tip">Banco</th>';
+                t += '<th data-class="tip">N° de Cuenta Saldo</th>';
+                t += '<th data-class="tip">CCI</th>';
+                t += '<th data-class="tip">Centro de Costos</th>';
+                t += '<th data-class="tip">Situación Educativa</th>';
+                t += '<th data-class="tip">Cod. Régimen</th>';
+                t += '<th data-class="tip">Desc. Régimen</th>';
+                t += '<th data-class="tip">Cod. Institución</th>';
+                t += '<th data-class="ed">Cod. Carrera</th>';
+                t += '<th data-class="nom">Desc. Carrera</th>';
+                return t;
+            }*/
+
+            function listdireccion() {
+                var url = '../../reporte?opc=list_da';
+                var data = 'ps=dir';
+                $.post(url, data, function (objJson) {
+                    var lista = objJson.dir;
+                    if (lista.length > 0) {
+                        var m = '';
+                        m += '<option selected disabled>Elegir Dirección</option>';
+                        for (var i = 0; i < lista.length; i++) {
+                            m += '<option value="'+lista[i].id+'">'+lista[i].nombre+'</option>';
+                        }
+                        $(".selDir").empty();
+                        $(".selDir").append(m);
+                    } else {
+                        alert("no hay direcciones");
+                    }
+                });
             }
-        </script>
-
-        <!-- Your GOOGLE ANALYTICS CODE Below -->
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-            _gaq.push(['_trackPageview']);
-
-            (function () {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-
-        </script>
-
-
-
-    </body>
+            function listdepartamento(dir){
+                var url = '../../reporte?opc=list_da';
+                var data = 'ps=dep&iddir='+dir;
+                $.post(url, data, function (objJson) {
+                    var lista = objJson.dep;
+                    if (lista.length > 0) {
+                        var m = '';
+                        m += '<option selected disabled>Elegir Departamento</option>';
+                        for (var i = 0; i < lista.length; i++) {
+                            m += '<option value="'+lista[i].id+'">'+lista[i].nombre+'</option>';
+                        }
+                        $(".selDep").empty();
+                        $(".selDep").append(m);
+                    } else {
+                        alert("no hay departamentos");
+                    }
+                });
+            }
+            function listarea(dep){
+                var url = '../../reporte?opc=list_da';
+                var data = 'ps=area&iddep='+dep;
+                $.post(url, data, function (objJson) {
+                    var lista = objJson.area;
+                    if (lista.length > 0) {
+                        var m = '';
+                        m += '<option selected disabled>Elegir Área</option>';
+                        for (var i = 0; i < lista.length; i++) {
+                            m += '<option value="'+lista[i].id+'">'+lista[i].nom+'</option>';
+                        }
+                        $(".seArea").empty();
+                        $(".selArea").append(m);
+                    } else {
+                        alert("no hay departamentos");
+                    }
+                });
+            }
+    </script>
+</body>
 
 </html>

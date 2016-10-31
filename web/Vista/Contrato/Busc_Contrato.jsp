@@ -168,7 +168,7 @@
                         <center><div class="container conTable" style="width: 95%;">
                             </div></center>
                     </div>
-                    <div id="wait" style="display:none;width:69px;height:89px;position:absolute;top:50%;left:50%;padding:2px;" align="center"><img src='../../imagenes/por-favor-espere.gif' width="100" height="100" /><br>Loading..</div>
+                    <div id="wait" style="display:none;width:69px;height:89px;position:absolute;top:50%;left:50%;padding:2px;" align="center"><img src='../../img/por-favor-espere.gif' width="100" height="100" /><br>Loading..</div>
                 </div>
             </center>
         </form>        
