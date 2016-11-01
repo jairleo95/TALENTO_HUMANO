@@ -36,6 +36,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.factory.WSClienteAcademico;
+import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Detalle_Carga_Academica;
 
 /**
@@ -119,68 +120,42 @@ public class CCarga_Academica extends HttpServlet {
             if (opc.equals("Reporte_Carga_Academica")) {
                 sesion.setAttribute("ListCarAca", carga.ListCarAca());
                 response.sendRedirect("Vista/Academico/Carga_Academica/Rep_Carga_Academica.jsp");
-
             }
+
             if (opc.equals("Registrar_CA")) {
                 /*Registrar proceso de carga academica*/
                 double CA_TIPO_HORA_PAGO = Double.parseDouble(request.getParameter("TI_HORA_PAGO"));
                 double CA_TOTAL_HL = Double.parseDouble(request.getParameter("HL"));
-                String FE_DESDE = request.getParameter("DESDE");
-                String FE_HASTA = request.getParameter("HASTA");
-                String IP_USUARIO = request.getParameter("IP_USUARIO");
-                String NO_USUARIO = request.getParameter("NO_USUARIO");
-
-                FE_DESDE = FactoryConnectionDB.convertFecha3(FE_DESDE);
-                FE_HASTA = FactoryConnectionDB.convertFecha3(FE_HASTA);
-
+                String FE_DESDE = FactoryConnectionDB.convertFecha3(request.getParameter("DESDE"));
+                String FE_HASTA = FactoryConnectionDB.convertFecha3(request.getParameter("HASTA"));
                 int numero = Integer.parseInt(request.getParameter("num_itera"));
                 String ID_TRABAJADOR = request.getParameter("IDTR");
                 String eap = request.getParameter("eap");
                 String facultad = request.getParameter("facultad");
-
                 /* REGISTRAR REQUERIMIENTO*/
-                double CA_SUELDO = 0.0;
-                String DE_DIAS_TRABAJO = request.getParameter("DE_DIAS_TRABAJO");
-                String ID_PUESTO = request.getParameter("PUESTO");
-                String ID_REQUERIMIENTO = request.getParameter("REQ");
-                //String ID_REQUERIMIENTO = "REQ-0018";
+                DGP d = new DGP();
+                d.setFe_desde(FE_DESDE);
+                d.setFe_hasta(FE_HASTA);
+                d.setId_puesto("PUT-000482");
+                d.setId_requerimiento("REQ-0018");
+                d.setId_trabajador(ID_TRABAJADOR);
+                d.setIp_usuario(FactoryConnectionDB.detalle_ip());
+                d.setUs_creacion(iduser);
+                String iddgp = carga.insertDGP(d);
+                /*PROCESO CARGA ACADEMICA*/
+                String ID_PROCESO_CARGA_AC = carga.INSERT_PROCESO_CARGA_ACADEMICA(null, null, CA_TIPO_HORA_PAGO, CA_TOTAL_HL, FE_DESDE, FE_HASTA, "0", iduser, null, null, null,
+                        FactoryConnectionDB.detalle_ip(), iduser, iddgp.trim());
 
-                String CO_RUC = request.getParameter("CO_RUC");
-                String DE_LUGAR_SERVICIO = request.getParameter("DE_LUGAR_SERVICIO");
-                String DE_SERVICIO = request.getParameter("DE_SERVICIO");
-                String DE_PERIODO_PAGO = request.getParameter("DE_PERIODO_PAGO");
-                String DE_DOMICILIO_FISCAL = request.getParameter("DE_DOMICILIO_FISCAL");
-                String DE_SUBVENCION = request.getParameter("DE_SUBVENCION");
-                String DE_HORARIO_CAPACITACION = request.getParameter("DE_HORARIO_CAPACITACION");
-                String DE_HORARIO_REFRIGERIO = request.getParameter("DE_HORARIO_REFRIGERIO");
-                String DE_DIAS_CAPACITACION = request.getParameter("DE_DIAS_CAPACITACION");
-                String ES_DGP = request.getParameter("ES_DGP");
-                double CA_BONO_ALIMENTARIO = 0.0;
-                double DE_BEV = 0.0;
-                String DE_ANTECEDENTES_POLICIALES = request.getParameter("DE_ANTECEDENTES_POLICIALES");
-                String ES_CERTIFICADO_SALUD = request.getParameter("ES_CERTIFICADO_SALUD");
-                String DE_MONTO_HONORARIO = request.getParameter("DE_MONTO_HONORARIO");
-                String FE_CESE = request.getParameter("FE_CESE");
-                String FE_RECEPCION = request.getParameter("FE_RECEPCION");
-                String MO_RENUNCIA = request.getParameter("MO_RENUNCIA");
-                double DI_ADQUIRIDOS = 0.0;
-                double DI_CONSUMIDOS = 0.0;
-                double DI_POR_CONSUMIR = 0.0;
-                String ES_VACACIONES = request.getParameter("ES_VACACIONES");
-                String LI_MOTIVO = request.getParameter("LI_MOTIVO");
-                String ES_MFL = "0";
-                double CA_BONIFICACION_P = 0.0;
-                String iddgp = carga.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO, DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION, ES_DGP, iduser, null, null, null, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD, DE_MONTO_HONORARIO, FE_CESE, FE_RECEPCION, MO_RENUNCIA, DI_ADQUIRIDOS, DI_CONSUMIDOS, DI_POR_CONSUMIR, ES_VACACIONES, LI_MOTIVO, ES_MFL, CA_BONIFICACION_P);
-                String ID_PROCESO_CARGA_AC = carga.INSERT_PROCESO_CARGA_ACADEMICA(null, null, CA_TIPO_HORA_PAGO, CA_TOTAL_HL, FE_DESDE, FE_HASTA, "0", iduser, null, null, null, FactoryConnectionDB.detalle_ip(), NO_USUARIO, iddgp.trim());
+                /*CUOTAS PAGO DOCENTE*/
                 for (int i = 1; i <= numero; i++) {
                     /*pago docente (iterar)*/
                     String NU_CUOTA = "" + i;
                     double CA_CUOTA = Double.parseDouble(request.getParameter("MES" + i));
                     /*CORREGIR FECHAS*/
                     String FE_PAGO = request.getParameter("FECHA" + i);
-                    /*FALTA US_CREACION*/
-                    carga.INSERT_PAGO_DOCENTE(null, NU_CUOTA, CA_CUOTA, FE_PAGO, null, ID_PROCESO_CARGA_AC.trim(), null, null, null, IP_USUARIO, NO_USUARIO);
+                    carga.INSERT_PAGO_DOCENTE(null, NU_CUOTA, CA_CUOTA, FE_PAGO, null, ID_PROCESO_CARGA_AC.trim(), null, null, null, FactoryConnectionDB.detalle_ip(), iduser);
                 }
+                /*DETALLE CARGA ACADEMICA*/
                 List<V_Detalle_Carga_Academica> lCargaAcad = carga.Lista_detalle_academico(ID_TRABAJADOR, facultad, eap, "", "");
                 for (int i = 0; i < lCargaAcad.size(); i++) {
                     carga.INSERT_DETALLE_CARGA_ACADEMICA(null, ID_PROCESO_CARGA_AC.trim(), lCargaAcad.get(i).getId_carga_academica(), "1");

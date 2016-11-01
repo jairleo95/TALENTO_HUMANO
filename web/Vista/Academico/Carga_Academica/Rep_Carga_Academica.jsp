@@ -73,7 +73,8 @@
             <section id="widget-grid" class="">
                 <div class="row">
                     <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="jarviswidget" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                        <div class="jarviswidget" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" 
+                             data-widget-deletebutton="false">
                             <header>
                                 <span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
                                 <h2>Carga Académica</h2>
@@ -94,10 +95,10 @@
                                                 <tr>
                                                     <th class="hasinput" colspan="10"  rowspan="1"></th>  
                                                     <th class='hasinput' >
-                                                        <input type="date" class='form-control input-sm' />
+                                                        <input type="text" class='form-control input-sm dateDesdeM' />
                                                     </th>
                                                     <th class='hasinput' >
-                                                        <input type="date" class='form-control input-sm' />
+                                                        <input type="text" class='form-control input-sm dateHastaM' />
                                                     </th>
                                                 </tr>
                                                 <tr>
@@ -161,8 +162,16 @@
                                                     <td><%=ca.getProfesion_docente()%></td>
                                                     <td><%=ca.getDe_condicion()%></td>
                                                     <td><%=ca.getDe_carga()%></td>
-                                                    <td><%=ca.getFe_desde()%></td>
-                                                    <td><%=ca.getFe_hasta()%></td>
+                                                    <td><%if (ca.getFe_desde() == null & ca.getValidateExistTrabajador() != null) {
+                                                        %> 
+                                                        <input type="text" class="dateDesdeItem form-control input-sm"/>
+                                                        <% }
+                                                        %></td>
+                                                    <td><%if (ca.getFe_hasta() == null & ca.getValidateExistTrabajador() != null) {
+                                                        %> 
+                                                        <input type="text" class="dateHastaItem form-control input-sm"/>
+                                                        <% }
+                                                        %></td>
                                                 </tr>
                                                 <%}%>
                                             </tbody>
@@ -204,7 +213,7 @@
                         <div class="areaModal">
 
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
@@ -309,6 +318,51 @@
                     phone: 480
                 };
                 var tableRepAcademico = $('.datatableRepCargaAcademica').DataTable();
+
+                $(".dateDesdeM").datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2,
+                    dateFormat: 'dd/mm/yy',
+                    prevText: '<i class="fa fa-chevron-left"></i>',
+                    nextText: '<i class="fa fa-chevron-right"></i>',
+                    onClose: function (selectedDate) {
+                      $(this).parents("tr").find($(".dateHastaM")).datepicker("option", "minDate", selectedDate);
+                    }
+                });
+                $(".dateHastaM").datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2,
+                    dateFormat: 'dd/mm/yy',
+                    prevText: '<i class="fa fa-chevron-left"></i>',
+                    nextText: '<i class="fa fa-chevron-right"></i>',
+                    onClose: function (selectedDate) {
+                           $(this).parents("tr").find($(".dateDesdeM")).datepicker("option", "maxDate", selectedDate);
+                    }
+                });
+                $(".dateDesdeItem").datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2,
+                    dateFormat: 'dd/mm/yy',
+                    prevText: '<i class="fa fa-chevron-left"></i>',
+                    nextText: '<i class="fa fa-chevron-right"></i>',
+                    onClose: function (selectedDate) {
+                      $(this).parents("tr").find($(".dateHastaItem")).datepicker("option", "minDate", selectedDate);
+                    }
+                });
+                $(".dateHastaItem").datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2,
+                    dateFormat: 'dd/mm/yy',
+                    prevText: '<i class="fa fa-chevron-left"></i>',
+                    nextText: '<i class="fa fa-chevron-right"></i>',
+                    onClose: function (selectedDate) {
+                           $(this).parents("tr").find($(".dateDesdeItem")).datepicker("option", "maxDate", selectedDate);
+                    }
+                });
 
 
             });

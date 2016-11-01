@@ -96,9 +96,19 @@ public class FactoryConnectionDB {
     }
 
     public static String convertFecha3(String fecha) {
-        System.out.println("Fecha :" + fecha);
-        String f[] = fecha.split("/");
-        return f[2] + "-" + f[1] + "-" + f[0];
+        String nuevaFecha = null;
+        if (fecha != null) {
+            if (!fecha.equals("")) {
+                System.out.println("Fecha :" + fecha);
+                String f[] = fecha.split("/");
+                nuevaFecha = f[2] + "-" + f[1] + "-" + f[0];
+            } else {
+                nuevaFecha = null;
+            }
+        } else if (fecha == null) {
+            nuevaFecha = null;
+        }
+        return nuevaFecha;
     }
 
     public static String convertFecha4(String fecha) {

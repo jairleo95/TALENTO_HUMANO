@@ -8,6 +8,7 @@ package pe.edu.upeu.application.dao_imp;
 import java.util.List;
 import java.util.Map;
 import pe.edu.upeu.application.model.Carga_Academica;
+import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Detalle_Carga_Academica;
 
 /**
@@ -33,6 +34,7 @@ public interface InterfaceCarga_AcademicaDAO {
     public String INSERT_PAGO_DOCENTE(String ID_PAGO_DOCENTE, String NU_CUOTA, double CA_CUOTA, String FE_PAGO, String ES_PAGO_DOCENTE, String ID_PROCESO_CARGA_AC, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String NO_USUARIO);
 
     public String INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO, String FE_CESE, String FE_RECEPCION, String MO_RENUNCIA, double DI_ADQUIRIDOS, double DI_CONSUMIDOS, double DI_POR_CONSUMIR, String ES_VACACIONES, String LI_MOTIVO, String ES_MFL, double CA_BONIFICACION_P);
+    public String insertDGP(DGP dgp);
 
     public void PROCESAR_CARGA_ACADEMICA(String id_proceso, String iddgp);
 
