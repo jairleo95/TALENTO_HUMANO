@@ -230,5 +230,9 @@ public class Carga_Academica {
     public void setFe_creacion(String fe_creacion) {
         this.fe_creacion = fe_creacion;
     }
+    public String toDataSent(){
+        return "nro_doc="+this.nu_doc+"&ap_p="+this.ap_paterno+"&ap_m="+this.ap_materno+"no_tr="+this.no_trabajador+"&ti_doc="+
+                this.es_tipo_doc+"&eap="+this.no_eap+"&facultad="+this.no_facultad+"&ciclo="+this.de_carga+"&idtr="+this.id_trabajador;
+    }
 
 }

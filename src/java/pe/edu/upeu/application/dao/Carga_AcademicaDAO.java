@@ -20,6 +20,7 @@ import pe.edu.upeu.application.model.Carga_Academica;
 import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Detalle_Carga_Academica;
 import pe.edu.upeu.application.web.controller.CConversion;
+import pe.edu.upeu.application.web.controller.CCriptografiar;
 
 /**
  *
@@ -282,7 +283,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                 ca.setFe_desde(rs.getString("fe_desde"));
                 ca.setFe_hasta(rs.getString("fe_hasta"));
                 ca.setFe_creacion(rs.getString("fe_creacion"));
-                ca.setId_trabajador(rs.getString("id_trabajador"));
+                ca.setId_trabajador(CCriptografiar.Encriptar(rs.getString("id_trabajador")));
                 ca.setNu_doc(rs.getString("nu_doc"));
                 ca.setEs_tipo_doc(rs.getString("es_tipo_doc"));
                 ca.setNo_trabajador(rs.getString("no_trabajador"));
@@ -293,9 +294,8 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                 ca.setDe_condicion(rs.getString("de_condicion"));
                 ca.setDe_carga(rs.getString("de_carga"));
                 ca.setId_proceso_carga_ac(rs.getString("id_proceso_carga_ac"));
-
                 ca.setCountCursos(rs.getInt("countCursos"));
-                ca.setValidateExistTrabajador(rs.getString("validateExistTrabajador"));
+                ca.setValidateExistTrabajador(CCriptografiar.Encriptar(rs.getString("validateExistTrabajador")));
                 list.add(ca);
             }
         } catch (SQLException e) {
@@ -431,7 +431,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 V_Detalle_Carga_Academica ca = new V_Detalle_Carga_Academica();
-                ca.setId_carga_academica(rs.getString("id_carga_academica"));
+                ca.setId_carga_academica(CCriptografiar.Encriptar(rs.getString("id_carga_academica")));
                 ca.setEs_carga_academica(rs.getString("es_carga_academica"));
                 ca.setCampus(rs.getString("campus"));
                 ca.setEs_tipo_doc(rs.getString("es_tipo_doc"));
@@ -451,7 +451,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                 ca.setEs_procesado(rs.getString("es_procesado"));
                 ca.setFe_creacion(rs.getString("fe_creacion"));
                 ca.setCa_tipo_hora_pago_refeerencial(rs.getString("ca_tipo_hora_pago_refeerencial"));
-                ca.setId_trabajador(rs.getString("id_trabajador"));
+                ca.setId_trabajador(CCriptografiar.Encriptar(rs.getString("id_trabajador")));
                 list.add(ca);
             }
         } catch (SQLException e) {

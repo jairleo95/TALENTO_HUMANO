@@ -213,7 +213,8 @@
                                             <a data-toggle="tab" href="#hr1"> <i class="fa fa-lg fa-arrow-circle-o-down"></i> <span class="hidden-mobile hidden-tablet"> DGP </span> </a>
                                         </li>
                                         <li>
-                                            <a data-toggle="tab" href="#hr2"> <i class="fa fa-lg fa-arrow-circle-o-up"></i> <span class="hidden-mobile hidden-tablet"> Carga académica</span> <sup class="badge bg-color-red bounceIn animated badgeCAcademico" style="display: none" >0</sup></a>
+                                            <a data-toggle="tab" href="#hr2"> <i class="fa fa-lg fa-arrow-circle-o-up"></i> <span class="hidden-mobile hidden-tablet"> Carga académica</span> 
+                                                <sup class="badge bg-color-red bounceIn animated badgeCAcademico" style="display: none" >0</sup></a>
                                         </li>
 
                                     </ul>	

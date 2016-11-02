@@ -129,7 +129,7 @@ public class CCarga_Academica extends HttpServlet {
                 String FE_DESDE = FactoryConnectionDB.convertFecha3(request.getParameter("DESDE"));
                 String FE_HASTA = FactoryConnectionDB.convertFecha3(request.getParameter("HASTA"));
                 int numero = Integer.parseInt(request.getParameter("num_itera"));
-                String ID_TRABAJADOR = request.getParameter("IDTR");
+                String ID_TRABAJADOR = CCriptografiar.Desencriptar(request.getParameter("idtr"));
                 String eap = request.getParameter("eap");
                 String facultad = request.getParameter("facultad");
                 /* REGISTRAR REQUERIMIENTO*/
@@ -145,7 +145,6 @@ public class CCarga_Academica extends HttpServlet {
                 /*PROCESO CARGA ACADEMICA*/
                 String ID_PROCESO_CARGA_AC = carga.INSERT_PROCESO_CARGA_ACADEMICA(null, null, CA_TIPO_HORA_PAGO, CA_TOTAL_HL, FE_DESDE, FE_HASTA, "0", iduser, null, null, null,
                         FactoryConnectionDB.detalle_ip(), iduser, iddgp.trim());
-
                 /*CUOTAS PAGO DOCENTE*/
                 for (int i = 1; i <= numero; i++) {
                     /*pago docente (iterar)*/
@@ -158,15 +157,15 @@ public class CCarga_Academica extends HttpServlet {
                 /*DETALLE CARGA ACADEMICA*/
                 List<V_Detalle_Carga_Academica> lCargaAcad = carga.Lista_detalle_academico(ID_TRABAJADOR, facultad, eap, "", "");
                 for (int i = 0; i < lCargaAcad.size(); i++) {
-                    carga.INSERT_DETALLE_CARGA_ACADEMICA(null, ID_PROCESO_CARGA_AC.trim(), lCargaAcad.get(i).getId_carga_academica(), "1");
+                    carga.INSERT_DETALLE_CARGA_ACADEMICA(null, ID_PROCESO_CARGA_AC.trim(), CCriptografiar.Desencriptar(lCargaAcad.get(i).getId_carga_academica()), "1");
                 }
                 String idrp = IReq.id_det_req_proc(iddgp.trim());
                 /* REGISTRAR PRIMERA AUTORIZACION*/
                 List<String> list = a.Det_Autorizacion(idrp);
                 a.Insert_Autorizacion("", iddgp.trim(), "1", "P1", "", iduser, "", "", "", list.get(1).trim(), idrp.trim(), list.get(0));
 
-                rpta.put("dgp", iddgp);
-                rpta.put("proceso", idrp);
+                rpta.put("dgp", CCriptografiar.Encriptar(iddgp));
+                rpta.put("proceso", CCriptografiar.Encriptar(idrp));
                 rpta.put("rpta", true);
             }
             if (opc.equals("getDetCargaAcademica")) {

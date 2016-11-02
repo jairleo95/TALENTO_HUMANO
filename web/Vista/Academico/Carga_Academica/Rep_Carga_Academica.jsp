@@ -133,7 +133,7 @@
                                                                 <%if (ca.getValidateExistTrabajador() != null) {
                                                                 %>
                                                                 <li>
-                                                                    <a href="../../../carga_academica?opc=Completar_Datos&nro_doc=<%=ca.getNu_doc()%>&ap_p=<%=ca.getAp_paterno()%>&ap_m=<%=ca.getAp_materno()%>&no_tr=<%=ca.getNo_trabajador()%>&ti_doc=<%=ca.getEs_tipo_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>"   >Completar Datos</a>
+                                                                    <a href="../../../carga_academica?opc=Completar_Datos&<%=ca.toDataSent()%>">Completar Datos</a>
                                                                 </li>
 
                                                                 <li class="divider"></li>
@@ -141,11 +141,11 @@
                                                                 <li>
                                                                     <a href="" data-toggle="modal" data-target="#myModal" data-backdrop="static" 
                                                                        data-keyboard="false" class="btnCargaAcademica"
-                                                                       data-valor="&nro_doc=<%=ca.getNu_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>&idtr=<%=ca.getId_trabajador()%>&ciclo=<%=ca.getDe_carga()%>"  >Carga Academica</a>
+                                                                       data-valor="&<%=ca.toDataSent()%>"  >Carga Academica</a>
                                                                 </li>
                                                                 <%} else {%>
                                                                 <li>
-                                                                    <a href="../../../carga_academica?opc=Completar_Datos&nro_doc=<%=ca.getNu_doc()%>&ap_p=<%=ca.getAp_paterno()%>&ap_m=<%=ca.getAp_materno()%>&no_tr=<%=ca.getNo_trabajador()%>&ti_doc=<%=ca.getEs_tipo_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>"   >Completar Datos</a>
+                                                                    <a href="../../../carga_academica?opc=Completar_Datos&<%=ca.toDataSent()%>" >Completar Datos</a>
                                                                 </li>
                                                                 <%}%>
                                                             </ul>
@@ -172,8 +172,9 @@
                                                         <input type="text" class="dateHastaItem form-control input-sm" style="width:100px"/>
                                                         <% }
                                                         %></td>
-                                                </tr>
-                                                <%}%>
+                                            <input type="hidden" class="idtr" value="<%=ca.getId_trabajador()%>"/>
+                                            </tr>
+                                            <%}%>
                                             </tbody>
                                         </table>
                                     </div>
@@ -195,8 +196,6 @@
                         </div>
                     </article>
                 </div>
-
-
             </section>
         </div>
 
@@ -327,7 +326,7 @@
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
                     onClose: function (selectedDate) {
-                      $(this).parents("tr").find($(".dateHastaM")).datepicker("option", "minDate", selectedDate);
+                        $(this).parents("tr").find($(".dateHastaM")).datepicker("option", "minDate", selectedDate);
                     }
                 });
                 $(".dateHastaM").datepicker({
@@ -338,7 +337,7 @@
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
                     onClose: function (selectedDate) {
-                           $(this).parents("tr").find($(".dateDesdeM")).datepicker("option", "maxDate", selectedDate);
+                        $(this).parents("tr").find($(".dateDesdeM")).datepicker("option", "maxDate", selectedDate);
                     }
                 });
                 $(".dateDesdeItem").datepicker({
@@ -349,7 +348,7 @@
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
                     onClose: function (selectedDate) {
-                      $(this).parents("tr").find($(".dateHastaItem")).datepicker("option", "minDate", selectedDate);
+                        $(this).parents("tr").find($(".dateHastaItem")).datepicker("option", "minDate", selectedDate);
                     }
                 });
                 $(".dateHastaItem").datepicker({
@@ -360,7 +359,7 @@
                     prevText: '<i class="fa fa-chevron-left"></i>',
                     nextText: '<i class="fa fa-chevron-right"></i>',
                     onClose: function (selectedDate) {
-                           $(this).parents("tr").find($(".dateDesdeItem")).datepicker("option", "maxDate", selectedDate);
+                        $(this).parents("tr").find($(".dateDesdeItem")).datepicker("option", "maxDate", selectedDate);
                     }
                 });
 

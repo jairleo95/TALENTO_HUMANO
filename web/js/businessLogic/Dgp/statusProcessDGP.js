@@ -157,6 +157,12 @@ function initStatusProcessDGP() {
             $('td:eq(4)', row).addClass("new-progress");
             // }
 
+        }, "drawCallback": function (oSettings) {
+            responsiveHelperCAacademico.respond();
+            console.log("Enter to drawCallBack CAcademico");
+        }, "initComplete": function (settings, json) {
+            // console.log(json.list);
+            $(".badgeCAcademico").text(json.list.length).show();
         }
     });
 }
