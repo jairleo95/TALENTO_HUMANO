@@ -50,7 +50,7 @@
                     <div class="well">
                         <h1><span class="semi-bold">Reporte</span> <i class="ultra-light">Carga Académica</i> (Docentes) <sup class="badge bg-color-red bounceIn animated">v 2.0</sup> <br>
                             <small class="text-danger slideInRight fast animated"><strong>Inicio de contratación</strong></small></h1>
-                        <div class="row">
+                        <!--<div class="row">
                             <div class="col-md-4">
                                 <select class="form-control" >
                                     <option value="" >[Condición Laboral]</option>
@@ -65,7 +65,7 @@
                                     <option value="2" >item 2</option>
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
 
                     </div>
                 </div>
@@ -164,12 +164,12 @@
                                                     <td><%=ca.getDe_carga()%></td>
                                                     <td><%if (ca.getFe_desde() == null & ca.getValidateExistTrabajador() != null) {
                                                         %> 
-                                                        <input type="text" class="dateDesdeItem form-control input-sm"/>
+                                                        <input type="text" class="dateDesdeItem form-control input-sm" style="width:100px"/>
                                                         <% }
                                                         %></td>
                                                     <td><%if (ca.getFe_hasta() == null & ca.getValidateExistTrabajador() != null) {
                                                         %> 
-                                                        <input type="text" class="dateHastaItem form-control input-sm"/>
+                                                        <input type="text" class="dateHastaItem form-control input-sm" style="width:100px"/>
                                                         <% }
                                                         %></td>
                                                 </tr>
