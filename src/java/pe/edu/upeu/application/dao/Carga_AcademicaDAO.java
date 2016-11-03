@@ -232,14 +232,14 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
     }
 
     @Override
-    public String INSERT_PROCESO_CARGA_ACADEMICA(String ID_PROCESO_CARGA_AC, String ES_PROCESO_CARGA_AC, double CA_TIPO_HORA_PAGO, double CA_TOTAL_HL, String FE_DESDE, String FE_HASTA, String ES_PROCESADO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String NO_USUARIO, String ID_DGP) {
+    public String INSERT_PROCESO_CARGA_ACADEMICA(String ID_PROCESO_CARGA_AC, String ES_PROCESO_CARGA_AC, String CA_TIPO_HORA_PAGO, double CA_TOTAL_HL, String FE_DESDE, String FE_HASTA, String ES_PROCESADO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String NO_USUARIO, String ID_DGP) {
         String id = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PROCESO_CARGA_AC( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? )} ");
             cst.setString(1, null);
             cst.setString(2, null);
-            cst.setDouble(3, CA_TIPO_HORA_PAGO);
+            cst.setString(3, CA_TIPO_HORA_PAGO);
             cst.setDouble(4, CA_TOTAL_HL);
             cst.setString(5, c.convertFecha(FE_DESDE));
             cst.setString(6, c.convertFecha(FE_HASTA));

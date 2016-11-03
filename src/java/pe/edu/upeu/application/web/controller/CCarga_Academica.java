@@ -112,8 +112,8 @@ public class CCarga_Academica extends HttpServlet {
                 }
             }
             if (opc.equals("Procesar")) {
-                String iddgp = request.getParameter("dgp");
-                String idpro = request.getParameter("proceso");
+                String iddgp = CCriptografiar.Desencriptar(request.getParameter("dgp"));
+                String idpro = CCriptografiar.Desencriptar(request.getParameter("proceso"));
                 carga.PROCESAR_CARGA_ACADEMICA(idpro, iddgp);
                 rpta.put("rpta", true);
             }
@@ -124,7 +124,7 @@ public class CCarga_Academica extends HttpServlet {
 
             if (opc.equals("Registrar_CA")) {
                 /*Registrar proceso de carga academica*/
-                double CA_TIPO_HORA_PAGO = Double.parseDouble(request.getParameter("TI_HORA_PAGO"));
+                String CA_TIPO_HORA_PAGO = request.getParameter("TiHoraPago");
                 double CA_TOTAL_HL = Double.parseDouble(request.getParameter("HL"));
                 String FE_DESDE = FactoryConnectionDB.convertFecha3(request.getParameter("DESDE"));
                 String FE_HASTA = FactoryConnectionDB.convertFecha3(request.getParameter("HASTA"));

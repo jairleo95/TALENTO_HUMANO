@@ -1,17 +1,18 @@
 function initCargaAcademica() {
     /*carga academica*/
     $(".btnCargaAcademica").click(function () {
+        var currentItem=$(this).val();
+        console.log("current item:"+currentItem)
         var objBodyPrint = $(".areaModal");
         var dataSent = $(this).data("valor");
         showCargaAcademica(objBodyPrint, dataSent, function () {
             pageSetUp();
             initFormPlugins();
             $(".fe_desde_p, .fe_hasta_p, .hl_docente, .TiHoraPago").change(function () {
-                var tiHoraPago=$(".TiHoraPago option[value|='"+$(".TiHoraPago").val()+"']").data("valor");
-                console.log("data tipo hora pago:"+tiHoraPago);
+                var tiHoraPago = $(".TiHoraPago option[value|='" + $(".TiHoraPago").val() + "']").data("valor");
                 calcularCuotasDocente($(".fe_desde_p").val(), $(".fe_hasta_p").val(), $(".hl_docente").val(), tiHoraPago);
             });
-            getTiHoraPago($(".idtr").val(),$(".divSelectTiHoraPAGO"));
+            getTiHoraPago($(".idtr"+currentItem).val(), $(".divSelectTiHoraPAGO"));
             $(".btnAceptarCuotasCA").click(function () {
                 $.ajax({
                     url: "../../../carga_academica",
@@ -22,14 +23,13 @@ function initCargaAcademica() {
                         alert("Registrado con exito!...");
                         $(".proceso").val(data.proceso);
                         $(".dgp").val(data.dgp);
-                        $(".btn_procesar").show();
+                        $(".btnAceptarCuotasCA").hide();
+                        $(".btnProcesar").show('fast');
                     }
-                }).fail(function (e) {
-                    alert("Error: " + e);
                 });
             });
-            $(".btn_procesar").click(function () {
-                ProcesarCargaAcademica($(".dgp").val(), $(".proceso").val());
+            $(".btnProcesar").click(function () {
+                ProcesarCargaAcademica($(".dgp"+currentItem).val(), $(".proceso"+currentItem).val());
             });
         });
     });

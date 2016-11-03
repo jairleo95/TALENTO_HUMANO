@@ -139,9 +139,9 @@
                                                                 <li class="divider"></li>
                                                                 <li>
                                                                 <li>
-                                                                    <a href="" data-toggle="modal" data-target="#myModal" data-backdrop="static" 
+                                                                    <button  data-toggle="modal" data-target="#myModal" data-backdrop="static" 
                                                                        data-keyboard="false" class="btnCargaAcademica"
-                                                                       data-valor="&<%=ca.toDataSent()%>"  >Carga Academica</a>
+                                                                       data-valor="&<%=ca.toDataSent()%>"  value="<%=(i+1)%>" >Carga Academica</button>
                                                                 </li>
                                                                 <%} else {%>
                                                                 <li>
@@ -172,7 +172,9 @@
                                                         <input type="text" class="dateHastaItem form-control input-sm" style="width:100px"/>
                                                         <% }
                                                         %></td>
-                                            <input type="hidden" class="idtr" value="<%=ca.getId_trabajador()%>"/>
+                                            <input type="text" class="idtr<%=(i+1)%>" value="<%=ca.getId_trabajador()%>"/>
+                                            <input type="text" class="iddgp<%=(i+1)%>" value=""/>
+                                            <input type="text" class="proceso<%=(i+1)%>" value=""/>
                                             </tr>
                                             <%}%>
                                             </tbody>
