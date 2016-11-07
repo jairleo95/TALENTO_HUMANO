@@ -1,16 +1,15 @@
-<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
-<%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
-<%@page import="pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO"%>
-<%@page import="pe.edu.upeu.application.model.Usuario"%>
-<%@page import="pe.edu.upeu.application.dao_imp.InterfaceComentario_DGPDAO"%>
-<%@page import="pe.edu.upeu.application.dao.Comentario_DGPDAO"%>
-
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
         String ID_DEP = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");
 %>
+<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
+<%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO"%>
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceComentario_DGPDAO"%>
+<%@page import="pe.edu.upeu.application.dao.Comentario_DGPDAO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="pe.edu.upeu.application.dao.DgpDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceDgpDAO"%>
@@ -181,7 +180,7 @@
                     <div class="row">
 
                         <!-- NEW WIDGET START -->
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12"  style="margin-top:2.5%;">
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
                             <!-- Widget ID (each widget will need unique ID)-->
                             <div class="jarviswidget jarviswidget-color-white" id="wid-id-0"   data-widget-editbutton="false"

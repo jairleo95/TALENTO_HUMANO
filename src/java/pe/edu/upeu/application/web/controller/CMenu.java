@@ -50,17 +50,14 @@ public class CMenu extends HttpServlet {
                 } else if (opc != null & user != null) {
                     if (opc.equals("logout")) {
                         sesion.invalidate();
-
                         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                         dispatcher.forward(request, response);
                     }
                     if (opc.equals("List_Privilegios")) {
                         String id_modulo = request.getParameter("idmod");
                         sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
-                        //sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
                         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal.jsp");
                         dispatcher.forward(request, response);
-
                     }
 
                 } else if (idrol.trim().equals("ROL-0013")) {

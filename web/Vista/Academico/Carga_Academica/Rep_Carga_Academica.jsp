@@ -172,9 +172,9 @@
                                                         <input type="text" class="dateHastaItem form-control input-sm" style="width:100px"/>
                                                         <% }
                                                         %></td>
-                                            <input type="text" class="idtr<%=(i+1)%>" value="<%=ca.getId_trabajador()%>"/>
-                                            <input type="text" class="iddgp<%=(i+1)%>" value=""/>
-                                            <input type="text" class="proceso<%=(i+1)%>" value=""/>
+                                            <input type="hidden" class="idtr<%=(i+1)%>" value="<%=ca.getId_trabajador()%>"/>
+                                            <input type="hidden" class="iddgp<%=(i+1)%>" value=""/>
+                                            <input type="hidden" class="proceso<%=(i+1)%>" value=""/>
                                             </tr>
                                             <%}%>
                                             </tbody>

@@ -84,7 +84,6 @@
 
         <!-- HEADER -->
         <header id="header">
-
             <div id="logo-group" >
                 <!-- PLACE YOUR LOGO HERE -->
                 <span id="logo"> <img src="img/logoRRHH.png" style=" position: absolute;top: 8px; width:100px; height:36px " alt="Talento Humano"> </span>
@@ -106,30 +105,23 @@
                             <input type="radio" name="activity" >
                             Rechazados </label>
                     </div>
-
                     <!-- notification content -->
                     <div class="ajax-notifications custom-scroll">
                         <ul class="notification-body autnot recnot poraut" >
                             <div class="alert alert-transparent">
                                 <h4>Click en el boton para mostrar el mensaje</h4>
-
                             </div>
-
                             <i class="fa fa-lock fa-4x fa-border"></i>
-
                         </ul>
                     </div>
                     <!-- end notification content -->
-
                 </div>
                 <!-- END AJAX-DROPDOWN -->
-
             </div>
             <%if (false) {
             %>
             <!-- projects dropdown -->
             <div class="project-context hidden-xs">
-
                 <span class="label">Proyectos:</span>
                 <span class="project-selector dropdown-toggle" data-toggle="dropdown">Proyectos Recientes <i class="fa fa-angle-down"></i></span>
 
@@ -364,16 +356,12 @@
                 traditional href="" links. See documentation for details.
                 -->
 
-                <ul >
-
-
+                <ul>
                     <%
                         for (int i = 0; i < listarURL.size(); i++) {
                             V_Privilegio dp = new V_Privilegio();
                             dp = (V_Privilegio) listarURL.get(i);
-
                     %>
-
                     <%  if (dp.getId_privilegio().equals("PRV-000012")) {%>
                     <li class="li-privilegio">
                         <a href="#" data-value="fa fa-lg fa-fw fa-file"><i class="fa fa-lg fa-fw fa-file-text"></i> <span class="menu-item-parent">Generar Requerimiento</span></a>
@@ -385,10 +373,7 @@
                             </li>
                             <li>
                                 <a href="Vista/Dgp/Requerimiento.jsp?opc=FueraDePlanilla" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i> Fuera de Planilla</a>
-
                             </li>
-
-
                             <%}
                                 if (id_rol.trim().equals("ROL-0011") | id_rol.trim().equals("ROL-0001")) {%>
                             <li>
@@ -398,7 +383,6 @@
                         </ul>
                     </li>
                     <%} else {%>
-
                     <li class="li-privilegio">
                         <%if (id_rol.trim().equals("ROL-0013")) {%>
                         <%if (dp.getNo_link().trim().equals("Ficha del Trabajador")) {%>
@@ -429,10 +413,8 @@
 
         <!-- MAIN PANEL -->
         <div id="main" role="main">
-
             <!-- RIBBON -->
             <div id="ribbon">
-
                 <!--  <span class="ribbon-button-alignment"> 
                       <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> ¡Alerta! Esto actualizará la pagina." data-html="true">
                           <i class="fa fa-refresh"></i>
@@ -470,13 +452,10 @@
                     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4" >
                         <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home" id="icon_menu"></i><label class="titulo_menu" >Inicio</label><span> </span></h1>
                     </div>
-                </div>
-                <!-- row -->
-                <div class="row ">
                     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
                         <div class="animacion_load"></div>
                     </div>
-                    <iframe id="myframe" name="myframe"  style="display:"  class="iframe_principal" scrolling="si"  width="100%" height="800" frameborder="0" src="Vista/inicio.jsp"></iframe>
+                    <iframe id="myframe" name="myframe" class="iframe_principal" scrolling="si"  width="100%" height="800" frameborder="0"  src="Vista/inicio.jsp"></iframe>
                 </div>
                 <!-- end row -->
                 <!-- end widget grid -->
