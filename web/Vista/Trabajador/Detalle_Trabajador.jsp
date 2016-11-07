@@ -76,8 +76,6 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <link rel="stylesheet" type="text/css" href="../../js/shadowbox/shadowbox.css"/>
         <link rel="stylesheet" type="text/css" href=".../../js/shadowbox/style.css"/>
-        <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
-        <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <style type="text/css">
             body{
 
@@ -93,12 +91,21 @@
             .ui-progressbar {
                 position: relative;
             }
+
             .progress-label {
                 position: absolute;
                 left: 50%;
                 top: 4px;
                 font-weight: bold;
                 text-shadow: 1px 1px 0 #fff;
+            }
+            .ui-widget-overlay {
+                background: #AAA;
+                height: 100%;
+                z-index: 50;
+                position: fixed;
+                top: 0;
+                left: 0;
             }
         </style>
     </head>
@@ -532,7 +539,7 @@
                 </div>
             </div>
         </div>
-        <div class="div_dialog"></div>
+        <div class="div_dialog" ></div>
         <input  value="<%out.print(FactoryConnectionDB.url_archivos);%>" type="hidden" class="url_archivo"/> 
         <!-- #dialog-message -->
 
@@ -619,7 +626,7 @@
         <script type="text/javascript" src="../../js/Js_Trabajador/Js_Trabajador.js"></script>
         <script type="text/javascript" src="../../js/Js_Autorizacion/Js_Autorizacion.js"></script>
         <script type="text/javascript" src="../../js/Js_Academico/Js_Carga_Academica.js"></script>
-        <script type="text/javascript" src="../../js/businessLogic/foto/foto.js"></script>
+        <script type="text/javascript" src="../../js/businessLogic/Foto/foto.js"></script>
         <script type="text/javascript">
         $(document).ready(function () {
             Listar_Cod_Huella();

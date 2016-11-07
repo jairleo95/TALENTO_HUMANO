@@ -17,8 +17,10 @@ import pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Carga_Academica;
+import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Detalle_Carga_Academica;
 import pe.edu.upeu.application.web.controller.CConversion;
+import pe.edu.upeu.application.web.controller.CCriptografiar;
 
 /**
  *
@@ -160,14 +162,84 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
     }
 
     @Override
-    public String INSERT_PROCESO_CARGA_ACADEMICA(String ID_PROCESO_CARGA_AC, String ES_PROCESO_CARGA_AC, double CA_TIPO_HORA_PAGO, double CA_TOTAL_HL, String FE_DESDE, String FE_HASTA, String ES_PROCESADO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String NO_USUARIO, String ID_DGP) {
+    public String insertDGP(DGP d) {
+        String id = "";
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PROCESO_CA_DGP( ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
+            cst.setString(1, null);
+            cst.setString(2, FactoryConnectionDB.convertFecha(d.getFe_desde()));
+            cst.setString(3, FactoryConnectionDB.convertFecha(d.getFe_hasta()));
+            cst.setDouble(4, 0.0);
+            cst.setString(5, d.getDe_dias_trabajo());
+            cst.setString(6, d.getId_puesto());
+            cst.setString(7, d.getId_requerimiento());
+            cst.setString(8, d.getId_trabajador());
+            cst.setString(9, d.getCo_ruc());
+            cst.setString(10, d.getDe_lugar_servicio());
+            cst.setString(11, d.getDe_servicio());
+            cst.setString(12, d.getDe_periodo_pago());
+            cst.setString(13, d.getDe_domicilio_fiscal());
+            cst.setString(14, d.getDe_subvencion());
+            cst.setString(15, d.getDe_horario_capacitacion());
+            cst.setString(16, d.getDe_horario_refrigerio());
+            cst.setString(17, d.getDe_dias_capacitacion());
+            cst.setString(18, d.getEs_dgp());
+            cst.setString(19, d.getUs_creacion());
+            cst.setString(20, d.getFe_creacion());
+            cst.setString(21, d.getUs_modif());
+            cst.setString(22, d.getFe_modif());
+            cst.setString(23, FactoryConnectionDB.detalle_ip());
+            cst.setDouble(24, 0.0);
+            cst.setDouble(25, 0.0);
+            cst.setString(26, d.getDe_antecedentes_policiales());
+            cst.setString(27, d.getDe_certificado_salud());
+            cst.setString(28, d.getDe_monto_honorario());
+            //cst.setString(29, FE_CESE);
+            cst.setString(29, null);
+            //cst.setString(30, FE_RECEPCION);
+            cst.setString(30, null);
+//            cst.setString(31, MO_RENUNCIA);
+            cst.setString(31, null);
+            cst.setInt(32, 0);
+            cst.setInt(33, 0);
+            cst.setInt(34, 0);
+
+//            cst.setString(35, ES_VACACIONES);
+            cst.setString(35, null);
+//            cst.setString(36, LI_MOTIVO);
+            cst.setString(36, null);
+//            cst.setString(37, ES_MFL);
+            cst.setString(37, null);
+//            cst.setDouble(38, CA_BONIFICACION_P);
+            cst.setDouble(38, 0.0);
+            //  cst.setString(39, ID_PROCESO_CARGA_AC);
+            cst.registerOutParameter(39, Types.CHAR);
+            cst.execute();
+            id = cst.getString(39);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR :" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return id;
+    }
+
+    @Override
+    public String INSERT_PROCESO_CARGA_ACADEMICA(String ID_PROCESO_CARGA_AC, String ES_PROCESO_CARGA_AC, String CA_TIPO_HORA_PAGO, double CA_TOTAL_HL, String FE_DESDE, String FE_HASTA, String ES_PROCESADO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String NO_USUARIO, String ID_DGP) {
         String id = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PROCESO_CARGA_AC( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? )} ");
             cst.setString(1, null);
             cst.setString(2, null);
-            cst.setDouble(3, CA_TIPO_HORA_PAGO);
+            cst.setString(3, CA_TIPO_HORA_PAGO);
             cst.setDouble(4, CA_TOTAL_HL);
             cst.setString(5, c.convertFecha(FE_DESDE));
             cst.setString(6, c.convertFecha(FE_HASTA));
@@ -199,7 +271,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
     @Override
     public List<Carga_Academica> ListCarAca() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-    String sql = "SELECT * FROM RHVD_CARGA_ACADEMICA where ID_PROCESO_CARGA_AC is null";
+        String sql = "SELECT * FROM RHVD_CARGA_ACADEMICA where ID_PROCESO_CARGA_AC is null";
         List<Carga_Academica> list = new ArrayList<Carga_Academica>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -211,7 +283,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                 ca.setFe_desde(rs.getString("fe_desde"));
                 ca.setFe_hasta(rs.getString("fe_hasta"));
                 ca.setFe_creacion(rs.getString("fe_creacion"));
-                ca.setId_trabajador(rs.getString("id_trabajador"));
+                ca.setId_trabajador(CCriptografiar.Encriptar(rs.getString("id_trabajador")));
                 ca.setNu_doc(rs.getString("nu_doc"));
                 ca.setEs_tipo_doc(rs.getString("es_tipo_doc"));
                 ca.setNo_trabajador(rs.getString("no_trabajador"));
@@ -222,9 +294,8 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                 ca.setDe_condicion(rs.getString("de_condicion"));
                 ca.setDe_carga(rs.getString("de_carga"));
                 ca.setId_proceso_carga_ac(rs.getString("id_proceso_carga_ac"));
-                
                 ca.setCountCursos(rs.getInt("countCursos"));
-                ca.setValidateExistTrabajador(rs.getString("validateExistTrabajador"));
+                ca.setValidateExistTrabajador(CCriptografiar.Encriptar(rs.getString("validateExistTrabajador")));
                 list.add(ca);
             }
         } catch (SQLException e) {
@@ -350,7 +421,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
     public List<V_Detalle_Carga_Academica> Lista_detalle_academico(String idtr, String facultad, String eap, String ciclo, String dni) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "SELECT * FROM RHVD_DETALLE_CARGA_ACADEMICA WHERE campus is not null";
-  //      sql += (idtr.equals("")) ? "" : " and TRIM(ID_TRABAJADOR)= '" + idtr.trim();
+        //      sql += (idtr.equals("")) ? "" : " and TRIM(ID_TRABAJADOR)= '" + idtr.trim();
         sql += (facultad.trim().equals("")) ? "" : " and TRIM(NO_FACULTAD)='" + facultad.trim() + "' ";
         sql += (eap.equals("")) ? "" : "  AND TRIM(NO_EAP)='" + eap.trim() + "' ";
         sql += (ciclo.trim().equals("")) ? "" : "  AND TRIM(DE_CARGA)='" + ciclo.trim() + "' ";
@@ -360,7 +431,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 V_Detalle_Carga_Academica ca = new V_Detalle_Carga_Academica();
-                ca.setId_carga_academica(rs.getString("id_carga_academica"));
+                ca.setId_carga_academica(CCriptografiar.Encriptar(rs.getString("id_carga_academica")));
                 ca.setEs_carga_academica(rs.getString("es_carga_academica"));
                 ca.setCampus(rs.getString("campus"));
                 ca.setEs_tipo_doc(rs.getString("es_tipo_doc"));
@@ -380,7 +451,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                 ca.setEs_procesado(rs.getString("es_procesado"));
                 ca.setFe_creacion(rs.getString("fe_creacion"));
                 ca.setCa_tipo_hora_pago_refeerencial(rs.getString("ca_tipo_hora_pago_refeerencial"));
-                ca.setId_trabajador(rs.getString("id_trabajador"));
+                ca.setId_trabajador(CCriptografiar.Encriptar(rs.getString("id_trabajador")));
                 list.add(ca);
             }
         } catch (SQLException e) {

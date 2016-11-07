@@ -50,102 +50,152 @@
         <link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
-
         <style>
-            div.about{
-                width: 100%;
-                padding: 10px;
-            }   
+            @media screen and (min-width: 992px)  /* Tablet */ {
+                #content{
+                    margin-left: 70px;margin-right: 70px;
+                }
+            }
+            @media screen and (min-width: 992px) and (max-width: 1024px) /* Tablet */ {
+                #content{
+                    margin-left: 35px;margin-right: 35px;
+                }
+            }
         </style>
-
     </head>
-
-    <body class="animated fadeInDown" onload="nobackbutton();">
-
+    <body class="animated fadeInDown">
         <header id="header">
-
             <div id="logo-group" >
                 <span id="logos"> <img src="img/logoRRHH.png"  style="margin-top: 13px; width:130px; height:52px " alt="Talento Humano"> </span>
             </div>
 
         </header>
-
-        <div id="main" role="main">
-
-            <!-- MAIN CONTENT -->
-            <div id="content" class="container">
-
+        <div id="main" role="main" class="mainLogin">
+            <div id="content" class="containerr">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm" >
-                        <h1 class="txt-color-red login-header-big">Gestión del Talento Humano</h1>
-
-                        <div class="hero">
-
-                            <div class="pull-left login-desc-box-l">
-                                <h4 class="paragraph-header">Exitoso es aquel que puede establecer una base firme con los ladrillos que los demás le tiraron!</h4>
-                                <div class="login-app-icons">
-                                    <a href="http://recursoshumanos.upeu.edu.pe/" class="btn btn-primary btn-sm">Pagina Oficial</a>
-                                </div>
-                            </div>
-
-                            <img src="img/demo/iphoneview.png" class="pull-right display-image" alt="" style="width:210px">
-
-                        </div>
-
-                        <div class="row">
-                            <div class="about">
-                                <h5 class="about-heading">Sobre Recursos Humanos</h5>
-                                <p>
-                                    "La Oficina de RRHH selecciona, evalúa, y capacita al personal idóneo para la formación integral de los estudiantes que han de 
-                                    formarse profesionalmente y prestar un servicio a la Iglesia y la Sociedad para restaurar en el ser humano la imagen de Dios".
-                                </p>
-                            </div>
-
-                        </div>
-
+                    <div
+                        class="col-xs-12 col-sm-12 col-md-12 col-lg-12 hidden-xs hidden-sm">
+                        <h1 class="text-info login-header-big text-center">Gestión de Talento Humano</h1>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                        <div class="well no-padding" style="padding-top: 50px;">
-                            <form id="login-form" class="smart-form client-form">
-                                <header>
-                                    Iniciar Sesión 
-                                </header>
-
-                                <fieldset>
-                                    <section>
-                                        <label class="label">Usuario</label>
-                                        <label class="input"> <i class="icon-append fa fa-user"></i>
-                                            <input type="text" name="username" autocomplete="off" autofocus="" required=""  />
-                                            <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Ingrese su usuario</b></label>
-                                    </section>
-
-                                    <section>
-                                        <label class="label">Contraseña</label>
-                                        <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                            <input type="password" name="clave" required="" />
-                                            <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Ingrese la contraseña</b> </label>
-
-                                    </section>
-                                </fieldset>
-                                <footer>
-                                    <button type="submit" class="btn btn-primary">
-                                        Conectar
-                                    </button>
-                                </footer>
-
-                            </form>
+                </div>
+                <div class="row">
+                    <div class="col col-md-12 col-md-offset-4">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 ">
+                            <div class="well no-padding">
+                                <form   id="login-form" class="form-horizontal formLogin"   autocomplete="off" >
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="icon-addon addon-md">
+                                                    <input id="txtUsuario"
+                                                           type="text" name="username"
+                                                           placeholder="Usuario" maxlength="20"
+                                                           autocomplete="off"
+                                                           onkeypress="return soloLetrasNumeros(event);"
+                                                           class="form-control txtUsuario" required="" />
+                                                    <label  class="fa fa-user fa-lg fa-fw" rel="tooltip"   data-original-title="Complete este campo"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="input-group" style="width: 100%;">
+                                                    <div class="icon-addon addon-md">
+                                                        <input id="txtClave" required="" name="clave"  type="password" placeholder="Contraseña"
+                                                               maxlength="50" autocomplete="off" class="form-control txtClave" 
+                                                               onkeypress="return soloLetrasNumeros(event);" style="width: 100%;" />
+                                                        <span   class="fa fa-lock fa-lg fa-fw lbClave" rel="tooltip" style="z-index: 5;"   data-original-title="Complete este campo"></span>
+                                                    </div>
+                                                    <span class="input-group-btn" >
+                                                        <button class="btn btn-default btnIngresar" type="submit" disabled="" id="btnIngresar" name="btnIngresar"><i class="fa fa-sign-in fa-lg" ></i></button>
+                                                    </span>   
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="alert alert-warning fade in box_cargando" style="display:none">
+                                            <button class="close" data-dismiss="alert" >×</button>
+                                            <i class="fa-fw fa fa-warning"></i>  
+                                            <span class="texto_box_h">Conectando...</span>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
                         </div>
-                        <div id="mensaje"  class="tooltip-arrow"></div>
-
                     </div>
                 </div>
             </div>
-
         </div>
-
-        <!--================================================== -->	
-
+        <!--
+          <div id="main" role="main">
+              <div id="content" class="container">
+                  <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm" >
+                          <h1 class="txt-color-red login-header-big">Gestión del Talento Humano</h1>
+  
+                          <div class="hero">
+  
+                              <div class="pull-left login-desc-box-l">
+                                  <h4 class="paragraph-header">Exitoso es aquel que puede establecer una base firme con los ladrillos que los demás le tiraron!</h4>
+                                  <div class="login-app-icons">
+                                      <a href="http://recursoshumanos.upeu.edu.pe/" class="btn btn-primary btn-sm">Pagina Oficial</a>
+                                  </div>
+                              </div>
+  
+                              <img src="img/demo/iphoneview.png" class="pull-right display-image" alt="" style="width:210px">
+  
+                          </div>
+  
+                          <div class="row">
+                              <div class="about">
+                                  <h5 class="about-heading">Sobre Recursos Humanos</h5>
+                                  <p>
+                                      "La Oficina de RRHH selecciona, evalúa, y capacita al personal idóneo para la formación integral de los estudiantes que han de 
+                                      formarse profesionalmente y prestar un servicio a la Iglesia y la Sociedad para restaurar en el ser humano la imagen de Dios".
+                                  </p>
+                              </div>
+  
+                          </div>
+  
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                          <div class="well no-padding" style="padding-top: 50px;">
+                              <form id="login-form" class="smart-form client-form">
+                                  <header>
+                                      Iniciar Sesión 
+                                  </header>
+  
+                                  <fieldset>
+                                      <section>
+                                          <label class="label">Usuario</label>
+                                          <label class="input"> <i class="icon-append fa fa-user"></i>
+                                              <input type="text" name="username" autocomplete="off" autofocus="" required=""  />
+                                              <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Ingrese su usuario</b></label>
+                                      </section>
+  
+                                      <section>
+                                          <label class="label">Contraseña</label>
+                                          <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                              <input type="password" name="clave" required="" />
+                                              <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Ingrese la contraseña</b> </label>
+  
+                                      </section>
+                                  </fieldset>
+                                  <footer>
+                                      <button type="submit" class="btn btn-primary">
+                                          Conectar
+                                      </button>
+                                  </footer>
+  
+                              </form>
+                          </div>
+                          <div id="mensaje"  class="tooltip-arrow"></div>
+  
+                      </div>
+                  </div>
+              </div>
+          </div>
+  
+        -->
         <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
         <script src="js/plugin/pace/pace.min.js"></script>
 
@@ -153,13 +203,13 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script> if (!window.jQuery) {
-            document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
-        }</script>
+                                                                       document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                                   }</script>
 
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script> if (!window.jQuery.ui) {
-            document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-        }</script>
+                                                                       document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                                   }</script>
         <!-- IMPORTANT: APP CONFIG -->
         <script src="js/app.config.js"></script>
 

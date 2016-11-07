@@ -18,7 +18,7 @@ import org.apache.commons.codec.binary.Base64;
  */
 public class CCriptografiar {
 
-    public static final String secretKey = "AlfaTeam";
+    public static final String secretKey = "AlphaTeam";
 
     public static String Encriptar(String texto) {
 

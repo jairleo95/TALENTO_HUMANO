@@ -1,16 +1,15 @@
-<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
-<%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
-<%@page import="pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO"%>
-<%@page import="pe.edu.upeu.application.model.Usuario"%>
-<%@page import="pe.edu.upeu.application.dao_imp.InterfaceComentario_DGPDAO"%>
-<%@page import="pe.edu.upeu.application.dao.Comentario_DGPDAO"%>
-
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
         String ID_DEP = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");
 %>
+<%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
+<%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO"%>
+<%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceComentario_DGPDAO"%>
+<%@page import="pe.edu.upeu.application.dao.Comentario_DGPDAO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="pe.edu.upeu.application.dao.DgpDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceDgpDAO"%>
@@ -135,7 +134,7 @@
             }
             .new-progress .new-circle.done .new-label {
                 color: #FFF;
-               /* background: #8bc435;*/
+                /* background: #8bc435;*/
                 background: #0aa699;
                 box-shadow: inset 0 0 2px rgba(0,0,0,.2);
             }
@@ -181,7 +180,7 @@
                     <div class="row">
 
                         <!-- NEW WIDGET START -->
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12"  style="margin-top:2.5%;">
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
                             <!-- Widget ID (each widget will need unique ID)-->
                             <div class="jarviswidget jarviswidget-color-white" id="wid-id-0"   data-widget-editbutton="false"
@@ -213,7 +212,8 @@
                                             <a data-toggle="tab" href="#hr1"> <i class="fa fa-lg fa-arrow-circle-o-down"></i> <span class="hidden-mobile hidden-tablet"> DGP </span> </a>
                                         </li>
                                         <li>
-                                            <a data-toggle="tab" href="#hr2"> <i class="fa fa-lg fa-arrow-circle-o-up"></i> <span class="hidden-mobile hidden-tablet"> Carga académica</span> <sup class="badge bg-color-red bounceIn animated badgeCAcademico" style="display: none" >0</sup></a>
+                                            <a data-toggle="tab" href="#hr2"> <i class="fa fa-lg fa-arrow-circle-o-up"></i> <span class="hidden-mobile hidden-tablet"> Carga académica</span> 
+                                                <sup class="badge bg-color-red bounceIn animated badgeCAcademico" style="display: none" >0</sup></a>
                                         </li>
 
                                     </ul>	
@@ -276,7 +276,7 @@
                                                                     <li class="divider"></li><li>
                                                                     <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Detalle">Ver Requerimiento</a> </li>
                                                                     <li><a onclick="listHistory(<%=i%>)" data-toggle="modal" data-target="#ModalHisto">Prueba</a></li>
-                                                          
+
                                                                     <input type="hidden" class="vHist<%=i%>" value="<%=r.getId_dgp().trim()%>">
                                                                 </ul>
                                                             </div>
@@ -611,7 +611,7 @@
             </div>
         </div>
     </div>
-        <div class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" id="myModalComentario" tabindex="-1" role="dialog"  >
+    <div class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" id="myModalComentario" tabindex="-1" role="dialog"  >
         <div class="modal-dialog" >
             <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12" style="width:100%;margin-left: 0%;">
                 <div class="modal-header">
@@ -710,7 +710,6 @@
     <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
     <!-- Voice command : plugin
     <script src="../../js/speech/voicecommand.min.js"></script> -->
-
     <!-- PAGE RELATED PLUGIN(S) -->
     <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
@@ -718,11 +717,10 @@
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
     <script src="../../js/coment/comenth.js" type="text/javascript"></script>
-
-
+    <script src="../../js/businessLogic/Dgp/statusProcessDGP.js" type="text/javascript"></script>
     <script type="text/javascript">
                             // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                              function listHistory(at) {
+                            function listHistory(at) {
                                 var dgp = "id_dgp";
                                 var id = $(".vHist" + at + "").val();
                                 var id1 = $(".idDepart").val();
@@ -768,7 +766,7 @@
                                             } else {
                                                 m += '<td colspan="7" style="text-align:center;"> No definido </td>';
                                             }
-                                                  
+
                                             m += '</tr>';
                                             if (lista[i].es_autorizacion !== null) {
                                                 if (lista[i].es_autorizacion === '2' & (rol === "ROL-0002" || rol === "ROL-0005" || rol === "ROL-0001")) {
@@ -777,8 +775,8 @@
                                                         var DivEspecial = '<div id="divEs" class="alert alert-danger alert-block">';
                                                         DivEspecial += '<a class="close" data-dismiss="alert" href="#">×</a>';
                                                         DivEspecial += ' <h4 class="alert-heading">DGP fuera de Proceso!</h4>';
-                                                        DivEspecial += '<p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp='+id+'&ID'+id1+'" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=' + id + '" class="btn btn-primary id-dgp "><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" class="btn btn-primary" onclick="ListarMotivo()" data-toggle="modal" data-target="#myModalComentario"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>';
-                                                      //  alert(+lista[i].us_no_puesto+);                                                                                                                                                                                                                                                                                                                                                                                
+                                                        DivEspecial += '<p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp=' + id + '&ID' + id1 + '" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=' + id + '" class="btn btn-primary id-dgp "><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" class="btn btn-primary" onclick="ListarMotivo()" data-toggle="modal" data-target="#myModalComentario"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>';
+                                                        //  alert(+lista[i].us_no_puesto+);                                                                                                                                                                                                                                                                                                                                                                                
                                                         DivEspecial += '</p>';
                                                         DivEspecial += '<input type="hidden" class="id-autorizacion" value="lista[i].id_autorizacion">';
                                                         DivEspecial += '</div>';
@@ -826,27 +824,27 @@
                                 table += '</table>';
                                 return table;
                             }
-                            
-                            
+
+
                             function ListarMotivo(at) {
                                 alert("asdasdasd");
                                 var id = $(".vHist" + at + "").val();
                                 var url = '../../dgp?opc=SeguimientoH';
                                 var data = 'iddgp=' + id;
 
-                               
+
                                 $.post(url, data, function (objJson) {
                                     var lista = objJson.listar;
                                     if (lista.length > 0) {
                                         var ma = '';
                                         for (var i = 0; i < lista.length; i++) {
                                             //  alert("asdasdasd");
-                                             $(".contMO").append("<td>" +lista[i].getDe_pasos+ "</td>");
-                                             $(".contMO").append("<td class='alert alert-danger'>" + lista[i].id_dgp + "</td>");
-                                           
+                                            $(".contMO").append("<td>" + lista[i].getDe_pasos + "</td>");
+                                            $(".contMO").append("<td class='alert alert-danger'>" + lista[i].id_dgp + "</td>");
+
                                         }
-                                             $(".contMO").empty();
-                                             } else {
+                                        $(".contMO").empty();
+                                    } else {
                                         alert("vacio");
                                     }
                                 });
@@ -867,41 +865,6 @@
 
 
 
-                            // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                            function closedthis() {
-                                $.smallBox({
-                                    title: "¡DGP registrada correctamente!",
-                                    content: "Ya puede visualizar la informacion del DGP",
-                                    color: "#739E73",
-                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                    timeout: 6000
-                                });
-                            }
-                            function closedthis2() {
-                                $.smallBox({
-                                    title: "¡Documentos del trabajador registrados correctamente!",
-                                    content: "ya puede visualizar toda los documentos del trabajador...",
-                                    color: "#739E73",
-                                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                    timeout: 6000
-                                });
-                            }
-                            function printDetProceso(objProgAut, postData) {
-                                objProgAut.empty();
-                                objProgAut.append('<img src="../../img/ajax-loader/horizontal_fountain.gif" />');
-                                $.ajax({
-                                    url: "../../dgp",
-                                    data: "opc=Imprimir_det_proceso" + postData,
-                                    type: 'POST',
-                                    success: function (data, textStatus, jqXHR) {
-                                        if (data.rpta === "1") {
-                                            objProgAut.empty();
-                                            objProgAut.append(data.html);
-                                            objProgAut.find(".new-circle").popover({trigger: 'hover click'});
-                                        }
-                                    }
-                                });
-                            }
 
                             $(document).ready(function () {
                                 pageSetUp();
@@ -918,136 +881,11 @@
                                         });
                                     });
                                 });
-
-                                var responsiveHelper_dt_basic = undefined;
-                                var breakpointDefinition = {
-                                    tablet: 1024,
-                                    phone: 480
-                                };
-                                var table_req = $('#dt_basic').dataTable({
-                                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                                            "t" +
-                                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                                    "autoWidth": true,
-                                    "preDrawCallback": function () {
-                                        // Initialize the responsive datatables helper once.
-                                        if (!responsiveHelper_dt_basic) {
-                                            responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                                        }
-                                    },
-                                    "rowCallback": function (nRow) {
-                                        responsiveHelper_dt_basic.createExpandIcon(nRow);
-                                    },
-                                    "drawCallback": function (oSettings) {
-                                        responsiveHelper_dt_basic.respond();
-                                    }
-                                });
-
-                                /* END BASIC */
-                                var rows = table_req.fnGetNodes();
-                                for (var i = 0; i < rows.length; i++) {
-                                    var obj = $(rows[i]).find(".prog_aut");
-                                    printDetProceso(obj, obj.data("value"));
-                                }
-                                var responsiveHelperCAacademico = undefined;
-                                var varTableCAcademica = $(".tableEsCargaAcademica").dataTable({
-                                    "ajax": {
-                                        "url": "../../carga_academica",
-                                        "type": "POST",
-                                        "dataSrc": "list",
-                                        "data": {
-                                            "opc": "listEsCargaAcademica"
-                                        }
-                                    }, "columns": [
-                                        {
-                                            "orderable": false,
-                                            "data": null,
-                                            "defaultContent": ""
-                                        },
-                                        {
-                                            "orderable": false,
-                                            "data": null,
-                                            "defaultContent": ""
-                                        },
-                                       
-                                        {
-                                            "orderable": false,
-                                            "data": null,
-                                            "defaultContent": ""
-                                        },
-                                        {"data": "ap_paterno"},
-                                        {
-                                            "orderable": false,
-                                            "data": null,
-                                            "defaultContent": ""
-                                        },
-                                        {"data": "no_dep"}, {
-                                            "orderable": false,
-                                            "data": null,
-                                            "defaultContent": ""
-                                        }
-                                    ],
-                                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>"
-                                            + "t"
-                                            + "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                                    "oLanguage": {
-                                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-                                    },
-                                    "autoWidth": true,
-                                    "preDrawCallback": function () {
-                                        // Initialize the responsive datatables helper once.
-                                        if (!responsiveHelperCAacademico) {
-                                            responsiveHelperCAacademico = new ResponsiveDatatablesHelper(
-                                                    $('.tableEsCargaAcademica'),
-                                                    breakpointDefinition);
-                                        }
-                                    },
-                                    "rowCallback": function (row, data, index) {
-                                        responsiveHelperCAacademico.createExpandIcon(row);
-                                        $('td:eq(0)', row).html(index + 1);
-                                        $('td:eq(0)', row).html(data.mes_procesamiento);
-                                        $('td:eq(2)', row)
-                                                .html(
-                                                        '<div class="btn-group">'
-                                                        + '   <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">'
-                                                        + '   <i class="fa fa-gear fa-lg"></i>'
-                                                        + '     <i class="fa fa-caret-down"></i>'
-                                                        + ' </button>'
-                                                        + ' <ul class="dropdown-menu">'
-                                                        + '     <li><a href="../../dgp?iddgp='+data.id_dgp+'&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>'
-                                                        + '<li><a href="../../dgp?iddgp='+data.id_dgp+'&opc=Seguimiento">Ver Historial</a> </li>'
-                                                        + '<li><a href="../../documento?iddgp='+data.id_dgp+'&idtr='+data.id_trabajador+'&opc=Ver_Documento">Ver Documentos</a></li>'
-                                                        + ' <li><a data-valor="'+data.id_dgp+';'+data.id_trabajador+';'+data.ap_paterno+' '+data.ap_materno+' '+data.no_trabajador+'" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjaxComment()" >Comentario</a></li>'
-                                                        + ' <li><a href="../../solicitud_requerimiento?iddgp='+data.id_dgp+'&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>'
-                                                        + ' <li class="divider"></li><li>'
-                                                        + '<li><a href="../../dgp?iddgp='+data.id_dgp+'&idtr='+data.id_trabajador+'&opc=Detalle">Ver Requerimiento</a> </li>'
-                                                        + ' </ul>'
-                                                        + ' </div>'
-                                                        );
-                                        if (data.es_dgp === "2") {
-                                            $('td:eq(6)', row).html('<span class="label label-danger">Fuera de Proceso</span>');
-                                        } else {
-                                            $('td:eq(6)', row).html('<span class="label label-primary">En Proceso</span>');
-                                        }
-                                         $('td:eq(3)', row).html(data.ap_paterno+' '+data.ap_materno+' '+data.no_trabajador);
-                                        // var rows = varTableCAcademica.fnGetNodes();
-                                        //   for (var i = 0; i < rows.length; i++) {
-                                        //  var obj = $(rows[i]).find(".prog_aut");
-                                        printDetProceso($('td:eq(4)', row), "&dgp=" + data.id_dgp + "&idrp=" + data.id_detalle_req_proceso + "&iddep=" + data.id_departamento);
-                                        $('td:eq(4)', row).addClass("new-progress");
-                                        // }
-
-                                    },
-                                });
-
+                                initStatusProcessDGP();
                             });
 
     </script>
-
-
-
 </body>
-
 </html>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");

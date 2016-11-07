@@ -50,7 +50,7 @@
                     <div class="well">
                         <h1><span class="semi-bold">Reporte</span> <i class="ultra-light">Carga Académica</i> (Docentes) <sup class="badge bg-color-red bounceIn animated">v 2.0</sup> <br>
                             <small class="text-danger slideInRight fast animated"><strong>Inicio de contratación</strong></small></h1>
-                        <div class="row">
+                        <!--<div class="row">
                             <div class="col-md-4">
                                 <select class="form-control" >
                                     <option value="" >[Condición Laboral]</option>
@@ -65,7 +65,7 @@
                                     <option value="2" >item 2</option>
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
 
                     </div>
                 </div>
@@ -73,7 +73,8 @@
             <section id="widget-grid" class="">
                 <div class="row">
                     <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="jarviswidget" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                        <div class="jarviswidget" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" 
+                             data-widget-deletebutton="false">
                             <header>
                                 <span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
                                 <h2>Carga Académica</h2>
@@ -94,10 +95,10 @@
                                                 <tr>
                                                     <th class="hasinput" colspan="10"  rowspan="1"></th>  
                                                     <th class='hasinput' >
-                                                        <input type="date" class='form-control input-sm' />
+                                                        <input type="text" class='form-control input-sm dateDesdeM' />
                                                     </th>
                                                     <th class='hasinput' >
-                                                        <input type="date" class='form-control input-sm' />
+                                                        <input type="text" class='form-control input-sm dateHastaM' />
                                                     </th>
                                                 </tr>
                                                 <tr>
@@ -132,19 +133,19 @@
                                                                 <%if (ca.getValidateExistTrabajador() != null) {
                                                                 %>
                                                                 <li>
-                                                                    <a href="../../../carga_academica?opc=Completar_Datos&nro_doc=<%=ca.getNu_doc()%>&ap_p=<%=ca.getAp_paterno()%>&ap_m=<%=ca.getAp_materno()%>&no_tr=<%=ca.getNo_trabajador()%>&ti_doc=<%=ca.getEs_tipo_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>"   >Completar Datos</a>
+                                                                    <a href="../../../carga_academica?opc=Completar_Datos&<%=ca.toDataSent()%>">Completar Datos</a>
                                                                 </li>
 
                                                                 <li class="divider"></li>
                                                                 <li>
                                                                 <li>
-                                                                    <a href="" data-toggle="modal" data-target="#myModal" data-backdrop="static" 
+                                                                    <button  data-toggle="modal" data-target="#myModal" data-backdrop="static" 
                                                                        data-keyboard="false" class="btnCargaAcademica"
-                                                                       data-valor="&nro_doc=<%=ca.getNu_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>&idtr=<%=ca.getId_trabajador()%>&ciclo=<%=ca.getDe_carga()%>"  >Carga Academica</a>
+                                                                       data-valor="&<%=ca.toDataSent()%>"  value="<%=(i+1)%>" >Carga Academica</button>
                                                                 </li>
                                                                 <%} else {%>
                                                                 <li>
-                                                                    <a href="../../../carga_academica?opc=Completar_Datos&nro_doc=<%=ca.getNu_doc()%>&ap_p=<%=ca.getAp_paterno()%>&ap_m=<%=ca.getAp_materno()%>&no_tr=<%=ca.getNo_trabajador()%>&ti_doc=<%=ca.getEs_tipo_doc()%>&eap=<%=ca.getNo_eap()%>&facultad=<%=ca.getNo_facultad()%>"   >Completar Datos</a>
+                                                                    <a href="../../../carga_academica?opc=Completar_Datos&<%=ca.toDataSent()%>" >Completar Datos</a>
                                                                 </li>
                                                                 <%}%>
                                                             </ul>
@@ -161,10 +162,21 @@
                                                     <td><%=ca.getProfesion_docente()%></td>
                                                     <td><%=ca.getDe_condicion()%></td>
                                                     <td><%=ca.getDe_carga()%></td>
-                                                    <td><%=ca.getFe_desde()%></td>
-                                                    <td><%=ca.getFe_hasta()%></td>
-                                                </tr>
-                                                <%}%>
+                                                    <td><%if (ca.getFe_desde() == null & ca.getValidateExistTrabajador() != null) {
+                                                        %> 
+                                                        <input type="text" class="dateDesdeItem form-control input-sm" style="width:100px"/>
+                                                        <% }
+                                                        %></td>
+                                                    <td><%if (ca.getFe_hasta() == null & ca.getValidateExistTrabajador() != null) {
+                                                        %> 
+                                                        <input type="text" class="dateHastaItem form-control input-sm" style="width:100px"/>
+                                                        <% }
+                                                        %></td>
+                                            <input type="hidden" class="idtr<%=(i+1)%>" value="<%=ca.getId_trabajador()%>"/>
+                                            <input type="hidden" class="iddgp<%=(i+1)%>" value=""/>
+                                            <input type="hidden" class="proceso<%=(i+1)%>" value=""/>
+                                            </tr>
+                                            <%}%>
                                             </tbody>
                                         </table>
                                     </div>
@@ -186,8 +198,6 @@
                         </div>
                     </article>
                 </div>
-
-
             </section>
         </div>
 
@@ -204,7 +214,7 @@
                         <div class="areaModal">
 
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
@@ -309,6 +319,51 @@
                     phone: 480
                 };
                 var tableRepAcademico = $('.datatableRepCargaAcademica').DataTable();
+
+                $(".dateDesdeM").datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2,
+                    dateFormat: 'dd/mm/yy',
+                    prevText: '<i class="fa fa-chevron-left"></i>',
+                    nextText: '<i class="fa fa-chevron-right"></i>',
+                    onClose: function (selectedDate) {
+                        $(this).parents("tr").find($(".dateHastaM")).datepicker("option", "minDate", selectedDate);
+                    }
+                });
+                $(".dateHastaM").datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2,
+                    dateFormat: 'dd/mm/yy',
+                    prevText: '<i class="fa fa-chevron-left"></i>',
+                    nextText: '<i class="fa fa-chevron-right"></i>',
+                    onClose: function (selectedDate) {
+                        $(this).parents("tr").find($(".dateDesdeM")).datepicker("option", "maxDate", selectedDate);
+                    }
+                });
+                $(".dateDesdeItem").datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2,
+                    dateFormat: 'dd/mm/yy',
+                    prevText: '<i class="fa fa-chevron-left"></i>',
+                    nextText: '<i class="fa fa-chevron-right"></i>',
+                    onClose: function (selectedDate) {
+                        $(this).parents("tr").find($(".dateHastaItem")).datepicker("option", "minDate", selectedDate);
+                    }
+                });
+                $(".dateHastaItem").datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2,
+                    dateFormat: 'dd/mm/yy',
+                    prevText: '<i class="fa fa-chevron-left"></i>',
+                    nextText: '<i class="fa fa-chevron-right"></i>',
+                    onClose: function (selectedDate) {
+                        $(this).parents("tr").find($(".dateDesdeItem")).datepicker("option", "maxDate", selectedDate);
+                    }
+                });
 
 
             });

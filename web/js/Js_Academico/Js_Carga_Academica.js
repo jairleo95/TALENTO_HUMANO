@@ -1,35 +1,52 @@
 function initCargaAcademica() {
     /*carga academica*/
     $(".btnCargaAcademica").click(function () {
+        var currentItem=$(this).val();
+        console.log("current item:"+currentItem)
         var objBodyPrint = $(".areaModal");
-        showCargaAcademica(objBodyPrint, $(this).data("valor"), function () {
+        var dataSent = $(this).data("valor");
+        showCargaAcademica(objBodyPrint, dataSent, function () {
             pageSetUp();
             initFormPlugins();
-            $(".fe_desde_p, .fe_hasta_p, .hl_docente, .ti_hp_docente").change(function () {
-                calcularCuotasDocente($(".fe_desde_p").val(), $(".fe_hasta_p").val(), $(".hl_docente").val(), $(".ti_hp_docente").val());
+            $(".fe_desde_p, .fe_hasta_p, .hl_docente, .TiHoraPago").change(function () {
+                var tiHoraPago = $(".TiHoraPago option[value|='" + $(".TiHoraPago").val() + "']").data("valor");
+                calcularCuotasDocente($(".fe_desde_p").val(), $(".fe_hasta_p").val(), $(".hl_docente").val(), tiHoraPago);
             });
+            getTiHoraPago($(".idtr"+currentItem).val(), $(".divSelectTiHoraPAGO"));
             $(".btnAceptarCuotasCA").click(function () {
                 $.ajax({
                     url: "../../../carga_academica",
                     type: "POST",
-                    data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize()
+                    data: "opc=Registrar_CA&" + $(".form_carga_academica").serialize() + dataSent
                 }).done(function (data) {
                     if (data.rpta === true) {
                         alert("Registrado con exito!...");
                         $(".proceso").val(data.proceso);
                         $(".dgp").val(data.dgp);
-                        $(".btn_procesar").show();
+                        $(".btnAceptarCuotasCA").hide();
+                        $(".btnProcesar").show('fast');
                     }
-                }).fail(function (e) {
-                    alert("Error: " + e);
                 });
             });
-            $(".btn_procesar").click(function () {
-                ProcesarCargaAcademica($(".dgp").val(), $(".proceso").val());
+            $(".btnProcesar").click(function () {
+                ProcesarCargaAcademica($(".dgp"+currentItem).val(), $(".proceso"+currentItem).val());
             });
         });
     });
 
+}
+function getTiHoraPago(idtr, objDivSelect) {
+    objDivSelect.empty();
+    console.log("cargando tipo de hora pago...");
+    $.ajax({
+        url: "../../../trabajador", data: "opc=getTiHoraPago&idtr=" + idtr, type: 'POST', success: function (data, textStatus, jqXHR) {
+            if (data.status) {
+                objDivSelect.append(data.html);
+            } else {
+                console.log("Error al cargar el tipo de hora pago");
+            }
+        }
+    });
 }
 /*FIN carga academica*/
 function showCargaAcademica(objBodyPrint, dataAjax, callback) {
@@ -59,11 +76,8 @@ function showCargaAcademica(objBodyPrint, dataAjax, callback) {
                     }
                     fila = 1;
                     columna = 0;
-
                     g++;
-
                     /*end print html*/
-
                     callback();
                 });
             });

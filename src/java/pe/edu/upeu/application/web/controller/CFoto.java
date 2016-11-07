@@ -53,9 +53,9 @@ public class CFoto extends HttpServlet {
 
             try {
                 // ubicacion = getServletConfig().getServletContext().getRealPath("/") +"Vista/Usuario/Fotos/";
-                ubicacion = FactoryConnectionDB.url+"Fotos/";
-            // ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Usuario\\Fotos";
-            DiskFileItemFactory f = new DiskFileItemFactory();
+                ubicacion = FactoryConnectionDB.url + "Fotos/";
+                // ubicacion = getServletContext().getRealPath(".").substring(0, getServletContext().getRealPath(".").length() - 11) + "web\\Vista\\Usuario\\Fotos";
+                DiskFileItemFactory f = new DiskFileItemFactory();
                 f.setSizeThreshold(1024);
                 f.setRepository(new File(ubicacion));
                 ServletFileUpload upload = new ServletFileUpload(f);
@@ -101,7 +101,10 @@ public class CFoto extends HttpServlet {
             } catch (Exception e) {
                 rpta.put("rpta", "-1");
                 rpta.put("mensaje", e.getMessage());
+            } finally {
+                rpta.put("ruta", getServletConfig().getServletContext().getRealPath("/"));
             }
+
         }
 
         Gson gson = new Gson();
