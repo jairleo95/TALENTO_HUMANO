@@ -7,6 +7,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.model.Situacion_Educativa;
 
 /**
@@ -15,4 +16,6 @@ import pe.edu.upeu.application.model.Situacion_Educativa;
  */
 public interface InterfaceSituacionEducativaDAO {
     public List<Situacion_Educativa> List_SituacionEducativa();
+    
+    public List<Map<String, ?>> List_SituacionEducativaM();
 }

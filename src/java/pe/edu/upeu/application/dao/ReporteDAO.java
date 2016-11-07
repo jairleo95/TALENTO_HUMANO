@@ -298,4 +298,38 @@ public class ReporteDAO implements InterfaceReporteDAO {
         return Lista;
     }
 
+    @Override
+    public List<Map<String, ?>> datosTrabajador(String direccion, String dep, String area, String sec, String puesto) {
+        List<Map<String, ?>> Lista = new ArrayList<>();
+        String sql = "select * from ";
+        try {
+            if (!direccion.equals("")) {
+                sql += " RHVD_FILTRO_CONTRATO_TERMINADO WHERE FE_CREACION IS NOT NULL and ID_DIRECCION='" + direccion + "'";
+            }
+            if (!dep.equals("")) {
+                
+            }
+            if (!area.equals("")) {
+
+            }
+            if (!sec.equals("")) {
+
+            }
+            if (!puesto.equals("")) {
+
+            }
+            System.out.println(sql);
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("nombre", rs.getString("NO_AP"));
+                Lista.add(rec);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al mostrar los datos generales del trabajador (reporte de trabajador) : " + e);
+        }
+        return Lista;
+    }
+
 }
