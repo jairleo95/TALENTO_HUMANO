@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import static oracle.security.o3logon.b.a;
+ 
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;

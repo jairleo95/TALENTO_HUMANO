@@ -37,9 +37,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     @Override
     public void Insert_Autorizacion(String ID_AUTORIZACION, String ID_DGP, String ES_AUTORIZACION, String NU_PASOS, String IP_USUARIO, String US_CREACION, String US_MODIF, String FE_MODIF, String CO_PUESTO, String ID_PUESTO, String ID_DETALLE_REQ_PROCESO, String ID_PASOS) {
         CallableStatement cst;
-
         try {
-
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             cst = conn.conex.prepareCall("{CALL RHSP_INSERT_AUTORIZACION( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, null);
@@ -595,7 +593,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM RHVD_DGP_AUTORIZADOS WHERE US_CREACION='" + id_usuario + "'  ";
+            String sql = "SELECT * FROM RHVD_DGP_AUTORIZADOS WHERE US_CREACION='" + id_usuario + "'  and mes_procesamiento is not null";
             /* sql += (!año.equals("")) ? " AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))='"
              + (mes + 1) + "' AND TRIM(año_procesamiento)='" + año
              + "' " : "  AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))=to_number(to_char(sysdate,'mm')) AND TRIM(año_procesamiento)=to_char(sysdate,'YYYY') "*/;

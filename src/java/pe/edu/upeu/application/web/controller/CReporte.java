@@ -66,6 +66,7 @@ public class CReporte extends HttpServlet {
     InterfaceDireccionDAO dir = new DireccionDAO();
     InterfaceAreaDAO area = new AreaDAO();
     InterfaceDepartamentoDAO dep = new DepartamentoDao();
+    InterfaceSeccionDAO sec = new SeccionDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -186,12 +187,44 @@ public class CReporte extends HttpServlet {
                         rpta.put("dep", dep.Listar_dep_id(idd));
                         break;
                     case "area":
-                        String idde=request.getParameter("iddep");
+                        String idde = request.getParameter("iddep");
                         rpta.put("area", area.List_area_id_json(idde));
                         break;
+                    case "seccion":
+                        String idarea = request.getParameter("idarea");
+                        rpta.put("seccion", sec.List_sec_ida(idarea));
+                        break;
                     case "puesto":
+                        String idseccion = request.getParameter("idseccion");
+                        rpta.put("puesto", p.Listar_Puesto_id_es(idseccion));
+                        break;
+                    case "seducativa":
+                        rpta.put("seducativa", se.List_SituacionEducativaM());
                         break;
                 }
+            }
+            if (opc.equals("searchtb")) {
+                String direccion = request.getParameter("direccion");
+                String departamento = request.getParameter("departamento");
+                String area = request.getParameter("area");
+                String seccion = request.getParameter("seccion");
+                String puesto = request.getParameter("puesto");
+                if (direccion.equals("null")) {
+                    direccion = "";
+                }
+                if (departamento.equals("null")) {
+                    departamento = "";
+                }
+                if (area.equals("null")) {
+                    area = "";
+                }
+                if (seccion.equals("null")) {
+                    seccion = "";
+                }
+                if (puesto.equals("null")) {
+                    puesto = "";
+                }
+                rpta.put("respuesta", r.datosTrabajador(direccion, departamento, area, seccion, puesto));
             }
             if (opc.equals("Reporte_Datos_Hijos")) {
                 response.sendRedirect("Vista/Reportes/RTHijo.jsp");

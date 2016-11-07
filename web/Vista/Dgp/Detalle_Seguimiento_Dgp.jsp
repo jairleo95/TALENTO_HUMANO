@@ -116,8 +116,7 @@
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
-                                    <div class="widget-body no-padding">
-
+                                    <div class="widget-body no-padding prueba" id="contenido">
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr>
@@ -126,7 +125,7 @@
                                                     <td data-class="expand"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Estado</td>
                                                     <td data-hide="phone"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Encargado</td>
                                                     <td>Cargo Encargado</td>
-                                                    <td > Usuario</td>
+                                                    <td> Usuario</td>
                                                     <td data-hide="phone,tablet"><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> Area</td>
                                                     <td data-hide="phone,tablet">Departamento</td>
                                                     <td data-hide="phone,tablet">Fecha Autorizacion</td>
@@ -137,7 +136,7 @@
                                                         X_List_De_Autorizacion a = new X_List_De_Autorizacion();
                                                         a = (X_List_De_Autorizacion) Det_Autorizacion.get(i);
                                                 %>
-                                                <tr >
+                                                <tr>
                                                     <td class="caji"><%=a.getNu_pasos()%></td>
                                                     <td ><%=a.getDe_pasos()%></td>
                                                     <% if (a.getEs_autorizacion() != null) {%>

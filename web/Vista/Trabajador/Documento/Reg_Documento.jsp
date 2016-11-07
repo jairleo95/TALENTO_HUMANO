@@ -28,7 +28,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link href="../../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
-        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"> test
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"> 
         <!-- Basic Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
@@ -216,7 +216,9 @@
                                                                 <!--  </td>
           
                                                                   <td  style="text-align:center;" align="center">-->
-                                                                <div style="margin-top:-15px;">
+                                                                <div style="margin-top:15px;">
+                                                                    
+                                                                
                                                                     <section  class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px; " align="center">
                                                                         <label>DESCRIPCION:</label><BR>
                                                                         <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
@@ -277,7 +279,7 @@
          
                                                              <td  style="text-align:center;" align="center">-->
 
-                                                            <div style="margin-top:-15px;" >
+                                                            <div style="margin-top:15px;" >
                                                                 <label>DESCRIPCION:</label><BR>
                                                                 <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                 <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -375,7 +377,7 @@
                                                             <!--   </td>
            
                                                                <td  style="text-align:center;" align="center">-->
-                                                            <div style="margin-top:-15px;">
+                                                            <div style="margin-top:15px;">
                                                                 <label>DESCRIPCION:</label><BR>
                                                                 <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                 <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -463,7 +465,7 @@
                                                             <!--   </td>
            
                                                                <td  style="text-align:center;" align="center">-->
-                                                            <div style="margin-top:-15px;" >
+                                                            <div style="margin-top:15px;" >
                                                                 <label>DESCRIPCION:</label><BR>
                                                                 <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                 <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -546,7 +548,7 @@
                                                             <!--    </td>
             
                                                                 <td  style="text-align:center;" align="center">-->
-                                                            <div style="margin-top:-15px;">
+                                                            <div style="margin-top:15px;">
                                                                 <label>DESCRIPCION:</label><BR>
                                                                 <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                                 <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -619,7 +621,7 @@
                                                             <!-- </td>
           
                                                               <td  style="text-align:center;" align="center">-->
-                                                            <div style="margin-top:-15px;">
+                                                            <div style="margin-top:15px;">
                                                                 <label>DESCRIPCION:</label><BR>
                                                                 <% if ((permissionEditDocument)) {%>
                                                                 <input type="text"  name="lob_description<%=i + 1%>"><BR><BR>
@@ -679,7 +681,7 @@
          
          
                                                          <td  style="text-align:center;" align="center">-->
-                                                        <div style="margin-top:-15px;" >
+                                                        <div style="margin-top:15px;" >
                                                             <label>DESCRIPCION:</label><BR>
                                                             <% if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {%>
                                                             <input type="text"   name="lob_description<%=i + 1%>"><BR><BR>
@@ -788,7 +790,7 @@
                                                 <button    type="button" class="btn btn-primary btn_reg_doc"style="display:none" >
                                                     Registrar
                                                 </button>
-                                                <button   type="button" onclick="history.back()"  class="btn btn-default">
+                                                <button   type="button"   onclick="history.back()"   class="btn btn-default">
                                                     Atrás
                                                 </button>
 
@@ -855,10 +857,10 @@
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
-<!--        <script src="../../../js/app.config.js"></script> test -->
+<!--        <script src="../../../js/app.config.js"></script>  -->
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-<!--        <script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>  test -->
+<!--        <script src="../../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>   -->
 
         <!-- BOOTSTRAP JS -->
         <script src="../../../js/bootstrap/bootstrap.min.js"></script>
@@ -892,7 +894,7 @@
         <!-- FastClick: For mobile devices -->
         <script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
 
-
+        
 
         <!--[if IE 8]>
 
@@ -910,9 +912,11 @@
         <!-- Voice command : plugin 
         <script src="../../../js/speech/voicecommand.min.js"></script>-->
 
-        <!-- PAGE RELATED PLUGIN(S) -->
+        <!-- 
+        -->
 
-
+<script src="../../../js/plugin/dropzone/dropzone.min.js" type="text/javascript"></script>
+<script src="../../../js/plugin/dropzone/dropzone-amd-module.min.js" type="text/javascript"></script>
         <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="../../../js/bootstrap/fileinput.js" type="text/javascript"></script>
@@ -939,6 +943,12 @@
                 }
             }
 
+
+function goBack() {
+   
+    window.history.back();
+
+}
 
             function validar() {
                 var x = true;

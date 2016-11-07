@@ -9,7 +9,9 @@ package pe.edu.upeu.application.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfaceSituacionEducativaDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -41,6 +43,28 @@ public class SituacionEducativaDAO implements InterfaceSituacionEducativaDAO{
             this.conn.close();
         }
         return list;
+    }
+
+    @Override
+    public List<Map<String, ?>> List_SituacionEducativaM() {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "SELECT NO_S_EDUCATIVA,ID_SITUACION_EDUCATIVA,ES_S_EDUCATIVA FROM RHTX_SITUACION_EDUCATIVA";
+        try {
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> a = new HashMap<String, Object>();
+                a.put("no_s_educativa",rs.getString("no_s_educativa"));
+                a.put("id_situacion",rs.getString("id_situacion_educativa"));
+                a.put("estado",rs.getString("es_s_educativa"));
+                lista.add(a);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar Situacion educativa : " + e);
+        } finally {
+            this.conn.close();
+        }
+        return lista;
     }
     
 }

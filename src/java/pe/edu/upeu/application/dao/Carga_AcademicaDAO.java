@@ -199,11 +199,10 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
     @Override
     public List<Carga_Academica> ListCarAca() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHVD_CARGA_ACADEMICA";
+    String sql = "SELECT * FROM RHVD_CARGA_ACADEMICA where ID_PROCESO_CARGA_AC is null";
         List<Carga_Academica> list = new ArrayList<Carga_Academica>();
         try {
             ResultSet rs = this.conn.query(sql);
-
             while (rs.next()) {
                 Carga_Academica ca = new Carga_Academica();
                 ca.setId_situacion_educativa(rs.getString("id_situacion_educativa"));
@@ -223,6 +222,9 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                 ca.setDe_condicion(rs.getString("de_condicion"));
                 ca.setDe_carga(rs.getString("de_carga"));
                 ca.setId_proceso_carga_ac(rs.getString("id_proceso_carga_ac"));
+                
+                ca.setCountCursos(rs.getInt("countCursos"));
+                ca.setValidateExistTrabajador(rs.getString("validateExistTrabajador"));
                 list.add(ca);
             }
         } catch (SQLException e) {
@@ -345,9 +347,14 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
     }
 
     @Override
-    public List<V_Detalle_Carga_Academica> Lista_detalle_academico(String idtr, String facultad, String eap) {
+    public List<V_Detalle_Carga_Academica> Lista_detalle_academico(String idtr, String facultad, String eap, String ciclo, String dni) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHVD_DETALLE_CARGA_ACADEMICA WHERE TRIM(ID_TRABAJADOR)= '" + idtr.trim() + "' AND TRIM(NO_FACULTAD) ='" + facultad.trim() + "' AND TRIM(NO_EAP)='" + eap.trim() + "' ";
+        String sql = "SELECT * FROM RHVD_DETALLE_CARGA_ACADEMICA WHERE campus is not null";
+  //      sql += (idtr.equals("")) ? "" : " and TRIM(ID_TRABAJADOR)= '" + idtr.trim();
+        sql += (facultad.trim().equals("")) ? "" : " and TRIM(NO_FACULTAD)='" + facultad.trim() + "' ";
+        sql += (eap.equals("")) ? "" : "  AND TRIM(NO_EAP)='" + eap.trim() + "' ";
+        sql += (ciclo.trim().equals("")) ? "" : "  AND TRIM(DE_CARGA)='" + ciclo.trim() + "' ";
+        sql += (dni.trim().equals("")) ? "" : "  AND TRIM(NU_DOC)='" + dni.trim() + "' ";
         List<V_Detalle_Carga_Academica> list = new ArrayList<V_Detalle_Carga_Academica>();
         try {
             ResultSet rs = this.conn.query(sql);

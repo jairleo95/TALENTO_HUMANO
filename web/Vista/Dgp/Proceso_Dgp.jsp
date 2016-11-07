@@ -2,6 +2,9 @@
 <%@page import="pe.edu.upeu.application.dao.AutorizacionDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceAutorizacionDAO"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
+<%@page import="pe.edu.upeu.application.dao_imp.InterfaceComentario_DGPDAO"%>
+<%@page import="pe.edu.upeu.application.dao.Comentario_DGPDAO"%>
+
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
@@ -14,7 +17,8 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%@page import="pe.edu.upeu.application.model.V_Es_Requerimiento"%>
-
+<jsp:useBean class="java.util.ArrayList" id="Det_Autorizacion" scope="session" />
+<%@page import="pe.edu.upeu.application.model.X_List_De_Autorizacion"%>
 <jsp:useBean class="java.util.ArrayList" id="LIST_DGP_PROCESO" scope="session" />
 <!DOCTYPE html>
 <html lang="en-us">
@@ -72,7 +76,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
-        <style type="text/css">
+        <style type="text/css" class="styleProcess">
 
             /* Form Progress */
             .new-progress {
@@ -106,7 +110,7 @@
                 /*// line-height: 32px;*/
                 border-radius: 32px;
                 margin-top: 3px;
-                color: #b5b5ba;
+                /*color: #b5b5ba;*/
                 /*  // font-size: 17px;*/
             }
             .new-progress .new-circle .new-title {
@@ -131,7 +135,8 @@
             }
             .new-progress .new-circle.done .new-label {
                 color: #FFF;
-                background: #8bc435;
+               /* background: #8bc435;*/
+                background: #0aa699;
                 box-shadow: inset 0 0 2px rgba(0,0,0,.2);
             }
             .new-progress .new-circle.done .new-title {
@@ -139,7 +144,7 @@
             }
             .new-progress .new-circle.active .new-label {
                 color: #FFF;
-                background: #0c95be;
+                background: #3276b1;
                 box-shadow: inset 0 0 2px rgba(0,0,0,.2);
             }
             .new-progress .new-circle.active .new-title {
@@ -205,10 +210,10 @@
                                     <h2 class="font-md"><strong>Estado de </strong> <i>Requerimientos</i></h2>
                                     <ul id="widget-tab-1" class="nav nav-tabs pull-right">
                                         <li class="active">
-                                            <a data-toggle="tab" href="#hr1"> <i class="fa fa-lg fa-arrow-circle-o-down"></i> <span class="hidden-mobile hidden-tablet"> Tab 1 </span> </a>
+                                            <a data-toggle="tab" href="#hr1"> <i class="fa fa-lg fa-arrow-circle-o-down"></i> <span class="hidden-mobile hidden-tablet"> DGP </span> </a>
                                         </li>
                                         <li>
-                                            <a data-toggle="tab" href="#hr2"> <i class="fa fa-lg fa-arrow-circle-o-up"></i> <span class="hidden-mobile hidden-tablet"> Carga académica</span></a>
+                                            <a data-toggle="tab" href="#hr2"> <i class="fa fa-lg fa-arrow-circle-o-up"></i> <span class="hidden-mobile hidden-tablet"> Carga académica</span> <sup class="badge bg-color-red bounceIn animated badgeCAcademico" style="display: none" >0</sup></a>
                                         </li>
 
                                     </ul>	
@@ -270,6 +275,9 @@
                                                                     <li><a href="../../solicitud_requerimiento?iddgp=<%=r.getId_dgp().trim()%>&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>
                                                                     <li class="divider"></li><li>
                                                                     <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Detalle">Ver Requerimiento</a> </li>
+                                                                    <li><a onclick="listHistory(<%=i%>)" data-toggle="modal" data-target="#ModalHisto">Prueba</a></li>
+                                                          
+                                                                    <input type="hidden" class="vHist<%=i%>" value="<%=r.getId_dgp().trim()%>">
                                                                 </ul>
                                                             </div>
 
@@ -366,7 +374,7 @@
 
         </div>
         <!-- END MAIN PANEL -->
-        <!-------------- Modal  ----------->
+        <!-------------- Modal Comentarios ----------->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog" >
                 <div class="modal-content">
@@ -405,11 +413,229 @@
     </div>
     <!-----Modal------------------------------------------->
 
+    <!-------------- Modal Historial ----------->
+
+    <%InterfaceComentario_DGPDAO cm = new Comentario_DGPDAO();
+        HttpSession sesion = request.getSession();
+        String rol = (String) sesion.getAttribute("IDROL");%>
+
+    <input type="hidden" id="rolse" value="<%=rol%>">
+    <div class="modal fade" id="myModalHis" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style=" width:180%;margin-left:-40%;">
+                <div class="modal-header">
+                    <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="text-left ">
+                    </div><br>
+                    <div class="jarviswidget jarviswidget-color-yellow" id="wid-id-0" data-widget-editbutton="false" style="margin-bottom:-5px;">
+                        <!-- widget options:
+                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
+                        -->
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>Historial de Autorizaciones</h2>
+                        </header>
+                    </div>  
+                </div> 
+
+                <div class="modal-body">
+                    <div id="contenido">
+                        <div class="widget-body no-padding">
+                            <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                                <thead>
+                                    <tr>
+                                        <td>Paso <%=Det_Autorizacion.size()%></td>
+                                        <td data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i> Detalle</td>
+                                        <td data-class="expand"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Estado</td>
+                                        <td data-hide="phone"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Encargado</td>
+                                        <td>Cargo Encargado</td>
+                                        <td > Usuario</td>
+                                        <td data-hide="phone,tablet"><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> Area</td>
+                                        <td data-hide="phone,tablet">Departamento</td>
+                                        <td data-hide="phone,tablet">Fecha Autorizacion</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%for (int i = 0; i < Det_Autorizacion.size(); i++) {
+                                            X_List_De_Autorizacion a = new X_List_De_Autorizacion();
+                                            a = (X_List_De_Autorizacion) Det_Autorizacion.get(i);
+                                    %>
+                                    <tr>
+                                        <td class="caji"><%=a.getNu_pasos()%></td>
+                                        <td><%=a.getDe_pasos()%></td>
+                                        <% if (a.getEs_autorizacion() != null) {%>
+                                        <td class="caji" >
+                                            <%
+                                                if (a.getEs_autorizacion() != null) {
+
+                                                    if (a.getEs_autorizacion().equals("1")) { %>
+
+                                            <img src="../../img/Aprobado.png" width="20" height="20">
+                                            <% }
+                                                if (a.getEs_autorizacion().equals("2")) {
+                                            %>
+                                            <img src="../../img/Desaprobado.png" width="20" height="20">
+                                            <% }
+                                            } else {%>
+                                            No registrado
+                                            <%}%><input type="hidden" class="estado-aut" value="<%=a.getEs_autorizacion()%>"></td>
+                                        <td><%
+                                            if (a.getUs_ap_mat() != null) {
+                                                out.println(a.getUs_ap_p().toUpperCase() + " " + a.getUs_ap_mat().toUpperCase() + " " + a.getUs_no_tr().toUpperCase());
+                                            } else {
+                                                out.println("No Registrado");
+                                            }
+                                            %></td> 
+                                        <td><%=a.getUs_no_puesto()%></td> 
+                                        <td><%=a.getNo_usuario()%></td> 
+                                        <td><%=a.getUs_no_area()%></td> 
+                                        <td><%=a.getUs_no_dep()%></td> 
+                                        <td><%=a.getFe_creacion()%></td>
+                                        <%} else {%>
+                                        <td colspan="7" style="text-align:center;">No definido</td>
+                                        <%}%>
+
+                                        <%
+                                            //if () {
+                                            if (a.getEs_autorizacion() != null) {
+
+                                                if (a.getEs_autorizacion().equals("2") & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0001"))) {
+
+                                        %>
 
 
+                                <div class="alert alert-danger alert-block">
+                                    <a class="close" data-dismiss="alert" href="#">×</a>
+                                    <h4 class="alert-heading">DGP fuera de Proceso!</h4>
+                                    <p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp=<%=a.getId_dgp().trim()%>&ID<%=a.getId_departamento()%>" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=<%=a.getId_dgp().trim()%>" class="btn btn-primary"><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" href="#myModal6" class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>
+                                    </p>
+                                    <input type="hidden" class="id-autorizacion" value="<%=a.getId_autorizacion()%>">
+                                </div>
+
+                                <div class="modal fade" id="myModal6" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content" align="center">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                    &times;
+                                                </button>
+                                            </div>
+                                            <div class="modal-body no-padding">
+                                                <fieldset>
+                                                    <section align="center">
+                                                        <div class="row" >
+                                                            <h1 class="h1" style="color:#218FDD ; font-size:20px;"><strong>MOTIVO</strong></h1>
+                                                            <div class="col col-10"  >
+                                                                <label class="input">
+                                                                    <% if (a.getCm_comentario() != null & a.getId_autorizacion() != null & a.getId_dgp() != null) {
+                                                                            String inf = "";
+                                                                            inf = cm.Comentario_dgp_aut(a.getId_dgp(), a.getId_autorizacion());
+                                                                            String info[] = inf.split("/");
+                                                                    %>
+                                                                    <P class="list_motivo"><%=info[0]%></P>
+                                                                    <P class="list_motivo"><strong>Usuario:</strong><%=info[1]%></P>
+                                                                    <P class="list_motivo"><strong>Fecha:</strong><%=info[2]%></P>
+                                                                        <%} else {%>
+                                                                    <p>No se Comento Rechazo</p>
+                                                                    <%}%>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </fieldset>
+                                                <footer align="center">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal" >
+                                                        Cancel
+                                                    </button>
+                                                </footer>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}
+                                        }
+                                    }%>
+                                </tr> 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>                         
+                </div><!--cierra cuerpo modal-->
+
+
+            </div>
+        </div>
+    </div>       
+
+
+
+    <div class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ModalHisto" tabindex="-1" role="dialog"  >
+        <div class="modal-dialog" >
+            <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12" style="width:220%;margin-left: -60%;">
+                <div class="modal-header">
+                    <div class="contD"></div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false" style="margin-bottom:-5px;">
+                        <!-- widget options:
+                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
+                        -->
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <h2>Historial de Autorizaciones</h2>
+                        </header>
+                    </div> 
+
+                </div>
+                <div class="modal-body">
+                    <div class="contM"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" id="myModalComentario" tabindex="-1" role="dialog"  >
+        <div class="modal-dialog" >
+            <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12" style="width:100%;margin-left: 0%;">
+                <div class="modal-header">
+                    <h1 class="h1" style="color:#218FDD ;text-align: center; font-size:20px;"><strong>MOTIVO</strong></h1>
+
+                </div>
+                <div class="modal-body">
+                    <div class="contMO"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- END MAIN CONTENT -->
+    <!---------------Fin modal Historial--------------------->
 
     <!--================================================== -->
-
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -486,14 +712,160 @@
     <script src="../../js/speech/voicecommand.min.js"></script> -->
 
     <!-- PAGE RELATED PLUGIN(S) -->
-
     <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
     <script src="../../js/coment/comenth.js" type="text/javascript"></script>
+
+
     <script type="text/javascript">
+                            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                              function listHistory(at) {
+                                var dgp = "id_dgp";
+                                var id = $(".vHist" + at + "").val();
+                                var id1 = $(".idDepart").val();
+                                var url = '../../dgp?opc=SeguimientoH';
+                                var data = 'iddgp=' + id;
+
+                                var rol = $("#rolse").val();
+                                $.post(url, data, function (objJson) {
+                                    var lista = objJson.listar;
+                                    if (lista.length > 0) {
+                                        var m = '';
+                                        for (var i = 0; i < lista.length; i++) {
+                                            /*$(".contM").append("<td class='caji'>" + lista[i].getNu_pasos + "</td>");
+                                             $(".contM").append("<td>" +lista[i].getDe_pasos+ "</td>");
+                                             $(".contM").append("<td class='alert alert-danger'>" + lista[i].id_dgp + "</td>");
+                                             */
+                                            m += '<tr>';
+                                            m += '<td>' + lista[i].nu_pasos + '</td>';
+                                            m += '<td>' + lista[i].de_pasos + '</td>';
+                                            if (lista[i].es_autorizacion != null) {
+
+                                                if (lista[i].es_autorizacion !== null) {
+                                                    if (lista[i].es_autorizacion === '1') {
+                                                        m += '<td><img src="../../img/Aprobado.png" width="20" height="20"></td>';
+                                                    }
+                                                    if (lista[i].es_autorizacion === '2') {
+                                                        m += '<td><img src="../../img/Desaprobado.png" width="20" height="20"></td>';
+                                                    }
+                                                } else {
+                                                    m += '<td>No Registrado</td>';
+                                                }
+
+                                                if (lista[i].us_ap_mat !== null) {
+                                                    m += '<td>' + lista[i].us_ap_p + " " + lista[i].us_ap_mat + " " + lista[i].us_no_tr + '</td>';
+                                                } else {
+                                                    alert("No Registrado");
+                                                }
+                                                m += '<td>' + lista[i].us_no_puesto + '</td>';
+                                                m += '<td>' + lista[i].no_usuario + '</td>';
+                                                m += '<td>' + lista[i].us_no_area + '</td>';
+                                                m += '<td>' + lista[i].us_no_dep + '</td>';
+                                                m += '<td>' + lista[i].fe_creacion + '</td>';
+                                            } else {
+                                                m += '<td colspan="7" style="text-align:center;"> No definido </td>';
+                                            }
+                                                  
+                                            m += '</tr>';
+                                            if (lista[i].es_autorizacion !== null) {
+                                                if (lista[i].es_autorizacion === '2' & (rol === "ROL-0002" || rol === "ROL-0005" || rol === "ROL-0001")) {
+
+                                                    function DivEspecial() {
+                                                        var DivEspecial = '<div id="divEs" class="alert alert-danger alert-block">';
+                                                        DivEspecial += '<a class="close" data-dismiss="alert" href="#">×</a>';
+                                                        DivEspecial += ' <h4 class="alert-heading">DGP fuera de Proceso!</h4>';
+                                                        DivEspecial += '<p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp='+id+'&ID'+id1+'" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=' + id + '" class="btn btn-primary id-dgp "><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" class="btn btn-primary" onclick="ListarMotivo()" data-toggle="modal" data-target="#myModalComentario"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>';
+                                                      //  alert(+lista[i].us_no_puesto+);                                                                                                                                                                                                                                                                                                                                                                                
+                                                        DivEspecial += '</p>';
+                                                        DivEspecial += '<input type="hidden" class="id-autorizacion" value="lista[i].id_autorizacion">';
+                                                        DivEspecial += '</div>';
+
+                                                        return DivEspecial;
+                                                    }
+                                                }
+                                            }
+
+                                        }
+
+                                        //var DivEspecial = DivEspecialL();
+                                        var table = createTable();
+                                        $(".contM").empty();
+                                        $(".contM").append(table);
+                                        $(".contM").append(DivEspecial);
+                                        $("#dataB").empty();
+                                        $("#dataB").append(m);
+                                        // $("#divEs").append(DivEspecial);
+                                        // $("#dt").dataTable();
+                                        //$("#divEs").dataDivEspecial();
+                                        //anexar a la tabla
+                                    } else {
+                                        alert("vacio");
+                                    }
+                                });
+                            }
+                            function createTable() {
+                                var table = '<table id="dt" class="table table-striped">';
+                                table += '<thead>';
+                                table += '<tr>';
+                                table += '<th>Paso</th>';
+                                table += '<th data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i>Detalle</th>';
+                                table += '<th data-class="expand><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Estado</th>';
+                                table += '<th data-hide="phone"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Encargado</th>';
+                                table += '<th>Cargo Encargado</th>';
+                                table += '<th>Usuario</th>';
+                                table += '<th data-hide="phone,tablet"> <i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> Area</th>';
+                                table += '<th data-hide="phone,tablet">Departamento</th>';
+                                table += '<th data-hide="phone,tablet">Fecha Autorizacion</th>';
+                                table += '</tr>';
+                                table += '</thead>';
+                                table += '<tbody id="dataB">';
+                                table += '</tbody>';
+                                table += '</table>';
+                                return table;
+                            }
+                            
+                            
+                            function ListarMotivo(at) {
+                                alert("asdasdasd");
+                                var id = $(".vHist" + at + "").val();
+                                var url = '../../dgp?opc=SeguimientoH';
+                                var data = 'iddgp=' + id;
+
+                               
+                                $.post(url, data, function (objJson) {
+                                    var lista = objJson.listar;
+                                    if (lista.length > 0) {
+                                        var ma = '';
+                                        for (var i = 0; i < lista.length; i++) {
+                                            //  alert("asdasdasd");
+                                             $(".contMO").append("<td>" +lista[i].getDe_pasos+ "</td>");
+                                             $(".contMO").append("<td class='alert alert-danger'>" + lista[i].id_dgp + "</td>");
+                                           
+                                        }
+                                             $(".contMO").empty();
+                                             } else {
+                                        alert("vacio");
+                                    }
+                                });
+                            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                             // DO NOT REMOVE : GLOBAL FUNCTIONS!
                             function closedthis() {
@@ -592,13 +964,18 @@
                                             "data": null,
                                             "defaultContent": ""
                                         },
-                                        {"data": "mes_procesamiento"},
                                         {
                                             "orderable": false,
                                             "data": null,
                                             "defaultContent": ""
                                         },
-                                        {"data": "ap_materno"},
+                                       
+                                        {
+                                            "orderable": false,
+                                            "data": null,
+                                            "defaultContent": ""
+                                        },
+                                        {"data": "ap_paterno"},
                                         {
                                             "orderable": false,
                                             "data": null,
@@ -628,6 +1005,7 @@
                                     "rowCallback": function (row, data, index) {
                                         responsiveHelperCAacademico.createExpandIcon(row);
                                         $('td:eq(0)', row).html(index + 1);
+                                        $('td:eq(0)', row).html(data.mes_procesamiento);
                                         $('td:eq(2)', row)
                                                 .html(
                                                         '<div class="btn-group">'
@@ -636,13 +1014,13 @@
                                                         + '     <i class="fa fa-caret-down"></i>'
                                                         + ' </button>'
                                                         + ' <ul class="dropdown-menu">'
-                                                        + '     <li><a href="../../dgp?iddgp=&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>'
-                                                        + '<li><a href="../../dgp?iddgp=&opc=Seguimiento">Ver Historial</a> </li>'
-                                                        + '<li><a href="../../documento?iddgp=&idtr=&opc=Ver_Documento">Ver Documentos</a></li>'
-                                                        + ' <li><a data-valor="<%/*=r.getId_dgp().trim()*/%>;<%/*=r.getId_trabajador().trim()*/%>;<%/*=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()*/%>" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjaxComment()" >Comentario</a></li>'
-                                                        + ' <li><a href="../../solicitud_requerimiento?iddgp=<%/*=r.getId_dgp().trim()*/%>&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>'
+                                                        + '     <li><a href="../../dgp?iddgp='+data.id_dgp+'&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>'
+                                                        + '<li><a href="../../dgp?iddgp='+data.id_dgp+'&opc=Seguimiento">Ver Historial</a> </li>'
+                                                        + '<li><a href="../../documento?iddgp='+data.id_dgp+'&idtr='+data.id_trabajador+'&opc=Ver_Documento">Ver Documentos</a></li>'
+                                                        + ' <li><a data-valor="'+data.id_dgp+';'+data.id_trabajador+';'+data.ap_paterno+' '+data.ap_materno+' '+data.no_trabajador+'" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjaxComment()" >Comentario</a></li>'
+                                                        + ' <li><a href="../../solicitud_requerimiento?iddgp='+data.id_dgp+'&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>'
                                                         + ' <li class="divider"></li><li>'
-                                                        + '<li><a href="../../dgp?iddgp=<%/*=r.getId_dgp().trim()*/%>&idtr=<%/*=r.getId_trabajador().trim()*/%>&opc=Detalle">Ver Requerimiento</a> </li>'
+                                                        + '<li><a href="../../dgp?iddgp='+data.id_dgp+'&idtr='+data.id_trabajador+'&opc=Detalle">Ver Requerimiento</a> </li>'
                                                         + ' </ul>'
                                                         + ' </div>'
                                                         );
@@ -651,11 +1029,12 @@
                                         } else {
                                             $('td:eq(6)', row).html('<span class="label label-primary">En Proceso</span>');
                                         }
+                                         $('td:eq(3)', row).html(data.ap_paterno+' '+data.ap_materno+' '+data.no_trabajador);
                                         // var rows = varTableCAcademica.fnGetNodes();
                                         //   for (var i = 0; i < rows.length; i++) {
                                         //  var obj = $(rows[i]).find(".prog_aut");
                                         printDetProceso($('td:eq(4)', row), "&dgp=" + data.id_dgp + "&idrp=" + data.id_detalle_req_proceso + "&iddep=" + data.id_departamento);
-
+                                        $('td:eq(4)', row).addClass("new-progress");
                                         // }
 
                                     },
@@ -664,6 +1043,8 @@
                             });
 
     </script>
+
+
 
 </body>
 

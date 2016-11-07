@@ -24,7 +24,7 @@ public interface InterfaceCarga_AcademicaDAO {
 
     public List<Carga_Academica> ListCarAca();
 
-    public List<V_Detalle_Carga_Academica> Lista_detalle_academico(String idtr, String facultad, String eap);
+    public List<V_Detalle_Carga_Academica> Lista_detalle_academico(String idtr, String facultad, String eap,String ciclo,String dni);
 
     public String INSERT_DETALLE_CARGA_ACADEMICA(String ID_DETALLE_CARGA_ACADEMICA, String ID_PROCESO_CARGA_AC, String ID_CARGA_ACADEMICA, String ES_DETALLE_CARGA);
 

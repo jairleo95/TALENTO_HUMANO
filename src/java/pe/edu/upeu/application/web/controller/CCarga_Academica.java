@@ -36,6 +36,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.factory.WSClienteAcademico;
+import pe.edu.upeu.application.model.V_Detalle_Carga_Academica;
 
 /**
  *
@@ -74,10 +75,15 @@ public class CCarga_Academica extends HttpServlet {
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         String semestre = request.getParameter("semestre");
         try {
+            if (opc.equals("validateTrabajador")) {
+                String dni = request.getParameter("nro_doc");
+                String idtr = carga.DNI_ID_TRABAJADOR(dni);
+                rpta.put("validateData", (!idtr.equals("")));
+                rpta.put("status", true);
+            }
             if (opc.equals("Completar_Datos")) {
                 String eap = request.getParameter("eap");
                 String facu = request.getParameter("facultad");
-
                 String dni = request.getParameter("nro_doc");
                 String idtr = carga.DNI_ID_TRABAJADOR(dni);
                 if (idtr.equals("")) {
@@ -99,7 +105,7 @@ public class CCarga_Academica extends HttpServlet {
                 } else {
                     String hl = request.getParameter("hl");
                     sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
-                    sesion.setAttribute("Lista_detalle_academico", carga.Lista_detalle_academico(idtr, facu, eap));
+                    sesion.setAttribute("Lista_detalle_academico", carga.Lista_detalle_academico(idtr, facu, eap, "", ""));
                     //response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "id=" + cripto.Encriptar("idtr:" + idtr));
                     response.sendRedirect("Vista/Trabajador/Detalle_Trabajador.jsp?" + "idtr=" + idtr + "&academico=true" + "&hl=" + hl + "&eap=" + eap + "&facultad=" + facu);
                 }
@@ -175,8 +181,9 @@ public class CCarga_Academica extends HttpServlet {
                     /*FALTA US_CREACION*/
                     carga.INSERT_PAGO_DOCENTE(null, NU_CUOTA, CA_CUOTA, FE_PAGO, null, ID_PROCESO_CARGA_AC.trim(), null, null, null, IP_USUARIO, NO_USUARIO);
                 }
-                for (int i = 0; i < carga.Lista_detalle_academico(ID_TRABAJADOR, facultad, eap).size(); i++) {
-                    carga.INSERT_DETALLE_CARGA_ACADEMICA(null, ID_PROCESO_CARGA_AC.trim(), carga.Lista_detalle_academico(ID_TRABAJADOR, facultad, eap).get(i).getId_carga_academica(), "1");
+                List<V_Detalle_Carga_Academica> lCargaAcad = carga.Lista_detalle_academico(ID_TRABAJADOR, facultad, eap, "", "");
+                for (int i = 0; i < lCargaAcad.size(); i++) {
+                    carga.INSERT_DETALLE_CARGA_ACADEMICA(null, ID_PROCESO_CARGA_AC.trim(), lCargaAcad.get(i).getId_carga_academica(), "1");
                 }
                 String idrp = IReq.id_det_req_proc(iddgp.trim());
                 /* REGISTRAR PRIMERA AUTORIZACION*/
@@ -187,14 +194,20 @@ public class CCarga_Academica extends HttpServlet {
                 rpta.put("proceso", idrp);
                 rpta.put("rpta", true);
             }
-
+            if (opc.equals("getDetCargaAcademica")) {
+                String eap = request.getParameter("eap");
+                String facu = request.getParameter("facultad");
+                String dni = request.getParameter("nro_doc");
+                String ciclo = request.getParameter("ciclo");
+                String idtr = request.getParameter("idtr");
+                rpta.put("list", carga.Lista_detalle_academico(idtr, facu, eap, ciclo, dni));
+            }
             if (opc.equals("List_ws")) {
                 rpta.put("List_ws", carga.List_Carga_Academica_WS(semestre));
             }
             if (opc.equals("listEsCargaAcademica")) {
-                rpta.put("list", dgp.LIST_DGP_PROCESO(iddep, ""));
+                rpta.put("list", dgp.LIST_DGP_PROCESO(iddep, "", true));
             }
-
             if (opc.equals("actualizar_ws")) {
                 //WSClienteAcademico ws = new WSClienteAcademico();
                 try {

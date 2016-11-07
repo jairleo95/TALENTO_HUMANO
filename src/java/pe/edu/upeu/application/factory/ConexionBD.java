@@ -22,12 +22,13 @@ public abstract class ConexionBD {
     abstract Connection open();
 
     public ResultSet query(String sql) {
+        System.out.println("query  :" + sql);
         Statement st;
         ResultSet rs = null;
         try {
             st = conex.createStatement();
             rs = st.executeQuery(sql);
-            System.out.println("query  :"+sql);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -51,10 +52,10 @@ public abstract class ConexionBD {
     public boolean close() {
         boolean ok = true;
         try {
-         conex.close();
-         } catch (SQLException e) {
-         e.printStackTrace();
-         }
+            conex.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return ok;
     }
 }

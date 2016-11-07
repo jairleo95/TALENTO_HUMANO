@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import oracle.net.aso.d;
+
 import pe.edu.upeu.application.dao_imp.InterfaceImagenDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
