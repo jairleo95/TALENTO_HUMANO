@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -104,6 +105,53 @@ public class ProcesoDAO implements InterfaceProcesoDAO {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("ERROR" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return lista;
+
+    }
+
+    @Override
+    public void statupdate(String id, String es) {
+        try{
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_UPDATE_ES_PROCESO(?,?)}");
+            cst.setString(1, id);
+            cst.setString(2, es);
+            cst.execute();
+            System.out.println("All is right in DAO");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            throw new RuntimeException(ex.getMessage());
+        }finally{
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public List<Map<String, ?>> List_AllProceso() {
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "select * from rhtv_proceso";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("id", rs.getString("id_proceso"));
+                rec.put("nombre", rs.getString("no_proceso"));
+                rec.put("desc", rs.getString("de_proceso"));
+                rec.put("es", rs.getString("es_proceso"));
+                lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR");
         } finally {
             try {
                 this.conn.close();

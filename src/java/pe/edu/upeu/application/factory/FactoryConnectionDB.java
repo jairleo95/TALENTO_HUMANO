@@ -24,7 +24,7 @@ public class FactoryConnectionDB {
 
     public static String[] configMYSQL = {"bd_almacen", "root", "root"};
 
-    public static String[] configORACLE = {"procesosrh", "rrhh", "localhost", "1521", "xe"};
+    public static String[] configORACLE = {"procesosrh", "rrhh", "192.168.21.12", "1521", "xe"};
 //
     public static final String url = "/opt/tomcat8/webapps/filesSystemTalentoHumano/";
     //  public static final String url = "C:\\filesSystemTalentoHumano\\";
