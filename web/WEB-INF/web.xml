@@ -155,6 +155,10 @@
         <servlet-name>MCCosto</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.MCCosto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CSituacionEspecial</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CSituacionEspecial</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -286,11 +290,6 @@
     <servlet-mapping>
         <servlet-name>CDocumento_Trabajador</servlet-name>
         <url-pattern>/documento_trabajador</url-pattern>
-        
- <controller>
-<set-property property="maxFileSize" value="500K" />
-
-</controller>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CImpresion_Masiva</servlet-name>
@@ -311,6 +310,10 @@
     <servlet-mapping>
         <servlet-name>MCCosto</servlet-name>
         <url-pattern>/MCCosto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CSituacionEspecial</servlet-name>
+        <url-pattern>/situacionEspecial</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>120</session-timeout>
