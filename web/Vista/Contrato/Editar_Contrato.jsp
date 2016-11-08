@@ -356,6 +356,14 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="row">
+                                    <section class="col col-2">
+                                                        <label class="select" id="titulo">Situación Especial:
+                                                            <select name="situacionEspecial" class="input-group-sm situacionEspecial">
+                                                                <option value="">[SELECCIONE]</option>
+
+                                                            </select>
+                                                        </label>
+                                                    </section>
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Regimen Laboral Mintra:
                                                 <select name="REG_LAB_MINTRA" class="input-group-sm" required="">
@@ -377,7 +385,7 @@
                                                 </select>
                                             </label>
                                         </section>
-                                        <section class="col col-4">
+                                        <section class="col col-2">
                                             <label class="select" id="titulo">Modalidad:
                                                 <select name="MODALIDAD" class="input-group-sm select_mod" id="select_mod" required="">
                                                     <option value="">[SELECCIONE]</option>

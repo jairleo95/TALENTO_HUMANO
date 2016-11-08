@@ -318,24 +318,31 @@
                                             <fieldset>
 
                                                 <div class="row">
-                                                    <section class="col col-3">
-                                                        <label class="select" id="titulo">Regimen Laboral Mintra:
-                                                            <select name="REG_LAB_MINTRA" class="input-group-sm"  <%
-                                                                if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
-                                                                    out.print("required='required'");
-                                                                }
-                                                                    %> >
+                                                    <section class="col col-2">
+                                                        <label class="select" id="titulo">Situación Especial:
+                                                            <select name="situacionEspecial" class="input-group-sm situacionEspecial">
                                                                 <option value="">[SELECCIONE]</option>
-                                                                <%for (int q = 0; q < list_reg_labo.size(); q++) {
-                                                                        Regimen_Laboral re = new Regimen_Laboral();
-                                                                        re = (Regimen_Laboral) list_reg_labo.get(q);
-                                                                %>
-                                                                <option value="<%=re.getId_regimen_laboral()%>"><%=re.getDe_regimen_l()%></option>
-                                                                <%}%>
+
                                                             </select>
                                                         </label>
+                                                    
+                                                    <label class="select" id="titulo">Regimen Laboral Mintra:
+                                                        <select name="REG_LAB_MINTRA" class="input-group-sm"  <%
+                                                            if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
+                                                                out.print("required='required'");
+                                                            }
+                                                                %> >
+                                                            <option value="">[SELECCIONE]</option>
+                                                            <%for (int q = 0; q < list_reg_labo.size(); q++) {
+                                                                    Regimen_Laboral re = new Regimen_Laboral();
+                                                                    re = (Regimen_Laboral) list_reg_labo.get(q);
+                                                            %>
+                                                            <option value="<%=re.getId_regimen_laboral()%>"><%=re.getDe_regimen_l()%></option>
+                                                            <%}%>
+                                                        </select>
+                                                    </label>
                                                     </section>
-                                                    <section class="col col-3">
+                                                    <section class="col col-2">
                                                         <label class="select" id="titulo">Modalidad:
                                                             <select name="MODALIDAD" class="input-group-sm" id="select_mod"  <%
                                                                 if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
@@ -803,7 +810,6 @@
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
         <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
-
     </body>
     <script  type="text/javascript">
                 function Listar_dep() {
@@ -931,6 +937,11 @@
                         }
                     });
                 }
+                function c() {
+                    var max = $("#ifechai").val();
+                    $("#suscripcion").attr("max", max);
+                    $("#suscripcion").attr("value", max);
+                }
                 $(document).ready(function () {
 
                     pageSetUp();
@@ -949,33 +960,13 @@
                     showEsDiezmo();
                     list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato", "id_tipo_contrato", "de_ti_contrato");
 
-                    $('#checkout-form').validate({
-                        // Rules for form validation
-                        rules: {
-                            fname: {
-                                required: true
-                            },
-                            FEC_DESDE: {
-                                val_fecha: true
-                            },
-                            FEC_HASTA: {
-                                val_fecha: true
-                            }
-                        },
-                        // Do not change code below
-                        errorPlacement: function (error, element) {
-                            error.insertAfter(element.parent());
-                        }
-                    });
-                    jQuery.validator.addMethod("val_fecha", function (value, element) {
-                        var d = value.split("-");
-                        return this.optional(element) || String(parseInt(d[0])).length === 4;
-                    }, "¡Fecha ingresada invalida!");
+                    $('#checkout-form').validate();
 
                     Listar_dep();
                     Listar_sec();
                     Listar_area();
                     Listar_plantilla();
+                    list_selectJavaBeans($(".situacionEspecial"),"../../situacionEspecial","opc=list","idSituacionEspecial","deSituacionEspecial");
 
                     var a = $("#select-sub-mod");
                     var c = $("#Selec_Area");
@@ -1086,11 +1077,7 @@
                     });
 
                 });
-                function c() {
-                    var max = $("#ifechai").val();
-                    $("#suscripcion").attr("max", max);
-                    $("#suscripcion").attr("value", max);
-                }
+
     </script>
 </html>
 <%} else {
