@@ -50,10 +50,16 @@ public class CProceso extends HttpServlet {
 
             }
             if (opc.equals("Registrar")) {
-
+                String nom = request.getParameter("nom");
+                String desc = request.getParameter("desc");
+                p.create(nom, desc);
+                rpta.put("rpta", "1");
             }
             if (opc.equals("Modificar")) {
-
+                String idpro = request.getParameter("id");
+                String nom = request.getParameter("nom");
+                String desc = request.getParameter("desc");
+                p.editprocess(idpro, nom, desc);
             }
             if (opc.equals("Listar")) {
                 List<Map<String, ?>> lista = p.List_Proceso();
@@ -81,10 +87,10 @@ public class CProceso extends HttpServlet {
 
             }
             if (opc.equals("statupdate")) {
-                String id=request.getParameter("id");
-                String es=request.getParameter("es");
+                String id = request.getParameter("id");
+                String es = request.getParameter("es");
                 p.statupdate(id, es);
-                System.out.println("All is right in controller "+es+" "+id);
+                System.out.println("All is right in controller " + es + " " + id);
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");

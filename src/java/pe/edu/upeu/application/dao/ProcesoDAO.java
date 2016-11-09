@@ -57,7 +57,7 @@ public class ProcesoDAO implements InterfaceProcesoDAO {
     }
 
     @Override
-    public List<Map<String, ?>> List_Pro_Paso_Id(String id_req, String id_pro, String id_dir, String id_dep, String id_area,String id_ti_planilla) {
+    public List<Map<String, ?>> List_Pro_Paso_Id(String id_req, String id_pro, String id_dir, String id_dep, String id_area, String id_ti_planilla) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -75,10 +75,10 @@ public class ProcesoDAO implements InterfaceProcesoDAO {
                 sql += (!"".equals(id_dep)) ? " and  ID_DEPARTAMENTO = '" + id_dep + "'" : "";
             }
             if (id_area != null) {
-               sql += (!"".equals(id_area)) ? " and  ID_AREA = '" + id_area + "'" : "";
+                sql += (!"".equals(id_area)) ? " and  ID_AREA = '" + id_area + "'" : "";
             }
             if (id_ti_planilla != null) {
-               sql += (!"".equals(id_ti_planilla)) ? " and  ID_TIPO_PLANILLA = '" + id_ti_planilla + "'" : "";
+                sql += (!"".equals(id_ti_planilla)) ? " and  ID_TIPO_PLANILLA = '" + id_ti_planilla + "'" : "";
             }
 
             ResultSet rs = this.conn.query(sql);
@@ -117,7 +117,7 @@ public class ProcesoDAO implements InterfaceProcesoDAO {
 
     @Override
     public void statupdate(String id, String es) {
-        try{
+        try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_UPDATE_ES_PROCESO(?,?)}");
             cst.setString(1, id);
@@ -127,7 +127,7 @@ public class ProcesoDAO implements InterfaceProcesoDAO {
         } catch (SQLException ex) {
             System.out.println(ex);
             throw new RuntimeException(ex.getMessage());
-        }finally{
+        } finally {
             this.conn.close();
         }
     }
@@ -160,6 +160,44 @@ public class ProcesoDAO implements InterfaceProcesoDAO {
         }
         return lista;
 
+    }
+
+    @Override
+    public void editprocess(String id, String nom, String desc) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_UPDATE_PROCESO(?,?,?)}");
+            cst.setString(1, id);
+            cst.setString(2, nom);
+            cst.setString(3, desc);
+            cst.execute();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            throw new RuntimeException(ex.getMessage());
+        } finally {
+            this.conn.close();
+        }
+    }
+
+    @Override
+    public void create(String nom, String desc) {
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PROCESO(?,?)}");
+            cst.setString(1, nom);
+            cst.setString(2, desc);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al cargar la lista de direcciones...");
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
     }
 
 }

@@ -358,6 +358,43 @@
                 $(".cancelbtn").hide();
                 $(".btnUpdProcess").hide();
                 listar_Proceso();
+                $(".btnUpdProcess").click(function () {
+                    var nom = $("#nom_pro").val();
+                    var desc = $("#desc_pro").val();
+                    var id = $("#opid").val();
+                    $.post("../../Proceso", {
+                        opc: "Modificar",
+                        nom: nom,
+                        desc: desc,
+                        id: id
+                    }, function () {
+                        listar_Proceso();
+                        $(".cancelbtn").hide();
+                        $(".btnUpdProcess").hide();
+                        $("#opid").val("");
+                        $(".btnAddProcess").show();
+                        $("#nom_pro").val("");
+                        $("#desc_pro").val("");
+                    });
+                });
+                $(".btnAddProcess").click(function () {
+                    var nom = $("#nom_pro").val();
+                    var desc = $("#desc_pro").val();
+                    $.post("../../Proceso", {
+                        opc: "Registrar",
+                        nom: nom,
+                        desc: desc
+                    }, function (x) {
+                        var rpta = x.rpta;
+                        if (rpta == "1") {
+                            listar_Proceso();
+                            $("#nom_pro").val("");
+                            $("#desc_pro").val("");
+                        }else if(rpta=="-1"){
+                            alert("Error al crear un nuevo proceso");
+                        }
+                    });
+                });
             });
     </script>
 

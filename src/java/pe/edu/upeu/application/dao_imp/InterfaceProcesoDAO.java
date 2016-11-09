@@ -15,7 +15,14 @@ import java.util.Map;
 public interface InterfaceProcesoDAO {
 
     public List<Map<String, ?>> List_Proceso();
+
     public List<Map<String, ?>> List_AllProceso();
-    public void statupdate(String id,String es);
-    public List<Map<String, ?>> List_Pro_Paso_Id(String id_req, String id_pro, String id_dir, String id_dep, String id_area,String id_ti_planilla);
+
+    public void statupdate(String id, String es);
+
+    public void create(String nom, String desc);
+
+    public void editprocess(String id, String nom, String desc);
+
+    public List<Map<String, ?>> List_Pro_Paso_Id(String id_req, String id_pro, String id_dir, String id_dep, String id_area, String id_ti_planilla);
 }
