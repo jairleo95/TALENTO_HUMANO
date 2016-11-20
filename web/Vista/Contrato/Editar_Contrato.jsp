@@ -356,14 +356,14 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="row">
-                                    <section class="col col-2">
-                                                        <label class="select" id="titulo">Situación Especial:
-                                                            <select name="situacionEspecial" class="input-group-sm situacionEspecial">
-                                                                <option value="">[SELECCIONE]</option>
+                                        <section class="col col-2">
+                                            <label class="select" id="titulo">Situación Especial:
+                                                <select name="situacionEspecial" class="input-group-sm situacionEspecial" data-valor="<%=a.getIdSituacionEspecial()%>">
+                                                    <option value="">[SELECCIONE]</option>
 
-                                                            </select>
-                                                        </label>
-                                                    </section>
+                                                </select>
+                                            </label>
+                                        </section>
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Regimen Laboral Mintra:
                                                 <select name="REG_LAB_MINTRA" class="input-group-sm" required="">
@@ -1013,6 +1013,7 @@
                                             Listar_Direccion();
                                             ListCentroCostoDGP($("#id_dgp").val());
                                             list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato", "id_tipo_contrato", "de_ti_contrato", "1", $(".id_ti_contrato").val());
+                                            list_selectJavaBeans($(".situacionEspecial"), "../../situacionEspecial", "opc=list", "idSituacionEspecial", "deSituacionEspecial","1",$(".situacionEspecial").data("valor"));
                                             var a = $("#select-sub-mod");
                                             var c = $("#Selec_Area");
                                             var d = $("#select_sec");

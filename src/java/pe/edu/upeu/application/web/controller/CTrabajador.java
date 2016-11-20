@@ -227,6 +227,7 @@ public class CTrabajador extends HttpServlet {
                             String AP_MATERNO_H = request.getParameter("APELLIDO_M_H" + i);
                             String NO_HIJO_TRABAJADOR = request.getParameter("NOMBRE_H" + i);
                             String FE_NACIMIENTO = request.getParameter("FECHA_NAC_H" + i);
+                             FE_NACIMIENTO = FactoryConnectionDB.convertFecha3(FE_NACIMIENTO);
                             String ES_SEXO_H = request.getParameter("SEXO_H" + i);
                             String ES_TIPO_DOC = request.getParameter("TIPO_DOC_ID_H" + i);
                             String NU_DOC_H = request.getParameter("NRO_DOC_H" + i);

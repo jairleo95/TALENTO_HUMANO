@@ -1,0 +1,31 @@
+<h4 style="text-align:center"><span style="font-size:11px"><strong>CONTRATO DE TRABAJO A PLAZO FIJO Y BAJO MODALIDAD</strong></span></h4>
+
+<h5 style="text-align:justify"><span style="font-size:12px">Conste por el presente documento el contrato de trabajo a plazo fijo y sujeto a modalidad por Servicio Específico, conforme lo dispone el Art. 63  del T.U.O del D. Leg. 728, Ley de Productividad y Competitividad Laboral (D.S. Nº 003-97-TR), que celebran de una parte la <strong>UNIVERSIDAD PERUANA UNIÓN</strong>, con RUC Nº 20138122256, con domicilio en Villa Unión s/n, altura del Km. 19 de la carretera central, Ñaña, Lurigancho-Chosica, a quien se le denominará <strong>"EMPLEADOR"</strong>, representada por su Apoderado Mg. Julio Cesar Rengifo Peña, con DNI Nº. 06690086,; y de la otra parte [nombre] [app] [apm] , con DNI Nº [dni], domiciliado(a) en [dir], [prov], a quien se le denominará el (la) <strong>"TRABAJADOR(A)</strong>, en los términos y condiciones siguientes:</span></h5>
+
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>PRIMERA</strong>: EL EMPLEADOR tiene por actividad principal la educación en todos sus niveles.</span></h5>
+
+<h5 style="text-align:justify"><span style="font-size:12px">El (la)TRABAJADOR (A) conoce que la Universidad Peruana Unión es parte integrante del sistema educativo Adventista, normado y regulada bajo practicas, costumbres, principios  éticos morales, por lo que acepta  respetar, observar y cumplir estos principios practicados por esta institución, dentro y fuera del Campus Universitario.</span></h5>
+
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>SEGUNDA</strong>: El EMPLEADOR requiere de personal temporal en las áreas de la [dep], con el objeto de diseñar detalladamente los requerimientos del sistema académico, programando nuevos módulos, reportes o actualizaciones de módulos, diseñar detalladamente los requerimientos de cada proyecto asignado, programando adecuadamente los módulos del sistema, apoyar en el mantenimiento de los recursos informáticos o brindar soporte técnico especializado a los equipos y sistemas solventando problemas o requerimientos de los usuarios; en consecuencia, el EMPLEADOR ha visto por conveniente contratar al TRABAJADOR (A), bajo la modalidad de servicio específico.</span></h5>
+
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>TERCERA</strong>: EL EMPLEADOR de acuerdo con la condición expresada en la segunda cláusula, contrata al (la) TRABAJADOR (A) para que se desempeñe como [puesto].</span></h5>
+
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>CUARTA</strong>: EL EMPLEADOR en virtud del presente documento, contrata, al (la) TRABAJADOR (A) desde el [desde] hasta el [hasta].</span></h5>
+
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>QUINTA</strong>: EL (la) TRABAJADOR (A) percibir una remuneración mensual de S/ [sueldo] ([moneda]), como retribución por las labores realizadas en la jornada y horario laboral establecido por el  EMPLEADOR, la que será de 48 horas semanales.</span></h5>
+
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>SEXTA</strong>: EL (la) TRABAJADOR (A) se obliga a prestar sus servicios con eficiencia, puntualidad y bajo principio de subordinación, cumplir con las directivas de sus jefes y de su Centro de Labor y con lo que dispone El Reglamento General Interno de Trabajo, Reglamento de Trabajo en Sobre tiempo, Reglamento de Seguridad y Salud en el Trabajo, Recomendaciones sobre Seguridad y Salud en el Trabajo y demás políticas, que por su función le son entregados a la suscripción del presente contrato, caso contrario se resolver el presente contrato conforme las normas laborales vigentes.</span></h5>
+
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>SÉPTIMA</strong>: EL (LA) TRABAJADOR (A) conoce y acepta que al término del plazo fijado en la cláusula CUARTA del presente contrato, éste quedará extinguido automáticamente sin obligación de aviso previo o comunicación alguna. EL EMPLEADOR sin perjuicio de lo indicado en las cláusulas anteriores, podrá dar por terminado el presente contrato si EL (la) TRABAJADOR (A) incurre en alguna de las causales de despido conforme a las leyes vigentes.</span></h5>
+
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>OCTAVA</strong>: EL (LA) TRABAJADOR (A), en cualquier momento, podrá dar por terminada la relación laboral en forma expresa, con la sola limitación de presentar su carta de renuncia con 30 días de anticipación.</span></h5>
+
+<h5 style="text-align:justify"><span style="font-size:12px"><strong>NOVENA</strong>: En todo lo no previsto en el presente contrato se aplicará la Ley vigente de nuestro país.</span></h5>
+
+<h5><span style="font-size:12px">Con tale funciones(<span style="font-family:open sans,arial,helvetica,sans-serif">[funciones_pr][funciones_sec]</span>)</span></h5>
+
+<h5 style="text-align:justify"><span style="font-size:12px">Estando de acuerdo en todo el contenido del presente contrato, firmamos en señal de conformidad, en Ñaña, Chosica, Lima, al [fe_suscripcion].</span></h5>
+
+<p style="text-align:justify">                                <img alt="" src="http://gth.upeu.edu.pe/TALENTO_HUMANO/Archivo/Firmas/FIR-0001_Rengifo.jpg" style="height:40px; position:absolute; width:131px" /></p>
+
+<h4 style="text-align:justify">�</h4>

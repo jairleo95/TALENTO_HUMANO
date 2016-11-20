@@ -627,7 +627,7 @@
             }
         }
         /*WEBSOCKET*/
-        var websocket = new WebSocket("ws://" + document.location.host + "/GTH/serverGth");
+        var websocket = new WebSocket("ws://" + document.location.host + "/TALENTO_HUMANO/serverGth");
 
         websocket.onopen = function openConnection() {
             websocket.send("Hi");
