@@ -62,7 +62,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(5, TI_DOC);
             cst.setString(6, NU_DOC);
             cst.setString(7, ES_CIVIL);
-            cst.setString(8, c.convertFecha(FE_NAC));
+            cst.setString(8, FactoryConnectionDB.convertFecha(FE_NAC));
             cst.setString(9, ID_NACIONALIDAD);
             cst.setString(10, ID_DEPARTAMENTO);
             cst.setString(11, ID_PROVINCIA);
@@ -121,7 +121,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(64, ES_TRABAJA_UPEU_C);
             cst.setString(65, AP_NOMBRES_C);
             if (FE_NAC_C != null) {
-                cst.setString(66, c.convertFecha(FE_NAC_C));
+                cst.setString(66, FactoryConnectionDB.convertFecha(FE_NAC_C));
             } else {
                 cst.setString(66, FE_NAC_C);
             }

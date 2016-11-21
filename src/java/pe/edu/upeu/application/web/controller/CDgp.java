@@ -251,6 +251,7 @@ public class CDgp extends HttpServlet {
                 }
                 FE_DESDE = FactoryConnectionDB.convertFecha3(FE_DESDE);
                 FE_HASTA = FactoryConnectionDB.convertFecha3(FE_HASTA);
+                out.println("Nueva fecha :"+FactoryConnectionDB.convertFecha(FE_HASTA));
 
                 dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO,
                         DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION,
