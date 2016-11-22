@@ -873,6 +873,7 @@
     <!-- Voice command : plugin 
     <script src="../../js/speech/voicecommand.min.js"></script>-->
     <!-- PAGE RELATED PLUGIN(S) -->
+    <script src="../../js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
     <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script src="../../js/chosen.jquery.js" type="text/javascript"></script>

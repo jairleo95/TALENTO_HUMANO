@@ -465,14 +465,17 @@ $(document).ready(function () {
             if (ButtonPressed === "Si") {
 
                 var lenghtDatatable = $('#dt_basic1 tr').length;
-                for (var r = 1; r <= lenghtDatatable; r++) {
-                    console.log("(" + r + ")Iterate items cod aps:" + $(".cod_aps" + r).val());
-                    if ($(".cod_aps" + r).val() !== "" & typeof $(".cod_aps" + r).val() !== 'undefined') {
-                        console.log(r + "codigo aps: " + $(".cod_aps" + r).val());
+                 console.log("total:"+lenghtDatatable);
+            
+            $.each($(".inp_cod_aps"),function(index){
+                 var itemCodAps = $(this);
+                 var valAut = itemCodAps.parents('tr').find(".valAut");
+                  if (itemCodAps.val() !== "" & typeof itemCodAps.val() !== 'undefined') {
+                        console.log(index + "codigo aps: " + itemCodAps.val());
                         $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
                         $.ajax({
                             async: false,
-                            url: "../../trabajador", data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val(),
+                            url: "../../trabajador", data: "opc=reg_aps_masivo&cod=" + itemCodAps.val() + "&idtr=" + itemCodAps.parents("tr").find(".idTrabajador").val(),
                             type: "POST", success: function (objJson, textStatus, jqXHR) {
                                 if (objJson.rpta) {
                                     $.ajax({
@@ -481,22 +484,19 @@ $(document).ready(function () {
                                         type: "POST", success: function (objJson, textStatus, jqXHR) {
                                             if (objJson.rpta) {
                                                 var table = new $.fn.dataTable.Api('#dt_basic1');
-                                                table.row($(".cod_aps" + r).parents('tr')).remove().draw();
+                                                table.row(itemCodAps.parents('tr')).remove().draw();
                                                 exito("Procesado con exito!", "Codigo APS ingresado correctamente");
                                                 console.log("autorizado!");
                                                 $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                                             }
                                         },
-                                        data: "opc=Aceptar" + $(".val_aut" + r).val()
+                                        data: "opc=Aceptar" + valAut.val()
                                     });
                                 }
-
                             }
-
                         });
-
-                    }
-                }
+                  }
+            });
             }
             if (ButtonPressed === "No") {
             }

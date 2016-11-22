@@ -608,7 +608,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 rec.put("area", rs.getString("no_area"));
                 rec.put("fecha_c", rs.getString("fe_creacion"));
                 rec.put("fecha_aut", rs.getString("fe_autorizacion"));
-                rec.put("mes_año_aut", rs.getString("mes_año_aut"));
+                rec.put("mes_anno_aut", rs.getString("mes_año_aut"));
                 rec.put("dep", rs.getString("no_dep"));
                 rec.put("mes_c", rs.getString("mes_creacion"));
                 rec.put("motivo", rs.getString("LI_MOTIVO"));
