@@ -262,6 +262,7 @@
                                                                     </button>
                                                                     <ul class="dropdown-menu">
                                                                         <li><a href="../../dgp?iddgp=<%=a.getId_dgp().trim()%>&opc=Seguimiento">Ver Proceso</a></li>
+                                                                        <li><a   class="btnHorario"  data-valor="<%=a.getId_dgp()%>"  data-toggle="modal" data-target="#exampleModal">Ver Horario</a></li>
                                                                         <li><a href="../../documento?iddgp=<%=a.getId_dgp().trim()%>&idtr=<%=a.getId_trabajador().trim()%>&opc=Reg_Pro_Dgp">Ver Documentos</a></li>
                                                                         <li><a  data-valor="<%=a.getId_dgp().trim()%>;<%=a.getId_trabajador().trim()%>;<%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%>" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjax('')" >Comentario</a></li>
                                                                             <% if (Integer.parseInt(a.getElab_contrato()) > 0) {%>
@@ -531,6 +532,25 @@
             </div>
         </div>
         <!-------------- Modal  ----------->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Horarios</h4>
+                        <h6 class="tipoh hidden"></h6>
+                    </div>
+                    <div class="modal-body" style="height:550px;">
+                        <div class="conTablas"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--================================================== -->
         <!---Modal---------------->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -617,7 +637,9 @@
     <script src="../../js/coment/comenth.js" type="text/javascript"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
+    <script type="text/javascript" src="../../js/businessLogic/Horario/horario.js"></script>
     <script type="text/javascript" src="../../js/businessLogic/Autorizacion/inboxAuthorization.js"></script>
+       
 </body>
 </html>
 <%

@@ -377,6 +377,10 @@ $(document).ready(function () {
     $(".inp_cod_huella").keypress(function (event) {
         return /\d/.test(String.fromCharCode(event.keyCode));
     });
+    $(".btnHorario").click(function(){
+        listHorario($(this).data("valor"));
+    });
+    
     listar_autorizados(mes, anno);
     /* BASIC ;*/
     var responsiveHelper_dt_basic = undefined;
