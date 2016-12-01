@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.model.Cuenta_Sueldo"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -383,19 +384,19 @@
                                             %>
 
                                             <div class="row"> 
-                                                <section class="col col-3" name="">
+                                                <section class="col col-3">
                                                     <label class="select" id="titu" >Cta Sueldo - Banco:
                                                         <select name="BANCO"  required="" disabled="">
                                                             <%if (cs.getNo_banco().equals("0")) { %>
                                                             <option >Ninguno</option>
                                                             <%}
-                                                                        if (cs.getNo_banco().equals("1")) {%>
+                                                                if (cs.getNo_banco().equals("1")) {%>
                                                             <option >BBVA</option>
                                                             <%}
-                                                                        if (cs.getNo_banco().equals("2")) { %>
+                                                                if (cs.getNo_banco().equals("2")) { %>
                                                             <option >BCP</option>
                                                             <%}
-                                                                        if (cs.getNo_banco().equals("3")) { %>
+                                                                if (cs.getNo_banco().equals("3")) { %>
                                                             <option >Otros</option>
                                                             <% }%>
                                                         </select>
@@ -408,21 +409,21 @@
                                                     </label>
                                                 </section>
                                                 <%}
-                                                            if (cs.getNu_cuenta() != null) {%>
+                                                    if (cs.getNu_cuenta() != null) {%>
                                                 <section class="col col-4">
                                                     <label class="input" id="titu">Nro Cuenta :
                                                         <input type="text" disabled="" value="<%=cs.getNu_cuenta()%>"   />
                                                     </label>
                                                 </section>
                                                 <%}
-                                                            if (cs.getNu_cuenta_banc() != null) {%>
+                                                    if (cs.getNu_cuenta_banc() != null) {%>
                                                 <section class="col col-4">
                                                     <label class="input" id="titu">Nro Cuenta Bancaria:
                                                         <input type="text" disabled="" value="<%=cs.getNu_cuenta_banc()%>">
                                                     </label>
                                                 </section>
                                                 <%}
-                                                            if (cs.getNo_banco().trim().equals("0")) {%>
+                                                    if (cs.getNo_banco().trim().equals("0")) {%>
                                                 <section class="col col-5" >
 
                                                     <p >Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
@@ -438,7 +439,7 @@
                                                 %>
                                             </div>
                                             <%}
-                                                        }%>
+                                                }%>
                                             <%}%>
                                             <div class="row">
                                                 <section class="col col-3" >
@@ -507,9 +508,9 @@
                                             <input type="hidden" name="ESTADO" value="<%=es_cue_sue%>">
                                             <%if (es_cue_sue.equals("0")) {%>
 
-                                            <input type="hidden" name="ES_CUENTA_SUELDO" value="1" required="" />
+                                            <input type="hidden" name="ES_CUENTA_SUELDO" value="1" />
                                             <div class="row"> 
-                                                <section class="col col-3" name="">
+                                                <section class="col col-3" >
                                                     <label class="select" id="titu">Cta Sueldo - Banco:
                                                         <select name="BANCO" id="banco" required="">
                                                             <option value="" selected="" disabled="" >[Selecione]</option>
@@ -556,7 +557,7 @@
                                             %>
                                             <div class="row"> 
 
-                                                <section class="col col-3" name="">
+                                                <section class="col col-3"  >
                                                     <label class="select" id="titu" >Cta Sueldo - Banco:
 
                                                         <select name="BANCO"  required="" disabled="">
@@ -564,13 +565,13 @@
                                                             <%if (cs.getNo_banco().equals("0")) { %>
                                                             <option >Ninguno</option>
                                                             <%}
-                                                                        if (cs.getNo_banco().equals("1")) {%>
+                                                                if (cs.getNo_banco().equals("1")) {%>
                                                             <option >BBVA</option>
                                                             <%}
-                                                                        if (cs.getNo_banco().equals("2")) { %>
+                                                                if (cs.getNo_banco().equals("2")) { %>
                                                             <option >BCP</option>
                                                             <%}
-                                                                        if (cs.getNo_banco().equals("3")) { %>
+                                                                if (cs.getNo_banco().equals("3")) { %>
                                                             <option >Otros</option>
                                                             <% }%>
                                                             <%} else {%>
@@ -587,21 +588,21 @@
                                                     </label>
                                                 </section>
                                                 <%}
-                                                            if (cs.getNu_cuenta() != null) {%>
+                                                    if (cs.getNu_cuenta() != null) {%>
                                                 <section class="col col-4">
                                                     <label class="input" id="titu">Nro Cuenta :
                                                         <input type="text" disabled="" value="<%=cs.getNu_cuenta()%>"   />
                                                     </label>
                                                 </section>
                                                 <%}
-                                                            if (cs.getNu_cuenta_banc() != null) {%>
+                                                    if (cs.getNu_cuenta_banc() != null) {%>
                                                 <section class="col col-4">
                                                     <label class="input" id="titu">Nro Cuenta Bancaria:
                                                         <input type="text" disabled="" value="<%=cs.getNu_cuenta_banc()%>">
                                                     </label>
                                                 </section>
                                                 <%}
-                                                            if (cs.getNo_banco().trim().equals("0")) {%>
+                                                    if (cs.getNo_banco().trim().equals("0")) {%>
                                                 <section class="col col-5" >
 
                                                     <p >Autorizo a la UPeU gestionar mi cuenta de sueldo en el BBVA Banco Continental, para tal efecto adjunto copia legible y vigente de mi DNI   </p>
@@ -617,20 +618,20 @@
                                                 %>
                                             </div>
                                             <%}
-                                                        }%>
+                                                }%>
                                             <%}%>
                                             <%if (idreq.equals("REQ-0010")) {%>  
 
                                             <section class="col col-4" >
                                                 <label class="input" id="titu"> RUC:
-                                                    <input type="text" name="RUC" id="" maxlength="20" required="" >
+                                                    <input type="text" name="RUC"  maxlength="20" required="" >
                                                 </label>
 
                                             </section>
 
                                             <section class="col col-4" >
                                                 <label class="input" id="titu"> Domicilio Fiscal:
-                                                    <input type="text" name="DOMICILIO_FISCAL" id="" required="" >
+                                                    <input type="text" name="DOMICILIO_FISCAL"  required="" >
                                                 </label>
                                             </section>
 
@@ -638,7 +639,7 @@
                                             <%if (idreq.equals("REQ-0010") || idreq.equals("REQ-0011")) {%>
                                             <section class="col col-4" >
                                                 <label class="input" id="titu"> Lugar de Servicio:
-                                                    <input type="text" name="LUGAR_SERVICIO" id="" required="" maxlength="50" >
+                                                    <input type="text" name="LUGAR_SERVICIO"  required="" maxlength="50" >
                                                 </label>
                                             </section>
 
@@ -804,7 +805,6 @@
             </div>
         </div>
     </body>
-    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
                                                         if (!window.jQuery) {
@@ -877,14 +877,14 @@
     <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
-    <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
-    <!--Funciones globales-->
 
-    <script src="../../js/Js_DGP/Registrar/Reg_Dgps.js" type="text/javascript" ></script>
-    <script src="../../js/Js_Horario/horario.js" type="text/javascript"></script>
-    <script src="../../js/Js_Plazo/Js_plazo_advertencia.js" type="text/javascript"></script>    
-    <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
- 
+    <!-- BUSINESS LOGIC PLUGINS-->
+    <script src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+    <script src="../../js/Js_DGP/Registrar/Reg_Dgps.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript" ></script>
+    <script src="../../js/Js_Horario/horario.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+    <script src="../../js/Js_Plazo/Js_plazo_advertencia.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>    
+    <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+
 
 </html>
 <%} else {

@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
@@ -26,7 +27,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
         <title> Requerimiento </title>
@@ -74,7 +75,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-      
+
         <style type="text/css">
             body{
                 background: white;
@@ -149,7 +150,7 @@
                                                         Detalle_Centro_Costo dcc = new Detalle_Centro_Costo();
                                                         dcc = (Detalle_Centro_Costo) Cargar_dcc_dgp.get(p);
                                             %>
-                                        <tr><td class="text-info ">Centro de Costo N° <%=p + 1%></td><td class="text-info "><label class="text-danger"> <%=dcc.getCa_porcentaje()+"%"%> &nbsp;</label><%=dcc.getDe_centro_costo()%>&nbsp;&nbsp;&nbsp;<span class="text-success">  Codigo : <%=dcc.getCo_centro_costo()%></span></td></tr>
+                                        <tr><td class="text-info ">Centro de Costo N° <%=p + 1%></td><td class="text-info "><label class="text-danger"> <%=dcc.getCa_porcentaje() + "%"%> &nbsp;</label><%=dcc.getDe_centro_costo()%>&nbsp;&nbsp;&nbsp;<span class="text-success">  Codigo : <%=dcc.getCo_centro_costo()%></span></td></tr>
                                         <%}
                                         } else {%>
                                         <tr><td class="text-info ">Centro de Costo </td><td class="text-info ">No tiene Centro de costo </td></tr>
@@ -183,8 +184,8 @@
                                                         if (num.equals("0") & d.getEs_dgp().equals("0") & idrol.trim().equals("ROL-0006")) {
 
                                                 %>
-                                        <%}
-                                            if (d.getEs_dgp().equals("1") & num.equals("0") & !"ROL-0006".equals(idrol.trim())) {%>
+                                                <%}
+                                                    if (d.getEs_dgp().equals("1") & num.equals("0") & !"ROL-0006".equals(idrol.trim())) {%>
                                         <tr><td colspan="3" class="ct"><a href="">Ver Contrato</a></td></tr>
                                         <%}
                                             }%>
@@ -219,7 +220,7 @@
                                             if (d.getEs_mfl().equals("0")) {%>
                                         <tr><td class="text-info ">MFL:</td><td colspan="2" class="text-info ">No</td></tr>
                                         <%}%>
-                                        
+
                                         <%                                            if (d.getEs_presupuestado().equals("1")) {%>
                                         <tr><td class="text-info ">Presupuestado:</td><td colspan="2" class="text-info ">Si</td></tr>
                                         <%}
@@ -235,12 +236,10 @@
                                         if (d.getEs_dgp() == null) {
                                     %>
                                     <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=<%=d.getId_dgp().trim()%>&redirect=proceso_dgp" class="btn btn-primary btn-labeled"><span class="btn-label"><i class="fa fa-pencil-square-o"></i></span> Editar DGP</a> 
-                                            <%} else {
-                                                if (d.getEs_dgp().trim().equals("2")) {
+                                            <%} else if (d.getEs_dgp().trim().equals("2")) {
                                             %>
                                     <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=<%=d.getId_dgp().trim()%>" class="btn btn-primary btn-labeled"><span class="btn-label"><i class="fa fa-pencil-square-o"></i></span> Editar DGP</a> 
-                                            <%}
-                                                }%>
+                                            <%}%>
                                     <a class="btn btn-primary btn-labeled" href="../../documento?iddgp=<%=d.getId_dgp().trim()%>&idtr=<%=d.getId_trabajador().trim()%>&opc=Ver_Documento"><span class="btn-label"><i class="glyphicon glyphicon-info-sign"></i></span>Ver Documentos</a>
                                     <a class="btn btn-primary btn-labeled" href="../../horario?iddgp=<%=d.getId_dgp()%>&opc=Listar"><span class="btn-label"><i class="glyphicon glyphicon-info-sign"></i></span>Ver Horario</a>
                                     <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=<%=d.getId_dgp().trim()%>" class="btn btn-primary btn-labeled"><span class="btn-label"><i class="fa fa-pencil-square-o"></i></span> Editar DGP</a>         
@@ -328,7 +327,7 @@
             </div>
 
         </body>
-   
+
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -400,10 +399,9 @@
         <!-- Voice command : plugin
         <script src="../../js/speech/voicecommand.min.js"></script> -->
 
-        <!-- PAGE RELATED PLUGIN(S)
-        <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script> -->
-        <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
-        <script src="../../js/Js_DGP/Detalle/Js_Detallle_dgp-api.js" type="text/javascript" charset="UTF-8"></script>
+        <!-- BUSINESS LOGIC PLUGINS -->
+        <script src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+        <script src="../../js/Js_DGP/Detalle/Js_Detallle_dgp-api.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript" charset="UTF-8"></script>
     </html>
     <%} else {
             out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");

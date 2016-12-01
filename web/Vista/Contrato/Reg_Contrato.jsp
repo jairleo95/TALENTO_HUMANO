@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
@@ -734,9 +735,10 @@
         <script src="../../js/plugin/knob/jquery.knob.min.js"></script>
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-        <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
-        <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
-        <script type="text/javascript" src="../../js/businessLogic/Horario/horario.js"></script>
+        <!--BUSINESS LOGIC PLUGINS-->
+        <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+        <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>"></script>
+        <script type="text/javascript" src="../../js/businessLogic/Horario/horario.js?v=<%=globalProperties.VERSION_JS%>"></script>
     </body>
     <script  type="text/javascript">
                 function Listar_dep() {

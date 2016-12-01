@@ -27,7 +27,6 @@ import pe.edu.upeu.application.model.X_List_dgp_by;
 import pe.edu.upeu.application.model.X_User_dgp;
 import pe.edu.upeu.application.model.X_val_tra_dgp;
 import pe.edu.upeu.application.model.x_List_Id_Trab_Dgp;
-import pe.edu.upeu.application.web.controller.CConversion;
 
 /**
  *

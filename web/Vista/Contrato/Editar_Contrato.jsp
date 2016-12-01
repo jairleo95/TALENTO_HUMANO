@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="java.util.ArrayList"%>
@@ -781,6 +782,8 @@
 
         <!-- FastClick: For mobile devices -->
         <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
+        <script type="text/javascript"  src="../../js/plugin/knob/jquery.knob.min.js"></script>
+        <script type="text/javascript"  src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
 
         <!--[if IE 8]>
 
@@ -801,8 +804,10 @@
         <script type="text/javascript"  src="../../js/plugin/knob/jquery.knob.min.js"></script>
         <script type="text/javascript"  src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-        <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
-        <script type="text/javascript" src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" ></script>
+
+        <!--BUSINESS LOGIC PLUGINS-->        
+        <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>"></script>
+        <script type="text/javascript" src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js?v=<%=globalProperties.VERSION_JS%>" ></script>
         <script type="text/javascript">
                                         function Listar_dep() {
                                             var s = $(".selec_dep");
@@ -1013,7 +1018,7 @@
                                             Listar_Direccion();
                                             ListCentroCostoDGP($("#id_dgp").val());
                                             list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato", "id_tipo_contrato", "de_ti_contrato", "1", $(".id_ti_contrato").val());
-                                            list_selectJavaBeans($(".situacionEspecial"), "../../situacionEspecial", "opc=list", "idSituacionEspecial", "deSituacionEspecial","1",$(".situacionEspecial").data("valor"));
+                                            list_selectJavaBeans($(".situacionEspecial"), "../../situacionEspecial", "opc=list", "idSituacionEspecial", "deSituacionEspecial", "1", $(".situacionEspecial").data("valor"));
                                             var a = $("#select-sub-mod");
                                             var c = $("#Selec_Area");
                                             var d = $("#select_sec");

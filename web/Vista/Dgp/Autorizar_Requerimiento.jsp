@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
@@ -473,13 +474,13 @@
 
 
                             </div>
-                 
+
                             <!-- end widget -->
                         </article>
                         <!-- WIDGET END -->
                     </div>
                     <!-- end row -->
-                     <div class="row">
+                    <div class="row">
                         <!-- NEW WIDGET START -->
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div id="alerta_dgp">
@@ -634,12 +635,13 @@
     <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-    <script src="../../js/coment/comenth.js" type="text/javascript"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-    <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
-    <script type="text/javascript" src="../../js/businessLogic/Horario/horario.js"></script>
-    <script type="text/javascript" src="../../js/businessLogic/Autorizacion/inboxAuthorization.js"></script>
-       
+    <!--BUSINESS LOGIC PLUGINS -->
+    <script src="../../js/coment/comenth.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+    <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>"></script>
+    <script type="text/javascript" src="../../js/businessLogic/Horario/horario.js?v=<%=globalProperties.VERSION_JS%>"></script>
+    <script type="text/javascript" src="../../js/businessLogic/Autorizacion/inboxAuthorization.js?v=<%=globalProperties.VERSION_JS%>"></script>
+
 </body>
 </html>
 <%

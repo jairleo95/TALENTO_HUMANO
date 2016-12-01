@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
@@ -76,7 +77,6 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
         <style type="text/css" class="styleProcess">
-
             /* Form Progress */
             .new-progress {
                 /*   //width: 100%;*/
@@ -271,8 +271,8 @@
                                                                     <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>
                                                                     <!--<li><a href="../../dgp?iddgp=<%/*=r.getId_dgp().trim()*/%>&opc=Seguimiento">Ver Historial</a> </li>-->
                                                                     <li><a onclick="listHistory(<%=i%>)" data-toggle="modal" data-target="#ModalHisto">Ver Historial</a></li>
-                                                                      <li><a   class="btnHorario"  data-valor="<%=r.getId_dgp()%>"  data-toggle="modal" data-target="#exampleModal">Ver Horario</a></li>
-                                                                       
+                                                                    <li><a   class="btnHorario"  data-valor="<%=r.getId_dgp()%>"  data-toggle="modal" data-target="#exampleModal">Ver Horario</a></li>
+
                                                                     <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></li>
                                                                     <li><a data-valor="<%=r.getId_dgp().trim()%>;<%=r.getId_trabajador().trim()%>;<%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%>" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjaxComment('')" >Comentario</a></li>
                                                                     <li><a href="../../solicitud_requerimiento?iddgp=<%=r.getId_dgp().trim()%>&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>
@@ -577,26 +577,26 @@
         </div>
     </div>       
 
-  <!-------------- Modal  ----------->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Horarios</h4>
-                        <h6 class="tipoh hidden"></h6>
-                    </div>
-                    <div class="modal-body" style="height:550px;">
-                        <div class="conTablas"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    </div>
+    <!-------------- Modal  ----------->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Horarios</h4>
+                    <h6 class="tipoh hidden"></h6>
+                </div>
+                <div class="modal-body" style="height:550px;">
+                    <div class="conTablas"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!--================================================== -->
+    <!--================================================== -->
 
     <div class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ModalHisto" tabindex="-1" role="dialog"  >
         <div class="modal-dialog" >
@@ -737,9 +737,11 @@
     <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-    <script src="../../js/coment/comenth.js" type="text/javascript"></script> 
-    <script src="../../js/businessLogic/Horario/horario.js" type="text/javascript"></script>
-    <script src="../../js/businessLogic/Dgp/statusProcessDGP.js" type="text/javascript"></script>
+
+    <!--BUSINESS LOGIC PLUGINS-->
+    <script src="../../js/coment/comenth.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script> 
+    <script src="../../js/businessLogic/Horario/horario.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+    <script src="../../js/businessLogic/Dgp/statusProcessDGP.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
 
     <script type="text/javascript">
                             // DO NOT REMOVE : GLOBAL FUNCTIONS!
