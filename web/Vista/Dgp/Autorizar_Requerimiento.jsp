@@ -591,8 +591,6 @@
 
     <!--===========================Modal======================= -->
 
-    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
@@ -607,10 +605,8 @@
                                 document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
                             }
     </script>
-
     <!-- IMPORTANT: APP CONFIG -->
     <script src="../../js/app.config.js"></script>
-
     <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
     <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
 
@@ -622,12 +618,8 @@
 
     <!-- JARVIS WIDGETS -->
     <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
-
-
-
     <!-- Demo purpose only -->
     <script src="../../js/demo.min.js"></script>
-
     <!-- MAIN APP JS FILE -->
     <script src="../../js/app.min.js"></script>
     <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
@@ -639,7 +631,6 @@
     <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
     <script type="text/javascript" src="../../js/businessLogic/Horario/horario.js"></script>
     <script type="text/javascript" src="../../js/businessLogic/Autorizacion/inboxAuthorization.js"></script>
-       
 </body>
 </html>
 <%

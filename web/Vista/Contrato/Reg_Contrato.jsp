@@ -189,7 +189,7 @@
                                                     <section class="col col-3" id="titulo">
                                                         <label class="select" id="titulo">Dirección:
                                                             <select name="DIRECCION" class="select_dir input-group-sm" disabled=""  id="select_dir" >
-                                                                <option value="" >[SELECCIONE]</option>
+                                                                <option value="" >[Seleccione]</option>
                                                                 <%for (int g = 0; g < Listar_Direccion.size(); g++) {
                                                                         Direccion direccion = new Direccion();
                                                                         direccion = (Direccion) Listar_Direccion.get(g);
@@ -206,20 +206,20 @@
                                                     <section class="sec_dep col col-3" id="titulo">
                                                         <label class="select" id="titulo">Departamento:
                                                             <select name="DEPARTAMENTO_ID" class="selec_dep input-group-sm" disabled="" id="selec_dep">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                             </select>  
                                                         </label>
                                                     </section>
                                                     <section class="sec_are col col-3" id="titulo">
                                                         <label class="select" id="titulo">Area:
                                                             <select name="AREA_ID" class="Selec_Area input-group-sm"  disabled=""  id="Selec_Area">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                             </select>  </label>
                                                     </section>
                                                     <section class="sec_sec col col-3" id="titulo">
                                                         <label class="select" id="titulo">Sección:
                                                             <select name="SECCION_ID" class="select_sec input-group-sm" disabled=""  id="select_sec">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                             </select>  </label>
                                                     </section>
                                                     <section class="col col-3" id="titulo">
@@ -246,7 +246,7 @@
                                                     <section class="col col-3">
                                                         <label class="select" id="titulo">Condición:
                                                             <select name="CONDICION" class="input-group-sm" >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1">Contratado</option>
                                                                 <option value="2">Contratado Independiente</option>
                                                                 <option value="3">Enpleado</option>
@@ -321,7 +321,7 @@
                                                     <section class="col col-2">
                                                         <label class="select" id="titulo">Situación Especial:
                                                             <select name="situacionEspecial" class="input-group-sm situacionEspecial">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
 
                                                             </select>
                                                         </label>
@@ -332,7 +332,7 @@
                                                                 out.print("required='required'");
                                                             }
                                                                 %> >
-                                                            <option value="">[SELECCIONE]</option>
+                                                            <option value="">[Seleccione]</option>
                                                             <%for (int q = 0; q < list_reg_labo.size(); q++) {
                                                                     Regimen_Laboral re = new Regimen_Laboral();
                                                                     re = (Regimen_Laboral) list_reg_labo.get(q);
@@ -349,7 +349,7 @@
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <%for (int l = 0; l < List_modalidad.size(); l++) {
                                                                         Modalidad mo = new Modalidad();
                                                                         mo = (Modalidad) List_modalidad.get(l);
@@ -367,7 +367,7 @@
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                             </select>
                                                         </label>
                                                     </section>
@@ -378,7 +378,7 @@
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="I">INICIO</option>
                                                                 <option value="R">RENOVACION</option>
                                                             </select>
@@ -395,7 +395,7 @@
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <%for (int gr = 0; gr < List_grup_ocu.size(); gr++) {
                                                                         Grupo_Ocupaciones g = new Grupo_Ocupaciones();
                                                                         g = (Grupo_Ocupaciones) List_grup_ocu.get(gr);
@@ -423,7 +423,7 @@
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="01" selected="">SOLES</option>
                                                                 <option value="02">DOLARES</option>
                                                                 <option value="03">EUROS</option>
@@ -437,7 +437,7 @@
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1">DESTAJO</option>
                                                                 <option value="2">COMISIONES</option>
                                                                 <option value="3">NINGUNO</option>
@@ -451,7 +451,7 @@
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1">SI</option>
                                                                 <option value="0">NO</option>
                                                             </select>
@@ -488,7 +488,7 @@
                                                     <section class="col col-4">
                                                         <label class="select" id="titulo">Tipo Trabajador.
                                                             <select name="TIPO_TRABAJADOR" class="input-group-sm" required="">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1" selected>Empleado</option>
                                                                 <option value="2">Obrero</option>
                                                             </select>
@@ -497,7 +497,7 @@
                                                     <section class="col col-4">
                                                         <label class="select" id="titulo">Regimen Laboral: 
                                                             <select name="REGIMEN_LABORAL" class="input-group-sm" required="">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1" selected>Privado</option>
                                                                 <option value="2" selected>Público</option>
                                                             </select>
@@ -506,7 +506,7 @@
                                                     <section class="col col-4">
                                                         <label class="select" id="titulo"> Discapacidad:
                                                             <select name="DISCAPACIDAD" class="input-group-sm" required="">
-                                                                <option value="">[SLECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1" selected>No</option>
                                                                 <option value="2">Si</option>
                                                             </select>
@@ -515,7 +515,7 @@
                                                     <section class="col col-4">
                                                         <label class="select" id="titulo">Regimen Pensionario:
                                                             <select name="REGIMEN_PENSIONARIO" class="input-group-sm" required="">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1" selected>Privado</option>
                                                                 <option value="2">SNP</option>
                                                             </select>
@@ -530,7 +530,7 @@
                                                                         }
                                                                     %>   
                                                                     >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1">Necesidad de Mercado</option>
                                                                 <option value="2">Incremento de Actividad</option>
                                                                 <option value="3">Servicio Especifico</option>
@@ -552,7 +552,7 @@
                                                     <section class="col col-4">
                                                         <label class="select" id="titulo">Tipo Convenio:
                                                             <select name="TIPO_CONVENIO" class="input-group-sm" >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1">CLJ</option>
                                                                 <option value="2">PPP</option>
                                                                 <option value="3">PP</option>
@@ -576,7 +576,7 @@
                                                     <section class="col col-3">
                                                         <label class="select" id="titulo">Filial donde Trabaja:
                                                             <select name="FILIAL" class="input-group-sm" required="">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1" selected >Lima</option>
                                                                 <option value="2">Juliaca</option>
                                                                 <option value="3">Tarapoto</option>
@@ -601,7 +601,7 @@
                                                     <section class="col col-3">
                                                         <label class="select" id="titulo" style="color:red">Plantilla de Contrato:
                                                             <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm"  required="">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                             </select>
                                                         </label>
                                                     </section>
@@ -744,7 +744,7 @@
                     $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function (objJson) {
                         s.empty();
                         var lista = objJson.lista;
-                        s.append("<option value='' > [SELECCIONE] </option>");
+                        s.append("<option value='' > [Seleccione] </option>");
                         for (var j = 0; j < lista.length; j++) {
                             if ($(".dep_pu").val() == lista[j].id) {
                                 s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
@@ -753,8 +753,6 @@
                                 s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
                             }
                         }
-
-
                     });
                 }
                 function Listar_area() {
@@ -763,7 +761,7 @@
                     $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function (objJson) {
                         s.empty();
                         var lista = objJson.lista;
-                        s.append("<option value='' > [SELECCIONE] </option>");
+                        s.append("<option value='' > [Seleccione] </option>");
                         for (var j = 0; j < lista.length; j++) {
 
                             if ($(".area_pu").val() == lista[j].id) {
@@ -781,7 +779,7 @@
                     $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function (objJson) {
                         s.empty();
                         var lista = objJson.lista;
-                        s.append("<option value='' > [SELECCIONE] </option>");
+                        s.append("<option value='' > [Seleccione] </option>");
                         for (var j = 0; j < lista.length; j++) {
 
                             if ($(".sec_pu").val() == lista[j].id) {
@@ -797,7 +795,7 @@
                     $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function (objJson) {
                         s.empty();
                         var lista = objJson.lista;
-                        s.append("<option value='' > [SELECCIONE] </option>");
+                        s.append("<option value='' > [Seleccione] </option>");
                         for (var i = 0; i < lista.length; i++) {
                             s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
                         }
@@ -913,7 +911,7 @@
                         $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
                             a.empty();
                             var list = objJson.lista;
-                            a.append("<option value='' > [SELECCIONE] </option>");
+                            a.append("<option value='' > [Seleccione] </option>");
                             if (list.length !== 0) {
                                 for (var i = 0; i < list.length; i++) {
                                     a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
@@ -929,7 +927,7 @@
                                 return;
                             }
                             var list = objJson.lista;
-                            c.append("<option value='' > [SELECCIONE] </option>");
+                            c.append("<option value='' > [Seleccione] </option>");
                             if (list.length !== 0) {
                                 for (var i = 0; i < list.length; i++) {
                                     c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
@@ -947,7 +945,7 @@
                                 return;
                             }
                             var list = objJson.lista;
-                            b.append("<option value='' > [SELECCIONE] </option>");
+                            b.append("<option value='' > [Seleccione] </option>");
                             if (list.length !== 0) {
                                 for (var i = 0; i < list.length; i++) {
                                     b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
@@ -962,7 +960,7 @@
                             d.empty();
 
                             var list = objJson.lista;
-                            d.append("<option value='' > [SELECCIONE] </option>");
+                            d.append("<option value='' > [Seleccione] </option>");
                             if (list.length !== 0) {
                                 for (var i = 0; i < list.length; i++) {
                                     d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
@@ -980,7 +978,7 @@
                                 return;
                             }
                             var list = objJson.lista;
-                            e.append("<option value='' > [SELECCIONE] </option>");
+                            e.append("<option value='' > [Seleccione] </option>");
                             if (list.length !== 0) {
                                 for (var i = 0; i < list.length; i++) {
                                     e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
