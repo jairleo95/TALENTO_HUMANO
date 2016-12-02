@@ -3,9 +3,7 @@
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
 %>
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
-
 <jsp:useBean id="Lista_hijo_individual" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_tipo_doc" scope="session" class="java.util.ArrayList"/>
 
@@ -362,8 +360,8 @@
 
 
 
-                    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-                    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
+                    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+                    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>-->
 
                     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
                     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>

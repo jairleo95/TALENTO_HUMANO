@@ -20,7 +20,7 @@ import pe.edu.upeu.application.dao_imp.InterfacePlazo_DgpDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.V_Dgp_Plazo;
-import pe.edu.upeu.application.web.controller.CConversion;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -29,7 +29,7 @@ import pe.edu.upeu.application.web.controller.CConversion;
 public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
 
     ConexionBD conn;
-    CConversion c = new CConversion();
+    DateFormat c = new DateFormat();
 
     @Override
     public List<Map<String, ?>> List_Plazo(String tipo) {
@@ -135,8 +135,8 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
             cst.setString(1, null);
             cst.setString(2, NO_PLAZO);
             cst.setString(3, DET_ALERTA);
-            cst.setString(4, c.convertFecha(FE_DESDE));
-            cst.setString(5, c.convertFecha(FE_HASTA));
+            cst.setString(4, DateFormat.toFormat1(FE_DESDE));
+            cst.setString(5, DateFormat.toFormat1(FE_HASTA));
             cst.setString(6, ES_PLAZO);
             cst.setString(7, ID_REQUERIMIENTO);
             cst.setString(8, TI_PLAZO);
@@ -170,8 +170,8 @@ public class Plazo_DgpDAO implements InterfacePlazo_DgpDAO {
             cst.setString(1, ID_PLAZO);
             cst.setString(2, NO_PLAZO);
             cst.setString(3, DET_ALERTA);
-            cst.setString(4, c.convertFecha(FE_DESDE));
-            cst.setString(5, c.convertFecha(FE_HASTA));
+            cst.setString(4, DateFormat.toFormat1(FE_DESDE));
+            cst.setString(5, DateFormat.toFormat1(FE_HASTA));
             cst.setString(6, ES_PLAZO);
             cst.setString(7, ID_DEPARTAMENTO);
             cst.setString(8, TI_PLAZO);

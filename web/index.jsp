@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <!DOCTYPE html>
 <html lang="en-us" id="extr-page">
     <head>
@@ -227,6 +228,6 @@
         <![endif]-->
         <!-- MAIN APP JS FILE -->
         <script src="js/app.min.js"></script>
-        <script src="js/Js_Index/index.js" type="text/javascript"></script>
+        <script src="js/Js_Index/index.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
     </body>
 </html>

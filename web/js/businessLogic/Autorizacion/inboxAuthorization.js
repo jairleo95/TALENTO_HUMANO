@@ -147,7 +147,7 @@ function loadDatatableCargaAcademica() {
                 $(".tableAutCargaAcademica").DataTable({
                     "initComplete": function (settings, json) {
                         var api = this.api();
-                        console.log(" filas:"+api.rows().length);
+                        console.log(" filas:" + api.rows().length);
                         $(".badgeAutCAcademico").text(api.rows().length).show();
                     }
                 });
@@ -341,7 +341,7 @@ function sendEmail(dataRequest, callback) {
         //  async: false,
         url: "../../autorizacion",
         type: "POST", success: function (data, textStatus, jqXHR) {
-            if (data.rpta) {
+            if (data.status) {
                 statusBarAut.text("Correos enviados!").fadeOut('slow');
                 //  console.log(table.row(inputItem.parent('tr')).data());
                 $.bigBox({
@@ -355,6 +355,16 @@ function sendEmail(dataRequest, callback) {
                 if (typeof callback !== 'undefined') {
                     callback(data);
                 }
+            } else if (!data.status) {
+                statusBarAut.text("Ha ocurrido un error en el envio de correos.");
+                $.bigBox({
+                    title: "Ha ocurrido un error en el envio de correos.",
+                    content: "<i class='fa fa-clock-o'></i> <i>" + data.mensaje + "</i>",
+                    color: "#953b39",
+                    icon: "fa fa-check shake animated"
+                            //,number: "1"
+                            //,timeout: 6000
+                });
             }
         },
         data: dataRequest
@@ -377,10 +387,10 @@ $(document).ready(function () {
     $(".inp_cod_huella").keypress(function (event) {
         return /\d/.test(String.fromCharCode(event.keyCode));
     });
-    $(".btnHorario").click(function(){
+    $(".btnHorario").click(function () {
         listHorario($(this).data("valor"));
     });
-    
+
     listar_autorizados(mes, anno);
     /* BASIC ;*/
     var responsiveHelper_dt_basic = undefined;
@@ -469,12 +479,12 @@ $(document).ready(function () {
             if (ButtonPressed === "Si") {
 
                 var lenghtDatatable = $('#dt_basic1 tr').length;
-                 console.log("total:"+lenghtDatatable);
-            
-            $.each($(".inp_cod_aps"),function(index){
-                 var itemCodAps = $(this);
-                 var valAut = itemCodAps.parents('tr').find(".valAut");
-                  if (itemCodAps.val() !== "" & typeof itemCodAps.val() !== 'undefined') {
+                console.log("total:" + lenghtDatatable);
+
+                $.each($(".inp_cod_aps"), function (index) {
+                    var itemCodAps = $(this);
+                    var valAut = itemCodAps.parents('tr').find(".valAut");
+                    if (itemCodAps.val() !== "" & typeof itemCodAps.val() !== 'undefined') {
                         console.log(index + "codigo aps: " + itemCodAps.val());
                         $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
                         $.ajax({
@@ -499,8 +509,8 @@ $(document).ready(function () {
                                 }
                             }
                         });
-                  }
-            });
+                    }
+                });
             }
             if (ButtonPressed === "No") {
             }

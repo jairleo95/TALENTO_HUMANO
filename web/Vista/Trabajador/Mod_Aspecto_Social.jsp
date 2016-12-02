@@ -17,7 +17,6 @@
 <%@page import="pe.edu.upeu.application.model.Carrera"%>
 <%@page import="pe.edu.upeu.application.model.V_Ubigeo"%>
 <%@page import="pe.edu.upeu.application.model.Nacionalidad"%>
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 
 <%
     HttpSession sesion_1 = request.getSession(true);

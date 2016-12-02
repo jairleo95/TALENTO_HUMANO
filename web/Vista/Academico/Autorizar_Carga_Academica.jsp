@@ -1,4 +1,3 @@
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion = request.getSession();
@@ -63,7 +62,6 @@
 
     </head>
     <%
-        CConversion c = new CConversion();
         int t = List_Autorizacion_Academico.size();
     %>
 

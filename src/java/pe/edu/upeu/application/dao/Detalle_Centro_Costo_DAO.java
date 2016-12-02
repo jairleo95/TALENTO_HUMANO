@@ -11,7 +11,7 @@ import java.sql.Types;
 import pe.edu.upeu.application.dao_imp.InterfaceDetalle_Centro_Costo;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
-import pe.edu.upeu.application.web.controller.CConversion;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -20,7 +20,7 @@ import pe.edu.upeu.application.web.controller.CConversion;
 public class Detalle_Centro_Costo_DAO implements InterfaceDetalle_Centro_Costo {
 
     ConexionBD conn;
-    CConversion c = new CConversion();
+    DateFormat c = new DateFormat();
 
     @Override
     public String INSERT_DETALLE_CENTRO_COSTO(String ID_DETALLE_CENTRO_COSTO,

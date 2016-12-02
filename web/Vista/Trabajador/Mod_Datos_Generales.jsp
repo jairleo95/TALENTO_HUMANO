@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.util.DateFormat"%>
 <%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <%@page import="pe.edu.upeu.application.model.Ub_Distrito"%>
 <%@page import="pe.edu.upeu.application.model.Ub_Provincia"%>
@@ -18,7 +19,6 @@
 <%@page import="pe.edu.upeu.application.model.Carrera"%>
 <%@page import="pe.edu.upeu.application.model.V_Ubigeo"%>
 <%@page import="pe.edu.upeu.application.model.Nacionalidad"%>
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 
 <%
     HttpSession sesion_1 = request.getSession(true);
@@ -424,7 +424,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i><label class="edad"></label></span>
                                                                             
-                                                                            <input type="text" name="FECHA_NAC" <%if (!rol.equals("ROL-0001")) out.print("readonly=''");   %> required="" value="<%=FactoryConnectionDB.convertFecha4(t.getFe_nac())%>" id="edad"  class=" form-control input-group-sm fecha fechapicker"  data-mask="00/00/0000" autocomplete="off" required="">
+                                                                            <input type="text" name="FECHA_NAC" <%if (!rol.equals("ROL-0001")) out.print("readonly=''");   %> required="" value="<%=DateFormat.toFormat4(t.getFe_nac())%>" id="edad"  class=" form-control input-group-sm fecha fechapicker"  data-mask="00/00/0000" autocomplete="off" required="">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -906,7 +906,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <% CConversion c = new CConversion();
+                                                            <%
                                                                 String edit = request.getParameter("edit");
                                                             %>
                                                             <!--<input type="text" value="<%=t.getFe_nac()%>"> -->               

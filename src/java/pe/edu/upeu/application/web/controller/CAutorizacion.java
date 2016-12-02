@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import pe.edu.upeu.application.util.CCriptografiar;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -537,7 +538,7 @@ public class CAutorizacion extends HttpServlet {
                                 + "- Boletín Informativo - sistema pensionario\n \n"
                                 + "Saludos Cordiales");
                         rpta.put("sendto", correo_inst + ", " + correo_personal);
-                        rpta.put("rpta", true);
+                        rpta.put("status", true);
 
                     }
                     if (opc.equals("List_Dgp_Aut")) {
@@ -709,6 +710,7 @@ public class CAutorizacion extends HttpServlet {
                 }
             } catch (Exception ex) {
                 rpta.put("rpta", "-1");
+                rpta.put("status", false);
                 rpta.put("mensaje", ex.getMessage());
             } finally {
                 Gson gson = new Gson();

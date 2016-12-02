@@ -1,3 +1,5 @@
+package pe.edu.upeu.application.test;
+
 /*Clase que permite escribir en un archivo de texto*/
 
 //Importamos clases que se usaran

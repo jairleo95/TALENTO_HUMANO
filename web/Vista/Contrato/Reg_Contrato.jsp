@@ -1,4 +1,5 @@
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
+<%@page import="pe.edu.upeu.application.util.DateFormat"%>
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion = request.getSession();
@@ -124,7 +125,7 @@
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
 
-                                        <%CConversion c = new CConversion();
+                                        <%
                                             for (int u = 0; u < LIST_ID_DGP.size(); u++) {
                                                 V_Det_DGP d = new V_Det_DGP();
                                                 d = (V_Det_DGP) LIST_ID_DGP.get(u);
@@ -178,12 +179,12 @@
                                                     <input type="hidden"  value="<%=d.getId_trabajador()%>" class="idtr">                              
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Inicio: 
-                                                            <input onchange="c()" type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" id="ifechai" class=" input-group-sm" required="">
+                                                            <input onchange="c()" type="date" name="FEC_DESDE" value="<%=DateFormat.toFormat3(d.getFe_desde())%>" id="ifechai" class=" input-group-sm" required="">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Cese: 
-                                                            <input type="date" name="FEC_HASTA" value="<%=c.convertFecha3(d.getFe_hasta())%>" class="input-group-sm" required="">
+                                                            <input type="date" name="FEC_HASTA" value="<%=DateFormat.toFormat3(d.getFe_hasta())%>" class="input-group-sm" required="">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3" id="titulo">
@@ -407,7 +408,7 @@
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Suscripción:
-                                                            <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION" class="input-group-sm"  value="<%=c.convertFecha3(d.getFe_desde())%>" max="<%=c.convertFecha3(d.getFe_desde())%>" 
+                                                            <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION" class="input-group-sm"  value="<%=DateFormat.toFormat3(d.getFe_desde())%>" max="<%=DateFormat.toFormat3(d.getFe_desde())%>" 
                                                                    <%
                                                                        if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
                                                                            out.print("required='required'");
@@ -734,9 +735,10 @@
         <script src="../../js/plugin/knob/jquery.knob.min.js"></script>
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-        <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
-        <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
-        <script type="text/javascript" src="../../js/businessLogic/Horario/horario.js"></script>
+        <!--BUSINESS LOGIC PLUGINS-->
+        <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+        <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>"></script>
+        <script type="text/javascript" src="../../js/businessLogic/Horario/horario.js?v=<%=globalProperties.VERSION_JS%>"></script>
     </body>
     <script  type="text/javascript">
                 function Listar_dep() {

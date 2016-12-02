@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import pe.edu.upeu.application.util.DateFormat;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,7 +35,7 @@ public class CImpresion_Masiva extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    CConversion co = new CConversion();
+    DateFormat co = new DateFormat();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,7 +46,7 @@ public class CImpresion_Masiva extends HttpServlet {
         HttpSession sesion = request.getSession(true);
         PrintWriter out = response.getWriter();
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
-        CConversion co = new CConversion();
+        DateFormat co = new DateFormat();
         InterfaceContratoDAO c = new ContratoDAO();
         try {
             if (opc.equals("filtrar")) {

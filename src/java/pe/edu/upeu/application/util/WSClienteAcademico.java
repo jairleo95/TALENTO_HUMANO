@@ -1,19 +1,19 @@
-package pe.edu.upeu.application.factory;
+package pe.edu.upeu.application.util;
 
+import pe.edu.upeu.application.util.StringMD;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.sql.CallableStatement;
-import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.xml.soap.*;
 import oracle.sql.ARRAY;
 import oracle.sql.ArrayDescriptor;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
+import pe.edu.upeu.application.factory.ConexionBD;
+import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.properties.globalProperties;
 
 public class WSClienteAcademico {
     
@@ -124,10 +124,10 @@ public class WSClienteAcademico {
         SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
         SOAPConnection soapConnection = soapConnectionFactory.createConnection();
         // Send SOAP Message to SOAP Server
-        String keyPub = StringMD.getStringMessageDigest(FactoryConnectionDB.keyApp + hour, StringMD.MD5);
-        System.out.println(FactoryConnectionDB.service + keyPub);
-        System.out.println(FactoryConnectionDB.keyApp + hour);
-        SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(semestre), FactoryConnectionDB.service + keyPub);
+        String keyPub = StringMD.getStringMessageDigest(globalProperties.keyApp + hour, StringMD.MD5);
+        System.out.println(globalProperties.service + keyPub);
+        System.out.println(globalProperties.keyApp + hour);
+        SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(semestre), globalProperties.service + keyPub);
          
         // print SOAP Response
       //  System.out.println("Response SOAP Message:");
@@ -153,12 +153,12 @@ public class WSClienteAcademico {
             SOAPPart soapPart = soapMessage.getSOAPPart();
             // SOAP Envelope
             SOAPEnvelope envelope = soapPart.getEnvelope();
-            envelope.addNamespaceDeclaration("ns1", FactoryConnectionDB.serverURI);
+            envelope.addNamespaceDeclaration("ns1", globalProperties.serverURI);
             // SOAP Body
             SOAPBody soapBody = envelope.getBody();
             SOAPElement soapBodyElem = soapBody.addChildElement("DocenteXCurso", "ns1");
             SOAPElement soapBodyElem1 = soapBodyElem.addChildElement("key", "ns1");
-            soapBodyElem1.addTextNode(FactoryConnectionDB.keyID);
+            soapBodyElem1.addTextNode(globalProperties.keyID);
             SOAPElement soapBodyElem2 = soapBodyElem.addChildElement("semestre", "ns1");
             soapBodyElem2.addTextNode(semestre);
             /*MimeHeaders headers = soapMessage.getMimeHeaders();

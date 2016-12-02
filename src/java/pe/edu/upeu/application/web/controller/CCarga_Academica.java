@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import pe.edu.upeu.application.util.CCriptografiar;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,9 +36,11 @@ import pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
-import pe.edu.upeu.application.factory.WSClienteAcademico;
+import pe.edu.upeu.application.util.WSClienteAcademico;
 import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Detalle_Carga_Academica;
+import pe.edu.upeu.application.properties.UserMachineProperties;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -126,8 +129,8 @@ public class CCarga_Academica extends HttpServlet {
                 /*Registrar proceso de carga academica*/
                 String CA_TIPO_HORA_PAGO = request.getParameter("TiHoraPago");
                 double CA_TOTAL_HL = Double.parseDouble(request.getParameter("HL"));
-                String FE_DESDE = FactoryConnectionDB.convertFecha3(request.getParameter("DESDE"));
-                String FE_HASTA = FactoryConnectionDB.convertFecha3(request.getParameter("HASTA"));
+                String FE_DESDE = DateFormat.toFormat3(request.getParameter("DESDE"));
+                String FE_HASTA = DateFormat.toFormat3(request.getParameter("HASTA"));
                 int numero = Integer.parseInt(request.getParameter("num_itera"));
                 String ID_TRABAJADOR = CCriptografiar.Desencriptar(request.getParameter("idtr"));
                 String eap = request.getParameter("eap");
@@ -139,12 +142,12 @@ public class CCarga_Academica extends HttpServlet {
                 d.setId_puesto("PUT-000482");
                 d.setId_requerimiento("REQ-0018");
                 d.setId_trabajador(ID_TRABAJADOR);
-                d.setIp_usuario(FactoryConnectionDB.detalle_ip());
+                d.setIp_usuario(UserMachineProperties.getAll());
                 d.setUs_creacion(iduser);
                 String iddgp = carga.insertDGP(d);
                 /*PROCESO CARGA ACADEMICA*/
                 String ID_PROCESO_CARGA_AC = carga.INSERT_PROCESO_CARGA_ACADEMICA(null, null, CA_TIPO_HORA_PAGO, CA_TOTAL_HL, FE_DESDE, FE_HASTA, "0", iduser, null, null, null,
-                        FactoryConnectionDB.detalle_ip(), iduser, iddgp.trim());
+                        UserMachineProperties.getAll(), iduser, iddgp.trim());
                 /*CUOTAS PAGO DOCENTE*/
                 for (int i = 1; i <= numero; i++) {
                     /*pago docente (iterar)*/
@@ -152,7 +155,7 @@ public class CCarga_Academica extends HttpServlet {
                     double CA_CUOTA = Double.parseDouble(request.getParameter("MES" + i));
                     /*CORREGIR FECHAS*/
                     String FE_PAGO = request.getParameter("FECHA" + i);
-                    carga.INSERT_PAGO_DOCENTE(null, NU_CUOTA, CA_CUOTA, FE_PAGO, null, ID_PROCESO_CARGA_AC.trim(), null, null, null, FactoryConnectionDB.detalle_ip(), iduser);
+                    carga.INSERT_PAGO_DOCENTE(null, NU_CUOTA, CA_CUOTA, FE_PAGO, null, ID_PROCESO_CARGA_AC.trim(), null, null, null, UserMachineProperties.getAll(), iduser);
                 }
                 /*DETALLE CARGA ACADEMICA*/
                 List<V_Detalle_Carga_Academica> lCargaAcad = carga.Lista_detalle_academico(ID_TRABAJADOR, facultad, eap, "", "");

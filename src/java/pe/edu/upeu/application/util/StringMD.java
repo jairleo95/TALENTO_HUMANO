@@ -1,4 +1,4 @@
-package pe.edu.upeu.application.factory;
+package pe.edu.upeu.application.util;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,7 +17,6 @@ package pe.edu.upeu.application.factory;
  */
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 public class StringMD {
 
     //algoritmos

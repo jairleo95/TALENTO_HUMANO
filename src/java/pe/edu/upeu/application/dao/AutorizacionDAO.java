@@ -23,7 +23,9 @@ import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Autorizacion;
 import pe.edu.upeu.application.model.V_Autorizar_Dgp;
 import pe.edu.upeu.application.model.X_List_De_Autorizacion;
-import pe.edu.upeu.application.web.controller.CConversion;
+import pe.edu.upeu.application.properties.UserMachineProperties;
+import pe.edu.upeu.application.properties.globalProperties;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -31,7 +33,7 @@ import pe.edu.upeu.application.web.controller.CConversion;
  */
 public class AutorizacionDAO implements InterfaceAutorizacionDAO {
 
-    CConversion c = new CConversion();
+    DateFormat c = new DateFormat();
     ConexionBD conn;
 
     @Override
@@ -44,7 +46,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             cst.setString(2, ID_DGP);
             cst.setString(3, ES_AUTORIZACION);
             cst.setString(4, NU_PASOS);
-            cst.setString(5, FactoryConnectionDB.detalle_ip());
+            cst.setString(5, UserMachineProperties.getAll());
             cst.setString(6, US_CREACION);
             cst.setString(7, US_MODIF);
             cst.setString(8, FE_MODIF);

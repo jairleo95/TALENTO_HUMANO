@@ -26,7 +26,7 @@ import pe.edu.upeu.application.model.Trabajador;
 import pe.edu.upeu.application.model.Universidad_Carrera;
 import pe.edu.upeu.application.model.V_Ficha_Trab_Num_C;
 import pe.edu.upeu.application.model.X_List_dat_tr_plantilla;
-import pe.edu.upeu.application.web.controller.CConversion;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -34,7 +34,7 @@ import pe.edu.upeu.application.web.controller.CConversion;
  */
 public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 
-    CConversion c = new CConversion();
+    DateFormat c = new DateFormat();
     ConexionBD conn;
 
     @Override
@@ -62,7 +62,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(5, TI_DOC);
             cst.setString(6, NU_DOC);
             cst.setString(7, ES_CIVIL);
-            cst.setString(8, FactoryConnectionDB.convertFecha(FE_NAC));
+            cst.setString(8, DateFormat.toFormat1(FE_NAC));
             cst.setString(9, ID_NACIONALIDAD);
             cst.setString(10, ID_DEPARTAMENTO);
             cst.setString(11, ID_PROVINCIA);
@@ -121,7 +121,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(64, ES_TRABAJA_UPEU_C);
             cst.setString(65, AP_NOMBRES_C);
             if (FE_NAC_C != null) {
-                cst.setString(66, FactoryConnectionDB.convertFecha(FE_NAC_C));
+                cst.setString(66, DateFormat.toFormat1(FE_NAC_C));
             } else {
                 cst.setString(66, FE_NAC_C);
             }
@@ -745,7 +745,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(4, TI_DOC);
             cst.setString(5, NU_DOC);
             cst.setString(6, ES_CIVIL);
-            cst.setString(7, c.convertFecha(FE_NAC));
+            cst.setString(7, DateFormat.toFormat1(FE_NAC));
             cst.setString(8, ID_NACIONALIDAD);
             cst.setString(9, ID_DEPARTAMENTO);
             cst.setString(10, ID_PROVINCIA);

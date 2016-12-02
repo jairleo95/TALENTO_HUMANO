@@ -1,5 +1,6 @@
 
 
+<%@page import="pe.edu.upeu.application.util.DateFormat"%>
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
@@ -12,8 +13,6 @@
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceListaDAO"%>
-<%@page import="pe.edu.upeu.application.web.controller.CCriptografiar"%>
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%@page import="pe.edu.upeu.application.model.Empleado"%>
 <%@page import="javax.print.DocFlavor.STRING"%>
@@ -180,7 +179,6 @@
                         <a class="ver_foto btn bg-color-purple txt-color-white btn-xs">Cambiar Foto</a>           
                         <div class="media-body">
                             <%
-                                CConversion c = new CConversion();
                                 for (int index = 0; index < ListaridTrabajador.size(); index++) {
                                     V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
                                     trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
@@ -191,7 +189,7 @@
                             <strong>  Nombre : </strong><%=trb.getNo_trabajador().toUpperCase()%><br>
                             <strong>Apellido Paterno :</strong> <%=trb.getAp_paterno().toUpperCase()%><br>
                             <strong>Apellido Materno :</strong> <%=trb.getAp_materno().toUpperCase()%><br>
-                            <strong>Fecha de Nacimiento :</strong><%=c.convertFecha5(trb.getFe_nac())%><br>
+                            <strong>Fecha de Nacimiento :</strong><%=DateFormat.toFormat5(trb.getFe_nac())%><br>
                             <%if (idrol.trim().equals("ROL-0009")) {%>
 
                             <strong>Tipo Documento: </strong>

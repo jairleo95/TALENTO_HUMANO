@@ -1,4 +1,4 @@
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
+<%@page import="pe.edu.upeu.application.util.DateFormat"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -136,7 +136,7 @@
                                                                                                                                         </tr>
                                                                                                                                     </thead>
                                                                                                                                     <tbody>
-                                                                                                                                        <%CConversion c = new CConversion();
+                                                                                                                                        <%
                                                                                                                                             for (int i = 0; i < List_Casos_Esp.size(); i++) {
                                                                                                                                                 V_List_Empleado e = new V_List_Empleado();
                                                                                                                                                 e = (V_List_Empleado) List_Casos_Esp.get(i);
@@ -148,9 +148,9 @@
                                                                                                                                             <td><%=e.getNo_area()%></td>
                                                                                                                                             <td><%=e.getNo_seccion()%></td>
                                                                                                                                             <td><%=e.getNo_puesto()%></td>
-                                                                                                                                            <td><%=c.convertFecha5(e.getFe_desde())%></td>
+                                                                                                                                            <td><%=DateFormat.toFormat5(e.getFe_desde())%></td>
                                                                                                                                             <%if (e.getFe_hasta() != null) {%>
-                                                                                                                                            <td><%=c.convertFecha5(e.getFe_hasta())%></td>
+                                                                                                                                            <td><%=DateFormat.toFormat5(e.getFe_hasta())%></td>
                                                                                                                                             <%} else {%>
                                                                                                                                             <td>Indeterminado</td>
                                                                                                                                             <%}%>

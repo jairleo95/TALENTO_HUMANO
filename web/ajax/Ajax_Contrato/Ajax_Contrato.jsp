@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.util.DateFormat"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.google.gson.Gson"%>
@@ -8,14 +9,12 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <%@page import="pe.edu.upeu.application.factory.ConexionBD"%>
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 
 <%
     response.setContentType("application/json");
     response.setCharacterEncoding("UTF-8");
 
     HttpSession sesion = request.getSession(true);
-    CConversion c = new CConversion();
     ConexionBD cnn;
     String Accion = request.getParameter("action");
 
@@ -48,7 +47,8 @@
             sql += (!"".equals(seccion)) ? "  and upper(no_seccion) like'%" + seccion + "%'" : "";
             //sql += (!"".equals(iduser)) ? "  and us_creacion='" + iduser.trim() + "'" : "";
             // sql +=(!"".equals(proceso))?"  and dp.id_proceso='"+proceso+"'":"";
-            sql += (!"".equals(c.convertFecha(del.trim())) && !"".equals(c.convertFecha(al.trim()))) ? " AND FE_CREACION BETWEEN '" + c.convertFecha(del.trim())+ "' and '" + c.convertFecha(al.trim())+ "'" : "";
+            sql += (!"".equals(DateFormat.toFormat1(del.trim())) && !"".equals(DateFormat.toFormat1(al.trim()))) ? " AND FE_CREACION BETWEEN '" +
+                    DateFormat.toFormat1(del.trim())+ "' and '" + DateFormat.toFormat1(al.trim())+ "'" : "";
             /* sql +=(!"".equals(iddep))?"  and du.id_departamento='"+iddep+"'":"";
             
              if(!"".equals(order)){

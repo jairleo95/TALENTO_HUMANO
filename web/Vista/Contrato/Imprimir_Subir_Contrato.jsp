@@ -17,7 +17,6 @@
 <%@page import="pe.edu.upeu.application.model.X_List_Plantilla"%>
 <%@page import="pe.edu.upeu.application.dao.PlantillaDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfacePlantillaDAO"%>
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.X_List_Id_Contrato_DGP"%>
 
 <jsp:useBean id="List_contra_x_idcto" scope="session" class="java.util.ArrayList"/>

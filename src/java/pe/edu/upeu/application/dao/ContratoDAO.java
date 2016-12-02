@@ -25,7 +25,7 @@ import pe.edu.upeu.application.model.Sub_Modalidad;
 import pe.edu.upeu.application.model.V_Contrato_dgp;
 import pe.edu.upeu.application.model.V_List_Empleado;
 import pe.edu.upeu.application.model.X_List_Id_Contrato_DGP;
-import pe.edu.upeu.application.web.controller.CConversion;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -34,7 +34,7 @@ import pe.edu.upeu.application.web.controller.CConversion;
 public class ContratoDAO implements InterfaceContratoDAO {
 
     ConexionBD conn;
-    CConversion c = new CConversion();
+    DateFormat c = new DateFormat();
 
     @Override
     public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE,
@@ -57,11 +57,11 @@ public class ContratoDAO implements InterfaceContratoDAO {
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? ,?,?)} ");
             cst.setString(1, null);
             cst.setString(2, ID_DGP);
-            cst.setString(3, c.convertFecha(FE_DESDE));
+            cst.setString(3, DateFormat.toFormat1(FE_DESDE));
             if (FE_HASTA.equals("")) {
                 cst.setString(4, FE_HASTA);
             } else {
-                cst.setString(4, c.convertFecha(FE_HASTA));
+                cst.setString(4, DateFormat.toFormat1(FE_HASTA));
             }
             cst.setString(5, FE_CESE);
             cst.setString(6, ID_FUNC);
@@ -105,7 +105,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(44, ID_MODALIDAD);
             cst.setString(45, ID_SUB_MODALIDAD);
             cst.setString(46, CO_GR_OCUPACION);
-            cst.setString(47, c.convertFecha(FE_SUSCRIPCION));
+            cst.setString(47, DateFormat.toFormat1(FE_SUSCRIPCION));
             cst.setString(48, CO_TI_MONEDA);
             cst.setString(49, CO_TI_REM_VARIAB);
             cst.setString(50, DE_REMU_ESPECIE);
@@ -579,20 +579,20 @@ public class ContratoDAO implements InterfaceContratoDAO {
             String sql = "select  *  from RHVD_FILTRO_CONTRATO_TERMINADO WHERE FE_CREACION IS NOT NULL ";
             if (!de.equals("") || !al.equals("") || !fe_i.equals("") || !fe_fin.equals("") || !fe_sus.equals("")) {//si busca por fecha
                 if (!de.equals("") && !al.equals("")) {
-                    sql += "AND FE_CREACION BETWEEN '" + c.convertFecha(de) + "' AND '" + c.convertFecha(al) + "' ";
+                    sql += "AND FE_CREACION BETWEEN '" + DateFormat.toFormat1(de) + "' AND '" + DateFormat.toFormat1(al) + "' ";
                 }
                 if (!fe_i.equals("") && !fe_fin.equals("")) {
-                    sql += "AND FE_DESDE >= '" + c.convertFecha(fe_i) + "' AND FE_HASTA <='" + c.convertFecha(fe_fin) + "' ";
+                    sql += "AND FE_DESDE >= '" + DateFormat.toFormat1(fe_i) + "' AND FE_HASTA <='" + DateFormat.toFormat1(fe_fin) + "' ";
                 } else {
                     if (!fe_i.equals("")) {
-                        sql += "AND FE_DESDE BETWEEN '" + c.convertFecha(fe_i) + "' AND (select SYSDATE from dual) ";
+                        sql += "AND FE_DESDE BETWEEN '" + DateFormat.toFormat1(fe_i) + "' AND (select SYSDATE from dual) ";
                     }
                     if (!fe_fin.equals("")) {
-                        sql += "AND FE_HASTA BETWEEN (SELECT MIN(FE_DESDE) AND '" + c.convertFecha(fe_fin) + "' ";
+                        sql += "AND FE_HASTA BETWEEN (SELECT MIN(FE_DESDE) AND '" + DateFormat.toFormat1(fe_fin) + "' ";
                     }
                 }
                 if (!fe_sus.equals("")) {
-                    sql += "AND FE_SUSCRIPCION = '" + c.convertFecha(fe_sus) + "' ";
+                    sql += "AND FE_SUSCRIPCION = '" + DateFormat.toFormat1(fe_sus) + "' ";
                 }
 
             }
@@ -903,11 +903,11 @@ public class ContratoDAO implements InterfaceContratoDAO {
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MODIF_CONTRATO( ?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? ,?)} ");
             cst.setString(1, ID_CONTRATO);
             cst.setString(2, ID_DGP);
-            cst.setString(3, c.convertFecha(FE_DESDE));
+            cst.setString(3, DateFormat.toFormat1(FE_DESDE));
             if (FE_HASTA.equals("")) {
                 cst.setString(4, FE_HASTA);
             } else {
-                cst.setString(4, c.convertFecha(FE_HASTA));
+                cst.setString(4, DateFormat.toFormat1(FE_HASTA));
             }
             cst.setString(5, FE_CESE);
             cst.setString(6, ID_FUNC);
@@ -952,7 +952,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(44, ID_MODALIDAD);
             cst.setString(45, ID_SUB_MODALIDAD);
             cst.setString(46, CO_GR_OCUPACION);
-            cst.setString(47, c.convertFecha(FE_SUSCRIPCION));
+            cst.setString(47, DateFormat.toFormat1(FE_SUSCRIPCION));
             cst.setString(48, CO_TI_MONEDA);
             cst.setString(49, CO_TI_REM_VARIAB);
             cst.setString(50, DE_REMU_ESPECIE);

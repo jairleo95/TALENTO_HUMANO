@@ -1,5 +1,5 @@
 
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
+<%@page import="pe.edu.upeu.application.util.DateFormat"%>
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%@page import="pe.edu.upeu.application.model.V_Ficha_Trab_Num_C"%>
 <%    HttpSession sesion_ = request.getSession();
@@ -63,7 +63,6 @@
         <%
             HttpSession sesion = request.getSession(true);
             String rol = (String) sesion.getAttribute("IDROL");
-            CConversion c = new CConversion();
             for (int q = 0; q < ListaridTrabajador.size(); q++) {
                 V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
                 tr = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(q);
@@ -124,7 +123,7 @@
                     }
                         %></td></tr>
                 <tr><td class="text-info">Fecha de Nacimiento:</td><td class="text-info-left"><%if (tr.getFe_nac_c() != null) {
-                        out.print(c.convertFecha5(tr.getFe_nac_c()));
+                        out.print(DateFormat.toFormat5(tr.getFe_nac_c()));
                     } else {
                         out.print("No registrado");
                     }

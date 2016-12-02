@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.CentroCostoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCentroCosto;
-import pe.edu.upeu.application.factory.StringTools;
+import pe.edu.upeu.application.util.StringTools;
 
 /**
  *

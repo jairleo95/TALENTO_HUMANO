@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.Solicitud_RequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSolicitud_RequerimientoDAO;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -123,7 +124,7 @@ public class CSolicitud_Requerimiento extends HttpServlet {
             String tipo = request.getParameter("tipo");
             String fecha = request.getParameter("fecha");
             String comentario = request.getParameter("comentario");
-            s.procesar_solicitud(tipo, id, FactoryConnectionDB.convertFecha3(fecha), iduser, comentario);
+            s.procesar_solicitud(tipo, id, DateFormat.toFormat3(fecha), iduser, comentario);
             rpta.put("rpta", "1");
         }
         if (opc.equals("Val_Envio_Solicitud")) {

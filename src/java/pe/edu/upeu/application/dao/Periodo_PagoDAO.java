@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import pe.edu.upeu.application.dao_imp.InterfacePeriodo_PagoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
-import pe.edu.upeu.application.web.controller.CConversion;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -22,7 +22,7 @@ import pe.edu.upeu.application.web.controller.CConversion;
  */
 public class Periodo_PagoDAO implements InterfacePeriodo_PagoDAO{
     ConexionBD conn;
-    CConversion c = new CConversion();
+    DateFormat c = new DateFormat();
 
     @Override
     public void InsetarPeriodo_Pago(String ID_PERIODO_PAGO, Double NU_CUOTA, String FE_PAGAR, Double CA_MONTO, String ID_DGP, String ES_PER_PAGO) {
@@ -31,7 +31,7 @@ public class Periodo_PagoDAO implements InterfacePeriodo_PagoDAO{
             CallableStatement pp = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PERIODO_PAGO(?, ?, ?, ?, ?, ? )}");
             pp.setString(1, null);
             pp.setDouble(2, NU_CUOTA);
-            pp.setString(3, c.convertFecha(FE_PAGAR));
+            pp.setString(3, DateFormat.toFormat1(FE_PAGAR));
             pp.setDouble(4, CA_MONTO);
             pp.setString(5, ID_DGP );
             pp.setString(6, ES_PER_PAGO);

@@ -59,6 +59,8 @@ import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.properties.UserMachineProperties;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -150,7 +152,7 @@ public class CDgp extends HttpServlet {
             }
             if (opc.equals("Val_Fe_Inicio")) {
                 String fecha = request.getParameter("fecha");
-                String newFormat = FactoryConnectionDB.convertFecha3(fecha);
+                String newFormat = DateFormat.toFormat3(fecha);
                 System.out.println("new format :" + newFormat);
                 boolean respuesta = dgp.val_fe_inicio_dgp(newFormat);
                 rpta.put("rpta", "1");
@@ -249,9 +251,9 @@ public class CDgp extends HttpServlet {
                 } else {
                     ES_PRESUPUESTADO = "0";
                 }
-                FE_DESDE = FactoryConnectionDB.convertFecha3(FE_DESDE);
-                FE_HASTA = FactoryConnectionDB.convertFecha3(FE_HASTA);
-                out.println("Nueva fecha :"+FactoryConnectionDB.convertFecha(FE_HASTA));
+                FE_DESDE = DateFormat.toFormat3(FE_DESDE);
+                FE_HASTA = DateFormat.toFormat3(FE_HASTA);
+                out.println("Nueva fecha :"+DateFormat.toFormat1(FE_HASTA));
 
                 dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO,
                         DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION,
@@ -279,7 +281,7 @@ public class CDgp extends HttpServlet {
                     String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
                     double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
                     if (ID_CENTRO_COSTO != null && porcentaje != 0.0) {
-                        dcc.INSERT_DETALLE_CENTRO_COSTO(null, iddgp, porcentaje, "1", iduser, null, null, null, FactoryConnectionDB.detalle_ip(), null, ID_CENTRO_COSTO);
+                        dcc.INSERT_DETALLE_CENTRO_COSTO(null, iddgp, porcentaje, "1", iduser, null, null, null, UserMachineProperties.getAll(), null, ID_CENTRO_COSTO);
                     }
                 }
                 List<String> list = a.Det_Autorizacion(idrp);
@@ -642,8 +644,8 @@ public class CDgp extends HttpServlet {
                 } else {
                     ES_PRESUPUESTADO = "1";
                 }
-                FE_DESDE = FactoryConnectionDB.convertFecha3(FE_DESDE);
-                FE_HASTA = FactoryConnectionDB.convertFecha3(FE_HASTA);
+                FE_DESDE = DateFormat.toFormat3(FE_DESDE);
+                FE_HASTA = DateFormat.toFormat3(FE_HASTA);
                 dgp.MODIFICAR_DGP(ID_DGP, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO,
                         DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION,
                         ES_DGP, null, FE_CREACION, iduser, FE_MODIF, IP_USUARIO, CA_BONO_ALIMENTARIO, DE_BEV, DE_ANTECEDENTES_POLICIALES, ES_CERTIFICADO_SALUD,
@@ -672,7 +674,7 @@ public class CDgp extends HttpServlet {
                             double porc_nuevo = Double.parseDouble(request.getParameter("PORCENTAJE_" + (1 + i)));
                             String centro_c_nuevo = request.getParameter("CENTRO_COSTOS_" + (1 + i));
                             String id_cont = request.getParameter("id_contrato");
-                            dcc.INSERT_DETALLE_CENTRO_COSTO("", ID_DGP, porc_nuevo, "1", iduser, "", "", "", FactoryConnectionDB.detalle_ip(), id_cont, centro_c_nuevo);
+                            dcc.INSERT_DETALLE_CENTRO_COSTO("", ID_DGP, porc_nuevo, "1", iduser, "", "", "", UserMachineProperties.getAll(), id_cont, centro_c_nuevo);
 
                         }
                     }

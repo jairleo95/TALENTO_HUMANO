@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import pe.edu.upeu.application.dao.Carga_AcademicaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -47,9 +48,9 @@ public class CPago_Docente extends HttpServlet {
                 String feDesde = request.getParameter("fe_desde");
                 String feHasta = request.getParameter("fe_hasta");
                 double ca_pago_semanal = Double.parseDouble(request.getParameter("pago_semanal"));
-                feDesde=FactoryConnectionDB.convertFecha3(feDesde);
-                feHasta=FactoryConnectionDB.convertFecha3(feHasta);
-                List<Map<String, ?>> lista = c.Cuotas_Pago_Docente(FactoryConnectionDB.convertFecha(feDesde), FactoryConnectionDB.convertFecha(feHasta), ca_pago_semanal);
+                feDesde=DateFormat.toFormat3(feDesde);
+                feHasta=DateFormat.toFormat3(feHasta);
+                List<Map<String, ?>> lista = c.Cuotas_Pago_Docente(DateFormat.toFormat1(feDesde), DateFormat.toFormat1(feHasta), ca_pago_semanal);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
             }

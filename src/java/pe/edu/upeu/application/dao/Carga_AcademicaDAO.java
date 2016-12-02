@@ -19,8 +19,9 @@ import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Carga_Academica;
 import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Detalle_Carga_Academica;
-import pe.edu.upeu.application.web.controller.CConversion;
-import pe.edu.upeu.application.web.controller.CCriptografiar;
+import pe.edu.upeu.application.properties.UserMachineProperties;
+import pe.edu.upeu.application.util.DateFormat;
+import pe.edu.upeu.application.util.CCriptografiar;
 
 /**
  *
@@ -29,7 +30,7 @@ import pe.edu.upeu.application.web.controller.CCriptografiar;
 public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
 
     ConexionBD conn;
-    CConversion c = new CConversion();
+    DateFormat c = new DateFormat();
 
     @Override
     public String DNI_ID_TRABAJADOR(String dni) {
@@ -106,8 +107,8 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PROCESO_CA_DGP( ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
             cst.setString(1, null);
-            cst.setString(2, FactoryConnectionDB.convertFecha(FE_DESDE));
-            cst.setString(3, FactoryConnectionDB.convertFecha(FE_HASTA));
+            cst.setString(2, DateFormat.toFormat1(FE_DESDE));
+            cst.setString(3, DateFormat.toFormat1(FE_HASTA));
             cst.setDouble(4, 0.0);
             cst.setString(5, DE_DIAS_TRABAJO);
             cst.setString(6, ID_PUESTO);
@@ -127,7 +128,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             cst.setString(20, FE_CREACION);
             cst.setString(21, US_MODIF);
             cst.setString(22, FE_MODIF);
-            cst.setString(23, FactoryConnectionDB.detalle_ip());
+            cst.setString(23,  UserMachineProperties.getAll());
             cst.setDouble(24, 0.0);
             cst.setDouble(25, 0.0);
             cst.setString(26, DE_ANTECEDENTES_POLICIALES);
@@ -168,8 +169,8 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PROCESO_CA_DGP( ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
             cst.setString(1, null);
-            cst.setString(2, FactoryConnectionDB.convertFecha(d.getFe_desde()));
-            cst.setString(3, FactoryConnectionDB.convertFecha(d.getFe_hasta()));
+            cst.setString(2, DateFormat.toFormat1(d.getFe_desde()));
+            cst.setString(3, DateFormat.toFormat1(d.getFe_hasta()));
             cst.setDouble(4, 0.0);
             cst.setString(5, d.getDe_dias_trabajo());
             cst.setString(6, d.getId_puesto());
@@ -189,7 +190,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             cst.setString(20, d.getFe_creacion());
             cst.setString(21, d.getUs_modif());
             cst.setString(22, d.getFe_modif());
-            cst.setString(23, FactoryConnectionDB.detalle_ip());
+            cst.setString(23, UserMachineProperties.getAll());
             cst.setDouble(24, 0.0);
             cst.setDouble(25, 0.0);
             cst.setString(26, d.getDe_antecedentes_policiales());
@@ -241,8 +242,8 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             cst.setString(2, null);
             cst.setString(3, CA_TIPO_HORA_PAGO);
             cst.setDouble(4, CA_TOTAL_HL);
-            cst.setString(5, c.convertFecha(FE_DESDE));
-            cst.setString(6, c.convertFecha(FE_HASTA));
+            cst.setString(5, DateFormat.toFormat1(FE_DESDE));
+            cst.setString(6, DateFormat.toFormat1(FE_HASTA));
             cst.setString(7, ES_PROCESADO);
             cst.setString(8, US_CREACION);
             cst.setString(9, null);

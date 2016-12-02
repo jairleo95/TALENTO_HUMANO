@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 import pe.edu.upeu.application.model.Usuario;
 
@@ -20,6 +19,7 @@ import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Trabajador;
 import pe.edu.upeu.application.model.V_Usuario;
 import pe.edu.upeu.application.model.V_Var_Usuario;
+import pe.edu.upeu.application.properties.UserMachineProperties;
 
 /**
  *
@@ -597,7 +597,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
             cst.setString(1, id_usuario);
             cst.setString(2, pwd);
             cst.setString(3, us_modif);
-            cst.setString(4, FactoryConnectionDB.detalle_ip());
+            cst.setString(4, UserMachineProperties.getAll());
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());

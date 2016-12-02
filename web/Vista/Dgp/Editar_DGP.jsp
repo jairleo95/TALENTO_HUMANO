@@ -1,5 +1,4 @@
 
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.V_Det_DGP"%>
 <%@page import="pe.edu.upeu.application.model.Cuenta_Sueldo"%>
 <%
@@ -109,10 +108,6 @@
                 width:40px;
             }
         </style>
-
-        <%            CConversion c = new CConversion();
-        %>
-
     </head>
     <body>   
 

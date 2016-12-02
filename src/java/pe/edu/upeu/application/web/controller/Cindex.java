@@ -86,11 +86,12 @@ public class Cindex extends HttpServlet {
 
             } else {
                 rpta.put("rpta", false);
+                rpta.put("message", "Usuario o clave incorrecta.");
             }
             rpta.put("status", true);
         } catch (Exception ex) {
             rpta.put("status", false);
-            rpta.put("mensaje", ex.getMessage());
+            rpta.put("message", ex.getMessage());
         } finally {
             Gson gson = new Gson();
             out.print(gson.toJson(rpta));
