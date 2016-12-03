@@ -284,8 +284,8 @@ function procesarSendToRemu(callback) {
     }
 }
 function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
-
-    console.log("::enter to registerAndProcessCodHuella function");
+$('.sendEmailsModal').modal('show');
+    /*console.log("::enter to registerAndProcessCodHuella function");
     if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
         registerCOdHuella(inputItem, function () {
             processAutorizacionMasive(dataProcess, function () {
@@ -297,7 +297,7 @@ function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
                 });
             });
         });
-    }
+    }*/
 }
 function registerCOdHuella(inputItem, callback) {
     console.log("::enter to registerCOdHuella function");
@@ -337,6 +337,7 @@ function processAutorizacionMasive(values, callback) {
 function sendEmail(dataRequest, callback) {
     console.log("::enter to sendEmail function");
     statusBarAut.text("Enviando correos...");
+    /*open modal*/
     $.ajax({
         //  async: false,
         url: "../../autorizacion",
@@ -365,12 +366,14 @@ function sendEmail(dataRequest, callback) {
                             //,number: "1"
                             //,timeout: 6000
                 });
+                if (typeof callback !== 'undefined') {
+                    callback(data);
+                }
             }
         },
         data: dataRequest
     });
 }
-
 $(document).ready(function () {
 
     statusBtnSendToRem();
