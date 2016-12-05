@@ -283,21 +283,40 @@ function procesarSendToRemu(callback) {
     } else {
     }
 }
+ $(".emailInput").tagsinput({
+        confirmKeys: [13, 44], typeahead: {
+            source: ['Amsterdam', 'Washington', 'Sydney', 'Beijing', 'Cairo']
+        },
+        freeInput: true
+    });
+    $('.emailInput').tagsinput('refresh');
 function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
-$('.sendEmailsModal').modal('show');
+console.log("enter to function registerAndProcessCodHuella");
+    $('.sendEmailsModal').modal({keyboard: false, backdrop: 'static'});
+    $('.sendEmailsModal').modal('show');
+
+   
+    $(".messageEmail").val('Estimado(a) Colaborador(a),\n'
+            + 'Compartimos la siguiente información \n'
+            + ' - Bienestar para el trabajador \n'
+            + ' - Reglamento de Control de Asistencia \n'
+            + ' - Reglamento de trabajo \n'
+            + ' - Boletín Informativo - sistema pensionario \n'
+            + 'Saludos Cordiales.');
+
     /*console.log("::enter to registerAndProcessCodHuella function");
-    if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
-        registerCOdHuella(inputItem, function () {
-            processAutorizacionMasive(dataProcess, function () {
-                $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-                sendEmail(dataEmail, function () {
-                    var table = new $.fn.dataTable.Api('#dt_basic1');
-                    table.row(inputItem.parents('tr')).remove().draw();
-                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-                });
-            });
-        });
-    }*/
+     if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
+     registerCOdHuella(inputItem, function () {
+     processAutorizacionMasive(dataProcess, function () {
+     $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+     sendEmail(dataEmail, function () {
+     var table = new $.fn.dataTable.Api('#dt_basic1');
+     table.row(inputItem.parents('tr')).remove().draw();
+     $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+     });
+     });
+     });
+     }*/
 }
 function registerCOdHuella(inputItem, callback) {
     console.log("::enter to registerCOdHuella function");

@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.util.DateFormat"%>
 <%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -118,7 +119,7 @@
                                                     BigDecimal total = new BigDecimal((d.getCa_bonificacion_p() + d.getCa_asig_familiar() + d.getCa_bono_alimentario() + d.getDe_bev() + d.getCa_sueldo())).setScale(2, RoundingMode.UP);
                                         %>
 
-                                        <input type="hidden"  class="fe_desde_dgp" value="<%=FactoryConnectionDB.convertFecha3(d.getFe_desde())%>"/>
+                                        <input type="hidden"  class="fe_desde_dgp" value="<%=DateFormat.toFormat3(d.getFe_desde())%>"/>
                                         <tr><td colspan="2" class="txt-color-blueDark"><h6><i class="fa fa-file"></i> REQUERIMIENTO : <%=d.getNo_req()%> </h6></td></tr>
                                         <!--<label style="color: black; //font-family: cursive;"><h2><%=d.getNo_req()%></h2></label>
                                         -->
@@ -402,7 +403,8 @@
         <!-- BUSINESS LOGIC PLUGINS -->
         <script src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
         <script src="../../js/Js_DGP/Detalle/Js_Detallle_dgp-api.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript" charset="UTF-8"></script>
-    </html>
+    
+</html>
     <%} else {
             out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
         }

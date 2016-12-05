@@ -104,6 +104,7 @@
         <div id="main" role="main" style="margin-left: 0px;">
             <!-- MAIN CONTENT -->
             <div id="content">
+                <input class="form-control emailInput" value="234234,234,234,234,234" name="to"   required  data-role="tagsinput" >
                 <!-- widget grid -->
                 <section id="widget-grid" class="slideInDown fast animated" >
 
@@ -258,7 +259,6 @@
                                                                 <div class="btn-group">
                                                                     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                                                         <i class="fa fa-gear fa-lg"></i>
-                                                                        <i class="fa fa-caret-down"></i>
                                                                     </button>
                                                                     <ul class="dropdown-menu">
                                                                         <li><a href="../../dgp?iddgp=<%=a.getId_dgp().trim()%>&opc=Seguimiento">Ver Proceso</a></li>
@@ -550,9 +550,38 @@
             </div>
         </div>
 
+         
         <!--================================================== -->
         <div class="modal fade sendEmailsModal">
-        
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>Enviar Correos</h1>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <label   class="h4">Email</label>
+                               
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label   class="h4">Asunto</label>
+                                <input type="text" class="form-control asunto" value="CARPETA LABORAL - UPEU" name="asunto" placeholder="Asunto" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label   class="h4 ">Mensaje</label>
+                            <textarea  class="form-control messageEmail" rows="10" placeholder="Ingresa un mensaje" name="mensaje" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="button"  class="btn btn-success pull-right ">Enviar</button>
+                    </div>
+
+                </div>
+            </div>
         </div>
         <!---Modal---------------->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -625,16 +654,24 @@
     <script src="../../js/demo.min.js"></script>
     <!-- MAIN APP JS FILE -->
     <script src="../../js/app.min.js"></script>
+    
+    <script src="../../js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js"></script>
+
+    
     <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+
+
+
     <!--BUSINESS LOGIC PLUGINS -->
     <script src="../../js/coment/comenth.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
     <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>"></script>
     <script type="text/javascript" src="../../js/businessLogic/Horario/horario.js?v=<%=globalProperties.VERSION_JS%>"></script>
     <script type="text/javascript" src="../../js/businessLogic/Autorizacion/inboxAuthorization.js?v=<%=globalProperties.VERSION_JS%>"></script>
+
 
 </body>
 </html>

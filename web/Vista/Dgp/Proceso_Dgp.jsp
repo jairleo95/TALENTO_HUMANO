@@ -221,7 +221,6 @@
                                 </header>
                                 <!-- widget div-->
                                 <div>
-
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
@@ -265,7 +264,6 @@
                                                             <div class="btn-group">
                                                                 <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                                                     <i class="fa fa-gear fa-lg"></i>
-                                                                    <i class="fa fa-caret-down"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu">
                                                                     <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>
@@ -742,161 +740,6 @@
     <script src="../../js/coment/comenth.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script> 
     <script src="../../js/businessLogic/Horario/horario.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
     <script src="../../js/businessLogic/Dgp/statusProcessDGP.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
-
-    <script type="text/javascript">
-                            // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                            function listHistory(at) {
-                                var dgp = "id_dgp";
-                                var id = $(".vHist" + at + "").val();
-                                var id1 = $(".idDepart").val();
-                                var url = '../../dgp?opc=SeguimientoH';
-                                var data = 'iddgp=' + id;
-
-                                var rol = $("#rolse").val();
-                                $.post(url, data, function (objJson) {
-                                    var lista = objJson.listar;
-                                    if (lista.length > 0) {
-                                        var m = '';
-                                        for (var i = 0; i < lista.length; i++) {
-                                            /*$(".contM").append("<td class='caji'>" + lista[i].getNu_pasos + "</td>");
-                                             $(".contM").append("<td>" +lista[i].getDe_pasos+ "</td>");
-                                             $(".contM").append("<td class='alert alert-danger'>" + lista[i].id_dgp + "</td>");
-                                             */
-                                            m += '<tr>';
-                                            m += '<td>' + lista[i].nu_pasos + '</td>';
-                                            m += '<td>' + lista[i].de_pasos + '</td>';
-                                            if (lista[i].es_autorizacion != null) {
-
-                                                if (lista[i].es_autorizacion !== null) {
-                                                    if (lista[i].es_autorizacion === '1') {
-                                                        m += '<td><img src="../../img/Aprobado.png" width="20" height="20"></td>';
-                                                    }
-                                                    if (lista[i].es_autorizacion === '2') {
-                                                        m += '<td><img src="../../img/Desaprobado.png" width="20" height="20"></td>';
-                                                    }
-                                                } else {
-                                                    m += '<td>No Registrado</td>';
-                                                }
-
-                                                if (lista[i].us_ap_mat !== null) {
-                                                    m += '<td>' + lista[i].us_ap_p + " " + lista[i].us_ap_mat + " " + lista[i].us_no_tr + '</td>';
-                                                } else {
-                                                    alert("No Registrado");
-                                                }
-                                                m += '<td>' + lista[i].us_no_puesto + '</td>';
-                                                m += '<td>' + lista[i].no_usuario + '</td>';
-                                                m += '<td>' + lista[i].us_no_area + '</td>';
-                                                m += '<td>' + lista[i].us_no_dep + '</td>';
-                                                m += '<td>' + lista[i].fe_creacion + '</td>';
-                                            } else {
-                                                m += '<td colspan="7" style="text-align:center;"> No definido </td>';
-                                            }
-
-                                            m += '</tr>';
-                                            if (lista[i].es_autorizacion !== null) {
-                                                if (lista[i].es_autorizacion === '2' & (rol === "ROL-0002" || rol === "ROL-0005" || rol === "ROL-0001")) {
-
-                                                    function DivEspecial() {
-                                                        var DivEspecial = '<div id="divEs" class="alert alert-danger alert-block">';
-                                                        DivEspecial += '<a class="close" data-dismiss="alert" href="#">×</a>';
-                                                        DivEspecial += ' <h4 class="alert-heading">DGP fuera de Proceso!</h4>';
-                                                        DivEspecial += '<p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp=' + id + '&ID' + id1 + '" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=' + id + '" class="btn btn-primary id-dgp "><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" class="btn btn-primary" onclick="ListarMotivo()" data-toggle="modal" data-target="#myModalComentario"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>';
-                                                        //  alert(+lista[i].us_no_puesto+);                                                                                                                                                                                                                                                                                                                                                                                
-                                                        DivEspecial += '</p>';
-                                                        DivEspecial += '<input type="hidden" class="id-autorizacion" value="lista[i].id_autorizacion">';
-                                                        DivEspecial += '</div>';
-
-                                                        return DivEspecial;
-                                                    }
-                                                }
-                                            }
-
-                                        }
-
-                                        //var DivEspecial = DivEspecialL();
-                                        var table = createTable();
-                                        $(".contM").empty();
-                                        $(".contM").append(table);
-                                        $(".contM").append(DivEspecial);
-                                        $("#dataB").empty();
-                                        $("#dataB").append(m);
-                                        // $("#divEs").append(DivEspecial);
-                                        // $("#dt").dataTable();
-                                        //$("#divEs").dataDivEspecial();
-                                        //anexar a la tabla
-                                    } else {
-                                        alert("vacio");
-                                    }
-                                });
-                            }
-                            function createTable() {
-                                var table = '<table id="dt" class="table table-striped">';
-                                table += '<thead>';
-                                table += '<tr>';
-                                table += '<th>Paso</th>';
-                                table += '<th data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i>Detalle</th>';
-                                table += '<th data-class="expand><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Estado</th>';
-                                table += '<th data-hide="phone"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Encargado</th>';
-                                table += '<th>Cargo Encargado</th>';
-                                table += '<th>Usuario</th>';
-                                table += '<th data-hide="phone,tablet"> <i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> Area</th>';
-                                table += '<th data-hide="phone,tablet">Departamento</th>';
-                                table += '<th data-hide="phone,tablet">Fecha Autorizacion</th>';
-                                table += '</tr>';
-                                table += '</thead>';
-                                table += '<tbody id="dataB">';
-                                table += '</tbody>';
-                                table += '</table>';
-                                return table;
-                            }
-
-
-                            function ListarMotivo(at) {
-                                alert("asdasdasd");
-                                var id = $(".vHist" + at + "").val();
-                                var url = '../../dgp?opc=SeguimientoH';
-                                var data = 'iddgp=' + id;
-
-
-                                $.post(url, data, function (objJson) {
-                                    var lista = objJson.listar;
-                                    if (lista.length > 0) {
-                                        var ma = '';
-                                        for (var i = 0; i < lista.length; i++) {
-                                            //  alert("asdasdasd");
-                                            $(".contMO").append("<td>" + lista[i].getDe_pasos + "</td>");
-                                            $(".contMO").append("<td class='alert alert-danger'>" + lista[i].id_dgp + "</td>");
-
-                                        }
-                                        $(".contMO").empty();
-                                    } else {
-                                        alert("vacio");
-                                    }
-                                });
-                            }
-
-                            $(document).ready(function () {
-                                pageSetUp();
-                                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-                                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-                                });
-                                $('#coment-s1').click(function () {
-                                    console.log("jalar comentario");
-                                    $.get('../../comentario?iddgp=DGP-000119&opc=Comentar_Dgp', function (responseJson) {
-                                        var $select = $('.comentarios');
-                                        $select.find('h2').remove();
-                                        $.each(responseJson, function (value) {
-                                            $('<p>').text(value).appendTo($select);
-                                        });
-                                    });
-                                });
-                                initStatusProcessDGP();
-                                $(".btnHorario").click(function () {
-                                    listHorario($(this).data("valor"));
-                                });
-                            });
-
-    </script>
 </body>
 </html>
 <%} else {
