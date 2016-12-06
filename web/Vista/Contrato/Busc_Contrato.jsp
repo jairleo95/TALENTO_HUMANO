@@ -23,6 +23,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">

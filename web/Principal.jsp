@@ -605,8 +605,8 @@
         <script src="js/plugin/fastclick/fastclick.min.js"></script>
 
     
-        <!-- Demo purpose only -->
-        <script src="js/demo.min.js"></script>
+        <!-- Demo purpose only
+        <script src="js/demo.min.js"></script> -->
 
         <!-- MAIN APP JS FILE -->
         <script src="js/app.min.js"></script>

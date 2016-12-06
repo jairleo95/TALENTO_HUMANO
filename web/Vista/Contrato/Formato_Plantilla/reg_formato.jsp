@@ -33,6 +33,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <script src="../../../js/plugin/ckeditor/ckeditor.js"></script>
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
+        
+            <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
         <link href="../../../js/plugin/ckeditor/samples/sample.css" rel="stylesheet">

@@ -12,6 +12,7 @@
         <meta charset="windows-1252">
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
+            <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
         <title></title>

@@ -23,6 +23,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
@@ -91,9 +92,9 @@
                             //alert(objJson.mensaje);
                             return;
                         }
-                        for (var i = 0; i < lista.length; i++) 
+                        for (var i = 0; i < lista.length; i++)
                             b.append("<div class='alert alert-danger alert-block' ><a class='close' data-dismiss='alert' href='#'>×</a><h4 class='alert-heading'>" + lista[i].nom + "</h4>" + lista[i].det + " , Fecha Plazo " + lista[i].desde + " al " + lista[i].hasta + "</div>");
-                        }
+                    }
                     });
                 }
                 listar();
@@ -202,8 +203,7 @@
                                                     });
                                                     // exito("Procesado correctamente!", "Las firmas de cada trabajador han sido procesadas con exito.");
 
-                                                }
-                                                catch (err) {
+                                                } catch (err) {
                                                     alert(err.message);
                                                 } finally {
                                                 }
@@ -276,7 +276,7 @@
                                         <%if (idrol.trim().equals("ROL-0009")) {%>
                                         <button type="button" class="btn btn-success btn_cod_aps">Procesar codigos</button>
                                         <%}%>
-                                        <%if (idrol.trim().equals("ROL-0007")|idrol.trim().equals("ROL-0001")) {%>
+                                        <%if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {%>
                                         <button type="button" class="btn btn-success btn_cod_huella">Procesar codigos</button>
                                         <%}%>
                                         <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
@@ -309,7 +309,7 @@
                                                         <%if (idrol.trim().equals("ROL-0009")) {%>
                                                     <th><strong>Código APS</strong></th>
                                                         <%}%>
-                                                        <%if (idrol.trim().equals("ROL-0007")|idrol.trim().equals("ROL-0001")) {%>
+                                                        <%if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {%>
                                                     <th><strong>Código Huella</strong></th>
                                                         <%}%>
                                                 </tr>
@@ -464,7 +464,7 @@
                                             <td><strong><%=a.getCo_aps()%></strong></td>
                                             <%}
                                                 }%>
-                                            <%if (idrol.trim().equals("ROL-0007")|idrol.trim().equals("ROL-0001")) {%>
+                                            <%if (idrol.trim().equals("ROL-0007") | idrol.trim().equals("ROL-0001")) {%>
                                             <%if (a.getVal_cod_huella() == 0) {
                                                     num_cod_huella++;
                                             %>
@@ -518,7 +518,7 @@
     </body>
 
     <!--================================================== -->
-     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
                                         if (!window.jQuery) {
@@ -767,7 +767,7 @@
 
     </script>
 
-     
+
 
 </html>
 <%} else {

@@ -26,6 +26,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
@@ -117,7 +118,7 @@
                                 <div >
 
                                     <!-- This area used as dropdown edit box -->
-                                   
+
 
 
                                     <!-- end widget edit box -->
@@ -170,10 +171,10 @@
                                                     <td ><%=d.getDe_documento_adjunto()%></td>
                                                     <%} else {%>
                                                     <td >No Registrado</td>
-                                                        <%}%>
+                                                    <%}%>
                                                 </tr>
                                                 <% }
-                                                        }%>
+                                                    }%>
                                             </tbody>
                                         </table>
 
@@ -267,7 +268,7 @@
         <script src="../../js/app.min.js"></script>
 
 
-<!--         PAGE RELATED PLUGIN(S)-->
+        <!--         PAGE RELATED PLUGIN(S)-->
         <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
@@ -322,9 +323,7 @@
     </center>
 </body>
 </html>
-<%}
-
-        else {
+<%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
     }
 %>

@@ -5,13 +5,6 @@
  */
 package pe.edu.upeu.application.factory;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import pe.edu.upeu.application.properties.globalProperties;
 
 /**

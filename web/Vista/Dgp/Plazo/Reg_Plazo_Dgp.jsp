@@ -19,6 +19,8 @@ Author     : JAIR
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        
+            <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/demo.min.css">
@@ -190,7 +192,6 @@ Author     : JAIR
         </div>
 
     </body>
-    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
         if (!window.jQuery) {
@@ -244,7 +245,7 @@ Author     : JAIR
     <script src="../../../js/plugin/fastclick/fastclick.min.js"></script>
 
 
-    <script src="../../../js/demo.min.js"></script>
+    <!--<script src="../../../js/demo.min.js"></script>-->
 
     <!-- MAIN APP JS FILE -->
     <script src="../../../js/app.min.js"></script>

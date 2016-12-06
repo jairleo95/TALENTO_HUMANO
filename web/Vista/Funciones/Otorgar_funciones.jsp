@@ -7,6 +7,7 @@
 
 <jsp:useBean id="Listar_Direccion" scope="session" class="java.util.ArrayList"/>
 <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
 <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
 <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css"/>

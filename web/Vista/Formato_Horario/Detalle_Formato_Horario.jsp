@@ -21,6 +21,7 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+            <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
         <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css"/>

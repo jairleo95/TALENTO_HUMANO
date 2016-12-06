@@ -16,6 +16,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
         <!-- SmartAdmin RTL Support is under construction
@@ -277,7 +278,7 @@
         function procesar_lista(lista, tipo, tipo_lista) {
             var array_id_dgp = [];
             var pos = 0;
-            var estado =  true;
+            var estado = true;
             var url = (tipo === 1) ? "../../autorizacion?opc=UpdateStatusDgp_Procesar&estado=" + estado + "&tipo=1" : "../../autorizacion?opc=UpdateStatusDgp_Procesar&estado=" + estado + "&tipo=2";
             if (tipo === 1) {
                 for (var i = 0, max = lista; i < max; i++) {
@@ -347,7 +348,7 @@
             }
         }
         function listar_autorizados(tipo_lista) {
-      
+
             $.post("../../autorizacion", "opc=ShowListProcesarReq&tipo_lista=" + tipo_lista, function (objJson) {
                 var lista = objJson.lista;
                 if (objJson.rpta === -1) {
@@ -374,7 +375,7 @@
                     if (tipo_lista) {
                         reload_table($("#table_procesar"));
                     } else {
-                     reload_table($("#table_autorizados"));
+                        reload_table($("#table_autorizados"));
                     }
 
                 }
@@ -386,7 +387,7 @@
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
             });
             listar_autorizados(true);
-             listar_autorizados(false);
+            listar_autorizados(false);
 
         });
 
