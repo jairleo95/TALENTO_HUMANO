@@ -1,5 +1,6 @@
 
 
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.util.DateFormat"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -30,19 +31,22 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Detalle de Trabajador</title>
-        <!-- Estilos plantilla-->
+       	<meta name="description" content="">
+        <meta name="author" content="">
 
-        <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <!-- Basic Styles -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
-
-        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
-        <!-- SmartAdmin RTL Support is under construction
-                 This RTL CSS will be released in version 1.5
-        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> -->
+        <!-- SmartAdmin RTL Support -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-rtl.min.css"> 
 
         <!-- We recommend you use "your_style.css" to override SmartAdmin
              specific styles this will also ensure you retrain your customization with each SmartAdmin update.
@@ -54,7 +58,7 @@
         <!-- FAVICONS -->
         <link rel="shortcut icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
         <link rel="icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
-        <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
+
         <!-- GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
@@ -73,24 +77,21 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+
         <link rel="stylesheet" type="text/css" href="../../js/shadowbox/shadowbox.css"/>
-        <link rel="stylesheet" type="text/css" href=".../../js/shadowbox/style.css"/>
+        <!--  <link rel="stylesheet" type="text/css" href="../../js/shadowbox/style.css"/>-->
         <style type="text/css">
             body{
-
                 margin-left: auto;
                 margin-right: auto  ;
                 width: 95%;
-                /* margin: 0;*/
             }
             .autoHeight{
                 border-style:none;            
             }
-
             .ui-progressbar {
                 position: relative;
             }
-
             .progress-label {
                 position: absolute;
                 left: 50%;
@@ -142,220 +143,240 @@
 
         %>
         <!--Begin Detalle Trabajador-->
-
-        <div class="jarviswidget jarviswidget-color-darken slideInDown fast animated" id="wid-id-3" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
-            <header>
-                <span class="widget-icon"> <i class="fa fa-user"></i> </span>
-                <h2 class="font-md"><strong>Datos del</strong> <i>Trabajador</i></h2>				
-
-            </header>
-            <%                String hl = "";
-                String academico = request.getParameter("academico");
-                if (academico != null) {
-                    if (Boolean.valueOf(academico) == true) {
-                        hl = request.getParameter("hl");
-            %>
-            <div>
-                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-                    Trabajador Nuevo
-                </button>
-                <button class="btn btn-default btn-sm btn_procesar" type="button" style="display:none">
-                    Procesar Carga Academica
-                </button>
-            </div>
-            <%}
-                }%>
-            <div class="row" style="padding-bottom: 10px;">
-                <div class="col-md-4">
-                    <div class="media">
-                        <!--  upload foto --> 
-                        <form action="../../foto" method="POST" enctype="multipart/form-data" class="form-subir-foto">
-                            <input type="hidden" name="idtr" class="idtr" id="input-file" value="<%=t.getId_trabajador()%>">
-                            <input style="display:none" class="file-foto" type="file" name="archivo" required="">
-                        </form>
-                        <a class="avatar mustang-gallery pull-left" href="../../img/avatar_default.jpg" ><img src="../../img/avatar_default.jpg" class="borde" width="100" height="100" ></a>
-                        <div class="foto-user" style="display: none;">
-                        </div>
-                        <a class="ver_foto btn bg-color-purple txt-color-white btn-xs">Cambiar Foto</a>           
-                        <div class="media-body">
-                            <%
-                                for (int index = 0; index < ListaridTrabajador.size(); index++) {
-                                    V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
-                                    trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
-                                    String nombres = trb.getNo_trabajador().toUpperCase() + " " + trb.getAp_paterno().toUpperCase();
-                                    String idtrab = trb.getId_trabajador();
-                            %>
-                            <button data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">asas</button>
-                            <strong>  Nombre : </strong><%=trb.getNo_trabajador().toUpperCase()%><br>
-                            <strong>Apellido Paterno :</strong> <%=trb.getAp_paterno().toUpperCase()%><br>
-                            <strong>Apellido Materno :</strong> <%=trb.getAp_materno().toUpperCase()%><br>
-                            <strong>Fecha de Nacimiento :</strong><%=DateFormat.toFormat5(trb.getFe_nac())%><br>
-                            <%if (idrol.trim().equals("ROL-0009")) {%>
-
-                            <strong>Tipo Documento: </strong>
-                            <%
-                                InterfaceTipo_DocumentoDAO itd = new Tipo_DocumentoDAO();
-                                for (int k = 0; k < itd.Listar_tipo_doc().size(); k++) {
-                                    Tipo_Documento td = new Tipo_Documento();
-                                    td = (Tipo_Documento) itd.Listar_tipo_doc().get(k);
-                                    if (trb.getTi_doc() != null) {
-                                        if (td.getId_tipo_doc_ident().trim().equals(trb.getTi_doc().trim())) {
-                                            out.print(td.getDe_tdoc_abreviada());
-                                        }
-                                    } else {
-                                        out.print("No Registrado");
-                                    }
-                                }
-                            %><br>
-                            <strong>Numero de documento:</strong> <%=trb.getNu_doc()%><br>
-                            <%}%>
-                        </div>
-
-                    </div>
-
-                </div>
-                <%
-                    String ID_ROL = (String) sesion.getAttribute("IDROL");
-                %>
-                <!-- INICIO codigos aps y huella-->
-                <input type="hidden"  class="idtr" value="<%=t.getId_trabajador()%>">
-                <div class="col-md-4">
-                    <div class='row row_cod_aps'>
-                    </div>
-                    <div class='row row_cod_huella'>
-                    </div>
+        <div id="main" role="main" style="margin-left: 0px;">
+            <div id="content" >
+                <section id="widget-grid" class="">
                     <div class="row">
-                        <%if (ID_ROL.equals("ROL-0001")) {%>
-                        <div class="col-md-4"><strong>Descuento de Diezmo</strong></div>
-                        <div class="col-md-8 div_input_diezmo"></div>
-                        <%} else {%>
-                        <div class="col-md-8"><strong>Descuento de Diezmo</strong></div>
-                        <div class="col-md-4"><%=((trb.getEs_diezmo().equals("0")) ? "No" : "Si")%></div>
-                        <%}%>
-                    </div>
-                    <%if (iddgp != null) {
-                    %>
-                    <input type="hidden" class="dgp" value="<%=iddgp%>" >
-                    <div class='row smart-form col_procesar_asigFam'>
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="jarviswidget jarviswidget-color-darken slideInDown fast animated" id="wid-id-3" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+                                <header>
+                                    <span class="widget-icon"> <i class="fa fa-user"></i> </span>
+                                    <h2 class="font-md"><strong>Datos del</strong> <i>Trabajador</i></h2>				
+
+                                </header>
+                                <%                String hl = "";
+                                    String academico = request.getParameter("academico");
+                                    if (academico != null) {
+                                        if (Boolean.valueOf(academico) == true) {
+                                            hl = request.getParameter("hl");
+                                %>
+                                <div>
+                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                                        Trabajador Nuevo
+                                    </button>
+                                    <button class="btn btn-default btn-sm btn_procesar" type="button" style="display:none">
+                                        Procesar Carga Academica
+                                    </button>
+                                </div>
+                                <%}
+                                }%>
+                                <div class="row" style="padding-bottom: 10px;">
+                                    <div class="col-md-4">
+                                        <div class="media">
+                                            <!--  upload foto --> 
+                                            <form action="../../foto" method="POST" enctype="multipart/form-data" class="form-subir-foto">
+                                                <input type="hidden" name="idtr" class="idtr" id="input-file" value="<%=t.getId_trabajador()%>">
+                                                <input style="display:none" class="file-foto" type="file" name="archivo" required="">
+                                            </form>
+                                            <a class="avatar mustang-gallery pull-left" href="../../img/avatar_default.jpg" ><img src="../../img/avatar_default.jpg" class="borde" width="100" height="100" ></a>
+                                            <div class="foto-user" style="display: none;">
+                                            </div>
+                                            <a class="ver_foto btn bg-color-purple txt-color-white btn-xs">Cambiar Foto</a>           
+                                            <div class="media-body">
+                                                <%
+                                                    for (int index = 0; index < ListaridTrabajador.size(); index++) {
+                                                        V_Ficha_Trab_Num_C trb = new V_Ficha_Trab_Num_C();
+                                                        trb = (V_Ficha_Trab_Num_C) ListaridTrabajador.get(index);
+                                                        String nombres = trb.getNo_trabajador().toUpperCase() + " " + trb.getAp_paterno().toUpperCase();
+                                                        String idtrab = trb.getId_trabajador();
+                                                %>
+                                                <button data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">asas</button>
+                                                <strong>  Nombre : </strong><%=trb.getNo_trabajador().toUpperCase()%><br>
+                                                <strong>Apellido Paterno :</strong> <%=trb.getAp_paterno().toUpperCase()%><br>
+                                                <strong>Apellido Materno :</strong> <%=trb.getAp_materno().toUpperCase()%><br>
+                                                <strong>Fecha de Nacimiento :</strong><%=DateFormat.toFormat5(trb.getFe_nac())%><br>
+                                                <%if (idrol.trim().equals("ROL-0009")) {%>
+
+                                                <strong>Tipo Documento: </strong>
+                                                <%
+                                                    InterfaceTipo_DocumentoDAO itd = new Tipo_DocumentoDAO();
+                                                    for (int k = 0; k < itd.Listar_tipo_doc().size(); k++) {
+                                                        Tipo_Documento td = new Tipo_Documento();
+                                                        td = (Tipo_Documento) itd.Listar_tipo_doc().get(k);
+                                                        if (trb.getTi_doc() != null) {
+                                                            if (td.getId_tipo_doc_ident().trim().equals(trb.getTi_doc().trim())) {
+                                                                out.print(td.getDe_tdoc_abreviada());
+                                                            }
+                                                        } else {
+                                                            out.print("No Registrado");
+                                                        }
+                                                    }
+                                                %><br>
+                                                <strong>Numero de documento:</strong> <%=trb.getNu_doc()%><br>
+                                                <%}%>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <%
+                                        String ID_ROL = (String) sesion.getAttribute("IDROL");
+                                    %>
+                                    <!-- INICIO codigos aps y huella-->
+                                    <input type="hidden"  class="idtr" value="<%=t.getId_trabajador()%>">
+                                    <div class="col-md-4">
+                                        <div class='row row_cod_aps'>
+                                        </div>
+                                        <div class='row row_cod_huella'>
+                                        </div>
+                                        <div class="row">
+                                            <%if (ID_ROL.equals("ROL-0001")) {%>
+                                            <div class="col-md-4"><strong>Descuento de Diezmo</strong></div>
+                                            <div class="col-md-8 div_input_diezmo"></div>
+                                            <%} else {%>
+                                            <div class="col-md-8"><strong>Descuento de Diezmo</strong></div>
+                                            <div class="col-md-4"><%=((trb.getEs_diezmo().equals("0")) ? "No" : "Si")%></div>
+                                            <%}%>
+                                        </div>
+                                        <%if (iddgp != null) {
+                                        %>
+                                        <input type="hidden" class="dgp" value="<%=iddgp%>" >
+                                        <div class='row smart-form col_procesar_asigFam'>
+
+                                        </div>
+                                        <div class='row smart-form col_procesar_sis'>
+
+                                        </div>
+                                        <%}%>
+                                        <div class="row_afp_sp"></div>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <% InterfaceTrabajadorDAO iTr = new TrabajadorDAO();
+                                        int porcentaje = iTr.ShowPorcentageTrabajador(idtr);%>
+                                        <center><strong>Completado: </strong>
+                                            <div class="showPorcentage">
+                                                <div class="easy-pie-chart txt-color-blue easyPieChart pcDatosCompTrabajador" data-percent="<%=porcentaje%>" data-pie-size="100"  >
+                                                    <span class="percent percent-sign txt-color-blue font-lg semi-bold spDatosCompTrabajador"><%=porcentaje%></span>
+                                                </div>
+
+                                            </div>
+
+                                        </center>
+                                    </div>
+                                </div>
+                                <!-- FIN DE codigos aps y huella-->
+                                <!-- widget div-->
+
+
+                                <div class="row" style="padding: 0px;">
+
+                                    <ul  class="nav nav-tabs bordered tab_detalle_trabajador">
+                                        <%
+                                            if (List_Auto_mostrar.size() == 1 && aut != null) {
+                                                for (int r = 0; r < List_Auto_mostrar.size(); r++) {
+                                                    Auto_Mostrar a = new Auto_Mostrar();
+                                                    a = (Auto_Mostrar) List_Auto_mostrar.get(r);
+                                        %>
+                                        <li  class="active" >
+                                            <a href="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Datos de Requerimientos</a>
+                                        </li>
+                                        <%}
+                                        }%>
+                                        <%if (iddep != null) {
+
+                                                if ((iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0005"))) {
+                                        %>
+                                        <li>
+                                            <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
+                                        </li>
+                                        <%}
+                                        }%>
+                                        <li >
+                                            <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
+                                        </li>
+                                        <li>
+                                            <a href="Aspecto_Academico.jsp?edit=<%=edit%>" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
+                                        </li>
+                                        <li >
+                                            <a href="../../trabajador?idtr=<%=idtr%>&opc=Listar_Asp_Social" target="myframe2"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
+                                        </li>
+                                        <li>
+                                            <a href="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" target="myframe2"><i class="fa fa-group fa-gear"></i> Familiares </a>
+                                        </li>
+                                        <%if (!idrol.trim().equals("ROL-0013")) {
+                                        %>
+                                        <li >
+                                            <a href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="myframe2"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
+                                        </li>
+                                        <%}%>
+                                        <li>
+                                            <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
+                                        </li>
+
+                                        <%if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
+                                        %>
+                                        <li >
+                                            <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Empleado</a>
+                                        </li>
+                                        <%}%>
+                                        <%if (idtr.equals(idtr_session)) {
+
+                                        %>
+                                        <li>
+                                            <%if (cl.trim().equals(user.trim())) {
+                                            %>
+                                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2" rel="" data-placement="top" data-original-title="<h1><b>One</b> <em>Really</em> big tip!</h1>" data-html="true" ><i class="fa fa-lock"></i> Contraseña <span class="badge bg-color-red pull-right inbox-badge">¡Cambiar!</span></a>
+                                            <%} else {%>
+                                            <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"  ><i class="fa fa-lock"></i> Contraseña</a>
+                                            <%}%>
+                                        </li>
+                                        <%}%>
+                                        <%if (idrol.trim().equals("ROL-0002") | ID_ROL.trim().equals("ROL-0001")) {
+                                        %>
+                                        <li>
+                                            <a href="../../contrato?idtr=<%=idtr%>&opc=SI_CONNTRATO" target="myframe2"><i class="fa fa-male fa-gear"></i> Imprimir / Subir Contratos </a>
+                                        </li>
+                                        <%}%>
+                                    </ul>
+
+                                    <div id="myTabContent1" class="tab-content">
+                                        <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
+                                                for (int r = 0; r < List_Auto_mostrar.size(); r++) {
+                                                    Auto_Mostrar a = new Auto_Mostrar();
+                                                    a = (Auto_Mostrar) List_Auto_mostrar.get(r);
+                                        %>
+                                        <iframe id="myframe2" name="myframe2" class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" width="100%" height="100%" ></iframe>
+                                            <%}
+                                                List_Auto_mostrar.clear();
+                                            } else {%>
+                                        <iframe id="myframe2" name="myframe2" width="100%" height="800" scrolling="si"  frameborder="0" src="Datos_Generales.jsp?edit=<%=edit%>"></iframe>
+                                            <%}%>
+                                    </div>
+                                </div>
+
+                                <!-- end widget content -->
+
+
+                                <!-- end widget div -->
+
+                            </div>      
+                        </article>
+
 
                     </div>
-                    <div class='row smart-form col_procesar_sis'>
+                </section>
 
-                    </div>
-                    <%}%>
-                    <div class="row_afp_sp"></div>
 
-                </div>
-                <div class="col-md-4">
-                    <% InterfaceTrabajadorDAO iTr = new TrabajadorDAO();
-                        int porcentaje = iTr.ShowPorcentageTrabajador(idtr);%>
-                    <center><strong>Completado: </strong>
-                        <div class="showPorcentage">
-                            <div class="easy-pie-chart txt-color-blue easyPieChart pcDatosCompTrabajador" data-percent="<%=porcentaje%>" data-pie-size="100"  >
-                                <span class="percent percent-sign txt-color-blue font-lg semi-bold spDatosCompTrabajador"><%=porcentaje%></span>
-                            </div>
 
-                        </div>
-
-                    </center>
-                </div>
             </div>
-            <!-- FIN DE codigos aps y huella-->
-            <!-- widget div-->
+
+        </div>
 
 
-            <div class="row" style="padding: 0px;">
 
-                <ul  class="nav nav-tabs bordered tab_detalle_trabajador">
-                    <%
-                        if (List_Auto_mostrar.size() == 1 && aut != null) {
-                            for (int r = 0; r < List_Auto_mostrar.size(); r++) {
-                                Auto_Mostrar a = new Auto_Mostrar();
-                                a = (Auto_Mostrar) List_Auto_mostrar.get(r);
-                    %>
-                    <li  class="active" >
-                        <a href="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Datos de Requerimientos</a>
-                    </li>
-                    <%}
-                        }%>
-                    <%if (iddep != null) {
-
-                            if ((iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0005"))) {
-                    %>
-                    <li>
-                        <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
-                    </li>
-                    <%}
-                        }%>
-                    <li >
-                        <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
-                    </li>
-                    <li>
-                        <a href="Aspecto_Academico.jsp?edit=<%=edit%>" target="myframe2"><i class="fa fa-graduation-cap fa-gear"></i> Aspecto Académico</a>
-                    </li>
-                    <li >
-                        <a href="../../trabajador?idtr=<%=idtr%>&opc=Listar_Asp_Social" target="myframe2"><i class="fa fa-home fa-gear"></i> Aspecto Social </a>
-                    </li>
-                    <li>
-                        <a href="../../familiar?idtr=<%=idtr%>&opc=Detalle_Familiar" target="myframe2"><i class="fa fa-group fa-gear"></i> Familiares </a>
-                    </li>
-                    <%if (!idrol.trim().equals("ROL-0013")) {
-                    %>
-                    <li >
-                        <a href="../../dgp?idtr=<%=idtr%>&opc=List_Dgp_Tr" target="myframe2"><i class="fa fa-file-o fa-gear"></i> Historial de Requerimientos </a>
-                    </li>
-                    <%}%>
-                    <li>
-                        <a href="../../trabajador?idtr=<%=idtr%>&opc=Documento_Trabajador" target="myframe2"><i class="fa fa-file fa-gear"></i> Documentación </a>
-                    </li>
-
-                    <%if (idrol.trim().equals("ROL-0007") | ID_ROL.trim().equals("ROL-0001")) {
-                    %>
-                    <li >
-                        <a href="../../empleado?opc=Eva_Emp&idtr=<%=idtr%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Evaluación de Empleado</a>
-                    </li>
-                    <%}%>
-                    <%if (idtr.equals(idtr_session)) {
-
-                    %>
-                    <li>
-                        <%if (cl.trim().equals(user.trim())) {
-                        %>
-                        <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2" rel="" data-placement="top" data-original-title="<h1><b>One</b> <em>Really</em> big tip!</h1>" data-html="true" ><i class="fa fa-lock"></i> Contraseña <span class="badge bg-color-red pull-right inbox-badge">¡Cambiar!</span></a>
-                        <%} else {%>
-                        <a href="../../trabajador?opc=Form_Cambiar_Clave" target="myframe2"  ><i class="fa fa-lock"></i> Contraseña</a>
-                        <%}%>
-                    </li>
-                    <%}%>
-                    <%if (idrol.trim().equals("ROL-0002") | ID_ROL.trim().equals("ROL-0001")) {
-                    %>
-                    <li>
-                        <a href="../../contrato?idtr=<%=idtr%>&opc=SI_CONNTRATO" target="myframe2"><i class="fa fa-male fa-gear"></i> Imprimir / Subir Contratos </a>
-                    </li>
-                    <%}%>
-                </ul>
-
-                <div id="myTabContent1" class="tab-content">
-                    <%  if (List_Auto_mostrar.size() == 1 && aut != null) {
-                            for (int r = 0; r < List_Auto_mostrar.size(); r++) {
-                                Auto_Mostrar a = new Auto_Mostrar();
-                                a = (Auto_Mostrar) List_Auto_mostrar.get(r);
-                    %>
-                    <iframe id="myframe2" name="myframe2" class="autoHeight" src="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" width="100%" height="100%" ></iframe>
-                        <%}
-                            List_Auto_mostrar.clear();
-                        } else {%>
-                    <iframe id="myframe2" name="myframe2" width="100%" height="800" scrolling="si"  frameborder="0" src="Datos_Generales.jsp?edit=<%=edit%>"></iframe>
-                        <%}%>
-                </div>
-            </div>
-
-            <!-- end widget content -->
-
-
-            <!-- end widget div -->
-
-        </div>        
         <!-- end TABS-->
         <div >
             <%
@@ -542,10 +563,10 @@
         <!-- #dialog-message -->
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script>
         if (!window.jQuery) {
-            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+            document.write('<script src="../../js/libs/jquery-2.1.1.min.js"><\/script>');
         }
         </script>
 
@@ -555,6 +576,8 @@
             document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
         }
         </script>
+
+
 
         <!-- IMPORTANT: APP CONFIG -->
         <script src="../../js/app.config.js"></script>
@@ -573,6 +596,7 @@
 
         <!-- EASY PIE CHARTS -->
         <script src="../../js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+
 
         <!-- SPARKLINES 
         <script src="../../js/plugin/sparkline/jquery.sparkline.min.js"></script>-->
@@ -601,19 +625,18 @@
         
         <![endif]-->
 
-        <!-- Demo purpose only -->
-        <script src="../../js/demo.min.js"></script>
+        <!-- Demo purpose only
+        <script src="../../js/demo.min.js"></script> -->
 
         <!-- MAIN APP JS FILE -->
         <script src="../../js/app.min.js"></script>
 
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-        <!-- Voice command : plugin -->
-        <script src="../../js/speech/voicecommand.min.js"></script>
+        <!-- Voice command : plugin
+        <script src="../../js/speech/voicecommand.min.js"></script> -->
 
         <!--    PAGE RELATED PLUGIN(S) -->
         <script src="../../js/plugin/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-        <script  type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
         <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
@@ -621,40 +644,12 @@
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript" src="../../js/shadowbox/shadowbox.js" ></script>
         <script  type="text/javascript" src="../../js/JQuery/jquery.session.js"></script>
-        <script type="text/javascript" src="../../js/Js_Trabajador/Js_Trabajador.js"></script>
-        <script type="text/javascript" src="../../js/Js_Autorizacion/Js_Autorizacion.js"></script>
-        <script type="text/javascript" src="../../js/Js_Academico/Js_Carga_Academica.js"></script>
-        <script type="text/javascript" src="../../js/businessLogic/Foto/foto.js"></script>
-        <script type="text/javascript">
-        $(document).ready(function () {
-            Listar_Cod_Huella();
-            Listar_Cod_APS();
-            ShowCbk_Procesar_Ind($(".dgp").val());
-            initAutorizacion();
-            pageSetUp();
-            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-            });
-            $(".tab_detalle_trabajador li").click(function () {
-                $(".tab_detalle_trabajador li").removeClass("active");
-                $(this).addClass("active");
-            });
-            validateShadowBox();
-            setTimeout(function () {
-                document.getElementById('myframe2').onload = function () {
-                    porcentaje_datos($(".idtr").val());
-                };
-            }, 5000);
-            showEsDiezmo();
-            ShowAFP_SP();
-            $(".btnCodigoAPS").click(function () {
-                Actualizar_Cod_APS();
-            });
-            initFoto();
-        });
 
-        </script>
-
+        <script  type="text/javascript" src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>"></script>
+        <script type="text/javascript" src="../../js/Js_Autorizacion/Js_Autorizacion.js?v=<%=globalProperties.VERSION_JS%>"></script>
+        <script type="text/javascript" src="../../js/Js_Academico/Js_Carga_Academica.js?v=<%=globalProperties.VERSION_JS%>"></script>
+        <script type="text/javascript" src="../../js/businessLogic/Foto/foto.js?v=<%=globalProperties.VERSION_JS%>"></script>
+        <script type="text/javascript" src="../../js/Js_Trabajador/Js_Trabajador.js?v=<%=globalProperties.VERSION_JS%>"></script>
     </body>
 </html>
 <%} else {

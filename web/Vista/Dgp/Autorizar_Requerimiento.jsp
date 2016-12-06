@@ -24,6 +24,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+           <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
         <!-- SmartAdmin RTL Support is under construction
@@ -104,7 +105,7 @@
         <div id="main" role="main" style="margin-left: 0px;">
             <!-- MAIN CONTENT -->
             <div id="content">
-                <input class="form-control emailInput" value="234234,234,234,234,234" name="to"   required  data-role="tagsinput" >
+             
                 <!-- widget grid -->
                 <section id="widget-grid" class="slideInDown fast animated" >
 
@@ -563,7 +564,7 @@
                         <div class="row">
                             <div class="form-group col-sm-12">
                                 <label   class="h4">Email</label>
-                               
+                                  <input class="form-control emailInput" value="234234,234,234,234,234" name="to"   required  data-role="tagsinput" >
                             </div>
                             <div class="form-group col-sm-12">
                                 <label   class="h4">Asunto</label>
@@ -650,8 +651,8 @@
 
     <!-- JARVIS WIDGETS -->
     <script src="../../js/smartwidgets/jarvis.widget.min.js"></script>
-    <!-- Demo purpose only -->
-    <script src="../../js/demo.min.js"></script>
+    <!-- Demo purpose only 
+    <script src="../../js/demo.min.js"></script>-->
     <!-- MAIN APP JS FILE -->
     <script src="../../js/app.min.js"></script>
     

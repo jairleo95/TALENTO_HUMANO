@@ -283,19 +283,20 @@ function procesarSendToRemu(callback) {
     } else {
     }
 }
- $(".emailInput").tagsinput({
-        confirmKeys: [13, 44], typeahead: {
+
+function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
+    console.log("enter to function registerAndProcessCodHuella");
+    $('.sendEmailsModal').modal({keyboard: false, backdrop: 'static'});
+    $('.sendEmailsModal').modal('show');
+    $(".emailInput").tagsinput({
+        confirmKeys: [13, 44], 
+       /* typeahead: {
             source: ['Amsterdam', 'Washington', 'Sydney', 'Beijing', 'Cairo']
-        },
+        },*/
         freeInput: true
     });
     $('.emailInput').tagsinput('refresh');
-function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
-console.log("enter to function registerAndProcessCodHuella");
-    $('.sendEmailsModal').modal({keyboard: false, backdrop: 'static'});
-    $('.sendEmailsModal').modal('show');
 
-   
     $(".messageEmail").val('Estimado(a) Colaborador(a),\n'
             + 'Compartimos la siguiente información \n'
             + ' - Bienestar para el trabajador \n'

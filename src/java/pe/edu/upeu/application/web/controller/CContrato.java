@@ -353,8 +353,8 @@ public class CContrato extends HttpServlet {
                 rpta.put("rpta", true);
             }
             if (opc.equals("SI_CONNTRATO")) {
-
                 String idtr = request.getParameter("idtr");
+                /*mostrar el ultimo contrato registrado*/
                 String id_cto = con.Contrato_max(idtr);
                 if (id_cto != null) {
                     String id_pu = puesto.puesto(id_cto);
@@ -367,7 +367,7 @@ public class CContrato extends HttpServlet {
                 sesion.setAttribute("list_Condicion_contrato", l.list_Condicion_contrato());
                 sesion.setAttribute("List_tipo_contrato", l.List_tipo_contrato());
                 sesion.setAttribute("list_reg_labo", con.list_reg_labo());
-                response.sendRedirect("Vista/Contrato/Imprimir_Subir_Contrato.jsp?idtr=" + idtr + "&id_cto=" + id_cto);
+                response.sendRedirect("Vista/Contrato/Imprimir_Subir_Contrato.jsp?idtr=" + idtr );
             }
 
             if (opc.equals("Subir_Contrato")) {

@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.model.Direccion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
@@ -485,7 +486,7 @@
 
 <!-- PAGE RELATED PLUGIN(S) -->
 <script src="../../../js/plugin/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="../../../js/Js_Contrato/formato_plantilla/formato-plantilla-api.js"></script>
+<script type="text/javascript" src="../../../js/Js_Contrato/formato_plantilla/formato-plantilla-api.js?v=<%=globalProperties.VERSION_JS%>"></script>
 </html>
 
 <%} else {

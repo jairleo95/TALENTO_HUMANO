@@ -63,13 +63,11 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        <script type="text/javascript" src="../../js/JQuery/jQuery.js"></script>
         <style type="text/css">
             body{
                 margin-left: auto;
                 margin-right: auto  ;
                 width: 95%;
-                /*// margin: 0;*/
             }
             .titulo{
                 background-color: #474747;
@@ -103,12 +101,9 @@
                 width: 100%;
             }
             .submit{
-                /*  //position: relative;*/
-
                 background-color: #0575f4;
                 color: white;
                 width: 100%;
-
             }
             .submit:hover{
                 background-color: #643771;
@@ -122,14 +117,7 @@
                 position: absolute;
 
             }
-        </style>
-        <title>Información Contractual</title>
-        <style type="text/css">
             .tables{
-                /*  // margin-top: 0px;
-                  // margin-left: 40px;
-                  //  font-family: cursive;
-                  //  font-size:18px;*/
                 border-radius: 3%;
                 padding: 0.5%;
                 background-color: white;
@@ -143,9 +131,9 @@
                 background-color:#c6dcde;     
             }
 
-
-
         </style>
+        <title>Información Contractual</title>
+       
     </head>
     <body class="slideInDown fast animated">
 
@@ -197,7 +185,7 @@
                             <%if (Integer.parseInt(n.getEs_secre_is()) == 2 && idrol.trim().equals("ROL-0002")) {%>
 
                             <%} else if (!idrol.trim().equals("ROL-0009")) {%>
-                            <a class="btn btn-labeled btn-primary" href="../../plantilla_contractual?opc=Imprimir&id_plan_contr=<%=n.getId_plantilla_contractual()%>&idtraba=<%=n.getId_trabajador()%>&id_con=<%=n.getId_contrato()%>&puesto=<%=n.getId_puesto()%>"><span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Imprimir</a>
+                            <a class="btn btn-labeled btn-primary" href="../../plantilla_contractual?opc=Imprimir&id_plan_contr=<%=n.getId_plantilla_contractual()%>&idtraba=<%=n.getId_trabajador()%>&id_con=<%=n.getId_contrato()%>&puesto=<%=n.getId_puesto()%>"><span class="btn-label"><i class="fa fa-print"></i></span>Imprimir</a>
 
                             <%}%>
 
