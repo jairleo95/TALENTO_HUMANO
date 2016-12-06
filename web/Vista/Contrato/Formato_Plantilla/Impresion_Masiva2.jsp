@@ -51,13 +51,13 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     <%
         for (int i = 0; i < texto.size(); i++) {
             //String texto_pl = texto.get(i).toString();
-    %>
+%>
     <textarea type="hidden" class="texto<%=i%>" id="texto<%=i%>" style="display:none;" value="<%=texto.get(i).toString()%>" ></textarea>
     <%}%>
     <script>
 // The instanceReady event is fired, when an instance of CKEditor has finished
 // its initialization.
-        CKEDITOR.on('instanceReady', function(ev) {
+        CKEDITOR.on('instanceReady', function (ev) {
             // Show the editor name and description in the browser status bar.
             document.getElementById('eMessage').innerHTML = 'Instance <code>' + ev.editor.name + '<\/code> loaded.';
 
@@ -77,8 +77,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 // Insert HTML code.
                 // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-insertHtml
                 editor.insertHtml(value);
-            }
-            else
+            } else
                 alert('You must be in WYSIWYG mode!');
         }
         function InsertText() {
@@ -91,8 +90,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 // Insert as plain text.
                 // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-insertText
                 editor.insertText(value);
-            }
-            else
+            } else
                 alert('You must be in WYSIWYG mode!');
         }
 
@@ -123,8 +121,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 // Execute the command.
                 // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-execCommand
                 editor.execCommand(commandName);
-            }
-            else
+            } else
                 alert('You must be in WYSIWYG mode!');
         }
 
@@ -165,7 +162,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         function procesar_texto(valor, asa) {
             // var editor = CKEDITOR.instances.editor1;
 
-            $.post("../../../Imprimir", "opc=Listar_contrato&" + "id=" + valor, function(objJson) {
+            $.post("../../../Imprimir", "opc=Listar_contrato&" + "id=" + valor, function (objJson) {
                 var Lista = objJson.lista;
                 var texto = asa;
                 //alert(Lista.length)
@@ -305,6 +302,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     } else {
                         ca_st = "-";
                     }
+                    var ca_sueldo_basico = "";
+                    if (Lista[i].ca_sueldo_basico != null) {
+                        ca_sueldo_basico = Lista[i].ca_sueldo_basico;
+                    } else {
+                        ca_sueldo_basico = "-";
+                    }
                     var nu_ho = "";
                     if (Lista[i].nu_ho != null) {
                         nu_ho = Lista[i].nu_ho;
@@ -339,7 +342,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         "[hasta]": fe_ha,
                         "[puesto]": no_pu,
                         "[fe_suscripcion]": fe_su,
-                        "[sueldo]": ca_st,
+                        "[sueldo]": ca_sueldo_basico,
+                        "[sueldo_total]": ca_st,
                         "[horas]": nu_ho,
                         "[cursos]": "",
                         "[moneda]": co_tm,
@@ -359,7 +363,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     //alert(texto);
                 }
                 var txt = $("#texto2").val();
-                txt += texto+'<div style="page-break-after: always;"><span style="display:none">&nbsp;</span></div>';
+                txt += texto + '<div style="page-break-after: always;"><span style="display:none">&nbsp;</span></div>';
                 $("#texto2").val(txt);
             });
         }
@@ -367,7 +371,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             var cant_con = $(".cant_con").val();
 
             for (var f = 0; f < cant_con + 1; f++) {
-                procesar_texto( $(".contrato" + f).val(),  $(".texto" + f).val());
+                procesar_texto($(".contrato" + f).val(), $(".texto" + f).val());
             }
 
         }
@@ -378,7 +382,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-setData
             editor.setData("");
             $(".texto2").val("");
-            setTimeout(function() {
+            setTimeout(function () {
                 InsertHTML();
                 ExecuteCommand("print");
             }, 10000);
@@ -392,12 +396,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
             // InsertHTML();
             //ExecuteCommand("print");
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             $("#actu").hide();
             $("#texto").hide();
             $("#texto2").hide();
-            setTimeout(function() {
+            setTimeout(function () {
                 InsertHTML();
                 ExecuteCommand("print");
             }, 3000);
@@ -429,7 +433,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     focus: onFocus,
                     blur: onBlur,
                     // Check for availability of corresponding plugins.
-                    pluginsLoaded: function(evt) {
+                    pluginsLoaded: function (evt) {
                         var doc = CKEDITOR.document, ed = evt.editor;
                         if (!ed.getCommand('bold'))
                             doc.getById('exec-bold').hide();
@@ -439,7 +443,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                 }
                 , height: '800px'});</script>
         <script type="text/javascript">
-            $(document).ready(function() {
+            $(document).ready(function () {
 
 
             }

@@ -317,7 +317,7 @@
                                                     <input type="hidden" class="val_aut<%=(f + 1)%> valAut" 
                                                            value="&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&IDDETALLE_DGP=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&COD=<%=a.getCo_pasos()%>&IDPASOS=<%=a.getId_pasos()%>&NROPASO=<%=a.getNu_pasos()%>&IDTR=<%=a.getId_trabajador()%>"/>
                                                     <input type="hidden" class="val_firm<%=(f + 1)%>" value="&IDDETALLE_DGP=<%=a.getId_dgp()%>&IDTR=<%=a.getId_trabajador()%>"/>
-                                                    <input type="hidden" class="correos_<%=(f + 1)%> correoTrabajador" value="&IDTR=<%=a.getId_trabajador()%>&co_inst=<%=a.getDi_correo_inst()%>&co_pers=<%=a.getDi_correo_personal()%>"/>
+                                                    <input type="hidden" class="correos_<%=(f + 1)%> correoTrabajador" value="<%=a.getDi_correo_inst()%>,<%=a.getDi_correo_personal()%>"/>
                                                     <td class="text-info">
                                                         <a href="../../trabajador?idtr=<%=a.getId_trabajador()%>&IDDETALLE_REQ_PROCESO=<%=a.getId_detalle_req_proceso()%>&iddetalle_dgp=<%=a.getId_dgp()%>&p=<%=a.getId_puesto()%>&cod=<%=a.getCo_pasos()%>&idpasos=<%=a.getId_pasos()%>&autorizacion=1&opc=aut&nup=<%=a.getNu_pasos()%>">
                                                             <strong><%=a.getDe_pasos()%></strong>
@@ -564,7 +564,7 @@
                         <div class="row">
                             <div class="form-group col-sm-12">
                                 <label   class="h4">Email</label>
-                                  <input class="form-control emailInput" value="234234,234,234,234,234" name="to"   required  data-role="tagsinput" >
+                                  <input class="form-control emailInput"  name="to"   required  data-role="tagsinput" >
                             </div>
                             <div class="form-group col-sm-12">
                                 <label   class="h4">Asunto</label>
@@ -573,7 +573,7 @@
                         </div>
                         <div class="form-group">
                             <label   class="h4 ">Mensaje</label>
-                            <textarea  class="form-control messageEmail" rows="10" placeholder="Ingresa un mensaje" name="mensaje" required></textarea>
+                            <textarea  class="form-control messageEmail" rows="8" placeholder="Ingresa un mensaje" name="mensaje" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

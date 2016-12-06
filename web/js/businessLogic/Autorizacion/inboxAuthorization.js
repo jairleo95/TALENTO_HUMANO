@@ -283,19 +283,15 @@ function procesarSendToRemu(callback) {
     } else {
     }
 }
-
-function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
-    console.log("enter to function registerAndProcessCodHuella");
+function loadFormSendEmail(emails) {
+    console.log("enter to function loadFormSendEmail");
     $('.sendEmailsModal').modal({keyboard: false, backdrop: 'static'});
     $('.sendEmailsModal').modal('show');
     $(".emailInput").tagsinput({
-        confirmKeys: [13, 44], 
-       /* typeahead: {
-            source: ['Amsterdam', 'Washington', 'Sydney', 'Beijing', 'Cairo']
-        },*/
+        confirmKeys: [13, 44],
         freeInput: true
     });
-    $('.emailInput').tagsinput('refresh');
+    $('.emailInput').tagsinput('add', emails);
 
     $(".messageEmail").val('Estimado(a) Colaborador(a),\n'
             + 'Compartimos la siguiente información \n'
@@ -304,20 +300,23 @@ function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
             + ' - Reglamento de trabajo \n'
             + ' - Boletín Informativo - sistema pensionario \n'
             + 'Saludos Cordiales.');
-
-    /*console.log("::enter to registerAndProcessCodHuella function");
-     if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
-     registerCOdHuella(inputItem, function () {
-     processAutorizacionMasive(dataProcess, function () {
-     $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-     sendEmail(dataEmail, function () {
-     var table = new $.fn.dataTable.Api('#dt_basic1');
-     table.row(inputItem.parents('tr')).remove().draw();
-     $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-     });
-     });
-     });
-     }*/
+}
+function registerAndProcessCodHuella(inputItem, emails, dataProcess) {
+    console.log("enter to function registerAndProcessCodHuella");
+    if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
+         loadFormSendEmail(emails);
+        /*
+        registerCOdHuella(inputItem, function () {
+            processAutorizacionMasive(dataProcess, function () {
+                $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+                sendEmail(emails, function () {
+                    var table = new $.fn.dataTable.Api('#dt_basic1');
+                    table.row(inputItem.parents('tr')).remove().draw();
+                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+                });
+            });
+        });*/
+    }
 }
 function registerCOdHuella(inputItem, callback) {
     console.log("::enter to registerCOdHuella function");
@@ -354,8 +353,9 @@ function processAutorizacionMasive(values, callback) {
     });
 }
 
-function sendEmail(dataRequest, callback) {
+function sendEmail(emailsConcat, callback) {
     console.log("::enter to sendEmail function");
+   // loadFormSendEmail(emailsConcat);
     statusBarAut.text("Enviando correos...");
     /*open modal*/
     $.ajax({
@@ -391,7 +391,7 @@ function sendEmail(dataRequest, callback) {
                 }
             }
         },
-        data: dataRequest
+        data: "opc=Enviar_Correo" + emailsConcat
     });
 }
 $(document).ready(function () {
@@ -551,7 +551,7 @@ $(document).ready(function () {
                     var objInputHuella = $(this);
                     var valAut = objInputHuella.parents('tr').find(".valAut");
                     var correoTrabajador = objInputHuella.parents('tr').find(".correoTrabajador");
-                    registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + correoTrabajador.val(), valAut.val());
+                    registerAndProcessCodHuella(objInputHuella ,correoTrabajador.val(), valAut.val());
                 });
 
                 $.each($(".cbHuellaItem"), function (index) {
@@ -563,7 +563,7 @@ $(document).ready(function () {
                             var correoTrabajador = itemRegistered.parents('tr').find(".correoTrabajador");
                             processAutorizacionMasive(itemValue.val(), function () {
                                 $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-                                sendEmail("opc=Enviar_Correo" + correoTrabajador.val(), function () {
+                                sendEmail(correoTrabajador.val(), function () {
                                     $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                                     var table = new $.fn.dataTable.Api('#dt_basic1');
                                     table.row(itemRegistered.parents('tr')).remove().draw();

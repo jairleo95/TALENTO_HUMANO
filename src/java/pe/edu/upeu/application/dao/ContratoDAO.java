@@ -678,6 +678,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 rec.put("fe_ha", rs.getString("fe_has"));
                 rec.put("no_pu", rs.getString("no_puesto"));
                 rec.put("fe_su", rs.getString("fe_sus"));
+                rec.put("ca_sueldo_basico", rs.getString("ca_sueldo"));
                 rec.put("ca_st", rs.getString("ca_sueldo_total"));
                 rec.put("nu_ho", rs.getString("nu_horas_lab"));
                 rec.put("co_tm", rs.getString("co_ti_moneda"));

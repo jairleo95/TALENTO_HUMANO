@@ -5,10 +5,6 @@
  */
 package pe.edu.upeu.application.util;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +24,7 @@ public class DateFormat {
             if (!fecha.equals("")) {
                 System.out.println("converFecha: " + fecha);
                 Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
-                nueva_fecha = new SimpleDateFormat("dd-MMM-yy").format(date).toUpperCase();
+                nueva_fecha = new SimpleDateFormat("dd-MMM-yyyy").format(date).toUpperCase();
                 System.out.println("converFecha (nueva fecha): " + nueva_fecha);
             } else {
                 nueva_fecha = null;

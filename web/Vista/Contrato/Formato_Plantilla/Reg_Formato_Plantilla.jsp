@@ -300,7 +300,8 @@
                                                                 <tr><td><code>[hasta]</code></td><td>Fecha de Fin del contrato</td></tr>
                                                                 <tr><td><code>[puesto]</code></td><td>Puesto que va a desempeñar</td></tr>
                                                                 <tr><td><code>[fe_suscripcion]</code></td><td>Fecha de suscripcion</td></tr>
-                                                                <tr><td><code>[sueldo]</code></td><td>Sueldo del trabajador</td></tr>
+                                                                <tr><td><code>[sueldo]</code></td><td>Sueldo básico del trabajador</td></tr>
+                                                                <tr><td><code>[sueldo_total]</code></td><td>Sueldo total del trabajador</td></tr>
                                                                 <tr><td><code>[horas]</code></td><td>Horas de trabajo semanales</td></tr>
                                                                 <tr><td><code>[cursos]</code></td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
                                                                 <tr><td><code>[funciones_pr]</code></td><td>Funciones primarias que va a desempeñar en el puesto</td></tr>
