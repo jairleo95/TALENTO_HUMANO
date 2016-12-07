@@ -564,23 +564,22 @@
                         <div class="row">
                             <div class="form-group col-sm-12">
                                 <label   class="h4">Email</label>
-                                  <input class="form-control emailInput"  name="to"   required  data-role="tagsinput" >
+                                  <input class="form-control emailInput"      required  data-role="tagsinput" >
                             </div>
                             <div class="form-group col-sm-12">
                                 <label   class="h4">Asunto</label>
-                                <input type="text" class="form-control asunto" value="CARPETA LABORAL - UPEU" name="asunto" placeholder="Asunto" required>
+                                <input type="text" class="form-control asunto" value="CARPETA LABORAL - UPEU"   placeholder="Asunto" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label   class="h4 ">Mensaje</label>
-                            <textarea  class="form-control messageEmail" rows="8" placeholder="Ingresa un mensaje" name="mensaje" required></textarea>
+                            <textarea  class="form-control messageEmail" rows="8" placeholder="Ingresa un mensaje"  required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="button"  class="btn btn-success pull-right ">Enviar</button>
+                        <button type="button"  class="btn btn-success pull-right btnSendEmail">Enviar</button>
                     </div>
-
                 </div>
             </div>
         </div>

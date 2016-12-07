@@ -99,11 +99,6 @@ function listar_autorizados(mes, anno) {
         }
         var count = 0;
         for (var i = 0; i < lista.length; i++) {
-            /* if ((i + 1) < lista.length) {
-             if (lista[i].id_dgp == lista[i + 1].id_dgp) {
-             i++;
-             }
-             }*/
             count++;
             text_html += "<tr>";
             text_html += "<td>" + (count) + "</td>";
@@ -186,11 +181,11 @@ function statusFirmaAndRem() {
 
 function nobackbutton() {
     window.location.hash = "no-back-button";
-    window.location.hash = "Again-No-back-button" //chrome
+    window.location.hash = "Again-No-back-button"; //chrome
 
     window.onhashchange = function () {
         window.location.hash = "";
-    }
+    };
 }
 function exito(titulo, mensaje) {
     $.smallBox({
@@ -292,7 +287,6 @@ function loadFormSendEmail(emails) {
         freeInput: true
     });
     $('.emailInput').tagsinput('add', emails);
-
     $(".messageEmail").val('Estimado(a) Colaborador(a),\n'
             + 'Compartimos la siguiente información \n'
             + ' - Bienestar para el trabajador \n'
@@ -300,22 +294,19 @@ function loadFormSendEmail(emails) {
             + ' - Reglamento de trabajo \n'
             + ' - Boletín Informativo - sistema pensionario \n'
             + 'Saludos Cordiales.');
+
 }
 function registerAndProcessCodHuella(inputItem, emails, dataProcess) {
     console.log("enter to function registerAndProcessCodHuella");
     if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
-         loadFormSendEmail(emails);
-        /*
         registerCOdHuella(inputItem, function () {
             processAutorizacionMasive(dataProcess, function () {
                 $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-                sendEmail(emails, function () {
-                    var table = new $.fn.dataTable.Api('#dt_basic1');
-                    table.row(inputItem.parents('tr')).remove().draw();
-                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-                });
+                loadFormSendEmail(emails);
+                var table = new $.fn.dataTable.Api('#dt_basic1');
+                table.row(inputItem.parents('tr')).remove().draw();
             });
-        });*/
+        });
     }
 }
 function registerCOdHuella(inputItem, callback) {
@@ -352,10 +343,9 @@ function processAutorizacionMasive(values, callback) {
         }
     });
 }
-
-function sendEmail(emailsConcat, callback) {
+function sendEmail(dataURL, callback) {
     console.log("::enter to sendEmail function");
-   // loadFormSendEmail(emailsConcat);
+    // loadFormSendEmail(emailsConcat);
     statusBarAut.text("Enviando correos...");
     /*open modal*/
     $.ajax({
@@ -391,7 +381,7 @@ function sendEmail(emailsConcat, callback) {
                 }
             }
         },
-        data: "opc=Enviar_Correo" + emailsConcat
+        data: "opc=Enviar_Correo" + dataURL
     });
 }
 $(document).ready(function () {
@@ -421,6 +411,14 @@ $(document).ready(function () {
         tablet: 1024,
         phone: 480
     };
+    $(".btnSendEmail").click(function () {
+        var emailInput = $(".emailInput").val();
+        var asunto = $(".asunto").val();
+        var messageEmail = $(".messageEmail").val();
+        sendEmail("&to=" + emailInput + "&from=jairleo95@gmail.com&asunto=" + asunto + "&cuerpo=" + messageEmail, function () {
+            $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+        });
+    });
     $('#dt_basic1').dataTable({
         "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
                 "t" +
@@ -551,7 +549,7 @@ $(document).ready(function () {
                     var objInputHuella = $(this);
                     var valAut = objInputHuella.parents('tr').find(".valAut");
                     var correoTrabajador = objInputHuella.parents('tr').find(".correoTrabajador");
-                    registerAndProcessCodHuella(objInputHuella ,correoTrabajador.val(), valAut.val());
+                    registerAndProcessCodHuella(objInputHuella, correoTrabajador.val(), valAut.val());
                 });
 
                 $.each($(".cbHuellaItem"), function (index) {
@@ -563,11 +561,12 @@ $(document).ready(function () {
                             var correoTrabajador = itemRegistered.parents('tr').find(".correoTrabajador");
                             processAutorizacionMasive(itemValue.val(), function () {
                                 $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-                                sendEmail(correoTrabajador.val(), function () {
+                                loadFormSendEmail(correoTrabajador.val());
+                               /* sendEmail(correoTrabajador.val(), function () {
                                     $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                                     var table = new $.fn.dataTable.Api('#dt_basic1');
                                     table.row(itemRegistered.parents('tr')).remove().draw();
-                                });
+                                });*/
                             });
                         }
                     }
