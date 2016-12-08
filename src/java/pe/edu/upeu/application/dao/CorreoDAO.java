@@ -31,8 +31,7 @@ public class CorreoDAO implements InterfaceCorreoDAO {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
-        props.put("mail.smtp.socketFactory.class",
-                "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.socketFactory.class",  "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
         // Get the Session object.
@@ -50,18 +49,19 @@ public class CorreoDAO implements InterfaceCorreoDAO {
             // Create a default MimeMessage object.
             Message message = new MimeMessage(session);
             // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
+            message.setFrom(new InternetAddress("jairleo95@gmail.com"));
             // Set To: header field of the header.
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(to));
+                    InternetAddress.parse("jairleo95@gmail.com"));
             // Set Subject: header field
             message.setSubject(Asunto);
             // Create the message part
             BodyPart messageBodyPart = new MimeBodyPart();
             // Now set the actual message
-            messageBodyPart.setText(Cuerpo);
+            messageBodyPart.setContent(Cuerpo, "text/html");
+            //messageBodyPart.setText(Cuerpo);
             // Create a multipar message
-            Multipart multipart = new MimeMultipart();
+                Multipart multipart = new MimeMultipart();
             // Set text message part
             multipart.addBodyPart(messageBodyPart);
             // Part two is attachment

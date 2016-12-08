@@ -916,12 +916,14 @@
         <!-- 
         -->
 
-<script src="../../../js/plugin/dropzone/dropzone.min.js" type="text/javascript"></script>
-<script src="../../../js/plugin/dropzone/dropzone-amd-module.min.js" type="text/javascript"></script>
+        <script src="../../../js/plugin/dropzone/dropzone.min.js" type="text/javascript"></script>
+        <script src="../../../js/plugin/dropzone/dropzone-amd-module.min.js" type="text/javascript"></script>
         <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="../../../js/bootstrap/fileinput.js" type="text/javascript"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+         <script src="../../../js/bootstrap/es.js" type="text/javascript"></script>
+        
         <script src="../../../js/notification/SmartNotification.min.js"></script>
         <script type="text/javascript" src="../../../js/shadowbox/demo.js"></script>
         <script type="text/javascript" src="../../../js/shadowbox/shadowbox.js"></script>
@@ -1020,6 +1022,7 @@ function goBack() {
                 });
 
                 $(".fileDocument").fileinput({
+                     language: "es",
                     showUpload: false,
                     layoutTemplates: {
                         main1: "{preview}\n" +

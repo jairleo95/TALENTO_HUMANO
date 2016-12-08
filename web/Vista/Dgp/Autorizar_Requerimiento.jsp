@@ -24,7 +24,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-           <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
         <!-- SmartAdmin RTL Support is under construction
@@ -66,7 +66,16 @@
             .form-inline .checkbox input[type=checkbox].checkbox+span, .form-inline .radiobox input[type=radio].radiobox+span {
                 margin-left: -20px;
             }
+
+            .inbox-compose-footer, .inbox-download, .inbox-info-bar, .inbox-message {
+                margin-right: 0px;
+                position: initial;
+            }
+            .bootstrap-tagsinput {
+                border: 1px solid #fff;
+            }
         </style>
+        <link href="../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
     </head>
     <%
         int t = List_id_Autorizacion.size();
@@ -105,13 +114,12 @@
         <div id="main" role="main" style="margin-left: 0px;">
             <!-- MAIN CONTENT -->
             <div id="content">
-             
                 <!-- widget grid -->
                 <section id="widget-grid" class="slideInDown fast animated" >
 
+
                     <!-- row -->
                     <div class="row">
-
 
                         <!-- NEW WIDGET START -->
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -550,36 +558,82 @@
                 </div>
             </div>
         </div>
-
-         
         <!--================================================== -->
-        <div class="modal fade sendEmailsModal">
+        <div class="modal fade sendEmailsModal" tabindex="-1">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content"  style="width:150%;margin-left: -30%;">
                     <div class="modal-header">
-                        <h1>Enviar Correos</h1>
+                        <h1>Enviar Correos al Trabajador</h1>
                     </div>
-                    
-                    <div class="modal-body">
-                        
-                        <div class="row">
-                            <div class="form-group col-sm-12">
-                                <label   class="h4">Email</label>
-                                  <input class="form-control emailInput"      required  data-role="tagsinput" >
-                            </div>
-                            <div class="form-group col-sm-12">
-                                <label   class="h4">Asunto</label>
-                                <input type="text" class="form-control asunto" value="CARPETA LABORAL - UPEU"   placeholder="Asunto" required>
+
+                    <div class="modal-body" >
+                        <div id="inbox-content" class="inbox-body">
+                            <div class="animated fast fadeInRight">
+                                <form  action="dummy.php" method="POST" class="form-horizontal" id="email-compose-form">
+
+                                    <div class="inbox-info-bar">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-1"><strong>Para</strong></label>
+                                                <div class="col-md-11">
+                                                    <input class="emailInput"  style="width:100%;border-color: #fff!important;"  required  data-role="tagsinput" >
+
+                                                </div>
+                                            </div>
+                                        </div>	
+                                    </div>
+                                    <div class="inbox-info-bar">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-1"><strong>Asunto</strong></label>
+                                                <div class="col-md-11">
+                                                    <input class="form-control asunto" value="CARPETA LABORAL - UPEU" placeholder="Ingrese un asunto del correo" type="text" required>
+                                                </div>
+                                            </div>
+                                        </div>	
+                                    </div>
+                                    <div class="inbox-info-bar hidden">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-1"><strong>Attachments</strong></label>
+                                                <div class="col-md-11">
+                                                    <input class="form-control fileinput" type="file" multiple="multiple">
+                                                </div>
+                                            </div>
+                                        </div>	
+                                    </div>
+                                    <div class="inbox-message" >
+                                        <textarea class="emailbody messageEmail" >
+            Estimado(a) Colaborador(a),<br>
+            Compartimos la siguiente información<br><br>
+             - Bienestar para el trabajador<br>
+             - Reglamento de Control de Asistencia<br>
+             - Reglamento de trabajo<br>
+             - Boletín Informativo - sistema pensionario<br>    
+                                                        <br><br><br>Gracias,<br><strong>Ing. Iván Huamán Fernández</strong><br><br><small>Área de Sistemas<br> Gerencia del Talento Humano<br>Universidad Peruana Unión<br><i class="fa fa-phone"> (+51) 989 059 491</i></small><br>		
+                                        </textarea>	
+                                    </div>
+                                    <div class="inbox-info-bar">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <input class="form-control fileinput inputFileEmail" type="file" multiple="multiple">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="inbox-compose-footer">
+                                        <button class="btn btn-danger" type="button" data-dismiss="modal">
+                                            Cerrar
+                                        </button>
+                                        <button  class="btn btn-primary pull-right btnSendEmail" type="button">
+                                            Enviar <i class="fa fa-arrow-circle-right fa-lg"></i>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label   class="h4 ">Mensaje</label>
-                            <textarea  class="form-control messageEmail" rows="8" placeholder="Ingresa un mensaje"  required></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="button"  class="btn btn-success pull-right btnSendEmail">Enviar</button>
+
                     </div>
                 </div>
             </div>
@@ -655,17 +709,26 @@
     <script src="../../js/demo.min.js"></script>-->
     <!-- MAIN APP JS FILE -->
     <script src="../../js/app.min.js"></script>
-    
+
     <script src="../../js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js"></script>
 
-    
+
     <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
+    <script src="../../js/plugin/delete-table-row/delete-table-row.min.js"></script>
+
+    <script src="../../js/plugin/summernote/summernote.min.js"></script>
+    <script src="../../js/plugin/select2/select2.min.js"></script>
 
 
+
+    <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
+ 
+    <script src="../../js/bootstrap/fileinput.js" type="text/javascript"></script>
+   <script src="../../js/bootstrap/es.js" type="text/javascript"></script>
 
     <!--BUSINESS LOGIC PLUGINS -->
     <script src="../../js/coment/comenth.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>

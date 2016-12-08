@@ -521,7 +521,7 @@ public class CAutorizacion extends HttpServlet {
                         String[] emails = to.split(",");
                         for (String email : emails) {
                             System.out.println("email:"+email);
-                         correo.Enviar("jairleo95@gmail.com", from, asunto, cuerpo);
+                         correo.Enviar(to, from, asunto, cuerpo);
                         }
                         System.out.print("Ejecutando envio de correos");
                         /*correo.Enviar("jairleo95@gmail.com", "jairleo95@gmail.com", "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"

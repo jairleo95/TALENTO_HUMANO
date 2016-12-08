@@ -287,14 +287,6 @@ function loadFormSendEmail(emails) {
         freeInput: true
     });
     $('.emailInput').tagsinput('add', emails);
-    $(".messageEmail").val('Estimado(a) Colaborador(a),\n'
-            + 'Compartimos la siguiente información \n'
-            + ' - Bienestar para el trabajador \n'
-            + ' - Reglamento de Control de Asistencia \n'
-            + ' - Reglamento de trabajo \n'
-            + ' - Boletín Informativo - sistema pensionario \n'
-            + 'Saludos Cordiales.');
-
 }
 function registerAndProcessCodHuella(inputItem, emails, dataProcess) {
     console.log("enter to function registerAndProcessCodHuella");
@@ -385,12 +377,40 @@ function sendEmail(dataURL, callback) {
     });
 }
 $(document).ready(function () {
-
     statusBtnSendToRem();
     statusBtnSendFirma();
     statusFirmaAndRem();
     loadDatatableCargaAcademica();
     pageSetUp();
+    //runAllForms();
+    $(".inputFileEmail").fileinput({
+        language: "es",
+        layoutTemplates: {
+            main1: "{preview}\n" +
+                    "<div class=\'input-group {class}\'>\n" +
+                    "   <div class=\'input-group-btn\' >\n" +
+                    "       {browse}\n" +
+                    "       {upload}\n" +
+                    "       {remove}\n" +
+                    "   </div>\n" +
+                    "   {caption}\n" +
+                    "</div>"},
+        allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc', 'txt'],
+        maxFileSize: 500,
+        maxFilesNum: 10,
+        browseClass: "btn btn-primary btn-sm",
+        removeClass: "btn btn-danger btn-sm"
+    });
+    $('.inputFileEmail').change(function () {
+        console.log(this.files[0].mozFullPath);
+    });
+    $('.emailbody').summernote({
+        height: 350,
+        focus: false,
+        tabsize: 2
+    });
+
+
     $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
         $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
     });
@@ -411,13 +431,22 @@ $(document).ready(function () {
         tablet: 1024,
         phone: 480
     };
+    $('.btnSendEmail').button({
+        loadingText: 'Enviando...'
+    }
+
+    );
     $(".btnSendEmail").click(function () {
+        var $btn = $(this);
+        $btn.button('loading');
         var emailInput = $(".emailInput").val();
         var asunto = $(".asunto").val();
         var messageEmail = $(".messageEmail").val();
         sendEmail("&to=" + emailInput + "&from=jairleo95@gmail.com&asunto=" + asunto + "&cuerpo=" + messageEmail, function () {
-            $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
+            $btn.button('reset');
         });
+
+
     });
     $('#dt_basic1').dataTable({
         "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
@@ -560,13 +589,9 @@ $(document).ready(function () {
                             var itemValue = itemRegistered.parents('tr').find(".valAut");
                             var correoTrabajador = itemRegistered.parents('tr').find(".correoTrabajador");
                             processAutorizacionMasive(itemValue.val(), function () {
-                                $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+                                //$(".headerReqAutorizado").addClass("widget-body-ajax-loading");
                                 loadFormSendEmail(correoTrabajador.val());
-                               /* sendEmail(correoTrabajador.val(), function () {
-                                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-                                    var table = new $.fn.dataTable.Api('#dt_basic1');
-                                    table.row(itemRegistered.parents('tr')).remove().draw();
-                                });*/
+
                             });
                         }
                     }
