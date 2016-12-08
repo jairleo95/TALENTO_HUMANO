@@ -719,8 +719,8 @@
     
     <![endif]-->
 
-    <!-- Demo purpose only -->
-    <script src="../../js/demo.min.js"></script>
+    <!-- Demo purpose only 
+    <script src="../../js/demo.min.js"></script>-->
 
     <!-- MAIN APP JS FILE -->
     <script src="../../js/app.min.js"></script>
@@ -730,6 +730,7 @@
     <!-- Voice command : plugin
     <script src="../../js/speech/voicecommand.min.js"></script> -->
     <!-- PAGE RELATED PLUGIN(S) -->
+    <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
     <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>

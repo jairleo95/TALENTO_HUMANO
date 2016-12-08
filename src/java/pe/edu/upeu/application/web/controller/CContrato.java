@@ -273,6 +273,7 @@ public class CContrato extends HttpServlet {
                         ES_TI_CONTRATACION, CA_BEV, ID_TIPO_PLANILLA, ES_REMUNERACION_PROCESADO, ID_HORARIO, ID_PLANTILLA_CONTRACTUAL, ca_bonificacion_p, PRACTICANTE, situacionEspecial);
 
                 out.print("1");
+                /*Actualizando centro de costo*/
                 if (ID_DGP != null) {
                     int cant_inicial = Integer.parseInt(request.getParameter("cant_inicial"));
                     int cant_ingresada = Integer.parseInt(request.getParameter("cant_ingresada"));

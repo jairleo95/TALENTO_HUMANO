@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
@@ -34,9 +35,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <link type="text/css" rel="stylesheet" href="../../css/Css_Detalle/CSS_DETALLE.css">  
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
+
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/demo.min.css">
@@ -63,80 +64,9 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        <style type="text/css">
-            body{
-                margin-left: auto;
-                margin-right: auto  ;
-                width: 95%;
-            }
-            .titulo{
-                background-color: #474747;
-                padding: 0.5%;
-
-                font-family: arial;
-                font-size: 130%;
-                text-align: center;
-                color: white;
-            }
-            .autoHeight{
-                border-style:none;            
-            }
-
-            .td{
-                font-weight: bold;
-                text-align: center;
-            }
-            .td1{
-                text-align: center;
-            }
-            .td2{
-                width: 8%;
-            }
-            .info-det{
-
-                width: 25%;
-            }
-
-            .table-det{
-                width: 100%;
-            }
-            .submit{
-                background-color: #0575f4;
-                color: white;
-                width: 100%;
-            }
-            .submit:hover{
-                background-color: #643771;
-            }
-
-            table, th, td {
-
-                padding: 4px;
-            }
-            img{
-                position: absolute;
-
-            }
-            .tables{
-                border-radius: 3%;
-                padding: 0.5%;
-                background-color: white;
-                width: 60%;
-            }
-            td {
-                padding: 0.5%;
-                padding-left: 2%;
-            } 
-            tr:hover{
-                background-color:#c6dcde;     
-            }
-
-        </style>
         <title>Información Contractual</title>
-       
     </head>
-    <body class="slideInDown fast animated">
-
+    <body class="slideInRight fast animated">
         <%
             String ID_CTO = request.getParameter("id_cto");
             if (List_contra_x_idcto.size() == 0) {%>
@@ -219,20 +149,20 @@
 
                 </div>
                 <br>
-                <p class="alert alert-info"><i class="fa fa-info"></i> ¡Una vez procesado la informacion usted ya no podra <strong>editar</strong> este contrato!</p>
+                <p class="alert alert-info"><i class="fa fa-info"></i> ¡Una vez procesado la informacion usted ya no podra editar este contrato!</p>
             </div>
             <% for (int p = 0; p < List_contra_x_idcto.size(); p++) {%>
-            <table class="table table-bordered table-hover table-striped  table-responsive">
-                <tr><td class="text-info"><strong>Fecha de Inicio: </strong></td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info" colspan="2"><strong>Fecha de Cese:</strong></td><td class="" colspan="2"><%if (n.getFe_hasta() != null) {
+            <table class="table table-bordered table-hover table-striped">
+                <tr><td class="text-info">Fecha de Inicio: </td><td colspan="2"><%=n.getFe_desde()%></td><td class="text-info" colspan="2">Fecha de Cese:</td><td class="" colspan="2"><%if (n.getFe_hasta() != null) {
                         out.print(n.getFe_hasta());
                     } else {
                         out.print("No definido");
                     }%></td></tr>
-                <tr><td class="text-info"><strong>Dirección:</strong></td><td colspan="6" class="" ><p><%=n.getNo_direccion()%> </p></td></tr>
-                <tr><td class="text-info"><strong>Departamento:</strong></td><td colspan="6" class="" ><p><%=n.getNo_dep()%> </p></td></tr>
-                <tr><td class="text-info"><strong>Area:</strong></td><td colspan="6" class="" ><p><%=n.getNo_area()%> </td></tr>
-                <tr><td class="text-info"><strong>Sección:</strong></td><td colspan="6" class="" ><p><%=n.getNo_seccion()%> </p></td></tr>
-                <tr><td class="text-info"><strong>Puesto:</strong></td><td colspan="6" class="" ><p><%=n.getNo_puesto()%></p><input type="hidden" class="id_pu" value="<%=n.getId_puesto()%>" name="puesto"></td> </tr>
+                <tr><td class="text-info">Dirección:</td><td colspan="6" class="" ><p><%=n.getNo_direccion()%> </p></td></tr>
+                <tr><td class="text-info">Departamento:</td><td colspan="6" class="" ><p><%=n.getNo_dep()%> </p></td></tr>
+                <tr><td class="text-info">Area:</td><td colspan="6" class="" ><p><%=n.getNo_area()%> </td></tr>
+                <tr><td class="text-info">Sección:</td><td colspan="6" class="" ><p><%=n.getNo_seccion()%> </p></td></tr>
+                <tr><td class="text-info">Puesto:</td><td colspan="6" class="" ><p><%=n.getNo_puesto()%></p><input type="hidden" class="id_pu" value="<%=n.getId_puesto()%>" name="puesto"></td> </tr>
                             <%
                                 if (Lis_c_c_id_contr.size() > 0) {
                                     double cantidad = 0.0;
@@ -243,17 +173,17 @@
                                         cantidad = Double.parseDouble(cc.getCa_porcentaje()) + cantidad;
                             %>
                 <tr>
-                    <td class="text-info "><strong>Centro costo Nº<%=q + 1%>:</strong></td>
+                    <td class="text-info ">Centro costo Nº<%=q + 1%>:</td>
                     <td colspan="2" class="" ><p><%=cc.getDe_centro_costo() + " - " + cc.getCo_centro_costo()%></p></td>
-                    <td class="text-info " colspan="2"><strong>Porcentaje</strong></td>
+                    <td class="text-info " colspan="2">Porcentaje</td>
                     <td colspan="2"><p><%=cc.getCa_porcentaje()%> %</p> </td></tr><%}%>
-                <tr><td class="text-info "><strong>Total Porcentaje:</strong></td>
+                <tr><td class="text-info ">Total Porcentaje:</td>
                     <td colspan="6" class="" ><p><%=cantidad%> %</p></td>
                 </tr><%} else {%>
-                <tr><td class="text-info "><strong>Centro costo </strong></td><td colspan="6" class="" ><p>No tiene</p></td>
+                <tr><td class="text-info ">Centro costo </td><td colspan="6" class="" ><p>No tiene</p></td>
                 </tr><%}%>
 
-                <tr><td class="text-info "><strong>Condición:</strong></td> <td colspan="6" class="" ><strong style="color:#b71c1c;"><%
+                <tr><td class="text-info ">Condición:</td> <td colspan="6" class="" ><strong style="color:#b71c1c;"><%
                     if (n.getLi_condicion() != null) {
                         for (int h = 0; h < list_Condicion_contrato.size(); h++) {
 
@@ -263,27 +193,27 @@
                         }
                     } else {
                         out.print("No tiene");
-                    }%> </strong></td></tr>
-                <tr><td class="text-info "><strong>Sueldo:</strong></td><td>S/.<%=n.getCa_sueldo()%></td><td class="text-info " colspan="1"><strong>Reintegro:</strong></td><td colspan="1">S/.<%=n.getCa_reintegro()%></td><td class="text-info " colspan="2"><strong>Bono Alimentario:</strong></td><td class="" >S/.<%=n.getCa_bono_alimento()%> </td></tr>
-                <tr><td class="text-info "><strong>Bev:</strong></td><td class=""  colspan="6">S/.<%if (n.getCa_bev() != null) {
+                    }%> </td></tr>
+                <tr><td class="text-info ">Sueldo:</td><td>S/.<%=n.getCa_sueldo()%></td><td class="text-info " colspan="1">Reintegro:</td><td colspan="1">S/.<%=n.getCa_reintegro()%></td><td class="text-info " colspan="2">Bono Alimentario:</td><td class="" >S/.<%=n.getCa_bono_alimento()%> </td></tr>
+                <tr><td class="text-info ">Bev:</td><td class=""  colspan="6">S/.<%if (n.getCa_bev() != null) {
                         out.print(n.getCa_bev());
                     } else {
                         out.print("0");
                     }%> </td></tr>
-                <tr><td class="text-info "><strong>Bonificacion Puesto:</strong></td><td class=""  colspan="6">S/.<%if (n.getCa_bonificacion_p() != null) {
+                <tr><td class="text-info ">Bonificacion Puesto:</td><td class=""  colspan="6">S/.<%if (n.getCa_bonificacion_p() != null) {
                         out.print(n.getCa_bonificacion_p());
                     } else {
                         out.print("--");
                     }%> </td></tr>
-                <tr><td class="text-info "><strong>Asignación Familiar:</strong></td><td class=""  class="" colspan="6"><%= "S/." + n.getCa_asig_familiar()%> </td></tr>
+                <tr><td class="text-info ">Asignación Familiar:</td><td class=""  class="" colspan="6"><%= "S/." + n.getCa_asig_familiar()%> </td></tr>
 
-                <tr><td class="text-info "><strong>Sueldo Total:</strong></td><td class="" colspan="6">S/.<%if (n.getCa_sueldo_total() != null) {
+                <tr><td class="text-info ">Sueldo Total:</td><td class="" colspan="6">S/.<%if (n.getCa_sueldo_total() != null) {
                         out.print(n.getCa_sueldo_total());
                     } else {
                         out.print("0");
                     }%> </td></tr>
                 <tr>
-                    <td class="text-info "><strong>Religion:</strong></td><td class="" colspan="6"><strong class="text-danger"><%if (n.getLi_religion().equals("1")) {
+                    <td class="text-info ">Religion:</td><td class="" colspan="6"><strong class="text-danger"><%if (n.getLi_religion().equals("1")) {
                             out.print("Adventista");
                         } else if (n.getLi_religion().equals("2")) {
                             out.print("Católico");
@@ -291,9 +221,9 @@
                             out.print("Otro");
                         } else if (n.getLi_religion() == null) {
                             out.print("Ninguna");
-                        }%></strong></td>
+                        }%></td>
                 </tr>
-                <tr><td class="text-info "><strong>Tipo Pago Horas:</strong></td><td class=""  colspan="6"><%
+                <tr><td class="text-info ">Tipo Pago Horas:</td><td class=""  colspan="6"><%
                     if (n.getTi_hora_pago() != null) {
                         out.print(n.getTi_hora_pago());
                     } else {
@@ -302,20 +232,20 @@
 
                         %> </td></tr>
 
-                <tr><td class="text-info "><strong>Regimen Laboral Mintra:</strong></td>
+                <tr><td class="text-info ">Regimen Laboral Mintra:</td>
                     <%                        if (n.getId_regimen_laboral() != null) {
                             for (int q = 0; q < list_reg_labo.size(); q++) {
                                 Regimen_Laboral re = new Regimen_Laboral();
                                 re = (Regimen_Laboral) list_reg_labo.get(q);
                                 if (n.getId_regimen_laboral().equals(re.getId_regimen_laboral())) {%>
-                    <td class=""  class=""  colspan="6"><%=re.getDe_regimen_l()%> </td>
+                    <td colspan="6"><%=re.getDe_regimen_l()%> </td>
                     <%}
                         }
                     } else {%>
                     <td class=""  colspan="6">No definido</td> 
                     <%}%>
                 </tr>
-                <tr><td class="text-info "><strong>Modalidad:</strong></td>
+                <tr><td class="text-info ">Modalidad:</td>
 
                     <td class=""  colspan="6"><%
                         if (n.getDe_modalidad() != null) {
@@ -326,7 +256,7 @@
                         %> </td>
 
                 </tr>
-                <tr><td class="text-info "><strong>Sub_Modalidad:</strong></td>
+                <tr><td class="text-info ">Sub_Modalidad:</td>
 
                     <td class=""  colspan="6"><%
                         if (n.getDe_sub_modalidad() != null) {
@@ -337,7 +267,7 @@
                         %> </td>
 
                 </tr>
-                <tr><td class="text-info "><strong>Tipo de Contratacion:</strong></td><td class=""  colspan="6"><%
+                <tr><td class="text-info ">Tipo de Contratacion:</td><td class=""  colspan="6"><%
                     if (n.getEs_ti_contratacion() != null) {
                         if (n.getEs_ti_contratacion().trim().equals("I")) {
                             out.println("INICIO");
@@ -348,7 +278,7 @@
                     } else {
                         out.print("NO DEFINIDO");
                     }%> </td></tr> 
-                <tr><td class="text-info "><strong>Codigo de Grupo de Ocupaciones:</strong></td>
+                <tr><td class="text-info ">Codigo de Grupo de Ocupaciones:</td>
 
                     <td class=""  colspan="6"><%
                         if (n.getDe_grupo_ocupacion() != null) {
@@ -365,7 +295,7 @@
                     } else {
                         out.print("No Registrado");
                     }%> </td></tr>
-                <tr><td class="text-info "><strong>Tipo moneda de pago:</strong></td><td class=""  colspan="6"><%
+                <tr><td class="text-info ">Tipo moneda de pago:</td><td class=""  colspan="6"><%
                     if (n.getCo_ti_moneda() != null) {
                         if (n.getCo_ti_moneda().trim().equals("01")) {
                             out.println("Soles");
@@ -397,9 +327,12 @@
                                 out.print("No registrado");
                             }
                         %> </td></tr>
-                
-                <tr><td class="text-info"><strong>Horas:</strong></td><td class="text-info"><strong>Semanal:</strong></td><td><%=n.getHo_semana()%></td><td class="text-info"><strong>Mensual:</strong></td><td><%=n.getNu_horas_lab() + " h"%></td><td class="text-info"><strong>Dias:</strong></td><td class="" > <%=n.getDia_contrato() + " d"%></td></tr>
-                <tr><td class="text-info"><strong>Tipo de Trabajador:</strong></td><td class=""  colspan="6"><%
+
+                <tr><td class="text-info"><label>Horario</label> <a   rel="tooltip" data-placement="top" data-original-title="Ver Horario" class="btnHorario btn btn-primary btn-sm btn-circle pull-right" data-valor="<%=n.getId_dgp()%>"  data-toggle="modal" data-target="#exampleModal"><i class="fa fa-info"></i></a></td><td class="text-info">Semanal:</td><td><%=n.getHo_semana()%> 
+
+                    </td>
+                    <td class="text-info">Mensual:</td><td><%=n.getNu_horas_lab() + " h"%></td><td class="text-info">Dias:</td><td><%=n.getDia_contrato() + " d"%></td></tr>
+                <tr><td class="text-info">Tipo de Trabajador:</td><td class=""  colspan="6"><%
                     if (n.getTi_trabajador() != null) {
                         if (n.getTi_trabajador().trim().equals("1")) {
                             out.println("Empleado");
@@ -410,7 +343,7 @@
                     } else {
                         out.print("No registrado");
                     }%> </td></tr>   
-                <tr><td class="text-info"><strong>Régimen Laboral:</strong></td><td class=""  colspan="6">
+                <tr><td class="text-info">Régimen Laboral:</td><td class=""  colspan="6">
                         <%if (n.getLi_regimen_laboral() != null) {
                                 if (n.getLi_regimen_laboral().trim().equals("1")) {
                                     out.println("Privado");
@@ -421,7 +354,7 @@
                             } else {
                                 out.print("No registrado");
                             }%> </td></tr>   
-                <tr><td class="text-info"><strong>Discapacidad:</strong></td><td class="" colspan="6"><%
+                <tr><td class="text-info">Discapacidad:</td><td class="" colspan="6"><%
                     if (n.getEs_discapacidad() != null) {
                         if (n.getEs_discapacidad().equals("1")) {
                             out.println("No");
@@ -433,7 +366,7 @@
                         out.println("No Ingresado ");
                     }%> 
                     </td></tr>   
-                <tr><td class="text-info"><strong>Tipo de Contrato:</strong></td><td class="" colspan="6">
+                <tr><td class="text-info">Tipo de Contrato:</td><td class="" colspan="6">
                         <%if (n.getTi_contrato() != null) {
                                 for (int k = 0; k < List_tipo_contrato.size(); k++) {
                                     Tipo_Contrato tc = new Tipo_Contrato();
@@ -446,7 +379,7 @@
                                 out.print("No definido");
                             }%> 
                     </td></tr>   
-                <tr><td class="text-info"><strong>Tipo de Convenio:</strong></td><td class="" colspan="6"><%
+                <tr><td class="text-info">Tipo de Convenio:</td><td class="" colspan="6"><%
                     if (n.getLi_tipo_convenio() != null) {
                         if (n.getLi_tipo_convenio().trim().equals("1")) {
                             out.println("CLJ");
@@ -462,7 +395,7 @@
 
                     }
                         %> </td></tr>   
-                <tr><td class="text-info"><strong>¿Firmo contrato?:</strong></td><td class="" colspan="6"><%
+                <tr><td class="text-info">¿Firmo contrato?:</td><td class="" colspan="6"><%
                     if (idrol.trim().equals("ROL-0006") & n.getEs_firmo_contrato() == null) {%>
                         <a href="../../contrato?fc=s&idc=<%=n.getId_trabajador()%>"  class="boton">SI</a>o<a href="" class="boton">NO</a>
                         <%} else if (n.getEs_firmo_contrato() != null) {
@@ -481,13 +414,13 @@
                         %></td></tr>
 
                 <!--  <tr><td>Nro. de Contrato:</td><td><?/* echo $list_rhc[$index][39];*/?> </td></tr>   -->
-                <tr><td class="text-info"><strong>Observaciones:</strong></td><td class="" colspan="6"><%
+                <tr><td class="text-info">Observaciones:</td><td class="" colspan="6"><%
                     if (n.getDe_observacion() != null) {
                         out.print(n.getDe_observacion());
                     } else {
                         out.print("No registrado");
                     }%> </td></tr>   
-                <tr><td class="text-info"><strong>Régimen Pensionario:</strong></td><td class="" colspan="6"><%
+                <tr><td class="text-info">Régimen Pensionario:</td><td class="" colspan="6"><%
                     if (n.getLi_regimen_pensionario() != null) {
                         if (n.getLi_regimen_pensionario().trim().equals("1")) {
                             out.println("Privado");
@@ -502,7 +435,7 @@
 
                 <%if (false) {
                 %>
-                <tr><td class="text-info"><strong>Situacion Actual:</strong></td><td class="" colspan="6"><%
+                <tr><td class="text-info">Situacion Actual:</td><td class="" colspan="6"><%
                     if (n.getEs_contrato() != null) {
                         if (n.getEs_contrato().trim().equals("1")) {
                             out.print("Activo");
@@ -512,7 +445,7 @@
                     }
                         %> </td></tr>   
                         <%}%>
-                <tr><td class="text-info"><strong>Filial donde Trabaja:</strong></td><td class="" colspan="6"><%
+                <tr><td class="text-info">Filial donde Trabaja:</td><td class="" colspan="6"><%
                     if (n.getId_filial().trim().equals(1 + "")) {
                         out.println("Lima");%>
                         <% }
@@ -525,7 +458,7 @@
                         %> </td></tr>
                         <%if (false) {
                         %>
-                <tr><td class="text-info"><strong>Fecha de Cese:</strong></td><td class="  " colspan="6">
+                <tr><td class="text-info">Fecha de Cese:</td><td class="  " colspan="6">
                         <% if (n.getFe_cese() != null) {
                                 out.print(n.getFe_cese());
                             } else {
@@ -538,12 +471,12 @@
                         Funciones fun = new Funciones();
                         fun = (Funciones) List_x_fun_x_idpu.get(fu);
                 %>
-                <tr><td class="text-info"><strong>Funcion Nº<%=fu + 1%>:</strong></td><td class="" colspan="6"><%=fun.getDe_funcion()%></td></tr>   <%}%>
+                <tr><td class="text-info">Funcion Nº<%=fu + 1%>:</td><td class="" colspan="6"><%=fun.getDe_funcion()%></td></tr>   <%}%>
                     <%}%>
 
 
                 <tr><%if (n.getUs_modif() != null && n.getFe_modif() != null) {%>
-                    <td class="text-info "><strong>Modificado por:</strong></td>
+                    <td class="text-info ">Modificado por:</td>
                     <td><%for (int f = 0; f < List_Usuario.size(); f++) {
                             Usuario u = new Usuario();
                             u = (Usuario) List_Usuario.get(f);
@@ -553,13 +486,13 @@
                     </td>
                     <%}
                     } else if (n.getUs_creacion() != null && n.getFe_creacion() != null) {%>
-                    <td class="text-danger text-info text-center "><strong>Creado por:</strong></td>
+                    <td class="text-danger text-info">Creado por:</td>
                     <%if (n.getUs_creacion() != null) {
                             for (int f = 0; f < List_Usuario.size(); f++) {
                                 Usuario u = new Usuario();
                                 u = (Usuario) List_Usuario.get(f);
                                 if (n.getUs_creacion().equals(u.getId_usuario())) {%>
-                    <td class="text-info text-center" colspan="6"><%=u.getNo_usuario()%></td>
+                    <td class="text-info" colspan="6"><%=u.getNo_usuario()%></td>
                     <%}
                         }
                     } else {%>
@@ -581,21 +514,55 @@
 
 
         <%}%>
+        <!-------------- Modal  ----------->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Horarios</h4>
+                        <h6 class="tipoh hidden"></h6>
+                    </div>
+                    <div class="modal-body" style="height:550px;">
+                        <div class="conTablas"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
     <script>
         if (!window.jQuery) {
-            document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+            document.write('<script src="../../js/libs/jquery-2.1.1.min.js"><\/script>');
         }
     </script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+
     <script>
         if (!window.jQuery.ui) {
             document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
         }
     </script>
+    <!-- IMPORTANT: APP CONFIG -->
+    <script src="../../js/app.config.js"></script>
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+    <script src="../../js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+
+    <!-- BOOTSTRAP JS -->
+    <script src="../../js/bootstrap/bootstrap.min.js"></script>
+
     <!-- CUSTOM NOTIFICATION -->
     <script src="../../js/notification/SmartNotification.min.js"></script>
+
+    <script src="../../js/businessLogic/Horario/horario.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+
+
     <script>
         function SelectorListaContrato(objSelector, idtr, idc) {
             $.ajax({
@@ -615,7 +582,9 @@
                 $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
             });
             SelectorListaContrato($(".SelectorListaContrato"), $(".idtr").val(), $(".idc").val());
-
+            $(".btnHorario").click(function () {
+                listHorario($(this).data("valor"));
+            });
             $(".ck_habilitar_is").click(function () {
                 if ($(".ck_habilitar_is").prop('checked')) {
                     $.ajax({
@@ -647,7 +616,7 @@
                     }).done(function () {
                         $.smallBox({
                             title: "¡Alerta!",
-                            content: "Se ha autortizado que la secretaria <strong>NO</strong> pueda subir e imprimir el contrato.",
+                            content: "Se ha autortizado que la secretaria NO pueda subir e imprimir el contrato.",
                             color: "#C79121",
                             iconSmall: "fa fa-cloud",
                             timeout: 4000
