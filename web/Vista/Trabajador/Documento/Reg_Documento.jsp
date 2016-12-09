@@ -843,19 +843,19 @@
 
         <!--================================================== -->
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <script>
-                                                    if (!window.jQuery) {
-                                                        document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                    }
-        </script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+                            if (!window.jQuery) {
+                                document.write('<script src="../../../js/libs/jquery-2.1.1.min.js"><\/script>');
+                            }
+    </script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-        <script>
-                                                    if (!window.jQuery.ui) {
-                                                        document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                    }
-        </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>
+                            if (!window.jQuery.ui) {
+                                document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                            }
+    </script>
 
         <!-- IMPORTANT: APP CONFIG -->
 <!--        <script src="../../../js/app.config.js"></script>  -->
@@ -1009,7 +1009,7 @@ function goBack() {
 
             $(document).ready(function () {
 
-                pageSetUp();
+              
                 $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
@@ -1048,37 +1048,22 @@ function goBack() {
 
 
 
-                $("#file-3").fileinput({
-                    showUpload: false,
-                    showCaption: false,
-                    browseClass: "btn btn-primary btn-lg",
-                    fileType: "any"
-                });
-                $("#file-4").fileinput({
-                    uploadExtraData: [
-                        {kvId: '10'}
-                    ],
-                });
-                $(".btn-warning").on('click', function () {
-                    if ($('#file-4').attr('disabled')) {
-                        $('#file-4').fileinput('enable');
-                    } else {
-                        $('#file-4').fileinput('disable');
-                    }
-                });
-                $(".btn-info").on('click', function () {
-                    $('#file-4').fileinput('refresh', {previewClass: 'bg-info'});
-                });
-                $.each($(".fileDocument"), function (i) {
+                  if ($(".fileDocument").length) {
+                                                            $(".btn_reg_doc").show();
+                                                        } else {
+                                                            $(".btn_reg_doc").hide();
+                                                            $(".btn_continuar_det").show();
+                                                        }
+                /*$.each($(".fileDocument"), function (i) {
 
                     if ((i + 1) == 0) {
                         $(".btn_reg_doc").hide();
-                        alert();
+                        
                     } else {
                         $(".btn_reg_doc").show();
                     }
 
-                });
+                });*/
                 $(".DD").change(function () {
                     $(".div-holi").text($(".DD").val());
                 });
@@ -1091,7 +1076,7 @@ function goBack() {
                     }
                 });
             });
-
+  pageSetUp();
 
         </script>
 

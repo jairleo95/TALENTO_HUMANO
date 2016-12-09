@@ -1064,27 +1064,7 @@
                                                             }
                                                         });
 
-                                                        $("#file-3").fileinput({
-                                                            showUpload: false,
-                                                            showCaption: false,
-                                                            browseClass: "btn btn-primary btn-lg",
-                                                            fileType: "any"
-                                                        });
-                                                        $("#file-4").fileinput({
-                                                            uploadExtraData: [
-                                                                {kvId: '10'}
-                                                            ],
-                                                        });
-                                                        $(".btn-warning").on('click', function () {
-                                                            if ($('#file-4').attr('disabled')) {
-                                                                $('#file-4').fileinput('enable');
-                                                            } else {
-                                                                $('#file-4').fileinput('disable');
-                                                            }
-                                                        });
-                                                        $(".btn-info").on('click', function () {
-                                                            $('#file-4').fileinput('refresh', {previewClass: 'bg-info'});
-                                                        });
+                                                       
                                                         if ($(".fileDocument").length) {
                                                             $(".btn_reg_doc").show();
                                                         } else {
@@ -1110,11 +1090,7 @@
                                                             }
                                                         });
 
-                                                        $("#test-upload").fileinput({
-                                                            'showPreview': false,
-                                                            'allowedFileExtensions': ['jpg', 'png', 'gif'],
-                                                            'elErrorContainer': '#errorBlock'
-                                                        });
+                                                     
                                                     })
 
         </script>

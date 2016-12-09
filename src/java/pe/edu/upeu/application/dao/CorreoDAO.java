@@ -25,7 +25,7 @@ public class CorreoDAO implements InterfaceCorreoDAO {
     @Override
     public void Enviar(String to, String from, String Asunto, String Cuerpo) {
         final String username = "jairleo95@gmail.com";//change accordingly
-        final String password = "BlackVeilBrides";//change accordingly
+        final String password = "1234567890";//change pass
         // Assuming you are sending email through relay.jangosmtp.net
         String host = "relay.jangosmtp.net";
         Properties props = new Properties();
