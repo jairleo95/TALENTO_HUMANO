@@ -8,7 +8,6 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <%@page import="pe.edu.upeu.application.factory.ConexionBD"%>
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 
 <%
     response.setContentType("application/json");
@@ -21,9 +20,9 @@
     if (true) {
 
         String id_Moda = request.getParameter("MODALIDAD");
-        String id_Dir = request.getParameter("DIRECCION");
+        /*String id_Dir = request.getParameter("DIRECCION");
         String id_Dep = request.getParameter("DEPARTAMENTO");
-        String id_Area = request.getParameter("AREA");
+        String id_Area = request.getParameter("AREA");*/
         String opc = request.getParameter("opc");
         if (true) {
             if (opc.equals("submodalidad")) {

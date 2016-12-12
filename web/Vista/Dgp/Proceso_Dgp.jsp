@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%
     HttpSession sesion_1 = request.getSession();
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
@@ -76,7 +77,6 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
         <style type="text/css" class="styleProcess">
-
             /* Form Progress */
             .new-progress {
                 /*   //width: 100%;*/
@@ -221,7 +221,6 @@
                                 </header>
                                 <!-- widget div-->
                                 <div>
-
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
                                         <!-- This area used as dropdown edit box -->
@@ -265,17 +264,19 @@
                                                             <div class="btn-group">
                                                                 <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                                                     <i class="fa fa-gear fa-lg"></i>
-                                                                    <i class="fa fa-caret-down"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu">
                                                                     <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>
-                                                                    <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=Seguimiento">Ver Historial</a> </li>
+                                                                    <!--<li><a href="../../dgp?iddgp=<%/*=r.getId_dgp().trim()*/%>&opc=Seguimiento">Ver Historial</a> </li>-->
+                                                                    <li><a onclick="listHistory(<%=i%>)" data-toggle="modal" data-target="#ModalHisto">Ver Historial</a></li>
+                                                                    <li><a   class="btnHorario"  data-valor="<%=r.getId_dgp()%>"  data-toggle="modal" data-target="#exampleModal">Ver Horario</a></li>
+
                                                                     <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></li>
                                                                     <li><a data-valor="<%=r.getId_dgp().trim()%>;<%=r.getId_trabajador().trim()%>;<%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%>" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjaxComment('')" >Comentario</a></li>
                                                                     <li><a href="../../solicitud_requerimiento?iddgp=<%=r.getId_dgp().trim()%>&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>
                                                                     <li class="divider"></li><li>
                                                                     <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Detalle">Ver Requerimiento</a> </li>
-                                                                    <li><a onclick="listHistory(<%=i%>)" data-toggle="modal" data-target="#ModalHisto">Prueba</a></li>
+
 
                                                                     <input type="hidden" class="vHist<%=i%>" value="<%=r.getId_dgp().trim()%>">
                                                                 </ul>
@@ -330,7 +331,6 @@
                                                             <th data-hide="phone">Nro</th>
                                                             <th>MES</th>
                                                             <th style="width: 5px">Accion</th>
-
                                                             <th data-class="expand">Nombre</th>
                                                             <th data-class="expand" style="width: 35%">Proceso</th>
                                                                 <%if (ID_DEP.equals("DPT-0019")) {%>
@@ -575,7 +575,26 @@
         </div>
     </div>       
 
+    <!-------------- Modal  ----------->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Horarios</h4>
+                    <h6 class="tipoh hidden"></h6>
+                </div>
+                <div class="modal-body" style="height:550px;">
+                    <div class="conTablas"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!--================================================== -->
 
     <div class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ModalHisto" tabindex="-1" role="dialog"  >
         <div class="modal-dialog" >
@@ -634,8 +653,8 @@
     <!---------------Fin modal Historial--------------------->
 
     <!--================================================== -->
-    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>-->
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -700,8 +719,8 @@
     
     <![endif]-->
 
-    <!-- Demo purpose only -->
-    <script src="../../js/demo.min.js"></script>
+    <!-- Demo purpose only 
+    <script src="../../js/demo.min.js"></script>-->
 
     <!-- MAIN APP JS FILE -->
     <script src="../../js/app.min.js"></script>
@@ -711,180 +730,17 @@
     <!-- Voice command : plugin
     <script src="../../js/speech/voicecommand.min.js"></script> -->
     <!-- PAGE RELATED PLUGIN(S) -->
+    <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
     <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-    <script src="../../js/coment/comenth.js" type="text/javascript"></script>
-    <script src="../../js/businessLogic/Dgp/statusProcessDGP.js" type="text/javascript"></script>
-    <script type="text/javascript">
-                            // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                            function listHistory(at) {
-                                var dgp = "id_dgp";
-                                var id = $(".vHist" + at + "").val();
-                                var id1 = $(".idDepart").val();
-                                var url = '../../dgp?opc=SeguimientoH';
-                                var data = 'iddgp=' + id;
 
-                                var rol = $("#rolse").val();
-                                $.post(url, data, function (objJson) {
-                                    var lista = objJson.listar;
-                                    if (lista.length > 0) {
-                                        var m = '';
-                                        for (var i = 0; i < lista.length; i++) {
-                                            /*$(".contM").append("<td class='caji'>" + lista[i].getNu_pasos + "</td>");
-                                             $(".contM").append("<td>" +lista[i].getDe_pasos+ "</td>");
-                                             $(".contM").append("<td class='alert alert-danger'>" + lista[i].id_dgp + "</td>");
-                                             */
-                                            m += '<tr>';
-                                            m += '<td>' + lista[i].nu_pasos + '</td>';
-                                            m += '<td>' + lista[i].de_pasos + '</td>';
-                                            if (lista[i].es_autorizacion != null) {
-
-                                                if (lista[i].es_autorizacion !== null) {
-                                                    if (lista[i].es_autorizacion === '1') {
-                                                        m += '<td><img src="../../img/Aprobado.png" width="20" height="20"></td>';
-                                                    }
-                                                    if (lista[i].es_autorizacion === '2') {
-                                                        m += '<td><img src="../../img/Desaprobado.png" width="20" height="20"></td>';
-                                                    }
-                                                } else {
-                                                    m += '<td>No Registrado</td>';
-                                                }
-
-                                                if (lista[i].us_ap_mat !== null) {
-                                                    m += '<td>' + lista[i].us_ap_p + " " + lista[i].us_ap_mat + " " + lista[i].us_no_tr + '</td>';
-                                                } else {
-                                                    alert("No Registrado");
-                                                }
-                                                m += '<td>' + lista[i].us_no_puesto + '</td>';
-                                                m += '<td>' + lista[i].no_usuario + '</td>';
-                                                m += '<td>' + lista[i].us_no_area + '</td>';
-                                                m += '<td>' + lista[i].us_no_dep + '</td>';
-                                                m += '<td>' + lista[i].fe_creacion + '</td>';
-                                            } else {
-                                                m += '<td colspan="7" style="text-align:center;"> No definido </td>';
-                                            }
-
-                                            m += '</tr>';
-                                            if (lista[i].es_autorizacion !== null) {
-                                                if (lista[i].es_autorizacion === '2' & (rol === "ROL-0002" || rol === "ROL-0005" || rol === "ROL-0001")) {
-
-                                                    function DivEspecial() {
-                                                        var DivEspecial = '<div id="divEs" class="alert alert-danger alert-block">';
-                                                        DivEspecial += '<a class="close" data-dismiss="alert" href="#">×</a>';
-                                                        DivEspecial += ' <h4 class="alert-heading">DGP fuera de Proceso!</h4>';
-                                                        DivEspecial += '<p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp=' + id + '&ID' + id1 + '" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=' + id + '" class="btn btn-primary id-dgp "><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" class="btn btn-primary" onclick="ListarMotivo()" data-toggle="modal" data-target="#myModalComentario"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>';
-                                                        //  alert(+lista[i].us_no_puesto+);                                                                                                                                                                                                                                                                                                                                                                                
-                                                        DivEspecial += '</p>';
-                                                        DivEspecial += '<input type="hidden" class="id-autorizacion" value="lista[i].id_autorizacion">';
-                                                        DivEspecial += '</div>';
-
-                                                        return DivEspecial;
-                                                    }
-                                                }
-                                            }
-
-                                        }
-
-                                        //var DivEspecial = DivEspecialL();
-                                        var table = createTable();
-                                        $(".contM").empty();
-                                        $(".contM").append(table);
-                                        $(".contM").append(DivEspecial);
-                                        $("#dataB").empty();
-                                        $("#dataB").append(m);
-                                        // $("#divEs").append(DivEspecial);
-                                        // $("#dt").dataTable();
-                                        //$("#divEs").dataDivEspecial();
-                                        //anexar a la tabla
-                                    } else {
-                                        alert("vacio");
-                                    }
-                                });
-                            }
-                            function createTable() {
-                                var table = '<table id="dt" class="table table-striped">';
-                                table += '<thead>';
-                                table += '<tr>';
-                                table += '<th>Paso</th>';
-                                table += '<th data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i>Detalle</th>';
-                                table += '<th data-class="expand><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Estado</th>';
-                                table += '<th data-hide="phone"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Encargado</th>';
-                                table += '<th>Cargo Encargado</th>';
-                                table += '<th>Usuario</th>';
-                                table += '<th data-hide="phone,tablet"> <i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> Area</th>';
-                                table += '<th data-hide="phone,tablet">Departamento</th>';
-                                table += '<th data-hide="phone,tablet">Fecha Autorizacion</th>';
-                                table += '</tr>';
-                                table += '</thead>';
-                                table += '<tbody id="dataB">';
-                                table += '</tbody>';
-                                table += '</table>';
-                                return table;
-                            }
-
-
-                            function ListarMotivo(at) {
-                                alert("asdasdasd");
-                                var id = $(".vHist" + at + "").val();
-                                var url = '../../dgp?opc=SeguimientoH';
-                                var data = 'iddgp=' + id;
-
-
-                                $.post(url, data, function (objJson) {
-                                    var lista = objJson.listar;
-                                    if (lista.length > 0) {
-                                        var ma = '';
-                                        for (var i = 0; i < lista.length; i++) {
-                                            //  alert("asdasdasd");
-                                            $(".contMO").append("<td>" + lista[i].getDe_pasos + "</td>");
-                                            $(".contMO").append("<td class='alert alert-danger'>" + lista[i].id_dgp + "</td>");
-
-                                        }
-                                        $(".contMO").empty();
-                                    } else {
-                                        alert("vacio");
-                                    }
-                                });
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            $(document).ready(function () {
-                                pageSetUp();
-                                $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-                                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-                                });
-                                $('#coment-s1').click(function () {
-                                    console.log("jalar comentario");
-                                    $.get('../../comentario?iddgp=DGP-000119&opc=Comentar_Dgp', function (responseJson) {
-                                        var $select = $('.comentarios');
-                                        $select.find('h2').remove();
-                                        $.each(responseJson, function (value) {
-                                            $('<p>').text(value).appendTo($select);
-                                        });
-                                    });
-                                });
-                                initStatusProcessDGP();
-                            });
-
-    </script>
+    <!--BUSINESS LOGIC PLUGINS-->
+    <script src="../../js/coment/comenth.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script> 
+    <script src="../../js/businessLogic/Horario/horario.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+    <script src="../../js/businessLogic/Dgp/statusProcessDGP.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
 </body>
 </html>
 <%} else {

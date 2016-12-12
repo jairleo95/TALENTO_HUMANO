@@ -1,4 +1,5 @@
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
+<%@page import="pe.edu.upeu.application.util.DateFormat"%>
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion = request.getSession();
@@ -124,7 +125,7 @@
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
 
-                                        <%CConversion c = new CConversion();
+                                        <%
                                             for (int u = 0; u < LIST_ID_DGP.size(); u++) {
                                                 V_Det_DGP d = new V_Det_DGP();
                                                 d = (V_Det_DGP) LIST_ID_DGP.get(u);
@@ -178,18 +179,18 @@
                                                     <input type="hidden"  value="<%=d.getId_trabajador()%>" class="idtr">                              
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Inicio: 
-                                                            <input onchange="c()" type="date" name="FEC_DESDE" value="<%=c.convertFecha3(d.getFe_desde())%>" id="ifechai" class=" input-group-sm" required="">
+                                                            <input onchange="c()" type="date" name="FEC_DESDE" value="<%=DateFormat.toFormat3(d.getFe_desde())%>" id="ifechai" class=" input-group-sm" required="">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Cese: 
-                                                            <input type="date" name="FEC_HASTA" value="<%=c.convertFecha3(d.getFe_hasta())%>" class="input-group-sm" required="">
+                                                            <input type="date" name="FEC_HASTA" value="<%=DateFormat.toFormat3(d.getFe_hasta())%>" class="input-group-sm" required="">
                                                         </label>
                                                     </section>
                                                     <section class="col col-3" id="titulo">
                                                         <label class="select" id="titulo">Dirección:
                                                             <select name="DIRECCION" class="select_dir input-group-sm" disabled=""  id="select_dir" >
-                                                                <option value="" >[SELECCIONE]</option>
+                                                                <option value="" >[Seleccione]</option>
                                                                 <%for (int g = 0; g < Listar_Direccion.size(); g++) {
                                                                         Direccion direccion = new Direccion();
                                                                         direccion = (Direccion) Listar_Direccion.get(g);
@@ -206,20 +207,20 @@
                                                     <section class="sec_dep col col-3" id="titulo">
                                                         <label class="select" id="titulo">Departamento:
                                                             <select name="DEPARTAMENTO_ID" class="selec_dep input-group-sm" disabled="" id="selec_dep">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                             </select>  
                                                         </label>
                                                     </section>
                                                     <section class="sec_are col col-3" id="titulo">
                                                         <label class="select" id="titulo">Area:
                                                             <select name="AREA_ID" class="Selec_Area input-group-sm"  disabled=""  id="Selec_Area">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                             </select>  </label>
                                                     </section>
                                                     <section class="sec_sec col col-3" id="titulo">
                                                         <label class="select" id="titulo">Sección:
                                                             <select name="SECCION_ID" class="select_sec input-group-sm" disabled=""  id="select_sec">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                             </select>  </label>
                                                     </section>
                                                     <section class="col col-3" id="titulo">
@@ -246,7 +247,7 @@
                                                     <section class="col col-3">
                                                         <label class="select" id="titulo">Condición:
                                                             <select name="CONDICION" class="input-group-sm" >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1">Contratado</option>
                                                                 <option value="2">Contratado Independiente</option>
                                                                 <option value="3">Enpleado</option>
@@ -318,14 +319,21 @@
                                             <fieldset>
 
                                                 <div class="row">
-                                                    <section class="col col-3">
+                                                    <section class="col col-2">
+                                                        <label class="select" id="titulo">Situación Especial:
+                                                            <select name="situacionEspecial" class="input-group-sm situacionEspecial">
+                                                                <option value="">[Seleccione]</option>
+
+                                                            </select>
+                                                        </label>
+
                                                         <label class="select" id="titulo">Regimen Laboral Mintra:
                                                             <select name="REG_LAB_MINTRA" class="input-group-sm"  <%
                                                                 if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <%for (int q = 0; q < list_reg_labo.size(); q++) {
                                                                         Regimen_Laboral re = new Regimen_Laboral();
                                                                         re = (Regimen_Laboral) list_reg_labo.get(q);
@@ -335,14 +343,14 @@
                                                             </select>
                                                         </label>
                                                     </section>
-                                                    <section class="col col-3">
+                                                    <section class="col col-2">
                                                         <label class="select" id="titulo">Modalidad:
                                                             <select name="MODALIDAD" class="input-group-sm" id="select_mod"  <%
                                                                 if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <%for (int l = 0; l < List_modalidad.size(); l++) {
                                                                         Modalidad mo = new Modalidad();
                                                                         mo = (Modalidad) List_modalidad.get(l);
@@ -360,7 +368,7 @@
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                             </select>
                                                         </label>
                                                     </section>
@@ -371,7 +379,7 @@
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="I">INICIO</option>
                                                                 <option value="R">RENOVACION</option>
                                                             </select>
@@ -388,7 +396,7 @@
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <%for (int gr = 0; gr < List_grup_ocu.size(); gr++) {
                                                                         Grupo_Ocupaciones g = new Grupo_Ocupaciones();
                                                                         g = (Grupo_Ocupaciones) List_grup_ocu.get(gr);
@@ -400,7 +408,7 @@
                                                     </section>
                                                     <section class="col col-3">
                                                         <label class="input" id="titulo">Fecha de Suscripción:
-                                                            <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION" class="input-group-sm"  value="<%=c.convertFecha3(d.getFe_desde())%>" max="<%=c.convertFecha3(d.getFe_desde())%>" 
+                                                            <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION" class="input-group-sm"  value="<%=DateFormat.toFormat3(d.getFe_desde())%>" max="<%=DateFormat.toFormat3(d.getFe_desde())%>" 
                                                                    <%
                                                                        if (!d.getId_tipo_planilla().trim().equals("TPL-0002")) {
                                                                            out.print("required='required'");
@@ -416,7 +424,7 @@
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="01" selected="">SOLES</option>
                                                                 <option value="02">DOLARES</option>
                                                                 <option value="03">EUROS</option>
@@ -430,7 +438,7 @@
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1">DESTAJO</option>
                                                                 <option value="2">COMISIONES</option>
                                                                 <option value="3">NINGUNO</option>
@@ -444,7 +452,7 @@
                                                                     out.print("required='required'");
                                                                 }
                                                                     %> >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1">SI</option>
                                                                 <option value="0">NO</option>
                                                             </select>
@@ -481,7 +489,7 @@
                                                     <section class="col col-4">
                                                         <label class="select" id="titulo">Tipo Trabajador.
                                                             <select name="TIPO_TRABAJADOR" class="input-group-sm" required="">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1" selected>Empleado</option>
                                                                 <option value="2">Obrero</option>
                                                             </select>
@@ -490,7 +498,7 @@
                                                     <section class="col col-4">
                                                         <label class="select" id="titulo">Regimen Laboral: 
                                                             <select name="REGIMEN_LABORAL" class="input-group-sm" required="">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1" selected>Privado</option>
                                                                 <option value="2" selected>Público</option>
                                                             </select>
@@ -499,7 +507,7 @@
                                                     <section class="col col-4">
                                                         <label class="select" id="titulo"> Discapacidad:
                                                             <select name="DISCAPACIDAD" class="input-group-sm" required="">
-                                                                <option value="">[SLECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1" selected>No</option>
                                                                 <option value="2">Si</option>
                                                             </select>
@@ -508,7 +516,7 @@
                                                     <section class="col col-4">
                                                         <label class="select" id="titulo">Regimen Pensionario:
                                                             <select name="REGIMEN_PENSIONARIO" class="input-group-sm" required="">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1" selected>Privado</option>
                                                                 <option value="2">SNP</option>
                                                             </select>
@@ -523,7 +531,7 @@
                                                                         }
                                                                     %>   
                                                                     >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1">Necesidad de Mercado</option>
                                                                 <option value="2">Incremento de Actividad</option>
                                                                 <option value="3">Servicio Especifico</option>
@@ -545,7 +553,7 @@
                                                     <section class="col col-4">
                                                         <label class="select" id="titulo">Tipo Convenio:
                                                             <select name="TIPO_CONVENIO" class="input-group-sm" >
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1">CLJ</option>
                                                                 <option value="2">PPP</option>
                                                                 <option value="3">PP</option>
@@ -569,7 +577,7 @@
                                                     <section class="col col-3">
                                                         <label class="select" id="titulo">Filial donde Trabaja:
                                                             <select name="FILIAL" class="input-group-sm" required="">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                                 <option value="1" selected >Lima</option>
                                                                 <option value="2">Juliaca</option>
                                                                 <option value="3">Tarapoto</option>
@@ -594,7 +602,7 @@
                                                     <section class="col col-3">
                                                         <label class="select" id="titulo" style="color:red">Plantilla de Contrato:
                                                             <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm"  required="">
-                                                                <option value="">[SELECCIONE]</option>
+                                                                <option value="">[Seleccione]</option>
                                                             </select>
                                                         </label>
                                                     </section>
@@ -633,80 +641,6 @@
                     </div>   
                 </section>
             </div>
-            <script>
-                var l = [];
-                l[0] = "lun";
-                l[1] = "mar";
-                l[2] = "mie";
-                l[3] = "jue";
-                l[4] = "vie";
-                l[5] = "sab";
-                l[6] = "dom";
-                var lb = [];
-                lb[0] = "Lunes";
-                lb[1] = "Martes";
-                lb[2] = "Miércoles";
-                lb[3] = "Jueves";
-                lb[4] = "Viernes";
-                lb[5] = "Sabado";
-                lb[6] = "Domingo";
-                function listHorario(id_dgp) {
-                    var url = '../../horario?iddgp=' + id_dgp;
-                    var data = 'opc=Listar2';
-                    $.post(url, data, function (objJson) {
-                        var listas = objJson.listar;
-                        if (listas.length > 0) {
-                            $(".tipoh").empty();
-                            $(".tipoh").append("Oficina");
-                            $(".conTablas").empty();
-                            for (var j = 0; j < l.length; j++) {
-                                var f = 0;
-                                var t = '';
-                                var d = 0;
-                                for (var i = 0; i < listas.length; i++) {
-                                    if (listas[i].dia_horario.toString() === l[j].toString()) {
-                                        d = d + 1;
-                                        t += '<tr>';
-                                        t += '<td>Turno ' + d + '</td>';
-                                        t += '<td>' + listas[i].ho_desde + '</td>';
-                                        t += '<td>' + listas[i].ho_hasta + '</td>';
-                                        t += '</tr>';
-                                        f = 1;
-                                    }
-                                }
-                                if (f > 0) {
-                                    var g = createTable(j);
-                                    $(".conTablas").append(g);
-                                    $(".data" + l[j] + "").empty();
-                                    $(".data" + l[j] + "").append(t);
-                                }
-                            }
-                            $(".dataHor").dataTable();
-                        } else {
-                            $(".conTablas").empty();
-                            $(".conTablas").append('<div class="alert alert-danger">No sujeto a fiscalización</div>');
-                        }
-                        //asdasd
-                    });
-                }
-                function createTable(a) {
-                    var t = '<div class="col-md-12">';
-                    t += '<table class="table table-condensed table-bordered dataHor">';
-                    t += '<thead>';
-                    t += '<tr>';
-                    t += '<th colspan="3" style="background:#01579b ;color:white;"><center>' + lb[a] + '</center></th>';
-                    t += '</tr>';
-                    t += '</thead>';
-                    t += '<tbody class="data' + l[a] + '">';
-                    t += '</tbody>';
-                    t += '</table>';
-                    t += '</div>';
-                    return t;
-                }
-
-            </script>
-
-
         </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog" role="document">
@@ -734,16 +668,16 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-                if (!window.jQuery) {
-                    document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                }
+                                                    if (!window.jQuery) {
+                                                        document.write('<script src="../../js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                    }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-                if (!window.jQuery.ui) {
-                    document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                }
+                                                    if (!window.jQuery.ui) {
+                                                        document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                    }
         </script>
 
         <!-- IMPORTANT: APP CONFIG -->
@@ -798,300 +732,15 @@
         <!-- Voice command : plugin -->
 
         <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="../../js/plugin/knob/jquery.knob.min.js"></script>
-        <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
+        <script type="text/javascript" src="../../js/plugin/knob/jquery.knob.min.js"></script>
+        <script type="text/javascript" src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-        <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" type="text/javascript"></script>
-        <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
-
+        <!--BUSINESS LOGIC PLUGINS-->
+        <script type="text/javascript" src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js?v=<%=globalProperties.VERSION_JS%>" ></script>
+        <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>"></script>
+        <script type="text/javascript" src="../../js/businessLogic/Horario/horario.js?v=<%=globalProperties.VERSION_JS%>"></script>
+        <script type="text/javascript" src="../../js/businessLogic/Contrato/RegContrato.js?v=<%=globalProperties.VERSION_JS%>"></script>
     </body>
-    <script  type="text/javascript">
-                function Listar_dep() {
-                    var s = $(".selec_dep");
-                    $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function (objJson) {
-                        s.empty();
-                        var lista = objJson.lista;
-                        s.append("<option value='' > [SELECCIONE] </option>");
-                        for (var j = 0; j < lista.length; j++) {
-                            if ($(".dep_pu").val() == lista[j].id) {
-                                s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
-
-                            } else {
-                                s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
-                            }
-                        }
-
-
-                    });
-                }
-                function Listar_area() {
-                    var s = $(".Selec_Area");
-
-                    $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function (objJson) {
-                        s.empty();
-                        var lista = objJson.lista;
-                        s.append("<option value='' > [SELECCIONE] </option>");
-                        for (var j = 0; j < lista.length; j++) {
-
-                            if ($(".area_pu").val() == lista[j].id) {
-                                s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
-                            } else {
-                                s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
-                            }
-                        }
-
-                    });
-                }
-                function Listar_sec() {
-                    var s = $("#select_sec");
-
-                    $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function (objJson) {
-                        s.empty();
-                        var lista = objJson.lista;
-                        s.append("<option value='' > [SELECCIONE] </option>");
-                        for (var j = 0; j < lista.length; j++) {
-
-                            if ($(".sec_pu").val() == lista[j].id) {
-                                s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
-                            } else {
-                                s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
-                            }
-                        }
-                    });
-                }
-                function Listar_plantilla() {
-                    var s = $(".con_pl_pu");
-                    $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function (objJson) {
-                        s.empty();
-                        var lista = objJson.lista;
-                        s.append("<option value='' > [SELECCIONE] </option>");
-                        for (var i = 0; i < lista.length; i++) {
-                            s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
-                        }
-                    });
-                }
-                function showEsDiezmo() {
-                    var obj = $(".div_input_diezmo");
-                    obj.hide(100);
-                    obj.empty();
-                    $.ajax({
-                        url: "../../trabajador", data: "opc=ShowEsDiezmoTrabajador&id=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
-                            if (data.rpta) {
-                                obj.append(data.html);
-                                obj.show(100);
-                                $(".cbkDiezmo").click(function () {
-                                    $.SmartMessageBox({
-                                        title: "&iexcl;Alerta!",
-                                        content: "Esta seguro de modificar la autorizaci&oacute;n de descuento diezmo?",
-                                        buttons: '[No][Si]'
-                                    }, function (ButtonPressed) {
-                                        if (ButtonPressed === "Si") {
-                                            if ($(".cbkDiezmo").prop("checked")) {
-                                                $.ajax({
-                                                    url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=0", type: 'POST', success: function (data, textStatus, jqXHR) {
-                                                        if (data.status) {
-                                                            $(".cbkDiezmo").prop("checked", false);
-                                                            $.smallBox({
-                                                                title: "&iexcl;Atenci&oacute;n!",
-                                                                content: "<i class='fa fa-clock-o'></i> <i>Se neg&oacute; el descuento de diezmo...</i>",
-                                                                color: "#C46A69",
-                                                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                                timeout: 6000
-                                                            });
-                                                        }
-
-                                                    }
-                                                });
-                                            } else {
-                                                $.ajax({
-                                                    url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=1", type: 'POST', success: function (data, textStatus, jqXHR) {
-                                                        if (data.status) {
-                                                            $(".cbkDiezmo").prop("checked", true);
-                                                            $.smallBox({
-                                                                title: "&iexcl;Atenci&oacute;n!",
-                                                                content: "<i class='fa fa-clock-o'></i> <i>Se autoriz&oacute; el descuento de diezmo...</i>",
-                                                                color: "#659265",
-                                                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                                timeout: 6000
-                                                            });
-                                                        }
-                                                    }
-                                                });
-                                            }
-                                            showEsDiezmo();
-
-
-                                        }
-                                    });
-                                    return false;
-
-
-                                });
-                            }
-                        }
-                    });
-                }
-                $(document).ready(function () {
-
-                    pageSetUp();
-                    $("#ca_bono_pu").numeric();
-                    $("#remu").numeric();
-                    $("#rein").numeric();
-                    $("#bo_a").numeric();
-                    $("#bev").numeric();
-                    $("#su_t").numeric();
-                    $("#asig").numeric();
-
-                    $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-                        $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
-                    });
-                    ListCentroCostoDGP($("#id_dgp").val());
-                    showEsDiezmo();
-                    list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato", "id_tipo_contrato", "de_ti_contrato");
-
-                    $('#checkout-form').validate({
-                        // Rules for form validation
-                        rules: {
-                            fname: {
-                                required: true
-                            },
-                            FEC_DESDE: {
-                                val_fecha: true
-                            },
-                            FEC_HASTA: {
-                                val_fecha: true
-                            }
-                        },
-                        // Do not change code below
-                        errorPlacement: function (error, element) {
-                            error.insertAfter(element.parent());
-                        }
-                    });
-                    jQuery.validator.addMethod("val_fecha", function (value, element) {
-                        var d = value.split("-");
-                        return this.optional(element) || String(parseInt(d[0])).length === 4;
-                    }, "¡Fecha ingresada invalida!");
-
-                    Listar_dep();
-                    Listar_sec();
-                    Listar_area();
-                    Listar_plantilla();
-
-                    var a = $("#select-sub-mod");
-                    var c = $("#Selec_Area");
-                    var d = $("#select_sec");
-                    var b = $("#selec_dep");
-                    var e = $("#pu_id_se");
-                    var f = $(".select_dir");
-                    c.attr("disabled", true);
-                    d.attr("disabled", true);
-                    b.attr("disabled", true);
-                    e.attr("disabled", true);
-                    f.attr("disabled", true);
-                    $(".date").keyup(function () {
-                        $(".conteni").val($(".date").val());
-                    });
-                    $("#select_mod").change(function () {
-                        $.post("../../ajax/Ajax_Reg_Contrato/Ajax_Reg_Contrato.jsp?opc=submodalidad&" + "MODALIDAD=" + $("#select_mod").val(), function (objJson) {
-                            a.empty();
-                            var list = objJson.lista;
-                            a.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    a.append('<option value="' + list[i].id_submodalidad + '">' + list[i].de_submod + '</option>');
-                                }
-                            }
-                        });
-                    });
-                    $("#selec_dep").change(function () {
-                        $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
-                            c.empty();
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            }
-                            var list = objJson.lista;
-                            c.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                                }
-                            } else {
-                                c.append("<option value='' > [no hay] </option>");
-                            }
-                        });
-                    });
-                    $("#select_dir").change(function () {
-                        $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
-                            b.empty();
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            }
-                            var list = objJson.lista;
-                            b.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                                }
-                            } else {
-                                b.append("<option value='' > [] </option>");
-                            }
-                        });
-                    });
-                    $("#Selec_Area").change(function () {
-                        $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
-                            d.empty();
-
-                            var list = objJson.lista;
-                            d.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                                }
-                            } else {
-                                d.append("<option value='' > [no hay] </option>");
-                            }
-                        });
-                    });
-                    $("#select_sec").change(function () {
-                        $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
-                            e.empty();
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            }
-                            var list = objJson.lista;
-                            e.append("<option value='' > [SELECCIONE] </option>");
-                            if (list.length !== 0) {
-                                for (var i = 0; i < list.length; i++) {
-                                    e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                                }
-                            } else {
-                                e.empty();
-                                e.append("<option value='' > [] </option>");
-                            }
-                        });
-                    });
-                    $("#btn-registrar").click(function () {
-                        var pr = $("#select-proceso").val();
-                        $.post("../../paso", $("#form-paso").serialize(), function () {
-                            Listar_Paso(pr);
-                        });
-                        $("#btn-registrar").val("Registrar Paso");
-                        $(".opc").val("Registrar");
-                        $("#form-paso")[0].reset();
-
-                        return false;
-                    });
-
-                });
-                function c() {
-                    var max = $("#ifechai").val();
-                    $("#suscripcion").attr("max", max);
-                    $("#suscripcion").attr("value", max);
-                }
-    </script>
 </html>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");

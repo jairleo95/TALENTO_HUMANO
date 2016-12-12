@@ -15,7 +15,6 @@
 
         <link rel="stylesheet" href="../../../css/Css_Formulario/form.css"  type="text/css" > 
         <script language="javascript" type="text/javascript" src="../../../js/JQuery/jQuery.js"></script>
-
         <script type="text/javascript">
             $(document).ready(
                     function() {

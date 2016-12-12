@@ -23,7 +23,9 @@ import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Autorizacion;
 import pe.edu.upeu.application.model.V_Autorizar_Dgp;
 import pe.edu.upeu.application.model.X_List_De_Autorizacion;
-import pe.edu.upeu.application.web.controller.CConversion;
+import pe.edu.upeu.application.properties.UserMachineProperties;
+import pe.edu.upeu.application.properties.globalProperties;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -31,7 +33,7 @@ import pe.edu.upeu.application.web.controller.CConversion;
  */
 public class AutorizacionDAO implements InterfaceAutorizacionDAO {
 
-    CConversion c = new CConversion();
+    DateFormat c = new DateFormat();
     ConexionBD conn;
 
     @Override
@@ -44,7 +46,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
             cst.setString(2, ID_DGP);
             cst.setString(3, ES_AUTORIZACION);
             cst.setString(4, NU_PASOS);
-            cst.setString(5, FactoryConnectionDB.detalle_ip());
+            cst.setString(5, UserMachineProperties.getAll());
             cst.setString(6, US_CREACION);
             cst.setString(7, US_MODIF);
             cst.setString(8, FE_MODIF);
@@ -608,7 +610,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 rec.put("area", rs.getString("no_area"));
                 rec.put("fecha_c", rs.getString("fe_creacion"));
                 rec.put("fecha_aut", rs.getString("fe_autorizacion"));
-                rec.put("mes_año_aut", rs.getString("mes_año_aut"));
+                rec.put("mes_anno_aut", rs.getString("mes_anno_aut"));
                 rec.put("dep", rs.getString("no_dep"));
                 rec.put("mes_c", rs.getString("mes_creacion"));
                 rec.put("motivo", rs.getString("LI_MOTIVO"));

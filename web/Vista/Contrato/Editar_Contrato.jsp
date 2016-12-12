@@ -1,5 +1,6 @@
+<%@page import="pe.edu.upeu.application.util.DateFormat"%>
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="pe.edu.upeu.application.model.Grupo_Ocupaciones"%>
 <%@page import="pe.edu.upeu.application.model.Modalidad"%>
@@ -24,6 +25,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
@@ -108,7 +110,7 @@
                         <!-- end widget edit box -->
                         <!-- widget content -->
                         <div class="widget-body no-padding">
-                            <% CConversion con = new CConversion();
+                            <%
                                 HttpSession sesion = request.getSession(true);
                                 String idrol = (String) sesion.getAttribute("IDROL");
                             %>
@@ -225,20 +227,20 @@
                                         <section class="sec_dep col col-3" id="titulo">
                                             <label class="select" id="titulo">Departamento:
                                                 <select name="DEPARTAMENTO_ID" <%=disabledEdit%> class="selec_dep input-group-sm"  id="selec_dep">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                 </select>  </label>
                                         </section>
                                         <section class="sec_are col col-3" id="titulo">
                                             <label class="select" id="titulo">Area:
                                                 <select name="AREA_ID" <%=disabledEdit%> class="Selec_Area input-group-sm" id="Selec_Area">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                 </select>  
                                             </label>
                                         </section>
                                         <section class="sec_sec col col-3" id="titulo">
                                             <label class="select" id="titulo">Sección:
                                                 <select name="SECCION_ID" <%=disabledEdit%> class="select_sec input-group-sm" id="select_sec">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                 </select>  </label>
                                         </section>
                                         <section class="col col-3" id="titulo">
@@ -266,7 +268,7 @@
                                                     <option value="7" <%if (a.getLi_condicion().trim().equals("7")) {%>selected=""<%}%>>Convenio Laboral Juvenil</option>
                                                     <option value="8" <%if (a.getLi_condicion().trim().equals("8")) {%>selected=""<%}%>>MFL-Contrato</option>
                                                     <%} else {%>
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                     <option value="1">Contratado</option>
                                                     <option value="2">Contratado Independiente</option>
                                                     <option value="3">Enpleado</option>
@@ -356,10 +358,18 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="row">
+                                        <section class="col col-2">
+                                            <label class="select" id="titulo">Situación Especial:
+                                                <select name="situacionEspecial" class="input-group-sm situacionEspecial" data-valor="<%=a.getIdSituacionEspecial()%>">
+                                                    <option value="">[Seleccione]</option>
+
+                                                </select>
+                                            </label>
+                                        </section>
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Regimen Laboral Mintra:
                                                 <select name="REG_LAB_MINTRA" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option> 
+                                                    <option value="">[Seleccione]</option> 
                                                     <%for (int d = 0; d < list_reg_labo.size(); d++) {
                                                             Regimen_Laboral re = new Regimen_Laboral();
                                                             re = (Regimen_Laboral) list_reg_labo.get(d);
@@ -377,10 +387,10 @@
                                                 </select>
                                             </label>
                                         </section>
-                                        <section class="col col-4">
+                                        <section class="col col-2">
                                             <label class="select" id="titulo">Modalidad:
                                                 <select name="MODALIDAD" class="input-group-sm select_mod" id="select_mod" required="">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                     <%for (int l = 0; l < List_modalidad.size(); l++) {
                                                             Modalidad mo = new Modalidad();
                                                             mo = (Modalidad) List_modalidad.get(l);
@@ -401,14 +411,14 @@
                                         <section class="col col-4">
                                             <label class="select" id="titulo">SUB-Modalidad:
                                                 <select name="SUB_MODALIDAD" class="input-group-sm" id="select-sub-mod" required="">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                 </select>
                                             </label>
                                         </section>
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Tipo Contratación:
                                                 <select name="REG_LAB_MINTRA" class="input-group-sm" >
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                     <option value="I">INICIO</option>
                                                     <option value="R">RENOVACION</option>
                                                 </select>
@@ -417,7 +427,7 @@
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Codigo Grupo de Ocupaciones:
                                                 <select name="CO_GRUPO_OCU" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                     <%for (int gr = 0; gr < List_grup_ocu.size(); gr++) {
                                                             Grupo_Ocupaciones g = new Grupo_Ocupaciones();
                                                             g = (Grupo_Ocupaciones) List_grup_ocu.get(gr);
@@ -438,7 +448,7 @@
                                         <section class="col col-4">
                                             <label class="input" id="titulo">Fecha de Suscripción: 
                                                 <%if (a.getFe_suscripcion() != null) {%>
-                                                <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm"  value="<%=con.convertFecha3(a.getFe_suscripcion())%>">
+                                                <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm"  value="<%=DateFormat.toFormat3(a.getFe_suscripcion())%>">
                                                 <%} else {%>
                                                 <input id="suscripcion" type="date" name="FECHA_SUSCRIPCION"  class="input-group-sm"  value="">
                                                 <%}%>
@@ -448,12 +458,12 @@
                                             <label class="select" id="titulo">Tipo de Moneda:
                                                 <select name="TIPO_MONEDA" class="input-group-sm" required="">
                                                     <%if (a.getCo_ti_moneda() != null) {%>
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                     <option value="01" <%if (a.getCo_ti_moneda().trim().equals("01")) {%> selected=""<%}%> >SOLES</option>
                                                     <option value="02" <%if (a.getCo_ti_moneda().trim().equals("02")) {%> selected=""<%}%>>DOLARES</option>
                                                     <option value="03" <%if (a.getCo_ti_moneda().trim().equals("03")) {%> selected=""<%}%>>EUROS</option>
                                                     <%} else {%>
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                     <option value="01" selected="">SOLES</option>
                                                     <option value="02">DOLARES</option>
                                                     <option value="03">EUROS</option>
@@ -465,12 +475,12 @@
                                             <label class="select" id="titulo">Tipo Remuneracion Variable:
                                                 <select name="REM_VARIABLE" class="input-group-sm" required="">
                                                     <%if (a.getCo_ti_rem_variab() != null) {%>
-                                                    <option value=""  >[SELECCIONE]</option>
+                                                    <option value=""  >[Seleccione]</option>
                                                     <option value="1" <%if (a.getCo_ti_rem_variab().trim().equals("1")) {%> selected=""<%}%> >DESTAJO</option>
                                                     <option value="2" <%if (a.getCo_ti_rem_variab().trim().equals("2")) {%> selected=""<%}%> >COMISIONES</option>
                                                     <option value="3" <%if (a.getCo_ti_rem_variab().trim().equals("3")) {%> selected=""<%}%> >NINGUNO</option>
                                                     <%} else {%>
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                     <option value="1">DESTAJO</option>
                                                     <option value="2">COMISIONES</option>
                                                     <option value="3">NINGUNO</option>
@@ -481,7 +491,7 @@
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Remuneración en Especie:
                                                 <select name="REM_ESPECIE" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                     <%if (a.getDe_remu_especie() != null) {%>
                                                     <option value="1" <%if (a.getDe_remu_especie().trim().equals("1")) {%> selected=""<%}%> >SI</option>
                                                     <option value="0" <%if (a.getDe_remu_especie().trim().equals("0")) {%> selected=""<%}%> >NO</option>
@@ -497,23 +507,28 @@
                                 </fieldset>
                                 <fieldset id="fila-agregar">
                                 </fieldset>
-                                <fieldset>
-                                    <h6><label id="titulo">Horas:</label></h6>
+                              
+                                                
+                                                <fieldset>
+                                    <legend >Horario</legend>
                                     <div class="row" >
-                                        <section class="col col-4">
+                                        <section class="col col-3">
                                             <label class="input" id="titulo">Semanal:
                                                 <input type="text" name="HORAS_SEMANA" value="48" class="input-group-sm" required="">
                                             </label>
                                         </section>
-                                        <section class="col col-4">
+                                        <section class="col col-3">
                                             <label class="input" id="titulo">Mensual:
                                                 <input type="text" name="NRO_HORAS_LAB" value="192" class="input-group-sm" required="">
                                             </label>
                                         </section>
-                                        <section class="col col-4">
+                                        <section class="col col-3">
                                             <label class="input" id="titulo">Dias:
                                                 <input type="text" name="DIAS" value="30" class="input-group-sm" required="">
                                             </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            ver horario
                                         </section>
                                     </div>
                                 </fieldset>
@@ -523,7 +538,7 @@
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Tipo Trabajador.
                                                 <select name="TIPO_TRABAJADOR" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                     <%if (a.getTi_trabajador() != null) {%>
                                                     <option value="1" <%if (a.getTi_trabajador().trim().equals("1")) {%> selected=""<%}%> >Empleado</option>
                                                     <option value="2" <%if (a.getTi_trabajador().trim().equals("2")) {%> selected=""<%}%> >Obrero</option>
@@ -537,7 +552,7 @@
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Regimen Laboral: 
                                                 <select name="REGIMEN_LABORAL" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                     <%if (a.getLi_regimen_laboral() != null) {%>
                                                     <option value="1" <%if (a.getLi_regimen_laboral().trim().equals("1")) {%> selected=""<%}%> >Privado</option>
                                                     <option value="2" <%if (a.getLi_regimen_laboral().trim().equals("2")) {%> selected=""<%}%> >Público</option>
@@ -566,7 +581,7 @@
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Regimen Pensionario:
                                                 <select name="REGIMEN_PENSIONARIO" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                     <%if (a.getLi_regimen_pensionario() != null) {%>
                                                     <option value="1" <%if (a.getLi_regimen_pensionario().trim().equals("1")) {%> selected=""<%}%>>Privado</option>
                                                     <option value="2" <%if (a.getLi_regimen_pensionario().trim().equals("2")) {%> selected=""<%}%>>SNP</option>
@@ -581,7 +596,7 @@
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Tipo Contrato:
                                                 <select name="TIPO_CONTRATO" class="input-group-sm ti_contrato" required="">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
 
                                                 </select>
                                                 <input type="hidden" class="id_ti_contrato" value="<%=a.getTi_contrato()%>" />
@@ -590,7 +605,7 @@
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Tipo Convenio:
                                                 <select name="TIPO_CONVENIO" class="input-group-sm" >
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                     <%if (a.getLi_tipo_convenio() != null) {%>
                                                     <option value="1" <%if (a.getLi_tipo_convenio().trim().equals("1")) {%> selected=""<%}%> >CLJ</option>
                                                     <option value="2" <%if (a.getLi_tipo_convenio().trim().equals("2")) {%> selected=""<%}%>>PPP</option>
@@ -618,7 +633,7 @@
                                         <!--<section class="col col-4">
                                             <label class="select" id="titulo">Situación Actual:
                                                 <select name="ESTADO_CONTRATO" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                     <option value="1" selected="" >Activo</option>
                                                     <option value="2">Término de Contrato</option>
                                                     <option value="3">Renuncia Voluntaria</option>
@@ -632,7 +647,7 @@
                                         <section class="col col-3">
                                             <label class="select" id="titulo">Filial donde Trabaja:
                                                 <select name="FILIAL" class="input-group-sm" required="">
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                     <%if (a.getId_filial() != null) {%>
                                                     <option value="1" <%if (a.getId_filial().trim().equals("1")) {%> selected=""<%}%>>Lima</option>
                                                     <option value="2" <%if (a.getId_filial().trim().equals("2")) {%> selected=""<%}%>>Juliaca</option>
@@ -668,7 +683,7 @@
                                         <section class="col col-3">
                                             <label class="select" id="titulo" style="color:red">Plantilla de Contrato:
                                                 <select name="id_plantilla_contractual" class="con_pl_pu input-group-sm" >
-                                                    <option value="">[SELECCIONE]</option>
+                                                    <option value="">[Seleccione]</option>
                                                 </select>
                                             </label>
                                         </section>
@@ -773,6 +788,8 @@
 
         <!-- FastClick: For mobile devices -->
         <script src="../../js/plugin/fastclick/fastclick.min.js"></script>
+        <script type="text/javascript"  src="../../js/plugin/knob/jquery.knob.min.js"></script>
+        <script type="text/javascript"  src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
 
         <!--[if IE 8]>
 
@@ -780,364 +797,24 @@
 
         <![endif]-->
 
-        <!-- Demo purpose only -->
-        <script src="../../js/demo.min.js"></script>
+        <!-- Demo purpose only 
+        <script src="../../js/demo.min.js"></script>-->
 
         <!-- MAIN APP JS FILE -->
         <script src="../../js/app.min.js"></script>
 
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-        <!-- Voice command : plugin -->
 
         <!-- PAGE RELATED PLUGIN(S) -->
         <script type="text/javascript"  src="../../js/plugin/knob/jquery.knob.min.js"></script>
         <script type="text/javascript"  src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-        <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js"></script>
-        <script type="text/javascript" src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js" ></script>
-        <script type="text/javascript">
-                                        function Listar_dep() {
-                                            var s = $(".selec_dep");
-                                            $.post("../../Direccion_Puesto", "opc=Listar&" + "id_dir=" + $(".dir_pu").val(), function (objJson) {
-                                                s.empty();
-                                                var lista = objJson.lista;
-                                                s.append("<option value='' > [SELECCIONE] </option>");
-                                                for (var j = 0; j < lista.length; j++) {
-                                                    if ($(".dep_pu").val() == lista[j].id) {
-                                                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
 
-                                                    } else {
-                                                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
-                                                    }
-                                                }
+        <!--BUSINESS LOGIC PLUGINS-->        
+        <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>"></script>
+        <script type="text/javascript" src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js?v=<%=globalProperties.VERSION_JS%>" ></script>
+        <script type="text/javascript" src="../../js/businessLogic/Contrato/editContrato.js?v=<%=globalProperties.VERSION_JS%>" ></script>
 
-
-                                            });
-                                        }
-                                        function Listar_area() {
-                                            var s = $(".Selec_Area");
-
-                                            $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $(".dep_pu").val(), function (objJson) {
-                                                s.empty();
-                                                var lista = objJson.lista;
-                                                s.append("<option value='' > [SELECCIONE] </option>");
-                                                for (var j = 0; j < lista.length; j++) {
-
-                                                    if ($(".area_pu").val() == lista[j].id) {
-                                                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
-                                                    } else {
-                                                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
-                                                    }
-                                                }
-
-                                            });
-                                        }
-                                        function Listar_sec() {
-                                            var s = $("#select_sec");
-
-                                            $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $(".area_pu").val(), function (objJson) {
-                                                s.empty();
-                                                var lista = objJson.lista;
-                                                s.append("<option value='' > [SELECCIONE] </option>");
-                                                for (var j = 0; j < lista.length; j++) {
-                                                    if ($(".sec_pu").val() == lista[j].id) {
-                                                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nom + "</option>");
-                                                    } else {
-                                                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nom + "</option>");
-                                                    }
-                                                }
-                                            });
-                                        }
-                                        function Listar_pue() {
-                                            var s = $("#pu_id_se");
-                                            $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $(".sec_pu").val(), function (objJson) {
-                                                s.empty();
-                                                var lista = objJson.lista;
-                                                s.append("<option value='' > [SELECCIONE] </option>");
-                                                for (var j = 0; j < lista.length; j++) {
-
-                                                    if ($(".id_pu_dgp").val() == lista[j].id) {
-                                                        s.append("<option value='" + lista[j].id + "' selected=''> " + lista[j].nombre + "</option>");
-                                                    } else {
-                                                        s.append("<option value='" + lista[j].id + "'> " + lista[j].nombre + "</option>");
-                                                    }
-                                                }
-                                            });
-                                        }
-
-                                        function Listar_plantilla() {
-                                            var s = $(".con_pl_pu");
-
-                                            $.post("../../plantilla_contractual", "opc=List_planti&" + "id_pu=" + $(".id_pu_dgp").val(), function (objJson) {
-                                                s.empty();
-                                                var lista = objJson.lista;
-                                                s.append("<option value='' > [SELECCIONE] </option>");
-                                                for (var i = 0; i < lista.length; i++) {
-                                                    if ($(".id_pl_con").val() == lista[i].id) {
-                                                        s.append("<option value='" + lista[i].id + "' selected=''> " + lista[i].nom_pl + "</option>");
-                                                    } else {
-                                                        s.append("<option value='" + lista[i].id + "'> " + lista[i].nom_pl + "</option>");
-                                                    }
-                                                }
-                                            });
-                                        }
-                                        function listar_sub_mod() {
-                                            var s = $("#select-sub-mod");
-                                            $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&" + "id=" + $(".id_mod_con").val(), function (objJson) {
-                                                s.empty();
-                                                var lista = objJson.lista;
-                                                s.append("<option value='' > [SELECCIONE] </option>");
-                                                for (var i = 0; i < lista.length; i++) {
-                                                    if ($(".id_sub_mod").val() != null) {
-                                                        if ($(".id_sub_mod").val() == lista[i].id) {
-                                                            s.append("<option value='" + lista[i].id + "' selected=''> " + lista[i].nombre + "</option>");
-                                                        } else {
-                                                            s.append("<option value='" + lista[i].id + "'> " + lista[i].nombre + "</option>");
-                                                        }
-                                                    } else {
-                                                        s.append("<option value='" + lista[i].id + "'> " + lista[i].nombre + "</option>");
-                                                    }
-                                                }
-                                            });
-                                        }
-                                        function Listar_Direccion() {
-                                            var cc_dir = $(".cc-dir");
-                                            $.post("../../centro_costo?opc=Listar_dir", function (objJson) {
-                                                if (objJson.rpta == -1) {
-                                                    alert(objJson.mensaje);
-                                                    return;
-                                                }
-                                                var lista = objJson.lista;
-                                                for (var i = 0; i < lista.length; i++) {
-                                                    if (lista[i].id == $(".id_dire").val()) {
-                                                        cc_dir.append("<option value='" + lista[i].id + "' selected=''>" + lista[i].nombre + "</option>");
-                                                    } else {
-                                                        cc_dir.append("<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>");
-                                                    }
-                                                }
-                                            });
-                                        }
-                                        function showEsDiezmo() {
-                                            var obj = $(".div_input_diezmo");
-                                            obj.hide(100);
-                                            obj.empty();
-                                            $.ajax({
-                                                url: "../../trabajador", data: "opc=ShowEsDiezmoTrabajador&id=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
-                                                    if (data.rpta) {
-                                                        obj.append(data.html);
-                                                        obj.show(100);
-                                                        $(".cbkDiezmo").click(function () {
-                                                            $.SmartMessageBox({
-                                                                title: "&iexcl;Alerta!",
-                                                                content: "Esta seguro de modificar la autorizaci&oacute;n de descuento diezmo?",
-                                                                buttons: '[No][Si]'
-                                                            }, function (ButtonPressed) {
-                                                                if (ButtonPressed === "Si") {
-                                                                    if ($(".cbkDiezmo").prop("checked")) {
-                                                                        $.ajax({
-                                                                            url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=0", type: 'POST', success: function (data, textStatus, jqXHR) {
-                                                                                if (data.status) {
-                                                                                    $(".cbkDiezmo").prop("checked", false);
-                                                                                    $.smallBox({
-                                                                                        title: "&iexcl;Atenci&oacute;n!",
-                                                                                        content: "<i class='fa fa-clock-o'></i> <i>Se neg&oacute; el descuento de diezmo...</i>",
-                                                                                        color: "#C46A69",
-                                                                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                                                        timeout: 6000
-                                                                                    });
-                                                                                }
-
-                                                                            }
-                                                                        });
-                                                                    } else {
-                                                                        $.ajax({
-                                                                            url: "../../trabajador", data: "opc=UpdateEsDiezmo&id=" + $(".idtr").val() + "&estado=1", type: 'POST', success: function (data, textStatus, jqXHR) {
-                                                                                if (data.status) {
-                                                                                    $(".cbkDiezmo").prop("checked", true);
-                                                                                    $.smallBox({
-                                                                                        title: "&iexcl;Atenci&oacute;n!",
-                                                                                        content: "<i class='fa fa-clock-o'></i> <i>Se autoriz&oacute; el descuento de diezmo...</i>",
-                                                                                        color: "#659265",
-                                                                                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                                                        timeout: 6000
-                                                                                    });
-                                                                                }
-                                                                            }
-                                                                        });
-                                                                    }
-                                                                    showEsDiezmo();
-
-
-                                                                }
-                                                            });
-                                                            return false;
-
-
-                                                        });
-                                                    }
-                                                }
-                                            });
-                                        }
-
-                                        $(document).ready(function () {
-                                            $("#ca_bono_pu").numeric();
-                                            $("#remu").numeric();
-                                            $("#rein").numeric();
-                                            $("#bo_a").numeric();
-                                            $("#bev").numeric();
-                                            $("#su_t").numeric();
-                                            $("#asig").numeric();
-                                            pageSetUp();
-                                            $(".btnModificarContrato").click(function () {
-                                                if ($(".formEditawrContrato").valid()) {
-
-                                                    $(".formEditawrContrato").submit();
-                                                    $(".btnModificarContrato").attr("disabled", "disabled");
-                                                }
-
-                                            });
-                                            Listar_pue();
-                                            Listar_dep();
-                                            Listar_sec();
-                                            Listar_area();
-                                            Listar_plantilla();
-                                            listar_sub_mod();
-                                            Listar_Direccion();
-                                            ListCentroCostoDGP($("#id_dgp").val());
-                                            list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato", "id_tipo_contrato", "de_ti_contrato", "1", $(".id_ti_contrato").val());
-                                            var a = $("#select-sub-mod");
-                                            var c = $("#Selec_Area");
-                                            var d = $("#select_sec");
-                                            var b = $("#selec_dep");
-                                            var e = $("#pu_id_se");
-                                            $(".date").keyup(function () {
-                                                $(".conteni").val($(".date").val());
-                                            });
-                                            // $.post("../../  ")
-                                            $(".select_mod").change(function () {
-                                                // alert("?MODALIDAD="+$("#select_mod").val());
-                                                $.post("../../Direccion_Puesto", "opc=Listar_SUB_MO&id=" + $(".select_mod").val(), function (objJson) {
-                                                    a.empty();
-                                                    if (objJson.rpta == -1) {
-                                                        alert(objJson.mensaje);
-                                                        return;
-                                                    }
-                                                    var list = objJson.lista;
-                                                    a.append("<option value='' > [SELECCIONE] </option>");
-                                                    if (list.length !== 0) {
-                                                        for (var i = 0; i < list.length; i++) {
-                                                            a.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                                                        }
-                                                    } else {
-                                                        a.append("<option value='' > [no hay] </option>");
-                                                    }
-                                                });
-                                            });
-                                            $("#selec_dep").change(function () {
-                                                $("#select_dir").val("");
-                                                $("#Selec_Area").val("");
-                                                $("#select_sec").val("");
-                                                $("#pu_id_se").val("");
-                                                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
-                                                    c.empty();
-                                                    if (objJson.rpta == -1) {
-                                                        alert(objJson.mensaje);
-                                                        return;
-                                                    }
-                                                    var list = objJson.lista;
-                                                    c.append("<option value='' > [SELECCIONE] </option>");
-                                                    if (list.length !== 0) {
-                                                        for (var i = 0; i < list.length; i++) {
-                                                            c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                                                        }
-                                                    } else {
-                                                        c.append("<option value='' > [no hay] </option>");
-                                                    }
-                                                });
-                                            });
-                                            $("#select_dir").change(function () {
-                                                $("#Selec_Area").val("");
-                                                $("#select_sec").val("");
-                                                $("#pu_id_se").val("");
-                                                $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $("#select_dir").val(), function (objJson) {
-                                                    b.empty();
-                                                    if (objJson.rpta == -1) {
-                                                        alert(objJson.mensaje);
-                                                        return;
-                                                    }
-                                                    var list = objJson.lista;
-                                                    b.append("<option value='' > [SELECCIONE] </option>");
-                                                    if (list.length !== 0) {
-                                                        for (var i = 0; i < list.length; i++) {
-                                                            b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                                                        }
-                                                    } else {
-                                                        b.append("<option value='' > [] </option>");
-                                                    }
-                                                });
-                                            });
-                                            $("#Selec_Area").change(function () {
-                                                $("#select_sec").val("");
-                                                $("#pu_id_se").val("");
-                                                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
-                                                    d.empty();
-                                                    var list = objJson.lista;
-                                                    d.append("<option value='' > [SELECCIONE] </option>");
-                                                    if (list.length !== 0) {
-                                                        for (var i = 0; i < list.length; i++) {
-                                                            d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                                                        }
-                                                    } else {
-                                                        d.append("<option value='' > [no hay] </option>");
-                                                    }
-                                                });
-
-                                            });
-                                            $("#select_sec").change(function () {
-                                                $("#pu_id_se").val("");
-                                                $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
-                                                    e.empty();
-                                                    if (objJson.rpta == -1) {
-                                                        alert(objJson.mensaje);
-                                                        return;
-                                                    }
-                                                    var list = objJson.lista;
-                                                    e.append("<option value='' > [SELECCIONE] </option>");
-                                                    if (list.length !== 0) {
-                                                        for (var i = 0; i < list.length; i++) {
-                                                            e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                                                        }
-                                                    } else {
-                                                        e.empty();
-                                                        e.append("<option value='' > [] </option>");
-                                                    }
-                                                });
-                                            });
-
-                                            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-                                                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-                                            });
-                                            showEsDiezmo();
-                                            $('.formEditawrContrato').validate({
-                                                // Rules for form validation
-                                                rules: {
-                                                    FEC_DESDE: {
-                                                        //  val_fecha: true
-                                                    },
-                                                    FEC_HASTA: {
-                                                        // val_fecha: true
-                                                    }
-                                                },
-                                                // Do not change code below
-                                                errorPlacement: function (error, element) {
-                                                    error.insertAfter(element.parent());
-                                                }
-                                            });
-
-
-
-                                        });
-        </script>
     </body>
 
 </html>

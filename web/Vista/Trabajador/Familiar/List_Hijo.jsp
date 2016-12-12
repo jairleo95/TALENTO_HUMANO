@@ -1,4 +1,4 @@
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
+<%@page import="pe.edu.upeu.application.util.DateFormat"%>
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%@page import="pe.edu.upeu.application.dao.Tipo_DocumentoDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO"%>
@@ -97,7 +97,7 @@
 
                     </thead>
                     <tbody>
-                        <% CConversion co = new CConversion();
+                        <%
                             InterfaceTipo_DocumentoDAO itd = new Tipo_DocumentoDAO();
                             for (int i = 0; i < LISTA_HIJO.size(); i++) {
                                 Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();
@@ -107,7 +107,7 @@
                         <tr>
                             <td><%out.print(i + 1);%></td>
                             <td><%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></td>
-                            <td><%=co.convertFecha5(h.getFe_nacimiento())%></td>
+                            <td><%=DateFormat.toFormat5(h.getFe_nacimiento())%></td>
                             <td>
                                 <%
                                     if (h.getEs_sexo().trim().equals("M")) {
@@ -198,8 +198,8 @@
 
         <!--================================================== -->
 
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>-->
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>

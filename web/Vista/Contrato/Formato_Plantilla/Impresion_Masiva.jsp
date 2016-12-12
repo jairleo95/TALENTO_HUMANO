@@ -337,6 +337,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     } else {
                         ca_st = "-";
                     }
+                     var ca_sueldo_basico = "";
+                    if (Lista[i].ca_sueldo_basico != null) {
+                        ca_sueldo_basico = Lista[i].ca_sueldo_basico;
+                    } else {
+                        ca_sueldo_basico = "-";
+                    }
                     var nu_ho = "";
                     if (Lista[i].nu_ho != null) {
                         nu_ho = Lista[i].nu_ho;
@@ -370,7 +376,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                         "[hasta]": fe_ha,
                         "[puesto]": no_pu,
                         "[fe_suscripcion]": fe_su,
-                        "[sueldo]": ca_st,
+                        "[sueldo]": ca_sueldo_basico,
+                        "[sueldo_total]": ca_st,
                         "[horas]": nu_ho,
                         "[cursos]": "",
                         "[moneda]": co_tm,

@@ -13,15 +13,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        
+            <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link href="../../css/smartadmin-production.min.css" rel="stylesheet" type="text/css"/>
         <link href="../../css/smartadmin-skins.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
         <title>Mantenimiento de Usuarios</title>
-        <!--<link rel="stylesheet" href="../CSS/estilos.css" />
-
-        <link rel="stylesheet" href="../CSS/chosen.css">
-        <script src="../js3/abc.js"></script>
-        <script src="../js3/organictabs.jquery.js"></script>-->
         <style type="text/css">
             .contenedor{
                 margin-left: 1%;

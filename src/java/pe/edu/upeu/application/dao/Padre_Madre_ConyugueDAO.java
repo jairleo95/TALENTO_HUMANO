@@ -18,8 +18,8 @@ import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfacePadre_Madre_ConyugueDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
-import pe.edu.upeu.application.model.Padre_Madre_Conyugue;
-import pe.edu.upeu.application.web.controller.CConversion;
+import pe.edu.upeu.application.properties.UserMachineProperties;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -28,7 +28,7 @@ import pe.edu.upeu.application.web.controller.CConversion;
 public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO {
 
     ConexionBD conn;
-    CConversion c = new CConversion();
+    DateFormat c = new DateFormat();
 
     @Override
     public void INSERT_CONYUGUE(String ES_TRABAJA_UPEU_CONYUGUE, String AP_NOMBRES_CONYUGUE, String FE_NAC_CONYUGUE, String TI_DOC_ID, String NU_DOC, String LI_INSCRIPCION_VIG_ESSALUD, String US_MODIF, String IP_USUARIO, String ID_TRABAJADOR, String ID_CONYUGUE) {
@@ -38,7 +38,7 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
             cst = conn.conex.prepareCall("{CALL RHSP_INSERT_CONYUGUE(  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, ES_TRABAJA_UPEU_CONYUGUE);
             cst.setString(2, AP_NOMBRES_CONYUGUE);
-            cst.setString(3, c.convertFecha(FE_NAC_CONYUGUE));
+            cst.setString(3, DateFormat.toFormat1(FE_NAC_CONYUGUE));
             cst.setString(4, TI_DOC_ID);
             cst.setString(5, NU_DOC);
             cst.setString(6, LI_INSCRIPCION_VIG_ESSALUD);
@@ -103,7 +103,7 @@ public class Padre_Madre_ConyugueDAO implements InterfacePadre_Madre_ConyugueDAO
             cst.setString(2, AP_NOMBRES_MADRE);
             cst.setString(3, ID_TRABAJADOR);
             cst.setString(4, USER);
-            cst.setString(5, FactoryConnectionDB.detalle_ip());
+            cst.setString(5, UserMachineProperties.getAll());
             cst.execute();
         } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());

@@ -47,6 +47,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
@@ -102,7 +103,7 @@
 
                             <!-- Widget ID (each widget will need unique ID)-->
                             <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false" 
-                                  data-widget-fullscreenbutton="false"  data-widget-togglebutton="false">
+                                 data-widget-fullscreenbutton="false"  data-widget-togglebutton="false">
                                 <!-- widget options:
                                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -116,7 +117,7 @@
                                 data-widget-sortable="false"
 
                                 -->
-                                 <header>
+                                <header>
                                     <span class="widget-icon"> <i class="glyphicon glyphicon-user"></i> </span>
                                     <h2 class="font-md"><strong>Modificar </strong> <i>apecto académico</i></h2>
                                 </header>
@@ -371,25 +372,26 @@
                                                             </div>
 
                                                         </div>
-                                                      <h3>Cuenta Sueldo </h3>
+                                                        <h3>Cuenta Sueldo </h3>
                                                         <div class="row" >           
                                                             <div class="col-sm-3">
                                                                 <div class="form-group">
                                                                     <label>Banco:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
-                                                                        <%
-                                                                            boolean permissionEdit = false;
-                                                                            String disabled ="";
-                                                                            if (!rol.equals("ROL-0002") || !rol.equals("ROL-0005") || !rol.equals("ROL-0016")) {
-                                                                                permissionEdit=true;
-                                                                            }if (iduser.equals("USR-001874")) {
-                                                                                     permissionEdit=true; 
+                                                                            <%
+                                                                                boolean permissionEdit = false;
+                                                                                String disabled = "";
+                                                                                if (!rol.equals("ROL-0002") || !rol.equals("ROL-0005") || !rol.equals("ROL-0016")) {
+                                                                                    permissionEdit = true;
                                                                                 }
-                                                                            if (!permissionEdit) {
-                                                                                disabled="disabled";
-                                                                            }
-                                                                        %>
+                                                                                if (iduser.equals("USR-001874")) {
+                                                                                    permissionEdit = true;
+                                                                                }
+                                                                                if (!permissionEdit) {
+                                                                                    disabled = "disabled";
+                                                                                }
+                                                                            %>
                                                                         <select name="BANCO" id="banco" class="form-control input-group-sm" <%=disabled%>>
                                                                             <option value=""   selected="" >[SELECCIONE]</option>
                                                                             <%
@@ -500,7 +502,7 @@
                                                         <input type="hidden" name="idtr" value="<%=idtr%>"/>
                                                         <input type="hidden" name="opc" value="Modificar_Asp_Acad">
                                                         <input type="hidden" name="US_MODIF" value="<%=id_user%>">
-                                                  
+
                                                         <%}
                                                         %>
                                                     </div>
@@ -682,15 +684,15 @@
                 if ($("#banco").val() == "0") {
                     $("#generar").show();
                     $("#no_cuen_otros").show();
-                   // document.getElementById("nu_cuen_otros").readOnly = true;
+                    // document.getElementById("nu_cuen_otros").readOnly = true;
                     $("#texto").show();
                 }
                 if (rol !== 'ROL-0001') {
-                  /*  document.getElementById("banco").disabled = true;
-                    document.getElementById("nu_cuen_otros").disabled = true;
-                    document.getElementById("nu_cuen").disabled = true;
-                    document.getElementById("nu_cuen_ban").disabled = true;
-                    document.getElementById("subscription").disabled = true;*/
+                    /*  document.getElementById("banco").disabled = true;
+                     document.getElementById("nu_cuen_otros").disabled = true;
+                     document.getElementById("nu_cuen").disabled = true;
+                     document.getElementById("nu_cuen_ban").disabled = true;
+                     document.getElementById("subscription").disabled = true;*/
                 }
                 $("#banco").change(function () {
                     cuenta_bancaria($(this).val());

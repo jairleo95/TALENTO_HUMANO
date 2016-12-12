@@ -33,6 +33,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         <script src="../../../js/plugin/ckeditor/ckeditor.js"></script>
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
+        
+            <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
         <link href="../../../js/plugin/ckeditor/samples/sample.css" rel="stylesheet">
@@ -284,7 +286,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     "[hasta]": "<%=fechahas%>",
                     "[puesto]": "<%=n.getNo_puesto()%>",
                     "[fe_suscripcion]": "<%=fechasus%>",
-                    "[sueldo]": "<%=n.getCa_sueldo_total()%>",
+                    "[sueldo]": "<%=n.getCa_sueldo()%>",
+                    "[sueldo_total]": "<%=n.getCa_sueldo_total()%>",
                     "[horas]": "<%=n.getNu_horas_lab()%>",
                     "[cursos]": "",
                     "[moneda]": "<%=moneda%>",

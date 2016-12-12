@@ -109,7 +109,7 @@ function list_select(objSelect, url, datos, opc, id) {
                 }
             }
         } else {
-            objSelect.append("<option value=''>[]</option>");
+            objSelect.append("<option value=''>[Sin Data]</option>");
         }
         objSelect.append(text_html);
         text_html = "";
@@ -128,7 +128,7 @@ function list_select(objSelect, url, datos, opc, id) {
     });
     if (opc === "3" | opc === "4") {
         /*sirve para validar cuando es required*/
-        $.validator.setDefaults({ignore: ":hidden:not(select)"})
+        $.validator.setDefaults({ignore: ":hidden:not(select)"});
     }
 
 }

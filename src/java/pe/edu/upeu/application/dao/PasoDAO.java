@@ -15,7 +15,7 @@ import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfacePasoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
-import pe.edu.upeu.application.web.controller.CConversion;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -24,7 +24,7 @@ import pe.edu.upeu.application.web.controller.CConversion;
 public class PasoDAO implements InterfacePasoDAO {
 
     ConexionBD conn;
-    CConversion c = new CConversion();
+    DateFormat c = new DateFormat();
 
     @Override
     public List<Map<String, ?>> List_Paso_Habilitado(String Proceso) {

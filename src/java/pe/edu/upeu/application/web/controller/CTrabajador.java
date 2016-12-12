@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import pe.edu.upeu.application.util.CCriptografiar;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,10 +41,10 @@ import pe.edu.upeu.application.dao_imp.InterfaceTipoHoraPagoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
-import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Cuenta_Sueldo;
 import pe.edu.upeu.application.model.Empleado;
 import pe.edu.upeu.application.model.TipoHoraPago;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -210,8 +211,11 @@ public class CTrabajador extends HttpServlet {
                         out.print("Trabajador ya existe!");
                     } else {
 
-                        FE_NAC = FactoryConnectionDB.convertFecha3(FE_NAC);
-                        FE_NAC_C = FactoryConnectionDB.convertFecha3(FE_NAC_C);
+                        FE_NAC = DateFormat.toFormat3(FE_NAC);
+                        FE_NAC_C = DateFormat.toFormat3(FE_NAC_C);
+                        
+                          out.println(" fecha nac :"+DateFormat.toFormat1(FE_NAC));
+                          out.println(" fecha nac C :"+DateFormat.toFormat1(FE_NAC_C));
 
                         tr.INSERT_TRABAJADOR(null, AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, ES_SEXO, LI_GRUPO_SANGUINEO, DE_REFERENCIA, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, CA_TIPO_HORA_PAGO_REFEERENCIAL, ES_FACTOR_RH, LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, CM_OBSERVACIONES, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, AP_NOMBRES_PADRE, AP_NOMBRES_MADRE,
                                 ES_TRABAJA_UPEU_C, AP_NOMBRES_C, FE_NAC_C, ID_TIPO_DOC_C, NU_DOC_C, LI_INSCRIPCION_VIG_ESSALUD_C,
@@ -236,6 +240,7 @@ public class CTrabajador extends HttpServlet {
                             String ES_DATOS_HIJO_TRABAJADOR = "1";
                             if (NU_DOC_H != null) {
                                 if (!NU_DOC_H.equals("")) {
+                                           FE_NACIMIENTO = DateFormat.toFormat3(FE_NACIMIENTO);
                                     h.INSERT_DATOS_HIJO_TRABAJADOR(null, idtr, AP_PATERNO_H, AP_MATERNO_H, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO_H, ES_TIPO_DOC, NU_DOC_H, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR);
                                 }
                             }
@@ -426,7 +431,7 @@ public class CTrabajador extends HttpServlet {
                     if (!ES_CIVIL.equals(ES_CIVIL_A)) {
                         ec.INSERT_HIST_ESTADO_CIVIL(null, ES_CIVIL_A, FE_MODIFICACION, US_MODIF, ID_TRABAJADOR, ES_REGISTRO);
                     }
-                    FE_NAC = FactoryConnectionDB.convertFecha3(FE_NAC);
+                    FE_NAC = DateFormat.toFormat3(FE_NAC);
                     tr.MOD_DAT_GEN(AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, ES_SEXO, LI_GRUPO_SANGUINEO, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, ES_FACTOR_RH, idtr, US_MODIF, IP_USUARIO);
                     sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
                     if (edit.equals("ok")) {
@@ -438,16 +443,12 @@ public class CTrabajador extends HttpServlet {
                 if (opc.equals("Editar_Asp_Acad")) {
                     String idtr = request.getParameter("idtr");
                     String edit = request.getParameter("edit");
-                    boolean x = false;
                     List<Cuenta_Sueldo> li1 = tr.List_Cuenta_Sueldo(idtr);
-                    //while (x) {
                     if (!li1.isEmpty()) {
-                        x = false;
                         sesion.setAttribute("List_Cuenta_Sueldo", li1);
                     } else {
                         tr.INSERT_CUENTA_SUELDO(null, null, null, null, "0", null, idtr, "0");
                     }
-                    // }
                     if (li1.get(0).getEs_cuenta_sueldo().trim().equals("1")) {
                         edit = "ok";
                     }
@@ -474,7 +475,6 @@ public class CTrabajador extends HttpServlet {
                     String IP_USUARIO = tr.ip();
                     out.print("1");
                     tr.MOD_ASPEC_ACADEM(LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, CA_TIPO_HORA_PAGO_REFEERENCIAL, idtr, CO_UNIVERSITARIO, US_MODIF, IP_USUARIO);
-                    //  String editar = request.getParameter("editar");
                     //MODIFICAR CUENTA SUELDO
                     out.print("2");
                     String NO_BANCO = "";
@@ -484,19 +484,11 @@ public class CTrabajador extends HttpServlet {
                     String NO_BANCO_OTROS = "";
 
                     if (request.getParameter("BANCO") != null) {
-                        //if (editar.equals("ok")) {
                         NO_BANCO = (request.getParameter("BANCO") == null) ? "" : request.getParameter("BANCO");
                         NU_CUENTA = (request.getParameter("CUENTA") == null) ? "" : request.getParameter("CUENTA");
                         NU_CUENTA_BANC = (request.getParameter("CUENTA_BANC") == null) ? "" : request.getParameter("CUENTA_BANC");
                         ES_GEM_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : request.getParameter("GEN_NU_CUEN");
                         NO_BANCO_OTROS = (request.getParameter("BANCO_OTROS") == null) ? "" : request.getParameter("BANCO_OTROS");
-                        /*} else {
-                         NO_BANCO = request.getParameter("BANCO");
-                         NU_CUENTA = (request.getParameter("CUENTA") == null) ? " " : request.getParameter("CUENTA");
-                         NU_CUENTA_BANC = request.getParameter("CUENTA_BANC");
-                         ES_GEM_NU_CUENTA = (request.getParameter("GEN_NU_CUEN") == null) ? "0" : "1";
-                         NO_BANCO_OTROS = request.getParameter("BANCO_OTROS");
-                         }*/
                         String ES_CUENTA_SUELDO = request.getParameter("ES_CUENTA_SUELDO");
                         if (NO_BANCO.equals("")) {
                             ES_CUENTA_SUELDO = "0";
@@ -509,11 +501,7 @@ public class CTrabajador extends HttpServlet {
                     }
                     sesion.setAttribute("ListaridTrabajador", tr.ListaridTrabajador(idtr));
                     sesion.setAttribute("List_Cuenta_Sueldo", tr.List_Cuenta_Sueldo(idtr));
-                    /*  if (editar.equals("ok")) {
-                     response.sendRedirect("Vista/Trabajador/Aspecto_Academico.jsp?edit=" + editar + "&idtr=" + idtr);
-                     } else {*/
                     response.sendRedirect("Vista/Trabajador/Aspecto_Academico.jsp?idtr=" + idtr);
-                    //}
                 }
                 if (opc.equals("Listar_Asp_Social")) {
                     String idtr = request.getParameter("idtr");

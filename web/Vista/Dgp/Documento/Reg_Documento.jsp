@@ -29,6 +29,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+            <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
 
@@ -911,8 +912,8 @@
 
         <![endif]-->
 
-        <!-- Demo purpose only -->
-        <script src="../../../js/demo.min.js"></script>
+        <!-- Demo purpose only
+        <script src="../../../js/demo.min.js"></script> -->
 
         <!-- MAIN APP JS FILE -->
         <script src="../../../js/app.min.js"></script>
@@ -928,6 +929,8 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="../../../js/bootstrap/fileinput.js" type="text/javascript"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+         <script src="../../../js/bootstrap/es.js" type="text/javascript"></script>
+        
         <script src="../../../js/notification/SmartNotification.min.js"></script>
         <script type="text/javascript" src="../../../js/shadowbox/demo.js"></script>
         <script type="text/javascript" src="../../../js/shadowbox/shadowbox.js"></script>
@@ -1037,6 +1040,7 @@
 
 
                                                         $(".fileDocument").fileinput({
+                                                             language: "es",
                                                             showUpload: false,
                                                             layoutTemplates: {
                                                                 main1: "{preview}\n" +
@@ -1060,27 +1064,7 @@
                                                             }
                                                         });
 
-                                                        $("#file-3").fileinput({
-                                                            showUpload: false,
-                                                            showCaption: false,
-                                                            browseClass: "btn btn-primary btn-lg",
-                                                            fileType: "any"
-                                                        });
-                                                        $("#file-4").fileinput({
-                                                            uploadExtraData: [
-                                                                {kvId: '10'}
-                                                            ],
-                                                        });
-                                                        $(".btn-warning").on('click', function () {
-                                                            if ($('#file-4').attr('disabled')) {
-                                                                $('#file-4').fileinput('enable');
-                                                            } else {
-                                                                $('#file-4').fileinput('disable');
-                                                            }
-                                                        });
-                                                        $(".btn-info").on('click', function () {
-                                                            $('#file-4').fileinput('refresh', {previewClass: 'bg-info'});
-                                                        });
+                                                       
                                                         if ($(".fileDocument").length) {
                                                             $(".btn_reg_doc").show();
                                                         } else {
@@ -1106,11 +1090,7 @@
                                                             }
                                                         });
 
-                                                        $("#test-upload").fileinput({
-                                                            'showPreview': false,
-                                                            'allowedFileExtensions': ['jpg', 'png', 'gif'],
-                                                            'elErrorContainer': '#errorBlock'
-                                                        });
+                                                     
                                                     })
 
         </script>

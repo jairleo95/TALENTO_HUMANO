@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.util.DateFormat"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.google.gson.Gson"%>
@@ -8,14 +9,12 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="pe.edu.upeu.application.factory.FactoryConnectionDB"%>
 <%@page import="pe.edu.upeu.application.factory.ConexionBD"%>
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 
 <%
     response.setContentType("application/json");
     response.setCharacterEncoding("UTF-8");
 
     HttpSession sesion = request.getSession(true);
-    CConversion c = new CConversion();
     ConexionBD cnn;
     String Accion = request.getParameter("action");
 
@@ -31,8 +30,8 @@
         String proceso = request.getParameter("`proceso");
         String req = request.getParameter("motivo");
         String iduser = (String) sesion.getAttribute("IDUSUARIO");
-       String del = c.convertFecha(request.getParameter("del").trim());
-        String al =  c.convertFecha(request.getParameter("al").trim());
+       String del = DateFormat.toFormat1(request.getParameter("del").trim());
+        String al =  DateFormat.toFormat1(request.getParameter("al").trim());
         String order = request.getParameter("orderby");
         if (true) {
 

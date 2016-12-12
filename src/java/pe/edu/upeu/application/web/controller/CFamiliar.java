@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import pe.edu.upeu.application.util.DateFormat;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,7 +54,7 @@ public class CFamiliar extends HttpServlet {
         String user = (String) sesion.getAttribute("IDUSER");
 
         String opc = request.getParameter("opc");
-        CConversion c = new CConversion();
+        DateFormat c = new DateFormat();
 
         InterfaceDatos_Hijo_Trabajador h = new Datos_Hijo_TrabajadorDAO();
         InterfacePadre_Madre_ConyugueDAO pmc = new Padre_Madre_ConyugueDAO();
@@ -124,7 +125,8 @@ public class CFamiliar extends HttpServlet {
                 String IP_USUARIO = null;
                 String ES_DATOS_HIJO_TRABAJADOR = "1";
 
-                h.INSERT_DATOS_HIJO_TRABAJADOR(ID_DATOS_HIJOS_TRABAJADOR, ID_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO, ES_TIPO_DOC, NU_DOC, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, user, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR);
+                h.INSERT_DATOS_HIJO_TRABAJADOR(ID_DATOS_HIJOS_TRABAJADOR, ID_TRABAJADOR, AP_PATERNO, AP_MATERNO, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO, ES_TIPO_DOC, NU_DOC, 
+                        ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, user, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR);
                sesion.setAttribute("LISTA_HIJO", h.LISTA_HIJOS(ID_TRABAJADOR));
                 response.sendRedirect("Vista/Trabajador/Familiar/Reg_Datos_Hijo.jsp?idtr=" + idtr);
             }
@@ -195,7 +197,7 @@ public class CFamiliar extends HttpServlet {
                     String ES_TRABAJA_UPEU_CONYUGUE = request.getParameter("TRABAJA_UPEU_CONYUGUE");
                     String AP_NOMBRES_CONYUGUE = request.getParameter("APELLIDO_NOMBRES_CONYUGUE");
 
-                    String FE_NAC_CONYUGUE = c.convertFecha(request.getParameter("FECHA_NAC_CONYUGUE"));
+                    String FE_NAC_CONYUGUE = DateFormat.toFormat1(request.getParameter("FECHA_NAC_CONYUGUE"));
                     String TI_DOC_ID = request.getParameter("TIPO_DOC_ID");
                     String NU_DOC = request.getParameter("NRO_DOC");
                     String LI_INSCRIPCION_VIG_ESSALUD = request.getParameter("INSCRIPCION_VIG_ESSALUD");

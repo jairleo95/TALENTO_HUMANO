@@ -99,11 +99,6 @@ function listar_autorizados(mes, anno) {
         }
         var count = 0;
         for (var i = 0; i < lista.length; i++) {
-            /* if ((i + 1) < lista.length) {
-             if (lista[i].id_dgp == lista[i + 1].id_dgp) {
-             i++;
-             }
-             }*/
             count++;
             text_html += "<tr>";
             text_html += "<td>" + (count) + "</td>";
@@ -147,7 +142,7 @@ function loadDatatableCargaAcademica() {
                 $(".tableAutCargaAcademica").DataTable({
                     "initComplete": function (settings, json) {
                         var api = this.api();
-                        console.log(" filas:"+api.rows().length);
+                        console.log(" filas:" + api.rows().length);
                         $(".badgeAutCAcademico").text(api.rows().length).show();
                     }
                 });
@@ -186,11 +181,11 @@ function statusFirmaAndRem() {
 
 function nobackbutton() {
     window.location.hash = "no-back-button";
-    window.location.hash = "Again-No-back-button" //chrome
+    window.location.hash = "Again-No-back-button"; //chrome
 
     window.onhashchange = function () {
         window.location.hash = "";
-    }
+    };
 }
 function exito(titulo, mensaje) {
     $.smallBox({
@@ -283,18 +278,25 @@ function procesarSendToRemu(callback) {
     } else {
     }
 }
-function registerAndProcessCodHuella(inputItem, dataEmail, dataProcess) {
-
-    console.log("::enter to registerAndProcessCodHuella function");
+function loadFormSendEmail(emails) {
+    console.log("enter to function loadFormSendEmail");
+    $('.sendEmailsModal').modal({keyboard: false, backdrop: 'static'});
+    $('.sendEmailsModal').modal('show');
+    $(".emailInput").tagsinput({
+        confirmKeys: [13, 44],
+        freeInput: true
+    });
+    $('.emailInput').tagsinput('add', emails);
+}
+function registerAndProcessCodHuella(inputItem, emails, dataProcess) {
+    console.log("enter to function registerAndProcessCodHuella");
     if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
         registerCOdHuella(inputItem, function () {
             processAutorizacionMasive(dataProcess, function () {
                 $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-                sendEmail(dataEmail, function () {
-                    var table = new $.fn.dataTable.Api('#dt_basic1');
-                    table.row(inputItem.parents('tr')).remove().draw();
-                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-                });
+                loadFormSendEmail(emails);
+                var table = new $.fn.dataTable.Api('#dt_basic1');
+                table.row(inputItem.parents('tr')).remove().draw();
             });
         });
     }
@@ -333,15 +335,16 @@ function processAutorizacionMasive(values, callback) {
         }
     });
 }
-
-function sendEmail(dataRequest, callback) {
+function sendEmail(dataURL, callback) {
     console.log("::enter to sendEmail function");
+    // loadFormSendEmail(emailsConcat);
     statusBarAut.text("Enviando correos...");
+    /*open modal*/
     $.ajax({
         //  async: false,
         url: "../../autorizacion",
         type: "POST", success: function (data, textStatus, jqXHR) {
-            if (data.rpta) {
+            if (data.status) {
                 statusBarAut.text("Correos enviados!").fadeOut('slow');
                 //  console.log(table.row(inputItem.parent('tr')).data());
                 $.bigBox({
@@ -355,19 +358,59 @@ function sendEmail(dataRequest, callback) {
                 if (typeof callback !== 'undefined') {
                     callback(data);
                 }
+            } else if (!data.status) {
+                statusBarAut.text("Ha ocurrido un error en el envio de correos.");
+                $.bigBox({
+                    title: "Ha ocurrido un error en el envio de correos.",
+                    content: "<i class='fa fa-clock-o'></i> <i>" + data.mensaje + "</i>",
+                    color: "#953b39",
+                    icon: "fa fa-check shake animated"
+                            //,number: "1"
+                            //,timeout: 6000
+                });
+                if (typeof callback !== 'undefined') {
+                    callback(data);
+                }
             }
         },
-        data: dataRequest
+        data: "opc=Enviar_Correo" + dataURL
     });
 }
-
 $(document).ready(function () {
-
     statusBtnSendToRem();
     statusBtnSendFirma();
     statusFirmaAndRem();
     loadDatatableCargaAcademica();
     pageSetUp();
+    //runAllForms();
+    $(".inputFileEmail").fileinput({
+        language: "es",
+        layoutTemplates: {
+            main1: "{preview}\n" +
+                    "<div class=\'input-group {class}\'>\n" +
+                    "   <div class=\'input-group-btn\' >\n" +
+                    "       {browse}\n" +
+                    "       {upload}\n" +
+                    "       {remove}\n" +
+                    "   </div>\n" +
+                    "   {caption}\n" +
+                    "</div>"},
+        allowedFileExtensions: ['jpg', 'png', 'gif', 'pdf', 'docx', 'doc', 'txt'],
+        maxFileSize: 500,
+        maxFilesNum: 10,
+        browseClass: "btn btn-primary btn-sm",
+        removeClass: "btn btn-danger btn-sm"
+    });
+    $('.inputFileEmail').change(function () {
+        console.log(this.files[0].mozFullPath);
+    });
+    $('.emailbody').summernote({
+        height: 350,
+        focus: false,
+        tabsize: 2
+    });
+
+
     $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
         $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
     });
@@ -377,6 +420,10 @@ $(document).ready(function () {
     $(".inp_cod_huella").keypress(function (event) {
         return /\d/.test(String.fromCharCode(event.keyCode));
     });
+    $(".btnHorario").click(function () {
+        listHorario($(this).data("valor"));
+    });
+
     listar_autorizados(mes, anno);
     /* BASIC ;*/
     var responsiveHelper_dt_basic = undefined;
@@ -384,6 +431,23 @@ $(document).ready(function () {
         tablet: 1024,
         phone: 480
     };
+    $('.btnSendEmail').button({
+        loadingText: 'Enviando...'
+    }
+
+    );
+    $(".btnSendEmail").click(function () {
+        var $btn = $(this);
+        $btn.button('loading');
+        var emailInput = $(".emailInput").val();
+        var asunto = $(".asunto").val();
+        var messageEmail = $(".messageEmail").val();
+        sendEmail("&to=" + emailInput + "&from=jairleo95@gmail.com&asunto=" + asunto + "&cuerpo=" + messageEmail, function () {
+            $btn.button('reset');
+        });
+
+
+    });
     $('#dt_basic1').dataTable({
         "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
                 "t" +
@@ -465,14 +529,17 @@ $(document).ready(function () {
             if (ButtonPressed === "Si") {
 
                 var lenghtDatatable = $('#dt_basic1 tr').length;
-                for (var r = 1; r <= lenghtDatatable; r++) {
-                    console.log("(" + r + ")Iterate items cod aps:" + $(".cod_aps" + r).val());
-                    if ($(".cod_aps" + r).val() !== "" & typeof $(".cod_aps" + r).val() !== 'undefined') {
-                        console.log(r + "codigo aps: " + $(".cod_aps" + r).val());
+                console.log("total:" + lenghtDatatable);
+
+                $.each($(".inp_cod_aps"), function (index) {
+                    var itemCodAps = $(this);
+                    var valAut = itemCodAps.parents('tr').find(".valAut");
+                    if (itemCodAps.val() !== "" & typeof itemCodAps.val() !== 'undefined') {
+                        console.log(index + "codigo aps: " + itemCodAps.val());
                         $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
                         $.ajax({
                             async: false,
-                            url: "../../trabajador", data: "opc=reg_aps_masivo&cod=" + $(".cod_aps" + r).val() + "&idtr=" + $(".idtr" + r).val(),
+                            url: "../../trabajador", data: "opc=reg_aps_masivo&cod=" + itemCodAps.val() + "&idtr=" + itemCodAps.parents("tr").find(".idTrabajador").val(),
                             type: "POST", success: function (objJson, textStatus, jqXHR) {
                                 if (objJson.rpta) {
                                     $.ajax({
@@ -481,22 +548,19 @@ $(document).ready(function () {
                                         type: "POST", success: function (objJson, textStatus, jqXHR) {
                                             if (objJson.rpta) {
                                                 var table = new $.fn.dataTable.Api('#dt_basic1');
-                                                table.row($(".cod_aps" + r).parents('tr')).remove().draw();
+                                                table.row(itemCodAps.parents('tr')).remove().draw();
                                                 exito("Procesado con exito!", "Codigo APS ingresado correctamente");
                                                 console.log("autorizado!");
                                                 $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                                             }
                                         },
-                                        data: "opc=Aceptar" + $(".val_aut" + r).val()
+                                        data: "opc=Aceptar" + valAut.val()
                                     });
                                 }
-
                             }
-
                         });
-
                     }
-                }
+                });
             }
             if (ButtonPressed === "No") {
             }
@@ -514,7 +578,7 @@ $(document).ready(function () {
                     var objInputHuella = $(this);
                     var valAut = objInputHuella.parents('tr').find(".valAut");
                     var correoTrabajador = objInputHuella.parents('tr').find(".correoTrabajador");
-                    registerAndProcessCodHuella(objInputHuella, "opc=Enviar_Correo" + correoTrabajador.val(), valAut.val());
+                    registerAndProcessCodHuella(objInputHuella, correoTrabajador.val(), valAut.val());
                 });
 
                 $.each($(".cbHuellaItem"), function (index) {
@@ -525,12 +589,9 @@ $(document).ready(function () {
                             var itemValue = itemRegistered.parents('tr').find(".valAut");
                             var correoTrabajador = itemRegistered.parents('tr').find(".correoTrabajador");
                             processAutorizacionMasive(itemValue.val(), function () {
-                                $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
-                                sendEmail("opc=Enviar_Correo" + correoTrabajador.val(), function () {
-                                    $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
-                                    var table = new $.fn.dataTable.Api('#dt_basic1');
-                                    table.row(itemRegistered.parents('tr')).remove().draw();
-                                });
+                                //$(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+                                loadFormSendEmail(correoTrabajador.val());
+
                             });
                         }
                     }

@@ -5,6 +5,7 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import pe.edu.upeu.application.util.CCriptografiar;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -514,30 +515,24 @@ public class CAutorizacion extends HttpServlet {
                     }
                     if (opc.equals("Enviar_Correo")) {
                         String to = request.getParameter("to");
-                        //  String from = request.getParameter("from");
+                        String from = request.getParameter("from");
                         String asunto = request.getParameter("asunto");
                         String cuerpo = request.getParameter("cuerpo");
-
-                        String correo_inst = request.getParameter("co_inst");
-                        String correo_personal = request.getParameter("co_pers");
-                        //correo.Enviar(to, from, asunto, cuerpo);
+                        String[] emails = to.split(",");
+                        for (String email : emails) {
+                            System.out.println("email:"+email);
+                         correo.Enviar(to, from, asunto, cuerpo);
+                        }
                         System.out.print("Ejecutando envio de correos");
-                        correo.Enviar("jairleo95@gmail.com", "jairleo95@gmail.com", "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"
+                        /*correo.Enviar("jairleo95@gmail.com", "jairleo95@gmail.com", "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"
                                 + "Compartimos la siguiente información\n \n"
                                 + "- Bienestar para el trabajador\n"
                                 + "- Reglamento de Control de Asistencia\n"
                                 + "- Reglamento de trabajo\n"
                                 + "- Boletín Informativo - sistema pensionario\n \n"
-                                + "Saludos Cordiales");
-                        correo.Enviar("jairleo95@gmail.com", "jairleo95@gmail.com", "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"
-                                + "Compartimos la siguiente información\n \n"
-                                + "- Bienestar para el trabajador\n"
-                                + "- Reglamento de Control de Asistencia\n"
-                                + "- Reglamento de trabajo\n"
-                                + "- Boletín Informativo - sistema pensionario\n \n"
-                                + "Saludos Cordiales");
-                        rpta.put("sendto", correo_inst + ", " + correo_personal);
-                        rpta.put("rpta", true);
+                                + "Saludos Cordiales");*/
+                        rpta.put("sendto", emails);
+                        rpta.put("status", true);
 
                     }
                     if (opc.equals("List_Dgp_Aut")) {
@@ -709,6 +704,7 @@ public class CAutorizacion extends HttpServlet {
                 }
             } catch (Exception ex) {
                 rpta.put("rpta", "-1");
+                rpta.put("status", false);
                 rpta.put("mensaje", ex.getMessage());
             } finally {
                 Gson gson = new Gson();

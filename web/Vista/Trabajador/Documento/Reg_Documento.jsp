@@ -34,6 +34,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+            <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
 
@@ -842,19 +843,19 @@
 
         <!--================================================== -->
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <script>
-                                                    if (!window.jQuery) {
-                                                        document.write('<script src="../../../js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                    }
-        </script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+                            if (!window.jQuery) {
+                                document.write('<script src="../../../js/libs/jquery-2.1.1.min.js"><\/script>');
+                            }
+    </script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-        <script>
-                                                    if (!window.jQuery.ui) {
-                                                        document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                    }
-        </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>
+                            if (!window.jQuery.ui) {
+                                document.write('<script src="../../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                            }
+    </script>
 
         <!-- IMPORTANT: APP CONFIG -->
 <!--        <script src="../../../js/app.config.js"></script>  -->
@@ -915,12 +916,14 @@
         <!-- 
         -->
 
-<script src="../../../js/plugin/dropzone/dropzone.min.js" type="text/javascript"></script>
-<script src="../../../js/plugin/dropzone/dropzone-amd-module.min.js" type="text/javascript"></script>
+        <script src="../../../js/plugin/dropzone/dropzone.min.js" type="text/javascript"></script>
+        <script src="../../../js/plugin/dropzone/dropzone-amd-module.min.js" type="text/javascript"></script>
         <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="../../../js/bootstrap/fileinput.js" type="text/javascript"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+         <script src="../../../js/bootstrap/es.js" type="text/javascript"></script>
+        
         <script src="../../../js/notification/SmartNotification.min.js"></script>
         <script type="text/javascript" src="../../../js/shadowbox/demo.js"></script>
         <script type="text/javascript" src="../../../js/shadowbox/shadowbox.js"></script>
@@ -1006,7 +1009,7 @@ function goBack() {
 
             $(document).ready(function () {
 
-                pageSetUp();
+              
                 $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                     $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                 });
@@ -1019,6 +1022,7 @@ function goBack() {
                 });
 
                 $(".fileDocument").fileinput({
+                     language: "es",
                     showUpload: false,
                     layoutTemplates: {
                         main1: "{preview}\n" +
@@ -1044,37 +1048,22 @@ function goBack() {
 
 
 
-                $("#file-3").fileinput({
-                    showUpload: false,
-                    showCaption: false,
-                    browseClass: "btn btn-primary btn-lg",
-                    fileType: "any"
-                });
-                $("#file-4").fileinput({
-                    uploadExtraData: [
-                        {kvId: '10'}
-                    ],
-                });
-                $(".btn-warning").on('click', function () {
-                    if ($('#file-4').attr('disabled')) {
-                        $('#file-4').fileinput('enable');
-                    } else {
-                        $('#file-4').fileinput('disable');
-                    }
-                });
-                $(".btn-info").on('click', function () {
-                    $('#file-4').fileinput('refresh', {previewClass: 'bg-info'});
-                });
-                $.each($(".fileDocument"), function (i) {
+                  if ($(".fileDocument").length) {
+                                                            $(".btn_reg_doc").show();
+                                                        } else {
+                                                            $(".btn_reg_doc").hide();
+                                                            $(".btn_continuar_det").show();
+                                                        }
+                /*$.each($(".fileDocument"), function (i) {
 
                     if ((i + 1) == 0) {
                         $(".btn_reg_doc").hide();
-                        alert();
+                        
                     } else {
                         $(".btn_reg_doc").show();
                     }
 
-                });
+                });*/
                 $(".DD").change(function () {
                     $(".div-holi").text($(".DD").val());
                 });
@@ -1087,7 +1076,7 @@ function goBack() {
                     }
                 });
             });
-
+  pageSetUp();
 
         </script>
 

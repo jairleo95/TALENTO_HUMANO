@@ -1,4 +1,4 @@
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
+<%@page import="pe.edu.upeu.application.util.DateFormat"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -24,6 +24,7 @@
                             <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
                                 <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+                                    <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
                                 <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
                                     <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
@@ -134,7 +135,7 @@
                                                                                                                                         </tr>
                                                                                                                                     </thead>
                                                                                                                                     <tbody>
-                                                                                                                                        <%      CConversion c = new CConversion();
+                                                                                                                                        <%    
                                                                                                                                             for (int i = 0; i < List_Empleado.size(); i++) {
                                                                                                                                                 V_List_Empleado e = new V_List_Empleado();
                                                                                                                                                 e = (V_List_Empleado) List_Empleado.get(i);
@@ -152,9 +153,9 @@
                                                                                                                                                         <td><%=e.getNo_area()%></td>
                                                                                                                                                         <td><%=e.getNo_seccion()%></td>
                                                                                                                                                         <td><%=e.getNo_puesto()%></td>
-                                                                                                                                                        <td><%=c.convertFecha5(e.getFe_desde())%></td>
+                                                                                                                                                        <td><%=DateFormat.toFormat5(e.getFe_desde())%></td>
                                                                                                                                                         <%if (e.getFe_hasta() != null) {%>
-                                                                                                                                                        <td><%=c.convertFecha5(e.getFe_hasta())%></td>
+                                                                                                                                                        <td><%=DateFormat.toFormat5(e.getFe_hasta())%></td>
                                                                                                                                                         <%} else {%>
                                                                                                                                                         <td>Indeterminado</td>
                                                                                                                                                         <%}%>
@@ -197,8 +198,8 @@
 
                                                                                                                                                         <!--================================================== -->
 
-                                                                                                                                                        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-                                                                                                                                                        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+                                                                                                                                                        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+                                                                                                                                                        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>-->
 
                                                                                                                                                         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
                                                                                                                                                         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>

@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.model.Direccion"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
@@ -19,6 +20,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+            <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
 
@@ -298,7 +300,8 @@
                                                                 <tr><td><code>[hasta]</code></td><td>Fecha de Fin del contrato</td></tr>
                                                                 <tr><td><code>[puesto]</code></td><td>Puesto que va a desempeñar</td></tr>
                                                                 <tr><td><code>[fe_suscripcion]</code></td><td>Fecha de suscripcion</td></tr>
-                                                                <tr><td><code>[sueldo]</code></td><td>Sueldo del trabajador</td></tr>
+                                                                <tr><td><code>[sueldo]</code></td><td>Sueldo básico del trabajador</td></tr>
+                                                                <tr><td><code>[sueldo_total]</code></td><td>Sueldo total del trabajador</td></tr>
                                                                 <tr><td><code>[horas]</code></td><td>Horas de trabajo semanales</td></tr>
                                                                 <tr><td><code>[cursos]</code></td><td>Cuesos que va enseñar (en el caso que sea docente)</td></tr>
                                                                 <tr><td><code>[funciones_pr]</code></td><td>Funciones primarias que va a desempeñar en el puesto</td></tr>
@@ -485,7 +488,7 @@
 
 <!-- PAGE RELATED PLUGIN(S) -->
 <script src="../../../js/plugin/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="../../../js/Js_Contrato/formato_plantilla/formato-plantilla-api.js"></script>
+<script type="text/javascript" src="../../../js/Js_Contrato/formato_plantilla/formato-plantilla-api.js?v=<%=globalProperties.VERSION_JS%>"></script>
 </html>
 
 <%} else {

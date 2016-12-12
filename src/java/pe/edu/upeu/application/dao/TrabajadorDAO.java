@@ -26,7 +26,7 @@ import pe.edu.upeu.application.model.Trabajador;
 import pe.edu.upeu.application.model.Universidad_Carrera;
 import pe.edu.upeu.application.model.V_Ficha_Trab_Num_C;
 import pe.edu.upeu.application.model.X_List_dat_tr_plantilla;
-import pe.edu.upeu.application.web.controller.CConversion;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -34,7 +34,7 @@ import pe.edu.upeu.application.web.controller.CConversion;
  */
 public class TrabajadorDAO implements InterfaceTrabajadorDAO {
 
-    CConversion c = new CConversion();
+    DateFormat c = new DateFormat();
     ConexionBD conn;
 
     @Override
@@ -62,7 +62,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(5, TI_DOC);
             cst.setString(6, NU_DOC);
             cst.setString(7, ES_CIVIL);
-            cst.setString(8, c.convertFecha(FE_NAC));
+            cst.setString(8, DateFormat.toFormat1(FE_NAC));
             cst.setString(9, ID_NACIONALIDAD);
             cst.setString(10, ID_DEPARTAMENTO);
             cst.setString(11, ID_PROVINCIA);
@@ -121,7 +121,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(64, ES_TRABAJA_UPEU_C);
             cst.setString(65, AP_NOMBRES_C);
             if (FE_NAC_C != null) {
-                cst.setString(66, c.convertFecha(FE_NAC_C));
+                cst.setString(66, DateFormat.toFormat1(FE_NAC_C));
             } else {
                 cst.setString(66, FE_NAC_C);
             }
@@ -745,7 +745,7 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
             cst.setString(4, TI_DOC);
             cst.setString(5, NU_DOC);
             cst.setString(6, ES_CIVIL);
-            cst.setString(7, c.convertFecha(FE_NAC));
+            cst.setString(7, DateFormat.toFormat1(FE_NAC));
             cst.setString(8, ID_NACIONALIDAD);
             cst.setString(9, ID_DEPARTAMENTO);
             cst.setString(10, ID_PROVINCIA);
@@ -1090,20 +1090,61 @@ public class TrabajadorDAO implements InterfaceTrabajadorDAO {
         int acum = 0;
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM rhtm_trabajador where id_trabajador ='" + idtr + "' ";
-            ResultSet rs = this.conn.query(sql);
-            if (rs.next()) {
-                Map<String, Object> rec = new HashMap<String, Object>();
-                for (int i = 1; i < 75; i++) {
-                    if (rs.getString(i) == null) {
+            String sql = "SELECT  AP_PATERNO,"
+                    + "  AP_MATERNO,"
+                    + "  NO_TRABAJADOR,"
+                    + "  TI_DOC,"
+                    + "  NU_DOC,"
+                    + "  ES_CIVIL,"
+                    + "  FE_NAC,"
+                    + "  ID_NACIONALIDAD,"
+                    + "  ID_DISTRITO,"
+                    + "  TE_TRABAJADOR,"
+                    + "  CL_TRA,"
+                    + "  DI_CORREO_PERSONAL,"
+                    + "  DI_CORREO_INST,"
+                    + "  CO_SISTEMA_PENSIONARIO,"
+                    + "  ID_SITUACION_EDUCATIVA,"
+                    + "  ES_SEXO,"
+                    + "  LI_GRUPO_SANGUINEO,"
+                    + "  LI_RELIGION,"
+                    + "  NO_IGLESIA,"
+                    + "  ID_NO_AFP,"
+                    + "  ES_AFILIADO_ESSALUD,"
+                    + "  LI_TIPO_TRABAJADOR,"
+                    + "  LI_DI_DOM_A_D1,"
+                    + "  DI_DOM_A_D2,"
+                    + "  LI_DI_DOM_A_D3,"
+                    + "  DI_DOM_A_D4,"
+                    + "  LI_DI_DOM_A_D5,"
+                    + "  DI_DOM_A_D6,"
+                    + "  DI_DOM_A_REF,"
+                    + "  ID_DI_DOM_A_DISTRITO,"
+                    + "  LI_DI_DOM_LEG_D1,"
+                    + "  DI_DOM_LEG_D2,"
+                    + "  LI_DI_DOM_LEG_D3,"
+                    + "  DI_DOM_LEG_D4,"
+                    + "  LI_DI_DOM_LEG_D5,"
+                    + "  DI_DOM_LEG_D6,"
+                    + "  ID_DI_DOM_LEG_DISTRITO,"
+                    + "  US_CREACION,"
+                    + "  FE_CREACION,"
+                    + "  IP_USUARIO FROM rhtm_trabajador where id_trabajador ='" + idtr + "' ";
+            try (ResultSet rs = this.conn.query(sql)) {
+                if (rs.next()) {
+                    //  Map<String, Object> rec = new HashMap<String, Object>();
+                    for (int i = 1; i < 40; i++) {
+                        if (rs.getString(i) == null) {
 
-                    } else {
-                        acum++;
+                        } else {
+                            acum++;
+                        }
                     }
+                    System.out.println("acum:"+acum);
+                    porcentaje = (int) ((acum / 40.0) * 100);
+                             System.out.println("porcentage:"+porcentaje);
                 }
-                porcentaje = (int) ((acum / 75.0) * 100);
             }
-            rs.close();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {

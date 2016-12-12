@@ -19,6 +19,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
 
@@ -198,7 +199,7 @@
                             <small>Validar la Foto  ? </small>
                             <form>
                                 <input class="id-tr" type="hidden" >
-                                <input name=""type="hidden" value="">
+                                <input type="hidden" value="">
 
                                 <button class="acep btn btn-success btn-md"><samp class="fa fa-check"></samp> Aceptar</button>
                                 <button class="recha btn btn-danger btn-md"><samp class="fa fa-ban"></samp> Rechazar</button>
@@ -219,7 +220,6 @@
     <!--================================================== -->
 
     <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
 
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -281,8 +281,8 @@
     
     <![endif]-->
 
-    <!-- Demo purpose only -->
-    <script src="../../../js/demo.min.js"></script>
+    <!-- Demo purpose only 
+    <script src="../../../js/demo.min.js"></script>-->
 
     <!-- MAIN APP JS FILE -->
     <script src="../../../js/app.min.js"></script>
@@ -301,8 +301,6 @@
     <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
     <script type="text/javascript">
         var term;
-
-
         $(document).ready(function () {
             DataT("0", "#example-table");
             DataT("2", "#example-table2");
@@ -323,7 +321,7 @@
                     {"data": "AP_PATERNO"},
                     {"data": "AP_MATERNO"},
                     {"data": "NO_TRABAJADOR"}
-              ],
+                ],
                 "createdRow": function (row, data, index) {
                     $(row).append('<td><img class="pre-img" src="../../../Archivo/Fotos/' + data.AR_FOTO + '" /></td>');
                     if (data.EFOTO == "1") {

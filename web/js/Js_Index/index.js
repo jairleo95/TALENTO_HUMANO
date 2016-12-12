@@ -10,14 +10,28 @@ function validarLogin() {
         data: formLogin.serialize(),
         success: function (objJson) {
             if (objJson.status) {
-                 console.log(objJson);
-                document.location = 'menu';
+                if (objJson.rpta) {
+                    console.log(objJson);
+                    document.location = 'menu';
+                } else {
+                    txtStatus.text(objJson.message);
+                    $(".box_cargando").show();
+                    $(".txtClave").removeClass("ui-autocomplete-loading");
+                    $(".btnIngresar").show();
+                }
+
             } else {
                 txtStatus.text(objJson.message);
                 $(".box_cargando").show();
                 $(".txtClave").removeClass("ui-autocomplete-loading");
                 $(".btnIngresar").show();
             }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            txtStatus.text(xhr.status + " : " + thrownError);
+            $(".box_cargando").show();
+            $(".txtClave").removeClass("ui-autocomplete-loading");
+            $(".btnIngresar").show();
         }
     });
 }
@@ -49,11 +63,11 @@ $(document).ready(function () {
     var formLogin = $(".formLogin");
     formLogin[0].reset();
     pageSetUp();
-   // validateSession();
+    // validateSession();
     $('input').keypress(function (e) {
         if (e.which == 13) {
             formLogin.submit();
-            return false;   
+            return false;
         }
     });
     $('.txtClave').focus(function () {

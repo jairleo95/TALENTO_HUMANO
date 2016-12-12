@@ -3,9 +3,7 @@
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
 %>
-<%@page import="pe.edu.upeu.application.web.controller.CConversion"%>
 <%@page import="pe.edu.upeu.application.model.Datos_Hijo_Trabajador"%>
-
 <jsp:useBean id="Lista_hijo_individual" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_tipo_doc" scope="session" class="java.util.ArrayList"/>
 
@@ -13,11 +11,9 @@
 <html>
     <head>
         <meta charset="windows-1252">
-        <title></title>
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title>Registrar Trabajador</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -28,6 +24,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+            <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
 
@@ -362,8 +359,8 @@
 
 
 
-                    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-                    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>
+                    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+                    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../../js/plugin/pace/pace.min.js"></script>-->
 
                     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
                     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>

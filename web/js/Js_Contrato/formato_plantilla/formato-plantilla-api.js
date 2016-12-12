@@ -527,12 +527,12 @@ $(document).ready(function () {
     $(".fil").change(function () {
         var c = $(".dir");
         list_dir_fil(c, $(this));
-        alert($(this));
+      //  alert($(this));
     });
     $(".fil_as").change(function () {
         var c = $(".dir_as");
         list_dir_fil(c, $(this), true);
-        alert($(this));
+       // alert($(this));
     });
     $("#dir").change(function () {
         var d = $(".dep");

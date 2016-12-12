@@ -4,24 +4,24 @@
  * and open the template in the editor.
  */
 
-  function closedthis() {
-            $.smallBox({
-                title: "¡Ficha de trabajador registrada correctamente!",
-                content: "ya puede visualizar toda la informacion del trabajador...",
-                color: "#739E73",
-                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                timeout: 6000
-            });
-        }
-        function closedthis2() {
-            $.smallBox({
-                title: "¡Contrato Especial registrado con exito!",
-                content: "ya puede visualizar el contrato en Detalle del Trabajador",
-                color: "#739E73",
-                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                timeout: 6000
-            });
-        }
+function closedthis() {
+    $.smallBox({
+        title: "¡Ficha de trabajador registrada correctamente!",
+        content: "ya puede visualizar toda la informacion del trabajador...",
+        color: "#739E73",
+        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+        timeout: 6000
+    });
+}
+function closedthis2() {
+    $.smallBox({
+        title: "¡Contrato Especial registrado con exito!",
+        content: "ya puede visualizar el contrato en Detalle del Trabajador",
+        color: "#739E73",
+        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+        timeout: 6000
+    });
+}
 
 function showEsDiezmo() {
     var obj = $(".div_input_diezmo");
@@ -126,100 +126,124 @@ function Listar_Cod_APS() {
         }
     });
 }
- function Actualizar_Cod_Huella() {
-            var co_huella = $(".textCodHuella").val();
-            if (co_huella !== "") {
+function Actualizar_Cod_Huella() {
+    var co_huella = $(".textCodHuella").val();
+    if (co_huella !== "") {
+        $.ajax({
+            url: "../../empleado",
+            type: "POST",
+            data: "opc=validar_huella&co_hue=" + co_huella
+        }).done(function (e) {
+            if (e.huella == 0) {
                 $.ajax({
-                    url: "../../empleado",
-                    type: "POST",
-                    data: "opc=validar_huella&co_hue=" + co_huella
-                }).done(function (e) {
-                    if (e.huella == 0) {
-                        $.ajax({
-                            url: "../../empleado", data: "opc=reg_huella&idtr=" + $(".idtr").val() + "&cod=" + co_huella, type: 'POST', success: function (data, textStatus, jqXHR) {
-                                if (data.rpta === "1") {
-                                    // Listar_Cod_Huella();
-                                    /*validar los botones de autorizar req*/                                     ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
-                                    $.smallBox({
-                                        title: "Se ha actualizado exitosamente el codigo de huella...",
-                                        content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-                                        color: "#296191", iconSmall: "fa fa-thumbs-up bounce animated", timeout: 4000
-                                    });
+                    url: "../../empleado", data: "opc=reg_huella&idtr=" + $(".idtr").val() + "&cod=" + co_huella, type: 'POST', success: function (data, textStatus, jqXHR) {
+                        if (data.rpta === "1") {
+                            // Listar_Cod_Huella();
+                            /*validar los botones de autorizar req*/                                     ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
+                            $.smallBox({
+                                title: "Se ha actualizado exitosamente el codigo de huella...",
+                                content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+                                color: "#296191", iconSmall: "fa fa-thumbs-up bounce animated", timeout: 4000
+                            });
 
-                                } else {
-                                    $.smallBox({
-                                        title: "¡Alerta!",
-                                        content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar los datos...</i>",
-                                        color: "#C46A69",
-                                        iconSmall: "fa fa-cloud bounce animated",
-                                        timeout: 7000
-                                    });
-                                }
-                            }
-                        });
+                        } else {
+                            $.smallBox({
+                                title: "¡Alerta!",
+                                content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar los datos...</i>",
+                                color: "#C46A69",
+                                iconSmall: "fa fa-cloud bounce animated",
+                                timeout: 7000
+                            });
+                        }
                     }
-                    else {
-                        $.SmartMessageBox({
-                            title: "¡Este Código de Huella ya fue registrado!",
-                            content: "Por favor Ingrese un Código de Huella distinto"
-                        });
-                    }
-
+                });
+            } else {
+                $.SmartMessageBox({
+                    title: "¡Este Código de Huella ya fue registrado!",
+                    content: "Por favor Ingrese un Código de Huella distinto"
                 });
             }
-        }
-        function Actualizar_Cod_APS() {
-            var co_aps = $(".txtCodigoAPS").val();
-            if (co_aps !== "") {
+
+        });
+    }
+}
+function Actualizar_Cod_APS() {
+    var co_aps = $(".txtCodigoAPS").val();
+    if (co_aps !== "") {
+        $.ajax({
+            url: "../../empleado",
+            type: "POST",
+            data: "opc=validar_aps&co_aps=" + co_aps
+        }).done(function (e) {
+            if (e.aps === 0) {
                 $.ajax({
-                    url: "../../empleado",
-                    type: "POST",
-                    data: "opc=validar_aps&co_aps=" + co_aps
-                }).done(function (e) {
-                    if (e.aps === 0) {
-                        $.ajax({
-                            url: "../../empleado", data: "opc=reg_aps&idtr=" + $(".idtr").val() + "&cod=" + co_aps, type: 'POST', success: function (data, textStatus, jqXHR) {
-                                if (data.rpta === "1") {
-                                    // Listar_Cod_Huella();
-                                    /*validar los botones de autorizar req*/
-                                    ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
-                                    $.smallBox({
-                                        title: "Se ha actualizado exitosamente el codigo APS...",
-                                        content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-                                        color: "#296191",
-                                        iconSmall: "fa fa-thumbs-up bounce animated",
-                                        timeout: 4000
-                                    });
+                    url: "../../empleado", data: "opc=reg_aps&idtr=" + $(".idtr").val() + "&cod=" + co_aps, type: 'POST', success: function (data, textStatus, jqXHR) {
+                        if (data.rpta === "1") {
+                            // Listar_Cod_Huella();
+                            /*validar los botones de autorizar req*/
+                            ValBtnAutorizarDgp($(".idtr").val(), $(".validacionBtnAutorizar"));
+                            $.smallBox({
+                                title: "Se ha actualizado exitosamente el codigo APS...",
+                                content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+                                color: "#296191",
+                                iconSmall: "fa fa-thumbs-up bounce animated",
+                                timeout: 4000
+                            });
 
-                                } else {
-                                    $.smallBox({
-                                        title: "¡Alerta!",
-                                        content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar los datos...</i>",
-                                        color: "#C46A69",
-                                        iconSmall: "fa fa-cloud bounce animated",
-                                        timeout: 7000
-                                    });
-                                }
-                            }
-                        });
+                        } else {
+                            $.smallBox({
+                                title: "¡Alerta!",
+                                content: "<i class='fa fa-clock-o'></i> <i>Ha ocurrido un error al procesar los datos...</i>",
+                                color: "#C46A69",
+                                iconSmall: "fa fa-cloud bounce animated",
+                                timeout: 7000
+                            });
+                        }
                     }
-                    else {
-                        $.SmartMessageBox({
-                            title: "¡Este Código APS ya fue registrado!",
-                            content: "Por favor Ingrese un Código APS distinto"});
-                    }
-
                 });
+            } else {
+                $.SmartMessageBox({
+                    title: "¡Este Código APS ya fue registrado!",
+                    content: "Por favor Ingrese un Código APS distinto"});
             }
-        }
-        function  ShowAFP_SP() {
-            /*show  afp y sp*/
-            $(".row_afp_sp").empty();
-            $.ajax({url: "../../trabajador", data: "opc=ShowAFP_SP&id=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
-                    if (data.rpta === "1") {
-                        $(".row_afp_sp").append(data.html);
-                    }
-                }});
 
-            /*end show afp y sp*/
-        }
+        });
+    }
+}
+function  ShowAFP_SP() {
+    /*show  afp y sp*/
+    $(".row_afp_sp").empty();
+    $.ajax({url: "../../trabajador", data: "opc=ShowAFP_SP&id=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
+            if (data.rpta === "1") {
+                $(".row_afp_sp").append(data.html);
+            }
+        }});
+
+    /*end show afp y sp*/
+}
+$(document).ready(function () {
+    Listar_Cod_Huella();
+    Listar_Cod_APS();
+    ShowCbk_Procesar_Ind($(".dgp").val());
+    initAutorizacion();
+    pageSetUp();
+    $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+        $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
+    });
+    $(".tab_detalle_trabajador li").click(function () {
+        $(".tab_detalle_trabajador li").removeClass("active");
+        $(this).addClass("active");
+    });
+    validateShadowBox();
+    setTimeout(function () {
+        document.getElementById('myframe2').onload = function () {
+            porcentaje_datos($(".idtr").val());
+        };
+    }, 5000);
+    showEsDiezmo();
+    ShowAFP_SP();
+    $(".btnCodigoAPS").click(function () {
+        Actualizar_Cod_APS();
+    });
+    initFoto();
+});

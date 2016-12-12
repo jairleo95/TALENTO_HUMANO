@@ -15,7 +15,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceReporteDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Datos_Generales;
-import pe.edu.upeu.application.web.controller.CConversion;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -24,7 +24,7 @@ import pe.edu.upeu.application.web.controller.CConversion;
 public class ReporteDAO implements InterfaceReporteDAO {
 
     ConexionBD conn;
-    CConversion c = new CConversion();
+    DateFormat c = new DateFormat();
 
     @Override
     public List<Map<String, ?>> Contrato_Mes() {

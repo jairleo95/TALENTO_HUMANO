@@ -25,7 +25,7 @@ import pe.edu.upeu.application.model.Sub_Modalidad;
 import pe.edu.upeu.application.model.V_Contrato_dgp;
 import pe.edu.upeu.application.model.V_List_Empleado;
 import pe.edu.upeu.application.model.X_List_Id_Contrato_DGP;
-import pe.edu.upeu.application.web.controller.CConversion;
+import pe.edu.upeu.application.util.DateFormat;
 
 /**
  *
@@ -34,7 +34,7 @@ import pe.edu.upeu.application.web.controller.CConversion;
 public class ContratoDAO implements InterfaceContratoDAO {
 
     ConexionBD conn;
-    CConversion c = new CConversion();
+    DateFormat c = new DateFormat();
 
     @Override
     public void INSERT_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE,
@@ -51,17 +51,17 @@ public class ContratoDAO implements InterfaceContratoDAO {
             String CO_TI_REM_VARIAB, String DE_REMU_ESPECIE, String DE_RUC_EMP_TRAB, String CO_SUCURSAL,
             String DE_MYPE, String ES_TI_CONTRATACION, double CA_BEV, String ID_TIPO_PLANILLA,
             String ES_REMUNERACION_PROCESADO, String ID_HORARIO, String ID_PLANTILLA_CONTRACTUAL,
-            double ca_bonificacion_p, String ES_MFL, String PRACTICANTE) {
+            double ca_bonificacion_p, String ES_MFL, String PRACTICANTE, String situacionEspecial) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? ,?)} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_CONTRATO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? ,?,?)} ");
             cst.setString(1, null);
             cst.setString(2, ID_DGP);
-            cst.setString(3, c.convertFecha(FE_DESDE));
+            cst.setString(3, DateFormat.toFormat1(FE_DESDE));
             if (FE_HASTA.equals("")) {
                 cst.setString(4, FE_HASTA);
             } else {
-                cst.setString(4, c.convertFecha(FE_HASTA));
+                cst.setString(4, DateFormat.toFormat1(FE_HASTA));
             }
             cst.setString(5, FE_CESE);
             cst.setString(6, ID_FUNC);
@@ -105,7 +105,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(44, ID_MODALIDAD);
             cst.setString(45, ID_SUB_MODALIDAD);
             cst.setString(46, CO_GR_OCUPACION);
-            cst.setString(47, c.convertFecha(FE_SUSCRIPCION));
+            cst.setString(47, DateFormat.toFormat1(FE_SUSCRIPCION));
             cst.setString(48, CO_TI_MONEDA);
             cst.setString(49, CO_TI_REM_VARIAB);
             cst.setString(50, DE_REMU_ESPECIE);
@@ -121,6 +121,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setDouble(60, ca_bonificacion_p);
             cst.setString(61, ES_MFL);
             cst.setString(62, PRACTICANTE);
+            cst.setString(63, situacionEspecial);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -439,6 +440,8 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 v.setEs_secre_is(rs.getString("es_secre_is"));
                 v.setLi_religion(rs.getString("li_religion"));
                 v.setPracticante(rs.getString("practicante"));
+                v.setIdSituacionEspecial(rs.getString("id_situacion_especial"));
+                v.setDeSituacionEspecial(rs.getString("de_situacion_especial"));
                 list.add(v);
             }
         } catch (SQLException e) {
@@ -576,20 +579,20 @@ public class ContratoDAO implements InterfaceContratoDAO {
             String sql = "select  *  from RHVD_FILTRO_CONTRATO_TERMINADO WHERE FE_CREACION IS NOT NULL ";
             if (!de.equals("") || !al.equals("") || !fe_i.equals("") || !fe_fin.equals("") || !fe_sus.equals("")) {//si busca por fecha
                 if (!de.equals("") && !al.equals("")) {
-                    sql += "AND FE_CREACION BETWEEN '" + c.convertFecha(de) + "' AND '" + c.convertFecha(al) + "' ";
+                    sql += "AND FE_CREACION BETWEEN '" + DateFormat.toFormat1(de) + "' AND '" + DateFormat.toFormat1(al) + "' ";
                 }
                 if (!fe_i.equals("") && !fe_fin.equals("")) {
-                    sql += "AND FE_DESDE >= '" + c.convertFecha(fe_i) + "' AND FE_HASTA <='" + c.convertFecha(fe_fin) + "' ";
+                    sql += "AND FE_DESDE >= '" + DateFormat.toFormat1(fe_i) + "' AND FE_HASTA <='" + DateFormat.toFormat1(fe_fin) + "' ";
                 } else {
                     if (!fe_i.equals("")) {
-                        sql += "AND FE_DESDE BETWEEN '" + c.convertFecha(fe_i) + "' AND (select SYSDATE from dual) ";
+                        sql += "AND FE_DESDE BETWEEN '" + DateFormat.toFormat1(fe_i) + "' AND (select SYSDATE from dual) ";
                     }
                     if (!fe_fin.equals("")) {
-                        sql += "AND FE_HASTA BETWEEN (SELECT MIN(FE_DESDE) AND '" + c.convertFecha(fe_fin) + "' ";
+                        sql += "AND FE_HASTA BETWEEN (SELECT MIN(FE_DESDE) AND '" + DateFormat.toFormat1(fe_fin) + "' ";
                     }
                 }
                 if (!fe_sus.equals("")) {
-                    sql += "AND FE_SUSCRIPCION = '" + c.convertFecha(fe_sus) + "' ";
+                    sql += "AND FE_SUSCRIPCION = '" + DateFormat.toFormat1(fe_sus) + "' ";
                 }
 
             }
@@ -675,6 +678,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 rec.put("fe_ha", rs.getString("fe_has"));
                 rec.put("no_pu", rs.getString("no_puesto"));
                 rec.put("fe_su", rs.getString("fe_sus"));
+                rec.put("ca_sueldo_basico", rs.getString("ca_sueldo"));
                 rec.put("ca_st", rs.getString("ca_sueldo_total"));
                 rec.put("nu_ho", rs.getString("nu_horas_lab"));
                 rec.put("co_tm", rs.getString("co_ti_moneda"));
@@ -869,6 +873,8 @@ public class ContratoDAO implements InterfaceContratoDAO {
                 v.setUs_modif(rs.getString("us_modif"));
                 v.setEs_mfl(rs.getString("es_mfl"));
                 v.setPracticante(rs.getString("practicante"));
+                v.setDeSituacionEspecial(rs.getString("de_situacion_especial"));
+                v.setIdSituacionEspecial(rs.getString("id_situacion_especial"));
                 list.add(v);
             }
         } catch (SQLException e) {
@@ -886,17 +892,23 @@ public class ContratoDAO implements InterfaceContratoDAO {
     }
 
     @Override
-    public void MODIFICAR_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO, Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO, String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_PUESTO, Double CA_BONO_ALIMENTO, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO, String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU, String ID_TRABAJADOR, Double CA_SUELDO_TOTAL, String ID_REGIMEN_LABORAL, String ID_MODALIDAD, String ID_SUB_MODALIDAD, String CO_GR_OCUPACION, String FE_SUSCRIPCION, String CO_TI_MONEDA, String CO_TI_REM_VARIAB, String DE_REMU_ESPECIE, String DE_RUC_EMP_TRAB, String CO_SUCURSAL, String DE_MYPE, String ES_TI_CONTRATACION, Double CA_BEV, String ID_TIPO_PLANILLA, String ES_REMUNERACION_PROCESADO, String ID_HORARIO, String ID_PLANTILLA_CONTRACTUAL, Double ca_bonificacion_p, String PRACTICANTE) {
+    public void MODIFICAR_CONTRATO(String ID_CONTRATO, String ID_DGP, String FE_DESDE, String FE_HASTA, String FE_CESE, String ID_FUNC, String LI_CONDICION, Double CA_SUELDO, Double CA_REINTEGRO,
+            Double CA_ASIG_FAMILIAR, Double HO_SEMANA, Double NU_HORAS_LAB, Double DIA_CONTRATO, String TI_TRABAJADOR, String LI_REGIMEN_LABORAL, String ES_DISCAPACIDAD, String TI_CONTRATO,
+            String LI_REGIMEN_PENSIONARIO, String ES_CONTRATO_TRABAJADOR, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String US_IP, String FE_VACACIO_INI, String FE_VACACIO_FIN, String ES_CONTRATO, String ID_FILIAL, String ID_PUESTO, Double CA_BONO_ALIMENTO, String LI_TIPO_CONVENIO, String ES_FIRMO_CONTRATO, Double NU_CONTRATO,
+            String DE_OBSERVACION, String ES_APOYO, String TI_HORA_PAGO, String NU_DOCUMENTO, String ES_ENTREGAR_DOC_REGLAMENTOS, String ES_REGISTRO_HUELLA, String DE_REGISTRO_SISTEM_REMU,
+            String ID_TRABAJADOR, Double CA_SUELDO_TOTAL, String ID_REGIMEN_LABORAL, String ID_MODALIDAD, String ID_SUB_MODALIDAD, String CO_GR_OCUPACION, String FE_SUSCRIPCION, String CO_TI_MONEDA,
+            String CO_TI_REM_VARIAB, String DE_REMU_ESPECIE, String DE_RUC_EMP_TRAB, String CO_SUCURSAL, String DE_MYPE, String ES_TI_CONTRATACION, Double CA_BEV, String ID_TIPO_PLANILLA,
+            String ES_REMUNERACION_PROCESADO, String ID_HORARIO, String ID_PLANTILLA_CONTRACTUAL, Double ca_bonificacion_p, String PRACTICANTE, String idSituacionEspecial) {
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MODIF_CONTRATO( ?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? )} ");
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_MODIF_CONTRATO( ?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? ,?)} ");
             cst.setString(1, ID_CONTRATO);
             cst.setString(2, ID_DGP);
-            cst.setString(3, c.convertFecha(FE_DESDE));
+            cst.setString(3, DateFormat.toFormat1(FE_DESDE));
             if (FE_HASTA.equals("")) {
                 cst.setString(4, FE_HASTA);
             } else {
-                cst.setString(4, c.convertFecha(FE_HASTA));
+                cst.setString(4, DateFormat.toFormat1(FE_HASTA));
             }
             cst.setString(5, FE_CESE);
             cst.setString(6, ID_FUNC);
@@ -941,7 +953,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(44, ID_MODALIDAD);
             cst.setString(45, ID_SUB_MODALIDAD);
             cst.setString(46, CO_GR_OCUPACION);
-            cst.setString(47, c.convertFecha(FE_SUSCRIPCION));
+            cst.setString(47, DateFormat.toFormat1(FE_SUSCRIPCION));
             cst.setString(48, CO_TI_MONEDA);
             cst.setString(49, CO_TI_REM_VARIAB);
             cst.setString(50, DE_REMU_ESPECIE);
@@ -956,6 +968,7 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(59, ID_PLANTILLA_CONTRACTUAL);
             cst.setDouble(60, ca_bonificacion_p);
             cst.setString(61, PRACTICANTE);
+            cst.setString(62, idSituacionEspecial);
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());

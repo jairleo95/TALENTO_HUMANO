@@ -13,7 +13,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceTipoHoraPagoDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.TipoHoraPago;
-import pe.edu.upeu.application.web.controller.CCriptografiar;
+import pe.edu.upeu.application.util.CCriptografiar;
 
 /**
  *
