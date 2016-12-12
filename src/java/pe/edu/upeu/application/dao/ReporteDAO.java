@@ -301,29 +301,76 @@ public class ReporteDAO implements InterfaceReporteDAO {
     @Override
     public List<Map<String, ?>> datosTrabajador(String direccion, String dep, String area, String sec, String puesto) {
         List<Map<String, ?>> Lista = new ArrayList<>();
-        String sql = "select * from ";
+        String sql = "select * from RHVD_REPORTE_EMP where ID_CONTRATO is not null ";
         try {
             if (!direccion.equals("")) {
-                sql += " RHVD_FILTRO_CONTRATO_TERMINADO WHERE FE_CREACION IS NOT NULL and ID_DIRECCION='" + direccion + "'";
+                sql += " and ID_DIRECCION='" + direccion + "' ";
             }
             if (!dep.equals("")) {
-                
+                sql += " and ID_DEPARTAMENTO='" + dep + "' ";
             }
             if (!area.equals("")) {
-
+                sql += " and ID_AREA='" + area + "' ";
             }
             if (!sec.equals("")) {
-
+                sql += " and ID_SECCION='" + sec + "' ";
             }
             if (!puesto.equals("")) {
-
+                sql += " and ID_PUESTO='" + puesto + "' ";
             }
             System.out.println(sql);
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
-                rec.put("nombre", rs.getString("NO_AP"));
+                rec.put("aps", rs.getString("CO_APS"));
+                rec.put("dir", rs.getString("ID_DIRECCION"));
+                rec.put("dep", rs.getString("ID_DEPARTAMENTO"));
+                rec.put("area", rs.getString("ID_AREA"));
+                rec.put("secc", rs.getString("ID_SECCION"));
+                rec.put("puesto", rs.getString("ID_PUESTO"));
+                rec.put("tipo", rs.getString("TI_DOC"));
+                rec.put("num", rs.getString("NU_DOC"));
+                rec.put("appa", rs.getString("AP_PATERNO"));
+                rec.put("apma", rs.getString("AP_MATERNO"));
+                rec.put("nombre", rs.getString("NO_TRABAJADOR"));
+                rec.put("apell", rs.getString("AP_PATERNO") + " " + rs.getString("AP_MATERNO"));
+                rec.put("desde", rs.getString("FE_DESDE"));
+                rec.put("hasta", rs.getString("FE_HASTA"));
+                rec.put("mes", rs.getString("NO_TRABAJADOR"));//mes de requerimiento
+                rec.put("sexo", rs.getString("ES_SEXO"));
+                rec.put("fe_nac", rs.getString("FE_NAC"));
+                rec.put("naci", rs.getString("CO_NACIONALIDAD"));
+                rec.put("es_civil", rs.getString("ES_CIVIL"));
+                rec.put("gp_san", rs.getString("LI_GRUPO_SANGUINEO"));
+                rec.put("sis_pen", rs.getString("CO_SISTEMA_PENSIONARIO"));
+                rec.put("afp", rs.getString("ID_NO_AFP"));
+                rec.put("sit_edu", rs.getString("ID_SITUACION_EDUCATIVA"));
+                rec.put("ins_per", rs.getString("ES_INST_EDUC_PERU"));
+                rec.put("reg", rs.getString("CO_REGIMEN"));
+                rec.put("tip_ins", rs.getString("NO_TIPO_INSTITUCION"));
+                rec.put("co_ins", rs.getString("CO_TI_INSTITUCION"));
+                rec.put("carr", rs.getString("NO_CARRERA"));
+                rec.put("a_egr", rs.getString("DE_ANNO_EGRESO"));
+                rec.put("hora_p", rs.getString("CA_TIPO_HORA_PAGO_REFEERENCIAL"));
+                rec.put("domi", rs.getString("DI_DOM_A_D6"));
+                rec.put("depar", rs.getString("NO_DEPARTAMENTO"));
+                rec.put("prov", rs.getString("NO_PROVINCIA"));
+                rec.put("dis", rs.getString("NO_DISTRITO"));
+                rec.put("rel", rs.getString("LI_RELIGION"));
+                rec.put("igl", rs.getString("NO_IGLESIA"));
+                rec.put("carg", rs.getString("DE_CARGO"));
+                rec.put("aut", rs.getString("LI_AUTORIDAD"));
+                rec.put("condicion", rs.getString("NO_IGLESIA"));//condicion laboral
+                rec.put("nombre", rs.getString("NO_IGLESIA"));
+                rec.put("nombre", rs.getString("NO_IGLESIA"));
+                rec.put("nombre", rs.getString("NO_IGLESIA"));
+                rec.put("nombre", rs.getString("NO_IGLESIA"));
+                rec.put("nombre", rs.getString("NO_IGLESIA"));
+                rec.put("nombre", rs.getString("NO_IGLESIA"));
+                rec.put("nombre", rs.getString("NO_IGLESIA"));
+                rec.put("nombre", rs.getString("NO_IGLESIA"));
+
                 Lista.add(rec);
             }
         } catch (Exception e) {
