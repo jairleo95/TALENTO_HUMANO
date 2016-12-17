@@ -59,23 +59,9 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-        <style>
-            .ui-datepicker-calendar {
-                display: none;
-            }
-            .form-inline .checkbox input[type=checkbox].checkbox+span, .form-inline .radiobox input[type=radio].radiobox+span {
-                margin-left: -20px;
-            }
 
-            .inbox-compose-footer, .inbox-download, .inbox-info-bar, .inbox-message {
-                margin-right: 0px;
-                position: initial;
-            }
-            .bootstrap-tagsinput {
-                border: 1px solid #fff;
-            }
-        </style>
         <link href="../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="../../css/businessLogic/Dgp/autorizarRequerimiento.css" rel="stylesheet" type="text/css"/>
     </head>
     <%
         int t = List_id_Autorizacion.size();
@@ -102,7 +88,8 @@
         %>
 
     <body onload='exito("Procesado con exito!", "Codigo huella ingresado correctamente");
-            nobackbutton();' class="body">
+            nobackbutto
+            n();' class="body">
         <%
             }
         } else {
@@ -681,14 +668,14 @@
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
-                            if (!window.jQuery) {
-                                document.write('<script src="../../js/libs/jquery-2.1.1.min.js"><\/script>');
+        if (!window.jQuery) {
+                            document.write('<script src="../../js/libs/jquery-2.1.1.min.js"><\/script>');
                             }
     </script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>
-                            if (!window.jQuery.ui) {
+        if (!window.jQuery.ui) {
                                 document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
                             }
     </script>
@@ -726,9 +713,9 @@
 
 
     <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
- 
+
     <script src="../../js/bootstrap/fileinput.js" type="text/javascript"></script>
-   <script src="../../js/bootstrap/es.js" type="text/javascript"></script>
+    <script src="../../js/bootstrap/es.js" type="text/javascript"></script>
 
     <!--BUSINESS LOGIC PLUGINS -->
     <script src="../../js/coment/comenth.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>

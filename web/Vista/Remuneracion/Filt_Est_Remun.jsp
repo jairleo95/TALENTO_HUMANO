@@ -146,7 +146,7 @@
 
     </body>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             var b = $(".tbodys");
             /* $.ajax({
              data:$("#frm_filtro2").serialize(),
@@ -161,8 +161,8 @@
             $("#asa").hide();
 
             $("#btnbuscar").click(
-                    function() {
-                        $.post("../../ajax/Ajax_Contrato/Ajax_Contrato.jsp", $("#frm_filtro2").serialize(), function(objJson) {
+                    function () {
+                        $.post("../../ajax/Ajax_Contrato/Ajax_Contrato.jsp", $("#frm_filtro2").serialize(), function (objJson) {
                             b.empty();
                             var list = objJson.lista;
                             for (var i = 0; i < list.length; i++) {
@@ -185,22 +185,22 @@
                                 $("#asa").show();
                             }
                             $("#btns").click(
-                                    function() {
+                                    function () {
 
                                         $("#gg :checkbox").attr('checked', true);
                                         $('#imp').is(':checked');
                                         alerta(checkboxValues.push($("#imp").val()));
                                     });
                             $("#btns2").click(
-                                    function() {
+                                    function () {
                                         var checkboxValues = new Array();
 //recorremos todos los checkbox seleccionados con .each
-                                        $('input[name="orderBox[]"]:checked').each(function() {
+                                        $('input[name="orderBox[]"]:checked').each(function () {
                                             //$(this).val() es el valor del checkbox correspondiente
-                                             checkboxValues.push($(this).val());
-                                             alert(checkboxValues.push($(this).val()));
+                                            checkboxValues.push($(this).val());
+                                            alert(checkboxValues.push($(this).val()));
                                         });
-                                     
+
                                     });
 
 
@@ -219,7 +219,7 @@
              }
              );*/
             $("#btncancel").click(
-                    function() {
+                    function () {
                         document.formulario.reset();
                         b.empty();
                         html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'

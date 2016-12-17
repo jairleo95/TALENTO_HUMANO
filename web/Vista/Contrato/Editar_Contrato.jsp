@@ -580,7 +580,7 @@
                                         </section>
                                         <section class="col col-4">
                                             <label class="select" id="titulo">Regimen Pensionario:
-                                                <select name="REGIMEN_PENSIONARIO" class="input-group-sm" required="">
+                                                <select name="REGIMEN_PENSIONARIO" class="input-group-sm">
                                                     <option value="">[Seleccione]</option>
                                                     <%if (a.getLi_regimen_pensionario() != null) {%>
                                                     <option value="1" <%if (a.getLi_regimen_pensionario().trim().equals("1")) {%> selected=""<%}%>>Privado</option>

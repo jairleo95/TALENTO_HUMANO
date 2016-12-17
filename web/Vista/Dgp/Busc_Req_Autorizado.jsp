@@ -35,7 +35,7 @@
     <center>
         <br>
         <div id="contenido">
-           
+
             <div   >
                 <!--style="padding-left: 30px"-->
                 <form class="form-inline" id="frm_filtro" method="post" action="" name="formulario">
@@ -74,7 +74,7 @@
                             <label>Puesto :</label><br>
                             <input type="text" name="puesto" class="form-control" style="width: 250px" />
                         </div>
-                        
+
                         <div class="form-group">
                             <label>Sueldo :</label><br>
                             <input type="text" name="sueldo" class="form-control" style="width: 250px" maxlength="10"/>
@@ -147,7 +147,7 @@
                 </form>
 
             </div> 
-            
+
             <br>
             <br>
             <div class="container">
@@ -181,24 +181,11 @@
 
 </body>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         var b = $(".tbodys");
-        /* $.ajax({
-         data:$("#frm_filtro").serialize(),
-         type:"POST",
-         dataType:"json",
-         url:"../../Ajax/Ajax_Dgp/Ajax_Dgp_Aut.jsp"
-         
-         }
-         
-         });
-         */
-
         $("#btnfiltrar").click(
-                function() {
-
-
-                    $.post("../../ajax/Ajax_Dgp/Ajax_Dgp_Aut.jsp", $("#frm_filtro").serialize(), function(objJson) {
+                function () {
+                    $.post("../../ajax/Ajax_Dgp/Ajax_Dgp_Aut.jsp", $("#frm_filtro").serialize(), function (objJson) {
                         b.empty();
                         var list = objJson.lista;
                         for (var i = 0; i < list.length; i++) {
@@ -220,7 +207,7 @@
                 }
         );
         $("#btncancel").click(
-                function() {
+                function () {
                     document.formulario.reset();
                     b.empty();
                     html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
@@ -237,7 +224,6 @@
 </html>
 <%        }%>
 <%} else {
-        //out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
-out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
+        out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
     }
 %>

@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion = request.getSession();
@@ -856,7 +857,7 @@
     <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
-    <script src="../../js/businessLogic/Contrato/casosEspeciales.js" type="text/javascript"></script>
+    <script src="../../js/businessLogic/Contrato/casosEspeciales.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
 </html>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");

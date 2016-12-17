@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion = request.getSession();
@@ -30,24 +31,9 @@
         <link rel="icon" href="../../../img/favicon/favicon.ico" type="image/x-icon">
         <!-- #GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+        <link href="../../../css/businessLogic/Horario/detalleHorario.css" rel="stylesheet" type="text/css"/>
     </head>
-    <style>
-        .cont{
-            margin: 0 auto;
-        }
-        .caja{
-            box-shadow: 2px 2px 5px #cccccc;
-            background-color: #ffffff;
-        }
-        .c_header{
-            color: #ffffff;
-            background-color: #3276b1;
-            border-color: #3276b1;
-        }
-        table{
-            border: 0px;
-        }
-    </style>
+
     <body>
 
         <div class="well">
@@ -65,10 +51,10 @@
                 InterfaceListaDAO l = new ListaDAO();
                 if (List_V_Horario.size() == 0) {
                     out.print("<center><h3>Tipo de Horario:&nbsp;<strong>No sujeto a Fiscaslización</strong></h3></center><hr>");
-                }else{
+                } else {
                     V_Horario h = new V_Horario();
-                        h = (V_Horario) List_V_Horario.get(0);
-                        out.print("<center><h3>Tipo de Horario:&nbsp; <strong>"+h.getNo_ti_horario() +"</strong></h3></center><hr>");
+                    h = (V_Horario) List_V_Horario.get(0);
+                    out.print("<center><h3>Tipo de Horario:&nbsp; <strong>" + h.getNo_ti_horario() + "</strong></h3></center><hr>");
                 }
                 for (int i = 0; i < l.List_H().length; i++) {
                     int g = 0;
@@ -78,7 +64,7 @@
                         h = (V_Horario) List_V_Horario.get(s);
                         if (h.getDia_horario().trim().equals(l.List_H()[i][0])) {
                             if (g == 0) {%>
-                            
+
             <section class="col col-sm-4 col-md-4">
                 <div class="caja">
                     <table class="table table-condensed table-bordered">
@@ -105,7 +91,6 @@
         <a href="../../../dgp?iddgp=<%=request.getParameter("iddgp")%>&idtr=<%=request.getParameter("idtr")%>&opc=rd">Continuar</a>
         <%}
             }%>
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
                             if (!window.jQuery) {
@@ -150,48 +135,8 @@
         <script src="../../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-        <script>
 
-        </script>
-        <script type="text/javascript">
-
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
-            $(document).ready(function () {
-
-                pageSetUp();
-
-                // PAGE RELATED SCRIPTS
-
-                // switch style change
-                $('input[name="checkbox-style"]').change(function () {
-                    //alert($(this).val())
-                    $this = $(this);
-
-                    if ($this.attr('value') === "switch-1") {
-                        $("#switch-1").show();
-                        $("#switch-2").hide();
-                    } else if ($this.attr('value') === "switch-2") {
-                        $("#switch-1").hide();
-                        $("#switch-2").show();
-                    }
-
-                });
-
-                // tab - pills toggle
-                $('#show-tabs').click(function () {
-                    $this = $(this);
-                    if ($this.prop('checked')) {
-                        $("#widget-tab-1").removeClass("nav-pills").addClass("nav-tabs");
-                    } else {
-                        $("#widget-tab-1").removeClass("nav-tabs").addClass("nav-pills");
-                    }
-
-                });
-
-            });
-
-        </script>
+        <script src="../../../js/businessLogic/Horario/detalleHorario.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
     </body>
 </html>
 <%} else {

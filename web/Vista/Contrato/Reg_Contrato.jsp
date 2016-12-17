@@ -515,7 +515,7 @@
                                                     </section>
                                                     <section class="col col-4">
                                                         <label class="select" id="titulo">Regimen Pensionario:
-                                                            <select name="REGIMEN_PENSIONARIO" class="input-group-sm" required="">
+                                                            <select name="REGIMEN_PENSIONARIO" class="input-group-sm" >
                                                                 <option value="">[Seleccione]</option>
                                                                 <option value="1" selected>Privado</option>
                                                                 <option value="2">SNP</option>

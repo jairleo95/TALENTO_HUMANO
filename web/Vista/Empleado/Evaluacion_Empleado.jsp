@@ -23,7 +23,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-            <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
@@ -60,19 +60,9 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
-        <style>
-            #sec{
-                margin-left:33%;
-            }
-            option{
-                font-weight: bold;
-            }
-            button{
-                width: 150px;
-            }
-        </style>
+        <link href="../../css/businessLogic/Empleado/evaluacionEmpleado.css" rel="stylesheet" type="text/css"/>
     </head>
+
     <body>
     <center>
         <!--begin widget-->
@@ -121,7 +111,7 @@
                                 </section>
                             </center>
                         </fieldset>
-                        
+
                         <input type="hidden" value="Reg_Evaluar_Emp" name="opc"/>
                         <input type="hidden" value="1" name="ESTADO"/>
                         <input type="hidden" name="ID_TRABAJADOR" value="<%=request.getParameter("idtr")%>"  >
@@ -141,7 +131,7 @@
         </div>
         <!-- end widget -->
 
-        
+
 
     </body>
 </html>

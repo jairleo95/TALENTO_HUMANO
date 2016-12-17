@@ -1,0 +1,85 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16-dic-2016, 3:34:39
+    Author     : JAIR
+*/
+
+/* Form Progress */
+.new-progress {
+    /*   //width: 100%;*/
+    margin:0px;
+    text-align: center;
+}
+.new-progress .new-circle,
+.new-progress .new-bar {
+    display: inline-block;
+    background: #fff;
+    width: 33px; height: 33px;
+    border-radius: 100%;
+    border: 1px solid #d5d5da;
+}
+.new-progress .new-bar {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 6px;
+    /*   //margin: 0 -0.01% 3% -5px;*/
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+}
+
+.new-progress .new-circle .new-label {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    /*// line-height: 32px;*/
+    border-radius: 32px;
+    margin-top: 3px;
+    /*color: #b5b5ba;*/
+    /*  // font-size: 17px;*/
+}
+.new-progress .new-circle .new-title {
+    color: #b5b5ba;
+    font-size: 100%;
+    /* //line-height: 30px;
+     //margin-left: -5px;*/
+}
+
+/* Done / Active */
+.new-progress .new-bar.done,
+.new-progress .new-circle.done {
+    background: #eee;
+    color:black;
+}
+.new-progress .new-circle.rechazo {
+    background: #a90329;
+    color: #b5b5ba;
+}
+.new-progress .new-bar.active {
+    background: linear-gradient(to right, #EEE 40%, #FFF 60%);
+}
+.new-progress .new-circle.done .new-label {
+    color: #FFF;
+    /* background: #8bc435;*/
+    background: #0aa699;
+    box-shadow: inset 0 0 2px rgba(0,0,0,.2);
+}
+.new-progress .new-circle.done .new-title {
+    color: #b5b5ba;
+}
+.new-progress .new-circle.active .new-label {
+    color: #FFF;
+    background: #3276b1;
+    box-shadow: inset 0 0 2px rgba(0,0,0,.2);
+}
+.new-progress .new-circle.active .new-title {
+    color: black;
+}
+.new-progress .new-circle.done .new-label:hover, .new-circle:hover{
+    /*//background-color:#739e73; */
+}

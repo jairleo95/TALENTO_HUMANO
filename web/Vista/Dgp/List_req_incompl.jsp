@@ -277,8 +277,8 @@
 
         <![endif]-->
 
-        <!-- Demo purpose only -->
-        <script src="../../js/demo.min.js"></script>
+        <!-- Demo purpose only
+        <script src="../../js/demo.min.js"></script> -->
 
         <!-- MAIN APP JS FILE -->
         <script src="../../js/app.min.js"></script>
@@ -302,12 +302,8 @@
 
                 pageSetUp();
 
-
                 /* BASIC ;*/
                 var responsiveHelper_dt_basic = undefined;
-                var responsiveHelper_datatable_fixed_column = undefined;
-                var responsiveHelper_datatable_col_reorder = undefined;
-                var responsiveHelper_datatable_tabletools = undefined;
 
                 var breakpointDefinition = {
                     tablet: 1024,

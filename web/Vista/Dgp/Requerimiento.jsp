@@ -22,7 +22,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-            <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
@@ -50,84 +50,7 @@
         <link rel="apple-touch-icon" sizes="76x76" href="../../img/splash/touch-icon-ipad.png">
         <link rel="apple-touch-icon" sizes="120x120" href="../../img/splash/touch-icon-iphone-retina.png">
         <link rel="apple-touch-icon" sizes="152x152" href="../../img/splash/touch-icon-ipad-retina.png">
-
-
-
-        <style>
-            /* Service Box
-================================================== */
-
-            #service{
-                position: relative;
-                /* //  padding: 0 0 40px;*/
-            }
-            .service-content{
-                text-align: center;
-                position: relative;
-                /* //    padding: 0 10px;*/
-            }
-            .service-content .service-icon{
-                position: relative;
-            }
-            .service-content:after{
-                content: "";
-                background: #1881F2;
-                width: 3%;
-                height: 4%;
-                position: absolute;
-                top: 40%;
-                /* // margin-top: -58px;*/
-                left: 105%;
-                -webkit-border-radius: 100%;
-                -moz-border-radius: 100%;
-                border-radius: 100%;
-                -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, .09);
-                -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, .09);
-                box-shadow: 0 0 0 3px rgba(0, 0, 0, .09);
-                z-index: 3;
-            }
-
-            .service-content:before{
-                content: '';
-                background: #ccc;
-                position: absolute;
-                top: 40%;
-                margin-top: 1%;
-                width: 100%;
-                /* //left: 74px;*/
-                height: 1px;
-                z-index: 0;
-
-            }
-            .service-content.last:after, 
-            .service-content.last:before{
-                content: '';
-                position: relative;
-                box-shadow: none;
-                border: 0;
-            }
-            .service-content i{
-                display: inline-block;
-                overflow: hidden;
-                color: #fff;
-                font-size: 350%;
-                background: #1881F2;
-                width:150px; 
-                height:150px;
-                line-height: 150px;
-                /* // margin:10px 0 0;*/
-                -webkit-box-shadow: 0 0 0 12px #f0f0f0;
-                -moz-box-shadow: 0 0 0 12px #f0f0f0;
-                box-shadow: 0 0 0 12px #f0f0f0;
-            }
-
-            .service-content h3{
-                font-size: 15px;
-
-            }
-           
-
-        </style>
+        <link href="../../css/businessLogic/Dgp/Requerimiento.css" rel="stylesheet" type="text/css"/>
 
     </head>
     <body class="">
@@ -138,116 +61,116 @@
             <div id="content" style="margin: 0px;" >
                 <center>
                     <div class="well">
-                  
-                    <%String opc = request.getParameter("opc");
+
+                        <%String opc = request.getParameter("opc");
                         if (opc.equals("Planilla")) {%>
 
-                    <section id="service" class="wow fadeInUp" style="margin: 0px; ">
-                        <div class="container" style="margin: 0px; margin-top: 2%;">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="service-content bounceIn animated">
-                                        <a href="Generar_Dgp.jsp?text=1"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
-                                        <h3>Tiempo Completo</h3>
-                                        <p>
+                        <section id="service" class="wow fadeInUp" style="margin: 0px; ">
+                            <div class="container" style="margin: 0px; margin-top: 2%;">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3">
+                                        <div class="service-content bounceIn animated">
+                                            <a href="Generar_Dgp.jsp?text=1"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
+                                            <h3>Tiempo Completo</h3>
+                                            <p>
 
-                                        </p>
-                                    </div>
-                                </div><!--/ End first service -->
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="service-content bounceIn animated">
-                                        <a href="Generar_Dgp.jsp?text=2"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
-                                        <h3>Medio Tiempo</h3>
-                                        <p>
+                                            </p>
+                                        </div>
+                                    </div><!--/ End first service -->
+                                    <div class="col-md-3 col-sm-3">
+                                        <div class="service-content bounceIn animated">
+                                            <a href="Generar_Dgp.jsp?text=2"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
+                                            <h3>Medio Tiempo</h3>
+                                            <p>
 
-                                        </p>
-                                    </div>
-                                </div><!--/ End 2nd service -->
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="service-content bounceIn animated">
-                                        <a href=Generar_Dgp.jsp?text=3><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
-                                        <h3>Tiempo Parcial</h3>
-                                        <p>
+                                            </p>
+                                        </div>
+                                    </div><!--/ End 2nd service -->
+                                    <div class="col-md-3 col-sm-3">
+                                        <div class="service-content bounceIn animated">
+                                            <a href=Generar_Dgp.jsp?text=3><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
+                                            <h3>Tiempo Parcial</h3>
+                                            <p>
 
-                                        </p>
-                                    </div>
-                                </div><!--/ End 3rd service -->
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="service-content last bounceIn animated">
-                                        <a href="Generar_Dgp.jsp?text=5"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
-                                        <h3>Extranjero</h3>
-                                        <p>
+                                            </p>
+                                        </div>
+                                    </div><!--/ End 3rd service -->
+                                    <div class="col-md-3 col-sm-3">
+                                        <div class="service-content last bounceIn animated">
+                                            <a href="Generar_Dgp.jsp?text=5"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
+                                            <h3>Extranjero</h3>
+                                            <p>
 
-                                        </p>
-                                    </div>
-                                </div><!--/ End 4th service -->
-                                <div class="col-md-3 col-sm-3" style="display: none">
-                                    <div class="service-content last bounceIn animated">
-                                        <a href="#."><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
-                                        <h3>Tiempo Parcial (Trabajador Docente)</h3>
-                                        <p>
+                                            </p>
+                                        </div>
+                                    </div><!--/ End 4th service -->
+                                    <div class="col-md-3 col-sm-3" style="display: none">
+                                        <div class="service-content last bounceIn animated">
+                                            <a href="#."><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
+                                            <h3>Tiempo Parcial (Trabajador Docente)</h3>
+                                            <p>
 
-                                        </p>
-                                    </div>
-                                </div><!--/ End 4th service -->
+                                            </p>
+                                        </div>
+                                    </div><!--/ End 4th service -->
+                                </div>
                             </div>
-                        </div>
-                    </section><!-- Service box end -->
-                    <%} else if (opc.equals("FueraDePlanilla")) {%>
-                    <section id="service" class="wow fadeInUp" style="margin: 0px; ">
-                        <div class="container" style="margin: 0px; margin-top: 2%;">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="service-content bounceIn animated">
-                                        <a href="Generar_Dgp.jsp?text=7"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
-                                        <h3>Practicas Pre Profesionales</h3>
-                                        <p>
+                        </section><!-- Service box end -->
+                        <%} else if (opc.equals("FueraDePlanilla")) {%>
+                        <section id="service" class="wow fadeInUp" style="margin: 0px; ">
+                            <div class="container" style="margin: 0px; margin-top: 2%;">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3">
+                                        <div class="service-content bounceIn animated">
+                                            <a href="Generar_Dgp.jsp?text=7"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
+                                            <h3>Practicas Pre Profesionales</h3>
+                                            <p>
 
-                                        </p>
-                                    </div>
-                                </div><!--/ End first service -->
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="service-content bounceIn animated">
-                                        <a href="Generar_Dgp.jsp?text=8"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
-                                        <h3>Practicas Profesionales</h3>
-                                        <p>
+                                            </p>
+                                        </div>
+                                    </div><!--/ End first service -->
+                                    <div class="col-md-3 col-sm-3">
+                                        <div class="service-content bounceIn animated">
+                                            <a href="Generar_Dgp.jsp?text=8"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
+                                            <h3>Practicas Profesionales</h3>
+                                            <p>
 
-                                        </p>
-                                    </div>
-                                </div><!--/ End 2nd service -->
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="service-content bounceIn animated">
-                                        <a href="Generar_Dgp.jsp?text=9"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
-                                        <h3>Convenio Laboral Juvenil</h3>
-                                        <p>
+                                            </p>
+                                        </div>
+                                    </div><!--/ End 2nd service -->
+                                    <div class="col-md-3 col-sm-3">
+                                        <div class="service-content bounceIn animated">
+                                            <a href="Generar_Dgp.jsp?text=9"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
+                                            <h3>Convenio Laboral Juvenil</h3>
+                                            <p>
 
-                                        </p>
-                                    </div>
-                                </div><!--/ End 3rd service -->
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="service-content bounceIn animated">
-                                        <a href="Generar_Dgp.jsp?text=10"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
-                                        <h3>Locación de Servicios</h3>
-                                        <p>
+                                            </p>
+                                        </div>
+                                    </div><!--/ End 3rd service -->
+                                    <div class="col-md-3 col-sm-3">
+                                        <div class="service-content bounceIn animated">
+                                            <a href="Generar_Dgp.jsp?text=10"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
+                                            <h3>Locación de Servicios</h3>
+                                            <p>
 
-                                        </p>
-                                    </div>
-                                </div><!--/ End 4th service -->
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="service-content last bounceIn animated">
-                                        <a href="Generar_Dgp.jsp?text=11"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
-                                        <h3>No Domiciliado (Expositores extranjeros)</h3>
-                                        <p>
+                                            </p>
+                                        </div>
+                                    </div><!--/ End 4th service -->
+                                    <div class="col-md-3 col-sm-3">
+                                        <div class="service-content last bounceIn animated">
+                                            <a href="Generar_Dgp.jsp?text=11"><span class="service-icon"><i class="fa fa-file img-circle wow flipInX"></i></span></a>
+                                            <h3>No Domiciliado (Expositores extranjeros)</h3>
+                                            <p>
 
-                                        </p>
-                                    </div>
-                                </div><!--/ End 4th service -->
+                                            </p>
+                                        </div>
+                                    </div><!--/ End 4th service -->
+                                </div>
                             </div>
-                        </div>
-                    </section><!-- Service box end -->
-                    <%}%>
-                    <!-- end widget grid -->
-                      </div>
+                        </section><!-- Service box end -->
+                        <%}%>
+                        <!-- end widget grid -->
+                    </div>
                 </center>
             </div>
             <!-- END MAIN CONTENT -->
