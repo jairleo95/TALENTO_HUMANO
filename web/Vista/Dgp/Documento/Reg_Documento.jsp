@@ -69,7 +69,7 @@
 
         <link rel="stylesheet" type="text/css" href="../../../js/shadowbox/shadowbox.css"/>
 
-        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+     <!--   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">-->
         <link href="../../../css/Css_Bootstrap/fileinput.css" media="all" rel="stylesheet" type="text/css" />
     </head>
     <%  //String num = request.getParameter("num");
@@ -146,14 +146,13 @@
                                     <!-- widget content -->
                                     <div class="widget-body no-padding"  >
 
-                                        <form action="../../../documento" method="post" enctype="multipart/form-data"  class="smart-form form_dgp_doc" >
+                                        <form action="../../../documento" method="post" enctype="multipart/form-data"  class="smart-form form_dgp_doc"  novalidate="novalidate" >
 
 
 
                                             <table id="datatable_tabletools" class="table table-bordered table-responsive" width="100%">
 
                                                 <thead>
-                                                <center>
                                                     <div class="container-fluid text-center" style="margin-top: 8px;margin-bottom: -5px;">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"  >Adjuntar,Detalle y Acción</div>   
@@ -161,9 +160,7 @@
                                                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" >Adjuntar,Detalle y Acción</div>   
                                                         </div>
                                                     </div>
-                                                </center>
                                                 </thead>
-
                                                 <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 "> 
                                                     <tbody>
                                                         <%                        int i = 0;
@@ -174,7 +171,7 @@
 
                                                         <%  if (d.getTi_documento().trim().equals("DOCA")) {%>
                                                         <%  if (n_nac != 0) {%>
-                                                        <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                                        <tr class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                             <td   style="width:40%; margin-top: -15px;" align="center">
                                                                 <table class="table table-striped" style="margin-top: -9px;">
                                                                     <tr>
@@ -218,7 +215,7 @@
                                                                     <% } %>
                                                                     <% } %>    
                                                                     <%if (d.getEs_documento_adjunto() == null) {%>
-                                                                    <section  class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;" align="center">
+                                                                    <section  class=" col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;" align="center">
                                                                         <%}%>
                                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
                                                                         <label>¿Recibido en fisico?:</label> <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;" ><i style="margin-top: -5px;" data-swchon-text="SI" data-swchoff-text="NO"></i></label>
@@ -260,7 +257,7 @@
                                                     }%>
                                                     <%  if (d.getTi_documento().trim().equals("COFE")) {%>
                                                     <%  if (num_ad != 0) {%>
-                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                                    <tr class=" col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                         <td   style="width:35%; margin-top: -15px;" align="center">
                                                             <table class="table table-striped" style="margin-top: -8px;">
                                                                 <tr><td align="center"  style="border:1px solid;border-color: purple rgb(101, 89, 107); height:30px;background: white"><%=d.getDocumento()%></td></tr><br>
@@ -301,7 +298,7 @@
                                                                 <% } %>    
 
                                                                 <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
-                                                                <section  class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:0px;margin-top:-4px; " align="center">
+                                                                <section  class=" col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:0px;margin-top:-4px; " align="center">
                                                                     <label>¿Recibido en fisico?:</label><label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;" ><i style="margin-top: -5px;" data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                         <% } else { %>
                                                                         <% if (d.getEs_documento_adjunto() == null) { %>
@@ -348,7 +345,7 @@
                                                     %>             
 
 
-                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                                    <tr class=" col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                         <td style="width:40%; margin-top: -15px;" align="center">
                                                             <table class="table table-striped" style="margin-top: -11px;">
                                                                 <tr> 
@@ -399,7 +396,7 @@
 
                                                                 <% } %>
                                                                 <% } %> 
-                                                                <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:0px;margin-top:-4px; " align="center">
+                                                                <section class=" col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:0px;margin-top:-4px; " align="center">
                                                                     <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
                                                                     <label>¿Recibido en fisico?:</label><label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;" ><i style="margin-top: -5px;" data-swchon-text="SI" data-swchoff-text="NO"></i></label>
                                                                         <% } else { %>
@@ -451,7 +448,7 @@
 
                                                     %>
 
-                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                                    <tr class=" col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                         <td   style="width:40%; margin-top: -15px;" align="center" >
                                                             <table class="table table-striped " style="margin-top: -33px;">
                                                                 <tr><td  align="center" style="border:1px solid; border-color:purple rgb(101, 89, 107);height:50px;">Copia DNI hijo :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></td></tr><br>
@@ -491,7 +488,7 @@
                                                                 <% } %>    
                                                                 <%if (d.getEs_documento_adjunto() == null) {%>
 
-                                                                <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px;margin-top:-4px; " align="center">
+                                                                <section class=" col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:30px;margin-top:-4px; " align="center">
                                                                     <%}%>
 
                                                                     <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
@@ -537,7 +534,7 @@
                                                         if (h.getVal_doc() > 0 & d.getId_datos_hijo().equals(h.getId_datos_hijos_trabajador().trim())) {
                                                             //   i++;
                                                     %>
-                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                                    <tr class=" col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                         <td   style="width:40%; margin-top: -15px;" align="center">
                                                             <table class="table table-striped " style="margin-top: -27px;">
                                                                 <tr><td align="center"style="border:1px solid;border-color: purple rgb(101, 89, 107);height:50px;">Copia DNI hijo:  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></td></tr><br>
@@ -579,7 +576,7 @@
                                                                 <%if (d.getEs_documento_adjunto() == null) {%>
                                                                 <section class="col col-10" style="text-align:center;" align="center">
                                                                     <%}%>
-                                                                    <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:0px;margin-top:-4px; " align="center">
+                                                                    <section class=" col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:0px;margin-top:-4px; " align="center">
                                                                         <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001") /* | rol.trim().equals("ROL-0013") */)) {%>
                                                                         <label class="toggle"><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;"><i style="margin-top: -5px;" data-swchon-text="SI" data-swchoff-text="NO"></i> ¿Recibido en fisico?:</label>
                                                                             <% } else { %>
@@ -619,7 +616,7 @@
                                                     } else if (h.getVal_doc() == 0 & !id_hijo_faltante.equals(h.getId_datos_hijos_trabajador())) {
 
                                                     %>
-                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6" >
+                                                    <tr class=" col-lg-4 col-md-4 col-sm-6 col-xs-6" >
                                                         <td style=" width:40%; margin-top: -15px;" align="center">
                                                             <table class="table table-striped "  style="margin-top: -9px;">
                                                                 <tr><td align="center" style="border:1px solid;border-color: purple rgb(101, 89, 107); height:30px;background: white">Copia DNI hijo :  <%=h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador()%></td></tr><br>
@@ -673,7 +670,7 @@
 
                                                     <%} else if (!d.getTi_documento().trim().equals("DNIH") & !d.getTi_documento().trim().equals("DNIC") & !d.getTi_documento().trim().equals("ACMA") & !d.getTi_documento().trim().equals("COFE") & !d.getTi_documento().trim().equals("DOCA")) {
                                                     %>
-                                                    <tr class="cajita col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                                    <tr class=" col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                                     <input type="hidden" name="iddoc<%=i + 1%>" value="<%=d.getId_document()%>">
                                                     <td  style="width:40%; margin-top: -15px;" align="center">
                                                         <table class="table table-striped" style="margin-top: -9px;">
@@ -720,7 +717,7 @@
                                                             <% } %>
                                                             <%if (d.getEs_documento_adjunto() == null) {%>
                                                             <label>¿Recibido en fisico?:</label>
-                                                            <section class="cajita col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:0px;margin-top:-4px; " align="center">
+                                                            <section class=" col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-left:0px;margin-top:-4px; " align="center">
                                                                 <%}%>
                                                                 <% if (d.getEs_documento_adjunto() == null & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001"))) {%>
                                                                 <label class="toggle"  ><input type="checkbox" value="1"   name="estado<%=i + 1%>" name="checkbox-toggle" style="margin-left:auto; margin-right:auto;" ><i  data-swchon-text="SI" data-swchoff-text="NO"></i></label>
@@ -924,13 +921,13 @@
 
         <!-- PAGE RELATED PLUGIN(S) -->
 
-
         <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="../../../js/bootstrap/fileinput.js" type="text/javascript"></script>
-        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
-         <script src="../../../js/bootstrap/es.js" type="text/javascript"></script>
         
+        <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+        
+        <script src="../../../js/bootstrap/fileinput.js" type="text/javascript"></script>
+      <!--  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>-->
+         <script src="../../../js/bootstrap/es.js" type="text/javascript"></script>
         <script src="../../../js/notification/SmartNotification.min.js"></script>
         <script type="text/javascript" src="../../../js/shadowbox/demo.js"></script>
         <script type="text/javascript" src="../../../js/shadowbox/shadowbox.js"></script>
@@ -965,20 +962,12 @@
                                                             timeout: 6000
                                                         });
                                                     }
-
-
-
                                                     function validateSizeFile() {
                                                         var x = true;
                                                         console.log("enter to function validar")
-
                                                         $.each($(".fileDocument"), function (index) {
                                                             var thisObject = $(this);
                                                             if (thisObject.val() !== "") {
-                                                                // console.log("value input :" + thisObject.val())
-                                                                //   console.log("tam input :" + thisObject[0].files.size)
-
-                                                                //  $("#ulList").empty();
                                                                 var fp = thisObject;
                                                                 var lg = fp[0].files.length; // get length
                                                                 var items = fp[0].files;
@@ -989,56 +978,37 @@
                                                                         var fileName = items[i].name; // get file name
                                                                         var fileSize = items[i].size; // get file size 
                                                                         var fileType = items[i].type; // get file type
-
                                                                         // append li to UL tag to display File info
                                                                         fragment = "<li>" + fileName + " (<b>" + fileSize + "</b> bytes) - Type :" + fileType + "</li>";
                                                                         console.log(fragment)
-
-
                                                                         if (fileSize > 512000) {
-                                                                            // $(thisObject).val(" ");
-                                                                            //    thisObject.clik(".kv-file-remove");
                                                                             $(thisObject).focus();
                                                                             x = false;
-
-
                                                                         }
-                                                                       
-                                                                        
-                                                                        
-
                                                                     }
-
-                                                                    // $("#ulList").append(fragment);
                                                                 }
-
                                                             }
-                                                            console.log(index)
-                                                            //   console.log(thisObject.files.length);
                                                         });
-                                                        console.log(x)
                                                         return x;
                                                     }
-
 
                                                     $(document).ready(function () {
                                                         pageSetUp();
                                                         $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
                                                             $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
                                                         });
-                                                        $("#file-0").fileinput({
-                                                            'allowedFileExtensions': ['jpg', 'png', 'gif'],
-                                                        });
-
+                                                     
                                                         $(".btn_reg_doc").click(function () {
-                                                            console.log(validateSizeFile());
-                                                            if (validateSizeFile()) {
+                                                           // console.log(validateSizeFile());
+                                                           if ( $(".form_dgp_doc").valid()) {
+     if (validateSizeFile()) {
                                                                 $(".form_dgp_doc").submit();
                                                             }
+}
+                                                       
+                       
+                                                           
                                                         });
-
-
-
                                                         $(".fileDocument").fileinput({
                                                              language: "es",
                                                             showUpload: false,
@@ -1063,7 +1033,6 @@
                                                                 return filename.replace('(', '_').replace(']', '_');
                                                             }
                                                         });
-
                                                        
                                                         if ($(".fileDocument").length) {
                                                             $(".btn_reg_doc").show();
@@ -1091,7 +1060,7 @@
                                                         });
 
                                                      
-                                                    })
+                                                    });
 
         </script>
     </body>

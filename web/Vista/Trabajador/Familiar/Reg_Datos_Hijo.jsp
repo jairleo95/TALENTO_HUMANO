@@ -16,7 +16,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-            <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production-plugins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
 
@@ -107,7 +107,7 @@
                                 </section>
                                 <section class="col col-4">
                                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                        <input type="date" name="FECHA_NAC"  class="date" required="">
+                                        <input type="text" name="FECHA_NAC"  class="datePickerInput" required="" data-mask="99/99/9999" data-mask-placeholder= "_">
                                     </label>
                                 </section>
                                 <section class="col col-4">
@@ -180,8 +180,8 @@
         <div class="listar_hijos"></div>
 
 
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
+        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>-->
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -250,11 +250,12 @@
         <script src="../../../js/app.min.js"></script>
 
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-        <!-- Voice command : plugin -->
-        <script src="../../../js/speech/voicecommand.min.js"></script>
+        <!-- Voice command : plugin 
+        <script src="../../../js/speech/voicecommand.min.js"></script>-->
         <!-- PAGE RELATED PLUGIN(S) -->
         <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
         <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
+        <script src="../../../js/Js_Formulario/Js_Form.js"></script>
         <script src="../../../js/Js_Validar/Validar_Formulario.js"></script>
         <script type="text/javascript">
 
@@ -322,21 +323,12 @@
                 });
                 $(".nu_doc").numeric();
                 $('#checkout-form').validate({
-                    // Rules for form validation
-                    rules: {
-                        FECHA_NAC: {
-                            val_fecha: true
-                        }
-                    },
                     // Do not change code below
                     errorPlacement: function (error, element) {
                         error.insertAfter(element.parent());
                     }
                 });
-                jQuery.validator.addMethod("val_fecha", function (value, element) {
-                    var d = value.split("-");
-                    return this.optional(element) || String(parseInt(d[0])).length == 4;
-                }, "¡Fecha ingresada invalida!");
+            
                 $(".ti_doc").change(
                         function () {
                             $(".nu_doc").val("");
@@ -354,7 +346,7 @@
                             $(".doc").focus();
                         }
                 );
-            })
+            });
 
         </script>
     </body>

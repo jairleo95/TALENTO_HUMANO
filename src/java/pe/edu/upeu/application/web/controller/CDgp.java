@@ -761,7 +761,7 @@ public class CDgp extends HttpServlet {
             if (opc.equals("Imprimir_det_proceso")) {
                 String idrp = request.getParameter("idrp");
                 String iddgp = request.getParameter("dgp");
-                String dep = request.getParameter("dgp");
+                String dep = request.getParameter("iddep");
                 rpta.put("html", dgp.Imprimir_det_proceso(iddgp, idrp, dep));
                 rpta.put("rpta", "1");
             }

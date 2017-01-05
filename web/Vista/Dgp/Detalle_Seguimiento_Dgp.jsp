@@ -494,11 +494,7 @@
         </script>
 
     
-        <script>
-            $(document).ready(function() {
-                if ($(".estado-aut").val() == )
-            })
-        </script>
+    
 
     </body>
 

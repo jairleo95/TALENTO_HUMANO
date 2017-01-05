@@ -14,6 +14,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        
+          <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link href="../../css/smartadmin-production.min.css" rel="stylesheet" type="text/css"/>
         <link href="../../css/smartadmin-skins.min.css" rel="stylesheet" type="text/css"/>
 
@@ -102,8 +104,8 @@
         </div>
         <!-- END MAIN PANEL -->
 
-        <!--Script Open Pannel--->
-        <script src="../../js/jquery.min.js"></script>
+        <!--Script Open Pannel
+        <script src="../../js/jquery.min.js"></script>--->
         <script src="../../js/Js_Sort/jquery.reveal.js" type="text/javascript"></script>
         <!--End Script Open Pannel--->
         <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->

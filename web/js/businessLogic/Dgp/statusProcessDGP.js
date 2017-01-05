@@ -80,16 +80,22 @@ function listHistory(at) {
                     if (lista[i].es_autorizacion === '2' & (rol === "ROL-0002" || rol === "ROL-0005" || rol === "ROL-0001")) {
 
                         function DivEspecial() {
-                            var DivEspecial = '<div id="divEs" class="alert alert-danger alert-block">';
-                            DivEspecial += '<a class="close" data-dismiss="alert" href="#">×</a>';
-                            DivEspecial += ' <h4 class="alert-heading">DGP fuera de Proceso!</h4>';
-                            DivEspecial += '<p>El DGP se ha rechazado por uno de los Usuarios... <a href="../../autorizacion?opc=HDGP&iddgp=' + id + '&ID' + id1 + '" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp=' + id + '" class="btn btn-primary id-dgp "><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" class="btn btn-primary" onclick="ListarMotivo()" data-toggle="modal" data-target="#myModalComentario"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>';
-                            //  alert(+lista[i].us_no_puesto+);                                                                                                                                                                                                                                                                                                                                                                                
-                            DivEspecial += '</p>';
-                            DivEspecial += '<input type="hidden" class="id-autorizacion" value="lista[i].id_autorizacion">';
-                            DivEspecial += '</div>';
+                            var html = '<div id="divEs" class="alert alert-danger alert-block">';
+                            html += '<a class="close" data-dismiss="alert" href="#">×</a>';
+                            html += ' <h4 class="alert-heading">DGP fuera de Proceso!</h4>';
+                            html += '<p>El DGP se ha rechazado por un Usuario... <a href="../../autorizacion?opc=HDGP&iddgp=' + id + '&ID' + id1
+                                    + '" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp='
+                                    + id + '" class="btn btn-primary id-dgp "><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" class="btn btn-primary" onclick="ListarMotivo()" data-toggle="modal" data-target="#myModalComentario"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>';
+                            if (rol === "ROL-0001") {
+                                html += '<a href="../../autorizacion?opc=eliminarDGP&iddgp=' + id + '" class="btn btn-danger"><strong><i class="fa fa-arrow-circle-right"></i> Eliminar DGP</strong></a>';  
+                            }
 
-                            return DivEspecial;
+                            //  alert(+lista[i].us_no_puesto+);                                                                                                                                                                                                                                                                                                                                                                                
+                            html += '</p>';
+                            html += '<input type="hidden" class="id-autorizacion" value="lista[i].id_autorizacion">';
+                            html += '</div>';
+
+                            return html;
                         }
                     }
                 }

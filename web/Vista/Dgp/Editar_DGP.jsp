@@ -272,7 +272,7 @@
                                                                         r = (Requerimiento) Listar_Requerimiento.get(index);
                                                                         if (dg.getId_requerimiento().trim().equals(r.getId_requerimiento().trim())) {
                                                                 %>
-                                                                //<option value="<%=r.getId_requerimiento()%>" selected=""  ><%=r.getNo_req()%></option>
+                                                                <option value="<%=r.getId_requerimiento()%>" selected=""  ><%=r.getNo_req()%></option>
                                                                 <%} else {%>
                                                                 <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req()%></option>                      
                                                                 <%}

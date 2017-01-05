@@ -144,7 +144,7 @@ public class Datos_Hijo_TrabajadorDAO implements InterfaceDatos_Hijo_Trabajador 
             cst.setString(2, AP_PATERNO);
             cst.setString(3, AP_MATERNO);
             cst.setString(4, NO_HIJO_TRABAJADOR);
-            cst.setString(5, DateFormat.toFormat3(FE_NACIMIENTO));
+            cst.setString(5, DateFormat.toFormat1(FE_NACIMIENTO));
             cst.setString(6, ES_SEXO);
             cst.setString(7, ES_TIPO_DOC);
             cst.setString(8, NU_DOC);

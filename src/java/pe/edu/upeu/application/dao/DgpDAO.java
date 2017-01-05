@@ -690,6 +690,26 @@ public class DgpDAO implements InterfaceDgpDAO {
             }
         }
     }
+    @Override
+    public void eliminarDGP(String IDDGP) {
+
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_ELIMINAR_DGP(?)}");
+            cst.setString(1, IDDGP);
+            cst.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
 
     @Override
     public List<Map<String, ?>> list_Req(String id) {

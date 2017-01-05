@@ -47,6 +47,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
         <!-- SmartAdmin RTL Support is under construction
@@ -148,12 +149,12 @@
                                                     <div class="row" >
                                                         <section class="col col-2 ">
                                                             <label class="input" id="titu">Desde: 
-                                                                <input type="text" name="FEC_DESDE"  class="input-group-sm simple-field-data-mask frompicker" data-mask="00/00/0000" autocomplete="off" required="">
+                                                                <input type="text" name="FEC_DESDE"  class="input-group-sm simple-field-data-mask frompicker"  data-mask="99/99/9999" data-mask-placeholder= "_" required="">
                                                             </label>
                                                         </section>
                                                         <section class="col col-2">
                                                             <label class="input" id="titu">Hasta: 
-                                                                <input type="text" name="FEC_HASTA"  class="input-group-sm simple-field-data-mask topicker" data-mask="00/00/0000" autocomplete="off" required="">
+                                                                <input type="text" name="FEC_HASTA"  class="input-group-sm simple-field-data-mask topicker" data-mask="99/99/9999" data-mask-placeholder= "_" >
                                                             </label>
                                                         </section>
                                                         <section class="col col-2" id="titu">

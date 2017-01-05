@@ -1,3 +1,5 @@
+<%@page import="pe.edu.upeu.application.util.DateFormat"%>
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%    HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
@@ -24,7 +26,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-            <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production-plugins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
 
@@ -65,7 +67,6 @@
         <style>
 
         </style>
-        <link rel="stylesheet" href="../../../css/Css_Formulario/form.css"  type="text/css" > 
 
         <style>
             #btn-duplicar{
@@ -145,7 +146,7 @@
                                                                         <label >Apellido Paterno:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="APELLIDO_P" value="<%=d.getAp_paterno()%>" required="" id="fname"   class="form-control input-group-sm"  required="" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_P" value="<%=d.getAp_paterno()%>" required="" id="fname"   class="form-control input-group-sm"  onblur="this.value = this.value.toUpperCase()" maxlength="50" >
 
                                                                         </div>
                                                                     </div>
@@ -156,7 +157,7 @@
                                                                         <label >Apellido Materno:</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="APELLIDO_M" value="<%=d.getAp_materno()%>" required=""  id="lname"  class="form-control input-group-sm" required="" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="APELLIDO_M" value="<%=d.getAp_materno()%>" required=""  id="lname"  class="form-control input-group-sm" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
 
                                                                         </div>
                                                                     </div>
@@ -166,7 +167,7 @@
                                                                         <label>Nombre(s):</label>
                                                                         <div class="input-group">
                                                                             <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-                                                                            <input type="text" name="NOMBRE" value="<%=d.getNo_hijo_trabajador()%>" required=""  id="lname"  class="form-control input-group-sm" required="" onblur="this.value = this.value.toUpperCase()" maxlength="50" >
+                                                                            <input type="text" name="NOMBRE" value="<%=d.getNo_hijo_trabajador()%>" required=""  id="lname"  class="form-control input-group-sm"  onblur="this.value = this.value.toUpperCase()" maxlength="50" >
 
                                                                         </div>
                                                                     </div>
@@ -180,13 +181,13 @@
                                                                     <label>Fecha de Nacimiento:</label>
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-child fa-lg fa-fw"></i><label class="edad"></label></span>
-                                                                        <input type="date" name="FECHA_NAC" required="" 
+                                                                        <input type="text" name="FECHA_NAC" required="" 
                                                                                <%if (d.getFe_nacimiento() != null) {%>
-                                                                               value="<%=d.getFe_nacimiento()%>"   
+                                                                               value="<%=DateFormat.toFormat4(d.getFe_nacimiento())%>"   
                                                                                <%} else {%>
-                                                                               value=""
+
                                                                                <%}%>
-                                                                               class="form-control input-group-sm fecha" >
+                                                                               class="form-control input-group-sm datePickerInput"  data-mask="99/99/9999" data-mask-placeholder= "_" >
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -432,10 +433,11 @@
                     <!-- Voice command : plugin -->
                     <script src="../../../js/speech/voicecommand.min.js"></script>
 
-                    <!-- PAGE RELATED PLUGIN(S) -->
+                    <!-- PAGE RELATED PLUGIN(S) 
                     <script src="../../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
-                    <script src="../../../js/plugin/fuelux/wizard/wizard.min.js"></script>
+                    <script src="../../../js/plugin/fuelux/wizard/wizard.min.js"></script>-->
                     <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
+                    <script src="../../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
                     <script src="../../../js/Js_Validar/Validar_Formulario.js"></script>
 
                     <script type="text/javascript">
@@ -506,20 +508,17 @@
                                                                                     $('#wizard-1').validate({
                                                                                         // Rules for form validation
                                                                                         rules: {
-                                                                                            FECHA_NAC: {
-                                                                                                val_fecha: true,
-                                                                                                val_edad: true
-                                                                                            }
+                                                                                         /*   FECHA_NAC: {
+                                                                                              //  val_fecha: true,
+                                                                                              //  val_edad: true
+                                                                                            }*/
                                                                                         },
                                                                                         // Do not change code below
                                                                                         errorPlacement: function (error, element) {
                                                                                             error.insertAfter(element.parent());
                                                                                         }
                                                                                     });
-                                                                                    jQuery.validator.addMethod("val_fecha", function (value, element) {
-                                                                                        var d = value.split("-");
-                                                                                        return this.optional(element) || String(parseInt(d[0])).length == 4;
-                                                                                    }, "¡Fecha ingresada invalida!");
+                                                                                   
                                                                                     $(".ti_doc").change(
                                                                                             function () {
                                                                                                 //$(".nu_doc").val("");
@@ -537,7 +536,7 @@
                                                                                                 $(".doc").focus();
                                                                                             }
                                                                                     );
-                                                                                })
+                                                                                });
 
                     </script>
                     </body>

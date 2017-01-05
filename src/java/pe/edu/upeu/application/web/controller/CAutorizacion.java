@@ -176,6 +176,22 @@ public class CAutorizacion extends HttpServlet {
                         // sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
                         response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
                     }
+                    if (opc.equals("eliminarDGP")) {
+                        String iddgp = request.getParameter("iddgp");
+                     
+                        dgp.eliminarDGP(iddgp);
+                        if (permissionDepartFilter) {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", false));
+                        }
+                        if (permissionDireccionFilter) {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, false));
+                        } else {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", false));
+                        }
+                        // sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
+                        response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
+
+                    }
                     if (opc.equals("Rechazar")) {
                         String iddgp = request.getParameter("IDDETALLE_DGP");
                         String comentario = request.getParameter("comentario");
@@ -378,7 +394,7 @@ public class CAutorizacion extends HttpServlet {
                             htmlBody += "       <strong>" + autCA.getDe_pasos() + "</strong>";
                             htmlBody += "   </a>";
                             htmlBody += "  </td>";
-                            htmlBody += "   <td >"+autCA.getFe_creacion()+"</td>";
+                            htmlBody += "   <td >" + autCA.getFe_creacion() + "</td>";
                             htmlBody += " <td>";
                             if (autCA.getLi_motivo() != null) {
 
@@ -410,7 +426,7 @@ public class CAutorizacion extends HttpServlet {
                                     htmlBody += " <a href='../../plazo_dgp?opc=Ver_detalle_plazo&iddgp=" + autCA.getId_dgp() + "' class='label label-danger popoverPlazo'  data-toggle='popover' data-trigger='hover' data-placement='top' title='Record de plazos cumplidos' data-content=\"" + autCA.getVer_list_plazo() + "\" data-html='true'> <strong>No cumplio plazos</strong></a>";
                                     htmlBody += " </td>";
                                 } else if (autCA.getVal_plazo() == 0) {
-                                    htmlBody += "   <a href='../../plazo_dgp?opc=Ver_detalle_plazo&iddgp=" + autCA.getId_dgp() + "' class='label label-primary popoverPlazo' data-toggle='popover' data-trigger='hover' data-placement='top' title='Record de plazos cumplidos' data-content=\"" + autCA.getVer_list_plazo()+ "\" data-html='true'> <strong>Cumplio plazos</strong></a></td>";
+                                    htmlBody += "   <a href='../../plazo_dgp?opc=Ver_detalle_plazo&iddgp=" + autCA.getId_dgp() + "' class='label label-primary popoverPlazo' data-toggle='popover' data-trigger='hover' data-placement='top' title='Record de plazos cumplidos' data-content=\"" + autCA.getVer_list_plazo() + "\" data-html='true'> <strong>Cumplio plazos</strong></a></td>";
                                 }
                                 if (idrol.trim().equals("ROL-0006")) {
 
@@ -520,8 +536,8 @@ public class CAutorizacion extends HttpServlet {
                         String cuerpo = request.getParameter("cuerpo");
                         String[] emails = to.split(",");
                         for (String email : emails) {
-                            System.out.println("email:"+email);
-                         correo.Enviar(to, from, asunto, cuerpo);
+                            System.out.println("email:" + email);
+                            correo.Enviar(to, from, asunto, cuerpo);
                         }
                         System.out.print("Ejecutando envio de correos");
                         /*correo.Enviar("jairleo95@gmail.com", "jairleo95@gmail.com", "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"
