@@ -13,7 +13,7 @@
         <link type="text/css" rel="stylesheet" href="../../css/Css_Reporte/Reportes.css">
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
-            <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
         <title>Generar Requerimiento</title>
@@ -161,18 +161,6 @@
         </table>
     </center>
 </body>
-<script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
-<script src="../../js/app.config.js"></script>
-<script src="../../js/bootstrap/bootstrap.min.js"></script>
-<script src="../../js/demo.min.js"></script>
-<script src="../../js/app.min.js"></script>
-<script type="text/javascript">
-
-                        // DO NOT REMOVE : GLOBAL FUNCTIONS!
-                        $(document).ready(function() {
-                            pageSetUp();
-                        })
-</script>
 </html>
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");

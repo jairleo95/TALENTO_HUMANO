@@ -30,7 +30,7 @@
             .input-desp{ 
                 margin-top: 5%;
                 width:100%;
-             /*   //height: 200px;*/
+                /*   //height: 200px;*/
                 position: static;
                 float: left;
                 border-color: #F2F2F2;
@@ -41,7 +41,7 @@
                 margin: 0;
                 position: static;
                 float: left;
-              /*  //  float: start;*/
+                /*  //  float: start;*/
             }
             input{
                 position: static;
@@ -67,7 +67,7 @@
             p { padding:0 0 5px 0; }
             input { padding:5px; border:1px solid #999; border-radius:4px; -moz-border-radius:4px; -web-kit-border-radius:4px; -khtml-border-radius:4px; }
             body{
-           /*     //  height: 500px;*/
+                /*     //  height: 500px;*/
             }
 
         </style>
@@ -78,55 +78,51 @@
 
     </head>
     <body>
-       
+
         <b><label><%=noFor%></label></b>
         <br> 
         <br> 
         <br> 
     <center>
         <form class="form" action="../../formato_horario" method="POST"> 
-            
+
 
             <input type="hidden" name="NOMRBE"  value="<%=noFor%>"  >
 
             <div class="input-desp">
                 <% InterfaceFormato_HorarioDAO l = new Formato_HorarioDAO();
-                
-                for (int i = 0; i < l.List_D().length; i++) {
-              int g = 0;
-                    for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
-                                Formato_Horario fh = new Formato_Horario();
-                                fh = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);  %>                                 
-                                
-                       <%     if(fh.getNo_dia().trim().equals(l.List_D()[i][0])){
-                            if (g == 0) {
-                        %>
+
+                    for (int i = 0; i < l.List_D().length; i++) {
+                        int g = 0;
+                        for (int j = 0; j < LISTAR_FORMATO_HORARIO.size(); j++) {
+                            Formato_Horario fh = new Formato_Horario();
+                            fh = (Formato_Horario) LISTAR_FORMATO_HORARIO.get(j);  %>                                 
+
+                <%     if (fh.getNo_dia().trim().equals(l.List_D()[i][0])) {
+                        if (g == 0) {
+                %>
                 <table > 
 
-                    <tr><td align="center" colspan="2"><%=l.List_D()[i][1] %></td></tr>
-                    
-                    <% } 
-                    if(fh.getNo_turno().trim().equals("T"+(g+1)+"")){%>
+                    <tr><td align="center" colspan="2"><%=l.List_D()[i][1]%></td></tr>
+
+                    <% }
+                        if (fh.getNo_turno().trim().equals("T" + (g + 1) + "")) {%>
                     <tr >
-                        <td>T<%=g+1%>:</td>
+                        <td>T<%=g + 1%>:</td>
                         <td><b><input type="text"  disabled="" value="<%=fh.getHo_desde()%>"></b></td>      
                         <td><b><input type="text"  disabled="" value="<%=fh.getHo_hasta()%>"></b></td>
                     </tr>         
                     <%          }%>
                     <% g++;
-                            }%>
+                        }%>
                     <%  }%>
                 </table>
-                    <%}%>
-                    
+                <%}%>
+
             </div>
         </form>
     </center>
- 
-
 </body>
-
-
 </html>
 
 <%} else {

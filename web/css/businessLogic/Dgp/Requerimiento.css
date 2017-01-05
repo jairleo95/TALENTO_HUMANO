@@ -1,0 +1,81 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16-dic-2016, 3:37:13
+    Author     : JAIR
+*/
+
+  /* Service Box
+================================================== */
+
+            #service{
+                position: relative;
+                /* //  padding: 0 0 40px;*/
+            }
+            .service-content{
+                text-align: center;
+                position: relative;
+                /* //    padding: 0 10px;*/
+            }
+            .service-content .service-icon{
+                position: relative;
+            }
+            .service-content:after{
+                content: "";
+                background: #1881F2;
+                width: 3%;
+                height: 4%;
+                position: absolute;
+                top: 40%;
+                /* // margin-top: -58px;*/
+                left: 105%;
+                -webkit-border-radius: 100%;
+                -moz-border-radius: 100%;
+                border-radius: 100%;
+                -webkit-box-shadow: 0 0 0 3px rgba(0, 0, 0, .09);
+                -moz-box-shadow: 0 0 0 3px rgba(0, 0, 0, .09);
+                box-shadow: 0 0 0 3px rgba(0, 0, 0, .09);
+                z-index: 3;
+            }
+
+            .service-content:before{
+                content: '';
+                background: #ccc;
+                position: absolute;
+                top: 40%;
+                margin-top: 1%;
+                width: 100%;
+                /* //left: 74px;*/
+                height: 1px;
+                z-index: 0;
+
+            }
+            .service-content.last:after, 
+            .service-content.last:before{
+                content: '';
+                position: relative;
+                box-shadow: none;
+                border: 0;
+            }
+            .service-content i{
+                display: inline-block;
+                overflow: hidden;
+                color: #fff;
+                font-size: 350%;
+                background: #1881F2;
+                width:150px; 
+                height:150px;
+                line-height: 150px;
+                /* // margin:10px 0 0;*/
+                -webkit-box-shadow: 0 0 0 12px #f0f0f0;
+                -moz-box-shadow: 0 0 0 12px #f0f0f0;
+                box-shadow: 0 0 0 12px #f0f0f0;
+            }
+
+            .service-content h3{
+                font-size: 15px;
+
+            }

@@ -12,8 +12,6 @@
 
 <%@page import="pe.edu.upeu.application.model.Evaluacion_Emp"%>
 
-
-
 <jsp:useBean id="LIST_EVALUACION" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html>
@@ -190,9 +188,6 @@
 
         </div>
         <!-- end widget -->
-
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
     </body>
 </html>
 <%} else {

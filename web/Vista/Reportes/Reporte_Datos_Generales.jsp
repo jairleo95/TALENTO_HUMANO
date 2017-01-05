@@ -434,14 +434,54 @@
                                 $.post(url, data, function (objJson) {
                                     var lista = objJson.respuesta;
                                     if (lista.length) {
-                                        /*for (var i = 0; i < lista.length; i++) {
-                                         alert(lista[i].nombre);
-                                         }*/
-                                        var m = '<tr>';
-                                        for (var i = 0; i < 54; i++) {
-                                            m += '<td>hola</td>';
+                                        var m = '';
+                                        for (var i = 0; i < lista.length; i++) {
+                                            m += '<tr>';
+                                            m += '<td>' + i +1+ '</td>';
+                                            m += '<td>' + lista[i].aps + '</td>';
+                                            m += '<td>' + lista[i].dir + '</td>';
+                                            m += '<td>' + lista[i].dep + '</td>';
+                                            m += '<td>' + lista[i].area + '</td>';
+                                            m += '<td>' + lista[i].secc + '</td>';
+                                            m += '<td>' + lista[i].puesto + '</td>';
+                                            m += '<td>' + lista[i].tipo + '</td>';
+                                            m += '<td>' + lista[i].num + '</td>';
+                                            m += '<td>' + lista[i].appa + '</td>';
+                                            m += '<td>' + lista[i].apma + '</td>';
+                                            m += '<td>' + lista[i].nombre + '</td>';
+                                            m += '<td>' + lista[i].apell + '</td>';
+                                            m += '<td>' + lista[i].desde + '</td>';
+                                            m += '<td>' + lista[i].hasta + '</td>';
+                                            m += '<td>' + lista[i].mes + '</td>';
+                                            m += '<td>' + lista[i].sexo + '</td>';
+                                            m += '<td>' + lista[i].fe_nac + '</td>';
+                                            m += '<td>' + lista[i].naci + '</td>';
+                                            m += '<td>' + lista[i].es_civil + '</td>';
+                                            m += '<td>' + lista[i].gp_san + '</td>';
+                                            m += '<td>' + lista[i].sis_pen + '</td>';
+                                            m += '<td>' + lista[i].afp + '</td>';
+                                            m += '<td>' + lista[i].sit_edu + '</td>';
+                                            m += '<td>' + lista[i].ins_per + '</td>';
+                                            m += '<td>' + lista[i].reg + '</td>';
+                                            m += '<td>' + lista[i].tip_ins + '</td>';
+                                            m += '<td>' + lista[i].co_ins + '</td>';
+                                            m += '<td>' + lista[i].carr + '</td>';
+                                            m += '<td>' + lista[i].a_egr + '</td>';
+                                            m += '<td>' + lista[i].hora_p + '</td>';
+                                            m += '<td>' + lista[i].domi + '</td>';
+                                            m += '<td>' + lista[i].depar + '</td>';
+                                            m += '<td>' + lista[i].prov + '</td>';
+                                            m += '<td>' + lista[i].dis + '</td>';
+                                            m += '<td>' + lista[i].rel + '</td>';
+                                            m += '<td>' + lista[i].igl + '</td>';
+                                            m += '<td>' + lista[i].carg + '</td>';
+                                            m += '<td>' + lista[i].aut + '</td>';
+                                            m += '<td>' + lista[i].condicion + '</td>';
+                                            m += '<td>' + lista[i].dep + '</td>';
+                                            m += '<td>' + lista[i].dep + '</td>';
+                                            m += '<td>' + lista[i].dep + '</td>';
+                                            m += '</tr>';
                                         }
-                                        m += '</tr>';
                                         var tabla = createTable();
                                         $(".conTable").empty();
                                         $(".conTable").append(tabla);
@@ -490,12 +530,13 @@
                                     }
                                 });
                             }
-                            function createTable() {
+                            function createTable() { //funcion para crear tabla que tendra los datos generales
                                 var t = '<table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">';
                                 t += '<thead>';
                                 t += '<tr>';
                                 t += '<th data-hide="phone">N°</th>';
                                 t += '<th data-class="APS">Codigo APS</th>';
+                                t += '<th data-hide="DEP">Direccion</th>';
                                 t += '<th data-hide="DEP">Departamento</th>';
                                 t += '<th data-hide="ARE">Area</th>';
                                 t += '<th data-hide="secc">SecciÃ³n</th>';

@@ -1,6 +1,7 @@
     
 
 
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
@@ -54,21 +55,8 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        <link href="../../css/businessLogic/Contrato/subirContratoAdjunto.css" rel="stylesheet" type="text/css"/>
 
-        <style>
-            .s2 {
-                color: #D14;
-            }
-
-            .c1 {
-                color: #998;
-                font-style: italic;
-            }
-
-            .mi {
-                color: #099;
-            }
-        </style>
 
     </head>
     <body class="">
@@ -175,8 +163,8 @@
 
         <!--================================================== -->
 
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>-->
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -238,8 +226,8 @@
 
         <![endif]-->
 
-        <!-- Demo purpose only -->
-        <script src="../../js/demo.min.js"></script>
+        <!-- Demo purpose only 
+        <script src="../../js/demo.min.js"></script>-->
 
         <!-- MAIN APP JS FILE -->
         <script src="../../js/app.min.js"></script>
@@ -251,69 +239,7 @@
         <!-- PAGE RELATED PLUGIN(S) -->
         <script src="../../js/plugin/dropzone/dropzone.min.js"></script>
 
-
-
-        <script type="text/javascript">
-
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
-            $(document).ready(function () {
-
-                pageSetUp();
-
-
-
-                Dropzone.autoDiscover = false;
-                /*$("#mydropzone").dropzone({
-                 //url: "/file/post",
-                 addRemoveLinks: true,
-                 maxFilesize: 0.5,
-                 dictResponseError: 'Error al cargar archivo!'
-                 
-                 });*/
-
-                var myDropzone = new Dropzone("#mydropzone",
-                        {
-                            addRemoveLinks: true,
-                            maxFilesize: 0.5,
-                            dictResponseError: 'Error al cargar archivo!',
-                            maxFiles: 5
-                                    //  acceptedFiles: ('image/*', '.zip', '.pdf', '.rar')
-                        }
-                );
-                $(".btn_accion").click(function () {
-                    myDropzone.removeAllFiles();
-                });
-                myDropzone.on("addedfile", function (file) {
-                    /* $.post("../../contrato_adjunto", "idc=" + $(".idc").val() + "&archivo=" + file.name, function (mensaje) {
-                     alert(mensaje);
-                     });*/
-
-                    var jForm = new FormData();
-
-                    jForm.append("idc", $('.idc').val());
-                    jForm.append("archivo", file);
-                    $.ajax({
-                        type: "POST",
-                        url: "../../contrato_adjunto",
-                        cache: false,
-                        processData: false,
-                        contentType: false,
-                        data: jForm
-                    }).done(function (f) {
-                        alert("Archivo Subido correctamente!");
-                    });
-
-
-                });
-
-
-            });
-
-        </script>
-
-
-
+        <script src="../../js/businessLogic/Contrato/subirContratoAdjunto.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
 
     </body>
 

@@ -81,34 +81,7 @@
 
         <link rel="stylesheet" href="../../css/chosen.css"  type="text/css" > 
         <link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-        <style>
-            .td{
-                font-weight: bold;
-            }
-            #titu{
-                font-weight: bold;
-                color: #005cac;
-                /*  // color: blue;*/
-            }
-            .cont{
-                margin: 0 auto;
-            }
-            .caja{
-                box-shadow: 2px 2px 5px #cccccc;
-                background-color: #ffffff;
-            }
-            .c_header{
-                color: #ffffff;
-                background-color: #3276b1;
-                border-color: #3276b1;
-            }
-            table{
-                border: 0px;
-            }
-            .texto-h{
-                width:40px;
-            }
-        </style>
+        <link href="../../css/businessLogic/Dgp/editDGP.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>   
 

@@ -1,0 +1,36 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16-dic-2016, 19:24:04
+    Author     : JAIR
+*/
+
+.td{
+    font-weight: bold;
+}
+#titu{
+    font-weight: bold;
+    color: #005cac;
+    /*  // color: blue;*/
+}
+.cont{
+    margin: 0 auto;
+}
+.caja{
+    box-shadow: 2px 2px 5px #cccccc;
+    background-color: #ffffff;
+}
+.c_header{
+    color: #ffffff;
+    background-color: #3276b1;
+    border-color: #3276b1;
+}
+table{
+    border: 0px;
+}
+.texto-h{
+    width:40px;
+}

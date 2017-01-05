@@ -561,82 +561,8 @@
     <script src="../../js/notification/SmartNotification.min.js"></script>
 
     <script src="../../js/businessLogic/Horario/horario.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+    <script src="../../js/businessLogic/Contrato/detalleInfoContractual.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
 
-
-    <script>
-        function SelectorListaContrato(objSelector, idtr, idc) {
-            $.ajax({
-                url: "../../contrato", type: 'POST', data: "opc=SelectorListaContrato&idtr=" + idtr + "&idc=" + idc,
-                success: function (data, textStatus, jqXHR) {
-                    if (data.rpta) {
-                        objSelector.append(data.html);
-                        $(".anno").change(function () {
-                            window.location.href = '../../contrato?opc=actualizar&idtr=' + $(".idtr").val() + '&idc=' + $(this).val();
-                        });
-                    }
-                }
-            });
-        }
-        $(document).ready(function () {
-            $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-                $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
-            });
-            SelectorListaContrato($(".SelectorListaContrato"), $(".idtr").val(), $(".idc").val());
-            $(".btnHorario").click(function () {
-                listHorario($(this).data("valor"));
-            });
-            $(".ck_habilitar_is").click(function () {
-                if ($(".ck_habilitar_is").prop('checked')) {
-                    $.ajax({
-                        url: "../../contrato",
-                        data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=1"
-                    }).done(function () {
-                        $.smallBox({
-                            title: "¡Alerta!",
-                            content: "Se ha autortizado que la secretaria pueda subir e imprimir el contrato.",
-                            color: "#296191",
-                            iconSmall: "fa fa-cloud",
-                            timeout: 4000
-                        });
-
-                    }).fail(function (jqXHR, textStatus, errorThrown) {
-                        $.smallBox({
-                            title: "¡Error!",
-                            // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
-                            content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
-                            color: "#C46A69",
-                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                            timeout: 6000
-                        });
-                    });
-                } else {
-                    $.ajax({
-                        url: "../../contrato",
-                        data: "opc=Habilitar_is&id=" + $(".id_contrato").val() + "&estado=2"
-                    }).done(function () {
-                        $.smallBox({
-                            title: "¡Alerta!",
-                            content: "Se ha autortizado que la secretaria NO pueda subir e imprimir el contrato.",
-                            color: "#C79121",
-                            iconSmall: "fa fa-cloud",
-                            timeout: 4000
-                        });
-                    }).fail(function (jqXHR, textStatus, errorThrown) {
-                        $.smallBox({
-                            title: "¡Error!",
-                            // content: "<i class='fa fa-clock-o'></i> <i>" +jqXHR.responseText+" - "+ textStatus + " - "+errorThrown+" : Se ha producido un error que causo que no se realice la accion...</i>",
-                            content: "<i class='fa fa-clock-o'></i> <i>  " + textStatus + " - " + errorThrown + " : Se ha producido un error que causo que no se realice la accion...</i>",
-                            color: "#C46A69",
-                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                            timeout: 6000
-                        });
-                    });
-                }
-            });
-
-
-        });
-    </script>
     <%} else {
             out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
         }%>

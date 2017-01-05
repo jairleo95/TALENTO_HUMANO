@@ -1,0 +1,23 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16-dic-2016, 19:25:45
+    Author     : JAIR
+*/
+.ui-datepicker-calendar {
+    display: none;
+}
+.form-inline .checkbox input[type=checkbox].checkbox+span, .form-inline .radiobox input[type=radio].radiobox+span {
+    margin-left: -20px;
+}
+
+.inbox-compose-footer, .inbox-download, .inbox-info-bar, .inbox-message {
+    margin-right: 0px;
+    position: initial;
+}
+.bootstrap-tagsinput {
+    border: 1px solid #fff;
+}
