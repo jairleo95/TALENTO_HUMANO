@@ -28,7 +28,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-            <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
@@ -75,7 +75,7 @@
             #titu{
                 font-weight: bold;
                 color: #005cac;
-              /*  // color: blue;*/
+                /*  // color: blue;*/
             }
             p{
                 font-weight: bold; 
@@ -155,7 +155,7 @@
                                                     <section class="col col-4">
                                                         <label class="select" id="titu">
                                                             Tipo de Planilla :<select name="ti_planilla" class="ti_planilla" required="" >
-                                                                <option value="" >[SELECCIONE]</option>
+                                                                <option value="" >[Seleccione]</option>
                                                             </select>
                                                         </label>
 
@@ -163,7 +163,7 @@
                                                     <section class="col col-4">
                                                         <label class="select" id="titu">
                                                             Requerimiento :<select name="requerimiento" class="req" required="" >
-                                                                <option value="" >[SELECCIONE]</option>
+                                                                <option value="" >[Seleccione]</option>
                                                             </select>
                                                         </label>
 
@@ -171,7 +171,7 @@
                                                     <section class="col col-4">
                                                         <label class="select" id="titu">
                                                             Proceso :<select name="proceso" class="proceso" required="" >
-                                                                <option value="" >[SELECCIONE]</option>
+                                                                <option value="" >[Seleccione]</option>
                                                             </select>
                                                         </label>
                                                     </section>
@@ -182,42 +182,36 @@
                                                     <section class="col col-4">
                                                         <label class="select" id="titu">
                                                             Dirección :<select name="direccion" class="direccion" required="" >
-                                                                <option value="" >[SELECCIONE]</option>
+                                                                <option value="" >[Seleccione]</option>
                                                             </select>
                                                         </label>
                                                     </section>
                                                     <section class="col col-4">
                                                         <label class="select" id="titu">
-                                                            Departamento :<select name="deparatamento" class="departamento" required="" >
-                                                                <option value="" >[SELECCIONE]</option>
+                                                            Departamento :<select name="departamento" class="departamento"  >
+                                                                <option value="" >[Seleccione]</option>
 
                                                             </select>
                                                         </label>
                                                     </section>
                                                     <section class="col col-4">
                                                         <label class="select" id="titu">
-                                                            Area :<select name="area" class="area" required="" >
-                                                                <option value="" >[SELECCIONE]</option>
+                                                            Area :<select name="area" class="area"  >
+                                                                <option value="" >[Seleccione]</option>
                                                             </select>
                                                         </label>
                                                     </section>
                                                 </div>
-
                                             </fieldset>
-
-
-
                                             <footer>
                                                 <button type="button" class="btn btn-danger btn-cancelar">
                                                     Cancelar
                                                 </button>
-                                                <button type="button" class="btn btn-primary">
+                                                <button type="submit" class="btn btn-primary">
                                                     Agregar
                                                 </button>
-
                                             </footer>
                                         </form>
-
                                     </div>
                                     <!-- end widget content -->
 
@@ -271,7 +265,7 @@
                                                     <th>Tipo de Planilla</th>
                                                     <th>Requerimiento</th>
                                                     <th data-class="expand">Proceso</th>
-                                                    <th data-hide="phone">DirecciÃ³n</th>
+                                                    <th data-hide="phone">Dirección</th>
                                                     <th data-hide="phone">Departamento</th>
                                                     <th data-hide="phone">Area</th>
                                                     <th>Estado</th>
@@ -373,7 +367,7 @@
                     }
                     var lista = objJson.lista;
                     if (lista.length > 0) {
-                        req.append("<option >[SELECCIONE]</option>");
+                        req.append("<option >[Seleccione]</option>");
                         for (var i = 0; i < lista.length; i++) {
                             text_html += "<option value='" + lista[i].id + "'>" + lista[i].nombre + "</option>";
                         }
@@ -386,7 +380,52 @@
                 });
 
             }
+            function insertDetalleReqProceso() {
+                $.ajax({
+                    url: "../../Proceso", data: $(".form-pro_req").serialize() + "&opc=insertDetalleReqProceso", type: 'POST',
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(data)
+                        listDetalleReqProceso();    
+                    }
+                });
 
+            }
+            function listDetalleReqProceso() {
+
+                var tbodys = $(".tbody-pro-paso");
+                tbodys.empty();
+                $.post("../../Proceso", "opc=Listar_Pro_Paso_Id&id_req=" + $(".req").val() + "&id_pro=" + $(".proceso").val() + "&id_dir=" + $(".direccion").val() + "&id_dep=" + $(".departamento").val(), function (objJson) {
+                    var lista = objJson.lista;
+                    if (objJson.rpta === -1) {
+                        alert(objJson.mensaje);
+                        return;
+                    }
+                    t = $('#datatable_tabletools').DataTable(); 
+                   for (var f = 0; f < lista.length; f++) {
+                        var estadoE, estadoB;
+                        if (lista[f].estado === "1") {
+                            estadoE = "Habilitado";
+                            estadoB = "<button class='btn btn-warning' value=" + f + ">Desactivar</button>";
+                        } else if (lista[f].estado === "0") {
+                            estadoE = "Deshabilitado";
+                            estadoB = "<button class='btn btn-success' value=" + f + " style='width: 98%;'>Activar</button>";
+                        }
+                       
+                        t.row.add([
+                            lista[f].ti_planilla,
+                            lista[f].req,
+                            lista[f].proceso,
+                            lista[f].dir,
+                            lista[f].dep,
+                            lista[f].area,
+                            estadoE,
+                            "<div class='row'>" + estadoB + "<button class='btn btn-danger'><i class='fa fa-times'></i></button></div>"
+                        ]).draw();
+
+                    }
+
+                });
+            }
             $(document).ready(function () {
                 var t;
                 $(".btn-cancelar").click(function () {
@@ -407,50 +446,21 @@
                     list_select($(".area"), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(this).val(), "1", $(this).val());
                 });
                 $(".proceso, .req, .direccion, .departamento").change(function () {
-                    var tbodys = $(".tbody-pro-paso");
-                    tbodys.empty();
-                    $.post("../../Proceso", "opc=Listar_Pro_Paso_Id&id_req=" + $(".req").val() + "&id_pro=" + $(".proceso").val() + "&id_dir=" + $(".direccion").val() + "&id_dep=" + $(".departamento").val(), function (objJson) {
-                        var lista = objJson.lista;
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-                        t = $('#datatable_tabletools').DataTable();
-                        for (var f = 0; f < lista.length; f++) {
-                            var estadoE, estadoB;
-                            if (lista[f].estado == "1") {
-                                estadoE = "Habilitado";
-                                estadoB="<button class='btn btn-warning' value=" + f + ">Desactivar</button>";
-                            } else if (lista[f].estado == "0") {
-                                estadoE = "Deshabilitado";
-                                estadoB="<button class='btn btn-success' value=" + f + " style='width: 98%;'>Activar</button>";
-                            }
-                            t.row.add([
-                                lista[f].ti_planilla,
-                                lista[f].req,
-                                lista[f].proceso,
-                                lista[f].dir,
-                                lista[f].dep,
-                                lista[f].area,
-                                estadoE ,
-                                "<div class='row'>"+estadoB + "<button class='btn btn-danger'><i class='fa fa-times'></i></button></div>"
-                            ]).draw();
-
-                        }
-
-                    });
-
+                    listDetalleReqProceso();
                 });
-                var $checkoutForm = $('#checkout-form').validate();
-              
+                var $checkoutForm = $('#checkout-form').validate({
+                    submitHandler: function (form) {
+                        // some other code
+                        // maybe disabling submit button
+                        // then:
+                        //$(form).submit();
+                        insertDetalleReqProceso();
+                    }
+                });
+
+
             });
-
-
         </script>
-
-
-      
-
     </body>
 
 </html>

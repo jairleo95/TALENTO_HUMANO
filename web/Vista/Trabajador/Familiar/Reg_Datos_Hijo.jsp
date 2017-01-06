@@ -256,7 +256,6 @@
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
         <!-- Voice command : plugin -->
         <script src="../../../js/speech/voicecommand.min.js"></script>
-        <script src="../../../js/businessLogic/Hijos/regDatosHijos.js" type="text/javascript"></script>
         <!-- PAGE RELATED PLUGIN(S) -->
         <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
         <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>

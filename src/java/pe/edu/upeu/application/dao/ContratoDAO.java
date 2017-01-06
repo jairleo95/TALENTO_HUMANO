@@ -58,8 +58,10 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(1, null);
             cst.setString(2, ID_DGP);
             cst.setString(3, DateFormat.toFormat1(FE_DESDE));
-            if (FE_HASTA.equals("")) {
-                cst.setString(4, FE_HASTA);
+            if (FE_HASTA == null) {
+                cst.setString(4, "");
+                System.out.println("enter to null condition");
+
             } else {
                 cst.setString(4, DateFormat.toFormat1(FE_HASTA));
             }
@@ -905,8 +907,9 @@ public class ContratoDAO implements InterfaceContratoDAO {
             cst.setString(1, ID_CONTRATO);
             cst.setString(2, ID_DGP);
             cst.setString(3, DateFormat.toFormat1(FE_DESDE));
-            if (FE_HASTA.equals("")) {
-                cst.setString(4, FE_HASTA);
+            if (FE_HASTA == null) {
+                cst.setString(4, "");
+                System.out.println("enter to null condition");
             } else {
                 cst.setString(4, DateFormat.toFormat1(FE_HASTA));
             }

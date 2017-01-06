@@ -122,6 +122,7 @@ public class CDgp extends HttpServlet {
         boolean permisoAdmin = false;
         boolean permissionDireccionFilter = false;
         boolean permissionDepartFilter = false;
+        boolean permissionPuestoFilter = false;
         switch (idrol) {
             case "ROL-0001":
                 // permissionDireccionFilter = true;
@@ -132,6 +133,8 @@ public class CDgp extends HttpServlet {
                 permisoAdmin = false;
                 permissionDireccionFilter = true;
                 break;
+            case "ROL-0010":
+                permissionPuestoFilter = true;
             default:
                 permissionDepartFilter = true;
                 permisoAdmin = false;
@@ -253,7 +256,7 @@ public class CDgp extends HttpServlet {
                 }
                 FE_DESDE = DateFormat.toFormat3(FE_DESDE);
                 FE_HASTA = DateFormat.toFormat3(FE_HASTA);
-                out.println("Nueva fecha :"+DateFormat.toFormat1(FE_HASTA));
+                out.println("Nueva fecha :" + DateFormat.toFormat1(FE_HASTA));
 
                 dgp.INSERT_DGP(null, FE_DESDE, FE_HASTA, CA_SUELDO, DE_DIAS_TRABAJO, ID_PUESTO, ID_REQUERIMIENTO, ID_TRABAJADOR, CO_RUC, DE_LUGAR_SERVICIO,
                         DE_SERVICIO, DE_PERIODO_PAGO, DE_DOMICILIO_FISCAL, DE_SUBVENCION, DE_HORARIO_CAPACITACION, DE_HORARIO_REFRIGERIO, DE_DIAS_CAPACITACION,
@@ -382,7 +385,7 @@ public class CDgp extends HttpServlet {
                 response.sendRedirect("Vista/Dgp/Reg_Dgp.jsp?idreq=" + idreq + "&es_cs=" + ES_CUENTA_SUELDO + "&as_f=" + dht.ASIGNACION_F(idtr));
             }
             if (opc.equals("Reg_renuncia")) {
-                String iddeph = request.getParameter("idep");
+                //   String iddeph = request.getParameter("idep");
                 /* TEMPORAL*/
                 String Tipo_planilla = tr.tipo_planilla(idtr);
                 if (Tipo_planilla.equals("TPL-0001")) {
@@ -503,12 +506,15 @@ public class CDgp extends HttpServlet {
             }
             if (opc.equals("Proceso")) {
                 if (permissionDepartFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", false));
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
                 }
                 if (permissionDireccionFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, false));
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false));
+                }
+                if (permissionPuestoFilter) {
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", idpuesto, false));
                 } else {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", false));
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
                 }
 
                 response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
@@ -528,13 +534,16 @@ public class CDgp extends HttpServlet {
                 String iddgp = request.getParameter("iddgp");
                 out.print(iddgp);
                 dgp.REG_DGP_FINAL(iddgp);
-                if (permissionDepartFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", false));
+                 if (permissionDepartFilter) {
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
                 }
                 if (permissionDireccionFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, false));
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false));
+                }
+                if (permissionPuestoFilter) {
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", idpuesto, false));
                 } else {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", false));
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
                 }
                 response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp?a=t");
             }

@@ -28,7 +28,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-            <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
@@ -94,8 +94,8 @@
 
                     <!-- row -->
                     <div class="row">
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-editbutton="false">
+                        <article class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Mantenimiento de Pasos</h2>
@@ -108,12 +108,12 @@
                                                     <div class="row">
                                                         <section class="col col-6">
                                                             <label class="input">
-                                                                <input name="num" required=""  maxlength="3" class="num_paso" maxlength="6" placeholder="Numero de Paso">
+                                                                <input name="num" required=""  maxlength="3" class="num_paso"   placeholder="Número">
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input">
-                                                                <input type="text" name="cod" class="co_paso" required=""maxlength="6" placeholder="Codigo" />
+                                                                <input type="text" name="cod" class="co_paso" required="" maxlength="6" placeholder="Código" />
                                                             </label>
                                                         </section>
                                                     </div>
@@ -130,14 +130,14 @@
                                                 </section>
                                                 <section class="col col-lg-8">
                                                     <label class="textarea textarea-resizable">
-                                                        <textarea type="text" name="desc" required="" maxlength="300" rows="5" cols="50" class="desc_paso custom-scroll" placeholder="Descripcion"></textarea>
+                                                        <textarea   name="desc" required="" maxlength="300" rows="5" cols="50" class="desc_paso custom-scroll" placeholder="Descripción"></textarea>
                                                     </label>
                                                 </section>
                                             </fieldset>
                                             <footer>
                                                 <input type="hidden" name="opc" class="opc" value="Registrar"/>
                                                 <input type="hidden" name="id" class="id_p" value=""/>
-                                                <button class="btn btn-primary btn-registrar" type="button" id="btn-registrar" name="Enviar" value="Registrar Paso" > Registrar Paso</button>
+                                                <button class="btn btn-primary btn-registrar" type="button" id="btn-registrar" name="Enviar" value="Registrar Paso" > Registrar</button>
                                                 <button class="btn btn-default btn_cancel_edit" type="button" style="display: none"  >Cancelar</button>
                                             </footer>
                                         </form>
@@ -145,10 +145,9 @@
                                 </div>
                             </div>
                         </article>
-                    </div>
-                    <div class="row">
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
-                            <div class="jarviswidget jarviswidget-color-greenDark" id="wid-id-2" data-widget-editbutton="false">
+
+                        <article class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-editbutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Lista de pasos Habilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
@@ -172,17 +171,17 @@
                                 </div>
                             </div>
                         </article>
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
-                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-3" data-widget-editbutton="false">
+                        <article class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-2" data-widget-editbutton="false" >
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Lista de puestos :<strong><label class="lb-list_puesto"></label></strong> </h2>
+                                    <h2>Puestos Asignados<strong><label class="lb-list_puesto"></label></strong> </h2>
                                 </header>
                                 <div>
                                     <div class="jarviswidget-editbox">
                                     </div>
                                     <div class="widget-body no-padding">
-                                        <form action="" method="post" class="smart-form form_puesto">
+                                        <form action="" method="post" class="smart-form form_puesto" novalidate="">
                                             <fieldset>
                                                 <div class="row">
                                                     <section class="col col-4">
@@ -232,20 +231,20 @@
                                                     </section>
                                                     <section class="col col-3">
                                                         <div style="margin-top: 15px; width: 98%; " >
-                                                            <button class="form-control btn btn-primary btn-agregar-p" style="margin: auto;">Agregar Puesto</button> 
+                                                            <button type="button" class="form-control btn btn-primary btn-agregar-p" style="margin: auto;">Agregar Puesto</button> 
                                                         </div>                                                            
                                                     </section>
                                                 </div>
                                             </fieldset>
                                         </form>
-                                        <div class="custom-scroll table-responsive"style="height:320px; overflow-y: scroll;">
+                                        <div class="custom-scroll table-responsive" style="height:320px; overflow-y: scroll;">
                                             <table class="table table-striped table-bordered table-hover" style="width: 98%;margin: auto; ">
                                                 <thead>
                                                     <tr>
                                                         <th data-class="expand">Puesto</th>
                                                         <th data-hide="phone,tablet">Area</th>
                                                         <th data-hide="phone,tablet">Departamento</th>
-                                                        <th data-hide="phone,tablet">DirecciÃ³n</th>
+                                                        <th data-hide="phone,tablet">Dirección</th>
                                                         <th>Estado</th>
                                                         <th colspan="2">Acciones</th>
                                                     </tr>
@@ -258,10 +257,12 @@
                                 </div>
                             </div>
                         </article>
+
                     </div>
+
                     <div class="row">
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="jarviswidget jarviswidget-color-yellow" id="wid-id-4" data-widget-editbutton="false">
+                            <div class="jarviswidget jarviswidget-color-yellow"   data-widget-editbutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Lista de pasos Deshabilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
@@ -275,8 +276,8 @@
                                                 <thead>
                                                     <tr>
                                                         <td>Nro</td>
-                                                        <td>DescripciÃ³n</td>
-                                                        <td>NÃºmero</td>
+                                                        <td>Descripción</td>
+                                                        <td>Número</td>
                                                         <td>Codigo</td>
                                                         <td>Proceso</td>
                                                         <td>Editar</td>
@@ -315,8 +316,8 @@
 
         <!--================================================== -->
 
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
+        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>-->
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -378,8 +379,8 @@
 
         <![endif]-->
 
-        <!-- Demo purpose only -->
-        <script src="../../js/demo.min.js"></script>
+        <!-- Demo purpose only
+        <script src="../../js/demo.min.js"></script> -->
 
         <!-- MAIN APP JS FILE -->
         <script src="../../js/app.min.js"></script>
@@ -533,17 +534,17 @@
                     tbody_p.append(texto);
                     texto = "";
                     $(".form_puesto").show();
-                    $(".btn-eliminar_puesto").click(
-                            function () {
-                                if (confirm("Â¿Esta Seguro de Eliminar?")) {
-                                    alert("opc=Eliminar_PP&id=" + $(".iddp" + $(this).val()).val());
-                                    $.post("../../paso", "opc=Eliminar_PP&id=" + $(".iddp" + $(this).val()).val(), function (objJson) {
-
+                    $(".btn-eliminar_puesto").click(function () {
+                        var $this = $(this).val();
+                        if (confirm("¿Esta Seguro de Eliminar?")) {
+                            alert("opc=Eliminar_PP&id=" + $(".iddp" + $this).val());
+                            $.post("../../paso", "opc=Eliminar_PP&id=" + $(".iddp" + $this).val(),
+                                    function (objJson) {
+                                        console.log("value:" + $this);
+                                        list_puesto($this - 1);
                                     });
-                                } else {
-
-                                }
-                            }
+                        }
+                    }
                     );
                     $(".btn_deshabilitar_p").click(function () {
                         $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=0", function (objJson) {
@@ -576,7 +577,7 @@
             }
             $(document).ready(function () {
                 $(".btn_cancel_edit").click(function () {
-                    $("#btn-registrar").text("Registrar Paso");
+                    $("#btn-registrar").text("Registrar");
                     $(".opc").val("Registrar");
                     $(".form-paso")[0].reset();
                     $(this).hide();
@@ -608,9 +609,9 @@
                             Listar_Paso(pr);
                         }
                     });
-                    $("#btn-registrar").text("Registrar Paso");
+                    $("#btn-registrar").text("Registrar");
                     $(".opc").val("Registrar");
-                    $(".form-paso")[0].reset();
+                    //$(".form-paso")[0].reset();
                     return false;
                 }
                 );
@@ -640,7 +641,7 @@
                             data: $(".form_puesto").serialize() + "&opc=Reg_puesto_paso"
                         }).done(function () {
                             list_puesto($(".num_p").val());
-                            alert("¡Registrado Exitosamente!");
+                            // alert("¡Registrado Exitosamente!");
                         }).fail(function (objJson) {
                             alert(objJson.mensaje);
                         });
@@ -782,23 +783,12 @@
                     group: 1
                 }).on('change', updateOutput);
                 // activate Nestable for list 2
-                $('#nestable2').nestable({
-                    group: 1
-                }).on('change', updateOutput);
+
                 // output initial serialised data
                 updateOutput($('#nestable').data('output', $('#nestable-output')));
-                updateOutput($('#nestable2').data('output', $('#nestable2-output')));
-                $('#nestable-menu').on('click', function (e) {
-                    var target = $(e.target), action = target.data('action');
-                    if (action === 'expand-all') {
-                        $('.dd').nestable('expandAll');
-                    }
-                    if (action === 'collapse-all') {
-                        $('.dd').nestable('collapseAll');
-                    }
-                });
-                $('#nestable3').nestable();
-            })
+
+
+            });
 
         </script>
         <script type="text/javascript">

@@ -62,22 +62,13 @@ $(document).ready(function () {
         });
 $(".nu_doc").numeric();
 $('#wizard-1').validate({
-    // Rules for form validation
-    rules: {
-        FECHA_NAC: {
-            val_fecha: true,
-            val_edad: true
-        }
-    },
+ 
     // Do not change code below
     errorPlacement: function (error, element) {
         error.insertAfter(element.parent());
     }
 });
-jQuery.validator.addMethod("val_fecha", function (value, element) {
-    var d = value.split("-");
-    return this.optional(element) || String(parseInt(d[0])).length == 4;
-}, "¡Fecha ingresada invalida!");
+ 
 $(".ti_doc").change(
         function () {
             //$(".nu_doc").val("");

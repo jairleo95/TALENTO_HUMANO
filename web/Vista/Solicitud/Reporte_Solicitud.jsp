@@ -19,7 +19,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-          <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
@@ -58,7 +58,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
         <script type="text/javascript" src="../../js/JQuery/jQuery.js" ></script>
-    
+
     </head>
     <body class="body"  >
         <!-- MAIN PANEL -->
@@ -186,7 +186,7 @@
                                 <table class="table table-hover table-striped  table-responsive tabla_detalle_sol" ></table>
 
                                 <form class="smart-form comentario">Comentario:<label class="textarea"><textarea rows="3"  required="" name="comentario" placeholder="Información adicional"></textarea></label></form>
-                                <input  type="hidden" value="" class="data_procesar" />
+                                <input  type="text" value="" class="data_procesar" />
                             </div>
                             <div class="modal-footer foot_sol">
 
@@ -248,7 +248,7 @@
     <!-- JQUERY MASKED INPUT 
     <script src="../../js/plugin/masked-input/jquery.maskedinput.min.js"></script>-->
 
- 
+
 
     <!-- JQUERY UI + Bootstrap Slider 
     <script src="../../js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>-->
@@ -284,7 +284,8 @@
     <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script type="text/javascript">
-        function listar_det_sol(valor, tipo, tabla_solicitud) {
+        function listar_det_sol(valor, tipo) {
+            console.log("enter to function listar_det_sol")
             var tb = $(".tabla_detalle_sol");
             tb.empty();
             var texto_html = '';
@@ -316,8 +317,7 @@
                     texto_html += '<tr><td>Detalle de Plazo</td><td>' + lista[i].detalle_plazo + '</td></tr>';
                     if (lista[i].ti_plazo === '2') {
                         texto_html += ' <tr class="success"><td>Mes de ingreso solicitado : </td><td>' + lista[i].mes + '</td></tr>';
-                    }
-                    else {
+                    } else {
                         texto_html += ' <tr class="success"><td>Fecha de inicio de contrato solicitado : </td><td>' + lista[i].fecha_plazo + '</td></tr>';
                     }
                     texto_html += '<tr><td>Motivo de solicitud</td><td>' + lista[i].solicitud + '</td></tr>';
@@ -332,9 +332,10 @@
                     }
                     if (tipo === '2') {
                         texto_html += '<tr><td>Comentario :</td><td>' + lista[i].comentario + '</td></tr>';
-                    } else {
-                        $(".data_procesar").val("&id=" + lista[i].id + "&tipo=" + lista[i].ti_plazo + "&fecha=" + lista[i].fecha_plazo);
                     }
+                    console.log("id_solicitud:" + lista[i].id);
+                    $(".data_procesar").val("&id=" + lista[i].id + "&tipo=" + lista[i].ti_plazo + "&fecha=" + lista[i].fecha_plazo);
+
                 }
                 texto_html += '';
                 tb.append(texto_html);
@@ -355,7 +356,7 @@
                                     $(".btn_cancel_form").click();
                                     $(".comentario")[0].reset();
                                     //add_tables("1");
-                                   // add_tables("2");
+                                    // add_tables("2");
                                     listar_solicitudes("1");
                                     listar_solicitudes("2");
                                     $.smallBox({
@@ -426,32 +427,47 @@
                     }
                     t_body.append(text_html);
                     text_html = '';
-
-                     if ($.fn.dataTable.isDataTable(table_sol)) {
-                        $.fn.dataTable.isDataTable(table_sol).destroy();
+                    
+                    $(".btn_sol_aut").click(function () {
+                        console.log("valor btn sol aut:" + $(this).val());
+                        listar_det_sol($(this).val(), "1");
+                    });
+                    $(".btn_sol").click(function () {
+                        console.log("valor btn sol:" + $(this).val());
+                        listar_det_sol($(this).val(), "2");
+                    });
+                    
+                    if ($.fn.dataTable.isDataTable(table_sol)) {
+                        console.log("destrpy datatable!")
+                        // $.fn.dataTable.isDataTable(table_sol).destroy();
                     } else {
                         var tablas = table_sol.dataTable({searching: true, paging: true});
-                        var rows = tablas.fnGetNodes();
-                        for (var i = 0; i < rows.length; i++) {
-                            var obj = $(rows[i]).find(".btn_sol_aut");
-                            var obj2 = $(rows[i]).find(".btn_sol");
-                            if (tipo === "1") {
-                                obj2.click(function () {
-                                    listar_det_sol($(this).val(), tipo, tablas);
-                                });
-                            } else {
-                                obj.click(function () {
-                                    listar_det_sol($(this).val(), "2", tablas);
-                                });
-                            }
-                        }
+
+                        // var rows = tablas.fnGetNodes();
+
+                        /* //for (var i = 0; i < rows.length; i++) {
+                         var obj = $(rows[i]).find(".btn_sol_aut");
+                         var obj2 = $(rows[i]).find(".btn_sol");
+                         if (tipo === "1") {
+                         obj2.click(function () {
+                         listar_det_sol($(this).val(), tipo, tablas);
+                         });
+                         } else {
+                         obj.click(function () {
+                         listar_det_sol($(this).val(), "2", tablas);
+                         });
+                         }*/
+                        // }
 
                     }
 
                 }
 
             });
+
         }
+
+
         $(document).ready(function () {
             pageSetUp();
             $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {

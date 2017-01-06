@@ -243,7 +243,7 @@ $(document).ready(function () {
         });
     });
     $("#selec_dep").change(function () {
-        $("#select_dir").val("");
+      //  $("#select_dir").val("");
         $("#Selec_Area").val("");
         $("#select_sec").val("");
         $("#pu_id_se").val("");
@@ -260,8 +260,8 @@ $(document).ready(function () {
                     c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
                 }
             } else {
-                c.append("<option value='' > [no hay] </option>");
-            }
+                    c.append("<option value='' > [no hay] </option>");
+                }
         });
     });
     $("#select_dir").change(function () {

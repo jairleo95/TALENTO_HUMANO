@@ -16,8 +16,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pe.edu.upeu.application.dao.DetalleReqProcesoDAO;
 import pe.edu.upeu.application.dao.ProcesoDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceDetalleReqProcesoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceProcesoDAO;
+import pe.edu.upeu.application.model.DetalleReqProceso;
+import pe.edu.upeu.application.util.CCriptografiar;
 
 /**
  *
@@ -42,6 +46,7 @@ public class CProceso extends HttpServlet {
         PrintWriter out = response.getWriter();
         InterfaceProcesoDAO p = new ProcesoDAO();
         Map<String, Object> rpta = new HashMap<String, Object>();
+        InterfaceDetalleReqProcesoDAO iddrp = new DetalleReqProcesoDAO();
         try {
             String opc = request.getParameter("opc");
 
@@ -91,6 +96,35 @@ public class CProceso extends HttpServlet {
                 String es = request.getParameter("es");
                 p.statupdate(id, es);
                 System.out.println("All is right in controller " + es + " " + id);
+            }
+            if (opc.equals("insertDetalleReqProceso")) {
+                DetalleReqProceso drp = new DetalleReqProceso();
+                drp.setEsReqProceso("1");
+
+                String area = "0";
+                String departamento = "0";
+                
+                if (request.getParameter("area") .equals("")) {
+                    area = "0";
+                } else {
+                    area = request.getParameter("area");
+                }
+                if (request.getParameter("departamento") .equals("")) {
+                    departamento = "0";
+                } else {
+                    departamento = request.getParameter("departamento");
+                }
+                
+                drp.setIdArea(area);
+                drp.setIdDepartamento(departamento);
+                drp.setIdDireccion(request.getParameter("direccion"));
+
+                drp.setIdProceso(request.getParameter("proceso"));
+                drp.setIdRequerimiento(request.getParameter("requerimiento"));
+                  rpta.put("serialize", drp);
+                String id = iddrp.insertDetalleReqProceso(drp);
+                rpta.put("id", CCriptografiar.Encriptar(id));
+                rpta.put("status", true);
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");

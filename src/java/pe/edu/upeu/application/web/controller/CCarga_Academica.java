@@ -183,7 +183,7 @@ public class CCarga_Academica extends HttpServlet {
                 rpta.put("List_ws", carga.List_Carga_Academica_WS(semestre));
             }
             if (opc.equals("listEsCargaAcademica")) {
-                rpta.put("list", dgp.LIST_DGP_PROCESO(iddep, "", true));
+                rpta.put("list", dgp.LIST_DGP_PROCESO(iddep, "", "",true));
             }
             if (opc.equals("actualizar_ws")) {
                 //WSClienteAcademico ws = new WSClienteAcademico();

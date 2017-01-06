@@ -539,8 +539,8 @@
         <!-- END MAIN PANEL -->
 
 
-        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>-->
 
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -613,15 +613,15 @@
         <script src="../../js/speech/voicecommand.min.js"></script>-->
 
         <!-- PAGE RELATED PLUGIN(S) -->
-        <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
-        <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
+  
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-        <script type="text/javascript" src="../../js/Js_Trabajador/Js_Form_Trabajador.js"></script>
+        <script type="text/javascript" src="../../js/businessLogic/Trabajador/regTrabajador.js"></script>
 
 
 
         <script type="text/javascript">
             $(document).ready(function () {
+               
                 //MOSTRAR ASPECTO ACADEMICO PARA MODIFICAR
                 if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
                         | $("#sit_edu").val() == 'SED-0015'

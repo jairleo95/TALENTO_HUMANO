@@ -52,7 +52,6 @@ import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSub_ModalidadDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
-import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Contrato;
 import pe.edu.upeu.application.properties.UserMachineProperties;
 import pe.edu.upeu.application.util.DateFormat;
@@ -707,7 +706,8 @@ public class CContrato extends HttpServlet {
                 String situacionEspecial = request.getParameter("situacionEspecial");
                 FE_DESDE = DateFormat.toFormat3(FE_DESDE);
                 FE_HASTA = DateFormat.toFormat3(FE_HASTA);
-                out.println("Nueva fecha :" + DateFormat.toFormat1(FE_HASTA));
+                      System.out.println("FE_HASTA: " + FE_HASTA);
+            //    out.println("Nueva fecha :" + DateFormat.toFormat1(FE_HASTA));
                 con.INSERT_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA,
                         NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION,
                         FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO,

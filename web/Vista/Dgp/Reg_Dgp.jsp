@@ -17,7 +17,6 @@
 <jsp:useBean id="List_Puesto" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="Listar_Requerimiento" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="list_Cuenta_Sueldo" scope="session" class="java.util.ArrayList"/>
-<jsp:useBean id="fecha_maxima_plazo" scope="session" class="java.lang.String"/>
 <!DOCTYPE html >
 <html>
     <head>

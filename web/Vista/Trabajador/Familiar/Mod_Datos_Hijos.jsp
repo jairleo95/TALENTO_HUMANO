@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.util.DateFormat"%>
 <%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
 <%    HttpSession sesion = request.getSession();

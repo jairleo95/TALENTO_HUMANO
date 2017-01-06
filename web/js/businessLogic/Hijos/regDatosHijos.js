@@ -66,7 +66,7 @@
 
                 $(".ti_doc").change(function () {
                     $(".nu_doc").val("");
-                    if ($(this).val() === 1) {
+                    if ($(this).val() === "1") {
                         $(".nu_doc").numeric(false, function () {
                         });
                         $(".nu_doc").attr("maxlength", "8");
