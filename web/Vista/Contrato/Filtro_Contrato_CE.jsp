@@ -94,7 +94,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2><center>Reporte de Contratos (Casos Especiales) -- 2015</center></h2>
+                                    <h2><center>Reporte de Contratos (Casos Especiales)</center></h2>
 
                                 </header>
 

@@ -318,13 +318,13 @@
         <aside id="left-panel">
 
             <!-- User info -->
-            <div class="logininfo slideInRight fast animated">
+            <div class="logininfo">
                 <div class="row">
                     <div class="avatar-user col-md-3">
                         <input id="id_trabajador" type="hidden" value="<%out.println(sesion.getAttribute("IDTR"));%>" />
                         <input id="iuser" type="hidden" value="<%out.println(id_user);%>" />
                         <a href="javascript:void(0);" id="show-shortcut" >
-                            <img id="foto_usuario" src="img/avatar_default.jpg"  />
+                            <img id="foto_usuario" src="img/avatar_default.jpg" class="bounceIn animated" />
                         </a>  
                     </div>
                     <div class="col-md-9">
@@ -362,7 +362,7 @@
                             dp = (V_Privilegio) listarURL.get(i);
                     %>
                     <%  if (dp.getId_privilegio().equals("PRV-000012")) {%>
-                    <li class="li-privilegio">
+                    <li class="li-privilegio bounceInDown animated">
                         <a href="#" data-value="fa fa-lg fa-fw fa-file"><i class="fa fa-lg fa-fw fa-file-text"></i> <span class="menu-item-parent">Generar Requerimiento</span></a>
                         <ul>
                             <%if (!id_rol.trim().equals("ROL-0011") | id_rol.trim().equals("ROL-0001")) {
@@ -382,7 +382,7 @@
                         </ul>
                     </li>
                     <%} else {%>
-                    <li class="li-privilegio">
+                    <li class="li-privilegio bounceInDown animated">
                         <%if (id_rol.trim().equals("ROL-0013")) {%>
                         <%if (dp.getNo_link().trim().equals("Ficha del Trabajador")) {%>
                         <a href="<%=dp.getDi_url()%>" target="myframe" title="<%=dp.getNo_link()%>" data-value="<%=dp.getIc_link().trim()%>" class="link"  id="link"><i class="<%=dp.getIc_link().trim()%>"></i> <span class="menu-item-parent"><%=dp.getNo_link()%></span></a>

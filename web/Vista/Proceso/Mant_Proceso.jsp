@@ -104,42 +104,52 @@
                                     <div class="widget-body no-padding">
                                         <form class="smart-form form-paso">
                                             <fieldset>
-                                                <section class="col col-lg-4">
-                                                    <div class="row">
-                                                        <section class="col col-6">
-                                                            <label class="input">
-                                                                <input name="num" required=""  maxlength="3" class="num_paso"   placeholder="Número">
-                                                            </label>
-                                                        </section>
-                                                        <section class="col col-6">
-                                                            <label class="input">
-                                                                <input type="text" name="cod" class="co_paso" required="" maxlength="6" placeholder="Código" />
-                                                            </label>
-                                                        </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-xs-12">
-                                                            <label>Proceso</label>
-                                                            <label class="select">
-                                                                <select name="proceso" required=""  id="select-proceso">
-                                                                    <option value="">[Seleccione]</option>
-                                                                </select>
-                                                                <i></i></label>
-                                                        </section>
-                                                    </div>
-                                                </section>
-                                                <section class="col col-lg-8">
-                                                    <label class="textarea textarea-resizable">
-                                                        <textarea   name="desc" required="" maxlength="300" rows="5" cols="50" class="desc_paso custom-scroll" placeholder="Descripción"></textarea>
+                                                <div class="row">
+                                                     <section class="col col-md-3">
+                                                    <label class="input">
+                                                        <input name="num" required=""  maxlength="3" class="num_paso"   placeholder="Número">
                                                     </label>
                                                 </section>
-                                            </fieldset>
-                                            <footer>
+                                                <section class="col col-md-3">
+                                                    <label class="input">
+                                                        <input type="text" name="cod" class="co_paso"  maxlength="4" placeholder="Código" />
+                                                    </label>
+                                                </section>
+
+
+                                                <section class="col col-md-6">
+                                                    <label class="select">
+                                                        <select name="proceso" required=""  id="select-proceso">
+                                                            <option value="">[Seleccione]</option>
+                                                        </select>
+                                                        <i></i></label>
+                                                </section>
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-md-9">
+                                                    <label class="input">
+                                                        <input type="text"  name="desc" class="desc_paso"  placeholder="Descripción" maxlength="200"/>
+                                                    </label>
+
+
+                                                </section>
+                                                <section class="col col-md-3" >
+                                                    <button class="btn btn-default btn-registrar btn-circle btn-lg pull-right" type="button" id="btn-registrar" name="Enviar" value="Registrar Paso" >
+                                                        <i class="fa fa-plus"></i></button>
+                                                    <button class="btn btn-danger btn_cancel_edit btn-circle btn-lg pull-right pull-right" type="button" style="display:none "  ><i class="fa fa-remove"></i></button>
+
+                                                </section>
+                                                </div>
+                                               
+
+
+                                                
+
+
                                                 <input type="hidden" name="opc" class="opc" value="Registrar"/>
                                                 <input type="hidden" name="id" class="id_p" value=""/>
-                                                <button class="btn btn-primary btn-registrar" type="button" id="btn-registrar" name="Enviar" value="Registrar Paso" > Registrar</button>
-                                                <button class="btn btn-default btn_cancel_edit" type="button" style="display: none"  >Cancelar</button>
-                                            </footer>
+
+                                            </fieldset>
                                         </form>
                                     </div>
                                 </div>
@@ -150,17 +160,17 @@
                             <div class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-editbutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Lista de pasos Habilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
+                                    <h2>Pasos Habilitados</h2>
                                 </header>
                                 <div>
                                     <div class="jarviswidget-editbox">
                                     </div>
                                     <div class="widget-body">
-                                        <div class="row">
-                                            <button type="button" class="btn btn-default Generar" data-action="collapse-all">
-                                                Generar Pasos
-                                            </button>
-                                        </div> 
+                                        <label class="lb-list_pasos"></label>
+                                        <button type="button" class="btn btn-default Generar pull-right" data-action="collapse-all">
+                                            Generar
+                                        </button>
+
                                         <div>
                                             <div class="dd" id="nestable"  >
                                                 <ol class="dd-list" >
@@ -172,7 +182,7 @@
                             </div>
                         </article>
                         <article class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-2" data-widget-editbutton="false" >
+                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-3" data-widget-editbutton="false" >
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Puestos Asignados<strong><label class="lb-list_puesto"></label></strong> </h2>
@@ -204,23 +214,24 @@
                                                     </section>
                                                 </div>
                                                 <div class="row">
-                                                    <section class="col col-3">
+                                                    <section class="col col-4">
                                                         <label>Sección:</label>
                                                         <label class="select">
                                                             <select class="input-sm sl_sec" required=""></select> 
                                                             <i></i></label>
                                                     </section>
 
-                                                    <section class="col col-3">
+                                                    <section class="col col-4">
                                                         <label>Puesto:</label>
                                                         <label class="select">
                                                             <select name="id_pu" class="input-sm sl_puesto" required=""></select>
                                                             <i></i></label>
+                                                  
                                                     </section>                                          
                                                     <input type="hidden" value="" name="idpasos" class="id_pasos"  />
                                                     <input type="hidden" value="" name="nun" class="num_p"  />
-                                                    <section class="col col-3" >
-                                                        <label>Código Puesto</label>
+                                                      <section class="col col-2" >
+                                                        <label>Tipo</label>
                                                         <label class="select">
                                                             <select class="input-sm co_puesto" name="co_pasos">
                                                                 <option value=""></option>
@@ -229,9 +240,11 @@
                                                             </select> 
                                                             <i></i></label>
                                                     </section>
-                                                    <section class="col col-3">
-                                                        <div style="margin-top: 15px; width: 98%; " >
-                                                            <button type="button" class="form-control btn btn-primary btn-agregar-p" style="margin: auto;">Agregar Puesto</button> 
+                                                    <section class="col col-2">
+                                                        <div style="margin-top: 5px;" >
+                                                            <button type="button" class="btn btn-primary btn-agregar-p btn-circle btn-lg pull-right" style="margin: auto;">
+                                                                <i class="fa fa-plus"></i> 
+                                                            </button> 
                                                         </div>                                                            
                                                     </section>
                                                 </div>
@@ -405,7 +418,7 @@
 
                 $.post("../../Direccion_Puesto", "opc=" + "Listar_pu_id" + "&" + "id=" + valor, function (objJson) {
                     d.empty();
-                    d.append("<option value='' > [SELECCIONE] </option>");
+                    d.append("<option value='' > [Seleccione] </option>");
                     var list = objJson.lista;
                     if (list.length !== 0) {
                         for (var i = 0; i < list.length; i++) {
@@ -418,11 +431,9 @@
             }
 
             function  lis_dir_id(d, valor) {
-
-
                 $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function (objJson) {
                     d.empty();
-                    d.append("<option value='' > [SELECCIONE] </option>");
+                    d.append("<option value='' > [Seleccione] </option>");
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
@@ -442,7 +453,7 @@
 
                 $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function (objJson) {
                     c.empty();
-                    c.append("<option value='' > [SELECCIONE] </option>");
+                    c.append("<option value='' > [Seleccione] </option>");
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
@@ -460,7 +471,7 @@
             function list_sec_id(d, valor) {
                 $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
                     d.empty();
-                    d.append("<option value='' > [SELECCIONE] </option>");
+                    d.append("<option value='' > [Seleccione] </option>");
                     if (objJson.rpta == -1) {
                         alert(objJson.mensaje);
                         return;
@@ -478,8 +489,8 @@
             function list_dir(c) {
                 $.post("../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
                     c.empty();
-                    c.append("<option value='' > [SELECCIONE] </option>");
-                    if (objJson.rpta == -1) {
+                    c.append("<option value='' > [Seleccione] </option>");
+                    if (objJson.rpta === -1) {
                         alert(objJson.mensaje);
                         return;
                     }
@@ -577,7 +588,7 @@
             }
             $(document).ready(function () {
                 $(".btn_cancel_edit").click(function () {
-                    $("#btn-registrar").text("Registrar");
+                    $("#btn-registrar").html('<i class="fa fa-plus"></i>');
                     $(".opc").val("Registrar");
                     $(".form-paso")[0].reset();
                     $(this).hide();
@@ -596,44 +607,47 @@
                 $(".sl_sec").change(function () {
                     list_put_id($(".sl_puesto"), $(this).val());
                 });
-                var num = 1;
+                // var num = 1;
                 listar_Proceso();
                 Listar_Paso($("#select-proceso").val());
                 $("#btn-registrar").click(function () {
                     var pr = $("#select-proceso").val();
-                    $.post("../../paso", $(".form-paso").serialize(), function (objJson) {
-                        if (objJson.rpta === "-1") {
-                            alert(objJson.mensaje);
-                            return;
-                        } else {
-                            Listar_Paso(pr);
-                        }
-                    });
-                    $("#btn-registrar").text("Registrar");
-                    $(".opc").val("Registrar");
-                    //$(".form-paso")[0].reset();
+                    if ($(".form-paso").valid()) {
+                        $.post("../../paso", $(".form-paso").serialize(), function (objJson) {
+                            if (objJson.rpta === "-1") {
+                                alert(objJson.mensaje);
+                                return;
+                            } else {
+                                Listar_Paso(pr);
+                            }
+                        });
+                        $("#btn-registrar").html('<i class="fa fa-plus"></i>');
+                        $(".opc").val("Registrar");
+                        //$(".form-paso")[0].reset();
+                    }
+
                     return false;
                 }
                 );
                 function listar_Proceso() {
                     var s = $("#select-proceso");
+                    s.append("<option >Cargando...</option>");
                     $.post("../../Proceso", "opc=Listar", function (objJson) {
                         s.empty();
                         var lista = objJson.lista;
-                        s.append("<option value='' selected >[SELECCIONE]</option>");
+                        s.append("<option value='' selected >[Proceso]</option>");
                         for (var j = 0; j < lista.length; j++) {
                             s.append("<option value='" + lista[j].id + "' > " + lista[j].nombre + "</option>");
                         }
                     });
                 }
-                $("#select-proceso").change(
-                        function () {
-                            $(".lb-list_pasos").text($(this).find(":selected").text());
-                            Listar_Paso($(this).val());
-                            $(".form_puesto").hide();
-                            $(".tbody-puesto").empty();
-                            // alert($(this).val());
-                        });
+                $("#select-proceso").change(function () {
+                    $(".lb-list_pasos").text($(this).find(":selected").text());
+                    Listar_Paso($(this).val());
+                    $(".form_puesto").hide();
+                    $(".tbody-puesto").empty();
+                    // alert($(this).val());
+                });
                 $(".btn-agregar-p").click(function () {
                     if ($(".form_puesto").valid()) {
                         $.ajax({
@@ -656,6 +670,7 @@
                 function Listar_Paso(proceso) {
                     var txt_append = "";
                     $.post("../../paso", "opc=Listar_habilitados&proceso=" + proceso, function (objJson) {
+                        c.hide();
                         b.empty();
                         c.empty();
                         var lista = objJson.lista;
@@ -694,6 +709,7 @@
                             txt_append += '<input type="hidden" value="' + lista[i].proceso_id + '" class="inp_pro_id_' + i + '" />';
                         }
                         c.append(txt_append);
+                          c.slideDown(200);
                         txt_append = "";
                         $(".btn-cargar-puesto").click(function () {
                             var num = $(this).val();
@@ -708,7 +724,7 @@
                             $(".co_paso").val($(".td_co" + $(this).val()).text());
                             $("#select-proceso").val($(".td_id_pro" + $(this).val()).text());
                             $(".id_p").val($(".id_paso" + $(this).val()).val());
-                            $(".btn-registrar").text("Modificar");
+                            $(".btn-registrar").html('<i class="fa fa-check"></i>');
                             $(".opc").val("Modificar");
                         });
                         $(".btn-eliminar").click(

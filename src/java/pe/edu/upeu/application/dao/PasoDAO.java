@@ -51,12 +51,12 @@ public class PasoDAO implements InterfacePasoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR: " + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
-
+                throw new RuntimeException(e.getMessage());
             }
         }
         return lista;
@@ -94,7 +94,7 @@ public class PasoDAO implements InterfacePasoDAO {
             try {
                 this.conn.close();
             } catch (Exception e) {
-
+                throw new RuntimeException(e.getMessage());
             }
         }
         return lista;

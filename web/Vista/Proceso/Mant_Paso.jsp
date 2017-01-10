@@ -169,7 +169,7 @@
                                             <div class="jarviswidget jarviswidget-color-greenDark" id="wid-id-2" data-widget-editbutton="false">
                                                 <header>
                                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                                    <h2>Lista de procesos Habilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
+                                                    <h2>Procesos del Sistema<strong><label class="lb-list_pasos"></label></strong> </h2>
                                                 </header>
                                                 <div>
                                                     <div class="jarviswidget-editbox">
@@ -180,7 +180,7 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Nombre</th>
-                                                                        <th>DescripciÃ³n</th>
+                                                                        <th>Descripción</th>
                                                                         <th>Acciones</th>
                                                                     </tr>
                                                                 </thead>
