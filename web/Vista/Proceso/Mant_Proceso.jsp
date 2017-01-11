@@ -93,7 +93,7 @@
                     <!-- row -->
                     <div class="row">
 
-                        <select name="proceso"  id="select-proceso" class="selectProceso">
+                        <select name="proceso"  id="select-proceso" class="form-control selectProceso">
                             <option value="">[Seleccione]</option>
                         </select>
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -141,6 +141,7 @@
                                                 <ol class="dd-list" >
                                                 </ol>
                                             </div>
+                                            <div class="TaskValues" ></div>
                                         </div>
                                         <div class="col col-xs-12 col-md-6">
                                             <form action="" method="post" class="smart-form form_puesto" novalidate="">
@@ -222,6 +223,7 @@
                                 </div>
                             </div>
                         </article>
+                        
                         <article class="col-sm-12 col-md-12 col-lg-12" >
 
                             <!-- Widget ID (each widget will need unique ID)-->
@@ -260,35 +262,33 @@
                                         <form  class="smart-form formReqProceso" novalidate="novalidate">
                                             <fieldset>
                                                 <div class="row">
-                                                    <section class="col col-4">
-                                                        <select name="ti_planilla" class="form-control ti_planilla" required="" >
+                                                    <section class="col col-2">
+                                                        <select name="ti_planilla" class="form-control input-sm ti_planilla" required="" >
                                                             <option value="" >[ Tipo de Planilla]</option>
                                                         </select>
                                                     </section>
-                                                    <section class="col col-4">
-                                                        <select name="requerimiento" class="form-control req" required="" >
+                                                    <section class="col col-2">
+                                                        <select name="requerimiento" class="form-control input-sm req" required="" >
                                                             <option value="" >[Requerimiento]</option>
                                                         </select>
 
                                                     </section>
-                                                    <section class="col col-4">
-                                                        <select name="direccion" class="form-control direccion" required="" >
+                                                    <section class="col col-3">
+                                                        <select name="direccion" class="form-control  input-sm direccion" required="" >
                                                             <option value="" >[Dirección]</option>
                                                         </select>
                                                     </section>
-                                                </div>
-                                                <div class="row">
-                                                    <section class="col col-4">
-                                                        <select name="departamento" class="form-control departamento"  >
+                                                    <section class="col col-2">
+                                                        <select name="departamento" class="form-control input-sm departamento"  >
                                                             <option value="" >[Departamento]</option>
                                                         </select>
                                                     </section>
-                                                    <section class="col col-4">
-                                                        <select name="area" class="form-control area"  >
+                                                    <section class="col col-2">
+                                                        <select name="area" class="form-control input-sm area"  >
                                                             <option value="" >[Area]</option>
                                                         </select>
                                                     </section>
-                                                    <section class="col col-4">
+                                                     <section class="col col-1">
                                                         <button type="button" class="btn btn-danger btn-circle btn-cancelar">
                                                             <i class="fa fa-remove" ></i>
                                                         </button>
@@ -297,6 +297,8 @@
                                                         </button>
                                                     </section>
                                                 </div>
+                                               
+                                              
                                             </fieldset>
 
                                         </form>
@@ -432,6 +434,7 @@
         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        
         <script src="../../js/businessLogic/Proceso/Proceso.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
         <script src="../../js/businessLogic/Proceso/ReqProceso.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
         <script src="../../js/businessLogic/Proceso/Proceso.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
