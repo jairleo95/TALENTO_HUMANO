@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -86,78 +87,17 @@
 
             <!-- MAIN CONTENT -->
             <div id="content" >
-
-
-
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
 
                     <!-- row -->
                     <div class="row">
-                        <article class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+                        <select name="proceso"  id="select-proceso" class="selectProceso">
+                            <option value="">[Seleccione]</option>
+                        </select>
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Mantenimiento de Pasos</h2>
-                                </header>
-                                <div>
-                                    <div class="widget-body no-padding">
-                                        <form class="smart-form form-paso">
-                                            <fieldset>
-                                                <div class="row">
-                                                     <section class="col col-md-3">
-                                                    <label class="input">
-                                                        <input name="num" required=""  maxlength="3" class="num_paso"   placeholder="Número">
-                                                    </label>
-                                                </section>
-                                                <section class="col col-md-3">
-                                                    <label class="input">
-                                                        <input type="text" name="cod" class="co_paso"  maxlength="4" placeholder="Código" />
-                                                    </label>
-                                                </section>
-
-
-                                                <section class="col col-md-6">
-                                                    <label class="select">
-                                                        <select name="proceso" required=""  id="select-proceso">
-                                                            <option value="">[Seleccione]</option>
-                                                        </select>
-                                                        <i></i></label>
-                                                </section>
-                                                </div>
-                                                <div class="row">
-                                                    <section class="col col-md-9">
-                                                    <label class="input">
-                                                        <input type="text"  name="desc" class="desc_paso"  placeholder="Descripción" maxlength="200"/>
-                                                    </label>
-
-
-                                                </section>
-                                                <section class="col col-md-3" >
-                                                    <button class="btn btn-default btn-registrar btn-circle btn-lg pull-right" type="button" id="btn-registrar" name="Enviar" value="Registrar Paso" >
-                                                        <i class="fa fa-plus"></i></button>
-                                                    <button class="btn btn-danger btn_cancel_edit btn-circle btn-lg pull-right pull-right" type="button" style="display:none "  ><i class="fa fa-remove"></i></button>
-
-                                                </section>
-                                                </div>
-                                               
-
-
-                                                
-
-
-                                                <input type="hidden" name="opc" class="opc" value="Registrar"/>
-                                                <input type="hidden" name="id" class="id_p" value=""/>
-
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-editbutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Pasos Habilitados</h2>
@@ -166,149 +106,231 @@
                                     <div class="jarviswidget-editbox">
                                     </div>
                                     <div class="widget-body">
-                                        <label class="lb-list_pasos"></label>
-                                        <button type="button" class="btn btn-default Generar pull-right" data-action="collapse-all">
-                                            Generar
-                                        </button>
+                                        <form class="smart-form form-paso">
+                                            <div class="row">
+                                                <section class="col col-md-2">
+                                                    <label class="input">
+                                                        <input name="num" required=""  maxlength="3" class="num_paso input-sm" style="width: 100%"   placeholder="Número">
+                                                    </label>
+                                                </section>
+                                                <section class="col col-md-2">
+                                                    <label class="input">
+                                                        <input type="text" name="cod" class="co_paso input-sm"  maxlength="4" placeholder="Código" />
+                                                    </label>
+                                                </section>
 
-                                        <div>
+                                                <section class="col col-md-6">
+                                                    <label class="input">
+                                                        <input type="text"  name="desc" class="desc_paso input-sm"  placeholder="Descripción" maxlength="200"/>
+                                                    </label>
+                                                </section>
+                                                <section class="col col-md-2" >
+                                                    <button class="btn btn-primary btn-registrar btn-circle pull-left" type="submit" id="btn-registrar" name="Enviar" value="Registrar Paso" >
+                                                        <i class="fa fa-plus"></i></button>
+                                                    <button class="btn btn-danger btn_cancel_edit btn-circle pull-right" type="button" style="display:none "  ><i class="fa fa-remove"></i></button>
+                                                    <button type="button" class="btn btn-default btn-circle Generar pull-right" data-action="collapse-all">
+                                                        <i class="fa fa-refresh"></i>
+                                                    </button>
+                                                </section>
+                                            </div>
+                                            <input type="hidden" name="id" class="id_p" value=""/>
+                                            <input type="hidden" name="opc" class="opc" value="Registrar"/>
+                                        </form>
+                                        <div class="col col-xs-12 col-md-6">
                                             <div class="dd" id="nestable"  >
                                                 <ol class="dd-list" >
                                                 </ol>
+                                            </div>
+                                        </div>
+                                        <div class="col col-xs-12 col-md-6">
+                                            <form action="" method="post" class="smart-form form_puesto" novalidate="">
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <section class="col col-4">
+                                                            <label>Dirección</label>
+                                                            <label class="select">
+                                                                <select class=" input-sm sl_dir" required="" ></select> 
+                                                                <i></i></label>      
+                                                        </section>
+                                                        <section class="col col-4">
+                                                            <label>Departamento:</label>
+                                                            <label class="select">
+                                                                <select class="input-sm sl_dep" required=""></select> 
+                                                                <i></i></label>                                                    
+                                                        </section>
+                                                        <section class="col col-4">
+                                                            <label>Area:</label>
+                                                            <label class="select">
+                                                                <select class="input-sm sl_area" required=""></select>  
+                                                                <i></i></label>
+                                                        </section>
+                                                    </div>
+                                                    <div class="row">
+                                                        <section class="col col-4">
+                                                            <label>Sección:</label>
+                                                            <label class="select">
+                                                                <select class="input-sm sl_sec" required=""></select> 
+                                                                <i></i></label>
+                                                        </section>
+
+                                                        <section class="col col-4">
+                                                            <label>Puesto:</label>
+                                                            <label class="select">
+                                                                <select name="id_pu" class="input-sm sl_puesto" required=""></select>
+                                                                <i></i></label>
+
+                                                        </section>                                          
+                                                        <input type="hidden" value="" name="idpasos" class="id_pasos"  />
+                                                        <input type="hidden" value="" name="nun" class="num_p"  />
+                                                        <section class="col col-2" >
+                                                            <label>Tipo</label>
+                                                            <label class="select">
+                                                                <select class="input-sm co_puesto" name="co_pasos">
+                                                                    <option value=""></option>
+                                                                    <option value="SECR">Secretaria de Area</option>
+                                                                    <option value="JEFE">Jefe de Area</option>
+                                                                </select> 
+                                                                <i></i></label>
+                                                        </section>
+                                                        <section class="col col-2">
+                                                            <div style="margin-top: 5px;" >
+                                                                <button type="button" class="btn btn-primary btn-agregar-p btn-circle btn-lg pull-right" style="margin: auto;">
+                                                                    <i class="fa fa-plus"></i> 
+                                                                </button> 
+                                                            </div>                                                            
+                                                        </section>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                            <div class="custom-scroll table-responsive" style="height:320px; overflow-y: scroll;">
+                                                <table class="table table-striped table-bordered table-hover" style="width: 98%;margin: auto; ">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-class="expand">Puesto</th>
+                                                            <th data-hide="phone,tablet">Area</th>
+                                                            <th data-hide="phone,tablet">Departamento</th>
+                                                            <th data-hide="phone,tablet">Dirección</th>
+                                                            <th colspan="2">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="tbody-puesto">
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </article>
-                        <article class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <div class="jarviswidget jarviswidget-color-red" id="wid-id-3" data-widget-editbutton="false" >
+                        <article class="col-sm-12 col-md-12 col-lg-12" >
+
+                            <!-- Widget ID (each widget will need unique ID)-->
+                            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                                <!-- widget options:
+                                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                                        
+                                        data-widget-colorbutton="false"	
+                                        data-widget-editbutton="false"
+                                        data-widget-togglebutton="false"
+                                        data-widget-deletebutton="false"
+                                        data-widget-fullscreenbutton="false"
+                                        data-widget-custombutton="false"
+                                        data-widget-collapsed="true" 
+                                        data-widget-sortable="false"
+                                        
+                                -->
                                 <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Puestos Asignados<strong><label class="lb-list_puesto"></label></strong> </h2>
+                                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                                    <h2>Requerimiento - Proceso</h2>				
                                 </header>
+
+                                <!-- widget div-->
                                 <div>
+
+                                    <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+
                                     </div>
+                                    <!-- end widget edit box -->
+
+                                    <!-- widget content -->
                                     <div class="widget-body no-padding">
-                                        <form action="" method="post" class="smart-form form_puesto" novalidate="">
+
+                                        <form  class="smart-form formReqProceso" novalidate="novalidate">
                                             <fieldset>
                                                 <div class="row">
                                                     <section class="col col-4">
-                                                        <label>Dirección</label>
-                                                        <label class="select">
-                                                            <select class=" input-sm sl_dir" required="" ></select> 
-                                                            <i></i></label>      
+                                                        <select name="ti_planilla" class="form-control ti_planilla" required="" >
+                                                            <option value="" >[ Tipo de Planilla]</option>
+                                                        </select>
                                                     </section>
                                                     <section class="col col-4">
-                                                        <label>Departamento:</label>
-                                                        <label class="select">
-                                                            <select class="input-sm sl_dep" required=""></select> 
-                                                            <i></i></label>                                                    
+                                                        <select name="requerimiento" class="form-control req" required="" >
+                                                            <option value="" >[Requerimiento]</option>
+                                                        </select>
+
                                                     </section>
                                                     <section class="col col-4">
-                                                        <label>Area:</label>
-                                                        <label class="select">
-                                                            <select class="input-sm sl_area" required=""></select>  
-                                                            <i></i></label>
+                                                        <select name="direccion" class="form-control direccion" required="" >
+                                                            <option value="" >[Dirección]</option>
+                                                        </select>
                                                     </section>
                                                 </div>
                                                 <div class="row">
                                                     <section class="col col-4">
-                                                        <label>Sección:</label>
-                                                        <label class="select">
-                                                            <select class="input-sm sl_sec" required=""></select> 
-                                                            <i></i></label>
+                                                        <select name="departamento" class="form-control departamento"  >
+                                                            <option value="" >[Departamento]</option>
+                                                        </select>
                                                     </section>
-
                                                     <section class="col col-4">
-                                                        <label>Puesto:</label>
-                                                        <label class="select">
-                                                            <select name="id_pu" class="input-sm sl_puesto" required=""></select>
-                                                            <i></i></label>
-                                                  
-                                                    </section>                                          
-                                                    <input type="hidden" value="" name="idpasos" class="id_pasos"  />
-                                                    <input type="hidden" value="" name="nun" class="num_p"  />
-                                                      <section class="col col-2" >
-                                                        <label>Tipo</label>
-                                                        <label class="select">
-                                                            <select class="input-sm co_puesto" name="co_pasos">
-                                                                <option value=""></option>
-                                                                <option value="SECR">Secretaria de Area</option>
-                                                                <option value="JEFE">Jefe de Area</option>
-                                                            </select> 
-                                                            <i></i></label>
+                                                        <select name="area" class="form-control area"  >
+                                                            <option value="" >[Area]</option>
+                                                        </select>
                                                     </section>
-                                                    <section class="col col-2">
-                                                        <div style="margin-top: 5px;" >
-                                                            <button type="button" class="btn btn-primary btn-agregar-p btn-circle btn-lg pull-right" style="margin: auto;">
-                                                                <i class="fa fa-plus"></i> 
-                                                            </button> 
-                                                        </div>                                                            
+                                                    <section class="col col-4">
+                                                        <button type="button" class="btn btn-danger btn-circle btn-cancelar">
+                                                            <i class="fa fa-remove" ></i>
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary btn-circle">
+                                                            <i class="fa fa-plus" ></i>
+                                                        </button>
                                                     </section>
                                                 </div>
                                             </fieldset>
+
                                         </form>
-                                        <div class="custom-scroll table-responsive" style="height:320px; overflow-y: scroll;">
-                                            <table class="table table-striped table-bordered table-hover" style="width: 98%;margin: auto; ">
-                                                <thead>
-                                                    <tr>
-                                                        <th data-class="expand">Puesto</th>
-                                                        <th data-hide="phone,tablet">Area</th>
-                                                        <th data-hide="phone,tablet">Departamento</th>
-                                                        <th data-hide="phone,tablet">Dirección</th>
-                                                        <th>Estado</th>
-                                                        <th colspan="2">Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="tbody-puesto">
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
+                                        <table 
+                                            class="table table-striped table-bordered table-hover dtReqProceso"
+                                            width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th data-hide="phone">Nro</th>
+                                                    <th>Tipo de Planilla</th>
+                                                    <th>Requerimiento</th>
+                                                    <th data-class="expand">Proceso</th>
+                                                    <th data-hide="phone">Dirección</th>
+                                                    <th data-hide="phone">Departamento</th>
+                                                    <th data-hide="phone">Area</th>
+                                                    <th>Estado</th>
+                                                    <th data-hide="phone,tablet" style="width: 5%">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                    </div>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- end widget content -->
 
-                    <div class="row">
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="jarviswidget jarviswidget-color-yellow"   data-widget-editbutton="false">
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Lista de pasos Deshabilitados :<strong><label class="lb-list_pasos"></label></strong> </h2>
-                                </header>
-                                <div>
-                                    <div class="jarviswidget-editbox">
-                                    </div>
-                                    <div class="widget-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <td>Nro</td>
-                                                        <td>Descripción</td>
-                                                        <td>Número</td>
-                                                        <td>Codigo</td>
-                                                        <td>Proceso</td>
-                                                        <td>Editar</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="tbodys" style=" display: none;">
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
                                 </div>
+                                <!-- end widget div -->
+
                             </div>
+                            <!-- end widget -->
                         </article>
                     </div>
-
                     <!-- end row -->
-
-
                 </section>
                 <!-- end widget grid -->
 
@@ -399,578 +421,23 @@
         <script src="../../js/app.min.js"></script>
 
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-        <!-- Voice command : plugin -->
-        <script src="../../js/speech/voicecommand.min.js"></script>
+        <!-- Voice command : plugin
+        <script src="../../js/speech/voicecommand.min.js"></script> -->
 
         <!-- PAGE RELATED PLUGIN(S) -->
+        <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
         <script src="../../js/plugin/jquery-nestable/jquery.nestable.min.js"></script>
         <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-
-        <script type="text/javascript">
-
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
-            function  list_put_id(d, valor) {
-
-
-                $.post("../../Direccion_Puesto", "opc=" + "Listar_pu_id" + "&" + "id=" + valor, function (objJson) {
-                    d.empty();
-                    d.append("<option value='' > [Seleccione] </option>");
-                    var list = objJson.lista;
-                    if (list.length !== 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            d.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                        }
-                    } else {
-                        d.append("<option value='0' > [] </option>");
-                    }
-                });
-            }
-
-            function  lis_dir_id(d, valor) {
-                $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + valor, function (objJson) {
-                    d.empty();
-                    d.append("<option value='' > [Seleccione] </option>");
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var list = objJson.lista;
-                    if (list.length !== 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            d.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                        }
-                    } else {
-                        d.append("<option value='' > [] </option>");
-                    }
-                });
-            }
-            function list_area_id(c, valor) {
-
-
-                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + valor, function (objJson) {
-                    c.empty();
-                    c.append("<option value='' > [Seleccione] </option>");
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var list = objJson.lista;
-                    if (list.length !== 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                        }
-                    } else {
-                        c.append("<option value='' > [] </option>");
-                    }
-                });
-            }
-            function list_sec_id(d, valor) {
-                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + valor, function (objJson) {
-                    d.empty();
-                    d.append("<option value='' > [Seleccione] </option>");
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var list = objJson.lista;
-                    if (list.length !== 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                        }
-                    } else {
-                        d.append("<option value='' > [no hay] </option>");
-                    }
-                });
-            }
-            function list_dir(c) {
-                $.post("../../Direccion_Puesto", "opc=Listar_direccion", function (objJson) {
-                    c.empty();
-                    c.append("<option value='' > [Seleccione] </option>");
-                    if (objJson.rpta === -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var list = objJson.lista;
-                    if (list.length !== 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            c.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                        }
-                    } else {
-                        c.append("<option value='0' > [] </option>");
-                    }
-                });
-            }
-
-            function list_puesto(num) {
-                $(".lb-list_puesto").text($(".det_p_" + num).val());
-                var tbody_p = $(".tbody-puesto");
-                var texto = "";
-                $(".id_pasos").val($(".id_paso" + num).val());
-                $.post("../../paso", "opc=Paso_Puesto&id=" + $(".id_paso" + num).val(), function (objJson) {
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    tbody_p.empty();
-                    var lista = objJson.lista;
-                    for (var h = 0; h < lista.length; h++) {
-                        if (lista[h].estado == '0') {
-                            texto += "<tr class='danger' >";
-                        } else if (lista[h].estado == '1') {
-                            texto += "<tr class='success' >";
-                        }
-
-                        texto += "<td>" + lista[h].puesto + "</td>";
-                        texto += "<td>" + lista[h].area + "</td>";
-                        texto += "<td>" + lista[h].dep + "</td>";
-                        texto += "<td>" + lista[h].direccion + "</td>";
-                        if (lista[h].estado == '0') {
-                            texto += "<td>Deshabilitado</td>";
-                        } else if (lista[h].estado == '1') {
-                            texto += "<td>Habilitado</td>";
-                        }
-                        texto += "<td><input type='hidden' class='iddp" + h + "' value='" + lista[h].idpp + "' />";
-                        if (lista[h].estado == '1') {
-                            texto += "<button class='btn btn-warning btn_deshabilitar_p' value='" + h + "'>Deshabilitar</button></td>";
-                        } else {
-                            texto += "<button class='btn btn-success btn_habilitar_p' value='" + h + "' style='width: 98%'>Habilitar</button></td>";
-                        }
-                        texto += "<td><button type='button' value='" + h + "' class='btn btn-danger btn-eliminar_puesto'><i class='fa fa-times'></i></button></td>";
-                        texto += "</tr>";
-                    }
-                    tbody_p.append(texto);
-                    texto = "";
-                    $(".form_puesto").show();
-                    $(".btn-eliminar_puesto").click(function () {
-                        var $this = $(this).val();
-                        if (confirm("¿Esta Seguro de Eliminar?")) {
-                            alert("opc=Eliminar_PP&id=" + $(".iddp" + $this).val());
-                            $.post("../../paso", "opc=Eliminar_PP&id=" + $(".iddp" + $this).val(),
-                                    function (objJson) {
-                                        console.log("value:" + $this);
-                                        list_puesto($this - 1);
-                                    });
-                        }
-                    }
-                    );
-                    $(".btn_deshabilitar_p").click(function () {
-                        $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=0", function (objJson) {
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            } else {
-
-                                alert("El puesto para este paso se ha deshabilitado correctamente...");
-                                list_puesto($(".num_p").val());
-                            }
-                        }
-                        );
-
-                    });
-                    $(".btn_habilitar_p").click(function () {
-                        $.post("../../paso", "opc=actualizar_estado&id=" + $(".iddp" + $(this).val()).val() + "&estado=1", function (objJson) {
-                            if (objJson.rpta == -1) {
-                                alert(objJson.mensaje);
-                                return;
-                            } else {
-
-                                alert("El puesto para este paso se ha habilitado correctamente...");
-                                list_puesto($(".num_p").val());
-                            }
-                        });
-                    });
-
-                });
-            }
-            $(document).ready(function () {
-                $(".btn_cancel_edit").click(function () {
-                    $("#btn-registrar").html('<i class="fa fa-plus"></i>');
-                    $(".opc").val("Registrar");
-                    $(".form-paso")[0].reset();
-                    $(this).hide();
-                });
-                $(".form_puesto").hide();
-                list_dir($(".sl_dir"));
-                $(".sl_dir").change(function () {
-                    lis_dir_id($(".sl_dep"), $(this).val());
-                });
-                $(".sl_dep").change(function () {
-                    list_area_id($(".sl_area"), $(this).val());
-                });
-                $(".sl_area").change(function () {
-                    list_sec_id($(".sl_sec"), $(this).val());
-                });
-                $(".sl_sec").change(function () {
-                    list_put_id($(".sl_puesto"), $(this).val());
-                });
-                // var num = 1;
-                listar_Proceso();
-                Listar_Paso($("#select-proceso").val());
-                $("#btn-registrar").click(function () {
-                    var pr = $("#select-proceso").val();
-                    if ($(".form-paso").valid()) {
-                        $.post("../../paso", $(".form-paso").serialize(), function (objJson) {
-                            if (objJson.rpta === "-1") {
-                                alert(objJson.mensaje);
-                                return;
-                            } else {
-                                Listar_Paso(pr);
-                            }
-                        });
-                        $("#btn-registrar").html('<i class="fa fa-plus"></i>');
-                        $(".opc").val("Registrar");
-                        //$(".form-paso")[0].reset();
-                    }
-
-                    return false;
-                }
-                );
-                function listar_Proceso() {
-                    var s = $("#select-proceso");
-                    s.append("<option >Cargando...</option>");
-                    $.post("../../Proceso", "opc=Listar", function (objJson) {
-                        s.empty();
-                        var lista = objJson.lista;
-                        s.append("<option value='' selected >[Proceso]</option>");
-                        for (var j = 0; j < lista.length; j++) {
-                            s.append("<option value='" + lista[j].id + "' > " + lista[j].nombre + "</option>");
-                        }
-                    });
-                }
-                $("#select-proceso").change(function () {
-                    $(".lb-list_pasos").text($(this).find(":selected").text());
-                    Listar_Paso($(this).val());
-                    $(".form_puesto").hide();
-                    $(".tbody-puesto").empty();
-                    // alert($(this).val());
-                });
-                $(".btn-agregar-p").click(function () {
-                    if ($(".form_puesto").valid()) {
-                        $.ajax({
-                            url: "../../Direccion_Puesto",
-                            data: $(".form_puesto").serialize() + "&opc=Reg_puesto_paso"
-                        }).done(function () {
-                            list_puesto($(".num_p").val());
-                            // alert("¡Registrado Exitosamente!");
-                        }).fail(function (objJson) {
-                            alert(objJson.mensaje);
-                        });
-                    } else {
-                        alert("Completar campos requeridos...");
-                    }
-
-                    ///alert($(".sl_puesto").val());
-                });
-                var b = $(".tbodys");
-                var c = $(".dd-list");
-                function Listar_Paso(proceso) {
-                    var txt_append = "";
-                    $.post("../../paso", "opc=Listar_habilitados&proceso=" + proceso, function (objJson) {
-                        c.hide();
-                        b.empty();
-                        c.empty();
-                        var lista = objJson.lista;
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-                        for (var i = 0; i < lista.length; i++) {
-                            b.append("<tr class='editar-tr" + i + "' >");
-                            b.append("<td >" + (i + 1) + "</td>");
-                            b.append("<td class='td_det" + i + "'>" + lista[i].det + "</td>");
-                            b.append("<td class='td_num" + i + "'><label>" + lista[i].num + "</label></td>");
-                            b.append("<td  class='td_co" + i + "'><label>" + lista[i].co + "</label></td>");
-                            b.append("<td class='td_id_pro" + i + "' >" + lista[i].proceso_id + "</td>");
-                            //b.append("<input type='text' name='id' value='" + lista[i].id + "'  class='id_paso" + i + "'/>");
-                            b.append("</tr>");
-                        }
-                        for (var i = 0; i < lista.length; i++) {
-                            txt_append += '<li class="dd-item dd3-item" ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + (i + 1) + '" style="font-size: 12px;">' + lista[i].num + ' </label> ' +
-                                    '<div class="pull-right"><button class="btn btn-primary btn-sm btn-cargar-puesto" value="' + i + '" ><i class="fa fa-eye" ></i></button></div>' +
-                                    '<div class="pull-right"><button class="btn btn-success btn-sm btn-editar" value="' + i + '" ><i class="fa fa-pencil" ></i></button></div>' +
-                                    '<div class="pull-right"><button class="btn btn-danger btn-sm btn-eliminar" value="' + i + '" ><i class="fa fa-times"></i></button></div>';
-                            if (typeof (lista[i].det) === "undefined") {
-                                txt_append += '<div class="pull-right"><label ></label></div>';
-                            } else {
-
-                                txt_append += '<div class="pull-right"><label style="font-size: 12px;">' + lista[i].det + '&nbsp;&nbsp;</label></div>';
-                            }
-
-                            // '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
-                            txt_append += '<input type="hidden"  value="' + lista[i].det + '"  class="det_p_' + i + '"/>' +
-                                    '<input type="hidden" name="id" value="' + lista[i].id + '"  class="id_paso' + i + '"/>' + '</div> </li>';
-                            txt_append += '<input  type="hidden" value="' + lista[i].det + '" class="inp_det_' + i + '" />';
-                            txt_append += '<input type="hidden" value="' + lista[i].num + '" class="inp_num_' + i + '" />';
-                            txt_append += '<input type="hidden" value="' + lista[i].co + '" class="inp_co_' + i + '" />';
-                            txt_append += '<input type="hidden" value="' + lista[i].proceso_id + '" class="inp_pro_id_' + i + '" />';
-                        }
-                        c.append(txt_append);
-                          c.slideDown(200);
-                        txt_append = "";
-                        $(".btn-cargar-puesto").click(function () {
-                            var num = $(this).val();
-                            $(".id_pasos_puesto").val($(".id_paso" + num).val());
-                            list_puesto(num);
-                            $(".num_p").val($(this).val());
-                        });
-                        $(".btn-editar").click(function () {
-                            $(".btn_cancel_edit").show();
-                            $(".desc_paso").val($(".td_det" + $(this).val()).text());
-                            $(".num_paso").val($(".td_num" + $(this).val()).text());
-                            $(".co_paso").val($(".td_co" + $(this).val()).text());
-                            $("#select-proceso").val($(".td_id_pro" + $(this).val()).text());
-                            $(".id_p").val($(".id_paso" + $(this).val()).val());
-                            $(".btn-registrar").html('<i class="fa fa-check"></i>');
-                            $(".opc").val("Modificar");
-                        });
-                        $(".btn-eliminar").click(
-                                function () {
-                                    var pr_e = $("#select-proceso").val();
-                                    if (confirm("¿Esta Seguro de Eliminar?")) {
-                                        $.post("../../paso", "opc=Eliminar&paso=" + $(".id_paso" + $(this).val()).val(), function () {
-                                            Listar_Paso(pr_e);
-                                        });
-                                        //alert($(".id_paso" + $(this).val()).val());
-                                    } else {
-
-                                    }
-                                }
-                        );
-
-                    });
-                }
-                $(".Generar").click(function () {
-                    //var num = $(".tbodys tr").size();
-                    var num = 1;
-                    var url = "";
-
-                    $.each($(".item_req"), function () {
-                        $(this).text("P" + num);
-                        num++;
-                    });
-                    for (var s = 1; s <= $(".tbodys tr").size(); s++) {
-                        url += "id" + s + "=" + $(".id_paso" + (s - 1)).val() + "&numero" + s + "=" + $(".item_" + s).text() + "&";
-                    }
-                    url = url.substring(0, url.length - 1);
-                    $.post("../../paso", "opc=Update_nu_paso&num=" + num + "&" + url, function (objJson) {
-                        if (objJson.rpta == -1) {
-                            alert(objJson.mensaje);
-                            return;
-                        }
-                    });
-                    alert(url);
-                    url = "";
-                    num = 1;
-
-                    /* for (var f = 0; f < num; f++) {
-                     //alert($(".id_paso" + f).val() + " - " + $(".item_"+f).text());
-                     
-                     $.ajax({
-                     url:"../../paso",
-                     data: "opc=Update_nu_paso&nu_paso=" + "P" + (f + 1) + "&paso=" + $(".id_paso" + f).val()
-                     
-                     }).done(function(){
-                     alert( "opc=Update_nu_paso&nu_paso=" + "P" + (f + 1) + "&paso=" + $(".id_paso" + f).val());   
-                     });
-                     /* $.post("../../paso", "opc=Update_nu_paso&nu_paso=" + "P" + (f + 1) + "&paso=" + $(".id_paso" + f).val(), function (objJson) {
-                     
-                     });*/
-                    // }*/
-
-                    Listar_Paso($("#select-proceso").val());
-                });
-                pageSetUp();
-                // PAGE RELATED SCRIPTS
-                var updateOutput = function (e) {
-                    var list = e.length ? e : $(e.target), output = list.data('output');
-                    if (window.JSON) {
-                        output.val(window.JSON.stringify(list.nestable('serialize')));
-                        //, null, 2));
-                    } else {
-                        output.val('JSON browser support required for this demo.');
-                    }
-                };
-                // activate Nestable for list 1
-                $('#nestable').nestable({
-                    group: 1
-                }).on('change', updateOutput);
-                // activate Nestable for list 2
-
-                // output initial serialised data
-                updateOutput($('#nestable').data('output', $('#nestable-output')));
-
-
-            });
-
-        </script>
-        <script type="text/javascript">
-
-            // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
-            $(document).ready(function () {
-
-                pageSetUp();
-
-                /* // DOM Position key index //
-                 
-                 l - Length changing (dropdown)
-                 f - Filtering input (search)
-                 t - The Table! (datatable)
-                 i - Information (records)
-                 p - Pagination (paging)
-                 r - pRocessing 
-                 < and > - div elements
-                 <"#id" and > - div with an id
-                 <"class" and > - div with a class
-                 <"#id.class" and > - div with an id and class
-                 
-                 Also see: http://legacy.datatables.net/usage/features
-                 */
-
-                /* BASIC ;*/
-                var responsiveHelper_dt_basic = undefined;
-                var responsiveHelper_datatable_fixed_column = undefined;
-                var responsiveHelper_datatable_col_reorder = undefined;
-                var responsiveHelper_datatable_tabletools = undefined;
-
-                var breakpointDefinition = {
-                    tablet: 1024,
-                    phone: 480
-                };
-
-                $('#dt_basic').dataTable({
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_dt_basic) {
-                            responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_dt_basic.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_dt_basic.respond();
-                    }
-                });
-
-                /* END BASIC */
-
-                /* COLUMN FILTER  */
-                var otable = $('#datatable_fixed_column').DataTable({
-                    //"bFilter": false,
-                    //"bInfo": false,
-                    //"bLengthChange": false
-                    //"bAutoWidth": false,
-                    //"bPaginate": false,
-                    //"bStateSave": true // saves sort state using localStorage
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_fixed_column) {
-                            responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_fixed_column.respond();
-                    }
-
-                });
-
-                // custom toolbar
-                $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
-
-                // Apply the filter
-                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
-
-                    otable
-                            .column($(this).parent().index() + ':visible')
-                            .search(this.value)
-                            .draw();
-
-                });
-                /* END COLUMN FILTER */
-
-                /* COLUMN SHOW - HIDE */
-                $('#datatable_col_reorder').dataTable({
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_col_reorder) {
-                            responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_col_reorder.respond();
-                    }
-                });
-
-                /* END COLUMN SHOW - HIDE */
-
-                /* TABLETOOLS */
-                $('#datatable_tabletools').dataTable({
-                    // Tabletools options: 
-                    //   https://datatables.net/extensions/tabletools/button_options
-                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
-                            "t" +
-                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                    "oTableTools": {
-                        "aButtons": [
-                            "copy",
-                            "csv",
-                            "xls",
-                            {
-                                "sExtends": "pdf",
-                                "sTitle": "Empleados_PDF",
-                                "sPdfMessage": "Empleados PDF Export",
-                                "sPdfSize": "letter"
-                            },
-                            {
-                                "sExtends": "print",
-                                "sMessage": "Generado por AlfaTeam <i>(presiona Esc para cerrar)</i>"
-                            }
-                        ],
-                        "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
-                    },
-                    "autoWidth": true,
-                    "preDrawCallback": function () {
-                        // Initialize the responsive datatables helper once.
-                        if (!responsiveHelper_datatable_tabletools) {
-                            responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
-                        }
-                    },
-                    "rowCallback": function (nRow) {
-                        responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-                    },
-                    "drawCallback": function (oSettings) {
-                        responsiveHelper_datatable_tabletools.respond();
-                    }
-                });
-
-                /* END TABLETOOLS */
-
-            });
-
-        </script>
+        <script src="../../js/businessLogic/Proceso/Proceso.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+        <script src="../../js/businessLogic/Proceso/ReqProceso.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+        <script src="../../js/businessLogic/Proceso/Proceso.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+        <script src="../../js/businessLogic/Proceso/Task.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+        <script src="../../js/businessLogic/Proceso/TaskXJob.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+        <script src="../../js/businessLogic/Proceso/ConfigureProcess.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
     </body>
 
 </html>

@@ -80,7 +80,7 @@ function initFormPlugins() {
 
 
 }
-function list_select(objSelect, url, datos, opc, id) {
+function list_select(objSelect, url, datos, opc, id, selectText) {
 
     var text_html = "";
     objSelect.empty();
@@ -94,7 +94,14 @@ function list_select(objSelect, url, datos, opc, id) {
         }
         var lista = objJson.lista;
         if (lista.length > 0) {
-            objSelect.append("<option value=''>[Seleccione]</option>");
+            if (selectText !== "") {
+
+                objSelect.append("<option value=''>[" + selectText + "]</option>");
+            } else {
+                console.log("enter to else condition ...")
+                objSelect.append("<option value=''>[Seleccione]</option>");
+            }
+
             if (opc === "1" | opc === "4") {
                 for (var i = 0; i < lista.length; i++) {
                     if (id == lista[i].id) {

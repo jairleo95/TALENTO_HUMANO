@@ -17,7 +17,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title> TALENTO HUMANO </title>
-        <meta name="description" content="">
+        <meta name="description" content="">2
         <meta name="author" content="">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -466,7 +466,7 @@
         <div class="page-footer">
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                    <span class="txt-color-white">AlphaTeam © 2015</span>
+                    <span class="txt-color-white">AlphaTeam © 2017</span>
                 </div>
                 <%if (false) {
                 %>

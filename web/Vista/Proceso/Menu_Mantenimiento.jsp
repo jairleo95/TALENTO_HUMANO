@@ -33,7 +33,6 @@
                 <li class="li1a"><a href="Mant_Paso.jsp"  target="myframe3"><i class="glyphicon glyphicon-cog"></i><span> Procesos</span></a></li>
                 <!-- <li><a href="Mant_Tipo_Requerimiento.jsp"  target="myframe3">Requerimiento</a></li>-->
                 <li class="li2a"><a  href="Mant_Proceso.jsp"  target="myframe3"><i class="glyphicon glyphicon-plus"></i><span> Pasos</span></a></li>
-                <li class="li3a"><a  href="Mant_Req_Proceso.jsp"  target="myframe3"><i class="glyphicon glyphicon-flash"></i><span> Requerimiento-Proceso</span></a></li> 
             </ul>
 
         </div>
