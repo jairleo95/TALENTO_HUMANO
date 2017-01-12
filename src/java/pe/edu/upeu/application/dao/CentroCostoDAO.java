@@ -28,7 +28,7 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
 
     @Override
     public List<Map<String, ?>> listarCcosto() {
-        sql = "SELECT * FROM RHVD_CENTRO_COSTO";
+        sql = "SELECT * FROM RHVD_CENTRO_COSTO where es_centro_costo='1'";
         List<Map<String, ?>> lista = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -66,7 +66,7 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
     @Override
     public List<Map<String, ?>> listarCcosto(String idCCosto) {
 
-        sql = "SELECT * FROM RHVD_CENTRO_COSTO where id_centro_costo='" + idCCosto + "'";
+        sql = "SELECT * FROM RHVD_CENTRO_COSTO where id_centro_costo='" + idCCosto + "' and es_centro_costo ='1'";
         List<Map<String, ?>> lista = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);

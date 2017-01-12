@@ -284,6 +284,10 @@ public class CTrabajador extends HttpServlet {
                     String nom = request.getParameter("nom");
                     String ape_mat = request.getParameter("ape_mat");
                     String ape_pat = request.getParameter("ape_pat");
+                    
+                    System.out.println(ape_pat);
+                    System.out.println(ape_mat);
+                    System.out.println(nom);
                     if (("Buscar".equals(Buscar) & (!"".equals(dni) | !"".equals(nom) | !"".equals(ape_mat) | !"".equals(ape_pat)))) {
                         sesion.setAttribute("ListarTrabajador", tr.Buscar_Ficha_Trabajador(iddep, dni, nom, ape_pat, ape_mat));
                         getServletContext().setAttribute(nom, dgp.VAL_OPC_DGP(dni));

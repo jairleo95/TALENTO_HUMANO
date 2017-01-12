@@ -32,7 +32,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-            <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
@@ -204,13 +204,13 @@
                                                         </section>
                                                         <section class="col col-2" id="titu">MFL:
                                                             <label class="toggle"  > 
-                                                                <input type="checkbox" value="1"   name="MFL" name="checkbox-toggle" >
+                                                                <input type="checkbox" value="1"   name="MFL"   >
                                                                 <i data-swchon-text="SI" data-swchoff-text="NO"></i>
                                                             </label>
                                                         </section>
                                                         <section class="col col-2" id="titu">Presupuestado:
                                                             <label class="toggle"  > 
-                                                                <input type="checkbox" value="1"   name="ES_PRESUPUESTADO" name="checkbox-toggle" >
+                                                                <input type="checkbox" value="1"   name="ES_PRESUPUESTADO"   >
                                                                 <i data-swchon-text="SI" data-swchoff-text="NO"></i>
                                                             </label>
                                                         </section>
@@ -221,7 +221,7 @@
                                                     <section style="display: none">
                                                         <label class="label" id="titu">Puesto | Seccion | Area:</label>
                                                         <label class="select">
-                                                            <select name="IDPUESTO"   required="" class="chosen-select select-puesto1" >
+                                                            <select name="PUESTO"   required="" class="chosen-select select-puesto1" >
                                                                 <option value="">[Seleccione]</option>
                                                                 <%
                                                                     for (int j = 0; j < List_Puesto.size(); j++) {
@@ -235,11 +235,14 @@
                                                             </select>
                                                         </label>
                                                     </section>
+                                                    <div class="aditionalFilters">
+                                                    </div>
                                                     <div class="row">
+
                                                         <section class="col col-4" >
                                                             <label class="label" id="titu"> Area:</label>
                                                             <label class="select">
-                                                                <select data-placeholder="Seleccionar Area"  class="select-area"required="" >
+                                                                <select data-placeholder="Seleccionar Area"  class="select-area" required="" >
                                                                     <option value="">[Seleccione]</option>  
                                                                 </select>
                                                             </label>
@@ -247,7 +250,7 @@
                                                         <section class="col col-4">
                                                             <label class="label" id="titu"> Sección:</label>
                                                             <label class="select">
-                                                                <select data-placeholder="Seleccionar Sección"  class="select-seccion"required="" >
+                                                                <select data-placeholder="Seleccionar Sección"  class="select-seccion" required="" >
                                                                     <option value="">[Seleccione]</option>  
                                                                 </select>
                                                             </label>
@@ -255,7 +258,7 @@
                                                         <section class="col col-4">
                                                             <label class="label" id="titu"> Puesto:</label>
                                                             <label class="select">
-                                                                <select data-placeholder="Seleccionar Puesto"  class="select-puesto" required="" >
+                                                                <select data-placeholder="Seleccionar Puesto"  class="select-puesto" required="" name="IDPUESTO" >
                                                                     <option value="">[Seleccione]</option>  
                                                                 </select>
                                                             </label>
@@ -334,8 +337,8 @@
                                                     <%String es_cue_sue = request.getParameter("es_cs");%>
                                                     <input type="hidden" name="ESTADO" value="<%=es_cue_sue%>">
                                                     <%if (es_cue_sue.equals("0")) {%>
-                                                    <input type="hidden" name="ES_CUENTA_SUELDO" value="1" rz
-                                                           <section class="col col-3" name="">
+                                                    <input type="hidden" name="ES_CUENTA_SUELDO" value="1" >
+                                                    <section class="col col-3" >
                                                         <label class="select" id="titu">Cta Sueldo - Banco:
                                                             <select name="BANCO" id="banco" required="">
                                                                 <option value="" selected="" disabled="" >[Seleccione]</option>
@@ -476,9 +479,9 @@
                                                 </section>
                                                 <%}%>
                                                 <section class="col col-3">
-                                                    <label class="input"  id="titu"> 
-                                                        Total Remunerativo :<div id="suel_total" style="color: red;">0.0</div>
-                                                    </label>
+                                                    <div class="input"  id="titu"> 
+                                                        Total Remunerativo :<label id="suel_total" style="color: red;">0.0</label>
+                                                    </div>
                                                 </section>
                                                 <section class="col col-3">
                                                     <label class="select" id="titu">

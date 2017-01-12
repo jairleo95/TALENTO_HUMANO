@@ -61,8 +61,6 @@
             </div>
 
 
-
-
             <%                int count = ListarTrabajador.size();
                 String cancel = request.getParameter("cancel");
                 if (cancel != null) {

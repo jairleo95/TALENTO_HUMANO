@@ -58,7 +58,6 @@ import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUsuarioDAO;
-import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.properties.UserMachineProperties;
 import pe.edu.upeu.application.util.DateFormat;
 
@@ -77,9 +76,6 @@ public class CDgp extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final Logger fLogger
-            = Logger.getLogger(CDgp.class.getPackage().getName());
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
@@ -123,11 +119,13 @@ public class CDgp extends HttpServlet {
         boolean permissionDireccionFilter = false;
         boolean permissionDepartFilter = false;
         boolean permissionPuestoFilter = false;
+        boolean RegDGPAditionalPermissions = false;
         switch (idrol) {
             case "ROL-0001":
                 // permissionDireccionFilter = true;
                 permissionDepartFilter = true;
                 permisoAdmin = true;
+                RegDGPAditionalPermissions = true;
                 break;
             case "ROL-0008":
                 permisoAdmin = false;
@@ -135,6 +133,8 @@ public class CDgp extends HttpServlet {
                 break;
             case "ROL-0010":
                 permissionPuestoFilter = true;
+            case "ROL-0003":
+                RegDGPAditionalPermissions = true;
             default:
                 permissionDepartFilter = true;
                 permisoAdmin = false;
@@ -160,6 +160,34 @@ public class CDgp extends HttpServlet {
                 boolean respuesta = dgp.val_fe_inicio_dgp(newFormat);
                 rpta.put("rpta", "1");
                 rpta.put("estado", respuesta);
+            }
+            if (opc.equals("RegDGPAditionalPermissions")) {
+
+                String htmlFilterAnyJobs = "";
+
+                if (RegDGPAditionalPermissions) {
+                    htmlFilterAnyJobs += "<div class='row'>";
+                    htmlFilterAnyJobs += "<section class='col col-md-6' >";
+                    htmlFilterAnyJobs += "<label class='label' id='titu'> Dirección:</label>";
+                    htmlFilterAnyJobs += "<label class='select'>";
+                    htmlFilterAnyJobs += "<select  class='selectDireccion' required='' >";
+                    htmlFilterAnyJobs += "<option value=''>[Seleccione]</option>  ";
+                    htmlFilterAnyJobs += "   </select>";
+                    htmlFilterAnyJobs += "  </label>";
+                    htmlFilterAnyJobs += "   </section>";
+                    htmlFilterAnyJobs += "  <section class='col col-md-6' >";
+                    htmlFilterAnyJobs += "      <label class='label' id='titu'> Departamento:</label>";
+                    htmlFilterAnyJobs += "    <label class='select'>";
+                    htmlFilterAnyJobs += "  <select   class='selectDepartamento' required='' >";
+                    htmlFilterAnyJobs += "  <option value=''>[Seleccione]</option>  ";
+                    htmlFilterAnyJobs += "    </select>";
+                    htmlFilterAnyJobs += " </label>";
+                    htmlFilterAnyJobs += " </section>";
+                    htmlFilterAnyJobs += "</div>";
+                }
+                rpta.put("filterAnyJobsHTML", htmlFilterAnyJobs);
+                rpta.put("filterAnyJobs", RegDGPAditionalPermissions);
+
             }
 
             if (opc.equals("Registrar")) {
@@ -534,7 +562,7 @@ public class CDgp extends HttpServlet {
                 String iddgp = request.getParameter("iddgp");
                 out.print(iddgp);
                 dgp.REG_DGP_FINAL(iddgp);
-                 if (permissionDepartFilter) {
+                if (permissionDepartFilter) {
                     sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
                 }
                 if (permissionDireccionFilter) {
