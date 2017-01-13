@@ -10,10 +10,10 @@ package pe.edu.upeu.application.properties;
  * @author ALPHA
  */
 public class globalProperties {
-
+    
     /*change when update server (for cache conflicts)*/
     public static String VERSION_CSS = "2.0.3";
-    public static String VERSION_JS = "2.3.1";
+    public static String VERSION_JS = "2.3.3";
 
     /* WebService Carga Academica*/
     public static final String keyApp = "4a7c88ee0791cad24a15d43a525982f8";

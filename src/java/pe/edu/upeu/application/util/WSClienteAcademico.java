@@ -16,9 +16,9 @@ import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.properties.globalProperties;
 
 public class WSClienteAcademico {
-    
-   public static void start_ws_academico (String semestre) throws Exception{
-  //public static void main(String args[]) throws Exception { String semestre = "2015-1";
+
+    public static void start_ws_academico(String semestre) throws Exception {
+        //public static void main(String args[]) throws Exception { String semestre = "2015-1";
         JSONArray arr = WSClienteAcademico.getRequest(semestre);
         int tamaño = arr.length();
         String[] campus = new String[tamaño];
@@ -59,8 +59,9 @@ public class WSClienteAcademico {
             hb_lab[i] = (arr.getJSONObject(i).getJSONObject("hlab").has("content")) ? Double.parseDouble(String.valueOf(arr.getJSONObject(i).getJSONObject("hlab").get("content"))) : 0.0;
             tipo_doc[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("tipodocumento").get("content"));
             facu[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("facultad").get("content"));
+            //  eapId=...
         }
-        
+
         ConexionBD conn;
         conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         ArrayDescriptor des = ArrayDescriptor.createDescriptor("ARR_WS_CAMPUS", conn.conex);
@@ -94,8 +95,8 @@ public class WSClienteAcademico {
         ARRAY array_to_pass13 = new ARRAY(des13, conn.conex, hb_lab);
         ARRAY array_to_pass14 = new ARRAY(des14, conn.conex, hb_de_condicion);
         ARRAY array_to_pass15 = new ARRAY(des15, conn.conex, hb_ti_curso);
-        
-       CallableStatement st = conn.conex.prepareCall("{CALL rhsp_ws_carga_academica(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+
+        CallableStatement st = conn.conex.prepareCall("{CALL rhsp_ws_carga_academica(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
         st.setArray(1, array_to_pass1);
         st.setArray(2, array_to_pass2);
         st.setArray(3, array_to_pass3);
@@ -114,8 +115,6 @@ public class WSClienteAcademico {
         st.executeUpdate();
 
     }
-    
-    
 
     public static JSONArray getRequest(String semestre) throws SOAPException, Exception {
         Calendar calendario = new GregorianCalendar();
@@ -128,14 +127,14 @@ public class WSClienteAcademico {
         System.out.println(globalProperties.service + keyPub);
         System.out.println(globalProperties.keyApp + hour);
         SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(semestre), globalProperties.service + keyPub);
-         
+
         // print SOAP Response
-      //  System.out.println("Response SOAP Message:");
+        //  System.out.println("Response SOAP Message:");
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         soapResponse.writeTo(out);
         String strMsg = new String(out.toByteArray());
         JSONObject jsonObject = XML.toJSONObject(strMsg);
-         System.out.println(jsonObject);
+        System.out.println(jsonObject);
         JSONArray arr = jsonObject.getJSONObject("SOAP-ENV:Envelope").
                 getJSONObject("SOAP-ENV:Body").getJSONObject("ns1:DocenteXCursoResponse").
                 getJSONObject("return").
@@ -148,7 +147,7 @@ public class WSClienteAcademico {
         try {
             MessageFactory messageFactory = MessageFactory.newInstance();
             String proxyAuth = System.getProperty("https.proxyAuth");
-            System.out.println("Puerto :"+proxyAuth);
+            System.out.println("Puerto :" + proxyAuth);
             SOAPMessage soapMessage = messageFactory.createMessage();
             SOAPPart soapPart = soapMessage.getSOAPPart();
             // SOAP Envelope
@@ -168,7 +167,7 @@ public class WSClienteAcademico {
 
             /* Print the request message */
             System.out.println("Request SOAP Message:");
-             soapMessage.writeTo(System.out);
+            soapMessage.writeTo(System.out);
             System.out.println();
             return soapMessage;
         } catch (Exception e) {
