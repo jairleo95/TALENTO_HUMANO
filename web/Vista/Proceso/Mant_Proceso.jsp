@@ -447,4 +447,4 @@
 <%} else {
         out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
     }
-%>
+%>  
