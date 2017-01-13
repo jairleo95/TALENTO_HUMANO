@@ -230,7 +230,7 @@
                                                                         <th align="center" style="text-align:center;">Nro</th>
                                                                         <th align="center" style="text-align:center;">Nombre Plantilla</th>
                                                                         <th align="center" style="text-align:center;">Puesto</th>
-                                                                        <th S style="text-align:center;">Acciones</th>
+                                                                        <th  style="text-align:center;">Acciones</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody class="tbody-plantilla">
@@ -255,9 +255,9 @@
                                                              <a data-toggle="tab" href="#BB">Tab 2</a>
                                                          </li>
                                                          <li>
-                                                             <a data-toggle="tab" href="#CC">Tab 3</a>
-                                                         </li>-->
-                                                    </ul>
+                                                             <a data-togg le="tab" href="#CC">Tab 3</a>
+                                                         </li>
+                                                    </ul>-->
                                                 </div>
 
                                             </div>

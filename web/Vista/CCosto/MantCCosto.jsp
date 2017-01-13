@@ -10,12 +10,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Mantenimiento Centro Costo</title>
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
+
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="../../css/demo.min.css">
     </head>
     <body>
         <div class="well caja_t">
@@ -40,7 +41,7 @@
                             <section class="col col-sm-3">
                                 <label class="label">Direccion</label>
                                 <label class="select">
-                                    <select class="indir" name=dir"">
+                                    <select class="indir" name="dir">
                                         <option value="">[Seleccione]</option>
                                     </select>
                                 </label>

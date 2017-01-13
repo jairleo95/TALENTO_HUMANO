@@ -515,6 +515,59 @@ function showEsDiezmo() {
         }
     });
 }
+function RegDGPAditionalPermissions() {
+    $.ajax({
+        url: "../../dgp", type: 'POST', data: "opc=RegDGPAditionalPermissions",
+        success: function (data, textStatus, jqXHR) {
+            if (data.filterAnyJobs) {
+                var aditionalFilters = $(".aditionalFilters");
+                aditionalFilters.append(data.filterAnyJobsHTML);
+                /*load data and events*/
+                list_select($(".selectDireccion"), "../../Direccion_Puesto", "opc=Listar_direccion", "3");
+                $(".selectDireccion").change(function () {
+                    list_select($(".selectDepartamento"), "../../Direccion_Puesto", "opc=Listar&id_dir=" + $(".selectDireccion").val(), "3");
+                    $(".selectDepartamento .select-area .select-seccion,.select-puesto").val("");
+                    $(".chosen-select").trigger("chosen:updated");
+                });
+                $(".selectDepartamento").change(function () {
+                    list_select($(".select-area"), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(".selectDepartamento").val(), "3");
+                    $(".select-area .select-seccion,.select-puesto").val("");
+                    $(".chosen-select").trigger("chosen:updated");
+                });
+                initJobsFilters(data.filterAnyJobs);
+            } else {
+                /*init traditional filters*/
+                initJobsFilters(data.filterAnyJobs);
+            }
+        }
+    });
+}
+function  initJobsFilters(aditionalFIlters) {
+    if (!aditionalFIlters) {
+        list_select($(".select-area"), "../../Direccion_Puesto", "opc=List_Area_RDGP", "3");
+    }
+
+    $(".select-area").change(function () {
+        list_select($(".select-seccion"), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(".select-area").val(), "3");
+        $(".select-seccion,.select-puesto").val("");
+        $(".chosen-select").trigger("chosen:updated");
+        /*Filtrar Centro de costo*/
+        list_cc_area($(this).val(), $(".centro_costo1"));
+    });
+    $(".select-seccion").change(function () {
+        list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".select-seccion").val() + "&esL=1", "3");
+        cargar_horarios($('.t_horario'));
+        list_cc_seccion($(this).val(), $(".centro_costo1"));
+    });
+    $(".select-puesto").change(function () {
+        $(".select-puesto1").val($(this).val());
+        $(".chosen-select").trigger("chosen:updated");
+    });
+    $(".select-puesto1").change(function () {
+        $(".select-area,.select-seccion,.select-puesto").val("");
+        $(".chosen-select").trigger("chosen:updated");
+    });
+}
 $(document).ready(function () {
     pageSetUp();
     $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
@@ -528,7 +581,8 @@ $(document).ready(function () {
     $("#nu_cuen_ban").numeric();
     showEsDiezmo();
     mostrar();
-     // $("#alerta_dgp").hide();
+    RegDGPAditionalPermissions();
+    // $("#alerta_dgp").hide();
     var b = $("#alerta_dgp");
     var info = $(".div_info");
     listar_mensaje_plazo("2", b, info);
@@ -536,7 +590,7 @@ $(document).ready(function () {
     var t = $(".alert_1");
     listar_mensaje_plazo("1", t, s);
     var lista_dgp = $(".btn-list-req");
-    
+
     $.post("../../dgp", "opc=Listar_Req&idtr=" + $(".id_tr").val(), function (objJson) {
         if (objJson.rpta === -1) {
             alert(objJson.mensaje);
@@ -592,44 +646,24 @@ $(document).ready(function () {
     });
     $(".val_fe").change(function () {
         var fecha = $(this).val().split("-");
-        if (fecha[0].length >10) {
+        if (fecha[0].length > 10) {
             $(this).val("");
         }
     });
-    list_select($(".select-area"), "../../Direccion_Puesto", "opc=List_Area_RDGP", "3");
-    $(".select-area").change(function () {
-        list_select($(".select-seccion"), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(".select-area").val(), "3");
-        $(".select-seccion,.select-puesto").val("");
-        $(".chosen-select").trigger("chosen:updated");
-        /*Filtrar Centro de costo*/
-        list_cc_area($(this).val(), $(".centro_costo1"));
-    });
-    $(".select-seccion").change(function () {
-        list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".select-seccion").val() + "&esL=1", "3");
-        cargar_horarios($('.t_horario'));
-        list_cc_seccion($(this).val(), $(".centro_costo1"));
-    });
-    $(".select-puesto").change(function () {
-        $(".select-puesto1").val($(this).val());
-        $(".chosen-select").trigger("chosen:updated");
-    });
-    $(".select-puesto1").change(function () {
-        $(".select-area,.select-seccion,.select-puesto").val("");
-        $(".chosen-select").trigger("chosen:updated");
-    });
+
     $(".feInicioDgp").change(function () {
         var fecha = $(this).val();
         AlertCumplimientoPlazo_Fecha(fecha);
     });
-   
+
     $('#checkout-form').validate({
 // Rules for form validation
         rules: {
             FEC_DESDE: {
-              //  val_fecha: true
+                //  val_fecha: true
             },
             FEC_HASTA: {
-             //   val_fecha: true
+                //   val_fecha: true
             },
             horas_totales: {
                 required: true
@@ -646,11 +680,11 @@ $(document).ready(function () {
             error.insertAfter(element.parent());
         }
     });
-  /*  jQuery.validator.addMethod("val_fechas", function (value, element) {
-        var d = value.split("/");
-        return this.optional(element) || String(parseInt(d[0])).length == 4;
-    }, "¡Fecha ingresada invalida!");*/
-   
+    /*  jQuery.validator.addMethod("val_fechas", function (value, element) {
+     var d = value.split("/");
+     return this.optional(element) || String(parseInt(d[0])).length == 4;
+     }, "¡Fecha ingresada invalida!");*/
+
     var cantidad = 1;
     $("#btn_add").click(function () {
         var agregar = $('.agregar_cuota');
@@ -718,7 +752,7 @@ $(document).ready(function () {
         $("#div_3").show();
     }
     listar_tipo_horario();
-   
+
     $("#no_cuen").hide();
     $("#no_cuen_ban").hide();
     $("#generar").hide();
@@ -733,7 +767,7 @@ $(document).ready(function () {
         $("#es_cuenta").val(1);
         //  alert($("#es_cuenta").val());
     });
-     /*sumn_porcen_total();*/
+    /*sumn_porcen_total();*/
     listar_cc();
     $("#horario").change(
             function () {

@@ -435,6 +435,7 @@ $(document).ready(function () {
     $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
         $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
     });
+    /*Crear o edotar el nombre de la plantilla*/
     $(".nombre_pl").keyup(function () {
         status_plantilla('0');
         if ($(".id_pl").val() != "" & $(this).val() != "") {

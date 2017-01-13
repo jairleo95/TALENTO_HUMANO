@@ -65,7 +65,7 @@ public class CAutorizacion extends HttpServlet {
             boolean permisoEsSistema = false;
             boolean permissionDireccionFilter = false;
             boolean permissionDepartFilter = false;
-            boolean permissionPuestoFilter=false;
+            boolean permissionPuestoFilter = false;
             switch (idrol) {
                 case "ROL-0009":
                     permisoAsigFam = true;
@@ -84,8 +84,8 @@ public class CAutorizacion extends HttpServlet {
                     break;
                 case "ROL-0008":
                     permissionDireccionFilter = true;
-                      case "ROL-0010":
-                permissionPuestoFilter = true;
+                case "ROL-0010":
+                    permissionPuestoFilter = true;
                     break;
 
                 default:
@@ -111,8 +111,8 @@ public class CAutorizacion extends HttpServlet {
                             System.out.println("3 :" + vAut.getCo_pasos());
                             System.out.println("4 :" + vAut.getId_detalle_req_proceso());
                             System.out.println("5 :" + idp);
-                            /*Cambiar con un trigger al momento de insertar*/
-                            dgp.VAL_DGP_PASOS();
+                            /*Cambiar con un trigger al momento de insertar (esta generando mucho retrazo)*/
+                            //  dgp.VAL_DGP_PASOS();
                             /*Autorización*/
                             a.Insert_Autorizacion("", iddgp, estado, vAut.getNu_pasos(), "", iduser, "", "", vAut.getCo_pasos(), idp, vAut.getId_detalle_req_proceso(), vAut.getId_pasos());
                             /*Notificaciones*/
@@ -169,34 +169,34 @@ public class CAutorizacion extends HttpServlet {
                         out.print(iddgp);
                         dgp.HABILITAR_DGP(iddgp);
                         if (permissionDepartFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
-                }
-                if (permissionDireccionFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false));
-                }
-                if (permissionPuestoFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", idp, false));
-                } else {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
-                }
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
+                        }
+                        if (permissionDireccionFilter) {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false));
+                        }
+                        if (permissionPuestoFilter) {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", idp, false));
+                        } else {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
+                        }
                         // sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
                         response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
                     }
                     if (opc.equals("eliminarDGP")) {
                         String iddgp = request.getParameter("iddgp");
-                     
+
                         dgp.eliminarDGP(iddgp);
-                          if (permissionDepartFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
-                }
-                if (permissionDireccionFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false));
-                }
-                if (permissionPuestoFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", idp, false));
-                } else {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
-                }
+                        if (permissionDepartFilter) {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
+                        }
+                        if (permissionDireccionFilter) {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false));
+                        }
+                        if (permissionPuestoFilter) {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", idp, false));
+                        } else {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
+                        }
                         // sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
                         response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
 
