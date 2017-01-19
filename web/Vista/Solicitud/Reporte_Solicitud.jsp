@@ -401,7 +401,7 @@
                     alert(objJson.mensaje);
                     return;
                 } else {
-                   // t_body.empty();
+                   t_body.empty();
                     var lista = objJson.lista;
                     for (var g = 0; g < lista.length; g++) {
                         text_html += '<tr>';
@@ -429,7 +429,7 @@
                         }
                         text_html += '</tr>';
                     }
-                  //  t_body.append(text_html);
+              t_body.append(text_html);
                     text_html = '';
                     
                     $(".btn_sol_aut"+tipo).click(function () {
@@ -444,9 +444,9 @@
                     
                     if ($.fn.dataTable.isDataTable(table_sol)) {
                         console.log("destrpy datatable!")
-                        // $.fn.dataTable.isDataTable(table_sol).destroy();
+                       //$.fn.dataTable.isDataTable(table_sol).destroy();
                     } else {
-                      //  var tablas = table_sol.DataTable({searching: true, paging: true});
+                    var tablas = table_sol.DataTable({searching: true, paging: true});
 
                         // var rows = tablas.fnGetNodes();
 
