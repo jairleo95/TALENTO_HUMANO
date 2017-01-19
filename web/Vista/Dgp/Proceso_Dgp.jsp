@@ -188,14 +188,16 @@
                                                                     <i class="fa fa-gear fa-lg"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu">
-                                                                    <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorizacion</a></li>
+                                                                    <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&opc=User_Aut">Usuarios - Prox. Autorización</a></li>
                                                                     <!--<li><a href="../../dgp?iddgp=<%/*=r.getId_dgp().trim()*/%>&opc=Seguimiento">Ver Historial</a> </li>-->
                                                                     <li><a onclick="listHistory(<%=i%>)" data-toggle="modal" data-target="#ModalHisto">Ver Historial</a></li>
                                                                     <li><a   class="btnHorario"  data-valor="<%=r.getId_dgp()%>"  data-toggle="modal" data-target="#exampleModal">Ver Horario</a></li>
 
                                                                     <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></li>
                                                                     <li><a data-valor="<%=r.getId_dgp().trim()%>;<%=r.getId_trabajador().trim()%>;<%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%>" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjaxComment('')" >Comentario</a></li>
-                                                                    <li><a href="../../solicitud_requerimiento?iddgp=<%=r.getId_dgp().trim()%>&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>
+
+<!--<li><a href="../../solicitud_requerimiento?iddgp=<%=r.getId_dgp().trim()%>&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>
+                                                                    -->
                                                                     <li class="divider"></li><li>
                                                                     <li><a href="../../dgp?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Detalle">Ver Requerimiento</a> </li>
 

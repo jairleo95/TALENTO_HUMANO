@@ -23,7 +23,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-            <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/smartadmin-skins.min.css">
 
@@ -100,8 +100,8 @@
                                 data-widget-sortable="false"
                                 -->
                                 <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Usuarios que intervienen en la autorizacion del  DGP</h2>
+                                    <span class="widget-icon"> <i class="fa fa-user"></i> </span>
+                                    <h2>Proximos usuarios a intervenir</h2>
 
                                 </header>
 
@@ -117,12 +117,12 @@
                                             <thead>
                                                 <tr>
 
-                                                    <th data-class="expand"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Nro. Paso</th>
-                                                    <th ><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Usuarios</th>
+                                                    <th data-class="expand"><i class="text-muted hidden-md hidden-sm hidden-xs"></i> Nro. Paso</th>
+                                                    <th ><i class="text-muted hidden-md hidden-sm hidden-xs"></i> Usuarios</th>
                                                     <th data-hide="phone">Nombres y Apellidos</th>
-                                                    <th data-hide="phone,tablet"><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> Puesto</th>
+                                                    <th data-hide="phone,tablet"><i class=" txt-color-blue hidden-md hidden-sm hidden-xs"></i> Puesto</th>
                                                     <th data-hide="phone,tablet">Departamento</th>
-                                                    <th data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i> Descripcion</th>
+                                                    <th data-hide="phone,tablet"><i class="txt-color-blue hidden-md hidden-sm hidden-xs"></i> Descripcion</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -130,12 +130,12 @@
                                                         X_User_dgp u = new X_User_dgp();
                                                         u = (X_User_dgp) USER_DGP.get(i);
                                                 %> <tr>
-                                                    <td class="caji"><%=u.getNu_pasos()%></td>
-                                                    <td class="caji"><%=u.getNo_usuario()%></td>
-                                                    <td class="caji"><%=u.getAp_paterno() + " " + u.getAp_materno() + " " + u.getNo_trabajador()%></td>
-                                                    <td class="caji"><%=u.getNo_puesto()%></td>
-                                                    <td class="caji"><%=u.getNo_dep()%></td>
-                                                    <td class="caji"><%=u.getDe_pasos()%></td>
+                                                    <td class=""><%=u.getNu_pasos()%></td>
+                                                    <td class=""><%=u.getNo_usuario()%></td>
+                                                    <td class=""><%=u.getAp_paterno() + " " + u.getAp_materno() + " " + u.getNo_trabajador()%></td>
+                                                    <td class=""><%=u.getNo_puesto()%></td>
+                                                    <td class=""><%=u.getNo_dep()%></td>
+                                                    <td class=""><%=u.getDe_pasos()%></td>
                                                 </tr>
                                                 <%}%>
 

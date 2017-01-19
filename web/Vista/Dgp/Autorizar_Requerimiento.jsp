@@ -511,6 +511,7 @@
 
                                     <!-- widget content -->
                                     <div class="widget-body no-padding imprimir_tabla">
+                                        <img src="../../img/ajax-loader.gif" class="img-responsive center-block"/> 
 
                                     </div>
                                     <!-- end widget content -->

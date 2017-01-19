@@ -100,11 +100,12 @@
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
-                                    <div class="widget-body no-padding add_table_1">
+                                    <div class="widget-body no-padding">
 
                                         <table  class="table table-striped table-bordered table-hover table_list_sol" width="100%">
                                             <thead><tr><th><strong>Nro</strong></th><th>Acciones</th><th data-class="expand"><strong>Apellidos y Nombres</strong></th><th data-hide="phone,tablet" ><strong>Departamento</strong></th><th data-class="expand" ><strong>Area</strong></th><th data-hide="phone,tablet"><strong>Puesto</strong></th><th data-hide="phone,tablet"><strong>Fecha Inicio</strong></th><th data-hide="phone,tablet"><strong>Fecha Cese</strong></th><th  data-hide="phone,tablet">Fecha Solicitud</th><th  data-hide="phone,tablet">Estado</th></tr></thead>
                                             <tbody class="tbody_list_solicitud">
+                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -151,7 +152,7 @@
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
-                                    <div class="widget-body no-padding add_table_2">
+                                    <div class="widget-body no-padding">
 
                                         <table  class="table table-striped table-bordered table-hover table_sol_aut" width="100%">
                                             <thead><tr><th><strong>Nro</strong></th><th>Acciones</th><th data-class="expand"><strong>Apellidos y Nombres</strong></th><th data-hide="phone,tablet" ><strong>Departamento</strong></th><th data-class="expand" ><strong>Area</strong></th><th data-hide="phone,tablet"><strong>Puesto</strong></th><th data-hide="phone,tablet"><strong>Fecha Inicio</strong></th><th data-hide="phone,tablet"><strong>Fecha Cese</strong></th><th  data-hide="phone,tablet">Fecha Solicitud</th><th  data-hide="phone,tablet">Estado</th></tr></thead>
@@ -186,7 +187,7 @@
                                 <table class="table table-hover table-striped  table-responsive tabla_detalle_sol" ></table>
 
                                 <form class="smart-form comentario">Comentario:<label class="textarea"><textarea rows="3"  required="" name="comentario" placeholder="Información adicional"></textarea></label></form>
-                                <input  type="text" value="" class="data_procesar" />
+                                <input  type="hidden" value="" class="data_procesar" />
                             </div>
                             <div class="modal-footer foot_sol">
 
@@ -203,8 +204,8 @@
 
     <!--================================================== -->
 
-    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>-->
 
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -286,6 +287,7 @@
     <script type="text/javascript">
         function listar_det_sol(valor, tipo) {
             console.log("enter to function listar_det_sol")
+            console.log("Tipo:"+tipo)
             var tb = $(".tabla_detalle_sol");
             tb.empty();
             var texto_html = '';
@@ -377,6 +379,7 @@
             });
         }
         function listar_solicitudes(tipo) {
+           
             var t_body;
             var text_html = '';
             var table_sol;
@@ -392,12 +395,13 @@
                 table_sol = $(".table_sol_aut");
             }
             t_body.empty();
+            t_body.append('<tr><td colspan="10"><img src="../../img/ajax-loader.gif" class="img-responsive center-block" /></td> </tr>');
             $.post("../../solicitud_requerimiento", url, function (objJson) {
                 if (objJson.rpta === -1) {
                     alert(objJson.mensaje);
                     return;
                 } else {
-                    t_body.empty();
+                   // t_body.empty();
                     var lista = objJson.lista;
                     for (var g = 0; g < lista.length; g++) {
                         text_html += '<tr>';
@@ -405,12 +409,12 @@
                         text_html += '<td><div class="btn-group"> <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Accion <span class="caret"></span></button><ul class="dropdown-menu"><li><a href="../../dgp?iddgp=' + lista[g].id_dgp + '&idtr=' + lista[g].id_trabajador + '&opc=Detalle"> Ver Requerimiento</a></li>';
                         text_html += '<li><a href="../../documento?iddgp=' + lista[g].id_dgp + '&idtr=' + lista[g].id_trabajador + '&opc=Listar_doc">Continuar registro</a></li>  <li class="divider"></li>';
 
-                        if (tipo === "1") {
-                            text_html += '<li><button class="btn btn-primary btn-labeled btn_sol" data-toggle="modal" type="button" data-target="#myModal" value="' + lista[g].id_solicitud_dgp + '"><span class="btn-label"><i class="fa fa-envelope"></i></span> Ver Solicitud</button></li></ul></div></td>';
+                        //if (tipo === "1") {
+                           // text_html += '<li><button class="btn btn-primary btn-labeled btn_sol" data-toggle="modal" type="button" data-target="#myModal" value="' + lista[g].id_solicitud_dgp + '"><span class="btn-label"><i class="fa fa-envelope"></i></span> Ver Solicitud</button></li></ul></div></td>';
 
-                        } else {
-                            text_html += '<li><button class="btn btn-primary btn-labeled btn_sol_aut" data-toggle="modal" type="button" data-target="#myModal" value="' + lista[g].id_solicitud_dgp + '"><span class="btn-label"><i class="fa fa-envelope"></i></span> Ver Solicitud</button></li></ul></div></td>';
-                        }
+                        //} else {
+                            text_html += '<li><button class="btn btn-primary btn-labeled btn_sol_aut'+tipo+'" data-value="'+tipo+'" data-toggle="modal" type="button" data-target="#myModal" value="' + lista[g].id_solicitud_dgp + '"><span class="btn-label"><i class="fa fa-envelope"></i></span> Ver Solicitud</button></li></ul></div></td>';
+                       // }
                         text_html += '<td><a href="../../trabajador?idtr=' + lista[g].id_trabajador + '&opc=list"><strong>' + lista[g].ap_paterno + ' ' + lista[g].ap_materno + ' ' + lista[g].no_trabajador + '</strong></a></td>';
                         text_html += '<td>' + lista[g].no_dep + '</td>';
                         text_html += '<td>' + lista[g].no_area + '</td>';
@@ -425,23 +429,24 @@
                         }
                         text_html += '</tr>';
                     }
-                    t_body.append(text_html);
+                  //  t_body.append(text_html);
                     text_html = '';
                     
-                    $(".btn_sol_aut").click(function () {
+                    $(".btn_sol_aut"+tipo).click(function () {
                         console.log("valor btn sol aut:" + $(this).val());
-                        listar_det_sol($(this).val(), "1");
+                        console.log("data-value:" + $(this).data("value"));
+                        listar_det_sol($(this).val(), $(this).data("value"));
                     });
-                    $(".btn_sol").click(function () {
+                   /* $(".btn_sol").click(function () {
                         console.log("valor btn sol:" + $(this).val());
-                        listar_det_sol($(this).val(), "2");
-                    });
+                        listar_det_sol($(this).val(), "1");
+                    });*/
                     
                     if ($.fn.dataTable.isDataTable(table_sol)) {
                         console.log("destrpy datatable!")
                         // $.fn.dataTable.isDataTable(table_sol).destroy();
                     } else {
-                        var tablas = table_sol.dataTable({searching: true, paging: true});
+                      //  var tablas = table_sol.DataTable({searching: true, paging: true});
 
                         // var rows = tablas.fnGetNodes();
 
