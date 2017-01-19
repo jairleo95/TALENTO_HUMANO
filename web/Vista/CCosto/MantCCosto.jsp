@@ -68,8 +68,8 @@
                                     <select class="inseccion" name="seccion">
                                         <option value="">[Seleccione]</option>
                                     </select>
-                                    <input type="text" name="id_cc" class="id_cc" />
-                                    <input type="text" name="id_det_cc" class="iddcc" />
+                                    <input type="hidden" name="id_cc" class="id_cc" />
+                                    <input type="hidden" name="id_det_cc" class="iddcc" />
                                 </label>
                             </section>
                         </div>

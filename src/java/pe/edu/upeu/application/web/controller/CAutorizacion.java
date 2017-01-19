@@ -721,10 +721,10 @@ public class CAutorizacion extends HttpServlet {
                         }
                     }
                 } else {
-                    Logger.getLogger(getClass().getName()).log(Level.INFO, ide);
-                    String idpu = e.Id_Puesto_Personal(ide);
-                    sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idpu, iduser, ""));
-                    out.print(a.List_Autorizados(idpu).size());
+                   // Logger.getLogger(getClass().getName()).log(Level.INFO, ide);
+                  //  String idpu = e.Id_Puesto_Personal(ide);
+                    sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idp, iduser, ""));
+                 //   out.print(a.List_Autorizados(idpu).size());
                     response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
                 }
             } catch (Exception ex) {
