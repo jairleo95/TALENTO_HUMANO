@@ -181,9 +181,9 @@
                                         <tr ><td class="text-info ">Creado por:</td><td colspan="2" class="text-info ">No Registrado</td></tr>
                                         <%}%>
                                         <%if (d.getUs_modif() != null) {%>
-                                        <tr><td class="text-info ">Ultima Modificacion por:</td><td class="text-danger" colspan="2"><%=d.getNo_trab_us_mod() + " - " + d.getNo_usuario_mod()%></td></tr>
+                                        <tr><td class="text-info ">Fuera de plazo autorizado por:</td><td class="text-danger" colspan="2"><%=d.getNo_trab_us_mod() + " - " + d.getNo_usuario_mod()%></td></tr>
                                             <%} else {%>
-                                        <tr><td class="text-info ">Ultima Modificacion por:</td><td class=" ">Sin Modificaciones</td></tr>
+                                        <tr><td class="text-info ">Fuera de plazo autorizado por:</td><td class=" ">Sin Modificaciones</td></tr>
                                         <%}%>
 
 

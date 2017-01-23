@@ -43,7 +43,7 @@ public class CFoto extends HttpServlet {
         String idtra = request.getParameter("idtra");
         String tipo = request.getParameter("tipo");
         InterfaceFotos_TrabajadorDAO foto = new Fotos_TrabajadorDAO();
-        InterfaceTrabajadorDAO tr = new TrabajadorDAO();
+        // InterfaceTrabajadorDAO tr = new TrabajadorDAO();
         String ubicacion = "";
         Map<String, Object> rpta = new HashMap<String, Object>();
 
