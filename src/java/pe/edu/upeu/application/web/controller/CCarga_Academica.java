@@ -22,6 +22,7 @@ import pe.edu.upeu.application.dao.Carga_AcademicaDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
+import pe.edu.upeu.application.dao.PagoDocenteDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao.Tipo_DocumentoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
@@ -31,12 +32,11 @@ import pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
+import pe.edu.upeu.application.dao_imp.InterfacePagoDocenteDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
-import pe.edu.upeu.application.factory.FactoryConnectionDB;
-import pe.edu.upeu.application.util.WSClienteAcademico;
 import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Detalle_Carga_Academica;
 import pe.edu.upeu.application.properties.UserMachineProperties;
@@ -74,6 +74,7 @@ public class CCarga_Academica extends HttpServlet {
         InterfaceRequerimientoDAO IReq = new RequerimientoDAO();
         InterfaceAutorizacionDAO a = new AutorizacionDAO();
         InterfaceDgpDAO dgp = new DgpDAO();
+
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
@@ -118,23 +119,27 @@ public class CCarga_Academica extends HttpServlet {
                 String iddgp = CCriptografiar.Desencriptar(request.getParameter("dgp"));
                 String idpro = CCriptografiar.Desencriptar(request.getParameter("proceso"));
                 carga.PROCESAR_CARGA_ACADEMICA(idpro, iddgp);
-                rpta.put("rpta", true);
+                rpta.put("status", true);
+            }
+            if (opc.equals("listCargaAcademica")) {
+                rpta.put("data", carga.ListCarAca());
+                rpta.put("status", true);
             }
             if (opc.equals("Reporte_Carga_Academica")) {
-                sesion.setAttribute("ListCarAca", carga.ListCarAca());
                 response.sendRedirect("Vista/Academico/Carga_Academica/Rep_Carga_Academica.jsp");
             }
 
             if (opc.equals("Registrar_CA")) {
                 /*Registrar proceso de carga academica*/
-                String CA_TIPO_HORA_PAGO = request.getParameter("TiHoraPago");
+                String CA_TIPO_HORA_PAGO = CCriptografiar.Desencriptar(request.getParameter("idTiHoraPago"));
                 double CA_TOTAL_HL = Double.parseDouble(request.getParameter("HL"));
                 String FE_DESDE = DateFormat.toFormat3(request.getParameter("DESDE"));
                 String FE_HASTA = DateFormat.toFormat3(request.getParameter("HASTA"));
                 int numero = Integer.parseInt(request.getParameter("num_itera"));
-                String ID_TRABAJADOR = CCriptografiar.Desencriptar(request.getParameter("idtr"));
+                String ID_TRABAJADOR = CCriptografiar.Desencriptar(request.getParameter("id"));
                 String eap = request.getParameter("eap");
                 String facultad = request.getParameter("facultad");
+                String ciclo = request.getParameter("ciclo");
                 /* REGISTRAR REQUERIMIENTO*/
                 DGP d = new DGP();
                 d.setFe_desde(FE_DESDE);
@@ -142,23 +147,37 @@ public class CCarga_Academica extends HttpServlet {
                 d.setId_puesto("PUT-000482");
                 d.setId_requerimiento("REQ-0018");
                 d.setId_trabajador(ID_TRABAJADOR);
-                d.setIp_usuario(UserMachineProperties.getAll());
+                /**/
+                System.out.println("::Obteniendo Datos de IP...");
+                String ipUser= UserMachineProperties.getAll();
+                d.setIp_usuario(ipUser);
+                System.out.println("::Datos de IP obtenidos");
                 d.setUs_creacion(iduser);
+                System.out.println("::Insertando DGP...");
                 String iddgp = carga.insertDGP(d);
+                System.out.println("::Dgp registrado");
                 /*PROCESO CARGA ACADEMICA*/
-                String ID_PROCESO_CARGA_AC = carga.INSERT_PROCESO_CARGA_ACADEMICA(null, null, CA_TIPO_HORA_PAGO, CA_TOTAL_HL, FE_DESDE, FE_HASTA, "0", iduser, null, null, null,
-                        UserMachineProperties.getAll(), iduser, iddgp.trim());
+                  System.out.println("::Insertando proceso carga academica...");
+                String ID_PROCESO_CARGA_AC = carga.INSERT_PROCESO_CARGA_ACADEMICA(null, null, CA_TIPO_HORA_PAGO,
+                        CA_TOTAL_HL, FE_DESDE, FE_HASTA, "0", iduser, null, null, null,
+                        ipUser, iduser, iddgp.trim());
+                System.out.println("::Proceso Carga academica registrado.");
+                System.out.println("::Iterando Cuotas...");
+
                 /*CUOTAS PAGO DOCENTE*/
                 for (int i = 1; i <= numero; i++) {
                     /*pago docente (iterar)*/
                     String NU_CUOTA = "" + i;
                     double CA_CUOTA = Double.parseDouble(request.getParameter("MES" + i));
                     /*CORREGIR FECHAS*/
-                    String FE_PAGO = request.getParameter("FECHA" + i);
-                    carga.INSERT_PAGO_DOCENTE(null, NU_CUOTA, CA_CUOTA, FE_PAGO, null, ID_PROCESO_CARGA_AC.trim(), null, null, null, UserMachineProperties.getAll(), iduser);
+                    String FE_PAGO = request.getParameter("fe_pago" + i);
+                    String id = carga.INSERT_PAGO_DOCENTE(null, NU_CUOTA, CA_CUOTA, FE_PAGO, null, 
+                            ID_PROCESO_CARGA_AC.trim(), null, null, null, ipUser, iduser);
+                    System.out.println("::Cuota " + i + " " + "registrada. ");
                 }
+                System.out.println("::Insertando detalle carga academica...");
                 /*DETALLE CARGA ACADEMICA*/
-                List<V_Detalle_Carga_Academica> lCargaAcad = carga.Lista_detalle_academico(ID_TRABAJADOR, facultad, eap, "", "");
+                List<V_Detalle_Carga_Academica> lCargaAcad = carga.Lista_detalle_academico(ID_TRABAJADOR, facultad, eap, ciclo, "");
                 for (int i = 0; i < lCargaAcad.size(); i++) {
                     carga.INSERT_DETALLE_CARGA_ACADEMICA(null, ID_PROCESO_CARGA_AC.trim(), CCriptografiar.Desencriptar(lCargaAcad.get(i).getId_carga_academica()), "1");
                 }
@@ -176,26 +195,19 @@ public class CCarga_Academica extends HttpServlet {
                 String facu = request.getParameter("facultad");
                 String dni = request.getParameter("nro_doc");
                 String ciclo = request.getParameter("ciclo");
-                String idtr = request.getParameter("idtr");
+                String idtr = CCriptografiar.Desencriptar(request.getParameter("idtr"));
                 rpta.put("list", carga.Lista_detalle_academico(idtr, facu, eap, ciclo, dni));
             }
             if (opc.equals("List_ws")) {
                 rpta.put("List_ws", carga.List_Carga_Academica_WS(semestre));
             }
             if (opc.equals("listEsCargaAcademica")) {
-                rpta.put("list", dgp.LIST_DGP_PROCESO(iddep, "", "",true));
+                rpta.put("list", dgp.LIST_DGP_PROCESO(iddep, "", "", true));
             }
-            if (opc.equals("actualizar_ws")) {
-                //WSClienteAcademico ws = new WSClienteAcademico();
-                try {
-                    //ws.start_ws_academico(semestre);
-                    rpta.put("lista", carga.actualizar_Carga_Academica(semestre));
-                    rpta.put("rpta", true);
-                } catch (Exception e) {
-                    rpta.put("rpta", false);
-                    rpta.put("mensaje", e.getMessage());
-                }
-
+            if (opc.equals("getProcesoCargaAcademicaById")) {
+                String id = CCriptografiar.Desencriptar(request.getParameter("id"));
+                rpta.put("item", carga.getProcesoCargaAcademciaById(id));
+                rpta.put("status", true);
             }
 
         } catch (Exception e) {

@@ -15,8 +15,9 @@ import java.net.UnknownHostException;
  * @author JAIR
  */
 public class UserMachineProperties {
+
     public static String getAll() {
-        String x = "";
+        /*  String x = "";
         InetAddress ip;
         try {
             ip = InetAddress.getLocalHost();
@@ -33,7 +34,8 @@ public class UserMachineProperties {
         } catch (SocketException e) {
             e.printStackTrace();
         }
-        return x;
+        return x;*/
+        return "";
     }
-    
+
 }

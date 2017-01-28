@@ -18,6 +18,7 @@ import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Carga_Academica;
 import pe.edu.upeu.application.model.DGP;
+import pe.edu.upeu.application.model.ProcesoCargaAcademica;
 import pe.edu.upeu.application.model.V_Detalle_Carga_Academica;
 import pe.edu.upeu.application.properties.UserMachineProperties;
 import pe.edu.upeu.application.util.DateFormat;
@@ -101,68 +102,6 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
     }
 
     @Override
-    public String INSERT_DGP(String ID_DGP, String FE_DESDE, String FE_HASTA, double CA_SUELDO, String DE_DIAS_TRABAJO, String ID_PUESTO, String ID_REQUERIMIENTO, String ID_TRABAJADOR, String CO_RUC, String DE_LUGAR_SERVICIO, String DE_SERVICIO, String DE_PERIODO_PAGO, String DE_DOMICILIO_FISCAL, String DE_SUBVENCION, String DE_HORARIO_CAPACITACION, String DE_HORARIO_REFRIGERIO, String DE_DIAS_CAPACITACION, String ES_DGP, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, double CA_BONO_ALIMENTARIO, double DE_BEV, String DE_ANTECEDENTES_POLICIALES, String ES_CERTIFICADO_SALUD, String DE_MONTO_HONORARIO, String FE_CESE, String FE_RECEPCION, String MO_RENUNCIA, double DI_ADQUIRIDOS, double DI_CONSUMIDOS, double DI_POR_CONSUMIR, String ES_VACACIONES, String LI_MOTIVO, String ES_MFL, double CA_BONIFICACION_P) {
-        String id = "";
-        try {
-            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_PROCESO_CA_DGP( ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? )} ");
-            cst.setString(1, null);
-            cst.setString(2, DateFormat.toFormat1(FE_DESDE));
-            cst.setString(3, DateFormat.toFormat1(FE_HASTA));
-            cst.setDouble(4, 0.0);
-            cst.setString(5, DE_DIAS_TRABAJO);
-            cst.setString(6, ID_PUESTO);
-            cst.setString(7, ID_REQUERIMIENTO);
-            cst.setString(8, ID_TRABAJADOR);
-            cst.setString(9, CO_RUC);
-            cst.setString(10, DE_LUGAR_SERVICIO);
-            cst.setString(11, DE_SERVICIO);
-            cst.setString(12, DE_PERIODO_PAGO);
-            cst.setString(13, DE_DOMICILIO_FISCAL);
-            cst.setString(14, DE_SUBVENCION);
-            cst.setString(15, DE_HORARIO_CAPACITACION);
-            cst.setString(16, DE_HORARIO_REFRIGERIO);
-            cst.setString(17, DE_DIAS_CAPACITACION);
-            cst.setString(18, ES_DGP);
-            cst.setString(19, US_CREACION);
-            cst.setString(20, FE_CREACION);
-            cst.setString(21, US_MODIF);
-            cst.setString(22, FE_MODIF);
-            cst.setString(23,  UserMachineProperties.getAll());
-            cst.setDouble(24, 0.0);
-            cst.setDouble(25, 0.0);
-            cst.setString(26, DE_ANTECEDENTES_POLICIALES);
-            cst.setString(27, ES_CERTIFICADO_SALUD);
-            cst.setString(28, DE_MONTO_HONORARIO);
-            cst.setString(29, FE_CESE);
-            cst.setString(30, FE_RECEPCION);
-            cst.setString(31, MO_RENUNCIA);
-            cst.setInt(32, 0);
-            cst.setInt(33, 0);
-            cst.setInt(34, 0);
-            cst.setString(35, ES_VACACIONES);
-            cst.setString(36, LI_MOTIVO);
-            cst.setString(37, ES_MFL);
-            cst.setDouble(38, CA_BONIFICACION_P);
-            //  cst.setString(39, ID_PROCESO_CARGA_AC);
-            cst.registerOutParameter(39, Types.CHAR);
-            cst.execute();
-            id = cst.getString(39);
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
-        } catch (Exception e) {
-            throw new RuntimeException("ERROR :" + e.getMessage());
-        } finally {
-            try {
-                this.conn.close();
-            } catch (Exception e) {
-                throw new RuntimeException(e.getMessage());
-            }
-        }
-        return id;
-    }
-
-    @Override
     public String insertDGP(DGP d) {
         String id = "";
         try {
@@ -205,7 +144,6 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             cst.setInt(32, 0);
             cst.setInt(33, 0);
             cst.setInt(34, 0);
-
 //            cst.setString(35, ES_VACACIONES);
             cst.setString(35, null);
 //            cst.setString(36, LI_MOTIVO);
@@ -272,7 +210,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
     @Override
     public List<Carga_Academica> ListCarAca() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHVD_CARGA_ACADEMICA where ID_PROCESO_CARGA_AC is null";
+        String sql = "SELECT * FROM RHVD_CARGA_ACADEMICA where es_procesado is null or es_procesado ='0'";
         List<Carga_Academica> list = new ArrayList<Carga_Academica>();
         try {
             ResultSet rs = this.conn.query(sql);
@@ -292,9 +230,9 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                 ca.setAp_materno(rs.getString("ap_materno"));
                 ca.setNo_eap(rs.getString("no_eap"));
                 ca.setNo_facultad(rs.getString("no_facultad"));
-                ca.setDe_condicion(rs.getString("de_condicion"));
-                ca.setDe_carga(rs.getString("de_carga"));
-                ca.setId_proceso_carga_ac(rs.getString("id_proceso_carga_ac"));
+                ca.setDe_condicion(rs.getString("de_condicion").trim());
+                ca.setDe_carga(rs.getString("de_carga").trim());
+                ca.setId_proceso_carga_ac(CCriptografiar.Encriptar(rs.getString("id_proceso_carga_ac")));
                 ca.setCountCursos(rs.getInt("countCursos"));
                 ca.setValidateExistTrabajador(CCriptografiar.Encriptar(rs.getString("validateExistTrabajador")));
                 list.add(ca);
@@ -392,7 +330,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             cst.setString(1, null);
             cst.setString(2, NU_CUOTA);
             cst.setDouble(3, CA_CUOTA);
-            cst.setString(4, FE_PAGO);
+            cst.setString(4, DateFormat.toFormat1(FE_PAGO));
             //cst.setString(4, "27/02/15");
             cst.setString(5, ES_PAGO_DOCENTE);
             cst.setString(6, ID_PROCESO_CARGA_AC);
@@ -422,7 +360,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
     public List<V_Detalle_Carga_Academica> Lista_detalle_academico(String idtr, String facultad, String eap, String ciclo, String dni) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "SELECT * FROM RHVD_DETALLE_CARGA_ACADEMICA WHERE campus is not null";
-        //      sql += (idtr.equals("")) ? "" : " and TRIM(ID_TRABAJADOR)= '" + idtr.trim();
+         sql += (idtr.equals("")) ? "" : " and TRIM(ID_TRABAJADOR)= '" + idtr+"' ";
         sql += (facultad.trim().equals("")) ? "" : " and TRIM(NO_FACULTAD)='" + facultad.trim() + "' ";
         sql += (eap.equals("")) ? "" : "  AND TRIM(NO_EAP)='" + eap.trim() + "' ";
         sql += (ciclo.trim().equals("")) ? "" : "  AND TRIM(DE_CARGA)='" + ciclo.trim() + "' ";
@@ -557,170 +495,34 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
     }
 
     @Override
-    public List<Map<String, ?>> actualizar_Carga_Academica(String semestre) {
-        List<Map<String, ?>> lista = new ArrayList<>();
-        List<Map<String, ?>> temp1 = new ArrayList<>();
-        List<Map<String, ?>> temp = new ArrayList<>();
+    public ProcesoCargaAcademica getProcesoCargaAcademciaById(String id) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select ID_PROCESO_CARGA_AC,ES_PROCESO_CARGA_AC,ID_TIPO_HORA_PAGO,CA_TOTAL_HL,to_char(FE_DESDE,'dd/mm/yyyy') as fe_desde ,to_char(FE_HASTA,'dd/mm/yyyy') as fe_hasta,ES_PROCESADO,ID_DGP from RHTM_PROCESO_CARGA_ACADEMICA where ID_PROCESO_CARGA_AC='" + id + "'";
+        ProcesoCargaAcademica x = new ProcesoCargaAcademica();
         try {
-            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM RHTM_CARGA_ACADEMICA_TEMP";
-            String sql1 = "SELECT * FROM RHTM_CARGA_ACADEMICA_TEMP1";
             ResultSet rs = this.conn.query(sql);
-            ResultSet rs1 = this.conn.query(sql1);
             while (rs.next()) {
-                Map<String, Object> cd = new HashMap<>();
-                cd.put("CAMPUS", rs.getString("CAMPUS"));
-                cd.put("ES_TIPO_DOC", rs.getString("ES_TIPO_DOC"));
-                cd.put("NU_DOC", rs.getString("NU_DOC"));
-                cd.put("AP_PATERNO", rs.getString("AP_PATERNO"));
-                cd.put("AP_MATERNO", rs.getString("AP_MATERNO"));
-                cd.put("NO_TRABAJADOR", rs.getString("NO_TRABAJADOR"));
-                cd.put("NO_FACULTAD", rs.getString("NO_FACULTAD"));
-                cd.put("NO_EAP", rs.getString("NO_EAP"));
-                cd.put("DE_CARGA", rs.getString("DE_CARGA"));
-                cd.put("NO_CURSO", rs.getString("NO_CURSO"));
-                cd.put("NU_GRUPO", rs.getString("NU_GRUPO"));
-                cd.put("DE_HORARIO", rs.getString("DE_HORARIO"));
-                cd.put("CA_HLAB", rs.getString("CA_HLAB"));
-                cd.put("DE_CONDICION", rs.getString("DE_CONDICION"));
-                cd.put("DE_TIPO_CURSO", rs.getString("DE_TIPO_CURSO"));
-                temp.add(cd);
+                x.setIdProcesoCargaAc(CCriptografiar.Encriptar(rs.getString("ID_PROCESO_CARGA_AC")));
+                x.setEsProcesoCargaAc(rs.getString("ES_PROCESO_CARGA_AC"));
+                x.getIdTipoHoraPago().setIdTiHoraPago(CCriptografiar.Encriptar(rs.getString("ID_TIPO_HORA_PAGO")));
+                x.setCaTotalHl(rs.getDouble("CA_TOTAL_HL"));
+                x.setFeDesde(rs.getString("fe_desde"));
+                x.setFeHasta(rs.getString("fe_hasta"));
+                x.setEsProcesado(rs.getString("es_procesado"));
+                  x.getIdDgp().setId_dgp(CCriptografiar.Encriptar(rs.getString("id_dgp")));
             }
-            while (rs1.next()) {
-                Map<String, Object> cd1 = new HashMap<>();
-                cd1.put("CAMPUS", rs1.getString("CAMPUS"));
-                cd1.put("ES_TIPO_DOC", rs1.getString("ES_TIPO_DOC"));
-                cd1.put("NU_DOC", rs1.getString("NU_DOC"));
-                cd1.put("AP_PATERNO", rs1.getString("AP_PATERNO"));
-                cd1.put("AP_MATERNO", rs1.getString("AP_MATERNO"));
-                cd1.put("NO_TRABAJADOR", rs1.getString("NO_TRABAJADOR"));
-                cd1.put("NO_FACULTAD", rs1.getString("NO_FACULTAD"));
-                cd1.put("NO_EAP", rs1.getString("NO_EAP"));
-                cd1.put("DE_CARGA", rs1.getString("DE_CARGA"));
-                cd1.put("NO_CURSO", rs1.getString("NO_CURSO"));
-                cd1.put("NU_GRUPO", rs1.getString("NU_GRUPO"));
-                cd1.put("DE_HORARIO", rs1.getString("DE_HORARIO"));
-                cd1.put("CA_HLAB", rs1.getString("CA_HLAB"));
-                cd1.put("DE_CONDICION", rs1.getString("DE_CONDICION"));
-                cd1.put("DE_TIPO_CURSO", rs1.getString("DE_TIPO_CURSO"));
-                temp1.add(cd1);
-            }
-            rs.close();
-            rs1.close();
-            //CONPARAR
-            System.out.println(temp.size());
-            System.out.println(temp1.size());
-            if (!temp1.isEmpty()) {
-                List<Integer> l = new ArrayList<>();
-                for (int i = 0; i < temp1.size(); i++) {
-                    l.add(i);
-                }
-                System.out.println(l.size());
-                for (int i = 0; i < temp1.size(); i++) {
-                    String arr1[] = new String[15];
-                    String arr2[] = new String[15];
-                    arr1[0] = temp1.get(i).get("CAMPUS").toString();
-                    arr1[1] = temp1.get(i).get("ES_TIPO_DOC").toString();
-                    arr1[2] = temp1.get(i).get("NU_DOC").toString();
-                    arr1[3] = temp1.get(i).get("AP_PATERNO").toString();
-                    arr1[4] = temp1.get(i).get("AP_MATERNO").toString();
-                    arr1[5] = temp1.get(i).get("NO_TRABAJADOR").toString();
-                    arr1[6] = temp1.get(i).get("NO_FACULTAD").toString();
-                    arr1[7] = temp1.get(i).get("NO_EAP").toString();
-                    arr1[8] = temp1.get(i).get("DE_CARGA").toString();
-                    arr1[9] = temp1.get(i).get("NO_CURSO").toString();
-                    arr1[10] = temp1.get(i).get("NU_GRUPO").toString();
-                    arr1[11] = temp1.get(i).get("DE_HORARIO").toString();
-                    arr1[12] = temp1.get(i).get("CA_HLAB").toString();
-                    arr1[13] = temp1.get(i).get("DE_CONDICION").toString();
-                    arr1[14] = temp1.get(i).get("DE_TIPO_CURSO").toString();
-
-                    if (!temp.isEmpty()) {
-                        int found = -1;
-                        for (int j = 0; j < temp.size(); j++) {
-                            int nivel_s = 0;
-                            arr2[0] = temp.get(j).get("CAMPUS").toString();
-                            arr2[1] = temp.get(j).get("ES_TIPO_DOC").toString();
-                            arr2[2] = temp.get(j).get("NU_DOC").toString();
-                            arr2[3] = temp.get(j).get("AP_PATERNO").toString();
-                            arr2[4] = temp.get(j).get("AP_MATERNO").toString();
-                            arr2[5] = temp.get(j).get("NO_TRABAJADOR").toString();
-                            arr2[6] = temp.get(j).get("NO_FACULTAD").toString();
-                            arr2[7] = temp.get(j).get("NO_EAP").toString();
-                            arr2[8] = temp.get(j).get("DE_CARGA").toString();
-                            arr2[9] = temp.get(j).get("NO_CURSO").toString();
-                            arr2[10] = temp.get(j).get("NU_GRUPO").toString();
-                            arr2[11] = temp.get(j).get("DE_HORARIO").toString();
-                            arr2[12] = temp.get(j).get("CA_HLAB").toString();
-                            arr2[13] = temp.get(j).get("DE_CONDICION").toString();
-                            arr2[14] = temp.get(j).get("DE_TIPO_CURSO").toString();
-                            for (int k = 0; k < arr1.length; k++) {
-                                if (arr1[k].equals(arr2[k])) {
-                                    nivel_s = nivel_s + 1;
-                                }
-                            }
-                            if (nivel_s == arr1.length) {
-                                found = j;
-                            }
-
-                        }
-                        if (found > -1) {
-                            l.set(i, -1);
-                        }
-                    }
-                }
-                if (!l.isEmpty()) {
-                    for (int i = 0; i < l.size(); i++) {
-                        if (l.get(i) != -1) {
-                            Map<String, Object> cd = (Map<String, Object>) temp1.get(l.get(i));
-                            cd.put("ID", i);
-                            cd.put("TDATO", 1);
-                            lista.add(cd);
-                            List<Map<String, ?>> p = buscarCargaAcademica(cd, temp);
-                            for (int j = 0; j < p.size(); j++) {
-                                Map<String, Object> cd1 = (Map<String, Object>) p.get(j);
-                                cd1.put("ID", i);
-                                cd1.put("TDATO", 0);
-                                lista.add(cd1);
-                            }
-
-                        }
-
-                    }
-                }
-            }
-
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        return lista;
-    }
-
-    public List<Map<String, ?>> buscarCargaAcademica(Map<String, Object> r, List<Map<String, ?>> x) {
-        List<Map<String, ?>> tmp = new ArrayList<>();
-        String arr1[] = new String[3];
-        arr1[0] = r.get("AP_PATERNO").toString();
-        arr1[1] = r.get("AP_MATERNO").toString();
-        arr1[2] = r.get("NO_TRABAJADOR").toString();
-        for (int i = 0; i < x.size(); i++) {
-            int nivel_s = 0;
-
-            String arr2[] = new String[15];
-            arr2[0] = x.get(i).get("AP_PATERNO").toString();
-            arr2[1] = x.get(i).get("AP_MATERNO").toString();
-            arr2[2] = x.get(i).get("NO_TRABAJADOR").toString();
-            for (int k = 0; k < arr1.length; k++) {
-                if (arr1[k].equals(arr2[k])) {
-                    nivel_s = nivel_s + 1;
-                }
-            }
-            if (nivel_s == arr1.length) {
-                tmp.add(x.get(i));
+            throw new RuntimeException("ERROR : " + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
-        System.out.println("Buscando " + arr1[0] + " " + arr1[1] + " " + arr1[2] + " encontrado:" + tmp.size());
-        return tmp;
+        return x;
     }
 
 }

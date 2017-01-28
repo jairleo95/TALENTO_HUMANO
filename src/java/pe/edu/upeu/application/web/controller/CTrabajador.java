@@ -213,9 +213,9 @@ public class CTrabajador extends HttpServlet {
 
                         FE_NAC = DateFormat.toFormat3(FE_NAC);
                         FE_NAC_C = DateFormat.toFormat3(FE_NAC_C);
-                        
-                          out.println(" fecha nac :"+DateFormat.toFormat1(FE_NAC));
-                          out.println(" fecha nac C :"+DateFormat.toFormat1(FE_NAC_C));
+
+                        out.println(" fecha nac :" + DateFormat.toFormat1(FE_NAC));
+                        out.println(" fecha nac C :" + DateFormat.toFormat1(FE_NAC_C));
 
                         tr.INSERT_TRABAJADOR(null, AP_PATERNO, AP_MATERNO, NO_TRABAJADOR, TI_DOC, NU_DOC, ES_CIVIL, FE_NAC, ID_NACIONALIDAD, ID_DEPARTAMENTO, ID_PROVINCIA, ID_DISTRITO, TE_TRABAJADOR, CL_TRA, DI_CORREO_PERSONAL, DI_CORREO_INST, CO_SISTEMA_PENSIONARIO, LI_NIVEL_EDUCATIVO, REGIMEN, ES_INST_PERU, CARRERA, DE_ANNO_EGRESO, CM_OTROS_ESTUDIOS, ES_SEXO, LI_GRUPO_SANGUINEO, DE_REFERENCIA, LI_RELIGION, NO_IGLESIA, DE_CARGO, LI_AUTORIDAD, NO_AP_AUTORIDAD, CL_AUTORIDAD, ID_NO_AFP, ES_AFILIADO_ESSALUD, LI_TIPO_TRABAJADOR, CA_TIPO_HORA_PAGO_REFEERENCIAL, ES_FACTOR_RH, LI_DI_DOM_A_D1, DI_DOM_A_D2, LI_DI_DOM_A_D3, DI_DOM_A_D4, LI_DI_DOM_A_D5, DI_DOM_A_D6, DI_DOM_A_REF, ID_DI_DOM_A_DISTRITO, LI_DI_DOM_LEG_D1, DI_DOM_LEG_D2, LI_DI_DOM_LEG_D3, DI_DOM_LEG_D4, LI_DI_DOM_LEG_D5, DI_DOM_LEG_D6, ID_DI_DOM_LEG_DISTRITO, CA_ING_QTA_CAT_EMPRESA, CA_ING_QTA_CAT_RUC, CA_ING_QTA_CAT_OTRAS_EMPRESAS, CM_OBSERVACIONES, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, AP_NOMBRES_PADRE, AP_NOMBRES_MADRE,
                                 ES_TRABAJA_UPEU_C, AP_NOMBRES_C, FE_NAC_C, ID_TIPO_DOC_C, NU_DOC_C, LI_INSCRIPCION_VIG_ESSALUD_C,
@@ -240,7 +240,7 @@ public class CTrabajador extends HttpServlet {
                             String ES_DATOS_HIJO_TRABAJADOR = "1";
                             if (NU_DOC_H != null) {
                                 if (!NU_DOC_H.equals("")) {
-                                           FE_NACIMIENTO = DateFormat.toFormat3(FE_NACIMIENTO);
+                                    FE_NACIMIENTO = DateFormat.toFormat3(FE_NACIMIENTO);
                                     h.INSERT_DATOS_HIJO_TRABAJADOR(null, idtr, AP_PATERNO_H, AP_MATERNO_H, NO_HIJO_TRABAJADOR, FE_NACIMIENTO, ES_SEXO_H, ES_TIPO_DOC, NU_DOC_H, ES_PRESENTA_DOCUMENTO, ES_INSCRIPCION_VIG_ESSALUD, ES_ESTUDIO_NIV_SUPERIOR, US_CREACION, FE_CREACION, US_MODIF, FE_MODIF, IP_USUARIO, ES_DATOS_HIJO_TRABAJADOR);
                                 }
                             }
@@ -284,7 +284,7 @@ public class CTrabajador extends HttpServlet {
                     String nom = request.getParameter("nom");
                     String ape_mat = request.getParameter("ape_mat");
                     String ape_pat = request.getParameter("ape_pat");
-                    
+
                     System.out.println(ape_pat);
                     System.out.println(ape_mat);
                     System.out.println(nom);
@@ -723,16 +723,19 @@ public class CTrabajador extends HttpServlet {
                     rpta.put("rpta", "1");
                 }
                 if (opc.equals("getTiHoraPago")) {
-                    String idtr = CCriptografiar.Desencriptar(request.getParameter("idtr"));
+                    System.out.println("enter to getTiHoraPago");
+                    String idtr = CCriptografiar.Desencriptar(String.valueOf(request.getParameter("idtr")));
+                    // System.out.println((request.getParameter("idtr")));
+                    //  System.out.println("id:"+CCriptografiar.Encriptar("TRB-002172"));
                     String html = "";
                     List<TipoHoraPago> t = thp.listTiHoraPagoByIdTrabajador(idtr);
                     html += "<select  name='TiHoraPago' class='form-control input-sm TiHoraPago bounceIn animated' required>";
                     if (t.isEmpty()) {
                         html += "<option>[Sin datos]</option>";
                     } else {
-                         html += "<option >[Seleccione]</option>";
+                        html += "<option >[Seleccione]</option>";
                         for (int i = 0; i < t.size(); i++) {
-                            html += "<option value='" + t.get(i).getIdTiHoraPago()+ "' data-valor='" + t.get(i).getCaTiHoraPago() + "'>s/." + t.get(i).getCaTiHoraPago() 
+                            html += "<option value='" + CCriptografiar.Encriptar(t.get(i).getIdTiHoraPago()) + "' data-valor='" + t.get(i).getCaTiHoraPago() + "'>S/." + t.get(i).getCaTiHoraPago()
                                     + " ( " + t.get(i).getFeCreacion() + ") </option>";
                         }
                     }

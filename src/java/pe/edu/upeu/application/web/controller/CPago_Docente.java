@@ -16,8 +16,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import pe.edu.upeu.application.dao.Carga_AcademicaDAO;
+import pe.edu.upeu.application.dao.PagoDocenteDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO;
+import pe.edu.upeu.application.dao_imp.InterfacePagoDocenteDAO;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.PagoDocente;
+import pe.edu.upeu.application.util.CCriptografiar;
 import pe.edu.upeu.application.util.DateFormat;
 
 /**
@@ -42,17 +46,50 @@ public class CPago_Docente extends HttpServlet {
         PrintWriter out = response.getWriter();
         InterfaceCarga_AcademicaDAO c = new Carga_AcademicaDAO();
         String opc = request.getParameter("opc");
+        InterfacePagoDocenteDAO pd = new PagoDocenteDAO();
         Map<String, Object> rpta = new HashMap<String, Object>();
         try {
             if (opc.equals("Listar_Cuotas")) {
                 String feDesde = request.getParameter("fe_desde");
                 String feHasta = request.getParameter("fe_hasta");
                 double ca_pago_semanal = Double.parseDouble(request.getParameter("pago_semanal"));
-                feDesde=DateFormat.toFormat3(feDesde);
-                feHasta=DateFormat.toFormat3(feHasta);
+                feDesde = DateFormat.toFormat3(feDesde);
+                feHasta = DateFormat.toFormat3(feHasta);
                 List<Map<String, ?>> lista = c.Cuotas_Pago_Docente(DateFormat.toFormat1(feDesde), DateFormat.toFormat1(feHasta), ca_pago_semanal);
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
+            }
+            if (opc.equals("getPagoDocenteHtml")) {
+                String idpca = CCriptografiar.Desencriptar(request.getParameter("id"));
+                List<PagoDocente> x = pd.getPagoDocenteByIdProcCA(idpca);
+                String html = "";
+                html += "<div class='row text-center'><div class='col-md-2'>Mes</div><div class='col-md-5'>Fecha Pago Aprox.</div><div class='col-md-5'>Monto</div></div>";
+
+                for (int i = 0; i < x.size(); i++) {
+                    html += "<div class='row text-center'>";
+                    html += "<div class='form-group'><label class='col-md-2 control-label'>" + (i + 1) + "</label>";
+
+                    html += "<div class='col-md-5'>";
+                    html += "<div class='input-group'>";
+                    html += "<span class='input-group-addon'><i class='fa fa-calendar'></i></span>";
+                    html += "<input type='text' class='form-control' disabled='disabled' value='" + x.get(i).getFePago() + "' />";
+                    html += "</div>";
+                    html += "</div>";
+                    html += "<div class='col-md-5'>";
+                    html += "<div class='input-group'>";
+                    html += "<span class='input-group-addon'>S/.</span>";
+                    html += "<input type='text' class='form-control'  disabled='disabled' value='" + x.get(i).getCaCuota() + "' />";
+                    html += "</div>";
+                    html += "</div>";
+                    html += "</div>";
+                    html += "</div>";
+
+                    //   html += "<div class='row'><div class='col-md-2 text-center' ><label class=''>"
+                    //      + (i + 1) + "</label></div><div class='col-md-10'><input type='text' class='form-control' readonly='' value='" + x.get(i).getCaCuota() + "' /></div></div>";
+                }
+                rpta.put("html", html);
+                rpta.put("status", true);
+
             }
 
         } catch (Exception e) {

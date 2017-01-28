@@ -1,4 +1,5 @@
 
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.model.Carga_Academica"%>
 <%@page import="pe.edu.upeu.application.dao.Carga_AcademicaDAO"%>
 <%@page import="pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO"%>
@@ -19,7 +20,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/font-awesome.min.css">
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-            <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production-plugins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production-plugins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-production.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../../css/smartadmin-skins.min.css">
 
@@ -51,23 +52,6 @@
                     <div class="well">
                         <h1><span class="semi-bold">Reporte</span> <i class="ultra-light">Carga Académica</i> (Docentes) <sup class="badge bg-color-red bounceIn animated">v 2.0</sup> <br>
                             <small class="text-danger slideInRight fast animated"><strong>Inicio de contratación</strong></small></h1>
-                        <!--<div class="row">
-                            <div class="col-md-4">
-                                <select class="form-control" >
-                                    <option value="" >[Condición Laboral]</option>
-                                    <option value="1" >Contratado</option>
-                                    <option value="2" >Tiempo Parcial</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <select class="form-control" >
-                                    <option value="" >[Facultad Adscrita]</option>
-                                    <option value="1" >item 1</option>
-                                    <option value="2" >item 2</option>
-                                </select>
-                            </div>
-                        </div>-->
-
                     </div>
                 </div>
             </div>
@@ -90,110 +74,33 @@
                             </header>
                             <div class="no-padding">
                                 <div class="widget-body">
-                                    <div class="tab-pane fade active in padding-10 no-padding-bottom" id="s1">
-                                        <table   class="table table-striped table-bordered table-hover datatableRepCargaAcademica" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th class="hasinput" colspan="10"  rowspan="1"></th>  
-                                                    <th class='hasinput' >
-                                                        <input type="text" class='form-control input-sm dateDesdeM' />
-                                                    </th>
-                                                    <th class='hasinput' >
-                                                        <input type="text" class='form-control input-sm dateHastaM' />
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Tipo Doc.</th>
-                                                    <th>N° Documento</th>
-                                                    <th style="width: 16%">Apellidos y Nombres</th>
-                                                    <th>Facultad</th>
-                                                    <th>Escuela</th>
-                                                    <th>Situación Educativa</th>
-                                                    <th>Profesión Docente</th>
-                                                    <th>Condición</th>
-                                                    <th>Ciclo</th>
-                                                    <th>Inicio</th>
-                                                    <th>Cese</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <%
-                                                    for (int i = 0; i < ListCarAca.size(); i++) {
-                                                        Carga_Academica ca = new Carga_Academica();
-                                                        ca = (Carga_Academica) ListCarAca.get(i);
-                                                %>
-                                                <tr>
-                                                    <td>  
-                                                        <div class="btn-group"> 
-                                                            <button class="btn btn-primary dropdown-toggle bounceIn animated" data-toggle="dropdown">
-                                                                <i class="fa fa-gear fa-lg"></i>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <%if (ca.getValidateExistTrabajador() != null) {
-                                                                %>
-                                                                <li>
-                                                                    <a href="../../../carga_academica?opc=Completar_Datos&<%=ca.toDataSent()%>">Completar Datos</a>
-                                                                </li>
-
-                                                                <li class="divider"></li>
-                                                                <li>
-                                                                <li>
-                                                                    <button  data-toggle="modal" data-target="#myModal" data-backdrop="static" 
-                                                                       data-keyboard="false" class="btnCargaAcademica"
-                                                                       data-valor="&<%=ca.toDataSent()%>"  value="<%=(i+1)%>" >Carga Academica</button>
-                                                                </li>
-                                                                <%} else {%>
-                                                                <li>
-                                                                    <a href="../../../carga_academica?opc=Completar_Datos&<%=ca.toDataSent()%>" >Completar Datos</a>
-                                                                </li>
-                                                                <%}%>
-                                                            </ul>
-                                                        </div>
-
-                                                    </td>
-                                                    <td><%=ca.getEs_tipo_doc()%></td>
-                                                    <td><%=ca.getNu_doc()%></td>
-                                                    <td><label><%=ca.getAp_paterno() + " " + ca.getAp_materno() + " " + ca.getNo_trabajador()%> </label>
-                                                        <sup class="badge bg-color-greenLight bounceIn animated"><%=ca.getCountCursos()%></sup></td>
-                                                    <td><%=ca.getNo_facultad()%></td>
-                                                    <td><%=ca.getNo_eap()%></td>
-                                                    <td><%=ca.getNo_s_educativa()%></td>
-                                                    <td><%=ca.getProfesion_docente()%></td>
-                                                    <td><%=ca.getDe_condicion()%></td>
-                                                    <td><%=ca.getDe_carga()%></td>
-                                                    <td><%if (ca.getFe_desde() == null & ca.getValidateExistTrabajador() != null) {
-                                                        %> 
-                                                        <input type="text" class="dateDesdeItem form-control input-sm" style="width:100px"/>
-                                                        <% }
-                                                        %></td>
-                                                    <td><%if (ca.getFe_hasta() == null & ca.getValidateExistTrabajador() != null) {
-                                                        %> 
-                                                        <input type="text" class="dateHastaItem form-control input-sm" style="width:100px"/>
-                                                        <% }
-                                                        %></td>
-                                            <input type="hidden" class="idtr<%=(i+1)%>" value="<%=ca.getId_trabajador()%>"/>
-                                            <input type="hidden" class="iddgp<%=(i+1)%>" value=""/>
-                                            <input type="hidden" class="proceso<%=(i+1)%>" value=""/>
+                                    <table   class="table table-striped table-bordered table-hover datatableCargaAcademica" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="hasinput" colspan="10"  rowspan="1"></th>  
+                                                <th class='hasinput' >
+                                                    <input type="text" class='form-control input-sm dateDesdeM' />
+                                                </th>
+                                                <th class='hasinput' >
+                                                    <input type="text" class='form-control input-sm dateHastaM' />
+                                                </th>
                                             </tr>
-                                            <%}%>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="tab-pane fade" id="s2">
-                                        <table id="example-table2" class="table table-condensed" >
-                                            <thead>
-                                                <tr>
-                                                    <th>AP_PATERNO</th>
-                                                    <th>AP_MATERNO</th>
-                                                    <th>NO_FACULTAD</th>
-                                                    <th>DE_CARGA</th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
-
+                                            <tr>
+                                                <th></th>
+                                                <th>Tipo Doc.</th>
+                                                <th>N° Documento</th>
+                                                <th style="width: 16%">Apellidos y Nombres</th>
+                                                <th>Facultad</th>
+                                                <th>Escuela</th>
+                                                <th>Situación Educativa</th>
+                                                <th>Profesión Docente</th>
+                                                <th>Condición</th>
+                                                <th>Ciclo</th>
+                                                <th>Inicio</th>
+                                                <th>Cese</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -209,7 +116,7 @@
                     <div class="modal-header">
                         <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-                        <h4 class="modalTitle" id="myModalLabel">Académico</h4>
+                        <h4 class="modalTitle" id="myModalLabel">Procesar Carga Académica</h4>
                     </div>
                     <div class="modal-body">
                         <div class="areaModal">
@@ -299,74 +206,17 @@
         <script src="../../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-        <script  type="text/javascript" src="../../../js/Js_Formulario/Js_Form.js"></script>
-        <script type="text/javascript" src="../../../js/Js_Academico/Js_Carga_Academica.js"></script>
+        <script  type="text/javascript" src="../../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>"></script>
+        <script type="text/javascript" src="../../../js/Js_Academico/Js_Carga_Academica.js?v=<%=globalProperties.VERSION_JS%>"></script>
         <script type="text/javascript">
             $(document).ready(function () {
+                $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
+                });
                 pageSetUp();
                 initFormPlugins();
-                initCargaAcademica();
-                var opc = "list";
-                var dataAditional = "";
-                var idRow = "";
-                var urlListDatatable = "../usuario/executeCrudUsuario.htm";
-                // PAGE RELATED SCRIPTS
-                var responsiveHelper_dt_basic = undefined;
-                var responsiveHelper_datatable_fixed_column = undefined;
-                var responsiveHelper_datatable_col_reorder = undefined;
-                var responsiveHelper_datatable_tabletools = undefined;
-                var breakpointDefinition = {
-                    tablet: 1024,
-                    phone: 480
-                };
-                var tableRepAcademico = $('.datatableRepCargaAcademica').DataTable();
-
-                $(".dateDesdeM").datepicker({
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    numberOfMonths: 2,
-                    dateFormat: 'dd/mm/yy',
-                    prevText: '<i class="fa fa-chevron-left"></i>',
-                    nextText: '<i class="fa fa-chevron-right"></i>',
-                    onClose: function (selectedDate) {
-                        $(this).parents("tr").find($(".dateHastaM")).datepicker("option", "minDate", selectedDate);
-                    }
-                });
-                $(".dateHastaM").datepicker({
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    numberOfMonths: 2,
-                    dateFormat: 'dd/mm/yy',
-                    prevText: '<i class="fa fa-chevron-left"></i>',
-                    nextText: '<i class="fa fa-chevron-right"></i>',
-                    onClose: function (selectedDate) {
-                        $(this).parents("tr").find($(".dateDesdeM")).datepicker("option", "maxDate", selectedDate);
-                    }
-                });
-                $(".dateDesdeItem").datepicker({
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    numberOfMonths: 2,
-                    dateFormat: 'dd/mm/yy',
-                    prevText: '<i class="fa fa-chevron-left"></i>',
-                    nextText: '<i class="fa fa-chevron-right"></i>',
-                    onClose: function (selectedDate) {
-                        $(this).parents("tr").find($(".dateHastaItem")).datepicker("option", "minDate", selectedDate);
-                    }
-                });
-                $(".dateHastaItem").datepicker({
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    numberOfMonths: 2,
-                    dateFormat: 'dd/mm/yy',
-                    prevText: '<i class="fa fa-chevron-left"></i>',
-                    nextText: '<i class="fa fa-chevron-right"></i>',
-                    onClose: function (selectedDate) {
-                        $(this).parents("tr").find($(".dateDesdeItem")).datepicker("option", "maxDate", selectedDate);
-                    }
-                });
-
-
+                initDatatableEvents();
+                loadDatatableCargaAcademica();
             });
         </script>
     </body>

@@ -1,17 +1,20 @@
-<div class="well">
+<div class="well well-light">
     <div class="row">
         <div class="col col-md-6">
-            <div class="row">Cursos</div>
-            <div class="row bodyCursos">
+            <div class="text-center">
+                <label class="txt-color-red font-md">Cursos</label>
+            </div>
+
+            <div class="bodyCursos">
 
             </div>
 
         </div>
-        <div class="col col-md-6">
-            <div class="row">Carga académica</div> 
-            <div class="row">
+        <div class="col col-md-6 text-center">
+            <label class="txt-color-red font-md">Horario</label> 
+            <div class="">
                 <table  class="tabla-horario text-center" border="1" style="width: 100%">
-                    <tr align='CENTER'>
+                    <tr class="text-center">
                         <th colspan=2>Periodo</th>
                         <th>D</th>
                         <th>L</th>
@@ -22,7 +25,7 @@
                         <th>S</th>
                     </tr>
                     <tr>
-                        <td colspan="9" align="CENTER" style="font-weight: bold;">
+                        <td colspan="9" >
                             Horario de Ma&ntilde;ana
                         </td>
                     </tr>
@@ -96,7 +99,7 @@
                         <td class="columna-7" ></td>
                     </tr>
                     <tr>
-                        <td colspan="9" align="CENTER" style="font-weight: bold;">Horario de Tarde</td>
+                        <td colspan="9" >Horario de Tarde</td>
                     </tr>
 
                     <tr class="fila-7">
@@ -167,7 +170,7 @@
                         <td class="columna-7" ></td>
                     </tr>
                     <tr>
-                        <td colspan="9" align="CENTER" style="font-weight: bold;">Horario de Noche</td>
+                        <td colspan="9">Horario de Noche</td>
                     </tr>
                     <tr class="fila-13">
                         <td ><b>1.</b></td>
@@ -219,78 +222,48 @@
     </div>
 
 </div>
-<div class="well">
-    <form class="form_carga_academica">
+
+<form class="form_carga_academica">
+    <div class="well well-light">
         <div class="row">
-            <div class="col col-md-6">
+            <div class="col col-md-3">
                 <div class="form-group">
-                    <label for="category"> Fecha de Inicio:</label>
+                    <label> Fecha Inicio:</label>
                     <input type="text" class="fecha form-control fe_desde_p frompicker" value="" name="DESDE" data-mask="99/99/9999" data-mask-placeholder= "_" required />
                 </div>
             </div>
-            <div class="col col-md-6">
+            <div class="col col-md-3">
                 <div class="form-group">
-                    <label for="category"> Fecha de Cese:</label>
+                    <label> Fecha Cese:</label>
                     <input type="text" class="fecha1 form-control fe_hasta_p topicker" value="" name="HASTA" data-mask="99/99/9999" data-mask-placeholder= "_" required />
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col col-md-6">
+    
+            <div class="col col-md-3">
                 <div class="form-group">
-                    <label for="category"> Tipo de Hora Pago:</label>
+                    <label > Tipo Hora Pago:</label>
                     <div class="divSelectTiHoraPAGO"></div>
                 </div>
             </div>
-            <div class="col col-md-6">
+            <div class="col col-md-3">
                 <div class="form-group">
-                    <label for="category"> Horas Laborables:</label>
-                    <!--       <%
-                           if (hl != null) {
-                           if (Boolean.valueOf(academico) == true) {
-                           %>
-                           <input type="text" class="form-control hl_docente" value="0" name="HL" placeholder="0" required />
-                           <%} else {%>
-                           <input type="text" class="form-control hl_docente" value="0" name="HL" placeholder="0" required />
-                           <%}%>-->
+                    <label>H. Laborables:</label>
+
                     <input type="text" class="form-control hl_docente" value="0" name="HL" placeholder="0" required />
                 </div>
             </div>
         </div>
-        <label for="category" > <strong>Cuotas</strong></label>
-        <br>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="cuota_docente">
-
-                    </div>
-                    <!--  <input type="hidden" name="PUESTO" value="PUT-000482" >
-                   <input type="hidden" name="REQ" value="REQ-0018">
-                <input type="hidden" name="IDTR" value="" >
-                   <input type="hidden" name="eap" value="" >
-                   <input type="hidden" name="facultad" value="" >
-                   <input type="hidden" name="dgp"  class="dgp" value="" >
-                   <input type="hidden" name="proceso" class="proceso" value="" >  -->
-                </div>
-            </div>
+    </div>
+    <div class="well well-light">
+        <label class="txt-color-red font-md">Cuotas</label> 
+        <div class="cuota_docente">
+            <label>(Complete los campos anteriores para calcular)</label>
         </div>
-        <!--  <div class="modal-footer">
-             <button type="button" class="btn btn-default" data-dismiss="modal">
-                 Cancelar
-             </button>
-             <button type="button" class="btn btn-primary btn_guardar_ca"  data-dismiss="modal">
-                 Guardar
-             </button>
- 
-         </div>-->
-    </form>
-
-</div>
-
+    </div>
+</form>
 <div class="modal-footer">
-    <button type="button" class="close-form btn btn-default" data-dismiss="modal">Close</button>
-    <button type="button" onclick="" class="btn btn-success btnAceptarCuotasCA">Aceptar</button>
+    <button type="button" class="close-form btn btn-default" data-dismiss="modal">Cerrar</button>
+    <button type="button" onclick="" class="btn btn-primary btnAceptarCuotasCA">Guardar</button>
     <button class="btn btn-default btn-sm btnProcesar" type="button" style="display:none">
         Procesar
     </button>
