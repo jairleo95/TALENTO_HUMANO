@@ -10,7 +10,7 @@ package pe.edu.upeu.application.properties;
  * @author ALPHA
  */
 public class globalProperties {
-
+    
     /*change when update server (for cache conflicts)*/
     public static String VERSION_CSS = "2.0.3";
     public static String VERSION_JS = "2.4.1";
@@ -25,7 +25,7 @@ public class globalProperties {
     public static final String HOSTNAME = "192.168.1.39";
    // public static final String HOSTNAME="procesrh-db.upeu";
     public static final String USER = "procesosrh";
-    public static final String USER_PWD = "gestionrrhh";
+    public static final String USER_PWD = "rrhh";
     public static final String PORT = "1521";
     public static final String SID = "xe";
 

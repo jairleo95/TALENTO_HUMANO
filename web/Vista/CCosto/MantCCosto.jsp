@@ -69,6 +69,7 @@
                                         <option value="">[Seleccione]</option>
                                     </select>
                                     <input type="hidden" name="id_cc" class="id_cc" />
+                                    <input type="hidden" name="id_det_cc" class="iddcc" />
                                 </label>
                             </section>
                         </div>
@@ -76,7 +77,7 @@
                     <section class="col-md-2">
                         <section class="col col-xs-12">
                             <center>
-                                <button class="btn btn-primary btn-xl btn-circle btnSave" type="button" style="margin-top: 13%" value="1"><i id="icono" class="glyphicon glyphicon-ok"></i></button> 
+                                <button class="btn btn-primary btn-xl btn-circle btnSave" type="button" style="margin-top: 13%" value="1"><i id="icono" class="fa fa-plus"></i></button> 
                                 <button class="btn btn-danger btn-xl btn-circle btnCancel" type="button" style="margin-top: 13%; display:none" value="1"><i id="icono" class="glyphicon glyphicon-remove"></i></button> 
                             </center>
                         </section>

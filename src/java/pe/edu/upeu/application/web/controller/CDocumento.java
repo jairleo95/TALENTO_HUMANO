@@ -5,14 +5,17 @@
  */
 package pe.edu.upeu.application.web.controller;
 
+import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +32,10 @@ import org.apache.commons.fileupload.servlet.ServletRequestContext;
 import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
+import pe.edu.upeu.application.model.Datos_Hijo_Trabajador;
+import pe.edu.upeu.application.model.Padre_Madre_Conyugue;
 import pe.edu.upeu.application.model.Renombrar;
+import pe.edu.upeu.application.model.V_Reg_Dgp_Tra;
 
 /**
  *
@@ -50,7 +56,8 @@ public class CDocumento extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, FileUploadException, Exception {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
 
         String dgp = request.getParameter("iddgp");
@@ -58,6 +65,9 @@ public class CDocumento extends HttpServlet {
         String opc = request.getParameter("opc");
         HttpSession sesion = request.getSession(true);
         String user = (String) sesion.getAttribute("IDUSER");
+        String rol = (String) sesion.getAttribute("IDROL");
+        Map<String, Object> rpta = new HashMap<String, Object>();
+
         try {
             if (opc != null) {
                 if (opc.equals("Eliminar")) {
@@ -79,7 +89,7 @@ public class CDocumento extends HttpServlet {
                     sesion.setAttribute("List_Hijos", d.List_Hijos(idtr));
                     sesion.setAttribute("List_Conyugue", d.List_Conyugue(idtr));
 
-                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + idtr);
+                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp);
                 }
                 if (opc.equals("Reg_Pro_Dgp")) {
                     sesion.setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
@@ -105,15 +115,681 @@ public class CDocumento extends HttpServlet {
                         response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
                     }
                 }
+                if (opc.equals("listDocument")) {
+                    System.out.println("enter to listDocument");
+                    boolean permissionEditDocument = false;
+                    if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001")) {
+                        permissionEditDocument = true;
+                    }
+
+                    int n_nac = d.List_Req_nacionalidad(idtr);
+                    int num_ad = d.List_Adventista(idtr);
+                    int can_doc = d.count_documentos(dgp);
+
+                    List<Datos_Hijo_Trabajador> List_Hijos = d.List_Hijos(idtr);
+                    List<V_Reg_Dgp_Tra> List_doc_req_pla = d.List_doc_req_pla(dgp, idtr);
+                    List<Padre_Madre_Conyugue> List_Conyugue = d.List_Conyugue(idtr);
+
+                    // int n_nac = Integer.parseInt(request.getParameter("n_nac"));
+                    // int num_ad = Integer.parseInt(request.getParameter("num_ad"));
+                    String id_hijo_faltante = "";
+
+                    List<String> listDocumentItem = new ArrayList<String>();
+                    InterfaceDocumentoDAO doc_ = new DocumentoDAO();
+                    String id_dgp = "";
+                    String html = "";
+                    html += " <form action='../../../documento' method='post' enctype='multipart/form-data'  class='form_dgp_doc' >";
+
+                    int i = 0;
+                    for (int z = 0; z < List_doc_req_pla.size(); z++) {
+                        V_Reg_Dgp_Tra d = new V_Reg_Dgp_Tra();
+                        d = (V_Reg_Dgp_Tra) List_doc_req_pla.get(z);
+
+                        String htmlDoca = "";
+                        if (d.getTi_documento().trim().equals("DOCA")) {
+                            if (n_nac != 0) {
+
+                                htmlDoca += "<div class='col-lg-4 col-md-6 col-sm-12 col-xs-12 documentItem'>";
+                                htmlDoca += " <div class='well well-sm'>";
+
+                                htmlDoca += "<div class=''>";
+                                htmlDoca += "<label >" + d.getDocumento() + "</label>";
+                                htmlDoca += "  </div>";
+
+                                htmlDoca += " <div class=' caji" + (i + 1) + "'  >";
+                                if (d.getId_documento_adjunto() == null & (permissionEditDocument)) {
+
+                                    htmlDoca += " <input  class='fileDocument' type='file' multiple='true'   ";
+                                    if (d.getEs_obligatorio().equals("1")) {
+                                        html += (" required='required' ");
+                                    }
+                                    htmlDoca += "name='archivos" + (i + 1) + "' >";
+
+                                } else if (d.getId_documento_adjunto() == null) {
+                                    htmlDoca += " <label class='null'>No Registrado</label>";
+                                } else {
+                                    htmlDoca += (doc_.List_files(d.getId_documento_adjunto().trim()));
+                                }
+
+                                htmlDoca += "</div>";
+
+                                htmlDoca += " <div class=''>";
+                                if (d.getDe_documento_adjunto() == null & (permissionEditDocument)) {
+                                    htmlDoca += "<input type='text' placeholder='Escribe una descripción' class='form-control' name='lob_description" + (i + 1) + "'>";
+
+                                } else if (d.getDe_documento_adjunto() == null) {
+                                    htmlDoca += " <label class='null' >No Registrado</label>";
+                                } else {
+                                    htmlDoca += "<label >Descripción:</label>";
+                                    htmlDoca += "<label style='font-weight: normal;'>" + d.getDe_documento_adjunto() + "</label>";
+
+                                }
+                                htmlDoca += "</div>";
+
+                                htmlDoca += " <div  class=''  >";
+                                if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {
+                                    htmlDoca += "  <label>¿Recibido en fisico?:</label> <label class='toggle'><input type='checkbox' value='1'   name='estado" + (i + 1) + "'  >";
+                                    htmlDoca += " <i data-swchon-text='SI' data-swchoff-text='NO'></i></label>";
+                                } else if (d.getEs_documento_adjunto() == null) {
+                                    htmlDoca += "<label class='null'>¿Recibido en fisico?:No Registrado</label>";
+                                } else {
+                                    htmlDoca += " <label>";
+                                    if (d.getEs_documento_adjunto().trim().equals("1")) {
+
+                                        htmlDoca += "¿Recibido en fisico?: Si";
+
+                                    } else {
+
+                                        htmlDoca += "¿Recibido en fisico?: No";
+
+                                    }
+                                    htmlDoca += "  </label>";
+                                }
+
+                                htmlDoca += "</div>";
+
+                                htmlDoca += "<div class=''>";
+                                if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {
+                                    htmlDoca += "<a type='button'  class='btn btn-danger btn-sm  elimi'"
+                                            + " href='../../../documento?opc=Eliminar&id_doc=" + d.getId_documento_adjunto()
+                                            + "&iddgp=" + d.getIddgp()
+                                            + "&idtr=" + d.getId_trabajador()
+                                            + "'><i class='fa fa-trash-o'></i></a>";
+                                }
+                                htmlDoca += " </div>  ";
+
+                                htmlDoca += "</div>";
+                                htmlDoca += "  <input type='hidden' name='iddoc" + (i + 1) + "' value='" + d.getId_document() + "'>";
+                                htmlDoca += "  </div>  ";
+                            }
+                            listDocumentItem.add(htmlDoca);
+                        }
+                        String htmlCOFE = "";
+                        /*ok*/
+                        if (d.getTi_documento().trim().equals("COFE")) {
+                            /*constancia de feligresia*/
+                            if (num_ad != 0) {
+                                htmlCOFE += "  <div class='col-lg-4 col-md-6 col-sm-12 col-xs-12 documentItem'>";
+                                htmlCOFE += "<div  class='well wel-sm'>";
+
+                                htmlCOFE += " <div class=''>";
+                                htmlCOFE += " <label>" + d.getDocumento() + "</label>";
+                                htmlCOFE += " </div>";
+
+                                htmlCOFE += " <div  class='caji" + (i + 1) + "'  >";
+                                if (d.getId_documento_adjunto() == null & (permissionEditDocument)) {
+                                    htmlCOFE += "   <input class='fileDocument' type='file' multiple=true   ";
+                                    if (d.getEs_obligatorio().equals("1")) {
+                                        htmlCOFE += " required='required' ";
+                                    }
+                                    htmlCOFE += "name='archivos" + (i + 1) + "' >";
+                                } else if (d.getId_documento_adjunto() == null) {
+                                    htmlCOFE += " <label class='null'>No Registrado</label>";
+                                } else {
+
+                                    htmlCOFE += doc_.List_files(d.getId_documento_adjunto().trim());
+
+                                }
+                                htmlCOFE += "  </div>";
+
+                                htmlCOFE += " <div class=''>";
+
+                                if (d.getDe_documento_adjunto() == null & (permissionEditDocument)) {
+                                    htmlCOFE += " <input type='text'  placeholder='Escribe una descripción' class='form-control' name='lob_description" + (i + 1) + "'>";
+                                } else if (d.getDe_documento_adjunto() == null) {
+                                    htmlCOFE += " <label class='null' >No Registrado</label>";
+                                } else {
+                                    htmlCOFE += " <label>Descripción:</label> ";
+                                    htmlCOFE += "   <label >" + d.getDe_documento_adjunto() + " </label>";
+
+                                }
+                                htmlCOFE += " </div>";
+                                htmlCOFE += "<div  class=''>";
+                                if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {
+
+                                    htmlCOFE += "    <label>¿Recibido en fisico?:</label>";
+                                    htmlCOFE += " <label class='toggle'><input type='checkbox' value='1'   name='estado" + (i + 1) + "'   >";
+                                    htmlCOFE += "<i data-swchon-text='SI' data-swchoff-text='NO'></i></label>";
+                                } else if (d.getEs_documento_adjunto() == null) {
+
+                                    htmlCOFE += "    <label class='null'>¿Recibido en fisico?:No Registrado</label>";
+
+                                } else {
+
+                                    htmlCOFE += "<label >";
+                                    if (d.getEs_documento_adjunto().trim().equals("1")) {
+
+                                        htmlCOFE += "¿Recibido en fisico?:Si";
+
+                                    } else {
+
+                                        htmlCOFE += " ¿Recibido en fisico?:No";
+                                        htmlCOFE += " </label>";
+                                    }
+                                }
+                                htmlCOFE += " </div>";
+
+                                htmlCOFE += " <div class='' >";
+                                if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {
+                                    htmlCOFE += " <a type='button'  class='btn btn-danger btn-sm  elimi' href='../../../documento?opc=Eliminar&id_doc="
+                                            + d.getId_documento_adjunto() + "&iddgp=" + d.getIddgp()
+                                            + "&idtr=" + d.getId_trabajador() + "'><i class='fa fa-trash-o'></i></a>";
+                                }
+
+                                htmlCOFE += " </div>";
+                                htmlCOFE += "  </div>";
+                                htmlCOFE += " <input type='hidden' name='iddoc" + (i + 1) + "' value='" + d.getId_document() + "'>";
+                                htmlCOFE += "   </div>  ";
+                            }
+                            listDocumentItem.add(htmlCOFE);
+                        }
+                        String htmlConyugue = "";
+                        if (d.getTi_documento().trim().equals("DNIC") | d.getTi_documento().trim().equals("ACMA")) {
+
+                            for (int kj = 0; kj < List_Conyugue.size(); kj++) {
+                                Padre_Madre_Conyugue co = new Padre_Madre_Conyugue();
+                                co = (Padre_Madre_Conyugue) List_Conyugue.get(kj);
+
+                                htmlConyugue += "   <div class='col-lg-4 col-md-6 col-sm-12 col-xs-12 documentItem'>";
+                                htmlConyugue += "  <div class='wel well-sm'>";
+
+                                htmlConyugue += "  <div class=''> ";
+                                htmlConyugue += "   <label>";
+
+                                if (d.getTi_documento().trim().equals("ACMA")) {
+                                    htmlConyugue += ("Acta de matrimonio con: <p class='txt-color-red' >' " + co.getAp_nombres_conyugue() + " '</p>");
+                                }
+                                if (d.getTi_documento().trim().equals("DNIC")) {
+                                    htmlConyugue += " Copia DNI cónyugue : <p class='txt-color-red' >' " + co.getAp_nombres_conyugue() + " '</p>";
+                                }
+
+                                htmlConyugue += "    </label>";
+                                htmlConyugue += "   </div>";
+
+                                htmlConyugue += " <div class=' caji" + (i + 1) + "' >";
+                                if (d.getId_documento_adjunto() == null & (permissionEditDocument)) {
+                                    htmlConyugue += " <input  class='fileDocument' type='file' multiple=true ";
+                                    if (d.getEs_obligatorio().equals("1")) {
+                                        htmlConyugue += (" required='required' ");
+                                    }
+                                    htmlConyugue += " name='archivos" + (i + 1) + "' >";
+                                } else if (d.getId_documento_adjunto() == null) {
+                                    htmlConyugue += " <label class='null'>No Registrado</label>";
+                                } else {
+                                    htmlConyugue += (doc_.List_files(d.getId_documento_adjunto().trim()));
+                                }
+
+                                htmlConyugue += " </div>";
+
+                                htmlConyugue += " <div class=''>";
+
+                                if (d.getDe_documento_adjunto() == null & (permissionEditDocument)) {
+                                    htmlConyugue += "  <input type='text'  placeholder='Escribe una descripción'  class='form-control' name='lob_description" + (i + 1) + "'>";
+                                } else if (d.getDe_documento_adjunto() == null) {
+                                    htmlConyugue += "   <label class='null' >No Registrado</label>";
+                                } else {
+                                    htmlConyugue += "   <label>Descripción:</label>";
+                                    htmlConyugue += "   <label> " + d.getDe_documento_adjunto() + "</label>";
+
+                                }
+                                htmlConyugue += "     </div>";
+
+                                htmlConyugue += " <div class='' >";
+                                if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {
+                                    htmlConyugue += "  <label>¿Recibido en fisico?:</label>";
+                                    htmlConyugue += "  <label class='toggle'><input type='checkbox' value='1'   name='estado" + (i + 1) + "'  >";
+                                    htmlConyugue += "  <i  data-swchon-text='SI' data-swchoff-text='NO'></i></label>";
+                                } else if (d.getEs_documento_adjunto() == null) {
+
+                                    htmlConyugue += "    <label class='null'>¿Recibido en fisico?:No Registrado</label>";
+
+                                } else {
+                                    htmlConyugue += "    <label >";
+                                    if (d.getEs_documento_adjunto().trim().equals("1")) {
+
+                                        htmlConyugue += " ¿Recibido en fisico?:Si";
+
+                                    } else {
+
+                                        htmlConyugue += "  ¿Recibido en fisico?:No";
+                                        htmlConyugue += "     </label>";
+                                    }
+                                }
+                                htmlConyugue += "   </div>";
+
+                                htmlConyugue += " <div class=''>";
+                                if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {
+
+                                    htmlConyugue += " <a type='button'  class='btn btn-danger btn-sm  elimi' href='../../../documento?opc=Eliminar&id_doc="
+                                            + d.getId_documento_adjunto() + "&iddgp=" + d.getIddgp()
+                                            + "&idtr=" + d.getId_trabajador() + "'><i class='fa fa-trash-o'></i></a>";
+                                }
+                                htmlConyugue += " </div>";
+
+                                htmlConyugue += " </div>";
+
+                                htmlConyugue += "  <input type='hidden' name='iddoc" + (i + 1) + "' value='" + d.getId_document() + "'>";
+                                htmlConyugue += " </div>  ";
+
+                                listDocumentItem.add(htmlConyugue);
+                            }
+                        }
+                        String htmlDNIH = "";
+                        if (d.getTi_documento().trim().equals("DNIH")) {
+                            if (List_Hijos.size() > 0) {
+                                for (int kk = 0; kk < List_Hijos.size(); kk++) {
+                                    Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();
+                                    h = (Datos_Hijo_Trabajador) List_Hijos.get(kk);
+                                    if (d.getId_datos_hijo() == null) {
+
+                                        htmlDNIH += "   <div class='col-lg-4 col-md-6 col-sm-12 col-xs-12 documentItem'>";
+                                        htmlDNIH += "   <div  class='well well-sm' >";
+
+                                        htmlDNIH += " <div class=''>";
+                                        htmlDNIH += "<label>Copia DNI hijo :   </label> <p class='txt-color-red'> " + h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador() + "</p>";
+
+                                        htmlDNIH += "</div>";
+                                        htmlDNIH += "<div  class=' caji" + (i + 1) + "' >";
+                                        if (d.getId_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {
+
+                                            htmlDNIH += " <input   class='fileDocument' type='file' multiple=true   name='archivos" + (i + 1) + "' >";
+                                            htmlDNIH += "<input type='hidden' name='idh" + (i + 1) + "' value='" + h.getId_datos_hijos_trabajador().trim() + "' >";
+
+                                        } else if (d.getId_documento_adjunto() == null) {
+                                            htmlDNIH += "   <label class='null'>No Registrado</label>";
+                                        } else {
+
+                                            htmlDNIH += (doc_.List_file_url(d.getId_documento_adjunto().trim()));
+
+                                        }
+                                        htmlDNIH += " </div>";
+
+                                        htmlDNIH += "<div class=''>";
+
+                                        if (d.getDe_documento_adjunto() == null & d.getEs_documento_adjunto() == null & (permissionEditDocument)) {
+                                            htmlDNIH += "  <input type='text'  placeholder='Escribe una descripción'  class='form-control' name='lob_description" + (i + 1) + "'>";
+                                        } else if (d.getDe_documento_adjunto() == null) {
+                                            htmlDNIH += "  <label class='null' >No Registrado</label>";
+                                        } else {
+                                            htmlDNIH += "  <label>Descripción:</label>";
+                                            htmlDNIH += "  <label>" + d.getDe_documento_adjunto() + "</label>";
+
+                                        }
+                                        htmlDNIH += "  </div>";
+                                        htmlDNIH += "   <div class=''>";
+                                        if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {
+                                            htmlDNIH += " <label class='toggle'>";
+                                            htmlDNIH += "    <label>¿Recibido en fisico?:</label>";
+                                            htmlDNIH += " <label class='toggle'><input type='checkbox' value='1'   name='estado" + (i + 1) + "'   >";
+                                            htmlDNIH += "<i data-swchon-text='SI' data-swchoff-text='NO'></i></label>";
+                                        } else if (d.getEs_documento_adjunto() == null) {
+
+                                            htmlDNIH += "    <label class='null'>¿Recibido en fisico?:No Registrado</label>";
+
+                                        } else {
+                                            htmlDNIH += "<label>";
+                                            if (d.getEs_documento_adjunto().trim().equals("1")) {
+
+                                                htmlDNIH += "¿Recibido en fisico?:Si";
+                                            } else {
+
+                                                htmlDNIH += "¿Recibido en fisico?:No";
+                                                htmlDNIH += "  </label>";
+                                            }
+                                        }
+
+                                        htmlDNIH += "  </div>";
+
+                                        htmlDNIH += " <div class=''>";
+                                        if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {
+
+                                            htmlDNIH += " <a type='button'  class='btn btn-danger btn-sm  elimi' href='../../../documento?opc=Eliminar&id_doc="
+                                                    + d.getId_documento_adjunto() + "&iddgp=" + d.getIddgp()
+                                                    + "&idtr=" + d.getId_trabajador() + "'><i class='fa fa-trash-o'></i></a>";
+                                        }
+                                        htmlDNIH += " </div>";
+
+                                        htmlDNIH += "  </div>";
+                                        htmlDNIH += " <input type='hidden' name='iddoc" + (i + 1) + "' value='" + d.getId_document() + "'>";
+                                        htmlDNIH += "   </div>  ";
+                                        //out.println(html);
+                                        listDocumentItem.add(htmlDNIH);
+                                    } else if (h.getVal_doc() > 0 & d.getId_datos_hijo().equals(h.getId_datos_hijos_trabajador().trim())) {
+                                        String htmlSecondDNIH = "";
+
+                                        htmlSecondDNIH += "<div class='col-lg-4 col-md-6 col-sm-12 col-xs-12 documentItem'>";
+                                        htmlSecondDNIH += "<div  class='well well-sm'>";
+
+                                        htmlSecondDNIH += " <div class=''>";
+                                        htmlSecondDNIH += "<label>Copia DNI hijo :   </label> <p class='txt-color-red'> " + h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador() + "</p>";
+
+                                        htmlSecondDNIH += " </div>";
+
+                                        htmlSecondDNIH += " <div  class='caji" + (i + 1) + "'  >";
+                                        if (d.getId_documento_adjunto() == null & (permissionEditDocument)) {
+                                            htmlSecondDNIH += " <input   class='fileDocument' type='file' multiple=true   name='archivos" + (i + 1) + "' >";
+                                            htmlSecondDNIH += "<input type='hidden' name='idh" + (i + 1) + "' value='" + h.getId_datos_hijos_trabajador().trim() + "' >";
+                                        } else if (d.getId_documento_adjunto() == null) {
+                                            htmlSecondDNIH += " <label class='null'>No Registrado</label>";
+                                        } else {
+
+                                            htmlSecondDNIH += doc_.List_files(d.getId_documento_adjunto().trim());
+
+                                        }
+                                        htmlSecondDNIH += "  </div>";
+
+                                        htmlSecondDNIH += " <div class=''>";
+
+                                        if (d.getDe_documento_adjunto() == null & (permissionEditDocument)) {
+                                            htmlSecondDNIH += " <input type='text'  placeholder='Escribe una descripción' class='form-control' name='lob_description" + (i + 1) + "'>";
+                                        } else if (d.getDe_documento_adjunto() == null) {
+                                            htmlSecondDNIH += " <label class='null' >No Registrado</label>";
+                                        } else {
+                                            htmlSecondDNIH += " <label>Descripción:</label> ";
+                                            htmlSecondDNIH += "   <label >" + d.getDe_documento_adjunto() + " </label>";
+
+                                        }
+                                        htmlSecondDNIH += " </div>";
+
+                                        htmlSecondDNIH += "<div  class=''>";
+                                        if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {
+
+                                            htmlSecondDNIH += "    <label>¿Recibido en fisico?:</label>";
+                                            htmlSecondDNIH += " <label class='toggle'><input type='checkbox' value='1'   name='estado" + (i + 1) + "'   >";
+                                            htmlSecondDNIH += "<i data-swchon-text='SI' data-swchoff-text='NO'></i></label>";
+                                        } else if (d.getEs_documento_adjunto() == null) {
+
+                                            htmlSecondDNIH += "    <label class='null'>¿Recibido en fisico?:No Registrado</label>";
+
+                                        } else {
+
+                                            htmlSecondDNIH += "<label >";
+                                            if (d.getEs_documento_adjunto().trim().equals("1")) {
+
+                                                htmlSecondDNIH += "¿Recibido en fisico?:Si";
+
+                                            } else {
+
+                                                htmlSecondDNIH += " ¿Recibido en fisico?:No";
+                                                htmlSecondDNIH += " </label>";
+                                            }
+                                        }
+                                        htmlSecondDNIH += " </div>";
+
+                                        htmlSecondDNIH += " <div class='' >";
+                                        if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {
+                                            htmlSecondDNIH += " <a type='button'  class='btn btn-danger btn-sm  elimi' href='../../../documento?opc=Eliminar&id_doc="
+                                                    + d.getId_documento_adjunto() + "&iddgp=" + d.getIddgp()
+                                                    + "&idtr=" + d.getId_trabajador() + "'><i class='fa fa-trash-o'></i></a>";
+                                        }
+
+                                        htmlSecondDNIH += " </div>";
+                                        htmlSecondDNIH += "  </div>";
+                                        htmlSecondDNIH += " <input type='hidden' name='iddoc" + (i + 1) + "' value='" + d.getId_document() + "'>";
+                                        htmlSecondDNIH += "   </div>  ";
+                                        listDocumentItem.add(htmlSecondDNIH);
+
+                                    } else if (h.getVal_doc() == 0 & !id_hijo_faltante.equals(h.getId_datos_hijos_trabajador())) {
+
+                                        String htmlHijoFaltante = "";
+                                        htmlHijoFaltante += "<div class='col-lg-4 col-md-6 col-sm-12 col-xs-12 documentItem'>";
+                                        htmlHijoFaltante += "<div  class='well well-sm'>";
+
+                                        htmlHijoFaltante += " <div class=''>";
+                                        htmlHijoFaltante += "<label>Copia DNI hijo :   </label> <p class='txt-color-red'> " + h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador() + "</p>";
+
+                                        htmlHijoFaltante += " </div>";
+                                        htmlHijoFaltante += " <div  class='caji" + (i + 1) + "'  >";
+                                        if (d.getId_documento_adjunto() == null & (permissionEditDocument)) {
+                                            htmlHijoFaltante += " <input   class='fileDocument' type='file' multiple=true   name='archivos" + (i + 1) + "' >";
+                                            htmlHijoFaltante += "<input type='hidden' name='idh" + (i + 1) + "' value='" + h.getId_datos_hijos_trabajador().trim() + "' >";
+                                        } else if (d.getId_documento_adjunto() == null) {
+                                            htmlHijoFaltante += " <label class='null'>No Registrado</label>";
+                                        } else {
+
+                                            htmlHijoFaltante += doc_.List_files(d.getId_documento_adjunto().trim());
+
+                                        }
+                                        htmlHijoFaltante += "  </div>";
+
+                                        htmlHijoFaltante += " <div class=''>";
+
+                                        if ((permissionEditDocument)) {
+                                            htmlHijoFaltante += " <input type='text'  placeholder='Escribe una descripción' class='form-control' name='lob_description" + (i + 1) + "'>";
+                                        } else if (d.getDe_documento_adjunto() == null) {
+                                            htmlHijoFaltante += " <label class='null' >No Registrado</label>";
+                                        } else {
+                                            htmlHijoFaltante += " <label>Descripción:</label> ";
+                                            htmlHijoFaltante += "   <label >" + d.getDe_documento_adjunto() + " </label>";
+
+                                        }
+                                        htmlHijoFaltante += " </div>";
+
+                                        htmlHijoFaltante += "<div  class=''>";
+                                        if ((permissionEditDocument)) {
+
+                                            htmlHijoFaltante += "    <label>¿Recibido en fisico?:</label>";
+                                            htmlHijoFaltante += " <label class='toggle'><input type='checkbox' value='1'   name='estado" + (i + 1) + "'   >";
+                                            htmlHijoFaltante += "<i data-swchon-text='SI' data-swchoff-text='NO'></i></label>";
+                                        } else if (d.getEs_documento_adjunto() == null) {
+
+                                            htmlHijoFaltante += "    <label class='null'>¿Recibido en fisico?:No Registrado</label>";
+
+                                        } else {
+
+                                            htmlHijoFaltante += "<label >";
+                                            if (d.getEs_documento_adjunto().trim().equals("1")) {
+
+                                                htmlHijoFaltante += "¿Recibido en fisico?:Si";
+
+                                            } else {
+
+                                                htmlHijoFaltante += " ¿Recibido en fisico?:No";
+                                                htmlHijoFaltante += " </label>";
+                                            }
+                                        }
+                                        htmlHijoFaltante += " </div>";
+
+                                        htmlHijoFaltante += " <div class='' >";
+                                        if ((permissionEditDocument)) {
+                                            htmlHijoFaltante += " <a type='button'  class='btn btn-danger btn-sm  elimi' href='../../../documento?opc=Eliminar&id_doc="
+                                                    + d.getId_documento_adjunto() + "&iddgp=" + d.getIddgp()
+                                                    + "&idtr=" + d.getId_trabajador() + "'><i class='fa fa-trash-o'></i></a>";
+                                        }
+
+                                        htmlHijoFaltante += " </div>";
+
+                                        htmlHijoFaltante += "  </div>";
+                                        htmlHijoFaltante += " <input type='hidden' name='iddoc" + (i + 1) + "' value='" + d.getId_document() + "'>";
+                                        htmlHijoFaltante += "   </div>  ";
+                                        listDocumentItem.add(htmlHijoFaltante);
+                                        id_hijo_faltante = h.getId_datos_hijos_trabajador();
+                                    }
+
+                                    i++;
+                                }
+                            }
+                        } else if (!d.getTi_documento().trim().equals("DNIH") & !d.getTi_documento().trim().equals("DNIC")
+                                & !d.getTi_documento().trim().equals("ACMA") & !d.getTi_documento().trim().equals("COFE") & !d.getTi_documento().trim().equals("DOCA")) {
+                            String htmlOtherItem = "";
+                            htmlOtherItem += "<div class='col-lg-4 col-md-6 col-sm-12 col-xs-12 documentItem'>";
+                            htmlOtherItem += " <div class='well well-sm'>";
+
+                            htmlOtherItem += "<div class=''>";
+                            htmlOtherItem += "<label >" + d.getDocumento() + "</label>";
+                            htmlOtherItem += "  </div>";
+
+                            htmlOtherItem += " <div class=' caji" + (i + 1) + "'  >";
+                            if (d.getId_documento_adjunto() == null & (permissionEditDocument)) {
+
+                                htmlOtherItem += " <input  class='fileDocument' type='file' multiple='true'   ";
+                                if (d.getEs_obligatorio().equals("1")) {
+                                    htmlOtherItem += (" required='required' ");
+                                }
+                                htmlOtherItem += "name='archivos" + (i + 1) + "' >";
+
+                            } else if (d.getId_documento_adjunto() == null) {
+                                htmlOtherItem += " <label class='null'>No Registrado</label>";
+                            } else {
+                                htmlOtherItem += (doc_.List_files(d.getId_documento_adjunto().trim()));
+                            }
+
+                            htmlOtherItem += "</div>";
+
+                            htmlOtherItem += " <div class=''>";
+                            if (d.getDe_documento_adjunto() == null & (permissionEditDocument)) {
+                                htmlOtherItem += "<input type='text' placeholder='Escribe una descripción' class='form-control' name='lob_description" + (i + 1) + "'>";
+
+                            } else if (d.getDe_documento_adjunto() == null) {
+                                htmlOtherItem += " <label class='null' >No Registrado</label>";
+                            } else {
+                                htmlOtherItem += "<label >Descripción:</label>";
+                                htmlOtherItem += "<label style='font-weight: normal;'>" + d.getDe_documento_adjunto() + "</label>";
+
+                            }
+                            htmlOtherItem += "</div>";
+
+                            htmlOtherItem += " <div  class=''  >";
+                            if (d.getEs_documento_adjunto() == null & (permissionEditDocument)) {
+                                htmlOtherItem += "  <label>¿Recibido en fisico?:</label> <label class='toggle'><input type='checkbox' value='1'   name='estado" + (i + 1) + "'  >";
+                                htmlOtherItem += " <i data-swchon-text='SI' data-swchoff-text='NO'></i></label>";
+                            } else if (d.getEs_documento_adjunto() == null) {
+
+                                htmlOtherItem += "<label class='null'>¿Recibido en fisico?:No Registrado</label>";
+                            } else {
+                                htmlOtherItem += " <label>";
+                                if (d.getEs_documento_adjunto().trim().equals("1")) {
+
+                                    htmlOtherItem += "¿Recibido en fisico?: Si";
+
+                                } else {
+
+                                    htmlOtherItem += "¿Recibido en fisico?: No";
+
+                                }
+                                htmlOtherItem += "  </label>";
+                            }
+
+                            htmlOtherItem += "</div>";
+
+                            htmlOtherItem += "<div class=''>";
+                            if (d.getEs_documento_adjunto() != null & (permissionEditDocument)) {
+                                htmlOtherItem += "<a type='button'  class='btn btn-danger btn-sm  elimi'"
+                                        + " href='../../../documento?opc=Eliminar&id_doc=" + d.getId_documento_adjunto()
+                                        + "&iddgp=" + d.getIddgp()
+                                        + "&idtr=" + d.getId_trabajador()
+                                        + "'><i class='fa fa-trash-o'></i></a>";
+                            }
+                            htmlOtherItem += " </div>  ";
+
+                            htmlOtherItem += "</div>";
+                            html += "  <input type='hidden' name='iddoc" + (i + 1) + "' value='" + d.getId_document() + "'>";
+                            htmlOtherItem += "  <input type='hidden' name='iddgp' value='" + d.getIddgp() + "'>";
+                            htmlOtherItem += "  <input type='hidden' name='idctr' value='" + request.getParameter("idctr") + "'>";
+                            htmlOtherItem += "   <input type='hidden' name='idtr' value='" + request.getParameter("idtr") + "'>";
+                            htmlOtherItem += "  </div>  ";
+                            listDocumentItem.add(htmlOtherItem);
+                        }
+
+                        i++;
+                        id_dgp = d.getIddgp();
+
+                    }
+                    int countItem = 0;
+                    System.out.println("tamaño de lista:" + listDocumentItem.size());
+                    for (int s = 0; s < listDocumentItem.size(); s++) {
+                        if (!listDocumentItem.get(s).equals("")) {
+                            if (countItem == 0) {
+                                html += "<div class='row'>";
+                            }
+                            if (countItem == 1) {
+                                //  html += listDocumentItem.get(s);
+                            }
+                            html += listDocumentItem.get(s);
+                            System.out.println("item (" + s + ") :" + listDocumentItem.get(s));
+                            if (countItem == 2) {
+                                html += "</div>";
+                                countItem = -1;
+                            }
+                            countItem++;
+                        }
+                    }
+
+                    html += "<input type='hidden' name='num' value='" + (i + 1) + "'>";
+
+                    if (permissionEditDocument) {
+                        if (request.getParameter("P2") == null) {
+                            html += "<input type='hidden' value='Registrar' name='opc'> ";
+                        }
+                    }
+
+                    html += "</div>";
+                    html += "<div class='row'>";
+                    if (request.getParameter("pro") != null) {
+                        if (request.getParameter("pro").equals("pr_dgp")) {
+                            html += ("<input  type='hidden' value='enter' name='P2'/>");
+                        }
+                    }
+
+                    if (request.getParameter("P2") != null) {
+                        if (request.getParameter("P2").equals("TRUE")) {
+
+                            html += "<input  type='hidden' value='enter' name='P2'/>";
+
+                            html += " <a class='btn btn-success btn-labeled' href='../../../dgp?iddgp=" + dgp + "&idtr=" + idtr + "&opc=rd'>Continuar ";
+                            html += "   <i class='fa fa-arrow-circle-right'></i> </a>";
+
+                            html += "  <button type='button' class='btn btn-primary btn_reg_doc' style='display:none'> <i class='fa fa-plus-square'></i>Registrar</button>";
+                        }
+                    } else {
+
+                        html += "  <a class='btn btn-success btn-labeled btn_continuar_det' style='display:none' href='../../../dgp?iddgp=" + id_dgp + "&idtr=" + request.getParameter("idtr") + "&opc=rd'>";
+                        html += "      Continuar <i class='fa fa-arrow-circle-right'></i> </a>";
+
+                        html += "     <button type='button' class='btn btn-primary btn_reg_doc'  style='display:none' >Registrar</button>";
+                        html += "    <button type='button' onclick='history.back()'  class='btn btn-default btn_atras'> Atrás</button>";
+
+                    }
+                    if (request.getParameter("dce") != null) {
+                        if (request.getParameter("dce").equals("Doc_CE")) {
+                            out.println("<input  type='hidden' value='CE' name='P2'/>");
+                        }
+                    }
+
+                    html += " </form>";
+                    rpta.put("htmlListDocument", html);
+
+                    rpta.put("status", true);
+                }
             } else {
-              //  String ubicacion = getServletConfig().getServletContext().getRealPath("/") + "Vista/Dgp/Documento/Archivo/";
-                String ubicacion = FactoryConnectionDB.url+"Archivo/";
+                //  String ubicacion = getServletConfig().getServletContext().getRealPath("/") + "Vista/Dgp/Documento/Archivo/";
+                String ubicacion = FactoryConnectionDB.url + "Archivo/";
                 DiskFileItemFactory f = new DiskFileItemFactory();
                 f.setSizeThreshold(1024);
                 f.setRepository(new File(ubicacion));
                 ServletFileUpload upload = new ServletFileUpload(f);
                 ServletRequestContext src = new ServletRequestContext(request);
-       
+
                 List<FileItem> p = upload.parseRequest(src);
                 int num_filas = 0;
                 String iddgp = null;
@@ -121,10 +797,7 @@ public class CDocumento extends HttpServlet {
                 String id_ctr = null;
                 String id_h = null;
                 List<String> list_files = new ArrayList<String>();
-                Iterator itera = p.iterator();
-                while (itera.hasNext()) {
-                    FileItem i_n_f = (FileItem) itera.next();
-
+                for (FileItem i_n_f : p) {
                     if (i_n_f.isFormField()) {
 
                         String nombre = i_n_f.getFieldName();
@@ -146,7 +819,6 @@ public class CDocumento extends HttpServlet {
                         }
 
                     }
-
                 }
 
                 String iddoc = null;
@@ -157,14 +829,10 @@ public class CDocumento extends HttpServlet {
                 int num = 0;
                 String no_original = null;
 
-                String validar_nombre = "";
-                Random rnd = new Random();
+                //  String validar_nombre = "";
+                // Random rnd = new Random();
                 for (int i = 0; i < num_filas; i++) {
-                    Iterator it = p.iterator();
-                    while (it.hasNext()) {
-
-                        FileItem item = (FileItem) it.next();
-
+                    for (FileItem item : p) {
                         if (item.isFormField()) {
                             String nombre = item.getFieldName();
                             String valor = item.getString();
@@ -177,19 +845,25 @@ public class CDocumento extends HttpServlet {
 
                             num++;
                             Calendar fecha = new GregorianCalendar();
+                            int day = fecha.get(Calendar.DAY_OF_MONTH);
+                            int month = fecha.get(Calendar.MONTH);
+                            int year = fecha.get(Calendar.YEAR);
                             int hora = fecha.get(Calendar.HOUR_OF_DAY);
                             int min = fecha.get(Calendar.MINUTE);
                             int sec = fecha.get(Calendar.SECOND);
 
                             if (fieldName.equals("archivos" + i) & item.getName() != null) {
                                 if (!item.getName().equals("")) {
-
-                                // out.println(item.getFieldName() + " : " + item.getName());
-                                    // nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + "_" + item.getName().toUpperCase();
-                                    nombre_archivo = String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp;
+                                    //  String n[] = no_original.split(".");
                                     no_original = item.getName();
-                                    Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
-                                    thread.start();
+                                    nombre_archivo = String.valueOf(year) + String.valueOf(month) + String.valueOf(day) + String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + num + iddgp + no_original;
+
+                                    //Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
+                                    //  thread.start();
+                                    System.out.println("nombre: " + nombre_archivo);
+                                    File files = new File(ubicacion, nombre_archivo);
+                                    item.write(files);
+
                                     archivo = no_original + ":" + nombre_archivo;
                                     list_files.add(archivo);
                                 }
@@ -200,13 +874,13 @@ public class CDocumento extends HttpServlet {
                             }
                         }
                     }
-                    Thread.sleep(100);
+                    //  Thread.sleep(100);
                     if (nombre_archivo != null) {
                         if (!nombre_archivo.equals("")) {
                             estado = ((estado == null) ? "0" : estado);
-                                 out.println(iddoc);
+                            //out.println(iddoc);
                             String id = d.INSERT_DOCUMENTO_ADJUNTO(null, iddoc, "1", user, null, null, null, null, desc, null, estado, id_ctr);
-                    
+
                             d.INSERT_DGP_DOC_ADJ(null, iddgp, id, null, idtr, id_h);
                             for (int t = 0; t < list_files.size(); t++) {
                                 String g[] = list_files.get(t).split(":");
@@ -223,23 +897,29 @@ public class CDocumento extends HttpServlet {
                     no_original = null;
                 }
 
-                sesion.setAttribute("List_doc_req_pla", d.List_doc_req_pla(iddgp, idtr));
-                int s = d.List_Req_nacionalidad(idtr);
-                int num_ad = d.List_Adventista(idtr);
-                sesion.setAttribute("List_Hijos", d.List_Hijos(idtr));
-                sesion.setAttribute("List_Conyugue", d.List_Conyugue(idtr));
-
-                if (pr != null) {
+                //    sesion.setAttribute("List_doc_req_pla", d.List_doc_req_pla(iddgp, idtr));
+                //int s = d.List_Req_nacionalidad(idtr);
+                // int num_ad = d.List_Adventista(idtr);
+                //   sesion.setAttribute("List_Hijos", d.List_Hijos(idtr));
+                // sesion.setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+                rpta.put("status", true);
+                /*   if (pr != null) {
                     if (pr.equals("enter")) {
                         response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + iddgp + "&a=t");
                     }
                 } else {
                     response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + iddgp + "&a=t");
-                }
+                }*/
             }
         } catch (Exception e) {
-            out.println("Error : " + e.getMessage());
+            //  out.println("Error : " + e.getMessage());
+            rpta.put("status", false);
+            rpta.put("mensaje", e.getMessage());
         } finally {
+
+            Gson gson = new Gson();
+            out.print(gson.toJson(rpta));
+            out.flush();
             out.close();
         }
     }

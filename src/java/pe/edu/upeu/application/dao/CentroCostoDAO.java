@@ -49,7 +49,7 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
                 rec.put("id_det_cc", rs.getString("ID_DEPART_CENTRO_COSTO"));
                 lista.add(rec);
             }
-       } catch (SQLException ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("ERROR : " + e.getMessage());
@@ -66,7 +66,7 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
     @Override
     public List<Map<String, ?>> listarCcosto(String idCCosto) {
 
-        sql = "SELECT * FROM RHVD_CENTRO_COSTO where id_centro_costo='" + idCCosto + "' ";
+        sql = "SELECT * FROM RHVD_CENTRO_COSTO where id_centro_costo='" + idCCosto + "'";
         List<Map<String, ?>> lista = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -87,7 +87,7 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
                 rec.put("id_det_cc", rs.getString("ID_DEPART_CENTRO_COSTO"));
                 lista.add(rec);
             }
-      } catch (SQLException ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("ERROR : " + e.getMessage());
@@ -132,9 +132,9 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
         boolean x = true;
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            System.out.println(ID_CENTRO_COSTO+" "+CO_CENTRO_COSTO+" "+DE_CENTRO_COSTO+" "+ID_DEPARTAMENTO+" "+ID_AREA+" "+ID_SECCION+" "+id_det_cc);
+            System.out.println(ID_CENTRO_COSTO + " " + CO_CENTRO_COSTO + " " + DE_CENTRO_COSTO + " " + ID_DEPARTAMENTO + " " + ID_AREA + " " + ID_SECCION + " " + id_det_cc);
             CallableStatement cst = this.cnn.conex.prepareCall("{CALL RHSP_MOD_CENTRO_COSTO( ?, ?, ?, ?, ?, ?,?)}");
-            
+
             cst.setString(1, ID_CENTRO_COSTO);
             cst.setString(2, CO_CENTRO_COSTO);
             cst.setString(3, DE_CENTRO_COSTO);
@@ -144,9 +144,9 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
             cst.setString(7, id_det_cc);
             cst.execute();
         } catch (SQLException e) {
-            System.out.println(e);
+            throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            System.out.println(e);
+            throw new RuntimeException(e.getMessage());
         } finally {
             try {
                 this.cnn.close();
@@ -168,7 +168,7 @@ public class CentroCostoDAO implements InterfaceCentroCosto {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error al cargar la lista de direcciones...");
+            throw new RuntimeException(e.getMessage());
         } finally {
             try {
                 this.cnn.close();

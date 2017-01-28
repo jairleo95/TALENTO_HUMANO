@@ -99,8 +99,8 @@ public class MCCosto extends HttpServlet {
                 ID_DEPARTAMENTO = StringTools.getString(request.getParameter("ID_DEPARTAMENTO"));
                 ID_AREA = StringTools.getString(request.getParameter("ID_AREA"));
                 ID_SECCION = StringTools.getString(request.getParameter("ID_SECCION"));
-                String ID_DET_CC = StringTools.getString(request.getParameter("ID_DET_CC"));
-                
+                String ID_DET_CC = StringTools.getString(request.getParameter("id_det_cc"));
+
                 cc.editarCCosto(ID_CENTRO_COSTO, CO_CENTRO_COSTO, DE_CENTRO_COSTO, ID_DEPARTAMENTO, ID_AREA, ID_SECCION, ID_DET_CC);
                 rpta.put("rpta", "1");
             }
@@ -115,11 +115,14 @@ public class MCCosto extends HttpServlet {
             }
             if (opc.equals("del_cc")) {
                 String ID_CENTRO_COSTO;
-                ID_CENTRO_COSTO = request.getParameter("ID_CENTRO_COSTO");
-                cc.eliminarCCosto(ID_CENTRO_COSTO);
+                ID_CENTRO_COSTO = request.getParameter("id_det_cc");
+
+                rpta.put("isDeleted", cc.eliminarCCosto(ID_CENTRO_COSTO));
+               rpta.put("status", true);
             }
         } catch (Exception e) {
             rpta.put("rpta", "-1");
+            rpta.put("status", false);
             rpta.put("mensaje", e.getMessage());
         }
         Gson gson = new Gson();
