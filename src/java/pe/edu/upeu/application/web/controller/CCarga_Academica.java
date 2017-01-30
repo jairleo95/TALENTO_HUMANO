@@ -128,6 +128,9 @@ public class CCarga_Academica extends HttpServlet {
             if (opc.equals("Reporte_Carga_Academica")) {
                 response.sendRedirect("Vista/Academico/Carga_Academica/Rep_Carga_Academica.jsp");
             }
+            if (opc.equals("horarioCursosAcademico")) {
+                response.sendRedirect("Vista/Academico/Carga_Academica/horarioCursosAcademico.html");
+            }
 
             if (opc.equals("Registrar_CA")) {
                 /*Registrar proceso de carga academica*/

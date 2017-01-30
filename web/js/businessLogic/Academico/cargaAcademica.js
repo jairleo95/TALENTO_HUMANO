@@ -1,17 +1,19 @@
 var idpcaItem = "";
 var iddgpItem = "";
-var urlCrudForm = "../../../carga_academica";
-var objDatatableCagaAcad = $('.datatableCargaAcademica');
-var responsiveHelper_dt_basic = undefined;
-var breakpointDefinition = {
-    tablet: 1024,
-    phone: 480
-};
+var urlCrudForm = "carga_academica";
 var dataAditional = "";
 var idRow = "";
 var idtrItem = "";
-function loadDatatableCargaAcademica() {
-    var table1 = objDatatableCagaAcad.DataTable({
+function initDatatableCargaAcademica() {
+    var responsiveHelper1 = undefined;
+    var breakpointDefinition = {
+        tablet: 1024,
+        phone: 480
+    };
+    var objDatatableCagaAcad = $('.datatableCargaAcademica');
+    console.log("responsiveHelper1:" + (typeof responsiveHelper1 === "function"))
+
+    objDatatableCagaAcad.DataTable({
         "ajax": {
             "url": urlCrudForm,
             "type": "POST",
@@ -84,13 +86,13 @@ function loadDatatableCargaAcademica() {
         }, "autoWidth": true,
         "preDrawCallback": function () {
             // Initialize the responsive datatables helper once.
-            if (!responsiveHelper_dt_basic) {
-                responsiveHelper_dt_basic = new ResponsiveDatatablesHelper(
-                        $('.datatableCargaAcademica'), breakpointDefinition);
+            if (!responsiveHelper1) {
+                console.log(":enter to preDrawCallback true condition");
+                responsiveHelper1 = new ResponsiveDatatablesHelper(objDatatableCagaAcad, breakpointDefinition);
             }
         }, "rowCallback": function (row, data, index) {
-            responsiveHelper_dt_basic.createExpandIcon(row);
-            console.log("index:" + index);
+            responsiveHelper1.createExpandIcon(row);
+            console.log(":enter to rowCallback");
 
             var dataToSent = '';
             dataToSent = 'nro_doc=' + data.nu_doc + '&ap_p=' + data.ap_paterno + '&ap_m=' + data.ap_materno + '&no_tr=' + data.no_trabajador + '&ti_doc=' +
@@ -104,7 +106,7 @@ function loadDatatableCargaAcademica() {
                     + ' <ul class="dropdown-menu">';
             if (data.validateExistTrabajador !== "") {
                 htmlTD += ' <li>'
-                        + '<a href="../../../carga_academica?opc=Completar_Datos&' + dataToSent + '">Completar Datos</a>'
+                        + '<a href="carga_academica?opc=Completar_Datos&' + dataToSent + '">Completar Datos</a>'
                         + ' </li>'
                         + ' <li class="divider"></li>'
                         + '<li>'
@@ -118,7 +120,7 @@ function loadDatatableCargaAcademica() {
                         + ' </li>';
             } else {
                 htmlTD += '   <li>'
-                        + '  <a href="../../../carga_academica?opc=Completar_Datos&' + dataToSent + '" >Completar Datos</a>'
+                        + '  <a href="carga_academica?opc=Completar_Datos&' + dataToSent + '" >Completar Datos</a>'
                         + '</li>';
             }
             htmlTD += ' </ul>'
@@ -126,14 +128,14 @@ function loadDatatableCargaAcademica() {
 
             $('td:eq(0)', row).html(htmlTD);
         }, "drawCallback": function (oSettings) {
-            responsiveHelper_dt_basic.respond();
+            responsiveHelper1.respond();
             // var api = this.api();
-            console.log("Enter to drawCallBack");
-            initDatatableEvents();
+            console.log(":Enter to drawCallBack");
+            initDatatableEvents(objDatatableCagaAcad);
         }
     });
 }
-function initDatatableEvents() {
+function initDatatableEvents(objDatatableCagaAcad) {
     /*carga academica*/
     $(".dateDesdeM").datepicker({
         defaultDate: "+1w",
@@ -220,7 +222,7 @@ function initDatatableEvents() {
                         "idTiHoraPago": $(".TiHoraPago").val()
                     };
                     $.ajax({
-                        url: "../../../carga_academica?" + $(".form_carga_academica").serialize() + "&" + dataSent,
+                        url: "carga_academica?" + $(".form_carga_academica").serialize() + "&" + dataSent,
                         type: "POST",
                         data: data
                     }).done(function (data) {
@@ -256,7 +258,7 @@ function getTiHoraPago(objDivSelect, callback) {
         "idtr": idtrItem
     };
     $.ajax({
-        url: "../../../trabajador", data: data, type: 'POST', success: function (data, textStatus, jqXHR) {
+        url: "trabajador", data: data, type: 'POST', success: function (data, textStatus, jqXHR) {
             if (data.status) {
                 objDivSelect.append(data.html);
                 callback();
@@ -272,7 +274,7 @@ function getPagoDocente(id, divObj) {
         "id": id
     };
     $.ajax({
-        url: "../../../pago_docente", data: data, type: 'POST', success: function (data, textStatus, jqXHR) {
+        url: "pago_docente", data: data, type: 'POST', success: function (data, textStatus, jqXHR) {
             if (data.status) {
                 divObj.empty();
                 divObj.append(data.html);
@@ -289,7 +291,7 @@ function getProcesoCargaAcademicaById(id, callback) {
         "id": id
     };
     $.ajax({
-        url: "../../../carga_academica", data: data, type: 'POST', success: function (data, textStatus, jqXHR) {
+        url: "carga_academica", data: data, type: 'POST', success: function (data, textStatus, jqXHR) {
             if (data.status) {
                 var item = data.item;
                 $(".fe_desde_p").val(item.feDesde);
@@ -308,19 +310,19 @@ function getProcesoCargaAcademicaById(id, callback) {
 }
 /*FIN carga academica*/
 function showCargaAcademica(objBodyPrint, dataAjax, callback) {
-    var url = '../../../carga_academica';
+    var url = 'carga_academica';
     var fila = 1;
     var columna = 0;
     var g = 0;
     objBodyPrint.empty();
-    $.ajax({url: "horarioCursosAcademico.html", type: 'POST', success: function (htmlContent, textStatus, jqXHR) {
+    $.ajax({url: "carga_academica?opc=horarioCursosAcademico", type: 'POST', success: function (htmlContent, textStatus, jqXHR) {
             objBodyPrint.append(htmlContent);
             /*test*/
             $.post(url, 'opc=getDetCargaAcademica&' + dataAjax, function (data) {
                 var dataList = data.list;
                 $.each(dataList, function (index, dataItem) {
                     var myArray = dataItem.de_horario.trim();
-                    console.log(myArray);
+                    //console.log(myArray);
                     $('.bodyCursos').append('<span class="badge bg-color-blueLight">' + (g + 1) + '</span> '
                             + dataItem.no_curso + '</br><li> ' + dataItem.no_eap + '</li><li>' + dataItem.de_tipo_curso + '</li>');
                     for (var i = 0; i < myArray.length; i++) {
@@ -344,7 +346,7 @@ function showCargaAcademica(objBodyPrint, dataAjax, callback) {
 }
 function ProcesarCargaAcademica() {
     $.ajax({
-        url: "../../../carga_academica", data: {
+        url: "carga_academica", data: {
             "opc": "Procesar",
             "dgp": iddgpItem,
             "proceso": idpcaItem
@@ -358,7 +360,7 @@ function ProcesarCargaAcademica() {
 function calcularCuotasDocente(valorFeDesde, valorFeHasta, valorHorasLaborales, valorTipoHoraPago) {
     var cuotas = $(".cuota_docente");
     cuotas.empty();
-    $.post("../../../pago_docente", "opc=Listar_Cuotas&fe_desde=" + valorFeDesde + "&fe_hasta=" + valorFeHasta
+    $.post("pago_docente", "opc=Listar_Cuotas&fe_desde=" + valorFeDesde + "&fe_hasta=" + valorFeHasta
             + "&pago_semanal=" + (parseFloat(valorHorasLaborales) * parseFloat(valorTipoHoraPago)), function (objJson) {
         var lista = objJson.lista;
         if (objJson.rpta === -1) {

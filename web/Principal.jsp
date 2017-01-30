@@ -17,7 +17,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title> TALENTO HUMANO </title>
-        <meta name="description" content="">2
+        <meta name="description" content="">
         <meta name="author" content="">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -349,6 +349,7 @@
             (the reference to the nav > ul) after page load. Or the navigation
             will not initialize.
             -->
+
             <nav>
                 <!-- NOTE: Notice the gaps after each icon usage <i></i>..
                 Please note that these links work a bit different than
@@ -376,7 +377,7 @@
                             <%}
                                 if (id_rol.trim().equals("ROL-0011") | id_rol.trim().equals("ROL-0001")) {%>
                             <li>
-                                <a href="carga_academica?opc=Reporte_Carga_Academica" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i>Carga Academica <span class="badge pull-right inbox-badge bg-color-blue">¡Nuevo!</span></a>
+                                <a href="#" class="repCargaAcademica"><i class="fa fa-lg fa-fw fa-file"></i>Carga Academica <span class="badge pull-right inbox-badge bg-color-blue">¡Nuevo!</span></a>
                             </li>
                             <%}%>
                         </ul>
@@ -446,7 +447,9 @@
             </div>
             <!-- END RIBBON -->
             <!-- MAIN CONTENT -->
-            <div id="content">
+            <div  id="content" style="display:none" class="newContent"></div>
+            <div id="content" class="oldContent">
+
                 <div class="row"  >
                     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4" >
                         <h1 class="page-title txt-color-blueDark" style="margin: 0px 0px 0px;"><i class="fa-fw fa fa-home" id="icon_menu"></i><label class="titulo_menu" >Inicio</label><span> </span></h1>
@@ -454,6 +457,7 @@
                     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
                         <div class="animacion_load"></div>
                     </div>
+                    
                     <iframe id="myframe" name="myframe" class="iframe_principal" scrolling="si"  width="100%" height="800" frameborder="0"  src="Vista/inicio.jsp"></iframe>
                 </div>
                 <!-- end row -->
@@ -603,7 +607,6 @@
 
         <!-- FastClick: For mobile devices -->
         <script src="js/plugin/fastclick/fastclick.min.js"></script>
-
 
         <!-- Demo purpose only
         <script src="js/demo.min.js"></script> -->

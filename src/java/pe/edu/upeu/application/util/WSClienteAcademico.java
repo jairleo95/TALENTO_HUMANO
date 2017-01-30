@@ -17,10 +17,10 @@ import pe.edu.upeu.application.properties.globalProperties;
 
 public class WSClienteAcademico {
 
-    public static void start_ws_academico(String semestre) throws Exception {
-        //public static void main(String args[]) throws Exception { String semestre = "2015-1";
+    public static void startWsAcademico(String semestre) throws Exception {
         JSONArray arr = WSClienteAcademico.getRequest(semestre);
         int tamaño = arr.length();
+        System.out.println("tamaño de arr:" + tamaño);
         String[] campus = new String[tamaño];
         String[] tipo_doc = new String[tamaño];
         String[] nu_doc = new String[tamaño];
@@ -39,15 +39,10 @@ public class WSClienteAcademico {
 
         for (int i = 0; i < arr.length(); i++) {
             hb_ti_curso[i] = (arr.getJSONObject(i).getJSONObject("tipocurso").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("tipocurso").get("content")) : "";
-            //System.out.println(hb_ti_curso[i]);
             horario[i] = (arr.getJSONObject(i).getJSONObject("horario").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("horario").get("content")) : "";
-            //System.out.println(horario[i]);
             campus[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("campus").get("content"));
-            //System.out.println(campus[i]);
             grupo[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("grupo").get("content"));
-            //System.out.println(grupo[i]);
             nu_doc[i] = (arr.getJSONObject(i).getJSONObject("numerodocumento").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("numerodocumento").get("content")) : "";
-            //System.out.println(nu_doc[i]);
             nombre[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("nombre").get("content"));
             //System.out.println(nombre[i]);
             hb_de_condicion[i] = (arr.getJSONObject(i).getJSONObject("condicion").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("condicion").get("content")) : "";
@@ -118,12 +113,15 @@ public class WSClienteAcademico {
 
     public static JSONArray getRequest(String semestre) throws SOAPException, Exception {
         Calendar calendario = new GregorianCalendar();
-        int hour = calendario.get(Calendar.HOUR_OF_DAY);
+        String hour = String.format("%02d", calendario.get(Calendar.HOUR_OF_DAY));
+
         // Create SOAP Connection
         SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
         SOAPConnection soapConnection = soapConnectionFactory.createConnection();
         // Send SOAP Message to SOAP Server
         String keyPub = StringMD.getStringMessageDigest(globalProperties.keyApp + hour, StringMD.MD5);
+
+        System.out.println("Hora:" + hour);
         System.out.println(globalProperties.service + keyPub);
         System.out.println(globalProperties.keyApp + hour);
         SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(semestre), globalProperties.service + keyPub);
@@ -147,7 +145,7 @@ public class WSClienteAcademico {
         try {
             MessageFactory messageFactory = MessageFactory.newInstance();
             String proxyAuth = System.getProperty("https.proxyAuth");
-            System.out.println("Puerto :" + proxyAuth);
+            //System.out.println("Puerto :" + proxyAuth);
             SOAPMessage soapMessage = messageFactory.createMessage();
             SOAPPart soapPart = soapMessage.getSOAPPart();
             // SOAP Envelope

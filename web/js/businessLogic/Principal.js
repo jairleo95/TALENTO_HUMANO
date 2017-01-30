@@ -280,8 +280,27 @@ $(document).ready(function () {
     getAvatar("perfil", idtra);
     pageSetUp();
     UpdateNotifications();
-    //var iduser=$("#iuser").val();
-    // alert('<%="Maximum Inactive Interval of Session in Seconds is : " + sesion.getMaxInactiveInterval() / 60%>');
+    $(".repCargaAcademica").click(function () {
+        // console.log("load html");
+        // alert("carga academica")
+        $(".oldContent").hide();
+        $(".newContent").show();
+        loadURL("carga_academica?opc=Reporte_Carga_Academica", $(".newContent"));
+        // return false;
+    });
+    $('nav a[href!="#"]').click(function () {
+        $(".newContent").hide();
+        if (typeof pagedestroy === "function") {
+            pagedestroy();
+            //  pagedestroy = undefined;
+        }
+        pagefunction = null;
+        $(".newContent").removeData().html("");
+        $(".newContent").empty();
+        $(".oldContent").show();
+    });
+//var iduser=$("#iuser").val();
+// alert('<%="Maximum Inactive Interval of Session in Seconds is : " + sesion.getMaxInactiveInterval() / 60%>');
     $(".menu-item-parent").parent().click(function () {
         $(".titulo_menu").text(" " + $(this).text());
         $("#icon_menu").removeClass();
@@ -346,7 +365,6 @@ $(document).ready(function () {
      }
      });*/
 });
-
 $("#btn-ocultar").click(function () {
     if (btnclose == 0) {
         $(".logininfo").css({display: "none"});
