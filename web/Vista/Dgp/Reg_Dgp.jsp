@@ -480,7 +480,7 @@
                                                 <%}%>
                                                 <section class="col col-3">
                                                     <div class="input"  id="titu"> 
-                                                        Total Remunerativo :<label id="suel_total" style="color: red;">0.0</label>
+                                                        <label>Total Remunerativo :</label><br><label id="suel_total" style="color: red;">0.0</label>
                                                     </div>
                                                 </section>
                                                 <section class="col col-3">

@@ -67,7 +67,10 @@ public class CDocumento extends HttpServlet {
         String user = (String) sesion.getAttribute("IDUSER");
         String rol = (String) sesion.getAttribute("IDROL");
         Map<String, Object> rpta = new HashMap<String, Object>();
-
+        boolean permissionEditDocument = false;
+        if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001")) {
+            permissionEditDocument = true;
+        }
         try {
             if (opc != null) {
                 if (opc.equals("Eliminar")) {
@@ -104,39 +107,41 @@ public class CDocumento extends HttpServlet {
 
                     int s = d.List_Req_nacionalidad(idtr);
                     int num_ad = d.List_Adventista(idtr);
-                    int can_doc = d.count_documentos(dgp);
 
                     sesion.setAttribute("List_Hijos", d.List_Hijos(idtr));
                     sesion.setAttribute("List_doc_req_pla", d.List_doc_req_pla(dgp, idtr));
                     sesion.setAttribute("List_Conyugue", d.List_Conyugue(idtr));
+                    int can_doc = d.countDocumentsByIdTrabajador(idtr);
                     if (can_doc > 0) {
                         response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&iddgp=" + dgp);
                     } else {
                         response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
                     }
                 }
+                if (opc.equals("ReqIncompletoNextStep")) {
+                    response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?" + "idtr=" + idtr + "&iddgp=" + dgp + "&pro=pr_dgp");
+                }
                 if (opc.equals("listDocument")) {
                     System.out.println("enter to listDocument");
-                    boolean permissionEditDocument = false;
-                    if (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0003") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0007") | rol.trim().equals("ROL-0001")) {
-                        permissionEditDocument = true;
-                    }
 
+                    //    Boolean enterToProcessDGP = false;
                     int n_nac = d.List_Req_nacionalidad(idtr);
                     int num_ad = d.List_Adventista(idtr);
-                    int can_doc = d.count_documentos(dgp);
+                    int documentsComplete = d.countDocumentsByIdTrabajador(idtr);
+                    Boolean enterToDGPProcess = false;
+                    if (request.getParameter("enterToDGPProcess") != null) {
+                        enterToDGPProcess = Boolean.parseBoolean(request.getParameter("enterToDGPProcess"));
+                    }
 
                     List<Datos_Hijo_Trabajador> List_Hijos = d.List_Hijos(idtr);
                     List<V_Reg_Dgp_Tra> List_doc_req_pla = d.List_doc_req_pla(dgp, idtr);
                     List<Padre_Madre_Conyugue> List_Conyugue = d.List_Conyugue(idtr);
 
-                    // int n_nac = Integer.parseInt(request.getParameter("n_nac"));
-                    // int num_ad = Integer.parseInt(request.getParameter("num_ad"));
                     String id_hijo_faltante = "";
 
                     List<String> listDocumentItem = new ArrayList<String>();
                     InterfaceDocumentoDAO doc_ = new DocumentoDAO();
-                    String id_dgp = "";
+                    // String id_dgp = "";
                     String html = "";
                     html += " <form action='../../../documento' method='post' enctype='multipart/form-data'  class='form_dgp_doc' >";
 
@@ -712,7 +717,7 @@ public class CDocumento extends HttpServlet {
                         }
 
                         i++;
-                        id_dgp = d.getIddgp();
+                        // id_dgp = d.getIddgp();
 
                     }
                     int countItem = 0;
@@ -734,48 +739,27 @@ public class CDocumento extends HttpServlet {
                             countItem++;
                         }
                     }
-
                     html += "<input type='hidden' name='num' value='" + (i + 1) + "'>";
 
                     if (permissionEditDocument) {
-                        if (request.getParameter("P2") == null) {
-                            html += "<input type='hidden' value='Registrar' name='opc'> ";
-                        }
+                        html += "<input type='hidden' value='Registrar' name='opc'> ";
                     }
 
                     html += "</div>";
                     html += "<div class='row'>";
-                    if (request.getParameter("pro") != null) {
-                        if (request.getParameter("pro").equals("pr_dgp")) {
-                            html += ("<input  type='hidden' value='enter' name='P2'/>");
+                    html += "<div class='col-md-12'>";
+               
+                    html += (enterToDGPProcess) ? "<a class='btn btn-success pull-right btn_continuar_det' href='../../../dgp?iddgp=" + dgp + "&idtr=" + idtr + "&opc=rd'>Continuar<i class='fa fa-arrow-circle-right'></i></a>" : "";
+                    html += "  <button type='button' class='btn btn-primary btn_reg_doc pull-right' style='display:none'> <i class='fa fa-plus-square'></i>Registrar</button>";
+                    
+                    /*casos especiales*/
+                    if (request.getParameter("casosEspeciales") != null) {
+                        if (request.getParameter("casosEspeciales").equals("Doc_CE")) {
+                            html += ("<input  type='hidden' value='CE' name='P2'/>");
                         }
                     }
-
-                    if (request.getParameter("P2") != null) {
-                        if (request.getParameter("P2").equals("TRUE")) {
-
-                            html += "<input  type='hidden' value='enter' name='P2'/>";
-
-                            html += " <a class='btn btn-success btn-labeled' href='../../../dgp?iddgp=" + dgp + "&idtr=" + idtr + "&opc=rd'>Continuar ";
-                            html += "   <i class='fa fa-arrow-circle-right'></i> </a>";
-
-                            html += "  <button type='button' class='btn btn-primary btn_reg_doc' style='display:none'> <i class='fa fa-plus-square'></i>Registrar</button>";
-                        }
-                    } else {
-
-                        html += "  <a class='btn btn-success btn-labeled btn_continuar_det' style='display:none' href='../../../dgp?iddgp=" + id_dgp + "&idtr=" + request.getParameter("idtr") + "&opc=rd'>";
-                        html += "      Continuar <i class='fa fa-arrow-circle-right'></i> </a>";
-
-                        html += "     <button type='button' class='btn btn-primary btn_reg_doc'  style='display:none' >Registrar</button>";
-                        html += "    <button type='button' onclick='history.back()'  class='btn btn-default btn_atras'> Atrás</button>";
-
-                    }
-                    if (request.getParameter("dce") != null) {
-                        if (request.getParameter("dce").equals("Doc_CE")) {
-                            out.println("<input  type='hidden' value='CE' name='P2'/>");
-                        }
-                    }
-
+                    html += "</div>";
+                    html += "</div>";
                     html += " </form>";
                     rpta.put("htmlListDocument", html);
 

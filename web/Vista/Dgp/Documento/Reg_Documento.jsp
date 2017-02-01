@@ -75,22 +75,19 @@
         <!--   <link href='http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' rel='stylesheet'>-->
         <link href='../../../css/Css_Bootstrap/fileinput.css' media='all' rel='stylesheet' type='text/css' />
     </head>
-    <%
-        if (request.getParameter("a") != null) {
-            if (request.getParameter("a").trim().equals("t")) {
-
-            }
-            if (request.getParameter("a").trim().equals("e")) {
-
-            }
-        } else {
-
-        }  %>
     <body>
         <%
             // HttpSession sesion_1 = request.getSession(true);
             out.print("<input type='hidden' class='iddgp' value='" + request.getParameter("iddgp") + "' />");
             out.print("<input type='hidden' class='idtr' value='" + request.getParameter("idtr") + "' />");
+            out.print("<input type='hidden' class='casosEspeciales' value='" + request.getParameter("dce") + "' />");
+            if (request.getParameter("pro") != null) {
+                if (request.getParameter("pro").equals("pr_dgp")) {
+                    out.print("<input type='hidden' class='enterToDGPProcess' value='true' />");
+                }
+
+            }
+
 
         %>
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->

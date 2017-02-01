@@ -6,8 +6,6 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
-import java.util.Map;
-import pe.edu.upeu.application.model.Cuenta_Sueldo;
 import pe.edu.upeu.application.model.Datos_Hijo_Trabajador;
 import pe.edu.upeu.application.model.Documentos;
 import pe.edu.upeu.application.model.Lis_Doc_tra;
@@ -44,7 +42,7 @@ public interface InterfaceDocumentoDAO {
 
     public int List_Req_nacionalidad(String id_trabajador);
 
-    public int count_documentos(String id_dgp);
+    public int countDocumentsByIdTrabajador(String id);
 
     public int count_documentos_x_tra(String id_tra);
 

@@ -14,7 +14,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -129,7 +128,8 @@ public class CDgp extends HttpServlet {
                 break;
             case "ROL-0008":
                 permisoAdmin = false;
-                permissionDireccionFilter = true;
+             //   permissionDireccionFilter = true;
+                permissionPuestoFilter=true;
                 break;
             case "ROL-0010":
                 permissionPuestoFilter = true;
@@ -361,13 +361,7 @@ public class CDgp extends HttpServlet {
                         }
                     }
                 }
-                System.out.println("set sessions" + dia);
-                sesion.setAttribute("List_doc_req_pla", doc.List_doc_req_pla(iddgp, ID_TRABAJADOR));
-                int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
-                int num_ad = doc.List_Adventista(ID_TRABAJADOR);
-                sesion.setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
-                sesion.setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
-                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&idtr=" + ID_TRABAJADOR);
+                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?pro=pr_dgp&idtr=" + ID_TRABAJADOR+"&iddgp="+iddgp);
             }
             if (opc.equals("Reg_form")) {
                 /* TEMPORAL*/

@@ -117,8 +117,17 @@ function initFormRegDocument() {
         $(".btn_reg_doc").show();
     } else {
         $(".btn_reg_doc").hide();
-        $(".btn_continuar_det").show();
+        //   $(".btn_continuar_det").show();
     }
+    console.log("num requeridos:" + $(".fileDocument[required='required']").length);
+    if ($(".fileDocument[required='required']").length === 0) {
+        //$(".btn_reg_doc").hide();
+        $(".btn_continuar_det").show();
+    } else if ($(".fileDocument[required='required']").length > 0) {
+        // $(".btn_reg_doc").show();
+        $(".btn_continuar_det").hide();
+    }
+
     $(".form_dgp_doc").submit(function () {
         $(".btn_reg_doc").attr("disabled", true);
         $(".btn_atras").attr("disabled", true);
@@ -142,7 +151,9 @@ function listDocument() {
     var data = {
         "opc": "listDocument",
         "iddgp": $(".iddgp").val(),
-        "idtr": $(".idtr").val()
+        "idtr": $(".idtr").val(),
+        "casosEspeciales": $(".casosEspeciales").val(),
+        "enterToDGPProcess": $(".enterToDGPProcess").val()
     };
     $.ajax({
         url: "../../../documento", type: 'POST', data: data, success: function (data, textStatus, jqXHR) {
