@@ -117,14 +117,11 @@ function initFormRegDocument() {
         $(".btn_reg_doc").show();
     } else {
         $(".btn_reg_doc").hide();
-        //   $(".btn_continuar_det").show();
     }
     console.log("num requeridos:" + $(".fileDocument[required='required']").length);
     if ($(".fileDocument[required='required']").length === 0) {
-        //$(".btn_reg_doc").hide();
         $(".btn_continuar_det").show();
     } else if ($(".fileDocument[required='required']").length > 0) {
-        // $(".btn_reg_doc").show();
         $(".btn_continuar_det").hide();
     }
 
@@ -135,7 +132,6 @@ function initFormRegDocument() {
 
 
     $(".DD").change(function () {
-
         $(".div-holi").text($(".DD").val());
     });
     $(".elimi").click(function () {
@@ -148,6 +144,7 @@ function initFormRegDocument() {
     });
 }
 function listDocument() {
+    var objDiv = $(".listDocument");
     var data = {
         "opc": "listDocument",
         "iddgp": $(".iddgp").val(),
@@ -155,12 +152,15 @@ function listDocument() {
         "casosEspeciales": $(".casosEspeciales").val(),
         "enterToDGPProcess": $(".enterToDGPProcess").val()
     };
+    objDiv.append('<img src="../../../img/load.gif" class="img-responsive center-block"/>');
     $.ajax({
         url: "../../../documento", type: 'POST', data: data, success: function (data, textStatus, jqXHR) {
-            // console.log();
-            $(".listDocument").empty();
-            $(".listDocument").append(data.htmlListDocument);
-            initFormRegDocument();
+            if (data.status) {
+                objDiv.empty();
+                objDiv.append(data.htmlListDocument);
+                initFormRegDocument();
+            }
+
         }
     });
 }
