@@ -11,6 +11,7 @@ function Listar_Paso(proceso) {
     var txt_append = "";
     var TaskValues = $(".TaskValues");
     var TaskValuesHtml = "";
+    TaskValues.empty();
     $.post("../../paso", "opc=Listar_habilitados&proceso=" + proceso, function (objJson) {
         c.hide();
         b.empty();
@@ -20,16 +21,7 @@ function Listar_Paso(proceso) {
             alert(objJson.mensaje);
             return;
         }
-        /* for (var i = 0; i < lista.length; i++) {
-         b.append("<tr class='editar-tr" + i + "' >");
-         b.append("<td >" + (i + 1) + "</td>");
-         b.append("<td class='td_det" + i + "'>" + lista[i].det + "</td>");
-         b.append("<td class='td_num" + i + "'><label>" + lista[i].num + "</label></td>");
-         b.append("<td  class='td_co" + i + "'><label>" + lista[i].co + "</label></td>");
-         b.append("<td class='td_id_pro" + i + "' >" + lista[i].proceso_id + "</td>");
-         //b.append("<input type='text' name='id' value='" + lista[i].id + "'  class='id_paso" + i + "'/>");
-         b.append("</tr>");
-         }*/
+       
         for (var i = 0; i < lista.length; i++) {
             txt_append += '<li class="dd-item dd3-item" ><div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><label class="item_req item_' + (i + 1) + '" style="font-size: 12px;">' + lista[i].num + ' </label> ' +
                     '<div class="pull-right"><button class="btn btn-primary btn-sm btn-cargar-puesto" value="' + i + '" ><i class="fa fa-eye" ></i></button></div>' +
@@ -41,7 +33,6 @@ function Listar_Paso(proceso) {
 
                 txt_append += '<div class="pull-right"><label style="font-size: 12px;">' + lista[i].det + '&nbsp;&nbsp;</label></div>';
             }
-            // '<div class="pull-right"><label >' + lista[i].co + '</label></div>' +
             TaskValuesHtml += '<input type="hidden"  value="' + lista[i].det + '"  class="det_p_' + i + '"/>' +
                     '<input type="hidden" name="id" value="' + lista[i].id + '"  class="id_paso' + i + '"/>' + '</div> </li>';
             TaskValuesHtml += '<input  type="hidden" value="' + lista[i].det + '" class="inp_det_' + i + '" />';

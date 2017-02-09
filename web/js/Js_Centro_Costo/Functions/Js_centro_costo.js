@@ -28,15 +28,15 @@ function AddCentroCosto(opc) {
     var texto = "";
     texto += '<label id="titu" class="centro-costo_' + ag + '"  >Centro de Costo N&deg; ' + ag + ':</label>';
     texto += '<div  class="row centro-costo_' + ag + '" >';
-    texto += '<section class="col col-3"><label class="select" id="titu">Direcci&oacute;n :<select required="" class="cc-dir' + ag + '"><option value="">[DIRECCION]</option></select></label></section>';
-    texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[DEPARTAMENTO]</option></select></label></section>';
-    texto += '<section class="col col-3"><label class="select" id="titu"> Area :<select required=""  class="cc-area' + ag + '"><option value="">[AREA]</option></select></label></section>';
-    texto += '<section class="col col-3"><label class="select" id="titu"> Secci&oacute;n :<select required=""  class="cc-seccion' + ag + '"><option value="">[SECCION]</option></select></label></section>';
-    texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[CENTRO COSTO]</option></select></label></section>';
+    texto += '<section class="col col-3"><label class="select" id="titu">Direcci&oacute;n :<select required="" class="cc-dir' + ag + '"><option value="">[Direcci&oacute;n]</option></select></label></section>';
+    texto += '<section class="col col-3"><label class="select" id="titu"> Departamento :<select required="" name="DEP" class="cc-dep' + ag + '"><option value="">[Departamento]</option></select></label></section>';
+    texto += '<section class="col col-3"><label class="select" id="titu"> Area :<select required=""  class="cc-area' + ag + '"><option value="">[Area]</option></select></label></section>';
+    texto += '<section class="col col-3"><label class="select" id="titu"> Secci&oacute;n :<select required=""  class="cc-seccion' + ag + '"><option value="">[Secci&oacute;n]</option></select></label></section>';
+    texto += '<section class="col col-3"><label class="select" id="titu"> Centro de Costo :<select name="CENTRO_COSTOS_' + ag + '" class="centro_costo' + ag + '" required=""><option value="">[Centro Costo]</option></select></label></section>';
     /*se condiciona con 1 para separar los datos antiguos de los agregados recientemente*/
     if (opc === "1") {
         texto += '<section class="col col-2" ><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0" value=""  type="text" required="" class="porcentaje_cc porcentaje_nuevo"/></label></section>';
-        texto += '<section class="col col-3" ><button type="button" class="btn btn-danger btn-circle btn-lg remover_edit" value="' + ag + '" ><i class="glyphicon glyphicon-remove"></i></button></section>';
+        texto += '<section class="col col-3" ><button type="button" class="btn btn-danger btn-circle remover_edit" value="' + ag + '" ><i class="glyphicon glyphicon-remove"></i></button></section>';
         texto += '</div>';
         agregar.append(texto);
         listar_cc_mod(ag);
@@ -46,7 +46,7 @@ function AddCentroCosto(opc) {
 
     } else if (opc === "0") {
         texto += '<section class="col col-3"><label class="input" id="titu">%<input name="PORCENTAJE_' + ag + '"  min="0"   type="text" required="" class="porcentaje_cc"/></label></section>';
-        texto += '<section class="col col-3" ><button type="button" class="btn btn-danger btn-circle btn-lg remover" value="' + ag + '" ><i class="glyphicon glyphicon-remove"></i></button></section>';
+        texto += '<section class="col col-3" ><button type="button" class="btn btn-danger btn-circle remover" value="' + ag + '" ><i class="glyphicon glyphicon-remove"></i></button></section>';
         texto += '</div>';
         agregar.hide();
         agregar.append(texto);
@@ -129,26 +129,36 @@ function listar_cc(num, opc, arr_cc) {
     });
 
 }
-function listCentoCostoByDGP(iddgp) {
+function listCentoCostoByDGP(iddgp, idContrato) {
+    var opcListCentroCosto = "";
+    if (typeof iddgp === "undefined") {
+
+        opcListCentroCosto = "listCentroCostoByIdContrato";
+    } else {
+        opcListCentroCosto = "Listar_centro_id_dgp";
+    }
+    var data = {
+        "id_dgp": iddgp,
+        "idContrato": idContrato,
+        "opc": opcListCentroCosto
+    };
     var ag = 1;
     var x = $("#fila-agregar");
-    $.post("../../centro_costo", "opc=Listar_centro_id_dgp&" + "id_dgp=" + iddgp, function (objJson) {
+    $.post("../../centro_costo", data, function (objJson) {
         var lista = objJson.lista;
         x.empty();
         var PorcentajeTotal = 0;
         var numero = 1;
         var texto = "";
         $(".can_centro_cos").val(lista.length);
-        texto += '<legend>Centro de Costo</legend>'+
-        '<div class="row" >' +
-                '<section class="col col-9">'+
-                ''+
-                '<div class="alert alert-block alert-info"><i class="fa-fw fa fa-info"></i>Solo puede eliminar y agregar centro de costos y editar porcentajes. </div>'+
-                '</section>'+
-                
+        texto += '<legend>Centro de Costo</legend>' +
+                '<div class="row" >' +
+                '<section class="col col-9">' +
+                '' +
+                '<div class="alert alert-block alert-info"><i class="fa-fw fa fa-info"></i>Solo puede eliminar y agregar centro de costos y editar porcentajes. </div>' +
+                '</section>' +
                 '<section class="col col-3">' +
-                 '<input class="total_porcentaje" readonly="" name="PORCENTAJE_TOTAL"  max="100" min="100" data-height="50"  data-width="50" data-displayInput=true value="" data-displayPrevious=true data-fgColor="#428BCA">' +
-                
+                '<input class="total_porcentaje" readonly="" name="PORCENTAJE_TOTAL"  max="100" min="100" data-height="50"  data-width="50" data-displayInput=true value="" data-displayPrevious=true data-fgColor="#428BCA">' +
                 '<label class="btn pull-right">' +
                 '<a type="button" id="btn-agregar-cc" value="' + ag + '" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-plus"></i></a>' +
                 '</label></section></div>';
@@ -180,7 +190,7 @@ function listCentoCostoByDGP(iddgp) {
 
             numero = 1;
             ag++;
-            texto="";
+            texto = "";
             PorcentajeTotal = (PorcentajeTotal + parseFloat(lista[i].ca_por_cc));
         }
 

@@ -35,7 +35,7 @@ public class UserMachineProperties {
             e.printStackTrace();
         }
         return x;*/
-        return "";
+        return "(no properties)";
     }
 
 }

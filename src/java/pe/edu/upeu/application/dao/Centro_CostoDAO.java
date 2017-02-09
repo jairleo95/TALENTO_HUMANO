@@ -70,7 +70,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
                 d.setId_departamento(rs.getString("ID_DEPARTAMENTO"));
                 list.add(d);
             }
-     } catch (SQLException ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("ERROR : " + e.getMessage());
@@ -141,7 +141,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         return Lista;
     }
 
-     @Override
+    @Override
     public List<Map<String, ?>> Centro_Costo_Dep(String iddep) {
 
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
@@ -184,14 +184,15 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
                 Lista.add(rec);
             }
             rs.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error!");
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
         return Lista;
@@ -205,7 +206,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
             cst.setString(1, id_cent_cos);
             cst.setString(2, id_contrato);
             cst.execute();
-       } catch (SQLException ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("ERROR : " + e.getMessage());
@@ -236,7 +237,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
                 d.setCa_porcentaje(rs.getString("CA_PORCENTAJE"));
                 list.add(d);
             }
-     } catch (SQLException ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("ERROR : " + e.getMessage());
@@ -270,14 +271,15 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
                 Lista.add(rec);
             }
             rs.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error!");
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
         return Lista;
@@ -290,12 +292,12 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = " select ID_DEPART_CENTRO_COSTO,id_centro_costo,CO_CENTRO_COSTO,DE_CENTRO_COSTO  from RHVD_CENTRO_COSTO where ID_AREA='"+id+"' ";
+            String sql = " select ID_DEPART_CENTRO_COSTO,id_centro_costo,CO_CENTRO_COSTO,DE_CENTRO_COSTO  from RHVD_CENTRO_COSTO where ID_AREA='" + id + "' ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("id", rs.getString("ID_DEPART_CENTRO_COSTO"));
-                rec.put("nombre", rs.getString("co_centro_costo")+" - "+rs.getString("de_centro_costo"));
+                rec.put("nombre", rs.getString("co_centro_costo") + " - " + rs.getString("de_centro_costo"));
                 Lista.add(rec);
             }
             rs.close();
@@ -313,18 +315,19 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         return Lista;
 
     }
+
     @Override
     public List<Map<String, ?>> listar_cc_seccion(String id) {
 
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "  select ID_DEPART_CENTRO_COSTO, ID_CENTRO_COSTO,CO_CENTRO_COSTO,DE_CENTRO_COSTO  from RHVD_CENTRO_COSTO where ID_SECCION='"+id+"' ";
+            String sql = "  select ID_DEPART_CENTRO_COSTO, ID_CENTRO_COSTO,CO_CENTRO_COSTO,DE_CENTRO_COSTO  from RHVD_CENTRO_COSTO where ID_SECCION='" + id + "' ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("id", rs.getString("ID_DEPART_CENTRO_COSTO"));
-                rec.put("nombre", rs.getString("co_centro_costo")+" - "+rs.getString("de_centro_costo"));
+                rec.put("nombre", rs.getString("co_centro_costo") + " - " + rs.getString("de_centro_costo"));
                 Lista.add(rec);
             }
             rs.close();
@@ -358,7 +361,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
                 d.setCa_porcentaje(rs.getString("CA_PORCENTAJE"));
                 list.add(d);
             }
-       } catch (SQLException ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("ERROR : " + e.getMessage());
@@ -393,7 +396,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
                 d.setCo_centro_costo(rs.getString("CO_CENTRO_COSTO"));
                 Lista.add(d);
             }
-       } catch (SQLException ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("ERROR : " + e.getMessage());
@@ -419,19 +422,31 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
             while (rs.next()) {
                 list.add(rs.getString("centro_costos"));
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
         return list;
     }
 
     @Override
-    public List<Map<String, ?>> List_centr_idcon(String id_con) {
+    public List<Map<String, ?>> listCentroCostoByIdContrato(String id_con) {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT (c.ID_DEPART_CENTRO_COSTO)as id_centro ,(c.CO_CENTRO_COSTO||' - '||c.DE_CENTRO_COSTO)as DE_CENTRO_COSTO,c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO, d.CA_PORCENTAJE,pd.ID_DIRECCION,(d.ID_DETALLE_CENTRO_COSTO)as id_det_cen FROM RHVD_CENTRO_COSTO c,RHTD_DETALLE_CENTRO_COSTO d,RHVD_PUESTO_DIRECCION pd where pd.ID_DEPARTAMENTO=c.ID_DEPARTAMENTO and d.ID_CENTRO_COSTO=c.ID_CENTRO_COSTO and  d.ID_CONTRATO='" + id_con.trim() + "' ";
+            /*   String sql = "SELECT (c.ID_DEPART_CENTRO_COSTO)as id_centro ,(c.CO_CENTRO_COSTO||' - '||c.DE_CENTRO_COSTO)as DE_CENTRO_COSTO,c.CO_CENTRO_COSTO,c.id_area,c.id_seccion, c.ID_DEPARTAMENTO, d.CA_PORCENTAJE,pd.ID_DIRECCION,"
+                    + "(d.ID_DETALLE_CENTRO_COSTO)as id_det_cen FROM RHVD_CENTRO_COSTO c,RHTD_DETALLE_CENTRO_COSTO d,RHVD_PUESTO_DIRECCION pd where pd.ID_DEPARTAMENTO=c.ID_DEPARTAMENTO"
+                    + " and d.ID_CENTRO_COSTO=c.ID_CENTRO_COSTO and  d.ID_CONTRATO='" + id_con.trim() + "' ";*/
+            String sql = "SELECT (c.ID_DEPART_CENTRO_COSTO)AS id_centro , c.id_area,c.id_seccion,c.ID_DIRECCION,(c.CO_CENTRO_COSTO||' - ' ||c.DE_CENTRO_COSTO)AS DE_CENTRO_COSTO, "
+                    + "c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO,d.CA_PORCENTAJE, (d.ID_DETALLE_CENTRO_COSTO)AS id_det_cen FROM RHVD_CENTRO_COSTO c, "
+                    + " RHTD_DETALLE_CENTRO_COSTO d WHERE d.ID_DEPART_CENTRO_COSTO   =c.ID_DEPART_CENTRO_COSTO AND d.ID_CONTRATO='" + id_con + "'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -442,17 +457,21 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
                 rec.put("id_dep_cc", rs.getString("ID_DEPARTAMENTO"));
                 rec.put("id_dir_cc", rs.getString("ID_DIRECCION"));
                 rec.put("ca_por_cc", rs.getString("CA_PORCENTAJE"));
+
+                rec.put("id_area_cc", rs.getString("id_area"));
+                rec.put("id_seccion_cc", rs.getString("id_seccion"));
                 Lista.add(rec);
             }
             rs.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error!");
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
             try {
                 this.conn.close();
             } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
             }
         }
         return Lista;
@@ -484,7 +503,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
             cst.setString(1, id_dcc.trim());
             cst.execute();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            // JOptionPane.showMessageDialog(null, e);
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("ERROR");
@@ -497,7 +516,6 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
         }
     }
 
-
     @Override
     public List<Map<String, ?>> List_centr_iddgp(String id_dgp) {
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
@@ -505,7 +523,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "SELECT (c.ID_DEPART_CENTRO_COSTO)AS id_centro , c.id_area,c.id_seccion,c.ID_DIRECCION,(c.CO_CENTRO_COSTO||' - ' ||c.DE_CENTRO_COSTO)AS DE_CENTRO_COSTO, "
                     + "c.CO_CENTRO_COSTO, c.ID_DEPARTAMENTO,d.CA_PORCENTAJE, (d.ID_DETALLE_CENTRO_COSTO)AS id_det_cen FROM RHVD_CENTRO_COSTO c, "
-                    + " RHTD_DETALLE_CENTRO_COSTO d WHERE d.ID_DEPART_CENTRO_COSTO   =c.ID_DEPART_CENTRO_COSTO AND d.ID_DGP            ='"+id_dgp+"'";
+                    + " RHTD_DETALLE_CENTRO_COSTO d WHERE d.ID_DEPART_CENTRO_COSTO   =c.ID_DEPART_CENTRO_COSTO AND d.ID_DGP            ='" + id_dgp + "'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -521,7 +539,7 @@ public class Centro_CostoDAO implements InterfaceCentro_CostosDAO {
                 Lista.add(rec);
             }
             rs.close();
-       } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("Error :" + e.getMessage());

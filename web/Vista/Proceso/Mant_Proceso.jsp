@@ -89,141 +89,142 @@
             <div id="content" >
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
-
                     <!-- row -->
                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="well">
+                                <select name="proceso"  id="select-proceso" class="form-control selectProceso">
+                                    <option value="">[Seleccione]</option>
+                                </select>  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="well">
+                                <h2>Tareas</h2>
+                                <div class="row">
+                                    <form class="smart-form form-paso">
+                                        <div class="">
+                                            <section class="col col-md-2">
+                                                <label class="input">
+                                                    <input name="num" required=""  maxlength="3" class="num_paso input-sm" style="width: 100%"   placeholder="Número">
+                                                </label>
+                                            </section>
+                                            <section class="col col-md-2">
+                                                <label class="input">
+                                                    <input type="text" name="cod" class="co_paso input-sm"  maxlength="4" placeholder="Código" />
+                                                </label>
+                                            </section>
 
-                        <select name="proceso"  id="select-proceso" class="form-control selectProceso">
-                            <option value="">[Seleccione]</option>
-                        </select>
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
-                                <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Pasos Habilitados</h2>
-                                </header>
-                                <div>
-                                    <div class="jarviswidget-editbox">
-                                    </div>
-                                    <div class="widget-body">
-                                        <form class="smart-form form-paso">
-                                            <div class="row">
-                                                <section class="col col-md-2">
-                                                    <label class="input">
-                                                        <input name="num" required=""  maxlength="3" class="num_paso input-sm" style="width: 100%"   placeholder="Número">
-                                                    </label>
-                                                </section>
-                                                <section class="col col-md-2">
-                                                    <label class="input">
-                                                        <input type="text" name="cod" class="co_paso input-sm"  maxlength="4" placeholder="Código" />
-                                                    </label>
-                                                </section>
-
-                                                <section class="col col-md-6">
-                                                    <label class="input">
-                                                        <input type="text"  name="desc" class="desc_paso input-sm"  placeholder="Descripción" maxlength="200"/>
-                                                    </label>
-                                                </section>
-                                                <section class="col col-md-2" >
-                                                    <button class="btn btn-primary btn-registrar btn-circle pull-left" type="submit" id="btn-registrar" name="Enviar" value="Registrar Paso" >
-                                                        <i class="fa fa-plus"></i></button>
-                                                    <button class="btn btn-danger btn_cancel_edit btn-circle pull-right" type="button" style="display:none "  ><i class="fa fa-remove"></i></button>
-                                                    <button type="button" class="btn btn-default btn-circle Generar pull-right" data-action="collapse-all">
-                                                        <i class="fa fa-refresh"></i>
-                                                    </button>
-                                                </section>
-                                            </div>
-                                            <input type="hidden" name="id" class="id_p" value=""/>
-                                            <input type="hidden" name="opc" class="opc" value="Registrar"/>
-                                        </form>
-                                        <div class="col col-xs-12 col-md-6">
-                                            <div class="dd" id="nestable"  >
-                                                <ol class="dd-list" >
-                                                </ol>
-                                            </div>
-                                            <div class="TaskValues" ></div>
+                                            <section class="col col-md-6">
+                                                <label class="input">
+                                                    <input type="text"  name="desc" class="desc_paso input-sm"  placeholder="Descripción" maxlength="200"/>
+                                                </label>
+                                            </section>
+                                            <section class="col col-md-2" >
+                                                <button class="btn btn-primary btn-registrar btn-circle pull-left" type="submit" id="btn-registrar" name="Enviar" value="Registrar Paso" >
+                                                    <i class="fa fa-plus"></i></button>
+                                                <button class="btn btn-danger btn_cancel_edit btn-circle pull-right" type="button" style="display:none "  ><i class="fa fa-remove"></i></button>
+                                                <button type="button" class="btn btn-default btn-circle Generar pull-right" data-action="collapse-all">
+                                                    <i class="fa fa-refresh"></i>
+                                                </button>
+                                            </section>
                                         </div>
-                                        <div class="col col-xs-12 col-md-6">
-                                            <form action="" method="post" class="smart-form form_puesto" novalidate="">
-                                                <fieldset>
-                                                    <div class="row">
-                                                        <section class="col col-4">
-                                                            <label>Dirección</label>
-                                                            <label class="select">
-                                                                <select class=" input-sm sl_dir" required="" ></select> 
-                                                                <i></i></label>      
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label>Departamento:</label>
-                                                            <label class="select">
-                                                                <select class="input-sm sl_dep" required=""></select> 
-                                                                <i></i></label>                                                    
-                                                        </section>
-                                                        <section class="col col-4">
-                                                            <label>Area:</label>
-                                                            <label class="select">
-                                                                <select class="input-sm sl_area" required=""></select>  
-                                                                <i></i></label>
-                                                        </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-4">
-                                                            <label>Sección:</label>
-                                                            <label class="select">
-                                                                <select class="input-sm sl_sec" required=""></select> 
-                                                                <i></i></label>
-                                                        </section>
+                                        <input type="hidden" name="id" class="id_p" value=""/>
+                                        <input type="hidden" name="opc" class="opc" value="Registrar"/>
+                                    </form>
+                                </div>
+                                <div class="row">   
+                                    <div class="col col-xs-12 col-md-6">
+                                        <div class="dd" id="nestable"  >
+                                            <ol class="dd-list" >
+                                            </ol>
+                                        </div>
+                                        <div class="TaskValues" ></div>
+                                    </div>
+                                    <div class="col col-xs-12 col-md-6">
+                                        <form action="" method="post" class="smart-form form_puesto" novalidate="">
+                                                <div class="row">
+                                                    <section class="col col-4">
+                                                        <label>Dirección</label>
+                                                        <label class="select">
+                                                            <select class=" input-sm sl_dir" required="" ></select> 
+                                                            <i></i></label>      
+                                                    </section>
+                                                    <section class="col col-4">
+                                                        <label>Departamento:</label>
+                                                        <label class="select">
+                                                            <select class="input-sm sl_dep" required=""></select> 
+                                                            <i></i></label>                                                    
+                                                    </section>
+                                                    <section class="col col-4">
+                                                        <label>Area:</label>
+                                                        <label class="select">
+                                                            <select class="input-sm sl_area" required=""></select>  
+                                                            <i></i></label>
+                                                    </section>
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-4">
+                                                        <label>Sección:</label>
+                                                        <label class="select">
+                                                            <select class="input-sm sl_sec" required=""></select> 
+                                                            <i></i></label>
+                                                    </section>
 
-                                                        <section class="col col-4">
-                                                            <label>Puesto:</label>
-                                                            <label class="select">
-                                                                <select name="id_pu" class="input-sm sl_puesto" required=""></select>
-                                                                <i></i></label>
+                                                    <section class="col col-4">
+                                                        <label>Puesto:</label>
+                                                        <label class="select">
+                                                            <select name="id_pu" class="input-sm sl_puesto" required=""></select>
+                                                            <i></i></label>
 
-                                                        </section>                                          
-                                                        <input type="hidden" value="" name="idpasos" class="id_pasos"  />
-                                                        <input type="hidden" value="" name="nun" class="num_p"  />
-                                                        <section class="col col-2" >
-                                                            <label>Tipo</label>
-                                                            <label class="select">
-                                                                <select class="input-sm co_puesto" name="co_pasos">
-                                                                    <option value=""></option>
-                                                                    <option value="SECR">Secretaria de Area</option>
-                                                                    <option value="JEFE">Jefe de Area</option>
-                                                                </select> 
-                                                                <i></i></label>
-                                                        </section>
-                                                        <section class="col col-2">
-                                                            <div style="margin-top: 5px;" >
-                                                                <button type="button" class="btn btn-primary btn-agregar-p btn-circle btn-lg pull-right" style="margin: auto;">
-                                                                    <i class="fa fa-plus"></i> 
-                                                                </button> 
-                                                            </div>                                                            
-                                                        </section>
-                                                    </div>
-                                                </fieldset>
-                                            </form>
-                                            <div class="custom-scroll table-responsive" style="height:320px; overflow-y: scroll;">
-                                                <table class="table table-striped table-bordered table-hover" style="width: 98%;margin: auto; ">
-                                                    <thead>
-                                                        <tr>
-                                                            <th data-class="expand">Puesto</th>
-                                                            <th data-hide="phone,tablet">Area</th>
-                                                            <th data-hide="phone,tablet">Departamento</th>
-                                                            <th data-hide="phone,tablet">Dirección</th>
-                                                            <th colspan="2">Acciones</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="tbody-puesto">
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    </section>                                          
+                                                    <input type="hidden" value="" name="idpasos" class="id_pasos"  />
+                                                    <input type="hidden" value="" name="nun" class="num_p"  />
+                                                    <section class="col col-2" >
+                                                        <label>Tipo</label>
+                                                        <label class="select">
+                                                            <select class="input-sm co_puesto" name="co_pasos">
+                                                                <option value=""></option>
+                                                                <option value="SECR">Secretaria de Area</option>
+                                                                <option value="JEFE">Jefe de Area</option>
+                                                            </select> 
+                                                            <i></i></label>
+                                                    </section>
+                                                    <section class="col col-2">
+                                                        <div style="margin-top: 5px;" >
+                                                            <button type="button" class="btn btn-primary btn-agregar-p btn-circle btn-lg pull-right" style="margin: auto;">
+                                                                <i class="fa fa-plus"></i> 
+                                                            </button> 
+                                                        </div>                                                            
+                                                    </section>
+                                                </div>
+                                        </form>
+                                        <div class="custom-scroll table-responsive" style="height:320px; overflow-y: scroll;">
+                                            <table class="table table-striped table-bordered table-hover" style="width: 98%;margin: auto; ">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-class="expand">Puesto</th>
+                                                        <th data-hide="phone,tablet">Area</th>
+                                                        <th data-hide="phone,tablet">Departamento</th>
+                                                        <th data-hide="phone,tablet">Dirección</th>
+                                                        <th colspan="2">Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="tbody-puesto">
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
+
+
                             </div>
-                        </article>
-                        
+                        </div>
+
+
+
                         <article class="col-sm-12 col-md-12 col-lg-12" >
 
                             <!-- Widget ID (each widget will need unique ID)-->
@@ -288,7 +289,7 @@
                                                             <option value="" >[Area]</option>
                                                         </select>
                                                     </section>
-                                                     <section class="col col-1">
+                                                    <section class="col col-1">
                                                         <button type="button" class="btn btn-danger btn-circle btn-cancelar">
                                                             <i class="fa fa-remove" ></i>
                                                         </button>
@@ -297,8 +298,8 @@
                                                         </button>
                                                     </section>
                                                 </div>
-                                               
-                                              
+
+
                                             </fieldset>
 
                                         </form>
@@ -434,10 +435,9 @@
         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-        
+
         <script src="../../js/businessLogic/Proceso/Proceso.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
         <script src="../../js/businessLogic/Proceso/ReqProceso.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
-        <script src="../../js/businessLogic/Proceso/Proceso.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
         <script src="../../js/businessLogic/Proceso/Task.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
         <script src="../../js/businessLogic/Proceso/TaskXJob.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
         <script src="../../js/businessLogic/Proceso/ConfigureProcess.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>

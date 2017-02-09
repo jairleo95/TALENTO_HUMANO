@@ -441,7 +441,6 @@
                     <script src="../../../js/plugin/fuelux/wizard/wizard.min.js"></script>-->
                     <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
                     <script src="../../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
-                    <script src="../../../js/Js_Validar/Validar_Formulario.js"></script>
                     <script src="../../../js/businessLogic/Hijos/modDatosHijos.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
                     </body>
                     </html>

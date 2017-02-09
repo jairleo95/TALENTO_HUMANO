@@ -260,7 +260,6 @@
         <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
         <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script src="../../../js/Js_Formulario/Js_Form.js"></script>
-        <script src="../../../js/Js_Validar/Validar_Formulario.js"></script>
         <script src="../../../js/businessLogic/Hijos/regDatosHijos.js?v=<%=globalProperties.VERSION_JS%>"></script>
         
     </body>

@@ -179,7 +179,7 @@ public class CEmpleado extends HttpServlet {
                                 + "                          <div class='col-md-8'>"
                                 + "                                <div class='input-group input-group-sm'>"
                                 + "                                    <div class='icon-addon addon-sm'>"
-                                + "                                        <input type='text' value='" + ((!codigo.equals("null")) ? codigo : "") + "' placeholder='APS' maxlength='6' class='form-control txtCodigoAPS'>"
+                                + "                                        <input type='text' value='" + ((!codigo.equals("null")) ? codigo : "") + "' placeholder='APS' maxlength='8' class='form-control txtCodigoAPS'>"
                                 + "                                        <label for='email' class='glyphicon glyphicon-info-sign' rel='tooltip' title='Escribir código de APS'></label>"
                                 + "                                    </div>"
                                 + "                                    <span class='input-group-btn'>"

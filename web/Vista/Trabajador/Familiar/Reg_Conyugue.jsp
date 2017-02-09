@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -338,7 +339,7 @@
     <!-- PAGE RELATED PLUGIN(S) -->
        
     <script src="../../../js/plugin/jquery-form/jquery-form.min.js"></script>
-    <script src="../../../js/Js_Validar/Validar_Formulario.js"></script>
+    <script src="../../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
     <script type="text/javascript" src="../../../js/JQuery/jquery.numeric.js"></script>
 
     <script type="text/javascript">

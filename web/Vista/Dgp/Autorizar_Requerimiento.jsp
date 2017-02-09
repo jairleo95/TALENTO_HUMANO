@@ -88,8 +88,7 @@
         %>
 
     <body onload='exito("Procesado con exito!", "Codigo huella ingresado correctamente");
-            nobackbutto
-            n();' class="body">
+            nobackbutton();' class="body">
         <%
             }
         } else {
@@ -407,7 +406,7 @@
                                                                 num_cod_aps++;
                                                     %>
                                                     <td>
-                                                        <input type="text" name="cod_aps" maxlength="6" class="cod_aps<%=(f + 1)%> inp_cod_aps" style="width:50px"/>
+                                                        <input type="text" name="cod_aps" maxlength="8" class="cod_aps<%=(f + 1)%> inp_cod_aps" style="width:50px"/>
                                                     </td>
                                                     <input type="hidden" name="idtr"  class="idtr<%=(f + 1)%> idTrabajador" value="<%=a.getId_trabajador()%>" />
                                                     <%} else {%>
@@ -723,8 +722,6 @@
     <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>"></script>
     <script type="text/javascript" src="../../js/businessLogic/Horario/horario.js?v=<%=globalProperties.VERSION_JS%>"></script>
     <script type="text/javascript" src="../../js/businessLogic/Autorizacion/inboxAuthorization.js?v=<%=globalProperties.VERSION_JS%>"></script>
-
-
 </body>
 </html>
 <%

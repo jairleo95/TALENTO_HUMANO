@@ -79,34 +79,34 @@ public class CCentro_Costo extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
-            if (opc.equals("Listar_centro_id_con")) {
-                String id_con = request.getParameter("id_con");
-                List<Map<String, ?>> list = cc.List_centr_idcon(id_con);
+            if (opc.equals("listCentroCostoByIdContrato")) {
+                String id_con = request.getParameter("idContrato");
+                List<Map<String, ?>> list = cc.listCentroCostoByIdContrato(id_con);
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
             if (opc.equals("Cargar_cc_DGP")) {
-                String id= request.getParameter("id_c");
+                String id = request.getParameter("id_c");
                 List<Map<String, ?>> list = cc.Cargar_cc_dgp(id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
             if (opc.equals("Lista_cc_area")) {
-                String id= request.getParameter("id");
+                String id = request.getParameter("id");
                 List<Map<String, ?>> list = cc.listar_cc_area(id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
             if (opc.equals("Lista_cc_seccion")) {
-                String id= request.getParameter("id");
+                String id = request.getParameter("id");
                 List<Map<String, ?>> list = cc.listar_cc_seccion(id);
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
             }
             if (opc.equals("Eliminar_det_cc")) {
-                String id_dcc= request.getParameter("id_dcc");
+                String id_dcc = request.getParameter("id_dcc");
                 cc.Eliminar_dcc(id_dcc);
-                  rpta.put("rpta", "1");
+                rpta.put("rpta", "1");
             }
 
         } catch (Exception e) {

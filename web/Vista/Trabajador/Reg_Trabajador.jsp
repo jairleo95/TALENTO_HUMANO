@@ -1586,14 +1586,12 @@
         </div>
         <!-- /.modal -->
         <button  data-toggle="modal" data-target="#myModal" id="btn-mostrar" hidden="">
-            Launch demo modal
+            modal
         </button>
     </center>
     <!-- END MAIN PANEL -->
 
 
-    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-    <script data-pace-options='{ "restartOnRequestAfter": true }' src="../../js/plugin/pace/pace.min.js"></script>
 
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -1669,8 +1667,7 @@
     <script src="../../js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
     <script src="../../js/plugin/fuelux/wizard/wizard.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
-    <script type="text/javascript" src="../../js/Js_Validar/Validar_Formulario.js"></script>
-    <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
+    <script src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
     
     <script src="../../js/businessLogic/Trabajador/regTrabajador.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
     

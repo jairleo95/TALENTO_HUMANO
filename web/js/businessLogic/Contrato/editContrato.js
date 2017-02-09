@@ -211,7 +211,7 @@ $(document).ready(function () {
     Listar_plantilla();
     listar_sub_mod();
     listSelectDirCentroCosto();
-    listCentoCostoByDGP($("#id_dgp").val());
+    listCentoCostoByDGP($("#id_dgp").val(),$(".id_contrato").val());
     list_selectJavaBeans($(".ti_contrato"), "../../contrato", "opc=List_ti_contrato", "id_tipo_contrato", "de_ti_contrato", "1", $(".id_ti_contrato").val());
     list_selectJavaBeans($(".situacionEspecial"), "../../situacionEspecial", "opc=list", "idSituacionEspecial", "deSituacionEspecial", "1", $(".situacionEspecial").data("valor"));
     var a = $("#select-sub-mod");
