@@ -4,6 +4,22 @@ var urlCrudForm = "carga_academica";
 var dataAditional = "";
 var idRow = "";
 var idtrItem = "";
+function initCAGlobalEvents() {
+    $(".btnUpdateCAData").click(function () {
+        console.log("update...");
+        $.ajax({
+            url: urlCrudForm,
+            data: "opc=updateCAData", type: 'POST', success: function (data, textStatus, jqXHR) {
+                 
+                if (data.status) {
+                    console.log("data updated...");
+                }else{
+                    console.log("ocurrio uhn error al actualizar");
+                }
+            }
+        });
+    });
+}
 function initDatatableCargaAcademica() {
     var responsiveHelper1 = undefined;
     var breakpointDefinition = {

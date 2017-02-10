@@ -77,7 +77,6 @@
     </head>
     <body>
         <%
-            // HttpSession sesion_1 = request.getSession(true);
             out.print("<input type='hidden' class='iddgp' value='" + request.getParameter("iddgp") + "' />");
             out.print("<input type='hidden' class='idtr' value='" + request.getParameter("idtr") + "' />");
             out.print("<input type='hidden' class='casosEspeciales' value='" + request.getParameter("dce") + "' />");
@@ -85,10 +84,7 @@
                 if (request.getParameter("pro").equals("pr_dgp")) {
                     out.print("<input type='hidden' class='enterToDGPProcess' value='true' />");
                 }
-
             }
-
-
         %>
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
         <!-- MAIN PANEL -->
@@ -121,8 +117,6 @@
                                     <h2>Registrar Documentos</h2>
 
                                 </header>
-
-
                                 <!-- widget div-->
                                 <div>
 
@@ -254,6 +248,21 @@
         <script type='text/javascript' src='../../../js/shadowbox/shadowbox.js'></script>
 
         <script src='../../../js/businessLogic/Trabajador/RegDocumentoDGP.js?v=<%=globalProperties.VERSION_JS%>' type='text/javascript'></script>
+        <script>
+            $(document).ready(function () {
+                pageSetUp();
+                $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
+                    $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>");
+                });
+
+                idtr = $(".idtr").val();
+                iddgp = $(".iddgp").val();
+                casosEspeciales = $(".casosEspeciales").val();
+                enterToDGPProcess = $(".enterToDGPProcess").val();
+                pathRequest = "../../../";
+                showDocuments(iddgp, idtr, casosEspeciales, enterToDGPProcess);
+            });
+        </script>
     </body>
 </html>
 <%  } else {

@@ -282,7 +282,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 + "ID_PUESTO, ID_REQUERIMIENTO, ID_TIPO_PLANILLA, NO_REQ, ID_PASOS, NO_USUARIO, ID_USUARIO, NO_SECCION,"
                 + " NO_AREA, FE_CREACION, VAL_PLAZO, AR_FOTO, DE_FOTO, ID_FOTO, NO_AR_FOTO, TA_AR_FOTO, TI_AR_FOTO, VER_LIST_PLAZO, "
                 + "ELAB_CONTRATO, VAL_FIRM_CONTRATO, NO_DEP, MES_CREACION, VAL_COD_APS_EMPLEADO, VAL_COD_HUELLA_EMP, CO_APS, CO_HUELLA_DIGITAL, LI_MOTIVO,"
-                + " ES_MFL, DI_CORREO_PERSONAL, DI_CORREO_INST, VAL_CONTRATO_ADJUNTO ,val_dgp_contrato  from rhvd_autorizar_dgp where id_puesto='" + id_aurotizacion + "'";
+                + " ES_MFL, DI_CORREO_PERSONAL, DI_CORREO_INST, VAL_CONTRATO_ADJUNTO ,val_dgp_contrato ,mes_plazo from rhvd_autorizar_dgp where id_puesto='" + id_aurotizacion + "'";
         sql += (!"".equals(id_user)) ? " and id_usuario='" + id_user + "'" : "";
         sql += (!"".equals(iddgp)) ? " and id_dgp='" + iddgp + "'" : "";
         sql += (true) ? " order by fe_creacion " : "";
@@ -335,6 +335,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setDi_correo_inst(rs.getString("DI_CORREO_INST"));
                 v.setVal_contrato_adjunto(rs.getInt("val_contrato_adjunto"));
                 v.setVal_dgp_cotrato(rs.getInt("val_dgp_contrato"));
+                v.setMesPlazo(rs.getString("mes_plazo"));
                 list.add(v);
             }
             Logger.getLogger(getClass().getName()).log(Level.INFO, sql);

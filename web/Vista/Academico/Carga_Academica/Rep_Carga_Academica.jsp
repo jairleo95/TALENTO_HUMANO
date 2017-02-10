@@ -1,10 +1,19 @@
  
 <%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-md-12">
         <div class="well">
-            <h1><span class="semi-bold">Reporte</span> <i class="ultra-light">Carga Académica</i> (Docentes) <sup class="badge bg-color-red bounceIn animated">v 2.0</sup> <br>
-                <small class="text-danger slideInRight fast animated"><strong>Inicio de contratación</strong></small></h1>
+            <div class="row">
+                <div class="col-md-10">
+                    <h1><span class="semi-bold">Reporte</span> <i class="ultra-light">Carga Académica</i> (Docentes)
+                        <sup class="badge bg-color-red bounceIn animated">v 2.0</sup> <br>
+                        <small class="text-danger slideInRight fast animated"><strong>Inicio de contratación</strong></small></h1>
+                </div>
+                <div class="col-md-2">
+                    <br>
+                    <button type="button" class="btn btn-primary btn-lg btn-circle pull-right btnUpdateCAData"><i class="fa fa-refresh"></i></button>
+                </div>  
+            </div>
         </div>
     </div>
 </div>
@@ -86,9 +95,11 @@
     pageSetUp();
     var pagefunction = function () {
         console.log("::enter to pagefunction");
+        initCAGlobalEvents();
         initFormPlugins();
         initDatatableEvents();
         initDatatableCargaAcademica();
+        
         console.log("::finish to pagefunction");
     };
     var pagedestroy = function () {

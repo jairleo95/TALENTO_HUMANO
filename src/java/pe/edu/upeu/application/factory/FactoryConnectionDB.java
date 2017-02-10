@@ -26,7 +26,7 @@ public class FactoryConnectionDB {
     //  
     //  public static String[] configORACLE = {"procesosrh", "gestionrrhh", "procesrh-db.upeu", "1521", "upeu"};
     public static final String url_archivos = "http://procesosrh-app.upeu/TALENTO_HUMANO/Archivo/";
-    public static final String url = "/usr/share/tomcat7/webapps/TALENTO_HUMANO/Archivo/";
+    public static final String url = "E:\\NetBeans Projects\\Versiones TALENTO HUMANO\\Current Version\\TALENTO_HUMANO\\web\\Archivo\\";
 
     public static ConexionBD open(int typeDB) {
         switch (typeDB) {

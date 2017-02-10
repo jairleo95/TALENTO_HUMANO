@@ -539,6 +539,8 @@ public class CAutorizacion extends HttpServlet {
                         response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?h=si");
                     }
                     if (opc.equals("Enviar_Correo")) {
+                        String emailSubject=request.getParameter("from");
+                        String pwdSubject =request.getParameter("pwdSubject");
                         String to = request.getParameter("to");
                         String from = request.getParameter("from");
                         String asunto = request.getParameter("asunto");
@@ -546,7 +548,7 @@ public class CAutorizacion extends HttpServlet {
                         String[] emails = to.split(",");
                         for (String email : emails) {
                             System.out.println("email:" + email);
-                            correo.Enviar(to, from, asunto, cuerpo);
+                            correo.Enviar(emailSubject,pwdSubject,to, from, asunto, cuerpo);
                         }
                         System.out.print("Ejecutando envio de correos");
                         /*correo.Enviar("jairleo95@gmail.com", "jairleo95@gmail.com", "CARPETA LABORAL - UPEU", "Estimado(a) Colaborador(a),\n"

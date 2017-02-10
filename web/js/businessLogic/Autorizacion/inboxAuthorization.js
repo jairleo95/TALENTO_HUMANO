@@ -442,7 +442,10 @@ $(document).ready(function () {
         var emailInput = $(".emailInput").val();
         var asunto = $(".asunto").val();
         var messageEmail = $(".messageEmail").val();
-        sendEmail("&to=" + emailInput + "&from=jairleo95@gmail.com&asunto=" + asunto + "&cuerpo=" + messageEmail, function () {
+        var from = $(".emailSubject").val();
+        var pwd = $(".pwdSubject").val();
+
+        sendEmail("&to=" + emailInput + "&from=" + from + "&asunto=" + asunto + "&cuerpo=" + messageEmail + "&pwdSubject=" + pwd, function () {
             $btn.button('reset');
         });
 

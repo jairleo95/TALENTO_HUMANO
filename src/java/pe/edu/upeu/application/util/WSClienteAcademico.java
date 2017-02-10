@@ -1,8 +1,8 @@
 package pe.edu.upeu.application.util;
 
-import pe.edu.upeu.application.util.StringMD;
 import java.io.ByteArrayOutputStream;
 import java.sql.CallableStatement;
+import java.sql.Types;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.xml.soap.*;
@@ -17,25 +17,25 @@ import pe.edu.upeu.application.properties.globalProperties;
 
 public class WSClienteAcademico {
 
-    public static void startWsAcademico(String semestre) throws Exception {
+    public static String startWsAcademico(String semestre) throws Exception {
         JSONArray arr = WSClienteAcademico.getRequest(semestre);
-        int tamaño = arr.length();
-        System.out.println("tamaño de arr:" + tamaño);
-        String[] campus = new String[tamaño];
-        String[] tipo_doc = new String[tamaño];
-        String[] nu_doc = new String[tamaño];
-        String[] app = new String[tamaño];
-        String[] apm = new String[tamaño];
-        String[] nombre = new String[tamaño];
-        String[] facu = new String[tamaño];
-        String[] eap = new String[tamaño];
-        String[] de_carga = new String[tamaño];
-        String[] curso = new String[tamaño];
-        String[] grupo = new String[tamaño];
-        String[] horario = new String[tamaño];
-        double[] hb_lab = new double[tamaño];
-        String[] hb_de_condicion = new String[tamaño];
-        String[] hb_ti_curso = new String[tamaño];
+        int length = arr.length();
+        String[] campus = new String[length];
+        String[] tipo_doc = new String[length];
+        String[] nu_doc = new String[length];
+        String[] app = new String[length];
+        String[] apm = new String[length];
+        String[] nombre = new String[length];
+        String[] facu = new String[length];
+        String[] eap = new String[length];
+        String[] de_carga = new String[length];
+        String[] curso = new String[length];
+        String[] grupo = new String[length];
+        String[] horario = new String[length];
+        double[] hb_lab = new double[length];
+        String[] hb_de_condicion = new String[length];
+        String[] hb_ti_curso = new String[length];
+        System.out.println("registros aceptados:" + length);
 
         for (int i = 0; i < arr.length(); i++) {
             hb_ti_curso[i] = (arr.getJSONObject(i).getJSONObject("tipocurso").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("tipocurso").get("content")) : "";
@@ -90,8 +90,8 @@ public class WSClienteAcademico {
         ARRAY array_to_pass13 = new ARRAY(des13, conn.conex, hb_lab);
         ARRAY array_to_pass14 = new ARRAY(des14, conn.conex, hb_de_condicion);
         ARRAY array_to_pass15 = new ARRAY(des15, conn.conex, hb_ti_curso);
-
-        CallableStatement st = conn.conex.prepareCall("{CALL rhsp_ws_carga_academica(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+        System.out.println(":::register in BD... ");
+        CallableStatement st = conn.conex.prepareCall("{CALL rhsp_ws_carga_academica(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
         st.setArray(1, array_to_pass1);
         st.setArray(2, array_to_pass2);
         st.setArray(3, array_to_pass3);
@@ -107,11 +107,17 @@ public class WSClienteAcademico {
         st.setArray(13, array_to_pass13);
         st.setArray(14, array_to_pass14);
         st.setArray(15, array_to_pass15);
+        st.registerOutParameter(16, Types.VARCHAR);
+
         st.executeUpdate();
+        System.out.println(st.getString(16));
+        conn.conex.close();
+
+        return arr.toString();
 
     }
 
-    public static JSONArray getRequest(String semestre) throws SOAPException, Exception {
+    public static JSONArray getRequest(String semestre) throws Exception {
         Calendar calendario = new GregorianCalendar();
         String hour = String.format("%02d", calendario.get(Calendar.HOUR_OF_DAY));
 
@@ -124,27 +130,35 @@ public class WSClienteAcademico {
         System.out.println("Hora:" + hour);
         System.out.println(globalProperties.service + keyPub);
         System.out.println(globalProperties.keyApp + hour);
-        SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(semestre), globalProperties.service + keyPub);
+        SOAPMessage soapResponse = null;
+        JSONObject jsonObject = null;
+        try {
+            soapResponse = soapConnection.call(createSOAPRequest(semestre), globalProperties.service + keyPub);
 
-        // print SOAP Response
-        //  System.out.println("Response SOAP Message:");
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        soapResponse.writeTo(out);
-        String strMsg = new String(out.toByteArray());
-        JSONObject jsonObject = XML.toJSONObject(strMsg);
-        System.out.println(jsonObject);
+            // print SOAP Response
+            //  System.out.println("Response SOAP Message:");
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            soapResponse.writeTo(out);
+            String strMsg = new String(out.toByteArray());
+            jsonObject = XML.toJSONObject(strMsg);
+        } catch (SOAPException e) {
+            System.out.println(e);
+            System.out.println("Error deS conexion, intentelo nuevamente");
+        }
+        //System.out.println(jsonObject);
         JSONArray arr = jsonObject.getJSONObject("SOAP-ENV:Envelope").
                 getJSONObject("SOAP-ENV:Body").getJSONObject("ns1:DocenteXCursoResponse").
                 getJSONObject("return").
                 getJSONArray("item");
         soapConnection.close();
+        System.out.println("tamaño arr:" + arr.length());
         return arr;
     }
 
     public static SOAPMessage createSOAPRequest(String semestre) {
         try {
             MessageFactory messageFactory = MessageFactory.newInstance();
-            String proxyAuth = System.getProperty("https.proxyAuth");
+            //  String proxyAuth = System.getProperty("https.proxyAuth");
             //System.out.println("Puerto :" + proxyAuth);
             SOAPMessage soapMessage = messageFactory.createMessage();
             SOAPPart soapPart = soapMessage.getSOAPPart();

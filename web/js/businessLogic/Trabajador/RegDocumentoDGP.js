@@ -3,6 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var idtr = "";
+var iddgp = "";
+var casosEspeciales = false;
+var enterToDGPProcess = false;
+/*defaul path*/
+var pathRequest = "";
 function validateShadowBox() {
     Shadowbox.init({
         overlayOpacity: 0.9
@@ -56,27 +62,29 @@ function validateSizeFile() {
                     var fileType = items[i].type; // get file type
                     // append li to UL tag to display File info
                     fragment = "<li>" + fileName + " (<b>" + fileSize + "</b> bytes) - Type :" + fileType + "</li>";
+
                     if (fileSize > 512000) {
                         $(thisObject).focus();
                         x = false;
                     }
+                    console.log(fragment);
                 }
             }
         }
     });
     return x;
 }
-function initFormRegDocument() {
+function initFormRegDocument(request) {
     validateShadowBox();
     $(".btn_reg_doc").click(function () {
         var data = new FormData($('.form_dgp_doc')[0]);
         if (validateSizeFile()) {
             $.ajax({
-                url: "../../../documento", type: 'POST',
+                url: pathRequest + "documento", type: 'POST',
                 success: function (data, textStatus, jqXHR) {
                     if (data.status) {
                         closedthis();
-                        listDocument();
+                        showDocuments(iddgp, idtr, casosEspeciales, enterToDGPProcess, initFormRegDocument);
                     }
                 },
                 cache: false,
@@ -143,31 +151,26 @@ function initFormRegDocument() {
         }
     });
 }
-function listDocument() {
+function showDocuments(dgp, idtr, casosEspeciales, enterToDGPProcess, callback) {
+    console.log("::enter to showDocuments function::");
     var objDiv = $(".listDocument");
     var data = {
         "opc": "listDocument",
-        "iddgp": $(".iddgp").val(),
-        "idtr": $(".idtr").val(),
-        "casosEspeciales": $(".casosEspeciales").val(),
-        "enterToDGPProcess": $(".enterToDGPProcess").val()
+        "iddgp": dgp,
+        "idtr": idtr,
+        "casosEspeciales": casosEspeciales,
+        "enterToDGPProcess": enterToDGPProcess
     };
-    objDiv.append('<img src="../../../img/load.gif" class="img-responsive center-block"/>');
+    objDiv.append('<img src='+pathRequest+'img/load.gif" class="img-responsive center-block"/>');
     $.ajax({
-        url: "../../../documento", type: 'POST', data: data, success: function (data, textStatus, jqXHR) {
+        url: pathRequest + "documento", type: 'POST', data: data, success: function (data, textStatus, jqXHR) {
             if (data.status) {
                 objDiv.empty();
                 objDiv.append(data.htmlListDocument);
-                initFormRegDocument();
+                if (typeof callback !== "undefined") {
+                    callback(data);
+                }
             }
-
         }
     });
 }
-$(document).ready(function () {
-    pageSetUp();
-    $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-        $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-    });
-    listDocument();
-});

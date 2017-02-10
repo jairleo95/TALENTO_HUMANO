@@ -193,7 +193,7 @@
                                                                     <li><a onclick="listHistory(<%=i%>)" data-toggle="modal" data-target="#ModalHisto">Ver Historial</a></li>
                                                                     <li><a   class="btnHorario"  data-valor="<%=r.getId_dgp()%>"  data-toggle="modal" data-target="#exampleModal">Ver Horario</a></li>
 
-                                                                    <li><a href="../../documento?iddgp=<%=r.getId_dgp().trim()%>&idtr=<%=r.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></li>
+                                                                    <li><a href="" data-iddgp="<%=r.getId_dgp().trim()%>" data-idtr="<%=r.getId_trabajador().trim()%>" class="seeDocuments" >Ver Documentos</a></li>
                                                                     <li><a data-valor="<%=r.getId_dgp().trim()%>;<%=r.getId_trabajador().trim()%>;<%=r.getAp_paterno().toUpperCase() + " " + r.getAp_materno().toUpperCase() + " " + r.getNo_trabajador().toUpperCase()%>" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjaxComment('')" >Comentario</a></li>
 
 <!--<li><a href="../../solicitud_requerimiento?iddgp=<%=r.getId_dgp().trim()%>&opc=Reg_List_Solicitud">Hacer Solicitud</a></li>
@@ -428,9 +428,7 @@
                                         <%}%>
 
                                         <%
-                                            //if () {
                                             if (a.getEs_autorizacion() != null) {
-
                                                 if (a.getEs_autorizacion().equals("2") & (rol.trim().equals("ROL-0002") | rol.trim().equals("ROL-0005") | rol.trim().equals("ROL-0001"))) {
 
                                         %>
@@ -518,6 +516,20 @@
         </div>
     </div>
 
+    <!-------------- Modal  ----------->
+    <div class="modal fade modalDocument" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+        <div class="modal-dialog modal-lg"   >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modalTitle" ></h4>
+                </div>
+                <div class="modal-body listDocument">
+
+                </div>
+            </div>
+        </div>
+    </div>
     <!--================================================== -->
 
     <div class="modal fade col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ModalHisto" tabindex="-1" role="dialog"  >
@@ -664,7 +676,9 @@
     <!--BUSINESS LOGIC PLUGINS-->
     <script src="../../js/coment/comenth.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script> 
     <script src="../../js/businessLogic/Horario/horario.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+    <script src='../../js/businessLogic/Trabajador/RegDocumentoDGP.js?v=<%=globalProperties.VERSION_JS%>' type='text/javascript'></script>
     <script src="../../js/businessLogic/Dgp/statusProcessDGP.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+
 </body>
 </html>
 <%} else {

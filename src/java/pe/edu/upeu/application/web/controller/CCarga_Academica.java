@@ -41,6 +41,7 @@ import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Detalle_Carga_Academica;
 import pe.edu.upeu.application.properties.UserMachineProperties;
 import pe.edu.upeu.application.util.DateFormat;
+import pe.edu.upeu.application.util.WSClienteAcademico;
 
 /**
  *
@@ -131,6 +132,12 @@ public class CCarga_Academica extends HttpServlet {
             if (opc.equals("horarioCursosAcademico")) {
                 response.sendRedirect("Vista/Academico/Carga_Academica/horarioCursosAcademico.html");
             }
+            if (opc.equals("updateCAData")) {
+                System.out.println("::Enter to update CA");
+                WSClienteAcademico wsAcad = new WSClienteAcademico();
+                rpta.put("responseWSCA", wsAcad.startWsAcademico("2015-1"));
+                rpta.put("status", true);
+            }
 
             if (opc.equals("Registrar_CA")) {
                 /*Registrar proceso de carga academica*/
@@ -140,6 +147,7 @@ public class CCarga_Academica extends HttpServlet {
                 String FE_HASTA = DateFormat.toFormat3(request.getParameter("HASTA"));
                 int numero = Integer.parseInt(request.getParameter("num_itera"));
                 String ID_TRABAJADOR = CCriptografiar.Desencriptar(request.getParameter("id"));
+                
                 String eap = request.getParameter("eap");
                 String facultad = request.getParameter("facultad");
                 String ciclo = request.getParameter("ciclo");
@@ -152,7 +160,7 @@ public class CCarga_Academica extends HttpServlet {
                 d.setId_trabajador(ID_TRABAJADOR);
                 /**/
                 System.out.println("::Obteniendo Datos de IP...");
-                String ipUser= UserMachineProperties.getAll();
+                String ipUser = UserMachineProperties.getAll();
                 d.setIp_usuario(ipUser);
                 System.out.println("::Datos de IP obtenidos");
                 d.setUs_creacion(iduser);
@@ -160,7 +168,7 @@ public class CCarga_Academica extends HttpServlet {
                 String iddgp = carga.insertDGP(d);
                 System.out.println("::Dgp registrado");
                 /*PROCESO CARGA ACADEMICA*/
-                  System.out.println("::Insertando proceso carga academica...");
+                System.out.println("::Insertando proceso carga academica...");
                 String ID_PROCESO_CARGA_AC = carga.INSERT_PROCESO_CARGA_ACADEMICA(null, null, CA_TIPO_HORA_PAGO,
                         CA_TOTAL_HL, FE_DESDE, FE_HASTA, "0", iduser, null, null, null,
                         ipUser, iduser, iddgp.trim());
@@ -174,7 +182,7 @@ public class CCarga_Academica extends HttpServlet {
                     double CA_CUOTA = Double.parseDouble(request.getParameter("MES" + i));
                     /*CORREGIR FECHAS*/
                     String FE_PAGO = request.getParameter("fe_pago" + i);
-                    String id = carga.INSERT_PAGO_DOCENTE(null, NU_CUOTA, CA_CUOTA, FE_PAGO, null, 
+                    String id = carga.INSERT_PAGO_DOCENTE(null, NU_CUOTA, CA_CUOTA, FE_PAGO, null,
                             ID_PROCESO_CARGA_AC.trim(), null, null, null, ipUser, iduser);
                     System.out.println("::Cuota " + i + " " + "registrada. ");
                 }

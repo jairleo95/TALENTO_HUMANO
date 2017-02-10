@@ -88,8 +88,7 @@
         %>
 
     <body onload='exito("Procesado con exito!", "Codigo huella ingresado correctamente");
-            nobackbutto
-            n();' class="body">
+            nobackbutton();' class="body">
         <%
             }
         } else {
@@ -293,7 +292,9 @@
                                                                 </div>
                                                             </td>
                                                             <td >
-                                                                <%out.print(aupl.Mes_plazo(a.getId_dgp()));%>
+                                                                <%
+                                                                    out.print(a.getMesPlazo());
+                                                                %>
                                                             </td>   
                                                             <% if (a.getAr_foto() == null) {%>
                                                             <td>
@@ -551,7 +552,11 @@
             <div class="modal-dialog">
                 <div class="modal-content"  style="width:150%;margin-left: -30%;">
                     <div class="modal-header">
-                        <h1>Enviar Correos al Trabajador</h1>
+                        <div class="col-md-6"><h1>Enviar Correos al Trabajador</h1></div>
+                        <div class="col-md-3">
+                            <input type="email" name="emailSubject" class="form-control emailSubject" placeholder="Email" />
+                        </div>
+                        <div class="col-md-3"><input type="password" name="pwdSubject" class="form-control pwdSubject" placeholder="Password"/></div>
                     </div>
 
                     <div class="modal-body" >
@@ -669,14 +674,14 @@
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
-        if (!window.jQuery) {
-                            document.write('<script src="../../js/libs/jquery-2.1.1.min.js"><\/script>');
+                            if (!window.jQuery) {
+                                document.write('<script src="../../js/libs/jquery-2.1.1.min.js"><\/script>');
                             }
     </script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>
-        if (!window.jQuery.ui) {
+                            if (!window.jQuery.ui) {
                                 document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');
                             }
     </script>
