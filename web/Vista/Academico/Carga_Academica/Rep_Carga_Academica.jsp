@@ -4,26 +4,29 @@
     <div class="col-md-12">
         <div class="well">
             <div class="row">
-                <div class="col-md-10">
-                    <h1><span class="semi-bold">Reporte</span> <i class="ultra-light">Carga Académica</i> (Docentes)
+                <div class="col-md-8">
+                    <h1>
+                        <span class="semi-bold">Reporte</span> <i class="ultra-light">Carga Académica</i> (Docentes)
                         <sup class="badge bg-color-red bounceIn animated">v 2.0</sup> <br>
                         <small class="text-danger slideInRight fast animated"><strong>Inicio de contratación</strong></small></h1>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <br>
-                    <button type="button" class="btn btn-primary btn-lg btn-circle pull-right btnUpdateCAData"><i class="fa fa-refresh"></i></button>
+                    <button type="button" class="btn btn-warning btn-lg btn-circle pull-right btnStopSyncUpAcargaAcademica"  ><i class="fa fa-remove"></i></button>
+                    <button type="button" class="btn btn-primary btn-lg btn-circle pull-right btnInitUpdateCAData" rel="tooltip" data-placement="top" data-original-title="Iniciar Actualizacion de Carga académica"  ><i class="fa fa-cloud"></i></button>
+                    <button type="button" class="btn btn-primary btn-lg btn-circle pull-right btnUpdateCAData"><i class="fa fa-cloud-download"></i></button>
                 </div>  
             </div>
         </div>
     </div>
 </div>
-<section id="widget-grid" class="">
+<section id="widget-grid">
     <div class="row">
         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="jarviswidget" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" 
                  data-widget-deletebutton="false">
                 <header>
-                    <span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
+                    <span class="widget-icon"> <i class="glyphicon glyphicon-user txt-color-darken"></i> </span>
                     <h2>Carga Académica</h2>
                     <ul class="nav nav-tabs pull-right in" id="myTab"> 
                         <li class="active">
@@ -77,14 +80,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close-form close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
-                <h4 class="modalTitle" id="myModalLabel">Procesar Carga Académica</h4>
+                <i class="fa fa-user fa-2x"></i>
+                <label class="modalTitle font-lg" id="myModalLabel"></label>
             </div>
             <div class="modal-body">
                 <div class="areaModal">
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -99,7 +100,7 @@
         initFormPlugins();
         initDatatableEvents();
         initDatatableCargaAcademica();
-        
+
         console.log("::finish to pagefunction");
     };
     var pagedestroy = function () {

@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ScheduledFuture;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +23,8 @@ import pe.edu.upeu.application.dao.Carga_AcademicaDAO;
 import pe.edu.upeu.application.dao.DgpDAO;
 import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
-import pe.edu.upeu.application.dao.PagoDocenteDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
+import pe.edu.upeu.application.dao.ScheduledTest;
 import pe.edu.upeu.application.dao.Tipo_DocumentoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
 import pe.edu.upeu.application.dao.UbigeoDAO;
@@ -32,7 +33,6 @@ import pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDgpDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
-import pe.edu.upeu.application.dao_imp.InterfacePagoDocenteDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTipo_DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
@@ -40,8 +40,10 @@ import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
 import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Detalle_Carga_Academica;
 import pe.edu.upeu.application.properties.UserMachineProperties;
+import pe.edu.upeu.application.properties.globalProperties;
 import pe.edu.upeu.application.util.DateFormat;
-import pe.edu.upeu.application.util.WSClienteAcademico;
+import pe.edu.upeu.application.util.WebServiceClient;
+import sun.awt.AppContext;
 
 /**
  *
@@ -134,9 +136,14 @@ public class CCarga_Academica extends HttpServlet {
             }
             if (opc.equals("updateCAData")) {
                 System.out.println("::Enter to update CA");
-                WSClienteAcademico wsAcad = new WSClienteAcademico();
-                rpta.put("responseWSCA", wsAcad.startWsAcademico("2015-1"));
+                rpta.put("responseWSCA", carga.syncupCargaAcademica(semestre, globalProperties.DOCENTESXCURSO_METHOD));
                 rpta.put("status", true);
+            }
+            if (opc.equals("initUpdateCAData")) {
+                System.out.println("::Enter to initUpdateCAData");
+                ScheduledTest s = new ScheduledTest();
+                rpta.put("runUpdateCAData", s.runForAnHour());
+
             }
 
             if (opc.equals("Registrar_CA")) {
@@ -147,7 +154,7 @@ public class CCarga_Academica extends HttpServlet {
                 String FE_HASTA = DateFormat.toFormat3(request.getParameter("HASTA"));
                 int numero = Integer.parseInt(request.getParameter("num_itera"));
                 String ID_TRABAJADOR = CCriptografiar.Desencriptar(request.getParameter("id"));
-                
+
                 String eap = request.getParameter("eap");
                 String facultad = request.getParameter("facultad");
                 String ciclo = request.getParameter("ciclo");
@@ -217,10 +224,16 @@ public class CCarga_Academica extends HttpServlet {
             }
             if (opc.equals("getProcesoCargaAcademicaById")) {
                 String id = CCriptografiar.Desencriptar(request.getParameter("id"));
-                rpta.put("item", carga.getProcesoCargaAcademciaById(id));
-                rpta.put("status", true);
+                getServletContext().setAttribute("runnableCA", carga.getProcesoCargaAcademciaById(id));
+                //rpta.put("item", carga.getProcesoCargaAcademciaById(id));
+                // rpta.put("status", true);
             }
-
+            if (opc.equals("stopSyncUpCargaAcademica")) {
+                System.out.println("::Enter to stopSyncUpCargaAcademica");
+                ScheduledFuture<?> beeperHandle = (ScheduledFuture<?>) getServletContext().getAttribute("runnableCA");
+                rpta.put("cancelProcess", beeperHandle.cancel(true));
+            }
+            rpta.put("status", true);
         } catch (Exception e) {
             rpta.put("rpta", false);
             rpta.put("mensaje", e.getMessage());
@@ -230,7 +243,6 @@ public class CCarga_Academica extends HttpServlet {
             out.flush();
             out.close();
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

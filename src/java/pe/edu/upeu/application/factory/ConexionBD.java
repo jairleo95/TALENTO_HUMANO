@@ -45,7 +45,6 @@ public abstract class ConexionBD {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return op;
     }
 

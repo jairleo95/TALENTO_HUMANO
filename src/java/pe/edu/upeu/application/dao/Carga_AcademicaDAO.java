@@ -13,6 +13,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import oracle.sql.ARRAY;
+import oracle.sql.ArrayDescriptor;
+import org.json.JSONArray;
 import pe.edu.upeu.application.dao_imp.InterfaceCarga_AcademicaDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -23,6 +28,7 @@ import pe.edu.upeu.application.model.V_Detalle_Carga_Academica;
 import pe.edu.upeu.application.properties.UserMachineProperties;
 import pe.edu.upeu.application.util.DateFormat;
 import pe.edu.upeu.application.util.CCriptografiar;
+import pe.edu.upeu.application.util.WebServiceClient;
 
 /**
  *
@@ -39,10 +45,8 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String idtr = "";
         String sql = "select *  from rhtm_trabajador  where  trim(NU_DOC)='" + dni.trim() + "'";
-
         try {
             ResultSet rs = this.conn.query(sql);
-
             while (rs.next()) {
                 idtr = rs.getString("id_trabajador");
             }
@@ -55,11 +59,9 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                 this.conn.close();
             } catch (Exception e) {
                 throw new RuntimeException(e.getMessage());
-
             }
         }
         return idtr;
-
     }
 
     @Override
@@ -360,7 +362,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
     public List<V_Detalle_Carga_Academica> Lista_detalle_academico(String idtr, String facultad, String eap, String ciclo, String dni) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "SELECT * FROM RHVD_DETALLE_CARGA_ACADEMICA WHERE campus is not null";
-         sql += (idtr.equals("")) ? "" : " and TRIM(ID_TRABAJADOR)= '" + idtr+"' ";
+        sql += (idtr.equals("")) ? "" : " and TRIM(ID_TRABAJADOR)= '" + idtr + "' ";
         sql += (facultad.trim().equals("")) ? "" : " and TRIM(NO_FACULTAD)='" + facultad.trim() + "' ";
         sql += (eap.equals("")) ? "" : "  AND TRIM(NO_EAP)='" + eap.trim() + "' ";
         sql += (ciclo.trim().equals("")) ? "" : "  AND TRIM(DE_CARGA)='" + ciclo.trim() + "' ";
@@ -509,7 +511,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
                 x.setFeDesde(rs.getString("fe_desde"));
                 x.setFeHasta(rs.getString("fe_hasta"));
                 x.setEsProcesado(rs.getString("es_procesado"));
-                  x.getIdDgp().setId_dgp(CCriptografiar.Encriptar(rs.getString("id_dgp")));
+                x.getIdDgp().setId_dgp(CCriptografiar.Encriptar(rs.getString("id_dgp")));
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
@@ -523,6 +525,118 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
             }
         }
         return x;
+    }
+
+    @Override
+    public String syncupCargaAcademica(String semestre, String methodProperties[]) {
+        JSONArray arr = null;
+        ConexionBD conn = null;
+        String response = null;
+        try {
+            arr = WebServiceClient.getRequest(semestre, methodProperties);
+            int length = arr.length();
+            String[] campus = new String[length];
+            String[] tipo_doc = new String[length];
+            String[] nu_doc = new String[length];
+            String[] app = new String[length];
+            String[] apm = new String[length];
+            String[] nombre = new String[length];
+            String[] facu = new String[length];
+            String[] eap = new String[length];
+            String[] de_carga = new String[length];
+            String[] curso = new String[length];
+            String[] grupo = new String[length];
+            String[] horario = new String[length];
+            double[] hb_lab = new double[length];
+            String[] hb_de_condicion = new String[length];
+            String[] hb_ti_curso = new String[length];
+            System.out.println("registros aceptados:" + length);
+
+            for (int i = 0; i < arr.length(); i++) {
+                hb_ti_curso[i] = (arr.getJSONObject(i).getJSONObject("tipocurso").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("tipocurso").get("content")) : "";
+                horario[i] = (arr.getJSONObject(i).getJSONObject("horario").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("horario").get("content")) : "";
+                campus[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("campus").get("content"));
+                grupo[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("grupo").get("content"));
+                nu_doc[i] = (arr.getJSONObject(i).getJSONObject("numerodocumento").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("numerodocumento").get("content")) : "";
+                nombre[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("nombre").get("content"));
+                //System.out.println(nombre[i]);
+                hb_de_condicion[i] = (arr.getJSONObject(i).getJSONObject("condicion").has("content")) ? String.valueOf(arr.getJSONObject(i).getJSONObject("condicion").get("content")) : "";
+                de_carga[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("carga").get("content"));
+                curso[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("nombrecurso").get("content"));
+                app[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("apepat").get("content"));
+                apm[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("apemat").get("content"));
+                eap[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("eap").get("content"));
+                hb_lab[i] = (arr.getJSONObject(i).getJSONObject("hlab").has("content")) ? Double.parseDouble(String.valueOf(arr.getJSONObject(i).getJSONObject("hlab").get("content"))) : 0.0;
+                tipo_doc[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("tipodocumento").get("content"));
+                facu[i] = String.valueOf(arr.getJSONObject(i).getJSONObject("facultad").get("content"));
+                //  eapId=...
+            }
+
+            conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ArrayDescriptor des = ArrayDescriptor.createDescriptor("ARR_WS_CAMPUS", conn.conex);
+            ArrayDescriptor des2 = ArrayDescriptor.createDescriptor("ARR_WS_ES_TIPO_DOC", conn.conex);
+            ArrayDescriptor des3 = ArrayDescriptor.createDescriptor("ARR_WS_NU_DOC", conn.conex);
+            ArrayDescriptor des4 = ArrayDescriptor.createDescriptor("ARR_WS_AP_PATERNO", conn.conex);
+            ArrayDescriptor des5 = ArrayDescriptor.createDescriptor("ARR_WS_AP_MATERNO", conn.conex);
+            ArrayDescriptor des6 = ArrayDescriptor.createDescriptor("ARR_WS_NO_TRABAJADOR", conn.conex);
+            ArrayDescriptor des7 = ArrayDescriptor.createDescriptor("ARR_WS_NO_FACULTAD", conn.conex);
+            ArrayDescriptor des8 = ArrayDescriptor.createDescriptor("ARR_WS_NO_EAP", conn.conex);
+            ArrayDescriptor des9 = ArrayDescriptor.createDescriptor("ARR_WS_DE_CARGA", conn.conex);
+            ArrayDescriptor des10 = ArrayDescriptor.createDescriptor("ARR_WS_NO_CURSO", conn.conex);
+            ArrayDescriptor des11 = ArrayDescriptor.createDescriptor("ARR_WS_NU_GRUPO", conn.conex);
+            ArrayDescriptor des12 = ArrayDescriptor.createDescriptor("ARR_WS_DE_HORARIO", conn.conex);
+            ArrayDescriptor des13 = ArrayDescriptor.createDescriptor("ARR_WS_CA_HLAB", conn.conex);
+            ArrayDescriptor des14 = ArrayDescriptor.createDescriptor("ARR_WS_DE_CONDICION", conn.conex);
+            ArrayDescriptor des15 = ArrayDescriptor.createDescriptor("ARR_WS_DE_TIPO_CURSO", conn.conex);
+
+            ARRAY array_to_pass1 = new ARRAY(des, conn.conex, campus);
+            ARRAY array_to_pass2 = new ARRAY(des2, conn.conex, tipo_doc);
+            ARRAY array_to_pass3 = new ARRAY(des3, conn.conex, nu_doc);
+            ARRAY array_to_pass4 = new ARRAY(des4, conn.conex, app);
+            ARRAY array_to_pass5 = new ARRAY(des5, conn.conex, apm);
+            ARRAY array_to_pass6 = new ARRAY(des6, conn.conex, nombre);
+            ARRAY array_to_pass7 = new ARRAY(des7, conn.conex, facu);
+            ARRAY array_to_pass8 = new ARRAY(des8, conn.conex, eap);
+            ARRAY array_to_pass9 = new ARRAY(des9, conn.conex, de_carga);
+            ARRAY array_to_pass10 = new ARRAY(des10, conn.conex, curso);
+            ARRAY array_to_pass11 = new ARRAY(des11, conn.conex, grupo);
+            ARRAY array_to_pass12 = new ARRAY(des12, conn.conex, horario);
+            ARRAY array_to_pass13 = new ARRAY(des13, conn.conex, hb_lab);
+            ARRAY array_to_pass14 = new ARRAY(des14, conn.conex, hb_de_condicion);
+            ARRAY array_to_pass15 = new ARRAY(des15, conn.conex, hb_ti_curso);
+            System.out.println(":::register in BD... ");
+            CallableStatement st = conn.conex.prepareCall("{CALL rhsp_ws_carga_academica(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+            st.setArray(1, array_to_pass1);
+            st.setArray(2, array_to_pass2);
+            st.setArray(3, array_to_pass3);
+            st.setArray(4, array_to_pass4);
+            st.setArray(5, array_to_pass5);
+            st.setArray(6, array_to_pass6);
+            st.setArray(7, array_to_pass7);
+            st.setArray(8, array_to_pass8);
+            st.setArray(9, array_to_pass9);
+            st.setArray(10, array_to_pass10);
+            st.setArray(11, array_to_pass11);
+            st.setArray(12, array_to_pass12);
+            st.setArray(13, array_to_pass13);
+            st.setArray(14, array_to_pass14);
+            st.setArray(15, array_to_pass15);
+            st.registerOutParameter(16, Types.VARCHAR);
+            st.executeUpdate();
+            response = st.getString(16);
+            System.out.println(response);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
+        } finally {
+            try {
+                conn.conex.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return arr.toString();
     }
 
 }

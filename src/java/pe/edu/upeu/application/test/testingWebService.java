@@ -7,7 +7,7 @@ package pe.edu.upeu.application.test;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import pe.edu.upeu.application.util.WSClienteAcademico;
+import pe.edu.upeu.application.util.WebServiceClient;
 
 /**
  *
@@ -19,9 +19,9 @@ public class testingWebService {
         
         System.out.println("testing...");
         System.out.println(":::::noww");
-            WSClienteAcademico a = new WSClienteAcademico();
+            WebServiceClient a = new WebServiceClient();
         try {
-            a.startWsAcademico("2016-1");
+           // a.startWsAcademico("2016-1");
         } catch (Exception ex) {
             Logger.getLogger(testingWebService.class.getName()).log(Level.SEVERE, null, ex);
         }

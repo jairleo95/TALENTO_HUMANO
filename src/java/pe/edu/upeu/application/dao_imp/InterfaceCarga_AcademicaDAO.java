@@ -44,4 +44,6 @@ public interface InterfaceCarga_AcademicaDAO {
 
     public ProcesoCargaAcademica getProcesoCargaAcademciaById(String id);
 
+    public String syncupCargaAcademica(String semestre,String docentesXCurso[]);
+
 }

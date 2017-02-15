@@ -5,15 +5,58 @@ var dataAditional = "";
 var idRow = "";
 var idtrItem = "";
 function initCAGlobalEvents() {
+    $(".btnInitUpdateCAData").tooltip();
+    $(".btnInitUpdateCAData").click(function () {
+        var data = {
+            "opc": "initUpdateCAData"
+        };
+        console.log("init Update carga Acedmica")
+        $(".btnInitUpdateCAData").attr("disabled", true);
+        $.ajax({
+            url: urlCrudForm, type: 'POST', data: data, success: function (data, textStatus, jqXHR) {
+                if (data.status) {
+                    console.log(data);
+
+                } else {
+                    console.log("disabled btn")
+                    $(".btnInitUpdateCAData").removeAttr("disabled");
+                }
+            }
+        });
+    });
+
+    $(".btnStopSyncUpAcargaAcademica").click(function () {
+        console.log("init event onclick in btnStopSyncUpAcargaAcademica")
+        var data = {
+            "opc": "stopSyncUpCargaAcademica"
+        };
+        console.log("init Update carga Acedmica")
+        8//  $(".btnInitUpdateCAData").attr("disabled",true);
+        $.ajax({
+            url: urlCrudForm, type: 'POST', data: data, success: function (data, textStatus, jqXHR) {
+                if (data.status) {
+                    console.log(data);
+
+                } else {
+                    console.log("disabled btn")
+                    //$(".btnInitUpdateCAData").removeAttr("disabled");
+                }
+            }
+        });
+    });
+
     $(".btnUpdateCAData").click(function () {
         console.log("update...");
+        var data = {
+            "opc": "updateCAData",
+            "semestre": "2017-1"
+        };
         $.ajax({
             url: urlCrudForm,
-            data: "opc=updateCAData", type: 'POST', success: function (data, textStatus, jqXHR) {
-                 
+            data: data, type: 'POST', success: function (data, textStatus, jqXHR) {
                 if (data.status) {
                     console.log("data updated...");
-                }else{
+                } else {
                     console.log("ocurrio uhn error al actualizar");
                 }
             }
@@ -27,7 +70,7 @@ function initDatatableCargaAcademica() {
         phone: 480
     };
     var objDatatableCagaAcad = $('.datatableCargaAcademica');
-    console.log("responsiveHelper1:" + (typeof responsiveHelper1 === "function"))
+    console.log("responsiveHelper1:" + (typeof responsiveHelper1 === "function"));
 
     objDatatableCagaAcad.DataTable({
         "ajax": {
@@ -330,12 +373,15 @@ function showCargaAcademica(objBodyPrint, dataAjax, callback) {
     var fila = 1;
     var columna = 0;
     var g = 0;
+    $(".modalTitle").text("");
     objBodyPrint.empty();
     $.ajax({url: "carga_academica?opc=horarioCursosAcademico", type: 'POST', success: function (htmlContent, textStatus, jqXHR) {
             objBodyPrint.append(htmlContent);
             /*test*/
+
             $.post(url, 'opc=getDetCargaAcademica&' + dataAjax, function (data) {
                 var dataList = data.list;
+                $(".modalTitle").text(dataList[0].ap_paterno + " " + dataList[0].ap_materno + " " + dataList[0].no_trabajador);
                 $.each(dataList, function (index, dataItem) {
                     var myArray = dataItem.de_horario.trim();
                     //console.log(myArray);
