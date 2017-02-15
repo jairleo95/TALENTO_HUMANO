@@ -342,7 +342,6 @@ $(document).ready(function () {
             },
             FECHA_NAC: {
                 required: true,
-                // val_fecha: true,
                 val_edad: true
             }
             ,
@@ -351,7 +350,6 @@ $(document).ready(function () {
             }
             ,
             FECHA_NAC_CONYUGUE: {
-                //  val_fecha: true,
                 val_edad: true
             },
             wphone: {
@@ -367,9 +365,6 @@ $(document).ready(function () {
                 val_cod_uni: true
 
             }
-            /*, diezmo: {
-             required: true
-             }*/
         },
         messages: {
             fname: "Please specify your First name",
@@ -396,11 +391,6 @@ $(document).ready(function () {
             }
         }
     });
-
-    /*   jQuery.validator.addMethod("val_fecha", function (value, element) {
-     var d = value.split("-");
-     return this.optional(element) || String(parseInt(d[0])).length === 4;
-     }, "¡Fecha ingresada invalida!");*/
     jQuery.validator.addMethod("val_edad", function (value, element) {
         return this.optional(element) || calcular_edad(value) > 0;
     }, "¡La edad debe ser mayor a cero!");
@@ -453,7 +443,7 @@ $(document).ready(function () {
     $('#bootstrap-wizard-1').bootstrapWizard({
         'tabClass': 'form-wizard',
         onTabClick: function (tab, navigation, index) {
-            return validateTab(index, tab)
+            return validateTab(index, tab);
             //return true;
         },
         'onNext': function (tab, navigation, index) {
@@ -530,7 +520,6 @@ $(document).ready(function () {
     });
     $(".doc, .doc_c").attr("maxlength", "8");
     $(".doc, .doc_c").attr("minlength", "8");
-    //  $(".doc, .doc_c").val("");
     $("#docs, .doc_c, #nu_cuen, #nu_cuen_ban").numeric();
     $("#doc, .doc_c").numeric(false, function () {
         alert("Solo Numeros Enteros");
@@ -762,11 +751,9 @@ $(document).ready(function () {
             $(".doc_c").removeNumeric();
             $(".doc_c").attr("maxlength", "10");
             $(".doc_c").removeAttr("minlength");
-            //    $(".doc").val("");
         }
 
-    }
-    );
+    });
 
 
     $(".alerta-req").hide(200);
@@ -793,8 +780,7 @@ $(document).ready(function () {
             $("#nom_afp").removeAttr("disabled");
             $(".n_afp").remove();
         }
-    }
-    );
+    });
 
     $("#no_cuen").hide(200);
     $("#no_cuen_ban").hide(200);
@@ -828,7 +814,7 @@ $(document).ready(function () {
     );
     $("#reli").change(function () {
         if ($("#reli").val() === "1") {
-            $("#igle").attr("required", "required")
+            $("#igle").attr("required", "required");
         } else {
             $("#igle").removeAttr("required");
         }
@@ -1082,10 +1068,7 @@ $(document).ready(function () {
         }
         $(".btn_remover").click(function () {
             $('.tr-hijo_' + $(this).val()).remove();
-            // $(".num_hijo").val($(".tr_item_hijo").length);
         });
-
-
     });
 
     var b = $(".tbodys");
@@ -1117,7 +1100,6 @@ $(document).ready(function () {
                         $(".ti_documento").val($(".tipo_" + v).val());
                         $(".num_doc").val($(".dni_" + v).val());
                         $(".cony").val($(".trab_" + v).val());
-                        //$(".select-conyugue").val("1");
                     });
                 }
                 );
@@ -1136,13 +1118,11 @@ $(document).ready(function () {
             $(".num_doc").val("");
             $(".cony").val("");
         }
-    }
-    );
-    $("#btncancel").click(
-            function () {
+    });
+    $("#btncancel").click(function () {
                 document.formulario.reset();
                 b.empty();
-                html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>'
+                html = '<tr><td colspan="8" align="center">Haga la busqueda por algunos de los filtros...</td></tr>';
                 $(".tbodys").html(html);
             }
     );

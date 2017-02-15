@@ -10,10 +10,10 @@ package pe.edu.upeu.application.properties;
  * @author ALPHA
  */
 public class globalProperties {
-    
+
     /*change when update server (for cache conflicts)*/
     public static String VERSION_CSS = "2.0.3";
-    public static String VERSION_JS = "2.5.0";
+    public static String VERSION_JS = "2.5.3";
 
     /* WebService Carga Academica*/
     public static final String keyApp = "4a7c88ee0791cad24a15d43a525982f8";
@@ -21,9 +21,12 @@ public class globalProperties {
     public static final String serverURI = "https://webapp.upeu.edu.pe/";
     public static final String service = "https://webapp.upeu.edu.pe/webservices/wsdl4rrhh/";
 
+    public static final String DOCENTESXCURSO_METHOD[] = {"DocenteXCurso", "ns1", "ns1:DocenteXCursoResponse"};
+
+
     /*oracle bd connection */
-   // public static final String HOSTNAME = "localhost";
-    public static final String HOSTNAME="192.168.1.13";
+    // public static final String HOSTNAME = "localhost";
+    public static final String HOSTNAME = "192.168.1.13";
     public static final String USER = "procesosrh";
     public static final String USER_PWD = "gestionrrhh";
     public static final String PORT = "1521";

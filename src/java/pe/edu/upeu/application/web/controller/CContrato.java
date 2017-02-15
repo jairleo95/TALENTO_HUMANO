@@ -225,14 +225,13 @@ public class CContrato extends HttpServlet {
                 Double CA_BONO_ALIMENTO = 0.0;
                 String LI_TIPO_CONVENIO = request.getParameter("TIPO_CONVENIO");
                 String ES_FIRMO_CONTRATO = "0";
-                Double NU_CONTRATO = 0.0;/*Double.parseDouble(request.getParameter("NU_CONTRATO"));*/
+                Double NU_CONTRATO = 0.0;
 
                 String DE_OBSERVACION = request.getParameter("OBSERVACION");
-                String ES_APOYO = "";/*request.getParameter("ES_APOYO");*/
+                String ES_APOYO = "";
 
                 String TI_HORA_PAGO = request.getParameter("TIPO_HORA_PAGO");
                 String NU_DOCUMENTO = "";
-                /*request.getParameter("NU_DOCUMENTO");*/
 
                 String ES_ENTREGAR_DOC_REGLAMENTOS = request.getParameter("ENTREGAR_DOC_REGLAMENTOS");
                 String ES_REGISTRO_HUELLA = request.getParameter("REGISTRO_HUELLA");
@@ -271,26 +270,42 @@ public class CContrato extends HttpServlet {
                         ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB, CO_SUCURSAL, DE_MYPE,
                         ES_TI_CONTRATACION, CA_BEV, ID_TIPO_PLANILLA, ES_REMUNERACION_PROCESADO, ID_HORARIO, ID_PLANTILLA_CONTRACTUAL, ca_bonificacion_p, PRACTICANTE, situacionEspecial);
 
-                out.print("1");
+                out.println("::Contrato Modificado");
                 /*Actualizando centro de costo*/
-                if (ID_DGP != null) {
-                    int cant_inicial = Integer.parseInt(request.getParameter("cant_inicial"));
-                    int cant_ingresada = Integer.parseInt(request.getParameter("cant_ingresada"));
-                    for (int a = 0; a < cant_inicial; a++) {
-                        if (request.getParameter("id_d_cen_cos" + (a + 1)) != null) {
-                            Double porcen = Double.parseDouble(request.getParameter("porcent_ant_" + (a + 1)));
-                            String id_dt_cen_c = request.getParameter("id_d_cen_cos" + (a + 1));
+                System.out.println("::Modificando Centro de costos....");
+                int cant_inicial = Integer.parseInt(request.getParameter("cant_inicial"));
+
+                System.out.println("::Cantidad Inicial:" + cant_inicial);
+                if (cant_inicial != 0) {
+
+                    for (int gg = 0; gg < cant_inicial; gg++) {
+                        if (request.getParameter("id_dcc" + (gg + 1)) != null) {
+                            Double porcen = Double.parseDouble(request.getParameter("PORCENTAJE_" + (gg + 1)));
+                            String id_dt_cen_c = request.getParameter("id_dcc" + (gg + 1));
+
+                            System.out.println("Modificando centro de costo:" + id_dt_cen_c);
+
                             dcc.Modificar_Centro_Costo_porc(id_dt_cen_c, porcen, iduser);
+                        } else {
+                            System.out.println(":: No se encontraron los id");
                         }
                     }
-                    if (cant_ingresada > 0) {
-                        for (int i = 0; i < cant_ingresada; i++) {
-                            double porc_nuevo = Double.parseDouble(request.getParameter("PORCENTAJE_CC" + (1 + i)));
-                            String centro_c_nuevo = request.getParameter("CENTRO_COSTOS_" + (1 + i));
-                            String id_cont = request.getParameter("id_contrato");
-                            dcc.INSERT_DETALLE_CENTRO_COSTO("", "", porc_nuevo, "1", iduser, "", "", "", UserMachineProperties.getAll(), id_cont, centro_c_nuevo);
+                    /*Se adicionaron nuevos centros de costo*/
+                    int cantNueva = Integer.parseInt(request.getParameter("cant_ingresada"));
+                    System.out.println("::Items de centro de costos adicionados:" + cantNueva);
+                    if (cantNueva > 0) {
+                        for (int i = 0; i < cantNueva; i++) {
+                            double porc_nuevo = Double.parseDouble(request.getParameter("PORCENTAJE_" + (cant_inicial + i)));
+                            String centro_c_nuevo = request.getParameter("CENTRO_COSTOS_" + (cant_inicial + i));
+
+                            System.out.println("***Agregando centro de costo:" + centro_c_nuevo);
+                            dcc.INSERT_DETALLE_CENTRO_COSTO("", "", porc_nuevo, "1", iduser, "", "", "", UserMachineProperties.getAll(),
+                                    ID_CONTRATO, centro_c_nuevo);
+                            System.out.println("***Centro de costo agregado**");
+
                         }
                     } else {
+                        System.out.println("::No se adicionaron Centros de Costo");
                     }
                 }
                 out.print("2");
@@ -441,15 +456,14 @@ public class CContrato extends HttpServlet {
                 double CA_BONO_ALIMENTO = Double.parseDouble(request.getParameter("BONO_ALIMENTO"));
                 String LI_TIPO_CONVENIO = request.getParameter("TIPO_CONVENIO");
                 String ES_FIRMO_CONTRATO = "0";
-                double NU_CONTRATO = 0.0;/*Double.parseDouble(request.getParameter("NU_CONTRATO"));*/
+                double NU_CONTRATO = 0.0;
 
                 out.print("0");
                 String DE_OBSERVACION = request.getParameter("OBSERVACION");
-                String ES_APOYO = "";/*request.getParameter("ES_APOYO");*/
+                String ES_APOYO = "";
 
                 String TI_HORA_PAGO = request.getParameter("TIPO_HORA_PAGO");
                 String NU_DOCUMENTO = "";
-                /*request.getParameter("NU_DOCUMENTO");*/
 
                 String ES_ENTREGAR_DOC_REGLAMENTOS = request.getParameter("ENTREGAR_DOC_REGLAMENTOS");
                 String ES_REGISTRO_HUELLA = request.getParameter("REGISTRO_HUELLA");
@@ -495,6 +509,7 @@ public class CContrato extends HttpServlet {
                         CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV, ID_TIPO_PLANILLA, ES_REMUNERACION_PROCESADO, ID_HORARIO, ID_PLANTILLA_CONTRACTUAL, ca_bonificacion_p, ES_MFL, PRACTICANTE, situacionEspecial);
                 String idtr1 = ID_TRABAJADOR;
                 String id_cto = con.Contrato_max(idtr1);
+                /*Modificar Centro de Costo*/
                 if (cantidad_centro > 0) {
                     for (int c = 0; c < cantidad_centro; c++) {
                         String ID_DET_CEN_COS = request.getParameter("id_dcc" + (c + 1));
@@ -656,13 +671,10 @@ public class CContrato extends HttpServlet {
                 String ES_CONTRATO = null;
                 String ES_FIRMO_CONTRATO = "1";
                 Double NU_CONTRATO = 0.0;
-                /*Double.parseDouble(request.getParameter("NU_CONTRATO"));*/
 
                 String ES_APOYO = "";
-                /*request.getParameter("ES_APOYO");*/
 
                 String NU_DOCUMENTO = "";
-                /*request.getParameter("NU_DOCUMENTO");*/
 
                 String ES_REMUNERACION_PROCESADO = null;
                 Double ca_bonificacion_p = Double.parseDouble(request.getParameter("ca_bono_puesto"));
@@ -706,8 +718,8 @@ public class CContrato extends HttpServlet {
                 String situacionEspecial = request.getParameter("situacionEspecial");
                 FE_DESDE = DateFormat.toFormat3(FE_DESDE);
                 FE_HASTA = DateFormat.toFormat3(FE_HASTA);
-                      System.out.println("FE_HASTA: " + FE_HASTA);
-            //    out.println("Nueva fecha :" + DateFormat.toFormat1(FE_HASTA));
+                System.out.println("FE_HASTA: " + FE_HASTA);
+                //    out.println("Nueva fecha :" + DateFormat.toFormat1(FE_HASTA));
                 con.INSERT_CONTRATO(ID_CONTRATO, ID_DGP, FE_DESDE, FE_HASTA, FE_CESE, ID_FUNC, LI_CONDICION, CA_SUELDO, CA_REINTEGRO, CA_ASIG_FAMILIAR, HO_SEMANA,
                         NU_HORAS_LAB, DIA_CONTRATO, TI_TRABAJADOR, LI_REGIMEN_LABORAL, ES_DISCAPACIDAD, TI_CONTRATO, LI_REGIMEN_PENSIONARIO, ES_CONTRATO_TRABAJADOR, US_CREACION,
                         FE_CREACION, US_MODIF, FE_MODIF, US_IP, FE_VACACIO_INI, FE_VACACIO_FIN, ES_CONTRATO, ID_FILIAL, ID_PUESTO, CA_BONO_ALIMENTO, LI_TIPO_CONVENIO, ES_FIRMO_CONTRATO, NU_CONTRATO,
@@ -726,18 +738,46 @@ public class CContrato extends HttpServlet {
                     int cod_hue = Integer.parseInt(huella);
                     emp.Reg_cod_huella(ID_TRABAJADOR, cod_hue);
                 }
-
-                //--------- CENTRO COSTOS --------------
-                //  String IP_USUARIO = request.getParameter("USUARIO_IP");
-                int cant_cc = Integer.parseInt(request.getParameter("CANT"));
                 String idcto = con.MAX_ID_CONTRATO();
-                for (int g = 1; g <= cant_cc; g++) {
-                    String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
-                    double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
-                    if (ID_CENTRO_COSTO != null && porcentaje != 0.0) {
-                        dcc.INSERT_DETALLE_CENTRO_COSTO(null, null, porcentaje, "1", iduser, null, null, null, UserMachineProperties.getAll(), idcto, ID_CENTRO_COSTO);
+                //--------- CENTRO COSTOS --------------
+                /*Actualizando centro de costo*/
+                System.out.println("::Modificando Centro de costos....");
+                int cant_inicial = Integer.parseInt(request.getParameter("cant_inicial"));
+
+                System.out.println("::Cantidad Inicial:" + cant_inicial);
+                if (cant_inicial != 0) {
+
+                    for (int gg = 0; gg < cant_inicial; gg++) {
+                        if (request.getParameter("id_dcc" + (gg + 1)) != null) {
+                            Double porcen = Double.parseDouble(request.getParameter("PORCENTAJE_" + (gg + 1)));
+                            String id_dt_cen_c = request.getParameter("id_dcc" + (gg + 1));
+
+                            System.out.println("Modificando centro de costo:" + id_dt_cen_c);
+
+                            dcc.Modificar_Centro_Costo_porc(id_dt_cen_c, porcen, iduser);
+                        } else {
+                            System.out.println(":: No se encontraron los id");
+                        }
+                    }
+                    /*Se adicionaron nuevos centros de costo*/
+                    int cantNueva = Integer.parseInt(request.getParameter("cant_ingresada"));
+                    System.out.println("::Items de centro de costos adicionados:" + cantNueva);
+                    if (cantNueva > 0) {
+                        for (int i = 0; i < cantNueva; i++) {
+                            double porc_nuevo = Double.parseDouble(request.getParameter("PORCENTAJE_" + (cant_inicial + i)));
+                            String centro_c_nuevo = request.getParameter("CENTRO_COSTOS_" + (cant_inicial + i));
+
+                            System.out.println("***Agregando centro de costo:" + centro_c_nuevo);
+                            dcc.INSERT_DETALLE_CENTRO_COSTO("", "", porc_nuevo, "1", iduser, "", "", "", UserMachineProperties.getAll(),
+                                    ID_CONTRATO, centro_c_nuevo);
+                            System.out.println("***Centro de costo agregado**");
+
+                        }
+                    } else {
+                        System.out.println("::No se adicionaron Centros de Costo");
                     }
                 }
+
                 //------------- HORARIO ------------
                 sesion.setAttribute("List_Jefe", l.List_Jefe());
                 sesion.setAttribute("List_Situacion_Actual", l.List_Situacion_Actual());

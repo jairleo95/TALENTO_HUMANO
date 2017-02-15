@@ -128,8 +128,8 @@ public class CDgp extends HttpServlet {
                 break;
             case "ROL-0008":
                 permisoAdmin = false;
-             //   permissionDireccionFilter = true;
-                permissionPuestoFilter=true;
+                //   permissionDireccionFilter = true;
+                permissionPuestoFilter = true;
                 break;
             case "ROL-0010":
                 permissionPuestoFilter = true;
@@ -361,7 +361,7 @@ public class CDgp extends HttpServlet {
                         }
                     }
                 }
-                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?pro=pr_dgp&idtr=" + ID_TRABAJADOR+"&iddgp="+iddgp);
+                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?pro=pr_dgp&idtr=" + ID_TRABAJADOR + "&iddgp=" + iddgp);
             }
             if (opc.equals("Reg_form")) {
                 /* TEMPORAL*/
@@ -617,7 +617,7 @@ public class CDgp extends HttpServlet {
                 String DE_DIAS_CAPACITACION = request.getParameter("DIAS_CAPACITACION");
                 String ES_DGP = "";
                 String FE_CREACION = request.getParameter("FECHA_CREACION");
-                String US_MODIF = request.getParameter("USER_MODIF");
+                // String US_MODIF = request.getParameter("USER_MODIF");
                 String FE_MODIF = request.getParameter("FECHA_MODIF");
                 String IP_USUARIO = request.getParameter("USUARIO_IP");
                 double CA_BONO_ALIMENTARIO = 0.0;
@@ -688,30 +688,40 @@ public class CDgp extends HttpServlet {
                         tr.MOD_CUENTA_SUELDO(NO_BANCO, NU_CUENTA, NU_CUENTA_BANC, ES_GEM_NU_CUENTA, NO_BANCO_OTROS, ID_TRABAJADOR, ES_CUENTA_SUELDO);
                     }
                 }
+                /*Actualizando centro de costo*/
+                System.out.println("::Modificando Centro de costos....");
+                int cant_inicial = Integer.parseInt(request.getParameter("cant_inicial"));
 
-                int cant_inicial = Integer.parseInt(request.getParameter("cant_actual_anti"));
-                int cant_ingresada = Integer.parseInt(request.getParameter("cant_ingresada"));
-
-                for (int j = 0; j < cant_inicial; j++) {
-                    if (request.getParameter("id_d_cen_cos" + (j + 1)) != null) {
-                        Double porcen = Double.parseDouble(request.getParameter("PORCENTAJE_" + (j + 1)));
-                        String id_dt_cen_c = request.getParameter("id_d_cen_cos" + (j + 1));
-                        dcc.Modificar_Centro_Costo_porc(id_dt_cen_c, porcen, iduser);
-                    }
-                }
-                if (cant_ingresada > 0) {
-                    for (int i = cant_inicial; i < cant_inicial + cant_ingresada; i++) {
-                        if (request.getParameter("CENTRO_COSTOS_" + (1 + i)) != null) {
-                            double porc_nuevo = Double.parseDouble(request.getParameter("PORCENTAJE_" + (1 + i)));
-                            String centro_c_nuevo = request.getParameter("CENTRO_COSTOS_" + (1 + i));
-                            String id_cont = request.getParameter("id_contrato");
-                            dcc.INSERT_DETALLE_CENTRO_COSTO("", ID_DGP, porc_nuevo, "1", iduser, "", "", "", UserMachineProperties.getAll(), id_cont, centro_c_nuevo);
-
+                System.out.println("::Cantidad Inicial:" + cant_inicial);
+                if (cant_inicial != 0) {
+                    for (int gg = 0; gg < cant_inicial; gg++) {
+                        if (request.getParameter("id_dcc" + (gg + 1)) != null) {
+                            Double porcen = Double.parseDouble(request.getParameter("PORCENTAJE_" + (gg + 1)));
+                            String id_dt_cen_c = request.getParameter("id_dcc" + (gg + 1));
+                            System.out.println("Modificando centro de costo:" + id_dt_cen_c);
+                            dcc.Modificar_Centro_Costo_porc(id_dt_cen_c, porcen, iduser);
+                        } else {
+                            System.out.println(":: No se encontraron los id");
                         }
                     }
-                } else {
-                }
+                    /*Se adicionaron nuevos centros de costo*/
+                    int cantNueva = Integer.parseInt(request.getParameter("cant_ingresada"));
+                    System.out.println("::Items de centro de costos adicionados:" + cantNueva);
+                    if (cantNueva > 0) {
+                        for (int i = 0; i < cantNueva; i++) {
+                            double porc_nuevo = Double.parseDouble(request.getParameter("PORCENTAJE_" + (cant_inicial + i)));
+                            String centro_c_nuevo = request.getParameter("CENTRO_COSTOS_" + (cant_inicial + i));
 
+                            System.out.println("***Agregando centro de costo:" + centro_c_nuevo);
+                            dcc.INSERT_DETALLE_CENTRO_COSTO("", ID_DGP, porc_nuevo, "1", iduser, "", "", "", UserMachineProperties.getAll(),
+                                    "", centro_c_nuevo);
+                            System.out.println("***Centro de costo agregado**");
+
+                        }
+                    } else {
+                        System.out.println("::No se adicionaron Centros de Costo");
+                    }
+                }
                 //  List<String> list = a.Det_Autorizacion(idrp);
                 // a.Insert_Autorizacion("", iddgp, "1", "P1", "12312", iduser, "", "", "", list.get(1), idrp, list.get(0));
                 String es_mod = request.getParameter("estado_de_horario");

@@ -28,7 +28,7 @@ public interface InterfaceCentro_CostosDAO {
 
     public List<Map<String, ?>> List_centr_id(String id_dgp);
 
-    public List<Map<String, ?>> List_centr_idcon(String id_con);
+    public List<Map<String, ?>> listCentroCostoByIdContrato(String id_con);
     
     public List<Map<String, ?>> List_centr_iddgp(String id_dgp);
 
