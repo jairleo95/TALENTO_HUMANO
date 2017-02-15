@@ -46,7 +46,7 @@ public interface InterfaceDocumentoDAO {
 
     public int count_documentos_x_tra(String id_tra);
 
-    public List<V_Reg_Dgp_Tra> List_doc_req_pla(String iddg, String idtra);
+    public List<Lis_Doc_tra> List_doc_req_pla(String iddg, String idtra);
 
     public String INSERT_DOCUMENTO_ADJUNTO(String ID_DOCUMENTO_ADJUNTO, String ID_DOCUMENTOS, String ES_DOCUMENTO_ADJUNTO, String US_CREACION, String FE_CREACION, String US_MODIF, String FE_MODIF, String IP_USUARIO, String DE_DOCUMENTO_ADJUNTO, String NO_USUARIO, String ES_REC_FISICO, String ID_CONTRATO);
 

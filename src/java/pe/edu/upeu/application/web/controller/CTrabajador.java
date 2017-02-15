@@ -252,11 +252,11 @@ public class CTrabajador extends HttpServlet {
                         int s = d.List_Req_nacionalidad(idtr);
                         int num_ad = d.List_Adventista(idtr);
                         int count = d.count_documentos_x_tra(idtr);
-                        if (count > 0) {
-                            response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&P2=TRUE&idtr=" + idtr + "&dt=ok");
-                        } else {
-                            response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE&dt=ok");
-                        }
+                        //if (count > 0) {
+                            response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?pro=regTR&idtr=" + idtr);
+                      //  } else {
+                        //    response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + s + "&num_ad=" + num_ad + "&idtr=" + idtr + "&pro=pr_dgp&P2=TRUE&dt=ok");
+                       // }
                     }
                 }
                 if (opc.equals("Buscar")) {

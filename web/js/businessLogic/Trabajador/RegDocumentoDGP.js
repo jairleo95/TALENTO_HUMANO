@@ -149,8 +149,9 @@ function listDocument() {
         "opc": "listDocument",
         "iddgp": $(".iddgp").val(),
         "idtr": $(".idtr").val(),
-        "casosEspeciales": $(".casosEspeciales").val(),
-        "enterToDGPProcess": $(".enterToDGPProcess").val()
+        "enterToCasosEspecialesProcess": $(".enterToCasosEspecialesProcess").val(),
+        "enterToDGPProcess": $(".enterToDGPProcess").val(),
+        "enterToRegTrabajador": $(".enterToRegTrabajador").val()
     };
     objDiv.append('<img src="../../../img/load.gif" class="img-responsive center-block"/>');
     $.ajax({

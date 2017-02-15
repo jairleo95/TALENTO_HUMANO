@@ -339,7 +339,7 @@ public class CAutorizacion extends HttpServlet {
                             htmlBody += "  </button>";
                             htmlBody += " <ul class='dropdown-menu'>";
                             htmlBody += "  <li><a href='../../dgp?iddgp=" + autCA.getId_dgp().trim() + "&opc=Seguimiento'>Ver Proceso</a></li>";
-                            htmlBody += "  <li><a href='../../documento?iddgp=" + autCA.getId_dgp().trim() + "&idtr=" + autCA.getId_trabajador().trim() + "&opc=Reg_Pro_Dgp'>Ver Documentos</a></li>";
+                            htmlBody += "  <li><a href='../../documento?iddgp=" + autCA.getId_dgp().trim() + "&idtr=" + autCA.getId_trabajador().trim() + "&opc=Ver_Documento'>Ver Documentos</a></li>";
                             htmlBody += "   <li><a  data-valor='" + autCA.getId_dgp().trim() + ";" + autCA.getId_trabajador().trim() + ";" + autCA.getAp_paterno() + " " + autCA.getAp_materno() + " "
                                     + autCA.getNo_trabajador() + "' class='click' data-toggle='modal' data-target='#myModal' data-backdrop='static' data-keyboard='false' onclick='sendAjax('')' >Comentario</a></li>";
                             if (Integer.parseInt(autCA.getElab_contrato()) > 0) {

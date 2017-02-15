@@ -258,7 +258,7 @@
                                                                     <ul class="dropdown-menu">
                                                                         <li><a href="../../dgp?iddgp=<%=a.getId_dgp().trim()%>&opc=Seguimiento">Ver Proceso</a></li>
                                                                         <li><a   class="btnHorario"  data-valor="<%=a.getId_dgp()%>"  data-toggle="modal" data-target="#exampleModal">Ver Horario</a></li>
-                                                                        <li><a href="../../documento?iddgp=<%=a.getId_dgp().trim()%>&idtr=<%=a.getId_trabajador().trim()%>&opc=Reg_Pro_Dgp">Ver Documentos</a></li>
+                                                                        <li><a href="../../documento?iddgp=<%=a.getId_dgp().trim()%>&idtr=<%=a.getId_trabajador().trim()%>&opc=Ver_Documento">Ver Documentos</a></li>
                                                                         <li><a  data-valor="<%=a.getId_dgp().trim()%>;<%=a.getId_trabajador().trim()%>;<%=a.getAp_paterno() + " " + a.getAp_materno() + " " + a.getNo_trabajador()%>" class="click" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" onclick="sendAjax('')" >Comentario</a></li>
                                                                             <% if (Integer.parseInt(a.getElab_contrato()) > 0) {%>
                                                                         <li>

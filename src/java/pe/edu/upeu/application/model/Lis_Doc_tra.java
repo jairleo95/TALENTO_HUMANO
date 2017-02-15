@@ -22,6 +22,28 @@ public class Lis_Doc_tra {
     private String id_dgp;
     private String es_obligatorio;
     private String es_documento_adjunto;
+    private String es_documento;
+    private String es_dgp_doc_adj;
+    private String de_documento_adjunto;
+    private String id_datos_hijo;
+    private String id_contrato;
+    private String es_rec_fisico;
+
+    public String getId_contrato() {
+        return id_contrato;
+    }
+
+    public void setId_contrato(String id_contrato) {
+        this.id_contrato = id_contrato;
+    }
+
+    public String getEs_rec_fisico() {
+        return es_rec_fisico;
+    }
+
+    public void setEs_rec_fisico(String es_rec_fisico) {
+        this.es_rec_fisico = es_rec_fisico;
+    }
 
     public String getId_datos_hijo() {
         return id_datos_hijo;
@@ -30,12 +52,10 @@ public class Lis_Doc_tra {
     public void setId_datos_hijo(String id_datos_hijo) {
         this.id_datos_hijo = id_datos_hijo;
     }
-    private String es_documento;
-    private String es_dgp_doc_adj;
-    private String de_documento_adjunto;
-    private String id_datos_hijo;
 
-    public Lis_Doc_tra(String ti_documento, String no_original, String no_file, String no_documento, String id_trabajador, String id_documentos, String id_documento_adjunto, String id_dgp_doc_adj, String id_dgp, String es_obligatorio, String es_documento_adjunto, String es_documento, String es_dgp_doc_adj, String de_documento_adjunto, String id_datos_hijo) {
+    public Lis_Doc_tra(String ti_documento, String no_original, String no_file, String no_documento, String id_trabajador, String id_documentos, String id_documento_adjunto,
+            String id_dgp_doc_adj, String id_dgp, String es_obligatorio, String es_documento_adjunto, String es_documento, String es_dgp_doc_adj, String de_documento_adjunto,
+            String id_datos_hijo, String id_contrato, String es_rec_fisico) {
         this.ti_documento = ti_documento;
         this.no_original = no_original;
         this.no_file = no_file;
@@ -51,6 +71,8 @@ public class Lis_Doc_tra {
         this.es_dgp_doc_adj = es_dgp_doc_adj;
         this.de_documento_adjunto = de_documento_adjunto;
         this.id_datos_hijo = id_datos_hijo;
+        this.id_contrato = id_contrato;
+        this.es_rec_fisico = es_rec_fisico;
     }
 
     public Lis_Doc_tra() {
@@ -69,6 +91,8 @@ public class Lis_Doc_tra {
         this.es_dgp_doc_adj = "";
         this.de_documento_adjunto = "";
         this.id_datos_hijo = "";
+        this.id_contrato = "";
+        this.es_rec_fisico = "";
     }
 
     public String getDe_documento_adjunto() {

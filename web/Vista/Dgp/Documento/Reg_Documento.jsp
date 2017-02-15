@@ -80,10 +80,14 @@
             // HttpSession sesion_1 = request.getSession(true);
             out.print("<input type='hidden' class='iddgp' value='" + request.getParameter("iddgp") + "' />");
             out.print("<input type='hidden' class='idtr' value='" + request.getParameter("idtr") + "' />");
-            out.print("<input type='hidden' class='casosEspeciales' value='" + request.getParameter("dce") + "' />");
+
             if (request.getParameter("pro") != null) {
                 if (request.getParameter("pro").equals("pr_dgp")) {
                     out.print("<input type='hidden' class='enterToDGPProcess' value='true' />");
+                } else if (request.getParameter("pro").equals("regTR")) {
+                    out.print("<input type='hidden' class='enterToRegTrabajador' value='true' />");
+                } else if (request.getParameter("pro").equals("casosEspeciales")) {
+                    out.print("<input type='hidden' class='enterToCasosEspecialesProcess' value='true' />");
                 }
 
             }
