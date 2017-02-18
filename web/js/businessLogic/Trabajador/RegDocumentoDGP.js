@@ -130,7 +130,6 @@ function initFormRegDocument() {
         $(".btn_atras").attr("disabled", true);
     });
 
-
     $(".DD").change(function () {
         $(".div-holi").text($(".DD").val());
     });

@@ -27,13 +27,13 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.servlet.ServletRequestContext;
+import org.apache.commons.io.FilenameUtils;
 import pe.edu.upeu.application.dao.DocumentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDocumentoDAO;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Datos_Hijo_Trabajador;
 import pe.edu.upeu.application.model.Lis_Doc_tra;
 import pe.edu.upeu.application.model.Padre_Madre_Conyugue;
-import pe.edu.upeu.application.model.V_Reg_Dgp_Tra;
 
 /**
  *
@@ -120,7 +120,7 @@ public class CDocumento extends HttpServlet {
                         enterToCasosEspecialesProcess = Boolean.parseBoolean(request.getParameter("enterToCasosEspecialesProcess"));
                     }
 
-                    List<Datos_Hijo_Trabajador> List_Hijos = d.List_Hijos(idtr);
+                    List<Datos_Hijo_Trabajador> listHijosMenoresDeEdad = d.List_Hijos(idtr);
                     List<Padre_Madre_Conyugue> List_Conyugue = d.List_Conyugue(idtr);
 
                     String id_hijo_faltante = "";
@@ -151,7 +151,7 @@ public class CDocumento extends HttpServlet {
                                 if (d.getId_documento_adjunto() == null & (permissionEditDocument)) {
 
                                     htmlDoca += " <input  class='fileDocument' type='file' multiple='true'   ";
-                                    if (d.getEs_obligatorio().equals("1")) {
+                                    if (d.getEs_obligatorio().equals("1") & !enterToRegTrabajador) {
                                         html += (" required='required' ");
                                     }
                                     htmlDoca += "name='archivos" + (i + 1) + "' >";
@@ -230,7 +230,7 @@ public class CDocumento extends HttpServlet {
                                 htmlCOFE += " <div  class='caji" + (i + 1) + "'  >";
                                 if (d.getId_documento_adjunto() == null & (permissionEditDocument)) {
                                     htmlCOFE += "   <input class='fileDocument' type='file' multiple=true   ";
-                                    if (d.getEs_obligatorio().equals("1")) {
+                                    if (d.getEs_obligatorio().equals("1") & !enterToRegTrabajador) {
                                         htmlCOFE += " required='required' ";
                                     }
                                     htmlCOFE += "name='archivos" + (i + 1) + "' >";
@@ -320,7 +320,7 @@ public class CDocumento extends HttpServlet {
                                 htmlConyugue += " <div class=' caji" + (i + 1) + "' >";
                                 if (d.getId_documento_adjunto() == null & (permissionEditDocument)) {
                                     htmlConyugue += " <input  class='fileDocument' type='file' multiple=true ";
-                                    if (d.getEs_obligatorio().equals("1")) {
+                                    if (d.getEs_obligatorio().equals("1") & !enterToRegTrabajador) {
                                         htmlConyugue += (" required='required' ");
                                     }
                                     htmlConyugue += " name='archivos" + (i + 1) + "' >";
@@ -387,10 +387,10 @@ public class CDocumento extends HttpServlet {
                         }
                         String htmlDNIH = "";
                         if (d.getTi_documento().trim().equals("DNIH")) {
-                            if (List_Hijos.size() > 0) {
-                                for (int kk = 0; kk < List_Hijos.size(); kk++) {
+                            if (listHijosMenoresDeEdad.size() > 0) {
+                                for (int kk = 0; kk < listHijosMenoresDeEdad.size(); kk++) {
                                     Datos_Hijo_Trabajador h = new Datos_Hijo_Trabajador();
-                                    h = (Datos_Hijo_Trabajador) List_Hijos.get(kk);
+                                    h = (Datos_Hijo_Trabajador) listHijosMenoresDeEdad.get(kk);
                                     if (d.getId_datos_hijo() == null) {
 
                                         htmlDNIH += "   <div class='col-lg-4 col-md-6 col-sm-12 col-xs-12 documentItem'>";
@@ -472,7 +472,7 @@ public class CDocumento extends HttpServlet {
                                         htmlSecondDNIH += "<div  class='well well-sm'>";
 
                                         htmlSecondDNIH += " <div class=''>";
-                                        htmlSecondDNIH += "<label>Copia DNI hijo :   </label> <p class='txt-color-red'> " + h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador() + "</p>";
+                                        htmlSecondDNIH += "<label>Copia DNI hijo:   </label> <p class='txt-color-red'> " + h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador() + "</p>";
 
                                         htmlSecondDNIH += " </div>";
 
@@ -547,33 +547,35 @@ public class CDocumento extends HttpServlet {
                                         htmlHijoFaltante += "<div  class='well well-sm'>";
 
                                         htmlHijoFaltante += " <div class=''>";
-                                        htmlHijoFaltante += "<label>Copia DNI hijo :   </label> <p class='txt-color-red'> " + h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador() + "</p>";
+                                        htmlHijoFaltante += "<label>Copia DNI hijo:   </label> <p class='txt-color-red'> " + h.getAp_paterno() + " " + h.getAp_materno() + " " + h.getNo_hijo_trabajador() + "</p>";
 
                                         htmlHijoFaltante += " </div>";
                                         htmlHijoFaltante += " <div  class='caji" + (i + 1) + "'  >";
-                                        if (d.getId_documento_adjunto() == null & (permissionEditDocument)) {
+                                        if ((permissionEditDocument)) {
                                             htmlHijoFaltante += " <input   class='fileDocument' type='file' multiple=true   name='archivos" + (i + 1) + "' >";
                                             htmlHijoFaltante += "<input type='hidden' name='idh" + (i + 1) + "' value='" + h.getId_datos_hijos_trabajador().trim() + "' >";
-                                        } else if (d.getId_documento_adjunto() == null) {
-                                            htmlHijoFaltante += " <label class='null'>No Registrado</label>";
                                         } else {
+                                            htmlHijoFaltante += " <label class='null'>No Registrado</label>";
+                                        }
+                                        /*else {
 
                                             htmlHijoFaltante += doc_.List_files(d.getId_documento_adjunto().trim());
 
-                                        }
+                                        }*/
                                         htmlHijoFaltante += "  </div>";
 
                                         htmlHijoFaltante += " <div class=''>";
 
                                         if ((permissionEditDocument)) {
                                             htmlHijoFaltante += " <input type='text'  placeholder='Escribe una descripción' class='form-control' name='lob_description" + (i + 1) + "'>";
-                                        } else if (d.getDe_documento_adjunto() == null) {
-                                            htmlHijoFaltante += " <label class='null' >No Registrado</label>";
                                         } else {
+                                            htmlHijoFaltante += " <label class='null' >No Registrado</label>";
+                                        }
+                                        /*else {
                                             htmlHijoFaltante += " <label>Descripción:</label> ";
                                             htmlHijoFaltante += "   <label >" + d.getDe_documento_adjunto() + " </label>";
 
-                                        }
+                                        }*/
                                         htmlHijoFaltante += " </div>";
 
                                         htmlHijoFaltante += "<div  class=''>";
@@ -582,11 +584,12 @@ public class CDocumento extends HttpServlet {
                                             htmlHijoFaltante += "    <label>¿Recibido en fisico?:</label>";
                                             htmlHijoFaltante += " <label class='toggle'><input type='checkbox' value='1'   name='estado" + (i + 1) + "'   >";
                                             htmlHijoFaltante += "<i data-swchon-text='SI' data-swchoff-text='NO'></i></label>";
-                                        } else if (d.getEs_documento_adjunto() == null) {
+                                        } else {
 
                                             htmlHijoFaltante += "    <label class='null'>¿Recibido en fisico?:No Registrado</label>";
 
-                                        } else {
+                                        }
+                                        /* else {
 
                                             htmlHijoFaltante += "<label >";
                                             if (d.getEs_documento_adjunto().trim().equals("1")) {
@@ -598,14 +601,14 @@ public class CDocumento extends HttpServlet {
                                                 htmlHijoFaltante += " ¿Recibido en fisico?:No";
                                                 htmlHijoFaltante += " </label>";
                                             }
-                                        }
+                                        }*/
                                         htmlHijoFaltante += " </div>";
 
                                         htmlHijoFaltante += " <div class='' >";
                                         if ((permissionEditDocument)) {
-                                            htmlHijoFaltante += " <a type='button'  class='btn btn-danger btn-sm  elimi' href='../../../documento?opc=Eliminar&id_doc="
+                                            /* htmlHijoFaltante += " <a type='button'  class='btn btn-danger btn-sm  elimi' href='../../../documento?opc=Eliminar&id_doc="
                                                     + d.getId_documento_adjunto() + "&iddgp=" + d.getId_dgp()
-                                                    + "&idtr=" + d.getId_trabajador() + "'><i class='fa fa-trash-o'></i></a>";
+                                                    + "&idtr=" + d.getId_trabajador() + "'><i class='fa fa-trash-o'></i></a>";*/
                                         }
 
                                         htmlHijoFaltante += " </div>";
@@ -634,7 +637,7 @@ public class CDocumento extends HttpServlet {
                             if (d.getId_documento_adjunto() == null & (permissionEditDocument)) {
 
                                 htmlOtherItem += " <input  class='fileDocument' type='file' multiple='true'   ";
-                                if (d.getEs_obligatorio().equals("1")) {
+                                if (d.getEs_obligatorio().equals("1") & !enterToRegTrabajador) {
                                     htmlOtherItem += (" required='required' ");
                                 }
                                 htmlOtherItem += "name='archivos" + (i + 1) + "' >";
@@ -822,10 +825,9 @@ public class CDocumento extends HttpServlet {
 
                             if (fieldName.equals("archivos" + i) & item.getName() != null) {
                                 if (!item.getName().equals("")) {
-                                    //  String n[] = no_original.split(".");
                                     no_original = item.getName();
-                                    nombre_archivo = String.valueOf(year) + String.valueOf(month) + String.valueOf(day) + String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_" + no_original;
-
+                                    String extension = FilenameUtils.getExtension(no_original);
+                                    nombre_archivo = String.valueOf(year) + String.valueOf(month) + String.valueOf(day) + String.valueOf(hora) + String.valueOf(min) + String.valueOf(sec) + "_sysgth." + extension;
                                     //Thread thread = new Thread(new Renombrar(item, ubicacion, nombre_archivo));
                                     //  thread.start();
                                     System.out.println("nombre: " + nombre_archivo);

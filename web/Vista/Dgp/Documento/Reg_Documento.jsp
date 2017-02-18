@@ -226,15 +226,10 @@
 
         <!-- FastClick: For mobile devices -->
         <script src='../../../js/plugin/fastclick/fastclick.min.js'></script>
-
-
-
         <!--[if IE 8]>
-
         <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
 
         <![endif]-->
-
         <!-- Demo purpose only
         <script src='../../../js/demo.min.js'></script> -->
 
@@ -246,11 +241,8 @@
         <script src='../../../js/speech/voicecommand.min.js'></script>-->
 
         <!-- PAGE RELATED PLUGIN(S) -->
-
         <script src='../../../js/plugin/jquery-form/jquery-form.min.js'></script>
-
         <!--<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>-->
-
         <script src='../../../js/bootstrap/fileinput.js' type='text/javascript'></script>
         <!--  <script src='http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' type='text/javascript'></script>-->
         <script src='../../../js/bootstrap/es.js' type='text/javascript'></script>
