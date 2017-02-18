@@ -134,6 +134,7 @@ function initFormRegDocument(request) {
         $(".btn_reg_doc").attr("disabled", true);
         $(".btn_atras").attr("disabled", true);
     });
+
     $(".DD").change(function () {
         $(".div-holi").text($(".DD").val());
     });
