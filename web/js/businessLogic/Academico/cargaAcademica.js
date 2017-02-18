@@ -4,21 +4,50 @@ var urlCrudForm = "carga_academica";
 var dataAditional = "";
 var idRow = "";
 var idtrItem = "";
+function statusSyncUpCargaAcademica(callbackStatus) {
+    $.ajax({
+        url: urlCrudForm, type: 'POST', data: "opc=" + "statusSyncUpCargaAcademica", success: function (data, textStatus, jqXHR) {
+            if (data.status) {
+                if (typeof callbackStatus === "function") {
+                    callbackStatus(data);
+                }
+                console.log(data);
+            } else {
+                alert("ha ocurrido un error al verificar el estado de la sincronizacion con la carga academica");
+            }
+        }
+    });
+}
+function statusSyncElements(status) {
+    if (status) {
+        console.log(":::btnInitUpdateCAData  enter to true condition");
+        $(".btnInitUpdateCAData").attr("disabled", true);
+        $(".btnInitUpdateCAData i").addClass("fa-spin");
+        $(".btnStopSyncUpAcargaAcademica").show(200);
+    } else {
+        console.log(":::btnInitUpdateCAData  enter to else condition");
+        $(".btnInitUpdateCAData").removeAttr("disabled");
+        $(".btnInitUpdateCAData i").removeClass("fa-spin");
+        $(".btnStopSyncUpAcargaAcademica").hide(200);
+    }
+}
 function initCAGlobalEvents() {
+    statusSyncUpCargaAcademica(function (data) {
+        statusSyncElements(data.statusSyncUp);
+    });
     $(".btnInitUpdateCAData").tooltip();
     $(".btnInitUpdateCAData").click(function () {
         var data = {
             "opc": "initUpdateCAData"
         };
-        console.log("init Update carga Acedmica")
+        console.log("init Update carga Acedmica");
         $(".btnInitUpdateCAData").attr("disabled", true);
         $.ajax({
             url: urlCrudForm, type: 'POST', data: data, success: function (data, textStatus, jqXHR) {
                 if (data.status) {
-                    console.log(data);
-
+                    statusSyncElements(data.runUpdateCAData);
                 } else {
-                    console.log("disabled btn")
+                    console.log("disabled btn");
                     $(".btnInitUpdateCAData").removeAttr("disabled");
                 }
             }
@@ -30,12 +59,18 @@ function initCAGlobalEvents() {
         var data = {
             "opc": "stopSyncUpCargaAcademica"
         };
-        console.log("init Update carga Acedmica")
-        8//  $(".btnInitUpdateCAData").attr("disabled",true);
+        console.log("init Update carga Acedmica");
+        //  $(".btnInitUpdateCAData").attr("disabled",true);
         $.ajax({
             url: urlCrudForm, type: 'POST', data: data, success: function (data, textStatus, jqXHR) {
                 if (data.status) {
                     console.log(data);
+                    if (data.cancelProcess) {
+                        statusSyncElements(false);
+                    } else {
+                        statusSyncElements(true);
+                        console.log(data.message);
+                    }
 
                 } else {
                     console.log("disabled btn")

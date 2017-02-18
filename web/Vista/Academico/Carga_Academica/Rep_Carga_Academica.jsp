@@ -12,9 +12,10 @@
                 </div>
                 <div class="col-md-4">
                     <br>
-                    <button type="button" class="btn btn-warning btn-lg btn-circle pull-right btnStopSyncUpAcargaAcademica"  ><i class="fa fa-remove"></i></button>
-                    <button type="button" class="btn btn-primary btn-lg btn-circle pull-right btnInitUpdateCAData" rel="tooltip" data-placement="top" data-original-title="Iniciar Actualizacion de Carga académica"  ><i class="fa fa-cloud"></i></button>
-                    <button type="button" class="btn btn-primary btn-lg btn-circle pull-right btnUpdateCAData"><i class="fa fa-cloud-download"></i></button>
+                    <button type="button" style="display: none" class="btn btn-danger btn-lg btn-circle pull-right btnStopSyncUpAcargaAcademica"  ><i class="fa fa-remove"></i></button>
+                    <button type="button" class="btn btn-primary btn-lg btn-circle pull-right btnInitUpdateCAData" disabled="disabled" rel="tooltip" data-placement="top" data-original-title="Iniciar Actualizacion de Carga académica"  >
+                        <i class="fa fa-refresh fa-lg"></i></button>
+                    <button type="button" class="btn btn-primary btn-lg btn-circle pull-right btnUpdateCAData"><i class="fa fa-download"></i></button>
                 </div>  
             </div>
         </div>
@@ -100,7 +101,6 @@
         initFormPlugins();
         initDatatableEvents();
         initDatatableCargaAcademica();
-
         console.log("::finish to pagefunction");
     };
     var pagedestroy = function () {

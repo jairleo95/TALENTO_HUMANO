@@ -348,9 +348,9 @@ public class CDgp extends HttpServlet {
 
                         String d = request.getParameter("DIA_" + dia.get(i) + j);
 
-                        System.out.println("dia:" + d);
+                      /*  System.out.println("dia:" + d);
                         System.out.println("desde:" + hora_desde);
-                        System.out.println("hasta:" + hora_hasta);
+                        System.out.println("hasta:" + hora_hasta);*/
                         if (hora_desde != null & d != null & hora_hasta != null) {
                             if (!hora_hasta.equals("") & !hora_desde.equals("") & !d.equals("")) {
                                 hora_desde = parser24(hora_desde);

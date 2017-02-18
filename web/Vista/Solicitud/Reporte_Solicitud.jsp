@@ -407,7 +407,7 @@
                         text_html += '<tr>';
                         text_html += '<td>' + (g + 1) + '</td>';
                         text_html += '<td><div class="btn-group"> <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Accion <span class="caret"></span></button><ul class="dropdown-menu"><li><a href="../../dgp?iddgp=' + lista[g].id_dgp + '&idtr=' + lista[g].id_trabajador + '&opc=Detalle"> Ver Requerimiento</a></li>';
-                        text_html += '<li><a href="../../documento?iddgp=' + lista[g].id_dgp + '&idtr=' + lista[g].id_trabajador + '&opc=Listar_doc">Continuar registro</a></li>  <li class="divider"></li>';
+                        text_html += '<li><a href="../../documento?iddgp=' + lista[g].id_dgp + '&idtr=' + lista[g].id_trabajador + '&opc=ReqIncompletoNextStep">Continuar registro</a></li>  <li class="divider"></li>';
 
                         //if (tipo === "1") {
                            // text_html += '<li><button class="btn btn-primary btn-labeled btn_sol" data-toggle="modal" type="button" data-target="#myModal" value="' + lista[g].id_solicitud_dgp + '"><span class="btn-label"><i class="fa fa-envelope"></i></span> Ver Solicitud</button></li></ul></div></td>';

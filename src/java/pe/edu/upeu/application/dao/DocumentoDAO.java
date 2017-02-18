@@ -393,55 +393,35 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
     }
 
     @Override
-    public List<V_Reg_Dgp_Tra> List_doc_req_pla(String iddgp, String idtra) {
+    public List<Lis_Doc_tra> List_doc_req_pla(String iddgp, String idtra) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT *  FROM RHVD_REQ_DGP_TRA  where IDDGP='" + iddgp + "' AND ID_TRABAJADOR='" + idtra + "' ORDER BY NU_ORDEN_DOC ";
-        List<V_Reg_Dgp_Tra> x = new ArrayList<V_Reg_Dgp_Tra>();
+        String sql = "SELECT *  FROM RHVD_LIST_DOC_TRA  where  ID_TRABAJADOR='" + idtra + "'  ";
+
+        if (iddgp != null) {
+       ///     sql += (!iddgp.equals("")) ? " and ID_DGP='" + iddgp + "' " : "";
+        }
+        sql += " ORDER BY nu_orden";
+        List<Lis_Doc_tra> x = new ArrayList<Lis_Doc_tra>();
         try {
             ResultSet rs = this.conn.query(sql);
 
             while (rs.next()) {
-                V_Reg_Dgp_Tra v = new V_Reg_Dgp_Tra();
-
-                v.setId_document(rs.getString("id_document"));
-                v.setId_tipo_plani(rs.getString("id_tipo_plani"));
-                v.setId_requerimient(rs.getString("id_requerimient"));
-                v.setDocumento(rs.getString("documento"));
-                v.setTi_planilla(rs.getString("ti_planilla"));
-                v.setPlanilla(rs.getString("planilla"));
-                v.setIddgp(rs.getString("iddgp"));
-                v.setFe_desde(rs.getString("fe_desde"));
-                v.setFe_hasta(rs.getString("fe_hasta"));
-                v.setCa_sueldo(rs.getDouble("ca_sueldo"));
-                v.setDe_dias_trabajo(rs.getString("de_dias_trabajo"));
-                v.setId_puesto(rs.getString("id_puesto"));
-                v.setId_requerimiento(rs.getString("id_requerimiento"));
-                v.setId_trabajador(rs.getString("id_trabajador"));
-                v.setCo_ruc(rs.getString("co_ruc"));
-                v.setDe_lugar_servicio(rs.getString("de_lugar_servicio"));
-                v.setDe_servicio(rs.getString("de_servicio"));
-                v.setDe_periodo_pago(rs.getString("de_periodo_pago"));
-                v.setDe_domicilio_fiscal(rs.getString("de_domicilio_fiscal"));
-                v.setDe_subvencion(rs.getString("de_subvencion"));
-                v.setDe_horario_capacitacion(rs.getString("de_horario_capacitacion"));
-                v.setDe_horario_refrigerio(rs.getString("de_horario_refrigerio"));
-                v.setDe_dias_capacitacion(rs.getString("de_dias_capacitacion"));
-                v.setEs_dgp(rs.getString("es_dgp"));
-                v.setTi_documento(rs.getString("ti_documento"));
-                v.setEs_obligatorio(rs.getString("es_obligatorio"));
-                v.setId_documento_adjunto(rs.getString("id_documento_adjunto"));
-                v.setId_documentos(rs.getString("id_documentos"));
-                v.setEs_documento_adjunto(rs.getString("es_documento_adjunto"));
-                v.setUs_creacion(rs.getString("us_creacion"));
-                v.setFe_creacion(rs.getString("fe_creacion"));
-                v.setUs_modif(rs.getString("us_modif"));
-                v.setFe_modif(rs.getString("fe_modif"));
-                v.setIp_usuario(rs.getString("ip_usuario"));
-                v.setDe_documento_adjunto(rs.getString("de_documento_adjunto"));
+                Lis_Doc_tra v = new Lis_Doc_tra();
+                v.setTi_documento(rs.getString("TI_DOCUMENTO"));
+                v.setNo_documento(rs.getString("NO_DOCUMENTO"));
+                v.setId_trabajador(rs.getString("ID_TRABAJADOR"));
+                v.setId_documentos(rs.getString("ID_DOCUMENTOS"));
+                v.setId_documento_adjunto(rs.getString("ID_DOCUMENTO_ADJUNTO"));
+                v.setId_dgp_doc_adj(rs.getString("ID_DGP_DOC_ADJ"));
+                v.setId_dgp(rs.getString("ID_DGP"));
+                v.setEs_obligatorio(rs.getString("ES_OBLIGATORIO"));
+                v.setEs_documento_adjunto(rs.getString("ES_DOCUMENTO_ADJUNTO"));
+                v.setEs_documento(rs.getString("ES_DOCUMENTO"));
+                v.setEs_dgp_doc_adj(rs.getString("ES_DGP_DOC_ADJ"));
+                v.setDe_documento_adjunto(rs.getString("DE_DOCUMENTO_ADJUNTO"));
+                v.setId_datos_hijo(rs.getString("ID_DATOS_HIJO"));
                 v.setId_contrato(rs.getString("id_contrato"));
                 v.setEs_rec_fisico(rs.getString("es_rec_fisico"));
-                v.setId_dgp(rs.getString("id_dgp"));
-                v.setId_datos_hijo(rs.getString("ID_DATOS_HIJO"));
                 x.add(v);
             }
         } catch (SQLException e) {
@@ -464,10 +444,10 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_INSERT_DGP_DOC_ADJ( ?, ?, ?, ? ,?,?)} ");
             cst.setString(1, null);
-            cst.setString(2, ID_DGP.trim());
+            cst.setString(2, null);
             cst.setString(3, ID_DOCUMENTO_ADJUNTO.trim());
             cst.setString(4, ES_DGP_DOC_ADJ);
-            cst.setString(5, idtr.trim());
+            cst.setString(5, idtr);
             cst.setString(6, idh);
             cst.execute();
         } catch (SQLException e) {
@@ -792,7 +772,7 @@ public class DocumentoDAO implements InterfaceDocumentoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR");
+            throw new RuntimeException("ERROR"+ e.getMessage());
         } finally {
             try {
                 this.conn.close();

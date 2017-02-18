@@ -139,12 +139,6 @@ public class CCarga_Academica extends HttpServlet {
                 rpta.put("responseWSCA", carga.syncupCargaAcademica(semestre, globalProperties.DOCENTESXCURSO_METHOD));
                 rpta.put("status", true);
             }
-            if (opc.equals("initUpdateCAData")) {
-                System.out.println("::Enter to initUpdateCAData");
-                ScheduledTest s = new ScheduledTest();
-                rpta.put("runUpdateCAData", s.runForAnHour());
-
-            }
 
             if (opc.equals("Registrar_CA")) {
                 /*Registrar proceso de carga academica*/
@@ -224,19 +218,61 @@ public class CCarga_Academica extends HttpServlet {
             }
             if (opc.equals("getProcesoCargaAcademicaById")) {
                 String id = CCriptografiar.Desencriptar(request.getParameter("id"));
-                getServletContext().setAttribute("runnableCA", carga.getProcesoCargaAcademciaById(id));
-                //rpta.put("item", carga.getProcesoCargaAcademciaById(id));
-                // rpta.put("status", true);
+                rpta.put("item", carga.getProcesoCargaAcademciaById(id));
+                rpta.put("status", true);
+            }
+            if (opc.equals("statusSyncUpCargaAcademica")) {
+                System.out.println("::statusSyncUpCargaAcademica");
+                Boolean x = false;
+                if (getServletContext().getAttribute("runnableCA") != null) {
+                    ScheduledFuture y = (ScheduledFuture) getServletContext().getAttribute("runnableCA");
+                    //System.out.println("schedule properties:" + y.get().toString());
+                    rpta.put("scheduleProperties", null);
+                    x = true;
+                } else if (getServletContext().getAttribute("runnableCA") == null) {
+                    x = false;
+                }
+                rpta.put("statusSyncUp", x);
+            }
+            if (opc.equals("initUpdateCAData")) {
+                Boolean x = false;
+                System.out.println("::Enter to initUpdateCAData");
+                if (getServletContext().getAttribute("runnableCA") == null) {
+                    ScheduledTest s = new ScheduledTest();
+                    ScheduledFuture sc = s.runForAnHour(getServletContext());
+                    Object obj = sc;
+                    System.out.println("ScheduleFuture in servletContext:" + getServletContext().getAttribute("runnableCA"));
+                    getServletContext().setAttribute("runnableCA", obj);
+                    System.out.println("ScheduledFuture:" + sc.toString());
+                    x = true;
+                } else {
+                    rpta.put("message", "La tarea ya esta activa.");
+                }
+
+                rpta.put("runUpdateCAData", x);
+
             }
             if (opc.equals("stopSyncUpCargaAcademica")) {
+                Boolean x = false;
                 System.out.println("::Enter to stopSyncUpCargaAcademica");
-                ScheduledFuture<?> beeperHandle = (ScheduledFuture<?>) getServletContext().getAttribute("runnableCA");
-                rpta.put("cancelProcess", beeperHandle.cancel(true));
+                if (getServletContext().getAttribute("runnableCA") != null) {
+                    System.out.println("ScheduleFuture__:" + getServletContext().getAttribute("runnableCA"));
+                    System.out.println("::Stoping schedule...");
+                    ScheduledFuture beeperHandle = (ScheduledFuture) getServletContext().getAttribute("runnableCA");
+                    x = beeperHandle.cancel(true);
+                    getServletContext().setAttribute("runnableCA", null);
+                    System.out.println("----Update finished.");
+                } else {
+                    rpta.put("message", "No se encontró la tarea o no hay ninguna activa");
+                }
+                rpta.put("cancelProcess", x);
             }
             rpta.put("status", true);
         } catch (Exception e) {
+            rpta.put("status", false);
             rpta.put("rpta", false);
             rpta.put("mensaje", e.getMessage());
+            rpta.put("message", e.getMessage().toString());
         } finally {
             Gson gson = new Gson();
             out.print(gson.toJson(rpta));

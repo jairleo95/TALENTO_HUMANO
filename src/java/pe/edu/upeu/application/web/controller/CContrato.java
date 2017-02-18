@@ -741,40 +741,15 @@ public class CContrato extends HttpServlet {
                 String idcto = con.MAX_ID_CONTRATO();
                 //--------- CENTRO COSTOS --------------
                 /*Actualizando centro de costo*/
-                System.out.println("::Modificando Centro de costos....");
-                int cant_inicial = Integer.parseInt(request.getParameter("cant_inicial"));
-
-                System.out.println("::Cantidad Inicial:" + cant_inicial);
-                if (cant_inicial != 0) {
-
-                    for (int gg = 0; gg < cant_inicial; gg++) {
-                        if (request.getParameter("id_dcc" + (gg + 1)) != null) {
-                            Double porcen = Double.parseDouble(request.getParameter("PORCENTAJE_" + (gg + 1)));
-                            String id_dt_cen_c = request.getParameter("id_dcc" + (gg + 1));
-
-                            System.out.println("Modificando centro de costo:" + id_dt_cen_c);
-
-                            dcc.Modificar_Centro_Costo_porc(id_dt_cen_c, porcen, iduser);
-                        } else {
-                            System.out.println(":: No se encontraron los id");
-                        }
-                    }
-                    /*Se adicionaron nuevos centros de costo*/
-                    int cantNueva = Integer.parseInt(request.getParameter("cant_ingresada"));
-                    System.out.println("::Items de centro de costos adicionados:" + cantNueva);
-                    if (cantNueva > 0) {
-                        for (int i = 0; i < cantNueva; i++) {
-                            double porc_nuevo = Double.parseDouble(request.getParameter("PORCENTAJE_" + (cant_inicial + i)));
-                            String centro_c_nuevo = request.getParameter("CENTRO_COSTOS_" + (cant_inicial + i));
-
-                            System.out.println("***Agregando centro de costo:" + centro_c_nuevo);
-                            dcc.INSERT_DETALLE_CENTRO_COSTO("", "", porc_nuevo, "1", iduser, "", "", "", UserMachineProperties.getAll(),
-                                    ID_CONTRATO, centro_c_nuevo);
-                            System.out.println("***Centro de costo agregado**");
-
-                        }
-                    } else {
-                        System.out.println("::No se adicionaron Centros de Costo");
+                System.out.println("::Agregando  Centro de costos....");
+                //--------- CENTRO COSTOS --------------
+                //  String IP_USUARIO = request.getParameter("USUARIO_IP");
+                int cant_cc = Integer.parseInt(request.getParameter("CANT"));
+                for (int g = 1; g <= cant_cc; g++) {
+                    String ID_CENTRO_COSTO = request.getParameter("CENTRO_COSTOS_" + g);
+                    double porcentaje = Double.parseDouble(request.getParameter("PORCENTAJE_" + g));
+                    if (ID_CENTRO_COSTO != null && porcentaje != 0.0) {
+                        dcc.INSERT_DETALLE_CENTRO_COSTO(null, null, porcentaje, "1", iduser, null, null, null, UserMachineProperties.getAll(), idcto, ID_CENTRO_COSTO);
                     }
                 }
 
@@ -786,11 +761,11 @@ public class CContrato extends HttpServlet {
                 sesion.setAttribute("List_tipo_contrato", l.List_tipo_contrato());
                 //   sesion.setAttribute("List_tipo_contrato", doc.List_Adventista(idcto));
                 sesion.setAttribute("Lis_doc_trabajador", doc.Lis_doc_trabajador(ID_TRABAJADOR));
-                int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
-                int num_ad = doc.List_Adventista(ID_TRABAJADOR);
+                // int i = doc.List_Req_nacionalidad(ID_TRABAJADOR);
+                //  int num_ad = doc.List_Adventista(ID_TRABAJADOR);
                 sesion.setAttribute("List_Hijos", doc.List_Hijos(ID_TRABAJADOR));
                 sesion.setAttribute("List_Conyugue", doc.List_Conyugue(ID_TRABAJADOR));
-                response.sendRedirect("Vista/Trabajador/Documento/Reg_Documento.jsp?n_nac=" + i + "&num_ad=" + num_ad + "&pro=pr_dgp&req=si&idtr=" + ID_TRABAJADOR + "&P2=TRUE&ms=ok");
+                response.sendRedirect("Vista/Dgp/Documento/Reg_Documento.jsp?pro=casosEspeciales&idtr=" + ID_TRABAJADOR + "&P2=TRUE&ms=ok");
             }
 
             if (opc.equals("Reporte_CE")) {

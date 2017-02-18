@@ -54,7 +54,6 @@ function validateSizeFile() {
             var lg = fp[0].files.length; // get length
             var items = fp[0].files;
             var fragment = "";
-
             if (lg > 0) {
                 for (var i = 0; i < lg; i++) {
                     var fileName = items[i].name; // get file name
@@ -62,7 +61,6 @@ function validateSizeFile() {
                     var fileType = items[i].type; // get file type
                     // append li to UL tag to display File info
                     fragment = "<li>" + fileName + " (<b>" + fileSize + "</b> bytes) - Type :" + fileType + "</li>";
-
                     if (fileSize > 512000) {
                         $(thisObject).focus();
                         x = false;
@@ -96,7 +94,6 @@ function initFormRegDocument(request) {
             return false;
         }
     });
-
     $(".fileDocument").fileinput({
         language: "es",
         showUpload: false,
@@ -137,8 +134,6 @@ function initFormRegDocument(request) {
         $(".btn_reg_doc").attr("disabled", true);
         $(".btn_atras").attr("disabled", true);
     });
-
-
     $(".DD").change(function () {
         $(".div-holi").text($(".DD").val());
     });
@@ -160,8 +155,13 @@ function showDocuments(dgp, idtr, casosEspeciales, enterToDGPProcess, callback) 
         "idtr": idtr,
         "casosEspeciales": casosEspeciales,
         "enterToDGPProcess": enterToDGPProcess
+
+                /*"iddgp": $(".iddgp").val(),
+                 "idtr": $(".idtr").val(),
+                 "enterToCasosEspecialesProcess": $(".enterToCasosEspecialesProcess").val(),
+                 "enterToRegTrabajador": $(".enterToRegTrabajador").val()*/
     };
-    objDiv.append('<img src='+pathRequest+'img/load.gif" class="img-responsive center-block"/>');
+    objDiv.append('<img src=' + pathRequest + 'img/load.gif" class="img-responsive center-block"/>');
     $.ajax({
         url: pathRequest + "documento", type: 'POST', data: data, success: function (data, textStatus, jqXHR) {
             if (data.status) {
