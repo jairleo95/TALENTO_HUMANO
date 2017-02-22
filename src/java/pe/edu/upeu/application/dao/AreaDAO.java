@@ -28,6 +28,34 @@ public class AreaDAO implements InterfaceAreaDAO {
     ConexionBD conn;
 
     @Override
+    public Area getAreaById(String idArea) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "Select * from rhtd_area where id_area='" + idArea + "'";
+        Area a = new Area();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            if (rs.next()) {
+                a.setId_area(rs.getString("id_area"));
+                a.setEs_area(rs.getString("es_area"));
+                a.setId_departamento(rs.getString("id_departamento"));
+                a.setNo_area(rs.getString("no_area"));
+                a.setNo_corto_area(rs.getString("no_corto_area"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return a;
+    }
+
+    @Override
     public List<Area> List_Area() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "Select * from rhtd_area ";
@@ -77,7 +105,7 @@ public class AreaDAO implements InterfaceAreaDAO {
                 list.add(a);
             }
 
-         } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("Error :" + e.getMessage());
@@ -335,7 +363,7 @@ public class AreaDAO implements InterfaceAreaDAO {
                 lista.add(rec);
             }
             rs.close();
-     } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException("Error :" + e.getMessage());

@@ -47,14 +47,12 @@ public class CRoles extends HttpServlet {
         String opc = request.getParameter("opc");
         HttpSession sesion = request.getSession(true);
         String iduser = (String) sesion.getAttribute("IDUSER");
-        
+
         try {
             if (opc.equals("mat_rol")) {
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
             }
             if (opc.equals("Listar_Rol")) {
-                //sesion.setAttribute("List_Rol", rol.List_Rol());
-                //response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
                 List<Map<String, ?>> list = rol.List_rol();
                 rpta.put("rpta", "1");
                 rpta.put("lista", list);
@@ -93,27 +91,29 @@ public class CRoles extends HttpServlet {
             }
             if (opc.equals("REGISTRAR")) {
                 String no_rol = request.getParameter("NOMBRE");
-                String ESTADO =request.getParameter("ESTADO");
-                if(ESTADO==null){
-                    ESTADO="0";
+                String ESTADO = request.getParameter("ESTADO");
+                if (ESTADO == null) {
+                    ESTADO = "0";
                     rol.INSERT_ROLES(no_rol, ESTADO);
-                }else {
+                } else {
                     rol.INSERT_ROLES(no_rol, ESTADO);
                 }
                 out.print(request.getParameter("ESTADO"));
                 sesion.setAttribute("List_Rol", rol.List_Rol());
                 response.sendRedirect("Vista/Usuario/Rol_Privilegio/Reg_Roles.jsp");
             }
+            rpta.put("status", true);
         } catch (Exception e) {
-            
+
             rpta.put("rpta", "-1");
             rpta.put("mensaje", e.getMessage());
+            rpta.put("status", false);
         }
         Gson gson = new Gson();
         out.println(gson.toJson(rpta));
         out.flush();
         out.close();
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

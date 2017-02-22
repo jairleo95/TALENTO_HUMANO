@@ -120,8 +120,7 @@ function list_select(objSelect, url, datos, opc, id, selectText) {
         }
         var lista = objJson.lista;
         if (lista.length > 0) {
-            if (selectText !== "") {
-
+            if (typeof selectText !== "undefined" & selectText !== null & selectText !== "") {
                 objSelect.append("<option value=''>[" + selectText + "]</option>");
             } else {
                 console.log("enter to else condition ...")

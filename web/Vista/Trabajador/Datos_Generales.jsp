@@ -138,9 +138,9 @@
                         out.print("No Registrado");
                     }%></td></tr>
                 <tr><td  class="text-info">Nombre AFP:</td><td><%
-                    if (trb.getCo_sistema_pensionario() != null) {
+                    if (trb.getId_no_afp() != null) {
                         for (int w = 0; w < list.List_Nom_AFP().size(); w++) {
-                            if (trb.getId_no_afp().equals(w + 1 + "")) {
+                            if (trb.getId_no_afp().equals(w + 1 )) {
                                 out.println(list.List_Nom_AFP().get(w));
                             }
                         }

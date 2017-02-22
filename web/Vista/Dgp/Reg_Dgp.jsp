@@ -20,8 +20,6 @@
 <!DOCTYPE html >
 <html>
     <head>
-
-
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
         <title> Registrar DGP </title>
         <meta name="description" content="">
@@ -69,6 +67,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
         <link rel="apple-touch-startup-image" href="../../img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+        <!--Plugins css-->
         <link rel="stylesheet" media="screen" href="../../css/chosen.css"  type="text/css" > 
         <link href="../../css/jquery-ui.css" media="screen" rel="stylesheet" type="text/css"/>
         <style>
@@ -131,8 +130,8 @@
     
                                     -->
                                     <header>
-                                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                        <h2 class="font-md"><strong>Registrar </strong> <i>Requerimientos</i></h2>
+                                        <span class="widget-icon"> <i class="fa fa-user"></i> </span>
+                                        <h2 class="font-md"><strong>Registrar </strong> <i>Requerimiento</i></h2>
                                     </header>
 
                                     <!-- widget div-->
@@ -149,19 +148,10 @@
                                         <div class="widget-body no-padding">
 
                                             <div class="smart-form" id="form_dgp"  method="post" action="../../dgp">
-                                                <header class="titulo_req">
-
-                                                    <div class="spacing">
-                                                        <center><h1 class="spacing" style="font-weight: bold; margin: 0px;  color: #005cac;"> Documento de Gestión de Personal</h1></center>
-                                                        <br>
-
-                                                    </div>
-                                                    <br>
-
+                                                <header>
+                                                    <center><h1 class="text-primary" > Documento de Gestión de Personal</h1></center>
                                                 </header>
-
                                                 <fieldset >
-
                                                     <%                                                        /*Temporal*/
                                                         String idreq = request.getParameter("idreq");
                                                         String id = "";
@@ -720,8 +710,8 @@
                                     data-widget-sortable="false"
                                     -->
                                     <header>
-                                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                        <h2 class="font-md"><strong>Registrar </strong> <i>Horario</i></h2>
+                                        <span class="widget-icon"> <i class="fa fa-clock-o"></i> </span>
+                                        <h2 class="font-lg"><strong>Registrar </strong> <i>Horario</i></h2>
                                     </header>
                                     <!-- widget div-->
                                     <div>
