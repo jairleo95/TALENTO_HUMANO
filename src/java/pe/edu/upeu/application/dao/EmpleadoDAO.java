@@ -693,4 +693,33 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
 
     }
 
+    @Override
+    public List<Map<String, ?>> getAllEmployeesWithOutUserAccount() {
+        List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String sql = "SELECT e.id_empleado,e.id_trabajador,e.ES_EMPLEADO,t.NO_TRABAJADOR,t.AP_PATERNO,t.AP_MATERNO FROM rhtd_empleado e , rhtm_trabajador t where  t.ID_TRABAJADOR = e.ID_TRABAJADOR and  e.id_empleado not in (select id_empleado from rhtc_usuario) and e.ES_EMPLEADO='1'";
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                Map<String, Object> rec = new HashMap<String, Object>();
+                rec.put("idEmpleado", rs.getString("id_empleado"));
+                rec.put("fullnameEmployee", rs.getString("no_trabajador") + " " + rs.getString("ap_paterno") + " " + rs.getString("ap_materno"));
+                Lista.add(rec);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error!" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return Lista;
+
+    }
+
 }

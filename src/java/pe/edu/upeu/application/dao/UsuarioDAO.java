@@ -93,7 +93,6 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
 
     }
 
-
     @Override
     public List<V_Usuario> Val_Usuario(String Usuario, String PWD) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -121,7 +120,7 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 us.setAp_materno(rs.getString("ap_materno"));
                 us.setAr_foto(rs.getString("ar_foto"));
                 us.setId_direccion(rs.getString("id_direccion"));
-                
+
                 list.add(us);
             }
         } catch (SQLException ex) {
@@ -610,5 +609,33 @@ public class UsuarioDAO implements InterfaceUsuarioDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
+    }
+
+    @Override
+    public Boolean validateIfUserNameExists(String userName) {
+        Boolean x = false;
+        int count = 0;
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select count(*) from rhtc_usuario where no_usuario='" + userName + "'";
+        try {
+            ResultSet rs = this.conn.query(sql);
+            if (rs.next()) {
+                count = rs.getInt(1);
+                if (count > 0) {
+                    x = true;
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return x;
     }
 }

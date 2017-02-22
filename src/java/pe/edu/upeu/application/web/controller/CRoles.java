@@ -55,7 +55,7 @@ public class CRoles extends HttpServlet {
             if (opc.equals("Listar_Rol")) {
                 List<Map<String, ?>> list = rol.List_rol();
                 rpta.put("rpta", "1");
-                rpta.put("lista", list);
+                rpta.put("data", list);
             }
             if (opc.equals("Modificar_Rol")) {
                 String idrol = request.getParameter("idrol");

@@ -54,4 +54,6 @@ public interface InterfaceEmpleadoDAO {
     public List<Map<String, ?>> List_co_huella(String idtr);
 
     public List<Map<String, ?>> List_co_aps(String idtr);
+
+    public List<Map<String, ?>> getAllEmployeesWithOutUserAccount();
 }
