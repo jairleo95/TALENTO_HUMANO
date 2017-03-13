@@ -2,15 +2,11 @@
     HttpSession sesion = request.getSession();
     String id_user = (String) sesion.getAttribute("IDUSER");
     if (id_user != null) {
-%>
-
-
-<%
-    HttpSession sesion_1 = request.getSession(true);
-    String iddep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");
-    String iduser = (String) sesion_1.getAttribute("IDUSER");
-    String rol = (String) sesion_1.getAttribute("IDROL");
-    rol = rol.trim();
+        HttpSession sesion_1 = request.getSession(true);
+        String iddep = (String) sesion_1.getAttribute("DEPARTAMENTO_ID");
+        String iduser = (String) sesion_1.getAttribute("IDUSER");
+        String rol = (String) sesion_1.getAttribute("IDROL");
+        rol = rol.trim();
 %>
 
 <%@page import="pe.edu.upeu.application.model.Cuenta_Sueldo"%>
@@ -143,7 +139,7 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                         <select name="NIVEL_EDUCATIVO" class="form-control input-group-sm" id="sit_edu" required>
-                                                                            <option value="" selected="selected" >[SELECCIONE]</option>
+                                                                            <option value="" selected="selected" >[Seleccione]</option>
                                                                             <%for (int s = 0; s < List_Situacion_Educativa.size(); s++) {
                                                                                     Situacion_Educativa e = new Situacion_Educativa();
                                                                                     e = (Situacion_Educativa) List_Situacion_Educativa.get(s);
@@ -165,7 +161,7 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                         <select class="form-control input-group-sm" id="inst_peru" name="ES_INST_PERU" required>
-                                                                            <option value="" selected="selected" >[SELECCIONE]</option>
+                                                                            <option value="" selected="selected" >[Seleccione]</option>
                                                                             <% if (t.getEs_inst_educ_peru() != null) {
                                                                                     if (t.getEs_inst_educ_peru().trim().equals("1")) {%>
                                                                             <option value="1" selected="">Si</option>
@@ -189,7 +185,7 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                         <select class="form-control input-group-sm" id="rg" name="REGIMEN" required>
-                                                                            <option value="" selected="selected">[SELECCIONE]</option>
+                                                                            <option value="" selected="selected">[Seleccione]</option>
                                                                             <%if (t.getLi_reg_inst_educativa() != null) {
                                                                                     if (t.getLi_reg_inst_educativa().trim().equals("1")) {%>
                                                                             <option value="1" selected="">Publica</option>
@@ -216,7 +212,7 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                         <select class="form-control input-group-sm" id="ti_inst"  required>
-                                                                            <option value="" selected="selected">[SELECCIONE]</option>
+                                                                            <option value="" selected="selected">[Seleccione]</option>
                                                                             <% if (t.getNo_universidad() != null)
                                                                                     for (int y = 0; y < List_Universidad.size(); y++) {
                                                                                         Universidad un = new Universidad();
@@ -250,7 +246,7 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-institution fa-lg fa-fw"></i></span>
                                                                         <select class="form-control input-group-sm" id="inst"  required name="UNIVERSIDAD">
-                                                                            <option value="" selected="selected">[SELECCIONE]</option>
+                                                                            <option value="" selected="selected">[Seleccione]</option>
 
                                                                             <%if (t.getNo_universidad() != null) {
                                                                                     for (int w = 0; w < List_Universidad.size(); w++) {
@@ -275,7 +271,7 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                         <select class="form-control input-group-sm" id="carrera" name="CARRERA" required>
-                                                                            <option value="" >[SELECCIONE]</option>
+                                                                            <option value="" >[Seleccione]</option>
                                                                             <% if (t.getId_universidad_carrera() != null) {
                                                                                     for (int q = 0; q < List_Carrera.size(); q++) {
                                                                                         Carrera c = new Carrera();
@@ -314,7 +310,7 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
                                                                         <select   id="ano_e" name="A_EGRESO" class="form-control input-group-sm" required="" >
-                                                                            <option value="">[SELECCIONE]</option>
+                                                                            <option value="">[Seleccione]</option>
                                                                             <% if (t.getDe_anno_egreso() != null) {
                                                                                     for (int jj = 0; jj < list_año.size(); jj++) {
                                                                                         if (t.getDe_anno_egreso().trim().equals(list_año.get(jj))) {
@@ -363,9 +359,9 @@
                                                                     <div class="input-group">
                                                                         <span class="input-group-addon"><i class="fa fa-align-justify fa-lg fa-fw"></i></span>
                                                                             <%if (t.getCm_otros_estudios() != null) {%>
-                                                                        <textarea name="OTROS_ESTUDIOS"  class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="1000"><%=t.getCm_otros_estudios()%></textarea>
+                                                                        <textarea name="OTROS_ESTUDIOS"  class="form-control input-group-sm"  cols="60" rows="6" maxlength="1000"><%=t.getCm_otros_estudios()%></textarea>
                                                                         <%} else {%>
-                                                                        <textarea name="OTROS_ESTUDIOS"  class="form-control input-group-sm" class="text-box" cols="60" rows="6" maxlength="1000"></textarea>
+                                                                        <textarea name="OTROS_ESTUDIOS"  class="form-control input-group-sm"  cols="60" rows="6" maxlength="1000"></textarea>
                                                                         <%}%>
                                                                     </div>
                                                                 </div>
@@ -378,7 +374,7 @@
                                                                 <div class="form-group">
                                                                     <label>Banco:</label>
                                                                     <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
+                                                                        <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <%
                                                                                 boolean permissionEdit = false;
                                                                                 String disabled = "";
@@ -393,7 +389,7 @@
                                                                                 }
                                                                             %>
                                                                         <select name="BANCO" id="banco" class="form-control input-group-sm" <%=disabled%>>
-                                                                            <option value=""   selected="" >[SELECCIONE]</option>
+                                                                            <option value=""   selected="" >[Seleccione]</option>
                                                                             <%
                                                                                 for (int u = 0; u < List_Cuenta_Sueldo.size(); u++) {
                                                                                     Cuenta_Sueldo cs = new Cuenta_Sueldo();
@@ -442,7 +438,7 @@
                                                                 <div class="form-group">
                                                                     <label>Nombre del Banco:</label>
                                                                     <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
+                                                                        <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <%if (cs.getNo_banco_otros() != null) {%>
                                                                         <input class="form-control input-group-sm" value="<%=cs.getNo_banco_otros()%>"   type="text" name="BANCO_OTROS" id="nu_cuen_otros" <%=disabled%> maxlength="30">
                                                                         <%} else {%>
@@ -455,7 +451,7 @@
                                                                 <div class="form-group">
                                                                     <label>Nro de Cuenta:</label>
                                                                     <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
+                                                                        <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <%if (cs.getNu_cuenta() != null) {%>
                                                                         <input class="form-control input-group-sm" value="<%=cs.getNu_cuenta().trim()%>"   type="text" name="CUENTA" id="nu_cuen" maxlength="30" <%=disabled%>>
                                                                         <%} else {%>
@@ -468,7 +464,7 @@
                                                                 <div class="form-group">
                                                                     <label>Nro de Cuenta Bancaria:</label>
                                                                     <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="fa fa-mortar-board fa-lg fa-fw"></i></span>
+                                                                        <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <%if (cs.getNu_cuenta_banc() != null) {%>
                                                                         <input class="form-control input-group-sm" value="<%=cs.getNu_cuenta_banc()%>"   type="text" name="CUENTA_BANC" id="nu_cuen_ban" maxlength="30" <%=disabled%>>
                                                                         <%} else {%>
@@ -613,191 +609,9 @@
         <script src="../../js/speech/voicecommand.min.js"></script>-->
 
         <!-- PAGE RELATED PLUGIN(S) -->
-  
+
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <script type="text/javascript" src="../../js/businessLogic/Trabajador/regTrabajador.js"></script>
-
-
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-               
-                //MOSTRAR ASPECTO ACADEMICO PARA MODIFICAR
-                if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
-                        | $("#sit_edu").val() == 'SED-0015'
-                        | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
-                        | $("#sit_edu").val() == 'SED-0017' | $("#sit_edu").val() == 'SED-0018'
-                        | $("#sit_edu").val() == 'SED-0019' | $("#sit_edu").val() == 'SED-0020'
-                        | $("#sit_edu").val() == 'SED-0021') {
-
-                    $("#es_inst_p").show();
-
-                } else {
-                    /*$("#es_inst_p").hide();
-                     $("#es_inst_p").removeAttr("selected");
-                     $("#regimen").hide("");
-                     $("#regimen").removeAttr("selected");
-                     $("#egreso").hide("");
-                     $("#egreso").removeAttr("selected");
-                     $("#ti").hide("");
-                     $("#ti").removeAttr("selected");
-                     $("#institucion").hide("");
-                     $("#institucion").removeAttr("selected");
-                     $("#carr").hide("");
-                     $("#carr").removeAttr("selected");*/
-                }
-                if ($("#inst_peru").val() == "1") {
-                    $("#regimen").show();
-                    $("#egreso").show();
-                    $("#ti").show();
-                    $("#institucion").show();
-                    $("#carr").show();
-                } else {
-                    $("#regimen").hide();
-                    $("#egreso").hide();
-                    $("#ti").hide();
-                    $("#institucion").hide();
-                    $("#carr").hide();
-                }
-            });
-        </script>
-        <script>
-            $(document).ready(function () {
-
-                var rol = '<%=rol%>';
-                $("#no_cuen").hide();
-                $("#no_cuen_ban").hide();
-                $("#generar").hide();
-                $("#no_cuen_otros").hide();
-                $("#texto").hide();
-                if ($("#banco").val() == "1") {
-                    $("#no_cuen").show();
-                }
-                if ($("#banco").val() == "2") {
-                    $("#no_cuen").show();
-                }
-                if ($("#banco").val() == "3") {
-                    $("#no_cuen").show();
-                    $("#no_cuen_ban").show();
-                    $("#no_cuen_otros").show();
-                }
-                if ($("#banco").val() == "0") {
-                    $("#generar").show();
-                    $("#no_cuen_otros").show();
-                    // document.getElementById("nu_cuen_otros").readOnly = true;
-                    $("#texto").show();
-                }
-                if (rol !== 'ROL-0001') {
-                    /*  document.getElementById("banco").disabled = true;
-                     document.getElementById("nu_cuen_otros").disabled = true;
-                     document.getElementById("nu_cuen").disabled = true;
-                     document.getElementById("nu_cuen_ban").disabled = true;
-                     document.getElementById("subscription").disabled = true;*/
-                }
-                $("#banco").change(function () {
-                    cuenta_bancaria($(this).val());
-                    $("#nu_cuen").focus();
-                });
-                $("#reli").change(function () {
-                    if ($("#reli").val() == "1") {
-                        $("#igle").attr("required", "required")
-                    } else {
-                        $("#igle").removeAttr("required");
-                    }
-                });
-            });
-        </script>
-        <script>
-            function cuenta_bancaria(banco) {
-                if (banco == '') {
-                    $("#no_cuen").hide();
-                    $("#no_cuen_ban").hide();
-                    $("#generar").hide();
-                    $("#texto").hide();
-                    $("#no_cuen_otros").hide();
-                    $("#banco").val("");
-                    $("#nu_cuen").val("");
-                    $("#nu_cuen_ban").val("");
-                    $("#nu_cuen_ban_otros").val("");
-                    $("#nu_cuen_otros").val("");
-                    $("#es_cuenta").val(0);
-                    $("#subscription").attr('checked', false);
-                    //alert($("#es_cuenta").val());
-                }
-                if (banco == '0') {
-                    $("#no_cuen").hide();
-                    $("#nu_cuen").val("");
-                    $("#no_cuen_ban").hide();
-                    $("#nu_cuen_ban").val("");
-                    $("#no_cuen_otros").show();
-                    $("#nu_cuen_otros").val("BBVA Banco Continental");
-                    $("#nu_cuen_otros").attr('readonly', 'readonly');
-                    //document.getElementById("nu_cuen_otros").readOnly = true;
-                    $("#texto").show();
-                    $("#generar").show();
-                    $("#subscription").attr("required", "required");
-                    $("#nu_cuen_otros").attr("required", "required");
-                    $("#nu_cuen_otros").removeAttr('maxlength');
-                    $("#nu_cuen_otros").removeAttr('minlength');
-                    $("#es_cuenta").val(1);
-                }
-                if (banco == '1') {
-                    $("#generar").hide();
-                    $("#no_cuen").show();
-                    $("#nu_cuen").val("");
-                    $("#nu_cuen").attr("required", "required");
-                    $("#no_cuen_ban").hide();
-                    $("#nu_cuen_ban").val("");
-                    $("#subscription").attr('checked', false);
-                    $("#nu_cuen").attr("maxlength", "21");
-                    $("#nu_cuen").attr("minlength", "18");
-                    //$("#nu_cuen").val("0011-")
-                    $("#no_cuen_otros").hide();
-                    $("#nu_cuen_otros").val("");
-                    $("#texto").hide();
-                    $("#es_cuenta").val(1);
-                }
-                if (banco === '2') {
-                    $("#generar").hide();
-                    $("#subscription").attr('checked', false);
-                    $("#no_cuen_ban").hide();
-                    $("#nu_cuen_ban").val("");
-                    $("#no_cuen").show();
-                    $("#nu_cuen").val("");
-                    $("#nu_cuen").attr("required", "required");
-                    $("#nu_cuen_otros").removeAttr('maxlength');
-                    $("#nu_cuen_otros").removeAttr('minlength');
-                    $("#nu_cuen").removeAttr('maxlength');
-                    $("#nu_cuen").removeAttr('minlength');
-                    $("#nu_cuen").attr("maxlength", "14");
-                    $("#nu_cuen").attr("minlength", "0");
-                    //$("#nu_cuen").mask("99999999999999", {placeholder: "X"});
-                    $("#no_cuen_otros").hide();
-                    $("#nu_cuen_otros").val("");
-                    $("#texto").hide();
-                    $("#nu_cuen").valid();
-                    $("#es_cuenta").val(1);
-                }
-                if (banco == '3') {
-                    $("#no_cuen").show();
-                    $("#no_cuen").val("");
-                    $("#nu_cuen").attr("required", "required");
-                    $("#no_cuen_ban").show();
-                    $("#no_cuen_ban").val("");
-                    $("#nu_cuen_ban").attr("required", "required");
-                    $("#no_cuen_otros").show();
-                    $("#nu_cuen_otros").val("");
-                    $("#nu_cuen_otros").attr("required", "required");
-                    $("#generar").hide();
-                    $("#subscription").attr('checked', false);
-                    $("#texto").hide();
-                    $("#nu_cuen_otros").removeAttr('readonly');
-                    $("#nu_cuen_otros").removeAttr('maxlength');
-                    $("#nu_cuen_otros").removeAttr('minlength');
-                    $("#es_cuenta").val(1);
-                }
-            }
-        </script> 
 
         <script type="text/javascript">
 
@@ -806,17 +620,8 @@
                 pageSetUp();
                 var $validator = $("#wizard-1").validate({
                     rules: {
-                        email: {
-                            required: true,
-                            email: "Your email address must be in the format of name@domain.com"
-                        },
                         FECHA_NAC: {
-                            required: true,
-                            val_fecha: true
-                        }
-                        ,
-                        FECHA_NAC_H: {
-                            val_fecha: true
+                            required: true
                         }
                     },
                     highlight: function (element) {
@@ -835,54 +640,86 @@
                         }
                     }
                 });
-                jQuery.validator.addMethod("val_fecha", function (value, element) {
-                    var d = value.split("-");
-                    return this.optional(element) || String(parseInt(d[0])).length == 4;
-                }, "¡Fecha ingresada invalida!");
 
-                $('#bootstrap-wizard-1').bootstrapWizard({
-                    'tabClass': 'form-wizard',
-                    'onNext': function (tab, navigation, index) {
-                        var $valid = $("#wizard-1").valid();
-                        if (!$valid) {
-                            $validator.focusInvalid();
-                            return false;
-                        } else {
-                            $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
-                                    'complete');
-                            $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
-                                    .html('<i class="fa fa-check"></i>');
-                        }
-                    }
-                });
-                // fuelux wizard
-                var wizard = $('.wizard').wizard();
-                wizard.on('finished', function (e, data) {
-                    //$("#fuelux-wizard").submit();
-                    //console.log("submitted!");
-                    $.smallBox({
-                        title: "Congratulations! Your form was submitted",
-                        content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-                        color: "#5F895F",
-                        iconSmall: "fa fa-check bounce animated",
-                        timeout: 4000
-                    });
+                $("#docs, .doc_c, #nu_cuen, #nu_cuen_ban").numeric();
+                $("#doc, .doc_c").numeric(false, function () {
+                    alert("Solo Numeros Enteros");
+                    this.value = "";
+                    this.focus();
                 });
             });
+            //MOSTRAR ASPECTO ACADEMICO PARA MODIFICAR
+            if ($("#sit_edu").val() == 'SED-0011' | $("#sit_edu").val() == 'SED-0013' | $("#sit_edu").val() == 'SED-0014'
+                    | $("#sit_edu").val() == 'SED-0015'
+                    | $("#sit_edu").val() == 'SED-0016' | $("#sit_edu").val() == 'SED-0017'
+                    | $("#sit_edu").val() == 'SED-0017' | $("#sit_edu").val() == 'SED-0018'
+                    | $("#sit_edu").val() == 'SED-0019' | $("#sit_edu").val() == 'SED-0020'
+                    | $("#sit_edu").val() == 'SED-0021') {
 
-        </script>
-        <!--Solo numeros -->
-        <script type="text/javascript">
-            $("#docs, .doc_c, #nu_cuen, #nu_cuen_ban").numeric();
-            $("#doc, .doc_c").numeric(false, function () {
-                alert("Solo Numeros Enteros");
-                this.value = "";
-                this.focus();
+                $("#es_inst_p").show();
+
+            } else {
+                /*$("#es_inst_p").hide();
+                 $("#es_inst_p").removeAttr("selected");
+                 $("#regimen").hide("");
+                 $("#regimen").removeAttr("selected");
+                 $("#egreso").hide("");
+                 $("#egreso").removeAttr("selected");
+                 $("#ti").hide("");
+                 $("#ti").removeAttr("selected");
+                 $("#institucion").hide("");
+                 $("#institucion").removeAttr("selected");
+                 $("#carr").hide("");
+                 $("#carr").removeAttr("selected");*/
+            }
+            if ($("#inst_peru").val() == "1") {
+                $("#regimen").show();
+                $("#egreso").show();
+                $("#ti").show();
+                $("#institucion").show();
+                $("#carr").show();
+            } else {
+                $("#regimen").hide();
+                $("#egreso").hide();
+                $("#ti").hide();
+                $("#institucion").hide();
+                $("#carr").hide();
+            }
+
+            $("#no_cuen").hide();
+            $("#no_cuen_ban").hide();
+            $("#generar").hide();
+            $("#no_cuen_otros").hide();
+            $("#texto").hide();
+            if ($("#banco").val() == "1") {
+                $("#no_cuen").show();
+            }
+            if ($("#banco").val() == "2") {
+                $("#no_cuen").show();
+            }
+            if ($("#banco").val() == "3") {
+                $("#no_cuen").show();
+                $("#no_cuen_ban").show();
+                $("#no_cuen_otros").show();
+            }
+            if ($("#banco").val() == "0") {
+                $("#generar").show();
+                $("#no_cuen_otros").show();
+                $("#texto").show();
+            }
+
+            $("#banco").change(function () {
+                cuenta_bancaria($(this).val());
+                $("#nu_cuen").focus();
             });
-        </script>
-        <!--boton duplicar-->
-        <!--Select dinamicos-->
-        <script type="text/javascript">
+            $("#reli").change(function () {
+                if ($("#reli").val() == "1") {
+                    $("#igle").attr("required", "required");
+                } else {
+                    $("#igle").removeAttr("required");
+                }
+            });
+
             /*Datos Academicos*/
             $("#rg").change(function () {
                 var ti = $("#ti_inst");
@@ -915,9 +752,7 @@
                 var inst = $("#inst");
                 inst.empty();
                 var ti = $("#ti_inst").val();
-                /* if (sucursal == '000') {
-                 return;
-                 }*/
+
                 var data = "ti=" + ti + "&opc=institucion";
                 inst.append('<option value="">Cargando...</option>').val('');
                 $.post("../../detalle_carrera", data, function (objJson) {
@@ -963,7 +798,6 @@
                 });
             });
         </script>
-
     </body>
 </html>
 <%} else {

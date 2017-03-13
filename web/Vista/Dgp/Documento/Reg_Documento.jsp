@@ -235,7 +235,6 @@
 
         <!-- MAIN APP JS FILE -->
         <script src='../../../js/app.min.js'></script>
-
         <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
         <!-- Voice command : plugin 
         <script src='../../../js/speech/voicecommand.min.js'></script>-->
