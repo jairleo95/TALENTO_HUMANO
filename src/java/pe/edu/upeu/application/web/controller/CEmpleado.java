@@ -8,7 +8,6 @@ package pe.edu.upeu.application.web.controller;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,10 +42,8 @@ public class CEmpleado extends HttpServlet {
         Map<String, Object> rpta = new HashMap<String, Object>();
 
         InterfaceEmpleadoDAO Iem = new EmpleadoDAO();
-
         HttpSession sesion = request.getSession(true);
         String idrol = (String) sesion.getAttribute("IDROL");
-
         String opc = request.getParameter("opc");
         try {
 
@@ -54,7 +51,6 @@ public class CEmpleado extends HttpServlet {
                 String ID_Trabajador = request.getParameter("idtr");
                 String ID_Empleado = Iem.ID_Empleado(ID_Trabajador);
                 String estado = Iem.ES_Empleado(ID_Empleado);
-
                 sesion.setAttribute("LIST_EVALUACION", Iem.Listar_Evaluacion_Emp(ID_Empleado));
                 if (estado != null) {
                     if (estado.equals("1")) {
@@ -195,10 +191,10 @@ public class CEmpleado extends HttpServlet {
                                 + "                        </div>";
                     }
                 } else {
-                            html = "                        <div class='form-group'>"
-                                    + "                          <div class='col-md-8'>  <label class='control-label' for='prepend'> <strong>  Código APS: </strong></label></div>"
-                                    + "                      <div class='col-md-4' >" + (" No registrado") + "</div>"
-                                    + " </div>";
+                    html = "                        <div class='form-group'>"
+                            + "                          <div class='col-md-8'>  <label class='control-label' for='prepend'> <strong>  Código APS: </strong></label></div>"
+                            + "                      <div class='col-md-4' >" + (" No registrado") + "</div>"
+                            + " </div>";
                 }
 
                 rpta.put("value", html);
@@ -210,9 +206,16 @@ public class CEmpleado extends HttpServlet {
                 Iem.Reg_aps(idtr, co_aps);
                 rpta.put("rpta", "1");
             }
+            if (opc.equals("getAllEmployeesWithOutUserAccount")) {
+                rpta.put("data", Iem.getAllEmployeesWithOutUserAccount());
+            }
+            rpta.put("status", true);
 
         } catch (Exception e) {
+            rpta.put("status", false);
             rpta.put("rpta", "-1");
+
+            rpta.put("message", e.getMessage());
             rpta.put("mensaje", e.getMessage());
         } finally {
             Gson gson = new Gson();

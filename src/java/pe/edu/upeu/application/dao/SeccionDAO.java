@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.edu.upeu.application.dao;
 
 import java.sql.CallableStatement;
@@ -22,8 +21,39 @@ import pe.edu.upeu.application.model.Seccion;
  *
  * @author Jose
  */
-public class SeccionDAO implements InterfaceSeccionDAO{
+public class SeccionDAO implements InterfaceSeccionDAO {
+
     ConexionBD conn;
+
+    @Override
+    public Seccion getSecctionById(String id) {
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select * from RHTR_SECCION where id_seccion='" + id + "'";
+        Seccion s = new Seccion();
+        try {
+            ResultSet rs = this.conn.query(sql);
+            if (rs.next()) {
+                s.setId_seccion(rs.getString("id_seccion"));
+                s.setId_area(rs.getString("id_area"));
+                s.setEs_seccion(rs.getString("es_seccion"));
+                s.setNo_seccion(rs.getString("no_seccion"));
+                s.setNo_corto_sec(rs.getString("No_corto_sec"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error :" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return s;
+    }
+
     @Override
     public List<Seccion> LISTA_RH_SECCION() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -31,9 +61,9 @@ public class SeccionDAO implements InterfaceSeccionDAO{
         List<Seccion> list = new ArrayList<Seccion>();
         try {
             ResultSet rs = this.conn.query(sql);
-          
+
             while (rs.next()) {
-                  Seccion n = new Seccion();
+                Seccion n = new Seccion();
                 n.setId_seccion(rs.getString("id_seccion"));
                 n.setId_area(rs.getString("id_area"));
                 n.setEs_seccion(rs.getString("es_seccion"));
@@ -50,16 +80,16 @@ public class SeccionDAO implements InterfaceSeccionDAO{
 
     @Override
     public String ID_SECCION(String id_puesto) {
-        this.conn=FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql="select ID_SECCION from   RHTR_PUESTO  where ID_PUESTO='"+ id_puesto.trim() +"'";
+        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        String sql = "select ID_SECCION from   RHTR_PUESTO  where ID_PUESTO='" + id_puesto.trim() + "'";
         String id_sec = null;
         try {
-            ResultSet rs=this.conn.query(sql);
-            while(rs.next()){
-                id_sec=rs.getString("ID_SECCION");
+            ResultSet rs = this.conn.query(sql);
+            while (rs.next()) {
+                id_sec = rs.getString("ID_SECCION");
             }
         } catch (SQLException e) {
-        }finally{
+        } finally {
             this.conn.close();
         }
         return id_sec;
@@ -70,7 +100,7 @@ public class SeccionDAO implements InterfaceSeccionDAO{
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select * from RHTR_SECCION where ID_AREA='"+id_are.trim()+"' order by no_seccion ";
+            String sql = "select * from RHTR_SECCION where ID_AREA='" + id_are.trim() + "' order by no_seccion ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -97,7 +127,7 @@ public class SeccionDAO implements InterfaceSeccionDAO{
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * from RHTR_PUESTO where ID_PUESTO='"+ id_pu.trim() +"'";
+            String sql = "SELECT * from RHTR_PUESTO where ID_PUESTO='" + id_pu.trim() + "'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -123,7 +153,7 @@ public class SeccionDAO implements InterfaceSeccionDAO{
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT ID_SECCION from RHTR_PUESTO where ID_PUESTO='"+id_pu.trim()+"'";
+            String sql = "SELECT ID_SECCION from RHTR_PUESTO where ID_PUESTO='" + id_pu.trim() + "'";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -149,7 +179,7 @@ public class SeccionDAO implements InterfaceSeccionDAO{
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select * from RHTR_SECCION where ID_AREA='"+id_are.trim()+"' order by no_seccion ";
+            String sql = "select * from RHTR_SECCION where ID_AREA='" + id_are.trim() + "' order by no_seccion ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -172,12 +202,13 @@ public class SeccionDAO implements InterfaceSeccionDAO{
         }
         return lista;
     }
+
     @Override
     public List<Map<String, ?>> List_sec_ida_Es(String id_are) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select * from RHTR_SECCION where ID_AREA='"+id_are.trim()+"' and ES_SECCION='1' order by no_seccion ";
+            String sql = "select * from RHTR_SECCION where ID_AREA='" + id_are.trim() + "' and ES_SECCION='1' order by no_seccion ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -208,9 +239,9 @@ public class SeccionDAO implements InterfaceSeccionDAO{
         List<Seccion> list = new ArrayList<Seccion>();
         try {
             ResultSet rs = this.conn.query(sql);
-          
+
             while (rs.next()) {
-                  Seccion n = new Seccion();
+                Seccion n = new Seccion();
                 n.setNo_seccion(rs.getString("NO_SECCION"));
                 list.add(n);
             }
@@ -342,10 +373,10 @@ public class SeccionDAO implements InterfaceSeccionDAO{
 
     @Override
     public List<Map<String, ?>> List_sec_es(String idArea) {
-         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
+        List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select * from RHTR_SECCION where ID_AREA='"+idArea.trim()+"'  and ES_SECCION='1' order by no_seccion ";
+            String sql = "select * from RHTR_SECCION where ID_AREA='" + idArea.trim() + "'  and ES_SECCION='1' order by no_seccion ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -366,5 +397,5 @@ public class SeccionDAO implements InterfaceSeccionDAO{
         }
         return lista;
     }
-    
+
 }

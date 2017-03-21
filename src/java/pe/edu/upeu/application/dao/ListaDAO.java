@@ -190,7 +190,7 @@ public class ListaDAO implements InterfaceListaDAO {
         List<String> list = new ArrayList<String>();
         list.add("Integra");
         list.add("Prima");
-        list.add("Profuturo");
+        list.add("Profuturo");  
         list.add("Horizonte");
         list.add("Habitat");
         list.add("Ninguno");

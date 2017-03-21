@@ -53,5 +53,7 @@ public interface InterfaceUsuarioDAO {
             String LI_DI_DOM_A_D3, String DI_DOM_A_D4, String LI_DI_DOM_A_D5, String DI_DOM_A_D6, String DI_DOM_A_REF, String ID_DI_DOM_A_DISTRITO, String ID_TRABAJADOR, String US_MODIF, String IP_USUARIO);
 
     public void Mod_Clave(String id_usuario, String pwd, String us_modif);
+    
+    public Boolean validateIfUserNameExists(String userName);
 
 }

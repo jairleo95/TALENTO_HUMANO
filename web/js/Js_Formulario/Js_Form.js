@@ -80,6 +80,26 @@ function initFormPlugins() {
 
 
 }
+function validateFieldUnique(valueValidate, urlPost, opc, dataAdit) {
+    var x = false;
+    valueValidate = valueValidate.trim();
+    $.ajax({
+        async: false,
+        url: urlPost,
+        type: "POST",
+        data: "opc=" + opc + "&fieldUnique=" + valueValidate + dataAdit,
+        success: function (objJson) {
+            objJson = JSON.parse(objJson);
+            var exists = objJson.exists;
+            if (exists) {
+                x = false;
+            } else {
+                x = true;
+            }
+        }
+    });
+    return x;
+}
 function calcular_edad(fecha) {
     /* format 2016-12-11 yyyy-mm-dd
      * 09
@@ -120,8 +140,7 @@ function list_select(objSelect, url, datos, opc, id, selectText) {
         }
         var lista = objJson.lista;
         if (lista.length > 0) {
-            if (selectText !== "") {
-
+            if (typeof selectText !== "undefined" & selectText !== null & selectText !== "") {
                 objSelect.append("<option value=''>[" + selectText + "]</option>");
             } else {
                 console.log("enter to else condition ...")
@@ -165,7 +184,7 @@ function list_select(objSelect, url, datos, opc, id, selectText) {
     }
 
 }
-function list_selectJavaBeans(objSelect, url, datos, id_select, opcion_select, opc, id) {
+function list_selectJavaBeans(objSelect, url, datos, id_select, opcion_select, opc, id, callback) {
     var text_html = "";
     objSelect.empty();
     objSelect.removeClass("chosen-select");
@@ -193,10 +212,13 @@ function list_selectJavaBeans(objSelect, url, datos, id_select, opcion_select, o
                 }
             }
         } else {
-            objSelect.append("<option value=''>[NO DATA]</option>");
+            objSelect.append("<option value=''>[No data]</option>");
         }
         objSelect.append(text_html);
         text_html = "";
+        if (typeof callback === "function") {
+            callback(objJson);
+        }
         if (opc == "3" | opc == "4") {
             objSelect.addClass("chosen-select");
             $(".chosen-select").trigger("chosen:updated");

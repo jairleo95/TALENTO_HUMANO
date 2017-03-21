@@ -13,9 +13,10 @@ $(document).ready(function () {
         guardar = false;
         if (guardar) {
             $('#myModalEdit').modal();
-        } else {
+            $('.cDia').show(200);
+        } else if ($(".formDGP").valid()) {
             enableElements($('.cDia'));
-            $('.cDia').hide(500);
+            $('.cDia').hide(200);
             $('.formDGP').submit();
         }
 
@@ -29,9 +30,8 @@ $(document).ready(function () {
         $.post("../../formato_horario", data, function () {
             cargar_horarios($('.t_horario'), true, $('.modNombre').val());
         });
-
     });
-    $('.select-seccion').change(function(){
+    $('.select-seccion').change(function () {
         console.log("cambiando horarios");
         cargar_horarios($('.t_horario'));
     });
@@ -75,6 +75,7 @@ function llenar_horario(valor) {
             }
 
         }
+        $('.cDia').show(200);
     });
     nInputs = $('.cDia input').size();
 
@@ -143,14 +144,14 @@ function plHeader(cont) {
     var t = "";
     t += '<div class="row">';
     t += '<div class="col col-12">';
-    t += '<center><h2>Horario</h2></center>';
+    t += '<center><h2 class="text-primary">Horario</h2></center>';
     t += '</div>';
     t += '</div>';
     t += '<fieldset>';
     t += '<div class="col col-12">';
     t += '<div class="col col-sm-12">';
     t += '<div class="smart-form">';
-    t += '<label>Tipo de Horario</label>';
+    t += '<label class="text-primary">Tipo de Horario</label>';
     t += '<label class="select">';
     t += '<select class="t_horario" name="HORARIO">';
     t += '<option>Seleccione</option>';
@@ -193,20 +194,20 @@ function plHeader(cont) {
 }
 function disableElements(el) {
     for (var i = 0; i < el.length; i++) {
-        if(el[i].value!==undefined){
-            el[i].readOnly=true;
-        }else{
-          el[i].disabled=true;  
+        if (el[i].value !== undefined) {
+            el[i].readOnly = true;
+        } else {
+            el[i].disabled = true;
         }
         disableElements(el[i].children);
     }
 }
 function enableElements(el) {
     for (var i = 0; i < el.length; i++) {
-        if(el[i].value!==undefined){
+        if (el[i].value !== undefined) {
             el[i].removeAttribute("readOnly");
-        }else{
-          el[i].removeAttribute("disabled");  
+        } else {
+            el[i].removeAttribute("disabled");
         }
         enableElements(el[i].children);
     }

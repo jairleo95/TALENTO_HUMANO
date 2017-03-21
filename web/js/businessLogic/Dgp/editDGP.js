@@ -746,7 +746,7 @@ $(document).ready(function () {
     $("#nu_cuen").numeric();
     $("#nu_cuen_ban").numeric();
     showEsDiezmo();
-    ListCentroCostoDGP($(".iddgp").val());
+    listCentoCostoByDGP($(".iddgp").val());
     listar_tipo_horario();
     listar_horas();
     $("#banco").change(function () {

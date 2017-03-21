@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceFormato_HorarioDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Formato_Horario;
@@ -67,7 +69,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
                 list.add(tih);
             }
         } catch (Exception e) {
-            System.out.println("Error al mostrar el tipo de horario : "+e);
+            System.out.println("Error al mostrar el tipo de horario : " + e);
         } finally {
             this.conn.close();
         }
@@ -150,13 +152,14 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
         return Lista;
 
     }
+
     @Override
     public List<Map<String, ?>> List_Tipo_HorarioDep(String iddep) {
 
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  * from RHTR_TIPO_HORARIO where trim(es_horario) ='1' AND ( ID_DEPARTAMENTO='"+iddep+"' OR ID_DEPARTAMENTO IS NULL) ";
+            String sql = "select  * from RHTR_TIPO_HORARIO where trim(es_horario) ='1' AND ( ID_DEPARTAMENTO='" + iddep + "' OR ID_DEPARTAMENTO IS NULL) ";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -179,13 +182,21 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
         return Lista;
 
     }
+
     @Override
     public List<Map<String, ?>> List_Tipo_HorarioSec(String idsec) {
 
         List<Map<String, ?>> Lista = new ArrayList<Map<String, ?>>();
+        InterfaceSeccionDAO s = new SeccionDAO();
+        InterfaceAreaDAO a = new AreaDAO();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "select  * from RHTR_TIPO_HORARIO where trim(es_horario) ='1' AND ( ID_SECCION='"+idsec+"' OR ID_SECCION IS NULL) ";
+
+            String idArea = s.getSecctionById(idsec).getId_area();
+            String idDepartamento = a.getAreaById(idArea).getId_departamento();
+            String sql = "select  * from RHTR_TIPO_HORARIO where trim(es_horario) ='1' AND ( ID_SECCION='" + idsec + "' OR ID_SECCION IS NULL) ";
+            sql += (idDepartamento != null) ? " and (ID_DEPARTAMENTO='" + idDepartamento + "' or id_departamento is null) " : "";
+            sql += (idArea != null) ? " and (id_area='" + idArea + "' or id_area is null) " : "";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
@@ -395,13 +406,13 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
 
     @Override
     public String ultimo_Tipo_Horario() {
-        String id="";
+        String id = "";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             String sql = "SELECT MAX(ID_TIPO_HORARIO) AS IDTH FROM RHTR_TIPO_HORARIO";
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
-                id=rs.getString("IDTH");
+                id = rs.getString("IDTH");
             }
             rs.close();
         } catch (SQLException e) {
@@ -471,7 +482,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
 
     @Override
     public void StatUpdate(String id, String es) {
-        try{
+        try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall("{CALL RHSP_UPDATE_TIPO_HORARIO(?,?)}");
             cst.setString(1, id);
@@ -480,7 +491,7 @@ public class Formato_HorarioDAO implements InterfaceFormato_HorarioDAO {
         } catch (SQLException ex) {
             System.out.println(ex);
             throw new RuntimeException(ex.getMessage());
-        }finally{
+        } finally {
             this.conn.close();
         }
     }

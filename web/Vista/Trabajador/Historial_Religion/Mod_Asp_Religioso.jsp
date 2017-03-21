@@ -146,7 +146,7 @@
                                                                     <div class="form-group">
                                                                         <label>Religión:</label>
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="RELIGION"   required=""   class="form-control input-group-sm" id="reli">
                                                                                 <option value="" disabled="" selected="">[SELECCIONE]</option> 
                                                                                 <%if (trb.getLi_religion() != null) {
@@ -179,7 +179,7 @@
                                                                     <div class="form-group">
                                                                         <label>Nombre de la Iglesia:</label>
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm" value="<%if (trb.getNo_iglesia() != null) {
                                                                                     out.print(trb.getNo_iglesia());
                                                                                 } else {
@@ -193,12 +193,12 @@
                                                                     <div class="form-group">
                                                                         <label>Cargo en la Iglesia:</label>
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm" value="<%if (trb.getDe_cargo() != null) {
                                                                                     out.print(trb.getDe_cargo());
                                                                                 } else {
                                                                                     out.print("");
-                                                                                }%>" type="text" name="CARGO"  id="ca_igle">
+                                                                            }%>" type="text" name="CARGO"  id="ca_igle" maxlength="100">
 
                                                                         </div>
                                                                     </div>
@@ -208,7 +208,7 @@
                                                                     <div class="form-group">
                                                                         <label>Autoridad:</label>
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <select name="AUTORIDAD"   required=""   class="form-control input-group-sm">
                                                                                 <option value=""  selected="">[SELECCIONE]</option> 
                                                                                 <% if (trb.getLi_autoridad() != null) {
@@ -242,7 +242,7 @@
                                                                     <div class="form-group">
                                                                         <label>Nombre y Apellidos (Autoridad):</label>
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm" value="<%if (trb.getNo_ap_autoridad() != null) {
                                                                                     out.print(trb.getNo_ap_autoridad());
                                                                                 } else {
@@ -257,7 +257,7 @@
                                                                     <div class="form-group">
                                                                         <label>Telefono/Celular:</label>
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
                                                                             <input class="form-control input-group-sm" value="<%if (trb.getCl_autoridad() != null) {
                                                                                     out.print(trb.getCl_autoridad());
                                                                                 } else {

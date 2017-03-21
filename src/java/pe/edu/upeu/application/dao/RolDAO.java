@@ -219,21 +219,28 @@ public class RolDAO implements InterfaceRolDAO {
     @Override
     public List<Map<String, ?>> List_rol() {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHTR_ROL";
-        List<Map<String,?>> list = new ArrayList<>();
+        String sql = "select * from RHTR_ROL order by no_rol asc";
+        List<Map<String, ?>> list = new ArrayList<>();
         try {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
-                Map<String,Object> rec= new HashMap<>();
+                Map<String, Object> rec = new HashMap<>();
                 rec.put("id_rol", rs.getString("id_rol"));
                 rec.put("no_rol", rs.getString("no_rol"));
                 rec.put("es_rol", rs.getString("es_rol"));
                 list.add(rec);
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         return list;
@@ -242,21 +249,28 @@ public class RolDAO implements InterfaceRolDAO {
     @Override
     public List<Map<String, ?>> List_rol(String idRol) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "select * from RHTR_ROL where id_rol="+idRol;
-        List<Map<String,?>> list = new ArrayList<>();
+        String sql = "select * from RHTR_ROL where id_rol=" + idRol;
+        List<Map<String, ?>> list = new ArrayList<>();
         try {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {
-                Map<String,Object> rec= new HashMap<>();
+                Map<String, Object> rec = new HashMap<>();
                 rec.put("id_rol", rs.getString("id_rol"));
                 rec.put("no_rol", rs.getString("no_rol"));
                 rec.put("es_rol", rs.getString("es_rol"));
                 list.add(rec);
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("ERROR : " + e.getMessage());
         } finally {
-            this.conn.close();
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         return list;

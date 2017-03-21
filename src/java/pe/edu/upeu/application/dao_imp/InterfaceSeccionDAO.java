@@ -15,6 +15,8 @@ import pe.edu.upeu.application.model.Seccion;
  */
 public interface InterfaceSeccionDAO {
 
+    public Seccion getSecctionById(String idSeccion);
+
     public List<Seccion> LISTA_RH_SECCION();
 
     public List<Seccion> LISTA_RH_SECCION_LIMA();
@@ -24,16 +26,23 @@ public interface InterfaceSeccionDAO {
     public List<Map<String, ?>> List_sec_id(String id_are);
 
     public List<Map<String, ?>> List_sec_ida(String id_are);
+
     public List<Map<String, ?>> List_sec_ida_Es(String id_are);
 
     public List<Map<String, ?>> List_pu_id(String id_pu);
 
     public List<Map<String, ?>> selec_sec(String id_pu);
+
     //MANTENIMIENTO
     public List<Map<String, ?>> List_sec_es(String idArea);
+
     public boolean crear_seccion(String nombre, String ncorto, String estado, String idArea);
-    public boolean editar_seccion(String id, String nombre, String ncorto, String estado , String idArea);
+
+    public boolean editar_seccion(String id, String nombre, String ncorto, String estado, String idArea);
+
     public boolean activar_seccion(String id);
+
     public boolean desactivar_seccion(String id);
+
     public boolean eliminar_seccion(String id);
 }

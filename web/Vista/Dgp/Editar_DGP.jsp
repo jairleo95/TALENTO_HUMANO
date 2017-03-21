@@ -84,8 +84,6 @@
         <link href="../../css/businessLogic/Dgp/editDGP.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>   
-
-
         <div id="main" role="main" style="margin: 0px;">
 
 
