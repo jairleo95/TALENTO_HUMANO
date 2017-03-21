@@ -91,7 +91,6 @@
         </div>
     </div>
 </div>
-
 <!-- PAGE RELATED PLUGIN(S) -->
 <script type="text/javascript">
     pageSetUp();
@@ -99,7 +98,7 @@
         console.log("::enter to pagefunction");
         initCAGlobalEvents();
         initFormPlugins();
-        initDatatableEvents();
+        // initDatatableEvents();
         initDatatableCargaAcademica();
         console.log("::finish to pagefunction");
     };
