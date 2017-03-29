@@ -153,7 +153,6 @@
                                                             tr = (V_Ficha_Trab_Num_C) Listar_Trabajador_id.get(i);
                                                     %>
                                                     <div class="row">
-                                                        <input value=""  type="hidden" id="" />
                                                         <section class="col col-6">
                                                             <label class="label" id="titu">Trabajador :</label>
                                                             <label class="input" style="color: red; font-weight: bold;">
@@ -259,12 +258,12 @@
                                                             <label class="input" id="titu">Fecha de Inicio :
                                                                 <input type="text" name="FEC_DESDE"  required="" 
                                                                        class="frompicker"
-                                                                       min="<%=fecha_maxima_plazo%>" value="<%=(dg.getFe_desde())%>" data-mask="99/99/9999" data-mask-placeholder= "_">
+                                                                       value="<%=(dg.getFe_desde())%>" data-mask="99/99/9999" data-mask-placeholder= "_">
                                                             </label>
                                                         </section>
                                                         <section class="col col-6">
                                                             <label class="input"  id="titu">Fecha de Cese :
-                                                                <input type="text" name="FEC_HASTA"  required=""  value="<%=(dg.getFe_hasta())%>" class="topicker" min="<%=fecha_maxima_plazo%>"  
+                                                                <input type="text" name="FEC_HASTA"  required=""  value="<%=(dg.getFe_hasta())%>" class="topicker" 
                                                                        data-mask="99/99/9999" data-mask-placeholder= "_">
                                                             </label>
                                                         </section>
