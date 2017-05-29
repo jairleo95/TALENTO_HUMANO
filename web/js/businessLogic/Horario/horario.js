@@ -51,7 +51,7 @@ function listHorario(id_dgp) {
                     $(".data" + l[j] + "").append(t);
                 }
             }
-            $(".dataHor").dataTable();
+          //  $(".dataHor").dataTable();
         } else {
             $(".conTablas").empty();
             $(".conTablas").append('<div class="alert alert-danger">No sujeto a fiscalización</div>');

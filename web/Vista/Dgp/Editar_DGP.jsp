@@ -147,7 +147,6 @@
                                                 %>
                                                 <fieldset>
                                                     <%                                                        /*Temporal*/
-
                                                         for (int i = 0; i < Listar_Trabajador_id.size(); i++) {
                                                             V_Ficha_Trab_Num_C tr = new V_Ficha_Trab_Num_C();
                                                             tr = (V_Ficha_Trab_Num_C) Listar_Trabajador_id.get(i);
@@ -157,7 +156,7 @@
                                                             <label class="label" id="titu">Trabajador :</label>
                                                             <label class="input" style="color: red; font-weight: bold;">
                                                                 <%=tr.getAp_paterno() + " " + tr.getAp_materno() + " " + tr.getNo_trabajador()%>
-                                                                <input type="hidden" value="<%=tr.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="id_tr input-xs">
+                                                                <input type="hidden" value="<%=tr.getId_trabajador()%>" name="IDDATOS_TRABAJADOR" class="id_tr input-xs idtr">
                                                                 <%}%>
                                                             </label>
                                                         </section>

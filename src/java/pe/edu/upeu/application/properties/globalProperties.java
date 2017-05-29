@@ -25,7 +25,7 @@ public class globalProperties {
 
 
     /*oracle bd connection */
-    public static final String HOSTNAME = "192.168.1.15";
+    public static final String HOSTNAME = "192.168.1.18";
    // public static final String HOSTNAME="procesrh-db.upeu";
     public static final String USER = "procesosrh";
     public static final String USER_PWD = "gestionrrhh";

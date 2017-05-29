@@ -118,9 +118,6 @@
                             if (Integer.parseInt(n.getEs_secre_is()) == 1) {
                                 out.print("checked");
                             } %> ><i data-swchon-text='SI' data-swchoff-text='NO'></i></label></div>
-
-
-
                         <%}%> 
                     </div>
 
@@ -157,11 +154,8 @@
                             <a class="btn btn-labeled btn-primary" href="../../contrato?opc=Editar&idc=<%=n.getId_contrato()%>&idtr=<%=request.getParameter("idtr")%>&id_dg=<%=n.getId_dgp()%>" > <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Editar</a>
                                     <%}
                                         }%>
-
-
                         </div>
                     </div>
-
                 </div>
                 <br>
                 <p class="alert alert-info"><i class="fa fa-info"></i> ¡Una vez procesado la informacion usted ya no podra editar este contrato!</p>
@@ -520,14 +514,8 @@
             </table>
 
         </div>
-
-
-
         <%}
-
         %>
-
-
         <%}%>
         <!-------------- Modal  ----------->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -549,16 +537,12 @@
         </div>
     </body>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
     <script>
         if (!window.jQuery) {
             document.write('<script src="../../js/libs/jquery-2.1.1.min.js"><\/script>');
         }
     </script>
-
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-
-
     <script>
         if (!window.jQuery.ui) {
             document.write('<script src="../../js/libs/jquery-ui-1.10.3.min.js"><\/script>');

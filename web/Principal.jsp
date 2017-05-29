@@ -77,10 +77,11 @@
         </style>
 
     </head>
+     
     <body class="smart-style-1 fixed-header fixed-footer"  onload="nobackbutton();
             document.getElementById('link').click()">
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
-
+ 
         <!-- HEADER -->
         <header id="header">
             <div id="logo-group" >
@@ -432,18 +433,6 @@
                         <%}%>
                 </ol>
                 <!-- end breadcrumb -->
-
-                <!-- You can also add more buttons to the
-                ribbon for further usability
-
-                Example below:
-
-                <span class="ribbon-button-alignment pull-right">
-                <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
-                <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
-                <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
-                </span> -->
-
             </div>
             <!-- END RIBBON -->
             <!-- MAIN CONTENT -->
@@ -457,8 +446,7 @@
                     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
                         <div class="animacion_load"></div>
                     </div>
-                    
-                    <iframe id="myframe" name="myframe" class="iframe_principal" scrolling="si"  width="100%" height="800" frameborder="0"  src="Vista/inicio.jsp"></iframe>
+                    <iframe id="myframe" name="myframe" class="iframe_principal" scrolling="si"  width="100%" height="2000" frameborder="0"  src="Vista/inicio.jsp"></iframe>
                 </div>
                 <!-- end row -->
                 <!-- end widget grid -->
@@ -550,6 +538,10 @@
             </ul>
         </div>
         <!-- END SHORTCUT AREA -->
+        <!--Modal content-->
+        <div class="modalContent"></div>
+        <!--End Modal content-->
+
 
         <!--================================================== -->
 

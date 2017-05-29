@@ -1,6 +1,4 @@
-moda
-
-<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
+ <%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.util.DateFormat"%>
 <%
     HttpSession sesion_1 = request.getSession();
@@ -35,7 +33,6 @@ moda
         <meta name="author" content="">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
         <!-- Basic Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
@@ -109,6 +106,8 @@ moda
             }
         </style>
     </head>
+
+    
     <%          if (request.getParameter("ms") != null) {
             if (request.getParameter("ms").equals("ok")) {
     %>
@@ -139,9 +138,8 @@ moda
             String id_pasos = request.getParameter("pas");
             String nropaso = request.getParameter("np");
             String edit = request.getParameter("edit");
-
-
         %>
+   
         <!--Begin Detalle Trabajador-->
         <div id="main" role="main" style="margin-left: 0px;">
             <div id="content" >
@@ -169,7 +167,7 @@ moda
                                     </button>
                                 </div>
                                 <%}
-                                }%>
+                                    }%>
                                 <div class="row" style="padding-bottom: 10px;">
                                     <div class="col-md-4">
                                         <div class="media">
@@ -249,30 +247,22 @@ moda
                                         </div>
                                         <%}%>
                                         <div class="row_afp_sp"></div>
-
                                     </div>
-
                                     <div class="col-md-4">
-
                                         <% InterfaceTrabajadorDAO iTr = new TrabajadorDAO();
-                                        int porcentaje = iTr.ShowPorcentageTrabajador(idtr);%>
+                                            int porcentaje = iTr.ShowPorcentageTrabajador(idtr);%>
                                         <center><strong>Completado: </strong>
                                             <div class="showPorcentage">
                                                 <div class="easy-pie-chart txt-color-blue easyPieChart pcDatosCompTrabajador" data-percent="<%=porcentaje%>" data-pie-size="100"  >
                                                     <span class="percent percent-sign txt-color-blue font-lg semi-bold spDatosCompTrabajador"><%=porcentaje%></span>
                                                 </div>
-
                                             </div>
-
                                         </center>
                                     </div>
                                 </div>
                                 <!-- FIN DE codigos aps y huella-->
                                 <!-- widget div-->
-
-
                                 <div class="row" style="padding: 0px;">
-
                                     <ul  class="nav nav-tabs bordered tab_detalle_trabajador">
                                         <%
                                             if (List_Auto_mostrar.size() == 1 && aut != null) {
@@ -284,7 +274,7 @@ moda
                                             <a href="<%=a.getDi_url() + "&iddgp=" + iddgp + "&idtr=" + trb.getId_trabajador()%>" target="myframe2"><i class="fa fa-file-text fa-gear"></i> Datos de Requerimientos</a>
                                         </li>
                                         <%}
-                                        }%>
+                                            }%>
                                         <%if (iddep != null) {
 
                                                 if ((iddep.equals("DPT-0019") || idrol.trim().equals("ROL-0012") || idrol.trim().equals("ROL-0005"))) {
@@ -293,7 +283,7 @@ moda
                                             <a href="../../contrato?idtr=<%=idtr%>&opc=Detalle_Contractual" target="myframe2"  ><i class="fa fa-file-text fa-gear"></i> Información Contractual </a>
                                         </li>
                                         <%}
-                                        }%>
+                                            }%>
                                         <li >
                                             <a href="Datos_Generales.jsp?edit=<%=edit%>" target="myframe2"  ><i class="fa fa-male fa-gear"></i> Información General </a>
                                         </li>
@@ -364,27 +354,16 @@ moda
 
                             </div>      
                         </article>
-
-
                     </div>
                 </section>
-
-
-
             </div>
-
         </div>
-
-
-
         <!-- end TABS-->
         <div >
             <%
 
                 if (aut != null) {
                     if (aut.equals("1")) {
-
-
             %>
             <center>
                 <form class="form-aut" action="../../autorizacion" method="post" > 

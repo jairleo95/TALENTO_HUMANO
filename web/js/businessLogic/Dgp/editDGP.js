@@ -541,13 +541,15 @@ function calcular_sueldo_total() {
 }
 function showEsDiezmo() {
     var obj = $(".div_input_diezmo");
-    obj.hide(100);
+    console.log("enter to function showEsDiezmo");
+    obj.show();
     obj.empty();
+    obj.append('<br><div class="col col-md-12 text-center"><i class="fa fa-spin fa-spinner"></i></div>');
     $.ajax({
         url: "../../trabajador", data: "opc=ShowEsDiezmoTrabajador&id=" + $(".idtr").val(), type: 'POST', success: function (data, textStatus, jqXHR) {
             if (data.rpta) {
+                obj.empty();
                 obj.append(data.html);
-                obj.show(100);
                 $(".cbkDiezmo").click(function () {
                     $.SmartMessageBox({
                         title: "&iexcl;Alerta!",
@@ -567,6 +569,8 @@ function showEsDiezmo() {
                                                 iconSmall: "fa fa-check fa-2x fadeInRight animated",
                                                 timeout: 6000
                                             });
+                                        } else {
+                                            alert('Error al actualizar.');
                                         }
 
                                     }
@@ -583,6 +587,8 @@ function showEsDiezmo() {
                                                 iconSmall: "fa fa-check fa-2x fadeInRight animated",
                                                 timeout: 6000
                                             });
+                                        } else {
+                                            alert('Error al actualizar.');
                                         }
                                     }
                                 });
@@ -596,6 +602,8 @@ function showEsDiezmo() {
 
 
                 });
+            }else{
+                 alert('Error al cargar.');
             }
         }
     });

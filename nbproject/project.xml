@@ -5,13 +5,10 @@
         <data xmlns="http://www.netbeans.org/ns/web-project/3">
             <name>TALENTO_HUMANO</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
+            <explicit-platform explicit-source-supported="true"/>
             <web-module-libraries>
                 <library dirs="200">
                     <file>${file.reference.javaee-api-7.0.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.json_simple.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
@@ -35,11 +32,15 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+                    <file>${file.reference.ojdbc6.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
                     <file>${file.reference.json-20160212.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.ojdbc6.jar}</file>
+                    <file>${file.reference.json_simple.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>

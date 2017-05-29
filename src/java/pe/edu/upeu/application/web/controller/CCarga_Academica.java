@@ -39,11 +39,10 @@ import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceUbigeoDAO;
 import pe.edu.upeu.application.model.DGP;
 import pe.edu.upeu.application.model.V_Detalle_Carga_Academica;
+import pe.edu.upeu.application.properties.Strings;
 import pe.edu.upeu.application.properties.UserMachineProperties;
 import pe.edu.upeu.application.properties.globalProperties;
 import pe.edu.upeu.application.util.DateFormat;
-import pe.edu.upeu.application.util.WebServiceClient;
-import sun.awt.AppContext;
 
 /**
  *
@@ -65,8 +64,7 @@ public class CCarga_Academica extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        Map<String, Object> rpta = new HashMap<String, Object>();
-
+        Map<String, Object> dataMap = new HashMap<String, Object>();
         InterfaceCarga_AcademicaDAO carga = new Carga_AcademicaDAO();
         InterfaceTrabajadorDAO tr = new TrabajadorDAO();
         InterfaceListaDAO li = new ListaDAO();
@@ -86,8 +84,8 @@ public class CCarga_Academica extends HttpServlet {
             if (opc.equals("validateTrabajador")) {
                 String dni = request.getParameter("nro_doc");
                 String idtr = carga.DNI_ID_TRABAJADOR(dni);
-                rpta.put("validateData", (!idtr.equals("")));
-                rpta.put("status", true);
+                dataMap.put("validateData", (!idtr.equals("")));
+                dataMap.put("status", true);
             }
             if (opc.equals("Completar_Datos")) {
                 String eap = request.getParameter("eap");
@@ -122,11 +120,11 @@ public class CCarga_Academica extends HttpServlet {
                 String iddgp = CCriptografiar.Desencriptar(request.getParameter("dgp"));
                 String idpro = CCriptografiar.Desencriptar(request.getParameter("proceso"));
                 carga.PROCESAR_CARGA_ACADEMICA(idpro, iddgp);
-                rpta.put("status", true);
+                dataMap.put("status", true);
             }
             if (opc.equals("listCargaAcademica")) {
-                rpta.put("data", carga.ListCarAca());
-                rpta.put("status", true);
+                dataMap.put("data", carga.ListCarAca());
+                dataMap.put("status", true);
             }
             if (opc.equals("Reporte_Carga_Academica")) {
                 response.sendRedirect("Vista/Academico/Carga_Academica/Rep_Carga_Academica.jsp");
@@ -136,8 +134,8 @@ public class CCarga_Academica extends HttpServlet {
             }
             if (opc.equals("updateCAData")) {
                 System.out.println("::Enter to update CA");
-                rpta.put("responseWSCA", carga.syncupCargaAcademica(semestre, globalProperties.DOCENTESXCURSO_METHOD));
-                rpta.put("status", true);
+                dataMap.put("responseWSCA", carga.syncupCargaAcademica(semestre, globalProperties.DOCENTESXCURSO_METHOD));
+                dataMap.put("status", true);
             }
 
             if (opc.equals("Registrar_CA")) {
@@ -198,9 +196,9 @@ public class CCarga_Academica extends HttpServlet {
                 List<String> list = a.Det_Autorizacion(idrp);
                 a.Insert_Autorizacion("", iddgp.trim(), "1", "P1", "", iduser, "", "", "", list.get(1).trim(), idrp.trim(), list.get(0));
 
-                rpta.put("dgp", CCriptografiar.Encriptar(iddgp));
-                rpta.put("proceso", CCriptografiar.Encriptar(idrp));
-                rpta.put("rpta", true);
+                dataMap.put("dgp", CCriptografiar.Encriptar(iddgp));
+                dataMap.put("proceso", CCriptografiar.Encriptar(idrp));
+                dataMap.put("rpta", true);
             }
             if (opc.equals("getDetCargaAcademica")) {
                 String eap = request.getParameter("eap");
@@ -208,18 +206,18 @@ public class CCarga_Academica extends HttpServlet {
                 String dni = request.getParameter("nro_doc");
                 String ciclo = request.getParameter("ciclo");
                 String idtr = CCriptografiar.Desencriptar(request.getParameter("idtr"));
-                rpta.put("list", carga.Lista_detalle_academico(idtr, facu, eap, ciclo, dni));
+                dataMap.put("list", carga.Lista_detalle_academico(idtr, facu, eap, ciclo, dni));
             }
             if (opc.equals("List_ws")) {
-                rpta.put("List_ws", carga.List_Carga_Academica_WS(semestre));
+                dataMap.put("List_ws", carga.List_Carga_Academica_WS(semestre));
             }
             if (opc.equals("listEsCargaAcademica")) {
-                rpta.put("list", dgp.LIST_DGP_PROCESO(iddep, "", "", true));
+                dataMap.put("list", dgp.LIST_DGP_PROCESO(iddep, "", "", true));
             }
             if (opc.equals("getProcesoCargaAcademicaById")) {
                 String id = CCriptografiar.Desencriptar(request.getParameter("id"));
-                rpta.put("item", carga.getProcesoCargaAcademciaById(id));
-                rpta.put("status", true);
+                dataMap.put("item", carga.getProcesoCargaAcademciaById(id));
+                dataMap.put("status", true);
             }
             if (opc.equals("statusSyncUpCargaAcademica")) {
                 System.out.println("::statusSyncUpCargaAcademica");
@@ -227,12 +225,12 @@ public class CCarga_Academica extends HttpServlet {
                 if (getServletContext().getAttribute("runnableCA") != null) {
                     ScheduledFuture y = (ScheduledFuture) getServletContext().getAttribute("runnableCA");
                     //System.out.println("schedule properties:" + y.get().toString());
-                    rpta.put("scheduleProperties", null);
+                    dataMap.put("scheduleProperties", null);
                     x = true;
                 } else if (getServletContext().getAttribute("runnableCA") == null) {
                     x = false;
                 }
-                rpta.put("statusSyncUp", x);
+                dataMap.put("statusSyncUp", x);
             }
             if (opc.equals("initUpdateCAData")) {
                 Boolean x = false;
@@ -246,10 +244,10 @@ public class CCarga_Academica extends HttpServlet {
                     System.out.println("ScheduledFuture:" + sc.toString());
                     x = true;
                 } else {
-                    rpta.put("message", "La tarea ya esta activa.");
+                    dataMap.put("message", "La tarea ya esta activa.");
                 }
 
-                rpta.put("runUpdateCAData", x);
+                dataMap.put("runUpdateCAData", x);
 
             }
             if (opc.equals("stopSyncUpCargaAcademica")) {
@@ -263,19 +261,19 @@ public class CCarga_Academica extends HttpServlet {
                     getServletContext().setAttribute("runnableCA", null);
                     System.out.println("----Update finished.");
                 } else {
-                    rpta.put("message", "No se encontró la tarea o no hay ninguna activa");
+                    dataMap.put("message", "No se encontró la tarea o no hay ninguna activa");
                 }
-                rpta.put("cancelProcess", x);
+                dataMap.put("cancelProcess", x);
             }
-            rpta.put("status", true);
+            dataMap.put("status", true);
         } catch (Exception e) {
-            rpta.put("status", false);
-            rpta.put("rpta", false);
-            rpta.put("mensaje", e.getMessage());
-            rpta.put("message", e.getMessage().toString());
+            dataMap.put("status", false);
+            dataMap.put("rpta", false);
+            dataMap.put("message", e.getMessage());
+            dataMap.put("errorMessage", Strings.ERROR_MESSAGE);
         } finally {
             Gson gson = new Gson();
-            out.print(gson.toJson(rpta));
+            out.print(gson.toJson(dataMap));
             out.flush();
             out.close();
         }

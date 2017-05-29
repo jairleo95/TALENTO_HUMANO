@@ -9,6 +9,12 @@ var btnclose = 0;
 document.oncontextmenu = function () {
     return false;
 };
+function scrolingToTop(size) {
+    console.log('scrolling to top...');
+    $('html, body').animate({
+        scrollTop: $("body").offset().top
+    }, size);
+}
 function nobackbutton() {
     window.location.hash = "no-back-button";
     window.location.hash = "Again-No-back-button" //chrome
@@ -275,14 +281,14 @@ function listAjaxNotificationRec(objOption) {
 }
 
 
+
 $(document).ready(function () {
     var idtra = $('#id_trabajador').val();
     getAvatar("perfil", idtra);
     pageSetUp();
     UpdateNotifications();
     $(".repCargaAcademica").click(function () {
-        // console.log("load html");
-        // alert("carga academica")
+     
         $(".oldContent").hide();
         $(".newContent").show();
         loadURL("carga_academica?opc=Reporte_Carga_Academica", $(".newContent"));
