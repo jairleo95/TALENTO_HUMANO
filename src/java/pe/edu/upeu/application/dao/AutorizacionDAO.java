@@ -26,6 +26,7 @@ import pe.edu.upeu.application.model.X_List_De_Autorizacion;
 import pe.edu.upeu.application.properties.UserMachineProperties;
 import pe.edu.upeu.application.properties.globalProperties;
 import pe.edu.upeu.application.util.DateFormat;
+import pe.edu.upeu.application.util.Sql;
 
 /**
  *
@@ -282,7 +283,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 + "ID_PUESTO, ID_REQUERIMIENTO, ID_TIPO_PLANILLA, NO_REQ, ID_PASOS, NO_USUARIO, ID_USUARIO, NO_SECCION,"
                 + " NO_AREA, FE_CREACION, VAL_PLAZO, AR_FOTO, DE_FOTO, ID_FOTO, NO_AR_FOTO, TA_AR_FOTO, TI_AR_FOTO, VER_LIST_PLAZO, "
                 + "ELAB_CONTRATO, VAL_FIRM_CONTRATO, NO_DEP, MES_CREACION, VAL_COD_APS_EMPLEADO, VAL_COD_HUELLA_EMP, CO_APS, CO_HUELLA_DIGITAL, LI_MOTIVO,"
-                + " ES_MFL, DI_CORREO_PERSONAL, DI_CORREO_INST, VAL_CONTRATO_ADJUNTO ,val_dgp_contrato  from rhvd_autorizar_dgp where id_puesto='" + id_aurotizacion + "'";
+                + " ES_MFL, DI_CORREO_PERSONAL, DI_CORREO_INST, VAL_CONTRATO_ADJUNTO ,val_dgp_contrato,mes_plazo  from rhvd_autorizar_dgp where id_puesto='" + id_aurotizacion + "'";
         sql += (!"".equals(id_user)) ? " and id_usuario='" + id_user + "'" : "";
         sql += (!"".equals(iddgp)) ? " and id_dgp='" + iddgp + "'" : "";
         sql += (true) ? " order by fe_creacion " : "";
@@ -335,6 +336,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 v.setDi_correo_inst(rs.getString("DI_CORREO_INST"));
                 v.setVal_contrato_adjunto(rs.getInt("val_contrato_adjunto"));
                 v.setVal_dgp_cotrato(rs.getInt("val_dgp_contrato"));
+                v.setMes_plazo(rs.getString("mes_plazo"));
                 list.add(v);
             }
             Logger.getLogger(getClass().getName()).log(Level.INFO, sql);
@@ -591,15 +593,71 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
     }
 
     @Override
-    public List<Map<String, ?>> List_Dgp_Autorizados(String id_usuario, int mes, String año) {
+    public List<Map<String, ?>> List_Dgp_Autorizados(String id_usuario, int pageNumber, int pageSize, int mes, String año) {
         List<Map<String, ?>> lista = new ArrayList<Map<String, ?>>();
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            String sql = "SELECT * FROM RHVD_DGP_AUTORIZADOS WHERE US_CREACION='" + id_usuario + "'  and mes_procesamiento is not null";
-            /* sql += (!año.equals("")) ? " AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))='"
+            String queryAuthorizeRequeriments = "SELECT\n"
+                    + "        dgp.id_dgp,\n"
+                    + "        trim(rhfu_mes_procesamiento_dgp(dgp.id_dgp) )\n"
+                    + "         || ' - '\n"
+                    + "         || trim(rhfu_anno_procesamiento_dgp(dgp.id_dgp) ) AS mes_anno_aut,\n"
+                    + "        trim(rhfu_anno_procesamiento_dgp(dgp.id_dgp) ) AS anno_procesamiento,\n"
+                    + "        trim(rhfu_mes_procesamiento_dgp(dgp.id_dgp) ) AS mes_procesamiento,\n"
+                    + "        TO_CHAR(\n"
+                    + "            dgp.fe_creacion,\n"
+                    + "            'MONTH',\n"
+                    + "            'nls_date_language=spanish'\n"
+                    + "        ) AS mes_creacion,\n"
+                    + "        trb.no_trabajador,\n"
+                    + "        trb.ap_paterno,\n"
+                    + "        trb.ap_materno,\n"
+                    + "        pu.no_puesto,\n"
+                    + "        au.id_puesto,\n"
+                    + "        pu.no_area,\n"
+                    + "        pu.no_dep,\n"
+                    + "        req.no_req,\n"
+                    + "        p.de_pasos,\n"
+                    + "        TO_CHAR(\n"
+                    + "            dgp.fe_creacion,\n"
+                    + "            'dd/mm/yy HH:MI:SS'\n"
+                    + "        ) AS fe_creacion,\n"
+                    + "        TO_CHAR(\n"
+                    + "            au.fe_creacion,\n"
+                    + "            'dd/mm/yy HH:MI:SS'\n"
+                    + "        ) AS fe_autorizacion,\n"
+                    + "        dgp.li_motivo,\n"
+                    + "        dgp.es_mfl,\n"
+                    + "        au.us_creacion,\n"
+                    + "        dgp.es_activ_sis_estado,\n"
+                    + "        dgp.es_proc_asignacion_f,\n"
+                    + "        dgp.id_trabajador, %s  \n"
+                    + "    FROM\n"
+                    + "        (select * from rhtv_autorizacion order by fe_creacion desc )  au,\n"
+                    + "        rhtm_dgp dgp,\n"
+                    + "        rhtm_trabajador trb,\n"
+                    + "        rhvd_puesto_direccion pu,\n"
+                    + "        rhtr_requerimiento req,\n"
+                    + "        rhtc_pasos p\n"
+                    + "    WHERE\n"
+                    + "            au.id_dgp = dgp.id_dgp\n"
+                    + "        AND\n"
+                    + "            dgp.id_trabajador = trb.id_trabajador\n"
+                    + "        AND\n"
+                    + "            dgp.id_puesto = pu.id_puesto\n"
+                    + "        AND\n"
+                    + "            dgp.id_requerimiento = req.id_requerimiento\n"
+                    + "        AND\n"
+                    + "            p.id_pasos = au.id_pasos\n"
+                    + "        AND\n"
+                    + "            dgp.es_dgp IS NOT NULL and au.US_CREACION='" + id_usuario + "'"
+                    + "    %s "
+                    //  + " ORDER BY au.fe_creacion DESC";
+                    //  String sql = "SELECT * FROM RHVD_DGP_AUTORIZADOS WHERE US_CREACION='" + id_usuario + "'  and mes_procesamiento is not null";
+                    /* sql += (!año.equals("")) ? " AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))='"
              + (mes + 1) + "' AND TRIM(año_procesamiento)='" + año
              + "' " : "  AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))=to_number(to_char(sysdate,'mm')) AND TRIM(año_procesamiento)=to_char(sysdate,'YYYY') "*/;
-            ResultSet rs = this.conn.query(sql);
+            ResultSet rs = this.conn.query(Sql.queryWithPagination(queryAuthorizeRequeriments, pageNumber, pageSize, "au.fe_creacion"));
             while (rs.next()) {
                 Map<String, Object> rec = new HashMap<String, Object>();
                 rec.put("nombre", rs.getString("no_trabajador"));
@@ -617,6 +675,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 rec.put("mfl", rs.getString("ES_MFL"));
                 rec.put("id_dgp", rs.getString("id_dgp"));
                 rec.put("paso", rs.getString("DE_PASOS"));
+                rec.put("row_number", rs.getString("row_number"));
                 lista.add(rec);
             }
             rs.close();
@@ -633,6 +692,55 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
         }
         return lista;
 
+    }
+
+    @Override
+    public Integer getListAuthorizeRequirementsSize(String id_usuario, int mes, String año) {
+        int size = 0;
+        try {
+            this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            String queryAuthorizeRequeriments = "SELECT count(1)"
+                    + "    FROM\n"
+                    + "        rhtv_autorizacion au,\n"
+                    + "        rhtm_dgp dgp,\n"
+                    + "        rhtm_trabajador trb,\n"
+                    + "        rhvd_puesto_direccion pu,\n"
+                    + "        rhtr_requerimiento req,\n"
+                    + "        rhtc_pasos p\n"
+                    + "    WHERE\n"
+                    + "            au.id_dgp = dgp.id_dgp\n"
+                    + "        AND\n"
+                    + "            dgp.id_trabajador = trb.id_trabajador\n"
+                    + "        AND\n"
+                    + "            dgp.id_puesto = pu.id_puesto\n"
+                    + "        AND\n"
+                    + "            dgp.id_requerimiento = req.id_requerimiento\n"
+                    + "        AND\n"
+                    + "            p.id_pasos = au.id_pasos\n"
+                    + "        AND\n"
+                    + "            dgp.es_dgp IS NOT NULL and au.US_CREACION='" + id_usuario + "'"
+                    + "    ORDER BY au.fe_creacion DESC";
+            //  String sql = "SELECT * FROM RHVD_DGP_AUTORIZADOS WHERE US_CREACION='" + id_usuario + "'  and mes_procesamiento is not null";
+            /* sql += (!año.equals("")) ? " AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))='"
+             + (mes + 1) + "' AND TRIM(año_procesamiento)='" + año
+             + "' " : "  AND to_number(TRIM(to_char(to_date(mes_procesamiento,'MONTH','nls_date_language=spanish'),'mm')))=to_number(to_char(sysdate,'mm')) AND TRIM(año_procesamiento)=to_char(sysdate,'YYYY') "*/;
+            ResultSet rs = this.conn.query(queryAuthorizeRequeriments);
+            while (rs.next()) {
+                size = rs.getInt(1);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener el tamaño de la lista de autorizaciones" + e.getMessage());
+        } finally {
+            try {
+                this.conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return size;
     }
 
     @Override

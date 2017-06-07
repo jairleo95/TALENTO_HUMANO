@@ -6,8 +6,6 @@
     String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
     if (id_user_1 != null) {
 %>
-<%@page import="pe.edu.upeu.application.model.V_List_Empleado"%>
-<jsp:useBean id="List_Empleado" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
@@ -73,20 +71,7 @@
                     <div class="row">
                         <!-- NEW WIDGET START -->
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3" data-widget-editbutton="false">
-                                <!-- widget options:
-                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-
-                                data-widget-colorbutton="false"
-                                data-widget-editbutton="false"
-                                data-widget-togglebutton="false"
-                                data-widget-deletebutton="false"
-                                data-widget-fullscreenbutton="false"
-                                data-widget-custombutton="false"
-                                data-widget-collapsed="true"
-                                data-widget-sortable="false"
-
-                                -->
+                            <div class="jarviswidget jarviswidget-color-magenta" id="wid-id-3" data-widget-editbutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                     <h2>Reporte de Empleados</h2>
@@ -106,11 +91,13 @@
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
 
-                                        <table id="datatable_tabletools" class="table table-striped table-bordered table-hover" width="100%">
+                                        <table id="datatable_tabletools" class="datatableEmployees table table-striped table-bordered table-hover" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th data-hide="phone">ID</th>
                                                     <th data-class="expand">Nombres y Apellidos</th>
+                                                    <th>Direccion</th>
+                                                    <th>Departamento</th>
                                                     <th>Área</th>
                                                     <th data-hide="phone">Sección</th>
                                                     <th data-hide="phone,tablet">Puesto</th>
@@ -120,33 +107,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <%
-                                                    for (int i = 0; i < List_Empleado.size(); i++) {
-                                                        V_List_Empleado e = new V_List_Empleado();
-                                                        e = (V_List_Empleado) List_Empleado.get(i);
-                                                %>
-                                                <tr>
-                                                    <td><%out.print(i + 1);%></td>
-
-                                                    <td>
-                                                        <% if (e.getAr_foto() == null) {%>
-                                                        <img src="../../img/avatar_default.jpg"  width="30"  height="30">
-                                                        <% } else {%>
-                                                        <img src="../Usuario/Fotos/<%=e.getAr_foto()%>"  width="30"  height="30">
-                                                        <% }%>
-                                                        <a href="../../trabajador?idtr=<%=e.getId_trabajador()%>&opc=list"><%=e.getNo_trabajador().toUpperCase() + " " + e.getAp_paterno().toUpperCase() + " " + e.getAp_materno().toUpperCase()%></a></td>
-                                                    <td><%=e.getNo_area()%></td>
-                                                    <td><%=e.getNo_seccion()%></td>
-                                                    <td><%=e.getNo_puesto()%></td>
-                                                    <td><%=DateFormat.toFormat5(e.getFe_desde())%></td>
-                                                    <%if (e.getFe_hasta() != null) {%>
-                                                    <td><%=DateFormat.toFormat5(e.getFe_hasta())%></td>
-                                                    <%} else {%>
-                                                    <td>Indeterminado</td>
-                                                    <%}%>
-                                                    <td><%="S/. " + e.getCa_sueldo()%></td>
-                                                </tr>
-                                                <%}%> 
+                                                
                                             </tbody>
                                         </table>
 
@@ -223,7 +184,7 @@
         <script src="../../js/plugin/datatables/dataTables.tableTools.min.js"></script>
         <script src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
         <script src="../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
-
+        <script src="../../js/jsGlobalFunctions/jsForm.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
         <script src="../../js/businessLogic/Empleado/filtroEmpleado.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
     </body>
 </html>

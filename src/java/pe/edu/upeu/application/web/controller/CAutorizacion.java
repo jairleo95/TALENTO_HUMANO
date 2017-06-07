@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -558,19 +559,27 @@ public class CAutorizacion extends HttpServlet {
                                 + "Saludos Cordiales");*/
                         rpta.put("sendto", emails);
                         rpta.put("status", true);
-
                     }
                     if (opc.equals("List_Dgp_Aut")) {
-                        String año = request.getParameter("año");
+                        String draw = request.getParameter("draw");
+                        int start = Integer.parseInt(request.getParameter("start"));
+                        int length = Integer.parseInt(request.getParameter("length"));
+                        int pageNumber = (start / length) + 1;
+
+                        String anno = request.getParameter("anno");
                         int mes = 0;
                         if (request.getParameter("mes") != null) {
                             if (!request.getParameter("mes").equals("")) {
                                 mes = Integer.parseInt(request.getParameter("mes"));
                             }
                         }
-                        List<Map<String, ?>> lista = a.List_Dgp_Autorizados(iduser, mes, año);
+                        List<Map<String, ?>> lista = a.List_Dgp_Autorizados(iduser, pageNumber, length, mes, anno);
+                        int size = a.getListAuthorizeRequirementsSize(iduser, mes, anno);
                         rpta.put("rpta", "1");
-                        rpta.put("lista", lista);
+                        rpta.put("draw", draw);
+                        rpta.put("recordsTotal", size);
+                        rpta.put("recordsFiltered", size);
+                        rpta.put("data", lista);
                     }
                     if (opc.equals("ValBtnAutorizacion")) {
                         String html = "";
@@ -721,15 +730,16 @@ public class CAutorizacion extends HttpServlet {
                         }
                     }
                 } else {
-                   // Logger.getLogger(getClass().getName()).log(Level.INFO, ide);
-                  //  String idpu = e.Id_Puesto_Personal(ide);
+                    // Logger.getLogger(getClass().getName()).log(Level.INFO, ide);
+                    //  String idpu = e.Id_Puesto_Personal(ide);
                     sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idp, iduser, ""));
-                 //   out.print(a.List_Autorizados(idpu).size());
+                    //   out.print(a.List_Autorizados(idpu).size());
                     response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp");
                 }
             } catch (Exception ex) {
                 rpta.put("rpta", "-1");
                 rpta.put("status", false);
+                rpta.put("error", ex.getMessage());
                 rpta.put("mensaje", ex.getMessage());
             } finally {
                 Gson gson = new Gson();

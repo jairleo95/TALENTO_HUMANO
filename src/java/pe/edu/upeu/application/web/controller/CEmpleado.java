@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.EmpleadoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceEmpleadoDAO;
+import pe.edu.upeu.application.model.page.Datatable;
 
 /**
  *
@@ -89,13 +90,24 @@ public class CEmpleado extends HttpServlet {
             }
 
             if (opc.equals("Reporte")) {
-                String iddepa = (String) sesion.getAttribute("DEPARTAMENTO_ID");
-                if (idrol.trim().equals("ROL-0001")) {
-                    sesion.setAttribute("List_Empleado", Iem.Listar_Empleado());
-                } else {
-                    sesion.setAttribute("List_Empleado", Iem.Listar_Empleado(iddepa));
-                }
                 response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp?idtr");
+            }
+            if (opc.equals("getAllEmployees")) {
+                Datatable datatable = new Datatable();
+                datatable.setPageSize(Integer.parseInt(request.getParameter("length")));
+                datatable.setPageNumber(((Integer.parseInt(request.getParameter("start")) / datatable.getPageSize()) + 1));
+                datatable.setDraw(Integer.parseInt(request.getParameter("draw")));
+
+                String iddepa = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+                datatable = Iem.getAllEmployees(datatable, iddepa);
+                //   if (idrol.trim().equals("ROL-0001")) {
+                rpta.put("data", datatable);
+                rpta.put("recordsTotal", datatable.getRecordsTotal());
+                rpta.put("recordsFiltered", datatable.getRecordsTotal());
+                // } else {
+                //   rpta.put("data", Iem.Listar_Empleado(iddepa));
+                // }
+                rpta.put("draw", datatable.getDraw());
             }
 
             if (opc.equals("validar_aps")) {
