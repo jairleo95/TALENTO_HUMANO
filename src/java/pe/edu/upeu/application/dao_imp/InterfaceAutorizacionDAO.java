@@ -25,9 +25,9 @@ public interface InterfaceAutorizacionDAO {
 
     public List<X_List_De_Autorizacion> List_Detalle_Autorizacion(String iddgp, String idrp);
 
-    public List<V_Autorizar_Dgp> List_id_Autorizacion(String id_aurotizacion, String id_user,String iddgp);
+    public List<V_Autorizar_Dgp> List_id_Autorizacion(String id_aurotizacion, String id_user, String iddgp);
 
-    public List<V_Autorizar_Dgp> List_Autorizacion_Academico(String id_aurotizacion, String id_user,String iddgp);
+    public List<V_Autorizar_Dgp> List_Autorizacion_Academico(String id_aurotizacion, String id_user, String iddgp);
 
     public List<Autorizacion> NO_List_DGP();
 
@@ -41,10 +41,13 @@ public interface InterfaceAutorizacionDAO {
 
     public String Mes_plazo(String id_dgp);
 
-    public List<Map<String, ?>> List_Dgp_Autorizados(String id_usuario, int mes, String año);
+    public List<Map<String, ?>> List_Dgp_Autorizados(String id_usuario, int pageNumber, int pageSize, int mes, String año);
 
-    public List<Map<String, ?>> List_procesar_req(boolean tipo_list,boolean permisoAsigFam,boolean permisoEsSistema);
+    public Integer getListAuthorizeRequirementsSize(String id_usuario, int mes, String año);
+
+    public List<Map<String, ?>> List_procesar_req(boolean tipo_list, boolean permisoAsigFam, boolean permisoEsSistema);
 
     public boolean UpdateDgp_EstadoProcesar(String[] iddgp, int tipo, boolean estado);
-    public List<Map<String, ?>>  ShowCkbEstado_procesarIndiviual(String iddgp);
+
+    public List<Map<String, ?>> ShowCkbEstado_procesarIndiviual(String iddgp);
 }

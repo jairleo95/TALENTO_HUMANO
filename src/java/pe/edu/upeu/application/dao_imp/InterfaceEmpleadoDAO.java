@@ -10,6 +10,7 @@ import java.util.Map;
 import pe.edu.upeu.application.model.Empleado;
 import pe.edu.upeu.application.model.Evaluacion_Emp;
 import pe.edu.upeu.application.model.V_List_Empleado;
+import pe.edu.upeu.application.model.page.Datatable;
 
 /**
  *
@@ -27,9 +28,7 @@ public interface InterfaceEmpleadoDAO {
 
     public void VALIDAR_EMPLEADO(String id_tra);
 
-    public List<V_List_Empleado> Listar_Empleado(String Departamento);
-
-    public List<V_List_Empleado> Listar_Empleado();
+    public  Datatable getAllEmployees(Datatable datatable, String Departamento);
 
     public List<V_List_Empleado> Listar_Emp();
 

@@ -364,7 +364,9 @@ function listSelectAjax(objSelect, url, datos, opc, id, selectText, callFunction
                 $(selector).chosen(config[selector]);
             }
         }
-        callFunction(lista);
+        if (typeof callFunction !== 'undefined') {
+            callFunction(lista);
+        }
     });
     if (opc === "3" | opc === "4") {
         /* sirve para validar cuando es required */

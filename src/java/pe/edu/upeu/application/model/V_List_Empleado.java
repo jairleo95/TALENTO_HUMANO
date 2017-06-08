@@ -10,6 +10,7 @@ package pe.edu.upeu.application.model;
  * @author Admin
  */
 public class V_List_Empleado {
+
     private String id_contrato;
     private String id_trabajador;
     private String ap_paterno;
@@ -97,7 +98,38 @@ public class V_List_Empleado {
     private String fe_creacion_contrato;
     private Double ca_sueldo;
     private String fe_desde;
-    public V_List_Empleado(String id_contrato, String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String ti_doc, String nu_doc, String es_civil, String fe_nac, String no_nacionalidad, String no_departamento, String no_provincia, String no_distrito, String te_trabajador, String cl_tra, String di_correo_personal, String di_correo_inst, String co_sistema_pensionario, String id_situacion_educativa, String li_reg_inst_educativa, String es_inst_educ_peru, String n, String nn, String cm_otros_estudios, String es_sexo, String li_grupo_sanguineo, String de_referencia, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad, String id_no_afp, String es_afiliado_essalud, String li_tipo_trabajador, String ca_tipo_hora_pago_refeerencial, String es_factor_rh, String li_di_dom_a_d1, String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String di_dom_a_distrito, String li_di_dom_leg_d1, String di_dom_leg_d2, String li_di_dom_leg_d3, String di_dom_leg_d4, String li_di_dom_leg_d5, String di_dom_leg_d6, String di_dom_leg_distrito, String ca_ing_qta_cat_empresa, String ca_ing_qta_cat_ruc, String ca_ing_qta_cat_otras_empresas, String cm_observaciones, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario, String id_usuario_creacion, String id_universidad_carrera, String id_nacionalidad, String distrito_nac, String no_s_educativa, String no_carrera, String no_universidad, String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto, String no_puesto, String no_seccion, String no_area, String id_direccion, String no_dep, String id_departamento, String id_area, String id_seccion, String id_puesto, String id_empleado, String fe_creacion_contrato, Double ca_sueldo, String fe_desde, String fe_hasta) {
+    private String no_direccion;
+
+    public String getNo_direccion() {
+        return no_direccion;
+    }
+
+    public void setNo_direccion(String no_direccion) {
+        this.no_direccion = no_direccion;
+    }
+    private Integer row_number;
+
+    public Integer getRow_number() {
+        return row_number;
+    }
+
+    public void setRow_number(Integer row_number) {
+        this.row_number = row_number;
+    }
+
+    public V_List_Empleado(String id_contrato, String id_trabajador, String ap_paterno, String ap_materno, String no_trabajador, String ti_doc, String nu_doc, String es_civil, String fe_nac,
+            String no_nacionalidad, String no_departamento, String no_provincia, String no_distrito, String te_trabajador, String cl_tra, String di_correo_personal, String di_correo_inst,
+            String co_sistema_pensionario, String id_situacion_educativa, String li_reg_inst_educativa, String es_inst_educ_peru, String n, String nn, String cm_otros_estudios, String es_sexo,
+            String li_grupo_sanguineo, String de_referencia, String li_religion, String no_iglesia, String de_cargo, String li_autoridad, String no_ap_autoridad, String cl_autoridad,
+            String id_no_afp, String es_afiliado_essalud, String li_tipo_trabajador, String ca_tipo_hora_pago_refeerencial, String es_factor_rh, String li_di_dom_a_d1,
+            String di_dom_a_d2, String li_di_dom_a_d3, String di_dom_a_d4, String li_di_dom_a_d5, String di_dom_a_d6, String di_dom_a_ref, String di_dom_a_distrito,
+            String li_di_dom_leg_d1, String di_dom_leg_d2, String li_di_dom_leg_d3, String di_dom_leg_d4, String li_di_dom_leg_d5, String di_dom_leg_d6,
+            String di_dom_leg_distrito, String ca_ing_qta_cat_empresa, String ca_ing_qta_cat_ruc, String ca_ing_qta_cat_otras_empresas,
+            String cm_observaciones, String us_creacion, String fe_creacion, String us_modif, String fe_modif, String ip_usuario,
+            String id_usuario_creacion, String id_universidad_carrera, String id_nacionalidad, String distrito_nac, String no_s_educativa,
+            String no_carrera, String no_universidad, String ar_foto, String de_foto, String id_foto, String no_ar_foto, String ta_ar_foto,
+            String no_puesto, String no_seccion, String no_area, String id_direccion, String no_dep, String id_departamento, String id_area,
+            String id_seccion, String id_puesto, String id_empleado, String fe_creacion_contrato, Double ca_sueldo, String fe_desde, String fe_hasta,String no_direccion, Integer row_number) {
         this.id_contrato = id_contrato;
         this.id_trabajador = id_trabajador;
         this.ap_paterno = ap_paterno;
@@ -186,6 +218,8 @@ public class V_List_Empleado {
         this.ca_sueldo = ca_sueldo;
         this.fe_desde = fe_desde;
         this.fe_hasta = fe_hasta;
+        this.no_direccion = no_direccion;
+        this.row_number = row_number;
     }
 
     public V_List_Empleado() {
@@ -277,6 +311,8 @@ public class V_List_Empleado {
         this.ca_sueldo = 0.0;
         this.fe_desde = "";
         this.fe_hasta = "";
+        this.no_direccion = "";
+        this.row_number = 0;
     }
     private String fe_hasta;
 

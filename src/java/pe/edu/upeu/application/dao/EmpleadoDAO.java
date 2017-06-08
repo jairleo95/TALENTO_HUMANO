@@ -18,6 +18,8 @@ import pe.edu.upeu.application.factory.FactoryConnectionDB;
 import pe.edu.upeu.application.model.Empleado;
 import pe.edu.upeu.application.model.Evaluacion_Emp;
 import pe.edu.upeu.application.model.V_List_Empleado;
+import pe.edu.upeu.application.model.page.Datatable;
+import pe.edu.upeu.application.util.Sql;
 
 /**
  *
@@ -70,16 +72,41 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
-
     }
 
     @Override
-    public List<V_List_Empleado> Listar_Empleado(String id_departamento) {
+    public Datatable getAllEmployees(Datatable datatable, String id_departamento) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHVD_LIST_EMPLEADO WHERE ID_departamento='" + id_departamento + "'  order by id_contrato desc";
-        List<V_List_Empleado> list = new ArrayList<V_List_Empleado>();
+        String queryColumns = "SELECT c.id_contrato,DT.\"ID_TRABAJADOR\",DT.\"AP_PATERNO\",DT.\"AP_MATERNO\",DT.\"NO_TRABAJADOR\",DT.\"TI_DOC\",DT.\"NU_DOC\",DT.\"ES_CIVIL\",\n"
+                + "    DT.\"FE_NAC\",DT.\"NO_NACIONALIDAD\",DT.\"NO_DEPARTAMENTO\",DT.\"NO_PROVINCIA\",DT.\"NO_DISTRITO\",DT.\"TE_TRABAJADOR\",DT.\"CL_TRA\",DT.\"DI_CORREO_PERSONAL\",DT.\"DI_CORREO_INST\",\n"
+                + "    DT.\"CO_SISTEMA_PENSIONARIO\",DT.\"ID_SITUACION_EDUCATIVA\",DT.\"LI_REG_INST_EDUCATIVA\",DT.\"ES_INST_EDUC_PERU\",\n"
+                + "    DT.\"CM_OTROS_ESTUDIOS\",DT.\"ES_SEXO\",DT.\"LI_GRUPO_SANGUINEO\",DT.\"DE_REFERENCIA\",\n"
+                + "    DT.\"LI_RELIGION\",DT.\"NO_IGLESIA\",DT.\"DE_CARGO\",DT.\"LI_AUTORIDAD\",DT.\"NO_AP_AUTORIDAD\",DT.\"CL_AUTORIDAD\",\n"
+                + "    DT.\"ID_NO_AFP\",DT.\"ES_AFILIADO_ESSALUD\",DT.\"LI_TIPO_TRABAJADOR\",DT.\"CA_TIPO_HORA_PAGO_REFEERENCIAL\",\n"
+                + "    DT.\"ES_FACTOR_RH\",DT.\"LI_DI_DOM_A_D1\",\n"
+                + "    DT.\"DI_DOM_A_D2\",DT.\"LI_DI_DOM_A_D3\",DT.\"DI_DOM_A_D4\",DT.\"LI_DI_DOM_A_D5\",DT.\"DI_DOM_A_D6\",DT.\"DI_DOM_A_REF\",DT.\"DI_DOM_A_DISTRITO\",DT.\"LI_DI_DOM_LEG_D1\",\n"
+                + "    DT.\"DI_DOM_LEG_D2\",DT.\"LI_DI_DOM_LEG_D3\",\n"
+                + "    DT.\"DI_DOM_LEG_D4\",DT.\"LI_DI_DOM_LEG_D5\",DT.\"DI_DOM_LEG_D6\",DT.\"DI_DOM_LEG_DISTRITO\",\n"
+                + "    DT.\"CA_ING_QTA_CAT_EMPRESA\",DT.\"CA_ING_QTA_CAT_RUC\",DT.\"CA_ING_QTA_CAT_OTRAS_EMPRESAS\",\n"
+                + "    DT.\"CM_OBSERVACIONES\",DT.\"US_CREACION\",  DT.\"FE_CREACION\",DT.\"US_MODIF\",DT.\"FE_MODIF\",DT.\"IP_USUARIO\",DT.\"ID_USUARIO_CREACION\",DT.\"ID_UNIVERSIDAD_CARRERA\",\n"
+                + "    DT.\"ID_NACIONALIDAD\",DT.\"DISTRITO_NAC\",DT.\"NO_S_EDUCATIVA\",DT.\"AP_NOMBRES_MADRE\",DT.\"AP_NOMBRES_PADRE\",DT.\"ES_TRABAJA_UPEU_C\",DT.\"AP_NOMBRES_C\",DT.\"FE_NAC_C\",\n"
+                + "    DT.\"ID_TIPO_DOC_C\",DT.\"NU_DOC_C\",DT.\"LI_INSCRIPCION_VIG_ESSALUD_C\",DT.\"ID_CONYUGUE\",DT.\"NO_CARRERA\",DT.\"NO_UNIVERSIDAD\",DT.\"AR_FOTO\",DT.\"DE_FOTO\",DT.\"ID_FOTO\",DT.\"NO_AR_FOTO\",DT.\"TA_AR_FOTO\",\n"
+                + "    dpd.no_puesto ,dpd.no_seccion,dpd.no_area,dpd.id_direccion,dpd.no_dep,dpd.id_departamento ,\n"
+                + "    dpd.id_area,dpd.id_seccion,c.id_puesto,e.id_empleado,c.fe_creacion AS fe_creacion_contrato, c.ca_sueldo,to_char(c.fe_desde, 'yyyy-mm-dd') as fe_desde,\n"
+                + "    to_char(c.fe_hasta, 'yyyy-mm-dd') as fe_hasta,dt.ID_UNIVERSIDAD,dt.ID_TIPO_INSTITUCION,\n"
+                + "    dt.CO_UNIVERSIDAD,dt.ID_CARRERA,dt.CO_NACIONALIDAD,dpd.NO_DIRECCION ";
+        String query = "  FROM RHTD_EMPLEADO e,\n"
+                + "    RHVD_TRABAJADOR dt ,\n"
+                + "    RHTM_CONTRATO c ,\n"
+                + "    RHVD_PUESTO_DIRECCION dpd"
+                + "  WHERE dt.id_trabajador = c.id_trabajador\n"
+                + "  AND e.id_trabajador    = c.id_trabajador\n"
+                + "  AND dpd.id_puesto      = c.id_puesto\n"
+                + "  AND c.es_contrato      =1  "
+                + " and dpd.ID_departamento='" + id_departamento + "' ";
+        List<Object> obj = new ArrayList<Object>();
         try {
-            ResultSet rs = this.conn.query(sql);
+            ResultSet rs = this.conn.query(Sql.queryWithPagination(queryColumns + ", %s " + query + " %s", datatable.getPageNumber(), datatable.getPageSize(), ""));
             while (rs.next()) {
                 V_List_Empleado v = new V_List_Empleado();
                 v.setEs_inst_educ_peru(rs.getString("es_inst_educ_peru"));
@@ -168,7 +195,15 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
                 v.setCo_sistema_pensionario(rs.getString("co_sistema_pensionario"));
                 v.setId_situacion_educativa(rs.getString("id_situacion_educativa"));
                 v.setLi_reg_inst_educativa(rs.getString("li_reg_inst_educativa"));
-                list.add(v);
+                v.setNo_direccion(rs.getString("no_direccion"));
+                v.setRow_number(rs.getInt("row_number"));
+                obj.add(v);
+            }
+            ResultSet re = (this.conn.query("select count(1) " + query));
+            if (re.next()) {
+                Integer total = re.getInt(1);
+                datatable.setRecordsTotal(total);
+                datatable.setRecordsFiltered(total);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -181,118 +216,8 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
                 throw new RuntimeException(e.getMessage());
             }
         }
-        return list;
-    }
-
-    @Override
-    public List<V_List_Empleado> Listar_Empleado() {
-        this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-        String sql = "SELECT * FROM RHVD_LIST_EMPLEADO order by id_contrato desc";
-        List<V_List_Empleado> list = new ArrayList<V_List_Empleado>();
-        try {
-            ResultSet rs = this.conn.query(sql);
-            while (rs.next()) {
-                V_List_Empleado v = new V_List_Empleado();
-                v.setEs_inst_educ_peru(rs.getString("es_inst_educ_peru"));
-                v.setCm_otros_estudios(rs.getString("cm_otros_estudios"));
-                v.setEs_sexo(rs.getString("es_sexo"));
-                v.setLi_grupo_sanguineo(rs.getString("li_grupo_sanguineo"));
-                v.setDe_referencia(rs.getString("de_referencia"));
-                v.setLi_religion(rs.getString("li_religion"));
-                v.setNo_iglesia(rs.getString("no_iglesia"));
-                v.setDe_cargo(rs.getString("de_cargo"));
-                v.setLi_autoridad(rs.getString("li_autoridad"));
-                v.setNo_ap_autoridad(rs.getString("no_ap_autoridad"));
-                v.setCl_autoridad(rs.getString("cl_autoridad"));
-                v.setId_no_afp(rs.getString("id_no_afp"));
-                v.setEs_afiliado_essalud(rs.getString("es_afiliado_essalud"));
-                v.setLi_tipo_trabajador(rs.getString("li_tipo_trabajador"));
-                v.setCa_tipo_hora_pago_refeerencial(rs.getString("ca_tipo_hora_pago_refeerencial"));
-                v.setEs_factor_rh(rs.getString("es_factor_rh"));
-                v.setLi_di_dom_a_d1(rs.getString("li_di_dom_a_d1"));
-                v.setDi_dom_a_d2(rs.getString("di_dom_a_d2"));
-                v.setLi_di_dom_a_d3(rs.getString("li_di_dom_a_d3"));
-                v.setDi_dom_a_d4(rs.getString("di_dom_a_d4"));
-                v.setLi_di_dom_a_d5(rs.getString("li_di_dom_a_d5"));
-                v.setDi_dom_a_d6(rs.getString("di_dom_a_d6"));
-                v.setDi_dom_a_ref(rs.getString("di_dom_a_ref"));
-                v.setDi_dom_a_distrito(rs.getString("di_dom_a_distrito"));
-                v.setLi_di_dom_leg_d1(rs.getString("li_di_dom_leg_d1"));
-                v.setDi_dom_leg_d2(rs.getString("di_dom_leg_d2"));
-                v.setLi_di_dom_leg_d3(rs.getString("li_di_dom_leg_d3"));
-                v.setDi_dom_leg_d4(rs.getString("di_dom_leg_d4"));
-                v.setLi_di_dom_leg_d5(rs.getString("li_di_dom_leg_d5"));
-                v.setDi_dom_leg_d6(rs.getString("di_dom_leg_d6"));
-                v.setDi_dom_leg_distrito(rs.getString("di_dom_leg_distrito"));
-                v.setCa_ing_qta_cat_empresa(rs.getString("ca_ing_qta_cat_empresa"));
-                v.setCa_ing_qta_cat_ruc(rs.getString("ca_ing_qta_cat_ruc"));
-                v.setCa_ing_qta_cat_otras_empresas(rs.getString("ca_ing_qta_cat_otras_empresas"));
-                v.setCm_observaciones(rs.getString("cm_observaciones"));
-                v.setUs_creacion(rs.getString("us_creacion"));
-                v.setFe_creacion(rs.getString("fe_creacion"));
-                v.setUs_modif(rs.getString("us_modif"));
-                v.setFe_modif(rs.getString("fe_modif"));
-                v.setIp_usuario(rs.getString("ip_usuario"));
-                v.setId_usuario_creacion(rs.getString("id_usuario_creacion"));
-                v.setId_universidad_carrera(rs.getString("id_universidad_carrera"));
-                v.setId_nacionalidad(rs.getString("id_nacionalidad"));
-                v.setDistrito_nac(rs.getString("distrito_nac"));
-                v.setNo_s_educativa(rs.getString("no_s_educativa"));
-                v.setNo_carrera(rs.getString("no_carrera"));
-                v.setNo_universidad(rs.getString("no_universidad"));
-                v.setAr_foto(rs.getString("ar_foto"));
-                v.setDe_foto(rs.getString("de_foto"));
-                v.setId_foto(rs.getString("id_foto"));
-                v.setNo_ar_foto(rs.getString("no_ar_foto"));
-                v.setTa_ar_foto(rs.getString("ta_ar_foto"));
-                v.setNo_puesto(rs.getString("no_puesto"));
-                v.setNo_seccion(rs.getString("no_seccion"));
-                v.setNo_area(rs.getString("no_area"));
-                v.setId_direccion(rs.getString("id_direccion"));
-                v.setNo_dep(rs.getString("no_dep"));
-                v.setId_departamento(rs.getString("id_departamento"));
-                v.setId_area(rs.getString("id_area"));
-                v.setId_seccion(rs.getString("id_seccion"));
-                v.setId_puesto(rs.getString("id_puesto"));
-                v.setId_empleado(rs.getString("id_empleado"));
-                v.setFe_creacion_contrato(rs.getString("fe_creacion_contrato"));
-                v.setCa_sueldo(rs.getDouble("ca_sueldo"));
-                v.setFe_desde(rs.getString("fe_desde"));
-                v.setFe_hasta(rs.getString("fe_hasta"));
-                v.setId_contrato(rs.getString("id_contrato"));
-                v.setId_trabajador(rs.getString("id_trabajador"));
-                v.setAp_paterno(rs.getString("ap_paterno"));
-                v.setAp_materno(rs.getString("ap_materno"));
-                v.setNo_trabajador(rs.getString("no_trabajador"));
-                v.setTi_doc(rs.getString("ti_doc"));
-                v.setNu_doc(rs.getString("nu_doc"));
-                v.setEs_civil(rs.getString("es_civil"));
-                v.setFe_nac(rs.getString("fe_nac"));
-                v.setNo_nacionalidad(rs.getString("no_nacionalidad"));
-                v.setNo_departamento(rs.getString("no_departamento"));
-                v.setNo_provincia(rs.getString("no_provincia"));
-                v.setNo_distrito(rs.getString("no_distrito"));
-                v.setTe_trabajador(rs.getString("te_trabajador"));
-                v.setCl_tra(rs.getString("cl_tra"));
-                v.setDi_correo_personal(rs.getString("di_correo_personal"));
-                v.setDi_correo_inst(rs.getString("di_correo_inst"));
-                v.setCo_sistema_pensionario(rs.getString("co_sistema_pensionario"));
-                v.setId_situacion_educativa(rs.getString("id_situacion_educativa"));
-                v.setLi_reg_inst_educativa(rs.getString("li_reg_inst_educativa"));
-                list.add(v);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
-        } catch (Exception e) {
-            throw new RuntimeException("Error: " + e.getMessage());
-        } finally {
-            try {
-                this.conn.close();
-            } catch (Exception e) {
-                throw new RuntimeException(e.getMessage());
-            }
-        }
-        return list;
+        datatable.setData(obj);
+        return datatable;
     }
 
     @Override

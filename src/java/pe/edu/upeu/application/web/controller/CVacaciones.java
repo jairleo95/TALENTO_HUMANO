@@ -43,7 +43,7 @@ public class CVacaciones extends HttpServlet {
         if (opc.equals("Listar")) {
 
            
-            sesion.setAttribute("List_Empleado", Iem.Listar_Empleado());
+           
 
 
             response.sendRedirect("Vista/Vacaciones/Lista_Empleados.jsp");
