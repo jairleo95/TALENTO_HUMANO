@@ -10,7 +10,7 @@ package pe.edu.upeu.application.model;
  * @author Cesar
  */
 public class Notification {
-    
+
     private String id_notification;
     private String id_rol;
     private String es_visualizado;
@@ -21,33 +21,47 @@ public class Notification {
     private String fecha;
     private String tipo_notification;
     private String id_usuario;
-
-    public Notification(String id_notification, String id_rol, String es_visualizado, String es_leido, String de_notification, String di_notification, String titulo, String fecha, String tipo_notification, String id_usuario) {
-        this.id_notification = id_notification;
-        this.id_rol = id_rol;
-        this.es_visualizado = es_visualizado;
-        this.es_leido = es_leido;
-        this.de_notification = de_notification;
-        this.di_notification = di_notification;
-        this.titulo = titulo;
-        this.fecha = fecha;
-        this.tipo_notification = tipo_notification;
-        this.id_usuario = id_usuario;
-    }
-
-    public Notification(String id_rol, String es_visualizado, String es_leido, String de_notification, String di_notification, String titulo, String fecha, String tipo_notification, String id_usuario) {
-        this.id_rol = id_rol;
-        this.es_visualizado = es_visualizado;
-        this.es_leido = es_leido;
-        this.de_notification = de_notification;
-        this.di_notification = di_notification;
-        this.titulo = titulo;
-        this.fecha = fecha;
-        this.tipo_notification = tipo_notification;
-        this.id_usuario = id_usuario;
-    }
+    private Boolean enable_send_email;
+    private Boolean mail_status;
+    private String url_external_access;
 
     public Notification() {
+        this.id_rol = "";
+        this.es_visualizado = "";
+        this.es_leido = "";
+        this.de_notification = "";
+        this.di_notification = "";
+        this.titulo = "";
+        this.fecha = "";
+        this.tipo_notification = "";
+        this.id_usuario = "";
+        this.enable_send_email = false;
+        this.mail_status = false;
+        this.url_external_access = "";
+    }
+
+    public Boolean getEnable_send_email() {
+        return enable_send_email;
+    }
+
+    public void setEnable_send_email(Boolean enable_send_email) {
+        this.enable_send_email = enable_send_email;
+    }
+
+    public Boolean getMail_status() {
+        return mail_status;
+    }
+
+    public void setMail_status(Boolean mail_status) {
+        this.mail_status = mail_status;
+    }
+
+    public String getUrl_external_access() {
+        return url_external_access;
+    }
+
+    public void setUrl_external_access(String url_external_access) {
+        this.url_external_access = url_external_access;
     }
 
     public String getId_notification() {
@@ -129,5 +143,5 @@ public class Notification {
     public void setId_usuario(String id_usuario) {
         this.id_usuario = id_usuario;
     }
-    
+
 }

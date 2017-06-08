@@ -159,6 +159,10 @@
         <servlet-name>CSituacionEspecial</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.CSituacionEspecial</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CMail</servlet-name>
+        <servlet-class>pe.edu.upeu.application.web.controller.CMail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -314,6 +318,10 @@
     <servlet-mapping>
         <servlet-name>CSituacionEspecial</servlet-name>
         <url-pattern>/situacionEspecial</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CMail</servlet-name>
+        <url-pattern>/mail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>120</session-timeout>
