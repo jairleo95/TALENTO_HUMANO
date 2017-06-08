@@ -88,7 +88,6 @@ public class CAutorizacion extends HttpServlet {
                 case "ROL-0010":
                     permissionPuestoFilter = true;
                     break;
-
                 default:
                     permissionDepartFilter = true;
             }
@@ -101,12 +100,12 @@ public class CAutorizacion extends HttpServlet {
 
                         /*Cambiar con un trigger al momento de insertar*/
                         System.out.println("Call List_id_Autorizacion");
-                        List<V_Autorizar_Dgp> l = a.List_id_Autorizacion(idp, iduser, iddgp);
-                        if (l.size() == 1) {
+                        List<V_Autorizar_Dgp> autDGP = a.List_id_Autorizacion(idp, iduser, iddgp);
+                        if (autDGP.size() == 1) {
 
                             System.out.println("Enter to Autorizacion DGP");
 
-                            V_Autorizar_Dgp vAut = l.get(0);
+                            V_Autorizar_Dgp vAut = autDGP.get(0);
                             System.out.println("1 :" + vAut.getNu_pasos());
                             System.out.println("2 :" + vAut.getId_pasos());
                             System.out.println("3 :" + vAut.getCo_pasos());
@@ -116,6 +115,9 @@ public class CAutorizacion extends HttpServlet {
                             //  dgp.VAL_DGP_PASOS();
                             /*Autorización*/
                             a.Insert_Autorizacion("", iddgp, estado, vAut.getNu_pasos(), "", iduser, "", "", vAut.getCo_pasos(), idp, vAut.getId_detalle_req_proceso(), vAut.getId_pasos());
+
+                            sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idp, iduser, ""));
+                            rpta.put("rpta", true);
                             /*Notificaciones*/
                             InterfaceNotificationDAO notdao = new NotificationDAO();
                             Notification not = new Notification();
@@ -135,9 +137,8 @@ public class CAutorizacion extends HttpServlet {
                                 not.setId_usuario(ids.get(i));
                                 notdao.Registrar(not);
                             }
-                            rpta.put("rpta", true);
-                            sesion.setAttribute("List_id_Autorizacion", a.List_id_Autorizacion(idp, iduser, ""));
-                            sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idp));
+                            /*End Notify*/
+                            // sesion.setAttribute("List_id_Autorizados", a.List_Autorizados(idp));
                         } else {
                             System.out.println("Enter to Autorizacion academico");
                             List<V_Autorizar_Dgp> autAcademico = a.List_Autorizacion_Academico(idp, iduser, iddgp);
@@ -161,8 +162,6 @@ public class CAutorizacion extends HttpServlet {
                             }
 
                         }
-
-                        /* response.sendRedirect("Vista/Dgp/Autorizar_Requerimiento.jsp?r=ok");*/
                     }
                     if (opc.equals("HDGP")) {
 
