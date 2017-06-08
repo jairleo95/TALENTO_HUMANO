@@ -358,12 +358,18 @@ function loadFormSendEmail(emails) {
 function registerAndProcessCodHuella(inputItem, emails, dataProcess) {
     console.log("enter to function registerAndProcessCodHuella");
     if (inputItem.val() !== "" & typeof inputItem.val() !== "undefined") {
+        $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
         registerCOdHuella(inputItem, function () {
             processAutorizacionMasive(dataProcess, function () {
-                $(".headerReqAutorizado").addClass("widget-body-ajax-loading");
+                $(".headerReqAutorizado").removeClass("widget-body-ajax-loading");
                 loadFormSendEmail(emails);
                 var table = new $.fn.dataTable.Api('#dt_basic1');
                 table.row(inputItem.parents('tr')).remove().draw();
+                //  table.fnFilterClear();
+                table
+                        .search('')
+                        .columns().search('')
+                        .draw();
             });
         });
     }
@@ -395,9 +401,12 @@ function processAutorizacionMasive(values, callback) {
         type: "POST", success: function (data, textStatus, jqXHR) {
             if (data.rpta) {
                 console.log("autorizacion registrada");
-                if (typeof callback !== 'undefined') {
-                    callback(data);
-                }
+
+            } else {
+                console.log('ocurrio un error al autorizar.');
+            }
+            if (typeof callback !== 'undefined') {
+                callback(data);
             }
         }
     });
@@ -547,6 +556,7 @@ $(document).ready(function () {
                 }, function (item) {
                     console.log("item:" + item);
                     processAutorizacionMasive(item.val(), function () {
+
                         /*termina la autorizacion*/
                         var table = new $.fn.dataTable.Api('#dt_basic1');
                         table.row(item.parents('tr')).remove().draw();
