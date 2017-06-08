@@ -1,9 +1,13 @@
 var _path = '../../';
+var direccion = '0';
 
-function  initJobsFilters() {
+function  initJobsFilters(datatable) {
     listSelectAjax($(".selectDir"), "../../Direccion_Puesto", "opc=Listar_direccion", null, null, "Direccion");
     $(".selectDir").change(function () {
         listSelectAjax($(".selectDep"), "../../Direccion_Puesto", "opc=Listar_dir_dep&id=" + $(this).val(), "1", $(this).val(), "Departamento");
+        direccion = $(this).val();
+        console.log(direccion);
+        datatable.ajax.reload();
         $(".selectDep").val("");
         $(".selectArea").val("");
         $(".selectSeccion").val("");
@@ -25,22 +29,6 @@ function  initJobsFilters() {
 $(document).ready(function () {
     pageSetUp();
 
-    /* // DOM Position key index //
-     
-     l - Length changing (dropdown)
-     f - Filtering input (search)
-     t - The Table! (datatable)
-     i - Information (records)
-     p - Pagination (paging)
-     r - pRocessing 
-     < and > - div elements
-     <"#id" and > - div with an id
-     <"class" and > - div with a class
-     <"#id.class" and > - div with an id and class
-     
-     Also see: http://legacy.datatables.net/usage/features
-     */
-
     /* BASIC ;*/
     var responsiveHelper_datatable_tabletools = undefined;
 
@@ -50,6 +38,7 @@ $(document).ready(function () {
     };
     var uriGetAllEmployees = "../../empleado";
     /* TABLETOOLS */
+
     $('.datatableEmployees').dataTable({
         "processing": true,
         "serverSide": true,
@@ -58,9 +47,13 @@ $(document).ready(function () {
             "url": uriGetAllEmployees,
             "type": "POST",
             "dataSrc": "data.data",
-            "data": {
-                "opc": "getAllEmployees"
+            "data": function (d) {
+                return $.extend({}, d, {
+                    "opc": "getAllEmployees",
+                    "direccion": direccion
+                });
             }
+
         },
         "columns": [
             {
@@ -152,10 +145,8 @@ $(document).ready(function () {
             x += '<div class="col col-xs-3 no-padding"><select class="selectArea form-control" style="width:100%;"><option value="">Area</option></select></div>';
             x += '<div class="col col-xs-3 no-padding"><select class="selectSeccion form-control" style="width:100%;"><option value="">Seccion</option></select></div>';
             $('.selectFilters').append(x);
-            initJobsFilters();
+            var datatable = this.api();
+            initJobsFilters(datatable);
         }
     });
-
-    /* END TABLETOOLS */
-
 });
