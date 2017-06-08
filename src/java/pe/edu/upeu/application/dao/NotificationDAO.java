@@ -29,7 +29,7 @@ public class NotificationDAO implements InterfaceNotificationDAO {
 
     @Override
     public void Registrar(Notification x) {
-        sql = "{CALL RHSP_INSERT_NOTIFICATION( ?, ?, ?, ?, ?, ?, ?, ?)}";
+        sql = "{CALL RHSP_INSERT_NOTIFICATION( ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)}";
         try {
             this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             CallableStatement cst = this.conn.conex.prepareCall(sql);
@@ -41,11 +41,14 @@ public class NotificationDAO implements InterfaceNotificationDAO {
             cst.setString(6, x.getTitulo());
             cst.setString(7, x.getTipo_notification());
             cst.setString(8, x.getId_usuario());
+            cst.setBoolean(9, x.getEnable_send_email());
+            cst.setString(10, x.getId_usuario());
+            cst.setString(11, x.getId_usuario());
             cst.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error aquiii..." + e);
+            throw new RuntimeException("Error:" + e);
         } finally {
             try {
                 this.conn.close();

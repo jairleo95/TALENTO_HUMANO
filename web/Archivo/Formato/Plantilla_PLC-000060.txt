@@ -1,6 +1,6 @@
 <p style="margin-left:14.2pt; text-align:center"><strong>CONTRATO INDIVIDUAL DE TRABAJO A PLAZO DETERMINADO Y SUJETO A MODALIDAD</strong></p>
 
-<p style="margin-left:14.2pt; text-align:justify">Conste por el presente documento, el contrato individual de trabajo a plazo determinado y sujeto a modalidad (Innominado), conforme lo dispone el Art. 82 del T.U.O del D. Leg. 728, Ley de Productividad y Competitividad Laboral (D.S. Nº 003-97-TR), que celebran de una parte la <strong>UNIVERSIDAD PERUANA UNIÓN</strong>, con <strong>RUC Nº 20138122256</strong>, con domicilio legal en Villa Unión s/n, altura del Km. 19 de la Carretera Central, Ñaña, Lurigancho-Chosica, a quien en adelante se le denominará <strong>EL</strong> <strong>EMPLEADOR</strong> representada por su Apoderado Dr. Julio Cesar Rengifo Peña, con DNI No. 06690086, facultado según poder inscrito en la partida Nº 01894897, asiento A00028 del Libro de Asociaciones del Registro de Personas Jurídicas de la Zona Registral No. IX-Sede Lima, y de la otra parte <strong>[app] [apm]</strong> <strong>[nombre]</strong>, con DNI Nº <strong>[dni]</strong>, con domicilio en  <span style="background-color:rgb(249, 242, 244); color:rgb(199, 37, 78); font-family:monaco,menlo,consolas,courier new,monospace; font-size:11.7px">[dir]</span>, a quien se le denominará <strong>EL (LA) TRABAJADOR(A)</strong>, en los términos y condiciones siguientes:</p>
+<p style="margin-left:14.2pt; text-align:justify">Conste por el presente documento, el contrato individual de trabajo a plazo determinado y sujeto a modalidad (Innominado), conforme lo dispone el Art. 82 del T.U.O del D. Leg. 728, Ley de Productividad y Competitividad Laboral (D.S. Nº 003-97-TR), que celebran de una parte la <strong>UNIVERSIDAD PERUANA UNIÓN</strong>, con <strong>RUC Nº 20138122256</strong>, con domicilio legal en Villa Unión s/n, altura del Km. 19 de la Carretera Central, Ñaña, Lurigancho-Chosica, a quien en adelante se le denominará <strong>EL</strong> <strong>EMPLEADOR</strong> representada por su Apoderado Dr. Julio Cesar Rengifo Peña, con DNI No. 06690086, facultado según poder inscrito en la partida Nº 01894897, asiento A00028 del Libro de Asociaciones del Registro de Personas Jurídicas de la Zona Registral No. IX-Sede Lima, y de la otra parte <strong>[app] [apm]</strong> <strong>[nombre]</strong>, con DNI Nº <strong>[dni]</strong>, con domicilio en  <span style="background-color:rgb(249, 242, 244); font-family:monaco,menlo,consolas,courier new,monospace; font-size:11.7px">[dir]</span>, a quien se le denominará <strong>EL (LA) TRABAJADOR(A)</strong>, en los términos y condiciones siguientes:</p>
 
 <p style="margin-left:14.2pt"><strong>ACTIVIDAD DEL EMPLEADOR:</strong></p>
 
@@ -18,7 +18,7 @@
 
 <p style="margin-left:14.2pt; text-align:justify"><strong>DURACIÓN DEL SERVICIO:</strong></p>
 
-<p style="margin-left:14.2pt; text-align:justify">CUARTA: <strong>EL EMPLEADOR </strong>en virtud del presente documento, contrata a <strong>EL(LA) TRABAJADOR(A)</strong>, desde el <span style="background-color:rgb(249, 242, 244); color:rgb(199, 37, 78); font-family:monaco,menlo,consolas,courier new,monospace; font-size:11.7px">[desde]</span> hasta el  <span style="background-color:rgb(249, 242, 244); color:rgb(199, 37, 78); font-family:monaco,menlo,consolas,courier new,monospace; font-size:11.7px">[hasta].</span></p>
+<p style="margin-left:14.2pt; text-align:justify">CUARTA: <strong>EL EMPLEADOR </strong>en virtud del presente documento, contrata a <strong>EL(LA) TRABAJADOR(A)</strong>, desde el <span style="background-color:rgb(249, 242, 244); font-family:monaco,menlo,consolas,courier new,monospace; font-size:11.7px">[desde]</span> hasta el  <span style="background-color:rgb(249, 242, 244); font-family:monaco,menlo,consolas,courier new,monospace; font-size:11.7px">[hasta].</span></p>
 
 <p style="margin-left:14.2pt; text-align:justify"><strong>REMUNERACIÓN MENSUAL Y JORNADA DE TRABAJO:              </strong></p>
 
@@ -49,8 +49,6 @@
 <div> </div>
 
 <p style="margin-left:14.2pt; text-align:justify">      </p>
-
-<p style="margin-left:14.2pt; text-align:justify"> </p>
 
 <div>
 <div>
