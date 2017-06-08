@@ -24,7 +24,6 @@ import pe.edu.upeu.application.model.Autorizacion;
 import pe.edu.upeu.application.model.V_Autorizar_Dgp;
 import pe.edu.upeu.application.model.X_List_De_Autorizacion;
 import pe.edu.upeu.application.properties.UserMachineProperties;
-import pe.edu.upeu.application.properties.globalProperties;
 import pe.edu.upeu.application.util.DateFormat;
 import pe.edu.upeu.application.util.Sql;
 

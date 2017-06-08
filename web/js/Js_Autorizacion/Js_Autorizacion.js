@@ -83,6 +83,8 @@ function ValBtnAutorizarDgp(trabajador, divBotones) {
                                         window.parent.UpdateNotifications();
                                         window.parent.sendMessage();
                                         window.location.href = "../Dgp/Autorizar_Requerimiento.jsp?r=ok";
+                                    } else {
+                                        alert('ocurrio un error al autorizar el requerimiento.')
                                     }
                                 }});
                         }
