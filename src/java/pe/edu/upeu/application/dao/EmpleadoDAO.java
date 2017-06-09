@@ -75,7 +75,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
     }
 
     @Override
-    public Datatable getAllEmployees(Datatable datatable, String id_departamento) {
+    public Datatable getAllEmployees(Datatable datatable, String direccion, String departamento, String area, String seccion) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String queryColumns = "SELECT c.id_contrato,DT.\"ID_TRABAJADOR\",DT.\"AP_PATERNO\",DT.\"AP_MATERNO\",DT.\"NO_TRABAJADOR\",DT.\"TI_DOC\",DT.\"NU_DOC\",DT.\"ES_CIVIL\",\n"
                 + "    DT.\"FE_NAC\",DT.\"NO_NACIONALIDAD\",DT.\"NO_DEPARTAMENTO\",DT.\"NO_PROVINCIA\",DT.\"NO_DISTRITO\",DT.\"TE_TRABAJADOR\",DT.\"CL_TRA\",DT.\"DI_CORREO_PERSONAL\",DT.\"DI_CORREO_INST\",\n"
@@ -102,11 +102,16 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
                 + "  WHERE dt.id_trabajador = c.id_trabajador\n"
                 + "  AND e.id_trabajador    = c.id_trabajador\n"
                 + "  AND dpd.id_puesto      = c.id_puesto\n"
-                + "  AND c.es_contrato      =1  "
-                + " and dpd.ID_departamento='" + id_departamento + "' ";
+                + "  AND c.es_contrato      =1  ";
+        /*filters*/
+        query += (!departamento.equals("")) ? " and dpd.ID_departamento='" + departamento + "' " : "";
+        query += (!direccion.equals("")) ? " and dpd.id_direccion='" + direccion + "' " : "";
+        query += (!area.equals("")) ? " and dpd.id_area='" + area + "' " : "";
+        query += (!seccion.equals("")) ? " and dpd.id_seccion='" + seccion + "' " : "";
+        /*end filters*/
         List<Object> obj = new ArrayList<Object>();
         try {
-            ResultSet rs = this.conn.query(Sql.queryWithPagination(queryColumns + ", %s " + query + " %s", datatable.getPageNumber(), datatable.getPageSize(), "au.fe_creacion"));
+            ResultSet rs = this.conn.query(Sql.queryWithPagination(queryColumns + ", %s " + query + " %s", datatable.getPageNumber(), datatable.getPageSize(), "c.fe_creacion"));
             while (rs.next()) {
                 V_List_Empleado v = new V_List_Empleado();
                 v.setEs_inst_educ_peru(rs.getString("es_inst_educ_peru"));

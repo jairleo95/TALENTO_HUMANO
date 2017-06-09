@@ -1,28 +1,41 @@
 var _path = '../../';
-var direccion = '0';
+var direccion = '';
+var departamento = '';
+var area = '';
+var seccion = '';
 
 function  initJobsFilters(datatable) {
     listSelectAjax($(".selectDir"), "../../Direccion_Puesto", "opc=Listar_direccion", null, null, "Direccion");
     $(".selectDir").change(function () {
         listSelectAjax($(".selectDep"), "../../Direccion_Puesto", "opc=Listar_dir_dep&id=" + $(this).val(), "1", $(this).val(), "Departamento");
         direccion = $(this).val();
-        console.log(direccion);
-        datatable.ajax.reload();
+
         $(".selectDep").val("");
         $(".selectArea").val("");
         $(".selectSeccion").val("");
+
+        datatable.ajax.reload();
         $(".chosen-select").trigger("chosen:updated");
     });
     $(".selectDep").change(function () {
         listSelectAjax($(".selectArea"), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(this).val(), "1", $(this).val(), "Area");
+        departamento = $(this).val();
+
+
+        datatable.ajax.reload();
         $(".chosen-select").trigger("chosen:updated");
     });
     $(".selectArea").change(function () {
-        listSelectAjax($(".selectSeccion"), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(".selectArea").val(), "3");
+        listSelectAjax($(".selectSeccion"), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(this).val(), "1");
+        area = $(this).val();
         $(".selectSeccion").val("");
+
+        datatable.ajax.reload();
         $(".chosen-select").trigger("chosen:updated");
     });
     $(".selectSeccion").change(function () {
+        seccion = $(this).val();
+        datatable.ajax.reload();
         //  list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".selectSeccion").val(), "3");
     });
 }
@@ -50,7 +63,10 @@ $(document).ready(function () {
             "data": function (d) {
                 return $.extend({}, d, {
                     "opc": "getAllEmployees",
-                    "direccion": direccion
+                    "direccion": direccion,
+                    "departamento": departamento,
+                    "seccion": seccion,
+                    "area": area
                 });
             }
 
@@ -104,7 +120,7 @@ $(document).ready(function () {
                 "data": "ca_sueldo"
             }
         ],
-        "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-3 no-padding'f><'selectFilters col-sm-6 col-xs-12'><'col-sm-3 col-xs-12'T>r>" +
+        "sDom": "<'dt-toolbar'<'selectFilters col-sm-8 col-xs-12'><'col-sm-4 col-xs-12'T>r>" +
                 "t" +
                 "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
         "oTableTools": {

@@ -98,8 +98,31 @@ public class CEmpleado extends HttpServlet {
                 datatable.setPageNumber(((Integer.parseInt(request.getParameter("start")) / datatable.getPageSize()) + 1));
                 datatable.setDraw(Integer.parseInt(request.getParameter("draw")));
 
-                String iddepa = (String) sesion.getAttribute("DEPARTAMENTO_ID");
-                datatable = Iem.getAllEmployees(datatable, iddepa);
+                String direccion = "";
+                String departamento = "";
+                String area = "";
+                String seccion = "";
+                if (idrol.trim().equals("ROL-0001")) {
+                    direccion = request.getParameter("direccion");
+                    departamento = request.getParameter("departamento");
+                    area = request.getParameter("area");
+                    seccion = request.getParameter("seccion");
+                } else {
+                    departamento = (String) sesion.getAttribute("DEPARTAMENTO_ID");
+                }
+                if (direccion == null) {
+                    direccion = "";
+                }
+                if (departamento == null) {
+                    departamento = "";
+                }
+                if (area == null) {
+                    area = "";
+                }
+                if (seccion == null) {
+                    seccion = "";
+                }
+                datatable = Iem.getAllEmployees(datatable, direccion, departamento, area, seccion);
                 //   if (idrol.trim().equals("ROL-0001")) {
                 rpta.put("data", datatable);
                 rpta.put("recordsTotal", datatable.getRecordsTotal());
