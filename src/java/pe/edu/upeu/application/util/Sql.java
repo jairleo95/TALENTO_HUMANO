@@ -13,7 +13,8 @@ public class Sql {
 
     public static String queryWithPagination(String query, int pageNumber, int pageSize,String orderby) {
         /*add %s scape for java into selec, on last column and other after where clause*/
-        return String.format(" SELECT * FROM(  " + query + "  ) WHERE row_number >= (((" + pageNumber + "-1) * " + pageSize + ") + 1)", " rownum row_number ", " AND  rownum < ((" + pageNumber + " * " + pageSize + ") + 1 ) ");
+        return String.format(" SELECT * FROM(  " + query + "  ) WHERE row_number >= (((" + pageNumber + "-1) * " + pageSize + ") + 1)", 
+                " row_number() over (order by "+orderby+" desc) row_number    ", " AND  rownum < ((" + pageNumber + " * " + pageSize + ") + 1 ) ");
 
     }
 }

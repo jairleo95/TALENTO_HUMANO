@@ -106,7 +106,7 @@ public class EmpleadoDAO implements InterfaceEmpleadoDAO {
                 + " and dpd.ID_departamento='" + id_departamento + "' ";
         List<Object> obj = new ArrayList<Object>();
         try {
-            ResultSet rs = this.conn.query(Sql.queryWithPagination(queryColumns + ", %s " + query + " %s", datatable.getPageNumber(), datatable.getPageSize(), ""));
+            ResultSet rs = this.conn.query(Sql.queryWithPagination(queryColumns + ", %s " + query + " %s", datatable.getPageNumber(), datatable.getPageSize(), "au.fe_creacion"));
             while (rs.next()) {
                 V_List_Empleado v = new V_List_Empleado();
                 v.setEs_inst_educ_peru(rs.getString("es_inst_educ_peru"));
