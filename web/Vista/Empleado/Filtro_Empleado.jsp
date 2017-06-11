@@ -73,7 +73,7 @@
                         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="jarviswidget jarviswidget-color-magenta" id="wid-id-3" data-widget-editbutton="false">
                                 <header>
-                                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                    <span class="widget-icon"> <i class="fa fa-user"></i> </span>
                                     <h2>Reporte de Empleados</h2>
 
                                 </header>

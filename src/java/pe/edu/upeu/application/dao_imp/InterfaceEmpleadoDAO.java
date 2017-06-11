@@ -28,7 +28,7 @@ public interface InterfaceEmpleadoDAO {
 
     public void VALIDAR_EMPLEADO(String id_tra);
 
-    public  Datatable getAllEmployees(Datatable datatable, String Departamento);
+    public Datatable getAllEmployees(Datatable datatable, String direccion, String departamento, String area, String seccion);
 
     public List<V_List_Empleado> Listar_Emp();
 
