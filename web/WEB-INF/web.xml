@@ -5,27 +5,27 @@
     </listener>
     <servlet>
         <servlet-name>Cindex</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.Cindex</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.user.Cindex</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CTrabajador</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CTrabajador</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CTrabajador</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CDgp</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CDgp</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CDgp</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CContrato</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CContrato</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CContrato</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CHorario</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CHorario</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CHorario</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CAutorizacion</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CAutorizacion</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.inbox.CAutorizacion</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CError</servlet-name>
@@ -33,23 +33,23 @@
     </servlet>
     <servlet>
         <servlet-name>CDocumento</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CDocumento</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CDocumento</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CRequerimiento</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CRequerimiento</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CRequerimiento</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CEmpleado</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CEmpleado</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CEmpleado</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CComentario</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CComentario</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CComentario</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CFamiliar</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CFamiliar</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CFamiliar</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CCarrera_Universidad</servlet-name>
@@ -57,27 +57,27 @@
     </servlet>
     <servlet>
         <servlet-name>CFoto</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CFoto</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.user.CFoto</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Roles</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CRoles</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.user.CRoles</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CPaso</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CPaso</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.processCore.CPaso</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CDir_Puesto</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CDir_Puesto</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CDir_Puesto</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CCentro_Costo</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CCentro_Costo</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CCentro_Costo</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CMenu</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CMenu</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.user.CMenu</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CVacaciones</servlet-name>
@@ -89,31 +89,31 @@
     </servlet>
     <servlet>
         <servlet-name>CFormato_Horario</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CFormato_Horario</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CFormato_Horario</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CRemuneracion</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CRemuneracion</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CRemuneracion</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CModulo</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CModulo</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.user.CModulo</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CImprimir</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CImprimir</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CImprimir</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CFormato_Plantilla</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CFormato_Plantilla</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CFormato_Plantilla</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CPlantilla_Contractual</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CPlantilla_Contractual</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CPlantilla_Contractual</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CContrato_Archivo_Adjunto</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CContrato_Archivo_Adjunto</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CContrato_Archivo_Adjunto</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CFunciones</servlet-name>
@@ -121,47 +121,47 @@
     </servlet>
     <servlet>
         <servlet-name>CFuncion</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CFuncion</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CFuncion</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Reporte</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CReporte</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.report.CReporte</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CCarga_Academica</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CCarga_Academica</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.academicCharge.CCarga_Academica</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CDocumento_Trabajador</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CDocumento_Trabajador</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CDocumento_Trabajador</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CImpresion_Masiva</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CImpresion_Masiva</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CImpresion_Masiva</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Cdocumento_adjunto</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.Cdocumento_adjunto</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.Cdocumento_adjunto</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CPago_Docente</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CPago_Docente</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.academicCharge.CPago_Docente</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CSolicitud_Requerimiento</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CSolicitud_Requerimiento</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CSolicitud_Requerimiento</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MCCosto</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.MCCosto</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.MCCosto</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CSituacionEspecial</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CSituacionEspecial</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CSituacionEspecial</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CMail</servlet-name>
-        <servlet-class>pe.edu.upeu.application.web.controller.CMail</servlet-class>
+        <servlet-class>pe.edu.upeu.application.web.controller.inbox.CMail</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
