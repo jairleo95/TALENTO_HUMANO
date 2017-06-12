@@ -386,7 +386,7 @@
 
         <!-- BUSINESS LOGIC PLUGINS -->
         <script src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
-        <script src="../../js/Js_DGP/Detalle/Js_Detallle_dgp-api.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript" charset="UTF-8"></script>
+        <script src="../../js/businessLogic/Dgp/Detalle/Js_Detallle_dgp-api.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript" charset="UTF-8"></script>
     
 </html>
     <%} else {

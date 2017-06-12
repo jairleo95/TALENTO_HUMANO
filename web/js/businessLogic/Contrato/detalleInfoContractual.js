@@ -28,7 +28,7 @@ $(document).ready(function () {
         //console.log('Scrolling...(333)');
         //var iframeTwo = window.parent.document;
       // $( iframeTwo.getElementsByTagName("header")[0]).css("background","red");
-       window.parent.parent.scrolingToTop(400);
+       window.parent.parent.scrolingToTop(200);
     });
     $(".ck_habilitar_is").click(function () {
         if ($(".ck_habilitar_is").prop('checked')) {

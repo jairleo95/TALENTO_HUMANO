@@ -70,7 +70,7 @@
         <script type="text/javascript" src="js/JQuery/jquery.autoheight.js"></script>
     </head>
      
-    <body class="smart-style-1 fixed-header fixed-footer"  onload="nobackbutton();
+    <body class="smart-style-1 fixed-header fixed-footer mainBody"  onload="nobackbutton();
             document.getElementById('link').click()">
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
  
@@ -352,7 +352,7 @@
                         <div class="animacion_load"></div>
                     </div>
 
-                    <iframe id="myframe" name="myframe" class="iframe_principal" scrolling="si"  width="100%" height="800" frameborder="0"  src="Vista/inicio.jsp"></iframe>
+                    <iframe id="myframe" name="myframe" class="iframe_principal" scrolling="si"  width="100%" height="2000" frameborder="0"  src="Vista/inicio.jsp"></iframe>
                 </div>
                 <!-- end row -->
                 <!-- end widget grid -->

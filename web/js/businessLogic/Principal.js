@@ -9,15 +9,13 @@ var btnclose = 0;
 document.oncontextmenu = function () {
     return false;
 };
-function scrolingToTop(size) {
+function scrolingToTop(number) {
     console.log('scrolling to top...');
     $('html, body').animate({
-        scrollTop: $("body").offset().top
-    }, size);
+        scrollTop: $(".mainBody").offset().top
+    }, number);
 }
 function nobackbutton() {
-    window.location.hash = "no-back-button";
-    window.location.hash = "Again-No-back-button" //chrome
     window.onhashchange = function () {
         window.location.hash = "";
     };
@@ -44,7 +42,6 @@ websocket.onmessage = function processMessage(request) {
         } else {
 
         }
-
         // messagesTextArea.value += jsonData.message + "\n";
     }
 }

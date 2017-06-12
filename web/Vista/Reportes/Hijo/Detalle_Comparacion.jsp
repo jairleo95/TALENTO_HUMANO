@@ -146,7 +146,7 @@
         <script src="../../../js/plugin/datatable-responsive/datatables.responsive.min.js"></script>
         <script src="../../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
 
-        <script src="../../../js/Js_DTDinamico/Dinamico.js" type="text/javascript"></script>
+        <script src="../../../js/businessLogic/Hijos/Dinamico.js" type="text/javascript"></script>
         <script type="text/javascript">
             function listar_fec_sin_repetir(fecha_default) {
                 $.post("../../../RHistorial", "opc=Fe_Modif_Hijo2&hijo=" + $(".idh").val() + "&fecha=" + fecha_default, function (objJson) {

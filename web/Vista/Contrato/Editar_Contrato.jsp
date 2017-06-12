@@ -812,7 +812,7 @@
 
         <!--BUSINESS LOGIC PLUGINS-->        
         <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>"></script>
-        <script type="text/javascript" src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js?v=<%=globalProperties.VERSION_JS%>" ></script>
+        <script type="text/javascript" src="../../js/businessLogic/CentroCosto/Js_centro_costo.js?v=<%=globalProperties.VERSION_JS%>" ></script>
         <script type="text/javascript" src="../../js/businessLogic/Contrato/editContrato.js?v=<%=globalProperties.VERSION_JS%>" ></script>
 
     </body>

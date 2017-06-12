@@ -873,10 +873,10 @@
 
     <!-- BUSINESS LOGIC PLUGINS-->
     <script src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
-    <script src="../../js/Js_DGP/Registrar/Reg_Dgps.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript" ></script>
-    <script src="../../js/Js_Horario/horario.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
-    <script src="../../js/Js_Plazo/Js_plazo_advertencia.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>    
-    <script src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+    <script src="../../js/businessLogic/Dgp/Registrar/Reg_Dgps.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript" ></script>
+    <script src="../../js/businessLogic/Horario/horario.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+    <script src="../../js/businessLogic/Plazo/Js_plazo_advertencia.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>    
+    <script src="../../js/businessLogic/CentroCosto/Js_centro_costo.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
 
 
 </html>

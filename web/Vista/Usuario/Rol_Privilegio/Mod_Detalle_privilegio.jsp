@@ -16,7 +16,7 @@
                 <link rel="stylesheet" href="../../../css/Css_Lista/listas.css" />
                 <link rel="stylesheet" href="../../../css/Css_DGP/estilos.css" />
                 <link rel="stylesheet" href="../../../css/Css_DGP//chosen.css">
-                <script src="../../../js/Js_DGP/abc.js"></script>
+                <script src="../../../js/businessLogic/Dgp/abc.js"></script>
                 <script src="../../../js/Js_Formulario/organictabs.jquery.js"></script>
                 <style type="text/css">
 

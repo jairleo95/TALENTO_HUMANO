@@ -625,10 +625,10 @@
         <script  type="text/javascript" src="../../js/JQuery/jquery.session.js"></script>
 
         <script  type="text/javascript" src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>"></script>
-        <script type="text/javascript" src="../../js/Js_Autorizacion/Js_Autorizacion.js?v=<%=globalProperties.VERSION_JS%>"></script>
+        <script type="text/javascript" src="../../js/businessLogic/Autorizacion/Js_Autorizacion.js?v=<%=globalProperties.VERSION_JS%>"></script>
         <script type="text/javascript" src="../../js/Js_Academico/Js_Carga_Academica.js?v=<%=globalProperties.VERSION_JS%>"></script>
         <script type="text/javascript" src="../../js/businessLogic/Foto/foto.js?v=<%=globalProperties.VERSION_JS%>"></script>
-        <script type="text/javascript" src="../../js/Js_Trabajador/Js_Trabajador.js?v=<%=globalProperties.VERSION_JS%>"></script>
+        <script type="text/javascript" src="../../js/businessLogic/Trabajador/Js_Trabajador.js?v=<%=globalProperties.VERSION_JS%>"></script>
     </body>
 </html>
 <%} else {

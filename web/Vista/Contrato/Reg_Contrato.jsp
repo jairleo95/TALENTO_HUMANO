@@ -737,7 +737,7 @@
         <script type="text/javascript" src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
         <!--BUSINESS LOGIC PLUGINS-->
-        <script type="text/javascript" src="../../js/Js_Centro_Costo/Functions/Js_centro_costo.js?v=<%=globalProperties.VERSION_JS%>" ></script>
+        <script type="text/javascript" src="../../js/businessLogic/CentroCosto/Js_centro_costo.js?v=<%=globalProperties.VERSION_JS%>" ></script>
         <script type="text/javascript" src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>"></script>
         <script type="text/javascript" src="../../js/businessLogic/Horario/horario.js?v=<%=globalProperties.VERSION_JS%>"></script>
         <script type="text/javascript" src="../../js/businessLogic/Contrato/RegContrato.js?v=<%=globalProperties.VERSION_JS%>"></script>

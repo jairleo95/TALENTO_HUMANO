@@ -228,6 +228,6 @@
         <![endif]-->
         <!-- MAIN APP JS FILE -->
         <script src="js/app.min.js"></script>
-        <script src="js/Js_Index/index.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
+        <script src="js/index.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
     </body>
 </html>
