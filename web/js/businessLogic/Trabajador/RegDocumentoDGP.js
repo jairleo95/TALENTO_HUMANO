@@ -3,6 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var idtr = "";
+var iddgp = "";
+var casosEspeciales = false;
+var enterToDGPProcess = false;
+/*defaul path*/
+var pathRequest = "";
 function validateShadowBox() {
     Shadowbox.init({
         overlayOpacity: 0.9
@@ -48,7 +54,6 @@ function validateSizeFile() {
             var lg = fp[0].files.length; // get length
             var items = fp[0].files;
             var fragment = "";
-
             if (lg > 0) {
                 for (var i = 0; i < lg; i++) {
                     var fileName = items[i].name; // get file name
@@ -60,23 +65,24 @@ function validateSizeFile() {
                         $(thisObject).focus();
                         x = false;
                     }
+                    console.log(fragment);
                 }
             }
         }
     });
     return x;
 }
-function initFormRegDocument() {
+function initFormRegDocument(request) {
     validateShadowBox();
     $(".btn_reg_doc").click(function () {
         var data = new FormData($('.form_dgp_doc')[0]);
         if (validateSizeFile()) {
             $.ajax({
-                url: "../../../documento", type: 'POST',
+                url: pathRequest + "documento", type: 'POST',
                 success: function (data, textStatus, jqXHR) {
                     if (data.status) {
                         closedthis();
-                        listDocument();
+                        showDocuments(iddgp, idtr, casosEspeciales, enterToDGPProcess, initFormRegDocument);
                     }
                 },
                 cache: false,
@@ -88,7 +94,6 @@ function initFormRegDocument() {
             return false;
         }
     });
-
     $(".fileDocument").fileinput({
         language: "es",
         showUpload: false,
@@ -142,32 +147,31 @@ function initFormRegDocument() {
         }
     });
 }
-function listDocument() {
+function showDocuments(dgp, idtr, casosEspeciales, enterToDGPProcess, callback) {
+    console.log("::enter to showDocuments function::");
     var objDiv = $(".listDocument");
     var data = {
         "opc": "listDocument",
-        "iddgp": $(".iddgp").val(),
-        "idtr": $(".idtr").val(),
-        "enterToCasosEspecialesProcess": $(".enterToCasosEspecialesProcess").val(),
-        "enterToDGPProcess": $(".enterToDGPProcess").val(),
-        "enterToRegTrabajador": $(".enterToRegTrabajador").val()
+        "iddgp": dgp,
+        "idtr": idtr,
+        "casosEspeciales": casosEspeciales,
+        "enterToDGPProcess": enterToDGPProcess
+
+                /*"iddgp": $(".iddgp").val(),
+                 "idtr": $(".idtr").val(),
+                 "enterToCasosEspecialesProcess": $(".enterToCasosEspecialesProcess").val(),
+                 "enterToRegTrabajador": $(".enterToRegTrabajador").val()*/
     };
-    objDiv.append('<img src="../../../img/load.gif" class="img-responsive center-block"/>');
+    objDiv.append('<img src=' + pathRequest + 'img/load.gif" class="img-responsive center-block"/>');
     $.ajax({
-        url: "../../../documento", type: 'POST', data: data, success: function (data, textStatus, jqXHR) {
+        url: pathRequest + "documento", type: 'POST', data: data, success: function (data, textStatus, jqXHR) {
             if (data.status) {
                 objDiv.empty();
                 objDiv.append(data.htmlListDocument);
-                initFormRegDocument();
+                if (typeof callback !== "undefined") {
+                    callback(data);
+                }
             }
-
         }
     });
 }
-$(document).ready(function () {
-    pageSetUp();
-    $.sound_path = "../../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
-        $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
-    });
-    listDocument();
-});

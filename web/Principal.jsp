@@ -69,10 +69,11 @@
         <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <script type="text/javascript" src="js/JQuery/jquery.autoheight.js"></script>
     </head>
+     
     <body class="smart-style-1 fixed-header fixed-footer"  onload="nobackbutton();
             document.getElementById('link').click()">
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
-
+ 
         <!-- HEADER -->
         <header id="header">
             <div id="logo-group" >
@@ -337,18 +338,6 @@
                         <%}%>
                 </ol>
                 <!-- end breadcrumb -->
-
-                <!-- You can also add more buttons to the
-                ribbon for further usability
-
-                Example below:
-
-                <span class="ribbon-button-alignment pull-right">
-                <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
-                <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
-                <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
-                </span> -->
-
             </div>
             <!-- END RIBBON -->
             <!-- MAIN CONTENT -->
@@ -455,6 +444,10 @@
             </ul>
         </div>
         <!-- END SHORTCUT AREA -->
+        <!--Modal content-->
+        <div class="modalContent"></div>
+        <!--End Modal content-->
+
 
         <!--================================================== -->
 

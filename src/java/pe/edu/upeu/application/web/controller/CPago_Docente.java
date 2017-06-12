@@ -52,11 +52,17 @@ public class CPago_Docente extends HttpServlet {
             if (opc.equals("Listar_Cuotas")) {
                 String feDesde = request.getParameter("fe_desde");
                 String feHasta = request.getParameter("fe_hasta");
-                double ca_pago_semanal = Double.parseDouble(request.getParameter("pago_semanal"));
-                feDesde = DateFormat.toFormat3(feDesde);
-                feHasta = DateFormat.toFormat3(feHasta);
-                List<Map<String, ?>> lista = c.Cuotas_Pago_Docente(DateFormat.toFormat1(feDesde), DateFormat.toFormat1(feHasta), ca_pago_semanal);
-                rpta.put("rpta", "1");
+                String pagoSemanal = request.getParameter("pago_semanal");
+
+                List<Map<String, ?>> lista = null;
+                if (feDesde != null & feHasta != null & !feDesde.equals("") & !feHasta.equals("") & pagoSemanal != null & !pagoSemanal.equals("") & !pagoSemanal.equals("0")) {
+                    Double ca_pago_semanal = Double.parseDouble(pagoSemanal);
+                    feDesde = DateFormat.toFormat3(feDesde);
+                    feHasta = DateFormat.toFormat3(feHasta);
+                    lista = c.Cuotas_Pago_Docente(DateFormat.toFormat1(feDesde), DateFormat.toFormat1(feHasta), ca_pago_semanal);
+                } else {
+                    rpta.put("statusListCuotas", "No se recibieron los parametros correctamente");
+                }
                 rpta.put("lista", lista);
             }
             if (opc.equals("getPagoDocenteHtml")) {
@@ -91,9 +97,11 @@ public class CPago_Docente extends HttpServlet {
                 rpta.put("status", true);
 
             }
-
+            rpta.put("status", true);
         } catch (Exception e) {
             rpta.put("rpta", "-1");
+            rpta.put("status", false);
+            rpta.put("message", e.getMessage());
             rpta.put("mensaje", e.getMessage());
         }
         Gson gson = new Gson();

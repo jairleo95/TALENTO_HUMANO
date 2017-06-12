@@ -551,7 +551,11 @@
             <div class="modal-dialog">
                 <div class="modal-content"  style="width:150%;margin-left: -30%;">
                     <div class="modal-header">
-                        <h1>Enviar Correos al Trabajador</h1>
+                        <div class="col-md-6"><h1>Enviar Correos al Trabajador</h1></div>
+                        <div class="col-md-3">
+                            <input type="email" name="emailSubject" class="form-control emailSubject" placeholder="Email" />
+                        </div>
+                        <div class="col-md-3"><input type="password" name="pwdSubject" class="form-control pwdSubject" placeholder="Password"/></div>
                     </div>
 
                     <div class="modal-body" >

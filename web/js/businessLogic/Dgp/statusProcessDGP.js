@@ -87,7 +87,7 @@ function listHistory(at) {
                                     + '" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i> Habilitar</strong></a>  <a href="../../dgp?opc=MODIFICAR REQUERIMIENTO&iddgp='
                                     + id + '" class="btn btn-primary id-dgp "><strong><i class="fa fa-pencil-square-o"></i> Editar DGP</strong></a> <a data-toggle="modal" class="btn btn-primary" onclick="ListarMotivo()" data-toggle="modal" data-target="#myModalComentario"><i class="glyphicon glyphicon-remove"></i> Ver Motivo</a>';
                             if (rol === "ROL-0001") {
-                                html += '<a href="../../autorizacion?opc=eliminarDGP&iddgp=' + id + '" class="btn btn-danger"><strong><i class="fa fa-arrow-circle-right"></i> Eliminar DGP</strong></a>';  
+                                html += '<a href="../../autorizacion?opc=eliminarDGP&iddgp=' + id + '" class="btn btn-danger"><strong><i class="fa fa-arrow-circle-right"></i> Eliminar DGP</strong></a>';
                             }
 
                             //  alert(+lista[i].us_no_puesto+);                                                                                                                                                                                                                                                                                                                                                                                
@@ -319,6 +319,17 @@ $(document).ready(function () {
                 $('<p>').text(value).appendTo($select);
             });
         });
+    });
+    $(".seeDocuments").click(function () {
+        $('.modalDocument').modal({keyboard: false, backdrop: 'static'});
+        $('.modalDocument').modal('show');
+        $(".modalTitle").text("Documentos del Trabajador");
+
+        idtr = $(this).data("idtr");
+        iddgp = $(this).data("iddgp");
+        pathRequest = "../../../";
+        showDocuments(iddgp, idtr, false, false);
+        return false;
     });
     initStatusProcessDGP();
     $(".btnHorario").click(function () {

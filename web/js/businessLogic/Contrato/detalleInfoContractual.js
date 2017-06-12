@@ -24,6 +24,11 @@ $(document).ready(function () {
     SelectorListaContrato($(".SelectorListaContrato"), $(".idtr").val(), $(".idc").val());
     $(".btnHorario").click(function () {
         listHorario($(this).data("valor"));
+        /*trying to scroll to top*/
+        //console.log('Scrolling...(333)');
+        //var iframeTwo = window.parent.document;
+      // $( iframeTwo.getElementsByTagName("header")[0]).css("background","red");
+       window.parent.parent.scrolingToTop(400);
     });
     $(".ck_habilitar_is").click(function () {
         if ($(".ck_habilitar_is").prop('checked')) {

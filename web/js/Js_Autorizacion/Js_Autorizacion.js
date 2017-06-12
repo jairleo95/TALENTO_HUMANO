@@ -161,3 +161,4 @@ function procesar_req_individual(ckb, tipo, iddgp) {
         }
     });
 }
+ 

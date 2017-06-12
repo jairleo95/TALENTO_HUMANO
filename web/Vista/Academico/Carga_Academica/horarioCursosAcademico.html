@@ -1,3 +1,27 @@
+<style type="text/css">
+    .columnHorario{
+        width: 28px;
+        text-align: center;
+    }
+    .columna-1,.columna-2, .columna-3, .columna-4, .columna-5,.columna-6,.columna-7{
+        /*  background-color:  #9cb4c5;
+          padding: 5px;*/
+    }
+    .tabla-horario>tbody>tr>td, .tabla-horario>tbody>tr>th, .tabla-horario>tfoot>tr>td, .tabla-horario>tfoot>tr>th, .tabla-horario>thead>tr>td, .tabla-horario>thead>tr>th{
+        height: 5px;
+        padding: 0px 0px;
+    }
+    .trTurno{
+       /* background-color: #275b89;
+        color: white;*/
+    }
+    .trTurno:hover{
+        background-color: #275b89;
+        background: #275b89;
+        color: black;
+    }
+  
+</style>
 <div class="col-md-6">
     <div class="well well-light">
         <div class="row">
@@ -5,231 +29,227 @@
                 <div class="text-center">
                     <label class="txt-color-red font-md">Cursos</label>
                 </div>
-
                 <div class="bodyCursos">
-
                 </div>
-
             </div>
-            
         </div>
         <div class="row">
             <div class="col col-md-12 text-center">
                 <label class="txt-color-red font-md">Horario</label> 
-                <div class="">
-                    <table  class="tabla-horario text-center" border="1" style="width: 100%">
-                        <tr class="text-center">
-                            <th colspan=2>Periodo</th>
-                            <th>D</th>
-                            <th>L</th>
-                            <th>M</th>
-                            <th>M</th>
-                            <th>J</th>
-                            <th>V</th>
-                            <th>S</th>
+                <table  class="table table-bordered table-hover tabla-horario text-center"  style="width: 100%">
+                    <thead>
+                        <tr class="text-center trHeadHorario" >
+                            <th colspan=2 style="text-align: center;">Periodo</th>
+                            <th class="columnHorario" >D</th>
+                            <th class="columnHorario">L</th>
+                            <th class="columnHorario">M</th>
+                            <th class="columnHorario">M</th>
+                            <th class="columnHorario">J</th>
+                            <th class="columnHorario">V</th>
+                            <th class="columnHorario">S</th>
                         </tr>
-                        <tr>
-                            <td colspan="9" >
-                                Horario de Ma&ntilde;ana
-                            </td>
-                        </tr>
+                    </thead>
 
-                        <tr class="fila-1">
-                            <td ><b>1.</b></td>
-                            <td>7:30 - 8:20</td> 
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
-                        <tr class="fila-2">
-                            <td ><b>2.</b></td>
-                            <td>8:25 - 9:15</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
-                        <tr class="fila-3">
-                            <td ><b>3.</b></td>
-                            <td>9:20 - 10:10</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
-                        <tr class="fila-4">
-                            <td><b>4.</b></td>
-                            <td >10:20 - 11:10</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
+                    <tr class="trTurno">
+                        <td colspan="9" >
+                            Horario de Ma&ntilde;ana
+                        </td>
+                    </tr>
+                    <tr class="fila-1">
+                        <td ><b>1.</b></td>
+                        <td>7:30 - 8:20</td> 
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
+                    <tr class="fila-2">
+                        <td ><b>2.</b></td>
+                        <td>8:25 - 9:15</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
+                    <tr class="fila-3">
+                        <td ><b>3.</b></td>
+                        <td>9:20 - 10:10</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
+                    <tr class="fila-4">
+                        <td><b>4.</b></td>
+                        <td >10:20 - 11:10</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
 
-                        <tr class="fila-5">
-                            <td ><b>5.</b></td>
-                            <td >11:15 - 12:05</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
+                    <tr class="fila-5">
+                        <td ><b>5.</b></td>
+                        <td >11:15 - 12:05</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
 
-                        <tr class="fila-6">
-                            <td ><b>6.</b></td>
-                            <td>12:10 - 1:00</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
-                        <tr>
-                            <td colspan="9" >Horario de Tarde</td>
-                        </tr>
+                    <tr class="fila-6">
+                        <td ><b>6.</b></td>
+                        <td>12:10 - 1:00</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
+                    <tr class="trTurno">
+                        <td colspan="9" >Horario de Tarde</td>
+                    </tr>
 
-                        <tr class="fila-7">
-                            <td ><b>1.</b></td>
-                            <td >1:10 - 2:00</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
+                    <tr class="fila-7">
+                        <td ><b>1.</b></td>
+                        <td >1:10 - 2:00</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
 
-                        <tr class="fila-8">
-                            <td ><b>2.</b></td>
-                            <td >2:05 - 2:55</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
-                        <tr class="fila-9">
-                            <td ><b>3.</b></td>
-                            <td >3:00 - 3:50</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
-                        <tr class="fila-10">
-                            <td ><b>4.</b></td>
-                            <td >4:00 - 4:50</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
-                        <tr class="fila-11">
-                            <td ><b>5.</b></td>
-                            <td>4:55 - 5:45</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
-                        <tr class="fila-12">
-                            <td ><b>6.</b></td>
-                            <td >5:50 - 6:40</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
-                        <tr>
-                            <td colspan="9">Horario de Noche</td>
-                        </tr>
-                        <tr class="fila-13">
-                            <td ><b>1.</b></td>
-                            <td >6:45 - 7:35</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
-                        <tr class="fila-14">
-                            <td><b>2.</b></td>
-                            <td >7:40 - 8:30</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
-                        <tr class="fila-15">
-                            <td ><b>3.</b></td>
-                            <td >8:35 - 9:25</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
-                        <tr class="fila-16">
-                            <td ><b>4.</b></td>
-                            <td >9:30 - 10:20</td>
-                            <td class="columna-1" ></td>
-                            <td class="columna-2" ></td>
-                            <td class="columna-3" ></td>
-                            <td class="columna-4" ></td>
-                            <td class="columna-5" ></td>
-                            <td class="columna-6" ></td>
-                            <td class="columna-7" ></td>
-                        </tr>
-                    </table>
-                </div> 
+                    <tr class="fila-8">
+                        <td ><b>2.</b></td>
+                        <td >2:05 - 2:55</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
+                    <tr class="fila-9">
+                        <td ><b>3.</b></td>
+                        <td >3:00 - 3:50</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
+                    <tr class="fila-10">
+                        <td ><b>4.</b></td>
+                        <td >4:00 - 4:50</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
+                    <tr class="fila-11">
+                        <td ><b>5.</b></td>
+                        <td>4:55 - 5:45</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
+                    <tr class="fila-12">
+                        <td ><b>6.</b></td>
+                        <td >5:50 - 6:40</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
+                    <tr class="trTurno">
+                        <td colspan="9">Horario de Noche</td>
+                    </tr>
+                    <tr class="fila-13">
+                        <td ><b>1.</b></td>
+                        <td >6:45 - 7:35</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
+                    <tr class="fila-14">
+                        <td><b>2.</b></td>
+                        <td >7:40 - 8:30</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
+                    <tr class="fila-15">
+                        <td ><b>3.</b></td>
+                        <td >8:35 - 9:25</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
+                    <tr class="fila-16">
+                        <td ><b>4.</b></td>
+                        <td >9:30 - 10:20</td>
+                        <td class="columna-1" ></td>
+                        <td class="columna-2" ></td>
+                        <td class="columna-3" ></td>
+                        <td class="columna-4" ></td>
+                        <td class="columna-5" ></td>
+                        <td class="columna-6" ></td>
+                        <td class="columna-7" ></td>
+                    </tr>
+                </table>
             </div>
         </div>
-            
+
 
     </div>
 </div>
 <div class="col-md-6">
-    <form class="form_carga_academica">
+    <form class="form_carga_academica" novalidate="novalidate" >
         <div class="well well-light">
             <div class="row">
                 <div class="col col-md-6">
@@ -255,7 +275,6 @@
                 <div class="col col-md-6">
                     <div class="form-group">
                         <label>H. Laborables:</label>
-
                         <input type="text" class="form-control hl_docente" value="0" name="HL" placeholder="0" required />
                     </div>
                 </div>

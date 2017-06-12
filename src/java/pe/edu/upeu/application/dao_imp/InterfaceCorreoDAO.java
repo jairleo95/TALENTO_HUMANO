@@ -11,6 +11,6 @@ package pe.edu.upeu.application.dao_imp;
  */
 public interface InterfaceCorreoDAO {
 
-    public void Enviar(String to, String from, String Asunto, String Cuerpo);
+    public void Enviar(String emailSubject,String pwdSubject,String to, String from, String Asunto, String Cuerpo);
 
 }

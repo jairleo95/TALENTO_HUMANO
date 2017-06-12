@@ -5,7 +5,6 @@
     if (id_user != null) {
         String iddep = (String) sesion.getAttribute("DEPARTAMENTO_ID");
         String iduser = (String) sesion.getAttribute("IDUSER");
-
 %>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
 <%@page import="pe.edu.upeu.application.model.Tipo_Documento"%>
@@ -31,7 +30,6 @@
     <head>
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
-
         <title>Registrar Trabajador</title>
         <meta name="description" content="">
         <meta name="author" content="">
@@ -134,7 +132,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-check"></i> </span>
-                                    <h2>FICHA DE TRABAJADOR</h2>
+                                    <h2>Ficha de Trabajador</h2>
 
                                 </header>
 

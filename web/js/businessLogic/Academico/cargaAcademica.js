@@ -4,6 +4,137 @@ var urlCrudForm = "carga_academica";
 var dataAditional = "";
 var idRow = "";
 var idtrItem = "";
+function statusSyncUpCargaAcademica(callbackStatus) {
+    $.ajax({
+        url: urlCrudForm, type: 'POST', data: "opc=" + "statusSyncUpCargaAcademica", success: function (data, textStatus, jqXHR) {
+            if (data.status) {
+                if (typeof callbackStatus === "function") {
+                    callbackStatus(data);
+                }
+                console.log(data);
+            } else {
+                alert("ha ocurrido un error al verificar el estado de la sincronizacion con la carga academica");
+            }
+        }
+    });
+}
+function statusSyncElements(status) {
+    if (status) {
+        console.log(":::btnInitUpdateCAData  enter to true condition");
+        $(".btnInitUpdateCAData").attr("disabled", true);
+        $(".btnInitUpdateCAData i").addClass("fa-spin");
+        $(".btnStopSyncUpAcargaAcademica").show(200);
+    } else {
+        console.log(":::btnInitUpdateCAData  enter to else condition");
+        $(".btnInitUpdateCAData").removeAttr("disabled");
+        $(".btnInitUpdateCAData i").removeClass("fa-spin");
+        $(".btnStopSyncUpAcargaAcademica").hide(200);
+    }
+}
+function initFormCaEvents(objDatatableCagaAcad) {
+    $(".form_carga_academica").validate({
+        debug: true,
+        rules: {
+            HASTA: {
+                required: true
+            }
+        }, messages: {
+            HASTA: {
+                required: "Ingrese una la fecha de culminacion."
+            }
+        },
+        highlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement: function (error, element) {
+            if (element.parent('.form-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        submitHandler: function (form) {
+            console.log("submiting...");
+            saveFormCA(objDatatableCagaAcad);
+        }
+    });
+    $(".btnAceptarCuotasCA").click(function () {
+        console.log("click in btnAceptarCuotasCA");
+        $(".form_carga_academica").submit();
+    });
+}
+function initCAGlobalEvents() {
+    statusSyncUpCargaAcademica(function (data) {
+        statusSyncElements(data.statusSyncUp);
+    });
+    $(".btnInitUpdateCAData").tooltip();
+    $(".btnInitUpdateCAData").click(function () {
+        var data = {
+            "opc": "initUpdateCAData"
+        };
+        console.log("init Update carga Acedmica");
+        $(".btnInitUpdateCAData").attr("disabled", true);
+        $.ajax({
+            url: urlCrudForm, type: 'POST', data: data, success: function (data, textStatus, jqXHR) {
+                if (data.status) {
+                    statusSyncElements(data.runUpdateCAData);
+                } else {
+                    console.log("disabled btn");
+                    $(".btnInitUpdateCAData").removeAttr("disabled");
+                }
+            }
+        });
+    });
+
+    $(".btnStopSyncUpAcargaAcademica").click(function () {
+        console.log("init event onclick in btnStopSyncUpAcargaAcademica");
+        var data = {
+            "opc": "stopSyncUpCargaAcademica"
+        };
+        console.log("init Update carga Acedmica");
+        //  $(".btnInitUpdateCAData").attr("disabled",true);
+        $.ajax({
+            url: urlCrudForm, type: 'POST', data: data, success: function (data, textStatus, jqXHR) {
+                if (data.status) {
+                    console.log(data);
+                    if (data.cancelProcess) {
+                        statusSyncElements(false);
+                    } else {
+                        statusSyncElements(true);
+                        console.log(data.message);
+                    }
+                } else {
+                    console.log("disabled btn")
+                    //$(".btnInitUpdateCAData").removeAttr("disabled");
+                }
+            }
+        });
+    });
+
+    $(".btnUpdateCAData").click(function () {
+        console.log("update...");
+        var data = {
+            "opc": "updateCAData",
+            "semestre": "2017-1"
+        };
+        $.ajax({
+            url: urlCrudForm,
+            data: data, type: 'POST', success: function (data, textStatus, jqXHR) {
+                if (data.status) {
+                    console.log("data updated...");
+                } else {
+                    console.log("ocurrio uhn error al actualizar");
+                }
+            }
+        });
+    });
+}
 function initDatatableCargaAcademica() {
     var responsiveHelper1 = undefined;
     var breakpointDefinition = {
@@ -11,7 +142,7 @@ function initDatatableCargaAcademica() {
         phone: 480
     };
     var objDatatableCagaAcad = $('.datatableCargaAcademica');
-    console.log("responsiveHelper1:" + (typeof responsiveHelper1 === "function"))
+    console.log("responsiveHelper1:" + (typeof responsiveHelper1 === "function"));
 
     objDatatableCagaAcad.DataTable({
         "ajax": {
@@ -127,15 +258,49 @@ function initDatatableCargaAcademica() {
                     + '    </div>';
 
             $('td:eq(0)', row).html(htmlTD);
-        }, "drawCallback": function (oSettings) {
+        }, "initComplete": function (oSettings) {
             responsiveHelper1.respond();
             // var api = this.api();
-            console.log(":Enter to drawCallBack");
+            console.log(":Enter to fnInitComplete");
             initDatatableEvents(objDatatableCagaAcad);
         }
     });
 }
+
+function saveFormCA(objDatatableCagaAcad) {
+    if ($(".form_carga_academica").valid()) {
+        var data = {
+            "opc": "Registrar_CA",
+            "id": idtrItem,
+            "idTiHoraPago": $(".TiHoraPago").val()
+        };
+        $.ajax({
+            url: "carga_academica?" + $(".form_carga_academica").serialize() + "&" + dataSent,
+            type: "POST",
+            data: data, success: function (data, textStatus, jqXHR) {
+                if (data.rpta === true) {
+                    $.fn.dataTable
+                            .Api(objDatatableCagaAcad).ajax
+                            .reload();
+                    $.smallBox({
+                        title: "Registrado!",
+                        content: "<i class='fa fa-clock-o'></i> <i>Se ha almacenado correctamente...</i>",
+                        color: "#659265",
+                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                        timeout: 6000
+                    });
+
+                    $(".proceso").val(data.proceso);
+                    $(".dgp").val(data.dgp);
+                    $(".btnAceptarCuotasCA").hide();
+                    $(".btnProcesar").show('fast');
+                }
+            }
+        });
+    }
+}
 function initDatatableEvents(objDatatableCagaAcad) {
+
     /*carga academica*/
     $(".dateDesdeM").datepicker({
         defaultDate: "+1w",
@@ -215,36 +380,13 @@ function initDatatableEvents(objDatatableCagaAcad) {
                     calcularCuotasDocente($(".fe_desde_p").val(), $(".fe_hasta_p").val(), $(".hl_docente").val(), tiHoraPago);
                 });
                 getTiHoraPago($(".divSelectTiHoraPAGO"));
-                $(".btnAceptarCuotasCA").click(function () {
-                    var data = {
-                        "opc": "Registrar_CA",
-                        "id": idtrItem,
-                        "idTiHoraPago": $(".TiHoraPago").val()
-                    };
-                    $.ajax({
-                        url: "carga_academica?" + $(".form_carga_academica").serialize() + "&" + dataSent,
-                        type: "POST",
-                        data: data
-                    }).done(function (data) {
-                        if (data.rpta === true) {
-                            $.fn.dataTable
-                                    .Api(objDatatableCagaAcad).ajax
-                                    .reload();
-                            $.smallBox({
-                                title: "Registrado!",
-                                content: "<i class='fa fa-clock-o'></i> <i>Se ha almacenado correctamente...</i>",
-                                color: "#659265",
-                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                timeout: 6000
-                            });
-
-                            $(".proceso").val(data.proceso);
-                            $(".dgp").val(data.dgp);
-                            $(".btnAceptarCuotasCA").hide();
-                            $(".btnProcesar").show('fast');
-                        }
-                    });
-                });
+                initFormCaEvents(objDatatableCagaAcad);
+                /* $(".btnAceptarCuotasCA").click(function () {
+                 
+                 console.log("validando formulario" + $(".form_carga_academica").valid());
+                 
+                 
+                 });*/
 
             }
         });
@@ -261,7 +403,9 @@ function getTiHoraPago(objDivSelect, callback) {
         url: "trabajador", data: data, type: 'POST', success: function (data, textStatus, jqXHR) {
             if (data.status) {
                 objDivSelect.append(data.html);
-                callback();
+                if (typeof callback === "function") {
+                    callback();
+                }
             } else {
                 console.log("Error al cargar el tipo de hora pago");
             }
@@ -314,12 +458,15 @@ function showCargaAcademica(objBodyPrint, dataAjax, callback) {
     var fila = 1;
     var columna = 0;
     var g = 0;
+    $(".modalTitle").text("");
     objBodyPrint.empty();
     $.ajax({url: "carga_academica?opc=horarioCursosAcademico", type: 'POST', success: function (htmlContent, textStatus, jqXHR) {
             objBodyPrint.append(htmlContent);
             /*test*/
+
             $.post(url, 'opc=getDetCargaAcademica&' + dataAjax, function (data) {
                 var dataList = data.list;
+                $(".modalTitle").text(dataList[0].ap_paterno + " " + dataList[0].ap_materno + " " + dataList[0].no_trabajador);
                 $.each(dataList, function (index, dataItem) {
                     var myArray = dataItem.de_horario.trim();
                     //console.log(myArray);
@@ -358,24 +505,38 @@ function ProcesarCargaAcademica() {
     });
 }
 function calcularCuotasDocente(valorFeDesde, valorFeHasta, valorHorasLaborales, valorTipoHoraPago) {
+
     var cuotas = $(".cuota_docente");
+    if (valorTipoHoraPago === null | isNaN(valorTipoHoraPago)) {
+        valorTipoHoraPago = 0;  
+    }
     cuotas.empty();
-    $.post("pago_docente", "opc=Listar_Cuotas&fe_desde=" + valorFeDesde + "&fe_hasta=" + valorFeHasta
-            + "&pago_semanal=" + (parseFloat(valorHorasLaborales) * parseFloat(valorTipoHoraPago)), function (objJson) {
-        var lista = objJson.lista;
-        if (objJson.rpta === -1) {
-            alert(objJson.mensaje);
-            return;
-        } else {
-            cuotas.append("<div class='row text-center'>");
-            cuotas.append("<div class='col-md-3 text-center'><label class='txt-color-blueDark'>Mes</label></div>");
-            cuotas.append("<div class='col-md-5 text-center'><label class='txt-color-blueDark'>Fecha Pago Aprox.</label></div>");
-            cuotas.append("<div class='col-md-4 text-center'><label class='txt-color-blueDark'>Monto</label></div>");
-            cuotas.append("</div>");
-            for (var i = 0; i < lista.length; i++) {
-                cuotas.append(lista[i].html);
+    $.ajax({
+        url: "pago_docente",
+        data: {
+            "opc": "Listar_Cuotas",
+            "fe_desde": valorFeDesde,
+            "fe_hasta": valorFeHasta,
+            "pago_semanal": (parseFloat(valorHorasLaborales) * parseFloat(valorTipoHoraPago))
+
+        }, type: 'POST', success: function (data, textStatus, jqXHR) {
+            var lista = data.lista;
+            if (!data.status) {
+                console.log(data.message);
+            } else {
+                if (lista.length > 0) {
+                    cuotas.append("<div class='row text-center'>");
+                    cuotas.append("<div class='col-md-3 text-center'><label class='txt-color-blueDark'>Mes</label></div>");
+                    cuotas.append("<div class='col-md-5 text-center'><label class='txt-color-blueDark'>Fecha Pago Aprox.</label></div>");
+                    cuotas.append("<div class='col-md-4 text-center'><label class='txt-color-blueDark'>Monto</label></div>");
+                    cuotas.append("</div>");
+                    for (var i = 0; i < lista.length; i++) {
+                        cuotas.append(lista[i].html);
+                    }
+                    cuotas.append('<input type="hidden" value="' + lista.length + '" name="num_itera">');
+                }
             }
-            cuotas.append('<input type="hidden" value="' + lista.length + '" name="num_itera">');
         }
     });
+
 }
