@@ -60,13 +60,16 @@
     position: absolute;
     border-radius: 50%;
     height: 70px;
-    width: 70px;
+    /* width: 70px;*/
     z-index: 1;
 }
 .spanuser{
     margin-top: 15px;
 }
-
+.smart-style-1 nav ul li a {
+    /*  padding: 12px 17px 12px 16px;*/
+    padding:  10px 10px 10px 10px;
+}
 
 
 

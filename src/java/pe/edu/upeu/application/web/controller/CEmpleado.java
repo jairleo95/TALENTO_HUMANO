@@ -90,7 +90,7 @@ public class CEmpleado extends HttpServlet {
             }
 
             if (opc.equals("Reporte")) {
-                response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp?idtr");
+                response.sendRedirect("Vista/Empleado/Filtro_Empleado.jsp");
             }
             if (opc.equals("getAllEmployees")) {
                 Datatable datatable = new Datatable();

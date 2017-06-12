@@ -273,20 +273,20 @@ function listAjaxNotificationRec(objOption) {
         }});
 
 }
-
-
 $(document).ready(function () {
     var idtra = $('#id_trabajador').val();
     getAvatar("perfil", idtra);
     pageSetUp();
     UpdateNotifications();
     $(".repCargaAcademica").click(function () {
-        // console.log("load html");
-        // alert("carga academica")
         $(".oldContent").hide();
         $(".newContent").show();
         loadURL("carga_academica?opc=Reporte_Carga_Academica", $(".newContent"));
-        // return false;
+    });
+    $(".repEmployees").click(function () {
+        $(".oldContent").hide();
+        $(".newContent").show();
+        loadURL("empleado?opc=Reporte", $(".newContent"));
     });
     $('nav a[href!="#"]').click(function () {
         $(".newContent").hide();

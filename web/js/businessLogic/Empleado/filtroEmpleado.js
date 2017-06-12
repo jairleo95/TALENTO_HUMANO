@@ -1,13 +1,13 @@
-var _path = '../../';
+var _path = '';
 var direccion = '';
 var departamento = '';
 var area = '';
 var seccion = '';
 
 function  initJobsFilters(datatable) {
-    listSelectAjax($(".selectDir"), "../../Direccion_Puesto", "opc=Listar_direccion", null, null, "Direccion");
+    listSelectAjax($(".selectDir"), _path + "Direccion_Puesto", "opc=Listar_direccion", null, null, "Direccion");
     $(".selectDir").change(function () {
-        listSelectAjax($(".selectDep"), "../../Direccion_Puesto", "opc=Listar_dir_dep&id=" + $(this).val(), "1", $(this).val(), "Departamento");
+        listSelectAjax($(".selectDep"), _path + "Direccion_Puesto", "opc=Listar_dir_dep&id=" + $(this).val(), "1", $(this).val(), "Departamento");
         direccion = $(this).val();
 
         $(".selectDep").val("");
@@ -18,7 +18,7 @@ function  initJobsFilters(datatable) {
         $(".chosen-select").trigger("chosen:updated");
     });
     $(".selectDep").change(function () {
-        listSelectAjax($(".selectArea"), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(this).val(), "1", $(this).val(), "Area");
+        listSelectAjax($(".selectArea"), _path + "Direccion_Puesto", "opc=Listar_area2&id=" + $(this).val(), "1", $(this).val(), "Area");
         departamento = $(this).val();
 
 
@@ -26,7 +26,7 @@ function  initJobsFilters(datatable) {
         $(".chosen-select").trigger("chosen:updated");
     });
     $(".selectArea").change(function () {
-        listSelectAjax($(".selectSeccion"), "../../Direccion_Puesto", "opc=Listar_sec2&id=" + $(this).val(), "1");
+        listSelectAjax($(".selectSeccion"), _path + "Direccion_Puesto", "opc=Listar_sec2&id=" + $(this).val(), "1");
         area = $(this).val();
         $(".selectSeccion").val("");
 
@@ -39,9 +39,8 @@ function  initJobsFilters(datatable) {
         //  list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".selectSeccion").val(), "3");
     });
 }
-$(document).ready(function () {
-    pageSetUp();
 
+function initEmployeesReport() {
     /* BASIC ;*/
     var responsiveHelper_datatable_tabletools = undefined;
 
@@ -49,12 +48,13 @@ $(document).ready(function () {
         tablet: 1024,
         phone: 480
     };
-    var uriGetAllEmployees = "../../empleado";
+    var uriGetAllEmployees = _path + "empleado";
     /* TABLETOOLS */
 
     $('.datatableEmployees').dataTable({
         "processing": true,
         "serverSide": true,
+         "ordering": false,
         "pageLength": 10,
         "ajax": {
             "url": uriGetAllEmployees,
@@ -79,9 +79,9 @@ $(document).ready(function () {
                 "data": function (data) {
                     var txt = '';
                     if (data.ar_foto !== null) {
-                        txt = ' <img src="../../img/avatar_default.jpg"  width="30"  height="30">';
+                        txt = ' <img src="' + _path + 'img/avatar_default.jpg"  width="30"  height="30"> ';
                     } else {
-                        txt = ' <img src="../../img/' + data.ar_foto + '"  width="30"  height="30">';
+                        txt = ' <img src="' + _path + 'img/' + data.ar_foto + '"  width="30"  height="30"> ';
                     }
                     txt += data.no_trabajador + " " + data.ap_paterno + " " + data.ap_materno;
                     return txt;
@@ -139,7 +139,7 @@ $(document).ready(function () {
                     "sMessage": "Generado por AlfaTeam <i>(presiona Esc para cerrar)</i>"
                 }
             ],
-            "sSwfPath": "../../js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
+            "sSwfPath": _path+"js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
         },
         "autoWidth": true,
         "preDrawCallback": function () {
@@ -165,4 +165,4 @@ $(document).ready(function () {
             initJobsFilters(datatable);
         }
     });
-});
+}

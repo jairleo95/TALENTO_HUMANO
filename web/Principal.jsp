@@ -24,8 +24,6 @@
         <meta http-equiv="Expires" content="0" /> 
         <meta http-equiv="Pragma" content="no-cache" />
 
-
-        <link href="css/your_style.css" rel="stylesheet" type="text/css"/>
         <!-- Basic Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
@@ -42,6 +40,7 @@
         <!-- We recommend you use "your_style.css" to override SmartAdmin
              specific styles this will also ensure you retrain your customization with each SmartAdmin update.
         <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
+        <link href="css/your_style.css" rel="stylesheet" type="text/css"/>
 
         <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
         <link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
@@ -69,13 +68,6 @@
         <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
         <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <script type="text/javascript" src="js/JQuery/jquery.autoheight.js"></script>
-        <style>
-            .smart-style-1 nav ul li a {
-                /*  padding: 12px 17px 12px 16px;*/
-                padding:  10px 10px 10px 10px;
-            }
-        </style>
-
     </head>
     <body class="smart-style-1 fixed-header fixed-footer"  onload="nobackbutton();
             document.getElementById('link').click()">
@@ -117,35 +109,6 @@
                 </div>
                 <!-- END AJAX-DROPDOWN -->
             </div>
-            <%if (false) {
-            %>
-            <!-- projects dropdown -->
-            <div class="project-context hidden-xs">
-                <span class="label">Proyectos:</span>
-                <span class="project-selector dropdown-toggle" data-toggle="dropdown">Proyectos Recientes <i class="fa fa-angle-down"></i></span>
-
-                <!-- Suggestion: populate this list with fetch and push technique -->
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="javascript:void(0);">ContrataciÛn de Personal</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);">GestiÛn de Renuncias</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);">GestiÛn de Licencias</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="javascript:void(0);"><i class="fa fa-power-off"></i> Borrar</a>
-                    </li>
-                </ul>
-                <!-- end dropdown-menu-->
-
-            </div>
-            <!-- end projects dropdown -->
-
-            <%}%>
             <!-- pulled right: nav area -->
             <div class="pull-right">
 
@@ -191,21 +154,22 @@
                     <span> 
                         <a href="menu?opc=logout" title="Sign Out" data-action="userLogout" data-logout-msg="øEst· complemetamente seguro de cerrar sesiÛn?">
                             <i class="fa fa-sign-out"></i>
-                            Salir
+                            <label class="hidden-xs hidden-sm">Salir</label>
                         </a> 
                     </span>
                 </div>
                 <!-- end logout button -->
 
                 <!-- search mobile button (this is hidden till mobile view port) -->
-                <div id="search-mobile" class="btn-header transparent pull-right">
+                <div id="search-mobile" class="btn-header transparent pull-right hidden-xs">
                     <span> <a href="javascript:void(0)" title="Search"><i class="fa fa-search"></i></a> </span>
                 </div>
                 <!-- end search mobile button -->
 
                 <!-- input: search field -->
+                <!--
                 <form action="" class="header-search pull-right">
-                    <input id="search-fld"  type="text" name="param" placeholder="Buscar reportes y m·s" data-autocomplete='[
+                    <input id="search-fld"   type="text" name="param" placeholder="Buscar reportes y m·s" data-autocomplete='[
                            "ActionScript",
                            "AppleScript",
                            "Asp",
@@ -232,7 +196,7 @@
                         <i class="fa fa-search"></i>
                     </button>
                     <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i class="fa fa-times"></i></a>
-                </form>
+                </form>-->
                 <!-- end input: search field -->
 
                 <!-- fullscreen button -->
@@ -243,69 +207,7 @@
                 <div id="logout" class="btn-header transparent pull-right">
                     <span> <a href="menu" title="Inicio" ><i class="fa fa-home"></i></a> </span>
                 </div>
-                <!-- end fullscreen button -->
 
-                <!-- #Voice Command: Start Speech -->
-                <!-- <div id="speech-btn" class="btn-header transparent pull-right hidden-sm hidden-xs">
-                     <div> 
-                         <a href="javascript:void(0)" title="Voice Command" data-action="voiceCommand"><i class="fa fa-microphone"></i></a> 
-                         <div class="popover bottom"><div class="arrow"></div>
-                             <div class="popover-content">
-                                 <h4 class="vc-title">Voice command activated <br><small>Please speak clearly into the mic</small></h4>
-                                 <h4 class="vc-title-error text-center">
-                                     <i class="fa fa-microphone-slash"></i> Voice command failed
-                                     <br><small class="txt-color-red">Must <strong>"Allow"</strong> Microphone</small>
-                                     <br><small class="txt-color-red">Must have <strong>Internet Connection</strong></small>
-                                 </h4>
-                                 <a href="javascript:void(0);" class="btn btn-success" onclick="commands.help()">See Commands</a> 
-                                 <a href="javascript:void(0);" class="btn bg-color-purple txt-color-white" onclick="$('#speech-btn .popover').fadeOut(50);">Close Popup</a> 
-                             </div>
-                         </div>
-                     </div>
-                 </div> -->
-                <!-- end voice command -->
-
-                <!-- multiple lang dropdown : find all flags in the flags page -->
-                <!-- Lenguaje -->
-                <!--<ul class="header-dropdown-list hidden-xs">
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="img/blank.gif" class="flag flag-us" alt="United States"> <span> English (US) </span> <i class="fa fa-angle-down"></i> </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li class="active">
-                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-us" alt="United States"> English (US)</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-fr" alt="France"> Fran√ßais</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-es" alt="Spanish"> Espa√±ol</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-de" alt="German"> Deutsch</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-jp" alt="Japan"> Ê?•Ê?¨Ë™?</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-cn" alt="China"> ‰∏≠Ê??</a>
-                            </li>	
-                            <li>
-                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-it" alt="Italy"> Italiano</a>
-                            </li>	
-                            <li>
-                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-pt" alt="Portugal"> Portugal</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-ru" alt="Russia"> –†—?—Å—Å–∫–∏–π —è–∑—?–∫</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-kp" alt="Korea"> Ì??Íµ≠Ï?¥</a>
-                            </li>						
-
-                        </ul>
-                    </li>
-                </ul>-->
-                <!-- end multiple lang -->
 
             </div>
             <!-- end pulled right: nav area -->
@@ -392,7 +294,10 @@
                                 if (!id_rol.trim().equals("ROL-0013")) {
                                     if (dp.getNo_link().trim().equals("Procesar Requerimiento")) {%>
                         <a href="<%=dp.getDi_url()%>" target="myframe" title="<%=dp.getNo_link()%>" class="link"  data-value="<%=dp.getIc_link().trim()%>" id="link"><i class="<%=dp.getIc_link().trim()%> "></i> <span class="menu-item-parent"><%=dp.getNo_link()%></span></a>
-                            <%} else {%>
+                            <%} else if (dp.getNo_link().trim().equals("Reporte de trabajadores")) {%>
+                        <a href="#" class="repEmployees"><i class="fa fa-lg fa-fw fa-users"></i>    Trabajadores</a>
+
+                        <%} else {%>
                         <a href="<%=dp.getDi_url()%>" target="myframe" title="<%=dp.getNo_link()%>" data-value="<%=dp.getIc_link().trim()%>" ><i class="<%=dp.getIc_link().trim()%> "></i> <span class="menu-item-parent" ><%=dp.getNo_link()%></span></a>
 
                         <%}
@@ -457,7 +362,7 @@
                     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
                         <div class="animacion_load"></div>
                     </div>
-                    
+
                     <iframe id="myframe" name="myframe" class="iframe_principal" scrolling="si"  width="100%" height="800" frameborder="0"  src="Vista/inicio.jsp"></iframe>
                 </div>
                 <!-- end row -->

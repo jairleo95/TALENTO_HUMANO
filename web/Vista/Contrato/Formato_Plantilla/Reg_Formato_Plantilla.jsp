@@ -488,7 +488,7 @@
 
 <!-- PAGE RELATED PLUGIN(S) -->
 <script src="../../../js/plugin/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="../../../js/Js_Contrato/formato_plantilla/formato-plantilla-api.js?v=<%=globalProperties.VERSION_JS%>"></script>
+<script type="text/javascript" src="../../../js/businessLogic/Contrato/formato-plantilla-api.js?v=<%=globalProperties.VERSION_JS%>"></script>
 </html>
 
 <%} else {
