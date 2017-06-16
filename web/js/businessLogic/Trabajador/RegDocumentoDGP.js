@@ -20,8 +20,7 @@ function validateShadowBox() {
     });
 }
 function nobackbutton() {
-    window.location.hash = "no-back-button";
-    window.location.hash = "Again-No-back-button" //chrome
+
     window.onhashchange = function () {
         window.location.hash = "";
     }
@@ -73,6 +72,7 @@ function validateSizeFile() {
     return x;
 }
 function initFormRegDocument(request) {
+    console.log('Enter to initFormRegDocument function');
     validateShadowBox();
     $(".btn_reg_doc").click(function () {
         var data = new FormData($('.form_dgp_doc')[0]);
@@ -82,7 +82,7 @@ function initFormRegDocument(request) {
                 success: function (data, textStatus, jqXHR) {
                     if (data.status) {
                         closedthis();
-                        showDocuments(iddgp, idtr, casosEspeciales, enterToDGPProcess, initFormRegDocument);
+                        showDocuments(iddgp, idtr, casosEspeciales, enterToDGPProcess);
                     }
                 },
                 cache: false,
@@ -92,6 +92,8 @@ function initFormRegDocument(request) {
 
             });
             return false;
+        } else {
+            console.log('uno de los archivos ha excedido el tamaño requerido');
         }
     });
     $(".fileDocument").fileinput({
@@ -107,7 +109,7 @@ function initFormRegDocument(request) {
                     "   </div>\n" +
                     "   {caption}\n" +
                     "</div>"},
-        allowedFileExtensions: ['jpg','jpeg', 'png', 'gif', 'pdf', 'docx', 'doc', 'txt'],
+        allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'docx', 'doc', 'txt'],
         overwriteInitial: false,
         maxFileSize: 500,
         maxFilesNum: 10,
@@ -118,17 +120,12 @@ function initFormRegDocument(request) {
             return filename.replace('(', '_').replace(']', '_');
         }
     });
-    if ($(".fileDocument").length) {
-        $(".btn_reg_doc").show();
-    } else {
-        $(".btn_reg_doc").hide();
-    }
-    console.log("num requeridos:" + $(".fileDocument[required='required']").length);
-    if ($(".fileDocument[required='required']").length === 0) {
-        $(".btn_continuar_det").show();
-    } else if ($(".fileDocument[required='required']").length > 0) {
-        $(".btn_continuar_det").hide();
-    }
+
+    $(".fileDocument").change(function () {
+        enabledRegDocumentButton(validateFileInputRequired());
+    });
+
+    validateButtons();
 
     $(".form_dgp_doc").submit(function () {
         $(".btn_reg_doc").attr("disabled", true);
@@ -146,6 +143,41 @@ function initFormRegDocument(request) {
             return false;
         }
     });
+}
+function enabledRegDocumentButton(isEnabled) {
+    if (!isEnabled) {
+        $(".btn_reg_doc").attr("disabled", true);
+    } else {
+        $(".btn_reg_doc").removeAttr("disabled");
+    }
+}
+function validateFileInputRequired() {
+    var countEmptyFileInput = 0;
+    $.each($(".fileDocument[required='required']"), function (index) {
+        if ($(this).val() === '') {
+            countEmptyFileInput++;
+            console.log('se debe seshabilitar el boton registrar:' + index);
+        }
+    });
+    return (countEmptyFileInput === 0);
+}
+function validateButtons() {
+    console.log('enter to validateButtons function');
+    var showRegigsterButton = $(".fileDocument").length > 0;
+    console.log("sizeFileDocument:" + showRegigsterButton);
+    var allFilesRequiredAreReady = $(".fileDocument[required='required']").length === 0;
+    console.log("num requeridos:" + $(".fileDocument[required='required']").length);
+    if (showRegigsterButton) {
+        $(".btn_reg_doc").show();
+        enabledRegDocumentButton(validateFileInputRequired());
+    } else {
+        $(".btn_reg_doc").hide();
+    }
+    if (allFilesRequiredAreReady) {
+        $(".btn_continuar_det").show();
+    } else {
+        $(".btn_continuar_det").hide();
+    }
 }
 function showDocuments(dgp, idtr, casosEspeciales, enterToDGPProcess, callback) {
     console.log("::enter to showDocuments function::");
@@ -168,9 +200,16 @@ function showDocuments(dgp, idtr, casosEspeciales, enterToDGPProcess, callback) 
             if (data.status) {
                 objDiv.empty();
                 objDiv.append(data.htmlListDocument);
+                initFormRegDocument();
                 if (typeof callback !== "undefined") {
                     callback(data);
+                } else {
+                    console.log('no existe funcion callback');
                 }
+            } else {
+                console.log(data.mensaje);
+                alert('ocurrio un error al cargar los documentos');
+
             }
         }
     });

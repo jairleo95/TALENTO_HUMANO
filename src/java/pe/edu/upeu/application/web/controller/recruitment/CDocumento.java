@@ -96,11 +96,11 @@ public class CDocumento extends HttpServlet {
                 }
                 if (opc.equals("listDocument")) {
                     System.out.println("enter to listDocument");
-
+                    System.out.println("permissionEditDocument:" + permissionEditDocument);
                     //    Boolean enterToProcessDGP = false;
                     int n_nac = d.List_Req_nacionalidad(idtr);
                     int num_ad = d.List_Adventista(idtr);
-                    int documentsComplete = d.countDocumentsByIdTrabajador(idtr);
+                    // int documentsComplete = d.countDocumentsByIdTrabajador(idtr);
                     Boolean enterToDGPProcess = false;
                     List<Lis_Doc_tra> listDocumentsByIdtr = null;
                     if (request.getParameter("enterToDGPProcess") != null) {
