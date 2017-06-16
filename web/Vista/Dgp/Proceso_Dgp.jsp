@@ -77,6 +77,12 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <link href="../../css/your_style.css" rel="stylesheet" type="text/css"/>
         <link href="../../css/businessLogic/Dgp/procesoDgp.css" rel="stylesheet" type="text/css"/>
+        
+        
+        <link rel='stylesheet' type='text/css' href='../../js/shadowbox/shadowbox.css'/>
+
+        <!--   <link href='http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' rel='stylesheet'>-->
+        <link href='../../css/Css_Bootstrap/fileinput.css' media='all' rel='stylesheet' type='text/css' />
     </head>
     <%
         if (request.getParameter("a") != null) {
@@ -666,6 +672,11 @@
     <!-- Voice command : plugin
     <script src="../../js/speech/voicecommand.min.js"></script> -->
     <!-- PAGE RELATED PLUGIN(S) -->
+      <script src='../../js/bootstrap/fileinput.js' type='text/javascript'></script>
+        <!--  <script src='http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' type='text/javascript'></script>-->
+        <script src='../../js/bootstrap/es.js' type='text/javascript'></script>
+         <script type='text/javascript' src='../../js/shadowbox/shadowbox.js'></script>
+        
     <script type="text/javascript" src="../../js/JQuery/jquery.autoheight.js"></script>
     <script src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
     <script src="../../js/plugin/datatables/dataTables.colVis.min.js"></script>

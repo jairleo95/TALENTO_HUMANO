@@ -327,7 +327,7 @@ $(document).ready(function () {
 
         idtr = $(this).data("idtr");
         iddgp = $(this).data("iddgp");
-        pathRequest = "../../../";
+        pathRequest = "../../";
         showDocuments(iddgp, idtr, false, false);
         return false;
     });

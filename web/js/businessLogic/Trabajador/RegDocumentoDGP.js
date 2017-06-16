@@ -25,15 +25,7 @@ function nobackbutton() {
         window.location.hash = "";
     }
 }
-function closedthis() {
-    $.smallBox({
-        title: "¡Documento registrada correctamente!",
-        content: "Puede visualizar el documento",
-        color: "#739E73",
-        iconSmall: "fa fa-check fa-2x fadeInRight animated",
-        timeout: 6000
-    });
-}
+ 
 function closedthis2() {
     $.smallBox({
         title: "¡Documento eliminado correctamente!",
@@ -81,8 +73,17 @@ function initFormRegDocument(request) {
                 url: pathRequest + "documento", type: 'POST',
                 success: function (data, textStatus, jqXHR) {
                     if (data.status) {
-                        closedthis();
+                        $.smallBox({
+                            title: "¡Documento registrada correctamente!",
+                            content: "Puede visualizar el documento",
+                            color: "#739E73",
+                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                            timeout: 6000
+                        });
                         showDocuments(iddgp, idtr, casosEspeciales, enterToDGPProcess);
+                    } else {
+                        console.log(data);
+                        alert('Ocurrio un error al guardar los documentos');
                     }
                 },
                 cache: false,

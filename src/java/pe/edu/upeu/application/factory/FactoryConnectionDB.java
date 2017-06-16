@@ -20,12 +20,10 @@ public class FactoryConnectionDB {
 
     public static String[] configORACLE = {globalProperties.USER, globalProperties.USER_PWD, globalProperties.HOSTNAME, globalProperties.PORT, globalProperties.SID};
 
-     public static final String url = "C:\\Users\\santjair\\Documents\\NetBeansProjects\\GTH\\Master\\TALENTO_HUMANO\\web\\Archivo\\";
-    public static final String url_archivos = "http://localhost:8082/TALENTO_HUMANO/Archivo/";
-    
-    /*
+    /* public static final String url = "C:\\Users\\ALPHA\\Documents\\NetBeansProjects\\TALENTO_HUMANO\\web\\Archivo\\";
+    public static final String url_archivos = "http://localhost:8082/TALENTO_HUMANO/Archivo/";*/
    public static final String url_archivos = "http://gth.upeu.edu.pe/TALENTO_HUMANO/Archivo/";
-    public static final String url = "/usr/share/tomcat7/webapps/TALENTO_HUMANO/Archivo/";*/
+    public static final String url = "/usr/share/tomcat7/webapps/TALENTO_HUMANO/Archivo/";
 
     public static ConexionBD open(int typeDB) {
         switch (typeDB) {
