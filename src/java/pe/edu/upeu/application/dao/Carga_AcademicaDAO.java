@@ -533,7 +533,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
         ConexionBD conn = null;
         String response = null;
         try {
-            arr = WebServiceClient.getRequest(semestre, methodProperties);
+            arr = WebServiceClient.getData(semestre, methodProperties);
             int length = arr.length();
             String[] campus = new String[length];
             String[] tipo_doc = new String[length];
@@ -628,7 +628,7 @@ public class Carga_AcademicaDAO implements InterfaceCarga_AcademicaDAO {
         } catch (SQLException ex) {
             throw new RuntimeException(ex.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("ERROR : " + e.getMessage());
+            throw new RuntimeException("Error : " + e.getMessage());
         } finally {
             try {
                 conn.conex.close();

@@ -11,7 +11,7 @@ import pe.edu.upeu.application.properties.globalProperties;
 
 public class WebServiceClient {
 
-    public static JSONArray getRequest(String semestre, String methodProperties[]) throws Exception {
+    public static JSONArray getData(String semestre, String methodProperties[]) throws Exception {
         Calendar calendario = new GregorianCalendar();
         String hour = String.format("%02d", calendario.get(Calendar.HOUR_OF_DAY));
         // Create SOAP Connection
@@ -24,31 +24,36 @@ public class WebServiceClient {
         System.out.println(globalProperties.keyApp + hour);
         SOAPMessage soapResponse = null;
         JSONObject jsonObject = null;
+        JSONArray arr = null;
         try {
+            System.out.println("enter to this line 1");
             soapResponse = soapConnection.call(createSOAPRequest(semestre, methodProperties), globalProperties.service + keyPub);
-            // print SOAP Response
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            soapResponse.writeTo(out);
-            String strMsg = new String(out.toByteArray());
-            jsonObject = XML.toJSONObject(strMsg);
+            if (soapResponse != null) {
+                // print SOAP Response
+                System.out.println("enter to this line 2");
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                soapResponse.writeTo(out);
+                String strMsg = new String(out.toByteArray());
+                jsonObject = XML.toJSONObject(strMsg);
+                //System.out.println(jsonObject);
+                arr = jsonObject.getJSONObject("SOAP-ENV:Envelope").
+                        getJSONObject("SOAP-ENV:Body").getJSONObject(methodProperties[2]).
+                        getJSONObject("return").
+                        getJSONArray("item");
+                soapConnection.close();
+                System.out.println("tamaño arr:" + arr.length());
+            }
         } catch (SOAPException e) {
             System.out.println(e);
             System.out.println("Error de conexion, intentelo nuevamente");
         }
-        //System.out.println(jsonObject);
-        JSONArray arr = jsonObject.getJSONObject("SOAP-ENV:Envelope").
-                getJSONObject("SOAP-ENV:Body").getJSONObject(methodProperties[2]).
-                getJSONObject("return").
-                getJSONArray("item");
-        soapConnection.close();
-        System.out.println("tamaño arr:" + arr.length());
         return arr;
     }
-
     public static SOAPMessage createSOAPRequest(String semestre, String methodProperties[]) {
+        SOAPMessage soapMessage = null;
         try {
             MessageFactory messageFactory = MessageFactory.newInstance();
-            SOAPMessage soapMessage = messageFactory.createMessage();
+            soapMessage = messageFactory.createMessage();
             SOAPPart soapPart = soapMessage.getSOAPPart();
             // SOAP Envelope
             SOAPEnvelope envelope = soapPart.getEnvelope();
@@ -63,17 +68,19 @@ public class WebServiceClient {
             /*MimeHeaders headers = soapMessage.getMimeHeaders();
              headers.addHeader("SOAPAction", serverURI  + "VerifyEmail");
              */
+            System.out.println("enter to line 68");
             soapMessage.saveChanges();
+            System.out.println("enter to line 70");
             /* Print the request message */
-            System.out.println("Request SOAP Message:");
+ /*System.out.println("Request SOAP Message:");
             soapMessage.writeTo(System.out);
-            System.out.println();
-            return soapMessage;
-        } catch (Exception e) {
-            System.out.println("------------------------------MESSAGE");
+            System.out.println();*/
+
+        } catch (SOAPException e) {
+            System.out.println("Error in createSOAPRequest:");
             e.printStackTrace();
-            return null;
         }
+        return soapMessage;
     }
 
 }

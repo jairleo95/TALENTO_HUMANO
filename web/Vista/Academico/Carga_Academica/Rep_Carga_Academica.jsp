@@ -1,5 +1,4 @@
  
-<%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <div class="row">
     <div class="col-md-12">
         <div class="well">
@@ -73,10 +72,8 @@
         </article>
     </div>
 </section>
-
-
 <!-------------- Modal  ----------->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<div class="modal fade modalAcademicDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-lg"   >
         <div class="modal-content">
             <div class="modal-header">

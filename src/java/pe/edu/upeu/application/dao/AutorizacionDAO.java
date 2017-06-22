@@ -131,7 +131,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 + "  s.us_no_puesto, "
                 + "  s.us_no_dep, "
                 + "  s.no_puesto, "
-                + "  s.no_usuario "
+                + "  s.no_usuario ,rhfu_aut_complete_time(s.id_dgp, s.id_autorizacion) as taskNum"
                 + "FROM "
                 + "  (SELECT p.id_pasos, "
                 + "    p.id_proceso, "
@@ -217,7 +217,6 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 + "  AND du.id_usuario    =a.us_creacion "
                 + "  AND dgp.id_puesto    =pu.id_puesto "
                 + "  AND dgp.id_dgp       ='" + iddgp.trim() + "' "
-                + "   "
                 + "  ) s ON ( s.ID_DETALLE_REQ_PROCESO=f.ID_DETALLE_REQ_PROCESO "
                 + "AND f.id_pasos                     =s.id_pasos ) "
                 + "WHERE f.ID_DETALLE_REQ_PROCESO     ='" + idrp.trim() + "' ORDER BY to_number(substr(f.nu_pasos,2,length(f.nu_pasos))) ASC) rec LEFT OUTER join RHTR_COMENTARIO_DGP com ON (rec.ID_DGP=com.ID_DGP and rec.ID_AUTORIZACION=com.ID_AUTORIZACION)";
@@ -256,7 +255,7 @@ public class AutorizacionDAO implements InterfaceAutorizacionDAO {
                 x.setNo_puesto(rs.getString("no_puesto"));
                 x.setNo_usuario(rs.getString("NO_USUARIO"));
                 x.setCm_comentario(rs.getString("CM_COMENTARIO"));
-
+                x.setTaskNum(rs.getDouble("taskNum"));
                 list.add(x);
             }
 

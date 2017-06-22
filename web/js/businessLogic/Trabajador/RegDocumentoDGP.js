@@ -146,7 +146,8 @@ function initFormRegDocument(request) {
     });
 }
 function enabledRegDocumentButton(isEnabled) {
-    if (!isEnabled) {
+    if (false) {
+  //  if (!isEnabled) {
         $(".btn_reg_doc").attr("disabled", true);
     } else {
         $(".btn_reg_doc").removeAttr("disabled");

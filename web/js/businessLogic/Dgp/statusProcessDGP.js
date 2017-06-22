@@ -10,8 +10,6 @@ function ListarMotivo(at) {
     var id = $(".vHist" + at + "").val();
     var url = '../../dgp?opc=SeguimientoH';
     var data = 'iddgp=' + id;
-
-
     $.post(url, data, function (objJson) {
         var lista = objJson.listar;
         if (lista.length > 0) {
@@ -20,7 +18,6 @@ function ListarMotivo(at) {
                 //  alert("asdasdasd");
                 $(".contMO").append("<td>" + lista[i].getDe_pasos + "</td>");
                 $(".contMO").append("<td class='alert alert-danger'>" + lista[i].id_dgp + "</td>");
-
             }
             $(".contMO").empty();
         } else {
@@ -34,22 +31,16 @@ function listHistory(at) {
     var id1 = $(".idDepart").val();
     var url = '../../dgp?opc=SeguimientoH';
     var data = 'iddgp=' + id;
-
     var rol = $("#rolse").val();
     $.post(url, data, function (objJson) {
         var lista = objJson.listar;
         if (lista.length > 0) {
             var m = '';
             for (var i = 0; i < lista.length; i++) {
-                /*$(".contM").append("<td class='caji'>" + lista[i].getNu_pasos + "</td>");
-                 $(".contM").append("<td>" +lista[i].getDe_pasos+ "</td>");
-                 $(".contM").append("<td class='alert alert-danger'>" + lista[i].id_dgp + "</td>");
-                 */
                 m += '<tr>';
                 m += '<td>' + lista[i].nu_pasos + '</td>';
                 m += '<td>' + lista[i].de_pasos + '</td>';
-                if (lista[i].es_autorizacion != null) {
-
+                if (lista[i].es_autorizacion !== null) {
                     if (lista[i].es_autorizacion !== null) {
                         if (lista[i].es_autorizacion === '1') {
                             m += '<td><img src="../../img/Aprobado.png" width="20" height="20"></td>';
@@ -60,7 +51,6 @@ function listHistory(at) {
                     } else {
                         m += '<td>No Registrado</td>';
                     }
-
                     if (lista[i].us_ap_mat !== null) {
                         m += '<td>' + lista[i].us_ap_p + " " + lista[i].us_ap_mat + " " + lista[i].us_no_tr + '</td>';
                     } else {
@@ -71,6 +61,7 @@ function listHistory(at) {
                     m += '<td>' + lista[i].us_no_area + '</td>';
                     m += '<td>' + lista[i].us_no_dep + '</td>';
                     m += '<td>' + lista[i].fe_creacion + '</td>';
+                    m += '<td>' + lista[i].taskNum + ' dias.</td>';
                 } else {
                     m += '<td colspan="7" style="text-align:center;"> No definido </td>';
                 }
@@ -78,7 +69,6 @@ function listHistory(at) {
                 m += '</tr>';
                 if (lista[i].es_autorizacion !== null) {
                     if (lista[i].es_autorizacion === '2' & (rol === "ROL-0002" || rol === "ROL-0005" || rol === "ROL-0001")) {
-
                         function DivEspecial() {
                             var html = '<div id="divEs" class="alert alert-danger alert-block">';
                             html += '<a class="close" data-dismiss="alert" href="#">×</a>';
@@ -89,7 +79,6 @@ function listHistory(at) {
                             if (rol === "ROL-0001") {
                                 html += '<a href="../../autorizacion?opc=eliminarDGP&iddgp=' + id + '" class="btn btn-danger"><strong><i class="fa fa-arrow-circle-right"></i> Eliminar DGP</strong></a>';
                             }
-
                             //  alert(+lista[i].us_no_puesto+);                                                                                                                                                                                                                                                                                                                                                                                
                             html += '</p>';
                             html += '<input type="hidden" class="id-autorizacion" value="lista[i].id_autorizacion">';
@@ -101,7 +90,6 @@ function listHistory(at) {
                 }
 
             }
-
             //var DivEspecial = DivEspecialL();
             var table = createTable();
             $(".contM").empty();
@@ -109,10 +97,6 @@ function listHistory(at) {
             $(".contM").append(DivEspecial);
             $("#dataB").empty();
             $("#dataB").append(m);
-            // $("#divEs").append(DivEspecial);
-            // $("#dt").dataTable();
-            //$("#divEs").dataDivEspecial();
-            //anexar a la tabla
         } else {
             alert("vacio");
         }
@@ -131,6 +115,7 @@ function createTable() {
     table += '<th data-hide="phone,tablet"> <i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> Area</th>';
     table += '<th data-hide="phone,tablet">Departamento</th>';
     table += '<th data-hide="phone,tablet">Fecha Autorizacion</th>';
+    table += '<th data-hide="phone,tablet">Tiempo en autorizar</th>';
     table += '</tr>';
     table += '</thead>';
     table += '<tbody id="dataB">';
@@ -165,7 +150,7 @@ function printDetProceso(objProgAut, postData) {
     $.ajax({
         url: "../../dgp",
         data: "opc=Imprimir_det_proceso" + postData,
-        type: 'POST',
+        type: 'POST', async: true,
         success: function (data, textStatus, jqXHR) {
             if (data.rpta === "1") {
                 objProgAut.hide();
@@ -173,6 +158,8 @@ function printDetProceso(objProgAut, postData) {
                 objProgAut.append(data.html);
                 objProgAut.show(250);
                 objProgAut.find(".new-circle").popover({trigger: 'hover click'});
+            } else {
+                console.log('ocurrio un error al obtener el detalle del proceso');
             }
         }
     });

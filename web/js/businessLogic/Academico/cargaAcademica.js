@@ -73,20 +73,22 @@ function initCAGlobalEvents() {
     statusSyncUpCargaAcademica(function (data) {
         statusSyncElements(data.statusSyncUp);
     });
-    $(".btnInitUpdateCAData").tooltip();
-    $(".btnInitUpdateCAData").click(function () {
+    var btnInitUpdateCAData = $(".btnInitUpdateCAData");
+    btnInitUpdateCAData.tooltip();
+    btnInitUpdateCAData.click(function () {
+        btnInitUpdateCAData.tooltip("hide");
         var data = {
             "opc": "initUpdateCAData"
         };
         console.log("init Update carga Acedmica");
-        $(".btnInitUpdateCAData").attr("disabled", true);
+        btnInitUpdateCAData.attr("disabled", true);
         $.ajax({
             url: urlCrudForm, type: 'POST', data: data, success: function (data, textStatus, jqXHR) {
                 if (data.status) {
                     statusSyncElements(data.runUpdateCAData);
                 } else {
                     console.log("disabled btn");
-                    $(".btnInitUpdateCAData").removeAttr("disabled");
+                    btnInitUpdateCAData.removeAttr("disabled");
                 }
             }
         });
@@ -166,7 +168,7 @@ function initDatatableCargaAcademica() {
                 }
             }, {
                 "data": function (data) {
-                    return data.ap_paterno + " " + data.ap_materno + " " + data.no_trabajador;
+                    return data.ap_paterno + " " + data.ap_materno + " " + data.no_trabajador + " <span class='badge bg-color-red'>" + data.countCursos + "</span>";
                 }
             }, {
                 "data": "no_facultad"
@@ -224,7 +226,6 @@ function initDatatableCargaAcademica() {
         }, "rowCallback": function (row, data, index) {
             responsiveHelper1.createExpandIcon(row);
             console.log(":enter to rowCallback");
-
             var dataToSent = '';
             dataToSent = 'nro_doc=' + data.nu_doc + '&ap_p=' + data.ap_paterno + '&ap_m=' + data.ap_materno + '&no_tr=' + data.no_trabajador + '&ti_doc=' +
                     data.es_tipo_doc + '&eap=' + data.no_eap + '&facultad=' + data.no_facultad + '&ciclo=' + data.de_carga + '&idtr=' + data.id_trabajador;
@@ -242,8 +243,8 @@ function initDatatableCargaAcademica() {
                         + ' <li class="divider"></li>'
                         + '<li>'
                         + '<li>'
-                        + ' <a  data-toggle="modal" data-target="#myModal" data-backdrop="static" '
-                        + '  data-keyboard="false" class="btnCargaAcademica"'
+                        + ' <a '
+                        + 'class="btnCargaAcademica"'
                         + ' data-valor="' + dataToSent + '" data-idtr="' + data.id_trabajador + '" '
                         + ' data-item="' + (index + 1) + '" '
                         + ' data-idpca="' + data.id_proceso_carga_ac + '"'
@@ -258,10 +259,10 @@ function initDatatableCargaAcademica() {
                     + '    </div>';
 
             $('td:eq(0)', row).html(htmlTD);
-        }, "initComplete": function (oSettings) {
+        }, "drawCallback": function (oSettings) {
             responsiveHelper1.respond();
             // var api = this.api();
-            console.log(":Enter to fnInitComplete");
+            console.log(":Enter to drawCallback");
             initDatatableEvents(objDatatableCagaAcad);
         }
     });
@@ -300,7 +301,6 @@ function saveFormCA(objDatatableCagaAcad) {
     }
 }
 function initDatatableEvents(objDatatableCagaAcad) {
-
     /*carga academica*/
     $(".dateDesdeM").datepicker({
         defaultDate: "+1w",
@@ -347,19 +347,20 @@ function initDatatableEvents(objDatatableCagaAcad) {
         }
     });
 
-
     $(".btnCargaAcademica").click(function () {
-        var currentItem = $(this).data("item");
+        console.log('enter to bntCargaAcademica click event');
         idpcaItem = $(this).data("idpca");
         var objBodyPrint = $(".areaModal");
         var dataSent = $(this).data("valor");
         idtrItem = $(this).data("idtr");
-        console.log("currentIten :" + currentItem);
+        console.log("idtrItem :" + idtrItem);
+        var modalObject = $('.modalAcademicDetails');
+        modalObject.modal({keyboard: false, backdrop: 'static'});
+        modalObject.modal('show');
         showCargaAcademica(objBodyPrint, dataSent, function () {
             pageSetUp();
             initFormPlugins();
             if (idpcaItem !== "") {
-                //console.log("enter to true condition id:"+idpca)
                 var cuotas = $(".cuota_docente");
                 getPagoDocente(idpcaItem, cuotas);
                 getProcesoCargaAcademicaById(idpcaItem, function (item) {
@@ -382,12 +383,8 @@ function initDatatableEvents(objDatatableCagaAcad) {
                 getTiHoraPago($(".divSelectTiHoraPAGO"));
                 initFormCaEvents(objDatatableCagaAcad);
                 /* $(".btnAceptarCuotasCA").click(function () {
-                 
                  console.log("validando formulario" + $(".form_carga_academica").valid());
-                 
-                 
                  });*/
-
             }
         });
     });
@@ -458,36 +455,41 @@ function showCargaAcademica(objBodyPrint, dataAjax, callback) {
     var fila = 1;
     var columna = 0;
     var g = 0;
+    var badgeColor = ['bg-color-blueLight', 'bg-color-darken', 'bg-color-greenLight', 'bg-color-orange', 'bg-color-red'];
     $(".modalTitle").text("");
     objBodyPrint.empty();
     $.ajax({url: "carga_academica?opc=horarioCursosAcademico", type: 'POST', success: function (htmlContent, textStatus, jqXHR) {
             objBodyPrint.append(htmlContent);
             /*test*/
-
             $.post(url, 'opc=getDetCargaAcademica&' + dataAjax, function (data) {
-                var dataList = data.list;
-                $(".modalTitle").text(dataList[0].ap_paterno + " " + dataList[0].ap_materno + " " + dataList[0].no_trabajador);
-                $.each(dataList, function (index, dataItem) {
-                    var myArray = dataItem.de_horario.trim();
-                    //console.log(myArray);
-                    $('.bodyCursos').append('<span class="badge bg-color-blueLight">' + (g + 1) + '</span> '
-                            + dataItem.no_curso + '</br><li> ' + dataItem.no_eap + '</li><li>' + dataItem.de_tipo_curso + '</li>');
-                    for (var i = 0; i < myArray.length; i++) {
-                        columna++;
-                        if (myArray[i] === "1") {
-                            $(".fila-" + fila + " .columna-" + columna).append('<span class="badge bg-color-blueLight">' + (g + 1) + '</span>');
+                if (data.status) {
+                    var dataList = data.list;
+                    $.each(dataList, function (index, dataItem) {
+                        var myArray = dataItem.de_horario.trim();
+                        $('.bodyCursos').append('<span class="badge ' + badgeColor[g] + '">' + (g + 1) + '</span> '
+                                + dataItem.no_curso + '</br><li> ' + dataItem.no_eap + '</li><li>' + dataItem.de_tipo_curso + '</li>');
+                        for (var i = 0; i < myArray.length; i++) {
+                            columna++;
+                            if (myArray[i] === "1") {
+                                $(".fila-" + fila + " .columna-" + columna).append('<span class="badge ' + badgeColor[g] + '">' + (g + 1) + '</span>');
+                            }
+                            if (columna === 7) {
+                                columna = 0;
+                                fila++;
+                            }
                         }
-                        if (columna === 7) {
-                            columna = 0;
-                            fila++;
-                        }
+                        fila = 1;
+                        columna = 0;
+                        g++;
+                        /*end print html*/
+                    });
+                    $(".modalTitle").text(dataList[0].ap_paterno + " " + dataList[0].ap_materno + " " + dataList[0].no_trabajador);
+                    if (typeof callback !== 'undefined') {
+                        callback();
                     }
-                    fila = 1;
-                    columna = 0;
-                    g++;
-                    /*end print html*/
-                });
-                callback();
+                } else {
+                    alert(data.errorMesage);
+                }
             });
         }});
 }
@@ -508,7 +510,7 @@ function calcularCuotasDocente(valorFeDesde, valorFeHasta, valorHorasLaborales, 
 
     var cuotas = $(".cuota_docente");
     if (valorTipoHoraPago === null | isNaN(valorTipoHoraPago)) {
-        valorTipoHoraPago = 0;  
+        valorTipoHoraPago = 0;
     }
     cuotas.empty();
     $.ajax({

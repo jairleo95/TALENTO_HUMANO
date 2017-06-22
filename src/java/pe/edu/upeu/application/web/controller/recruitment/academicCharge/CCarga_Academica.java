@@ -223,8 +223,8 @@ public class CCarga_Academica extends HttpServlet {
                 System.out.println("::statusSyncUpCargaAcademica");
                 Boolean x = false;
                 if (getServletContext().getAttribute("runnableCA") != null) {
-                    ScheduledFuture y = (ScheduledFuture) getServletContext().getAttribute("runnableCA");
-                    //System.out.println("schedule properties:" + y.get().toString());
+                    ScheduledFuture sc = (ScheduledFuture) getServletContext().getAttribute("runnableCA");
+                    //System.out.println("schedule properties:" + sc.get().toString());
                     dataMap.put("scheduleProperties", null);
                     x = true;
                 } else if (getServletContext().getAttribute("runnableCA") == null) {

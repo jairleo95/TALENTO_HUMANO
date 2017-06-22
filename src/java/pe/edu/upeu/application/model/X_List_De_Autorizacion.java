@@ -57,8 +57,10 @@ public class X_List_De_Autorizacion {
     private String us_no_dep;
     private String no_puesto;
     private String no_usuario;
+    private Double taskNum;
 
-    public X_List_De_Autorizacion(String co_pasos, String de_pasos, String es_autorizacion, String fe_creacion, String id_autorizacion, String id_departamento, String id_detalle_pasos, String id_detalle_req_proceso, String id_dgp, String id_direccion, String id_pasos, String id_proceso, String id_puesto, String id_requerimiento, String no_proceso, String nu_pasos, String us_creacion, String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String CA_SUELDO, String us_ap_p, String us_ap_mat, String us_no_tr, String us_no_puesto, String us_no_area, String us_no_dep, String no_puesto, String no_usuario, String cm_comentario) {
+    public X_List_De_Autorizacion(String co_pasos, String de_pasos, String es_autorizacion, String fe_creacion, String id_autorizacion, String id_departamento, String id_detalle_pasos, String id_detalle_req_proceso, String id_dgp, String id_direccion, String id_pasos, String id_proceso, String id_puesto,
+            String id_requerimiento, String no_proceso, String nu_pasos, String us_creacion, String AP_PATERNO, String AP_MATERNO, String NO_TRABAJADOR, String CA_SUELDO, String us_ap_p, String us_ap_mat, String us_no_tr, String us_no_puesto, String us_no_area, String us_no_dep, String no_puesto, String no_usuario, String cm_comentario,Double taskNum) {
         this.co_pasos = co_pasos;
         this.de_pasos = de_pasos;
         this.es_autorizacion = es_autorizacion;
@@ -89,6 +91,7 @@ public class X_List_De_Autorizacion {
         this.no_puesto = no_puesto;
         this.no_usuario = no_usuario;
         this.cm_comentario = cm_comentario;
+        this.taskNum = taskNum;
     }
 
     public X_List_De_Autorizacion() {
@@ -122,6 +125,15 @@ public class X_List_De_Autorizacion {
         this.no_puesto = "";
         this.no_usuario = "";
         this.cm_comentario = "";
+        this.taskNum = 0.0;
+    }
+
+    public Double getTaskNum() {
+        return taskNum;
+    }
+
+    public void setTaskNum(Double taskNum) {
+        this.taskNum = taskNum;
     }
 
     public String getCo_pasos() {
