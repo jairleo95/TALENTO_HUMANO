@@ -44,6 +44,7 @@ public class CPresupuesto extends HttpServlet {
         PrintWriter out = response.getWriter();
         //int opc = Integer.parseInt(request.getParameter("opc"));
         String opc = request.getParameter("opc");
+        String idArea = "";
         switch (opc) {
             case "gest":
                 response.sendRedirect("Vista/Presupuesto/Gpresupuesto.jsp");
@@ -53,18 +54,26 @@ public class CPresupuesto extends HttpServlet {
                 break;
             case "reg":
                 Map<String, Object> c = new HashMap<>();
-                String idA = request.getParameter("idA");
+                idArea = request.getParameter("idA");
                 double PA = Double.parseDouble(request.getParameter("PA"));
                 int NT = Integer.parseInt(request.getParameter("NT"));
                 String f_inicio = request.getParameter("f_i");
                 String f_fin = request.getParameter("f_fin");
-                System.out.println(idA+" "+PA+" "+NT+" "+f_inicio+" "+f_fin);
-                c.put("idA", idA);
+                System.out.println(idArea + " " + PA + " " + NT + " " + f_inicio + " " + f_fin);
+                c.put("idA", idArea);
                 c.put("PA", PA);
                 c.put("NT", NT);
                 c.put("f_i", f_inicio);
                 c.put("f_fin", f_fin);
                 rpta.put("rpta", pD.Reg_PresupuestoArea(c));
+                break;
+            case "comp":
+                idArea = request.getParameter("idArea");
+                rpta.put("datos", pD.comprobar(idArea));
+                break;
+            case "actual":
+                idArea = request.getParameter("idArea");
+                rpta.put("datos", pD.dataPresupuesto(idArea));
                 break;
         }
 

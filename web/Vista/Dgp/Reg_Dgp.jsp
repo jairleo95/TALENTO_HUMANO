@@ -694,20 +694,21 @@
                                 </div>
                                 <!-- end widget -->
                             </article>
+                            <div class="hidden" role="alert" id="presC"></div>
                             <article class="col-sm-12 col-md-12 col-lg-6">
                                 <!-- Widget ID (each widget will need unique ID)-->
                                 <div class="jarviswidget jarviswidget-color-white" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-deletebutton="false">
                                     <!-- widget options:
-                                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-    
-                                    data-widget-colorbutton="false"
-                                    data-widget-editbutton="false"
-                                    data-widget-togglebutton="false"
-                                    data-widget-deletebutton="false"
-                                    data-widget-fullscreenbutton="false"
-                                    data-widget-custombutton="false"
-                                    data-widget-collapsed="true"
-                                    data-widget-sortable="false"
+                                                                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                                        
+                                                                        data-widget-colorbutton="false"
+                                                                        data-widget-editbutton="false"
+                                                                        data-widget-togglebutton="false"
+                                                                        data-widget-deletebutton="false"
+                                                                        data-widget-fullscreenbutton="false"
+                                                                        data-widget-custombutton="false"
+                                                                        data-widget-collapsed="true"
+                                                                        data-widget-sortable="false"
                                     -->
                                     <header>
                                         <span class="widget-icon"> <i class="fa fa-clock-o"></i> </span>

@@ -542,6 +542,96 @@ function RegDGPAditionalPermissions() {
         }
     });
 }
+
+function evaluarPresupuesto(idArea) {
+    var pmonto = 0;
+    var pntra = 0;
+    var url = '../../pres?opc=comp';
+    var data = 'idArea=' + idArea;
+    $.post(url, data, function (objJson) {
+        var tipo = "";
+        var mensaje = "";
+        var d = objJson.datos;
+        if (d.length > 0) {
+            pmonto = d[0].monto;//monto presupuestado
+            pntra = d[0].ntrabajadores;//trabajadores presupuestados
+        } else {
+            pmonto = 0;
+            pntra = 0;
+        }
+        var psaldo = 0;
+        var psntra = 0;
+        var url = '../../pres?opc=actual';
+        var data = 'idArea=' + idArea;
+        $.post(url, data, function (objJson) {
+            var d = objJson.datos;
+            if (d.length > 0) {
+                psaldo = d[0].saldo;//saldo actual
+                psntra = d[0].ntrabajadores;//trabajadores actuales
+            } else {
+                psaldo = 0;
+                psntra = 0;
+            }
+            var pt = 0;
+            //var rm = 0;
+            if (pmonto !== 0 && pntra !== 0) {
+                //rm = psaldo - pmonto;
+                pt = psntra / pntra;
+                pt = pt * 100;
+                if (0 < pt && pt < 25) {
+                    tipo = "success";
+                }
+                if (25 < pt && pt < 50) {
+                    tipo = "info";
+                }
+                if (50 < pt && pt < 75) {
+                    tipo = "warning";
+                }
+                if (75 < pt && pt < 100) {
+                    tipo = "danger";
+                }
+                mensaje = "<strong>" + psntra + "</strong> trabajadores contratados de <strong>" + pntra + "</strong> presupuestados en esta Area";
+                mensaje += "<br/><strong>$ " + psaldo + "</strong> restantes en el presupuesto anual de esta Area";
+            } else {
+                tipo = "danger";
+                mensaje = "No se ha presupuestado esta Area";
+                pt = 1;
+            }
+            $("#presC").empty();
+            $("#presC").attr("class", "alert alert-" + tipo + " col-sm-12 col-md-12 col-lg-6");
+            $("#presC").append(createAlert(pt, tipo));
+            $("#contMen").empty();
+            $("#contMen").append(mensaje);
+            //$("#")
+        });
+        console.log("asda");
+    });
+}
+
+function createAlert(por, tipo) {
+    var s = '<div class="col-md-12" id="contAll">';
+    s += '<div class="col-md-6" id="contMen">';
+    s += '</div>';
+    s += '<div class="col-md-6" id="contBar">';
+    s += '<div class="progress">';
+    s += '<div class="progress-bar progress-bar-' + tipo + ' progress-bar-striped active" role="progressbar" aria-valuenow="' + por + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + por + '%">';
+    s += Math.round(por) +"%";
+    s += '</div>';
+    s += '</div>';
+    s += '</div>';
+    s += '</div>';
+    return s;
+}
+
+function createLoader(load) {
+    var s = '<div class="progress">';
+    s += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
+    s += '<span class="sr-only">' + load + '% Complete</span>';
+    s += '</div>';
+    s += '</div>';
+    return s;
+}
+
 function  initJobsFilters(aditionalFIlters) {
     if (!aditionalFIlters) {
         list_select($(".select-area"), "../../Direccion_Puesto", "opc=List_Area_RDGP", "3");
@@ -552,12 +642,14 @@ function  initJobsFilters(aditionalFIlters) {
         $(".select-seccion,.select-puesto").val("");
         $(".chosen-select").trigger("chosen:updated");
         /*Filtrar Centro de costo*/
-        list_cc_area($(this).val(), $(".centro_costo1"));
+        //list_cc_area($(this).val(), $(".centro_costo1"));
+        //actualPresupuesto($(".select-area").val());
+        evaluarPresupuesto($(".select-area").val());
     });
     $(".select-seccion").change(function () {
         list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".select-seccion").val() + "&esL=1", "3");
         cargar_horarios($('.t_horario'));
-        list_cc_seccion($(this).val(), $(".centro_costo1"));
+        //list_cc_seccion($(this).val(), $(".centro_costo1"));
     });
     $(".select-puesto").change(function () {
         $(".select-puesto1").val($(this).val());

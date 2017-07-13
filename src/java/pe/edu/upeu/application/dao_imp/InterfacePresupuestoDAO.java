@@ -5,6 +5,9 @@
  */
 package pe.edu.upeu.application.dao_imp;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  *
  * @author Leandro Burgos
@@ -12,5 +15,6 @@ package pe.edu.upeu.application.dao_imp;
 public interface InterfacePresupuestoDAO {
     
     public boolean Reg_PresupuestoArea(Object s);
-    
+    public ArrayList<Map<String, ?>> comprobar(String idArea);
+    public ArrayList<Map<String, ?>> dataPresupuesto(String idArea);
 }
