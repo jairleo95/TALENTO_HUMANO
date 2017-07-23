@@ -167,6 +167,10 @@
         <servlet-name>CPresupuesto</servlet-name>
         <servlet-class>pe.edu.upeu.application.web.controller.recruitment.CPresupuesto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>WSController</servlet-name>
+        <servlet-class>pe.edu.upeu.application.webservices.WSController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CTrabajador</servlet-name>
         <url-pattern>/trabajador</url-pattern>
@@ -330,6 +334,10 @@
     <servlet-mapping>
         <servlet-name>CPresupuesto</servlet-name>
         <url-pattern>/pres</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WSController</servlet-name>
+        <url-pattern>/ws</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>120</session-timeout>

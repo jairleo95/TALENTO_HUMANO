@@ -50,7 +50,7 @@
         <br>
         <br>
         <div class="text-center">
-             <h1><span class="semi-bold">Gestión de</span> <i class="ultra-light">Talento Humano</i> <sup class="badge bg-color-red bounceIn animated"> v 2.0</sup> <br>
+            <h1><span class="semi-bold">Gestión de</span> <i class="ultra-light">Talento Humano</i> <sup class="badge bg-color-red bounceIn animated"> v 2.0</sup> <br>
                 <!--     <small class="text-primary slideInRight fast animated"><strong>¡Bienvenido!</strong></small>-->
             </h1>
         </div>
@@ -78,7 +78,7 @@
                     <%}%>
                 </ul>
             </nav>
-                
+
         </div><!-- /container -->
         <script src="js/Js_Modulos/modernizr.custom.js"></script>
         <script>

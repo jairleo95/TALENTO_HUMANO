@@ -55,7 +55,7 @@ public class CMenu extends HttpServlet {
                     }
                     if (opc.equals("List_Privilegios")) {
                         String id_modulo = request.getParameter("idmod");
-                        sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
+                            sesion.setAttribute("listarURL", Irol.listarURL(idrol, id_modulo));
                         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Principal.jsp");
                         dispatcher.forward(request, response);
                     }
@@ -73,11 +73,11 @@ public class CMenu extends HttpServlet {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/");
                 dispatcher.forward(request, response);
             }
-          
+
         } finally {
             out.close();
         }
-         
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
