@@ -578,7 +578,7 @@ function evaluarPresupuesto(idArea) {
                 //rm = psaldo - pmonto;
                 pt = psntra / pntra;
                 pt = pt * 100;
-                if (0 < pt && pt < 25) {
+                if (0 <= pt && pt < 25) {
                     tipo = "success";
                 }
                 if (25 < pt && pt < 50) {
@@ -587,7 +587,7 @@ function evaluarPresupuesto(idArea) {
                 if (50 < pt && pt < 75) {
                     tipo = "warning";
                 }
-                if (75 < pt && pt < 100) {
+                if (75 < pt && pt <= 100) {
                     tipo = "danger";
                 }
                 mensaje = "<strong>" + psntra + "</strong> trabajadores contratados de <strong>" + pntra + "</strong> presupuestados en esta Area";

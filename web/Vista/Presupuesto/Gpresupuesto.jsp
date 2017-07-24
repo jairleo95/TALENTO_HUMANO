@@ -5,6 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    HttpSession sesion_1 = request.getSession();
+    String id_user_1 = (String) sesion_1.getAttribute("IDUSER");
+    if (id_user_1 != null) {
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,25 +33,23 @@
             <div class="list-group"><br/><br/>
                 <button type="button" id="v2" onclick="changeOption(this.id)" class="list-group-item us" >Actualizar Presupuesto</button>
                 <button type="button" id="v1" onclick="changeOption(this.id)" class="list-group-item us active">Asignar Presupuesto</button>
-                <button type="button" class="list-group-item disabled">Historial de Modificaciones</button>
-                <button type="button" class="list-group-item disabled">Reporte por Área</button>
+                <button type="button" id="v3" onclick="changeOption(this.id)" class="list-group-item us">Historial de Presupuesto</button>
             </div>
         </div>
-        <div id="vcont" class="col-md-8 col-lg-8">            
-        </div>
-
-
-
-        <div class="col-lg-2 col-md-2">
-            <input type="hidden" id="vopt" value="1">
-        </div>
+        <div id="vcont" class="col-md-9 col-lg-9">            
+        </div>        
+        <input type="hidden" id="vopt" value="1">
 
 
         <script type="text/javascript" src="../../js/jquery-2.2.3.min.js"></script>
         <script src="../../ajax/ajax.google.min.js"></script> 
         <script src="../../js/plugin/pfnotify/pnotify.custom.min.js" type="text/javascript"></script>
         <script src="LogicPresup.js" type="text/javascript"></script>
-        
+
     </body>
 
 </html>
+<%} else {
+        out.print("<script> window.parent.location.href = '/TALENTO_HUMANO/';</script>");
+    }
+%>

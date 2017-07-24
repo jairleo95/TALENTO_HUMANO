@@ -13,8 +13,14 @@ import java.util.Map;
  * @author Leandro Burgos
  */
 public interface InterfacePresupuestoDAO {
-    
+
     public boolean Reg_PresupuestoArea(Object s);
+
     public ArrayList<Map<String, ?>> comprobar(String idArea);
+
     public ArrayList<Map<String, ?>> dataPresupuesto(String idArea);
+
+    public ArrayList<Map<String, ?>> pActual(String idArea);
+    
+    public boolean statusPresupuesto(String idArea);
 }

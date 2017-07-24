@@ -1,6 +1,5 @@
 //AL CARGAR LA PAGINA
 $(document).ready(function () {
-    console.log("Loading...");
     $("#vcont").empty();
     $("#vcont").append(createContentAsignar());
     $("#estOPC").attr("value", "anual");
@@ -85,7 +84,7 @@ function createContentAsignar() {
     s += '<div class="row">';
     s += '<div class="col-md-12">';
     s += '<div class="col-md-4"></div>';
-    s += '<button class="btn btn-primary btn-lg col-md-4" type="button" onclick="saveB()">';
+    s += '<button class="btn btn-primary btn-lg col-md-4" type="button" onclick="saveB()" id="sbu" disabled>';
     s += 'Registrar';
     s += '</button>';
     s += '<div class="col-md-4"></div>';
@@ -131,14 +130,65 @@ function createContentEdit() {
     s += '</div>';
     s += '<input type="hidden" id="iArea">';
     s += '</fieldset>';
-    s += '<div class="form-actions" id="contH">';
+    s += '<div id="contH">';
+    s += '<fieldset>';
+    s += '<legend>';
+    s += 'Gestión de Presupuesto';
+    s += '</legend>';
+    s += '<div class="row">';
+    s += '<ul class="nav nav-pills">';
+    s += '<li role="presentation" onclick="ch(this.id)" id="anual" class="se active"><a style="cursor: pointer">Anual</a></li>';
+    s += '<li role="presentation" onclick="ch(this.id)" id="mensual" class="se"><a style="cursor: pointer">Mensual</a></li>';
+    s += '<li role="presentation" onclick="ch(this.id)" id="inter" class="se"><a style="cursor: pointer">Definir Intervalo</a></li>';
+    s += '</ul>';
+    s += '<input type="hidden" id="estOPC">';
+    s += '</div>';
+    s += '<br/>';
+    s += '<div class="row">';
+    s += '<div class="form-group col-md-6 col-xs-6">';
+    s += '<label>Fecha Inicio:</label><br>';
+    s += '<input type="date" name="fec_i" class="form-control" length="45"  id="fe_i" onchange="getFecha(this.value)">';
+    s += '</div>';
+    s += '<div class="form-group col-md-6 col-xs-6">';
+    s += '<label>Fecha Fin :</label><br>';
+    s += '<input type="date" name="fec_f" class="form-control" size="45" maxlength="100"  id="fe_fin" disabled="">';
+    s += '</div>';
+    s += '</div>';
+    s += '<div class="form-group col-md-6 col-xs-6">';
+    s += '<label>Presupuesto:</label><br>';
+
+    s += '<div class="alert alert-warning" role="alert">';
+    s += '<a class="alert-link" id="alpre"></a>';
+    s += '</div>';
+
+    s += '<div class="input-group ">';
+    s += '<div class="input-group-addon">$</div>';
+    s += '<input type="number" name="sueldo" class="form-control" maxlength="10" min="0" id="ipre" value="" placeholder="Ingrese el Presupuesto para esta área">';
+    s += '<div class="input-group-addon">.00</div>';
+    s += '</div>';
+    s += '</div>';
+    s += '<div class="form-group col-md-6 col-xs-6">';
+    s += '<label>N° de Trabajadores :</label><br>';
+
+    s += '<div class="alert alert-warning" role="alert">';
+    s += '<a class="alert-link" id="altra"></a>';
+    s += '</div>';
+
+    s += '<div class="input-group">';
+    s += '<div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>';
+    s += '<input type="number"  class="form-control" id="intr" placeholder="Ingrese el número de trabajadores de esta área">';
+    s += '</div>';
+    s += '</div>';
+    s += '</fieldset>';
+    s += '<div class="form-actions">';
     s += '<div class="row">';
     s += '<div class="col-md-12">';
     s += '<div class="col-md-4"></div>';
-    s += '<button class="btn btn-success btn-lg col-md-4" type="button" onclick="saveB()">';
+    s += '<button class="btn btn-success btn-lg col-md-4" type="button" onclick="saveB()" disabled>';
     s += 'Actualizar';
     s += '</button>';
     s += '<div class="col-md-4"></div>';
+    s += '</div>';
     s += '</div>';
     s += '</div>';
     s += '</div>';
@@ -203,18 +253,15 @@ function getFechaInit() {
         month = "0" + month;
     }
     var m = year + "-" + month + "-" + day;
-    console.log("Fecha actual : " + m);
     return m;
 }
 
 function getFecha(fecha) {
     var com = $("#estOPC").val();
     if (com === "anual") {
-        console.log("Eleccion de fecha ANUAL");
         getFechaAnual(fecha);
     }
     if (com === "mensual") {
-        console.log("Eleccion de fecha MENSUAL");
         setFechaMensual(fecha);
     }
 }
@@ -230,7 +277,6 @@ function setFechaMensual(fecha) {
         month = "0" + month;
     }
     var m = year + "-" + month + "-" + day;
-    console.log("Fecha calculada : " + m);
     $("#fe_fin").attr("value", m);
 }
 
@@ -251,7 +297,6 @@ function setFechaAnual(fecha) {
     var day = f[2];
     year = parseInt(year) + 1;
     var m = year + "-" + month + "-" + day;
-    console.log("Fecha calculada : " + m);
     $("#fe_fin").attr("value", m);
 }
 
@@ -412,16 +457,90 @@ function init() {
         $("#iArea").attr("value", id);
         if ($("#vopt").val() === "2") {
             listarActualPresupuesto(id);
-            $("#contH").show();
+        }
+        if ($("#vopt").val() === "1") {
+            statusPresupuesto(id);
         }
     });
 }
 
+//DATOS ACTUALES
+
 function listarActualPresupuesto(idArea) {
-    var url = '../../pres?opc=actual';
+    var url = '../../pres?opc=listActual';
     var data = 'idArea=' + idArea;
     $.post(url, data, function (objJson) {
-        console.log(objJson);
+        var datos = objJson.datos;
+        var pres_ac = 0;
+        var n_trab = 0;
+        var tr = 0;
+        var monto_i = 0;
+        if (datos.length > 0) {
+            $("#contH").show();
+            var f_f = datos[0].fe_hasta.split(" ");
+            var f_i = datos[0].fe_desde.split(" ");
+            $("#fe_fin").attr("value", f_f[0]);
+            $("#fe_i").attr("value", f_i[0]);
+            monto_i = parseInt(datos[0].saldo);
+            var trab = parseInt(datos[0].n_trabajadores);
+            for (var i = 0; i < datos.length; i++) {
+                var ca = 0;
+                var monto_ac = datos[i].monto;
+                var op = datos[i].operacion;
+                if (parseInt(op) === 1) {
+                    ca = parseFloat(monto_ac);
+                }
+                if (parseInt(op) === 2) {
+                    ca = parseFloat(monto_ac) * (-1);
+                }
+                pres_ac = monto_i + ca;
+                if (datos[i].operacion === "2" && datos[i].mtrabajador === "1") {
+                    n_trab = n_trab + 1;
+                }
+                tr = parseInt(trab) - n_trab;
+            }
+            if (pres_ac === parseFloat(monto_i)) {
+                $("#alpre").empty();
+                $("#alpre").append("Aún no se ha usado el Presupuesto de esta área");
+                $("#ipre").attr("value", pres_ac);
+            } else {
+                $("#alpre").empty();
+                $("#alpre").append("$ " + ca * (-1) + " usados del presupuesto total de $ " + monto_i);
+                $("#ipre").attr("value", pres_ac);
+            }
+            if (parseInt(tr) === parseInt(trab)) {
+                $("#altra").empty();
+                $("#altra").append("Aún no se ha contratado trabajadores con el presupuesto de esta área");
+                $("#intr").attr("value", tr);
+            } else {
+                $("#altra").empty();
+                if (parseInt(n_trab) > 1) {
+                    $("#altra").append(n_trab + " trabajadores contratados de " + trab + " presupuestados");
+                } else {
+                    $("#altra").append(n_trab + " trabajador contratado de " + trab + " presupuestados");
+                }
+                $("#intr").attr("value", tr);
+            }
+        } else {
+            alert("Area no presupuestada aún");
+        }
     });
 }
 
+//PRESUPUESTO ACTIVO
+
+function statusPresupuesto(idArea) {
+    var url = '../../pres?opc=status';
+    var data = 'idArea=' + idArea;
+    $.post(url, data, function (objJson) {
+        if (objJson.datos) {
+            new PNotify({
+                title: 'Área Presupuestada',
+                text: 'Hay un Presupuesto Activo en esta Area',
+                type: 'info'
+            });
+        } else {
+            jQuery("#sbu").removeAttr("disabled");
+        }
+    });
+}

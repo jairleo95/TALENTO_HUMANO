@@ -59,7 +59,6 @@ public class CPresupuesto extends HttpServlet {
                 int NT = Integer.parseInt(request.getParameter("NT"));
                 String f_inicio = request.getParameter("f_i");
                 String f_fin = request.getParameter("f_fin");
-                System.out.println(idArea + " " + PA + " " + NT + " " + f_inicio + " " + f_fin);
                 c.put("idA", idArea);
                 c.put("PA", PA);
                 c.put("NT", NT);
@@ -74,6 +73,14 @@ public class CPresupuesto extends HttpServlet {
             case "actual":
                 idArea = request.getParameter("idArea");
                 rpta.put("datos", pD.dataPresupuesto(idArea));
+                break;
+            case "listActual":
+                idArea = request.getParameter("idArea");
+                rpta.put("datos", pD.pActual(idArea));
+                break;
+            case "status":
+                idArea = request.getParameter("idArea");
+                rpta.put("datos", pD.statusPresupuesto(idArea));
                 break;
         }
 

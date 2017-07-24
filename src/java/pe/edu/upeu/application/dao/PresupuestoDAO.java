@@ -63,7 +63,7 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
                 + "and rs.ID_SECCION=rp.ID_SECCION "
                 + "and rs.ID_AREA=ra.ID_AREA "
                 + "and pr.FE_DESDE < rc.FE_DESDE "
-                + "and pr.F_HASTA > rc.FE_HASTA "
+                + "and pr.FE_HASTA > rc.FE_HASTA "
                 + "and pr.IDAREA=ra.ID_AREA "
                 + "and ra.ID_AREA=? ";
         ArrayList<Map<String, ?>> lista = new ArrayList<>();
@@ -109,6 +109,60 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
         return lista;
     }
 
-    
-    
+    @Override
+    public ArrayList<Map<String, ?>> pActual(String idArea) {
+        sql = "select * from PRESUPUESTO p,DET_PRESUPUESTO d "
+                + "where p.IDPRESUPUESTO=d.IDPRESUPUESTO  "
+                + "and p.IDAREA=? "
+                + "and sysdate BETWEEN p.FE_DESDE and p.FE_HASTA "
+                + "and p.ESTADO='1' ";
+        ArrayList<Map<String, ?>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idArea);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("idpresupuesto", rs.getString("IDPRESUPUESTO"));
+                m.put("idarea", rs.getString("IDAREA"));
+                m.put("saldo", rs.getString("SALDO"));
+                m.put("fe_desde", rs.getString("FE_DESDE"));
+                m.put("fe_hasta", rs.getString("FE_HASTA"));
+                m.put("n_trabajadores", rs.getString("N_TRABAJADORES"));
+                m.put("iddet_presupuesto", rs.getString("IDDET_PRESUPUESTO"));
+                m.put("f_modif", rs.getString("F_MODIF"));
+                m.put("operacion", rs.getString("OPERACION"));
+                m.put("monto", rs.getString("MONTO"));
+                m.put("mtrabajador", rs.getString("MTRABAJADOR"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar Presupuestado " + e);
+        } finally {
+            this.cnn.close();
+        }
+        return lista;
+    }
+
+    @Override
+    public boolean statusPresupuesto(String idArea) {
+        boolean s = false;
+        sql = "select * from PRESUPUESTO where ESTADO=1 and IDAREA=?";
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idArea);
+            int a = ps.executeUpdate();
+            if (a > 0) {
+                s = true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar Presupuestado " + e);
+        } finally {
+            this.cnn.close();
+        }
+        return s;
+    }
+
 }
