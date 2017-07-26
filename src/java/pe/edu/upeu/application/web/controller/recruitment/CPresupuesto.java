@@ -45,6 +45,8 @@ public class CPresupuesto extends HttpServlet {
         //int opc = Integer.parseInt(request.getParameter("opc"));
         String opc = request.getParameter("opc");
         String idArea = "";
+        String id;
+        int tipo;
         switch (opc) {
             case "gest":
                 response.sendRedirect("Vista/Presupuesto/Gpresupuesto.jsp");
@@ -81,6 +83,11 @@ public class CPresupuesto extends HttpServlet {
             case "status":
                 idArea = request.getParameter("idArea");
                 rpta.put("datos", pD.statusPresupuesto(idArea));
+                break;
+            case "ccosto":
+                id = request.getParameter("id");
+                tipo = Integer.parseInt(request.getParameter("tipo"));
+                rpta.put("datos", pD.CCostos(id, tipo));
                 break;
         }
 

@@ -23,4 +23,7 @@ public interface InterfacePresupuestoDAO {
     public ArrayList<Map<String, ?>> pActual(String idArea);
     
     public boolean statusPresupuesto(String idArea);
+    
+    public ArrayList<Map<String, ?>> CCostos(String id,int tipo);
+    
 }

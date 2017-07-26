@@ -165,4 +165,40 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
         return s;
     }
 
+    @Override
+    public ArrayList<Map<String, ?>> CCostos(String id, int tipo) {
+        String sr = "";
+        if (tipo == 1) {
+            sr = "where ID_DEPARTAMENTO=?";
+        }
+        if (tipo == 2) {
+            sr = "where ID_AREA=?";
+        }
+        sql = "select * from RHVD_CENTRO_COSTO " + sr;
+        ArrayList<Map<String, ?>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("idccosto", rs.getString("ID_CENTRO_COSTO"));
+                m.put("codigo", rs.getString("CO_CENTRO_COSTO"));
+                m.put("denominacion", rs.getString("DE_CENTRO_COSTO"));
+                m.put("iddireccion", rs.getString("ID_DIRECCION"));
+                m.put("no_direccion", rs.getString("NO_DIRECCION"));
+                m.put("iddepartamento", rs.getString("ID_DEPARTAMENTO"));
+                m.put("no_departamento", rs.getString("NO_DEP"));
+                m.put("idarea", rs.getString("ID_AREA"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar Centros de Costo " + e);
+        } finally {
+            this.cnn.close();
+        }
+        return lista;
+    }
+
 }

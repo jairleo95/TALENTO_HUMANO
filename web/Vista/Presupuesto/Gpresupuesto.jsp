@@ -40,9 +40,29 @@
         </div>        
         <input type="hidden" id="vopt" value="1">
 
+        <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Resumen</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Send message</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script type="text/javascript" src="../../js/jquery-2.2.3.min.js"></script>
         <script src="../../ajax/ajax.google.min.js"></script> 
+        <script src="../../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
         <script src="../../js/plugin/pfnotify/pnotify.custom.min.js" type="text/javascript"></script>
         <script src="LogicPresup.js" type="text/javascript"></script>
 

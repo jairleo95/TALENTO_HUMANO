@@ -16,25 +16,34 @@ function createContentAsignar() {
     s += '<div class="panel-body">';
     s += '<form class="">';
     s += '<fieldset>';
-    s += '<legend>';
-    s += 'Seleccionar Área';
+    s += '<legend class="text-primary">';
+    s += 'Destino de Presupuesto';
     s += '</legend>';
+    s += '<div class="alert alert-info" role="alert">';
+    s += '<i class="fa fa-info"></i>  El destino puede ser un <strong>Departamento</strong> o un <strong>Area</strong>. Los <strong>Centros de Costo</strong> se muestran dependiendo de esta eleccion';
+    s += '</div>';
     s += '<div class="row">';
-    s += '<div class="form-group col-md-4 col-xs-4" >';
-    s += '<label>Dirección :</label><br>';
+    s += '<div class="form-group col-md-4 col-xs-12" >';
+    s += '<label class="text-primary">Dirección :</label><br>';
     s += '<select class="form-control select_direccion" >';
     s += '<option value="" selected disabled>[Seleccione]</option>';
     s += '</select>';
     s += '</div>';
-    s += '<div class="form-group col-md-4 col-xs-4" >';
-    s += '<label>Departamento :</label><br>';
+    s += '<div class="form-group col-md-4 col-xs-12" >';
+    s += '<label class="text-primary">Departamento :</label><br>';
     s += '<select class="form-control select_dep" >';
     s += '<option value="" selected disabled>[Seleccione]</option>';
     s += '</select>';
     s += '</div>';
-    s += '<div class="form-group col-md-4 col-xs-4" >';
-    s += '<label>Área :</label><br>';
+    s += '<div class="form-group col-md-4 col-xs-12" >';
+    s += '<label class="text-primary">Área :</label><br>';
     s += '<select class="form-control select_area" >';
+    s += '<option value="" selected disabled>[Seleccione]</option>';
+    s += '</select>';
+    s += '</div>';
+    s += '<div class="form-group col-md-4 col-xs-12" >';
+    s += '<label class="text-success">Centro de Costos :</label><br>';
+    s += '<select class="form-control select_cc" >';
     s += '<option value="" selected disabled>[Seleccione]</option>';
     s += '</select>';
     s += '</div>';
@@ -42,10 +51,10 @@ function createContentAsignar() {
     s += '<input type="hidden" id="iArea">';
     s += '</fieldset>';
     s += '<fieldset>';
-    s += '<legend>';
+    s += '<legend class="text-primary">';
     s += 'Gestión de Presupuesto';
     s += '</legend>';
-    s += '<div class="row">';
+    s += '<div class="row" style="margin-left:1%">';
     s += '<ul class="nav nav-pills">';
     s += '<li role="presentation" onclick="ch(this.id)" id="anual" class="se active"><a style="cursor: pointer">Anual</a></li>';
     s += '<li role="presentation" onclick="ch(this.id)" id="mensual" class="se"><a style="cursor: pointer">Mensual</a></li>';
@@ -55,28 +64,64 @@ function createContentAsignar() {
     s += '</div>';
     s += '<br/>';
     s += '<div class="row">';
-    s += '<div class="form-group col-md-6 col-xs-6">';
+    s += '<div class="form-group col-md-6 col-xs-12">';
     s += '<label>Fecha Inicio:</label><br>';
     s += '<input type="date" name="fec_i" class="form-control" length="45"  id="fe_i" onchange="getFecha(this.value)">';
     s += '</div>';
-    s += '<div class="form-group col-md-6 col-xs-6">';
+    s += '<div class="form-group col-md-6 col-xs-12">';
     s += '<label>Fecha Fin :</label><br>';
     s += '<input type="date" name="fec_f" class="form-control" size="45" maxlength="100"  id="fe_fin" disabled="">';
     s += '</div>';
     s += '</div>';
-    s += '<div class="form-group col-md-6 col-xs-6">';
-    s += '<label>Presupuesto:</label><br>';
+    s += '<div class="form-group col-md-6 col-xs-12">';
+    s += '<div class="form-group col-md-6 col-xs-12">';
+    s += '<label>Sueldo Basico:</label><br>';
     s += '<div class="input-group ">';
     s += '<div class="input-group-addon">$</div>';
-    s += '<input type="number" name="sueldo" class="form-control" maxlength="10" min="0" id="ipre" value="" placeholder="Ingrese el Presupuesto para esta área">';
+    s += '<input type="number" name="sueldo" class="form-control SP" maxlength="10" min="0" id="ipreA" onkeyup="suma()" placeholder="Presupuesto para los Sueldos">';
     s += '<div class="input-group-addon">.00</div>';
     s += '</div>';
     s += '</div>';
-    s += '<div class="form-group col-md-6 col-xs-6">';
+    s += '<div class="form-group col-md-6 col-xs-12">';
+    s += '<label>Asignacion Familiar:</label><br>';
+    s += '<div class="input-group ">';
+    s += '<div class="input-group-addon">$</div>';
+    s += '<input type="number" name="sueldo" class="form-control SP" maxlength="10" min="0" id="ipreB" onkeyup="suma()" placeholder="Ingrese el Presupuesto para esta área">';
+    s += '<div class="input-group-addon">.00</div>';
+    s += '</div>';
+    s += '</div>';
+    s += '<div class="form-group col-md-6 col-xs-12">';
+    s += '<label>Bono Alimentario:</label><br>';
+    s += '<div class="input-group ">';
+    s += '<div class="input-group-addon">$</div>';
+    s += '<input type="number" name="sueldo" class="form-control SP" maxlength="10" min="0" id="ipreC" onkeyup="suma()"  placeholder="Presupuesto para los Sueldos">';
+    s += '<div class="input-group-addon">.00</div>';
+    s += '</div>';
+    s += '</div>';
+    s += '<div class="form-group col-md-6 col-xs-12">';
+    s += '<label>Bonificacion:</label><br>';
+    s += '<div class="input-group ">';
+    s += '<div class="input-group-addon">$</div>';
+    s += '<input type="number" name="sueldo" class="form-control SP" maxlength="10" min="0" id="ipreD" onkeyup="suma()"  placeholder="Ingrese el Presupuesto para esta área">';
+    s += '<div class="input-group-addon">.00</div>';
+    s += '</div>';
+    s += '</div>';
+    s += '<div class="form-group col-md-12 col-xs-12">';
+    s += '<label>Presupuesto General:</label><br>';
+    s += '<div class="input-group ">';
+    s += '<div class="input-group-addon">$</div>';
+    s += '<input type="number" name="sueldo" class="form-control" maxlength="10" min="0" id="ipret" value="" placeholder="Ingrese el Presupuesto para esta área" disabled>';
+    s += '<div class="input-group-addon">.00</div>';
+    s += '</div>';
+    s += '</div>';
+    s += '</div>';
+    s += '<div class="form-group col-md-6 col-xs-12">';
+    s += '<div class="form-group col-md-12 col-xs-12">';
     s += '<label>N° de Trabajadores :</label><br>';
     s += '<div class="input-group">';
-    s += '<div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>';
+    s += '<div class="input-group-addon"><i class="fa fa-users"></i></div>';
     s += '<input type="number"  class="form-control" id="intr" placeholder="Ingrese el número de trabajadores de esta área">';
+    s += '</div>';
     s += '</div>';
     s += '</div>';
     s += '</fieldset>';
@@ -84,7 +129,7 @@ function createContentAsignar() {
     s += '<div class="row">';
     s += '<div class="col-md-12">';
     s += '<div class="col-md-4"></div>';
-    s += '<button class="btn btn-primary btn-lg col-md-4" type="button" onclick="saveB()" id="sbu" disabled>';
+    s += '<button class="btn btn-primary btn-lg col-md-4" type="button" onclick="saveB()" id="sbu" disabled data-toggle="modal" data-target="#dataModal">';
     s += 'Registrar';
     s += '</button>';
     s += '<div class="col-md-4"></div>';
@@ -109,19 +154,19 @@ function createContentEdit() {
     s += 'Seleccionar Área';
     s += '</legend>';
     s += '<div class="row">';
-    s += '<div class="form-group col-md-4 col-xs-4" >';
+    s += '<div class="form-group col-md-4 col-xs-12" >';
     s += '<label>Dirección :</label><br>';
     s += '<select class="form-control select_direccion" >';
     s += '<option value="" selected disabled>[Seleccione]</option>';
     s += '</select>';
     s += '</div>';
-    s += '<div class="form-group col-md-4 col-xs-4" >';
+    s += '<div class="form-group col-md-4 col-xs-12" >';
     s += '<label>Departamento :</label><br>';
     s += '<select class="form-control select_dep" >';
     s += '<option value="" selected disabled>[Seleccione]</option>';
     s += '</select>';
     s += '</div>';
-    s += '<div class="form-group col-md-4 col-xs-4" >';
+    s += '<div class="form-group col-md-4 col-xs-12" >';
     s += '<label>Área :</label><br>';
     s += '<select class="form-control select_area" >';
     s += '<option value="" selected disabled>[Seleccione]</option>';
@@ -145,16 +190,16 @@ function createContentEdit() {
     s += '</div>';
     s += '<br/>';
     s += '<div class="row">';
-    s += '<div class="form-group col-md-6 col-xs-6">';
+    s += '<div class="form-group col-md-6 col-xs-12">';
     s += '<label>Fecha Inicio:</label><br>';
     s += '<input type="date" name="fec_i" class="form-control" length="45"  id="fe_i" onchange="getFecha(this.value)">';
     s += '</div>';
-    s += '<div class="form-group col-md-6 col-xs-6">';
+    s += '<div class="form-group col-md-6 col-xs-12">';
     s += '<label>Fecha Fin :</label><br>';
     s += '<input type="date" name="fec_f" class="form-control" size="45" maxlength="100"  id="fe_fin" disabled="">';
     s += '</div>';
     s += '</div>';
-    s += '<div class="form-group col-md-6 col-xs-6">';
+    s += '<div class="form-group col-md-6 col-xs-12">';
     s += '<label>Presupuesto:</label><br>';
 
     s += '<div class="alert alert-warning" role="alert">';
@@ -167,7 +212,7 @@ function createContentEdit() {
     s += '<div class="input-group-addon">.00</div>';
     s += '</div>';
     s += '</div>';
-    s += '<div class="form-group col-md-6 col-xs-6">';
+    s += '<div class="form-group col-md-6 col-xs-12">';
     s += '<label>N° de Trabajadores :</label><br>';
 
     s += '<div class="alert alert-warning" role="alert">';
@@ -184,7 +229,7 @@ function createContentEdit() {
     s += '<div class="row">';
     s += '<div class="col-md-12">';
     s += '<div class="col-md-4"></div>';
-    s += '<button class="btn btn-success btn-lg col-md-4" type="button" onclick="saveB()" disabled>';
+    s += '<button class="btn btn-success btn-lg col-md-4" type="button" onclick="saveS()">';
     s += 'Actualizar';
     s += '</button>';
     s += '<div class="col-md-4"></div>';
@@ -199,11 +244,50 @@ function createContentEdit() {
     return s;
 }
 
+function createContentReport() {
+    var s = '<div class="panel panel-info">';
+    s += '<div class="panel-heading"><h3><i class="fa fa-list"></i> Presupuesto</h3></div>';
+    s += '<div class="panel-body">';
+    s += '<form class="">';
+    s += '<fieldset>';
+    s += '<legend>';
+    s += 'Seleccionar Área';
+    s += '</legend>';
+    s += '<div class="row">';
+    s += '<div class="form-group col-md-4 col-xs-12" >';
+    s += '<label>Dirección :</label><br>';
+    s += '<select class="form-control select_direccion" >';
+    s += '<option value="" selected disabled>[Seleccione]</option>';
+    s += '</select>';
+    s += '</div>';
+    s += '<div class="form-group col-md-4 col-xs-12" >';
+    s += '<label>Departamento :</label><br>';
+    s += '<select class="form-control select_dep" >';
+    s += '<option value="" selected disabled>[Seleccione]</option>';
+    s += '</select>';
+    s += '</div>';
+    s += '<div class="form-group col-md-4 col-xs-12" >';
+    s += '<label>Área :</label><br>';
+    s += '<select class="form-control select_area" >';
+    s += '<option value="" selected disabled>[Seleccione]</option>';
+    s += '</select>';
+    s += '</div>';
+    s += '</div>';
+    s += '<input type="hidden" id="iArea">';
+    s += '</fieldset>';
+    s += '</form>';
+    s += '</div>';
+    s += '</div>';
+    s += '</div>';
+    return s;
+}
+
 //CAMBIAR OPCIONES DE NAVEGADORES
 
 function changeOption(id) {
     if (id === "v1") {
         $("#v2").attr("class", "list-group-item us");
+        $("#v3").attr("class", "list-group-item us");
         $("#v1").attr("class", "list-group-item us active");
         $("#vopt").attr("value", "1");
         $("#vcont").empty();
@@ -215,10 +299,21 @@ function changeOption(id) {
     }
     if (id === "v2") {
         $("#v1").attr("class", "list-group-item us");
+        $("#v3").attr("class", "list-group-item us");
         $("#v2").attr("class", "list-group-item us active");
         $("#vopt").attr("value", "2");
         $("#vcont").empty();
         $("#vcont").append(createContentEdit());
+        $("#contH").hide();
+        init();
+    }
+    if (id === "v3") {
+        $("#v1").attr("class", "list-group-item us");
+        $("#v2").attr("class", "list-group-item us");
+        $("#v3").attr("class", "list-group-item us active");
+        $("#vopt").attr("value", "3");
+        $("#vcont").empty();
+        $("#vcont").append(createContentReport());
         $("#contH").hide();
         init();
     }
@@ -310,10 +405,10 @@ function convertir_fecha(fecha) {
 }
 
 //REGISTRAR PRESUPUESTO
-
+//CAMBIAAAAR
 function saveB() {
     var idArea = $("#iArea").val();
-    var presupuesto = $("#ipre").val();
+    var presupuesto = $("#ipret").val();
     var trabajadores = $("#intr").val();
     var f_inicio = $("#fe_i").val();
     var f_fin = $("#fe_fin").val();
@@ -451,6 +546,7 @@ function init() {
         var opc = 'Listar_area2';
         var id = $(".select_dep").val();
         listar_opciones(opc, id);
+        listCCostos(id, "dep");
     });
     $(".select_area").change(function () {
         var id = $(".select_area").val();
@@ -459,6 +555,7 @@ function init() {
             listarActualPresupuesto(id);
         }
         if ($("#vopt").val() === "1") {
+            listCCostos(id, "area");
             statusPresupuesto(id);
         }
     });
@@ -505,7 +602,7 @@ function listarActualPresupuesto(idArea) {
                 $("#ipre").attr("value", pres_ac);
             } else {
                 $("#alpre").empty();
-                $("#alpre").append("$ " + ca * (-1) + " usados del presupuesto total de $ " + monto_i);
+                $("#alpre").append("$ " + ca * (-1) + " usados del presupuesto Inicial de $ " + monto_i);
                 $("#ipre").attr("value", pres_ac);
             }
             if (parseInt(tr) === parseInt(trab)) {
@@ -515,14 +612,19 @@ function listarActualPresupuesto(idArea) {
             } else {
                 $("#altra").empty();
                 if (parseInt(n_trab) > 1) {
-                    $("#altra").append(n_trab + " trabajadores contratados de " + trab + " presupuestados");
+                    $("#altra").append(n_trab + " trabajadores contratados de " + trab + " presupuestados Inicialmente");
                 } else {
-                    $("#altra").append(n_trab + " trabajador contratado de " + trab + " presupuestados");
+                    $("#altra").append(n_trab + " trabajador contratado de " + trab + " presupuestados Inicialmente");
                 }
                 $("#intr").attr("value", tr);
             }
         } else {
-            alert("Area no presupuestada aún");
+            $("#contH").hide();
+            new PNotify({
+                title: 'Área No Presupuestada',
+                text: 'Esta Área aún no se ha presupuestado',
+                type: 'warning'
+            });
         }
     });
 }
@@ -534,6 +636,7 @@ function statusPresupuesto(idArea) {
     var data = 'idArea=' + idArea;
     $.post(url, data, function (objJson) {
         if (objJson.datos) {
+            $("#sbu").attr("disabled", "disabled");
             new PNotify({
                 title: 'Área Presupuestada',
                 text: 'Hay un Presupuesto Activo en esta Area',
@@ -543,4 +646,81 @@ function statusPresupuesto(idArea) {
             jQuery("#sbu").removeAttr("disabled");
         }
     });
+}
+
+//ACTUALIZAR PRESUPUESTO
+
+function saveS() {
+    var idArea = $("#iArea").val();
+    var presupuesto = $("#ipre").val();
+    var trabajadores = $("#intr").val();
+    var f_inicio = $("#fe_i").val();
+    var f_fin = $("#fe_fin").val();
+    if (idArea !== "" && presupuesto !== "" && trabajadores !== "" && f_inicio !== "" && f_fin) {
+        console.log(idArea);
+        console.log(presupuesto);
+        console.log(trabajadores);
+        console.log(f_inicio);
+        console.log(f_fin);
+    }
+
+}
+
+function suma() {
+    var sum = 0;
+    var sb = $("#ipreA").val();
+    var af = $("#ipreB").val();
+    var ba = $("#ipreC").val();
+    var b = $("#ipreD").val();
+    if (sb === "") {
+        sb = 0;
+    }
+    if (af === "") {
+        af = 0;
+    }
+    if (ba === "") {
+        ba = 0;
+    }
+    if (b === "") {
+        b = 0;
+    }
+    sum = parseInt(sb) + parseInt(af) + parseInt(ba) + parseInt(b);
+    $("#ipret").attr("value", sum);
+}
+
+function listCCostos(id, tipo) {
+    var text = '';
+    var url = '../../pres?opc=ccosto';
+    var data = '';
+    if (tipo === "dep") {
+        data += 'id=' + id;
+        data += '&tipo=1';
+        text = 'Este Departamento ';
+    }
+    if (tipo === "area") {
+        data += 'id=' + id;
+        data += '&tipo=2';
+        text = 'Esta Area ';
+    }
+    $.post(url, data, function (objJson) {
+        var a = $(".select_cc");
+        var lista = objJson.datos;
+        if (lista.length > 0) {
+            jQuery(".select_cc").removeAttr("disabled");
+            a.empty();
+            a.append("<option value=''>[Seleccione]</option>");
+            for (var i = 0; i < lista.length; i++) {
+                a.append("<option value='" + lista[i].idccosto + "'>" + lista[i].denominacion + "</option>");
+            }
+        } else {
+            a.attr("disabled","");
+            new PNotify({
+                title: 'No hay Centros de Costo',
+                text: text + 'no tiene centros de costos disponibles',
+                type: 'info'
+            });
+        }
+    });
+
+
 }
