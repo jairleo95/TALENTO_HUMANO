@@ -139,7 +139,7 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
                 m.put("iddet_presupuesto", rs.getString("IDDET_PRESUPUESTO"));
                 m.put("f_modif", rs.getString("F_MODIF"));
                 m.put("operacion", rs.getString("OPERACION"));
-                m.put("mtrabajador", rs.getString("MTRABAJADOR"));  
+                m.put("ctrabajador", rs.getString("CTRABAJADOR"));  
                 m.put("tipo", rs.getString("TIPO"));  
                 
                 m.put("sbgeneral", rs.getString("SBASICO"));

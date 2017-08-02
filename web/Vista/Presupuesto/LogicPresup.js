@@ -302,12 +302,163 @@ function createContentReport() {
     s += '</select>';
     s += '</div>';
     s += '</div>';
+    s += '<button class="btn btn-info col col-md-3 col-xs-6 col-md-offset-9 col-xs-offset-6" type="button" onclick="history()">Ver Reporte</button>';
     s += '<input type="hidden" id="iDestino">';
+    s += '</fieldset>';
+    s += '<fieldset>';
+    s += '<div id="contHI"></div>';
     s += '</fieldset>';
     s += '</form>';
     s += '</div>';
     s += '</div>';
     s += '</div>';
+    return s;
+}
+
+//LISTAR HISTORIAL
+
+function history() {
+    var idDestino = $("#iDestino").val();
+    console.log(idDestino);
+    var url = '../../pres?opc=listActual';
+    var data = 'idDes=' + idDestino;
+    $.post(url, data, function (objJson) {
+        var datos = objJson.datos;
+        if (datos.length > 0) {
+            var m = '';
+            for (var i = 0, max = datos.length; i < max; i++) {
+                var datos = objJson.datos;
+                var sbgeneral = parseInt(datos[0].sbgeneral);
+                var afgeneral = parseInt(datos[0].afgeneral);
+                var bageneral = parseInt(datos[0].bageneral);
+                var bogeneral = parseInt(datos[0].bogeneral);
+                var monto_i = sbgeneral + afgeneral + bageneral + bogeneral;
+
+                var sbacum = 0;//sueldo basico acumulado
+                var afacum = 0;//asignacion familiar acumulado
+                var baacum = 0;//bono alimentario acumulado
+                var boacum = 0;//bonificacion acumulado
+                var monacum = 0;//MONTO TOTAL acumulado
+                m += '<tr>';
+                m += '<td><center>' + (i + 1) + '</center></td>';
+                m += '<td><center>' + datos[i].f_modif + '</center></td>';
+                if (datos[i].operacion === "0") {
+                    m += '<td><center>Presupuesto Inicial</center></td>';
+                }
+                if (datos[i].operacion === "2") {
+                    m += '<td><center>Contratacion de Trabajador</center></td>';
+                }
+                if (datos[i].operacion === "1") {
+                    m += '<td><center>Retiro de Trabajador</center></td>';
+                }
+                m += '<td><center>' + datos[i].sbdet + '</center></td>';
+                m += '<td><center>' + datos[i].afdet + '</center></td>';
+                m += '<td><center>' + datos[i].badet + '</center></td>';
+                m += '<td><center>' + datos[i].bodet + '</center></td>';
+                m += '</tr>';
+                if (datos[i].operacion === "2" && datos[i].ctrabajador !== "0") {
+                    //Calculo de Sueldo Basico                    
+                    sbacum = sbacum + parseInt(datos[i].sbdet);
+                    //Calculo de Asignacion Familiar
+                    afacum = afacum + parseInt(datos[i].afdet);
+                    //Calculo de Bono Alimentario
+                    baacum = baacum + parseInt(datos[i].badet);
+                    //Calculo de Bonificacion
+                    boacum = boacum + parseInt(datos[i].bodet);
+                }
+            }
+            monacum = sbacum + afacum + baacum + boacum;
+            var mt = monto_i - monacum;
+            var sb = sbgeneral - sbacum;
+            var af = afgeneral - afacum;
+            var ba = bageneral - baacum;
+            var bo = bogeneral - boacum;
+
+            $("#contHI").empty();
+            $("#contHI").append(createTableH(sb, af, ba, bo, mt));
+            $("#dHis").empty();
+            $("#dHis").append(m);
+            $("#idTab").dataTable({
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+
+        } else {
+            //No tiene data para mostrar
+            new PNotify({
+                title: 'Sin Historial',
+                text: 'No se tiene un historial de presupuesto de este destino',
+                type: 'info'
+            });
+        }
+    });
+}
+
+function createTableH(sb, af, ba, bo, saldo) {
+    var s = '<legend class="text-info">';
+    s += 'Historial';
+    s += '</legend>';
+    
+    s += '<div class="panel panel-info>';
+    s += '<div class="panel-heading"><p class="text-info">El Presupuesto actual es de  $ <strong>' + saldo + '</strong> dividido en:</p></div>';
+    
+    s += '<ul class="list-group col col-md-3">';
+    s += '<li class="list-group-item"><span class="badge">' + sb + '</span>Sueldo Básico</li>';
+    s += '</ul>';
+    s += '<ul class="list-group col col-md-3">';
+    s += '<li class="list-group-item"><span class="badge">' + af + '</span>Asignacion Familiar</li>';
+    s += '</ul>';
+    s += '<ul class="list-group col col-md-3">';
+    s += '<li class="list-group-item"><span class="badge">' + ba + '</span>Bono Alimentos</li>';
+    s += '</ul>';
+    s += '<ul class="list-group col col-md-3">';
+    s += '<li class="list-group-item"><span class="badge">' + bo + '</span>Bonificaciones</li>';
+    s += '</ul>';
+    s += '</div>';
+    
+    s += '<table id="idTab">';
+    s += '<thead>';
+    s += '<tr>';
+    s += '<th colspan="1"></th>';
+    s += '<th colspan="1"></th>';
+    s += '<th colspan="1"></th>';
+    s += '<th colspan="4"><center>Detalle</center></th>';
+    s += '</tr>';
+    s += '<tr>';
+    s += '<th><center>N°</center></th>';
+    s += '<th><center>Fecha y Hora</center></th>';
+    s += '<th><center>Operacion</center></th>';
+    s += '<th><center>Sueldo Básico</center></th>';
+    s += '<th><center>Asignacion Familiar</center></th>';
+    s += '<th><center>Bono Alimentos</center></th>';
+    s += '<th><center>Bonificaciones</center></th>';
+    s += '</tr>';
+    s += '</thead>';
+    s += '<tbody id="dHis">';
+    s += '</tbody>';
+    s += '</table>';
     return s;
 }
 
@@ -670,7 +821,7 @@ function listarActualPresupuesto(id) {
             if (datos.length > 1) {
 
                 for (var i = 0, max = datos.length; i < max; i++) {
-                    if (datos[i].operacion === 2 && datos[i].mtrabajador === 1) {
+                    if (datos[i].operacion === "2" && datos[i].ctrabajador !== "0") {
                         //Calculo de Sueldo Basico                    
                         sbacum = sbacum + parseInt(datos[i].sbdet);
                         //Calculo de Asignacion Familiar
@@ -686,6 +837,10 @@ function listarActualPresupuesto(id) {
                 monacum = sbacum + afacum + baacum + boacum;
                 var mt = monto_i - monacum;
                 var tt = trab - tracum;
+                $("#ipreA").attr("value", sbgeneral - sbacum);
+                $("#ipreB").attr("value", afgeneral - afacum);
+                $("#ipreC").attr("value", bageneral - baacum);
+                $("#ipreD").attr("value", bogeneral - boacum);
                 $("#ipret").attr("value", mt);
                 $("#intr").attr("value", tt);
 
@@ -701,7 +856,7 @@ function listarActualPresupuesto(id) {
         } else {
             $("#contH").hide();
             new PNotify({
-                title: 'No Presupuestada',
+                title: 'No Presupuestado',
                 text: 'Este Departamento/Area no está presupuestado',
                 type: 'info'
             });

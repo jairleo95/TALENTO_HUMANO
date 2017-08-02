@@ -27,6 +27,7 @@
         <link rel="icon" href="../../img/favicon/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome.min.css">
         <link href="../../js/plugin/pfnotify/pnotify.custom.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/datatable.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="col-lg-2 col-md-2">
@@ -43,10 +44,11 @@
         <input type="hidden" id="tipo_p" value="0">
 
 
-        <script type="text/javascript" src="../../js/jquery-2.2.3.min.js"></script>
+        <script type="text/javascript" src="../../js/jquery-2.2.3.min.js"></script>        
         <script src="../../ajax/ajax.google.min.js"></script> 
         <script src="../../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
         <script src="../../js/plugin/pfnotify/pnotify.custom.min.js" type="text/javascript"></script>
+        <script src="../../js/plugin/datatables/datatable.js" type="text/javascript"></script>
         <script src="LogicPresup.js" type="text/javascript"></script>
 
     </body>
