@@ -16,13 +16,13 @@ public interface InterfacePresupuestoDAO {
 
     public boolean Reg_PresupuestoArea(Object s);
 
-    public ArrayList<Map<String, ?>> comprobar(String idArea);
+    public ArrayList<Map<String, ?>> comprobar(String idDestino);
 
-    public ArrayList<Map<String, ?>> dataPresupuesto(String idArea);
+    public ArrayList<Map<String, ?>> dataPresupuesto(String idDestino);
 
-    public ArrayList<Map<String, ?>> pActual(String idArea);
+    public ArrayList<Map<String, ?>> pActual(String idDestino);
     
-    public boolean statusPresupuesto(String idArea);
+    public boolean statusPresupuesto(String idDestino);
     
     public ArrayList<Map<String, ?>> CCostos(String id,int tipo);
     

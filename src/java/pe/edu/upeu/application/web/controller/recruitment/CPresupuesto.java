@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.DireccionDAO;
 import pe.edu.upeu.application.dao.PresupuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
@@ -42,10 +43,10 @@ public class CPresupuesto extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession(true);
         //int opc = Integer.parseInt(request.getParameter("opc"));
         String opc = request.getParameter("opc");
-        String idArea = "";
-        String id;
+        String idDestino,id,ccosto ;
         int tipo;
         switch (opc) {
             case "gest":
@@ -56,33 +57,44 @@ public class CPresupuesto extends HttpServlet {
                 break;
             case "reg":
                 Map<String, Object> c = new HashMap<>();
-                idArea = request.getParameter("idA");
-                double PA = Double.parseDouble(request.getParameter("PA"));
+                idDestino = request.getParameter("idDes");
+                ccosto = request.getParameter("idCC");
+                int SB = Integer.parseInt(request.getParameter("SB"));
+                int AF = Integer.parseInt(request.getParameter("AF"));
+                int BA = Integer.parseInt(request.getParameter("BA"));
+                int BO = Integer.parseInt(request.getParameter("BO"));
                 int NT = Integer.parseInt(request.getParameter("NT"));
                 String f_inicio = request.getParameter("f_i");
                 String f_fin = request.getParameter("f_fin");
-                c.put("idA", idArea);
-                c.put("PA", PA);
+                String tip = request.getParameter("tipo");
+                c.put("idDes", idDestino);
+                c.put("SB", SB);
                 c.put("NT", NT);
                 c.put("f_i", f_inicio);
                 c.put("f_fin", f_fin);
+                c.put("idUSER", session.getAttribute("IDUSER"));
+                c.put("AF", AF);
+                c.put("BA", BA);
+                c.put("BO", BO);
+                c.put("idCC", ccosto);
+                c.put("tipo", tip);
                 rpta.put("rpta", pD.Reg_PresupuestoArea(c));
                 break;
             case "comp":
-                idArea = request.getParameter("idArea");
-                rpta.put("datos", pD.comprobar(idArea));
+                idDestino = request.getParameter("idDes");
+                rpta.put("datos", pD.comprobar(idDestino));
                 break;
             case "actual":
-                idArea = request.getParameter("idArea");
-                rpta.put("datos", pD.dataPresupuesto(idArea));
+                idDestino = request.getParameter("idDes");
+                rpta.put("datos", pD.dataPresupuesto(idDestino));
                 break;
             case "listActual":
-                idArea = request.getParameter("idArea");
-                rpta.put("datos", pD.pActual(idArea));
+                idDestino = request.getParameter("idDes");
+                rpta.put("datos", pD.pActual(idDestino));
                 break;
             case "status":
-                idArea = request.getParameter("idArea");
-                rpta.put("datos", pD.statusPresupuesto(idArea));
+                idDestino = request.getParameter("idDes");
+                rpta.put("rpta", pD.statusPresupuesto(idDestino));
                 break;
             case "ccosto":
                 id = request.getParameter("id");

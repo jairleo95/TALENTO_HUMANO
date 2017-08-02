@@ -4,10 +4,10 @@ $(document).ready(function () {
     $("#vcont").append(createContentAsignar());
     $("#estOPC").attr("value", "anual");
     var a = getFechaInit();
+    $("#fe_i").attr("min", a);
     getFechaAnual(a);
     init();
 });
-
 //CONTENEDORES DE FORMULARIOS
 
 function createContentAsignar() {
@@ -43,12 +43,12 @@ function createContentAsignar() {
     s += '</div>';
     s += '<div class="form-group col-md-4 col-xs-12" >';
     s += '<label class="text-success">Centro de Costos :</label><br>';
-    s += '<select class="form-control select_cc" >';
+    s += '<select class="form-control select_cc" disabled>';
     s += '<option value="" selected disabled>[Seleccione]</option>';
     s += '</select>';
     s += '</div>';
     s += '</div>';
-    s += '<input type="hidden" id="iArea">';
+    s += '<input type="hidden" id="iDestino">';
     s += '</fieldset>';
     s += '<fieldset>';
     s += '<legend class="text-primary">';
@@ -129,16 +129,14 @@ function createContentAsignar() {
     s += '<div class="row">';
     s += '<div class="col-md-12">';
     s += '<div class="col-md-4"></div>';
-    s += '<button class="btn btn-primary btn-lg col-md-4" type="button" onclick="saveB()" id="sbu" disabled data-toggle="modal" data-target="#dataModal">';
+    s += '<button class="btn btn-primary btn-lg col-md-4" type="button" onclick="saveB()" id="sbu" disabled>';
     s += 'Registrar';
     s += '</button>';
     s += '<div class="col-md-4"></div>';
     s += '</div>';
     s += '</div>';
     s += '</div>';
-
     s += '</form>';
-
     s += '</div>';
     s += '</div>';
     return s;
@@ -150,37 +148,43 @@ function createContentEdit() {
     s += '<div class="panel-body">';
     s += '<form class="">';
     s += '<fieldset>';
-    s += '<legend>';
-    s += 'Seleccionar Área';
+    s += '<legend class="text-success">';
+    s += 'Destino de Presupuesto';
     s += '</legend>';
     s += '<div class="row">';
     s += '<div class="form-group col-md-4 col-xs-12" >';
-    s += '<label>Dirección :</label><br>';
+    s += '<label class="text-success">Dirección :</label><br>';
     s += '<select class="form-control select_direccion" >';
     s += '<option value="" selected disabled>[Seleccione]</option>';
     s += '</select>';
     s += '</div>';
     s += '<div class="form-group col-md-4 col-xs-12" >';
-    s += '<label>Departamento :</label><br>';
+    s += '<label class="text-success">Departamento :</label><br>';
     s += '<select class="form-control select_dep" >';
     s += '<option value="" selected disabled>[Seleccione]</option>';
     s += '</select>';
     s += '</div>';
     s += '<div class="form-group col-md-4 col-xs-12" >';
-    s += '<label>Área :</label><br>';
+    s += '<label class="text-success">Área :</label><br>';
     s += '<select class="form-control select_area" >';
     s += '<option value="" selected disabled>[Seleccione]</option>';
     s += '</select>';
     s += '</div>';
+    s += '<div class="form-group col-md-4 col-xs-12" >';
+    s += '<label class="text-success">Centro de Costos :</label><br>';
+    s += '<select class="form-control select_cc" disabled>';
+    s += '<option value="" selected disabled>[Seleccione]</option>';
+    s += '</select>';
     s += '</div>';
-    s += '<input type="hidden" id="iArea">';
+    s += '</div>';
+    s += '<input type="hidden" id="iDestino">';
     s += '</fieldset>';
     s += '<div id="contH">';
     s += '<fieldset>';
-    s += '<legend>';
+    s += '<legend class="text-primary">';
     s += 'Gestión de Presupuesto';
     s += '</legend>';
-    s += '<div class="row">';
+    s += '<div class="row" style="margin-left:1%">';
     s += '<ul class="nav nav-pills">';
     s += '<li role="presentation" onclick="ch(this.id)" id="anual" class="se active"><a style="cursor: pointer">Anual</a></li>';
     s += '<li role="presentation" onclick="ch(this.id)" id="mensual" class="se"><a style="cursor: pointer">Mensual</a></li>';
@@ -200,28 +204,54 @@ function createContentEdit() {
     s += '</div>';
     s += '</div>';
     s += '<div class="form-group col-md-6 col-xs-12">';
-    s += '<label>Presupuesto:</label><br>';
-
-    s += '<div class="alert alert-warning" role="alert">';
-    s += '<a class="alert-link" id="alpre"></a>';
-    s += '</div>';
-
+    s += '<div class="form-group col-md-6 col-xs-12">';
+    s += '<label>Sueldo Basico:</label><br>';
     s += '<div class="input-group ">';
     s += '<div class="input-group-addon">$</div>';
-    s += '<input type="number" name="sueldo" class="form-control" maxlength="10" min="0" id="ipre" value="" placeholder="Ingrese el Presupuesto para esta área">';
+    s += '<input type="number" name="sueldo" class="form-control SP" maxlength="10" min="0" id="ipreA" onkeyup="suma()" placeholder="Presupuesto para los Sueldos">';
     s += '<div class="input-group-addon">.00</div>';
     s += '</div>';
     s += '</div>';
     s += '<div class="form-group col-md-6 col-xs-12">';
-    s += '<label>N° de Trabajadores :</label><br>';
-
-    s += '<div class="alert alert-warning" role="alert">';
-    s += '<a class="alert-link" id="altra"></a>';
+    s += '<label>Asignacion Familiar:</label><br>';
+    s += '<div class="input-group ">';
+    s += '<div class="input-group-addon">$</div>';
+    s += '<input type="number" name="sueldo" class="form-control SP" maxlength="10" min="0" id="ipreB" onkeyup="suma()" placeholder="Ingrese el Presupuesto para esta área">';
+    s += '<div class="input-group-addon">.00</div>';
     s += '</div>';
-
+    s += '</div>';
+    s += '<div class="form-group col-md-6 col-xs-12">';
+    s += '<label>Bono Alimentario:</label><br>';
+    s += '<div class="input-group ">';
+    s += '<div class="input-group-addon">$</div>';
+    s += '<input type="number" name="sueldo" class="form-control SP" maxlength="10" min="0" id="ipreC" onkeyup="suma()"  placeholder="Presupuesto para los Sueldos">';
+    s += '<div class="input-group-addon">.00</div>';
+    s += '</div>';
+    s += '</div>';
+    s += '<div class="form-group col-md-6 col-xs-12">';
+    s += '<label>Bonificacion:</label><br>';
+    s += '<div class="input-group ">';
+    s += '<div class="input-group-addon">$</div>';
+    s += '<input type="number" name="sueldo" class="form-control SP" maxlength="10" min="0" id="ipreD" onkeyup="suma()"  placeholder="Ingrese el Presupuesto para esta área">';
+    s += '<div class="input-group-addon">.00</div>';
+    s += '</div>';
+    s += '</div>';
+    s += '<div class="form-group col-md-12 col-xs-12">';
+    s += '<label>Presupuesto General:</label><br>';
+    s += '<div class="input-group ">';
+    s += '<div class="input-group-addon">$</div>';
+    s += '<input type="number" name="sueldo" class="form-control" maxlength="10" min="0" id="ipret" value="" placeholder="Ingrese el Presupuesto para esta área" disabled>';
+    s += '<div class="input-group-addon">.00</div>';
+    s += '</div>';
+    s += '</div>';
+    s += '</div>';
+    s += '<div class="form-group col-md-6 col-xs-12">';
+    s += '<div class="form-group col-md-12 col-xs-12">';
+    s += '<label>N° de Trabajadores :</label><br>';
     s += '<div class="input-group">';
-    s += '<div class="input-group-addon"><i class="glyphicon glyphicon-user"></i></div>';
+    s += '<div class="input-group-addon"><i class="fa fa-users"></i></div>';
     s += '<input type="number"  class="form-control" id="intr" placeholder="Ingrese el número de trabajadores de esta área">';
+    s += '</div>';
     s += '</div>';
     s += '</div>';
     s += '</fieldset>';
@@ -229,11 +259,10 @@ function createContentEdit() {
     s += '<div class="row">';
     s += '<div class="col-md-12">';
     s += '<div class="col-md-4"></div>';
-    s += '<button class="btn btn-success btn-lg col-md-4" type="button" onclick="saveS()">';
-    s += 'Actualizar';
+    s += '<button class="btn btn-primary btn-lg col-md-4" type="button" onclick="saveB()" id="sbu" disabled>';
+    s += 'Registrar';
     s += '</button>';
     s += '<div class="col-md-4"></div>';
-    s += '</div>';
     s += '</div>';
     s += '</div>';
     s += '</div>';
@@ -273,7 +302,7 @@ function createContentReport() {
     s += '</select>';
     s += '</div>';
     s += '</div>';
-    s += '<input type="hidden" id="iArea">';
+    s += '<input type="hidden" id="iDestino">';
     s += '</fieldset>';
     s += '</form>';
     s += '</div>';
@@ -405,25 +434,53 @@ function convertir_fecha(fecha) {
 }
 
 //REGISTRAR PRESUPUESTO
-//CAMBIAAAAR
 function saveB() {
-    var idArea = $("#iArea").val();
-    var presupuesto = $("#ipret").val();
+    var tipo = $("#tipo_p").val();
+    var idDestino = "";
+    if (tipo === "1") {
+        idDestino = $("#iDestino").val();
+    }
+    if (tipo === "2") {
+        idDestino = $("#iDestino").val();
+    }
+    var cc = $("#id_cc").val();
+    //var presupuesto = $("#ipret").val();
     var trabajadores = $("#intr").val();
     var f_inicio = $("#fe_i").val();
     var f_fin = $("#fe_fin").val();
-    if (idArea !== "" && presupuesto !== "" && trabajadores !== "" && f_inicio !== "" && f_fin) {
-        //Confirmar
+    if (idDestino !== "" && trabajadores !== "" && f_inicio !== "" && f_fin !== "" && cc !== "") {
+//Confirmar
         var confirmar = confirm("¿Está seguro que desea registrar este presupuesto?");
         if (confirmar) {
+            var iA = $("#ipreA").val();
+            var iB = $("#ipreB").val();
+            var iC = $("#ipreC").val();
+            var iD = $("#ipreD").val();
+            if (iA === "") {
+                iA = 0;
+            }
+            if (iB === "") {
+                iB = 0;
+            }
+            if (iC === "") {
+                iC = 0;
+            }
+            if (iD === "") {
+                iD = 0;
+            }
             var f_i = convertir_fecha(f_inicio);
             var f_f = convertir_fecha(f_fin);
             var url = '../../pres?opc=reg';
-            var data = 'idA=' + idArea;
-            data += '&PA=' + presupuesto;
+            var data = 'idDes=' + idDestino;
             data += '&NT=' + trabajadores;
             data += '&f_i=' + f_i;
             data += '&f_fin=' + f_f;
+            data += '&SB=' + iA;
+            data += '&AF=' + iB;
+            data += '&BA=' + iC;
+            data += '&BO=' + iD;
+            data += '&idCC=' + cc;
+            data += '&tipo=' + tipo;
             $.post(url, data, function (objJson) {
                 if (objJson.rpta) {
                     dyn_notice();
@@ -466,7 +523,6 @@ function dyn_notice() {
         shadow: true,
         width: "300px"
     });
-
     setTimeout(function () {
         notice.update({
             title: false
@@ -506,15 +562,15 @@ function listar_opciones(opc, id) {
         var a = $(".select_direccion");
         $(".select_dep").empty();
         $(".select_dep").append("<option value=''>[Seleccione]</option>");
-        $(".selectarea").empty();
-        $(".selectarea").append("<option value=''>[Seleccione]</option>");
+        $(".select_area").empty();
+        $(".select_area").append("<option value=''>[Seleccione]</option>");
         a.empty();
         a.append("<option value=''>[Seleccione]</option>");
     }
     if (opc == 'Listar_dir_dep') {
         var a = $(".select_dep");
-        $(".selectarea").empty();
-        $(".selectarea").append("<option value=''>[Seleccione]</option>");
+        $(".select_area").empty();
+        $(".select_area").append("<option value=''>[Seleccione]</option>");
         ap = "&id=" + id;
         a.empty();
         a.append("<option value=''>[Seleccione]</option>");
@@ -546,104 +602,129 @@ function init() {
         var opc = 'Listar_area2';
         var id = $(".select_dep").val();
         listar_opciones(opc, id);
-        listCCostos(id, "dep");
-    });
-    $(".select_area").change(function () {
-        var id = $(".select_area").val();
-        $("#iArea").attr("value", id);
+        $("#iDestino").attr("value", id);
+        $("#tipo_p").attr("value", 2);
         if ($("#vopt").val() === "2") {
             listarActualPresupuesto(id);
         }
         if ($("#vopt").val() === "1") {
-            listCCostos(id, "area");
-            statusPresupuesto(id);
+            statusPresupuesto(id, "dep");
         }
+    });
+    $(".select_area").change(function () {
+        var id = $(".select_area").val();
+        $("#iDestino").attr("value", id);
+        $("#tipo_p").attr("value", 1);
+        if ($("#vopt").val() === "2") {
+            listarActualPresupuesto(id);
+        }
+        if ($("#vopt").val() === "1") {
+            statusPresupuesto(id, "area");
+        }
+    });
+    $(".select_cc").change(function () {
+        var id = $(".select_cc").val();
+        $("#id_cc").attr("value", id);
+        jQuery("#sbu").removeAttr("disabled");
     });
 }
 
 //DATOS ACTUALES
 
-function listarActualPresupuesto(idArea) {
+function listarActualPresupuesto(id) {
     var url = '../../pres?opc=listActual';
-    var data = 'idArea=' + idArea;
+    var data = 'idDes=' + id;
     $.post(url, data, function (objJson) {
         var datos = objJson.datos;
-        var pres_ac = 0;
-        var n_trab = 0;
-        var tr = 0;
-        var monto_i = 0;
+        var sbgeneral = 0;//sueldo basico inicial
+        var afgeneral = 0;//asignacion familiar inicial
+        var bageneral = 0;//bono alimentario inicial
+        var bogeneral = 0;//bonificacion inicial
+        var monto_i = 0;//MONTO TOTAL INICIAL
+        var trab = 0;//Numero de trabajadores inicialmente
+
+        var sbacum = 0;//sueldo basico acumulado
+        var afacum = 0;//asignacion familiar acumulado
+        var baacum = 0;//bono alimentario acumulado
+        var boacum = 0;//bonificacion acumulado
+        var monacum = 0;//MONTO TOTAL acumulado
+        var tracum = 0;//Numero de trabajadores acumulado
+
         if (datos.length > 0) {
+
             $("#contH").show();
+
             var f_f = datos[0].fe_hasta.split(" ");
             var f_i = datos[0].fe_desde.split(" ");
             $("#fe_fin").attr("value", f_f[0]);
             $("#fe_i").attr("value", f_i[0]);
-            monto_i = parseInt(datos[0].saldo);
-            var trab = parseInt(datos[0].n_trabajadores);
-            for (var i = 0; i < datos.length; i++) {
-                var ca = 0;
-                var monto_ac = datos[i].monto;
-                var op = datos[i].operacion;
-                if (parseInt(op) === 1) {
-                    ca = parseFloat(monto_ac);
+            sbgeneral = parseInt(datos[0].sbgeneral);
+            afgeneral = parseInt(datos[0].afgeneral);
+            bageneral = parseInt(datos[0].bageneral);
+            bogeneral = parseInt(datos[0].bogeneral);
+            monto_i = sbgeneral + afgeneral + bageneral + bogeneral;
+            trab = parseInt(datos[0].n_trabajadores);
+
+            opcCCDefault(datos[0].iddestino, datos[0].idccosto, datos[0].tipo);
+
+            if (datos.length > 1) {
+
+                for (var i = 0, max = datos.length; i < max; i++) {
+                    if (datos[i].operacion === 2 && datos[i].mtrabajador === 1) {
+                        //Calculo de Sueldo Basico                    
+                        sbacum = sbacum + parseInt(datos[i].sbdet);
+                        //Calculo de Asignacion Familiar
+                        afacum = afacum + parseInt(datos[i].afdet);
+                        //Calculo de Bono Alimentario
+                        baacum = baacum + parseInt(datos[i].badet);
+                        //Calculo de Bonificacion
+                        boacum = boacum + parseInt(datos[i].bodet);
+
+                        tracum = tracum + 1;
+                    }
                 }
-                if (parseInt(op) === 2) {
-                    ca = parseFloat(monto_ac) * (-1);
-                }
-                pres_ac = monto_i + ca;
-                if (datos[i].operacion === "2" && datos[i].mtrabajador === "1") {
-                    n_trab = n_trab + 1;
-                }
-                tr = parseInt(trab) - n_trab;
+                monacum = sbacum + afacum + baacum + boacum;
+                var mt = monto_i - monacum;
+                var tt = trab - tracum;
+                $("#ipret").attr("value", mt);
+                $("#intr").attr("value", tt);
+
+            } else {//No se ha modificado el presupuesto inicial
+                $("#ipreA").attr("value", sbgeneral);
+                $("#ipreB").attr("value", afgeneral);
+                $("#ipreC").attr("value", bageneral);
+                $("#ipreD").attr("value", bogeneral);
+                $("#ipret").attr("value", monto_i);
+                $("#intr").attr("value", trab);
             }
-            if (pres_ac === parseFloat(monto_i)) {
-                $("#alpre").empty();
-                $("#alpre").append("Aún no se ha usado el Presupuesto de esta área");
-                $("#ipre").attr("value", pres_ac);
-            } else {
-                $("#alpre").empty();
-                $("#alpre").append("$ " + ca * (-1) + " usados del presupuesto Inicial de $ " + monto_i);
-                $("#ipre").attr("value", pres_ac);
-            }
-            if (parseInt(tr) === parseInt(trab)) {
-                $("#altra").empty();
-                $("#altra").append("Aún no se ha contratado trabajadores con el presupuesto de esta área");
-                $("#intr").attr("value", tr);
-            } else {
-                $("#altra").empty();
-                if (parseInt(n_trab) > 1) {
-                    $("#altra").append(n_trab + " trabajadores contratados de " + trab + " presupuestados Inicialmente");
-                } else {
-                    $("#altra").append(n_trab + " trabajador contratado de " + trab + " presupuestados Inicialmente");
-                }
-                $("#intr").attr("value", tr);
-            }
+
         } else {
             $("#contH").hide();
             new PNotify({
-                title: 'Área No Presupuestada',
-                text: 'Esta Área aún no se ha presupuestado',
-                type: 'warning'
+                title: 'No Presupuestada',
+                text: 'Este Departamento/Area no está presupuestado',
+                type: 'info'
             });
+
         }
     });
 }
 
 //PRESUPUESTO ACTIVO
 
-function statusPresupuesto(idArea) {
+function statusPresupuesto(idDestino, tipo) {
     var url = '../../pres?opc=status';
-    var data = 'idArea=' + idArea;
+    var data = 'idDes=' + idDestino;
     $.post(url, data, function (objJson) {
-        if (objJson.datos) {
-            $("#sbu").attr("disabled", "disabled");
+        if (objJson.rpta) {
             new PNotify({
-                title: 'Área Presupuestada',
-                text: 'Hay un Presupuesto Activo en esta Area',
+                title: 'Presupuesto activo',
+                text: 'Ya se tiene un presupuesto activo en este Destino',
                 type: 'info'
             });
+            $(".select_cc").attr("disabled", "");
         } else {
-            jQuery("#sbu").removeAttr("disabled");
+            listCCostos(idDestino, tipo);
         }
     });
 }
@@ -651,7 +732,7 @@ function statusPresupuesto(idArea) {
 //ACTUALIZAR PRESUPUESTO
 
 function saveS() {
-    var idArea = $("#iArea").val();
+    var idArea = $("#iDestino").val();
     var presupuesto = $("#ipre").val();
     var trabajadores = $("#intr").val();
     var f_inicio = $("#fe_i").val();
@@ -694,12 +775,12 @@ function listCCostos(id, tipo) {
     var data = '';
     if (tipo === "dep") {
         data += 'id=' + id;
-        data += '&tipo=1';
+        data += '&tipo=2';
         text = 'Este Departamento ';
     }
     if (tipo === "area") {
         data += 'id=' + id;
-        data += '&tipo=2';
+        data += '&tipo=1';
         text = 'Esta Area ';
     }
     $.post(url, data, function (objJson) {
@@ -713,7 +794,8 @@ function listCCostos(id, tipo) {
                 a.append("<option value='" + lista[i].idccosto + "'>" + lista[i].denominacion + "</option>");
             }
         } else {
-            a.attr("disabled","");
+            a.empty();
+            a.append("<option value=''>[Seleccione]</option>");
             new PNotify({
                 title: 'No hay Centros de Costo',
                 text: text + 'no tiene centros de costos disponibles',
@@ -721,6 +803,45 @@ function listCCostos(id, tipo) {
             });
         }
     });
-
-
 }
+
+function opcCCDefault(id, idCC, tipo) {
+    var url = '../../pres?opc=ccosto';
+    var data = '';
+    if (tipo === "2") {
+        data += 'id=' + id;
+        data += '&tipo=2';
+    }
+    if (tipo === "1") {
+        data += 'id=' + id;
+        data += '&tipo=1';
+    }
+    $.post(url, data, function (objJson) {
+        var a = $(".select_cc");
+        var lista = objJson.datos;
+        if (lista.length > 0) {
+            jQuery(".select_cc").removeAttr("disabled");
+            a.empty();
+            a.append("<option value=''>[Seleccione]</option>");
+
+            for (var i = 0; i < lista.length; i++) {
+                if (lista[i].idccosto === idCC) {
+                    a.append("<option value='" + lista[i].idccosto + "' selected>" + lista[i].denominacion + "</option>");
+                } else {
+                    a.append("<option value='" + lista[i].idccosto + "'>" + lista[i].denominacion + "</option>");
+                }
+            }
+            jQuery("#sbu").removeAttr("disabled");
+        } else {
+            a.empty();
+            a.append("<option value=''>[Seleccione]</option>");
+            new PNotify({
+                title: 'No hay Centros de Costo',
+                text: 'no tiene centros de costos disponibles',
+                type: 'info'
+            });
+            $("#sbu").attr("disabled", "");
+        }
+    });
+}
+
