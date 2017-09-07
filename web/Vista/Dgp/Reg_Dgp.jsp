@@ -161,6 +161,7 @@
                                                             id = tr.getId_trabajador();
                                                     %>
                                                     <input  type="hidden" class="idtr" value="<%=id%>"/>
+                                                    
                                                     <div class="row">
 
                                                         <input value= "<%=tr.getId_trabajador()%>"  type="hidden" id="" />
@@ -791,6 +792,7 @@
 
                             </article>
                             <!-- END COL -->
+                            <input type="hidden" name="idDes" id="idDestino" value="">
                             <input type="hidden" name="opc"  class="submit" value="Registrar">
                         </form>
                     </div>

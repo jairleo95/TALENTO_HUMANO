@@ -533,6 +533,8 @@ function RegDGPAditionalPermissions() {
                     list_select($(".select-area"), "../../Direccion_Puesto", "opc=Listar_area2&id=" + $(".selectDepartamento").val(), "3");
                     $(".select-area .select-seccion,.select-puesto").val("");
                     $(".chosen-select").trigger("chosen:updated");
+                    //evaluar presupuesto de Departamento
+                    //evaluarPresupuesto($(".selectDepartamento").val());
                 });
                 initJobsFilters(data.filterAnyJobs);
             } else {
@@ -543,84 +545,90 @@ function RegDGPAditionalPermissions() {
     });
 }
 
-function evaluarPresupuesto(idArea) {
-    var pmonto = 0;
-    var pntra = 0;
-    var url = '../../pres?opc=comp';
-    var data = 'idArea=' + idArea;
-    $.post(url, data, function (objJson) {
-        var tipo = "";
-        var mensaje = "";
-        var d = objJson.datos;
-        if (d.length > 0) {
-            pmonto = d[0].monto;//monto presupuestado
-            pntra = d[0].ntrabajadores;//trabajadores presupuestados
-        } else {
-            pmonto = 0;
-            pntra = 0;
-        }
+
+function evaluarPresupuesto(idDestino) {
+    $("#idDestino").attr("value",idDestino);
+    try {
         var psaldo = 0;
         var psntra = 0;
         var url = '../../pres?opc=actual';
-        var data = 'idArea=' + idArea;
+        var data = 'idDes=' + idDestino;
         $.post(url, data, function (objJson) {
+            var tipo = "";
+            var mensaje = "";
             var d = objJson.datos;
             if (d.length > 0) {
-                psaldo = d[0].saldo;//saldo actual
-                psntra = d[0].ntrabajadores;//trabajadores actuales
-            } else {
-                psaldo = 0;
-                psntra = 0;
-            }
-            var pt = 0;
-            //var rm = 0;
-            if (pmonto !== 0 && pntra !== 0) {
-                //rm = psaldo - pmonto;
-                pt = psntra / pntra;
-                pt = pt * 100;
-                if (0 <= pt && pt < 25) {
-                    tipo = "success";
-                }
-                if (25 < pt && pt < 50) {
-                    tipo = "info";
-                }
-                if (50 < pt && pt < 75) {
-                    tipo = "warning";
-                }
-                if (75 < pt && pt <= 100) {
-                    tipo = "danger";
-                }
-                mensaje = "<strong>" + psntra + "</strong> trabajadores contratados de <strong>" + pntra + "</strong> presupuestados en esta Area";
-                mensaje += "<br/><strong>$ " + psaldo + "</strong> restantes en el presupuesto anual de esta Area";
-            } else {
+                psaldo = d[0].sbasico + d[0].afamiliar + d[0].bonoal + d[0].bonificacion; //saldo presupuestado
+                psntra = d[0].ntrabajadores; //trabajadores presupuestados
+                var pt = 0;
+                //constratos realizados
+                var pmonto = 0;
+                var pntra = 0;
+                var url = '../../pres?opc=comp';
+                var data = 'idDes=' + idDestino;
+                $.post(url, data, function (objJson) {
+                    var dinero = 0;
+                    var s = objJson.datos;
+                    pmonto = s[0].monto; //monto gastado
+                    pntra = s[0].ntrabajadores; //trabajadores contratados
+                    if (pmonto !== 0 & pntra !== 0) {//Presupuesto usado
+
+                        pt = pntra / psntra;
+                        pt = pt * 100;
+                        if (0 <= pt && pt < 25) {
+                            tipo = "success";
+                        }
+                        if (25 < pt && pt < 50) {
+                            tipo = "info";
+                        }
+                        if (50 < pt && pt < 75) {
+                            tipo = "warning";
+                        }
+                        if (75 < pt && pt <= 100) {
+                            tipo = "danger";
+                        }
+                        dinero = pmonto;
+
+                    } else {//Presupuestado pero no usado
+                        tipo = "success";
+                        pt = 100;
+                        dinero = psaldo;
+                    }
+                    mensaje = "<strong>" + pntra + "</strong> trabajadores contratados de <strong>" + psntra + "</strong> presupuestados en esta Area";
+                    mensaje += "<br/><strong>$ " + dinero + "</strong> disponibles en el presupuesto de esta Area";
+                    createAlert(mensaje, pt, tipo);
+                });
+            } else {//No Presupuestado
                 tipo = "danger";
-                mensaje = "No se ha presupuestado esta Area";
-                pt = 1;
+                mensaje = "No se ha presupuestado este Destino";
+                pt = 0;
+                createAlert(mensaje, pt, tipo);
             }
-            $("#presC").empty();
-            $("#presC").attr("class", "alert alert-" + tipo + " col-sm-12 col-md-12 col-lg-6");
-            $("#presC").append(createAlert(pt, tipo));
-            $("#contMen").empty();
-            $("#contMen").append(mensaje);
-            //$("#")
+
         });
-        console.log("asda");
-    });
+    } catch (e) {
+        console.error("Error al evaluar presupuesto" + e);
+    }
 }
 
-function createAlert(por, tipo) {
+function createAlert(mensaje, por, tipo) {
     var s = '<div class="col-md-12" id="contAll">';
     s += '<div class="col-md-6" id="contMen">';
+    s += mensaje;
     s += '</div>';
     s += '<div class="col-md-6" id="contBar">';
     s += '<div class="progress">';
     s += '<div class="progress-bar progress-bar-' + tipo + ' progress-bar-striped active" role="progressbar" aria-valuenow="' + por + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + por + '%">';
-    s += Math.round(por) +"%";
+    s += Math.round(por) + "%";
     s += '</div>';
     s += '</div>';
     s += '</div>';
     s += '</div>';
-    return s;
+
+    $("#presC").empty();
+    $("#presC").attr("class", "alert alert-" + tipo + " col-sm-12 col-md-12 col-lg-6");
+    $("#presC").append(s);
+
 }
 
 function createLoader(load) {
@@ -682,7 +690,6 @@ $(document).ready(function () {
     var t = $(".alert_1");
     listar_mensaje_plazo("1", t, s);
     var lista_dgp = $(".btn-list-req");
-
     $.post("../../dgp", "opc=Listar_Req&idtr=" + $(".id_tr").val(), function (objJson) {
         if (objJson.rpta === -1) {
             alert(objJson.mensaje);
@@ -742,17 +749,15 @@ $(document).ready(function () {
             $(this).val("");
         }
     });
-
     $(".feInicioDgp").change(function () {
         var fecha = $(this).val();
         AlertCumplimientoPlazo_Fecha(fecha);
     });
-
     $('#checkout-form').validate({
 // Rules for form validation
         rules: {
             FEC_DESDE: {
-                //  val_fecha: true
+//  val_fecha: true
             },
             FEC_HASTA: {
                 //   val_fecha: true
@@ -844,7 +849,6 @@ $(document).ready(function () {
         $("#div_3").show();
     }
     listar_tipo_horario();
-
     $("#no_cuen").hide();
     $("#no_cuen_ban").hide();
     $("#generar").hide();

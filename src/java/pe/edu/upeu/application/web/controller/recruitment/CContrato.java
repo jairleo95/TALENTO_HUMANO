@@ -28,6 +28,7 @@ import pe.edu.upeu.application.dao.GrupoOcupacionesDAO;
 import pe.edu.upeu.application.dao.HorarioDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.PlantillaDAO;
+import pe.edu.upeu.application.dao.PresupuestoDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.SeccionDAO;
 import pe.edu.upeu.application.dao.Sub_ModalidadDAO;
@@ -47,6 +48,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceGrupo_ocupacionesDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlantillaDAO;
+import pe.edu.upeu.application.dao_imp.InterfacePresupuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSub_ModalidadDAO;
@@ -91,6 +93,7 @@ public class CContrato extends HttpServlet {
     InterfaceSub_ModalidadDAO sub = new Sub_ModalidadDAO();
     InterfaceDocumentoDAO doc = new DocumentoDAO();
     InterfaceFuncionDAO fu = new FuncionDAO();
+    InterfacePresupuestoDAO pd=new PresupuestoDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -507,6 +510,19 @@ public class CContrato extends HttpServlet {
                         NU_CONTRATO, DE_OBSERVACION, ES_APOYO, TI_HORA_PAGO, NU_DOCUMENTO, ES_ENTREGAR_DOC_REGLAMENTOS, ES_REGISTRO_HUELLA, DE_REGISTRO_SISTEM_REMU, ID_TRABAJADOR,
                         CA_SUELDO_TOTAL, ID_REGIMEN_LABORAL, ID_MODALIDAD, ID_SUB_MODALIDAD, CO_GR_OCUPACION, FE_SUSCRIPCION, CO_TI_MONEDA, CO_TI_REM_VARIAB, DE_REMU_ESPECIE, DE_RUC_EMP_TRAB,
                         CO_SUCURSAL, DE_MYPE, ES_TI_CONTRATACION, CA_BEV, ID_TIPO_PLANILLA, ES_REMUNERACION_PROCESADO, ID_HORARIO, ID_PLANTILLA_CONTRACTUAL, ca_bonificacion_p, ES_MFL, PRACTICANTE, situacionEspecial);
+                /*Disminucion de Presupuesto al contratar*/
+                /*Map<String, Object> s = new HashMap<>();
+                String idDestino = request.getParameter("idDes");
+                s.put("idDes", idDestino);
+                s.put("SB", CA_SUELDO);
+                s.put("idUSER", sesion.getAttribute("IDUSER"));
+                s.put("AF", CA_ASIG_FAMILIAR);
+                s.put("BA", CA_BONO_ALIMENTO);
+                s.put("BO", ca_bonificacion_p);
+                s.put("idtr", ID_TRABAJADOR);
+                pd.Reg_DetPresupuesto(s);*/
+                
+                
                 String idtr1 = ID_TRABAJADOR;
                 String id_cto = con.Contrato_max(idtr1);
                 /*Modificar Centro de Costo*/

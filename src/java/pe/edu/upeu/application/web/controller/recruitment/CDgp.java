@@ -34,6 +34,7 @@ import pe.edu.upeu.application.dao.HorarioDAO;
 import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.Periodo_PagoDAO;
 import pe.edu.upeu.application.dao.Plazo_DgpDAO;
+import pe.edu.upeu.application.dao.PresupuestoDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.RequerimientoDAO;
 import pe.edu.upeu.application.dao.TrabajadorDAO;
@@ -53,6 +54,7 @@ import pe.edu.upeu.application.dao_imp.InterfaceHorarioDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePeriodo_PagoDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePlazo_DgpDAO;
+import pe.edu.upeu.application.dao_imp.InterfacePresupuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceRequerimientoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceTrabajadorDAO;
@@ -113,6 +115,7 @@ public class CDgp extends HttpServlet {
         InterfaceUsuarioDAO usu = new UsuarioDAO();
         InterfaceDireccionDAO dir = new DireccionDAO();
         InterfacePeriodo_PagoDAO pp = new Periodo_PagoDAO();
+        InterfacePresupuestoDAO pd=new PresupuestoDAO();
         /*Permisoss*/
         boolean permisoAdmin = false;
         boolean permissionDireccionFilter = false;

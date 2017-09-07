@@ -61,7 +61,35 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     }
 
     @Override
-    public ArrayList<Map<String, ?>> comprobar(String idArea) {
+    public boolean Reg_DetPresupuesto(Object s) {
+        boolean p = false;
+        sql = "INSERT into DETPRESUPUESTO values (null,?,sysdate(),?,2,?,?,?,?,?)";
+        Map<String, Object> m = (Map<String, Object>) s;
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareCall(sql);
+            ps.setString(1, m.get("idDes").toString());
+            ps.setString(2, m.get("idUSER").toString());
+            ps.setString(3, m.get("idtr").toString());
+            ps.setInt(4, Integer.parseInt(m.get("SB").toString()));
+            ps.setInt(5, Integer.parseInt(m.get("AF").toString()));
+            ps.setInt(6, Integer.parseInt(m.get("BA").toString()));
+            ps.setInt(7, Integer.parseInt(m.get("BO").toString()));
+            int r = ps.executeUpdate();
+            if (r > 0) {
+                p = true;
+            }
+        } catch (SQLException | NumberFormatException e) {
+            System.out.println("Error al agregar DETPresupuesto " + e);
+            p = false;
+        } finally {
+            this.cnn.close();
+        }
+        return p;
+    }
+
+    @Override
+    public ArrayList<Map<String, ?>> comprobar(String idDestino) { //cambiar esta consulta
         sql = "select count(dgp.ID_TRABAJADOR) ntr,sum(dgp.CA_SUELDO*12) nsu "
                 + "from rhtm_contrato rc,rhtm_dgp dgp,rhtr_puesto rp,rhtr_seccion rs,rhtd_area ra,presupuesto pr "
                 + "where dgp.ID_DGP=rc.ID_DGP "
@@ -70,13 +98,12 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
                 + "and rs.ID_AREA=ra.ID_AREA "
                 + "and pr.FE_DESDE < rc.FE_DESDE "
                 + "and pr.FE_HASTA > rc.FE_HASTA "
-                + "and pr.IDAREA=ra.ID_AREA "
-                + "and ra.ID_AREA=? ";
+                + "and pr.IDDESTINO=?";
         ArrayList<Map<String, ?>> lista = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             ps = this.cnn.conex.prepareStatement(sql);
-            ps.setString(1, idArea);
+            ps.setString(1, idDestino);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Map<String, Object> m = new HashMap<>();
@@ -94,7 +121,7 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
 
     @Override
     public ArrayList<Map<String, ?>> dataPresupuesto(String idDestino) {
-        sql = "select * from PRESUPUESTO where  sysdate BETWEEN FE_DESDE  and F_HASTA and IDDESTINO=?";
+        sql = "select * from PRESUPUESTO where  sysdate BETWEEN FE_DESDE  and FE_HASTA and IDDESTINO=? and ESTADO=1";
         ArrayList<Map<String, ?>> lista = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -104,7 +131,10 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
             while (rs.next()) {
                 Map<String, Object> m = new HashMap<>();
                 m.put("ntrabajadores", rs.getInt("n_trabajadores"));
-                m.put("saldo", rs.getDouble("saldo"));
+                m.put("sbasico", rs.getDouble("SBASICO"));
+                m.put("afamiliar", rs.getDouble("AFAMILIAR"));
+                m.put("bonoal", rs.getDouble("BONOAL"));
+                m.put("bonificacion", rs.getDouble("BONIFICACION"));
                 lista.add(m);
             }
         } catch (Exception e) {
@@ -139,18 +169,18 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
                 m.put("iddet_presupuesto", rs.getString("IDDET_PRESUPUESTO"));
                 m.put("f_modif", rs.getString("F_MODIF"));
                 m.put("operacion", rs.getString("OPERACION"));
-                m.put("ctrabajador", rs.getString("CTRABAJADOR"));  
-                m.put("tipo", rs.getString("TIPO"));  
-                
+                m.put("ctrabajador", rs.getString("CTRABAJADOR"));
+                m.put("tipo", rs.getString("TIPO"));
+
                 m.put("sbgeneral", rs.getString("SBASICO"));
                 m.put("afgeneral", rs.getString("AFAMILIAR"));
                 m.put("bageneral", rs.getString("BONOAL"));
                 m.put("bogeneral", rs.getString("BONIFICACION"));
-                
-                m.put("sbdet", rs.getString(19));
+
+                /*m.put("sbdet", rs.getString(19));
                 m.put("afdet", rs.getString(20));
                 m.put("badet", rs.getString(21));
-                m.put("bodet", rs.getString(22));
+                m.put("bodet", rs.getString(22));*/
                 lista.add(m);
             }
         } catch (SQLException e) {
@@ -213,6 +243,41 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
             }
         } catch (SQLException e) {
             System.out.println("Error al listar Centros de Costo " + e);
+        } finally {
+            this.cnn.close();
+        }
+        return lista;
+    }
+
+    @Override
+    public ArrayList<Map<String, ?>> historial_cont(String idDestino) {
+        sql = "select * "
+                + "from rhtm_contrato rc,rhtm_dgp dgp,rhtr_puesto rp,rhtr_seccion rs,rhtd_area ra,presupuesto pr "
+                + "where dgp.ID_DGP=rc.ID_DGP "
+                + "and dgp.ID_PUESTO=rp.ID_PUESTO "
+                + "and rs.ID_SECCION=rp.ID_SECCION "
+                + "and rs.ID_AREA=ra.ID_AREA "
+                + "and pr.FE_DESDE < rc.FE_DESDE "
+                + "and pr.FE_HASTA > rc.FE_HASTA "
+                + "and pr.IDDESTINO=?";
+        ArrayList<Map<String, ?>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idDestino);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("fe_creacion", rs.getString("fe_creacion"));
+                m.put("ca_sueldo", rs.getString("ca_sueldo"));
+                m.put("ca_asig_familiar", rs.getString("ca_asig_familiar"));
+                m.put("ca_bono_alimento", rs.getString("ca_bono_alimento"));
+                m.put("ca_bonificacion_p", rs.getString("ca_bonificacion_p"));
+                //m.put("ca_bonificacion_p", rs.getString("ca_bonificacion_p"));
+                lista.add(m);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al listar Condiciones Presupuestado " + e);
         } finally {
             this.cnn.close();
         }

@@ -26,4 +26,8 @@ public interface InterfacePresupuestoDAO {
     
     public ArrayList<Map<String, ?>> CCostos(String id,int tipo);
     
+    public boolean Reg_DetPresupuesto(Object s);
+    
+    public ArrayList<Map<String, ?>> historial_cont(String idDestino);
+    
 }

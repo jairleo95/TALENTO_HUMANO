@@ -46,7 +46,7 @@ public class CPresupuesto extends HttpServlet {
         HttpSession session = request.getSession(true);
         //int opc = Integer.parseInt(request.getParameter("opc"));
         String opc = request.getParameter("opc");
-        String idDestino,id,ccosto ;
+        String idDestino, id, ccosto;
         int tipo;
         switch (opc) {
             case "gest":
@@ -83,6 +83,10 @@ public class CPresupuesto extends HttpServlet {
             case "comp":
                 idDestino = request.getParameter("idDes");
                 rpta.put("datos", pD.comprobar(idDestino));
+                break;
+            case "hist_con":
+                idDestino = request.getParameter("idDes");
+                rpta.put("datos", pD.historial_cont(idDestino));
                 break;
             case "actual":
                 idDestino = request.getParameter("idDes");
