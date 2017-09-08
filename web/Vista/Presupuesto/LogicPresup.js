@@ -2,6 +2,7 @@
 $(document).ready(function () {
     $("#vcont").empty();
     $("#vcont").append(createContentAsignar());
+    $("#nmeses").hide();
     $("#rowFecha").hide();
     $("#estOPC").attr("value", "anual");
     var a = getFechaInit();
@@ -521,6 +522,7 @@ function changeOption(id) {
         $("#vopt").attr("value", "1");
         $("#vcont").empty();
         $("#vcont").append(createContentAsignar());
+        $("#rowFecha").hide();
         $("#estOPC").attr("value", "anual");
         var a = getFechaInit();
         getFechaAnual(a);
@@ -580,6 +582,7 @@ function ch(id) {
         $("#rowFecha").hide();
     }
     if (id === "inter") {
+        $("#rowFecha").hide();
         jQuery("#fe_fin").removeAttr("disabled");
         jQuery("#fe_i").removeAttr("disabled");
     } else {
