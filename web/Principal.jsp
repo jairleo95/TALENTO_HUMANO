@@ -226,7 +226,7 @@
                     <div class="avatar-user col-md-3">
                         <input id="id_trabajador" type="hidden" value="<%out.println(sesion.getAttribute("IDTR"));%>" />
                         <input id="iuser" type="hidden" value="<%out.println(id_user);%>" />
-                        <a href="javascript:void(0);" id="show-shortcut" >
+                        <a href="trabajador?opc=edit_perfil" target="myframe" id="show-shortcut" >
                             <img id="foto_usuario" src="img/avatar_default.jpg" class="bounceIn animated" />
                         </a>  
                     </div>
