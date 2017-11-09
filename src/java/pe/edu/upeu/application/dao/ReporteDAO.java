@@ -234,7 +234,7 @@ public class ReporteDAO implements InterfaceReporteDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
-            throw new RuntimeException("Error!");
+            throw new RuntimeException("Error! : " +e);
         } finally {
             try {
                 this.conn.close();

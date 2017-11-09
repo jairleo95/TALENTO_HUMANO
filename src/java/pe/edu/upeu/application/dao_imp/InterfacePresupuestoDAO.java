@@ -14,20 +14,30 @@ import java.util.Map;
  */
 public interface InterfacePresupuestoDAO {
 
-    public boolean Reg_PresupuestoArea(Object s);
+    public String Reg_Presupuesto(Object s);
 
     public ArrayList<Map<String, ?>> comprobar(String idDestino);
 
     public ArrayList<Map<String, ?>> dataPresupuesto(String idDestino);
 
     public ArrayList<Map<String, ?>> pActual(String idDestino);
-    
-    public boolean statusPresupuesto(String idDestino);
-    
-    public ArrayList<Map<String, ?>> CCostos(String id,int tipo);
-    
+
+    public String statusPresupuesto(String idDestino);
+
+    public ArrayList<Map<String, ?>> CCostos(String id, int tipo);
+
     public boolean Reg_DetPresupuesto(Object s);
-    
+
     public ArrayList<Map<String, ?>> historial_cont(String idDestino);
-    
+
+    public boolean Reg_Temporada(String nombre, String f_i, String f_f, String id, String destino);
+
+    public ArrayList<Map<String, ?>> listTemporadas(String idDestino);
+
+    public boolean Reg_Det_Presupuesto(Object s);
+
+    public ArrayList<Map<String, ?>> listDetPresupuesto(Object s);
+
+    public ArrayList<Map<String, ?>> compDet(String idPresupuesto, int con, int time);
+
 }

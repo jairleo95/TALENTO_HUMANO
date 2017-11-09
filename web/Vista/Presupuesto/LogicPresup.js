@@ -577,6 +577,7 @@ function ch(id) {
     $("#fe_fin").attr("value", "");
     if (id === "mensual") {
         $("#fe_i").attr("disabled", "");
+        $("#nmeses").show();
         $("#rowFecha").show();
     } else {
         $("#rowFecha").hide();

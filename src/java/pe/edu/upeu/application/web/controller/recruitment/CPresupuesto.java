@@ -46,39 +46,47 @@ public class CPresupuesto extends HttpServlet {
         HttpSession session = request.getSession(true);
         //int opc = Integer.parseInt(request.getParameter("opc"));
         String opc = request.getParameter("opc");
-        String idDestino, id, ccosto;
-        int tipo;
+        String idDestino, id, ccosto, temp, idPresupuesto;
+        int tipo, ntra, con, tiem;
+        String tip = request.getParameter("tip");
+        Map<String, Object> c = new HashMap<>();
         switch (opc) {
             case "gest":
-                response.sendRedirect("Vista/Presupuesto/Gpresupuesto.jsp");
+                //response.sendRedirect("Vista/Presupuesto/Gpresupuesto.jsp");
+                response.sendRedirect("Vista/Presupuesto/Gestionar_Presupuesto.jsp");
                 break;
             case "list":
                 rpta.put("rpta", dO.List_Direccion());
                 break;
-            case "reg":
-                Map<String, Object> c = new HashMap<>();
-                idDestino = request.getParameter("idDes");
-                ccosto = request.getParameter("idCC");
-                int SB = Integer.parseInt(request.getParameter("SB"));
-                int AF = Integer.parseInt(request.getParameter("AF"));
-                int BA = Integer.parseInt(request.getParameter("BA"));
-                int BO = Integer.parseInt(request.getParameter("BO"));
-                int NT = Integer.parseInt(request.getParameter("NT"));
-                String f_inicio = request.getParameter("f_i");
-                String f_fin = request.getParameter("f_fin");
-                String tip = request.getParameter("tipo");
-                c.put("idDes", idDestino);
-                c.put("SB", SB);
-                c.put("NT", NT);
-                c.put("f_i", f_inicio);
-                c.put("f_fin", f_fin);
+            case "regPres":
+                idDestino = request.getParameter("id");
+                temp = request.getParameter("temp");
+                ccosto = request.getParameter("cc");
+                ntra = Integer.parseInt(request.getParameter("ntra"));
+                con = Integer.parseInt(request.getParameter("con"));
+                tiem = Integer.parseInt(request.getParameter("tiem"));
+                tip = request.getParameter("tip");
+                c.put("id", idDestino);
                 c.put("idUSER", session.getAttribute("IDUSER"));
-                c.put("AF", AF);
-                c.put("BA", BA);
-                c.put("BO", BO);
-                c.put("idCC", ccosto);
-                c.put("tipo", tip);
-                rpta.put("rpta", pD.Reg_PresupuestoArea(c));
+                c.put("ntra", ntra);
+                c.put("cc", ccosto);
+                c.put("con", con);
+                c.put("tiem", tiem);
+                c.put("destino", tip);
+                c.put("temp", temp);
+                rpta.put("obj", pD.Reg_Presupuesto(c));
+                break;
+            case "reg":
+                idDestino = request.getParameter("id");
+                temp = request.getParameter("temp");
+                ccosto = request.getParameter("cc");
+                tip = request.getParameter("tip");
+                c.put("id", idDestino);
+                c.put("idUSER", session.getAttribute("IDUSER"));
+                c.put("cc", ccosto);
+                c.put("destino", tip);
+                c.put("temp", temp);
+                rpta.put("obj", pD.Reg_Presupuesto(c));
                 break;
             case "comp":
                 idDestino = request.getParameter("idDes");
@@ -104,6 +112,38 @@ public class CPresupuesto extends HttpServlet {
                 id = request.getParameter("id");
                 tipo = Integer.parseInt(request.getParameter("tipo"));
                 rpta.put("datos", pD.CCostos(id, tipo));
+                break;
+            case "n_temp":
+                String nombre = request.getParameter("temporada");
+                String f_inicio = request.getParameter("f_i");
+                String f_fin = request.getParameter("f_fin");
+                idDestino = request.getParameter("idDes");
+                tip = request.getParameter("tip");
+                rpta.put("rp", pD.Reg_Temporada(nombre, f_inicio, f_fin, idDestino, tip));
+                break;
+            case "list_temp":
+                idDestino = request.getParameter("idDes");
+                rpta.put("temporadas", pD.listTemporadas(idDestino));
+                break;
+            case "regDetPre":
+                idPresupuesto = request.getParameter("idPre");
+                ntra = Integer.parseInt(request.getParameter("ntra"));
+                con = Integer.parseInt(request.getParameter("con"));
+                tiem = Integer.parseInt(request.getParameter("tiem"));
+                c.put("idP", idPresupuesto);
+                c.put("ntra", ntra);
+                c.put("con", con);
+                c.put("time", tiem);
+                rpta.put("res", pD.Reg_Det_Presupuesto(c));
+                break;
+            case "listDetPre":
+                idPresupuesto = request.getParameter("idPre");
+                con = Integer.parseInt(request.getParameter("con"));
+                tiem = Integer.parseInt(request.getParameter("tiem"));
+                c.put("idP", idPresupuesto);
+                c.put("con", con);
+                c.put("time", tiem);
+                rpta.put("detalle", pD.compDet(idPresupuesto, con, tiem));
                 break;
         }
 

@@ -9,6 +9,7 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,31 +30,23 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     CallableStatement cs;
 
     @Override
-    public boolean Reg_PresupuestoArea(Object s) {
-        boolean p = false;
-        sql = "{CALL INSERT_PRESUPUESTO (?,?,?,?,?,?,?,?,?,?,?)}";
+    public String Reg_Presupuesto(Object s) {
+        String p = null;
+        sql = "{CALL INSERT_PRESUPUESTO (?,?,?,?,?,?)}";
         Map<String, Object> m = (Map<String, Object>) s;
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             cs = this.cnn.conex.prepareCall(sql);
-            cs.setString(1, m.get("idCC").toString());
-            cs.setString(2, m.get("idUSER").toString());
-            cs.setString(3, m.get("idDes").toString());
-            cs.setInt(4, Integer.parseInt(m.get("SB").toString()));
-            cs.setInt(5, Integer.parseInt(m.get("AF").toString()));
-            cs.setInt(6, Integer.parseInt(m.get("BA").toString()));
-            cs.setInt(7, Integer.parseInt(m.get("BO").toString()));
-            cs.setString(8, m.get("f_i").toString());
-            cs.setString(9, m.get("f_fin").toString());
-            cs.setInt(10, Integer.parseInt(m.get("NT").toString()));
-            cs.setString(11, m.get("tipo").toString());
-            int r = cs.executeUpdate();
-            if (r > 0) {
-                p = true;
-            }
+            cs.setString(1, m.get("id").toString());
+            cs.setString(2, m.get("cc").toString());
+            cs.setString(3, m.get("temp").toString());
+            cs.setString(4, m.get("idUSER").toString());
+            cs.setString(5, m.get("destino").toString());
+            cs.registerOutParameter(6, Types.CHAR);
+            cs.execute();
+            p = cs.getString(6);
         } catch (SQLException | NumberFormatException e) {
             System.out.println("Error al agregar Presupuesto " + e);
-            p = false;
         } finally {
             this.cnn.close();
         }
@@ -178,9 +171,9 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
                 m.put("bogeneral", rs.getString("BONIFICACION"));
 
                 /*m.put("sbdet", rs.getString(19));
-                m.put("afdet", rs.getString(20));
-                m.put("badet", rs.getString(21));
-                m.put("bodet", rs.getString(22));*/
+                 m.put("afdet", rs.getString(20));
+                 m.put("badet", rs.getString(21));
+                 m.put("bodet", rs.getString(22));*/
                 lista.add(m);
             }
         } catch (SQLException e) {
@@ -192,16 +185,16 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     }
 
     @Override
-    public boolean statusPresupuesto(String idDestino) {
-        boolean s = false;
-        sql = "select * from PRESUPUESTO where ESTADO=1 and IDDESTINO=?";
+    public String statusPresupuesto(String idDestino) {
+        String s = null;
+        sql = "select * from RHTM_PRESUPUESTO where IDDESTINO=? and ESTADO='1'";
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             ps = this.cnn.conex.prepareStatement(sql);
             ps.setString(1, idDestino);
             rs = ps.executeQuery();
             while (rs.next()) {
-                s = true;
+                s = rs.getString("ID_PRESUPUESTO");
             }
         } catch (SQLException e) {
             System.out.println("Error al listar Estado de Presupuestado " + e);
@@ -278,6 +271,138 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
             }
         } catch (Exception e) {
             System.out.println("Error al listar Condiciones Presupuestado " + e);
+        } finally {
+            this.cnn.close();
+        }
+        return lista;
+    }
+
+    @Override
+    public boolean Reg_Temporada(String nombre, String f_i, String f_f, String id, String destino) {
+        boolean r = false;
+        try {
+            sql = "INSERT INTO RHTX_TEMPORADA VALUES(null,?,?,'1',?,?,?)";
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareCall(sql);
+            ps.setString(1, f_i);
+            ps.setString(2, f_f);
+            ps.setString(3, nombre);
+            ps.setString(4, id);
+            ps.setString(5, destino);
+            int m = ps.executeUpdate();
+            if (m > 0) {
+                r = true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error al registrar Temporada : " + e);
+        }
+        return r;
+    }
+
+    @Override
+    public ArrayList<Map<String, ?>> listTemporadas(String idDestino) {
+        sql = "select * from RHTX_TEMPORADA where ESTADO='1' and IDDESTINO=?";
+        ArrayList<Map<String, ?>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idDestino);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("id_temporada", rs.getString("ID_TEMPORADA"));
+                m.put("fecha_inicio", rs.getString("FECHA_INICIO"));
+                m.put("fecha_fin", rs.getString("FECHA_FIN"));
+                m.put("nombre_temp", rs.getString("NOMBRE_TEMP"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar Temporadas " + e);
+        } finally {
+            this.cnn.close();
+        }
+        return lista;
+    }
+
+    @Override
+    public boolean Reg_Det_Presupuesto(Object s) {
+        boolean r = false;
+        try {
+            Map<String, Object> m = (Map<String, Object>) s;
+            sql = "INSERT INTO RHTD_DETALLE_PRESUPUESTO VALUES(null,?,?,?,?,'1')";
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareCall(sql);
+            ps.setString(1, m.get("idP").toString());
+            ps.setString(2, m.get("con").toString());
+            ps.setString(3, m.get("time").toString());
+            ps.setString(4, m.get("ntra").toString());
+            int g = ps.executeUpdate();
+            if (g > 0) {
+                r = true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error al registrar Detalle Presupuesto : " + e);
+        }
+        return r;
+    }
+
+    @Override
+    public ArrayList<Map<String, ?>> listDetPresupuesto(Object s) {
+        Map<String, Object> h = (Map<String, Object>) s;
+        sql = "select r.ID_DETALLE_PRESUPUESTO,r.N_TRABAJADORES Ttotal,g.N_TRABAJADORES tra,g.ID_DETALLE_PRE_PUESTO from RHTD_DETALLE_PRESUPUESTO r, RHTH_DETALLE_PRE_PUESTO "
+                + " where r.ESTADO='1' and r.ID_PRESUPUESTO=? and r.CONDICION_LABORAL=? and r.TIEMPO_TRABAJO=? "
+                + "and r.ID_DETALLE_PRESUPUESTO=g.ID_DETALLE_PRESUPUESTO";
+        ArrayList<Map<String, ?>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, h.get("idP").toString());
+            ps.setString(2, h.get("con").toString());
+            ps.setString(3, h.get("time").toString());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("id_det_pres", rs.getString("ID_DETALLE_PRESUPUESTO"));
+                m.put("id_det_pre_puesto", rs.getString("ID_DETALLE_PRE_PUESTO"));
+                m.put("ntrabT", rs.getString("TTOTAL"));
+                m.put("ntr", rs.getString("TRA"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar DETALLE PRESUPUESTO " + e);
+        } finally {
+            this.cnn.close();
+        }
+        return lista;
+    }
+
+    @Override
+    public ArrayList<Map<String, ?>> compDet(String idPresupuesto, int con, int time) {
+        sql = "select * from RHTD_DETALLE_PRESUPUESTO "
+                + "where ID_PRESUPUESTO=? "
+                + "and CONDICION_LABORAL=? "
+                + "and TIEMPO_TRABAJO=? "
+                + "and ESTADO=1 ";
+        ArrayList<Map<String, ?>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idPresupuesto);
+            ps.setInt(2, con);
+            ps.setInt(3, time);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("id_det_pres", rs.getString("ID_DETALLE_PRESUPUESTO"));
+                m.put("id_presupuesto", rs.getString("ID_PRESUPUESTO"));
+                m.put("condocion_laboral", rs.getString("CONDICION_LABORAL"));
+                m.put("tiempo_trabajo", rs.getString("TIEMPO_TRABAJO"));
+                m.put("ntrabajadores", rs.getString("N_TRABAJADORES"));
+                m.put("estado", rs.getString("ESTADO"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar COMPROBACION PRESUPUESTO " + e);
         } finally {
             this.cnn.close();
         }

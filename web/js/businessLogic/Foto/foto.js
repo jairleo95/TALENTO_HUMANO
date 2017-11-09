@@ -105,7 +105,7 @@ function getAvatar(tipo, idtra) {
                     $('.borde').attr("src", url_archivos + obj.ar_foto);
                     $(".avatar").attr("href", url_archivos + obj.ar_foto);
                     $("#sb-player").attr("href", url_archivos + obj.ar_foto);
-
+                    console.log("tu doc es : "+url_archivos);
                     if (obj.EFOTO === "1") {/* your photo success */
                     }
                     if (obj.EFOTO === "0") {
@@ -125,6 +125,7 @@ function getAvatar(tipo, idtra) {
                         if (obj.EFOTO != 2) {
                             $('.borde').attr("src", "../../Archivo/Archivo/Fotos/" + obj.ar_foto);
                             $(".avatar").attr("href", "../../Archivo/Archivo/Fotos/" + obj.ar_foto);
+                            console.log("doc:"+obj.ar_foto)
                             $("#sb-player").attr("href", "../../Archivo/Archivo/Fotos/" + obj.ar_foto);
                             console.log(obj.ar_foto);
                         }
