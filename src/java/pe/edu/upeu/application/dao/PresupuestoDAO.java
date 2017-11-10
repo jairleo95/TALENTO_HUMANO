@@ -409,4 +409,41 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
         return lista;
     }
 
+    @Override
+    public ArrayList<Map<String, ?>> listDetalleTra(String idDetalle) {
+        sql = "select * from RHTH_DETALLE_PRE_PUESTO r,RHTD_DETALLE_PRESUPUESTO d,RHTR_PUESTO p "
+                + "where r.ID_DETALLE_PRESUPUESTO=d.ID_DETALLE_PRESUPUESTO "
+                + "and r.ID_PUESTO=p.ID_PUESTO "
+                + "and d.ESTADO='1' and d.ID_DETALLE_PRESUPUESTO=?";
+        ArrayList<Map<String, ?>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idDetalle);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("id_det_pre_puesto", rs.getString("ID_DETALLE_PRE_PUESTO"));
+                m.put("id_det_pres", rs.getString("ID_DETALLE_PRESUPUESTO"));
+                m.put("id_presupuesto", rs.getString("ID_PRESUPUESTO"));
+                m.put("condocion_laboral", rs.getString("CONDICION_LABORAL"));
+                m.put("tiempo_trabajo", rs.getString("TIEMPO_TRABAJO"));
+                m.put("ntotal", rs.getString("NTOTAL"));
+                m.put("npredet", rs.getString("NDET"));
+                m.put("no_puesto", rs.getString("NO_PUESTO"));
+                m.put("id_puesto", rs.getString("ID_PUESTO"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar DETALLE PRESUPUESTO " + e);
+        } finally {
+            this.cnn.close();
+        }
+        return lista;
+    }
+
+    @Override
+    public ArrayList<Map<String, ?>> listDetalleTraPuesto(String idPuesto, String idDet_pre_puesto) {
+        return null;
+    }
 }

@@ -135,7 +135,9 @@
                                 <label>Número de Trabajadores:</label>
                                 <div class="input-group ">
                                     <div class="input-group-addon"><i class="fa fa-group"></i></div>
+                                    <div class="bNG">
                                     <input type="number" name="sueldo" id="ntraG" class="form-control"  placeholder="Número de trabajadores">
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-3 col-xs-12" >
@@ -175,11 +177,11 @@
                                 <label>Número de Trabajadores:</label>
                                 <div class="input-group ">
                                     <div class="input-group-addon"><i class="fa fa-group"></i></div>
-                                    <input type="number" name="sueldo" class="form-control"  placeholder="Número de trabajadores">
+                                    <input type="number" id="nTraDP" class="form-control"  placeholder="Número de trabajadores">
                                 </div>
                             </div>
                             <div class="form-group col-md-3 col-xs-12">
-                                <button class="btn btn-success col-md-12 BD" type="button" disabled style="margin-top: 7%">Guardar</button>
+                                <button class="btn btn-success col-md-12 BD" type="button" disabled style="margin-top: 7%;">Guardar</button>
                             </div>
                         </div>
                     </fieldset>

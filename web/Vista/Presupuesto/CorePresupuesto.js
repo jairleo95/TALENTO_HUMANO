@@ -3,6 +3,7 @@ $(document).ready(function () {
 });
 
 var idPresupuestoact;
+var idDetallePreAct;
 
 function oModal() {
     var opc = 'Listar_direccion';
@@ -19,13 +20,11 @@ function oModal() {
         listar_opcionesM(opc, id);
         $("#iDestinoM").attr("value", id);
         $("#tipo_pM").attr("value", 2);
-        //loadTemporada(id);
     });
     $(".select_area_M").change(function () {
         var id = $(".select_area_M").val().split("**")[0];
         $("#iDestinoM").attr("value", id);
         $("#tipo_pM").attr("value", 1);
-        //loadTemporada(id);
     });
 }
 
@@ -64,9 +63,9 @@ function listar_opcionesM(opc, id) {
 
 function helpDG() {
     new PNotify({
-        title: 'Temporada Registrada',
-        text: 'Se registró correctamente la temporada',
-        type: 'success'
+        title: 'Datos Generales',
+        text: 'El presupuesto puede ser destinado para un departamento o para un área,las temporadas se muestran dependiendo de esa elección',
+        type: 'info'
     });
 }
 
@@ -109,13 +108,12 @@ function saveNewTemp() {
 }
 
 $(".BG").click(function () {
-    console.log("asd");
     var idDestino = $("#iDestino").val();
     var c_c = $(".select_cc").val();
     var tip = $("#tipo_p").val();
     var temp = $(".select_temporada").val();
     var t = temp.split("**");
-    if (idDestino !== "" && t !== null) {
+    if (idDestino !== "" && t !== null ) {
         statusPresupuesto(idDestino, c_c, tip);
     } else {
         new PNotify({
@@ -130,11 +128,56 @@ $(".BGE").click(function () {
     var con = $(".select_condicion").val();
     var tiem = $(".select_tiempo").val();
     var ntra = $("#ntraG").val();
-    comprobarDet(con, tiem, ntra);
-
-
+    if (con !== null && tiem !== null && ntra !== "") {
+        comprobarDet(con, tiem, ntra);
+    } else {
+        new PNotify({
+            title: 'Incompleto',
+            text: 'Los campos están incompletos',
+            type: 'info'
+        });
+    }
 
 });
+
+$(".BD").click(function () {
+    var puesto = $(".select_puesto").val();
+    var nt = $("#nTraDP").val();
+    if (puesto !== null && nt !== nt) {
+        comprobarPuestoNT(puesto, nt);
+    }
+});
+
+$(".BM").click(function () {
+
+});
+
+function comprobarPuestoNT(puesto, nt) {
+    var url = "../../pres?opc=regPuesTra";
+    var data = "puesto=" + puesto;
+    data += "&idDet=" + idDetPreTra;
+
+    $.post(url, data, function (obj) {
+        var li = obj.detTPuesto;
+    });
+
+    var c;
+    for (var i = 0, max = listDetPuesto.length; i < max; i++) {
+        if (listDetPuesto[i].id_puesto === puesto) {
+            console.log("presupuestado antes : " + nt + " trabajadores");
+            c = 1;
+        }
+    }
+    if (c !== 1) {
+        regPuesTra(puesto, nt);
+    }
+}
+
+function regPuesTra(puesto, nt) {
+    var url = "../../pres?opc=regPuesTra";
+    var data = "";
+
+}
 
 function comprobarDet(con, tiem, ntra) {
     var data = "con=" + con;
@@ -143,13 +186,15 @@ function comprobarDet(con, tiem, ntra) {
     var url = "../../pres?opc=listDetPre";
     $.post(url, data, function (objJson) {
         if (objJson.detalle.length > 0) {
-            new PNotify({
-                title: 'Antes Presupuestado',
-                text: 'Se presupuestó antes con las mismas opciones',
-                type: 'success'
-            });
-            console.log(objJson.detalle);
-            $("#ntraG").attr("value", objJson.detalle[0].ntrabajadores);
+            /*new PNotify({
+             title: 'Antes Presupuestado',
+             text: 'Se presupuestó antes con las mismas opciones',
+             type: 'success'
+             });*/
+            $(".bNG").empty();
+            $(".bNG").append('<input type="number" name="sueldo" id="ntraG" class="form-control" value="' + objJson.detalle[0].ntrabajadores + '"  placeholder="Número de trabajadores">');
+            idDetallePreAct = objJson.detalle[0].id_det_pres;
+            loadDetalleTrabajadores(objJson.detalle[0].ntrabajadores);
         } else {
             var data = "con=" + con;
             data += "&tiem=" + tiem;
@@ -163,7 +208,7 @@ function comprobarDet(con, tiem, ntra) {
                         text: 'Se registró correctamente esta sección',
                         type: 'success'
                     });
-                    loadHPuesto(con, tiem, ntra, idPresupuestoact);
+                    comprobarDet(con, tiem, ntra);
                 } else {
                     alert("Error al registrar");
                 }
@@ -172,21 +217,37 @@ function comprobarDet(con, tiem, ntra) {
     });
 }
 
-function loadHPuesto(con, tiem, ntra, idPresupuestoact) {
-    var data = "con=" + con;
-    data += "&tiem=" + tiem;
-    data += "&ntra=" + ntra;
-    data += "&idPre=" + idPresupuestoact;
-    var url = "../../pres?opc=listDetPre";
-    $.post(url, data, function (objJson) {
-        var lista = objJson.detalle;
+var listDetPuesto;
+var idDetPreTra;
 
+function loadDetalleTrabajadores(ntra) {
+    //nTraDP
+    var nc = 0;
+    var url = "../../pres?opc=listNtra";
+    var data = "id=" + idDetallePreAct;
+    $.post(url, data, function (objJson) {
+        var lista = objJson.listaDet;
+        if (lista.length > 0) {
+            var con = 0;
+            for (var i = 0, max = lista.length; i < max; i++) {
+                con = con + parseInt(lista[i].npredet);
+                idDetPreTra = lista[i].id_det_pres;
+            }
+            nc = ntra - con;
+        } else {
+            nc = ntra;
+        }
+        var t = createAlert("Puede contratar a <strong>" + nc + "</strong> trabajadores de los <strong>" + ntra + "</strong> presupuestados ");
+        //var t = createAlert("Puede contratar a <strong>" + nc + "</strong> trabajadores de los <strong>" + ntra + "</strong> presupuestados  <button class='btn btn-info' type='button' style='float:right;margin-bottom: 5%'>Ver detalle</button>");
+        $(".alertNT").empty();
+        $(".alertNT").append(t);
     });
+
 }
 
 function createAlert(mensaje) {
     var s = '<div class="alert alert-info" role="alert">';
-    s += '<i class="fa fa-info"></i>' + mensaje;
+    s += '<i class="fa fa-info"></i>  ' + mensaje;
     s += '</div>';
     return s;
 }
@@ -333,7 +394,7 @@ function statusPresupuesto(idDestino, c_c, tip) {
         if (objJson.rpta !== null) {
             new PNotify({
                 title: 'Presupuesto activo',
-                text: 'Continúe el presupuestoado',
+                text: 'Continúe el presupuestado',
                 type: 'info'
             });
             idPresupuestoact = objJson.rpta;

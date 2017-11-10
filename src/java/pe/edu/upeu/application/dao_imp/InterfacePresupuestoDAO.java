@@ -40,4 +40,8 @@ public interface InterfacePresupuestoDAO {
 
     public ArrayList<Map<String, ?>> compDet(String idPresupuesto, int con, int time);
 
+    public ArrayList<Map<String, ?>> listDetalleTra(String idDetalle);
+
+    public ArrayList<Map<String, ?>> listDetalleTraPuesto(String idPuesto, String idDet_pre_puesto);
+
 }

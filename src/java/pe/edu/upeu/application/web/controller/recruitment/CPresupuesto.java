@@ -46,7 +46,7 @@ public class CPresupuesto extends HttpServlet {
         HttpSession session = request.getSession(true);
         //int opc = Integer.parseInt(request.getParameter("opc"));
         String opc = request.getParameter("opc");
-        String idDestino, id, ccosto, temp, idPresupuesto;
+        String idDestino, id, ccosto, temp, idPresupuesto, idDetalle, idPuesto;
         int tipo, ntra, con, tiem;
         String tip = request.getParameter("tip");
         Map<String, Object> c = new HashMap<>();
@@ -144,6 +144,15 @@ public class CPresupuesto extends HttpServlet {
                 c.put("con", con);
                 c.put("time", tiem);
                 rpta.put("detalle", pD.compDet(idPresupuesto, con, tiem));
+                break;
+            case "listNtra":
+                idDetalle = request.getParameter("id");
+                rpta.put("listaDet", pD.listDetalleTra(idDetalle));
+                break;
+            case "comPues":
+                idPuesto = request.getParameter("puesto");
+                idDetalle = request.getParameter("idDet");
+                rpta.put("detTPuesto", pD.listDetalleTraPuesto(idPuesto, idDetalle));
                 break;
         }
 
