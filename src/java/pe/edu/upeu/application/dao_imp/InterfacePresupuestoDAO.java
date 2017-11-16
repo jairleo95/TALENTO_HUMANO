@@ -44,4 +44,10 @@ public interface InterfacePresupuestoDAO {
 
     public ArrayList<Map<String, ?>> listDetalleTraPuesto(String idPuesto, String idDet_pre_puesto);
 
+    public boolean Reg_DetTraPuesto(String idPuesto, String idDet, int ntra);
+
+    public ArrayList<Map<String, ?>> infoPrePuesto(String idDetPuesto);
+
+    public boolean Reg_DetSueldo(Object s);
+
 }

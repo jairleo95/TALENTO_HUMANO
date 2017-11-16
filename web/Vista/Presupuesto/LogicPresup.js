@@ -1088,7 +1088,8 @@ function sueldoAprox(ntra) {
     $("#cBO").append(so.toFixed(2));
 }
 
-function listCCostos(id, tipo) {
+/*function listCCostos(id, tipo) {
+    console.log("asdasd");
     var text = '';
     var url = '../../pres?opc=ccosto';
     var data = '';
@@ -1102,6 +1103,7 @@ function listCCostos(id, tipo) {
         data += '&tipo=1';
         text = 'Esta Area ';
     }
+    console.log(data);
     $.post(url, data, function (objJson) {
         var a = $(".select_cc");
         var lista = objJson.datos;
@@ -1122,7 +1124,7 @@ function listCCostos(id, tipo) {
             });
         }
     });
-}
+}*/
 
 function opcCCDefault(id, idCC, tipo) {
     var url = '../../pres?opc=ccosto';

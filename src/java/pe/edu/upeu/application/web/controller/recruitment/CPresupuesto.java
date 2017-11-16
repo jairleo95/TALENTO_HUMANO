@@ -47,6 +47,7 @@ public class CPresupuesto extends HttpServlet {
         //int opc = Integer.parseInt(request.getParameter("opc"));
         String opc = request.getParameter("opc");
         String idDestino, id, ccosto, temp, idPresupuesto, idDetalle, idPuesto;
+        double sueldo_min, sueldo_max, bono_min, bono_max, boal_min, boal_max;
         int tipo, ntra, con, tiem;
         String tip = request.getParameter("tip");
         Map<String, Object> c = new HashMap<>();
@@ -111,7 +112,7 @@ public class CPresupuesto extends HttpServlet {
             case "ccosto":
                 id = request.getParameter("id");
                 tipo = Integer.parseInt(request.getParameter("tipo"));
-                rpta.put("datos", pD.CCostos(id, tipo));
+                rpta.put("cco", pD.CCostos(id, tipo));
                 break;
             case "n_temp":
                 String nombre = request.getParameter("temporada");
@@ -153,6 +154,26 @@ public class CPresupuesto extends HttpServlet {
                 idPuesto = request.getParameter("puesto");
                 idDetalle = request.getParameter("idDet");
                 rpta.put("detTPuesto", pD.listDetalleTraPuesto(idPuesto, idDetalle));
+                break;
+            case "regPuesTra":
+                idPuesto = request.getParameter("puesto");
+                idDetalle = request.getParameter("idDet");
+                ntra = Integer.parseInt(request.getParameter("nt"));
+                rpta.put("ta", pD.Reg_DetTraPuesto(idPuesto, idDetalle, ntra));
+                break;
+            case "infoPP":
+                idDetalle = request.getParameter("idDet");
+                rpta.put("in", pD.infoPrePuesto(idDetalle));
+                break;
+            case "regPP":
+                c.put("idDet", request.getParameter("idDet"));
+                c.put("sueldo_min", Double.parseDouble(request.getParameter("sueldo_min")));
+                c.put("sueldo_max", Double.parseDouble(request.getParameter("sueldo_max")));
+                c.put("bono_min", Double.parseDouble(request.getParameter("bono_min")));
+                c.put("bono_max", Double.parseDouble(request.getParameter("bono_max")));
+                c.put("boal_min", Double.parseDouble(request.getParameter("boal_min")));
+                c.put("boal_max", Double.parseDouble(request.getParameter("boal_max")));
+                rpta.put("ac", pD.Reg_DetSueldo(c));
                 break;
         }
 

@@ -44,9 +44,9 @@
         <div class="panel panel-primary col-lg-10 col-lg-offset-1">            
             <div class="panel-body">
                 <form class="">
-                    <div class="row">
+                    <!--<div class="row">
                         <button type="button" class="btn btn-danger bT"><i class="fa fa-refresh"></i></button>
-                    </div>
+                    </div>-->
                     <fieldset>
                         <legend class="">
                             Datos Generales de <strong>Presupuesto</strong>   <a class="Help" onclick="helpDG()"><i class="fa fa-question-circle"></i></a>
@@ -105,7 +105,7 @@
                             </div>
                         </div>
                         <legend class="">
-                            Asignación de trabajadores por <strong>condición laboral</strong>  <a class="Help" onclick="helpDG()"><i class="fa fa-question-circle"></i></a>
+                            Asignación de trabajadores por <strong>condición laboral</strong>  <a class="Help" onclick="helpCL()"><i class="fa fa-question-circle"></i></a>
                         </legend>
                         <div class="row">
                             <div class="form-group col-md-3 col-xs-12" >
@@ -136,7 +136,7 @@
                                 <div class="input-group ">
                                     <div class="input-group-addon"><i class="fa fa-group"></i></div>
                                     <div class="bNG">
-                                    <input type="number" name="sueldo" id="ntraG" class="form-control"  placeholder="Número de trabajadores">
+                                        <input type="number" name="sueldo" id="ntraG" class="form-control"  placeholder="Número de trabajadores">
                                     </div>
                                 </div>
                             </div>
@@ -155,10 +155,10 @@
 
                     <fieldset>
                         <legend class="">
-                            Asignación de trabajadores por <strong>puesto</strong>  <a class="Help" onclick="helpDG()"><i class="fa fa-question-circle"></i></a>
+                            Asignación de trabajadores por <strong>puesto</strong>  <a class="Help" onclick="helpTP()"><i class="fa fa-question-circle"></i></a>
                         </legend>
                         <div class="alertNT">
-                            
+
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3 col-xs-12" >
@@ -177,7 +177,9 @@
                                 <label>Número de Trabajadores:</label>
                                 <div class="input-group ">
                                     <div class="input-group-addon"><i class="fa fa-group"></i></div>
-                                    <input type="number" id="nTraDP" class="form-control"  placeholder="Número de trabajadores">
+                                    <div class="bND">
+                                        <input type="number" name="sueldo" id="ntraD" class="form-control"  placeholder="Número de trabajadores">
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-3 col-xs-12">
@@ -188,7 +190,7 @@
 
                     <fieldset>
                         <legend class="">
-                            Asignación de sueldo mínimo y máximo por <strong>puesto</strong>  <a class="Help" onclick="helpDG()"><i class="fa fa-question-circle"></i></a>
+                            Asignación de sueldo mínimo y máximo por <strong>puesto</strong>  <a class="Help" onclick="helpSM()"><i class="fa fa-question-circle"></i></a>
                         </legend>
                     </fieldset>
                     <div class="row">
@@ -254,7 +256,7 @@
                 </form>
             </div>
         </div>
-
+        <input id="iDestinoM" type="hidden">
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -262,11 +264,9 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title" id="myModalLabel">Nueva Temporada</h4>
                     </div>
-                    <input id="iDestinoM" type="hidden">
-                    <input id="tipo_pM" type="hidden">
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="form-group col-md-4 col-xs-12" >
+                        <div class="row conB">
+                            <!--<div class="form-group col-md-4 col-xs-12" >
                                 <label class="">Dirección :</label>
                                 <select class="form-control select_direccion_M" >
                                     <option value="" selected disabled>[Seleccione]</option>
@@ -283,7 +283,7 @@
                                 <select class="form-control select_area_M" >
                                     <option value="" selected disabled>[Seleccione]</option>
                                 </select>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6 col-xs-12">
@@ -306,7 +306,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" onclick="saveNewTemp()">Guardar</button>
+                        <button type="button" class="btn btn-primary bbst" onclick="saveNewTemp()">Guardar</button>
                     </div>
                 </div>
             </div>
@@ -320,6 +320,7 @@
         <script src="../../js/plugin/pfnotify/pnotify.custom.min.js" type="text/javascript"></script>
         <script src="../../js/plugin/datatables/datatable.js" type="text/javascript"></script>
         <script src="CorePresupuesto.js" type="text/javascript"></script>
+        <script src="utilPresupuesto.js" type="text/javascript"></script>
 
 
     </body>

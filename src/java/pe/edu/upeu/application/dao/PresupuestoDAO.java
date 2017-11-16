@@ -60,7 +60,7 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
         Map<String, Object> m = (Map<String, Object>) s;
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            ps = this.cnn.conex.prepareCall(sql);
+            ps = this.cnn.conex.prepareStatement(sql);
             ps.setString(1, m.get("idDes").toString());
             ps.setString(2, m.get("idUSER").toString());
             ps.setString(3, m.get("idtr").toString());
@@ -186,7 +186,7 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
 
     @Override
     public String statusPresupuesto(String idDestino) {
-        String s = null;
+        String s = "no";
         sql = "select * from RHTM_PRESUPUESTO where IDDESTINO=? and ESTADO='1'";
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -283,7 +283,7 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
         try {
             sql = "INSERT INTO RHTX_TEMPORADA VALUES(null,?,?,'1',?,?,?)";
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            ps = this.cnn.conex.prepareCall(sql);
+            ps = this.cnn.conex.prepareStatement(sql);
             ps.setString(1, f_i);
             ps.setString(2, f_f);
             ps.setString(3, nombre);
@@ -331,7 +331,7 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
             Map<String, Object> m = (Map<String, Object>) s;
             sql = "INSERT INTO RHTD_DETALLE_PRESUPUESTO VALUES(null,?,?,?,?,'1')";
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
-            ps = this.cnn.conex.prepareCall(sql);
+            ps = this.cnn.conex.prepareStatement(sql);
             ps.setString(1, m.get("idP").toString());
             ps.setString(2, m.get("con").toString());
             ps.setString(3, m.get("time").toString());
@@ -411,10 +411,7 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
 
     @Override
     public ArrayList<Map<String, ?>> listDetalleTra(String idDetalle) {
-        sql = "select * from RHTH_DETALLE_PRE_PUESTO r,RHTD_DETALLE_PRESUPUESTO d,RHTR_PUESTO p "
-                + "where r.ID_DETALLE_PRESUPUESTO=d.ID_DETALLE_PRESUPUESTO "
-                + "and r.ID_PUESTO=p.ID_PUESTO "
-                + "and d.ESTADO='1' and d.ID_DETALLE_PRESUPUESTO=?";
+        sql = "select * from RHTH_DETALLE_PRE_PUESTO where ID_DETALLE_PRESUPUESTO=?";
         ArrayList<Map<String, ?>> lista = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -425,17 +422,12 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
                 Map<String, Object> m = new HashMap<>();
                 m.put("id_det_pre_puesto", rs.getString("ID_DETALLE_PRE_PUESTO"));
                 m.put("id_det_pres", rs.getString("ID_DETALLE_PRESUPUESTO"));
-                m.put("id_presupuesto", rs.getString("ID_PRESUPUESTO"));
-                m.put("condocion_laboral", rs.getString("CONDICION_LABORAL"));
-                m.put("tiempo_trabajo", rs.getString("TIEMPO_TRABAJO"));
-                m.put("ntotal", rs.getString("NTOTAL"));
-                m.put("npredet", rs.getString("NDET"));
-                m.put("no_puesto", rs.getString("NO_PUESTO"));
+                m.put("ntrabajadores", rs.getString("N_TRABAJADORES"));
                 m.put("id_puesto", rs.getString("ID_PUESTO"));
                 lista.add(m);
             }
         } catch (SQLException e) {
-            System.out.println("Error al listar DETALLE PRESUPUESTO " + e);
+            System.out.println("Error al listar DETALLE PRESUPUESTO TRABAJADOR " + e);
         } finally {
             this.cnn.close();
         }
@@ -444,6 +436,107 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
 
     @Override
     public ArrayList<Map<String, ?>> listDetalleTraPuesto(String idPuesto, String idDet_pre_puesto) {
-        return null;
+        sql = "select * from RHTH_DETALLE_PRE_PUESTO where ID_DETALLE_PRESUPUESTO=? and ID_PUESTO=?";
+        ArrayList<Map<String, ?>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idDet_pre_puesto);
+            ps.setString(2, idPuesto);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("id_det_pre_puesto", rs.getString("ID_DETALLE_PRE_PUESTO"));
+                m.put("id_det_pres", rs.getString("ID_DETALLE_PRESUPUESTO"));
+                m.put("id_puesto", rs.getString("ID_PUESTO"));
+                m.put("n_trabajadores", rs.getString("N_TRABAJADORES"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar DETALLE PRESUPUESTO PUESTO" + e);
+        } finally {
+            this.cnn.close();
+        }
+        return lista;
     }
+
+    @Override
+    public boolean Reg_DetTraPuesto(String idPuesto, String idDet, int ntra) {
+        boolean r = false;
+        try {
+            sql = "INSERT INTO RHTH_DETALLE_PRE_PUESTO VALUES(null,?,?,?)";
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idDet);
+            ps.setString(2, idPuesto);
+            ps.setInt(3, ntra);
+            int g = ps.executeUpdate();
+            if (g > 0) {
+                r = true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error al registrar Detalle Presupuesto Puesto : " + e);
+        }
+        return r;
+    }
+
+    @Override
+    public ArrayList<Map<String, ?>> infoPrePuesto(String idDetPuesto) {
+        sql = "select * from RHTR_PRESUPUESTO_PUESTO where ID_PUESTO=? AND ESTADO=1";
+        ArrayList<Map<String, ?>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idDetPuesto);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("id_pres_puesto", rs.getString("ID_PRESUPUESTO_PUESTO"));
+                m.put("id_det_pre_puesto", rs.getString("ID_DETALLE_PRE_PUESTO"));
+                m.put("sueldo_min", rs.getDouble("SUELDO_MIN"));
+                m.put("sueldo_max", rs.getDouble("SUELDO_MAX"));
+                m.put("bono_min", rs.getDouble("BONO_MIN"));
+                m.put("bono_max", rs.getDouble("BONO_MAX"));
+                m.put("boal_min", rs.getDouble("BOAL_MIN"));
+                m.put("boal_max", rs.getDouble("BOAL_MAX"));
+                m.put("n_trabajadores", rs.getString("N_TRABAJADORES"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar DETALLE PRESUPUESTO PUESTO SUELDO" + e);
+        } finally {
+            this.cnn.close();
+        }
+        return lista;
+    }
+
+    @Override
+    public boolean Reg_DetSueldo(Object s) {
+        boolean p = false;
+        sql = "INSERT INTO RHTR_PRESUPUESTO_PUESTO (ID_PRESUPUESTO_PUESTO,ID_PUESTO,SUELDO_MIN,SUELDO_MAX,BONO_MIN,BONO_MAX,BOAL_MIN,BOAL_MAX,ESTADO,FECHA_MODIFICACION) "
+                + "VALUES (NULL,?,?,?,?,?,?,?,'1',sysdate)";
+        Map<String, Object> m = (Map<String, Object>) s;
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, m.get("idDet").toString());
+            ps.setDouble(2, Double.parseDouble(m.get("sueldo_min").toString()));
+            ps.setDouble(3, Double.parseDouble(m.get("sueldo_max").toString()));
+            ps.setDouble(4, Double.parseDouble(m.get("bono_min").toString()));
+            ps.setDouble(5, Double.parseDouble(m.get("bono_max").toString()));
+            ps.setDouble(6, Double.parseDouble(m.get("boal_min").toString()));
+            ps.setDouble(7, Double.parseDouble(m.get("boal_max").toString()));
+            int r = ps.executeUpdate();
+            if (r > 0) {
+                p = true;
+            }
+        } catch (SQLException | NumberFormatException e) {
+            System.out.println("Error al agregar DETPresupuestoPUESTO " + e);
+            p = false;
+        } finally {
+            this.cnn.close();
+        }
+        return p;
+    }
+
 }
