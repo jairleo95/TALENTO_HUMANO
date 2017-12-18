@@ -175,6 +175,10 @@ public class CPresupuesto extends HttpServlet {
                 c.put("boal_max", Double.parseDouble(request.getParameter("boal_max")));
                 rpta.put("ac", pD.Reg_DetSueldo(c));
                 break;
+            case "infTra":
+                idDetalle = request.getParameter("idDet");
+                rpta.put("info", pD.detTrabajadores(idDetalle));
+                break;
         }
 
         Gson gson = new Gson();

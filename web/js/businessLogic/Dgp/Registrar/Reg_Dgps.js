@@ -535,6 +535,7 @@ function RegDGPAditionalPermissions() {
                     $(".chosen-select").trigger("chosen:updated");
                     //evaluar presupuesto de Departamento
                     //evaluarPresupuesto($(".selectDepartamento").val());
+                    loadPresupuesto($(".select-area").val(), 1);
                 });
                 initJobsFilters(data.filterAnyJobs);
             } else {
@@ -545,99 +546,197 @@ function RegDGPAditionalPermissions() {
     });
 }
 
+/*
+ function evaluarPresupuesto(idDestino) {
+ $("#idDestino").attr("value",idDestino);
+ try {
+ var psaldo = 0;
+ var psntra = 0;
+ var url = '../../pres?opc=actual';
+ var data = 'idDes=' + idDestino;
+ $.post(url, data, function (objJson) {
+ var tipo = "";
+ var mensaje = "";
+ var d = objJson.datos;
+ if (d.length > 0) {
+ psaldo = d[0].sbasico + d[0].afamiliar + d[0].bonoal + d[0].bonificacion; //saldo presupuestado
+ psntra = d[0].ntrabajadores; //trabajadores presupuestados
+ var pt = 0;
+ //constratos realizados
+ var pmonto = 0;
+ var pntra = 0;
+ var url = '../../pres?opc=comp';
+ var data = 'idDes=' + idDestino;
+ $.post(url, data, function (objJson) {
+ var dinero = 0;
+ var s = objJson.datos;
+ pmonto = s[0].monto; //monto gastado
+ pntra = s[0].ntrabajadores; //trabajadores contratados
+ if (pmonto !== 0 & pntra !== 0) {//Presupuesto usado
+ 
+ pt = pntra / psntra;
+ pt = pt * 100;
+ if (0 <= pt && pt < 25) {
+ tipo = "success";
+ }
+ if (25 < pt && pt < 50) {
+ tipo = "info";
+ }
+ if (50 < pt && pt < 75) {
+ tipo = "warning";
+ }
+ if (75 < pt && pt <= 100) {
+ tipo = "danger";
+ }
+ dinero = pmonto;
+ 
+ } else {//Presupuestado pero no usado
+ tipo = "success";
+ pt = 100;
+ dinero = psaldo;
+ }
+ mensaje = "<strong>" + pntra + "</strong> trabajadores contratados de <strong>" + psntra + "</strong> presupuestados en esta Area";
+ mensaje += "<br/><strong>$ " + dinero + "</strong> disponibles en el presupuesto de esta Area";
+ createAlert(mensaje, pt, tipo);
+ });
+ } else {//No Presupuestado
+ tipo = "danger";
+ mensaje = "No se ha presupuestado este Destino";
+ pt = 0;
+ createAlert(mensaje, pt, tipo);
+ }
+ 
+ });
+ } catch (e) {
+ console.error("Error al evaluar presupuesto" + e);
+ }
+ }
+ 
+ function createAlert(mensaje, por, tipo) {
+ var s = '<div class="col-md-12" id="contAll">';
+ s += '<div class="col-md-6" id="contMen">';
+ s += mensaje;
+ s += '</div>';
+ s += '<div class="col-md-6" id="contBar">';
+ s += '<div class="progress">';
+ s += '<div class="progress-bar progress-bar-' + tipo + ' progress-bar-striped active" role="progressbar" aria-valuenow="' + por + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + por + '%">';
+ s += Math.round(por) + "%";
+ s += '</div>';
+ s += '</div>';
+ s += '</div>';
+ s += '</div>';
+ 
+ $("#presC").empty();
+ $("#presC").attr("class", "alert alert-" + tipo + " col-sm-12 col-md-12 col-lg-6");
+ $("#presC").append(s);
+ 
+ }
+ 
+ function createLoader(load) {
+ var s = '<div class="progress">';
+ s += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
+ s += '<span class="sr-only">' + load + '% Complete</span>';
+ s += '</div>';
+ s += '</div>';
+ return s;
+ }
+ */
 
-function evaluarPresupuesto(idDestino) {
-    $("#idDestino").attr("value",idDestino);
+function loadPresupuesto(idDestino, destino) {
+    console.log(idDestino);
     try {
-        var psaldo = 0;
-        var psntra = 0;
-        var url = '../../pres?opc=actual';
-        var data = 'idDes=' + idDestino;
-        $.post(url, data, function (objJson) {
-            var tipo = "";
-            var mensaje = "";
-            var d = objJson.datos;
-            if (d.length > 0) {
-                psaldo = d[0].sbasico + d[0].afamiliar + d[0].bonoal + d[0].bonificacion; //saldo presupuestado
-                psntra = d[0].ntrabajadores; //trabajadores presupuestados
-                var pt = 0;
-                //constratos realizados
-                var pmonto = 0;
-                var pntra = 0;
-                var url = '../../pres?opc=comp';
-                var data = 'idDes=' + idDestino;
-                $.post(url, data, function (objJson) {
-                    var dinero = 0;
-                    var s = objJson.datos;
-                    pmonto = s[0].monto; //monto gastado
-                    pntra = s[0].ntrabajadores; //trabajadores contratados
-                    if (pmonto !== 0 & pntra !== 0) {//Presupuesto usado
-
-                        pt = pntra / psntra;
-                        pt = pt * 100;
-                        if (0 <= pt && pt < 25) {
-                            tipo = "success";
-                        }
-                        if (25 < pt && pt < 50) {
-                            tipo = "info";
-                        }
-                        if (50 < pt && pt < 75) {
-                            tipo = "warning";
-                        }
-                        if (75 < pt && pt <= 100) {
-                            tipo = "danger";
-                        }
-                        dinero = pmonto;
-
-                    } else {//Presupuestado pero no usado
-                        tipo = "success";
-                        pt = 100;
-                        dinero = psaldo;
-                    }
-                    mensaje = "<strong>" + pntra + "</strong> trabajadores contratados de <strong>" + psntra + "</strong> presupuestados en esta Area";
-                    mensaje += "<br/><strong>$ " + dinero + "</strong> disponibles en el presupuesto de esta Area";
-                    createAlert(mensaje, pt, tipo);
-                });
-            } else {//No Presupuestado
-                tipo = "danger";
-                mensaje = "No se ha presupuestado este Destino";
-                pt = 0;
-                createAlert(mensaje, pt, tipo);
+        var url = "../../pres?opc=infTra";
+        var data = "idDet=" + idDestino;
+        $.post(url, data, function (data) {
+            var dataPresupuesto = data.info;
+            if (dataPresupuesto.length > 0) {
+                createAlertExist(destino, dataPresupuesto[0].tpresup, dataPresupuesto[0].tcon);
+            } else {
+                createAlertNoExist(destino);
             }
-
         });
     } catch (e) {
-        console.error("Error al evaluar presupuesto" + e);
+
     }
+
 }
 
-function createAlert(mensaje, por, tipo) {
-    var s = '<div class="col-md-12" id="contAll">';
-    s += '<div class="col-md-6" id="contMen">';
-    s += mensaje;
+function createAlertNoExist(destino) {
+    var d;
+    if (destino === 1) {
+        d = "este Departamento";
+    }
+    if (destino === 2) {
+        d = "esta Área";
+    }
+    var s = '<div class="alert alert-warning">';
+    s += '<strong>Atención!</strong> ,no se ha presupuestado aún ' + d + '.';
     s += '</div>';
-    s += '<div class="col-md-6" id="contBar">';
-    s += '<div class="progress">';
-    s += '<div class="progress-bar progress-bar-' + tipo + ' progress-bar-striped active" role="progressbar" aria-valuenow="' + por + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + por + '%">';
-    s += Math.round(por) + "%";
-    s += '</div>';
-    s += '</div>';
-    s += '</div>';
-    s += '</div>';
+    $("#presC").empty();
+    $("#presC").append(decodeURIComponent(escape(s)));
+}
+
+function createAlertExist(destino, tpresup, tcon) {
+    var s = "";
+    if (tpresup >= tcon) {
+        var d;
+        if (destino === 1) {
+            d = "este Departamento";
+        }
+        if (destino === 2) {
+            d = "esta Área";
+        }
+        var load = calculatePorcent(tpresup, tcon);
+        var tipo = TipPresupuesto(load);
+        s += '<div class="alert alert-' + tipo + '">';
+        s += '<strong>Hey!</strong> ,el estado actual del presupuesto es ' + d + ':';
+        s += '<br/>';
+        s += '<strong>' + tcon + '</strong> trabajadores contratados de los <strong>' + tpresup + '</strong> trabajadores presupuestados';
+        s += '<br/>';
+        s += '<div class="progress">';
+        s += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
+        s += load + '%';
+        s += '</div>';
+        s += '</div>';
+        s += '</div>';
+    } else {
+        alert("llegó al límite");
+    }
 
     $("#presC").empty();
-    $("#presC").attr("class", "alert alert-" + tipo + " col-sm-12 col-md-12 col-lg-6");
-    $("#presC").append(s);
-
+    $("#presC").append(decodeURIComponent(escape(s)));
 }
 
-function createLoader(load) {
-    var s = '<div class="progress">';
-    s += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
-    s += '<span class="sr-only">' + load + '% Complete</span>';
-    s += '</div>';
-    s += '</div>';
-    return s;
+function TipPresupuesto(porcentaje) {
+    var percent = parseInt(porcentaje);
+    var tipo = "";
+    if (percent > 0) {
+        if (percent <= 25) {
+            tipo = "success";
+        } else {
+            if (percent <= 50) {
+                tipo = "info";
+            } else {
+                if (percent <= 75) {
+                    tipo = "warning";
+                } else {
+                    tipo = "danger";
+                }
+            }
+        }
+    } else {
+        tipo = "success";
+    }
+    return tipo;
+}
+
+function calculatePorcent(tpresup, tcon) {
+    var por = tcon * 100 / tpresup;
+    return por;
+}
+
+function disabledNext() {
+    $('.btnSig').attr("disabled", true);
 }
 
 function  initJobsFilters(aditionalFIlters) {
@@ -652,7 +751,8 @@ function  initJobsFilters(aditionalFIlters) {
         /*Filtrar Centro de costo*/
         //list_cc_area($(this).val(), $(".centro_costo1"));
         //actualPresupuesto($(".select-area").val());
-        evaluarPresupuesto($(".select-area").val());
+        //evaluarPresupuesto($(".select-area").val());
+        loadPresupuesto($(".select-area").val(), 2);
     });
     $(".select-seccion").change(function () {
         list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".select-seccion").val() + "&esL=1", "3");

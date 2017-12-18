@@ -49,5 +49,7 @@ public interface InterfacePresupuestoDAO {
     public ArrayList<Map<String, ?>> infoPrePuesto(String idDetPuesto);
 
     public boolean Reg_DetSueldo(Object s);
+    
+    public ArrayList<Map<String, ?>> detTrabajadores(String idDestino);
 
 }

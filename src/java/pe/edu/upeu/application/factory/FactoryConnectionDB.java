@@ -20,10 +20,15 @@ public class FactoryConnectionDB {
 
     public static String[] configORACLE = {globalProperties.USER, globalProperties.USER_PWD, globalProperties.HOSTNAME, globalProperties.PORT, globalProperties.SID};
 
-    public static final String url = "E:/Projects/GTH/20-06/TALENTO_HUMANO/web/Archivo/Archivo";
-    /*public static final String url_archivos = "http://localhost:8082/TALENTO_HUMANO/Archivo/";*/
-    public static final String url_archivos = "http://gth.upeu.edu.pe/TALENTO_HUMANO/Archivo/";
+    //ARCHIVOS LOCALES
+    public static final String url = "E:/Projects/TALENTO_HUMANO/web/Archivo/";
+    public static final String url_archivos = "http://localhost:8084/TALENTO_HUMANO/Archivo/";
+    //SERVIDOR 192.168.13.52
+    //public static final String url_archivos = "http://gth.upeu.edu.pe/TALENTO_HUMANO/Archivo/";
     //public static final String url = "/usr/share/tomcat7/webapps/TALENTO_HUMANO/Archivo/";
+    //SERVIDOR 192.168.15.20
+    //public static final String url_archivos = "http://gth.upeu.edu.pe/TALENTO_HUMANO/Archivo/";
+    //public static final String url = "//u01/tomcat/gth_webapps/DATA_GTH/Archivo/";
 
     public static ConexionBD open(int typeDB) {
         switch (typeDB) {

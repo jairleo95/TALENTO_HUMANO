@@ -539,4 +539,32 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
         return p;
     }
 
+    @Override
+    public ArrayList<Map<String, ?>> detTrabajadores(String idDestino) {
+        sql = "select d.N_TRABAJADORES trapre,sum(r.N_TRABAJADORES) tracon "
+                + "from RHTM_PRESUPUESTO p,RHTD_DETALLE_PRESUPUESTO d,RHTH_DETALLE_PRE_PUESTO r "
+                + "where IDDESTINO=? "
+                + "AND p.ID_PRESUPUESTO=d.ID_PRESUPUESTO "
+                + "AND d.ID_DETALLE_PRESUPUESTO=r.ID_DETALLE_PRESUPUESTO "
+                + "group by d.N_TRABAJADORES";
+        ArrayList<Map<String, ?>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idDestino);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("tpresup", rs.getInt("TRAPRE"));
+                m.put("tcon", rs.getInt("TRACON"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar DETALLE DE LOS TRABAJADORES CONTRATADOS " + e);
+        } finally {
+            this.cnn.close();
+        }
+        return lista;
+    }
+
 }

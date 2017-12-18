@@ -24,6 +24,7 @@
         <title> Registrar DGP </title>
         <meta name="description" content="">
         <meta name="author" content="">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <!-- Basic Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
@@ -161,7 +162,7 @@
                                                             id = tr.getId_trabajador();
                                                     %>
                                                     <input  type="hidden" class="idtr" value="<%=id%>"/>
-                                                    
+
                                                     <div class="row">
 
                                                         <input value= "<%=tr.getId_trabajador()%>"  type="hidden" id="" />
@@ -690,13 +691,15 @@
                                     </div>
                                 </div>
                                 <!-- end widget content -->
-                                </div>
+                                <!-- </div> -->
                                 <!-- end widget div -->
-                                </div>
+                                <!-- </div> -->
                                 <!-- end widget -->
                             </article>
-                            <div class="hidden" role="alert" id="presC"></div>
+                            
                             <article class="col-sm-12 col-md-12 col-lg-6">
+                                <div id="presC">
+                                </div>
                                 <!-- Widget ID (each widget will need unique ID)-->
                                 <div class="jarviswidget jarviswidget-color-white" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-deletebutton="false">
                                     <!-- widget options:

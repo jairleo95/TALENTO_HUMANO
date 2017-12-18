@@ -12,7 +12,7 @@ package pe.edu.upeu.application.properties;
 public class globalProperties {
 
     /* Enviroment variable*/
- /*change when update server (for cache conflicts)*/
+    /*change when update server (for cache conflicts)*/
     public static String VERSION_CSS = "2.1.0";
     public static String VERSION_JS = "2.7.0";
 
@@ -25,11 +25,18 @@ public class globalProperties {
     public static final String DOCENTESXCURSO_METHOD[] = {"DocenteXCurso", "ns1", "ns1:DocenteXCursoResponse"};
 
     /*oracle bd connection */
-    public static final String HOSTNAME = "192.168.1.18";
- //public static final String HOSTNAME = "procesrh-db.upeu";
+    //public static final String HOSTNAME = "192.168.1.18";
+    //public static final String HOSTNAME = "192.168.1.18";
+    /*public static final String HOSTNAME = "procesrh-db.upeu";
     public static final String USER = "procesosrh";
     public static final String USER_PWD = "gestionrrhh";
     public static final String PORT = "1521";
-    public static final String SID = "xe";
+    public static final String SID = "xe";*/
+    
+     public static final String HOSTNAME = "localhost";
+     public static final String USER = "gth";
+     public static final String USER_PWD = "123";
+     public static final String PORT = "1521";
+     public static final String SID = "xe";
 
 }

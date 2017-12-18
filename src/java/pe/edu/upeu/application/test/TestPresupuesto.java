@@ -19,7 +19,8 @@ public class TestPresupuesto {
     static PresupuestoDAO pD = new PresupuestoDAO();
 
     public static void main(String[] args) {
-        PresupuestoActual("ARE-0006");
+        //PresupuestoActual("ARE-0006");
+        trabajadores("ARE-0006");
     }
 
     public static void PresupuestoActual(String idArea) {
@@ -29,6 +30,15 @@ public class TestPresupuesto {
             System.out.println("Error : " + e);
         }
 
+    }
+
+    public static void trabajadores(String idDestino) {
+        System.out.println("=======================================");
+        try {
+            System.out.println(pD.detTrabajadores(idDestino));
+        } catch (Exception e) {
+            System.out.println("Error : " + e);
+        }
     }
 
 }
