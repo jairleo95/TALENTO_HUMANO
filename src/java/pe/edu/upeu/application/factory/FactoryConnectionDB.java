@@ -18,10 +18,12 @@ public class FactoryConnectionDB {
 
     public static String[] configMYSQL = {"bd_almacen", "root", "root"};
 
-    public static String[] configORACLE = {globalProperties.USER, globalProperties.USER_PWD, globalProperties.HOSTNAME, globalProperties.PORT, globalProperties.SID};
+    //public static String[] configORACLE = {globalProperties.USER, globalProperties.USER_PWD, globalProperties.HOSTNAME, globalProperties.PORT, globalProperties.SID};
+    public static String[] configORACLE = {"gth", "123", "192.168.21.9", "1521", "xe"};
 
     //ARCHIVOS LOCALES
-    public static final String url = "E:/Projects/TALENTO_HUMANO/web/Archivo/";
+    //public static final String url = "E:/Projects/TALENTO_HUMANO/web/Archivo/";
+    public static final String url = "C:/Users/Cesar/Documents/NetBeansProjects/TALENTO_HUMANO/web/Archivo/";
     public static final String url_archivos = "http://localhost:8084/TALENTO_HUMANO/Archivo/";
     //SERVIDOR 192.168.13.52
     //public static final String url_archivos = "http://gth.upeu.edu.pe/TALENTO_HUMANO/Archivo/";

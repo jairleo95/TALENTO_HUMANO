@@ -6,6 +6,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,14 +16,28 @@ import java.util.Map;
 public interface InterfacePresupuestoDAO {
 
     public String Reg_Presupuesto(Object s);
+    
+    public int comprobarContratadosByDept(String idDestino, String idReq);
 
-    public ArrayList<Map<String, ?>> comprobar(String idDestino);
+    public int comprobarContratadosByArea(String idDestino, String idReq);
+    
+    public int comprobarContratadosByPuesto(String idDestino, String idReq);
+    
+    public int calcTrabPresByDept(String idDestino, String idReq);
+    
+    public int calcTrabPresByArea(String idPres, String idReq);
 
-    public ArrayList<Map<String, ?>> dataPresupuesto(String idDestino);
+    public ArrayList<Map<String, ?>> getPresupuestoActual(String idDestino);
+    
+    public String getIdPresupuestoActual(String idDestino);
+    
+    public String getIdDetallePresupuestoActual(String id, String idreq);
 
-    public ArrayList<Map<String, ?>> pActual(String idDestino);
+    public ArrayList<Map<String, ?>> getDetallePresupuestoActual(String idDestino);
 
     public String statusPresupuesto(String idDestino);
+    
+    public List<Map<String, Object>> listDetPres(String idpres);
 
     public ArrayList<Map<String, ?>> CCostos(String id, int tipo);
 
@@ -39,6 +54,10 @@ public interface InterfacePresupuestoDAO {
     public ArrayList<Map<String, ?>> listDetPresupuesto(Object s);
 
     public ArrayList<Map<String, ?>> compDet(String idPresupuesto, int con, int time);
+    
+    public List<Map<String, Object>> listDetPrePuesto(String idDetalle);
+    
+    public Map<String, Object> getDetPrePuesto(String idpres, String idpuesto);
 
     public ArrayList<Map<String, ?>> listDetalleTra(String idDetalle);
 
@@ -46,10 +65,12 @@ public interface InterfacePresupuestoDAO {
 
     public boolean Reg_DetTraPuesto(String idPuesto, String idDet, int ntra);
 
-    public ArrayList<Map<String, ?>> infoPrePuesto(String idDetPuesto);
+    public ArrayList<Map<String, ?>> infoPrePuesto(String idPuesto,String idDetPres);
+    
+    public int checkNumTraDispByDetPres(String idDetPres);
+    
+    public boolean UpdateDetSueldo(Object s);
 
     public boolean Reg_DetSueldo(Object s);
-    
-    public ArrayList<Map<String, ?>> detTrabajadores(String idDestino);
 
 }

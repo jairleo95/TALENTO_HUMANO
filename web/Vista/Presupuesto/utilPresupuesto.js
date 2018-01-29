@@ -76,7 +76,7 @@ function init() {
         var opc = 'Listar_area2';
         var id = $(".select_dep").val().split("**")[0];
         listar_opciones(opc, id);
-        $("#iDestino").attr("value", id);
+        //$("#iDestino").attr("value", id);
         $("#iDestinoM").attr("value", $(".select_dep").val());
         $("#tipo_p").attr("value", 2);
         //statusPresupuesto(id);        
@@ -126,7 +126,7 @@ function init() {
 function helpDG() {
     new PNotify({
         title: 'Datos Generales',
-        text: 'El presupuesto puede ser destinado para un departamento o para un área,las temporadas se muestran dependiendo de esa elección',
+        text: 'El presupuesto es destinado para un área,las temporadas se muestran dependiendo de la elección del área. El presupuesto del Departamento será la suma de los presupuestos de sus áreas',
         type: 'info'
     });
 }

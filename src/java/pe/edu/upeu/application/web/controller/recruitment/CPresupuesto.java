@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -51,6 +52,8 @@ public class CPresupuesto extends HttpServlet {
         int tipo, ntra, con, tiem;
         String tip = request.getParameter("tip");
         Map<String, Object> c = new HashMap<>();
+        List<Map<String, Object>> detpres;
+        String idpres;
         switch (opc) {
             case "gest":
                 //response.sendRedirect("Vista/Presupuesto/Gpresupuesto.jsp");
@@ -90,8 +93,25 @@ public class CPresupuesto extends HttpServlet {
                 rpta.put("obj", pD.Reg_Presupuesto(c));
                 break;
             case "comp":
-                idDestino = request.getParameter("idDes");
-                rpta.put("datos", pD.comprobar(idDestino));
+                String dest = request.getParameter("dest");
+                String idReq = request.getParameter("idreq");
+                if (dest.equals("2")) {
+                    idDestino = request.getParameter("idDes");
+                    rpta.put("ntrac", pD.comprobarContratadosByDept(idDestino, idReq));
+                    rpta.put("ntrad", pD.calcTrabPresByDept(idDestino, idReq));
+                } else if (dest.equals("1")) {
+                    idDestino = request.getParameter("idDes");
+                    idpres = pD.getIdPresupuestoActual(idDestino);
+                    rpta.put("ntrac", pD.comprobarContratadosByArea(idDestino, idReq));
+                    rpta.put("ntrad", pD.calcTrabPresByArea(idpres, idReq));
+                    rpta.put("idpres", idpres);
+                    rpta.put("iddetpres", pD.getIdDetallePresupuestoActual(idpres, idReq));
+                } else if (dest.equals(dest)) {
+                    String iddetp = request.getParameter("iddetp");
+                    String idpuesto = request.getParameter("idpuesto");
+                    rpta.put("ntrac", pD.comprobarContratadosByPuesto(idpuesto, idReq));
+                    rpta.put("detpuesto", pD.getDetPrePuesto(iddetp, idpuesto));
+                }
                 break;
             case "hist_con":
                 idDestino = request.getParameter("idDes");
@@ -99,15 +119,22 @@ public class CPresupuesto extends HttpServlet {
                 break;
             case "actual":
                 idDestino = request.getParameter("idDes");
-                rpta.put("datos", pD.dataPresupuesto(idDestino));
+                rpta.put("datos", pD.getPresupuestoActual(idDestino));
                 break;
             case "listActual":
                 idDestino = request.getParameter("idDes");
-                rpta.put("datos", pD.pActual(idDestino));
+                rpta.put("datos", pD.getDetallePresupuestoActual(idDestino));
                 break;
             case "status":
                 idDestino = request.getParameter("idDes");
-                rpta.put("rpta", pD.statusPresupuesto(idDestino));
+                String idp = pD.statusPresupuesto(idDestino);
+                rpta.put("rpta", idp);
+                detpres = pD.listDetPres(idp);
+                for (int i = 0; i < detpres.size(); i++) {
+                    String iddetpres = (String) detpres.get(i).get("ID_DETALLE_PRESUPUESTO");
+                    detpres.get(i).put("detalleprespuesto", pD.listDetPrePuesto(iddetpres));
+                }
+                rpta.put("detallepres", detpres);
                 break;
             case "ccosto":
                 id = request.getParameter("id");
@@ -159,11 +186,28 @@ public class CPresupuesto extends HttpServlet {
                 idPuesto = request.getParameter("puesto");
                 idDetalle = request.getParameter("idDet");
                 ntra = Integer.parseInt(request.getParameter("nt"));
-                rpta.put("ta", pD.Reg_DetTraPuesto(idPuesto, idDetalle, ntra));
+                int disp = pD.checkNumTraDispByDetPres(idDetalle);
+                System.out.println("Disponible: " + disp + ", nuevos: " + ntra);
+                if (ntra != 0 && ntra <= disp) {
+                    rpta.put("ta", pD.Reg_DetTraPuesto(idPuesto, idDetalle, ntra));
+                } else {
+                    rpta.put("ta", 2);
+                }
                 break;
             case "infoPP":
+                idPuesto = request.getParameter("idpues");
                 idDetalle = request.getParameter("idDet");
-                rpta.put("in", pD.infoPrePuesto(idDetalle));
+                rpta.put("in", pD.infoPrePuesto(idPuesto, idDetalle));
+                break;
+            case "updateSueldo":
+                c.put("idPrePuesto", request.getParameter("idprepuesto"));
+                c.put("sueldo_min", Double.parseDouble(request.getParameter("sueldo_min")));
+                c.put("sueldo_max", Double.parseDouble(request.getParameter("sueldo_max")));
+                c.put("bono_min", Double.parseDouble(request.getParameter("bono_min")));
+                c.put("bono_max", Double.parseDouble(request.getParameter("bono_max")));
+                c.put("boal_min", Double.parseDouble(request.getParameter("boal_min")));
+                c.put("boal_max", Double.parseDouble(request.getParameter("boal_max")));
+                rpta.put("rpta", pD.UpdateDetSueldo(c));
                 break;
             case "regPP":
                 c.put("idDet", request.getParameter("idDet"));
@@ -177,7 +221,26 @@ public class CPresupuesto extends HttpServlet {
                 break;
             case "infTra":
                 idDetalle = request.getParameter("idDet");
-                rpta.put("info", pD.detTrabajadores(idDetalle));
+                idpres = pD.getIdPresupuestoActual(idDetalle);
+                System.out.println(idpres);
+                Map<String, Object> mp = new HashMap<>();
+                mp.put("idp", idpres);
+                detpres = pD.listDetPres(idpres);
+                for (int i = 0; i < detpres.size(); i++) {
+                    String iddetpres = (String) detpres.get(i).get("ID_DETALLE_PRESUPUESTO");
+                    detpres.get(i).put("detalleprespuesto", pD.listDetPrePuesto(iddetpres));
+                }
+                mp.put("detallepres", detpres);
+                rpta.put("info", mp);
+                break;
+            case "presupuestoDetails":
+                idp = request.getParameter("id");
+                detpres = pD.listDetPres(idp);
+                for (int i = 0; i < detpres.size(); i++) {
+                    String iddetpres = (String) detpres.get(i).get("ID_DETALLE_PRESUPUESTO");
+                    detpres.get(i).put("detalleprespuesto", pD.listDetPrePuesto(iddetpres));
+                }
+                rpta.put("detallepres", detpres);
                 break;
         }
 

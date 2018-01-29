@@ -535,7 +535,8 @@ function RegDGPAditionalPermissions() {
                     $(".chosen-select").trigger("chosen:updated");
                     //evaluar presupuesto de Departamento
                     //evaluarPresupuesto($(".selectDepartamento").val());
-                    loadPresupuesto($(".select-area").val(), 1);
+                    console.log("ready!");
+                    loadPresupuesto($(".selectDepartamento").val(), 2);
                 });
                 initJobsFilters(data.filterAnyJobs);
             } else {
@@ -546,15 +547,19 @@ function RegDGPAditionalPermissions() {
     });
 }
 
-/*
- function evaluarPresupuesto(idDestino) {
- $("#idDestino").attr("value",idDestino);
+
+/*function evaluarPresupuesto(idDestino) {
+ $("#idDestino").attr("value", idDestino);
  try {
  var psaldo = 0;
  var psntra = 0;
  var url = '../../pres?opc=actual';
  var data = 'idDes=' + idDestino;
- $.post(url, data, function (objJson) {
+ $.ajax(url, {
+ data: data,
+ type: 'POST',
+ async: false,
+ success: function (objJson) {
  var tipo = "";
  var mensaje = "";
  var d = objJson.datos;
@@ -567,7 +572,11 @@ function RegDGPAditionalPermissions() {
  var pntra = 0;
  var url = '../../pres?opc=comp';
  var data = 'idDes=' + idDestino;
- $.post(url, data, function (objJson) {
+ $.ajax(url, {
+ data: data,
+ type: 'POST',
+ async: false,
+ success: function (objJson) {
  var dinero = 0;
  var s = objJson.datos;
  pmonto = s[0].monto; //monto gastado
@@ -598,6 +607,7 @@ function RegDGPAditionalPermissions() {
  mensaje = "<strong>" + pntra + "</strong> trabajadores contratados de <strong>" + psntra + "</strong> presupuestados en esta Area";
  mensaje += "<br/><strong>$ " + dinero + "</strong> disponibles en el presupuesto de esta Area";
  createAlert(mensaje, pt, tipo);
+ }
  });
  } else {//No Presupuestado
  tipo = "danger";
@@ -605,104 +615,208 @@ function RegDGPAditionalPermissions() {
  pt = 0;
  createAlert(mensaje, pt, tipo);
  }
- 
+ }
  });
  } catch (e) {
  console.error("Error al evaluar presupuesto" + e);
  }
- }
- 
- function createAlert(mensaje, por, tipo) {
- var s = '<div class="col-md-12" id="contAll">';
- s += '<div class="col-md-6" id="contMen">';
- s += mensaje;
- s += '</div>';
- s += '<div class="col-md-6" id="contBar">';
- s += '<div class="progress">';
- s += '<div class="progress-bar progress-bar-' + tipo + ' progress-bar-striped active" role="progressbar" aria-valuenow="' + por + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + por + '%">';
- s += Math.round(por) + "%";
- s += '</div>';
- s += '</div>';
- s += '</div>';
- s += '</div>';
- 
- $("#presC").empty();
- $("#presC").attr("class", "alert alert-" + tipo + " col-sm-12 col-md-12 col-lg-6");
- $("#presC").append(s);
- 
- }
- 
- function createLoader(load) {
- var s = '<div class="progress">';
- s += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
- s += '<span class="sr-only">' + load + '% Complete</span>';
- s += '</div>';
- s += '</div>';
- return s;
- }
- */
+ }*/
+
+function createAlert(mensaje, por, tipo) {
+    var s = '<div class="col-md-12" id="contAll">';
+    s += '<div class="col-md-6" id="contMen">';
+    s += mensaje;
+    s += '</div>';
+    s += '<div class="col-md-6" id="contBar">';
+    s += '<div class="progress">';
+    s += '<div class="progress-bar progress-bar-' + tipo + ' progress-bar-striped active" role="progressbar" aria-valuenow="' + por + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + por + '%">';
+    s += Math.round(por) + "%";
+    s += '</div>';
+    s += '</div>';
+    s += '</div>';
+    s += '</div>';
+
+    $("#presC").empty();
+    $("#presC").attr("class", "alert alert-" + tipo + " col-sm-12 col-md-12 col-lg-6");
+    $("#presC").append(s);
+
+}
+
+function createLoader(load) {
+    var s = '<div class="progress">';
+    s += '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
+    s += '<span class="sr-only">' + load + '% Complete</span>';
+    s += '</div>';
+    s += '</div>';
+    return s;
+}
+
+var idPresupuesto;
+var idDetPres;
 
 function loadPresupuesto(idDestino, destino) {
-    console.log(idDestino);
-    try {
-        var url = "../../pres?opc=infTra";
-        var data = "idDet=" + idDestino;
-        $.post(url, data, function (data) {
-            var dataPresupuesto = data.info;
-            if (dataPresupuesto.length > 0) {
-                createAlertExist(destino, dataPresupuesto[0].tpresup, dataPresupuesto[0].tcon);
-            } else {
-                createAlertNoExist(destino);
+    console.log(idDestino, destino);
+    var url = "";
+    var data = "";
+    if (destino === 2) {
+        url = "../../pres?opc=comp";
+        data = "idDes=" + idDestino;
+        data += "&dest=" + destino;
+        data += "&idreq=" + $('#nom_req').val();
+        $.ajax(url, {
+            data: data,
+            type: 'POST',
+            async: false,
+            success: function (obj) {
+                var ntrad = parseInt(obj.ntrad);
+                if (ntrad > 0) {
+                    createAlertExist(destino, obj);
+                } else {
+                    createAlertNoExist(destino);
+                    disabledNext();
+                }
             }
         });
-    } catch (e) {
-
+    } else if (destino === 1) {
+        url = "../../pres?opc=comp";
+        data = "idDes=" + idDestino;
+        data += "&dest=" + destino;
+        data += "&idreq=" + $('#nom_req').val();
+        $.ajax(url, {
+            data: data,
+            type: 'POST',
+            async: false,
+            success: function (obj) {
+                idPresupuesto = obj.idpres;
+                if (obj.iddetpres !== null) {
+                    idDetPres = obj.iddetpres;
+                }
+                console.log(idPresupuesto);
+                var ntrad = parseInt(obj.ntrad);
+                if (ntrad > 0) {
+                    createAlertExist(destino, obj);
+                } else {
+                    createAlertNoExist(destino);
+                }
+            }
+        });
+    } else if (destino === 3) {
+        console.log(idDestino);
+        url = "../../pres?opc=comp";
+        data = "idpuesto=" + idDestino;
+        data += "&dest=" + destino;
+        data += "&iddetp=" + idDetPres;
+        data += "&idreq=" + $('#nom_req').val();
+        $.ajax(url, {
+            data: data,
+            type: 'POST',
+            async: false,
+            success: function (obj) {
+                if (obj.detpuesto['NO_PUESTO'] != null) {
+                    createAlertExist(destino, obj);
+                } else {
+                    createAlertNoExist(destino);
+                }
+            }
+        });
     }
 
 }
 
 function createAlertNoExist(destino) {
     var d;
-    if (destino === 1) {
+    if (destino === 2) {
         d = "este Departamento";
     }
-    if (destino === 2) {
-        d = "esta Área";
+    if (destino === 1) {
+        d = "este Área";
+    }
+    if (destino === 3) {
+        d = "este Puesto";
     }
     var s = '<div class="alert alert-warning">';
-    s += '<strong>Atención!</strong> ,no se ha presupuestado aún ' + d + '.';
+    s += '<strong>Atención!</strong>, no se ha presupuestado aún ' + d + '.';
     s += '</div>';
     $("#presC").empty();
     $("#presC").append(decodeURIComponent(escape(s)));
 }
 
-function createAlertExist(destino, tpresup, tcon) {
+function createAlertExist(destino, obj) {
     var s = "";
-    if (tpresup >= tcon) {
-        var d;
-        if (destino === 1) {
-            d = "este Departamento";
-        }
-        if (destino === 2) {
-            d = "esta Área";
-        }
-        var load = calculatePorcent(tpresup, tcon);
-        var tipo = TipPresupuesto(load);
-        s += '<div class="alert alert-' + tipo + '">';
-        s += '<strong>Hey!</strong> ,el estado actual del presupuesto es ' + d + ':';
-        s += '<br/>';
-        s += '<strong>' + tcon + '</strong> trabajadores contratados de los <strong>' + tpresup + '</strong> trabajadores presupuestados';
-        s += '<br/>';
-        s += '<div class="progress">';
-        s += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
-        s += load + '%';
-        s += '</div>';
-        s += '</div>';
-        s += '</div>';
-    } else {
-        alert("llegó al límite");
-    }
+    console.log(obj);
 
+    var load = calculatePorcent(parseInt(obj.ntrad), parseInt(obj.ntrac));
+    var tipo = TipPresupuesto(load);
+    if (destino === 1 | destino === 2) {
+        if (obj.ntrad > obj.ntrac) {
+            var d;
+            if (destino === 2) {
+                d = "este Departamento";
+                s += '<div class="alert alert-' + tipo + '">';
+                s += '<strong>Hey!</strong> este es el estado actual del presupuesto en ' + d + ':';
+                s += '<br/>';
+                s += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.ntrad + '</strong> trabajadores presupuestados bajo el mismo requerimiento';
+                s += '<br/>';
+                s += '<div class="progress">';
+                s += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
+                s += load + '%';
+                s += '</div>';
+                s += '</div>';
+                s += '</div>';
+            }
+            if (destino === 1) {
+                d = "este Área";
+                s += '<div class="alert alert-' + tipo + '">';
+                s += '<strong>Hey!</strong> este es el estado actual del presupuesto en ' + d + ':';
+                s += '<br/>';
+                s += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.ntrad + '</strong> trabajadores presupuestados bajo el mismo requerimiento';
+                s += '<br/>';
+                s += '<div class="progress">';
+                s += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
+                s += load + '%';
+                s += '</div>';
+                s += '</div>';
+                s += '</div>';
+            }
+        } else {
+            alert("llegó al límite");
+            disabledNext();
+        }
+    }
+    if (destino === 3) {
+        console.log("hola");
+        d = "este Puesto: " + obj.detpuesto.NO_PUESTO;
+        load = calculatePorcent(parseInt(obj.detpuesto.N_TRABAJADORES), parseInt(obj.ntrac));
+        console.log(load);
+        tipo = TipPresupuesto(load);
+        if (obj.detpuesto.N_TRABAJADORES > obj.ntrac) {
+            s += '<div class="alert alert-' + tipo + '">';
+            s += '<strong>Hey!</strong> este es el estado actual del presupuesto en ' + d + ':';
+            s += '<br/>';
+            s += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.detpuesto.N_TRABAJADORES + '</strong> trabajadores presupuestados bajo el mismo requerimiento';
+            s += '<br/>';
+            s += '<div class="progress">';
+            s += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
+            s += load + '%';
+            s += '</div>';
+            s += '</div>';
+            s += '</div>';
+            $('.btnSig').attr("disabled", false);
+        } else {
+            s += '<div class="alert alert-' + tipo + '">';
+            s += '<strong>Hey!</strong> este es el estado actual del presupuesto en ' + d + ':';
+            s += '<br/>';
+            s += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.detpuesto.N_TRABAJADORES + '</strong> trabajadores presupuestados bajo el mismo requerimiento. Se ha llegado al límite.';
+            s += '<br/>';
+            s += '<div class="progress">';
+            s += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
+            s += load + '%';
+            s += '</div>';
+            s += '</div>';
+            s += '</div>';
+            disabledNext();
+        }
+    }
     $("#presC").empty();
     $("#presC").append(decodeURIComponent(escape(s)));
 }
@@ -732,7 +846,7 @@ function TipPresupuesto(porcentaje) {
 
 function calculatePorcent(tpresup, tcon) {
     var por = tcon * 100 / tpresup;
-    return por;
+    return por.toFixed(2);
 }
 
 function disabledNext() {
@@ -752,7 +866,7 @@ function  initJobsFilters(aditionalFIlters) {
         //list_cc_area($(this).val(), $(".centro_costo1"));
         //actualPresupuesto($(".select-area").val());
         //evaluarPresupuesto($(".select-area").val());
-        loadPresupuesto($(".select-area").val(), 2);
+        loadPresupuesto($(".select-area").val(), 1);
     });
     $(".select-seccion").change(function () {
         list_select($(".select-puesto"), "../../Direccion_Puesto", "opc=Listar_pu_id&id=" + $(".select-seccion").val() + "&esL=1", "3");
@@ -762,6 +876,7 @@ function  initJobsFilters(aditionalFIlters) {
     $(".select-puesto").change(function () {
         $(".select-puesto1").val($(this).val());
         $(".chosen-select").trigger("chosen:updated");
+        loadPresupuesto($(".select-puesto").val(), 3);
     });
     $(".select-puesto1").change(function () {
         $(".select-area,.select-seccion,.select-puesto").val("");

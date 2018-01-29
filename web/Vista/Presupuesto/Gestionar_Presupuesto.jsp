@@ -40,8 +40,8 @@
             }
         </style>
     </head>
-    <body>
-        <div class="panel panel-primary col-lg-10 col-lg-offset-1">            
+    <body class="container-fluid">
+        <div class="panel panel-primary col-lg-9">            
             <div class="panel-body">
                 <form class="">
                     <!--<div class="row">
@@ -105,30 +105,25 @@
                             </div>
                         </div>
                         <legend class="">
-                            Asignación de trabajadores por <strong>condición laboral</strong>  <a class="Help" onclick="helpCL()"><i class="fa fa-question-circle"></i></a>
+                            Asignación de trabajadores por <strong>requerimiento</strong>  <a class="Help" onclick="helpCL()"><i class="fa fa-question-circle"></i></a>
                         </legend>
                         <div class="row">
-                            <div class="form-group col-md-3 col-xs-12" >
-                                <label class="">Condición Laboral :</label>
+                            <div class="form-group col-md-6 col-xs-12" >
+                                <label class="">Requerimiento :</label>
                                 <select class="form-control select_condicion" >
                                     <option value="" selected disabled>[Seleccione]</option>
-                                    <option value="1">Contratado</option>
-                                    <option value="2">Contratado Independiente</option>
-                                    <option value="3">Enpleado</option>
-                                    <option value="4">Misionero</option>
-                                    <option value="5">Practicante Profesional</option>
-                                    <option value="6">Practicante Pre profesional</option>
-                                    <option value="7">Convenio Laboral Juvenil</option>
-                                    <option value="8">MFL-Contrato</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3 col-xs-12" >
-                                <label class="">Tiempo de Trabajo :</label>
-                                <select class="form-control select_tiempo" >
-                                    <option value="" selected disabled>[Seleccione]</option>
-                                    <option value="1">Tiempo Completo</option>
-                                    <option value="2">Medio Tiempo</option>
-                                    <option value="3">Tiempo Parcial</option>
+                                    <option value="REQ-0001">Contrato Personal : Tiempo Completo</option>
+                                    <option value="REQ-0002">Contrato Personal : Medio Tiempo (24 Horas Semanal)</option>
+                                    <option value="REQ-0003">Contrato Personal : Tiempo Parcial</option>
+                                    <option value="REQ-0004">Renovacion de Contrato</option>
+                                    <option value="REQ-0005">Contrato Personal : Extranjero</option>
+                                    <option value="REQ-0007">Practicas Preprofesionales (Tope 6hrs diarias / 30 hrs  semanales.)</option>
+                                    <option value="REQ-0008">Practicas Profesionales</option>
+                                    <option value="REQ-0009">Convenio Laboral Juvenil (Hasta 22 a?os, no matriculados)</option>
+                                    <option value="REQ-0010">Locacion de Servicios</option>
+                                    <option value="REQ-0011">No domiciliado (Expositores Extranjeros)</option>
+                                    <option value="REQ-0018">Contrato Personal : Tiempo Parcial (Trabajador Docente)</option>
+                                    <option value="REQ-0019">Contratacion Casos Especiales</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-xs-12">
@@ -254,6 +249,14 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+        <div class="panel panel-primary col-lg-3">
+            <div class="well row"><h4>Detalle</h4>En esta sección se irá mostrando todo lo que usted haya registrado hasta el momento del presupuesto seleccionado en la parte superior:
+                <br>
+                <div id="detcontent">
+                </div>
+
             </div>
         </div>
         <input id="iDestinoM" type="hidden">

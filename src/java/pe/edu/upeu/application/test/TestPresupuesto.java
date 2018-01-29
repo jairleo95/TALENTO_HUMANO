@@ -19,26 +19,27 @@ public class TestPresupuesto {
     static PresupuestoDAO pD = new PresupuestoDAO();
 
     public static void main(String[] args) {
-        //PresupuestoActual("ARE-0006");
-        trabajadores("ARE-0006");
+        //PresupuestoActual("PRE-000001");
+        getIdPres("ARE-0356");
+        //trabajadores("ARE-0006");
     }
 
     public static void PresupuestoActual(String idArea) {
         try {
-            System.out.println(pD.pActual(idArea));
+            System.out.println(pD.getDetallePresupuestoActual(idArea));
         } catch (Exception e) {
             System.out.println("Error : " + e);
         }
 
     }
-
-    public static void trabajadores(String idDestino) {
-        System.out.println("=======================================");
+    
+    public static void getIdPres(String idArea) {
         try {
-            System.out.println(pD.detTrabajadores(idDestino));
+            System.out.println(pD.getIdPresupuestoActual(idArea));
         } catch (Exception e) {
             System.out.println("Error : " + e);
         }
+
     }
 
 }
