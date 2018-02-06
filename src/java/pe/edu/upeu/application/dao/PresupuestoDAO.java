@@ -92,7 +92,7 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     @Override
     public int comprobarContratadosByDept(String idDestino, String idReq) {
         System.out.println("===============INGRESANDO A comprobarByDept======================");
-        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con,RHTX_TEMPORADA t, RHTM_DGP dgp where "
+        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con, RHTM_DGP dgp where "
                 + "con.ES_CONTRATO=1 and con.ID_PUESTO in (select ID_PUESTO from RHTR_PUESTO where "
                 + "RHTR_PUESTO.ID_SECCION in (select ID_SECCION from RHTR_SECCION where "
                 + "ID_AREA in (select ID_AREA from RHTD_AREA where ID_DEPARTAMENTO=?))) and con.ID_DGP=dgp.ID_DGP and dgp.ID_REQUERIMIENTO=?";
@@ -107,11 +107,39 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
                 ntra = rs.getInt("ntra");
             }
         } catch (Exception e) {
-            System.out.println("Error al obtener el número de trabajadores contratados por departamento " + e + " MÉTODO comprobar");
+            System.out.println("Error al obtener el número de trabajadores contratados por departamento " + e + " MÉTODO comprobarContratadosByDept");
         } finally {
             this.cnn.close();
         }
         System.out.println("===============SALIENDO DE comprobarByDept======================");
+        return ntra;
+    }
+
+    @Override
+    public int comprobarContratadosInDeptByIdPP(String idPP) {
+        System.out.println("===============INGRESANDO A comprobarContratadosInDeptByIdPP======================");
+        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con, RHTM_DGP dgp, (select pres.IDDESTINO, dp.ID_REQUERIMIENTO "
+                + "from RHTM_PRESUPUESTO pres, RHTD_DETALLE_PRESUPUESTO dp, RHTR_PRESUPUESTO_PUESTO pp where pres.ID_PRESUPUESTO=dp.ID_PRESUPUESTO "
+                + "and dp.ID_DETALLE_PRESUPUESTO=pp.ID_DETALLE_PRESUPUESTO and pp.ID_PRESUPUESTO_PUESTO=?) n where "
+                + "con.ES_CONTRATO=1 and con.ID_PUESTO in (select ID_PUESTO from RHTR_PUESTO where "
+                + "RHTR_PUESTO.ID_SECCION in (select ID_SECCION from RHTR_SECCION where "
+                + "ID_AREA in (select ID_AREA from RHTD_AREA where ID_DEPARTAMENTO=(select ID_DEPARTAMENTO from RHTD_AREA "
+                + "where ID_AREA=n.IDDESTINO)))) and con.ID_DGP=dgp.ID_DGP and dgp.ID_REQUERIMIENTO=n.ID_REQUERIMIENTO";
+        int ntra = 0;
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idPP);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ntra = rs.getInt("ntra");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al obtener el número de trabajadores contratados por departamento " + e + " MÉTODO comprobarContratadosInDeptByIdPP");
+        } finally {
+            this.cnn.close();
+        }
+        System.out.println("===============SALIENDO DE comprobarContratadosInDeptByIdPP======================");
         return ntra;
     }
 
@@ -141,6 +169,35 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     }
 
     @Override
+    public int calcTrabPresInDeptByIdPP(String idPP) {
+        System.out.println("===============INGRESANDO A calcTrabPresInDeptByIdPP======================");
+        sql = "select nvl(sum(dp.N_TRABAJADORES),0) as ntrad from RHTD_DETALLE_PRESUPUESTO dp, RHTM_PRESUPUESTO pr, "
+                + "(select pres.IDDESTINO, dp.ID_REQUERIMIENTO "
+                + "from RHTM_PRESUPUESTO pres, RHTD_DETALLE_PRESUPUESTO dp, RHTR_PRESUPUESTO_PUESTO pp where pres.ID_PRESUPUESTO=dp.ID_PRESUPUESTO "
+                + "and dp.ID_DETALLE_PRESUPUESTO=pp.ID_DETALLE_PRESUPUESTO and pp.ID_PRESUPUESTO_PUESTO=?) n "
+                + "where dp.ID_PRESUPUESTO=pr.ID_PRESUPUESTO "
+                + "and pr.ID_TEMPORADA in (select ID_TEMPORADA from RHTX_TEMPORADA where IDDESTINO in (select ID_AREA from RHTD_AREA "
+                + "where ID_DEPARTAMENTO=(select ID_DEPARTAMENTO from RHTD_AREA where ID_AREA=n.IDDESTINO)) "
+                + "and sysdate between FECHA_INICIO and FECHA_FIN) and dp.ID_REQUERIMIENTO=n.ID_REQUERIMIENTO";
+        int ntra = 0;
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idPP);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ntra = rs.getInt("ntrad");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el número de trabajadores presupuestados por departamento " + e + " MÉTODO calcTrabPresInDeptByIdPP");
+        } finally {
+            this.cnn.close();
+        }
+        System.out.println("===============SALIENDO DE calcTrabPresInDeptByIdPP======================");
+        return ntra;
+    }
+
+    @Override
     public int calcTrabPresByArea(String idPres, String idReq) {
         System.out.println("===============INGRESANDO A calcTrabPresByArea======================");
         sql = "select nvl(sum(dp.N_TRABAJADORES),0) as ntrad from RHTD_DETALLE_PRESUPUESTO dp where dp.ID_PRESUPUESTO=? and dp.ID_REQUERIMIENTO=?";
@@ -166,7 +223,7 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     @Override
     public int comprobarContratadosByArea(String idDestino, String idReq) {
         System.out.println("===============INGRESANDO A comprobarContratadosByArea======================");
-        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con,RHTX_TEMPORADA t, RHTM_DGP dgp where "
+        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con, RHTM_DGP dgp where "
                 + "con.ES_CONTRATO=1 and con.ID_PUESTO in (select RHTR_PUESTO.ID_PUESTO from RHTR_PUESTO where "
                 + "RHTR_PUESTO.ID_SECCION in (select RHTR_SECCION.ID_SECCION from RHTR_SECCION where "
                 + "RHTR_SECCION.ID_AREA=?)) and con.ID_DGP=dgp.ID_DGP and dgp.ID_REQUERIMIENTO=?";
@@ -188,11 +245,40 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
         System.out.println("===============SALIENDO DE comprobarContratadosByArea======================");
         return ntra;
     }
-    
+
+    @Override
+    public Map<String, Object> comprobarContratadosAndPresInAreaByIdPP(String idPP) {
+        System.out.println("===============INGRESANDO A comprobarContratadosAndPresInAreaByIdPP======================");
+        sql = "select count(con.ID_CONTRATO) as ntra, n.N_TRABAJADORES as ntrap from RHTM_CONTRATO con, RHTM_DGP dgp, (select pres.IDDESTINO, "
+                + "dp.ID_REQUERIMIENTO, dp.N_TRABAJADORES "
+                + "from RHTM_PRESUPUESTO pres, RHTD_DETALLE_PRESUPUESTO dp, RHTR_PRESUPUESTO_PUESTO pp where pres.ID_PRESUPUESTO=dp.ID_PRESUPUESTO "
+                + "and dp.ID_DETALLE_PRESUPUESTO=pp.ID_DETALLE_PRESUPUESTO and pp.ID_PRESUPUESTO_PUESTO=?) n where "
+                + "con.ES_CONTRATO=1 and con.ID_PUESTO in (select RHTR_PUESTO.ID_PUESTO from RHTR_PUESTO where "
+                + "RHTR_PUESTO.ID_SECCION in (select RHTR_SECCION.ID_SECCION from RHTR_SECCION where "
+                + "RHTR_SECCION.ID_AREA=n.IDDESTINO)) and con.ID_DGP=dgp.ID_DGP and dgp.ID_REQUERIMIENTO=n.ID_REQUERIMIENTO group by n.N_TRABAJADORES";
+        Map<String, Object> mp = new HashMap();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idPP);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                mp.put("ntrac", rs.getInt("ntra"));
+                mp.put("ntrap", rs.getInt("ntrap"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el número de trabajadores contratados por área " + e + " MÉTODO comprobarContratadosAndPresInAreaByIdPP");
+        } finally {
+            this.cnn.close();
+        }
+        System.out.println("===============SALIENDO DE comprobarContratadosAndPresInAreaByIdPP======================");
+        return mp;
+    }
+
     @Override
     public int comprobarContratadosByPuesto(String idDestino, String idReq) {
         System.out.println("===============INGRESANDO A comprobarContratadosByPuesto======================");
-        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con,RHTX_TEMPORADA t, RHTM_DGP dgp where "
+        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con, RHTM_DGP dgp where "
                 + "con.ES_CONTRATO=1 and con.ID_PUESTO = ? and con.ID_DGP=dgp.ID_DGP and dgp.ID_REQUERIMIENTO=?";
         int ntra = 0;
         try {
@@ -479,6 +565,189 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     }
 
     @Override
+    public boolean RegSolFueraPresupuesto(String idpp, int ntra, String com, String iduser) {
+        System.out.println("===============INGRESANDO A RegSolFueraPresupuesto======================");
+        boolean r = false;
+        try {
+            sql = "INSERT INTO RHTH_SOL_FUERA_PRESUPUESTO (ID_PRESUPUESTO_PUESTO,COMENTARIO,ESTADO,N_TRABAJADORES,ID_USER,FECHA_SOLICITUD) VALUES(?,?,'1',?,?,sysdate)";
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idpp);
+            ps.setString(2, com);
+            ps.setInt(3, ntra);
+            ps.setString(4, iduser);
+            int m = ps.executeUpdate();
+            if (m > 0) {
+                r = true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error al registrar Solicitud de Presupuesto : " + e);
+        }
+        System.out.println("===============SALIENDO DE RegSolFueraPresupuesto======================");
+        return r;
+    }
+
+    @Override
+    public ArrayList<Map<String, Object>> listSolFP() {
+        System.out.println("===============INGRESANDO A listSolFP======================");
+        sql = "select sfp.ID_SOL_FUERA_PRESUPUESTO,sfp.COMENTARIO,sfp.N_TRABAJADORES,to_char(sfp.FECHA_SOLICITUD,'dd/mm/yyyy') as FECHA,u.NO_TRABAJADOR||' '||u.AP_PATERNO as solicitante,"
+                + "t.NOMBRE_TEMP,p.NO_PUESTO, to_char(t.FECHA_INICIO,'dd/mm/yyyy') as FECHA_INICIO, to_char(t.FECHA_FIN,'dd/mm/yyyy') as FECHA_FIN, ar.NO_AREA, dep.NO_DEP, req.NO_REQ, sfp.ID_PRESUPUESTO_PUESTO "
+                + "from RHTH_SOL_FUERA_PRESUPUESTO sfp, RHVD_USUARIO u, RHTX_TEMPORADA t, RHTR_PUESTO p, "
+                + "RHTR_PRESUPUESTO_PUESTO pp, RHTD_DETALLE_PRESUPUESTO dp, RHTM_PRESUPUESTO pre ,RHTR_SECCION sec ,RHTD_AREA ar,RHTX_DEPARTAMENTO dep, RHTR_REQUERIMIENTO req "
+                + "where sfp.ESTADO='0' and sfp.ID_USER=u.ID_USUARIO and sfp.ID_PRESUPUESTO_PUESTO=pp.ID_PRESUPUESTO_PUESTO and pp.ID_DETALLE_PRESUPUESTO=dp.ID_DETALLE_PRESUPUESTO "
+                + "and dp.ID_PRESUPUESTO=pre.ID_PRESUPUESTO and pre.ID_TEMPORADA=t.ID_TEMPORADA and pp.ID_PUESTO=p.ID_PUESTO and p.ID_SECCION=sec.ID_SECCION and sec.ID_AREA=ar.ID_AREA "
+                + "and ar.ID_DEPARTAMENTO=dep.ID_DEPARTAMENTO and dp.ID_REQUERIMIENTO=req.ID_REQUERIMIENTO";
+        ArrayList<Map<String, Object>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("ID_SOL_FUERA_PRESUPUESTO", rs.getString("ID_SOL_FUERA_PRESUPUESTO"));
+                m.put("COMENTARIO", rs.getString("COMENTARIO"));
+                m.put("N_TRABAJADORES", rs.getString("N_TRABAJADORES"));
+                m.put("FECHA", rs.getString("FECHA"));
+                m.put("SOLICITANTE", rs.getString("SOLICITANTE"));
+                m.put("NOMBRE_TEMP", rs.getString("NOMBRE_TEMP"));
+                m.put("NO_PUESTO", rs.getString("NO_PUESTO"));
+                m.put("FECHA_INICIO", rs.getString("FECHA_INICIO"));
+                m.put("FECHA_FIN", rs.getString("FECHA_FIN"));
+                m.put("NO_AREA", rs.getString("NO_AREA"));
+                m.put("NO_DEP", rs.getString("NO_DEP"));
+                m.put("NO_REQ", rs.getString("NO_REQ"));
+                m.put("ID_PRESUPUESTO_PUESTO", rs.getString("ID_PRESUPUESTO_PUESTO"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar SFP " + e + " MÉTODO listSolFP");
+        } finally {
+            this.cnn.close();
+        }
+        System.out.println("===============SALIENDO DE listSolFP======================");
+        return lista;
+    }
+
+    @Override
+    public ArrayList<Map<String, Object>> listAllSolFP(String idDep, String idArea, String idSeccion, String idPuesto) {
+        System.out.println("===============INGRESANDO A listAllSolFP======================");
+        sql = "select sp.*,pro.procesador from (select  sfp.ESTADO,sfp.COMENTARIO,sfp.N_TRABAJADORES,to_char(sfp.FECHA_SOLICITUD,'dd/mm/yyyy') as FECHA,"
+                + "u.NO_TRABAJADOR||' '||u.AP_PATERNO as solicitante,t.NOMBRE_TEMP,p.NO_PUESTO, to_char(t.FECHA_INICIO,'dd/mm/yyyy') as FECHA_INICIO, "
+                + "to_char(t.FECHA_FIN,'dd/mm/yyyy') as FECHA_FIN, ar.NO_AREA, dep.NO_DEP, req.NO_REQ,sfp.OBSERVACION,sfp.AUTH_USER "
+                + "from RHTH_SOL_FUERA_PRESUPUESTO sfp, RHVD_USUARIO u, RHTX_TEMPORADA t, RHTR_PUESTO p,RHTR_PRESUPUESTO_PUESTO pp, "
+                + "RHTD_DETALLE_PRESUPUESTO dp, RHTM_PRESUPUESTO pre ,RHTR_SECCION sec ,RHTD_AREA ar,RHTX_DEPARTAMENTO dep, RHTR_REQUERIMIENTO req "
+                + "where sfp.ID_USER=u.ID_USUARIO and sfp.ID_PRESUPUESTO_PUESTO=pp.ID_PRESUPUESTO_PUESTO and "
+                + "pp.ID_DETALLE_PRESUPUESTO=dp.ID_DETALLE_PRESUPUESTO and dp.ID_PRESUPUESTO=pre.ID_PRESUPUESTO and pre.ID_TEMPORADA=t.ID_TEMPORADA "
+                + "and pp.ID_PUESTO=p.ID_PUESTO and p.ID_SECCION=sec.ID_SECCION and sec.ID_AREA=ar.ID_AREA and ar.ID_DEPARTAMENTO=dep.ID_DEPARTAMENTO "
+                + ((idDep != null) ? "and dep.ID_DEPARTAMENTO='" + idDep + "' " : "") + ((idArea != null) ? "and ar.ID_AREA='" + idArea + "' " : "")
+                + ((idSeccion != null) ? "and sec.ID_SECCION='" + idSeccion + "' " : "") + ((idPuesto != null) ? "and p.ID_PUESTO='" + idPuesto + "' " : "")
+                + "and dp.ID_REQUERIMIENTO=req.ID_REQUERIMIENTO) sp left join (SELECT NO_TRABAJADOR||' '||AP_PATERNO as procesador, ID_USUARIO "
+                + "from RHVD_USUARIO) pro on sp.AUTH_USER=pro.ID_USUARIO";
+        System.out.println(sql);
+        ArrayList<Map<String, Object>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("ESTADO", rs.getString("ESTADO"));
+                m.put("COMENTARIO", rs.getString("COMENTARIO"));
+                m.put("N_TRABAJADORES", rs.getString("N_TRABAJADORES"));
+                m.put("FECHA", rs.getString("FECHA"));
+                m.put("SOLICITANTE", rs.getString("SOLICITANTE"));
+                m.put("NOMBRE_TEMP", rs.getString("NOMBRE_TEMP"));
+                m.put("NO_PUESTO", rs.getString("NO_PUESTO"));
+                m.put("FECHA_INICIO", rs.getString("FECHA_INICIO"));
+                m.put("FECHA_FIN", rs.getString("FECHA_FIN"));
+                m.put("NO_AREA", rs.getString("NO_AREA"));
+                m.put("NO_DEP", rs.getString("NO_DEP"));
+                m.put("NO_REQ", rs.getString("NO_REQ"));
+                m.put("PROCESADOR", rs.getString("PROCESADOR"));
+                m.put("OBSERVACION", rs.getString("OBSERVACION"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar SFP " + e + " MÉTODO listAllSolFP");
+        } finally {
+            this.cnn.close();
+        }
+        System.out.println("===============SALIENDO DE listAllSolFP======================");
+        return lista;
+    }
+
+    @Override
+    public int updateSFP(String idsfp, String est, String obs, String iduser) {
+        System.out.println("===============INGRESANDO A updateSFP======================");
+        int r = 0;
+        try {
+            sql = "UPDATE RHTH_SOL_FUERA_PRESUPUESTO set OBSERVACION=?,ESTADO=?,AUTH_USER=? where ID_SOL_FUERA_PRESUPUESTO=?";
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, obs);
+            ps.setString(2, est);
+            ps.setString(3, iduser);
+            ps.setString(4, idsfp);
+            System.out.println("actualizando registro de RHTH_SOL_FUERA_PRESUPUESTO con ID: " + idsfp);
+            r = ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error al registrar Detalle Presupuesto : " + e + " MÉTODO Reg_Det_Presupuesto");
+        }
+        System.out.println("===============SALIENDO DE updateSFP======================");
+        return r;
+    }
+
+    @Override
+    public boolean updatePresPuestoTrab(String idpp, int extra) {
+        System.out.println("===============INGRESANDO A updatePresPuestoTrab======================");
+        boolean p = false;
+        sql = "{CALL RHSP_UPDATE_PRESUPUESTO_PUESTO (?,?)}";
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            cs = this.cnn.conex.prepareCall(sql);
+            cs.setString(1, idpp);
+            cs.setInt(2, extra);
+            System.out.println("Actualizando Trabajadores presupuestados en RHTR_PRESUPUESTO_PUESTO");
+            p = (!cs.execute());
+        } catch (SQLException | NumberFormatException e) {
+            System.out.println("Error al agregar Presupuesto " + e + " MÉTODO updatePresPuestoTrab");
+            p = false;
+        } finally {
+            this.cnn.close();
+        }
+        System.out.println("===============SALIENDO DE updatePresPuestoTrab======================");
+        return p;
+    }
+
+    @Override
+    public Map<String, Object> getTrabPresAndCon(String idpp) {
+        System.out.println("===============INGRESANDO A getTrabPresAndCon======================");
+        sql = "select trad,trac from (select count(con.ID_CONTRATO) as trac from RHTM_CONTRATO con, RHTM_DGP dgp, RHTR_PRESUPUESTO_PUESTO pp "
+                + "where con.ES_CONTRATO=1 and con.ID_PUESTO = pp.ID_PUESTO and con.ID_DGP=dgp.ID_DGP and dgp.ID_REQUERIMIENTO=(select ID_REQUERIMIENTO "
+                + "from RHTM_PRESUPUESTO pres, RHTD_DETALLE_PRESUPUESTO det, RHTR_PRESUPUESTO_PUESTO prep where prep.ID_PRESUPUESTO_PUESTO=? "
+                + "and prep.ID_DETALLE_PRESUPUESTO=det.ID_DETALLE_PRESUPUESTO and det.ID_PRESUPUESTO=pres.ID_PRESUPUESTO)),"
+                + "(select RHTR_PRESUPUESTO_PUESTO.N_TRABAJADORES as trad from RHTR_PRESUPUESTO_PUESTO where RHTR_PRESUPUESTO_PUESTO.ID_PRESUPUESTO_PUESTO=?)";
+        Map<String, Object> m = new HashMap<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idpp);
+            ps.setString(2, idpp);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                m.put("trad", rs.getInt("trad"));
+                m.put("trac", rs.getInt("trac"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar Temporadas " + e + " MÉTODO listTemporadas");
+        } finally {
+            this.cnn.close();
+        }
+        System.out.println("===============SALIENDO DE getTrabPresAndCon======================");
+        return m;
+    }
+
+    @Override
     public ArrayList<Map<String, ?>> listTemporadas(String idDestino) {
         System.out.println("===============INGRESANDO A listTemporadas======================");
         sql = "select * from RHTX_TEMPORADA where ESTADO='1' and IDDESTINO=?";
@@ -490,7 +759,6 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Map<String, Object> m = new HashMap<>();
-                System.out.println(rs.getString("ID_TEMPORADA"));
                 m.put("id_temporada", rs.getString("ID_TEMPORADA"));
                 m.put("fecha_inicio", rs.getString("FECHA_INICIO"));
                 m.put("fecha_fin", rs.getString("FECHA_FIN"));
@@ -498,7 +766,7 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
                 lista.add(m);
             }
         } catch (SQLException e) {
-            System.out.println("Error al listar Temporadas " + e + "MÉTODO listTemporadas");
+            System.out.println("Error al listar Temporadas " + e + " MÉTODO listTemporadas");
         } finally {
             this.cnn.close();
         }
@@ -507,18 +775,43 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     }
 
     @Override
+    public Map<String, Object> getTemporadaByIdPres(String idPres) {
+        System.out.println("===============INGRESANDO A getTemporadaByIdPres======================");
+        sql = "select t.ID_TEMPORADA,to_char(t.FECHA_INICIO,'dd/mm/yyyy')as FECHA_INICIO,to_char(t.FECHA_FIN,'dd/mm/yyyy') as FECHA_FIN,t.NOMBRE_TEMP from RHTX_TEMPORADA t, RHTM_PRESUPUESTO p where p.ESTADO='1' and t.ID_TEMPORADA=p.ID_TEMPORADA and p.ID_PRESUPUESTO=?";
+        Map<String, Object> m = new HashMap<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idPres);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                m.put("ID_TEMPORADA", rs.getString("ID_TEMPORADA"));
+                m.put("FECHA_INICIO", rs.getString("FECHA_INICIO"));
+                m.put("FECHA_FIN", rs.getString("FECHA_FIN"));
+                m.put("NOMBRE_TEMP", rs.getString("NOMBRE_TEMP"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar Temporadas " + e + " MÉTODO getTemporadaByIdPres");
+            m = null;
+        } finally {
+            this.cnn.close();
+        }
+        System.out.println("===============SALIENDO DE listTemporadas======================");
+        return m;
+    }
+
+    @Override
     public boolean Reg_Det_Presupuesto(Object s) {
         System.out.println("===============INGRESANDO A Reg_Det_Presupuesto======================");
         boolean r = false;
         try {
             Map<String, Object> m = (Map<String, Object>) s;
-            sql = "INSERT INTO RHTD_DETALLE_PRESUPUESTO VALUES(null,?,?,?,?,'1')";
+            sql = "INSERT INTO RHTD_DETALLE_PRESUPUESTO VALUES(null,?,?,?,'1')";
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             ps = this.cnn.conex.prepareStatement(sql);
             ps.setString(1, m.get("idP").toString());
-            ps.setString(2, m.get("con").toString());
-            ps.setString(3, m.get("time").toString());
-            ps.setString(4, m.get("ntra").toString());
+            ps.setString(2, m.get("idreq").toString());
+            ps.setString(3, m.get("ntra").toString());
             System.out.println("Insertando nuevo registro de RHTD_DETALLE_PRESUPUESTO");
             int g = ps.executeUpdate();
             if (g > 0) {
@@ -564,17 +857,16 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     }
 
     @Override
-    public ArrayList<Map<String, ?>> compDet(String idPresupuesto, int con, int time) {
+    public ArrayList<Map<String, ?>> compDet(String idPresupuesto, String idreq) {
         System.out.println("===============INGRESANDO A compDet======================");
-        sql = "select * from RHTD_DETALLE_PRESUPUESTO where ID_PRESUPUESTO=? and CONDICION_LABORAL=? and TIEMPO_TRABAJO=? and ESTADO=1 ";
+        sql = "select * from RHTD_DETALLE_PRESUPUESTO where ID_PRESUPUESTO=? and ID_REQUERIMIENTO=? and ESTADO=1 ";
         ArrayList<Map<String, ?>> lista = new ArrayList<>();
         this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         try {
             ps = this.cnn.conex.prepareStatement(sql);
-            System.out.println(sql + " - " + idPresupuesto + " - " + con + " - " + time);
+            System.out.println(sql + " - " + idPresupuesto + " - " + idreq);
             ps.setString(1, idPresupuesto);
-            ps.setInt(2, con);
-            ps.setInt(3, time);
+            ps.setString(2, idreq);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Map<String, Object> m = new HashMap<>();

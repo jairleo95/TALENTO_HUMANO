@@ -129,10 +129,10 @@ function statusPresupuesto(idDestino, c_c, tip, tem) {
 
 //************    ASIGNACIÓN POR CONDICION LABORAL   ************************//
 $(".BGE").click(function () {
-    var con = $(".select_condicion").val();
+    var idreq = $(".select_condicion").val();
     var ntra = $("#ntraG").val();
-    if (con !== null && ntra !== "") {
-        comprobarDet(con, ntra);
+    if (idreq !== null && ntra !== "") {
+        comprobarDet(idreq, ntra);
     } else {
         new PNotify({
             title: 'Incompleto',
@@ -144,8 +144,8 @@ $(".BGE").click(function () {
 
 });
 
-function comprobarDet(con, ntra) {
-    var data = "con=" + con;
+function comprobarDet(idreq, ntra) {
+    var data = "idreq=" + idreq;
     data += "&idPre=" + idPresupuestoact;
     var url = "../../pres?opc=listDetPre";
     console.log(data);
@@ -162,7 +162,7 @@ function comprobarDet(con, ntra) {
                 idDetallePreAct = objJson.detalle[0].id_det_pres;
                 loadDetalleTrabajadores(objJson.detalle[0].ntrabajadores);
             } else {
-                var data = "con=" + con;
+                var data = "idreq=" + idreq;
                 data += "&ntra=" + ntra;
                 data += "&idPre=" + idPresupuestoact;
                 var url = "../../pres?opc=regDetPre";
@@ -178,7 +178,7 @@ function comprobarDet(con, ntra) {
                                 type: 'success'
                             });
                             console.log("Ejecutando nuevamente comprobarDet()");
-                            comprobarDet(con, ntra);
+                            comprobarDet(idreq, ntra);
                         } else {
                             alert("Error al registrar - comuniquese con el administrador del sistema");
                         }

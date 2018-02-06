@@ -71,6 +71,7 @@
         <!--Plugins css-->
         <link rel="stylesheet" media="screen" href="../../css/chosen.css"  type="text/css" > 
         <link href="../../css/jquery-ui.css" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="../../js/plugin/pfnotify/pnotify.custom.min.css" rel="stylesheet" type="text/css"/>
         <style>
             .td{
                 font-weight: bold;
@@ -290,7 +291,7 @@
                                                     <section>
                                                         <label class="label" id="titu">Requerimiento :</label>
                                                         <label class="select">
-                                                            <select name="IDREQUERIMIENTO"    disabled="" onchange="mostrar()"  id="nom_req"  > 
+                                                            <select name="IDREQUERIMIENTO" class="select_req"    disabled="" onchange="mostrar()"  id="nom_req"  > 
                                                                 <option value=""></option>
 
                                                                 <%
@@ -696,7 +697,7 @@
                                 <!-- </div> -->
                                 <!-- end widget -->
                             </article>
-                            
+
                             <article class="col-sm-12 col-md-12 col-lg-6">
                                 <div id="presC">
                                 </div>
@@ -776,6 +777,9 @@
                                                     <div class="div_info">
 
                                                     </div>
+                                                    <button type="button" class="btn btn-success btn-labeled btnPresModal">
+                                                        Solicitar Presupuesto  <i class="fa fa-fa-plus"></i>
+                                                    </button>
                                                     <button type="button" class="btn btn-primary btn-labeled btnSig">
                                                         Siguiente  <i class="fa fa-arrow-circle-right"></i>
                                                     </button>
@@ -803,6 +807,70 @@
 
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="solPresModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="solPresModalLabel">Solicitud de ampliación del presupuesto</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table  class="table table-striped">
+                                    <tr><td class="td">Departamento:</td><td><label id="spdep">Mi mamà</label></td></tr>   
+                                    <tr><td class="td">Àrea:</td><td><label id="spare">me mima</label></td></tr>   
+                                    <tr><td class="td">Puesto:</td><td><label id="sppto">Mi mamà</label></td></tr>  
+                                    <tr><td class="td">Temporada:</td><td><label id="sptem">me ama</label></td></tr>  
+                                    <tr><td class="td">Requerimiento:</td><td><label id="spreq">Hola</label></td></tr>  
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="sntra"> Presupuesto por:</label>
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="text" min="1" id="sntra">
+                                                        <span class="input-group-addon">trabajador(es)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="well well-sm well-primary">
+                                    <div class="form-group">
+                                        <textarea id="scom" class="form-control" placeholder="Motivo (Justificaciòn)" rows="5" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="button" id="spbtn" class="btn btn-primary">
+                            Solicitar
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </body>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script>
@@ -876,6 +944,7 @@
     <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
+    <script src="../../js/plugin/pfnotify/pnotify.custom.min.js" type="text/javascript"></script>
 
     <!-- BUSINESS LOGIC PLUGINS-->
     <script src="../../js/Js_Formulario/Js_Form.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>

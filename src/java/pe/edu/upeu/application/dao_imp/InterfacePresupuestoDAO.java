@@ -18,12 +18,18 @@ public interface InterfacePresupuestoDAO {
     public String Reg_Presupuesto(Object s);
     
     public int comprobarContratadosByDept(String idDestino, String idReq);
+    
+    public int comprobarContratadosInDeptByIdPP(String idPP);
 
     public int comprobarContratadosByArea(String idDestino, String idReq);
+    
+    public Map<String,Object> comprobarContratadosAndPresInAreaByIdPP(String idPP);
     
     public int comprobarContratadosByPuesto(String idDestino, String idReq);
     
     public int calcTrabPresByDept(String idDestino, String idReq);
+    
+    public int calcTrabPresInDeptByIdPP(String idPP);
     
     public int calcTrabPresByArea(String idPres, String idReq);
 
@@ -46,14 +52,28 @@ public interface InterfacePresupuestoDAO {
     public ArrayList<Map<String, ?>> historial_cont(String idDestino);
 
     public boolean Reg_Temporada(String nombre, String f_i, String f_f, String id, String destino);
+    
+    public boolean RegSolFueraPresupuesto(String idpp, int ntra, String com, String iduser);
+    
+    public ArrayList<Map<String, Object>> listSolFP();
+    
+    public ArrayList<Map<String, Object>> listAllSolFP(String idDep, String idArea, String idSeccion, String idPuesto);
+    
+    public int updateSFP(String idsfp, String est, String obs, String iduser);
+    
+    public boolean updatePresPuestoTrab(String idpp, int extra);
+    
+    public Map<String, Object> getTrabPresAndCon(String idpp);
 
     public ArrayList<Map<String, ?>> listTemporadas(String idDestino);
+    
+    public Map<String, Object> getTemporadaByIdPres(String idDestino);
 
     public boolean Reg_Det_Presupuesto(Object s);
 
     public ArrayList<Map<String, ?>> listDetPresupuesto(Object s);
 
-    public ArrayList<Map<String, ?>> compDet(String idPresupuesto, int con, int time);
+    public ArrayList<Map<String, ?>> compDet(String idPresupuesto, String idreq);
     
     public List<Map<String, Object>> listDetPrePuesto(String idDetalle);
     

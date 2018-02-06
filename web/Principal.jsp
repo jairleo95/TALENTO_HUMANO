@@ -261,6 +261,9 @@
 
                 <ul>
                     <%
+                        V_Privilegio gpres=null;
+                        V_Privilegio rspres=null;
+                        V_Privilegio spres=null;
                         for (int i = 0; i < listarURL.size(); i++) {
                             V_Privilegio dp = new V_Privilegio();
                             dp = (V_Privilegio) listarURL.get(i);
@@ -285,7 +288,13 @@
                             <%}%>
                         </ul>
                     </li>
-                    <%} else {%>
+                    <%} else if(dp.getId_privilegio().equals("PRV-000046")){
+                        gpres=dp;    
+                    } else if(dp.getId_privilegio().equals("PRV-000074")){
+                        spres=dp;    
+                    } else if(dp.getId_privilegio().equals("PRV-000075")){
+                        rspres=dp;    
+                    } else {%>
                     <li class="li-privilegio bounceInDown animated">
                         <%if (id_rol.trim().equals("ROL-0013")) {%>
                         <%if (dp.getNo_link().trim().equals("Ficha del Trabajador")) {%>
@@ -306,6 +315,24 @@
                     </li>
                     <%}
                         }%>
+                    <li class="li-privilegio bounceInDown animated">
+                        <a href="#" data-value="fa fa-lg fa-fw fa-file"><i class="fa fa-lg fa-fw fa-file-text"></i> <span class="menu-item-parent">Presupuesto</span></a>
+                        <ul>
+                            <%if (gpres!=null) {%>
+                            <li>
+                                <a href="<%=gpres.getDi_url()%>" target="myframe"><i class="<%=gpres.getIc_link()%>"></i> <%=gpres.getNo_link()%></a>
+                            </li>
+                            <%}if (rspres!=null) {%>
+                            <li>
+                                <a href="<%=rspres.getDi_url()%>" target="myframe"><i class="<%=rspres.getIc_link()%>"></i> <%=rspres.getNo_link()%></a>
+                            </li>
+                            <%}if (spres!=null) {%>
+                            <li>
+                                <a href="<%=spres.getDi_url()%>" target="myframe"><i class="<%=spres.getIc_link()%>"></i> <%=spres.getNo_link()%></a>
+                            </li>
+                            <%}%>
+                        </ul>
+                    </li>
 
                 </ul>
 

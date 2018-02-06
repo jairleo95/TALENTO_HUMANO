@@ -653,6 +653,7 @@ function createLoader(load) {
 
 var idPresupuesto;
 var idDetPres;
+var idPrePuesto;
 
 function loadPresupuesto(idDestino, destino) {
     console.log(idDestino, destino);
@@ -713,6 +714,7 @@ function loadPresupuesto(idDestino, destino) {
             async: false,
             success: function (obj) {
                 if (obj.detpuesto['NO_PUESTO'] != null) {
+                    idPrePuesto = obj.detpuesto['ID_PRESUPUESTO_PUESTO'];
                     createAlertExist(destino, obj);
                 } else {
                     createAlertNoExist(destino);
@@ -725,75 +727,120 @@ function loadPresupuesto(idDestino, destino) {
 
 function createAlertNoExist(destino) {
     var d;
+    var s;
     if (destino === 2) {
+        $("#presC").empty();
         d = "este Departamento";
+        s = '<div class="alert alert-warning">';
+        s += '<strong>Atención!</strong>, no se ha presupuestado aún ' + d + '.';
+        s += '</div>';
+        $("#presC").append(decodeURIComponent(escape(s)));
     }
     if (destino === 1) {
         d = "este Área";
+        console.log(($("#presCA").length == 0));
+        if ($("#presCA").length == 0) {
+            s = '<div id="presCA" class="alert alert-warning">';
+            s += '<strong>Atención!</strong>, no se ha presupuestado aún ' + d + '.';
+            s += '</div>';
+            $("#presC").append(decodeURIComponent(escape(s)));
+        } else {
+            $("#presCA").empty();
+            s = '<strong>Atención!</strong>, no se ha presupuestado aún ' + d + '.';
+            $("#presCA").append(decodeURIComponent(escape(s)));
+        }
     }
     if (destino === 3) {
         d = "este Puesto";
+        console.log(($("#presCP").length == 0));
+        if ($("#presCP").length == 0) {
+            s = '<div id="presCP" class="alert alert-warning">';
+            s += '<strong>Atención!</strong>, no se ha presupuestado aún ' + d + '.';
+            s += '</div>';
+            $("#presC").append(decodeURIComponent(escape(s)));
+        } else {
+            $("#presCP").empty();
+            $("#presDP").empty();
+            s = '<strong>Atención!</strong>, no se ha presupuestado aún ' + d + '.';
+            $("#presCP").append(decodeURIComponent(escape(s)));
+        }
     }
-    var s = '<div class="alert alert-warning">';
-    s += '<strong>Atención!</strong>, no se ha presupuestado aún ' + d + '.';
-    s += '</div>';
-    $("#presC").empty();
-    $("#presC").append(decodeURIComponent(escape(s)));
 }
 
 function createAlertExist(destino, obj) {
     var s = "";
+    var info = "";
     console.log(obj);
 
     var load = calculatePorcent(parseInt(obj.ntrad), parseInt(obj.ntrac));
     var tipo = TipPresupuesto(load);
     if (destino === 1 | destino === 2) {
+        var d;
+        if (destino === 2) {
+            $("#presC").empty();
+            d = "Departamento";
+            s += '<div class="alert alert-' + tipo + '">';
+            s += '<strong>Presupuesto Actual: </strong>' + d + '';
+            s += '<br/>';
+            s += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.ntrad + '</strong> trabajadores presupuestados bajo el mismo requerimiento';
+            s += '<br/>';
+            s += '<div class="progress">';
+            s += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
+            s += load + '%';
+            s += '</div>';
+            s += '</div>';
+            s += '</div>';
+            $("#presC").append(decodeURIComponent(escape(s)));
+        }
+        if (destino === 1) {
+            d = "Área";
+            info = '<strong>Presupuesto Actual: </strong>' + d;
+            info += '<br/>';
+            info += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.ntrad + '</strong> trabajadores presupuestados bajo el mismo requerimiento';
+            info += '<br/>';
+            info += '<div class="progress">';
+            info += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
+            info += load + '%';
+            info += '</div>';
+            info += '</div>';
+            if ($("#presCA").length == 0) {
+                s += '<div id="presCA" class="alert alert-' + tipo + '">';
+                s += info;
+                s += '</div>';
+                $("#presC").append(decodeURIComponent(escape(s)));
+            } else {
+                $("#presCA").attr('class', 'alert alert-' + tipo + '');
+                $("#presCA").empty();
+                s = info;
+                $("#presCA").append(decodeURIComponent(escape(s)));
+            }
+        }
         if (obj.ntrad > obj.ntrac) {
-            var d;
-            if (destino === 2) {
-                d = "este Departamento";
-                s += '<div class="alert alert-' + tipo + '">';
-                s += '<strong>Hey!</strong> este es el estado actual del presupuesto en ' + d + ':';
-                s += '<br/>';
-                s += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.ntrad + '</strong> trabajadores presupuestados bajo el mismo requerimiento';
-                s += '<br/>';
-                s += '<div class="progress">';
-                s += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
-                s += load + '%';
-                s += '</div>';
-                s += '</div>';
-                s += '</div>';
-            }
-            if (destino === 1) {
-                d = "este Área";
-                s += '<div class="alert alert-' + tipo + '">';
-                s += '<strong>Hey!</strong> este es el estado actual del presupuesto en ' + d + ':';
-                s += '<br/>';
-                s += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.ntrad + '</strong> trabajadores presupuestados bajo el mismo requerimiento';
-                s += '<br/>';
-                s += '<div class="progress">';
-                s += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
-                s += load + '%';
-                s += '</div>';
-                s += '</div>';
-                s += '</div>';
-            }
         } else {
-            alert("llegó al límite");
             disabledNext();
         }
     }
     if (destino === 3) {
-        console.log("hola");
-        d = "este Puesto: " + obj.detpuesto.NO_PUESTO;
+        d = "Puesto - " + obj.detpuesto.NO_PUESTO;
         load = calculatePorcent(parseInt(obj.detpuesto.N_TRABAJADORES), parseInt(obj.ntrac));
         console.log(load);
         tipo = TipPresupuesto(load);
-        if (obj.detpuesto.N_TRABAJADORES > obj.ntrac) {
-            s += '<div class="alert alert-' + tipo + '">';
-            s += '<strong>Hey!</strong> este es el estado actual del presupuesto en ' + d + ':';
+
+
+        if ($("#presCP").length == 0) {
+            s = '<div id="presCP" class="alert alert-' + tipo + '">';
+            s += '<strong>Presupuesto Actual: </strong>' + d;
             s += '<br/>';
-            s += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.detpuesto.N_TRABAJADORES + '</strong> trabajadores presupuestados bajo el mismo requerimiento';
+            s += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.detpuesto.N_TRABAJADORES + '</strong> trabajadores presupuestados bajo el mismo requerimiento.';
+            if (obj.detpuesto.N_TRABAJADORES > obj.ntrac) {
+                $('.btnSig').attr("disabled", false);
+                $(".btnPresModal").hide();
+            } else {
+                s += ' Se ha llegado al límite.';
+                disabledNext();
+                $(".btnPresModal").show();
+                loadModalSolPres();
+            }
             s += '<br/>';
             s += '<div class="progress">';
             s += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
@@ -801,24 +848,117 @@ function createAlertExist(destino, obj) {
             s += '</div>';
             s += '</div>';
             s += '</div>';
-            $('.btnSig').attr("disabled", false);
+            s += '<div id="presDP" class="alert alert-info">';
+            s += '<strong>Detalles: </strong>';
+            s += '<br/>';
+            s += '<div class="row"><div class="col-lg-6 col-sm-12">\n\
+                    <strong>Sueldo Máx.: </strong><label>' + obj.detpuesto.SUELDO_MAX + '</label><br/>\n\
+                    <strong>Sueldo Min.: </strong><label>' + obj.detpuesto.SUELDO_MIN + '</label><br/>\n\</div>';
+            s += '<div class="col-lg-6 col-sm-12">\n\
+                    <strong>Bonificaciones Máx.: </strong><label>' + obj.detpuesto.BONO_MAX + '</label><br/>\n\
+                    <strong>Bonificaciones Min.: </strong><label>' + obj.detpuesto.BONO_MIN + '</label><br/>\n\</div>';
+            s += '<div class="col-lg-6 col-sm-12">\n\
+                    <strong>Bono Alimenticio Máx.: </strong><label>' + obj.detpuesto.BOAL_MAX + '</label><br/>\n\
+                    <strong>Bono Alimenticio Min.: </strong><label>' + obj.detpuesto.BOAL_MIN + '</label><br/>\n\</div><div/>';
+            s += '</div>';
+            $("#presC").append(decodeURIComponent(escape(s)));
         } else {
-            s += '<div class="alert alert-' + tipo + '">';
-            s += '<strong>Hey!</strong> este es el estado actual del presupuesto en ' + d + ':';
+            $("#presCP").attr('class', 'alert alert-' + tipo + '');
+            s = '<strong>Presupuesto Actual: </strong>' + d;
             s += '<br/>';
-            s += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.detpuesto.N_TRABAJADORES + '</strong> trabajadores presupuestados bajo el mismo requerimiento. Se ha llegado al límite.';
+            s += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.detpuesto.N_TRABAJADORES + '</strong> trabajadores presupuestados bajo el mismo requerimiento.';
+            if (obj.detpuesto.N_TRABAJADORES > obj.ntrac) {
+                $('.btnSig').attr("disabled", false);
+                $(".btnPresModal").hide();
+            } else {
+                s += ' Se ha llegado al límite.';
+                disabledNext();
+                loadModalSolPres();
+                $(".btnPresModal").show();
+            }
             s += '<br/>';
             s += '<div class="progress">';
             s += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
             s += load + '%';
             s += '</div>';
             s += '</div>';
-            s += '</div>';
-            disabledNext();
+            $("#presCP").empty();
+            $("#presCP").append(decodeURIComponent(escape(s)));
+            s = '<strong>Detalles: </strong>';
+            s += '<br/>';
+            s += '<div class="row"><div class="col-lg-6 col-sm-12">\n\
+                    <strong>Sueldo Máx.: </strong><label>' + obj.detpuesto.SUELDO_MAX + '</label><br/>\n\
+                    <strong>Sueldo Min.: </strong><label>' + obj.detpuesto.SUELDO_MIN + '</label><br/>\n\</div>';
+            s += '<div class="col-lg-6 col-sm-12">\n\
+                    <strong>Bonificaciones Máx.: </strong><label>' + obj.detpuesto.BONO_MAX + '</label><br/>\n\
+                    <strong>Bonificaciones Min.: </strong><label>' + obj.detpuesto.BONO_MIN + '</label><br/>\n\</div>';
+            s += '<div class="col-lg-6 col-sm-12">\n\
+                    <strong>Bono Alimenticio Máx.: </strong><label>' + obj.detpuesto.BOAL_MAX + '</label><br/>\n\
+                    <strong>Bono Alimenticio Min.: </strong><label>' + obj.detpuesto.BOAL_MIN + '</label><br/>\n\</div><div/>';
+            $("#presDP").empty();
+            $("#presDP").append(decodeURIComponent(escape(s)));
         }
     }
-    $("#presC").empty();
-    $("#presC").append(decodeURIComponent(escape(s)));
+}
+$(".btnPresModal").click(function(){
+    loadModalSolPres();
+});
+
+$("#spbtn").click(function () {
+    $.ajax("../../pres?opc=regSFP", {
+        data: {
+            idpp: idPrePuesto,
+            ntra: $("#sntra").val(),
+            com: $("#scom").val()
+        },
+        type: 'POST',
+        async: false,
+        success: function (data) {
+            if (data.obj) {
+                new PNotify({
+                    title: 'Genial!',
+                    text: 'Ya enviamos tu solicitud, puedes verlo en Estado de Solicitudes en la Sección de Presupuesto y asegurarte si lo autorizan para que puedas continuar con la contratación.',
+                    type: 'success'
+                });
+                $("#solPresModal").modal('hide');
+                setTimeout(function () {
+                    window.location.href = "../../pres?opc=solfpview";
+                }, 3000);
+
+            } else {
+                new PNotify({
+                    title: 'Oh no!',
+                    text: 'Hubo un problema, nuestros ingenieros están trabajando para solucionarlo. Por favor inténtalo de nuevo.',
+                    type: 'warning'
+                });
+                $("#solPresModal").modal('hide');
+            }
+        }
+    });
+});
+
+//Mostrar el modal para solicitar ampliación del presupuesto
+function loadModalSolPres() {
+    $("#spdep").text($(".selectDepartamento option:selected").text());
+    $("#spare").text($(".select-area option:selected").text());
+    $("#sppto").text($(".select-puesto option:selected").text());
+    //alert($(".select_req option:selected").text());
+    $("#spreq").text($("#nom_req option:selected").text());
+    $.ajax("../../pres?opc=getTempByIdPres", {
+        data: {
+            idp: idPresupuesto
+        },
+        type: 'POST',
+        async: false,
+        success: function (obj) {
+            console.log(obj);
+            var detT = obj.detTemp;
+            $("#sptem").text(detT.NOMBRE_TEMP + " > " + detT.FECHA_INICIO + " - " + detT.FECHA_FIN);
+        }
+    });
+    $("#solPresModal").modal('show');
+    //$("#spare").text($(".select-area option:selected").text());
+    //$("#spare").text($(".select-area option:selected").text());
 }
 
 function TipPresupuesto(porcentaje) {
@@ -885,6 +1025,7 @@ function  initJobsFilters(aditionalFIlters) {
 }
 $(document).ready(function () {
     pageSetUp();
+    $(".btnPresModal").hide();
     $.sound_path = "../../sound/", $.sound_on = !0, jQuery(document).ready(function () {
         $("body").append("<div id='divSmallBoxes'></div>"), $("body").append("<div id='divMiniIcons'></div><div id='divbigBoxes'></div>")
     });
