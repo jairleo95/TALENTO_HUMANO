@@ -277,7 +277,7 @@
         <script src="../../js/plugin/bootstrap-timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
         <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
         <script src="../../js/chosen.jquery.js" type="text/javascript"></script>
-        <script src="../../js/Js_Horario/horario-api.js" type="text/javascript"></script>
+        <script src="../../js/businessLogic/Horario/horario-api.js" type="text/javascript"></script>
         <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
          
         <script src="../../js/businessLogic/Horario/detalleFormatoHorario.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>

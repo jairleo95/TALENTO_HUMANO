@@ -277,9 +277,6 @@
                             <li>
                                 <a href="Vista/Dgp/Requerimiento.jsp?opc=Planilla" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i> En Planilla</a>
                             </li>
-                            <li>
-                                <a href="Vista/Dgp/Requerimiento.jsp?opc=FueraDePlanilla" target="myframe"><i class="fa fa-lg fa-fw fa-file"></i> Fuera de Planilla</a>
-                            </li>
                             <%}
                                 if (id_rol.trim().equals("ROL-0011") | id_rol.trim().equals("ROL-0001")) {%>
                             <li>
@@ -290,9 +287,9 @@
                     </li>
                     <%} else if(dp.getId_privilegio().equals("PRV-000046")){
                         gpres=dp;    
-                    } else if(dp.getId_privilegio().equals("PRV-000074")){
+                    } else if(dp.getId_privilegio().equals("PRV-000048")){
                         spres=dp;    
-                    } else if(dp.getId_privilegio().equals("PRV-000075")){
+                    } else if(dp.getId_privilegio().equals("PRV-000047")){
                         rspres=dp;    
                     } else {%>
                     <li class="li-privilegio bounceInDown animated">

@@ -41,7 +41,7 @@ public interface InterfacePresupuestoDAO {
 
     public ArrayList<Map<String, ?>> getDetallePresupuestoActual(String idDestino);
 
-    public String statusPresupuesto(String idDestino);
+    public String statusPresupuesto(String idDestino, String temp);
     
     public List<Map<String, Object>> listDetPres(String idpres);
 
@@ -70,10 +70,12 @@ public interface InterfacePresupuestoDAO {
     public Map<String, Object> getTemporadaByIdPres(String idDestino);
 
     public boolean Reg_Det_Presupuesto(Object s);
+    
+    public int updateDetPresupuesto(String idDet,int ntra);
 
     public ArrayList<Map<String, ?>> listDetPresupuesto(Object s);
 
-    public ArrayList<Map<String, ?>> compDet(String idPresupuesto, String idreq);
+    public ArrayList<Map<String, Object>> compDet(String idPresupuesto, String idreq);
     
     public List<Map<String, Object>> listDetPrePuesto(String idDetalle);
     
@@ -81,9 +83,13 @@ public interface InterfacePresupuestoDAO {
 
     public ArrayList<Map<String, ?>> listDetalleTra(String idDetalle);
 
-    public ArrayList<Map<String, ?>> listDetalleTraPuesto(String idPuesto, String idDet_pre_puesto);
+    public ArrayList<Map<String, Object>> listDetalleTraPuesto(String idPuesto, String idDet_pre_puesto);
+    
+    public Map<String, Object> getTrabDispAndPresTotal(String idDet, String idpp);
 
     public boolean Reg_DetTraPuesto(String idPuesto, String idDet, int ntra);
+    
+    public boolean updateDetTraPuesto(String idpp, int ntra);
 
     public ArrayList<Map<String, ?>> infoPrePuesto(String idPuesto,String idDetPres);
     

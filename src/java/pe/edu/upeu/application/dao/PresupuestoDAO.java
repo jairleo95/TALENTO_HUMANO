@@ -415,14 +415,16 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     }
 
     @Override
-    public String statusPresupuesto(String idDestino) {
+    public String statusPresupuesto(String idDestino, String temp) {
         System.out.println("===============INGRESANDO A statusPresupuesto======================");
         String s = "no";
-        sql = "select * from RHTM_PRESUPUESTO where IDDESTINO=? and ESTADO='1'";
+        sql = "select ID_PRESUPUESTO from RHTM_PRESUPUESTO where IDDESTINO=? and ESTADO='1' and ID_TEMPORADA=?";
+        System.out.println(sql + " - " + idDestino + " - " + temp);
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             ps = this.cnn.conex.prepareStatement(sql);
             ps.setString(1, idDestino);
+            ps.setString(2, temp);
             rs = ps.executeQuery();
             while (rs.next()) {
                 s = rs.getString("ID_PRESUPUESTO");
@@ -545,7 +547,7 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
         System.out.println("===============INGRESANDO A Reg_Temporada======================");
         boolean r = false;
         try {
-            sql = "INSERT INTO RHTX_TEMPORADA VALUES(null,?,?,'1',?,?,?)";
+            sql = "INSERT INTO RHTX_TEMPORADA VALUES(null,to_date(?,'dd/mm/yyyy'),to_date(?,'dd/mm/yyyy'),'1',?,?,?)";
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             ps = this.cnn.conex.prepareStatement(sql);
             ps.setString(1, f_i);
@@ -825,6 +827,25 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     }
 
     @Override
+    public int updateDetPresupuesto(String idDet, int ntra) {
+        int g = 0;
+        System.out.println("===============INGRESANDO A updateDetPresupuesto======================");
+        try {
+            sql = "UPDATE RHTD_DETALLE_PRESUPUESTO SET N_TRABAJADORES=? where ID_DETALLE_PRESUPUESTO=?";
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setInt(1, ntra);
+            ps.setString(2, idDet);
+            System.out.println("actualizando registro de RHTD_DETALLE_PRESUPUESTO con id " + idDet);
+            g = ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error al registrar Detalle Presupuesto : " + e + "MÉTODO updateDetPresupuesto");
+        }
+        System.out.println("===============SALIENDO DE updateDetPresupuesto======================");
+        return g;
+    }
+
+    @Override
     public ArrayList<Map<String, ?>> listDetPresupuesto(Object s) {
         System.out.println("===============INGRESANDO A listDetPresupuesto======================");
         Map<String, Object> h = (Map<String, Object>) s;
@@ -857,10 +878,10 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     }
 
     @Override
-    public ArrayList<Map<String, ?>> compDet(String idPresupuesto, String idreq) {
+    public ArrayList<Map<String, Object>> compDet(String idPresupuesto, String idreq) {
         System.out.println("===============INGRESANDO A compDet======================");
         sql = "select * from RHTD_DETALLE_PRESUPUESTO where ID_PRESUPUESTO=? and ID_REQUERIMIENTO=? and ESTADO=1 ";
-        ArrayList<Map<String, ?>> lista = new ArrayList<>();
+        ArrayList<Map<String, Object>> lista = new ArrayList<>();
         this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         try {
             ps = this.cnn.conex.prepareStatement(sql);
@@ -880,6 +901,7 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
         } catch (SQLException e) {
             //lista = new ArrayList<>();
             System.out.println("Error al listar COMPROBACION PRESUPUESTO " + e + "MÉTODO compDet");
+            lista = null;
         } finally {
             this.cnn.close();
         }
@@ -936,6 +958,7 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
                 m.put("ID_PRESUPUESTO_PUESTO", rs.getString("ID_PRESUPUESTO_PUESTO"));
                 m.put("ID_DETALLE_PRESUPUESTO", rs.getString("ID_DETALLE_PRESUPUESTO"));
                 m.put("NO_PUESTO", rs.getString("NO_PUESTO"));
+                m.put("ID_PUESTO", rs.getString("ID_PUESTO"));
                 m.put("SUELDO_MIN", rs.getString("SUELDO_MIN"));
                 m.put("SUELDO_MAX", rs.getString("SUELDO_MAX"));
                 m.put("BONO_MIN", rs.getString("BONO_MIN"));
@@ -984,12 +1007,11 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     }
 
     @Override
-    public ArrayList<Map<String, ?>> listDetalleTraPuesto(String idPuesto, String idDet_pre_puesto) {
+    public ArrayList<Map<String, Object>> listDetalleTraPuesto(String idPuesto, String idDet_pre_puesto) {
         System.out.println("===============INGRESANDO A listDetalleTraPuesto======================");
-        sql = "";
         sql = "select * from RHTR_PRESUPUESTO_PUESTO where ID_DETALLE_PRESUPUESTO=? and ID_PUESTO=?";
         System.out.println(sql + " - " + idDet_pre_puesto + " - " + idPuesto);
-        ArrayList<Map<String, ?>> lista = new ArrayList<>();
+        ArrayList<Map<String, Object>> lista = new ArrayList<>();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
             ps = this.cnn.conex.prepareStatement(sql);
@@ -1005,12 +1027,43 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
                 lista.add(m);
             }
         } catch (SQLException e) {
+            lista = null;
             System.out.println("Error al listar DETALLE PRESUPUESTO PUESTO" + e + "MÉTODO listDetalleTraPuesto");
         } finally {
             this.cnn.close();
         }
         System.out.println("===============SALIENDO DE listDetalleTraPuesto======================");
         return lista;
+    }
+
+    @Override
+    public Map<String, Object> getTrabDispAndPresTotal(String idDet, String idpp) {
+        System.out.println("===============INGRESANDO A getTrabDispAndPresTotal======================");
+        sql = "select ntrab,RHTD_DETALLE_PRESUPUESTO.N_TRABAJADORES as total from (select nvl(sum(N_TRABAJADORES),0) as ntrab from RHTR_PRESUPUESTO_PUESTO "
+                + "where ID_DETALLE_PRESUPUESTO=? "
+                + "and ID_PRESUPUESTO_PUESTO!=?) "
+                + "left join RHTD_DETALLE_PRESUPUESTO on RHTD_DETALLE_PRESUPUESTO.ID_DETALLE_PRESUPUESTO=?";
+        System.out.println(sql + " - " + idDet + " - " + idpp);
+        Map<String, Object> m = new HashMap<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idDet);
+            ps.setString(2, idpp);
+            ps.setString(3, idDet);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                m.put("ntrab", rs.getInt("ntrab"));
+                m.put("total", rs.getInt("total"));
+            }
+        } catch (SQLException e) {
+            m = null;
+            System.out.println("Error al listar DETALLE PRESUPUESTO PUESTO" + e + " MÉTODO getTrabDispAndPresTotal");
+        } finally {
+            this.cnn.close();
+        }
+        System.out.println("===============SALIENDO DE getTrabDispAndPresTotal======================");
+        return m;
     }
 
     @Override
@@ -1052,11 +1105,34 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
                 r = true;
             }
         } catch (Exception e) {
-            System.out.println("Error al registrar Detalle Presupuesto Puesto : " + e + "MÉTODO Reg_DetTraPuesto");
+            System.out.println("Error al registrar Detalle Presupuesto Puesto : " + e + " MÉTODO Reg_DetTraPuesto");
         } finally {
             this.cnn.close();
         }
         System.out.println("===============SALIENDO DE Reg_DetTraPuesto======================");
+        return r;
+    }
+
+    @Override
+    public boolean updateDetTraPuesto(String idpp, int ntra) {
+        System.out.println("===============INGRESANDO A updateDetTraPuesto======================");
+        boolean r = false;
+        sql = "UPDATE RHTR_PRESUPUESTO_PUESTO SET N_TRABAJADORES=? WHERE ID_PRESUPUESTO_PUESTO=?";
+        this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        try {
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setInt(1, ntra);
+            ps.setString(2, idpp);
+            int g = ps.executeUpdate();
+            if (g > 0) {
+                r = true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error al registrar Detalle Presupuesto Puesto : " + e + " MÉTODO updateDetTraPuesto");
+        } finally {
+            this.cnn.close();
+        }
+        System.out.println("===============SALIENDO DE updateDetTraPuesto======================");
         return r;
     }
 

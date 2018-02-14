@@ -1,3 +1,5 @@
+var iDestino;
+
 function convertir_fecha(fecha) {
     var fi = fecha.split("-");
     var year = fi[0];
@@ -23,7 +25,7 @@ function listar_opciones(opc, id) {
         $(".select_area").empty();
         $(".select_area").append("<option value='' selected disabled>[Seleccione]</option>");
         a.empty();
-        a.append("<option value='' selected disabled>[Seleccione]</option>");
+        a.append("<option value='0' selected disabled>[Seleccione]</option>");
     }
     if (opc == 'Listar_dir_dep') {
         var a = $(".select_dep");
@@ -31,7 +33,7 @@ function listar_opciones(opc, id) {
         $(".select_area").append("<option value='' selected disabled>[Seleccione]</option>");
         ap = "&id=" + id;
         a.empty();
-        a.append("<option value='' selected disabled>[Seleccione]</option>");
+        a.append("<option value='0' selected disabled>[Seleccione]</option>");
     }
     if (opc == 'Listar_area2') {
         var a = $(".select_area");
@@ -39,7 +41,7 @@ function listar_opciones(opc, id) {
         $(".select_seccion").empty();
         $(".select_seccion").append("<option value='' selected disabled>[Seleccione]</option>");
         a.empty();
-        a.append("<option value='' selected disabled>[Seleccione]</option>");
+        a.append("<option value='0' selected disabled>[Seleccione]</option>");
     }
     if (opc === "Listar_sec2") {
         var a = $(".select_seccion");
@@ -47,18 +49,18 @@ function listar_opciones(opc, id) {
         $(".select_puesto").empty();
         $(".select_puesto").append("<option value='' selected disabled>[Seleccione]</option>");
         a.empty();
-        a.append("<option value='' selected disabled>[Seleccione]</option>");
+        a.append("<option value='0' selected disabled>[Seleccione]</option>");
     }
     if (opc === "Listar_pu_id") {
         var a = $(".select_puesto");
         ap = "&id=" + id;
         a.empty();
-        a.append("<option value='' selected disabled>[Seleccione]</option>");
+        a.append("<option value='0' selected disabled>[Seleccione]</option>");
     }
     $.post("../../Direccion_Puesto", "opc=" + opc + ap, function (objJson) {
         var list = objJson.lista;
         for (var i = 0; i < list.length; i++) {
-            a.append("<option value='" + list[i].id + "**" + list[i].nombre + "'>" + list[i].nombre + "</option>");
+            a.append("<option value='" + list[i].id + "'>" + list[i].nombre + "</option>");
         }
     });
 }
@@ -69,12 +71,12 @@ function init() {
     listar_opciones(opc, id);
     $(".select_direccion").change(function () {
         var opc = 'Listar_dir_dep';
-        var id = $(".select_direccion").val().split("**")[0];
+        var id = $(".select_direccion").val();
         listar_opciones(opc, id);
     });
     $(".select_dep").change(function () {
         var opc = 'Listar_area2';
-        var id = $(".select_dep").val().split("**")[0];
+        var id = $(".select_dep").val();
         listar_opciones(opc, id);
         //$("#iDestino").attr("value", id);
         $("#iDestinoM").attr("value", $(".select_dep").val());
@@ -84,7 +86,7 @@ function init() {
         listCCostos(id, 2);
     });
     $(".select_area").change(function () {
-        var id = $(".select_area").val().split("**")[0];
+        var id = $(".select_area").val();
         var opc = 'Listar_sec2';
         listar_opciones(opc, id);
         $("#iDestino").attr("value", id);
@@ -95,19 +97,40 @@ function init() {
         listCCostos(id, 1);
     });
     $(".select_cc").change(function () {
-        var id = $(".select_cc").val().split("**")[0];
+        var id = $(".select_cc").val();
         $("#id_cc").attr("value", id);
     });
     $(".select_seccion").change(function () {
-        var id = $(".select_seccion").val().split("**")[0];
+        var id = $(".select_seccion").val();
         var opc = 'Listar_pu_id';
         listar_opciones(opc, id);
+        getPresupuestoDetails();
     });
     $(".select_puesto").change(function () {
-        var id = $(".select_puesto").val().split("**")[0];
+        var id = $(".select_puesto").val();
         $("#ipuesto").attr("value", id);
         $(".cPuestoT").empty();
-        $(".cPuestoT").append("<small>Puesto de : </small> <strong>" + $(".select_puesto").val().split("**")[1] + "</strong>");
+        $(".cPuestoT").append("<small>Puesto de : </small> <strong>" + $(".select_puesto option:selected").text() + "</strong>");
+///////////////////////////////////////////////////////////////////////////////
+        var objJson = listDetPuesto($(".select_puesto").val());
+        if (objJson !== null) {
+            if (objJson.detTPuesto.length > 0) {
+                idDetPrePuesto=objJson.detTPuesto[0].id_det_pre_puesto;
+                $(".bND").empty();
+                $(".bND").append('<input type="number" name="sueldo" id="ntraD" class="form-control" value="' + objJson.detTPuesto[0].n_trabajadores + '"  placeholder="Número de trabajadores">');
+                getInfoSueldo();
+            } else {
+                $("#ntraD").val(0);
+            }
+        } else {
+            $.smallBox({
+                title: "¡Oh no!",
+                content: "<i>Nuestro trabajador metió la pata. Ocurrió un problema, talvez es mejor que recargues la página ;)</i><img width='400' src='../../img/sleeping_cat.jpg' alt='Sleeping Cat' >",
+                color: "#FF7A7A",
+                iconSmall: "fa fa-close fa-2x fadeInRight animated",
+                timeout: 6000
+            });
+        }
     });
     $(".select_temporada").change(function () {
         var temp = $(".select_temporada").val();
@@ -120,6 +143,21 @@ function init() {
         $("#fe_f").attr("value", f_f[0]);
         $("#fe_i").attr("value", f_i[0]);
         $("#itemp").attr("value", id);
+        /////////////////////////////////////////////////////////////////
+        var idDestino = $("#iDestino").val();
+        var c_c = $(".select_cc").val();
+        var tip = $("#tipo_p").val();
+        var temp = $(".select_temporada").val();
+        if (idDestino !== "" && temp !== null) {
+            var t = temp.split("**");
+            statusPresupuesto(idDestino, c_c, tip, t[0]);
+        } else {
+            new PNotify({
+                title: 'Incompleto',
+                text: 'Los campos están incompletos',
+                type: 'info'
+            });
+        }
     });
 }
 
@@ -146,7 +184,7 @@ function helpTP() {
 }
 function helpSM() {
     new PNotify({
-        title: 'Asiganación de Sueldo',
+        title: 'Asignación de Sueldo',
         text: 'La asignación será únicamente para el puesto que haya seleccionado',
         type: 'info'
     });
@@ -217,7 +255,7 @@ function listar_opcionesM(opc, id) {
     $.post("../../Direccion_Puesto", "opc=" + opc + ap, function (objJson) {
         var list = objJson.lista;
         for (var i = 0; i < list.length; i++) {
-            a.append("<option value='" + list[i].id + "**" + list[i].nombre + "'>" + list[i].nombre + "</option>");
+            a.append("<option value='" + list[i].id + "'>" + list[i].nombre + "</option>");
         }
     });
 }

@@ -383,10 +383,10 @@
                                 } else {
                                     $.smallBox({
                                         title: "¡Oh no!",
-                                        content: "<i>Nuestro encargado de enviar solicitudes se quedó dormido. Ya lo estamos despertando, inténtalo de nuevo más tarde ;)</i><img src='../../img/sleeping_cat.jpg' alt='Sleeping Cat' >",
+                                        content: "<i>Nuestro gatito encargado de enviar solicitudes se quedó dormido. Ya lo estamos despertando, inténtalo de nuevo más tarde ;)</i><img src='../../img/sleeping_cat.jpg' alt='Sleeping Cat' >",
                                         color: "#FF7A7A",
                                         iconSmall: "fa fa-close fa-2x fadeInRight animated",
-                                        timeout: 8000
+                                        timeout: 6000
                                     });
                                 }
                             }

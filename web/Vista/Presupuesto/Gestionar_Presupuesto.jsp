@@ -98,11 +98,11 @@
                                 </div>
                                 <input type="hidden" id="itemp">
                             </div>
-                            <div>                                
+                            <!--<div>                                
                                 <div class="col-md-3 col-md-offset-9">
-                                    <button class="col-md-12 btn btn-success BG" type="button" style="margin-top: 9%">Registrar</button>
+                                    <button class="col-md-12 btn btn-success BG" type="button" style="margin-top: 9%">Activar</button>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                         <legend class="">
                             Asignación de trabajadores por <strong>requerimiento</strong>  <a class="Help" onclick="helpCL()"><i class="fa fa-question-circle"></i></a>
@@ -110,7 +110,7 @@
                         <div class="row">
                             <div class="form-group col-md-6 col-xs-12" >
                                 <label class="">Requerimiento :</label>
-                                <select class="form-control select_condicion" >
+                                <select class="form-control select_req" >
                                     <option value="" selected disabled>[Seleccione]</option>
                                     <option value="REQ-0001">Contrato Personal : Tiempo Completo</option>
                                     <option value="REQ-0002">Contrato Personal : Medio Tiempo (24 Horas Semanal)</option>
@@ -124,6 +124,10 @@
                                     <option value="REQ-0011">No domiciliado (Expositores Extranjeros)</option>
                                     <option value="REQ-0018">Contrato Personal : Tiempo Parcial (Trabajador Docente)</option>
                                     <option value="REQ-0019">Contratacion Casos Especiales</option>
+                                    <option value="REQ-0020">Contrato Personal : MFL - Medio Tiempo</option>
+                                    <option value="REQ-0021">Contrato Personal : MFL - Tiempo Completo</option>
+                                    <option value="REQ-0022">Empleado</option>
+                                    <option value="REQ-0023">Misionero</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-xs-12">
@@ -198,7 +202,7 @@
                             <label>Sueldo Mínimo</label>
                             <div class="input-group ">
                                 <div class="input-group-addon">$</div>
-                                <input type="number" name="sueldo" class="form-control SP" maxlength="10" min="0" id="iSMin"  placeholder="Ingrese el Monto">
+                                <input type="text" name="sueldo" class="form-control SP" id="iSMin"  placeholder="Ingrese el Monto">
                                 <div class="input-group-addon">.00</div>
                             </div>
                         </div>
@@ -206,7 +210,7 @@
                             <label>Sueldo Máximo:</label>
                             <div class="input-group ">
                                 <div class="input-group-addon">$</div>
-                                <input type="number" name="sueldo" class="form-control SP" maxlength="10" min="0" id="iSMax"  placeholder="Ingrese el Monto">
+                                <input type="text" name="sueldo" class="form-control SP" id="iSMax"  placeholder="Ingrese el Monto">
                                 <div class="input-group-addon">.00</div>
                             </div>
                         </div> 
@@ -214,7 +218,7 @@
                             <label>Bonificación Mínima:</label>
                             <div class="input-group ">
                                 <div class="input-group-addon">$</div>
-                                <input type="number" name="sueldo" class="form-control SP" maxlength="10" min="0" id="iBMin"  placeholder="Ingrese el Monto">
+                                <input type="text" name="sueldo" class="form-control SP" id="iBMin"  placeholder="Ingrese el Monto">
                                 <div class="input-group-addon">.00</div>
                             </div>
                         </div>
@@ -222,7 +226,7 @@
                             <label>Bonificación Máxima:</label>
                             <div class="input-group ">
                                 <div class="input-group-addon">$</div>
-                                <input type="number" name="sueldo" class="form-control SP" maxlength="10" min="0" id="iBMax"  placeholder="Ingrese el Monto">
+                                <input type="text" name="sueldo" class="form-control SP" id="iBMax"  placeholder="Ingrese el Monto">
                                 <div class="input-group-addon">.00</div>
                             </div>
                         </div> 
@@ -232,7 +236,7 @@
                             <label>Bono Alimenticio Mínimo</label>
                             <div class="input-group ">
                                 <div class="input-group-addon">$</div>
-                                <input type="number" name="sueldo" class="form-control SP" maxlength="10" min="0" id="iBAMin"  placeholder="Ingrese el Monto">
+                                <input type="text" name="sueldo" class="form-control SP" id="iBAMin"  placeholder="Ingrese el Monto">
                                 <div class="input-group-addon">.00</div>
                             </div>
                         </div>
@@ -240,7 +244,7 @@
                             <label>Bono Alimenticio Máximo:</label>
                             <div class="input-group ">
                                 <div class="input-group-addon">$</div>
-                                <input type="number" name="sueldo" class="form-control SP" maxlength="10" min="0" id="iBAMax"  placeholder="Ingrese el Monto">
+                                <input type="text" name="sueldo" class="form-control SP" id="iBAMax"  placeholder="Ingrese el Monto">
                                 <div class="input-group-addon">.00</div>
                             </div>
                         </div>
@@ -322,6 +326,8 @@
         <script src="../../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
         <script src="../../js/plugin/pfnotify/pnotify.custom.min.js" type="text/javascript"></script>
         <script src="../../js/plugin/datatables/datatable.js" type="text/javascript"></script>
+        <!-- CUSTOM NOTIFICATION -->
+        <script src="../../js/notification/SmartNotification.min.js"></script>
         <script src="CorePresupuesto.js" type="text/javascript"></script>
         <script src="utilPresupuesto.js" type="text/javascript"></script>
 

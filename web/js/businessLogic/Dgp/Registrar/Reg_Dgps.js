@@ -674,7 +674,7 @@ function loadPresupuesto(idDestino, destino) {
                     createAlertExist(destino, obj);
                 } else {
                     createAlertNoExist(destino);
-                    disabledNext();
+                    //disabledNext();
                 }
             }
         });
@@ -817,7 +817,7 @@ function createAlertExist(destino, obj) {
         }
         if (obj.ntrad > obj.ntrac) {
         } else {
-            disabledNext();
+            //disabledNext();
         }
     }
     if (destino === 3) {
@@ -872,7 +872,7 @@ function createAlertExist(destino, obj) {
                 $(".btnPresModal").hide();
             } else {
                 s += ' Se ha llegado al límite.';
-                disabledNext();
+                //disabledNext();
                 loadModalSolPres();
                 $(".btnPresModal").show();
             }

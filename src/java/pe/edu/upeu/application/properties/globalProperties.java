@@ -13,8 +13,8 @@ public class globalProperties {
 
     /* Enviroment variable*/
     /*change when update server (for cache conflicts)*/
-    public static String VERSION_CSS = "2.1.0";
-    public static String VERSION_JS = "2.7.0";
+    public static String VERSION_CSS = "2.1.6";
+    public static String VERSION_JS = "2.7.6";
 
     /* WebService Carga Academica*/
     public static final String keyApp = "4a7c88ee0791cad24a15d43a525982f8";
@@ -27,16 +27,16 @@ public class globalProperties {
     /*oracle bd connection */
     //public static final String HOSTNAME = "192.168.1.18";
     //public static final String HOSTNAME = "192.168.1.18";
-    /*public static final String HOSTNAME = "procesrh-db.upeu";
+    public static final String HOSTNAME = "procesrh-db.upeu";
     public static final String USER = "procesosrh";
     public static final String USER_PWD = "gestionrrhh";
     public static final String PORT = "1521";
-    public static final String SID = "xe";*/
+    public static final String SID = "upeu";
     
-     public static final String HOSTNAME = "localhost";
+     /*public static final String HOSTNAME = "localhost";
      public static final String USER = "gth";
      public static final String USER_PWD = "123";
      public static final String PORT = "1521";
-     public static final String SID = "xe";
+     public static final String SID = "xe";*/
 
 }

@@ -338,7 +338,8 @@ $(document).ready(function () {
         function getImagen(data) {
             $.each(data, function (i, datos) {
                 $.each(datos, function (i, obj) {
-                    $('#foto_usuario').attr("src", "Archivo/Fotos/" + obj.ar_foto);
+                    //$('#foto_usuario').attr("src", "Archivo/Fotos/" + obj.ar_foto);
+                    $('#foto_usuario').attr("src", "http://gth.upeu.edu.pe/DATA_FILES_GTH/Archivo/Fotos/" + obj.ar_foto);
                 });
             });
         }

@@ -29,7 +29,6 @@ public class CPresupuesto extends HttpServlet {
 
     InterfaceDireccionDAO dO = new DireccionDAO();
     InterfacePresupuestoDAO pD = new PresupuestoDAO();
-    Map<String, Object> rpta = new HashMap<>();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,6 +47,7 @@ public class CPresupuesto extends HttpServlet {
         //int opc = Integer.parseInt(request.getParameter("opc"));
         String opc = request.getParameter("opc");
         String idDestino, id, ccosto, temp, idPresupuesto, idDetalle, idPuesto;
+        Map<String, Object> rpta = new HashMap<>();
         int tipo, ntra, con, tiem;
         String tip = request.getParameter("tip");
         Map<String, Object> c = new HashMap<>();
@@ -186,7 +186,8 @@ public class CPresupuesto extends HttpServlet {
                 break;
             case "status":
                 idDestino = request.getParameter("idDes");
-                idp = pD.statusPresupuesto(idDestino);
+                temp = request.getParameter("temp");
+                idp = pD.statusPresupuesto(idDestino, temp);
                 rpta.put("rpta", idp);
                 detpres = pD.listDetPres(idp);
                 for (int i = 0; i < detpres.size(); i++) {
@@ -221,12 +222,22 @@ public class CPresupuesto extends HttpServlet {
                 c.put("idreq", idreq);
                 rpta.put("res", pD.Reg_Det_Presupuesto(c));
                 break;
+            case "updateDetPre":
+                idDetalle = request.getParameter("idDetPre");
+                ntra = Integer.parseInt(request.getParameter("ntra"));
+                rpta.put("res", pD.updateDetPresupuesto(idDetalle, ntra));
+                break;
             case "listDetPre":
                 idPresupuesto = request.getParameter("idPre");
                 idreq = request.getParameter("idreq");
                 c.put("idP", idPresupuesto);
                 c.put("idreq", idreq);
-                rpta.put("detalle", pD.compDet(idPresupuesto, idreq));
+                List<Map<String, Object>> cd = pD.compDet(idPresupuesto, idreq);
+                if (cd != null) {
+                    rpta.put("detalle", cd);
+                } else {
+                    rpta.put("detalle", false);
+                }
                 break;
             case "listNtra":
                 idDetalle = request.getParameter("id");
@@ -235,7 +246,12 @@ public class CPresupuesto extends HttpServlet {
             case "comPues":
                 idPuesto = request.getParameter("puesto");
                 idDetalle = request.getParameter("idDet");
-                rpta.put("detTPuesto", pD.listDetalleTraPuesto(idPuesto, idDetalle));
+                cd = pD.listDetalleTraPuesto(idPuesto, idDetalle);
+                if (cd != null) {
+                    rpta.put("detTPuesto", cd);
+                } else {
+                    rpta.put("detTPuesto", false);
+                }
                 break;
             case "regPuesTra":
                 idPuesto = request.getParameter("puesto");
@@ -245,6 +261,20 @@ public class CPresupuesto extends HttpServlet {
                 System.out.println("Disponible: " + disp + ", nuevos: " + ntra);
                 if (ntra != 0 && ntra <= disp) {
                     rpta.put("ta", pD.Reg_DetTraPuesto(idPuesto, idDetalle, ntra));
+                } else {
+                    rpta.put("ta", 2);
+                }
+                break;
+            case "updPuesTra":
+                idpp = request.getParameter("idDetPuesto");
+                idDetalle = request.getParameter("idDet");
+                ntra = Integer.parseInt(request.getParameter("nt"));
+                c = pD.getTrabDispAndPresTotal(idDetalle, idpp);
+                System.out.println("Disponible: " + c.get("ntrab") + ", total: " + c.get("total"));
+                int total = (int) c.get("total");
+                int ntrab = (int) c.get("ntrab");
+                if (ntra <= (total - ntrab) && ntra != 0) {
+                    rpta.put("ta", pD.updateDetTraPuesto(idpp, ntra));
                 } else {
                     rpta.put("ta", 2);
                 }

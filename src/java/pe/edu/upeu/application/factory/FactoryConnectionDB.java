@@ -18,20 +18,24 @@ public class FactoryConnectionDB {
 
     public static String[] configMYSQL = {"bd_almacen", "root", "root"};
 
-    //public static String[] configORACLE = {globalProperties.USER, globalProperties.USER_PWD, globalProperties.HOSTNAME, globalProperties.PORT, globalProperties.SID};
-    public static String[] configORACLE = {"gth", "123", "192.168.21.9", "1521", "xe"};
+    public static String[] configORACLE = {globalProperties.USER, globalProperties.USER_PWD, globalProperties.HOSTNAME, globalProperties.PORT, globalProperties.SID};
+    //public static String[] configORACLE = {"gth", "123", "192.168.21.9", "1521", "xe"};
 
     //ARCHIVOS LOCALES
     //public static final String url = "E:/Projects/TALENTO_HUMANO/web/Archivo/";
-    public static final String url = "C:/Users/Cesar/Documents/NetBeansProjects/TALENTO_HUMANO/web/Archivo/";
-    public static final String url_archivos = "http://localhost:8084/TALENTO_HUMANO/Archivo/";
+    //public static final String url = "C:/xampp/htdocs/DATA_FILES_GTH/Archivo/";
+    //public static final String url_archivos = "http://localhost/DATA_FILES_GTH/Archivo/";
     //SERVIDOR 192.168.13.52
-    //public static final String url_archivos = "http://gth.upeu.edu.pe/TALENTO_HUMANO/Archivo/";
+    //public static final String url_archivos = "http://gth.upeu.edu.pe/Archivo/";
     //public static final String url = "/usr/share/tomcat7/webapps/TALENTO_HUMANO/Archivo/";
     //SERVIDOR 192.168.15.20
     //public static final String url_archivos = "http://gth.upeu.edu.pe/TALENTO_HUMANO/Archivo/";
     //public static final String url = "//u01/tomcat/gth_webapps/DATA_GTH/Archivo/";
-
+    //
+    //SERVIDOR gth-app.upeu (NUEVO SERVIDOR)
+    public static final String url_archivos = "http://gth.upeu.edu.pe/DATA_FILES_GTH/Archivo/";
+    public static final String url = "//u01/tomcat/webapps/DATA_FILES_GTH/Archivo/";
+    //
     public static ConexionBD open(int typeDB) {
         switch (typeDB) {
             case FactoryConnectionDB.MYSQL:

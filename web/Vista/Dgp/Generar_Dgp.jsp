@@ -71,6 +71,22 @@
                                         out.println("Requerimiento: No Domiciliado");
                                         idreq = "REQ-0011";
                                     }
+                                    if (text.equals("20")) {
+                                        out.println("Requerimiento: Contrato MFL - Medio Tiempo");
+                                        idreq = "REQ-0020";
+                                    }
+                                    if (text.equals("21")) {
+                                        out.println("Requerimiento: Contrato MFL - Tiempo Completo");
+                                        idreq = "REQ-0021";
+                                    }
+                                    if (text.equals("22")) {
+                                        out.println("Requerimiento: Empleado");
+                                        idreq = "REQ-0022";
+                                    }
+                                    if (text.equals("23")) {
+                                        out.println("Requerimiento: Misionero");
+                                        idreq = "REQ-0023";
+                                    }
                                     %>
                                 </h1> 
 
