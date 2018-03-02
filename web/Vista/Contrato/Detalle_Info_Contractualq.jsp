@@ -24,7 +24,7 @@
 <jsp:useBean id="List_contra_x_idcto" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Situacion_Actual" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Planilla" scope="session" class="java.util.ArrayList"/>
-<jsp:useBean id="list_Condicion_contrato" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="list_Condicion_contrato" scope="session" class="java.util.HashMap"/>
 <jsp:useBean id="List_tipo_contrato" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="list_reg_labo" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_Usuario" scope="session" class="java.util.ArrayList"/>
@@ -194,12 +194,8 @@
 
                 <tr><td class="text-info ">Condición:</td> <td colspan="6"  ><strong style="color:#b71c1c;"><%
                     if (n.getLi_condicion() != null) {
-                        for (int h = 0; h < list_Condicion_contrato.size(); h++) {
-
-                            if (n.getLi_condicion().trim().equals(h + 1 + "")) {
-                                out.println(list_Condicion_contrato.get(h));
-                            }
-                        }
+                        System.out.println("hola "+n.getLi_condicion().trim());
+                        out.println(list_Condicion_contrato.get(n.getLi_condicion().trim()));
                     } else {
                         out.print("No tiene");
                     }%> </td></tr>

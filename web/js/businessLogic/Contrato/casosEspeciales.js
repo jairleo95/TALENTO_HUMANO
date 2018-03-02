@@ -309,21 +309,21 @@ function VAL_COD_HUELLA() {
         $.ajax({
             url: "../../empleado",
             type: "POST",
-            data: "opc=validar_huella&co_hue=" + co_huel.value,success: function (data, textStatus, jqXHR) {
-                
-            // alert(e)
-            var cant = $("#cod_hu").val();
-            if (cant.length > 5) {
-                if (data.huella === 0) {
-                    //window.location.href = "";
-                } else {
-                    $.SmartMessageBox({
-                        title: "Este Código de Huella ya fue registrado!",
-                        content: "Por favor Ingrese un Codigo de Huella distinto",
-                    });
+            data: "opc=validar_huella&co_hue=" + co_huel.value, success: function (data, textStatus, jqXHR) {
+
+                // alert(e)
+                var cant = $("#cod_hu").val();
+                if (cant.length > 5) {
+                    if (data.huella === 0) {
+                        //window.location.href = "";
+                    } else {
+                        $.SmartMessageBox({
+                            title: "Este Código de Huella ya fue registrado!",
+                            content: "Por favor Ingrese un Codigo de Huella distinto",
+                        });
+                    }
                 }
             }
-            } 
         }).done(function (e) {
         });
     }
@@ -909,97 +909,450 @@ $(document).ready(function () {
                 });
             });
 
-    $("#selec_dep").change(
-            function () {
-                $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
-                    c.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var list = objJson.lista;
-                    c.append("<option value='' > [SELECCIONE] </option>");
-                    if (list.length !== 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                        }
-                    } else {
-                        c.append("<option value='' > [no hay] </option>");
-                    }
-                });
-            });
-
-    $(".select_dir").change(
-            function () {
-
-                $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $(this).val(), function (objJson) {
-                    b.empty();
-
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var list = objJson.lista;
-                    b.append("<option value='' > [SELECCIONE] </option>");
-                    if (list.length !== 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                        }
-                    } else {
-                        b.append("<option value='' > [] </option>");
-                    }
-                });
-            });
-
-
-    $("#Selec_Area").change(
-            function () {
-                $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
-                    d.empty();
-                    var list = objJson.lista;
-                    d.append("<option value='' > [SELECCIONE] </option>");
-                    if (list.length !== 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
-                        }
-                    } else {
-                        d.append("<option value='' > [no hay] </option>");
-                    }
-                });
-            });
-
-    $("#select_sec").change(
-            function () {
-                $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
-                    e.empty();
-                    if (objJson.rpta == -1) {
-                        alert(objJson.mensaje);
-                        return;
-                    }
-                    var list = objJson.lista;
-                    e.append("<option value='' > [SELECCIONE] </option>");
-                    if (list.length !== 0) {
-                        for (var i = 0; i < list.length; i++) {
-                            e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
-                        }
-                    } else {
-                        e.empty();
-                        e.append("<option value='' > [] </option>");
-                    }
-                });
-            });
-    $("#btn-registrar").click(
-            function () {
-                var pr = $("#select-proceso").val();
-                $.post("../../paso", $("#form-paso").serialize(), function () {
-                    Listar_Paso(pr);
-                });
-                $("#btn-registrar").val("Registrar Paso");
-                $(".opc").val("Registrar");
-                $("#form-paso")[0].reset();
-                return false;
+    $("#selec_dep").change(function () {
+        $.post("../../Direccion_Puesto", "opc=Listar_area&" + "id_dep=" + $("#selec_dep").val(), function (objJson) {
+            c.empty();
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
             }
-    );
+            var list = objJson.lista;
+            c.append("<option value='' > [SELECCIONE] </option>");
+            if (list.length !== 0) {
+                for (var i = 0; i < list.length; i++) {
+                    c.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                }
+            } else {
+                c.append("<option value='' > [no hay] </option>");
+            }
+        });
+        loadPresupuesto($("#selec_dep").val(), 2);
+    });
+
+    var idPresupuesto;
+    var idDetPres;
+    var idPrePuesto;
+    function loadPresupuesto(idDestino, destino) {
+        if ($('#nom_req').val() != 0) {
+            console.log(idDestino, destino);
+            var url = "";
+            var data = "";
+            if (destino === 2) {
+                url = "../../pres?opc=comp";
+                data = "idDes=" + idDestino;
+                data += "&dest=" + destino;
+                data += "&idreq=" + $('#nom_req').val();
+                $.ajax(url, {
+                    data: data,
+                    type: 'POST',
+                    async: false,
+                    success: function (obj) {
+                        var ntrad = parseInt(obj.ntrad);
+                        if (ntrad > 0) {
+                            createAlertExist(destino, obj);
+                        } else {
+                            createAlertNoExist(destino);
+                            //disabledNext();
+                        }
+                    }
+                });
+            } else if (destino === 1) {
+                url = "../../pres?opc=comp";
+                data = "idDes=" + idDestino;
+                data += "&dest=" + destino;
+                data += "&idreq=" + $('#nom_req').val();
+                $.ajax(url, {
+                    data: data,
+                    type: 'POST',
+                    async: false,
+                    success: function (obj) {
+                        idPresupuesto = obj.idpres;
+                        if (obj.iddetpres !== null) {
+                            idDetPres = obj.iddetpres;
+                        }
+                        console.log(idPresupuesto);
+                        var ntrad = parseInt(obj.ntrad);
+                        if (ntrad > 0) {
+                            createAlertExist(destino, obj);
+                        } else {
+                            createAlertNoExist(destino);
+                        }
+                    }
+                });
+            } else if (destino === 3) {
+                console.log(idDestino);
+                url = "../../pres?opc=comp";
+                data = "idpuesto=" + idDestino;
+                data += "&dest=" + destino;
+                data += "&iddetp=" + idDetPres;
+                data += "&idreq=" + $('#nom_req').val();
+                $.ajax(url, {
+                    data: data,
+                    type: 'POST',
+                    async: false,
+                    success: function (obj) {
+                        if (obj.detpuesto['NO_PUESTO'] != null) {
+                            idPrePuesto = obj.detpuesto['ID_PRESUPUESTO_PUESTO'];
+                            createAlertExist(destino, obj);
+                        } else {
+                            createAlertNoExist(destino);
+                        }
+                    }
+                });
+            }
+        } else {
+            new PNotify({
+                title: 'Por Favor!',
+                text: 'Seleccione primero el requerimiento para poder mostrarle el estado del presupuesto.',
+                type: 'info'
+            });
+        }
+
+    }
+
+    function createAlertNoExist(destino) {
+        var d;
+        var s;
+        if (destino === 2) {
+            $("#presC").empty();
+            d = "este Departamento";
+            s = '<div class="alert alert-warning">';
+            s += '<strong>Atención!</strong>, no se ha presupuestado aún ' + d + '.';
+            s += '</div>';
+            $("#presC").append(decodeURIComponent(escape(s)));
+        }
+        if (destino === 1) {
+            d = "este Área";
+            console.log(($("#presCA").length == 0));
+            if ($("#presCA").length == 0) {
+                s = '<div id="presCA" class="alert alert-warning">';
+                s += '<strong>Atención!</strong>, no se ha presupuestado aún ' + d + '.';
+                s += '</div>';
+                $("#presC").append(decodeURIComponent(escape(s)));
+            } else {
+                $("#presCA").empty();
+                $("#presCA").attr("class", "alert alert-warning");
+                s = '<strong>Atención!</strong>, no se ha presupuestado aún ' + d + '.';
+                $("#presCA").append(decodeURIComponent(escape(s)));
+            }
+        }
+        if (destino === 3) {
+            d = "este Puesto";
+            console.log(($("#presCP").length == 0));
+            if ($("#presCP").length == 0) {
+                s = '<div id="presCP" class="alert alert-warning">';
+                s += '<strong>Atención!</strong>, no se ha presupuestado aún ' + d + '.';
+                s += '</div>';
+                $("#presC").append(decodeURIComponent(escape(s)));
+            } else {
+                $("#presCP").empty();
+                $("#presCP").attr("class", "alert alert-warning");
+                $("#presDP").empty();
+                s = '<strong>Atención!</strong>, no se ha presupuestado aún ' + d + '.';
+                $("#presCP").append(decodeURIComponent(escape(s)));
+            }
+        }
+    }
+
+    function createAlertExist(destino, obj) {
+        var s = "";
+        var info = "";
+        console.log(obj);
+
+        var load = calculatePorcent(parseInt(obj.ntrad), parseInt(obj.ntrac));
+        var tipo = TipPresupuesto(load);
+        if (destino === 1 | destino === 2) {
+            var d;
+            if (destino === 2) {
+                $("#presC").empty();
+                d = "Departamento";
+                s += '<div class="alert alert-' + tipo + '">';
+                s += '<strong>Presupuesto Actual: </strong>' + d + '';
+                s += '<br/>';
+                s += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.ntrad + '</strong> trabajadores presupuestados bajo el mismo requerimiento';
+                s += '<br/>';
+                s += '<div class="progress">';
+                s += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
+                s += load + '%';
+                s += '</div>';
+                s += '</div>';
+                s += '</div>';
+                $("#presC").append(decodeURIComponent(escape(s)));
+            }
+            if (destino === 1) {
+                d = "Área";
+                info = '<strong>Presupuesto Actual: </strong>' + d;
+                info += '<br/>';
+                info += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.ntrad + '</strong> trabajadores presupuestados bajo el mismo requerimiento';
+                info += '<br/>';
+                info += '<div class="progress">';
+                info += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
+                info += load + '%';
+                info += '</div>';
+                info += '</div>';
+                if ($("#presCA").length == 0) {
+                    s += '<div id="presCA" class="alert alert-' + tipo + '">';
+                    s += info;
+                    s += '</div>';
+                    $("#presC").append(decodeURIComponent(escape(s)));
+                } else {
+                    $("#presCA").attr('class', 'alert alert-' + tipo + '');
+                    $("#presCA").empty();
+                    s = info;
+                    $("#presCA").append(decodeURIComponent(escape(s)));
+                }
+            }
+            if (obj.ntrad > obj.ntrac) {
+            } else {
+                //disabledNext();
+            }
+        }
+        if (destino === 3) {
+            d = "Puesto - " + obj.detpuesto.NO_PUESTO;
+            load = calculatePorcent(parseInt(obj.detpuesto.N_TRABAJADORES), parseInt(obj.ntrac));
+            console.log(load);
+            tipo = TipPresupuesto(load);
+
+
+            if ($("#presCP").length == 0) {
+                s = '<div id="presCP" class="alert alert-' + tipo + '">';
+                s += '<strong>Presupuesto Actual: </strong>' + d;
+                s += '<br/>';
+                s += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.detpuesto.N_TRABAJADORES + '</strong> trabajadores presupuestados bajo el mismo requerimiento.';
+                if (obj.detpuesto.N_TRABAJADORES > obj.ntrac) {
+                    $('#submit').attr("disabled", false);
+                    $(".btnPresModal").hide();
+                } else {
+                    s += ' Se ha llegado al límite.';
+                    disabledNext();
+                    $(".btnPresModal").show();
+                    loadModalSolPres();
+                }
+                s += '<br/>';
+                s += '<div class="progress">';
+                s += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
+                s += load + '%';
+                s += '</div>';
+                s += '</div>';
+                s += '</div>';
+                s += '<div id="presDP" class="alert alert-info">';
+                s += '<strong>Detalles: </strong>';
+                s += '<br/>';
+                s += '<div class="row"><div class="col-lg-6 col-sm-12">\n\
+                    <strong>Sueldo Máx.: </strong><label>' + obj.detpuesto.SUELDO_MAX + '</label><br/>\n\
+                    <strong>Sueldo Min.: </strong><label>' + obj.detpuesto.SUELDO_MIN + '</label><br/>\n\</div>';
+                s += '<div class="col-lg-6 col-sm-12">\n\
+                    <strong>Bonificaciones Máx.: </strong><label>' + obj.detpuesto.BONO_MAX + '</label><br/>\n\
+                    <strong>Bonificaciones Min.: </strong><label>' + obj.detpuesto.BONO_MIN + '</label><br/>\n\</div>';
+                s += '<div class="col-lg-6 col-sm-12">\n\
+                    <strong>Bono Alimenticio Máx.: </strong><label>' + obj.detpuesto.BOAL_MAX + '</label><br/>\n\
+                    <strong>Bono Alimenticio Min.: </strong><label>' + obj.detpuesto.BOAL_MIN + '</label><br/>\n\</div><div/>';
+                s += '</div>';
+                $("#presC").append(decodeURIComponent(escape(s)));
+            } else {
+                $("#presCP").attr('class', 'alert alert-' + tipo + '');
+                s = '<strong>Presupuesto Actual: </strong>' + d;
+                s += '<br/>';
+                s += '<strong>' + obj.ntrac + '</strong> trabajadores contratados de los <strong>' + obj.detpuesto.N_TRABAJADORES + '</strong> trabajadores presupuestados bajo el mismo requerimiento.';
+                if (obj.detpuesto.N_TRABAJADORES > obj.ntrac) {
+                    $('#submit').attr("disabled", false);
+                    $(".btnPresModal").hide();
+                } else {
+                    s += ' Se ha llegado al límite.';
+                    //disabledNext();
+                    loadModalSolPres();
+                    $(".btnPresModal").show();
+                }
+                s += '<br/>';
+                s += '<div class="progress">';
+                s += '<div class="progress-bar progress-bar-striped progress-bar-' + tipo + ' active" role="progressbar" aria-valuenow="' + load + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + load + '%">';
+                s += load + '%';
+                s += '</div>';
+                s += '</div>';
+                $("#presCP").empty();
+                $("#presCP").append(decodeURIComponent(escape(s)));
+                s = '<strong>Detalles: </strong>';
+                s += '<br/>';
+                s += '<div class="row"><div class="col-lg-6 col-sm-12">\n\
+                    <strong>Sueldo Máx.: </strong><label>' + obj.detpuesto.SUELDO_MAX + '</label><br/>\n\
+                    <strong>Sueldo Min.: </strong><label>' + obj.detpuesto.SUELDO_MIN + '</label><br/>\n\</div>';
+                s += '<div class="col-lg-6 col-sm-12">\n\
+                    <strong>Bonificaciones Máx.: </strong><label>' + obj.detpuesto.BONO_MAX + '</label><br/>\n\
+                    <strong>Bonificaciones Min.: </strong><label>' + obj.detpuesto.BONO_MIN + '</label><br/>\n\</div>';
+                s += '<div class="col-lg-6 col-sm-12">\n\
+                    <strong>Bono Alimenticio Máx.: </strong><label>' + obj.detpuesto.BOAL_MAX + '</label><br/>\n\
+                    <strong>Bono Alimenticio Min.: </strong><label>' + obj.detpuesto.BOAL_MIN + '</label><br/>\n\</div><div/>';
+                $("#presDP").empty();
+                $("#presDP").append(decodeURIComponent(escape(s)));
+            }
+        }
+    }
+    $(".btnPresModal").click(function () {
+        loadModalSolPres();
+    });
+    $("#spbtn").click(function () {
+        $.ajax("../../pres?opc=regSFP", {
+            data: {
+                idpp: idPrePuesto,
+                ntra: $("#sntra").val(),
+                com: $("#scom").val()
+            },
+            type: 'POST',
+            async: false,
+            success: function (data) {
+                if (data.obj) {
+                    new PNotify({
+                        title: 'Genial!',
+                        text: 'Ya enviamos tu solicitud, puedes verlo en Estado de Solicitudes en la Sección de Presupuesto y asegurarte si lo autorizan para que puedas continuar con la contratación.',
+                        type: 'success'
+                    });
+                    $("#solPresModal").modal('hide');
+                    setTimeout(function () {
+                        window.location.href = "../../pres?opc=solfpview";
+                    }, 3000);
+
+                } else {
+                    new PNotify({
+                        title: 'Oh no!',
+                        text: 'Hubo un problema, nuestros ingenieros están trabajando para solucionarlo. Por favor inténtalo de nuevo.',
+                        type: 'warning'
+                    });
+                    $("#solPresModal").modal('hide');
+                }
+            }
+        });
+    });
+    //Mostrar el modal para solicitar ampliación del presupuesto
+    function loadModalSolPres() {
+        $("#spdep").text($(".selectDepartamento option:selected").text());
+        $("#spare").text($(".select-area option:selected").text());
+        $("#sppto").text($(".select-puesto option:selected").text());
+        //alert($(".select_req option:selected").text());
+        $("#spreq").text($("#nom_req option:selected").text());
+        $.ajax("../../pres?opc=getTempByIdPres", {
+            data: {
+                idp: idPresupuesto
+            },
+            type: 'POST',
+            async: false,
+            success: function (obj) {
+                console.log(obj);
+                var detT = obj.detTemp;
+                $("#sptem").text(detT.NOMBRE_TEMP + " > " + detT.FECHA_INICIO + " - " + detT.FECHA_FIN);
+            }
+        });
+        $("#solPresModal").modal('show');
+        //$("#spare").text($(".select-area option:selected").text());
+        //$("#spare").text($(".select-area option:selected").text());
+    }
+
+    function TipPresupuesto(porcentaje) {
+        var percent = parseInt(porcentaje);
+        var tipo = "";
+        if (percent > 0) {
+            if (percent <= 25) {
+                tipo = "success";
+            } else {
+                if (percent <= 50) {
+                    tipo = "info";
+                } else {
+                    if (percent <= 75) {
+                        tipo = "warning";
+                    } else {
+                        tipo = "danger";
+                    }
+                }
+            }
+        } else {
+            tipo = "success";
+        }
+        return tipo;
+    }
+
+    function calculatePorcent(tpresup, tcon) {
+        var por = tcon * 100 / tpresup;
+        return por.toFixed(2);
+    }
+
+    function disabledNext() {
+        $('#submit').attr("disabled", true);
+    }
+
+    $(".select_dir").change(function () {
+        $.post("../../Direccion_Puesto", "opc=Listar_dir_dep&" + "id=" + $(this).val(), function (objJson) {
+            b.empty();
+
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
+            }
+            var list = objJson.lista;
+            b.append("<option value='' > [SELECCIONE] </option>");
+            if (list.length !== 0) {
+                for (var i = 0; i < list.length; i++) {
+                    b.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                }
+            } else {
+                b.append("<option value='' > [] </option>");
+            }
+        });
+        new PNotify({
+            title: 'Por Favor!',
+            text: 'Seleccione primero el requerimiento para poder mostrarle el estado del presupuesto.',
+            type: 'info'
+        });
+        $("#nom_req").focus();
+    });
+
+
+    $("#Selec_Area").change(function () {
+        $.post("../../Direccion_Puesto", "opc=Listar_sec&" + "id_are=" + $("#Selec_Area").val(), function (objJson) {
+            d.empty();
+            var list = objJson.lista;
+            d.append("<option value='' > [SELECCIONE] </option>");
+            if (list.length !== 0) {
+                for (var i = 0; i < list.length; i++) {
+                    d.append('<option value="' + list[i].id + '">' + list[i].nom + '</option>');
+                }
+            } else {
+                d.append("<option value='' > [no hay] </option>");
+            }
+        });
+        loadPresupuesto($("#Selec_Area").val(), 1);
+    });
+
+    $("#select_sec").change(function () {
+        $.post("../../Direccion_Puesto", "opc=Listar_pu_id&" + "id=" + $("#select_sec").val(), function (objJson) {
+            e.empty();
+            if (objJson.rpta == -1) {
+                alert(objJson.mensaje);
+                return;
+            }
+            var list = objJson.lista;
+            e.append("<option value='' > [SELECCIONE] </option>");
+            if (list.length !== 0) {
+                for (var i = 0; i < list.length; i++) {
+                    e.append('<option value="' + list[i].id + '">' + list[i].nombre + '</option>');
+                }
+            } else {
+                e.empty();
+                e.append("<option value='' > [] </option>");
+            }
+        });
+    });
+    $("#pu_id_se").change(function () {
+        loadPresupuesto($("#pu_id_se").val(), 3);
+    });
+    $("#btn-registrar").click(function () {
+        var pr = $("#select-proceso").val();
+        $.post("../../paso", $("#form-paso").serialize(), function () {
+            Listar_Paso(pr);
+        });
+        $("#btn-registrar").val("Registrar Paso");
+        $(".opc").val("Registrar");
+        $("#form-paso")[0].reset();
+        return false;
+    });
     function Listar_dep() {
         var s = $("#selec_dep");
         $.post("../../Direccion_Puesto", "opc=Listar", function (objJson) {

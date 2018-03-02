@@ -7,6 +7,7 @@
 package pe.edu.upeu.application.dao_imp;
 
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.model.Auto_Mostrar;
 import pe.edu.upeu.application.model.Carrera;
 import pe.edu.upeu.application.model.Nacionalidad;
@@ -40,7 +41,8 @@ public interface InterfaceListaDAO {
     public List<String> List_Dom_D3_Id();
     public List<Zona> List_Dom_D5_Id();
     public List<String> List_Jefe();
-    public List<String> list_Condicion_contrato();
+    public Map<String,String> list_Condicion_contrato();
+    public List<Map<String,String>> listCondicionContratoJson();
     public List<Tipo_Contrato> List_tipo_contrato();
     public List<String> List_Situacion_Actual();
     

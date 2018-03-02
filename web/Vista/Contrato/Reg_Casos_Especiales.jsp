@@ -81,6 +81,7 @@
         <link rel="apple-touch-startup-image" href="../../img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
         <link rel="stylesheet" href="../../css/Css_Formulario/form.css"  type="text/css" > 
+        <link href="../../js/plugin/pfnotify/pnotify.custom.min.css" rel="stylesheet" type="text/css"/>
         <style>
             .td{
                 font-weight: bold;
@@ -199,17 +200,25 @@
                                                                 </select>  </label>
                                                         </section>
                                                         <section class="col col-3">
-                                                            <label class="select" id="titu">Condición:
-                                                                <select name="CONDICION" class="input-group-sm" required="">
-                                                                    <option value="">[Seleccione]</option>
-                                                                    <option value="1">Contratado</option>
-                                                                    <option value="2">Contratado Independiente</option>
-                                                                    <option value="3">Enpleado</option>
-                                                                    <option value="4">Misionero</option>
-                                                                    <option value="5">MFL-Práctica Pre-Profesional</option>
-                                                                    <option value="6">MFL-Práctica Profesionales</option>
-                                                                    <option value="7">MFL-CLJ</option>
-                                                                    <option value="8">MFL-Contrato</option>
+                                                            <label class="select" id="titu">Requerimiento:
+                                                                <select name="CONDICION" id="nom_req" class="input-group-sm" required="">
+                                                                    <option value="0" disabled selected>[Seleccione]</option>
+                                                                    <option value="REQ-0001">Contrato Personal : Tiempo Completo</option>
+                                                                    <option value="REQ-0002">Contrato Personal : Medio Tiempo (24 Horas Semanal)</option>
+                                                                    <option value="REQ-0003">Contrato Personal : Tiempo Parcial</option>
+                                                                    <option value="REQ-0004">Renovacion de Contrato</option>
+                                                                    <option value="REQ-0005">Contrato Personal : Extranjero</option>
+                                                                    <option value="REQ-0007">Practicas Preprofesionales (Tope 6hrs diarias / 30 hrs  semanales.)</option>
+                                                                    <option value="REQ-0008">Practicas Profesionales</option>
+                                                                    <option value="REQ-0009">Convenio Laboral Juvenil (Hasta 22 a?os, no matriculados)</option>
+                                                                    <option value="REQ-0010">Locacion de Servicios</option>
+                                                                    <option value="REQ-0011">No domiciliado (Expositores Extranjeros)</option>
+                                                                    <option value="REQ-0018">Contrato Personal : Tiempo Parcial (Trabajador Docente)</option>
+                                                                    <option value="REQ-0019">Contratacion Casos Especiales</option>
+                                                                    <option value="REQ-0020">Contrato Personal : MFL - Medio Tiempo</option>
+                                                                    <option value="REQ-0021">Contrato Personal : MFL - Tiempo Completo</option>
+                                                                    <option value="REQ-0022">Empleado</option>
+                                                                    <option value="REQ-0023">Misionero</option>
                                                                 </select>
                                                             </label>
                                                         </section>
@@ -594,10 +603,12 @@
 
 
 
-                            <article class="col-sm-12 col-md-12 col-lg-6">
+                            <article class="col-sm-12 col-md-12 col-lg-12 row">
+                                <div id="presC" class="col-sm-12 col-md-12 col-lg-6">
+                                </div>
 
                                 <!-- Widget ID (each widget will need unique ID)-->
-                                <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-deletebutton="false">
+                                <div class="jarviswidget col-sm-12 col-md-12 col-lg-6" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-deletebutton="false">
                                     <!-- widget options:
                                     usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
     
@@ -780,6 +791,70 @@
             </form>
 
         </div>                                      
+        <!-- Modal -->
+        <div class="modal fade" id="solPresModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="solPresModalLabel">Solicitud de ampliación del presupuesto</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table  class="table table-striped">
+                                    <tr><td class="td">Departamento:</td><td><label id="spdep">Mi mamà</label></td></tr>   
+                                    <tr><td class="td">Àrea:</td><td><label id="spare">me mima</label></td></tr>   
+                                    <tr><td class="td">Puesto:</td><td><label id="sppto">Mi mamà</label></td></tr>  
+                                    <tr><td class="td">Temporada:</td><td><label id="sptem">me ama</label></td></tr>  
+                                    <tr><td class="td">Requerimiento:</td><td><label id="spreq">Hola</label></td></tr>  
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="sntra"> Presupuesto por:</label>
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="text" min="1" id="sntra">
+                                                        <span class="input-group-addon">trabajador(es)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="well well-sm well-primary">
+                                    <div class="form-group">
+                                        <textarea id="scom" class="form-control" placeholder="Motivo (Justificaciòn)" rows="5" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="button" id="spbtn" class="btn btn-primary">
+                            Solicitar
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
 
 
@@ -858,6 +933,7 @@
     <script src="../../js/plugin/jquery-form/jquery-form.min.js"></script>
     <script type="text/javascript" src="../../js/JQuery/jquery.numeric.js"></script>
     <script src="../../js/Js_Formulario/Js_Form.js" type="text/javascript"></script>
+    <script src="../../js/plugin/pfnotify/pnotify.custom.min.js" type="text/javascript"></script>
     <script src="../../js/businessLogic/Contrato/casosEspeciales.js?v=<%=globalProperties.VERSION_JS%>" type="text/javascript"></script>
 </html>
 <%} else {

@@ -347,7 +347,7 @@ public class DgpDAO implements InterfaceDgpDAO {
         sql += (idPuesto.trim().equals("")) ? "" : " and ID_DETALLE_REQ_PROCESO in (select ID_DETALLE_REQ_PROCESO from RHVD_REQ_PASO_PU where id_puesto='" + idPuesto.trim() + "') ";
         
         /*departamento de recursos humanos*/
-        if (id_dep.equals("DPT-0019")) {
+        if (id_dep.equals("DPT-0019")||id_dep.equals("DPT-0033")) {
             sql = "select * from RHVD_ES_REQUERIMIENTO where ES_PORCENT IS NOT NULL  ";
         }
         sql += (procAcad) ? " and es_proc_acad>0" : " and es_proc_acad=0 ";

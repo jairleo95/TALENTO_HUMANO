@@ -31,7 +31,6 @@ var condicionval = {
     'REQ-0001': 'Contrato Personal : Tiempo Completo',
     'REQ-0002': 'Contrato Personal : Medio Tiempo (24 Horas Semanal)',
     'REQ-0003': 'Contrato Personal : Tiempo Parcial',
-    'REQ-0004': 'Renovacion de Contrato',
     'REQ-0005': 'Contrato Personal : Extranjero',
     'REQ-0007': 'Practicas Preprofesionales (Tope 6hrs diarias / 30 hrs  semanales.)',
     'REQ-0008': 'Practicas Profesionales',

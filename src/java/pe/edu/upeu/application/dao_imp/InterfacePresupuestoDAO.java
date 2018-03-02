@@ -44,6 +44,8 @@ public interface InterfacePresupuestoDAO {
     public String statusPresupuesto(String idDestino, String temp);
     
     public List<Map<String, Object>> listDetPres(String idpres);
+    
+    public List<Map<String, Object>> listResumenPresupuesto(String dir, String dep, String area, String puesto, String req);
 
     public ArrayList<Map<String, ?>> CCostos(String id, int tipo);
 
@@ -98,5 +100,9 @@ public interface InterfacePresupuestoDAO {
     public boolean UpdateDetSueldo(Object s);
 
     public boolean Reg_DetSueldo(Object s);
+    
+    public ArrayList<Map<String, Object>> getAllFltrPresupuesto(String idArea, String idDep, String idDir, String idReq, String idPuesto);
+    
+    public List<Map<String, Object>> getAllFltrDetPres(String idpres, String idPuesto, String idReq);
 
 }

@@ -69,11 +69,11 @@
         <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
         <script type="text/javascript" src="js/JQuery/jquery.autoheight.js"></script>
     </head>
-     
+
     <body class="smart-style-1 fixed-header fixed-footer mainBody"  onload="nobackbutton();
             document.getElementById('link').click()">
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
- 
+
         <!-- HEADER -->
         <header id="header">
             <div id="logo-group" >
@@ -261,9 +261,11 @@
 
                 <ul>
                     <%
-                        V_Privilegio gpres=null;
-                        V_Privilegio rspres=null;
-                        V_Privilegio spres=null;
+                        V_Privilegio gpres = null;
+                        V_Privilegio rspres = null;
+                        V_Privilegio spres = null;
+                        V_Privilegio respres = null;
+                        V_Privilegio resdetpres = null;
                         for (int i = 0; i < listarURL.size(); i++) {
                             V_Privilegio dp = new V_Privilegio();
                             dp = (V_Privilegio) listarURL.get(i);
@@ -285,12 +287,16 @@
                             <%}%>
                         </ul>
                     </li>
-                    <%} else if(dp.getId_privilegio().equals("PRV-000046")){
-                        gpres=dp;    
-                    } else if(dp.getId_privilegio().equals("PRV-000048")){
-                        spres=dp;    
-                    } else if(dp.getId_privilegio().equals("PRV-000047")){
-                        rspres=dp;    
+                    <%} else if (dp.getId_privilegio().equals("PRV-000046")) {
+                        gpres = dp;
+                    } else if (dp.getId_privilegio().equals("PRV-000048")) {
+                        spres = dp;
+                    } else if (dp.getId_privilegio().equals("PRV-000049")) {
+                        respres = dp;
+                    } else if (dp.getId_privilegio().equals("PRV-000050")) {
+                        resdetpres = dp;
+                    } else if (dp.getId_privilegio().equals("PRV-000047")) {
+                        rspres = dp;
                     } else {%>
                     <li class="li-privilegio bounceInDown animated">
                         <%if (id_rol.trim().equals("ROL-0013")) {%>
@@ -312,24 +318,38 @@
                     </li>
                     <%}
                         }%>
+                        <%if (gpres != null || rspres != null || spres != null || resdetpres != null || respres != null) {%>
                     <li class="li-privilegio bounceInDown animated">
                         <a href="#" data-value="fa fa-lg fa-fw fa-file"><i class="fa fa-lg fa-fw fa-file-text"></i> <span class="menu-item-parent">Presupuesto</span></a>
                         <ul>
-                            <%if (gpres!=null) {%>
+                            <%if (gpres != null) {%>
                             <li>
                                 <a href="<%=gpres.getDi_url()%>" target="myframe"><i class="<%=gpres.getIc_link()%>"></i> <%=gpres.getNo_link()%></a>
                             </li>
-                            <%}if (rspres!=null) {%>
+                            <%}
+                                if (rspres != null) {%>
                             <li>
                                 <a href="<%=rspres.getDi_url()%>" target="myframe"><i class="<%=rspres.getIc_link()%>"></i> <%=rspres.getNo_link()%></a>
                             </li>
-                            <%}if (spres!=null) {%>
+                            <%}
+                                if (spres != null) {%>
                             <li>
                                 <a href="<%=spres.getDi_url()%>" target="myframe"><i class="<%=spres.getIc_link()%>"></i> <%=spres.getNo_link()%></a>
+                            </li>
+                            <%}
+                                if (resdetpres != null) {%>
+                            <li>
+                                <a href="<%=resdetpres.getDi_url()%>" target="myframe"><i class="<%=resdetpres.getIc_link()%>"></i> <%=resdetpres.getNo_link()%></a>
+                            </li>
+                            <%}
+                                if (respres != null) {%>
+                            <li>
+                                <a href="<%=respres.getDi_url()%>" target="myframe"><i class="<%=respres.getIc_link()%>"></i> <%=respres.getNo_link()%></a>
                             </li>
                             <%}%>
                         </ul>
                     </li>
+                    <%}%>
 
                 </ul>
 

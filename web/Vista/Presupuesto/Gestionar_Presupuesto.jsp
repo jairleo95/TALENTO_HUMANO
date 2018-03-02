@@ -111,11 +111,10 @@
                             <div class="form-group col-md-6 col-xs-12" >
                                 <label class="">Requerimiento :</label>
                                 <select class="form-control select_req" >
-                                    <option value="" selected disabled>[Seleccione]</option>
+                                    <option value="0" selected disabled>[Seleccione]</option>
                                     <option value="REQ-0001">Contrato Personal : Tiempo Completo</option>
                                     <option value="REQ-0002">Contrato Personal : Medio Tiempo (24 Horas Semanal)</option>
                                     <option value="REQ-0003">Contrato Personal : Tiempo Parcial</option>
-                                    <option value="REQ-0004">Renovacion de Contrato</option>
                                     <option value="REQ-0005">Contrato Personal : Extranjero</option>
                                     <option value="REQ-0007">Practicas Preprofesionales (Tope 6hrs diarias / 30 hrs  semanales.)</option>
                                     <option value="REQ-0008">Practicas Profesionales</option>

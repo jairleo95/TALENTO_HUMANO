@@ -8,7 +8,9 @@ package pe.edu.upeu.application.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.factory.ConexionBD;
 import pe.edu.upeu.application.factory.FactoryConnectionDB;
@@ -292,16 +294,90 @@ public class ListaDAO implements InterfaceListaDAO {
     }
 
     @Override
-    public List<String> list_Condicion_contrato() {
-        List<String> list = new ArrayList<String>();
-        list.add("Contrato");
-        list.add("Contrato Independiente");
-        list.add("Empleado");
-        list.add("Misionero");
-        list.add("Práctica Profesional");
-        list.add("MFL-Práctica Pre Profesional");
-        list.add("Convenio Laboral Juvenil");
-        list.add("MFL-Contrato");
+    public Map<String,String> list_Condicion_contrato() {
+        Map<String,String> list = new HashMap();
+        list.put("REQ-0001","Contrato Personal - Tiempo Completo");
+        list.put("REQ-0002","Contrato Personal - Medio Tiempo (24 Horas Semanal)");
+        list.put("REQ-0003","Contrato Personal - Tiempo Parcial");
+        list.put("REQ-0005","Contrato Personal - Extranjero");
+        list.put("REQ-0007","Practicas Preprofesionales (Tope 6hrs diarias / 30 hrs  semanales.)");
+        list.put("REQ-0008","Practicas Profesionales");
+        list.put("REQ-0009","Convenio Laboral Juvenil (Hasta 22 años, no matriculados)");
+        list.put("REQ-0010","Locacion de Servicios");
+        list.put("REQ-0011","No domiciliado (Expositores Extranjeros)");
+        list.put("REQ-0018","Contrato Personal - Tiempo Parcial (Trabajador Docente)");
+        list.put("REQ-0019","Contratacion Casos Especiales ");
+        list.put("REQ-0020","Contrato Personal > MFL - Medio Tiempo");
+        list.put("REQ-0021","Contrato Personal > MFL - Tiempo Completo");
+        list.put("REQ-0022","Empleado");
+        list.put("REQ-0023","Misionero");
+        return list;
+    }
+    
+    @Override
+    public List<Map<String,String>> listCondicionContratoJson(){
+        List<Map<String,String>> list=new ArrayList();
+        Map<String,String> mp = new HashMap();
+        mp.put("nombre","Contrato Personal - Tiempo Completo");
+        mp.put("id","REQ-0001");
+        list.add(mp);
+        mp = new HashMap();
+        mp.put("nombre","Contrato Personal - Medio Tiempo (24 Horas Semanal)");
+        mp.put("id","REQ-0002");
+        list.add(mp);
+        mp = new HashMap();
+        mp.put("nombre","Contrato Personal - Tiempo Parcial");
+        mp.put("id","REQ-0003");
+        list.add(mp);
+        mp = new HashMap();
+        mp.put("nombre","Contrato Personal - Extranjero");
+        mp.put("id","REQ-0005");
+        list.add(mp);
+        mp = new HashMap();
+        mp.put("nombre","Practicas Preprofesionales (Tope 6hrs diarias / 30 hrs  semanales.)");
+        mp.put("id","REQ-0007");
+        list.add(mp);
+        mp = new HashMap();
+        mp.put("nombre","Practicas Profesionales");
+        mp.put("id","REQ-0008");
+        list.add(mp);
+        mp = new HashMap();
+        mp.put("nombre","Convenio Laboral Juvenil (Hasta 22 años, no matriculados)");
+        mp.put("id","REQ-0009");
+        list.add(mp);
+        mp = new HashMap();
+        mp.put("nombre","Locacion de Servicios");
+        mp.put("id","REQ-0010");
+        list.add(mp);
+        mp = new HashMap();
+        mp.put("nombre","No domiciliado (Expositores Extranjeros)");
+        mp.put("id","REQ-0011");
+        list.add(mp);
+        mp = new HashMap();
+        mp.put("nombre","Contrato Personal - Tiempo Parcial (Trabajador Docente)");
+        mp.put("id","REQ-0018");
+        list.add(mp);
+        mp = new HashMap();
+        mp.put("nombre","Contratacion Casos Especiales");
+        mp.put("id","REQ-0019");
+        list.add(mp);
+        mp = new HashMap();
+        mp.put("nombre","Contrato Personal > MFL - Medio Tiempo");
+        mp.put("id","REQ-0020");
+        list.add(mp);
+        mp = new HashMap();
+        mp.put("nombre","Contrato Personal > MFL - Tiempo Completo");
+        mp.put("id","REQ-0021");
+        list.add(mp);
+        mp = new HashMap();
+        mp.put("nombre","Empleado");
+        mp.put("id","REQ-0022");
+        list.add(mp);
+        mp = new HashMap();
+        mp.put("nombre","Misionero");
+        mp.put("id","REQ-0023");
+        list.add(mp);
+        
         return list;
     }
 

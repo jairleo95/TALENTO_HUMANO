@@ -123,10 +123,10 @@ function getAvatar(tipo, idtra) {
                         }
                     } else {
                         if (obj.EFOTO != 2) {
-                            $('.borde').attr("src", "../../Archivo/Fotos/" + obj.ar_foto);
-                            $(".avatar").attr("href", "../../Archivo/Fotos/" + obj.ar_foto);
+                            $('.borde').attr("src", "http://gth.upeu.edu.pe/DATA_FILES_GTH/Archivo/Fotos/" + obj.ar_foto);
+                            $(".avatar").attr("href", "http://gth.upeu.edu.pe/DATA_FILES_GTH/Archivo/Fotos/" + obj.ar_foto);
                             console.log("doc:"+obj.ar_foto)
-                            $("#sb-player").attr("href", "../../Archivo/Fotos/" + obj.ar_foto);
+                            $("#sb-player").attr("href", "http://gth.upeu.edu.pe/DATA_FILES_GTH/Archivo/Fotos/" + obj.ar_foto);
                             console.log(obj.ar_foto);
                         }
                     }

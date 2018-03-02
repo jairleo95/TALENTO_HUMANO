@@ -92,10 +92,10 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     @Override
     public int comprobarContratadosByDept(String idDestino, String idReq) {
         System.out.println("===============INGRESANDO A comprobarByDept======================");
-        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con, RHTM_DGP dgp where "
+        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con where "
                 + "con.ES_CONTRATO=1 and con.ID_PUESTO in (select ID_PUESTO from RHTR_PUESTO where "
                 + "RHTR_PUESTO.ID_SECCION in (select ID_SECCION from RHTR_SECCION where "
-                + "ID_AREA in (select ID_AREA from RHTD_AREA where ID_DEPARTAMENTO=?))) and con.ID_DGP=dgp.ID_DGP and dgp.ID_REQUERIMIENTO=?";
+                + "ID_AREA in (select ID_AREA from RHTD_AREA where ID_DEPARTAMENTO=?))) and con.LI_CONDICION=?";
         int ntra = 0;
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -118,13 +118,13 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     @Override
     public int comprobarContratadosInDeptByIdPP(String idPP) {
         System.out.println("===============INGRESANDO A comprobarContratadosInDeptByIdPP======================");
-        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con, RHTM_DGP dgp, (select pres.IDDESTINO, dp.ID_REQUERIMIENTO "
+        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con, (select pres.IDDESTINO, dp.ID_REQUERIMIENTO "
                 + "from RHTM_PRESUPUESTO pres, RHTD_DETALLE_PRESUPUESTO dp, RHTR_PRESUPUESTO_PUESTO pp where pres.ID_PRESUPUESTO=dp.ID_PRESUPUESTO "
                 + "and dp.ID_DETALLE_PRESUPUESTO=pp.ID_DETALLE_PRESUPUESTO and pp.ID_PRESUPUESTO_PUESTO=?) n where "
                 + "con.ES_CONTRATO=1 and con.ID_PUESTO in (select ID_PUESTO from RHTR_PUESTO where "
                 + "RHTR_PUESTO.ID_SECCION in (select ID_SECCION from RHTR_SECCION where "
                 + "ID_AREA in (select ID_AREA from RHTD_AREA where ID_DEPARTAMENTO=(select ID_DEPARTAMENTO from RHTD_AREA "
-                + "where ID_AREA=n.IDDESTINO)))) and con.ID_DGP=dgp.ID_DGP and dgp.ID_REQUERIMIENTO=n.ID_REQUERIMIENTO";
+                + "where ID_AREA=n.IDDESTINO)))) and con.LI_CONDICION=n.ID_REQUERIMIENTO";
         int ntra = 0;
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -223,10 +223,10 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     @Override
     public int comprobarContratadosByArea(String idDestino, String idReq) {
         System.out.println("===============INGRESANDO A comprobarContratadosByArea======================");
-        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con, RHTM_DGP dgp where "
+        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con where "
                 + "con.ES_CONTRATO=1 and con.ID_PUESTO in (select RHTR_PUESTO.ID_PUESTO from RHTR_PUESTO where "
                 + "RHTR_PUESTO.ID_SECCION in (select RHTR_SECCION.ID_SECCION from RHTR_SECCION where "
-                + "RHTR_SECCION.ID_AREA=?)) and con.ID_DGP=dgp.ID_DGP and dgp.ID_REQUERIMIENTO=?";
+                + "RHTR_SECCION.ID_AREA=?)) and con.LI_CONDICION=?";
         int ntra = 0;
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -249,13 +249,13 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     @Override
     public Map<String, Object> comprobarContratadosAndPresInAreaByIdPP(String idPP) {
         System.out.println("===============INGRESANDO A comprobarContratadosAndPresInAreaByIdPP======================");
-        sql = "select count(con.ID_CONTRATO) as ntra, n.N_TRABAJADORES as ntrap from RHTM_CONTRATO con, RHTM_DGP dgp, (select pres.IDDESTINO, "
+        sql = "select count(con.ID_CONTRATO) as ntra, n.N_TRABAJADORES as ntrap from RHTM_CONTRATO con, (select pres.IDDESTINO, "
                 + "dp.ID_REQUERIMIENTO, dp.N_TRABAJADORES "
                 + "from RHTM_PRESUPUESTO pres, RHTD_DETALLE_PRESUPUESTO dp, RHTR_PRESUPUESTO_PUESTO pp where pres.ID_PRESUPUESTO=dp.ID_PRESUPUESTO "
                 + "and dp.ID_DETALLE_PRESUPUESTO=pp.ID_DETALLE_PRESUPUESTO and pp.ID_PRESUPUESTO_PUESTO=?) n where "
                 + "con.ES_CONTRATO=1 and con.ID_PUESTO in (select RHTR_PUESTO.ID_PUESTO from RHTR_PUESTO where "
                 + "RHTR_PUESTO.ID_SECCION in (select RHTR_SECCION.ID_SECCION from RHTR_SECCION where "
-                + "RHTR_SECCION.ID_AREA=n.IDDESTINO)) and con.ID_DGP=dgp.ID_DGP and dgp.ID_REQUERIMIENTO=n.ID_REQUERIMIENTO group by n.N_TRABAJADORES";
+                + "RHTR_SECCION.ID_AREA=n.IDDESTINO)) and con.LI_CONDICION=n.ID_REQUERIMIENTO group by n.N_TRABAJADORES";
         Map<String, Object> mp = new HashMap();
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -278,8 +278,8 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     @Override
     public int comprobarContratadosByPuesto(String idDestino, String idReq) {
         System.out.println("===============INGRESANDO A comprobarContratadosByPuesto======================");
-        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con, RHTM_DGP dgp where "
-                + "con.ES_CONTRATO=1 and con.ID_PUESTO = ? and con.ID_DGP=dgp.ID_DGP and dgp.ID_REQUERIMIENTO=?";
+        sql = "select count(con.ID_CONTRATO) as ntra from RHTM_CONTRATO con where "
+                + "con.ES_CONTRATO=1 and con.ID_PUESTO = ? and con.LI_CONDICION=?";
         int ntra = 0;
         try {
             this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
@@ -462,6 +462,50 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
             this.cnn.close();
         }
         System.out.println("===============SALIENDO DE listDetPres======================");
+        return lista;
+    }
+
+    //Para obtener la consulta original solo quitar las partes condicionales
+    @Override
+    public List<Map<String, Object>> listResumenPresupuesto(String dir, String dep, String area, String puesto, String req) {
+        System.out.println("===============INGRESANDO A listResumenPresupuesto======================");
+        sql = "select n.IDDESTINO, con.ntrac, n.ntrap,dep.NO_DEP,ar.NO_AREA,dep.ID_DEPARTAMENTO from (select count(con.ID_CONTRATO) as ntrac, sec.ID_AREA as area from "
+                + "RHTM_CONTRATO con,RHTR_SECCION sec,RHTR_PUESTO pto where con.ES_CONTRATO=1 and con.ID_PUESTO=pto.ID_PUESTO "
+                + ((puesto != null) ? "and pto.ID_PUESTO='" + puesto + "'" : "") + "  and "
+                + "pto.ID_SECCION=sec.ID_SECCION "
+                + ((req != null) ? "and con.LI_CONDICION='" + req + "'" : "") + " group by sec.ID_AREA) con, "
+                + "(select pres.IDDESTINO,pres.ID_PRESUPUESTO, "
+                + "sum(pp.N_TRABAJADORES) as ntrap from RHTM_PRESUPUESTO pres, RHTD_DETALLE_PRESUPUESTO dp,RHTX_TEMPORADA tem, "
+                + "RHTR_PRESUPUESTO_PUESTO pp where pres.ID_PRESUPUESTO=dp.ID_PRESUPUESTO and dp.ID_DETALLE_PRESUPUESTO=pp.ID_DETALLE_PRESUPUESTO and "
+                + "pres.ID_TEMPORADA=tem.ID_TEMPORADA and sysdate between tem.FECHA_INICIO and FECHA_FIN and tem.IDDESTINO=pres.IDDESTINO"
+                + " " + ((req != null) ? "and dp.ID_REQUERIMIENTO='" + req + "'" : "") + " " + ((puesto != null) ? "and pp.ID_PUESTO='" + puesto + "'" : "") + " "
+                + "group by pres.IDDESTINO, pres.ID_PRESUPUESTO ) n,RHTD_AREA ar,RHTX_DEPARTAMENTO dep,RHTX_DIRECCION dir where n.IDDESTINO=con.area "
+                + "and n.IDDESTINO=ar.ID_AREA " + ((area != null) ? "and ar.ID_AREA='" + area + "'" : "") + "  "
+                + "and ar.ID_DEPARTAMENTO=dep.ID_DEPARTAMENTO " + ((dep != null) ? "and dep.ID_DEPARTAMENTO='" + dep + "'" : "")
+                + "  and dep.ID_DIRECCION=dir.ID_DIRECCION"
+                + " " + ((dir != null) ? "and dir.ID_DIRECCION='" + dir + "'" : "") + " ";
+        List<Map<String, Object>> lista = new ArrayList();
+        System.out.println(sql);
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("ID_DEPARTAMENTO", rs.getString("ID_DEPARTAMENTO"));
+                m.put("IDDESTINO", rs.getString("IDDESTINO"));
+                m.put("ntrac", rs.getInt("ntrac"));
+                m.put("ntrap", rs.getInt("ntrap"));
+                m.put("NO_DEP", rs.getString("NO_DEP"));
+                m.put("NO_AREA", rs.getString("NO_AREA"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar Resúmen del presupuesto " + e + "MÉTODO listResumenPresupuesto");
+        } finally {
+            this.cnn.close();
+        }
+        System.out.println("===============SALIENDO DE listResumenPresupuesto======================");
         return lista;
     }
 
@@ -724,8 +768,8 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
     @Override
     public Map<String, Object> getTrabPresAndCon(String idpp) {
         System.out.println("===============INGRESANDO A getTrabPresAndCon======================");
-        sql = "select trad,trac from (select count(con.ID_CONTRATO) as trac from RHTM_CONTRATO con, RHTM_DGP dgp, RHTR_PRESUPUESTO_PUESTO pp "
-                + "where con.ES_CONTRATO=1 and con.ID_PUESTO = pp.ID_PUESTO and con.ID_DGP=dgp.ID_DGP and dgp.ID_REQUERIMIENTO=(select ID_REQUERIMIENTO "
+        sql = "select trad,trac from (select count(con.ID_CONTRATO) as trac from RHTM_CONTRATO con, RHTR_PRESUPUESTO_PUESTO pp "
+                + "where con.ES_CONTRATO=1 and con.ID_PUESTO = pp.ID_PUESTO and con.LI_CONDICION=(select ID_REQUERIMIENTO "
                 + "from RHTM_PRESUPUESTO pres, RHTD_DETALLE_PRESUPUESTO det, RHTR_PRESUPUESTO_PUESTO prep where prep.ID_PRESUPUESTO_PUESTO=? "
                 + "and prep.ID_DETALLE_PRESUPUESTO=det.ID_DETALLE_PRESUPUESTO and det.ID_PRESUPUESTO=pres.ID_PRESUPUESTO)),"
                 + "(select RHTR_PRESUPUESTO_PUESTO.N_TRABAJADORES as trad from RHTR_PRESUPUESTO_PUESTO where RHTR_PRESUPUESTO_PUESTO.ID_PRESUPUESTO_PUESTO=?)";
@@ -1230,6 +1274,94 @@ public class PresupuestoDAO implements InterfacePresupuestoDAO {
         }
         System.out.println("===============SALIENDO DE Reg_DetSueldo======================");
         return p;
+    }
+
+    @Override
+    public ArrayList<Map<String, Object>> getAllFltrPresupuesto(String idArea, String idDep, String idDir, String idReq, String idPuesto) {
+        
+        System.out.println("===============INGRESANDO A getAllFltrPresupuesto======================");
+        sql = "select pres.ID_PRESUPUESTO,area.NO_AREA,dept.NO_DEP,dept.ID_DEPARTAMENTO from RHTM_PRESUPUESTO pres,RHTX_DEPARTAMENTO dept,"
+                + "RHTD_AREA area where pres.ID_TEMPORADA in (select ID_TEMPORADA "
+                + "from RHTX_TEMPORADA where sysdate BETWEEN FECHA_INICIO  and FECHA_FIN) and pres.ESTADO=1 and "
+                + "pres.IDDESTINO in (select ID_AREA from RHTD_AREA ar, RHTX_DEPARTAMENTO dep where "
+                + "dep.ID_DEPARTAMENTO=ar.ID_DEPARTAMENTO " + ((!idDir.equals("0")) ? "and dep.ID_DIRECCION=? " : "")
+                + ((!idDep.equals("0")) ? "and dep.ID_DEPARTAMENTO=? " : "") + ((!idArea.equals("0")) ? "and ar.ID_AREA=? " : "") + ") "
+                + "and pres.IDDESTINO=area.ID_AREA and area.ID_DEPARTAMENTO=dept.ID_DEPARTAMENTO and pres.ID_PRESUPUESTO in "
+                + "(select dp.ID_PRESUPUESTO from RHTD_DETALLE_PRESUPUESTO dp where "
+                + ((idReq!=null) ? " dp.ID_REQUERIMIENTO in ("+idReq+") and " : "")+"dp.ID_DETALLE_PRESUPUESTO in "
+                + "(select ID_DETALLE_PRESUPUESTO from RHTR_PRESUPUESTO_PUESTO"
+                + ((!idPuesto.equals("0")) ? " where ID_PUESTO=?" : "")+"))";
+        System.out.println(sql + " - " + idArea + " - " + idDep + " - " + idDir);
+        ArrayList<Map<String, Object>> lista = new ArrayList<>();
+        try {
+            this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+            ps = this.cnn.conex.prepareStatement(sql);
+            if (!idDir.equals("0")) {
+                ps.setString(1, idDir);
+                if (!idDep.equals("0")) {
+                    ps.setString(2, idDep);
+                    if (!idArea.equals("0")) {
+                        ps.setString(3, idArea);
+                        if (!idPuesto.equals("0")) {
+                            ps.setString(4, idPuesto);
+                        }
+                    } else if (!idPuesto.equals("0")){
+                        ps.setString(3, idPuesto);
+                    }
+                } else if (!idPuesto.equals("0")){
+                    ps.setString(2, idPuesto);
+                }
+            } else if (!idPuesto.equals("0")) {
+                ps.setString(1, idPuesto);
+            }
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("ID_DEPARTAMENTO", rs.getString("ID_DEPARTAMENTO"));
+                m.put("ID_PRESUPUESTO", rs.getString("ID_PRESUPUESTO"));
+                m.put("NO_AREA", rs.getString("NO_AREA"));
+                m.put("NO_DEP", rs.getString("NO_DEP"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar DETALLE PRESUPUESTO PUESTO SUELDO" + e + " MÉTODO getAllFltrPresupuesto");
+        } finally {
+            this.cnn.close();
+        }
+        System.out.println("===============SALIENDO DE getAllFltrPresupuesto======================");
+        return lista;
+    }
+
+    @Override
+    public List<Map<String, Object>> getAllFltrDetPres(String idpres, String idPuesto, String idReq) {
+        System.out.println("===============INGRESANDO A listDetPrePuesto======================");
+        sql = "select dp.* from RHTD_DETALLE_PRESUPUESTO dp where dp.ID_PRESUPUESTO=? "
+                + ((!idPuesto.equals("0")) ? " and ID_DETALLE_PRESUPUESTO in "
+                + "(select ID_DETALLE_PRESUPUESTO from RHTR_PRESUPUESTO_PUESTO  where ID_PUESTO=?) " : "")
+                + ((idReq!=null) ? "and ID_REQUERIMIENTO in ("+idReq+")" : "");
+        List<Map<String, Object>> lista = new ArrayList();
+        this.cnn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
+        try {
+            ps = this.cnn.conex.prepareStatement(sql);
+            ps.setString(1, idpres);
+            if(!idPuesto.equals("0")){
+                ps.setString(2, idPuesto);
+            }
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Map<String, Object> m = new HashMap<>();
+                m.put("ID_DETALLE_PRESUPUESTO", rs.getString("ID_DETALLE_PRESUPUESTO"));
+                m.put("N_TRABAJADORES", rs.getString("N_TRABAJADORES"));
+                m.put("ID_REQUERIMIENTO", rs.getString("ID_REQUERIMIENTO"));
+                lista.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar DETALLE PRESUPUESTO TRABAJADOR " + e + " MÉTODO listDetPrePuesto");
+        } finally {
+            this.cnn.close();
+        }
+        System.out.println("===============SALIENDO DE listDetPrePuesto======================");
+        return lista;
     }
 
 }

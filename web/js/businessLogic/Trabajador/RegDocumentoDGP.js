@@ -52,7 +52,7 @@ function validateSizeFile() {
                     var fileType = items[i].type; // get file type
                     // append li to UL tag to display File info
                     fragment = "<li>" + fileName + " (<b>" + fileSize + "</b> bytes) - Type :" + fileType + "</li>";
-                    if (fileSize > 512000) {
+                    if (fileSize > 1048576) {
                         $(thisObject).focus();
                         x = false;
                     }
@@ -74,7 +74,7 @@ function initFormRegDocument(request) {
                 success: function (data, textStatus, jqXHR) {
                     if (data.status) {
                         $.smallBox({
-                            title: "¡Documento registrada correctamente!",
+                            title: "¡Documento registrado correctamente!",
                             content: "Puede visualizar el documento",
                             color: "#739E73",
                             iconSmall: "fa fa-check fa-2x fadeInRight animated",
@@ -112,7 +112,7 @@ function initFormRegDocument(request) {
                     "</div>"},
         allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'docx', 'doc', 'txt'],
         overwriteInitial: false,
-        maxFileSize: 500,
+        maxFileSize: 1024,
         maxFilesNum: 10,
         browseClass: "btn btn-primary btn-sm",
         removeClass: "btn btn-danger btn-sm",

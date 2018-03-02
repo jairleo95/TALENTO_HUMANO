@@ -21,12 +21,14 @@ import javax.servlet.http.HttpSession;
 import pe.edu.upeu.application.dao.AreaDAO;
 import pe.edu.upeu.application.dao.DepartamentoDao;
 import pe.edu.upeu.application.dao.DireccionDAO;
+import pe.edu.upeu.application.dao.ListaDAO;
 import pe.edu.upeu.application.dao.PuestoDAO;
 import pe.edu.upeu.application.dao.SeccionDAO;
 import pe.edu.upeu.application.dao.Sub_ModalidadDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceAreaDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDepartamentoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceDireccionDAO;
+import pe.edu.upeu.application.dao_imp.InterfaceListaDAO;
 import pe.edu.upeu.application.dao_imp.InterfacePuestoDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSeccionDAO;
 import pe.edu.upeu.application.dao_imp.InterfaceSub_ModalidadDAO;
@@ -53,6 +55,7 @@ public class CDir_Puesto extends HttpServlet {
     InterfacePuestoDAO p = new PuestoDAO();
     InterfaceSub_ModalidadDAO sub = new Sub_ModalidadDAO();
     InterfaceDireccionDAO dir = new DireccionDAO();
+    InterfaceListaDAO lD=new ListaDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -100,7 +103,7 @@ public class CDir_Puesto extends HttpServlet {
                 String es_l = request.getParameter("esL");
                 List<Map<String, ?>> lista = p.Listar_Puesto_id_es(id);
                 if (es_l != null) {
-                    
+
                     List<Map<String, ?>> lista1 = new ArrayList<>();
                     for (int i = 0; i < lista.size(); i++) {
                         if (lista.get(i).get("estado").equals("1")) {
@@ -170,6 +173,11 @@ public class CDir_Puesto extends HttpServlet {
                 rpta.put("rpta", "1");
                 rpta.put("lista", lista);
 
+            }
+            if (opc.equals("list_req")) {
+                List<Map<String, String>> lista = lD.listCondicionContratoJson();
+                rpta.put("rpta", "1");
+                rpta.put("lista", lista);
             }
 
         } catch (Exception e) {

@@ -169,7 +169,7 @@
 
                                                             <th data-class="expand">Nombre</th>
                                                             <th data-class="expand" style="width: 35%">Proceso</th>
-                                                                <%if (ID_DEP.equals("DPT-0019")) {%>
+                                                            <%if (ID_DEP.equals("DPT-0019") || ID_DEP.equals("DPT-0033")) {%>
                                                             <th data-hide="phone,tablet">Departamento</th>
                                                                 <%}%>
                                                             <th >Estado</th>
@@ -234,7 +234,7 @@
                                                             </div>
 
                                                         </td>
-                                                        <%if (ID_DEP.equals("DPT-0019")) {%>
+                                                        <%if (ID_DEP.equals("DPT-0019") || ID_DEP.equals("DPT-0033")) {%>
                                                         <td><%=r.getNo_dep()%></td>
                                                         <%} %>
                                                         <td>
@@ -263,7 +263,7 @@
                                                             <th style="width: 5px">Accion</th>
                                                             <th data-class="expand">Nombre</th>
                                                             <th data-class="expand" style="width: 35%">Proceso</th>
-                                                                <%if (ID_DEP.equals("DPT-0019")) {%>
+                                                                <%if (ID_DEP.equals("DPT-0019") || ID_DEP.equals("DPT-0033")) {%>
                                                             <th data-hide="phone,tablet">Departamento</th>
                                                                 <%}%>
                                                             <th >Estado</th>

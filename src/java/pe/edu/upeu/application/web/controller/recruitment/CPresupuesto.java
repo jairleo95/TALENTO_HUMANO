@@ -52,10 +52,15 @@ public class CPresupuesto extends HttpServlet {
         String tip = request.getParameter("tip");
         Map<String, Object> c = new HashMap<>();
         List<Map<String, Object>> detpres;
+        List<Map<String, Object>> list;
         String idpres;
         String idp;
         String idreq;
         String idpp;
+        String idDep;
+        String idArea;
+        String idSeccion;
+        String idDir;
         int fltr;
         switch (opc) {
             case "gest":
@@ -68,8 +73,14 @@ public class CPresupuesto extends HttpServlet {
             case "statusSFPview":
                 response.sendRedirect("Vista/Presupuesto/statusSFP.jsp");
                 break;
+            case "resumenPresView":
+                response.sendRedirect("Vista/Presupuesto/reporteResumenPresupuesto.jsp");
+                break;
+            case "resumenDetPresView":
+                response.sendRedirect("Vista/Presupuesto/resumenDetalladoPresupuesto.jsp");
+                break;
             case "listSFPP":
-                List<Map<String, Object>> list = pD.listSolFP();
+                list = pD.listSolFP();
                 for (int i = 0; i < list.size(); i++) {
                     idpp = (String) list.get(i).get("ID_PRESUPUESTO_PUESTO");
                     list.get(i).put("trab", pD.getTrabPresAndCon(idpp));
@@ -77,11 +88,44 @@ public class CPresupuesto extends HttpServlet {
                 rpta.put("rpta", list);
                 break;
             case "listAllSFP":
-                String idDep = request.getParameter("idDep");
-                String idArea = request.getParameter("idArea");
-                String idSeccion = request.getParameter("idSeccion");
+                idDep = request.getParameter("idDep");
+                idArea = request.getParameter("idArea");
+                idSeccion = request.getParameter("idSeccion");
                 idPuesto = request.getParameter("idPuesto");
                 rpta.put("rpta", pD.listAllSolFP(idDep, idArea, idSeccion, idPuesto));
+                break;
+            case "listResumenPres":
+                idDir = request.getParameter("idDir");
+                idDep = request.getParameter("idDep");
+                idArea = request.getParameter("idArea");
+                idPuesto = request.getParameter("idPuesto");
+                idreq = request.getParameter("req");
+                rpta.put("rpta", pD.listResumenPresupuesto(idDir, idDep, idArea, idPuesto, idreq));
+                break;
+            case "listResumenDetPres":
+                idDir = request.getParameter("idDir");
+                idDep = request.getParameter("idDep");
+                idArea = request.getParameter("idArea");
+                idPuesto = request.getParameter("idPuesto");
+                String[] req = request.getParameterValues("req[]");
+                String filter = "";
+                if (!req[0].equals("")) {
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < req.length; i++) {
+                        //printval[i];
+                        sb.append("'" + req[i] + "',");
+                    }
+                    filter = sb.toString();
+                    filter = filter.substring(0, filter.length() - 1);
+                }else{
+                    filter=null;
+                }
+                list=pD.getAllFltrPresupuesto(idArea, idDep, idDir, filter, idPuesto);
+                for (int i = 0; i < list.size(); i++) {
+                    idp = (String) list.get(i).get("ID_PRESUPUESTO");
+                    list.get(i).put("detpres", pD.getAllFltrDetPres(idp,idPuesto,filter));
+                }
+                rpta.put("rpta", list);
                 break;
             case "authPres":
                 String obs = request.getParameter("obs");

@@ -746,6 +746,7 @@ function createAlertNoExist(destino) {
             $("#presC").append(decodeURIComponent(escape(s)));
         } else {
             $("#presCA").empty();
+            $("#presCA").attr("class", "alert alert-warning");
             s = '<strong>Atención!</strong>, no se ha presupuestado aún ' + d + '.';
             $("#presCA").append(decodeURIComponent(escape(s)));
         }
@@ -760,6 +761,7 @@ function createAlertNoExist(destino) {
             $("#presC").append(decodeURIComponent(escape(s)));
         } else {
             $("#presCP").empty();
+            $("#presCP").attr("class", "alert alert-warning");
             $("#presDP").empty();
             s = '<strong>Atención!</strong>, no se ha presupuestado aún ' + d + '.';
             $("#presCP").append(decodeURIComponent(escape(s)));
@@ -900,7 +902,7 @@ function createAlertExist(destino, obj) {
         }
     }
 }
-$(".btnPresModal").click(function(){
+$(".btnPresModal").click(function () {
     loadModalSolPres();
 });
 

@@ -132,7 +132,7 @@ public class CDgp extends HttpServlet {
             case "ROL-0008":
                 permisoAdmin = false;
                 //   permissionDireccionFilter = true;
-                permissionPuestoFilter = true;
+                permissionDepartFilter = true;
                 break;
             case "ROL-0010":
                 permissionPuestoFilter = true;

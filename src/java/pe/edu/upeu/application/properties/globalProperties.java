@@ -13,8 +13,8 @@ public class globalProperties {
 
     /* Enviroment variable*/
     /*change when update server (for cache conflicts)*/
-    public static String VERSION_CSS = "2.1.6";
-    public static String VERSION_JS = "2.7.6";
+    public static String VERSION_CSS = "2.1.7";
+    public static String VERSION_JS = "2.7.7";
 
     /* WebService Carga Academica*/
     public static final String keyApp = "4a7c88ee0791cad24a15d43a525982f8";
