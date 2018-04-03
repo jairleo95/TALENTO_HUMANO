@@ -337,7 +337,7 @@ public class DgpDAO implements InterfaceDgpDAO {
     }
 
     @Override
-    public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep, String id_dir,String idPuesto, Boolean procAcad) {
+    public List<V_Es_Requerimiento> LIST_DGP_PROCESO(String id_dep, String id_dir,String idPuesto, Boolean procAcad, boolean admin) {
         this.conn = FactoryConnectionDB.open(FactoryConnectionDB.ORACLE);
         String sql = "select * from RHVD_ES_REQUERIMIENTO where  ES_PORCENT IS NOT NULL  ";
         sql += (id_dep.trim().equals("")) ? "" : " and ID_DEPARTAMENTO='" + id_dep.trim() + "' ";
@@ -347,7 +347,7 @@ public class DgpDAO implements InterfaceDgpDAO {
         sql += (idPuesto.trim().equals("")) ? "" : " and ID_DETALLE_REQ_PROCESO in (select ID_DETALLE_REQ_PROCESO from RHVD_REQ_PASO_PU where id_puesto='" + idPuesto.trim() + "') ";
         
         /*departamento de recursos humanos*/
-        if (id_dep.equals("DPT-0019")||id_dep.equals("DPT-0033")) {
+        if (id_dep.equals("DPT-0019")||id_dep.equals("DPT-0033")||admin) {
             sql = "select * from RHVD_ES_REQUERIMIENTO where ES_PORCENT IS NOT NULL  ";
         }
         sql += (procAcad) ? " and es_proc_acad>0" : " and es_proc_acad=0 ";
@@ -355,6 +355,7 @@ public class DgpDAO implements InterfaceDgpDAO {
 
         Logger.getLogger(getClass().getName()).log(Level.INFO, id_dir);
         List<V_Es_Requerimiento> Lista = new ArrayList<V_Es_Requerimiento>();
+        System.out.println(sql);
         try {
             ResultSet rs = this.conn.query(sql);
             while (rs.next()) {

@@ -19,7 +19,15 @@ $(document).ready(function () {
         } else {
             enableElements($('.cDia'));
             $('.cDia').hide(500);
-            $('.formDGP').submit();
+            if ($(".select-puesto").val() !== "") {
+                $('.formDGP').submit();
+            }else{
+                new PNotify({
+                    title: 'Hey!',
+                    text: 'Necesitamos que asignes un puesto a este trabajador.',
+                    type: 'warning'
+                });
+            }
         }
 
     });
@@ -192,20 +200,20 @@ function plHeader(cont) {
 }
 function disableElements(el) {
     for (var i = 0; i < el.length; i++) {
-        if(el[i].value!==undefined){
-            el[i].readOnly=true;
-        }else{
-          el[i].disabled=true;  
+        if (el[i].value !== undefined) {
+            el[i].readOnly = true;
+        } else {
+            el[i].disabled = true;
         }
         disableElements(el[i].children);
     }
 }
 function enableElements(el) {
     for (var i = 0; i < el.length; i++) {
-        if(el[i].value!==undefined){
+        if (el[i].value !== undefined) {
             el[i].removeAttribute("readOnly");
-        }else{
-          el[i].removeAttribute("disabled");  
+        } else {
+            el[i].removeAttribute("disabled");
         }
         enableElements(el[i].children);
     }

@@ -115,7 +115,7 @@ public class CDgp extends HttpServlet {
         InterfaceUsuarioDAO usu = new UsuarioDAO();
         InterfaceDireccionDAO dir = new DireccionDAO();
         InterfacePeriodo_PagoDAO pp = new Periodo_PagoDAO();
-        InterfacePresupuestoDAO pd=new PresupuestoDAO();
+        InterfacePresupuestoDAO pd = new PresupuestoDAO();
         /*Permisoss*/
         boolean permisoAdmin = false;
         boolean permissionDireccionFilter = false;
@@ -131,16 +131,28 @@ public class CDgp extends HttpServlet {
                 break;
             case "ROL-0008":
                 permisoAdmin = false;
-                //   permissionDireccionFilter = true;
-                permissionDepartFilter = true;
+                permissionDireccionFilter = true;
+                //permissionDepartFilter = true;
                 break;
             case "ROL-0010":
                 permissionPuestoFilter = true;
+                break;
             case "ROL-0003":
                 RegDGPAditionalPermissions = true;
+                break;
+            case "ROL-0019":
+                permissionDireccionFilter = true;
+                break;
             default:
                 permissionDepartFilter = true;
                 permisoAdmin = false;
+                break;
+        }
+        
+        //PARA QUE EL RECTOR PUEDA VISUALIZAR TODOS LOS ESTADOS DE REQUERIMIENTOS DESCOMENTAR LA LINEA QUE ESTÁ DENTRO DE LA CONDICIONAL IF, 
+        //VOLVER A COMENTAR PARA QUE EL RECTOR TENGA SUS PRIVILEGIOS POR DEFECTO//
+        if(idpuesto.equals("PUT-000649")/*||idpuesto.equals("PUT-000638")*/){
+            permisoAdmin = true;
         }
         try {
 
@@ -351,7 +363,7 @@ public class CDgp extends HttpServlet {
 
                         String d = request.getParameter("DIA_" + dia.get(i) + j);
 
-                      /*  System.out.println("dia:" + d);
+                        /*  System.out.println("dia:" + d);
                         System.out.println("desde:" + hora_desde);
                         System.out.println("hasta:" + hora_hasta);*/
                         if (hora_desde != null & d != null & hora_hasta != null) {
@@ -530,16 +542,24 @@ public class CDgp extends HttpServlet {
                 rpta.put("listar", a.List_Detalle_Autorizacion(iddgp, idrp));
             }
             if (opc.equals("Proceso")) {
-                if (permissionDepartFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
-                }
-                if (permissionDireccionFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false));
-                }
-                if (permissionPuestoFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", idpuesto, false));
+                if (permisoAdmin) {
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", "", false, true));
                 } else {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
+                    if (idrol.equals("ROL-0019")||idrol.equals("ROL-0008")) {
+                        sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false, false));
+                    } else {
+                        if (permissionDepartFilter) {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false, false));
+                        }
+                        if (permissionDireccionFilter) {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false, false));
+                        }
+                        if (permissionPuestoFilter) {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", idpuesto, false, false));
+                        } else {
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false, false));
+                        }
+                    }
                 }
 
                 response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
@@ -559,16 +579,20 @@ public class CDgp extends HttpServlet {
                 String iddgp = request.getParameter("iddgp");
                 out.print(iddgp);
                 dgp.REG_DGP_FINAL(iddgp);
-                if (permissionDepartFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
-                }
-                if (permissionDireccionFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false));
-                }
-                if (permissionPuestoFilter) {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", idpuesto, false));
+                if (permisoAdmin) {
+                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", "", false, true));
                 } else {
-                    sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
+                    if (permissionDepartFilter) {
+                        sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false, false));
+                    }
+                    if (permissionDireccionFilter) {
+                        sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false, false));
+                    }
+                    if (permissionPuestoFilter) {
+                        sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", idpuesto, false, false));
+                    } else {
+                        sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false, false));
+                    }
                 }
                 response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp?a=t");
             }

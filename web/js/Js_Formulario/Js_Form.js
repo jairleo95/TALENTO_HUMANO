@@ -147,7 +147,7 @@ function list_select(objSelect, url, datos, opc, id, selectText) {
                 if (typeof selectText !== "undefined" & selectText !== null & selectText !== "") {
                     objSelect.append("<option value=''>[" + selectText + "]</option>");
                 } else {
-                    console.log("enter to else condition ...")
+                    console.log("enter to else condition ...");
                     objSelect.append("<option value=''>[Seleccione]</option>");
                 }
 

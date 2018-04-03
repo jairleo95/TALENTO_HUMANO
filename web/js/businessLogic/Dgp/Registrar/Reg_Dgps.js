@@ -1122,12 +1122,18 @@ $(document).ready(function () {
             },
             horas_totales: {
                 required: true
+            },
+            IDPUESTO:{
+                required: true
             }
         },
         // Messages for form validation
         messages: {
             horas_totales: {
                 max: 'Porfavor digite un horario que se menor a 48 Horas de Trabajo'
+            },
+            IDPUESTO:{
+                required:'Hey! necesitamos que selecciones un puesto para este trabajador.'
             }
         },
         // Do not change code below

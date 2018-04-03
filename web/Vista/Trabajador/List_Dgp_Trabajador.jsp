@@ -96,8 +96,8 @@
                                     %>
                                     <tr>
                                         <td ><%=i + 1%></td>
-                                        <td ><%=DateFormat.toFormat5(d.getFe_desde())%></td>
-                                        <td ><%=DateFormat.toFormat5(d.getFe_hasta())%></td>
+                                        <td ><%=d.getFe_desde()%></td>
+                                        <td ><%=d.getFe_hasta()%></td>
                                         <td ><%=d.getNo_req()%></td>
                                         <td ><%=d.getNo_puesto()%></td>
                                         <td ><%=d.getNo_seccion()%></td> 
