@@ -212,7 +212,7 @@ public class CCarga_Academica extends HttpServlet {
                 dataMap.put("List_ws", carga.List_Carga_Academica_WS(semestre));
             }
             if (opc.equals("listEsCargaAcademica")) {
-                dataMap.put("list", dgp.LIST_DGP_PROCESO(iddep, "", "", true));
+                dataMap.put("list", dgp.LIST_DGP_PROCESO(iddep, "", "", true,false));
             }
             if (opc.equals("getProcesoCargaAcademicaById")) {
                 String id = CCriptografiar.Desencriptar(request.getParameter("id"));

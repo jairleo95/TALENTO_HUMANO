@@ -169,15 +169,15 @@ public class CAutorizacion extends HttpServlet {
                         out.print(iddgp);
                         dgp.HABILITAR_DGP(iddgp);
                         if (permissionDepartFilter) {
-                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false,false));
                         }
                         if (permissionDireccionFilter) {
-                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false));
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false,false));
                         }
                         if (permissionPuestoFilter) {
-                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", idp, false));
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", idp, false,false));
                         } else {
-                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false,false));
                         }
                         // sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
                         response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
@@ -187,15 +187,15 @@ public class CAutorizacion extends HttpServlet {
 
                         dgp.eliminarDGP(iddgp);
                         if (permissionDepartFilter) {
-                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false,false));
                         }
                         if (permissionDireccionFilter) {
-                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false));
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", iddir, "", false,false));
                         }
                         if (permissionPuestoFilter) {
-                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", idp, false));
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO("", "", idp, false,false));
                         } else {
-                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false));
+                            sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep, "", "", false,false));
                         }
                         // sesion.setAttribute("LIST_DGP_PROCESO", dgp.LIST_DGP_PROCESO(iddep));
                         response.sendRedirect("Vista/Dgp/Proceso_Dgp.jsp");
