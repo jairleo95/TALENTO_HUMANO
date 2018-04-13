@@ -250,8 +250,9 @@ function calcular_sueldo_total() {
     var z = parseFloat($("#bev").val());
     var v = x + y + z + w;
     var f = parseInt($('#asigf').val());
+    console.log(f);
     if (f > 0) {
-        v = v + 75;
+        v = v + 93;
     }
 
     $("#suel_total").text(Math.round(v * 100) / 100);
