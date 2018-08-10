@@ -474,6 +474,7 @@ public class CDgp extends HttpServlet {
                         sesion.setAttribute("List_modalidad", con.List_modalidad());
                         sesion.setAttribute("list_reg_labo", con.list_reg_labo());
                         sesion.setAttribute("List_grup_ocu", gr.List_grup_ocu());
+                        sesion.setAttribute("Listar_Requerimiento", IReq.Listar_Requerimiento());
 
                         int asig = dht.ASIGNACION_F(ID_TRABAJADOR);
                         Calendar fecha = new GregorianCalendar();

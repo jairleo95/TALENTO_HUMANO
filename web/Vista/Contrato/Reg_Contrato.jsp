@@ -1,3 +1,4 @@
+<%@page import="pe.edu.upeu.application.model.Requerimiento"%>
 <%@page import="pe.edu.upeu.application.util.DateFormat"%>
 <%@page import="pe.edu.upeu.application.properties.globalProperties"%>
 <%@page import="pe.edu.upeu.application.model.Usuario"%>
@@ -24,6 +25,7 @@
 <jsp:useBean id="list_reg_labo" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_grup_ocu" scope="session" class="java.util.ArrayList"/>
 <jsp:useBean id="List_dgp" scope="session" class="java.util.ArrayList"/>
+<jsp:useBean id="Listar_Requerimiento" scope="session" class="java.util.ArrayList"/>
 <!DOCTYPE html >
 <html>
     <head>
@@ -248,15 +250,14 @@
                                                     <section class="col col-3">
                                                         <label class="select" id="titulo">Condición:
                                                             <select name="CONDICION" class="input-group-sm" >
-                                                                <option value="">[Seleccione]</option>
-                                                                <option value="1">Contratado</option>
-                                                                <option value="2">Contratado Independiente</option>
-                                                                <option value="3">Enpleado</option>
-                                                                <option value="4">Misionero</option>
-                                                                <option value="5">Practicante Profesional</option>
-                                                                <option value="6">Practicante Pre profesional</option>
-                                                                <option value="7">Convenio Laboral Juvenil</option>
-                                                                <option value="8">MFL-Contrato</option>
+                                                                <%
+                                                                    for (int index = 0; index < Listar_Requerimiento.size(); index++) {
+                                                                        Requerimiento r = new Requerimiento();
+                                                                        r = (Requerimiento) Listar_Requerimiento.get(index);
+                                                                %>
+                                                                <option value="<%=r.getId_requerimiento()%>"><%=r.getNo_req()%></option>                      
+                                                                <% 
+                                                                    }%>
                                                             </select>
                                                         </label>
                                                     </section>
